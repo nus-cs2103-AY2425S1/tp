@@ -97,9 +97,9 @@ Murphy's List does not support whitespaces in **tags**; each tag must be a singl
 
 Displays a list of accepted commands.
 
-![help page](images/HelpPage.png)
-
 Format: `help`
+
+![help page](images/HelpPage.png)
 
 ### Adding a patient profile : `add`
 
@@ -115,18 +115,20 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/S1234123A a/John Street, Block 123, #01-01 t/2`
 * `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Clementi Ave 1, Block 230 t/1 tag/Diabetic tag/G6PD`
 
-> **Note:** `add` **does not support** the addition of appointments. Use the [appointment](#adding-an-appointment--appointment) command to do so.
+> **Note:** `add` **does not support** the addition of appointments and remarks. Use the [appointment](#adding-an-appointment--appointment) and [remark](#adding-a-remark-to-a-patient-profile--remark) command to do so.
 
 ### Adding a remark to a patient profile : `remark`
 
 Adds a remark to a specified patient profile.
-> **Note:** You can only specify **one** remark to add, and patients can only have one remark. If the patient already has a remark, the original remark will be overwritten.
 
 Format: `remark NRIC r/REMARK`
 
 Examples:
 * `remark S1234567A r/allergic to dogs`
 * `remark T1231231D r/keep away from flashing lights`
+
+> **Note:** You can only specify **one** remark to add, and patients can only have one remark. If the patient already has a remark, the original remark will be overwritten.
+
 
 ### Adding an appointment : `appointment`
 
@@ -169,6 +171,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] 
 
 * Edits the patient profile with the specified `NRIC`.
 * At least one of the optional fields must be provided.
+* Apart from `NRIC`, all other fields can be in any order.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the patient will be removed i.e. adding of tags is not cumulative.
 * You can remove all the patient’s tags by typing `tag/` without
