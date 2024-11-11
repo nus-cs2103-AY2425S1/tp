@@ -144,6 +144,8 @@ Adds a remark to a specified patient profile.
 
 Format: `remark NRIC r/REMARK`
 
+Parameters: `NRIC` must be a valid NRIC in the database. `REMARK` must be a non-empty string consisting of only alphanumeric characters or spaces.
+
 Examples:
 * `remark S1234567A r/allergic to dogs`
 * `remark T1231231D r/keep away from flashing lights`
@@ -235,6 +237,7 @@ Search for patients by their names or by tags (i.e. medical conditions).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* KEYWORD is a alphanumeric string.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
@@ -253,6 +256,7 @@ Examples:
 
 Format: `find tag/TAG [MORE_TAGS]`
 
+* TAG is an alphanumeric string.
 * Tags are case-insensitive e.g `tag/diabetic` will match `tag/Diabetic`
 * Only full words will be matched e.g `tag/g6` will not match `tag/g6pd`
 * If you specify `tag/` at the start of your search, the command interprets the input as a tag search.
