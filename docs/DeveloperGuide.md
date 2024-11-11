@@ -2,12 +2,16 @@
 layout: page
 title: Developer Guide
 ---
+---
+layout: page
+title: Developer Guide
+---
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 * This project builds upon [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
 
@@ -22,13 +26,13 @@ title: Developer Guide
   
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -194,7 +198,7 @@ Independent of Other Components:
 
 The `Storage` component manages data persistence by saving and loading various parts of the application's data in JSON format. It handles the following components: `AddressBook`, `UserPrefs`, `SupplyOrderList`, `CustomerOrderList`, `IngredientCatalogue`, and `PastryCatalogue`.
 
-#### **Responsibilities**
+#### Responsibilities
 1. **Saving Data**: Converts in-memory objects from the `Model` component into JSON format and writes them to disk.
 2. **Loading Data**: Reads data from JSON files and converts them back into in-memory objects used by the `Model` component.
 3. **Error Handling**: Provides robust mechanisms to handle missing files, corrupt data, and deserialization errors.
@@ -206,7 +210,7 @@ The `Storage` component manages data persistence by saving and loading various p
     - `IngredientCatalogueStorage`
     - `PastryCatalogueStorage`
 
-#### **Key Interfaces and Classes**
+#### Key Interfaces and Classes
 
 | Interface/Class                  | Description                                                                                   |
 |----------------------------------|-----------------------------------------------------------------------------------------------|
@@ -219,7 +223,7 @@ The `Storage` component manages data persistence by saving and loading various p
 | `JsonPastryCatalogueStorage`     | Implements `PastryCatalogueStorage`. Handles saving and loading of `PastryCatalogue`.         |
 
 
-#### **JSON-Adapted Classes and Their Usage**
+#### JSON-Adapted Classes and Their Usage
 Each data type uses specialized `JsonAdapted` classes to handle JSON serialization and deserialization. These classes ensure data consistency and validate constraints during data conversion.
 
 | **JSON-Adapted Class**              | **Used By (JSON Classes)**           | **Purpose**                                                               |
@@ -249,7 +253,7 @@ Each data type uses specialized `JsonAdapted` classes to handle JSON serializati
     - The `MainApp` ensures all modified data is saved before closing.
     - This includes saving the current state of User Preferences, Address Book, Ingredient Catalogue, Pastry Catalogue, Customer Orders, and Supply Orders.
 
-#### **Data Flow**
+#### Data Flow
 1. **Saving Data**:
     - When data is modified, `Model` notifies `StorageManager`.
     - `StorageManager` converts the data to JSON and saves it using the respective storage class.
@@ -276,7 +280,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -426,7 +430,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## Documentation, Logging, Testing, Configuration, Dev-Ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -436,7 +440,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
