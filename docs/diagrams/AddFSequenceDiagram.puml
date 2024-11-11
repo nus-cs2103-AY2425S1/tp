@@ -47,7 +47,7 @@ activate ArgumentMultiMap
 ArgumentMultiMap --> ArgumentTokenizer
 deactivate ArgumentMultiMap
 
-ArgumentTokenizer --> AddFCommandParser : arguMultimap
+ArgumentTokenizer --> AddFCommandParser
 deactivate ArgumentTokenizer
 
 AddFCommandParser -> AddFCommandParser : arePrefixesPresent(...)
