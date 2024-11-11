@@ -475,7 +475,7 @@ MSS
 * **Commonly Used Formats**: Text Files, CSV Files
 * **Help System**: The built-in documentation or command that provides guidance on using the application, including descriptions of commands and examples.
 * **Goods**: A commodity that is sold to the user.
-* **Goods Receipt**: 
+* **Goods Receipt**: Receipt that contains data about the delivery information (e.g. procurement date, arrival date, delivery status).
 * **Supplier**: Someone who is selling goods to the user. For this application, they are the contacts.
 * **Procurement Date**: The date in which the order for the goods have been made.
 * **Arrival Date**: The expected date of delivery for the goods.
