@@ -94,7 +94,7 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
+A client can have any number of tags (including 0).
 </div>
 
 <div id="input-format" markdown="block" class="alert alert-info">
@@ -115,8 +115,8 @@ The following constraints apply to the `edit` command as well:
         the commands:
           * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
           * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-            different block, different unit`
-            will successfully add both `John Doe` and `John doe` to the case management system.
+            different block, different unit` will successfully add both `John Doe` and `John 
+            doe` to the case management system.
   * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
   * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
 
@@ -138,7 +138,7 @@ The following constraints apply to the `edit` command as well:
     * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`.
     * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`.
 
-* Client's addresses can take any values, and it should not be blank
+* Client's addresses can take any values, and it should not be blank.
     * The address is recommended to be within 100 characters long to be displayed properly.
     - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`.
     - Unacceptable address format: ``.
@@ -206,7 +206,7 @@ Format: `tag INDEX t/TAG_NAME`
 * Adds the tag to the client at the specific `INDEX`.
 * The tag names should be alphanumeric. They should not contain any spaces or special characters.
 * Only one tag can be added at once.
-* Adding a tag that has the same tag name as a pre-existing tag will override the original tag..
+* Adding a tag that has the same tag name as a pre-existing tag will override the original tag.
 
 Example:
 - `tag 1 t/urgent`
@@ -217,26 +217,30 @@ Untags a client in the case management system.
 
 Format: `untag INDEX t/TAG`
 
-* Removes the tag from the client at the specific `INDEX`
-* Only one tag can be removed at once
-* If the tag is not found, a warining will be displayed
+* Removes the tag from the client at the specific `INDEX`.
+* Only one tag can be removed at once.
+* If the tag is not found, a warning will be displayed.
 
 Example:
 - `untag 1 t/urgent`
 
 ### Setting an appointment: `setappointment`
 
-Sets an appointment date for a client
+Sets an appointment date for a client.
 
 Format: `setappointment INDEX d/[YYYY-MM-DD]`
 
-* Sets appointment date for the client at the specific `INDEX`
-* If the date is left empty, the current appointment date will be removed
+* Sets appointment date for the client at the specific `INDEX`.
 * Setting the appointment date to the same date will override the original date, no changes will 
-  be made effectively
+  be made effectively.
 
 Example:
 - `setappointment 1 d/2024-11-23`
+
+* If the date is left empty, the current appointment date will be removed.
+
+Example:
+- `setappointment 1 d/` removes the appointment date for the client at index 1.
 
 ### Searching and filtering clients: `find`
 
@@ -245,37 +249,39 @@ Finds and filters clients using a combination of name, address, and tags.
 Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TAGS]`
 
 * At least one of name, address, or tag needs to be entered. 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. 
-  * e.g. `n/Hans Bo` will match name `Bo Hans`
-  * `a/Ave Clementi` will match the address`Clementi Ave`
-* Partial names and addresses will also be matched 
-  * e.g. `Han` will match `Hans`
-  * e.g. `Cle` will match `Clementi`
-* Note that tags is a complete string match
-  * e.g. `elderly` will match `elderly`
-  * e.g. `urg` will not match `urgent`
+  * e.g. `n/Hans Bo` will match name `Bo Hans`.
+  * `a/Ave Clementi` will match the address`Clementi Ave`.
+* Partial names and addresses will also be matched. 
+  * e.g. `Han` will match `Hans`.
+  * e.g. `Cle` will match `Clementi`.
+* Note that tags is a complete string match.
+  * e.g. `elderly` will match `elderly`.
+  * e.g. `urg` will not match `urgent`.
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
-  * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
-  * This is to search as a filtering function 
-  * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags
-  * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`
+  * This is to search as a filtering function.
+  * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags.
+  * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`.
 
 * If multiple parameters are used, only those matching all parameters will be returned
-    to help quickly filter and narrow down searches
-  * e.g. `find n/Hans Bo a/serangoon` will return 
-        1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`
-        2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`
-        3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`
+    to help quickly filter and narrow down searches.
+  * e.g. `find n/Hans Bo a/serangoon` will return:
+        1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`.
+        2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`.
+        3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`.
 
 
 Examples:
-* `find n/ John` returns `johnny` and `John Doe`
-* `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`<br>
-* `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`
-* `find a/ cl av` will return `Carl` with address `Blk 777 Clementi Ave 2`
-* `find n/john a/Bishan t/urgent` will return `John Hans` with address `9 Bishan road, 302534` and tags `urgent`, `ill`
+* `find n/ John` returns `johnny` and `John Doe`.
+* `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`.<br>
+* `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, 
+  #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`.
+* `find a/ cl av` will return `Carl` with address `Blk 777 Clementi Ave 2`.
+* `find n/john a/Bishan t/urgent` will return `John Hans` with address `9 Bishan road, 302534` 
+  and tags `urgent`, `ill`.
 ![img.png](images/findJohnHans.png)
 
 ### Deleting a client : `delete`
@@ -303,9 +309,9 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The remark is mandatory. It can be any non-empty string within 500 characters. e.g. `Client is 
-  doing well`
+  doing well`.
 * The date is optional and defaults to the current date and time if not provided.
-* The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`
+* The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`.
 
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
