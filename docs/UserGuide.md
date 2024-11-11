@@ -29,11 +29,8 @@ internet connectivity.
 - [Introduction](#introduction)
     - [Beginner's Guide](#beginners-guide)
     - [Expert's Guide](#experts-guide)
-
 - [Setup Guide](#setup-guide)
-
 - [GUI Summary](#gui-summary)
-
 - [Try it out!](#try-it-out)
 - [Features](#features)
     - [Command Overview](#command-overview)
@@ -300,22 +297,22 @@ capabilities.
 
 DLTbook supports the following commands:
 
- Command                                                                | Description                                                                     
-------------------------------------------------------------------------|---------------------------------------------------------------------------------
- [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
- [**add**](#adding-a-contact--add)                                      | Adds a contact to the address book                                              
- [**list**](#listing-all-persons-list)                                  | Shows a list of all contacts in the address book                                
- [**edit**](#editing-a-person-edit)                                     | Edits an existing contact in the address book                                   
- [**find**](#locating-persons-by-name-find)                             | Finds contacts whose names contain any of the given keywords                    
- [**delete**](#deleting-a-person-delete)                                | Deletes the specified contact from the address book                             
- [**clear**](#clearing-all-entries--clear)                              | Clears all entries from the address book                                        
- [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                               
- [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
- [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
- [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
- [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
- [**searchpa**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
- [**filter**](#filtering-persons-by-public-addresses-network-filter)    | Filters out a list of people with the public addresses of the specified network 
+| Command                                                                | Description                                                                            |
+|------------------------------------------------------------------------|----------------------------------------------------------------------------------------| 
+| [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                                 |
+| [**add**](#adding-a-contact-add)                                       | Adds a contact to the address book                                                     |
+| [**delete**](#deleting-a-contact-delete)                               | Deletes the specified contact from the address book                                    |
+| [**edit**](#editing-a-contact-edit)                                    | Edits an existing contact in the address book                                          |
+| [**find**](#finding-contacts-by-name-find)                             | Finds contacts whose names contain any of the given keywords                           |
+| [**list**](#listing-all-contacts-list)                                 | Shows a list of all contacts in the address book                                       |
+| [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                                     |
+| [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                                |
+| [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                          |
+| [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves public addresses with matching labels                                        |
+| [**searchpa**](#searching-for-a-public-address-searchpa)               | Based on contacts displayed, it searches for a contact using the unique public address |
+| [**filter**](#filtering-contacts-by-public-addresses-network-filter)   | Filters out a list of contacts with the public addresses of the specified network      |
+| [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                               |
+| [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                                      |
 
 <box type="info" seamless>
 
@@ -339,12 +336,13 @@ DLTbook supports the following commands:
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
-  <br>
+</box>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
@@ -356,6 +354,7 @@ Shows a message explaining how to access the help page.
 #### Format: `help`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -365,6 +364,7 @@ Clears all entries from the address book.
 #### Format: `clear`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program : `exit`
@@ -374,9 +374,11 @@ Exits the program.
 #### Format: `exit`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contact Management Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact : `add`
@@ -404,6 +406,7 @@ Adds a contact to the address book.
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a contact : `delete`
@@ -425,6 +428,7 @@ Deletes the specified contact from the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a contact : `edit`
@@ -454,6 +458,7 @@ Edits an existing contact in the address book.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Finding contacts by name : `find`
@@ -483,6 +488,7 @@ Finds contacts whose names contain any of the given keywords.
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Listing all contacts : `list`
@@ -492,8 +498,11 @@ Shows a list of all contacts in the address book.
 #### Format: `list`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Public Address Management Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a public address to a contact : `addpa`
@@ -524,6 +533,7 @@ Adds a public address to a contact.
 ![img.png](img.png)
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a public address of a contact : `deletepa`
@@ -559,7 +569,9 @@ Deletes the public address of a contact.
   network.
 
 ![deletepa2.png](images/deletepa2.png)
+
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a public address of a contact : `editpa`
@@ -592,6 +604,7 @@ Edits an existing public address of a contact.
   ![editpa](images/editpa-2.png)
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Retrieving public addresses of a contact : `retrievepa`
@@ -623,6 +636,7 @@ Retrieves public addresses with matching labels.
   ![retrievepa label](images/retrievepa-label-network-name.png)
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Searching for a public address : `searchpa`
@@ -649,6 +663,7 @@ search on list of contacts displayed).
   which it belongs.
 
 ![searchpa](images/searchpa.png)
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -671,7 +686,9 @@ Filters out a list of contacts with the public addresses of the specified networ
   displays it with their respective list number.
 
 ![filter](images/filter.png)
+
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -681,6 +698,7 @@ Clears all entries from the address book.
 #### Format: `clear`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program : `exit`
@@ -690,6 +708,7 @@ Exits the program.
 #### Format: `exit`
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
@@ -699,6 +718,7 @@ manually.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Support
@@ -730,8 +750,8 @@ our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
-<br>
---------------------------------------------------------------------------------------------------------------------
+<box type = "info">
+
 **Caution:**
 
 If your changes to the data file makes its format invalid, DLTbook will discard all data and start with an empty data
@@ -740,7 +760,10 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
+</box>
+
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Common Errors
