@@ -37,8 +37,6 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 * [Command summary](#command-summary)
 * [Glossary](#glossary)
 
-<page-nav-print />
-
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
