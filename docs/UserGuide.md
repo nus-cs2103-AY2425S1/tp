@@ -258,11 +258,13 @@ Input must contain at least one parameter for patient to be edited.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-
-* Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies of the patient.
-
-* Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed are current allergies of the patient.
+Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies of the patient.
 </div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed are current allergies of the patient.
+</div>
+
 
 Examples:
 * Edits the name and date-of-birth of the patient with NRIC S9758366N
