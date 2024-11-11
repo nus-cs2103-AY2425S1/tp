@@ -1,16 +1,14 @@
+---
+layout: page
+title: User Guide
+---
+
+* Table of Contents
+{:toc}
+
 EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
 at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
----------------------------------------------------------------------------------------------------------------------
-## Table of Contents
-1. [Quick start](#quick-start)
-2. [Features](#features)
-   * [Person commands](#persons)
-   * [Event commands](#events)
-   * [Miscellaneous features](#miscellaneous-features)
-3. [FAQ](#faq)
-4. [Known issues](#known-issues)
-5. [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
