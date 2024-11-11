@@ -186,7 +186,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the student list.
-* `filter Betsy` followed by `delete 1` deletes the 1st person in the results of the `filter` command.
+* `filter n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `filter` command.
 
 ### Adding an Emergency contact's name : `addEcName`
 
