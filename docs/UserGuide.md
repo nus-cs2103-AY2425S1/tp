@@ -93,7 +93,7 @@
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
   Note: If an optional field is not required, **avoid** leaving the prefix empty, as this will result in an invalid command.
-  e.g. `edit 1 n/NAME t/` is not a valid command.
+  e.g. `edit 1 n/` is not a valid command.
 
 <br> 
 
@@ -104,7 +104,7 @@
   The index must meet the following conditions:
 
   1. **Correct Format**:  
-     The index **must be a positive integer** (e.g., 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g., `-1`, `abc`, `1.5`) will be deemed as incorrect format.
+     The index **must be a positive integer** (e.g. 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g. `-1`, `abc`, `1.5`) will be deemed as incorrect format.
 
   2. **Valid Index**:  
      The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g. `999` when the list has only 10 people) will be deemed as invalid indices.
@@ -276,7 +276,7 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 * Search is restricted to the fields indicated by the provided prefixes.
 * The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
-* For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
+* For name searches, the order of keywords does not matter (e.g. Hans Bo will match Bo Hans).
 * For name searches, persons matching any of the keywords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
@@ -463,7 +463,7 @@ ContactsForGood data are saved automatically as a JSON file `[JAR file location]
 
 **Caution:**
 If your changes to the data file makes its format invalid, ContactsForGood will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -492,7 +492,7 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 **Q**: How can I improve search accuracy in CFG?<br>  
 **A**: For more precise search results:
-- Use multiple prefixes (e.g., `search n/John t/friend`) to filter by multiple criteria.
+- Use multiple prefixes (e.g. `search n/John t/friend`) to filter by multiple criteria.
 - Remember that searches are case-insensitive but require exact word matches.
 - If your search results are too broad, refine them with additional criteria.
 
