@@ -68,7 +68,7 @@ This User Guide is designed to help you navigate and make the most of ABCLI. It 
 8. **[Glossary](#glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
 
 <a id="display-boxes"></a>
-<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Display Boxes</span>
+<span style="font-size: 20px; font-weight: bold; color: #d67d3e">Display Boxes</span>
 
 Throughout the guide, you will see display boxes with additional information:
 
@@ -78,7 +78,7 @@ Throughout the guide, you will see display boxes with additional information:
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Key Insights**
- Refer to these boxes for extra insights and context about ABCLI features.
+ Refer to these boxes for additional information.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -110,7 +110,9 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 <span style="font-size: 30px; font-weight: bold; color: #d67d3e">Quick Start</span>
 
 1. Install Java `17` or above: Ensure that Java 17 or a later version is installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java17).
-   * MacOS users can refer to this [set of instructions](https://se-education.org/guides/tutorials/javaInstallationMac.html) for easier installation. 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ MacOS users can refer to this [set of instructions](https://se-education.org/guides/tutorials/javaInstallationMac.html) for easier installation.
+</div>
 
 2. Download the latest ABCLI application: Get the latest `ABCLI.jar` file from the [release page](https://github.com/AY2425S1-CS2103T-F13-2/tp/releases/).  
 
@@ -355,7 +357,7 @@ Clears all entries from the buyer list.
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Using the clear command will delete all the buyers from the BuyerList, and there is no way to undo this, you may lose your data permanently.
+Using the clear command will delete all the buyers from the list of buyers, and there is no way to undo this, you may lose your data permanently.
 </div>
 
 <a id="meet-ups"></a>
@@ -408,9 +410,11 @@ When adding the MEETUP_FROM or MEETUP_TO, the `DD` parameter will take in any 2-
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
 
-Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
-
+<div markdown="block" class="alert alert-info">
+**:information_source: Clashing Timings:**
+ Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 ![MeetUpClash](images/MeetUpClash.png)
+</div>
 
 <a id="edit-meetup"></a>
 <span style="font-size: 20px; font-weight: bold; color: #b44cc7">Editing a meet-up : `edit`</span>
@@ -440,6 +444,10 @@ Format: `find s/KEYWORD`
 * The search is case-insensitive. e.g `meet` will match `Meet`
 * Only the meet-up name is searched.
 * Keyword will be matched to exact words, e.g. `meet` will not match `meeting`
+
+<div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
+Planned update will allow searches using other attributes, such as: `f/FROM`, `t/TO`, and `n/ADDED_BUYER`.
+</div>
 
 Examples:
 * `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for Jane's meet`
@@ -471,7 +479,7 @@ Clears all entries from the meet-up list.
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Using the clear command will delete all the meet-ups from the MeetUpList, and there is no way to undo this, you may lose your data permanently.
+Using the clear command will delete all the meet-ups from the list of meet-ups, and there is no way to undo this, you may lose your data permanently.
 </div>
 
 <a id="properties"></a>
@@ -545,6 +553,10 @@ Format: `find n/LANDLORD_NAME` or `find a/ADDRESS`
 * Properties matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `n/Hans Bo` will return property linked with `Hans Gruber`, `Bo Yang`.
 
+<div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
+Planned update will allow searches using other attributes, such as: `a/ASKING_PRICE`, `p/PHONE`, and `t/PROPERTY_TYPE`.
+</div>
+
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find a/Pasir Ris` returns `pasir ris east` and `Pasir Ris West`
@@ -575,7 +587,7 @@ Clears all entries from the property list.
 Format: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Using the clear command will delete all the properties from the PropertyList, and there is no way to undo this, you may lose your data permanently.
+Using the clear command will delete all the properties from the list of properties, and there is no way to undo this, you may lose your data permanently.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -583,14 +595,41 @@ Using the clear command will delete all the properties from the PropertyList, an
 <a id="faq"></a>
 <span style="font-size: 30px; font-weight: bold; color: #baa856">FAQ</span>
 
+**Q**: Can I use ABCLI without any programming knowledge?  
+**A**: Yes, ABCLI is designed to be user-friendly and does not require any coding skills. Follow the User Guide to learn the commands and usage patterns, and you’ll be able to use ABCLI effectively.
+
+**Q**: What operating systems are compatible with ABCLI?  
+**A**: ABCLI can be run on any system that supports Java `17` or above, including Windows, macOS, and Linux. Refer to [quick start](#Quick-Start) for the step-by-step installation guide.
+
+**Q**: How can I check if Java 17 is installed and set as the default version?  
+**A**: Open your command terminal and type:`java -version`. If Java 17 is installed, the output should start with: `java version "17.0.x"`.If not, download Java `17` from [here](https://www.oracle.com/java/technologies/downloads/#java17).
+
+**Q**: How can I troubleshoot if the GUI doesn’t display properly on my screen?  
+**A**: If using multiple screens, ensure the app window is on your main display, as secondary screens may cause display issues. If the issue persists, delete the `preferences.json` file to reset GUI settings.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data files (`buyerlist.json`, `meetuplist.json`, and `propertylist.json`) it creates with the respective files that contain your previous data (which should be in the old `buyerlist.json`, `meetuplist.json`, and `propertylist.json`).
 
 **Q**: Where can I find my local data files?<br>
 **A**: In the same folder that contains your app `Abcli.jar`, there should be a folder called `data` which contains `buyerlist.json`, `meetuplist.json`, and `propertylist.json`.
 
-**Q**: How do I add MeetUps or Properties? I can only add buyers<br>
+**Q**: How do I add Meet-Ups or Properties? I can only add Buyers<br>
 **A**: You are likely in the `Buyer Mode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUp Mode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [switching parser modes](#general-switch).
+
+**Q**: How are duplicates determined when adding meet-ups?  
+**A**: Meet-ups are considered duplicates if they share the same `Subject`, `From` date-time, and `To` date-time. Ensure at least one of these fields is unique to avoid duplication errors.
+
+**Q**: Can I view all buyers, meet-ups, and properties together on a single screen?  
+**A**: No, ABCLI organizes these entries by mode. Use the [switch command]((#general-switch)) to move between modes for buyers, meet-ups, or properties.
+
+**Q**: Why is my meet-up entry showing certain buyers in red?  
+**A**: Buyers shown in red are not listed in the `Buyer` mode’s current entries. Ensure that the buyer’s name matches exactly in both the buyer list and the meet-up entry for it to be displayed in purple.
+
+**Q**: Why are some date-time entries in meet-ups highlighted in red?  
+**A**: Date-time entries in red indicate scheduling conflicts. These meet-ups overlap with another meet-up in the schedule, helping you identify potential double-bookings or timing issues that require attention.
+
+**Q**: Is there a way to search for buyers based on phone number or budget?  
+**A**: Currently, the search function for buyers only supports keywords within the `Name` field. A future enhancement is planned to allow for more advanced searches based on other fields like `Phone Number`, `Tag`, `Email` and `Budget`.
 
 **Q**: Is there a separate save command/button, are all my changes auto-saved?<br>
 **A**: Any successfully inputted command will save the changes into the data files, thus there is no need to worry about manually saving your changes.
@@ -632,14 +671,14 @@ Using the clear command will delete all the properties from the PropertyList, an
     <tr>
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
-        <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
-        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+        <td><code>add s/SUBJECT i/INFO f/FROM t/TO [n/ADDED_BUYER]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/PROPERTY_TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
         <td><code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​</code><br> e.g., <code>edit 2 n/James Lee e/jameslee@example.com</code></td>
-        <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/FROM] [t/TO] [a/ADDED_BUYERS]…​</code><br> e.g., <code>edit 3 a/Alex Yeoh a/Ben Ten</code></td>
-        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
+        <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/FROM] [t/TO] [n/ADDED_BUYER]…​</code><br> e.g., <code>edit 3 a/Alex Yeoh a/Ben Ten</code></td>
+        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/PROPERTY_TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
     </tr>
     <tr>
         <td><b>Delete</b></td>
