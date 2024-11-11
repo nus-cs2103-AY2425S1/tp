@@ -18,8 +18,8 @@
    5. [Storage Component](#storage-component)
    6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [(Proposed) Undo/redo feature](#proposed-data-archiving)
-   2. [(Proposed) Data archiving](#proposed-data-archiving)
+   1. [Add Patient Feature](#add-patient-feature)
+   2. [Add Appointment Feature](#add-appointment-feature)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix](#appendix)
@@ -249,8 +249,8 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
    Uses the `index` from the parser to locate the patient in the address book.
 
 2. **Create New Person Instance with Appointment**:
-    - Combines patient information with the new `Appointment` details.
-    - Creates an updated `Person` instance, including the appointment data.
+    - utilises patient information from the current patient (identified by the index) and the new `Appointment` details.
+    - Creates an updated `Person` instance with patient information and appointment instance.
 
 3. **Replace Existing Patient Record**:
     - The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
@@ -266,10 +266,6 @@ The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes 
     - **Command** checks if the new appointment overlaps with any existing appointments for the patient.
     - If there is an overlap, an error message is thrown, preventing the appointment from being created.
     - If no overlap exists, the new appointment overrides any previous appointment.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
