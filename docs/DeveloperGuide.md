@@ -244,6 +244,13 @@ Currently: KnottyPlanners only support inputs up till XXX characters. As such, e
 
 Plan: To handle extreme inputs of all fields with a long character count, ensuring that the information can still remain visible.
 
+6. Index Referencing
+
+Currently: KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in counteractive outcomes when handling names that are extremely long.
+
+Plan: To allow suers to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
+
+
 // Support for Multi-Languages
  
 --------------------------------------------------------------------------------------------------------------------
