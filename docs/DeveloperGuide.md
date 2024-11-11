@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. User enters an invalid number of arguments.
+* 1a. User enters an invalid number of parameters.
     * 1a1. HireMe shows an error message 
   
     Use case ends.
@@ -643,7 +643,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra argument(s) in command format.
+* 1a. The user provided extra parameter(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -665,7 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra argument(s) in command format.
+* 1a. The user provided extra parameter(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -708,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra argument(s) in command format.
+* 1a. The user provided extra parameter(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -730,7 +730,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra argument(s) in command format.
+* 1a. The user provided extra parameter(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
