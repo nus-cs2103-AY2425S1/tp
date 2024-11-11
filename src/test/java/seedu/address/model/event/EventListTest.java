@@ -9,11 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 public class EventListTest {
 
