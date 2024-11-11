@@ -98,7 +98,7 @@ public class AddListingCommand extends Command {
         Person seller = lastShownPersonList.get(zeroBasedSeller);
 
         // Check if the person is actually an instance of a Seller
-        ListingCommandsUtil.checkIfSeller(seller, seller.getRole(), sellerIndex);
+        ListingCommandsUtil.handleNonSeller(seller, seller.getRole(), sellerIndex);
 
         // Gets buyers for the new listing
         Set<Person> listingBuyers = getBuyers(buyerIndexes, lastShownPersonList);
@@ -125,7 +125,7 @@ public class AddListingCommand extends Command {
                 Person buyer = lastShownPersonList.get(zeroBasedBuyer);
 
                 // Check if the person is actually an instance of a Buyer
-                ListingCommandsUtil.checkIfBuyer(buyer, buyer.getRole(), buyerIndex);
+                ListingCommandsUtil.handleNonBuyer(buyer, buyer.getRole(), buyerIndex);
                 listingBuyers.add(buyer);
             }
         }

@@ -31,8 +31,8 @@ public class ListingCommandsUtil {
      * @param buyerIndex the index of the buyer in the list
      * @throws CommandException if the person is a seller
      */
-    public static void personIsNotBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
-        if (role.equals(Role.SELLER)) {
+    public static void verifyPersonIsNotBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
+        if (!role.equals(Role.BUYER)) {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
                     buyerIndex.getOneBased(), person.getName()));
         }
@@ -47,8 +47,8 @@ public class ListingCommandsUtil {
      * @param buyerIndex the index of the buyer in the list
      * @throws CommandException if the person is a seller
      */
-    public static void checkIfBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
-        if (role.equals(Role.SELLER)) {
+    public static void handleNonBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
+        if (!role.equals(Role.BUYER)) {
             throw new CommandException(String.format(MESSAGE_NOT_BUYER,
                     buyerIndex.getOneBased(), person.getName()));
         }
@@ -62,8 +62,8 @@ public class ListingCommandsUtil {
      * @param sellerIndex the index of the seller in the list
      * @throws CommandException if the person is a buyer
      */
-    public static void checkIfSeller(Person person, Role role, Index sellerIndex) throws CommandException {
-        if (role.equals(Role.BUYER)) {
+    public static void handleNonSeller(Person person, Role role, Index sellerIndex) throws CommandException {
+        if (!role.equals(Role.SELLER)) {
             throw new CommandException(String.format(MESSAGE_NOT_SELLER,
                     sellerIndex.getOneBased(), person.getName()));
         }
