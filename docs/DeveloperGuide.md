@@ -210,6 +210,37 @@ To make this more convenient for the user, we made the `exit` command close all 
 ### Patient Management Features
 
 #### Add Command : `add`
+The `add` command is used to add a patient to the patient list quickly with only necessary details.
+
+The user has to specify the patient's:
+* NRIC (`Nric`)
+* Name (`Name`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Sex (`Sex`)
+
+##### Parsing User Input
+The `AddCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `add` command: `execute(add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666)`
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+The parsing of the fields is as follows:
+
+![AddSequenceDiagram](images/AddParseFieldsSequenceDiagram.png)
+
+##### Executing the Command
+The `AddCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
+
+The activity diagram below illustrates the workflow behind the execution of the `add` command:
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
 
 #### Add Full Command : `addf`
 The `addf` command is used to add a patient to the patient list.
@@ -412,6 +443,8 @@ The sequence diagram below illustrates the process behind the parsing of the use
 In this example, it takes an `filter` command: `execute(filter sd|2022-10-01 ed|2022-11-01 h|Blood Test)`
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>FilterCommandParser</code>,<code>ArgumentMultiMap</code> and <code>FilterCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
 
 The parsing of the fields is as follows:
 
