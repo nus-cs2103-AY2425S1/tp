@@ -241,6 +241,10 @@ The activity diagram below illustrates the workflow behind the execution of the 
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
+#### Design Considerations
+**Using `Nric` as an unique identifier** <br>
+Patients may have the same names and other fields. Therefore, unique NRICs will be used to distinguish between patients to prevent administrative errors.
+
 
 #### Add Full Command : `addf`
 The `addf` command is used to add a patient to the patient list.
@@ -287,7 +291,7 @@ The activity diagram below illustrates the workflow behind the execution of the 
 ![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
 ##### Design Considerations
-**Using `Nric` Field as a Unique Identifier**<br>
+**Using `Nric` Field as an unique identifier**<br>
 Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `addf` command since both commands are fundamentally similar.
 
 **Compulsory and Non-Compulsory Fields**<br>
@@ -437,7 +441,7 @@ health service to be added. It uses the `ArgumentTokenizer` to tokenize the inpu
 It returns an `ArgumentMultiMap` object which is used to create a `AppointmentDateFilter` object with the start and end date
 and `HealthService`.
 
-#### Sequence Diagram
+##### Sequence Diagram
 
 The sequence diagram below illustrates the process behind the parsing of the user input.
 In this example, it takes an `filter` command: `execute(filter sd|2022-10-01 ed|2022-11-01 h|Blood Test)`
@@ -461,7 +465,7 @@ The filtered appointments are then sorted and stored in the model.
 
 ![FilterExecuteSequenceDiagram](images/FilterExecuteSequenceDiagram.png)
 
-#### Design Considerations
+##### Design Considerations
 
 The `filter` command is designed such that the user has versatility in filtering appointments.
 
