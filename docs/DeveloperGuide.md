@@ -1202,7 +1202,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
 
-### Adding Patient: `add`
+### Adding a Patient: `add`
 command: `add`
 1. Adding a patient with valid fields
 
