@@ -313,6 +313,11 @@ Format: `sort ATTRIBUTE`
 > * If a student has subjects listed as "Math, Physics, Chemistry", the `sort subject` command will use "Math" as the primary sorting key.
 > * Similarly, if a teacher is associated with classes "5A, 7C, 8B", the `sort class` command will use "5A" as the sorting key.
 
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The `sort` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
+ 
 Examples:
 * `list` followed by `sort attendance` sorts the list of students by attendance in descending order.
    <br/><br/>
