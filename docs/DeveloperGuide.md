@@ -968,6 +968,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 n/@#$%` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a customer
 
 1. Deleting a customer while all customers are being shown.
@@ -1026,6 +1028,8 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `addo 1 q/100` <br>
         Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+
+<div style="page-break-after: always;"></div>
 
 4. Adding a [similar order](#glossary).
 
