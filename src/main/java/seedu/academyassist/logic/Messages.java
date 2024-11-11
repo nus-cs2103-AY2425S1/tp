@@ -25,6 +25,9 @@ public class Messages {
             + "these special characters, excluding the parentheses, (-/')";
     public static final String MESSAGE_DUPLICATE_IC = "Another student with the same NRIC already exists "
             + "in the system.";
+    public static final String MESSAGE_ID_LIMIT = "AcademyAssist has reached its student ID limit of 99999 and cannot "
+            + "add any more students.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

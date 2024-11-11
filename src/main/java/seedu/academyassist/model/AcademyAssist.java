@@ -144,6 +144,13 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     /**
+     * Returns True if this {@code AddressBook} has generated 99999 student ids.
+     */
+    public boolean hasReachedIdLimit() {
+        return idGeneratedCount >= 99999;
+    }
+
+    /**
      * Returns the {@code Person} in this {@code AddressBook} with the given {@code Ic}
      */
     public Person getPersonWithIc(Ic ic) {

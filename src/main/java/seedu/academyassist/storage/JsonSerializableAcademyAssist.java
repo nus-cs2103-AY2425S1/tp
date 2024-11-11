@@ -21,6 +21,7 @@ class JsonSerializableAcademyAssist {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    public static final String MESSAGE_EXCEED_LIMIT = "Student ID generation count exceeds the maximum limit of 99999.";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final int idGeneratedCount;
 
@@ -57,6 +58,10 @@ class JsonSerializableAcademyAssist {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             academyAssist.addPerson(person);
+        }
+
+        if (idGeneratedCount > 99999) {
+            throw new IllegalValueException(MESSAGE_EXCEED_LIMIT);
         }
         academyAssist.setIdGeneratedCount(idGeneratedCount);
         return academyAssist;

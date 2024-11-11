@@ -15,7 +15,7 @@ public class Name {
             "Names should not be blank and should be between 2 and 255 characters long. Names should only contain "
                     + "alphabets, spaces and these special characters, excluding the parentheses, ("
                     + SPECIAL_CHARACTERS + "). Names should start and end with an alphabet, and there should not be "
-                    + "more than one consecutive special characters.";
+                    + "more than one consecutive special character or space.";
 
     public static final String VALIDATION_REGEX = "^[a-zA-Z](?!.*[" + SPECIAL_CHARACTERS + " ]{2})[a-zA-Z"
             + SPECIAL_CHARACTERS + " ]{0,253}[a-zA-Z]$"; // Adapted from the help of ChatGPT
