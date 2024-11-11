@@ -60,7 +60,7 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
    
    * Now, in the same folder, you should see a data file `clientell.json`. Opening it will show the saved data from the app, which will be loaded the next time you launch Clientell.
   
-   * Try finding the client and transaction you just added! This file is sensitive, so do not edit it. You may transfer this file to another device with Clientell and load the same data.
+   * Try finding the client and transaction you just added. This file is sensitive, so do not edit it. You may transfer this file to another device with Clientell installed and load the same data in that device's app's directory.
 
 6. Refer to the [Features](#features) below for details of each command. Happy Bookkeeping!
 
@@ -94,13 +94,19 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
 
 <box type="warning" seamless>
 
-**Handling Errors In User Input:**
+**Handling Errors In User Input:** Errors are caught in this order of severity
 * First checks for valid command. Did you type a real command word?
 * Then checks for presence of fields for that command. Did you give enough/correct info?
 * Next checks if the command is run in the correct view (Client VS transaction list view). Are you using it in the right view?
+* Next checks if, if there's a positive integer index, is it in range?
 * Lastly checks if the command alters the balance beyond the supported range.
 
 *Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
+
+**Notes about extreme user behaviour:**
+* Extreme inputs for some very flexible parameters (e.g name, address) are allowed but at your own risk of inconvenience.
+* Namely, the window may not fully display the text/info. This can be remedied by expanding your window.
+* This in no way affects other behaviours. In addition, these extreme inputs are also saved in the data file `clientell.json`.
 
 </box>
 
