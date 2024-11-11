@@ -243,7 +243,7 @@ Examples:
 
 Clears all entries from ContactMate.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="span" class="alert alert-danger">:stop_sign: **Warning:**
 This command is irreversible. Use with caution.
 </div>
 
