@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -19,13 +20,17 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ADDRESS = "123 Jurong West Ave 6 #08-111";
+    public static final String DEFAULT_COMMENT = "She likes fast delivery.";
+    public static final boolean DEFAULT_IS_VIP = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Comment comment;
     private Set<Tag> tags;
+    private boolean isVip;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +40,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        comment = new Comment(DEFAULT_COMMENT);
         tags = new HashSet<>();
+        isVip = DEFAULT_IS_VIP;
     }
 
     /**
@@ -46,7 +53,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        comment = personToCopy.getComment();
         tags = new HashSet<>(personToCopy.getTags());
+        isVip = personToCopy.isVip();
     }
 
     /**
@@ -58,7 +67,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -89,8 +98,26 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Comment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
     }
 
+    /**
+     * Sets the {@code isVip} state of the {@code Person} that we are building.
+     */
+    public PersonBuilder withVipState(boolean isVip) {
+        this.isVip = isVip;
+        return this;
+    }
+
+    /**
+     * Builds and returns a {@code Person} object with the specified attributes.
+     */
+    public Person build() {
+        return new Person(name, phone, email, address, comment, tags, isVip);
+    }
 }

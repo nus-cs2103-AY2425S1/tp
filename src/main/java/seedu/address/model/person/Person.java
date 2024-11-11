@@ -24,17 +24,28 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final boolean isVip;
+    private final Comment comment;
+
+    /**
+     * Every field must be present and not null. The customer will start as a non-VIP.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Comment comment, Set<Tag> tags) {
+        this(name, phone, email, address, comment, tags, false);
+    }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Comment comment, Set<Tag> tags, boolean isVip) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.comment = comment;
         this.tags.addAll(tags);
+        this.isVip = isVip;
     }
 
     public Name getName() {
@@ -53,12 +64,20 @@ public class Person {
         return address;
     }
 
+    public Comment getComment() {
+        return comment;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean isVip() {
+        return isVip;
     }
 
     /**
@@ -94,13 +113,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && isVip == otherPerson.isVip;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isVip);
     }
 
     @Override
@@ -110,7 +130,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("comment", comment)
                 .add("tags", tags)
+                .add("isVip", isVip)
                 .toString();
     }
 

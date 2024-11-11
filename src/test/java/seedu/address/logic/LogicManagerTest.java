@@ -28,6 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonIsVipPredicate;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -61,13 +62,25 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                + ". Your list only contains 0 customers.");
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_validListCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_validListVipCommand_success() throws Exception {
+        String listVipCommand = ListCommand.COMMAND_WORD + " vip";
+
+        // Update expected model to filter only VIP persons
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(new PersonIsVipPredicate());
+
+        assertCommandSuccess(listVipCommand, ListCommand.MESSAGE_SUCCESS_VIP, expectedModel);
     }
 
     @Test
