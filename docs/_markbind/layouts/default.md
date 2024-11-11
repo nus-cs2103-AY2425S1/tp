@@ -30,7 +30,9 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [Introduction]({{ baseUrl }}/UserGuide.html#welcome-to-legacylink)
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start-guide)
+  * [Overview]({{ baseUrl }}/UserGuide.html#what-can-you-do-with-legacylink)
   * [Features]({{ baseUrl }}/UserGuide.html#features-overview)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
