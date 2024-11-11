@@ -18,8 +18,8 @@ convenience and security.
 **DLTbook** offers a command-line first interface, allowing you to manage your contacts and their DLT
 addresses with ease.
 
-We’ll walk you through each feature, so you can discover with ease **DLTbooks** offerings. Let’s get started with *
-*DLTbook** and manage your contact's public addresses with greater ease.
+We’ll walk you through each feature, so you can discover with ease **DLTbook**'s offerings. Let’s get started with 
+**DLTbook** and manage your contact's public addresses with greater ease.
 
 ⚠️ **Security Note** : To protect your data from potential manipulation, we recommend using DLTbook on a device with no
 internet connectivity.
@@ -27,48 +27,75 @@ internet connectivity.
 # Table Of Contents
 
 - [Introduction](#introduction)
-    - [Beginner's Guide](#beginners-guide)
-    - [Expert's Guide](#experts-guide)
+
+    - [Beginner's Guide](#beginner-s-guide)
+
+    - [Expert's Guide](#expert-s-guide)
 
 - [Setup Guide](#setup-guide)
-
 - [GUI Summary](#gui-summary)
-
 - [Try it out!](#try-it-out)
-- [Features](#features)
-    - [Command Overview](#command-overview)
-    - [Basic Features](#basic-features)
-        - [Viewing help: `help`](#viewing-help--help)
-        - [Clearing all contacts from DLTbook: `clear`](#clearing-all-entries--clear)
-        - [Exiting the application: `exit`](#exiting-the-program--exit)
-    - [Contact Management Features](#contact-management-features)
-        - [Adding a contact: `add`](#adding-a-contact--add)
-        - [Deleting a contact: `delete`](#deleting-a-contact--delete)
-        - [Editing a contact: `edit`](#editing-a-contact--edit)
-        - [Finding contacts: `find`](#finding-contacts-by-name--find)
-        - [Listing all contacts: `list`](#listing-all-contacts--list)
-    - [Public Address Management Features](#public-address-management-features)
-        - [Adding a public address to a contact: `addpa`](#adding-a-public-address-to-a-contact--addpa)
-        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address-of-a-contact--deletepa)
-        - [Editing a public address of a contact: `editpa`](#editing-a-public-address-of-a-contact--editpa)
-        - [Retrieving public address given contact information:
-          `retrievepa`](#retrieving-public-addresses-of-a-contact--retrievepa)
-        - [Searching for currently displayed contacts for a public address:
-          `searchpa`](#searching-for-a-public-address--searchpa)
-        - [Filters contacts based on presence of network:
-          `filter`](#filtering-contacts-by-public-addresses-network--filter)
 
-- [Support](#Support)
+- [Features](#features)
+
+    - [Command Overview](#command-overview)
+
+    - [Basic Features](#basic-features)
+
+        - [Viewing help: `help`](#viewing-help-help)
+
+        - [Clearing all contacts from DLTbook: `clear`](#clearing-all-entries-clear)
+
+        - [Exiting the application: `exit`](#exiting-the-program-exit)
+
+    - [Contact Management Features](#contact-management-features)
+
+        - [Adding a contact: `add`](#adding-a-contact-add)
+
+        - [Deleting a contact: `delete`](#deleting-a-contact-delete)
+
+        - [Editing a contact: `edit`](#editing-a-contact-edit)
+
+        - [Finding contacts: `find`](#finding-contacts-by-name-find)
+
+        - [Listing all contacts: `list`](#listing-all-contacts-list)
+
+    - [Public Address Management Features](#public-address-management-features)
+
+        - [Adding a public address to a contact: `addpa`](#adding-a-public-address-to-a-contact-addpa)
+
+        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address-of-a-contact-deletepa)
+
+        - [Editing a public address of a contact: `editpa`](#editing-a-public-address-of-a-contact-editpa)
+
+        - [Retrieving public address given contact information:
+          `retrievepa`](#retrieving-public-addresses-of-a-contact-retrievepa)
+
+        - [Searching for currently displayed contacts for a public address:
+          `searchpa`](#searching-for-a-public-address-searchpa)
+
+        - [Filters contacts based on presence of network:
+          `filter`](#filtering-contacts-by-public-addresses-network-filter)
+
+- [Support](#support)
+
     - [Frequently Asked Questions](#frequently-asked-questions)
+
     - [Common Errors](#common-errors)
+
     - [Known Issues](#known-issues)
+
     - [Future Enhancements](#future-enhancements)
-    - [Data Storage](#sata-storage)
+
+    - [Data Storage](#data-storage)
 
 - [Feature Summary](#feature-summary)
-    - [Basic Features](#basic-commands)
-    - [Contact Management Features](#contact-management-commands)
-    - [Public Address Management Features](#public-address-management-features)
+
+    - [Basic Features](#basic-features-2)
+
+    - [Contact Management Features](#contact-management-features)
+
+    - [Public Address Management Features](#public-address-management-features-2)
 
 - [Glossary](#glossary)
 
@@ -136,7 +163,7 @@ Before diving in, let's clarify some essential terms:
   Source: [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet))
 
 - **Wallet Name**: A label that you use tag to the wallet to identify the wallets purpose
-- (for daily transactions, for decentralised fiannce transactions, for long term storage).
+  (for daily transactions, for decentralised finance transactions, for long term storage).
 
 - **Public Address**: A public address is a unique series of cryptographic codes that can be shared with others to
   receive messages, coins, or tokens. (similar to an
@@ -162,11 +189,14 @@ Here’s how you can start using DLTbook:
 
 4. Once you're comfortable with the basics, explore the full range of [features](#features) available in DLTbook.
 
+
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
 
-## Experts Guide
+
+## Expert's Guide
+
 
 If you have used DLTbook before, jump straight to [Setup Guide](#setup-guide) for a quick overview on basic
 commands.
@@ -240,7 +270,7 @@ Note that the app initially contains some sample data.
 
 # GUI summary
 
-We have labelled the various parts of DLTbooks GUI for your reference:
+We have labelled the various parts of DLTbook's GUI for your reference:
 
 ![GUI summary](images/GUISummary.png)
 
@@ -318,22 +348,22 @@ capabilities.
 
 DLTbook supports the following commands:
 
- Command                                                                | Description                                                                     
-------------------------------------------------------------------------|---------------------------------------------------------------------------------
- [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
- [**add**](#adding-a-contact--add)                                      | Adds a contact to the address book                                              
- [**list**](#listing-all-persons-list)                                  | Shows a list of all contacts in the address book                                
- [**edit**](#editing-a-person-edit)                                     | Edits an existing contact in the address book                                   
- [**find**](#locating-persons-by-name-find)                             | Finds contacts whose names contain any of the given keywords                    
- [**delete**](#deleting-a-person-delete)                                | Deletes the specified contact from the address book                             
- [**clear**](#clearing-all-entries--clear)                              | Clears all entries from the address book                                        
- [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                               
- [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
- [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
- [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
- [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
- [**searchpa**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
- [**filter**](#filtering-persons-by-public-addresses-network-filter)    | Filters out a list of people with the public addresses of the specified network 
+| Command                                                                | Description                                                                            |
+|------------------------------------------------------------------------|----------------------------------------------------------------------------------------| 
+| [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                                 |
+| [**add**](#adding-a-contact-add)                                       | Adds a contact to the address book                                                     |
+| [**delete**](#deleting-a-contact-delete)                               | Deletes the specified contact from the address book                                    |
+| [**edit**](#editing-a-contact-edit)                                    | Edits an existing contact in the address book                                          |
+| [**find**](#finding-contacts-by-name-find)                             | Finds contacts whose names contain any of the given keywords                           |
+| [**list**](#listing-all-contacts-list)                                 | Shows a list of all contacts in the address book                                       |
+| [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                                     |
+| [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                                |
+| [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                          |
+| [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves public addresses with matching labels                                        |
+| [**searchpa**](#searching-for-a-public-address-searchpa)               | Based on contacts displayed, it searches for a contact using the unique public address |
+| [**filter**](#filtering-contacts-by-public-addresses-network-filter)   | Filters out a list of contacts with the public addresses of the specified network      |
+| [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                               |
+| [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                                      |
 
 <box type="info" seamless>
 
@@ -357,8 +387,8 @@ DLTbook supports the following commands:
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
-  <br>
+</box>
+<br>
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
@@ -367,6 +397,7 @@ DLTbook supports the following commands:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
@@ -383,6 +414,7 @@ Shows a message explaining how to access the help page.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -397,6 +429,7 @@ Clears all entries from the address book.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program : `exit`
@@ -411,9 +444,11 @@ Exits the program.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contact Management Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact : `add`
@@ -446,6 +481,7 @@ Adds a contact to the address book.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a contact : `delete`
@@ -472,6 +508,7 @@ Deletes the specified contact from the address book.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a contact : `edit`
@@ -506,6 +543,7 @@ Edits an existing contact in the address book.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Finding contacts by name : `find`
@@ -540,6 +578,7 @@ Finds contacts whose names contain any of the given keywords.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Listing all contacts : `list`
@@ -554,8 +593,11 @@ Shows a list of all contacts in the address book.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Public Address Management Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a public address to a contact : `addpa`
@@ -591,6 +633,7 @@ Adds a public address to a contact.
 
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a public address of a contact : `deletepa`
@@ -626,11 +669,14 @@ Deletes the public address of a contact.
   network.
 
 ![deletepa2.png](images/deletepa2.png)
+
 <br>
+
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -664,6 +710,7 @@ Edits an existing public address of a contact.
   ![editpa](images/editpa-2.png)
 
 <br>
+
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
@@ -702,9 +749,11 @@ Retrieves public addresses with matching labels.
 
 <br>
 
+
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -733,6 +782,7 @@ search on list of contacts displayed).
   which it belongs.
 
 ![searchpa](images/searchpa.png)
+
 <br>
 
 <div style="text-align: left;">
@@ -760,11 +810,14 @@ Filters out a list of contacts with the public addresses of the specified networ
   displays it with their respective list number.
 
 ![filter](images/filter.png)
+
 <br>
+
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -780,6 +833,7 @@ Clears all entries from the address book.
 </div>
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program : `exit`
@@ -790,9 +844,11 @@ Exits the program.
 
 <br>
 
+
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -805,9 +861,11 @@ manually.
 
 <br>
 
+
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -836,6 +894,12 @@ our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
 **Q**: Can I use it offline?<br>
 **A**: Yes, DLTbook is a desktop application and does not require an internet connection to run.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Data Storage
 
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
@@ -843,9 +907,8 @@ welcome to update data directly by editing that data file.
 
 <br>
 
+<box type = "info">
 
-
---------------------------------------------------------------------------------------------------------------------
 **Caution:**
 
 If your changes to the data file makes its format invalid, DLTbook will discard all data and start with an empty data
@@ -854,11 +917,15 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
+</box>
+
 <br>
+
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -876,6 +943,10 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 5. **Public Address for length BTC/ETH/SOL should be more than 26 characters**<br>
    Ensure that the public address is provided and is valid. The length of BTC/ETH/SOL public addresses should be more
    than 26 characters, less than 44 characters and can only contain alphanumeric characters.
+   
+ <div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -934,14 +1005,14 @@ exactly describe this error. This shall be fixed in the future.
 
 ## Public Address Management Features
 
-| Action                      | Format, Examples                                                                                                                              |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`     |
-| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` |
-| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                          |
-| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                   |
-| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                               |
-| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                   |
+| Action                      | Format, Examples                                                                                                                                 |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`        |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                             |
+| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                      |
+| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                  |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                      |
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
@@ -963,7 +1034,7 @@ exactly describe this error. This shall be fixed in the future.
 | **GUI**                            | Graphical User Interface, allows users to interact with electronic devices through graphical icons and visual indicators.                                                                            |
 | **JAR**                            | Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                                          |
 | **JSON**                           | JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.                                            |
-| **Public Address**                 | A unique series of alphanumerical charecters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
+| **Public Address**                 | A unique series of alphanumerical characters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
 | **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
 
 <div style="text-align: left;">
