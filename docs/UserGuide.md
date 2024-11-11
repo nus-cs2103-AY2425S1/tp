@@ -192,8 +192,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Searching persons by a specified field : `search`
-
+### Searching by a specified field : `search`
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
 Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
@@ -202,17 +201,27 @@ Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 * Only the specified field is searched.
 * Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* However, the search for events is an exact search criteria, where all characters must match.
-* Any number of words used with the event prefix `ev/` is treated as a single keyword.
+* e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `search a/street avenue`
 * `search e/gmail exampleEmail`
 * `search n/alice bob charlie`
 * `search p/98765432 12345678`
-* `search t/friend colleague`
-* `search ev/Orbital Workshop`
+* `search t/friend colleague`<br>  
+  ![result for search t/friends](images/searchTagsFriendsResult.png)
+
+The `search` command can also be used to find contacts assigned to an event.
+
+Format: `search ev/{EVENT_NAME}`
+
+* Contacts who are assigned to the event entered will be displayed as the search result.
+* However, the search for events is an exact search criteria, where all characters must match.
+* Any number of words used with the event prefix `ev/` is treated as a single keyword.
+
+Examples:
+* `search ev/Orbital Workshop`<br>  
+  ![result for search ev/Orbital Workshop](images/searchEventOrbitalWorkshop.png)
 
 #### Exporting persons: `export`
 
