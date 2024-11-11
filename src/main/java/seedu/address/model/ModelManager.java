@@ -186,7 +186,9 @@ public class ModelManager implements Model {
 
     @Override
     public Index getFirstArchivedIndex() {
-        return this.addressBook.getFirstArchivedIndex();
+        int count = (int) filteredPersons.stream().filter(person -> person.isArchived()).count();
+        Index index = Index.fromZeroBased(count);
+        return index;
     }
 
     @Override
