@@ -451,14 +451,13 @@ Use case ends.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Most commands should result in a visible change within 2 seconds.
-5.  Should not contain languages and images that are deemed offensive to the target audience.
-6.  The GUI should contain high contrast themes, which allows users to view the contents without straining their eyes.
-7.  The GUI should work well in different resolutions.
-8.  The system should be intuitive and easy to use for new users.
-9.  The date formats for fields that require dates must align with the cultural preferences of SoC students. 
-10. Should have a friendly pdf for both the user and developer guides.
-11. Should adhere to a strict schedule that delivers a feature set or update by the end of every milestone.
-12. NetBook should only take up a small storage space of less than 100MB.
+5.  The GUI should contain high contrast themes, which allows users to view the contents without straining their eyes.
+6.  The GUI should work well in different resolutions.
+7.  The system should be intuitive and easy to use for new users.
+8.  The date formats for fields that require dates must align with the cultural preferences of SoC students.
+9.  Should have a friendly pdf for both the user and developer guides.
+10. Should adhere to a strict schedule that delivers a feature set or update by the end of every milestone.
+11. NetBook should only take up a small storage space of less than 100MB.
 
 
 
