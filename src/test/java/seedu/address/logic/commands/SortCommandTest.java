@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SortCommand.ASCENDING;
-import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.commands.SortCommand.ASC;
+import static seedu.address.logic.commands.SortCommand.DESC;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,42 +30,42 @@ public class SortCommandTest {
     }
     @Test
     public void execute_sortAscendingNameSuccess() {
-        SortCommand sortCommand = new SortCommand(ASCENDING, false);
-        expectedModel.sortFilteredPersonList(ASCENDING, false);
+        SortCommand sortCommand = new SortCommand(ASC, false);
+        expectedModel.sortFilteredPersonList(ASC, false);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
     @Test
     public void execute_sortAscendingScheduleSuccess() {
-        SortCommand sortCommand = new SortCommand(ASCENDING, true);
-        expectedModel.sortFilteredPersonList(ASCENDING, true);
+        SortCommand sortCommand = new SortCommand(ASC, true);
+        expectedModel.sortFilteredPersonList(ASC, true);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_sortDescendingNameSuccess() {
-        SortCommand sortCommand = new SortCommand(DESCENDING, false);
-        expectedModel.sortFilteredPersonList(DESCENDING, false);
+        SortCommand sortCommand = new SortCommand(DESC, false);
+        expectedModel.sortFilteredPersonList(DESC, false);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
     @Test
     public void execute_sortDescendingScheduleSuccess() {
-        SortCommand sortCommand = new SortCommand(DESCENDING, true);
-        expectedModel.sortFilteredPersonList(DESCENDING, true);
+        SortCommand sortCommand = new SortCommand(DESC, true);
+        expectedModel.sortFilteredPersonList(DESC, true);
         assertCommandSuccess(sortCommand, model, SortCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 
     @Test
     public void equals() {
-        SortCommand sortFirstCommand = new SortCommand(ASCENDING, true);
-        SortCommand sortSecondCommand = new SortCommand(DESCENDING, true);
-        SortCommand sortThirdCommand = new SortCommand(ASCENDING, false);
+        SortCommand sortFirstCommand = new SortCommand(ASC, true);
+        SortCommand sortSecondCommand = new SortCommand(DESC, true);
+        SortCommand sortThirdCommand = new SortCommand(ASC, false);
 
         // same object -> returns true
         assertTrue(sortFirstCommand.equals(sortFirstCommand));
 
         // same values -> returns true
-        SortCommand sortFirstCommandCopy = new SortCommand(ASCENDING, true);
+        SortCommand sortFirstCommandCopy = new SortCommand(ASC, true);
         assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
 
         // different types -> returns false
