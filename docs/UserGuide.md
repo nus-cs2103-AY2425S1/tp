@@ -602,16 +602,17 @@ Do read up on our known issues and planned enhacements to see if we have already
 
 ---
 
----
 ## Glossary
 
-**CLASS (placeholder)** : Is the the field for users to input student classes.
-**CLI** : Command Line Interface, where you enter commands.
-**INDEX (placeholder)** : Refers to the index number shown in the displayed person list.
-**KEYWORD (placeholder)** : Is the text we use search for a group or student.
-**NAME (placeholder)** : Is the the field for users to input student's names.
-**PHONE_NUMBER (placeholder)** : Is the the field for users to input student's phone numbers.
-**TAG (placeholder)** : Is the the field for users to input student tags.
+| Term                    | Definition                                                   |
+|-------------------------|--------------------------------------------------------------|
+| **CLASS (placeholder)** | The field for users to input student classes                 |
+| **CLI**                 | Command Line Interface, where you enter commands             |
+| **INDEX (placeholder)**              | Refers to the index number shown in the displayed person list |
+| **KEYWORD (placeholder)**        | The text we use search for a group or student                |
+|**NAME (placeholder)** | The field for users to input student's names |
+|**PHONE_NUMBER (placeholder)** | The field for users to input student's phone numbers |
+|**TAG (placeholder)** | The field for users to input student tags |
 
 ## Acknowledgements
 
