@@ -46,6 +46,9 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
+    /**
+     * Returns an error message indicating the unexpected prefixes.
+     */
     public static String getErrorMessageForUnexpectedPrefixes(Prefix... unexpectedPrefixes) {
         assert unexpectedPrefixes.length > 0 : "No unexpected prefix found when prompting error message to user";
 
