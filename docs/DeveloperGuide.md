@@ -155,6 +155,38 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Command History
+
+#### Implementation
+
+The command history functionality is implemented in three main components:
+
+1. `CommandHistory`: This class maintains a list of past commands and `currentIndex` to track the current position within the list. It includes methods for adding new commands and retrieving the previous or next command:
+
+* `add(command)` — Adds a command to the history and resets the pointer to the most recent position.
+* `getPreviousCommand()` — Moves the pointer to the previous command and returns it.
+* `getNextCommand()` — Moves the pointer to the next command and returns it.
+
+2. `LogicManager`: The `LogicManager` component integrates the `CommandHistory` to store each command upon execution. It provides access to the history for other components like the UI.
+
+
+3. `CommandBox` UI Component: This component captures key events when the user presses the up or down arrow keys. Based on these key events, it retrieves commands from `CommandHistory` via `LogicManager` and displays them in the command input field.
+
+#### Sequence Diagram
+
+The following sequence diagram illustrates the flow when a user presses the up arrow key to access the previous command in history:
+
+![CommandHistorySequence](images/CommandHistorySequenceDiagram.png)
+
+1. The user presses the up arrow key.
+2. `CommandBox` calls `LogicManager#getPreviousCommand()`.
+3. `LogicManager` delegates this request to `CommandHistory#getPrevious()`.
+4. `CommandHistory` retrieves the previous command and returns it to `LogicManager`.
+5. `LogicManager` then passes the command back to `CommandBox`.
+6. `CommandBox` displays the previous command in the input field.
+
+This streamlined structure keeps the history management isolated within CommandHistory, simplifying logic in other components. The result is an intuitive user experience that enhances the command-line interface.
+
 ### Undo/redo feature
 
 #### Implementation
