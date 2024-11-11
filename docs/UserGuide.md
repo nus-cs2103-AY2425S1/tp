@@ -46,10 +46,11 @@ title: User Guide
 
 6. [FAQ](#faq)
 
-7. [Planned Features](#planned-features)
+7. [Upcoming Features](#upcoming-features)
 
 8. [Glossary](#glossary)
 
+---
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
@@ -70,6 +71,7 @@ and automated data saving**, AcademyAssist is set to revolutionize how you manag
 Let's embark on this journey to **simpler, faster, and more effective** student management!
 
 ---
+<div style="page-break-after: always;"></div>
 
 # Quick start
 This guide provides step-by-step instructions for installing and running the AcademyAssist application for both non-technical
@@ -96,12 +98,14 @@ Before you begin, ensure you have Java `17` or above installed in your computer.
 Download the latest `academyassist.jar` file from the latest release in our [GitHub repository](https://github.com/AY2425S1-CS2103T-W11-3/tp/releases).
 You can find the file under the `Assets` section of the release.
 
+<div style="page-break-after: always;"></div>
+
 ## Things to note before you start
 When you first use AcademyAssist, some sample student contacts have been added to help you familiarise yourself with
 our features. Once you are ready to manage your tuition center's students, simply use the clear command
 to clear all existing contacts and reset the StudentID. 
 
-<div markdown="span" class="alert alert-primary">::exclamation: **Caution:**
+<div markdown="span" class="alert alert-primary">:exclamation: **Caution:**
 Please note that clear action is <span style="color:red;font-weight:bold">IRREVERSIBLE!</span> All student entries will be deleted permanently. 
 </div>
 
@@ -121,20 +125,33 @@ Please note that clear action is <span style="color:red;font-weight:bold">IRREVE
 3. Navigate to the directory where the `academyassist.jar` file is located.
 4. Type `java -jar academyassist.jar` and press Enter to start the app.
 
+<div style="page-break-after: always;"></div>
+
 ## Getting Started
 For all users, upon first running the application, a help window will appear automatically, providing details on some basic features.
 You may refer to the [Command Summary](#command-summary) section for a quick overview of the available commands. The [Features](#features) section provides a more detailed explanation of each feature.
 
 ### User Interface Overview
 
-<img src="images/UiOverview.png" alt="UI overview" width="1000"/>
-
+#### Main Window
+![User Interface Overview](images/UiOverview.png)
 1. **Top Bar**: Contains the following buttons
     * **Help**: Click on this to view the help window.
     * **Exit**: Click on this to exit the application.
 2. **Command Box**: Enter your commands here to interact with the application.
 3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
-4**Student List**: Displays the list of students in the system.
+4. **Student List**: Displays the list of students in the system. Each student is represented by a Student Card.
+
+<div style="page-break-after: always;"></div>
+
+
+#### Student Card
+![Student Card Overview](images/studentCard.png)
+1. **Name**: The name of the student.
+2. **Year Group**: The year group of the student.
+3. **Subject List**: The subject(s) the student is taking.
+4. **Student ID**: The unique identifier for the student.
+5. **Phone Number**: The phone number of the student or guardian.
 
 ### Using AcademyAssist 
 To interact with AcademyAssist, type your commands into the command box and press Enter.
@@ -168,8 +185,8 @@ Where:
 - `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
 - `PARAMETERS` are the inputs required for the command to execute successfully.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
 Refer to the tables below or the [Features](#features) section for more details on each command.
 </div>
 
@@ -185,7 +202,7 @@ This section provides a quick overview of the available commands for managing st
 | **View Student**    | `detail STUDENT_ID`                                                                       | `detail S00001`                                                                             |
 | **Find Student**    | `find NAME [MORE_NAMES]`                                                                  | `find John Jane`                                                                            |
 | **Filter Students** | `filter FIELD\VALUE`                                                                      | `filter yg\2`                                                                               |
-| **Add Subject**     | `addsubject STUDENT_ID s\SUBJECT`                                                         | `addsubject S00003 s\Science`                                                               |
+| **Add Subject**     | `addsubject STUDENT_ID s\SUBJECT [s\MORE_SUBJECTS]...`                                    | `addsubject S00003 s\Science`                                                               |
 | **Track Subjects**  | `tracksubject`                                                                            |                                                                                             |
 | **Sort Students**   | `sort by\FIELD`                                                                           | `sort by\name`                                                                              |
 | **Clear Data**      | `clear`                                                                                   |                                                                                             |
@@ -218,6 +235,7 @@ In this section, you'll find detailed information about the parameters for each 
 | **Exit**                | -                 | -                                                  | No parameters required.                                                                                                                        | -                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -243,6 +261,10 @@ The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have 
 * Items with `...` after them can be repeated.
   e.g. `s\SUBJECT [s\MORE_SUBJECTS]...` can be used as `s\SUBJECT`, `s\SUBJECT s\SUBJECT`, `s\SUBJECT s\SUBJECT 
 s\SUBJECT`.
+
+* Item are compulsory unless specified as optional.
+  e.g. `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` means that all
+  parameters are compulsory except for `[s\MORE_SUBJECTS]`.
 
 * Commands are case-sensitive (e.g., `add` is not the same as `Add`). Hence, commands should be in lowercase.
 
@@ -271,10 +293,10 @@ Adds a new student to the student management system.
 Format: `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...`
 
 #### Parameters Constraints:
-* `NAME` should not be blank and should between 2 and 255 characters long. Names should only contain alphabets, spaces,
-and the special characters (-/') excluding parentheses. Names should start and end with an alphabet,
-and there should not be more than one consecutive special character or space.
-* `NRIC` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of
+* `NAME`: Must not be blank, should be 2 to 255 characters long, contain only alphabets, spaces, and the special 
+characters (-/') excluding parenthesis, start and end with an alphabet, and not have more than one consecutive 
+special character or space. 
+* `NRIC`: Should follow the format of Singaporean IC and FIN numbers. It should start with one of
   `S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A). 
 <div markdown="span" class="alert alert-note">:memo: **Note:**
 Contacts added should not have the same NRIC number. New contacts having the same NRIC number as an existing
@@ -282,19 +304,19 @@ contact will be treated as a duplicate and will not be allowed.
 
 </div>
 
-* `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
+* `YEAR_GROUP`: Should be a number within 1-13 (which represents primary school years 1 - 6 and
   secondary school years 7 - 13).
-* `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
-* `EMAIL` should follow the format local-part@domain.
+* `PHONE_NUMBER`: Should only contain number. It should be between 4 and 20 digits long with no spaces in between.
+* `EMAIL`: Should follow the format local-part@domain.
   * **local-part**: Must start and end with an alphanumeric character. It can include letters, digits, and the special 
   characters `+`, `_`, `.`, `-`, but not consecutively or at the start/end.
   * **domain**: Made of domain labels separated by periods. Each label must start and end with an alphanumeric character 
   and can contain hyphens, but not consecutively. The domain must end in a label at least 2 characters long.
-* `ADDRESS` allow any characters and should not be empty. The maximum length is 300 characters including spaces in 
+* `ADDRESS`: Allow any characters and should not be empty. The maximum length is 300 characters including spaces in 
 between. 
-* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are 
-available within the tuition center will be allowed.
-* `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
+* `SUBJECT`: Only the subjects listed below are allowed.
+  * Subjects available: English, Chinese, Malay, Tamil, Math, Further Math, Science, History, Geography, Literature, Economics, Accounting, Business, Physics, Chemistry, Biology and Computing.
+* `[MORE_SUBJECTS]`: Optional, and you can add multiple subjects by repeating the `s\` field. The same constraints as `SUBJECT` apply. 
 
 <div markdown="span" class="alert alert-note">:memo: **Note:**
 Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
@@ -302,12 +324,16 @@ will be added.
 
 </div>
 
-* A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
+</div>
 
 Examples:
-* `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street s\Science`
+* `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street \Science`
+  * Adds a student named Sam Tan the respective details and the subject Science. 
 * `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
+  * Adds a student named John Doe with the respective details and the subjects Science and Math.
 
 ![Add Success Message](images/add.png)
 
@@ -319,7 +345,7 @@ the details of a student, you can use the [detail command] (#viewing-a-students-
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Exceptionally long names will be cut off on the display, but you can read the student's full name using the 
-[detail command] (#viewing-a-students-detail--detail).
+detail command.
 </div>
 
 ### Deleting a student : `delete`
@@ -328,12 +354,11 @@ Removes a student from the tuition center management system.
 
 Format: `delete STUDENT_ID`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a 
-student is automatically assigned when the student contact is first added and can be found by viewing the student's 
-details.
+* `STUDENT_ID`: Should begin with S followed by a 5-digit, starting from 00001 to 99999.
+  * The ID of a student is automatically assigned when the student contact is first added and can be found by viewing the student's 
+  details.
 <div markdown="span" class="alert alert-note">:memo: **Note:**
-The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
-` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
+The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID S00001` and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
 (instead of replacing S00001).
 
 </div>
@@ -345,6 +370,7 @@ system.
 
 Examples:
 * `delete S00001`
+  * Deletes the student with the ID S00001.
 
 ![Delete Success Message](images/delete.png)
 
@@ -354,15 +380,18 @@ Edits an existing student's details in the system.
 
 Format: `edit STUDENT_ID FIELD\NEW_VALUE`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a 
-student is automatically assigned when the student contact is first added and can be found by viewing the student's 
-details.
-* `FIELD` can be one of: Name(`n\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), NRIC(`i\ `) or Subject 
+* `STUDENT_ID`: Should begin with S followed by a 5-digit, starting from 00001 to 99999.
+    * The ID of a student is automatically assigned when the student contact is first added and can be found by viewing the student's
+      details.
+* `FIELD`: Can be one of: Name(`n\ `), NRIC(`i\ `), Year Group(`yg\ `), Phone Number(`p\ `), Email(`e\ `), Address(`a\ `), or Subject 
 taken(`s\ `).
-* `NEW_VALUE` should follow the constraints of the specified field. You may refer to the constraints of each field 
-in the [add feature](#adding-a-student--add) section.
-* Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
+* `NEW_VALUE`: Should follow the constraints of the specified field. You may refer to the constraints of each field 
+in the [add feature](#adding-a-student--add) section or the [Command Parameters Reference](#command-parameters-reference) section.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
+
+</div>
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 When editing a contact, the previously saved value of FIELD will be replaced entirely by NEW_VALUE. e.g. 'edit S00001 
 n\Henry Teo' replaces the name field of student S00001 with "Henry Tan". 
@@ -371,19 +400,24 @@ n\Henry Teo' replaces the name field of student S00001 with "Henry Tan".
 
 Examples:
 * `edit S00001 a\New_Address`
-* `edit S00002 p\91234567 a\New_Address`
+  * Edits the address of the student with the ID S00001 to "New_Address".
+* `edit s00002 p\91234567 a\New_Address`
+  * Edits the phone number and address of the student with the ID S00002 to "91234567" and "New_Address" respectively.
 
 ![Edit Success Message](images/edit.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
-
+To more efficiently add a subject to a person, you can use the `addsubject` command. You may refer to the section
+"Adding subject(s) to a student" under "Subject Management" for more details. 
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete a subject, you can use the edit command. e.g. student S00120 takes the subjects English and Math, but wishes to 
-drop the subject English, you can use the command 'edit S00120 s\Math'.
+drop the subject English, you can use the command 'edit S00120 s\Math'.<br><br>
 
+:exclamation: But note that the subject will be replaced entirely by the new subject.
+For example, if the student is taking English and Math and you use the command 'edit S00120 s\Science', the student will
+only be taking Science.
 </div>
 
 ### Listing all students : `list`
@@ -400,13 +434,15 @@ Displays a window that shows the student's details.
 
 Format: `detail STUDENT_ID`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
-  automatically assigned when the student contact is first added and can be found by viewing the student's details.
+* `STUDENT_ID`: Should begin with S followed by a 5-digit, starting from 00001 to 99999.
+    * The ID of a student is automatically assigned when the student contact is first added and can be found by viewing the student's
+      details.
 * The student's details will be displayed in a pop-up window.
 * User may use keyboard shortcut `B` to close the pop-up window.
 
 Examples:
 * `detail S00001`
+  * Displays the details of the student with the ID S00001.
 
 ![Detail Success Message](images/detail.png)
 
@@ -425,20 +461,26 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive (i.e. John, JOHN, john are all treated the same way).
 * You can only search for a student by their name.
-* `NAME` should not be blank and should between 2 and 255 characters long. Names should only contain alphabets, spaces,
-and the special characters (-/') excluding parentheses. Names should start and end with an alphabet,
-and there should not be more than one consecutive special character.
+* `KEYWORD`: Each keyword must be between 1-255 characters long contains only alphabets and special characters (-/’) excluding parenthesis, separated by spaces. 
 * Students matching at least one keyword will be returned.
+
+Examples:
+* `find John` 
+  * Returns `John` and `John Doe`
+* `find John Jane` 
+  * Returns any student having names `John` or `Jane`
+* `find J` 
+  * Returns any student having names starting with `J`
+
+![Find Success Message](images/find.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can use the `find` command to locate the student ID, which allows the admin to use other commands like `edit`, `detail`, `addsubject`, etc., that require the student ID.
+</div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After finding, you can use `list` command to return to the full list of students.
 
 </div>
-Examples:
-* `find John` returns `John` and `John Doe`
-* `find John Jane` returns any student having names `John` or `Jane`
-* `find J` returns any student having names starting with `J`
-
-![Find Success Message](images/find.png)
 
 ### Sorting students : `sort`
 
@@ -446,7 +488,7 @@ Sort the list of students based on a specified field.
 
 Format: `sort by\FIELD`
 
-* `FIELD` can be either `name`, `subject`, `studentID` or `yearGroup`.
+* `FIELD`: Can be either `name`, `subject`, `studentID` or `yearGroup`.
 * Sorting by name will sort students in lexicographical ascending order of their names.
 * Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
 * Sorting by studentID will sort students based on ascending order of studentID.
@@ -456,20 +498,25 @@ FIELD is case-sensitive (e.g., `NAME` is not the same as `name`). Hence, FIELDs 
 
 </div> 
 
+Examples:
+* `sort by\name`
+  * Sorts the students by their names.
+* `sort by\subject`
+  * Sorts the students by the subjects. 
+* `sort by\yearGroup`
+  * Sorts the students by their year group.
+* `sort by\studentId`
+  * Sorts the students by their student ID.
+
+![Sort Success Message](images/sort.png)
+
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Sort command will sort the current list of students shown in the main window.
 For example, if you have filtered the list by year group 2 students and then use the `sort by\name` command, only year 
 group 2 students will be sorted.
 
 </div>
-
-Examples:
-* `sort by\name`
-* `sort by\subject`
-* `sort by\yearGroup`
-* `sort by\studentID`
-
-![Sort Success Message](images/sort.png)
 
 ### Filtering students : `filter`
 
@@ -480,38 +527,51 @@ Format: `filter FIELD\VALUE`
 * You can only filter by EITHER year group or class.
 * You can only filter one value (eg. filter by Science only).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-After filtering, you can use `list` command to return to the full list of students.
-
-</div>
-
 Examples:
-* `filter yg\2` shows only students who belong to year group 2
-* `filter s\Science` shows only students who take Science as a subject
+* `filter yg\2`
+  * Filters the list to show only year group 2 students. 
+* `filter s\Science`
+  * Filters the list to show only students taking Science.
 
 ![Filter Success Message](images/filter.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+After filtering, you can use `list` command to return to the full list of students.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The `filter` function can be useful for tracking the number of students, as the number of students in the filtered list 
+will be displayed.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
+</div>
 
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
 
 Adds one or more subjects to an existing student's record.
 
-Format: `addsubject STUDENT_ID s\SUBJECT`
+Format: `addsubject STUDENT_ID s\SUBJECT [s\MORE_SUBJECTS]...`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
-  automatically assigned when the student contact is first added and can be found by viewing the student's details.
-* `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
-  (i.e. science, SCIENCE, Science are treated the same way).
+* `STUDENT_ID`: Should begin with S followed by a 5-digit, starting from 00001 to 99999.
+    * The ID of a student is automatically assigned when the student contact is first added and can be found by viewing the student's
+      details.
+* `SUBJECT`: Only the subjects listed below are allowed.
+    * Subjects available: English, Chinese, Malay, Tamil, Math, Further Math, Science, History, Geography, Literature, Economics, Accounting, Business, Physics, Chemistry, Biology and Computing.
+* `[MORE_SUBJECTS]`: Optional, and you can add multiple subjects by repeating the `s\` field. The same constraints as `SUBJECT` apply.
+
 <div markdown="span" class="alert alert-note">:memo: **Note:**
-Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject will be added.
-
+Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
+will be added.
 </div>
-* Subjects available: English, Chinese, Malay, Tamil, Math, Further Math, Science, History, Geography, Literature,
-Economics, Accounting, Business, Physics, Chemistry, Biology and Computing.
 
 Examples:
 * `addsubject S00001 s\Science`
+  * Adds the subject Science to the student with the ID S00001. 
 * `addsubject S00002 s\Science s\Math`
+  * Adds the subjects Science and Math to the student with the ID S00002. 
 
 ![Addsubject Success Message](images/addsubject.png)
 
@@ -528,8 +588,13 @@ Format: `tracksubject`
 Track subject displays the number of students based on the filtered list. For example,
 filtering by year 2 students followed by a `tracksubject` command will only show how many year 2 students 
 are taking each of the subjects.
-
 </div> 
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** 
+The subject tracker must be closed and reopened to refresh the data. If you filter the list and then run the 
+`tracksubject` command without closing the pop-up, subsequent commands like `list` will not update the subject tracker. 
+Please ensure to close the tracker to view the most current information. 
+</div>
 
 ![TrackSubject Success Message](images/tracksubject.png)
 
@@ -591,6 +656,13 @@ why not copy your AcademyAssist file to a USB drive or cloud storage?
 2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend
 it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** 
+Be aware that if your modifications to the data file create an invalid format, Academy Assist will erase all existing
+data and start with a blank data file the next time it runs. To prevent data loss, it is advisable to back up the file 
+before making any changes.<br><br>
+Additionally, certain alterations may cause Academy Assist to function improperly (for instance, if a value entered is
+outside the permissible range). Only edit the data file if you are sure you can do so accurately.
+</div>
 
 ## What If Something Goes Wrong?
 
@@ -608,17 +680,44 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 
 --------------------------------------------------------------------------------------------------------------------
-
 # FAQ
+This section provides answers to frequently asked questions about AcademyAssist. If you have any other questions or
+encounter issues while using the application, please feel free to reach out to us via our email (academyassist@gmail.com).
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AcademyAssist folder.<br><br>
+
 **Q**: Why is there a gap in the studentID after I deleted a student?<br>
-**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.
+**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.<br><br>
+
+**Q**: Why do the system doesn't replace the studentID of a deleted student?<br>
+**A**: This is an intentional design. Setting the studentID as irreplacable ensures data consistency and integrity,
+similar to a primary key in a database, by preventing duplicate or erroneous entries. <br><br>
+
+**Q**: Why is the maximum studentID capped at S99999?<br>
+**A**: The maximum student ID is capped at S99999 to meet the needs of small and medium-sized tuition centers. This 
+limit is sufficient for managing hundreds of students while providing a safe buffer for growth over the years. 
+As student IDs are irreplacable, this capacity remains adequate even with operations such as deleting student records.<br><br>
+
+**Q**: Some of the subjects I want to add are not available. How can I add them?<br>
+**A**: Currently, the system only supports a predefined set of subjects. However, we are working on a feature that will
+allow users to create their own subjects. Stay tuned for updates on this feature!<br><br>
+
+**Q**: How can I view the full list of students after filtering or sorting?<br>
+**A**: You can use the `list` command to view the full list of students after filtering or sorting. This command will
+reset the list to display all students in the system.<br><br>
+
+**Q**: Why is the subject tracker not updating after filtering the list?<br>
+**A**: The subject tracker must be closed and reopened to refresh the data. If you filter the list and then run the
+`tracksubject` command without closing the pop-up, subsequent commands like `list` will not update the subject tracker.
+
+**Q**: I can't see the full details of a student in the main window. How can I view all the details?<br>
+**A**: Currently, we only display the student's name, student ID, year group, subjects taken, and phone number in the 
+main window for a cleaner user interface. To view more detailed information about a student, you can use the `detail` 
+command followed by the student's ID. This will provide you with all the additional details you need.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
-
 # Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
 introduce the following features aimed at providing greater flexibility in subject management:
@@ -635,6 +734,11 @@ up-to-date records.
 only supports adding subjects, and if a user wants to remove a subject from a student’s record, they must use the edit
 feature and manually note the remaining subjects. This new feature will streamline the process and enhance usability.
 <br><br>
+4. **Add Remark**: Enable users to add remarks or comments to student contacts in the future. This feature will allow 
+users to tag additional information, such as notes about missed payments or other important details, to specific 
+students. By implementing this functionality, we aim to improve communication and record-keeping, making it easier for 
+users to manage student interactions effectively<br><br> 
+
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
