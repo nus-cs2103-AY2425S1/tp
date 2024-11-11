@@ -198,7 +198,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 7. Find Students who have yet to submit assignments
 8. Limit the length of inputs to prevent truncation errors 
 9. Add timestamp to deadline for assignments
-10. Fix Attendance Window's Bug when editing names in a filtered view
+10. Add Start Date and End Date to `Assignments`
 
 
 
