@@ -102,7 +102,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
                 model,
                 AddPublicAddressCommand::mergePersons,
                 MESSAGE_ADDPA_SUCCESS
-            ); // TODO: Update success message
+            );
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }
