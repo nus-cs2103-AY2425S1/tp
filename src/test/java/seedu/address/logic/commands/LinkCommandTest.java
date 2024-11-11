@@ -32,6 +32,10 @@ public class LinkCommandTest {
 
         // different types -> returns false
         assertFalse(linkFirstCommand.equals(1));
+        LinkCommand linkFirstCommandDifferentStudent = new LinkCommand(CARL_NAME, BENSON_NAME);
+        LinkCommand linkFirstCommandDifferentParent = new LinkCommand(ALICE_NAME, DANIEL_NAME);
+        assertFalse(linkFirstCommand.equals(linkFirstCommandDifferentStudent));
+        assertFalse(linkFirstCommand.equals(linkFirstCommandDifferentParent));
 
         // null -> returns false
         assertFalse(linkFirstCommand.equals(null));
