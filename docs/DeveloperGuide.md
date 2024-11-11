@@ -741,7 +741,7 @@ Team Size: 5
    Add editHistory and deleteHistory command that allows order history of a customer to be modified
 
 
-5.**Being able to export customer order history into csv file**
+5. **Being able to export customer order history into csv file**
 
 * Add downloadOrderHistory to export all customer data alongside the order history
 
