@@ -21,7 +21,7 @@ public class JsonAdaptedTransaction {
      * {@code amount}, {@code otherParty} and {@code date}.
      */
     @JsonCreator
-    public JsonAdaptedTransaction(@JsonProperty("description") String description, @JsonProperty("amount") int amount,
+    public JsonAdaptedTransaction(@JsonProperty("description") String description, @JsonProperty("amount") double amount,
                           @JsonProperty("otherParty") String otherParty, @JsonProperty("date") LocalDate date) {
         this.description = description;
         this.amount = amount;
