@@ -1090,7 +1090,6 @@ PhysioPal currently truncates long client details (address, email, name, and med
 **Proposed Implementation**
 1. Modify `ClientWindow` to enable wrapping for long fields, ensuring full details are visible across multiple lines.
 2. Use `Text` or `TextArea` components with word-wrapping for address, email, and medical condition fields. The name field will also wrap if it exceeds the header width.
-3. Include an option to expand or scroll for very lengthy details, with a toggle to enable or disable wrapping for advanced users.
 
 ## **Appendix: Effort**
 
