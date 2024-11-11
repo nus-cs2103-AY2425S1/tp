@@ -294,7 +294,7 @@ This command will help you find guests and vendors that match any of the given k
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of [prefix](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) should be used for each find command.
+> :warning: **Exactly** one type of [prefix](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) should be used for each `find` command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -393,6 +393,8 @@ This command will allow you to edit the details of the guest identified by the `
 
 > :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
+> :warning: At least one field of a `Guest` has to be changed to properly utilise the `edit_guest` command without error.
+
 * :information_source: As of now, BridalBuddy only supports one single word per tag.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
@@ -461,6 +463,8 @@ This command will allow you to edit the details of the vendor identified by the 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
 > :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
+
+> :warning: At least one field of a `Vendor` has to be changed to properly utilise the `edit_vendor` command without error.
 
 * :information_source: As of now, BridalBuddy only supports one single word per tag.
 
