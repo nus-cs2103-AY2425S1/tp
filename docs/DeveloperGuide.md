@@ -279,17 +279,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                |
-|----------|--------------------------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users |
-| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | find a specific person quickly without manually scrolling the list |
-| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                    |
-| `* * *`  | Tuition Center Administrators        | manage, retrieve and update the contact information for teachers, students and parents      | smoothly communicate across all parties without any confusions or delays |
-| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | boost efficiency by cutting down administrative time on repetitive tasks |
-| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | personalise learning experience                                |
-| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | ensure timely payments                                         |
-| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | lower administrative burden by minimising manual billing tasks |
-| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                             |
+| Priority | As a …​       | I want to …​                                                                                | So that I can…​                                                          |
+|----------|---------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | Private Tutor | search for contacts based on multiple criteria (name, role, or ID)                          | find a specific person quickly without manually scrolling the list       |
+| `* * *`  | Private Tutor | have a user-friendly command-line interface with clear and concise command options          | quickly perform tasks without a user guide                               |
+| `* * *`  | Private tutor | manage, retrieve and update the contact information for my students                         | smoothly communicate across all parties without any confusions or delays |
+| `* * *`  | Private Tutor | perform multiple actions at once                                                            | boost efficiency by cutting down administrative time on repetitive tasks |
+| `* * *`  | Private Tutor | add note about individual students (e.g. learning preferences, special needs, etc)          | personalise learning experience                                          |
+| `* *`    | Private Tutor | send automated payment notifications to parents                                             | ensure timely payments                                                   |
+| `* *`    | Private Tutor | integrate a billing system that automatically calculates monthly fees and generate invoices | lower administrative burden by minimising manual billing tasks           |
+| `* *`    | Private Tutor | log and track communication history with my students                                        | ensure continuity in communication                                       |
 
 
 
@@ -298,10 +297,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## Use cases
 
 #### **Use Case UC01: Add Student**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to add a new student with the required details in a single line.
+1. Private tutor types the command to add a new student with the required details in a single line.
 2. EduTuTu validates the input details.
 3. EduTuTu adds the new student to the system and logs the action.
 
@@ -321,10 +320,10 @@ Use case ends.
 
 
 #### **Use Case UC02: Delete Student**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to delete a student using their unique index:
+1. Private tutor types the command to delete a student using their unique index:
 2. EduTuTu validates the index.
 3. EduTuTu deletes the student and logs the details of the deleted student.
 
@@ -339,10 +338,10 @@ Use case ends.
 ---
 
 #### **Use Case UC03: List All Students**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to list all students.
+1. Private tutor types the command to list all students.
 2. EduTuTu retrieves all student records and outputs the list in the terminal with unique indices.
 
 Use case ends.
@@ -350,10 +349,10 @@ Use case ends.
 ---
 
 #### **Use Case UC04: Find Students**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to search for students by any field.
+1. Private tutor types the command to search for students by any field.
 2. EduTuTu validates the search criteria.
 3. EduTuTu searches the system and outputs matching students with unique indices.
 
@@ -368,12 +367,12 @@ Use case ends.
 ---
 
 #### **Use Case UC05: Mark Fees as Paid**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator first searches for the student using the find command.
+1. Private tutor first searches for the student using the find command.
 2. EduTuTu displays a list of students with unique indices.
-3. Administrator types the command to mark a student's fees as paid, including the student index and date.
+3. Private tutor types the command to mark a student's fees as paid, including the student index and date.
 4. EduTuTu validates the student index and date format.
 5. EduTuTu updates the student's record and logs the payment confirmation.
 
@@ -393,12 +392,12 @@ Use case ends.
 
 
 #### **Use Case UC06: Unmark Fees as Paid**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator first searches for the student using the `find` command.
+1. Private tutor first searches for the student using the `find` command.
 2. EduTuTu displays a list of students with unique indices.
-3. Administrator types the command to unmark a student's fees as paid, including the student index and date.
+3. Private tutor types the command to unmark a student's fees as paid, including the student index and date.
 4. EduTuTu validates the student index and month format.
 5. EduTuTu updates the student’s record, removing the payment record for the specified month, and logs the removal confirmation.
 
@@ -417,12 +416,12 @@ Use case ends.
 ---
 
 #### **Use Case UC07: Edit Student Record**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator first searches for the student using the `find` command.
+1. Private tutor first searches for the student using the `find` command.
 2. EduTuTu displays a list of students with unique indices.
-3. Administrator types the command to edit a student's record, including the student index.
+3. Private tutor types the command to edit a student's record, including the student index.
 4. EduTuTu validates the student index.
 5. Administrator edits the selected the field with new value.
 6. EduTuTu updates the student’s record with the new information and logs a confirmation of the successful edit.
@@ -442,10 +441,10 @@ Use case ends.
 ---
 
 #### **Use Case UC08: Display Class Pie Chart**
-**Actor**: Administrator
+**Actor**: Private Tutor
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command `pie` to view the distribution of students across classes.
+1. Private tutor types the command `pie` to view the distribution of students across classes.
 2. EduTuTu generates and displays a pie chart, representing the number of students per class, with each class labeled clearly.
 3. Administrator reviews the chart for insights into class sizes.
 
@@ -460,12 +459,12 @@ Use case ends.
 ---
 
 #### **Use Case UC09: Display Monthly Payment Bar Chart**
-**Actor**: Administrator
+**Actor**: Private Tutir
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command `bar` to view the monthly payment data.
+1. Private tutor types the command `bar` to view the monthly payment data.
 2. EduTuTu generates and displays a bar chart with the y-axis representing the number of students and the x-axis representing each month.
-3. Administrator reviews the chart for insights into monthly payment patterns.
+3. Private Tutor reviews the chart for insights into monthly payment patterns.
 
 Use case ends.
 
