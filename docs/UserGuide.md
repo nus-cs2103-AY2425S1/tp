@@ -268,7 +268,8 @@ Examples:
 
 ### Adding a Property : `addProperty`
 
-Add a property listing to an existing person in the address book.
+Add a property listing to an existing person in the address book.  Note that
+although multiple of the same field may be entered, only the last (most up to date one) will be recorded.
 
 Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
 
