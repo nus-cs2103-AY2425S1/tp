@@ -16,7 +16,7 @@ title: Developer Guide
   4.1. [Undo/redo feature](#undoredo-feature)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation-1)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-6. [Planned Enhancements](#planned-enhancements)
+6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 7. [Appendix: Requirements](#appendix-requirements)<br>
   7.1. [Product scope](#product-scope)<br>
   7.2. [User stories](#user-stories)<br>
@@ -272,7 +272,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ---
 
-## **Planned Enhancements**
+## **Appendix: Planned Enhancements**
 
 Team Size: 5
 
