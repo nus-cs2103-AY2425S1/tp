@@ -492,9 +492,9 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 *_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
 
 ### Name
-- Must contain alphabets and spaces only, with the following exceptions:
+- Must contain english alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
-//& white space thingy issue
+      - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
 - Must not be blank
 
