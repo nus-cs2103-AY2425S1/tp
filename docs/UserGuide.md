@@ -173,7 +173,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 >
 > * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 > * A person can have up to 10 tags (including 0).
-> * `NAME` and `EMERGENCY_NAME` consist of alphabets, numbers, dashes (-) and apostrophes (').
+> * `NAME` and `EMERGENCY_NAME` consist of alphabets, numbers, dashes (-), commas (-), and apostrophes (').
 > * `PHONE` and `EMERGENCY_PHONE` consist of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format `local-part@domain`.
 > * `ROOM_NUMBER` should be of the format `##-####`, where # corresponds to the digits 0, 1, 2, ... 9. 
@@ -399,7 +399,7 @@ Format: A sequence of alphanumeric characters corresponding to a student's name.
 
 Constraints:
 * `name` can contain any alphanumeric character or whitespace.
-* `name` can contain hyphens, commas and apostrophes.
+* `name` can contain hyphens, commas, and apostrophes.
 * `name` can be 1 to 300 characters long.
 
 Duplicate handling:
