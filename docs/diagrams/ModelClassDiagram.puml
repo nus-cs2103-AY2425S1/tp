@@ -81,4 +81,5 @@ Species -[hidden]right-> Sex
 
 ModelManager --> "~* filtered" Owner
 ModelManager --> "~* filtered" Pet
+
 @enduml
