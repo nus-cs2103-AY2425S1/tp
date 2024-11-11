@@ -90,7 +90,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/everntTory/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
