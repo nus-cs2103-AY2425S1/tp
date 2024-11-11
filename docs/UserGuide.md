@@ -805,7 +805,7 @@ close
 - **On Success:**
     - The split view closes.
     - The main list view returns to full width.
-    - The image below the GUI before and after using `close`:
+    - The images below show the GUI before and after using `close`:
       <div style="display: flex; gap: 10px;">
           <figure markdown>
               <img src="images/UIAfterView.png" alt="UI Before View" style="width: 100%;">
