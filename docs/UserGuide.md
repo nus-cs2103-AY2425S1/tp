@@ -36,7 +36,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
 * [Glossary](#glossary)
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
@@ -50,7 +50,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
    <img src="images/openinterminal.png" alt="openinterminal" width="600">
-   
+ 
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    <img src="images/Ui.png" alt="ui" width="600">
 
@@ -68,7 +68,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
