@@ -488,22 +488,22 @@ duplicate. This is because 2 people can share numbers, address and emails (eg a 
 the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
 number, email and addresses simultaneously.
 
-### 4. Flexible Command Keywords.
-Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
-will make command keywords case-insensitive in a future update by parsing the prefixes differently.
+### 4. Some common names are not allowed to be entered
+Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
+is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
+commands.
 
 ### 5. No Wrapping for very long ui details
 Currently, if the name, tags or other details are very long, they are cut off in the UI. This will be fixed in a future
 version by enabling wrapping for texts in the UI such that they are more easily viewable.
 
-### 6. Some common names are not allowed to be entered
-Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
-is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
-commands.
-
-### 7. Currently, our find function only supports finding by name
+### 6. Currently, our find function only supports finding by name
 This may not be ideal when you want to search clients by what insurance plans or claim ID they have. This will be supported
 in a future version when we enhance the search function to search by either insurance plan type or claim ID.
+
+### 7. Flexible Command Keywords.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
+will make command keywords case-insensitive in a future update by parsing the prefixes differently.
 
 --------------------------------------------------------------------------------------------------------------------
 
