@@ -116,4 +116,20 @@ public class TypicalPersons {
         }
         return ab;
     }
+
+    public static AddressBook getArchivedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toArchive = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withArchived(toArchive).build();
+                ab.addPerson(newStudent);
+                toArchive = !toArchive;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withArchived(toArchive).build();
+                ab.addPerson(newParent);
+            }
+        }
+        return ab;
+    }
 }
