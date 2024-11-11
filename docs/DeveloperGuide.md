@@ -951,6 +951,68 @@ testers are expected to do more *exploratory* testing.
 ---
 <h3 class="features">Task Features</h3>
 
+### Creating Task
+##### ... if `Task1` is not in the list of tasks
+1. Test case: `create-task tk/Task1`<br>
+   Expected: `Task1` is added to list of tasks. Details of the added task are shown.
+
+##### ... if `Task1` is in the list of tasks
+1. Test case: `create-task tk/Task1`<br>
+   Expected: No tasks are added to list of tasks. Error details shown.
+
+### Deleting Task
+##### ... if there is only 1 task in the list
+1. Test case: `delete-task 1`<br>
+   Expected: `Task1` is removed from list of tasks. Details of the removed task are shown.
+
+1. Test case: `delete-task 2`<br>
+   Expected: No tasks are removed from list of tasks. Error details shown.
+
+### Assigning Task
+##### ... if there's only 1 task and 1 vendor without that task assigned to them
+1. Test case: `assign-task 1 1`<br>
+   Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
+
+1. Test case: `assign-task 0 0`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+1. Test case: `assign-task 2 2`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+##### ... if there's only 1 task and 1 vendor with that task already assigned to them
+1. Test case: `assign-task 1 1`<br>
+   Expected: No tasks are assigned to any contacts. Error details shown.
+
+##### ... if there's only 1 task and 0 vendors
+1. Test case: `assign-task 1 1`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+### Unassigning Task
+##### ... if first contact has first task
+1. Test case: `unassign-task 1 1`<br>
+   Expected: First task unassigned. Details of updated contact shown.
+
+##### ... if first contact does not have first task
+1. Test case: `unassign-task 1 1`<br>
+   Expected: No tasks are unassigned. Error details shown.
+
+### Marking Task
+##### ... if there's only 2 tasks
+1. Test case: `mark-task 1 2`<br>
+   Expected: First two task marked. Details of updated tasks shown.
+
+1. Test case: `mark-task 1 2 3 4`<br>
+   Expected: No tasks marked. Error details shown.
+
+### Unmarking Task
+##### ... if there's only 2 tasks
+1. Test case: `unmark-task 1`<br>
+   Expected: First task unmarked. Details of updated tasks shown.
+
+##### ... if first contact does not have first task
+1. Test case: `unmark-task 1 2 3 4`<br>
+   Expected: No tasks are unmarked. Error details shown.
+
 ---
 <h3 class="features">Tag Features</h3>
 
