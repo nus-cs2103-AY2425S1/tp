@@ -34,8 +34,8 @@ public class ExportCommandTest {
         // 2. Populate sample source file with sample json data.
         try {
             Files.createDirectory(Path.of("test"));
-            tempSrcPath = Files.createFile(Paths.get("test", "addressbook.json"));
-            tempDstPath = Files.createFile(Paths.get("test", "dst-addressbook.json"));
+            tempSrcPath = Files.createFile(Paths.get("test", "vbook.json"));
+            tempDstPath = Files.createFile(Paths.get("test", "dst-vbook.json"));
             ReadOnlyAddressBook sampleData = SampleDataUtil.getSampleAddressBook();
             String stringData = JsonUtil.toJsonString(sampleData);
             byte[] encryptedData = EncryptionManager.encrypt(stringData, tempKeyPath);

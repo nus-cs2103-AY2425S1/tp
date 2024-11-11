@@ -32,7 +32,7 @@ public class ExportCommand extends Command {
 
     // Constructor for normal use (opens file chooser)
     public ExportCommand() {
-        this(null, new File("data/addressbook.json"), null);
+        this(null, new File("data/vbook.json"), null);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ExportCommand extends Command {
             // Decrypt data on attempting to export
             encryptedData = Files.readAllBytes(sourceFile.toPath());
             String jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
-            File tmpFile = new File("addressbook.json");
+            File tmpFile = new File("vbook.json");
 
             // Create a new file if it doesn't exist
             tmpFile.createNewFile();
@@ -121,7 +121,7 @@ public class ExportCommand extends Command {
         fileChooser.setTitle("Export VBook");
 
         // Set the initial file name
-        fileChooser.setInitialFileName("addressbook.json");
+        fileChooser.setInitialFileName("vbook.json");
 
         // Filter to only show JSON files
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
