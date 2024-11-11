@@ -27,11 +27,11 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TalentHub.
 
-4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
+4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 <img src="images/Ui.png" alt="Ui" style="display: block; margin: 0 auto; border-radius: 10px;">
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list person` : Lists all persons.
@@ -42,11 +42,11 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-    <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+    <div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
     </div>
 
-    - `exit` : Exits the app.
+    - `exit` : Exits the app.<br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -84,7 +84,7 @@ This command allows you to add a person to a list of persons on TalentHub!
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Person constraints**<br>
 
@@ -102,21 +102,13 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 **:information_source: Optionals** <br>
 A person can have any number of tags or none at all!
 The address and email address fields are also optional! 
-Current implementation does not require the person to be added to have the celebrity tag attached to their name.
 </div>
 
 Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
-<div markdown="block" class="alert alert-info">:pushpin:<br> 
-Note that John Doe does not have an address in this example.
-</div>
 
 - `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-You can add the prefixes in any order you want!
-</div>
 
 <figure style="text-align: center;">
   <img src="images/add_person.png" alt="result for 'add person'" style="display: block; margin: 0 auto; border-radius: 10px;">
@@ -147,7 +139,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Person constraints**<br>
 
@@ -158,13 +150,14 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - A person's phone number must be unique.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
 Examples:
 
 - `edit person 7 p/91234567 e/ a/123 Clementi Rd` Edits the phone number and address of the 7th person to be `91234567` and `123 Clementi Rd` respectively and clears the email address.
+
 - `edit person 2 n/Bernice Yu a/ t/` Edits the name of the 2nd person to be `Bernice Yu` and clears the address and all existing tags.
 
 <figure style="text-align: center;">
@@ -188,11 +181,12 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find person John` returns `john` and `John Doe`
+
 - `find person john bernice` returns `John Doe`, `Bernice Yu`
 
 <figure style="text-align: center;">
   <img src="images/find_person.png" alt="find person" style="display: block; margin: 0 auto; border-radius: 10px;">
-  <figcaption>command: <code>find person john bernice</code></figcaption>
+  <figcaption>command: <code>find person John Bernice</code></figcaption>
 </figure>
 
 ### Viewing person by name: `view person`
@@ -202,7 +196,7 @@ whose name exactly matches the given keywords on TalentHub!
 
 Format: `view person KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g. `john` will match `John`
+- The search is case-sensitive. e.g. `john` will not match `John`
 - The order of the keywords matters. e.g. `John Doe` will match `John Doe` but not `Doe John`
 - Only the **full name** is searched.
 - Only full words will be matched. e.g. `John` will not match `Johnny`
@@ -211,6 +205,7 @@ Format: `view person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `view person Bernice Yu` returns the details for `Bernice Yu`
+
 - `view person John Doe` returns the details for `John Doe`
 
 <figure style="text-align: center;">
@@ -231,6 +226,7 @@ Format: `filter person TAG`
 Examples:
 
 - `filter person Hairdresser` returns the person with tag `HairDresser`.
+
 - `filter person Celebrity` returns the person with tag `Celebrity`.
 
 <figure style="text-align: center;">
@@ -249,13 +245,14 @@ Format: `delete person INDEX`
 - The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647
   ) e.g. 1, 2, 3 …​
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from **all** events' contact lists. This action is irreversible after confirmation.
 </div>
 
 Examples:
 
-- `list person` followed by `delete person 2` deletes the 2nd person in the address book.
+- `list person` followed by `delete person 2` deletes the 2nd person in the TalentHub.
+
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
 <figure style="text-align: center;">
@@ -269,7 +266,7 @@ Examples:
 </figure>
 
 <figure style="text-align: center;">
-  <img src="images/delete_person_confirmation.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <img src="images/delete_person.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
 </figure>
 
@@ -281,12 +278,14 @@ This command allows you to add an event to a list of events on TalentHub!
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Event constraints**<br>
 
 - The celebrity and all points of contacts must be existing persons in TalentHub.
+- Current implementation does not require the person to be added to have the celebrity tag attached to their name.
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
+- When adding a person to the point of contacts list, only the first tag will be displayed.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -294,17 +293,13 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 **:information_source: Optionals** <br>
 An event can have any number of points of contact or none at all!
 The venue field is also optional! 
-When adding a person to the point of contacts list, only the first tag will be listed in the point of contact list.
 </div>
 
 Examples:
 
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
-- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-You can add the prefixes in any order you want!
-</div>
+- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
 <figure style="text-align: center;">
   <img src="images/add_event.png" alt="result for 'add event'" style="display: block; margin: 0 auto; border-radius: 10px;">
@@ -334,7 +329,7 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 **:warning: Event constraints**<br>
 - The celebrity and all points of contacts must be existing persons in TalentHub.
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
@@ -347,6 +342,7 @@ You can delete an event's venue or points of contact by leaving their fields emp
 Examples:
 
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
+
 - `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact.
 
 <figure style="text-align: center;">
@@ -363,12 +359,13 @@ Format: `find event KEYWORD [MORE_KEYWORDS]`
 - The search is case-insensitive. e.g. `hiking` will match `Hiking`
 - The order of the keywords does not matter. e.g. `Hair Cut` will match `Cut Hair`
 - Only full words will be matched. e.g. `Oscar` will not match `Oscars`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Persons matching at least one keyword will be returned.
   e.g. `Hair Hiking` will return `Hair Cut`, `Park Hiking`, `Hiking`
 
 Examples:
 
 - `find event Hiking` returns `Hiking` and `Park Hiking`
+
 - `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
 <figure style="text-align: center;">
@@ -394,6 +391,7 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `view event Oscars` returns the details for `Oscars`
+
 - `view event Hair Cut` returns the details for `Hair Cut`
 
 <figure style="text-align: center;">
@@ -407,7 +405,7 @@ This command allows you to filter events based on the exact celebrity name provi
 
 Format: `filter event CELEBRITY_NAME`
 
-- The search is case-insensitive. e.g. `bernice yu` will match `Bernice Yu`
+- The search is case-sensitive. e.g. `bernice yu` will not match `Bernice Yu`
 - The order of the keywords matters. e.g. `Bernice Yu` will not match `Yu Bernice`
 - Only the **full celebrity name** is searched.
 - Only full name will be matched. e.g. `Ber` will not match `Bernice`
@@ -417,6 +415,7 @@ Format: `filter event CELEBRITY_NAME`
 Examples:
 
 - `filter event Alex Yeoh` returns the events for celebrity `Alex Yeoh`
+
 - `filter event Bernice Yu` returns the events for celebrity `Bernice Yu`
 
 <figure style="text-align: center;">
@@ -435,13 +434,14 @@ Format: `delete event INDEX`
   e.g. 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-  :bulb: **Tip:**
+  :bulb: **Tip:** 
   If you would like to delete all events at once, you can use the <a href="#clearing-all-events--clear-event">clear event</a> command.
 </div>
 
 Examples:
 
-- `list event` followed by `delete event 2` deletes the 2nd event in the address book.
+- `list event` followed by `delete event 2` deletes the 2nd event in the TalentHub.
+
 - `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
 <figure style="text-align: center;">
@@ -455,8 +455,8 @@ This command allows you to clear all event entries from the TalentHub after rece
 
 Format: `clear event`
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all events in TalentHub. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+Running this command will clear **all** events in TalentHub. This action is irreversible after confirmation.
 </div>
 
 Example:
@@ -482,8 +482,8 @@ Example:
 
 This command allows you to clear all entries from TalentHub!
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all persons and events in TalentHub. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+Running this command will clear **all** persons and events in TalentHub. This action is irreversible after confirmation.
 </div>
 
 Format: `clear all`
@@ -533,9 +533,9 @@ The data that you store into TalentHub is saved in the hard disk automatically a
 
 Your data is saved automatically as a JSON file `[JAR file location]/data/talenthub.json`! If you are experienced with handling such files, you are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly!
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning!**<br>
+If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
+Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ---

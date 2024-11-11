@@ -16,7 +16,7 @@ public class EventCelebrityMatchesKeywordPredicate implements Predicate<Event> {
 
     @Override
     public boolean test(Event event) {
-        return keyword.equalsIgnoreCase(event.getCelebrity().getName().toString());
+        return keyword.equals(event.getCelebrity().getName().toString());
     }
 
     @Override
