@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -86,5 +85,12 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email.com")));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String email = "test@example.com";
+
+        assertEquals(new Email(email).toString(), email);
     }
 }

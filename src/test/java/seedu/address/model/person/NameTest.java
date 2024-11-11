@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -83,5 +82,12 @@ public class NameTest {
         Name name1 = new Name("Alice");
         Name name2 = new Name("Alicf");
         assertTrue(name2.compareTo(name1) > 0);
+    }
+
+    @Test
+    public void toStringMethod() {
+        String name = "Clement";
+
+        assertEquals(new Name(name).toString(), name);
     }
 }
