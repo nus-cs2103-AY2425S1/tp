@@ -33,7 +33,7 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `ClinicConnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-2/tp/releases).
 
@@ -60,11 +60,11 @@ These boxes might offer some additional information of different types:
 Highlights important information that you should know.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Provides you with tips to use our system more effectively.
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
 Provides you with warnings about potential issues you might encounter.
 </div>
 
@@ -77,39 +77,39 @@ Before we proceed with the commands, here are some important points to note on t
 <ul>
 <li>
 
-Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
+Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
+e.g. in <code>add n|NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n|John Doe</code>.
 </li>
 <li>
 
 Parameters in square brackets are optional.<br>
-  e.g. `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|nuts` or as `n|John Doe`.
+  e.g. <code>n|NAME [al|ALLERGY]</code> can be used as <code>n|John Doe al|nuts</code> or as <code>n|John Doe</code>.
 </li>
 <li>
 
 Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
-  e.g. `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
+  e.g. <code>al|ALLERGY...</code> can be used as <code>al|fish al|nuts</code> or <code>al|nuts</code>.
 </li>
 <li>
 
 Parameters can be in any order.<br>
-e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
+e.g. if the command specifies <code>n|NAME p|PHONE_NUMBER</code>, <code>p|PHONE_NUMBER n|NAME</code> is also acceptable.
 </li>
 <li>
 
-Extraneous parameters for commands that do not take in parameters (such as `home`, `exit` and `clear`) will be ignored.<br>
-e.g. if the command specifies `home 123`, it will be interpreted as `home`.
+Extraneous parameters for commands that do not take in parameters (such as <code>home</code>, <code>exit</code> and <code>clear</code>) will be ignored.<br>
+e.g. if the command specifies <code>home 123</code>, it will be interpreted as <code>home</code>.
 </li>
 <li>
 
-For these commands requiring NRIC to specify the patient (`bookappt`, `deleteappt`, `delete`, `edit` and `view`), NRIC should:
+For these commands requiring NRIC to specify the patient (<code>bookappt</code>, <code>deleteappt</code>, <code>delete</code>, <code>edit</code> and <code>view</code>), NRIC should:
 <ul>
 <li>
 Be a 9 character uppercase sequence with an alphabet at the start and at the end
 </li>
 <li>
 
-Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
+Start with an uppercase <code>S</code>, <code>T</code>, <code>F</code>, <code>G</code>, <code>M</code> followed by 7 numbers and ending with an uppercase alphabet
 </li>
 <li>
 Be registered in the system
@@ -122,7 +122,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
 </div>
 
@@ -140,15 +140,15 @@ Format: `help [COMMAND_KEYWORD]` <br>
 This command only takes in one command keyword.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Multiple help windows can be open at any point in time, but only one help window per command keyword can be open.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Press `esc` to close the help window.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can keep the help windows open and refer to it while using our application.
 </div>
 
@@ -173,7 +173,7 @@ Each person should have a unique NRIC.
 ClinicConnect does not allow two patients with the same NRIC to exist in the system.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Use this command to quickly add a patient with only the required information.
 </div>
 
@@ -181,7 +181,7 @@ Example:
 * Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number
   * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Adding a patient with additional information : `addf`
 
@@ -198,12 +198,12 @@ Each person should have a unique NRIC.
 ClinicConnect does not allow two patients with the same NRIC to exist in the system.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Use this command if you want to add a patient with additional information in addition to the required fields
 (NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NUMBER)
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 
 Multiple allergies can be added using multiple `al` prefixes
 </div>
@@ -217,7 +217,7 @@ Examples:
   * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
      e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Viewing a patient's full profile : `view`
 
@@ -228,12 +228,12 @@ Format: `view NRIC`
 ![view result](images/viewResult.png)
 
 Example:
-* View all information of patient with NRIC T0123456A 
+* View all information of the patient with NRIC T0123456A 
   * `view T0123456A` 
 
 ### Editing a patient : `edit`
 
-Edits the information of an existing patient in the system by searching for their NRIC.
+Edits the information of an existing patient in the system with the corresponding NRIC.
 
 Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE_NUMBER] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
@@ -251,19 +251,17 @@ Except for allergies, input values will replace existing values.
 Editing EXISTING_CONDITIONS and NOTES is not cumulative (i.e. the existing conditions and notes of the patient will be removed).
 </li>
 <li>
-Input must contain at least one parameter to be edited.
+Input must contain at least one parameter for patient to be edited.
 </li>
 </ul>
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 <ul>
 <li>
 
 Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies 
 of the patient
-
 </li>
 <li>
 
@@ -271,16 +269,15 @@ Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergi
 are current allergies of the patient
 </li>
 </ul>
-
 </div>
 
 Examples:
 * Edits the name and date-of-birth of the patient with NRIC S9758366N
-  * `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
+  * `edit S9758366N n|Abraham Lee d|1997-10-28`
 * Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed
   * `edit S9758366N al|wheat al|eggs rmal|fish`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Returning to home page : `home`
 
@@ -290,7 +287,7 @@ Format: `home`
 
 ![home command result](images/homeCommand.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Home Command also informs you on the number of patients currently registered in the system.
 </div>
 
@@ -304,18 +301,14 @@ Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
-<ul>
-<li>
 Appointments can only be booked for future dates and times
-</li>
-</ul>
 </div>
 
 Example:
-* Books a vaccination appoinment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Books a vaccination appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
   * `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Deleting an appointment : `deleteappt`
 
@@ -329,7 +322,7 @@ Example:
 * Deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
   * `deleteappt T0123456A dt|2024-12-29 13:00`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Filtering appointments : `filter`
 
@@ -348,7 +341,7 @@ Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
 * Specify the health service to display appointments that matches the health service
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
 
 `filter sd|2024-10-20 ed|2024-10-20`
@@ -364,18 +357,18 @@ Examples:
 * Filters all appointments from today's date to Oct 01 2028
   *  `filter ed|2028-10-01` 
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Deleting a patient : `delete`
 
-Deletes the patient with the corresponding NRIC from ClinicConnect.
+Deletes the patient with the corresponding NRIC.
 
 Format: `delete NRIC`
 
 ![delete message](images/deleteResult.png)
 
 Example:
-* Deletes the patient with NRIC T0123456A from ClinicConnect
+* Deletes the patient with NRIC T0123456A
   * `delete T0123456A`
 
 ### Clearing all entries : `clear`
@@ -386,7 +379,7 @@ Format: `clear`
 
 ![clear command result](images/clearCommand.png)
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
 Using clear will delete all data in the system. Please use it carefully.
 </div>
 
@@ -396,7 +389,7 @@ Exits the system and closes all windows of ClinicConnect.
 
 Format: `exit`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Using exit command will also close any help windows that are currently open.
 </div>
 
@@ -408,23 +401,26 @@ ClinicConnectSystem data are saved in the hard disk automatically after any comm
 
 ClinicConnectSystem data are saved automatically as a JSON file `[JAR file location]/data/clinicconnectsystem.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
+If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClinicConnectSystem home folder.
+
+**Q**: How do I remove a patient's `EXISTING_CONDITIONS` and `NOTES` from the patient's record? <br>
+**A**: Use the `edit` command to edit the respective fields to NIL<br>e.g.`edit T0123456A ec|NIL no|NIL`.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the window will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
+3. **When adding or editing patient entries**, the combination of an NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
 4. **When adding allergies**, there is no distinction between capitalized and uncapitalized forms and plural and singular variations.
 5. **For `no` and `ec` parameters**, the parameter summary has stated that it has to be non-empty. However,
@@ -549,7 +545,7 @@ Follow the specifications given below
       <td style="text-align:center;">6</td>
       <td style="text-align:center;">Date and Time</td>
       <td style="text-align:center;">dt|</td>
-      <td>Should be a valid calendar date followed by a valid time in the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
+      <td>Should be a valid calendar date followed by a valid time in the format YYYY-MM-DD HH:MM separated by a single whitespace. </td>
     </tr>
     <tr>
       <td style="text-align:center;">7</td>
