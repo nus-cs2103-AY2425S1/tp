@@ -6,7 +6,7 @@ pageNav: 3
 
 # TrueRental User Guide
 
-TrueRental is a **desktop** application for managing your client details, **optimized** for use via a Command Line
+TrueRental is a **desktop** application for managing your clients' details, **optimized** for use via a Command Line
 Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).<br>
 
 TrueRental prioritises **productivity** and **efficiency**.
@@ -14,12 +14,12 @@ TrueRental prioritises **productivity** and **efficiency**.
 TrueRental can get your client management tasks done **much faster** than traditional GUI apps, due to minimal mouse
 movements and distractions.
 
-Our application allows you to perform multiple operations that suits your needs as a **Letting Agent**, such as:
+Our application allows you to perform multiple operations that suits your needs as a **letting agent**, such as:
 
 1. Adding new clients
 2. Updating existing clients
 3. Removing outdated clients
-4. Finding clients based on requirements
+4. Finding clients who match a criteria
 5. Import and Export client details
 
 This project is built on top of [AddressBook-Level3 Project](https://se-education.org/). Special thanks and appreciation
@@ -39,34 +39,33 @@ for the team of AddressBook-Level 3.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar truerental.jar` command
    to run the application.<br>
    <box type="info" seamless>
-   Note: A GUI similar to the image below should appear in a few seconds. The image below consist of existing sample
-   data.<br>
+   Note: A GUI similar to the image below should appear in a few seconds. The image below consists of sample data.<br>
    </box>
-
    ![defaultUi](images/uiWithDescription.png)
-5. Type the command in the command box and press Enter to execute it. E.g. Typing **`help`** in the command box and
-   pressing enter will open the help window.<br>
+
+5. Type the command in the command box and press Enter to execute it. E.g. Typing `help` in the command box and
+   pressing Enter will open the help window.<br>
 
 6. **Simple and Quick Tutorial**:
 
-    1. `cadd n/Steven Tan e/steventan@tutorial.com p/98765432`: Adds a client named `Steven Tan` to TrueRental with
+    1. `cadd n/Steven Tan e/steventan@tutorial.com p/98765432`: Adds a client named `Steven Tan` with
        email `steventan@tutorial.com` and phone number `98765432`.
 
     2. `list`: Lists all clients. There should be 6 clients listed within the TrueRental application.
 
-    3. `cdelete 3`: Deletes the 3rd client shown in the current list, namely client called `Charlotte Oliveiro`.<br>
+    3. `cdelete 3`: Deletes the 3rd client shown in the current list, named `Charlotte Oliveiro`.<br>
        Enter `y`: Yes for confirmation to the operation.
 
-    4. `clear`: Deletes every client and their associated rental information from TrueRental application.<br>
+    4. `clear`: Deletes every client and their associated rental information.<br>
        Enter `y`: Yes for confirmation to the operation.
 
     5. `exit`: Exits the application.
 
 <!--TODO: Screenshots of tutorial run down AFTER sample data has been updated in the application -->
 
-7. Refer to the [Command Summary](#command-summary) for a quick overview of available commands.
+7. Refer to [Command Summary](#command-summary) for a quick overview of available commands.
 
-8. Refer to the [Features](#features) for details of each command.
+8. Refer to [Features](#features) for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,7 +75,7 @@ for the team of AddressBook-Level 3.
 
 **Notes about command format:**<br>
 
-* Commands are **case-sensitive** and show always be **lowercase**.<br>
+* Commands are **case-sensitive** and should always be **lowercase**.<br>
   E.g. `help`, `cadd`, `cedit`, `list`.
 
 * Words in `UPPER_CASE` are the **parameters** to be supplied by the user.<br>
@@ -118,15 +117,15 @@ for the team of AddressBook-Level 3.
 
 - Please refer to this user guide whenever you feel something is wrong with the application to determine whether it is a genuine problem.
 - If you are a more technical or experienced user, feel free to check out our [Developer Guide](DeveloperGuide.md) for detailed technical information about TrueRental.
-- The **client** referred to in this user guide is the property owner or landlord who has engaged you to rent out and manage their property.
+- The **client** referred to in this user guide is the property owner or landlord who has engaged you to manage their property.
 - The **rental information** referred to in this user guide consists of the details of the property being rented, including key information for example address, rental start date, and other relevant property details.
-- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property managed by the client.
+- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property owned by the client.
 - **Monthly rent** is equivalent to **monthly rent amount**.
   - Both are referring to the monthly rent amount for the property managed by your client.
 - **Deposit** is equivalent to **deposit amount**.
-  - Both are referring to the security deposit amount for the property managed by your client, paid by the tenant at the start of the lease.
+  - Both are referring to the security deposit amount for the property owned by your client, paid by the tenant at the start of the lease.
 - **Customer list** is equivalent to **customers**.
-  - Both are referring to the name(s) of the tenant(s) for the property managed by your client.
+  - Both are referring to the name(s) of the tenant(s) for the property owned by your client.
 - **Rent due date** is equivalent to **rental monthly payment date**.
   - Both are referring to the specific day (of the month) on which the rent payment is due for the property managed by your client.
 
@@ -177,7 +176,7 @@ for the team of AddressBook-Level 3.
 | `ADDRESS`           | The address of the property managed by your client.                                                                                     | The value of `ADDRESS` can consist of any combination of `Unicode` characters, with a minimum length of one character.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `59 Ubi Ave 1 #06-05`, `18 Upper Boon Keng Road #01-1137`            |
 | `RENTAL_START_DATE` | The specific date (including day, month, and year) on which the rental period for the property, under your client's management, begins. | The value of `RENTAL_START_DATE` can be empty (no value is provided after the prefix `s/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENTAL_START_DATE` is not empty (a value is provided after the prefix `s/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be in the format `dd/mm/yyyy`, where `dd` represents the day, `mm` represents the month, and `yyyy` represents the year.<br>**2.** It must represents a valid date and fall within the range of `01/01/1900` to `31/12/2099`.<br>**3.** If the value of `RENTAL_END_DATE` is also specified and not empty, then the date represented by the value of `RENTAL_START_DATE` should be the same date or earlier than the date represented by the value of `RENTAL_END_DATE`.                                | `01/01/2024`, `01/06/2024`                                           |
 | `RENTAL_END_DATE`   | The specific date (including day, month, and year) on which the rental period for the property, under your client's management, ends.   | The value of `RENTAL_END_DATE` can be empty (no value is provided after the prefix `e/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENTAL_END_DATE` is not empty (a value is provided after the prefix `e/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be in the format `dd/mm/yyyy`, where `dd` represents the day, `mm` represents the month, and `yyyy` represents the year.<br>**2.** It must represents a valid date and fall within the range of `01/01/1900` to `31/12/2099`.<br>**3.** If the value of `RENTAL_START_DATE` is also specified and not empty, then the date represented by the value of `RENTAL_END_DATE` should be the same date or later than the date represented by the value of `RENTAL_START_DATE`.                                    | `31/12/2027`, `01/02/2026`                                           |
-| `RENT_DUE_DATE`     | The specific day (of the month) on which the rent payment is due for the property managed by your client.                               | The value of `RENT_DUE_DATE` can be empty (no value is provided after the prefix `dd/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENT_DUE_DATE` is not empty (a value is provided after the prefix `dd/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be an integer within the range of `1` to `31`.<br>**2.** It must not have leading zeroes (for example, `01` or `001` are not valid).                                                                                                                                                                                                                                                                                                                                                                          | `1`, `15`, `30`                                                      |
+| `RENT_DUE_DATE`     | The specific date (of the month) on which the rent payment is due for the property managed by your client.                              | The value of `RENT_DUE_DATE` can be empty (no value is provided after the prefix `dd/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENT_DUE_DATE` is not empty (a value is provided after the prefix `dd/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be an integer within the range of `1` to `31`.<br>**2.** It must not have leading zeroes (for example, `01` or `001` are not valid).                                                                                                                                                                                                                                                                                                                                                                          | `1`, `15`, `30`                                                      |
 | `MONTHLY_RENT`      | The monthly rent amount for the property managed by your client.                                                                        | The value of `MONTHLY_RENT` can be empty (no value is provided after the prefix `m/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `MONTHLY_RENT` is not empty (a value is provided after the prefix `m/` for the specified command), it must adhere to the following conditions: <br>**1.** It must be a number greater than or equal to 0.<br>**2.** If it is a decimal, it must have exactly 2 decimal places (for example, `100.`, `100.0` or `100.001` are not valid).<br>**3.** It must not have leading zeroes (for example, `0100` or `00100` are not valid).                                                                                                                                                                                                                                                 | `1000`, `1000.00`, `0`                                               |
 | `DEPOSIT`           | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease.                      | The value of `DEPOSIT` can be empty (no value is provided after the prefix `d/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `DEPOSIT` is not empty (a value is provided after the prefix `d/` for the specified command), it must adhere to the following conditions: <br>**1.** It must be a number greater than or equal to 0.<br>**2.** If it is a decimal, it must have exactly 2 decimal places (for example, `100.`, `100.0` or `100.001` are not valid).<br>**3.** It must not have leading zeroes (for example, `0100` or `00100` are not valid).                                                                                                                                                                                                                                                           | `2000`, `2000.00`, `0`                                               |
 | `CUSTOMER_LIST`     | The name(s) of the tenant(s) for the property managed by your client.                                                                   | The value of `CUSTOMER_LIST` can be empty (no value is provided after the prefix `cl/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `CUSTOMER_LIST` is not empty (a value is provided after the prefix `cl/` for the specified command), it must adhere to the following conditions:<br>**1.** It can consist of any combination of `Unicode` characters.<br>**2.** It must have a length of at least one character.<br>**3.** If it does not contain a `;` character (semicolon), it represents the name of a single tenant.<br>**4.** If it contains the `;` character(s) (semicolon), it is treated as a list of tenant names, with each name separated by a `;` and name cannot be empty.<br>**5.** If it contains the `;` character(s) (semicolon), `;` should not appear at the beginning or end of the value. | `David Ng`, `Steven Ang 2;David Tan`, `123, Dexter;Joshua`           |
@@ -396,7 +395,7 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 
 ### Listing all clients : `list`
 
-Displays a list of all clients within TrueRental in a table format on the Client List Panel.
+Displays a list of all clients within TrueRental on the Client List Panel.
 
 Format: `list`
 
@@ -465,7 +464,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 
 **Constraints:**
 
-* The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive number.
+* The `CLIENT_INDEX` refers to the index shown in the displayed client list and must be a positive number.
 * The range starts from `1` till the last number shown within the list.
 * A client **name** cannot be empty.
 * A client must have at least **either** **one phone number** or **one email address**.
@@ -1025,3 +1024,40 @@ and use the `import` command to import the data file that you previously exporte
 7. The error message displayed when `import` or `export` fails is quite vague ("The chosen file may be corrupted").
    We will be refining this error message in the future to give more feedback about what went wrong 
    (duplicate clients, missing field, etc.)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Extraneous**: Not directly related connected with or related to something.
+
+* **Client**: A landlord whose properties are managed by you (a letting agent).
+
+* **Letting agent**: An individual that facilitates agreements between tenants and landlords to rent properties.
+
+* **Customer list**: The list of tenants who are renting a property.
+
+* **Rent due date**: The date ('dd' in `dd/mm/yyyy`) in each month when monthly rent is collected from tenants.
+    Ranges between `1` - `31`, without leading zeros.
+
+* **Command Line Interface (CLI)**: A means of interacting with a computer program by inputting lines of text.
+
+* **Graphical User Interface (GUI)**: A means of interacting with a computer program through visual indicators such
+    as graphical icons, images, videos, etc.
+
+* **Parameter**: A value that defines the behavior of commands. For example, `cdelete 1` deletes the first client in the
+    list, while `cdelete 2` deletes the second. The numbers `1` and `2` are **parameters** supplied to the `cdelete`
+    command.
+
+* **Parameter option flag**: A prefix ending in `/` which indicates that what comes after is a specific parameter.
+    For example, in the command `rdelete c/1 r/2`, the **parameter option flags** are `c/` and `r/`. `c/` indicates
+    that the `1` which comes after is the **client index**, and `r/` indicates that the `2` which comes after is the
+    **rental index**.
+
+* **Index**: The position of a _client_ or _rental information_ in the lists shown in the app, represented by a number.
+
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
