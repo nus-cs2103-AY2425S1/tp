@@ -19,6 +19,7 @@ title: Developer Guide
 * Libraries used:
    * [JavaFX](https://openjfx.io/) - The main GUI framework
    * [JUnit](https://junit.org/junit5/) - Testing framework
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -141,6 +142,11 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram.png](images%2FModelClassDiagram.png)
+**Note:** Some arrows might be blurred from the conversion between markdown and pdf. Here is a description in case arrows are not visible:
+- Person contains phone, email, information, name and optional tag
+- Customer and Supplier inherit from person
+- Customer and Supplier contains address
+- ModelManager has a filtered number of persons. UniquePersonList has all persons in the address book.
 
 The Model component is responsible for managing the core data of the application, structured based on the updated UML diagram.
 
@@ -261,6 +267,7 @@ The `Storage` component employs robust error handling to manage potential issues
 - **IOException**:
     - Thrown during file read/write operations.
     - Errors are logged, and users are notified.
+  
 --------------------------------------------------------------------------------------------------------------------
 ### Common classes
 
@@ -416,14 +423,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -494,7 +493,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **2a. The provided phone number is already associated with an existing customer.**
     - 2a1. System shows an error message indicating a duplicate phone number.
-    - 2a2. Use case ends.
+    - 2a2. User is prompted to input another phone number.
+    - 2a3. User provides a new phone number.
+    - 2a4. Use case resumes from step 2.
 
 - **2b. One or more mandatory fields (e.g., name, phone) are missing.**
     - 2b1. System shows an error message indicating which fields are missing.
@@ -511,6 +512,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a2. System logs the error for troubleshooting.
     - 3a3. Use case ends.
 
+**Use case: Edit a customer's details**
+
+**MSS**
+
+1. User requests to list customers.
+2. System shows a list of customers.
+3. User requests to edit details of a specific customer.
+4. System updates the customer's details.
+5. Use case ends.
+
+**Extensions**
+
+- **2a. The list is empty.**
+    - 2a1. Use case ends.
+
+- **3a. The given index is invalid.**
+    - 3a1. System shows an error message.
+    - 3a2. Use case resumes at step 2.
+
+**Use case: Add a supplier**
+
+**MSS**
+
+1. User requests to add a new supplier by providing their details (name, phone, email, address, and ingredients supplied).
+2. System validates the provided details.
+3. System adds the new supplier to the address book.
+4. System confirms the addition by displaying a success message.
+5. Use case ends.
+
+**Extensions**
+
+- **2a. The provided phone number is already associated with an existing supplier.**
+    - 2a1. System shows an error message indicating a duplicate phone number.
+    - 2a2. Use case ends.
+
+- **2b. One or more mandatory fields (e.g., name, phone) are missing.**
+    - 2b1. System shows an error message indicating which fields are missing.
+    - 2b2. User provides the missing information.
+    - 2b3. Use case resumes from step 2.
+
+- **2c. The provided phone number, email, or other fields do not meet format constraints.**
+    - 2c1. System shows an error message specifying the invalid field(s).
+    - 2c2. User corrects the invalid input.
+    - 2c3. Use case resumes from step 2.
+
+- **3a. The system encounters an error while trying to save the new supplier.**
+    - 3a1. System shows an error message indicating the save failure.
+    - 3a2. System logs the error for troubleshooting.
+    - 3a3. Use case ends.
 
 **Use case: Edit a supplier's details**
 
@@ -531,6 +581,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a1. System shows an error message.
     - 3a2. Use case resumes at step 2.
 
+**Use case: Add a new ingredient to the catalogue**
+
+**MSS**
+
+1. User requests to add a new ingredient by providing its details (name and cost).
+2. System validates the provided details.
+3. System adds the new ingredient to the ingredient catalogue.
+4. System confirms the addition by displaying a success message. 
+5. Use case ends.
+
+**Extensions**
+
+- 2a. The provided ingredient already exists in the catalogue.
+    - 2a1. System shows an error message indicating the duplicate ingredient.
+    - 2a2. Use case ends.
+
+- 2b. One or more mandatory fields (e.g., name, cost) are missing.
+    - 2b1. System shows an error message indicating which fields are missing.
+    - 2b2. User provides the missing information.
+    - 2b3. Use case resumes from step 2.
+
+- 2c. The cost value is excessively large or has an invalid format.
+    - 2c1. System shows an error message indicating the invalid cost value.
+    - 2c2. User corrects the cost value.
+    - 2c3. Use case resumes from step 2.
+
+- 3a. The system encounters an error while trying to save the new ingredient.
+    - 3a1. System shows an error message indicating the save failure.
+    - 3a2. System logs the error for troubleshooting.
+    - 3a3. Use case ends.
+
 **Use case: Add a new pastry to the catalogue**
 
 **MSS**
@@ -538,9 +619,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a new pastry by providing its details (name, price, and list of ingredients).
 2. System validates the provided details.
 3. System adds the new pastry to the pastry catalogue.
-4. System confirms the addition by displaying a success message.
-
-   Use case ends.
+4. System confirms the addition by displaying a success message. 
+5. Use case ends.
 
 **Extensions**
 
@@ -564,7 +644,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 3a2. System logs the error for troubleshooting.
     - 3a3. Use case ends.
 
-
 **Use case: Viewing Inventory**
 
 **MSS**
@@ -572,10 +651,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Bakery owner logs into the system
 2. Bakery owner navigates to the "Inventory" section
 3. Bakery owner clicks on "View Inventory"
-4. System displays a list of all ingredients in stock, showing each ingredient's ID, name, and quantity available
+4. System displays a list of all ingredients in stock, showing each ingredient's ID, name, and quantity available 
+5. Use case ends.
 
-Use case ends.
+**Use case: Add Customer Order**
 
+**MSS**
+
+1. User requests to add a new customer order by providing order details (name, phone number, list of pastries, etc).
+2. System validates the provided details.
+3. System records the new customer order in the order list.
+4. System confirms the addition by displaying a success message.
+5. Use case ends.
+
+**Extensions**
+
+- 2a. The provided customer does not exist in the address book.
+    - 2a1. System shows an error message indicating the customer is not found.
+    - 2a2. User selects an existing customer or creates a new customer.
+    - 2a3. Use case resumes from step 2.
+
+- 2b. One or more pastries in the order do not exist in the pastry catalogue.
+    - 2b1. System shows an error message indicating the missing pastries.
+    - 2b2. User updates the pastry catalogue or adds the missing pastry to the inventory.
+    - 2b3. Use case resumes from step 2.
+
+- 2c. The quantity specified for a product is invalid (e.g., negative or zero).
+    - 2c1. System shows an error message indicating the invalid quantity.
+    - 2c2. User corrects the quantity.
+    - 2c3. Use case resumes from step 2.
+
+- 3a.  The system encounters an error while trying to save the new customer order.
+    - 3a1. System shows an error message indicating the save failure.
+    - 3a2. System logs the error for troubleshooting.
+    - 3a3. Use case ends.
+
+**Use case: Add Supply Order**
+
+**MSS**
+
+1. User requests to add a new supply order by providing order details (name, phone number, list of supplied ingredients, etc).
+2. System validates the provided details.
+3. System records the new supply order in the order list.
+4. System confirms the addition by displaying a success message.
+5. Use case ends.
+
+**Extensions**
+
+- 2a. The provided supplier does not exist in the address book.
+    - 2a1. System shows an error message indicating the supplier is not found.
+    - 2a2. User selects an existing supplier or creates a new supplier.
+    - 2a3. Use case resumes from step 2.
+
+- 2b. One or more ingredients in the supply order do not exist in the ingredient catalogue.
+    - 2b1. System shows an error message indicating the missing ingredients.
+    - 2b2. User updates the ingredient catalogue or adds the missing ingredient to the inventory.
+    - 2b3. Use case resumes from step 2.
+
+- 2c. The quantity specified for an ingredient is invalid (e.g., negative or zero).
+    - 2c1. System shows an error message indicating the invalid quantity.
+    - 2c2. User corrects the quantity.
+    - 2c3. Use case resumes from step 2.
+
+- 3a.  The system encounters an error while trying to save the new supply order.
+    - 3a1. System shows an error message indicating the save failure.
+    - 3a2. System logs the error for troubleshooting.
+    - 3a3. Use case ends.
 
 ### Non-Functional Requirements
 
@@ -630,7 +771,8 @@ Given below are instructions to test the app manually.
 #### Initial launch
 
 1. Download the `jar` file and copy it into an empty folder.
-2. Double-click the `jar` file.
+2. Navigate to the folder which contains the jar file using the command line.
+3. Run the command `java -jar BakeBuddy.jar`.
     - **Expected:** Shows the GUI with a set of sample customers, suppliers, and orders. The window size may not be optimum.
 
 #### Saving window preferences
@@ -675,6 +817,23 @@ Given below are instructions to test the app manually.
 2. Test case: `editContact 10 p/91234567` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
 
+### Adding a customer order
+
+#### Adding a new customer order
+1. Prerequisites: Ensure that the customer exists in the address book and the pastries to be ordered are available in the pastry catalogue.
+2. Test case: addCustomerOrder n/Caleb p/94519909 o/1 2
+    - **Expected:** The order for Caleb is added successfully with the specified pastries. A success message is displayed. 
+3. Test case: addCustomerOrder n/Charlotte Oliveiro p/93210283 o/1 2
+    - **Expected:** The order for Charlotte Oliveiro is added successfully with the specified pastries. A success message is displayed.
+
+#### Adding with invalid data
+1. Test case: addCustomerOrder n/Caleb p/94519909 o/100
+    - **Expected:** Error message indicating that pastry must be added to the pastry catalogue using the addPastry command before it can be ordered.
+2. Test case: addCustomerOrder n/Unknown Customer p/9800 0001 o/1 2
+    - **Expected:** Error message indicating that the specified customer does not exist in the address book.
+3. Test case: addCustomerOrder n/Caleb p/94519909 o/-1
+    - **Expected:** Error message indicating that the pastry id cannot be negative.
+
 ### Deleting a customer order
 
 #### Deleting an existing customer order
@@ -691,6 +850,23 @@ Given below are instructions to test the app manually.
     - **Expected:** Error message indicating an invalid index.
 2. Test case: `deleteCustomerOrder 100` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
+
+### Adding a supply order
+
+#### Adding a new supply order
+1. Prerequisites: Ensure that the supplier exists in the address book and the ingredients to be ordered are available in the ingredient catalogue.
+2. Test case: addSupplyOrder n/Donald Trump p/98126599 o/1 2 
+  - **Expected:** The order for Donald Trump is added successfully with the specified ingredients. A success message is displayed.
+3. Test case: addSupplyOrder n/Supplier ABC p/87431111 o/1 2
+  - **Expected:** The order for Supplier ABC is added successfully with the specified ingredients. A success message is displayed.
+
+#### Adding with invalid data
+1. Test case: addSupplyOrder n/Donald Trump p/98126599 o/100
+  - **Expected:** Error message indicating that ingredient must be added to the ingredient catalogue using the addIngredient command before it can be ordered.
+2. Test case: addSupplyOrder n/Unknown Supplier p/9800 0001 o/1 2
+  - **Expected:** Error message indicating that the specified supplier does not exist in the address book.
+3. Test case: addSupplyOrder n/Donald Trump p/98126599 o/-1
+  - **Expected:** Error message indicating that the ingredient id cannot be negative.
 
 ### Adding a pastry
 
@@ -732,3 +908,16 @@ Given below are instructions to test the app manually.
 2. **Simulating a corrupted data file**: Introduce invalid JSON syntax in the data file and restart the app.
     - **Expected:** App shows an error message and starts with an empty address book or sample data.
 
+## Future Enhancements
+1. **Allow bakery owners to edit ingredient cost after input**
+- If there were to be changes in the ingredients prices, user would have to delete the entire input and add another rather than having a fast fix of allowing the user to solely modify changes in ingredients cost. We aim to allow user to directly modify the ingredient catalogue directly in the future.
+2. **Replace click requirements with input commands on GUI**
+- Some GUI elements currently require a mouse click to function, such as the drop-down icon to display full contact profiles, and the refresh button. These can be replaced with inputs commands to follow the spirit of a command line application better.
+3. **Allow addition of "quantity" field when adding orders**
+- Given a scenario where a customer would order 30 Strawberry Waffles for example, it would require the user to input addCustomerOrder p/ o/1 1 1 1 1 .... (a total of 30 times) which is inefficient. The resulting UI also displays Strawberry Waffles 30 times. The temporary solution is to add the quantity under "remarks", however we aim to add a quantity field when placing an order to reduce this redundancy.
+4. **Use better alignment for "Additional Details" field in customer and supplier profile, and order details under "Items" field**
+- The ingredients supplied and order details are not top aligned with the "Additional Details" and "Items" field respectively, making it less user-friendly to read. We aim to improve UI display for Contact cards in future iterations.
+5. **Allow different suppliers to offer different prices for ingredients**
+- Currently BakeBuddy assumes that the price of an ingredient is fixed no matter where it is sourced from. In future iterations we will allow differing costs for ingredients to model real world scenarios more.
+6. **Enable orders to be made for a future date**
+- Orders are tagged to the date which the order enters the system (i.e orders are tagged to the date which the order is made) currently. In future iterations we plan to allow orders to be made in advance, such as for an event scheduled for a later date.

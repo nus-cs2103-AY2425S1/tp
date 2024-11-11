@@ -25,6 +25,8 @@ public class AddPastryCommand extends Command {
 
     public static final String MESSAGE_ADD_PASTRY_SUCCESS = "New pastry added: %1$s";
     public static final String MESSAGE_DUPLICATE_PASTRY = "This pastry already exists in the catalogue.";
+    public static final String MESSAGE_INVALID_COST = "The cost value entered is too large and may lead to inaccuracies. "
+            + "Please enter a reasonable cost value (e.g., less than 1000).";
 
     private final String name;
     private final double cost;
@@ -43,6 +45,11 @@ public class AddPastryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Validate the cost value
+        if (cost >= 1000) {
+            throw new CommandException(MESSAGE_INVALID_COST);
+        }
 
         // Find the next available id from the pastry catalogue.
         PastryCatalogue pastryCatalogue = model.getPastryCatalogue();

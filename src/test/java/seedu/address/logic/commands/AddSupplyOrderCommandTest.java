@@ -29,7 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.Remark;
@@ -65,7 +64,7 @@ public class AddSupplyOrderCommandTest {
 
         CommandResult commandResult = addOrderCommand.execute(modelStub);
 
-        assertEquals(String.format(AddSupplyOrderCommand.MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS,
+        assertEquals(String.format(AddSupplyOrderCommand.MESSAGE_ADD_SUPPLY_ORDER_SUCCESS,
                 modelStub.ordersAdded.get(0).viewOrder()), commandResult.getFeedbackToUser());
         assertEquals(1, modelStub.ordersAdded.size());
     }
@@ -221,10 +220,6 @@ public class AddSupplyOrderCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public Inventory getInventory() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
