@@ -261,9 +261,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**: Tuition center administrative staff
+**Target user profile**: Private tutors
 
-* has a need to manage a significant number of students
+* has a need to manage a small but significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -483,7 +483,7 @@ Use case ends.
 **1. Performance Requirements**
 
 - **Response Time**: The system should respond to any command within **1 second** under normal operating conditions.
-- **Throughput**: Capable of processing **concurrent commands** from multiple administrators without significant delay.
+- **Throughput**: Capable of processing **concurrent commands** from private tutor without significant delay.
 - **Capacity**: Should handle up to **1,000 students** without noticeable sluggishness in performance for typical usage.
 
 **2. Maintainability Requirements**
@@ -803,7 +803,7 @@ To streamline development, we leveraged certain libraries and reused components 
 ### Achievements
 Despite the complexity, we achieved several milestones:
 - Designed a flexible and scalable multi-entity data model that can be expanded easily for future needs.
-- Successfully implemented user-friendly data visualization commands (`pie`, `bar`), providing tuition center administrators with valuable insights at a glance.
+- Successfully implemented user-friendly data visualization commands (`pie`, `bar`), providing private tutors with valuable insights at a glance.
 - Developed a robust system for error handling and user feedback, enhancing usability and reliability.
 
 In summary, EduTuTu required significant effort due to its multi-entity structure, visualizations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
