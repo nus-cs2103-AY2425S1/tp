@@ -14,6 +14,7 @@
 ## **Acknowledgements**
 
 - Codebase adapted from [AddressBook3](https://se-education.org/addressbook-level3/)
+- Solution for Undo/Redo function adapted from [AddressBook3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
 - Libraries
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
