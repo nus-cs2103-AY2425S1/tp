@@ -184,7 +184,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 | `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
-| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                     |
+| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                       |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
 
