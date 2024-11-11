@@ -15,36 +15,42 @@ width: 50%;"/>
 # **User Guide**
 
 <box type="info" light theme="primary">
-<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
-details, appointments, and treatment records.
+<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient 
+contact details, appointments, and treatment records.
 
 <br><sbr>
 
-DocTrack aims to be the bridge for medical practitioners in smaller clinics 
-towards digitalisation of their administrative efforts, with focus on contact management and visit history tracking.
+**DocTrack** aims to be the bridge for general practitioners in smaller clinics towards the digitalisation of their administrative efforts, with a focus on contact management and visit history tracking.
 
 <br>
-We plan on helping you simplify and speed-up the administrative burden of patient management 
-through an intuitive and efficient application.
+We plan to help you simplify and speed-up the administrative burden of patient management through an 
+intuitive and efficient application.
 
 </box>
 
-With **DocTrack**, you can take the first step towards digitalisation of your practice!
-**DocTrack** aims to simplify your patient and appointment tracking process, by allowing you to
-- easily add and update patient and appointment records.
-- delete records for regulation purposes.
-- search for records based on important criteria such as dates and names
-with an intuitive and user-friendly interface!
+<br>
 
-To get started, you can read the introduction below, which shows all the different sections
-in this user guide.
+With **DocTrack**, you can take the first step towards digitalisation of your practice!
+**DocTrack** can assist you in streamlining your patient and appointment tracking process, by allowing you to ...
+- easily add and update patient and appointment records,
+- delete records for regulation purposes, and
+- search for records based on important criteria such as dates and names
+
+... all with an intuitive and user-friendly interface!
+
+<br>
+
+To get started, you can read the introduction below, which shows all the different sections in this user guide.
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
 
+<br>
 ---
 
 <div style="page-break-after: always;"></div>
+
+<br>
 
 ## **Introduction**
 
