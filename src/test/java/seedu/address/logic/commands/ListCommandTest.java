@@ -54,7 +54,12 @@ public class ListCommandTest {
     public void execute_listSortedByEmail_success() {
         ListCommand listCommand = new ListCommand("email", false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getEmail().value));
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing(
+                person -> person.getEmail() != null ? person.getEmail().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            )
+        );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -62,7 +67,12 @@ public class ListCommandTest {
     public void execute_listSortedByIncome_success() {
         ListCommand listCommand = new ListCommand("income", false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getIncome().value));
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing(
+                person -> person.getIncome() != null ? person.getIncome().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            )
+        );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -70,7 +80,12 @@ public class ListCommandTest {
     public void execute_listSortedByAge_success() {
         ListCommand listCommand = new ListCommand("age", false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.sortFilteredPersonList(Comparator.comparing(person -> person.getAge().value));
+        expectedModel.sortFilteredPersonList(
+            Comparator.comparing(
+                person -> person.getAge() != null ? person.getAge().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            )
+        );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -89,7 +104,9 @@ public class ListCommandTest {
         ListCommand listCommand = new ListCommand("email", true);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.sortFilteredPersonList(
-            Comparator.comparing((Person person) -> person.getEmail().value).reversed()
+            Comparator.comparing((Person person) -> person.getEmail() != null ? person.getEmail().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            ).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -99,7 +116,9 @@ public class ListCommandTest {
         ListCommand listCommand = new ListCommand("income", true);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.sortFilteredPersonList(
-            Comparator.comparing((Person person) -> person.getIncome().value).reversed()
+            Comparator.comparing((Person person) -> person.getIncome() != null ? person.getIncome().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            ).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -109,7 +128,9 @@ public class ListCommandTest {
         ListCommand listCommand = new ListCommand("age", true);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.sortFilteredPersonList(
-            Comparator.comparing((Person person) -> person.getAge().value).reversed()
+            Comparator.comparing((Person person) -> person.getAge() != null ? person.getAge().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            ).reversed()
         );
         assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
