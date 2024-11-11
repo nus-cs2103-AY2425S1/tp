@@ -898,7 +898,7 @@ Warning: If any of the fields in `courselist.json` are invalid, no courses will 
 
 | Field | Format                                                                                                                                          |
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` denote _uppercase_ letter(s), `xxxx` is a 4-digit number, `B` is an **optional** _uppercase_ letter. |
+| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more _uppercase_ letters, `xxxx` is a 4-digit number, `B` is an **optional** _uppercase_ letter. |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                 |
 Note: The course code is unique and cannot be duplicated.
 
@@ -996,5 +996,6 @@ Expected: Attendance cleared. Success message shown.
 1. Add a `course-list` command to list all courses so that user can view courses in the system.
 2. Add support for more Tutorial IDs by changing the regular expressions (i.e:`VALIDATION_REGEX`) used to accommodate other valid tutorial ids (e.g: T01A).
 3. Modify all commands that takes in `m/MATRICULATION_NUMBER` to allow option of accepting index of the person in the list.
-4. Add an `attendance` (or similar) command that opens the Attendance window instead of using a mouse to click the `Attendance` button.
-5. Add more detailed error messages that tell the user specifically what fields are missing instead of simply "required fields are missing"
+4. The `NAME` attribute for person shall have a maximum length of 50 characters.
+5. Add an `attendance` (or similar) command that opens the Attendance window instead of using a mouse to click the `Attendance` button.
+6. Add more detailed error messages that tell the user specifically what fields are missing instead of simply "required fields are missing"
