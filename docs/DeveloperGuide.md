@@ -146,9 +146,9 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object).
-* stores the currently 'selected' `Customer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Customer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Customer` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Customer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a particular `Customer` whose orders will be displayed in a `ReadOnlyObjectWrapper<Customer>` which is exposed to outsiders as an unmodifiable `ReadOnlyObjectProperty<Customer>` that can be 'observed' e.g. the UI can be bound to this object property so that the UI automatically updates when selected customer change.
-  * Each `Customer` stores the currently 'selected' `Order` objects (e.g., results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+  * Each `Customer` stores the currently 'selected' `Order` objects (e.g. results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 <div style="page-break-after: always;"></div>
@@ -1242,7 +1242,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: Delete the `data` folder together with the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should create a new `data` folder and a new `addressbook.json` file inside the folder with default data.
 
-    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
+    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g. add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty customer list.
 
 ## **Appendix: Planned Enhancements**
