@@ -43,8 +43,6 @@ public class Messages {
                 .append(restaurant.getEmail())
                 .append("; Address: ")
                 .append(restaurant.getAddress())
-                .append("; Rating: ")
-                .append(restaurant.getRating().getStringValue())
                 .append("; Tags: ");
         restaurant.getTags().forEach(builder::append);
         return builder.toString();
