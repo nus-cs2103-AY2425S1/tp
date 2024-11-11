@@ -187,13 +187,13 @@ Tagging & Untagging (Editing of [Tags](#glossary)) is done using the `tag` and `
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email address of the 1st contact in the current list to be `91234567` and `johndoe@gmail.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd contact in the current list to `Betsy Crower`.
 
 <br><br/>
-
-<div style="page-break-after: always;"></div>
 
 #### Tagging a contact: `tag`
 
@@ -276,7 +276,7 @@ Examples:
 <br><br/>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<br><br/>
+<div style="page-break-after: always;"></div>
 
 #### Filtering contacts by tag: `filter`
 
@@ -304,7 +304,6 @@ Examples:
 * `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`.<br>
 
 <br><br/>
-<div style="page-break-after: always;"></div>
 
 #### Deleting a contact : `delete`
 
@@ -320,8 +319,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
-**Warning**: If you want to remove a contact from a [wedding](#glossary), use the unassign command instead of the delete command. 
+<box type="warning">
+If you want to remove a contact from a [wedding](#glossary), use the unassign command instead of the delete command.
 The delete command deletes the contact from the address book entirely.
+</box>
 <br><br/>
 
 #### Sorting all contacts: `sort`
@@ -335,8 +336,8 @@ Sorts the [contacts](#glossary) in the current view in alphabetical order.
 You will not be able to recover the previous sorting of your contacts after the running the `sort` command. If you sort your contacts while in a wedding view, the list of all contacts will also be sorted.
 
 </box>
+<div style="page-break-after: always;"></div>
 
-<br><br/>
 #### Clearing all entries : `clear`
 
 Format: `clear`
@@ -349,8 +350,6 @@ Clears all [contact](#glossary) and [wedding](#glossary) entries in the address 
   lose all of your wedding and contact-related data.
 
 <br><br/>
-
-<div style="page-break-after: always;"></div>
 
 ### Wedding-related Features
 
@@ -452,7 +451,7 @@ Examples:
 
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
-Assigns [contacts](#glossary) at the specified index's to the [wedding](#glossary) at the specified `WEDDING_INDEX`.
+Assigns [contacts](#glossary) at the specified indexes to the [wedding](#glossary) at the specified `WEDDING_INDEX`.
 
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
@@ -467,7 +466,7 @@ Examples:
 
 Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
-Unassigns [contacts](#glossary) at the specified index's from the [wedding](#glossary) you are currently viewing.
+Unassigns [contacts](#glossary) at the specified indexes from the [wedding](#glossary) you are currently viewing.
 
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
@@ -499,8 +498,6 @@ Examples:
 * `deletew 4` deletes the 4th wedding shown on the weddings panel.
 
 <br><br/>
-
-<div style="page-break-after: always;"></div>
 
 ### Other Features
 
@@ -578,7 +575,7 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 
 | Term                        | Explanation                                                                                                                                                                                                 |
 |-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <a id="contact">Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                       |
+| <a id="contact">Contact</a> | Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                                             |
 | <a id="wedding">Wedding</a> | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/> <br/> Weddings are considered duplicate if they have identical names (case-sensitive). |
 | <a id="tag">Tag</a>         | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                            | 
 
