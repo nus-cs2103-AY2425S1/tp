@@ -12,7 +12,7 @@ public class Major {
     public static final String MESSAGE_CONSTRAINTS = "Major can take any values";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of major must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -40,7 +40,7 @@ public class Major {
     }
 
     /**
-     * Constructs a {@code Major} or an empty {@code Major} instance.
+     * Constructs a {@code Major} or returns an empty {@code Major} instance.
      *
      * @param major A valid major or an empty string
      */

@@ -37,7 +37,7 @@ public class Email {
     }
 
     /**
-     * Constructs an {@code Email} or an empty {@code Email} instance.
+     * Constructs an {@code Email} or returns an empty {@code Email} instance.
      *
      * @param email A valid email address or an empty string
      */

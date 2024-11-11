@@ -35,7 +35,7 @@ public class Year {
     }
 
     /**
-     * Constructs a {@code Year} or an empty {@code Year} instance.
+     * Constructs a {@code Year} or returns an empty {@code Year} instance.
      *
      * @param year A valid year or an empty string
      */
