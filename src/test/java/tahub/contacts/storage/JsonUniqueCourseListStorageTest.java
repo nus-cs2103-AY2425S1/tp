@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -39,7 +40,8 @@ public class JsonUniqueCourseListStorageTest {
 
     @Test
     public void saveCourseList_nullCourseList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> storage.saveCourseList(null, testFolder.resolve("dummy.json")));
+        assertThrows(NullPointerException.class, () -> storage.saveCourseList(null,
+                testFolder.resolve("dummy.json")));
     }
 
     @Test
@@ -99,4 +101,18 @@ public class JsonUniqueCourseListStorageTest {
         assertFalse(readCourseList("NonExistentFile.json").isPresent());
     }
 
+    @Test
+    public void readCourseList_illegalValuesInFile_throwsDataLoadingException() throws IOException {
+        // Create a JSON file with illegal values
+        String invalidJsonContent = "{\n"
+                + "  \"courses\" : [ {\n"
+                + "    \"courseCode\" : \"1521MA\",\n"
+                + "    \"courseName\" : \"Calculus I\"\n"
+                + "  } ] }";
+        Path filePath = testFolder.resolve("invalidCourses.json");
+        Files.write(filePath, invalidJsonContent.getBytes());
+
+        // Attempt to read the course list and expect a DataLoadingException
+        assertThrows(DataLoadingException.class, () -> storage.readCourseList(filePath));
+    }
 }

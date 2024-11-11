@@ -29,18 +29,14 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent SCA as the given argument.
+     * Checks if the specified StudentCourseAssociation is present in the internalList.
+     *
+     * @param toCheck the StudentCourseAssociation to check for presence in the list
+     * @return true if the specified StudentCourseAssociation is found in the list, false otherwise
      */
     public boolean contains(StudentCourseAssociation toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
-    }
-
-    /**
-     * Returns true if the list contains an equivalent SCA as the given argument.
-     */
-    public boolean has(StudentCourseAssociation toCheck) {
-        return contains(toCheck);
     }
 
     /**
@@ -155,9 +151,10 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
         return internalList
                 .stream()
                 .filter(sca ->
-                        sca.getStudent().getMatricNumber().equals(compMatricNumber)
-                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial().equals(compTutorial)
-                )
+                                sca.getStudent().getMatricNumber().equals(compMatricNumber)
+                                        && sca.getCourse().isConflictCourse(compCourse) && sca.getTutorial()
+                                        .equals(compTutorial)
+                       )
                 .findFirst()
                 .orElseThrow(() -> new ScaNotFoundException(notFoundErrorMessage));
     }
@@ -213,7 +210,7 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
      */
     public void set(List<StudentCourseAssociation> scaList) {
         requireAllNonNull(scaList);
-        if (!scaAre(scaList)) {
+        if (!scaAreUnique(scaList)) {
             throw new RuntimeException("Duplicate SCA detected.");
         }
 
@@ -226,9 +223,18 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
      */
     public void remove(StudentCourseAssociation toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!internalList.contains(toRemove)) {
             throw new RuntimeException("SCA not found in list");
         }
+        internalList.remove(toRemove);
+    }
+
+    /**
+     * Removes zero or more SCAs containing the specified course.
+     */
+    public void remove(Course course) {
+        requireNonNull(course);
+        internalList.removeIf(sca -> sca.getCourse().equals(course));
     }
 
     /**
@@ -270,7 +276,7 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
     /**
      * Returns true if {@code sca} contains only unique sca.
      */
-    private boolean scaAre(List<StudentCourseAssociation> sca) {
+    private boolean scaAreUnique(List<StudentCourseAssociation> sca) {
         for (int i = 0; i < sca.size() - 1; i++) {
             for (int j = i + 1; j < sca.size(); j++) {
                 if (sca.get(i).equals(sca.get(j))) {

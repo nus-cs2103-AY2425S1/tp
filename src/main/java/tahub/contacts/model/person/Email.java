@@ -9,27 +9,32 @@ import static tahub.contacts.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
-            + "The domain name must:\n"
-            + "    - end with a domain label at least 2 characters long\n"
-            + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
-    // alphanumeric and special characters
-    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
-    private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
-            + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
-    private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    public static final String MESSAGE_CONSTRAINTS = "Email must be a valid email format according "
+            + "to the following rules:\n"
+            + "https://help.xmatters.com/ondemand/trial/valid_email_format.htm";
+
+    // Allowed characters in email prefix
+    private static final String ALLOWED_PREFIX_CHARS = "a-zA-Z0-9._-";
+
+    // Regex for the email prefix (local part)
+    private static final String PREFIX_REGEX = "(?!^[._-])" // Does not start with '.', '_', or '-'
+            + "(?!.*[._-]{2,})" // No consecutive '.', '_', or '-'
+            + "(?!.*[._-]@)" // Does not end with '.', '_', or '-'
+            + "[" + ALLOWED_PREFIX_CHARS + "]+"; // Contains allowed characters
+
+    // Allowed characters in email domain
+    private static final String ALLOWED_DOMAIN_CHARS = "a-zA-Z0-9-";
+
+    // Regex for each domain part (labels)
+    private static final String DOMAIN_PART_REGEX = "[" + ALLOWED_DOMAIN_CHARS + "]+";
+
+    // Regex for the domain (including subdomains and TLD)
+    private static final String DOMAIN_REGEX = "("
+            + DOMAIN_PART_REGEX + "\\.)+" // One or more domain labels followed by '.'
+            + "[a-zA-Z]{2,}$"; // TLD with at least two letters
+
+    // Complete validation regex
+    public static final String VALIDATION_REGEX = PREFIX_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
 

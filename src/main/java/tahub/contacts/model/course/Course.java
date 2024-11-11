@@ -29,7 +29,7 @@ public class Course {
         if (this.equals(otherCourse)) {
             return true;
         }
-        return courseCode.equals(otherCourse.courseCode) || courseName.equals(otherCourse.courseName);
+        return courseCode.equals(otherCourse.courseCode);
     }
 
     @Override
@@ -43,12 +43,12 @@ public class Course {
             return false;
         }
 
-        return courseCode.equals(otherCourse.courseCode) && courseName.equals(otherCourse.courseName);
+        return courseCode.equals(otherCourse.courseCode);
     }
 
     @Override
     public int hashCode() {
-        return courseName.hashCode();
+        return courseCode.hashCode();
     }
 
     /**

@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PersonDeleteCommandParser" as PersonDeleteCommandParser LOGIC_COLOR
+participant "d:PersonDeleteCommand" as PersonDeleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("person-delete m/A1234570L")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("person-delete m/A1234570L")
+activate AddressBookParser
+
+create PersonDeleteCommandParser
+AddressBookParser -> PersonDeleteCommandParser
+activate PersonDeleteCommandParser
+
+PersonDeleteCommandParser --> AddressBookParser
+deactivate PersonDeleteCommandParser
+
+AddressBookParser -> PersonDeleteCommandParser : parse("m/A1234570L")
+activate PersonDeleteCommandParser
+
+create PersonDeleteCommand
+PersonDeleteCommandParser -> PersonDeleteCommand
+activate PersonDeleteCommand
+
+PersonDeleteCommand --> PersonDeleteCommandParser :
+deactivate PersonDeleteCommand
+
+PersonDeleteCommandParser --> AddressBookParser : d
+deactivate PersonDeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PersonDeleteCommandParser -[hidden]-> AddressBookParser
+destroy PersonDeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> PersonDeleteCommand : execute(m)
+activate PersonDeleteCommand
+
+PersonDeleteCommand -> Model : deletePerson(m/A1234570L)
+activate Model
+
+Model --> PersonDeleteCommand
+deactivate Model
+
+create CommandResult
+PersonDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PersonDeleteCommand
+deactivate CommandResult
+
+PersonDeleteCommand --> LogicManager : r
+deactivate PersonDeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

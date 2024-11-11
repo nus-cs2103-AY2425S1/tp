@@ -109,7 +109,10 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteCourse(Course target) {
+        requireNonNull(target);
+        scaList.remove(target);
         courseList.remove(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -121,7 +124,6 @@ public class ModelManager implements Model {
     @Override
     public void setCourse(Course target, Course editedCourse) {
         requireAllNonNull(target, editedCourse);
-
         courseList.setCourse(target, editedCourse);
     }
 
@@ -167,8 +169,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -192,30 +194,33 @@ public class ModelManager implements Model {
 
     @Override
     public Path getScaListFilePath() {
-        return userPrefs.getCourseListFilePath();
+        return userPrefs.getScaListFilePath();
     }
 
     @Override
-    public void setScaListFilePath(Path courseListFilePath) {
-        requireNonNull(courseListFilePath);
-        userPrefs.setCourseListFilePath(courseListFilePath);
+    public void setScaListFilePath(Path scaListFilePath) {
+        requireNonNull(scaListFilePath);
+        userPrefs.setScaListFilePath(scaListFilePath);
     }
 
     @Override
     public boolean hasSca(StudentCourseAssociation sca) {
         requireNonNull(sca);
-        return scaList.has(sca);
+        return scaList.contains(sca);
     }
 
     @Override
     public void deleteSca(StudentCourseAssociation target) {
         scaList.remove(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        notifyEnrollmentChanged();
     }
 
     @Override
     public void addSca(StudentCourseAssociation sca) {
         scaList.add(sca);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        notifyEnrollmentChanged();
     }
 
     @Override
@@ -239,6 +244,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void notifyEnrollmentChanged() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -255,4 +265,14 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public StudentCourseAssociationList getStudentScaList() {
+        return scaList;
+    }
+
+    @Override
+    public void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca) {
+        requireAllNonNull(target, editedSca);
+        scaList.set(target, editedSca);
+    }
 }

@@ -3,7 +3,7 @@ package tahub.contacts.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import tahub.contacts.commons.core.index.Index;
 import tahub.contacts.logic.commands.exceptions.CommandException;
+import tahub.contacts.logic.commands.person.PersonEditCommand;
 import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
@@ -57,7 +58,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String COURSE_CODE_DESC = " " + PREFIX_CODE + VALID_COURSE_CODE;
+    public static final String COURSE_CODE_DESC = " " + PREFIX_COURSE_CODE + VALID_COURSE_CODE;
     public static final String COURSE_NAME_DESC = " " + PREFIX_NAME + VALID_COURSE_NAME;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -65,14 +66,14 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_COURSE_CODE_DESC = " " + PREFIX_CODE + "cs2103t";
+    public static final String INVALID_COURSE_CODE_DESC = " " + PREFIX_COURSE_CODE + "cs2103t";
     public static final String INVALID_COURSE_NAME_DESC = " " + PREFIX_NAME + "Software@Engineering";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_AMY;
+    public static final PersonEditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

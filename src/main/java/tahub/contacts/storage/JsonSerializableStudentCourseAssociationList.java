@@ -29,7 +29,7 @@ class JsonSerializableStudentCourseAssociationList {
      */
     @JsonCreator
     public JsonSerializableStudentCourseAssociationList(@JsonProperty("scas")
-                                                            List<JsonAdaptedStudentCourseAssociation> scas) {
+                                                        List<JsonAdaptedStudentCourseAssociation> scas) {
         this.scas = (scas != null) ? scas : new ArrayList<>();
     }
 
@@ -52,7 +52,7 @@ class JsonSerializableStudentCourseAssociationList {
         StudentCourseAssociationList scaList = new StudentCourseAssociationList();
         for (JsonAdaptedStudentCourseAssociation jsonAdaptedSca : scas) {
             StudentCourseAssociation sca = jsonAdaptedSca.toModelType(addressBook, courseList);
-            if (scaList.has(sca)) {
+            if (scaList.contains(sca)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_SCA);
             }
             scaList.add(sca);

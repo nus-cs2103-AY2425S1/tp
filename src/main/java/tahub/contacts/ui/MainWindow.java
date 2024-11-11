@@ -2,6 +2,7 @@ package tahub.contacts.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -110,7 +111,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -157,7 +158,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                                                  (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -177,6 +178,19 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // Immediate refresh for person-edit command
+            if (commandText.startsWith("person-edit")) {
+                Platform.runLater(() -> {
+                    personListPanel.refreshPersonView();
+                });
+            }
+
+            // Immediately refresh person list panel after course deletion or enrollment changes
+            if (commandText.startsWith("course-delete") || commandText.startsWith("enroll")
+                    || commandText.startsWith("unenroll")) {
+                personListPanel.refreshPersonView();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

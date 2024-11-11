@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tahub.contacts.logic.commands.EditCommand.EditPersonDescriptor;
+import tahub.contacts.logic.commands.person.PersonEditCommand.EditPersonDescriptor;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.Name;

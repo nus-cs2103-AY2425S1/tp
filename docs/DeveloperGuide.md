@@ -8,8 +8,7 @@
 ## **Acknowledgements**
 
 * This project is built on the AddressBook-Level3 (AB3) project created by the [SE-EDU initiative](https://se-education.org).
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* 3rd-party Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -31,7 +30,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/MainApp.java)) is in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -64,13 +63,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -81,25 +80,25 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("person-delete m/A1234570L")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/PersonDeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `person-delete m/A1234570L` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `PersonDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `PersonDeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `PersonDeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -115,35 +114,44 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the enrollment data i.e: all `StudentCourseAssociation` objects contained in a `StudentCourseAssociationList` object
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
 
+### Course component
+
+API: [`Course.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/model/course/Course.java)
+
+<puml src="diagrams/CourseClassDiagram.puml" width="300" />
+
+The `Course` component,
+
+* stores the course data i.e., all `Course` objects (which are contained in a `UniqueCourseList` object).
+
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14B-2/tp/tree/master/src/main/java/tahub/contacts/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both address book data, user preference data and enrollment data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage` and `StudentCourseAssociationListStorage`, which means it can be treated as any one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -174,11 +182,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `person-delete m/A1234570L` command to delete the person with matriculation number A1234570L in the address book. The `person-delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `person-delete m/A1234570L` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `person-add m/A1234570L n/David …​` to add a new person. The `person-add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -243,14 +251,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `person-delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -286,6 +288,8 @@ Priorities:
  <span style="color:#F0AB00;">Medium (nice to have) - ★★</span> |
  <span style="color:#C9190B;">Low (unlikely to have) - ★</span>
 
+<!-- markdownlint-disable MD013 -->
+
 | Priority                                       | As a ... User    | I want to ...                                         | So that I can ...                                              |
 |------------------------------------------------|-------------------|-------------------------------------------------------|----------------------------------------------------------------|
 | <span style="color:#4CB140;">★★★</span>      | Beginner          | Add contacts                                          | Track contact details for students joining the class           |
@@ -313,6 +317,8 @@ Priorities:
 | <span style="color:#C9190B;">★</span>        | Intermediate      | Flag students with missing contact details            | Ensure all required student information is complete            |
 | <span style="color:#C9190B;">★</span>        | Beginner          | Set communication preferences for individual students | Communicate via their preferred method (Telegram, phone, etc.) |
 
+<!-- markdownlint-enable MD013 -->
+
 ### :fa-solid-user: Use cases
 
 (For all use cases below, the **System** is the `TAHub Contacts` and the **Actor** is the `user`, unless specified otherwise)
@@ -321,12 +327,12 @@ Priorities:
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a contact with a name, email, and optionally a phone number, address, and tags.
+1. User requests to add a contact with a name, email, and optionally a phone number and address.
 2. System validates the input fields:
     * a. Checks if the name is valid (alphabets and spaces only).
     * b. Checks if the email format is valid and unique.
     * c. (Optional) Checks if the phone number is valid (8 digits) and unique.
-    * d. (Optional) Validates address and tags.
+    * d. (Optional) Validates address.
 3. System adds the contact if all validations pass.
 4. System displays a success message, "New contact added: [Contact details]."
 
@@ -351,14 +357,12 @@ Priorities:
 **Main Success Scenario (MSS):**
 
 1. User requests to view all contacts.
-2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
+2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address).
 3. User views the list to get an overview of student contact information.
 
    Use case ends.</panel>
 
-<<<<<<< HEAD
 **Use case: Delete a contact**
-=======
 <panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
 
 **Main Success Scenario (MSS):**
@@ -378,31 +382,34 @@ Priorities:
       Use case ends.</panel>
 
 <panel header="#### Use case: Delete a contact" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
 1. User requests to delete a contact by providing the index of the contact in the list.
-2. System validates the provided index.
-3. System deletes the contact if the index is valid.
+2. System validates the provided matriculation number.
+3. System deletes the contact if the matriculation number is valid and student with the matriculation number exists.
 4. System displays a success message, "Deleted contact: [Contact details]."
 
    Use case ends.
 
 **Extensions:**
 
-* 2a. The index is out of bounds.
-  * 2a1. System shows an error message, "Invalid index."
+* 2a. The matriculation number is invalid.
+  * 2a1. System shows an error message, "Invalid matriculation number."
+      Use case resumes at step 1.</panel>
+
+* 3a. The student with matriculation number does not exist.
+  * 2a1. System shows an error message, "Student does not exist."
       Use case resumes at step 1.</panel>
 
 <panel header="#### Use case: Edit a contact" expanded>
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the contact by providing the index of the contact and the fields to update (name, phone, email, address, tags).
-2. System validates the provided index and input fields:
-    * a. Checks if the contact at the given index exists.
-    * b. Validates the new name, email, phone, address, and tags as per the same rules as in the add contact case.
+1. User requests to edit the contact by providing the matriculation number of the contact and the fields to update (name, phone, email, address).
+2. System validates the provided matriculation number and input fields:
+    * a. Checks if the contact with the given matriculation number exists.
+    * b. Validates the new name, email, phone and address as per the same rules as in the add contact case.
 3. System updates the contact with the new details if all validations pass.
 4. System displays a success message, "Contact updated: [Updated contact details]."
 
@@ -410,8 +417,8 @@ Priorities:
 
 **Extensions:**
 
-* 2a. The index is out of bounds.
-  * 2a1. System shows an error message, "Invalid index."
+* 2a. The student with matriculation number does not exist.
+  * 2a1. System shows an error message, "Student does not exist."
       Use case resumes at step 1.
 
 * 2b. The new name is invalid.
@@ -579,8 +586,8 @@ Priorities:
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for students with additional filters (e.g., by grade, tag, or other criteria).
-2. System prompts the user to specify the filters (e.g., grade range, specific tag, etc.).
+1. User requests to search for students with additional filters (e.g., by grade, or other criteria).
+2. System prompts the user to specify the filters (e.g., grade range etc.).
 3. User specifies the filters and submits the search request.
 4. System retrieves students that match the specified filters and displays the filtered list.
 
@@ -601,7 +608,6 @@ Priorities:
   * System displays a message: "Operation cancelled."
   * **Use case ends.**</panel>
 
-<<<<<<< HEAD
 **Use Case: Get Warnings Before Making Major Changes**
 
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
@@ -615,13 +621,13 @@ Priorities:
 **Extensions:**
 
 * 2a. The list is empty.
-    * 2a1. System shows a message, "No contacts available."
+  * 2a1. System shows a message, "No contacts available."
       Use case ends.
 
 **Use Case: Explore App with Sample Student Data**
 =======
+
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
@@ -849,12 +855,8 @@ _{More to be added}_
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more _exploratory_ testing.
-
-</box>
 
 ### Launch and shutdown
 
@@ -871,29 +873,129 @@ testers are expected to do more _exploratory_ testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `person-delete m/A1234560L`<br>
+      Expected: contact with matriculation number A1234560L is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `person-delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `person-delete`, `person-delete x`, `...` (where x is a matriculation number of student that does not exist)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding, Deleting, and Editing courses
+
+Similar to adding, deleting and editing persons, but with courses.
+
+The courses are stored in file `data/courselist.json`.
+
+Warning: If any of the fields in `courselist.json` are invalid, no courses will be loaded and the json file will be cleared.
+
+| Field | Format                                                                                                                                          |
+| :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more _uppercase_ letters, `xxxx` is a 4-digit number, `B` is an **optional** _uppercase_ letter. |
+| `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                 |
+Note: The course code is unique and cannot be duplicated.
+
+**Test sequence**
+
+Prerequisite: Ensure courses with course codes CS2103T and MA1521 are not already added.
+
+1. Adding `course-add c/COURSE_CODE n/COURSE_NAME`
+
+* 1.1 Test case: `course-add c/CS2103T n/Software Engineering`
+  * Expected: A new course with course code `CS2103T` and course name `Software Engineering` is added. Success message shown.
+* 1.2 Test case: `course-add c/CS2103T n/Software Engineering`
+  * Expected: Error message shown, as Course with course code `CS2103T` already exists.
+
+2. Editing `course-edit c/COURSE_CODE n/COURSE_NAME`
+
+* 2.1 Test Case: `course-edit c/CS2103T n/Software Engineering 1`.
+  * Expected: The course with course code `CS2103T` is updated with the new course name `Software Engineering 1`. Success message shown.
+* 2.2 Test Case: `course-edit c/MA1521 n/Software Engineering 1`.
+  * Expected: Error message shown, as Course with course code `MA1521` does not exist.
+
+3. Deleting `course-delete c/COURSE_CODE`
+
+* 3.1 Test Case: `course-delete c/CS2103T`
+  * Expected: The course with course code `CS2103T` is deleted. Success message shown.
+* 3.2 Test Case: `course-delete c/MA1521`
+  * Expected: Error message shown, as Course with course code `MA1521` does not exist.
+
+Note: The manual test cases are to be run sequentially (eg 1.1, 1.2, 2.1, 2.2 etc).
+
+### Enrolling a student into a course and tutorial
+
+1. Enrolling an existing student into an existing course on TAHub
+
+   1. Prerequisites: Ensure that both _student_ and _course_ objects have been created.
+      (In this case, the _student_ object with matriculation number A2345678Y and the _course_
+       object with course code MA1521 must already be created.)
+
+   2. Test case: `enroll m/A2345678Y c/MA1521 tut/T17`
+
+       Expected: The student with matriculation number A2345678Y is enrolled into tutorial T17 of the course MA1521. A success message will be shown to the user.
+
+   3. Test case: `enroll m/A2345678Y c/MA1521 tut/T17` (_again_)
+
+       Expected: An error message will be displayed to the user and no new enrollment will occur.
+
+2. Enrolling an existing student into an invalid course on TAHub
+
+    1. Prerequisites: Ensure that a _student_ object has been created but a course with course code _CS3233_ has not been created
+
+    2. Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
+
+        Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
+
+    3. Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+
+       Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
+
+### Managing Attendance
+
+1. Marking students as present
+    1. Prerequisites:  Ensure that both student and course objects have been created and the student is enrolled into
+   a valid tutorial of the course. (In this case, the student object with matriculation number A0286651Y, the course
+   object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
+    2. Test case: `attend-present m/A0286651Y c/MA1521 tut/T17` <br>
+Expected: Student marked present. Success message shown.
+
+2. Marking students as absent
+    1. Prerequisites: Ensure that both student and course objects have been created and the student is enrolled into
+       a valid tutorial of the course. (In this case, the student object with matriculation number A0286651Y, the course
+       object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
+    2. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
+Expected: Student marked absent. Success message shown.
+    3. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
+Expected: Error message shown. Student not found.
+
+3. Clearing attendance records
+    1. Prerequisites: Student has existing attendance record
+    2. Test case: `attend-clear m/A2345678Y c/MA1521 tut/T17` <br>
+Expected: Attendance cleared. Success message shown.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Prerequisites: TAHub Contacts must have been run at least once with a data-modifying operation.
+   2. Test case: **missing** file(s) - delete one or more of the `.json` files in `./data` <br>
+      **Expected**: TAHub Contacts automatically loads a set of sample data to replace the missing data.
+      (This behavior is meant to be used for loading sample data when first running the program)
+   3. Test case: **corrupted** file(s) - corrupt one or more of the `.json` files in `./data`,
+      for instance, by deleting the trailing `}` and invalidating the JSON format. <br>
+      **Expected**: TAHub Contacts loads with empty data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+## **Appendix: Planned Enhancements**
 
-1. _{ more test cases …​ }_
+1. Add a `course-list` command to list all courses so that user can view courses in the system.
+2. Add support for more Tutorial IDs by changing the regular expressions (i.e:`VALIDATION_REGEX`) used to accommodate other valid tutorial ids (e.g: T01A).
+3. Modify all commands that takes in `m/MATRICULATION_NUMBER` to allow option of accepting index of the person in the list.
+4. The `NAME` attribute for person shall have a maximum length of 50 characters.
+5. Add an `attendance` (or similar) command that opens the Attendance window instead of using a mouse to click the `Attendance` button.
+6. Add more detailed error messages that tell the user specifically what fields are missing instead of simply "required fields are missing"

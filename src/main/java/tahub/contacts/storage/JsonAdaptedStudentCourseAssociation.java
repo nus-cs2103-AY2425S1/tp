@@ -9,7 +9,6 @@ import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.UniqueCourseList;
-import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
@@ -68,7 +67,7 @@ class JsonAdaptedStudentCourseAssociation {
         // Checks if the student is valid
         if (student == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JsonAdaptedPerson.class.getSimpleName()));
+                                                          JsonAdaptedPerson.class.getSimpleName()));
         }
 
         if (!CourseCode.isValidCourseCode(courseCode)) {
@@ -80,24 +79,23 @@ class JsonAdaptedStudentCourseAssociation {
         // Checks if the course is valid
         if (course == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JsonAdaptedCourse.class.getSimpleName()));
+                                                          JsonAdaptedCourse.class.getSimpleName()));
         }
 
         // Checks if the tutorial is valid
         if (this.tutorial == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JsonAdaptedTutorial.class.getSimpleName()));
+                                                          JsonAdaptedTutorial.class.getSimpleName()));
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
         // Checks if the attendance is valid
         if (this.attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JsonAdaptedAttendance.class.getSimpleName()));
+                                                          JsonAdaptedAttendance.class.getSimpleName()));
         }
         final Attendance attendanceModel = this.attendance.toModelType();
 
-        return new StudentCourseAssociation(student, course, tutorialModel,
-                new GradingSystem(), attendanceModel);
+        return new StudentCourseAssociation(student, course, tutorialModel, attendanceModel);
     }
 }

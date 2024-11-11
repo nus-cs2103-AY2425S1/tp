@@ -1,6 +1,6 @@
 package tahub.contacts.testutil;
 
-import tahub.contacts.logic.commands.EditCourseCommand.EditCourseDescriptor;
+import tahub.contacts.logic.commands.course.CourseEditCommand.EditCourseDescriptor;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseName;
 

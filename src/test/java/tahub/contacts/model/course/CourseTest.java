@@ -25,7 +25,7 @@ public class CourseTest {
         assertTrue(course1.isConflictCourse(course2));
 
         // same course name
-        assertTrue(course1.isConflictCourse(course3));
+        assertFalse(course1.isConflictCourse(course3));
 
         // different course code and name
         assertFalse(course1.isConflictCourse(course4));
