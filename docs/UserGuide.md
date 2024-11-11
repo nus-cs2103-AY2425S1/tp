@@ -444,6 +444,8 @@ Examples:
 * `sort f/NumProp o/H` returns the contact list sorted in descending order with respect to the property list associated with the contact.
   ![result for sort](images/sortCommand.png)
 
+Note: The error message for sort encloses the parameters in square brackets, however these parameters are compulsory.
+
 ### Sort all properties associated with a person: `sorti`
 
 Sorts the list of properties associated with a contact by a specified field and order. This sorted order resets every time the app closes, so the command needs to be run again each time the app re-opens.
