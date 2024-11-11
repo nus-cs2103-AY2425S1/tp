@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant "ParserUtil" as ParserUtil <<class>> LOGIC_COLOR
+participant "Name" as Name <<class>> LOGIC_COLOR
+participant "n:Name" as n LOGIC_COLOR
+
+end box
+
+[-> ParserUtil : parseName("John")
+activate ParserUtil
+
+
+ParserUtil -> Name : isValidName
+
+activate Name
+Name --> ParserUtil
+deactivate Name
+
+alt name is valid
+
+create n
+ParserUtil -> n
+activate n
+n --> ParserUtil : n
+deactivate n
+
+[<--ParserUtil : n
+
+else name is invalid
+
+[<--ParserUtil: ParseException
+deactivate ParserUtil
+end

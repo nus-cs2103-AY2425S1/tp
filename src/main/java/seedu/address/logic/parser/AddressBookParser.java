@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseInvalidVariants;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -13,10 +15,13 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuitCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -38,7 +43,17 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (userInput.trim().length() >= 2
+                && userInput.trim().substring(userInput.trim().length() - 2).equals(
+                PREFIX_TAG.getPrefix().trim()) && userInput.trim().length() < userInput.length()) {
+
+            int lastIndex = userInput.lastIndexOf(PREFIX_TAG.getPrefix());
+            userInput = userInput.substring(0, lastIndex + 2)
+                    + userInput.substring(lastIndex + 2).replaceAll("\\s+", " ");
+        } else {
+            userInput = userInput.trim();
+        }
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
@@ -53,34 +68,44 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.SHORT_COMMAND_WORD, ClearCommand.LONG_COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindCommand.SHORT_COMMAND_WORD, FindCommand.LONG_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+        case UndoCommand.SHORT_COMMAND_WORD, UndoCommand.LONG_COMMAND_WORD:
+            return new UndoCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case RedoCommand.SHORT_COMMAND_WORD, RedoCommand.LONG_COMMAND_WORD:
+            return new RedoCommand();
+
+        case QuitCommand.SHORT_COMMAND_WORD, QuitCommand.LONG_COMMAND_WORD:
+            return new QuitCommand();
+
+        case HelpCommand.SHORT_COMMAND_WORD, HelpCommand.LONG_COMMAND_WORD:
             return new HelpCommand();
+
+        case ExportCommand.SHORT_COMMAND_WORD, ExportCommand.LONG_COMMAND_WORD:
+            return new ExportCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
+            parseInvalidVariants(commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
         }
     }
-
 }

@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "ArgumentTokeniser" as ArgumentTokeniser <<class>> LOGIC_COLOR
+participant "argmap:ArgumentMultimap" as ArgumentMultimap LOGIC_COLOR
+participant "ParserUtil" as ParserUtil <<class>> LOGIC_COLOR
+end box
+
+group sd parse and create Person parameters
+
+AddCommandParser -> ArgumentTokeniser : tokenize("-n John -p 98765432 -e john@gmail.com -l Brown Street \n -r Busy -t Friend", PREFIX_NAME, PREFIX_PHONE, \n PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_TAG, PREFIX_REMARK)
+activate ArgumentTokeniser
+
+create ArgumentMultimap
+ArgumentTokeniser -> ArgumentMultimap
+activate ArgumentMultimap
+
+ArgumentMultimap -> ArgumentTokeniser : argmap
+deactivate ArgumentMultimap
+
+ArgumentTokeniser -> AddCommandParser : argmap
+deactivate ArgumentTokeniser
+
+AddCommandParser -> ArgumentMultimap : verifyNoDuplicates(...)
+activate ArgumentMultimap
+ArgumentMultimap --> AddCommandParser
+deactivate ArgumentMultimap
+
+AddCommandParser -> ParserUtil: parseName("John")
+activate ParserUtil
+
+
+ParserUtil --> AddCommandParser : name
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseOptionalValue(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone, new Phone(""))
+activate ParserUtil
+
+
+ParserUtil --> AddCommandParser : phone
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseOptionalValue(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail, new Email(""))
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : email
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseOptionalValue(argMultimap.getValue(PREFIX_LOCATION), ParserUtil::parseAddress, new Address(""))
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : email
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil :  parseOptionalValue(argMultimap.getValue(PREFIX_REMARK), ParserUtil::parseRemark, new Remark(""))
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : remark
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil: parseTags(tags)
+activate ParserUtil
+
+ParserUtil --> AddCommandParser: tags
+deactivate ParserUtil
+
+end

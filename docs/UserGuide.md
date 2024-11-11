@@ -1,199 +1,500 @@
 ---
-layout: page
-title: User Guide
+layout: default.md
+title: "User Guide"
+pageNav: 4
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# VBook User Guide
 
-* Table of Contents
-{:toc}
+VBook is a **desktop application for freelance software developers to store and organise client contact details and log client preferences.** VBook is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+VBook (VimBook) is inspired by the Vim editor, where users can edit, navigate, and program faster with the keyboard than using a mouse. Hence, our commands and theme are inspired by the style of Vim.
+
+Software developers who type fast can get their contact management tasks done at lightning speed with VBook's keyboard-only navigation feature. With advanced privacy features like password protection and encryption, VBook ensures that software developers’ client details remain secure and confidential at all times.
+
+<!-- * Table of Contents -->
+<page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+<box type="info" seamless>
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+**Note:** This document assumes familiarity with the command line, though it is not required.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+</box>
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Ensure you have Java `17` or above installed in your computer. For Mac users, you should use the specific `Azul JDK 17` distribution following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+2. Download the latest `{{ jarFile }}` file from [here](https://github.com/AY2425S1-CS2103T-F12-4/tp/releases).
 
-   * `list` : Lists all contacts.
+3. Copy the file to the folder you want to use as the _home folder_ for VBook.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+4. Open a command terminal, change directory (`cd`) into the folder you put the `{{ jarFile }}` file in, and use the `java -jar {{ jarFile }}` command to run the application.<br>
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+```shell
+cd path/to/vbook
+java -jar {{ jarFile}}
+```
 
-   * `clear` : Deletes all contacts.
+5. An initial dialog will appear to prompt you to set a new password.
 
-   * `exit` : Exits the app.
+![setPasswordDialog](images/setPasswordDialog.png){width=60%}
 
-1. Refer to the [Features](#features) below for details of each command.
+
+-  On subsequent logins, the password dialog will prompt you to enter the password that you set.
+
+![enterPasswordDialog](images/enterPasswordDialog.png){width=60%}
+
+
+6. A GUI similar to the screenshot below should appear upon successful login. The application contains some sample data for you to get familiar with the application.<br>
+
+![VBook_annotated.png](images/VBook_annotated.png)
+
+7) Type any command in the Command Box and press <kbd>ENTER</kbd> to execute it. For example, typing **`:help`** and pressing <kbd>ENTER</kbd> will open the help window.
+
+<box type="info" seamless>
+    The application contains sample contacts. To remove them, type <code>:clear</code> and press <kbd>ENTER</kbd>.
+</box>
+
+For a summary of all our commands, refer to this table below:
+
+    {{ commandSummary }}
+
+<box type="info" seamless>
+
+**Notes about the command format:**<br>
+
+* All commands are in lowercase.
+
+* Words in `UPPERCASE` are the parameters to be supplied by the user.<br>
+  e.g. in `:add -n NAME`, `NAME` is a parameter which can be used as `:add -n John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g. `-n NAME [-t TAG]` can be used as `-n John Doe -t friend` or as `-n John Doe`.
+
+* Items with `…`​ after them can be used any number of times.<br>
+  e.g. `[-t TAG]…​` can be used as ` ` (i.e. 0 times), `-t friend` (i.e. 1 time), `-t friend -t family` (i.e. 2 times) etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `:help`, `:list`, `:quit` and `:clear`) will be ignored.<br>
+  e.g. if the command specifies `:help 123`, it will be interpreted as `:help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</box>
+
+<box type="info" seamless>
+
+**Notes about the parameters:**<br>
+
+* Some parameters have restrictions on the values they accept:
+
+    * **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
+    * **Phone numbers** should only contain numbers, and it should be at least 3 digits long. Duplicates are allowed because a single phone number may be used by multiple people, such as a company number.
+    * **Emails** should be of the format local-part@domain and adhere to the following constraints:
+        1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+_.-`). The local-part may not start or end with any special characters.
+        2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+           The domain name must:
+            - end with a domain label at least 2 characters long
+            - have each domain label start and end with alphanumeric characters
+            - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * **Locations** can take any values.
+    * **Tags** should be alphanumeric, only one word long, and under 50 characters.
+    * **Remarks** should only contain alphanumeric characters and spaces.
+    * **Phone numbers**, **Emails**, **Locations**, **Tags** and **Remarks** can be shared by contacts. This is because people in an organisation may share the same information.
+
+</box>
+
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+### Commands
 
-**:information_source: Notes about the command format:**<br>
+<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+#### View Help
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
+> Shows a command cheatsheet, as well as a link to access this user guide.
 
 
-### Adding a person: `add`
+**Format** `:help`\
+**Shortcut:** `:h`
 
-Adds a person to the address book.
+<br>
+<br>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+#### Add Person
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+> Adds a person to the address book.
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+**Format:** `:add -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]`\
+**Shortcut:** `:a`
 
-Shows a list of all persons in the address book.
+<box type="tip" seamless>
 
-Format: `list`
+**Tip:** A person can have any number of tags (including 0).
 
-### Editing a person : `edit`
+</box>
 
-Edits an existing person in the address book.
+**Examples:**
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+![addPersonInitalState.png](images/addPersonInitalState.png){width=60%}
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
+
+1. To add a client named "Jack Lee", key in
+   `:add -n Jack Lee`.
+
+![addJackLee.png](images/addJackLee.png){width=60%}
+
+
+2. To add a friend and client you met at a conference named "Ivy King", with a phone number of "87654320", an email of "ivyk@example.com", with location of "808 Palm St", key in
+   `:a -n Ivy King -p 87654320 -e ivyk@example.com -l 808 Palm St -t friend -t client -r Met at a conference`.
+
+![addIvyKing.png](images/addIvyKing.png){width=60%}
+
+<br>
+<br>
+
+#### List All
+
+> Shows a list of all persons in the address book.
+
+**Format:** `:list`\
+**Shortcut:** `:ls`
+
+<br>
+<br>
+
+#### Edit Person
+
+> Edits an existing person in the address book.
+
+**Format:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​ [-r REMARK]`\
+**Shortcut:** `:ed​`
+
+* Edits the person at the specified index. The index refers to the index number shown in the displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `-t ` without
+  specifying any tags after it.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Examples:**
 
-### Locating persons by name: `find`
+![addPersonInitalState.png](images/addPersonInitalState.png){width=60%}
 
-Finds persons whose names contain any of the given keywords.
+From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+1. To edit the first person's phone number and email address to be "91234567" and "johndoe@example.com" respectively, key in: `:edit 1 -p 91234567 -e johndoe@example.com`.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+![editJohnDoe.png](images/editJohnDoe.png){width=60%}
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+2. To edit the second person's name to "Betsy Crower" and clear all existing tags, key in: `:edit 2 -n Betsy Crower -t `.
 
-### Deleting a person : `delete`
+![editBetsyCrower.png](images%2FeditBetsyCrower.png){width=60%}
 
-Deletes the specified person from the address book.
+<br>
+<br>
 
-Format: `delete INDEX`
+#### Find Person
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+>  Finds contacts that match any specified search criteria, including name, phone number, email, location, tags, or remark.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Format:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​ [-r REMARK]`\
+**Shortcut:** `:f`
 
-### Clearing all entries : `clear`
+* The search is case-insensitive. \
+  E.g. "hans" will match "Hans".
+* Persons with a certain name, phone number, email, address and remark can be searched through flags.\
+  E.g. to find a person with the name "david" and remark "busy", the arguments would be `-n david -r busy`.
+* Each flag is optional, but there must be at least one flag in a query.
+* As long as the contact contains the query, it is considered a match, e.g. searching "Han" will bring up "Hans".
+* Only persons matching all keywords will be returned.\
+  E.g. `:find -n Hans -p 98765432` will not return "Hans" if his phone number is not "98765432".
 
-Clears all entries from the address book.
+**Examples:**
 
-Format: `clear`
+![addPersonInitalState.png](images/addPersonInitalState.png){width=60%}
 
-### Exiting the program : `exit`
+From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
-Exits the program.
+1. To find a person named "Alice" with location "789 Oak St", key in `:find -n alice -l oak`.
 
-Format: `exit`
+![findAlice.png](images/findAlice.png){width=60%}
 
-### Saving the data
+<br>
+<br>
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+#### Remove Person
 
-### Editing the data file
+> Removes the specified person(s) from the address book.
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**Format:** `:remove -i INDEX1, INDEX2, ...`\
+**Shortcut:** `:rm`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+* Removes the person at the specified index.
+* The index refers to the index number shown in the displayed list.
+* Multiple persons can be deleted by listing their indexes, separated by commas.
+* The index **must be a positive integer** 1, 2, 3, ...
 
-### Archiving data files `[coming in v2.0]`
+**Examples:**
 
-_Details coming soon ..._
+![removePersonInitialState.png](images/removePersonInitialState.png){width=60%}
+
+From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
+
+1.  To remove the 1st and 3rd person in your address book, key in `:list` to list all your contacts, followed by `:remove -i 1, 3`.
+
+![remove1st3rdPerson.png](images/remove1st3rdPerson.png){width=60%}
+
+2. To remove a person named "Betsy Crower", key in `:find -n Betsy` followed by `:remove -i 1` to delete the 1st person named "Betsy" in the result of the `:find` command. If you have multiple people named "Betsy", you can delete them using their specified index as well.
+
+![removeBetsy.png](images/removeBetsy.png){width=60%}
+
+<br>
+<br>
+
+#### Undo
+
+> Reverts the address book to the state before the last change.\
+> User can undo up to **10 changes**.\
+> Can undo commands that change the address book data, such as `:add`, `:remove`, `:edit`.
+
+**Format:** `:undo`\
+**Shortcut:** `:u`\
+**Examples:**
+
+1. If you accidentally added a person named "John Doe" to the address book (through an `:add` command), to undo the command and remove "John Doe", key in `:undo`.
+2. If you accidentally deleted an important contact named "Betsy" (through a `:remove` command), to undo the command and restore the contact, key in `:undo`.
+
+<box type="tip" seamless>
+
+**Tip:** <kbd>Ctrl-Z</kbd> can also be used to undo the last change outside the command box.
+
+</box>
+
+<br>
+<br>
+
+#### Redo
+
+> Reapplies the last change to the address book that was undone with the `:undo` command.\
+> User can redo up to **10 changes** that were undone with the `:undo` command.
+
+**Format:** `:redo`\
+**Shortcut:** `:r`\
+**Examples:**
+
+1. Given that `:undo` was used to revert the addition of "John Doe", to add "John Doe" back to the address book, key in `:redo`.
+2. Given that `:undo` was used to revert the deletion of "Betsy", to delete "Betsy" again, key in `:redo`.
+
+<box type="tip" seamless>
+
+**Tip:** <kbd>Ctrl-Shift-Z</kbd> can also be used to redo the last change outside the command box.
+
+</box>
+
+<br>
+<br>
+
+#### Export Data
+
+> Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
+> select a directory to save the file.
+
+**Format:** `:export`\
+**Shortcut**: `:exp`
+
+
+<box type="important" seamless>
+
+**Important:** If you want to transfer your data to a VBook application in another computer, use `:export` instead of directly copying the data file over. Refer to the [FAQ](#faq) for a detailed guide on this.
+
+</box>
+
+<br>
+<br>
+
+#### Clear Data
+
+> Clears all entries from the address book's data.
+
+**Format:** `:clear`\
+**Shortcut:** `:cl`
+
+<br>
+<br>
+
+#### Quit Program
+
+> Quits the program.
+
+**Format:** `:quit`\
+**Shortcut:** `:q`
+
+---
+### Command Shortcuts
+
+| Command       | Shortcut |
+|---------------|----------|
+| View Help     | `:h`     |
+| Add Person    | `:a`     |
+| List All      | `:ls`    |
+| Edit Person   | `:ed `   |
+| Find Person   | `:f`     |
+| Remove Person | `:rm `   |
+| Undo          | `:u`     |
+| Redo          | `:r`     |
+| Export Data   | `:exp`   |
+| Clear Data    | `:cl`    |
+| Quit Program  | `:q`     |
+
+
+<br>
+<br>
+
+### Keyboard Shortcuts
+There are two modes in VBook: Command Box and UI Navigation. The following keyboard shortcuts are available in each mode.
+
+#### Command Box
+* <kbd>Ctrl + Z</kbd> -  Undo the most recently typed words within the command box. This does not affect executed commands.
+* <kbd>F1</kbd> - Open the Help Window.
+* <kbd>ESC</kbd> - Go back to UI Navigation Mode.
+
+#### UI Navigation
+* <kbd>Ctrl + Z</kbd> - Undo the last change made to the address book.
+* <kbd>Ctrl + Shift + Z</kbd> - Redo the last undone change made to the address book.
+* <kbd>F1</kbd> - Open the Help Window.
+* <kbd>Up-arrow</kbd> - Highlight the previous contact in the list.
+* <kbd>Down-arrow</kbd> - Highlight the next contact in the list.
+* <kbd>:</kbd> - Focus on the Command Box.
+
+---
+
+### Privacy and Security
+
+<br>
+
+#### Password Prompt
+**Initial Setup:**
+When you launch VBook for the first time, you’ll be prompted to create a new password. This password will be used to control access to your address book.
+
+<box type="info">
+
+**Info:**
+The password will be hashed with a salt and saved into a `password.txt` file stored in the same directory as `{{ jarFile }}`.
+
+</box>
+
+**Subsequent Logins:**
+Each time you open VBook, you’ll be prompted to enter your password. This ensures that your data remains secure and accessible only to authorized users.
+
+<box type="warning">
+
+**Caution:**
+If you forget your password, there is no way to retrieve your data. To re-enter the application, you can delete the `password.txt` file located in the same directory as `VBook.jar`.
+However, deleting this file will also permanently erase all your address book data. This safeguard is designed to prevent unauthorized users from bypassing the password prompt.
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** Store your password in a secure place to avoid losing access to your data.
+
+</box>
+
+<br>
+<br>
+
+#### Encryption
+**How it Works:**
+
+- When you enter your password during the initial setup, it generates an encryption key saved as `vbook.jks` stored in the same directory as `{{ jarFile }}`.
+- All your address book data is encrypted using this key and saved securely on your device.
+- Each time you open the app, the password is used to decrypt the data for access.
+
+<box type="info" seamleass>
+
+**Info:**
+Encryption only happens the first time you make changes to the address book from the VBook GUI. Loading a JSON file to your directory will not automatically encrypt the file.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## File Management
+
+<br>
+
+### Save Data
+
+> VBook data is saved in the hard disk automatically after any command that changes the data. There is no need to
+> save manually.
+
+<br>
+<br>
+
+### Edit Data File
+
+> The encrypted VBook data are saved automatically as a JSON file `[JAR file location]/data/vbook.json`.
+
+<box type="warning">
+
+**Caution:**
+Do not make changes to the encrypted JSON file, as it can corrupt the data and make it unreadable. If you want to manually edit the data file, follow these instructions:
+
+1. Export your data by running `:export`.
+2. Overwrite the empty data file in the new computer's `data/vbook.json` with the `vbook.json` file from your export in Step 1.
+3. Run VBook and your modified data should appear.
+
+</box>
+
+<box type="tip" seamless>
+
+**Note:**
+If your changes to the data file makes its format invalid, VBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the VBook to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: To transfer your data over, follow these steps:
+1. Export your data from your current computer by running `:export`.
+2. Install VBook in the other computer (refer to [Quick Start](#quick-start) for more information).
+3. Overwrite the empty data file in the new computer's `data/vbook.json` with the `vbook.json` file from your export in Step 1.
+4. Run VBook and your data should appear in your new computer.
+
+<box type="tip" seamless>
+
+**Note:** Your data in your new VBook application will only be encrypted when you make a change to it in the application, through commands (i.e. `:add`, `:edit`).
+
+
+</box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
+   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
+   application before running the application again.
+2. **If you minimize the Help Window** and then run the `:help` command (or use the `Help` menu, or the keyboard shortcut <kbd>F1</kbd>) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`

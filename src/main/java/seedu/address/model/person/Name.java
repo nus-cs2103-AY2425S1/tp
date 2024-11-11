@@ -38,6 +38,19 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if value is empty, otherwise returns false.
+     */
+    public boolean isEmpty() {
+        return fullName.isEmpty();
+    }
+
+    /**
+     * Returns value of name.
+     */
+    public String getDisplayableName() {
+        return fullName;
+    }
 
     @Override
     public String toString() {

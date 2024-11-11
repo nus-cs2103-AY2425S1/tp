@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant "ParserUtil" as ParserUtil <<class>> LOGIC_COLOR
+participant "Phone" as Phone <<class>> LOGIC_COLOR
+participant "p:Phone" as p LOGIC_COLOR
+
+end box
+
+[-> ParserUtil : parseOptionalValue(\nargMultimap.getValue(PREFIX_PHONE), \n ParserUtil::parsePhone, new Phone(""))
+
+activate ParserUtil
+
+alt value present
+
+
+
+    ParserUtil -> ParserUtil : parsePhone("98765432")
+    activate ParserUtil
+
+    ParserUtil -> Phone : isValidPhone
+    activate Phone
+    Phone --> ParserUtil
+    deactivate Phone
+
+    alt phone number is valid
+
+        create p
+        ParserUtil -> p
+        activate p
+        p --> ParserUtil
+        deactivate p
+
+        ParserUtil --> ParserUtil : p
+
+
+    else phone number is invalid
+        ParserUtil --> ParserUtil : ParseException
+        deactivate ParserUtil
+
+    end
+    [<--ParserUtil : p or ParseException
+
+else value not present
+[<--ParserUtil : new Phone("")
+deactivate ParserUtil
+end
+@enduml

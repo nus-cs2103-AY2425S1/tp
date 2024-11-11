@@ -1,11 +1,19 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonSearchPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -13,16 +21,44 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String SHORT_COMMAND_WORD = ":f";
+    public static final String LONG_COMMAND_WORD = ":find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE =
+            "\"" + SHORT_COMMAND_WORD + "\"" + " OR "
+            + "\"" + LONG_COMMAND_WORD + "\""
+            + ": Finds all persons whose specified "
+            + "fields contain "
+            + "the keywords in the given parameters (case-insensitive).\n"
+            + "Parameters are optional but there must be at least one.\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_LOCATION + "LOCATION "
+            + PREFIX_REMARK + "REMARK\n"
+            + "Example 1: " + LONG_COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_LOCATION + "serangoon" + "\n"
+            + "Example 2: " + SHORT_COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_LOCATION + "serangoon";
 
-    private final NameContainsKeywordsPredicate predicate;
+    public static final String COMMAND_SUMMARY_ACTION = "Find";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]\n"
+                    + ":f [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":find -n david -l serangoon\n"
+                    + ":f -n david -l serangoon";
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+
+    public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",
+            "query");
+
+    private final PersonSearchPredicate predicate;
+
+    public FindCommand(PersonSearchPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -36,17 +72,19 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // Must have this check
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
+        // Must have this check
         if (!(other instanceof FindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        // Compare the predicates, not the object references
+        FindCommand otherCommand = (FindCommand) other;
+        return predicate.equals(otherCommand.predicate);
     }
 
     @Override

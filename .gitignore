@@ -21,3 +21,11 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+
+password.txt
+key.txt
+/test/*
+docs/_markbind/logs/
+
+*.jks
+/docs/_markbind/logs/
