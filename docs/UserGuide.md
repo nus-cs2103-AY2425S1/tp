@@ -406,11 +406,11 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## Glossary
 1. **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with a software application through visual elements such as buttons, icons, menus, and windows, instead of text-based commands. 
-2. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`).
-local-part: The portion of the email address before the `@` symbol. It identifies the specific mailbox. 
-3. **Domain**: The portion of the email address after the `@` symbol. 
-4. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`). 
-5. **Top-level domain (TLD)**: The last part of the domain name, such as `.com`, `.org`, or `.edu`. It generally indicates the type or location of the organization.
+2. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`). 
+3. **Local-part**: The portion of the email address before the `@` symbol.
+4. **Domain**: The portion of the email address after the `@` symbol. 
+5. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`). 
+6. **Top-level domain (TLD)**: The last part of the domain name, such as `com`, `org`, or `edu`. It generally indicates the type or location of the organization.
 
 --------------------------------------------------------------------------------------------------------------------
 
