@@ -20,38 +20,31 @@ activate Model
 Model --> EditCommand : lastShownList
 deactivate Model
 
-EditCommand -> EditCommand : get(index)
-alt index out of bounds
-    EditCommand -> EditCommand : throw CommandException (invalid index)
-end
-
 EditCommand -> EditCommand : personToEdit = lastShownList.get(index)
 
 alt Person is not Student and contains education field
-    EditCommand -> EditCommand : throw CommandException (education on non-student)
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
 alt Person is not Student and contains lesson time field
-    EditCommand -> EditCommand : throw CommandException (lesson time on non-student)
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
-EditCommand -> EditCommandClass : createEditedPerson(personToEdit, editPersonDescriptor)
+EditCommand -> EditCommandClass : createEditedPerson(...)
 activate EditCommandClass
 EditCommandClass --> EditCommand : editedPerson
 deactivate EditCommandClass
 
 alt editedPerson is duplicate
-    EditCommand -> EditCommand : throw CommandException (duplicate person)
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
 EditCommand -> Model : setPerson(personToEdit, editedPerson)
 activate Model
-Model --> EditCommand
 deactivate Model
 
 EditCommand -> Model : updateFilteredPersonList()
 activate Model
-Model --> EditCommand
 deactivate Model
 
 create CommandResult
