@@ -49,6 +49,8 @@
   - [Additional Notes](#additional-notes)
 - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
   - [Advanced Error Messages](#advanced-error-messages)
+  - [Case Insensitivity for All Contact Fields](case-insensitivity-for-all-contact-fields)
+  - [Display Index of Newly Added Contact](display-index-of-newly-added-contact)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -793,12 +795,35 @@ This section outlines the planned future enhancements for the data_coNdUctorS ap
 
    1. Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time.
   
-   1. Example 1: Editing a contact with the same `NAME` and `NICKNAME` as a current contact will result in an error message: "This Contact already exists in the address book". This is not very clear and so in the future, we could show that current contact to the user and show them which fields are duplicated.
+   1. Example 1: Editing a contact with the same `NAME` and `NICKNAME` as an existing contact will result in an error message: "This Contact already exists in the address book". This is not very clear so in the future, we could display the said contact to the user and inform them which fields are duplicated.
    
    1. Example 2: Executing this command `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` will output an error message saying invalid Role. Instead, should tell the user that the Role they implemented is `President [` which is not recognised as a role.
       
-   1. Expected Outcome: Users will waste less time debugging their inputs, espeically for large address books.
+   1. Expected Outcome: Users will waste less time debugging their inputs, especially for large address books.
 
 ---
+
+### Case Insensitivity for All Contact Fields
+
+ 1. Some Contact fields are case-sensitive so errors arise during duplicate contacts being loaded into the address book
+
+   1. Goal: Reduce accidental duplicates to enhance the user experience when interacting with the contact list.
+
+   1. Case 1: `Nickname` is case-sensitive (e.g., `nn/alice` and `nn/Alice` are considered distinct). After this enhancement, `nn/alice` and `nn/Alice` will be treated as identical, reducing potential conflicts caused by casing differences. Contacts will be flagged as having the same identity if both `Name` and `Nickname` match in a case-insensitive manner.
+
+   1. Case 2: `Telegram Handle` and `Email` are also case-sensitive. In the enhanced version, these fields will also become case-insensitive, ensuring no two contacts can have the same `Telegram Handle`, `Email`, or `Nickname`, even if they differ only by letter casing.
+
+   1. Expected Outcome: Reduce errors and confusion due to case variations. Ensure that no two contacts have the same `Telegram Handle`, `Email`, or `Nickname` regardless of case, thereby improving data integrity.
+---
+
+### Display Index of Newly Added Contact
+
+1. Users may be uncertain about where a newly added contact appears within the contact list.
+
+   1. Goal: Clearly indicate the index of the newly added contact so that users can easily locate and verify the contact’s information without unnecessary searching.
+
+   1. Example: When a contact is added, the UI will default to displaying the first page. However, since contacts are listed in alphabetical order, the new contact may not be visible on this page if it appears further down the list. Users may end up scrolling through multiple pages to locate the newly added contact, especially if they are unfamiliar with other contacts in the system.
+
+   1. Expected Outcome: Users can instantly see the index of the added contact, allowing them to navigate directly to its location without spending extra time searching through the list.
 
 
