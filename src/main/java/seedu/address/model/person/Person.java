@@ -36,8 +36,13 @@ public class Person {
         this.address = address;
         this.department = department;
         this.role = role;
-        this.contractEndDate = contractEndDate;
         this.isEmployee = isEmployee;
+        if (isEmployee) {
+            assert !contractEndDate.equals(ContractEndDate.empty());
+            this.contractEndDate = contractEndDate;
+        } else {
+            this.contractEndDate = ContractEndDate.empty();
+        }
     }
 
     public Name getName() {
