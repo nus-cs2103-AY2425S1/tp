@@ -43,10 +43,9 @@ public class PointTest {
         assertTrue(point.equals(new Point("3")));
 
         // same values after parsing -> returns true
-        // not currently implemented, as it fails and might be an enhancement
+        // not currently implemented, as it fails and fixing it might be an enhancement
         // assertTrue(point.equals(new Point("03")));
         // assertTrue(point.equals(new Point("0000000000000000003")));
-        // assertTrue(point.equals(new Point("    3    ")));
 
         // same object -> returns true
         assertTrue(point.equals(point));
@@ -76,12 +75,10 @@ public class PointTest {
     public void toStringTest() {
         Point point = new Point("10");
         // Point point2 = new Point("003"); // zero-padding
-        // Point point3 = new Point("       99      "); // extra spaces
 
         // Check if toString returns the expected value
         assertTrue(point.toString().equals("10 points"));
         // assertTrue(point2.toString().equals("3 points"));
-        // assertTrue(point3.toString().equals("99 points"));
     }
 
     @Test
