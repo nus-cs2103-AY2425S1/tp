@@ -1,10 +1,5 @@
 package seedu.address.ui;
 
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -24,9 +19,15 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private static final String ASSERT_WEB_VIEW_MUST_BE_INITIALIZED = "WebView must be initialized";
+    private static final String ASSERT_HELP_MESSAGE_MUST_BE_INITIALIZED = "Help message label must be initialized";
+
+    private static final String LOG_URL_COPIED_TO_CLIPBOARD = "URL copied to clipboard: ";
+    private static final String LOG_FAILED_TO_ACCESS_CLIPBOARD = "Failed to access system clipboard. URL not copied.";
+    private static final String LOG_SHOW_HELP_PAGE = "Showing help page about the application.";
 
     @FXML
     private Button copyButton;
@@ -43,8 +44,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        assert webView != null : "WebView must be initialized";
-        assert helpMessage != null : "Help message label must be initialized";
+        assert webView != null : ASSERT_WEB_VIEW_MUST_BE_INITIALIZED;
+        assert helpMessage != null : ASSERT_HELP_MESSAGE_MUST_BE_INITIALIZED;
         helpMessage.setText(HELP_MESSAGE);
         loadUserGuide();
     }
@@ -84,7 +85,7 @@ public class HelpWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine(LOG_SHOW_HELP_PAGE);
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -110,25 +111,16 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Loads the user guide URL in the WebView.
-     */
-    @FXML
-    private void openUrlInBrowser() {
-        try {
-            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
-            logger.fine("Opened URL: " + USERGUIDE_URL);
-        } catch (IOException | URISyntaxException e) {
-            logger.warning("Failed to open URL: " + USERGUIDE_URL);
-        }
-    }
-
     @FXML
     private void copyUrl() {
         Clipboard clipboard = Clipboard.getSystemClipboard();
-        ClipboardContent content = new ClipboardContent();
-        content.putString(USERGUIDE_URL);
-        clipboard.setContent(content);
-        System.out.println("URL copied to clipboard: " + USERGUIDE_URL);
+        if (clipboard != null) {
+            ClipboardContent content = new ClipboardContent();
+            content.putString(USERGUIDE_URL);
+            clipboard.setContent(content);
+            logger.info(LOG_URL_COPIED_TO_CLIPBOARD + USERGUIDE_URL);
+        } else {
+            logger.warning(LOG_FAILED_TO_ACCESS_CLIPBOARD);
+        }
     }
 }

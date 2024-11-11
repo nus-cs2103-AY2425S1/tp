@@ -250,14 +250,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User enters delete contact command with the contact's full name.
-2. Cher shows list of contacts with name that matches user input.
-3. User re-enters delete command with index of the contact in list shown to delete.
-4. Cher prompts for delete confirmation.
-5. User confirms deletion.
-6. Cher deletes the contact from memory.
-7. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-8. Cher shows a success message. <br>
+1. User enters delete contact command with a specified attribute.
+2. Cher shows list of contacts that matches user input.
+3. User re-enters delete command with the full attribute of the desired contact to delete.
+4. Cher deletes the contact from memory.
+5. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+6. Cher shows a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -290,8 +288,9 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC5 - Batch delete
 **MSS**
 1. User enters a command to delete all contacts with specific tags.
-2. Cher will remove all contacts containing specified tags.
-3. Cher will show the contacts that have been removed.<br>
+2. Cher removes all contacts containing specified tags.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the contacts that have been removed.<br>
    Use case ends.
 
 **Extensions**
@@ -309,8 +308,9 @@ Use case ends
 #### Use case: UC7 - Batch edit
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
-2. Cher will change all contacts containing specified tags to the new tag.
-3. Cher will show the contacts that have been changed.<br>
+2. Cher changes all contacts containing specified tags to the new tag.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows all the contacts that have the new tag.<br>
    Use case ends.
 
 **Extensions**
@@ -318,6 +318,18 @@ Use case ends
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
+
+#### Use case: UC8 - Find Contacts
+
+**MSS**
+1. User enters find contacts command with specified attribute.
+2. Cher shows list of contacts that matches user input.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.<br>
+      Use case ends.
 
 #### Use case: UC8 - Select contacts by index
 
@@ -435,6 +447,7 @@ Use case ends
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
 
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -492,13 +505,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Marking attendance for a person 
@@ -591,17 +604,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Batch deleting a group of people
 1. Deleting a group of people.
+   
    1. Prerequisites: <br>
    Execute the following:
       - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+      - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+      - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
       - List all persons using the `list` command.
+        
    2. Test case: `batch-delete t/tag3` <br>
       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-   3. Test case: `batch-delete t/tag1 t/tag2` <br>
+   
+   4. Test case: `batch-delete t/tag1 t/tag2` <br>
       Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
-   4. Test case: `batch-delete t/tag1` <br>
+      
+   6. Test case: `batch-delete t/tag1` <br>
       Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
       previous test case `iii`. Feedback box will show detail of deleted person.
 
@@ -610,16 +627,24 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: <br>
        Execute the following:
         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
-        - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
-        - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+        - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
+          
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
+   
+    4. Test case: `batch-edit t/tag1 t/tag3` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
+
     3. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`.
+
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
-    4. Test case: `batch-edit t/tag2 t/tag4` <br>
+       
+    6. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
 
@@ -672,4 +697,27 @@ testers are expected to do more *exploratory* testing.
    1. Delete all generated save file if there is any.
    2. Re-start the Cher application which will automatically regenerate the basic data.
    3. It will result in loss of data.
+
+
+### Finding persons
+
+1. Finding persons by tag
+      1. Prerequisites: <br>
+         Execute the following:
+         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+         - List all persons using the `list` command.
+           
+      2. Test case: `find t/tag1`<br>
+         Expected: test person 1, test person 2, and test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      3. Test case: `find t/tag2`<br>
+         Expected: test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
+         Expected: List of persons shown remains unchanged.
+         Feedback box shows error details regarding incorrect input format.
 
