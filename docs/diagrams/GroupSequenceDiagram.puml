@@ -33,7 +33,7 @@ AddressBookParser -> GroupCommandParser : parse("g/ClassA s/Alice")
 activate GroupCommandParser
 
 create GroupCommand
-GroupCommandParser -> GroupCommand
+GroupCommandParser -> GroupCommand : new GroupCommand(...)
 activate GroupCommand
 
 GroupCommand --> GroupCommandParser : g

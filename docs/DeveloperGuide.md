@@ -228,6 +228,197 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Group feature
+
+The `GroupCommand` allows educators to group students together within the application. This is particularly useful for managing classes, group-based activities, assignments, and projects efficiently.
+
+#### Implementation Details
+
+The `GroupCommand` is implemented by extending the base `Command` class. It uses prefixes such as `/g`, `/s`, specifying
+required data fields `groupName`, `students`, respectively. Once the data fields are filled,
+a new Group is added. It implements the following operations:
+
+* `execute(Model)` — Checks the current address book state by calling the following methods as part of our defensive programming:
+  1. `model.hasGroupName(new Group(groupName, List.of()))`, and throws a `CommandException` if a duplicate Group is found
+  2. `groupName.isEmpty()`, and throws a `CommandException` if a the group name field is empty is found
+  3. `model.getFilteredPersonList()`, to obtain a `List<Person>` to iterate over to search for the inputted student names and adding them to a new `List<Person>` to be passed into the constrcutor for a new `Group`
+* `addGroup(group)` — Adds the Group to the group list. This operation is exposed in the `Model` interface as `Model#addGroup(Group)`.
+
+The Group command is initiated by firstly checking the filtered group list to ensure no duplicate is found, after which `Model#addGroup(Group)` is called to complete the actual addition.
+
+Given below is an example usage scenario of how the addition mechanism behaves when the user tries to add a group to the group list.
+
+Step 1. The user launches the application, with some students and groups added to the address book already.
+The `AddressBook` will be initialized with the previously saved address book state.
+
+Step 2. The user executes `group` command with the specific data at each prefix to specify the person to be added.
+The `GroupCommand` will then call `excecute()`, which checks whether there is a duplicate Group in the group list before calling `addGroup(Group)`.
+
+<box type="info" seamless>
+
+**Note:** If the `groupName` and `students` provided is invalid, a `CommandException` will be thrown.
+
+</box>
+
+#### Sequence Diagram
+
+<img src="images/GroupSequenceDiagram.png" width="550" />
+
+#### Design considerations:
+
+**Aspect: How Group executes:**
+
+- **Alternative 1 (current choice):** Create a new `Group` Object containing a list of `Person`, and storing it in the `model` component.
+
+  - Pros: Easier to implement and more intuitive.
+  - Cons: May have performance issues in terms of memory usage, and deleting a student will require iterating over all `Group`s to ensure it is deleted from all groups
+
+- **Alternative 2:** Each `Person` Object has a field of a List of all the groups it is in.
+  - Pros: Deleting a person is alot easier (Simply by deleting the `Person` Object will remove it from all the `Group`s it is in)).
+  - Cons: Very hard to implement, and not a good representation of the has-a relationship between `Group` and `Person`.
+
+### Delete Group feature
+
+The `DeleteGroupCommand` allows educators to delete Groups within the application. This is particularly  useful 
+for deleting Groups that the user no longer need, assisting the management of Groups.
+
+#### Implementation Details
+
+The `DeleteGroupCommand` is implemented by extending the base `Command` class. It does not use any prefixes, rather
+using the `groupName` to identify which group to delete. Once the data fields are filled, it will look for the 
+specified group containing that `groupName` and delete it.
+It implements the following operations:
+
+* `execute(Model)` — Checks the current address book state by calling the `model.getFilteredGroupList()` to obtain 
+  an `ObservableList<Group>` and iterating over it to find a matching `groupName`, throwing a `CommandException` if 
+  no `Group` is found.
+* `deleteGroup(groupToDelete)` — Deletes the Group from the group list. This operation is exposed in the `Model` 
+  interface as `Model#deleteGroup(Group)`.
+
+Given below is an example usage scenario of how the delete group mechanism behaves when the user tries to delete a 
+group 
+from the group list.
+
+Step 1. The user launches the application, with some students and groups added to the address book already.
+The `AddressBook` will be initialized with the previously saved address book state.
+
+Step 2. The user executes `deleteGroup` command with the specified Group Name to specify the `Group` to be added.
+The `deleteGroupCommand` will then call `excecute()`, which checks whether there is a Group in the group list that 
+matches the name before calling `deleteGroup(Group)`.
+
+#### Sequence Diagram
+
+<img src="images/DeleteGroupSequenceDiagram.png" width="650" />
+
+#### Design considerations:
+
+**Aspect: How deleteGroup executes:**
+
+- **Alternative 1 (current choice):** Iterating over all `Group` in model and searching for a match and proceeding 
+  to delete that group
+
+    - Pros: Easier to implement, and deleting a Group will not cause bugs in other logic components
+    - Cons: Can become very slow when there are many groups in `Logic`
+
+- **Alternative 2:** Using a Hash to map every groupName to its respective Group
+    - Pros: Deleting a Group is much faster, since there is no longer a need to iterate over all groups within model
+    - Cons: The logic will be much more complicated, and showing a Hash through JavaFx is much more difficult 
+      compared to using the already provided `ObservableList`
+
+### Export feature
+
+The `ExportCommand` allows educators to export the data in their current GoonBook storage out as a csv file for 
+usage in other spreadsheets such as Google spreadsheets, giving GoonBook seamless integration with existing 
+spreadsheet editors.
+
+#### Implementation Details
+
+The `ExportCommand` is implemented by extending the base `Command` class. It does not use any prefixes, and is called 
+as is. Once the data fields, like `projectRootPath` are filled, it will proceed to convert the data in model into a 
+json file, then into a csv file for the user to freely use.
+It implements the following operations:
+
+* `execute(Model)` —  Obtain the `Path` Objects that represent both the import directory, and the export directory, 
+  by calling the `Path#resolve` method.
+* `saveJsonfile` —  Takes in the `model`, `importPath` and `exportPath` as parameters to then convert the data in 
+  model to a csv file by further calling the methods `translateJsonToCsv` and `getPersonTags` which will perform the 
+  necessary actions to convert the json file into a csv file
+
+Given below is an example usage scenario of how the export mechanism behaves when the user tries to export data
+from GoonBook.
+
+Step 1. The user launches the application, with some students and groups added to the address book already.
+The `AddressBook` will be initialized with the previously saved address book state.
+
+Step 2. The user executes `export` command. The `ExportCommand` will then call `excecute()`, which proceeds to take 
+the current data stored in the address book and converting it into a csv file, and saving it in the same directory as 
+root for the user to access
+
+#### Sequence Diagram
+
+<img src="images/ExportSequenceDiagram.png" width="650" />
+
+#### Design considerations:
+
+**Aspect: How export executes:**
+
+- **Alternative 1 (current choice):** Using the existing Storage interface and addressBook.json to directly convert 
+  into a csv file
+
+    - Pros: Has already laid the foundation for our csv conversion method to build off from
+    - Cons: Has an added dependency on the json file, so if any issues were to occur to the json coverter, it 
+      would mean that the export function would no longer function
+
+- **Alternative 2:** Directly exporting the data of the address book and converting it into a csv file without 
+  needing the dependency on the json file
+    - Pros: Will ensure that any bugs with the jsonAdaptablePersons and etc will not affect the functionality of the 
+      export function, since they would no longer be associated
+    - Cons: Extremely hard to implement, and would not be worth the hassle
+
+### Tag feature
+
+The `TagCommand` allows educators to add custom tags to their students for quality of life benefits, such as reminders, or to categorise them accordingly.
+
+#### Implementation Details
+
+The `TagCommand` is implemented by extending the base `Command` class. It uses only the prefix `/t` taking in a index as the other part of the command syntax, specifying
+required data fields `newTags` and `targetIndex`, respectively. Once the data fields are filled, new tags are added to a specified Person. It implements the following operations:
+
+* `execute(Model)` — Obtain a `List<Person>` using the `model.getFilteredPersonList`, and using the `targetIndex` to get the corresponding `Person` object to add the `newTags` to, by calling `model.addTag`
+* `targetIndex.getZeroBased` — Used to check if the given index is larger than the size of the filteredPersonList, and throws a `CommandException` if the index is larger than the index in filteredPersonList
+* `model.tagExists(person, newTags)` — Used to check if the person object already has the given tag name already, 
+  throws a `CommandException` if the person is found to already have an existing tag of the same name
+
+Given below is an example usage scenario of how the tag mechanism behaves when the user tries to add a tag to a student
+
+Step 1. The user launches the application, with some students and groups added to the address book already.
+The `AddressBook` will be initialized with the previously saved address book state.
+
+Step 2. The user executes `tag` command. The `TagCommand` will then call `excecute()`, which proceeds to take 
+the list of filtered person, and using the index provided by the user, choose that specific person to add the given 
+`tags` to
+
+#### Sequence Diagram
+
+<img src="images/TagSequenceDiagram.png" width="650" />
+
+#### Design considerations:
+
+**Aspect: How tag executes:**
+
+- **Alternative 1 (current choice):** Using a Set to implement a collection of tags per student
+
+    - Pros: Can easily check to see if there are any duplicate tags due to the nature of the data structure, saving 
+      time that would have otherwise been spent iterating through it
+    - Cons: If we ever decided to allow multiple tags with the same name, we will not be able to do so
+  
+- **Alternative 2:** Using a List to implement a collection of Tags
+- 
+    - Pros: Much simpler to implement, and familiar to use
+    - Cons: Can become very inefficient, when there are many tags, it could take some time to iterate through every
+      tag one by one to ensure that the same tag doesn't exist twice
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -797,24 +988,135 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Planned enchancments
-1. Ability to export explicit groups to csv files
-  - Support for users to choose specific group or groups to export to csv file
-2. Ability to change export filename or file path
-  - Support for users to type in their own filename for the exported data or specific absolute file path
-3. Ability to import groups
-  - New importGroup command which creates group(s) based on the data inside the csv file
-  - Would create students in groups who are not in database
-  - Would use existing students in database
-4. Better student duplication handling
-  - Students can have the same name we will be migrating to a different primary key for    students in the future.
-5. Support for special characters in name and class fields
-  - Students may legally have special characters in their name thus we will be adding support for special characters in the future.
-6. Increasing support to host more student information
-  - Students grades, key notes about them and guardian information to be added as fields
-7. Increased filter options for students
-  - Ability to filter students based on grades, attendance, class etc.
-8. Support for precise student name searching
-  - Currently find cannot search keywords with white space inbetween. Support to solve this issue so users can search for students names with space's such as Gong Yi will be added.
+
+---
+## **Appendix: Planned Enhancements**
+
+This section covers the enhancements we plan to implement in the future.
+
+### Enhancement 1:  Ability to export explicit groups to csv files
+
+Feature flaw: <br>
+Currently, the `export` command will export all the data in the GoonBook out without discrimination and has no option to selectively certain data like one specific Group only
+
+Proposed enhancement: <br>
+Implement a feature that allows users to export selected groups to CSV files. This allows users to select which specific group to export depending on the user's preference
+
+Justification: <br>
+Providing the ability to export group data enhances data portability and enables users to share or back up specific groups as needed.
+
+Updated behaviours: <br>
+* Introduce an exportGroup command that exports the chosen groups to a CSV file.
+
+### Enhancement 2:  Ability to change export filename or file path
+
+Feature flaw: <br>
+Currently, the `export` command will export all the data in the GoonBook out to only the root path, and no where 
+else, with the unchangeable default name of `exported_data.csv`
+
+Proposed enhancement: <br>
+Implement a feature that allows users to specify their own preferred filename for the exported data, as well as the 
+absolute path for when exporting data
+
+Justification: <br>
+This gives users flexibility to organize their exported data according to their preferences, improving user experience.
+
+Updated behaviours: <br>
+* Modify the export command to accept optional filename or file path parameters.
+
+### Enhancement 3:  Ability to import groups
+
+Feature flaw: <br>
+Currently, the `import` command will import all the data in a csv file indiscriminately, and is unable to discern 
+how students are split up into groups in the csv files, thus making it unable to show existing groups data in GoonBook.
+
+Proposed enhancement: <br>
+Develop a new `importGroup` command that creates group(s) based on data from a CSV file. It would create new students in groups who are not in the database and use existing students if they are already present.
+
+Justification: <br>
+Importing groups from CSV files allows users to easily add large amounts of group data, streamlining the data entry process and facilitating data migration.
+
+Updated behaviours: <br>
+* Implement an importGroup command to import groups and their members from a CSV file.
+* Automatically add new students to the database when importing groups.
+
+### Enhancement 4:  Better student duplication handling
+
+Feature flaw: <br>
+Currently, the `addCommand` does not allow for duplicate students, with the same name to be added into GoonBook, 
+which despite its rarity, can still occur in real life.
+
+Proposed enhancement: <br>
+Improve the handling of students with duplicate names by migrating to a different primary key for students.
+
+Justification: <br>
+Students may have the same name, so relying on names as unique identifiers is insufficient. Using a different primary key ensures data integrity and accurate identification of students.
+
+Updated behaviours: <br>
+* Introduce a unique identifier (e.g., student ID) for each student.
+* Update commands and data storage to use the new primary key.
+
+### Enhancement 5:  Support for special characters in name and class fields
+
+Feature flaw: <br>
+Currently, the `addCommand` does not have support for student names with specifal characters, such as those with "s/o", since the "/" is a special character
+
+Proposed enhancement: <br>
+Add support for special characters in student names and class fields.
+
+Justification: <br>
+Students may have legal names that include special characters. Supporting these characters ensures accurate 
+representation of student information and improves the quality of life overall
+
+Updated behaviours: <br>
+* Modify input validation to allow special characters in names and class fields.
+
+### Enhancement 6:  Increasing support to host more student information
+
+Feature flaw: <br>
+Currently, the `Person` object is limited in its attributes, unlike its real life counterpart, which has information such as their grades, attendance or parent's info
+
+Proposed enhancement: <br>
+Extend the application to store additional student information, such as grades, key notes, and guardian contact details.
+
+Justification: <br>
+Providing more comprehensive student profiles assists educators in managing and understanding their students better, 
+and supports our goal of easing the workload of tutors even better.
+
+Updated behaviours: <br>
+* Add new fields to the Person class for grades, notes, and guardian information.
+* Update the UI to display the additional information.
+
+### Enhancement 7:  Increased filter options for students
+
+Feature flaw: <br>
+Currently, the `FindCommand` and `FindGroupCommand`are limited in their capability to search to just the keywords in 
+the names, whereas if a person wishes to see students who has a certain tag specifically, he is unable to do so.
+
+Proposed enhancement: <br>
+Enhance the filtering capabilities to allow users to filter students based on grades, attendance, class, etc.
+
+Justification: <br>
+Advanced filtering helps users efficiently locate and manage students who meet certain criteria, improving usability.
+
+Updated behaviours: <br>
+* Add a filter command to search and sort via specific fields using different additional parameters for grades, attendance, and class.
+
+### Enhancement 8:  Support for precise student name searching
+
+Feature flaw: <br>
+Currently, the `FindCommand` does not have support for searching students with keywords containing white space in 
+between. 
+
+Proposed enhancement: <br>
+Improve the search functionality to support keywords with whitespace, enabling precise student name searches.
+
+Justification: <br>
+Currently, the find command cannot handle keywords with spaces, limiting the ability to search for full names like 
+"Gong Yi". This is severely hindering to users who want to search for a very specific name. Enhancing this functionality improves search accuracy.
+
+Updated behaviours: <br>
+* Modify the find command to accept phrases enclosed in quotes for exact matches.
+* Update parsing logic to handle whitespace in keywords.
 
 ### Known Issues
