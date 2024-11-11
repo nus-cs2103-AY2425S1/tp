@@ -324,12 +324,19 @@ Given below is a sequence diagram to highlight the differences in implementation
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
+
 ### Log Command
 Log command add a log entry to person at given index.
 Given below is a sequence diagram of favourite command usage.
 
 ![ViewSequenceDiagram](images/LogCommandSequenceDiagram.png)
 ![ViewSequenceDiagram](images/LogWithDateSequenceDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">:information_source: 
+The log command is a command that updates the person model. Similar commands within RealConnect follow the same
+sequence diagram.
+</div>
 
 
 ### Favourite Command
