@@ -624,6 +624,17 @@ Update the budget tracking feature to allow users to input their preferred curre
 This enhancement would enable planners to use a symbol that reflects their local currency, making the budget tracking experience more intuitive and globally accessible. 
 This change would improve clarity and provide a more personalized experience for users in various regions.
 
+### Extend clear command to clear Guests and Vendors Separately
+
+**Feature Flaw in Current Implementation**
+The existing `clear` command in BridalBuddy deletes all Guests and Vendors. 
+In some situations, users might want to clear only either the Guest or Vendor list.
+This command may cause some inconvenience as users would have to manually delete all Guests or all Vendors.
+
+**Proposed Enhancement**
+Extend the clear function with two more functions `clear_guest` and `clear_vendor` to delete all Guests or all Vendors respectively.
+This would help to resolve the aforementioned scenario, allowing users more functionality.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix C: Instructions for Manual Testing**
@@ -748,24 +759,24 @@ Prerequisites: List all Guests and Vendors using the `list` command. Multiple Gu
 1. Test case: `clear`<br>
     Expected: All Guests and Vendors deleted from their respective lists. Both lists have no contacts displayed. Success message is displayed in the outcome box.
 
-### Exiting Bridalbuddy
+### Exiting BridalBuddy
 
 1. Test case: `exit`<br>
-    Expected: Bridalbuddy closes.
+    Expected: BridalBuddy closes.
 
 ### Saving Data
 
 1. Dealing with missing data file<br>
     i. Delete the file named `bridalbuddy.json` located in the data folder.<br>
-    ii. Relaunch Bridalbuddy<br>
+    ii. Relaunch BridalBuddy<br>
     iii. Run the command `clear`<br>
         Expected: A new empty `bridalbuddy.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
 
 2. Dealing with corrupted data file<br>
     i. Open the `bridalbuddy.json` file located in the `data` folder with a text editor.<br>
     ii. Corrupt the file by deleting a few characters. Save the file.<br>
-    iii. Relaunch Bridalbuddy.<br>
-        Expected: No Guests and Vendors will be displayed in the display panel of Bridalbuddy.
+    iii. Relaunch BridalBuddy.<br>
+        Expected: No Guests and Vendors will be displayed in the display panel of BridalBuddy.
 
 --------------------------------------------------------------------------------------------------------------------
 
