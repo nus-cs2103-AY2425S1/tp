@@ -36,7 +36,7 @@ Your terminal should look something like this right before entering the last com
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 
-    <img src="images/ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+    <img src="images/Ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 7. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -763,7 +763,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
 
 **Q**: What should I do if I input an invalid command?<br>
-**A**: Check out [Features](#features) or simple run `help` to see the full list of commands, and try entering a valid command again.
+**A**: Check out [Features](#features) or simply run `help` to see the full list of commands, and try entering a valid command again.
 
 **Q**: Where should I start if I am a novice to CLI?<br>
 **A**: Run `help` to check the format. For more information on each command's usage, check out the [Features](#features) section.
@@ -793,23 +793,23 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                                                    |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                                                             |
-| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`                                                                                                                                                           |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com`                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                                                                              |
-| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan`                                                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`                                                                                                                                                                      |
-| **Help**   | `help`                                                                                                                                                                                                                              |
-| **Import** | `import FILENAME.json`<br>e.g. `import patientRecords.json`                                                                                                                                                                         |
-| **List**   | `list` <br/>`list *` (to list starred contacts)                                                                                                                                                                                     |
-| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`                                                                                                                 |
-| **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                                |
-| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
-| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |
-| **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh`                                                                                                                                                                  |
+| Action     | Format, Examples                                                                                                                                                                                                                   |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                                                                                            |
+| **Delete** | `delete INDEX` or `delete NAME` <br> e.g. `delete 3`, `delete Alex Yeoh`                                                                                                                                                           |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.`edit John Doe n/James Lee e/jameslee@example.com`                                                                          |
+| **Exit**   | `exit`                                                                                                                                                                                                                             |
+| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.`filter b/70-79 t/medication t/Dr Tan`                                                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James 89127777`                                                                                                                                                                      |
+| **Help**   | `help`                                                                                                                                                                                                                             |
+| **Import** | `import FILENAME.json`<br>e.g. `import patientRecords.json`                                                                                                                                                                        |
+| **List**   | `list` <br/>`list *` (to list starred contacts)                                                                                                                                                                                    |
+| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g. `note John Doe r/Allergic to XXX m/10mg Ibuprofen`                                                                                                                |
+| **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                               |
+| **Star**   | `star INDEX` or `star NAME` <br/> e.g. `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
+| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g. `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |
+| **View**   | `view INDEX` or `view NAME` <br/> e.g. `view 3`, `view Alex Yeoh`                                                                                                                                                                  |
 
 [Return to Table of Contents](#medicontact)
 
