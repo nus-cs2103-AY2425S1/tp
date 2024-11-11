@@ -13,7 +13,7 @@ public class Grade {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Grade should be a decimal number not between 0 and 100 (inclusive) "
-            + "OR null if not graded";
+            + "OR NULL if not graded";
 
     public static final String VALIDATION_REGEX = "[0-9]{1,2}\\.[0-9]*|NULL|[0-9]{1,2}|100(\\.0*)?";
 
