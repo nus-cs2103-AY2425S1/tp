@@ -352,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. SocialBook displays detailed command instructions.
 
-    Use case ends.
+      Use case ends.
 
 	
 **Use case: UC05 - Edit existing information of a person**
@@ -378,6 +378,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+**Use case: UC06 - Check eligibility for assistance**
+
+**MSS:**
+
+1. User chooses which person to check eligibility for assistance.
+2. SocialBook displays what schemes the person is eligible for.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. SocialBook detects missing or invalid input.
+    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+    
+      Use case resumes from step 2.
+
+
+**Use case: UC07 - Add a scheme to a person**
+
+**MSS**
+1. User <ins>checks what schemes a person is eligible for (UC06).</ins>
+2. User selects a scheme to add to the person.
+3. SocialBook adds the scheme to the person and displays the updated information.
+
+    Use case ends.
+
+**Extensions:**
+* 2a. SocialBook detects missing or invalid input.
+    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
+
+        Use case resumes from step 3.
+  
+* 2b.  The scheme is already added to the person.
+    * 2b1. SocialBook informs user that the scheme is already added to the person.
+        
+      Use case ends.
+
+**Use case: UC08 - View what schemes a person is under**
+1. User chooses which person to check .
+2. SocialBook displays what schemes the current person is under.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. SocialBook detects missing or invalid input.
+    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 2.
+
+**Use case: UC09 - Delete schemes from a person**
+
+**MSS**
+1. User <ins>checks what schemes a person is under (UC08).</ins>
+2. User selects a scheme to delete from the person.
+3. SocialBook deletes the scheme from the person and displays the updated information.
+
+   Use case ends.
+
+**Extensions:**
+* 2a. SocialBook detects missing or invalid input.
+    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 3.
+
+* 2b. User chooses to delete more than 1 scheme at a time.
+    * 2b1. SocialBook deletes the schemes from the person and displays the updated information.
+      
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -392,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **CLI**: Command line interface
+* **CLI**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

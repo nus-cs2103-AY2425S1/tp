@@ -6,10 +6,10 @@
 
 # SocialBook User Guide
 
-SocialBook is a **desktop app specifically designed to ease the administrative process for social workers.**
+SocialBook is a **desktop app specifically designed to ease the administrative process for social workers in Singapore.**
 
 By providing a **comprehensive way to store the personal details** of those they are helping, as well as **functionalities 
-to make the information managing process efficient**, SocialBook streamlines the process for social workers. 
+to make the information managing process efficient**, SocialBook streamlines the process for these social workers. 
 
 SocialBook is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a 
 Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster 
@@ -19,11 +19,12 @@ than traditional GUI apps.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
 1. Ensure you have **Java 17 or above** installed in your Computer.
-   *  How To Install Java 17 ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
+   *  How To Install Java 17 ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [macOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
    * From the link, under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `.jar` file named `socialbook.jar`.
@@ -32,10 +33,12 @@ than traditional GUI apps.
    * Ensure that this _folder_ is **empty**.
 
 4. Open a command terminal, `cd` into the folder you put the `socialbook.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
-   * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
-   * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
+   * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [macOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
+   * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [macOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
    
-If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Ui](images/Ui.png)
+If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Sample data](images/sampleData.png)
+
+<div style="page-break-after: always;"></div>
 
 5. Type the commands where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open a help window.<br><br>
    Some example commands you can try:
@@ -91,7 +94,9 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
    * Valid Examples: `john.doe@example.com`, `jane-doe123@example.com`
    * Invalid Examples: `john.doe.@example.com`, `john.doe@exa_mple.com`
 
-5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format yyyy-MM-dd. <br> Prefix: `dob/`
+<div style="page-break-after: always;"></div>
+
+5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format `yyyy-MM-dd`. <br> Prefix: `dob/`
     * Valid Examples: `2000-01-01`, `1990-12-29`
     * Invalid Examples: `01-01-2001`, `1st Dec 1996`, `2030-02-01`
 
@@ -143,12 +148,15 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
   e.g. if the input specifies `statistics 123`, it will be interpreted as `statistics`.
 
 <box type="warning" seamless>
+
 **Caution**
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
 e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -190,11 +198,12 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
 * `add n/Betsy Crowe t/friend e/betsycrowe@outlook.com a/Newgate Prison p/12345678 dob/2002-12-25 pri/MEDIUM t/criminal`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing persons: `list`
 
 Shows the list of persons in SocialBook, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 
-<box type="tip" seamless>
 
 Format: `list [archive/] [all/]`
 
@@ -209,6 +218,12 @@ Format: `list [archive/] [all/]`
 - `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
 - Parameters other than `archive/` and `all/` are disallowed, e.g. `list 1` ❌, `list archie/` ❌
 </box>
+
+Example output for `list archive/`:
+
+![Listing archived people](images/listArchive.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person: `edit`
 
@@ -246,13 +261,20 @@ Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [inc
 Examples:
 * `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
 * `find n/a n/b n/c pri/high pri/medium` returns `Alice Tan` and `Benny Lim`<br>
-  ![sample find result](images/findResult.png)
+
+<div style="page-break-after: always;"></div>
+
+Example output for `find pri/high`:
+
+![Sample find result](images/findResult.png)
 
 <box type="warning" seamless>
 
 **Caution:** Finding is applied on the currently displayed list of persons. If you have narrowed down the list using the `find` command previously, and are trying to find someone not part of this filtered list, execute the `list` command with the appropriate format and execute the `find` command again. Refer to the [list](#listing-all-persons-list) feature above for the exact format required. 
 - Example: `find n/Alice` filters the list to only those whose names start with "Alice". Then, to find "David" in SocialBook, `list all/` followed by `find n/David` will help to find David, regardless of whether he is archived or not. 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting persons: `sort`
 
@@ -273,8 +295,7 @@ Format: `sort [name] [address] [priority] [income] [updated]`
 
 Examples:
 * `sort updated`
-* `sort name` <br>
-  ![sample sort result](images/sortResult.png)
+* `sort name`
 
 <box type="info" seamless>
 
@@ -302,6 +323,8 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person from last viewed person list.
 * `list all/` followed by `delete 1,1,2` deletes the 1st and 2nd person from all persons.
 
+<div style="page-break-after: always;"></div>
+
 ### Getting parameters of these people: `get` 
 
 Gets the specified parameters of each individual person in last viewed person list.
@@ -320,6 +343,26 @@ Examples:
 * `list archive/` followed by `get pHone phone` gets only one set of the phone numbers of the archived people in SocialBook.
 * `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people in the last viewed person list.
 
+Example output for `get phone EMAIL`:
+
+```
+Here are the PHONE NUMBER details:
+81234567,
+81234570,
+81234568,
+81234571,
+81234569,
+81234572
+
+Here are the EMAIL details:
+alice.tan@example.com,
+david.wong@example.com,
+benny.lim@example.com,
+evelyn.chua@example.com,
+catherine.lee@example.com,
+felix.ng@example.com
+```
+
 ### Clearing all entries: `clear`
 
 Clears all entries from SocialBook.
@@ -331,6 +374,7 @@ Format: `clear`
 Examples:
 * `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an appointment: `addappt`
 
@@ -339,14 +383,14 @@ Adds an appointment with a person in SocialBook.
 Format: `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`
 
 * Adds an appointment with a person at the specified `INDEX`.
-* The index refers to the index number shown in the **last viewed person list**.
-* The index should be a **positive integer** not exceeding the last index number in the last viewed person list.
+  * The index refers to the index number shown in the **last viewed person list**.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
 * `date` specifies the date of the appointment in the `yyyy-MM-dd` format, where:
   * `yyyy` is the four-digit year (e.g., `2024`)
   * `MM` is the two-digit month (e.g., `01`)
   * `dd` is the two-digit day of the month (e.g., `08`)
 * `from` and `to` specify the start and end times of the appointment in the `HH:mm` format (24-hour clock).
-* The start time should be before the end time, and the appointment time should not conflict with any existing appointments.
+* The start time should be before the end time, and the appointment should not conflict with any existing appointments.
 
 For more details on the command format, refer to the [notes about the command format](#features).
 
@@ -357,13 +401,24 @@ as future appointments will eventually become past appointments.
 
 <box type="tip" seamless>
 To add an appointment that spans multiple days, add separate consecutive appointments for each day
-to cover the entire period.<br>
-e.g. To add appointment with 1st person from 2024-11-29, 21:00 to 2024-11-30, 10:00, you can do `addappt 1 date/2024-11-29 from/21:00 to/23:59` followed by `addappt 1 date/2024-11-30 from/00:00 to/10:00`.
+to cover the entire period.
+
+For example, to add an appointment from November 15, 11:00 PM, to November 16, 1:00 AM, you can do:
+
+* `addappt 1 date/2024-11-15 from/23:00 to/23:59`
+* `addappt 1 date/2024-11-16 from/00:00 to/01:00`
 </box>
 
 Examples:
-* `addappt 1 date/2024-11-08 from/16:00 to/17:00`
+
+* `addappt 1 date/2024-11-15 from/16:00 to/17:45`
 * `addappt 2 date/2024-11-26 from/17:00 to/18:30`
+
+Example output for `addappt 1 date/2024-11-15 from/16:00 to/17:45`:
+
+![Adding an appointment](images/addAppointment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all appointments: `listappt`
 
@@ -382,8 +437,8 @@ Edits an existing appointment in the address book.
 Format: `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`
 
 * Edits the appointment at the specified `INDEX`.
-* The index refers to the index number shown in the **last viewed appointment list**.
-* The index should be a **positive integer** not exceeding the last index number in the last viewed appointment list.
+  * The index refers to the index number shown in the **last viewed appointment list**.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
 * `date` specifies the new date of the appointment in the `yyyy-MM-dd` format, where:
     * `yyyy` is the four-digit year (e.g., `2024`)
     * `MM` is the two-digit month (e.g., `01`)
@@ -406,12 +461,14 @@ Deletes the specified appointment from SocialBook.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment at the specified `INDEX`.
-* The index refers to the index number shown in the **last viewed appointment list**.
-* The index should be a **positive integer** not exceeding the last index number in the last viewed appointment list.
+  * The index refers to the index number shown in the **last viewed appointment list**.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
 
 Examples:
 
-* `listappt` followed by `deleteappt 2` deletes the second appointment from the address book.
+* `listappt` followed by `deleteappt 2` deletes the second appointment from SocialBook.
+
+<div style="page-break-after: always;"></div>
 
 ### Displaying overall statistics: `statistics`
 
@@ -430,6 +487,18 @@ Statistics include:
 Examples:
 * `find pri/HIGH` followed by `statistics` shows the above statistics for the high priority people in last viewed person list.
 
+Example output for `statistics`:
+
+```
+Here are the statistics for the current list:
+Total Number Of People: 6
+Number Of HIGH Priority People: 2
+Number Of MEDIUM Priority People: 2
+Number Of LOW Priority People: 2
+Number Of Appointments Scheduled Within Next 7 Days: 1
+Number Of People Eligible For At Least One Scheme: 6
+```
+
 ### Displaying eligible schemes: `scheme`
 
 Displays the schemes that a person in SocialBook is eligible for.
@@ -441,7 +510,7 @@ Format: `scheme INDEX`
 * The index **must be a positive integer** not exceeding the last index number in the last viewed person list.
 
 <box type="info">
-Currently only 2 schemes are available in the current version of SocialBook.
+Currently only two schemes are available in the current version of SocialBook.
 </box>
 
 Examples:
@@ -465,6 +534,8 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme from the list of eligible schemes to the 1st person in last viewed person list.
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing schemes attached to a person: `viewscheme`
 
@@ -527,6 +598,8 @@ Examples:
 **Tip:** To view archived persons, run `list archive/` or `list all/`
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Unarchiving a person: `unarchive`
 
 Unarchives the specified person from SocialBook.
@@ -556,6 +629,7 @@ Format: `undo`
 * Undo can be called multiple times till there is no longer a previous command to execute.
 
 <box type="info" seamless>
+
 If you exit and reopen the app, `undo` would not work to undo past commands that were executed before the app was exited.
 </box>
 
@@ -572,18 +646,28 @@ Format: `exit`
 
 ### Saving the data
 
-SocialBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SocialBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-SocialBook data are saved automatically as a JSON file `[JAR file location]/data/socialbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SocialBook data is saved automatically as JSON files at `[JAR file location]/data/socialbook.json` and `[JAR file location]/data/appointments.json`.
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, SocialBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+<box type="warning" seamless>
+
+**Caution:** The data files for persons and appointments are independent. Editing a person's name in `socialbook.json`
+will not update their appointments in `appointments.json`, which can cause inconsistencies. **Duplicate entries** in either file
+can also lead to **data loss**.
+</box>
+
+<div style="page-break-after: always;"></div>
 
 ### Going through entered commands
 
@@ -598,6 +682,7 @@ On the other hand, you can press the down key until the command entered most rec
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Calendar
 
@@ -605,11 +690,11 @@ On the other hand, you can press the down key until the command entered most rec
 
 The calendar UI allows you to visualize your appointments throughout the day.
 
-The **right side of the calendar** shows a timeline view of today's appointments. Each appointment is represented
+The **right side of the calendar** (denoted by a green rectangle) shows a timeline view of today's appointments. Each appointment is represented
 by a blue box with the person's name. For appointments lasting 30 minutes or more, the start time is also displayed.
 The height of the box represents the duration of the appointment.
 
-The **left side of the calendar** shows a monthly calendar view along with an agenda view that lists appointments 
+The **left side of the calendar** (denoted by a blue rectangle) shows a monthly calendar view along with an agenda view that lists appointments 
 for the next 30 days, including today (e.g., November 7 to December 7). The agenda view provides detailed information
 for each appointment, including the person's name and the start and end times.
 
@@ -619,17 +704,28 @@ You can also navigate the calendar using these keyboard shortcuts:
 * `Ctrl + N`: Go to the next day
 * `Ctrl + T`: Go to today
 
-
-<box type="info" seamless>
+<box type="info">
 The current time marker (denoted by the red line on the right side of the calendar) is updated every 10 seconds.
 </box>
+
+Note that the left side of the calendar with the agenda view is only shown when the right panel is __sufficiently large__.
+If the agenda view is not visible, you can resize the panel by dragging the divider in the middle of the application.
+The divider is shown as a green line in the following two images.
+
+![Calendar without agenda view](images/calendarWithoutAgendaView.png)
+
+<div style="page-break-after: always;"></div>
+
+After dragging the divider to the left, the agenda view will be shown.
+
+![Calendar with agenda view](images/calendarWithAgendaView.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -639,31 +735,32 @@ The current time marker (denoted by the red line on the right side of the calend
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
-| Command          | Format, Examples                                                                                                                                                                                                                                                                       |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **help**         | `help [COMMAND]`                                                                                                                                                                                                                                                                       |
-| **add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 123456 dob/1990-12-19 pri/HIGH income/2000 famsize/3 t/father` |
-| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                                                                                               |
-| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                    |
-| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                                                                                                    |
-| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                                                                                             |
-| **delete**       | `delete INDEXES`<br> e.g., `delete 2,3`                                                                                                                                                                                                                                                |
-| **get**          | `get [name] [phone] [email] [address]`<br> e.g.,`get email phone`                                                                                                                                                                                                                      |
-| **clear**        | `clear`                                                                                                                                                                                                                                                                                |
-| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                                                                                                          |
-| **listappt**     | `listappt`                                                                                                                                                                                                                                                                             |
-| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                                                                                                  |
-| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                                                                                                     |
-| **statistics**   | `statistics`                                                                                                                                                                                                                                                                           |
-| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                                                                                                   |
-| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                                                                                                   |
-| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                                                                                           |
-| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEXES` <br> e.g., `deletescheme 1 i/1, 2`                                                                                                                                                                                                        |
-| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                                                                                                 |
-| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                                                                                             |
-| **undo**         | `undo`                                                                                                                                                                                                                                                                                 |
-| **exit**         | `exit`                                                                                                                                                                                                                                                                                 |
+| Command          | Format, Examples                                                                                                                                                                                                                                                                      |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**         | `help [COMMAND]`                                                                                                                                                                                                                                                                      |
+| **add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 123456 dob/1990-12-19 pri/HIGH income/2000 famsize/3 t/father` |
+| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                                                                                              |
+| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
+| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                                                                                                   |
+| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                                                                                            |
+| **delete**       | `delete INDEXES`<br> e.g., `delete 2,3`                                                                                                                                                                                                                                               |
+| **get**          | `get [name] [phone] [email] [address]`<br> e.g.,`get email phone`                                                                                                                                                                                                                     |
+| **clear**        | `clear`                                                                                                                                                                                                                                                                               |
+| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-15 from/16:00 to/17:45`                                                                                                                                                                         |
+| **listappt**     | `listappt`                                                                                                                                                                                                                                                                            |
+| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                                                                                                 |
+| **deleteappt**   | `deleteappt INDEX`<br> e.g., `deleteappt 2`                                                                                                                                                                                                                                           |
+| **statistics**   | `statistics`                                                                                                                                                                                                                                                                          |
+| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                                                                                                  |
+| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                                                                                                  |
+| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                                                                                          |
+| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEXES` <br> e.g., `deletescheme 1 i/1, 2`                                                                                                                                                                                                       |
+| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                                                                                                |
+| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                                                                                            |
+| **undo**         | `undo`                                                                                                                                                                                                                                                                                |
+| **exit**         | `exit`                                                                                                                                                                                                                                                                                |
 
