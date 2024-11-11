@@ -41,7 +41,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" Meetings
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList --> "~*" Person
 Meetings --> "*" Meeting
 
 Person *--> "1" Major
@@ -60,5 +60,5 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager -->  Person
 @enduml

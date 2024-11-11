@@ -274,12 +274,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* a sociable member of NUS School of Computing
-* either has reasonable experience in computing or in search of a contact who is
-* prefer desktop apps to keep track of their contacts
-* is reasonably comfortable using CLI apps
+* A sociable member of NUS School of Computing, known as an Udder, who values personal connections and seeks to cultivate relationships with peers and mentors.
+* Comprises brUdders (students seeking guidance or wishing to mentor peers) and mUdders (experienced mentors within the computing field).
+* Prefers desktop applications for managing contacts and is comfortable using CLI apps for efficient navigation and functionality.
 
-**Value proposition**: schedule meetings and manage contacts from NUS SoC easily
+**Value proposition**: <br>
+Has the academic challenge of CS at NUS become overwhelming? Are you looking for more authentic connections beyond Talent Connect, LinkedIn, or even NUSConfessIT? 
+Introducing FindingbrUdders—your go-to desktop application crafted specifically for students at the School of Computing (SoC). With FindingbrUdders, managing your contacts and scheduling meetings is seamless, ensuring you never lose track of the invaluable connections you make throughout your university journey. 
+Whether you're adding new Udders you meet, updating contact details, or organizing meetings with fellow brUdders and mUdders, our user-friendly Command Line Interface (CLI) makes navigation a breeze. Let FindingbrUdders help you transform stressful networking into meaningful relationships with ease and efficiency!
 
 <br>
 
@@ -292,20 +294,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 | Priority | As a…​                        | I want to…​                      | So that I can…​                                                        |
 |----------|-------------------------------|----------------------------------|------------------------------------------------------------------------|
-| `* * *`  | anUdder                       | add a new contact                |                                                                        |
-| `* * *`  | anUdder                       | edit an existing contact         | update the added contact with new information                          |
+| `* * *`  | Udder                         | add a new contact                |                                                                        |
+| `* * *`  | Udder                         | edit an existing contact         | update the added contact with new information                          |
 | `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                  |
-| `* * *`  | curious anUdder               | view the details of a contact    | learn more about the contacts abilities                                |
-| `* * *`  | anUdder                       | list all contacts                |                                                                        |
-| `* * *`  | anUdder                       | list all meetings with a contact |                                                                        |
-| `* * *`  | anUdder                       | delete a contact                 | remove contacts that I no longer need                                  |
-| `* * *`  | anUdder                       | filter through my contacts       | locate details of persons without having to go through the entire list |
-| `* *`    | new anUdder                   | get help                         | refer to instructions when I forget how to use the App                 |
-| `* *`    | anUdder                       | edit details of a meeting        | update the meeting with new information                                |
-| `* *`    | anUdder                       | delete a meeting                 | remove meetings that no longer exists                                  |
-| `*`      | anUdder                       | favourite some of my contacts    | find my favourite contacts in an instant                               |
-| `*`      | anUdder                       | unfavourite some of my contacts  | remove them from my favourites list                                    |
-| `*`      | more social anUdder           | share my contacts with anUdder   |                                                                        |
+| `* * *`  | curious Udder                 | view the details of a contact    | learn more about the contacts abilities                                |
+| `* * *`  | Udder                         | list all contacts                |                                                                        |
+| `* * *`  | Udder                         | list all meetings with a contact |                                                                        |
+| `* * *`  | Udder                         | delete a contact                 | remove contacts that I no longer need                                  |
+| `* * *`  | Udder                         | filter through my contacts       | locate details of persons without having to go through the entire list |
+| `* *`    | new Udder                     | get help                         | refer to instructions when I forget how to use the App                 |
+| `* *`    | Udder                         | edit details of a meeting        | update the meeting with new information                                |
+| `* *`    | Udder                         | delete a meeting                 | remove meetings that no longer exists                                  |
+| `*`      | Udder                         | favourite some of my contacts    | find my favourite contacts in an instant                               |
+| `*`      | Udder                         | unfavourite some of my contacts  | remove them from my favourites list                                    |
+
+**Note:** Features with priority label `*` are **not** implemented as of version 1.6 of FindingbrUdders.
 
 <br>
 
@@ -317,7 +320,29 @@ For all use cases below,
 
 <br>
 
-**Use case: Delete an Udder**
+**UC01: Add an Udder**
+
+**MSS**
+
+1. The user requests to add a new Udder by specifying necessary details (e.g., name, phone, email, and other contact information).
+2. FindingbrUdders validates the provided information.
+3. FindingbrUdders adds the new Udder to the system and confirms the addition to the user.
+4. FindingbrUdders displays the updated list of Udders with the newly added Udder.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user provides incomplete or invalid details.
+
+    * 2a1. FindingbrUdders shows an error message indicating that the command format is invalid.
+    * 2a2. Use case resumes at step 1.
+
+      Use case resumes at step 2.
+
+<br>
+
+**UC02: Delete an Udder**
 
 **MSS**
 
@@ -337,7 +362,7 @@ For all use cases below,
 
 <br>
 
-**Use case: Schedule a meeting with a specific Udder**
+**UC03: Schedule a meeting with a specific Udder**
 
 **MSS**
 
@@ -360,10 +385,11 @@ For all use cases below,
     * 2b1. FindingbrUdders shows a error message.
 
       Use case resumes at step 2.
+* 2c. The meeting start date
 
 <br>
 
-**Use case: View details of a specific Udder**
+**UC04: View details of a specific Udder**
 
 **MSS**
 
@@ -375,7 +401,7 @@ For all use cases below,
 
 <br>
 
-**Use case: Find Udders**
+**UC05: Find Udders**
 
 **MSS**
 
@@ -386,7 +412,7 @@ For all use cases below,
 
 <br>
 
-**Use case: List all Udders**
+**UC06: List all Udders**
 
 **MSS**
 
@@ -397,7 +423,7 @@ For all use cases below,
 
 <br>
 
-**Use case: List all meetings**
+**UC07: List all meetings**
 
 **MSS**
 
@@ -406,17 +432,9 @@ For all use cases below,
 
    Use case ends.
 
-**Extensions**
-
-* 2a. There are no meetings.
-
-    * 2a1. FindingbrUdders shows an error message in the command result panel.
-
-      Use case ends.
-
 <br>
 
-**Use case: Delete a meeting**
+**UC08: Delete a meeting**
 
 **MSS**
 
@@ -437,7 +455,7 @@ For all use cases below,
 <br>
 
 
-**Use case: Edit a meeting**
+**UC09: Edit a meeting**
 
 **MSS**
 
@@ -467,7 +485,7 @@ For all use cases below,
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A anUdder with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  An Udder with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The app should not feel awkward when switching between clicking the screens and typing commands.
 
 ### Glossary
@@ -478,7 +496,7 @@ For all use cases below,
 <br>
 
 * **Users**:
-  - anUdder (refers to any type of user described below)
+  - Udder (refers to any type of user described below)
   - brUdders (refers to mentee users and/or those who wish to mentor as peers)
   - mUdders (refers to mentor users)
 --------------------------------------------------------------------------------------------------------------------
