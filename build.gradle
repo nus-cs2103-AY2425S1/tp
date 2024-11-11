@@ -66,7 +66,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = '[CS2103T-F10-3][NUStates].jar'
+    archiveFileName = 'NUStates.jar'
 }
 
 run {
