@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 ## What is VolunSync?
-Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers, organize events, keep track of hours, and stay in touch with everyone – all in one place.
+Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers and organize events all in one place.
 
 ## Before You Start
 
@@ -103,6 +103,8 @@ Let's get you started with VolunSync! Just follow these simple steps:
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Format Guidelines
 
@@ -570,15 +572,16 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### Volunteer Commands
 
-| Action                                                                                               | Format                                                   | Examples                                                      |
-|------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
-| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                     | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
-| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                   | `/v find KEYWORD`                                        | `/v find Anne`                                                |
-| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                               | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
-| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**              | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
-| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)** | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
-| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                         | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
-| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**         | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
+| Action                                                                                                              | Format                                                   | Examples                                                      |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
+| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                                    | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
+| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                                  | `/v find KEYWORD`                                        | `/v find Anne`                                                |
+| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                                              | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
+ | **[Listing all events participated in by a volunteer](#listing-all-events-a-volunteer-is-participating-in-v-view)** | `/v view VOLUNTEER_INDEX`                                | `/v view 1`                                                   |
+| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**                             | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
+| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)**                | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
+| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                                        | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
+| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**                        | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
