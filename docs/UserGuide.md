@@ -517,6 +517,13 @@ find KEYWORD [MORE_KEYWORDS]...
 | `KEYWORD`       | Required     | A keyword to search for in clients by names or car [VRN](#glossary)s. |
 | `MORE_KEYWORDS` | Optional     | Additional keywords.                                                  |
 
+
+
+
+<div style="page-break-after: always;"></div>
+
+
+
 **Notes:**
 
 - The search checks both the client's name and the car's [Vehicle Registration Number (VRN)](#glossary).
