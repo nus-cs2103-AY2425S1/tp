@@ -630,11 +630,11 @@ Deletes the specified tag(s) from the specified contact.
 Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 ```
 
-| Parameter Name | Description                                                                    | Constraint                                    | Required   |
-| -------------- | ------------------------------------------------------------------------------ | --------------------------------------------- | ---------- |
-| `INDEX`        | Index number of the contact in the currently displayed list to delete tag from | Positive integer only (e.g. 1, 2, 3)          | Compulsory |
-| `t/TAG`        | Tag to be deleted from the specified contact                                   | Must be alphanumeric characters and no spaces | Compulsory |
-| `t/MORE_TAG`   | More tags to be deleted                                                        | Must be alphanumeric characters and no spaces | Optional   |
+| Parameter Name | Description                                                                    | Constraint                                                                        | Required   |
+|----------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|------------|
+| `INDEX`        | Index number of the contact in the currently displayed list to delete tag from | Positive integer only (e.g. 1, 2, 3)                                              | Compulsory |
+| `t/TAG`        | Tag to be deleted from the specified contact                                   | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive)) | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                        | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive)) | Optional   |
 
 **Format 2**: `deletetag all t/TAG [t/MORE_TAG]…​`
 
@@ -644,11 +644,10 @@ Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 ```
 
-| Parameter Name | Description                                                               | Constraint                                    | Required   |
-| -------------- | ------------------------------------------------------------------------- | --------------------------------------------- | ---------- |
-| `all`          | Indicates that the deletion operation applies to all contacts in the list |                                               | Compulsory |
-| `t/TAG`        | Tag to be deleted from every contact in the list with the tag             | Must be alphanumeric characters and no spaces | Compulsory |
-| `t/MORE_TAG`   | More tags to be deleted                                                   | Must be alphanumeric characters and no spaces | Optional   |
+| Parameter Name | Description                                                                    | Constraint                                                                        | Required   |
+|----------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|------------|
+| `t/TAG`        | Tag to be deleted from the specified contact                                   | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive)) | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                        | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive)) | Optional   |
 
 <div markdown="block" class="alert alert-info">
 
@@ -656,11 +655,13 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 
 - The index refers to the index number shown in the displayed contact list.
 
-- `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
-- `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
-- For both formats 1 and 2,
-  - The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
-  - Only full words will be matched e.g. `partner` will not match `partners`.
+* `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
+  
+* `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
+  
+* For both formats 1 and 2, 
+  * The tag is ([case-sensitive](#case-sensitive)). For example, `partner` will not match `PartnEr`.
+  * Only full words will be matched e.g. `partner` will not match `partners`.
 
 </div>
 
@@ -828,4 +829,4 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 | **Export CSV**    | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
 | **Exit**          | `exit`                                                                                              | `exit`                                                                                                              |
 
-[Back to the top](#table-of-contents)
+[Back to the table of contents](#table-of-contents)
