@@ -3,6 +3,12 @@
 
 VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency!
 
+Overview of key features:
+* Supplier Contact Management
+* Delivery Detail Management
+* Multi-level Filtering
+* Sort supplier contacts and delivery information
+
 --- 
 # Table of Contents
 <!-- * Table of Contents -->
