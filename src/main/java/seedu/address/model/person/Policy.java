@@ -229,6 +229,7 @@ public class Policy {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the policy object
         return this == other
                 || (other instanceof Policy
                 && policyName.equals(((Policy) other).policyName)

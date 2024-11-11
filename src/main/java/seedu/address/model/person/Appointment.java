@@ -54,13 +54,13 @@ public class Appointment {
     /**
      * Returns true if a given string is a valid appointment date and time.
      */
-    public static boolean isValidAppointment(String test) {
-        requireNonNull(test);
-        if (!test.matches(VALIDATION_REGEX)) {
+    public static boolean isValidAppointment(String input) {
+        requireNonNull(input);
+        if (!input.matches(VALIDATION_REGEX)) {
             return false;
         }
         try {
-            LocalDateTime appointmentDateTime = LocalDateTime.parse(test, FORMATTER);
+            LocalDateTime appointmentDateTime = LocalDateTime.parse(input, FORMATTER);
             return appointmentDateTime.toLocalDate().isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
@@ -79,6 +79,8 @@ public class Appointment {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the appointment object
+
         return other == this || (other instanceof Appointment && date.equals(((Appointment) other).date));
     }
 
