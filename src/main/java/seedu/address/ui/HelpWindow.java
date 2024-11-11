@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -80,6 +81,16 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         ugLink.setText(USERGUIDE_URL);
+
+        Screen screen = Screen.getPrimary();
+        double width = screen.getBounds().getWidth() * 0.8;
+        double height = screen.getBounds().getHeight() * 0.8;
+
+        root.setWidth(width);
+        root.setHeight(height);
+
+        // Make the window resizable
+        root.setResizable(true);
 
         // Make the window draggable
         getRoot().getScene().setOnMousePressed(event -> {
