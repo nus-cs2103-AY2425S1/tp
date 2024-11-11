@@ -679,6 +679,10 @@ Team Size: 5
    1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
    2. Sorting of appointments will be in ascending order (earliest to latest).
 
+11. **Fix UI bug regarding date of birth**
+    1. Intended Behaviour: For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected. (e.g. 30-02-2024 will return 29-02-2024)
+    2. Current Behaviour: Entering a date that is too large but below 32 will not be automatically corrected in the UI. (e.g. 30-02-2024 will return 30-02-2024). But, the date stored correctly in storage, therefore restarting the app will show the corrected date.
+    3. We plan to fix the UI to display the corrected date immediately after the user enters the date.
 
 --------------------------------------------------------------------------------------------------------------------
 
