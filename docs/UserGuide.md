@@ -42,7 +42,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-7. Do note that users should open only one instance of AB3 My Guest at a time.
+7. Do note that users should open only **one** instance of AB3 My Guest at a time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -88,16 +88,16 @@ Adds a guest to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
-* Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'
+* Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'.
 * Guests with the exact same name cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A guest can have any number of tags (including 0)
+A guest can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com t/broom's side`
+* `add n/John Doe p/98765432 e/johnd@example.com t/groom's side`
 * `add n/Betsy Crowe p/81234567 e/betsycrowe@example.com t/bride's side`
 * `add n/Zeon p/81234567 e/zeon@example.com`
 
@@ -106,7 +106,7 @@ Examples:
 
 ### Deleting a guest : `delete`
 
-Deletes the specified guest from the address book.
+Deletes the specified guest from the currently displayed guest list.
 
 Format: `delete INDEX`
 
@@ -116,13 +116,13 @@ Format: `delete INDEX`
 * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd guest in the address book.
+* `list` followed by `delete 2` deletes the 2nd guest in the guest list.
 * `find yu` followed by `delete 2` deletes the 2nd guest in the results of the `find` command.
 
 
 ### Editing a guest : `edit`
 
-Edits an existing guest in the address book.
+Edits an existing guest in the currently displayed guest list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
@@ -154,8 +154,8 @@ Format: `newtag t/TAG1…​`
 * Duplicate tags (with the same name) are **not** allowed.
 * Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
 * Only 30 (or fewer) predefined tags can exist at any point.
-* Attempting to add tags with mix of invalid and valid names at once will result in an error.
-* Attempting to add a mix of duplicate and non-duplicate tags at once will only allow the non-duplicate tags to be added.
+* Attempting to add tags with a mix of invalid and valid names at once will result in an error.
+* Attempting to add tags with a mix of duplicate and non-duplicate names at once will only allow the non-duplicate tags to be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may add any number of tags at once (as long as the total number does not exceed 30). e.g. `newtag t/bride's side t/groom's side t/friends`
@@ -179,6 +179,7 @@ Format: `deletetag [-force] t/TAG1…​`
 * User cannot delete a tag that has not been added via `newtag` before.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
+* Attempting to delete a mix of tags with invalid and valid names at once will result in an error.
 * Attempting to delete a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -255,7 +256,7 @@ Format: `setrsvp INDEX s/STATUS_INDEX`
   * `2` represents `Not Coming`
   * `3` represents `Pending`
 * By default, the RSVP status for all guests is `Pending`.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
 You may only set one guest's RSVP status in each command. i.e. Setting multiple guests' statuses at once is not supported.
 </div>
 
@@ -277,7 +278,7 @@ Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
     * `2` represents `Not Coming`
     * `3` represents `Pending`
 * The filter accepts multiple predicates. For example, `filter t/bride's side t/neighbours` and `filter s/3 t/neighbours` are both valid commands.
-* Note that `filter s/3 t/neighbours` is equivalent to typing `filter s/3` then `filter t/neighbours` or `filter t/neighbours s/3`.
+* Note that `filter s/3 t/neighbours` is equivalent to stacking the commands `filter s/3` and `filter t/neighbours` into a single command, or running `filter t/neighbours s/3`.
 * Only one RSVP status can be used for filtering in each command, but multiple tags can be used. i.e `filter s/1 s/2` is not a valid command.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can clear all filters by running the `list` command.
@@ -301,7 +302,7 @@ Format: `find KEYWORD…​`
 * The order of the keywords does not matter. e.g. `Alex Yu` will match `Yu Alex`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Ale` will not match `Alex`.
-* Guests matching at least one keyword will be returned (i.e. `OR` search).
+* Guests matching at least one keyword will be returned. i.e. `OR` search.
   e.g. `Alex Yu` will return `Alex Yeoh`, `Bernice Yu` and `Terrence Yu`.
 * Find will apply to the whole list, not the currently filtered list, 
  ignoring all previous filter and find commands.
@@ -314,7 +315,7 @@ Examples:
 
 ### Undoing latest command : `undo`
 
-Undoes the changes from the latest command.
+Undoes the changes made from the last command if it was successfully executed, partially or fully.
 
 Format: `undo`
 
@@ -330,7 +331,10 @@ Format: `undo`
   * `filter`
   * `find`
   * `setrsvp`
-* Only the **latest** successfully executed command can be undone.
+* Only the **latest** command can be undone, if it was successfully executed. 
+* Some examples of the `undo` command are:
+  * `tag 1 2 t/friends` successfully tagged the guest at index 1 but not the guest at index 2. Then `undo` will untag the guest at index 1
+  * `filter s/3 t/friends` followed by `filter s/3` (shows an error message since the filter predicate is already applied). Then `undo` will not revert the first filter command `filter s/3 t/friends` since the last command, `filter s/3` was not successfully executed.
 
 Examples:
 * `tag 7 t/neighbours` is the latest successfully executed
@@ -340,12 +344,12 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book. i.e deleting all guests.
+Clears all entries from the guest list. i.e deleting all guests.
 
 Format: `clear`
 
 <div markdown="span" class="alert alert-primary">:bulb: **WARNING:**
-This command will permanently delete all guests in your address book. <br> Ensure that you have saved a copy of the address book somewhere else.
+This command will permanently delete all guests in your guest list. <br> Ensure that you have saved a copy of the guest list somewhere else.
 </div>
 
 
@@ -363,10 +367,10 @@ AB3 My Guest data is saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AB3 My Guest data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AB3 My Guest data is saved automatically as a JSON file `[JAR file location]/data/ab3myguest.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AB3 My Guest will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, AB3 My Guest will discard all data and start with an empty data file during the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AB3 My Guest application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -384,7 +388,7 @@ This feature will allow users to archive data files, acting as a backup.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AB3 My Guest home folder.
 
 **Q**: I accidentally entered the command `clear` and removed my entire list of guests. How do I recover it?<br>
-**A**: Unfortunately, there is no way to recover the list. Hence, we recommend occasionally copying the JSON file at `[JAR file location]/data/addressbook.json` into a separate file saved in your computer.
+**A**: Unfortunately, there is no way to recover the list. Hence, we recommend occasionally copying the JSON file at `[JAR file location]/data/ab3myguest.json` into a separate file saved in your computer.
 
 --------------------------------------------------------------------------------------------------------------------
 

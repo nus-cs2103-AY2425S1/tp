@@ -574,7 +574,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter panel**: Shows the current filter predicates applied to the list
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
-* **Undo**: Undoes the previous executed command
+* **Undo**: Undoes the last command if it was successfully executed partially or fully
 * **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
 
 --------------------------------------------------------------------------------------------------------------------
@@ -592,7 +592,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
