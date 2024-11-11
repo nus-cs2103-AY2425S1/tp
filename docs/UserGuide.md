@@ -18,14 +18,14 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 ## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F13-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for the EventTory application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventTory.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note that the application contains some sample data on initial boot.<br>
+   A GUI similar to the one below should appear in a few seconds. Note that the application contains some sample data on the initial boot.<br>
    ![Ui](images/Ui.png)
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
@@ -51,7 +51,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 ## Storing Information
 
-EventTory provides users a way to keep track of events and vendors.
+EventTory provides users with a way to keep track of events and vendors.
 The details of what information can be stored for a vendor/event are as shown below.
 
 ### Vendor
