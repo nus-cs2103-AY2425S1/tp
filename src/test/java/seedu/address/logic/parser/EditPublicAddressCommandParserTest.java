@@ -1,11 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPublicAddresses.INVALID_PUBLIC_ADDRESS_INVALID_CHAR_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.INVALID_PUBLIC_ADDRESS_TOO_LONG_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
@@ -57,6 +60,15 @@ public class EditPublicAddressCommandParserTest {
                 + PREFIX_PUBLIC_ADDRESS_LABEL + " mylabel  "
                 + PREFIX_PUBLIC_ADDRESS + " " + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING + " ",
             new EditPublicAddressCommand(index, publicAddress));
+    }
+
+    @Test
+    public void parse_validNetworkLowerCase_success() {
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "btc "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+                new EditPublicAddressCommand(Index.fromOneBased(1),
+                        new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel")));
     }
 
     // Missing arguments
@@ -164,15 +176,6 @@ public class EditPublicAddressCommandParserTest {
     }
 
     @Test
-    public void parse_invalidNetworkWrongCase_success() {
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "btc "
-                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
-                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
-            new EditPublicAddressCommand(Index.fromOneBased(1),
-                new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel")));
-    }
-
-    @Test
     public void parse_invalidNetworkEmpty_failure() {
         assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + " "
                 + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
@@ -180,5 +183,59 @@ public class EditPublicAddressCommandParserTest {
             Network.MESSAGE_CONSTRAINTS);
     }
 
-    // TODO: Invalid public address
+    @Test
+    public void parse_invalidPublicAddressEmpty_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + " ",
+                PublicAddress.MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_SHORT);
+    }
+
+    @Test
+    public void parse_invalidPublicAddressTooLong_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + INVALID_PUBLIC_ADDRESS_TOO_LONG_STRING,
+                PublicAddress.MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
+    }
+
+    @Test
+    public void parse_invalidPublicAddressNonAlphanumeric_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + INVALID_PUBLIC_ADDRESS_INVALID_CHAR_STRING,
+                PublicAddress.MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+    }
+
+    // Extra fields
+    @Test
+    public void parse_invalidExtraFieldAfterNetwork_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_NAME + "My Name"
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidExtraFieldAfterLabel_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_NAME + "My Name "
+                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidExtraFieldAfterPA_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING + " "
+                        + PREFIX_NAME + "My Name",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
 }

@@ -6,9 +6,9 @@ package seedu.address.model.addresses;
 public class SolAddress extends PublicAddress {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
+            "Public Addresses can take any values, and it should not be blank";
 
-    public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^\\S+$"; // TODO: Update regex
+    public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^\\S+$";
 
     /**
      * Constructs a {@code SolAddress}.
