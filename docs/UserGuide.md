@@ -646,7 +646,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 7. **Inconsistent NRIC Censorship in Success Messages**: In some success messages, the NRIC appears fully displayed, while in others, it is censored
 
-- **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
+   - **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
 
 ---
 
