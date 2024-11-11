@@ -78,6 +78,9 @@ Example:
 
 * Add `$` after the input name to indicate **exact** name.<br>
   * This is useful when a client's name is a prefix of another client's name.
+  * Order of name inputs matter when using `$`
+  * Name written before `$` must be **EXACT** name of the contact to be deleted.
+  
 
   e.g. `delete John Doe$` will delete the contact with the name `John Doe`.<br>
   e.g. If there are two client named `David Li` and `David Lim`, typing `delete David Li$` will delete the client with the name `David Li`.
@@ -178,16 +181,12 @@ Format: `delete NAME` or `d NAME` or `delete NAME$`
 
 * Deletes the client with specified `NAME`
 * `$` is used to indicate specific name to delete
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `delete David Li$` will delete the contact with the name "David Li".
-      * if not name not specified with `$`, an error will be thrown if there is more than 1 contact that consists of that name
-      * Eg. if there are 2 contacts named `David Li` and `David Lim`, typing `delete David Li` will throw an error.
-    * However, deleting David Lim does not require `$` as it is already the **MOST** specific name.
-    * Name written before `$` must be **EXACT** name of the contact to be deleted.
-    * Order matters when using `$` to delete a contact.
+
 
 Examples:
 * `delete John Doe` deletes the person named `John Doe`
 * `delete John Doe$` deletes the person named `John Doe` and not `John Doey`
+* If there are 2 contacts `David Li` and `David Lim`, typing `delete David Li` will throw an error
 
 Result for `delete John Doe`:
 ![result for 'delete John Doe'](images/result_for_delete.png)
@@ -199,13 +198,14 @@ Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`.
 
 #### Locating by `NAME`
 Format: `find n/NAME` or `fn NAME` or `find NAME$`
-  * Only the name is searched.
-  * The search is case-insensitive. e.g `hans` will match `Hans`
-  * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-  * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
-  * `$` is used to indicate exact name to find
-  * Clients matching all keyword prefix will be returned (i.e. `AND` search).
-    e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
+
+* `$` is used to indicate exact name to find
+* Only the name is searched.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
+* Clients matching all keyword prefix will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
 
 Examples:
@@ -277,8 +277,10 @@ Adds a reminder to the reminder list.
 
 Format:
 `radd n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
-`ra n/NAME dt/DATETIME r/REMINDER_DESCRIPTION`
+`ra n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
+`radd n/NAME$ dt/DATETIME r/REMINDER_DESCRIPTION`
 
+* `$` is used to indicate exact name to add a reminder for
 * If specified datetime is invalid, the reminder will be update to the **NEAREST VALID** datetime
   * Eg. If datetime is made to be `2024-02-30 16:00` which is invalid as 30th February does not exist, the reminder will be added with dt:`2024-02-29 16:00`
 
@@ -355,7 +357,7 @@ Result for `view jeremy`:
 ### Sort by name : `sort`
 Sort the current list of clients on Client Hub according to their `NAME`.
 
-Format: `sort`
+Format: `sort` or `s`
 
 * The list of clients is sorted alphabetically by their full names in ascending order, where no duplicate names are allowed.
 
@@ -366,7 +368,7 @@ Examples:
 ### Listing all persons : `list`
 Shows a list of all persons in the Client Hub.
 
-Format: `list`
+Format: `list` or `li`
 
 
 ### Clearing all entries : `clear`
