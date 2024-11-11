@@ -799,3 +799,5 @@ Team size: 5
 1. **Modify meeting sample data to generate whole number timings.**
    Currently time fields for meetings sample data is generated using `LocalTime#now` which provides very precise timing up to the milliseconds.
    While it is not wrong, some user complained that it looks wrong or invalid to display timings as such, and it would be much appropriate to display time fields as available to the users through other commands, i.e. if user cannot add time field up to milliseconds of precision, do not display time fields up to milliseconds of precision.
+1. **Modify Date Time Logic for Invalid Dates**
+   Currently, Java LocalDate library helps to correct the string if the user types in invalid dates like `29-02-2023` to `28-02-2023`. We plan to improve the logic such that our application has better logic to detect Leap Year Dates
