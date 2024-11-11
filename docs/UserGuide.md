@@ -9,7 +9,7 @@ pageNav: 3
 
 # HallPointer User Guide
 
-Welcome to HallPointer, your one-stop go-to tool as a leader for managing CCA (Co-Curricular Activity) members in a hall setting. This guide will help you get started with using HallPointer, so you can **easily keep track of member details, attendance, assigned points and more**—all without the hassle of traditional spreadsheets.
+Welcome to HallPointer, your one-stop go-to tool as a leader for managing Co-Curricular Activity (CCA) members in a hall setting. This guide will help you get started with using HallPointer, so you can **easily keep track of member details, attendance, assigned points and more**—all without the hassle of traditional spreadsheets.
 
 HallPointer is **crafted to prioritize simplicity and efficiency**. Whether you’re tracking member attendance, organizing contact details, or updating points, HallPointer’s mix of easy-to-use commands and real-time visual feedback makes usage simple and straightforward, even if you’re not a tech expert. Plus, built-in checks ensure accuracy, preventing you from wasting your precious time on hunting down data entry errors.
 
@@ -37,6 +37,7 @@ This guide will walk you through HallPointer’s main features and show you step
   - [Editing the Data File](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
+- [Glossary](#glossary)
 
 
 ---
@@ -55,7 +56,7 @@ Move the downloaded `.jar` file into the _home folder_ where you want to store y
 
 4. **Run HallPointer:**
 - Open a command terminal, and use the `cd` command to navigate to the folder where you saved the `.jar` file.
-- Type the folowing command and press Enter: `java -jar hallpointer.jar`
+- Type the following command and press Enter: `java -jar hallpointer.jar`
 - A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the app comes with some sample data to help you get started.<br>
    ![Ui](images/Ui.png)
 
@@ -72,6 +73,13 @@ Here are some example commands you can try:
 
 6. **Learn more about the commands:**\
 Refer to the [Command Summary](#command-summary) section below for a quick overview of each command, and to the [Features](#features) section below for further details for each command.
+
+<box type="tip" seamless>
+
+**TIP:**
+* If you’re unfamiliar with using the command terminal, fret not! [Here](https://www.git-tower.com/blog/command-line-cheat-sheet/) is a condensed cheat sheet for your reference.
+
+</box>
 
 ---
 
@@ -129,7 +137,7 @@ Displays  an alphabetical list of all available commands for quick and easy refe
 
 ### Adding a member:
 
-Adds a member to Hall Pointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
+Adds a member to HallPointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
 
 **Format:** `add_member n/NAME r/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
@@ -154,26 +162,26 @@ Adds a member to Hall Pointer. A member must have a name, room assignment, and T
 **Examples:**
 
 - `add_member n/John Doe r/4-3-301 t/johndoe123` adds a member with name `John Doe` in room `4-3-301` and Telegram username `johndoe123`.
-- `add_member n/Betsy Crowe s/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
+- `add_member n/Betsy Crowe d/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe d/o Alice Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
  
 ![result for 'add_member n/John Doe r/4-3-301 t/johndoe123'](images/addCommandResult.png)
 ---
 
 ### Listing all members:
 
-Shows a list of all members registered in Hall Pointer.
+Shows a list of all members registered in HallPointer.
 
 **Format:** `list`
 
 **Example:**
-- `list` shows all members in Hall Pointer.
+- `list` shows all members in HallPointer.
 
 ![result for 'list'](images/listCommandResult.png)
 ---
 
 ### Updating a member: 
 
-Updates an existing member in Hall Pointer.
+Updates an existing member in HallPointer.
 
 **Format:** `update_member INDEX [n/NAME] [r/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
@@ -233,7 +241,7 @@ Finds members whose names contain any of the given keywords.
 
 ### Deleting a member:
 
-Deletes the specified member from Hall Pointer.
+Deletes the specified member from HallPointer.
 
 **Format:** `delete_member INDEX`
 
@@ -245,7 +253,7 @@ Deletes the specified member from Hall Pointer.
 
 **Examples:**
 
-- `list` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
+- `list` followed by `delete_member 2` deletes the 2nd member in HallPointer.
 - `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ![result for 'delete_member 2'](images/deleteMemberResult.png)
@@ -253,7 +261,7 @@ Deletes the specified member from Hall Pointer.
 
 ### Adding a Session:
 
-Adds a session to Hall Pointer and associates it with specified members. A session contains a name, date, and points awarded to each member attending the session. You can add multiple members to a session.
+Adds a session to HallPointer and associates it with specified members. A session contains a name, date, and points awarded to each member attending the session. You can add multiple members to a session.
 
 **Format:** `add_session s/NAME d/DATE p/POINTS m/INDEX [m/INDEX]…`
 
@@ -267,12 +275,6 @@ Adds a session to Hall Pointer and associates it with specified members. A sessi
 **Tips:** 
 - **Multiple members** If you have multiple members attending the session, you can add them sequentially by specifying their indexes.
 - **Duplicate Session** If you wish to add multiple sessions with the same name to a member, consider adding a unique identifier to the session name (e.g., "Rehearsal 1", "Rehearsal 2").
-
-</box>
-
-<box type="warning" seamless>
-
-
 
 </box>
 
@@ -308,7 +310,7 @@ This command finds members who have attended sessions with names that contain an
 
 ### Deleting a Session:
 
-Deletes a session associated with one or more members in Hall Pointer.
+Deletes a session associated with one or more members in HallPointer.
 
 **Format:** `delete_session s/NAME m/INDEX [m/INDEX]…`
 
@@ -325,7 +327,7 @@ Deletes a session associated with one or more members in Hall Pointer.
 
 ### Clearing all entries:
 
-Clears all entries from Hall Pointer.
+Clears all entries from HallPointer.
 
 **Format:** `clear`
 
@@ -371,3 +373,28 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 2. **Multiple Screens Issue**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 3. **Help Window Minimization**: If you minimize the Help Window and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+---
+
+## Glossary
+
+### Graphical User Interface (GUI)
+A visual interface that allows users to interact with the application using graphical elements like buttons and icons instead of text commands.
+
+### Command Terminal
+Where you enter commands to run the HallPointer application (e.g., Command Prompt on Windows, Terminal on macOS/Linux).
+
+### Tag
+A label to categorize members (e.g., "logistics," "friend").
+
+### Session
+An event or activity for members (e.g., "Rehearsal") with points awarded for attendance.
+
+### JSON File
+The file where HallPointer saves your data automatically (`hallpointer.json`).
+
+### Points
+Scores awarded to members for attending sessions.
+
+### Telegram Handle
+The unique Telegram username for each member.
