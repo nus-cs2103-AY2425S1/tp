@@ -265,7 +265,7 @@ Format: `export FILENAME` or `export FILEPATH`
 * `FILENAME` should only have alphanumeric characters and `_`.
 * If the specified file already exists, a copy will be created for the new export.
 * `FILEPATH` should only have alphanumeric characters, `_` and `/`
-* To avoid I/O errors, the `FILEPATH` should only consist of pre-existing directories.
+* To avoid I/O errors, the `FILEPATH` should **only consist of pre-existing directories**.
 
 Examples:
 * `export data/MyEmailsList` exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
