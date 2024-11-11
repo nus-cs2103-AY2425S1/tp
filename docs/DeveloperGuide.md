@@ -451,6 +451,7 @@ Use case ends.
 
 ### Glossary
 
+* **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **CLI**: Command Line Interface, allows users to interact with the application by typing commands instead of using a graphical interface.
@@ -491,7 +492,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: System displays a confirmation message asking if the user is sure. On confirmation, the person is deleted. 
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.

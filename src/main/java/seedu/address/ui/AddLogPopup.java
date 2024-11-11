@@ -18,6 +18,7 @@ import seedu.address.model.log.LogEntry;
 public class AddLogPopup extends UiPart<Stage> {
 
     private static final String FXML = "AddLogPopup.fxml";
+
     /**
      * Constructs a UiPart using the specified FXML file within {@link #FXML_FILE_FOLDER}.
      *
@@ -39,7 +40,7 @@ public class AddLogPopup extends UiPart<Stage> {
 
         TextArea logEntryArea = new TextArea();
         logEntryArea.setPromptText("Enter your log entry here...");
-        logEntryArea.setWrapText(true); // Enable wrapping without new lines
+        logEntryArea.setWrapText(true);
 
         VBox.setVgrow(logEntryArea, Priority.ALWAYS);
 
@@ -47,7 +48,8 @@ public class AddLogPopup extends UiPart<Stage> {
         saveButton.setDisable(true);
 
         logEntryArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            saveButton.setDisable(newValue.trim().isEmpty());
+            String trimmedText = newValue.trim();
+            saveButton.setDisable(trimmedText.isEmpty() || trimmedText.matches("^(\\\\n|\\s)*$"));
         });
 
         final String[] logEntry = {null}; // Capture log entry result

@@ -7,7 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class LogEntry {
     public static final String MESSAGE_CONSTRAINTS = "Log description should not be blank.";
-    public static final String VALIDATION_REGEX = ".+";
+    // Validation regex represents a string that contains only new line or whitespace characters
+    public static final String VALIDATION_REGEX = "^(\\\\n|\\s)*$";
     private final String entry;
     private final String formattedEntry;
 
@@ -47,13 +48,32 @@ public class LogEntry {
         return formattedEntry;
     }
 
+    /**
+     * Converts the log entry to a storage string. It is also safe to be passed a argument to any command.
+     */
     public static String convertToStorageString(String formattedEntry) {
-        return formattedEntry.replace("\n", "\\n");
+        // Replaces all tags with special characters to prevent conflicts with the parser
+        // \n is converted into NEWLINE, before converting back to counter edge case where users
+        // types a new line character within the replacement character for tags.
+        // Eg: #i\n$ will not be converted properly.
+        return formattedEntry.replace("\n", "{NEWLINE}")
+                .replace("i/", "#i$")
+                .replace("d/", "#d$")
+                .replace("l/", "#l$")
+                .replace("{NEWLINE}", "\\n");
+
     }
 
+    /**
+     * Converts the storage entry to a formatted string.
+     */
     public static String convertToFormattedString(String storageEntry) {
-        return storageEntry.replace("\\n", "\n");
+        return storageEntry.replace("#l$", "l/")
+                .replace("#d$", "d/")
+                .replace("#i$", "i/")
+                .replace("\\n", "\n");
     }
+
     /**
      * Returns the formatted truncated log entry.
      */
@@ -67,9 +87,12 @@ public class LogEntry {
      * Returns true if a given string is a valid entry.
      */
     public static boolean isValidEntry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both log entries are the same.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -77,6 +100,9 @@ public class LogEntry {
                 && entry.equals(((LogEntry) other).entry)); // state check
     }
 
+    /**
+     * Returns the hashcode of the log entry.
+     */
     @Override
     public int hashCode() {
         return entry.hashCode();
