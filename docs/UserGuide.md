@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ClientHub is a desktop app for **Tech-savvy Independent Financial Advisors who have more than 50 clients that are mainly Singaporean** to better manage their clients. Our product provides financial advisors with a streamlined tool to manage client details (eg. Track insurance policies), **optimized for use via a Command Line Interface** (CLI) while still **having the benefits of a Graphical user Interface (GUI)**. This product makes the lives of financial advisors easier by offering easier access to relevant information for their clients improving their efficiency. If you can type fast, ClientHub can get your contact management tasks done faster than traditional GUI apps.
+ClientHub is a desktop app for **Tech-savvy Independent Financial Advisors who have more than 50 clients that are mainly Singaporean** to better manage their clients. Our product provides financial advisors with a streamlined tool to manage client details (eg. Track insurance policies), **optimized for use via a Command Line Interface** (CLI) while still **having the benefits of a Graphical user Interface (GUI)**. 
+
+This product makes the lives of financial advisors easier by offering easier access to relevant information for their clients improving their efficiency. If you can type fast, ClientHub can get your contact management tasks done faster than traditional GUI apps.
 
 
 * Table of Contents
@@ -79,8 +81,8 @@ Example:
 * Add `$` after the input name to indicate **exact** name.<br>
   * This is useful when a client's name is a prefix of another client's name.
   * Order of name inputs matter when using `$`
-  * Name written before `$` must be **EXACT** name of the contact to be deleted.
-  
+  * Name written before `$` must be **EXACT** name of the client.
+
 
   e.g. `delete John Doe$` will delete the contact with the name `John Doe`.<br>
   e.g. If there are two client named `David Li` and `David Lim`, typing `delete David Li$` will delete the client with the name `David Li`.
@@ -115,7 +117,7 @@ to ensure that 2 names with the same letters but different cases are not conside
 
     e.g. `john doe` and `John Doe` are considered the same name and cannot be added as 2 different clients.
 
-* `CLIENT_TYPE` is **case-senstive**. This is to give greater flexibility to differentiate between different client types that are similar but have different cases.
+* `CLIENT_TYPE` is **case-sensitive**. This is to give greater flexibility to differentiate between different client types that are similar but have different cases.
 
     e.g. `Health` is different from `hEaLtH` while `Investment` and `Investment` are the same and are considered duplicates
 
@@ -152,18 +154,18 @@ Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 1
 
 ### Editing a client: `edit`
 
-Edits an existing client in  Client Hub.
+Edits an existing client in Client Hub.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DESCRIPTION] [c/CLIENT_TYPE]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* The fields constraints are the same as the `add` command.
+* Edits the client at the specified `INDEX`. 
 * At least one of the optional fields must be provided.
-  * At most 1 of each field can be edited at a time.(excluding CLIENT_TYPE)
+  * At most 1 of each field can be edited at a time. (excluding `CLIENT_TYPE`)
+  * Multiple `CLIENT_TYPE` can be inputted at once.
 * Existing values will be updated to the input values.
 * When editing `CLIENT_TYPE`, the existing `CLIENT_TYPE` of the person will be removed i.e adding of `CLIENT_TYPE` is not cumulative.
 * When editing `NAME`, the client with the associated `NAME` should have **no** reminders.
-* Edited Name must be unique. ie no 2 clients can have the same name.
+* Edited Name must be unique. (e.g. no 2 clients can have the same name).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -179,7 +181,7 @@ Deletes the specified person from ClientHub.
 
 Format: `delete NAME` or `d NAME` or `delete NAME$`
 
-* Deletes the client with specified `NAME`
+* Deletes the client with the specified `NAME`
 * `$` is used to indicate specific name to delete
 
 
@@ -200,7 +202,7 @@ Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`.
 Format: `find n/NAME` or `fn NAME` or `find NAME$`
 
 * `$` is used to indicate exact name to find
-* Only the name is searched.
+* Only the `NAME` is searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
@@ -255,9 +257,9 @@ Format: `find c/CLIENT_TYPE…​` or `fc CLIENT_TYPE…​`
 * Duplicate `CLIENT_TYPE` will be combined into 1 (No way to have duplicate client types showing)
 
 Examples:
-* `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
-* `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
-* `find c/Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` and `Healthcare`
+* `find c/Investment` returns every contact that has a `CLIENT_TYPE` beginning with `Investment`
+* `find c/Invest` returns every contact that has `CLIENT_TYPE` beginning with `Invest`
+* `find c/Investment Healthcare` returns every contact that has `CLIENT_TYPE` beginning with `Investment` and `Healthcare`
 * `fc Investment` returns `Investment Plan`
 * `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
 
@@ -273,7 +275,7 @@ deleted, and edited.
 
 #### Adding Reminder: `radd`
 
-Adds a reminder to the reminder list.
+Adds a reminder for a client with the specified `NAME` to the reminder list.
 
 Format:
 `radd n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
@@ -296,8 +298,8 @@ Format:
 `redit INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]` or
 `re INDEX [dt/DATETIME] [d/REMINDER_DESCRIPTION]`
 
-* Edits the reminder at the specified `INDEX`. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
-* Have least one of the optional fields must be provided.
+* Edits the reminder at the specified `INDEX`.
+* At least one of the optional fields must be provided.
   * At most 1 of each field can be edited at a time.
 * Existing values will be updated to the input values.
 * If edited datetime is invalid, the reminder will be update to the **NEAREST VALID** datetime
@@ -319,11 +321,11 @@ Format:
 `rdelete INDEX` or
 `rd INDEX`
 
-* Deletes the person with specified INDEX. The index refers to the index number shown in the displayed reminder list. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the reminder from the reminder list with the specified `INDEX`.
 
 Examples:
-* `rdelete 1` deletes the person at index 1 of the list
-* `rd 2` will delete the person at index 2 of the list
+* `rdelete 1` deletes the reminder at index 1 of the reminder list
+* `rd 2` will delete the reminder at index 2 of the reminder list
 
 Result for `rdelete 1`:
 ![result for 'rdelete`](images/result_for_delete_reminder.png)
