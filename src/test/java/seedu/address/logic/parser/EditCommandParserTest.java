@@ -42,6 +42,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.contact.Name;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
+//@@author
 public class EditCommandParserTest {
     private static final String VALID_NAME_ALEX = "Alex Yeoh";
     private static final String ROLE_EMPTY = " " + PREFIX_ROLE;

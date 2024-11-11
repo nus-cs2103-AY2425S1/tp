@@ -152,10 +152,11 @@ public class HelpCommand extends Command {
      */
     private static String formatAcceptedString(String fieldName, String[] strings) {
         int stringArraySize = strings.length;
+        int lastIndex = stringArraySize - 1;
         String toReturn = String.format("For %s, the accepted ones are:", fieldName);
-        String partialListedString = Arrays.stream(strings).limit(stringArraySize - 1)
+        String partialListedString = Arrays.stream(strings).limit(lastIndex)
                 .reduce("", (listedString, string) -> listedString + string + "," + WHITESPACE);
-        toReturn += WHITESPACE + partialListedString + "or" + WHITESPACE + strings[stringArraySize - 1];
+        toReturn += WHITESPACE + partialListedString + "or" + WHITESPACE + strings[lastIndex];
         return toReturn;
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.Storage;
 
+//@@author
 /**
  * The main LogicManager of the app.
  */
@@ -66,10 +67,12 @@ public class LogicManager implements Logic {
         return model.getAddressBook();
     }
 
+    //@@author cth06-Github
     @Override
     public ObservableList<Contact> getAllContactList() {
         return model.getAllContactList();
     }
+    //@@author
 
     @Override
     public ObservableList<Contact> getFilteredContactList() {

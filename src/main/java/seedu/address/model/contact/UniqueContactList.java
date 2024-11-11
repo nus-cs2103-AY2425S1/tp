@@ -12,6 +12,7 @@ import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.contact.exceptions.DuplicateFieldException;
 
+//@@author
 /**
  * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
  * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding
@@ -27,9 +28,11 @@ import seedu.address.model.contact.exceptions.DuplicateFieldException;
 public class UniqueContactList implements Iterable<Contact> {
 
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
+
+    //@@author cth06-Github
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList.sorted(new ComparatorName()));
-
+    //@@author
     /**
      * Returns true if the list contains an equivalent contact as the given argument.
      */

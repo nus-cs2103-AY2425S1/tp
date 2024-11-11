@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
 
+//@@author
 /**
  * The API of the Model component.
  */
@@ -91,8 +92,10 @@ public interface Model {
      */
     void setContact(Contact target, Contact editedContact);
 
+    //@@author cth06-Github
     /** Returns an unmodifiable view of the entire contact list in full*/
     ObservableList<Contact> getAllContactList();
+    //@@author
 
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();

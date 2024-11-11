@@ -19,6 +19,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
+//@@author
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -89,10 +90,12 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasContact(ALICE));
     }
 
+    //@@author cth06-Github
     @Test
     public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getAllContactList().remove(0));
     }
+    //@@author
 
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {

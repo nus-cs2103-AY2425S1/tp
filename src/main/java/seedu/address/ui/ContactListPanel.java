@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
 
+//@@author
 /**
  * Panel containing the list of contacts.
  */
@@ -29,6 +30,7 @@ public class ContactListPanel extends UiPart<Region> {
         contactListView.setCellFactory(listView -> new ContactListViewCell());
     }
 
+    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Contact} using a {@code ContactCard}.
      */
