@@ -1159,7 +1159,7 @@ on why the command is invalid. The error message could be more specific to state
 
 4. **Improve UI to deal with long texts:** <br></br>
    - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text. <br></br>
-   - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. 
+   - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. <br></br>
    - Justification: This lets the user see the full text in application. <br></br>
 
 5. **Improve the validator for `email`:** The current email validator flags valid emails as invalid, such as `faceb__k@fb.com.sg`. This could cause some inconvenience to the users. 
