@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
@@ -30,6 +33,8 @@ public class DeleteContactCommand extends ContactCommand {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
 
+    private static Logger logger = LogsCenter.getLogger(DeleteContactCommand.class);
+
     private final Index targetIndex;
     /**
      * Constructs a {@code DeleteContactCommand} to delete a contact at the specified {@code Index}.
@@ -46,16 +51,19 @@ public class DeleteContactCommand extends ContactCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.log(Level.INFO, "Executing Delete Contact Command");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Invalid target index: {0}", targetIndex.getOneBased());
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudentLesson(personToDelete);
         model.deletePerson(personToDelete);
+        logger.log(Level.INFO, String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
 
