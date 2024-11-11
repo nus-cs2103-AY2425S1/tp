@@ -263,7 +263,7 @@ Adds an insurance plan (given by the `INSURANCE_ID`) to the client at the specif
 
 Format: `addInsurance INDEX iid/INSURANCE_ID`
 
-**Insurance Plan**    | **INSURANCE_ID**
+Insurance Plan    | INSURANCE_ID
 -----------|---------------------------------------------------------------------------------------------------------
 Basic Insurance Plan   | `0`
 Travel Insurance Plan  | `1`
