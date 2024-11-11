@@ -41,7 +41,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category in CSV. Category must be either 'student' "
             + "or 'company'";
-    public static final String MESSAGE_INVALID_CSV_FORMAT = "Invalid CSV format. File is corrupted or missing compulsory fields.";
+    public static final String MESSAGE_INVALID_CSV_FORMAT = "Invalid CSV format";
+    public static final String MESSAGE_CORRUPTED_CSV_FILE = "File is corrupted or missing compulsory fields\n"
+            + "Please ensure all compulsory fields are present";
     public static final String MESSAGE_NON_CSV_FILE = "The file extension must be .csv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a CSV file.\n"
             + "Parameters: FILE_PATH\n"
@@ -99,7 +101,7 @@ public class ImportCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, filePath.toString()));
         } catch (IllegalArgumentException e) {
-            throw new CommandException(MESSAGE_INVALID_CSV_FORMAT);
+            throw new CommandException(MESSAGE_CORRUPTED_CSV_FILE);
         } catch (CommandException e) {
             throw new CommandException(e.getMessage());
         }
@@ -150,11 +152,11 @@ public class ImportCommand extends Command {
     private int addStudent(List<String> values, Model model) throws CommandException {
         String name = values.get(0).trim();
         if (name.isEmpty()) {
-            throw new CommandException("Invalid CSV format: Name cannot be blank for student category");
+            throw new CommandException(MESSAGE_CORRUPTED_CSV_FILE);
         }
         String studentId = values.get(2).trim();
         if (studentId.isEmpty()) {
-            throw new CommandException("Invalid CSV format: Missing Student ID for student category");
+            throw new CommandException("Missing Student ID for student category");
         }
         Student student = new Student(
                 new Name(name),
@@ -182,11 +184,11 @@ public class ImportCommand extends Command {
     private int addCompany(List<String> values, Model model) throws CommandException {
         String name = values.get(0).trim();
         if (name.isEmpty()) {
-            throw new CommandException("Invalid CSV format: Name cannot be blank for company category");
+            throw new CommandException(MESSAGE_CORRUPTED_CSV_FILE);
         }
         String industry = values.get(2).trim();
         if (industry.isEmpty()) {
-            throw new CommandException("Invalid CSV format: Missing Industry for company category");
+            throw new CommandException("Missing Industry for company category");
         }
         Company company = new Company(
                 new Name(name),
@@ -204,12 +206,12 @@ public class ImportCommand extends Command {
         return 0;
     }
 
-     /**
-     * Returns a success message indicating the number of contacts successfully imported.
-     *
-     * @param successCount The number of contacts imported.
-     * @return The success message string.
-     */
+    /**
+    * Returns a success message indicating the number of contacts successfully imported.
+    *
+    * @param successCount The number of contacts imported.
+    * @return The success message string.
+    */
     private String getSuccessMessage(int successCount) {
         return String.format(MESSAGE_SUCCESS, filePath.toString()) + "\nSuccessfully imported: "
                 + successCount + " entries";
