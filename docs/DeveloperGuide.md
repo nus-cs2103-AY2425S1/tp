@@ -1085,8 +1085,8 @@ CS2103T teaching team, including:
 - [UML Class Diagrams](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/uml.html#class-diagrams)
 - [Testing](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/testing.html)
 
-As we envisioned an application for wedding planners, we concocted multiple features that wedding planners we interviewed
-mentioned they wanted. These are features we have implemented to the WedLinker you see today.
+As we envisioned an application for wedding planners, we concocted multiple features based on feedback from the wedding planners we interviewed.
+These are the features that shape the WedLinker you see today.
 
 #### Difficulty Level:
 Adapting from the original AB3 to the WedLinker has been difficult as we opted for a more daring approach to implement 
@@ -1094,12 +1094,11 @@ many features that wedding planners wanted. As with any software, the more featu
 and WedLinker was no exception to it. 
 
 As a result, the difficulty of developing WedLinker came not only from the
-myriad of features we had to implement (and alter from the original AB3), but to also ensure the minimal number of
-bugs created.
+myriad of features we had to implement (and alter from the original AB3), but to also ensure that there were minimal bugs created.
 
 #### Challenges Faced:
 Undoubtedly with any projects, there will be challenges faced. 
-With the number of features that we wanted to implement, we had used to [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
+With the number of features that we wanted to implement, we had used the [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
 that enabled us to work on numerous features, debugs, or minor adjustments concurrently. However, with the Forking Workflow came some drawbacks that we personally experienced, such as
 the extra overhead of sending everything through forks, as well as the increased possibility of merge conflicts.
 
