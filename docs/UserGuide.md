@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Welcome to TalentHub, an all-in-one desktop app designed to help you and other **Celebrity Talent Managers** with the **management of celebrity and relevant industrial contacts**.
+Welcome to TalentHub, an all-in-one desktop application designed to help you, a **Celebrity Talent Manager**, with the management of your celebrities and their relevant industrial contacts.
 
 TalentHub is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 
@@ -62,10 +62,10 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Celebrity` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Celebrity`, `t/Stylist t/Hairdresser` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -93,15 +93,15 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - A person's name can only contain alphanumeric characters and spaces.
 
 - A person's phone number must be unique.
+
+- A person's tag must not contain any spaces e.g `Twitch Streamer` is not a valid tag.
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Optionals** <br>
-
 A person can have any number of tags or none at all!
-The address and email fields are also optional!
-
+The address and email address fields are also optional! 
 </div>
 
 Examples:
@@ -134,7 +134,7 @@ This command allows you to edit an existing person in TalentHub!
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -176,6 +176,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched. e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Exact spacing must be used `Bernice Yu` is not the same as `Bernice  Yu`.
 
 Examples:
 
@@ -241,7 +242,8 @@ Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647
+  ) e.g. 1, 2, 3 …​
 
 <div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
 When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from **all** events' contact lists. This action is irreversible after confirmation.
@@ -281,16 +283,16 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 **:warning: Event constraints**<br>
 
 - The celebrity and all points of contacts must be existing persons in TalentHub.
+- Current implementation does not require the person to be added to have the celebrity tag attached to their name.
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
+- When adding a person to the point of contacts list, only the first tag will be displayed.
 </div>
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Optionals** <br>
-
 An event can have any number of points of contact or none at all!
-The venue field is also optional!
-
+The venue field is also optional! 
 </div>
 
 Examples:
@@ -323,19 +325,18 @@ This command allows you to edit an existing event on TalentHub!
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
-- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
 <div markdown="block" class="alert alert-warning">
 **:warning: Event constraints**<br>
-
 - The celebrity and all points of contacts must be existing persons in TalentHub.
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete an event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
 Examples:
@@ -385,6 +386,7 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched. e.g. `Oscar` will not match `Oscars`.
 - Events matching all keywords exactly will be returned.
   e.g. `Hiking` will not match `Park Hiking`
+- Only the first tag of every person in the Point of Contact list is displayed.
 
 Examples:
 
@@ -426,10 +428,10 @@ Examples:
 This command allows you to delete the specified event from the list of events on TalentHub!
 
 Format: `delete event INDEX`
-
 - Deletes the event at the specified `INDEX`.
 - The index refers to the index number shown in the displayed event list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** and smaller than or equal to `Integer.MAX_VALUE` (2147483647)
+  e.g. 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
   :bulb: **Tip:** 
