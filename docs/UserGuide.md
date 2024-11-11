@@ -213,6 +213,8 @@ Examples:
 Created weddings will have the person automatically assigned to their guest lists.
 
 * A person can have any number of tags or weddings (including 0)
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
+
 </box>
 
 <box type="warning" seamless>
@@ -299,7 +301,7 @@ This will return all contacts that have either 98 ot 64 in their phone number.
 
 ### Creating a tag : `create-tag` or `ctag`
 
-Use the `create-tag` command to create a `tag` within WedLinker, which you can assign to contacts.
+Use the `create-tag` command to create a tag within WedLinker, which you can assign to contacts.
 
 Format: `create-tag t/TAG_NAME` or`ctag t/TAG_NAME`
 
@@ -309,6 +311,9 @@ To create a tag, type `create-tag` followed by the name of the tag.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Multiple contacts can share the same tag.
 * Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
+* If you want to create a Tag with a long name, it might not be shown clearly in the list.</br>
+We recommend keeping names of Tags to a maximum of 50 characters long.</br>
+You can use [list-tags](#listing-all-tags--list-tags-or-ltags) instead for better visuals.
 
 Examples:
 * To create a tag named `Florist`, enter the command:
@@ -321,7 +326,7 @@ Examples:
 
 Use the `tag` command when you want to assign a tag to a specific contact in WedLinker.
 
-Format: `tag PERSON_NUMBER t/TAG_NAME [f/]`
+Format: `tag PERSON_NUMBER t/TAG_NAME... [f/]`
 
 To assign a tag to a contact, type `tag` followed by the positional number of the person in the contact list and the name of the tag.
 
@@ -337,8 +342,10 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags) command
+**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags-or-ltags) command
 </box>
+
+### Unassigning tag from contacts : `untag`
 
 ### Unassigning tag from contacts : `untag`
 
@@ -349,6 +356,7 @@ Format: `untag PERSON_NUMBER t/TAG_NAME...`
 To remove a tag from a contact, type `untag` followed by the positional number of the person in the contact list and the name of the tag.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+* `TAG_NAME` is case-insensitive.
 
 Examples:
 * To remove the tag named `Florist` from the first person in the list, enter the command:
@@ -384,7 +392,10 @@ To create a `Wedding`, type `create-wedding` followed by the name of the wedding
 * The `WEDDING_NAME` should only contain alphanumeric characters, spaces or the following characters: / . , ' & : ( )
 * `WEDDING_NAME` is case-insensitive.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
-* Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
+* Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding--assign-wedding-or-asw) command.
+* If you want to create a Wedding with a long name, it might not be shown clearly in the list.</br>
+  We recommend keeping names of Weddings to a maximum of 50 characters long.</br>
+  You can use [list-weddings](#listing-all-weddings--list-weddings-or-lw) instead for better visuals.
 
 Examples:
 * To create a Wedding named `Wedding 1`, enter the command:
@@ -416,7 +427,6 @@ Format: `edit-wedding WEDDING_NUMBER [a/ADDRESS] [d/DATE]` or `ew WEDDING_NUMBER
 To edit the details of a `Wedding`, enter the command [list-weddings](#listing-all-weddings-list-weddings) to identify the Wedding number in the `Wedding` list. <br>
 Following that, type "edit-wedding" followed by the Wedding number enter the details you wish to edit and the name of the wedding.
 
-* Edits the specific `Wedding` at the WEDDING_NUMBER when in [list-wedding](#listing-all-weddings-list-weddings) view.
 * The WEDDING_NUMBER **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
@@ -600,7 +610,7 @@ To designate a contact as a vendor, type "assign-vendor" followed by the positio
 > Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, be assigned with tags etc.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
-* The `Vendor` can have `Tasks` assigned to them.
+* The `Vendor` can now have `Tasks` assigned to them.
 
 Examples:
 * To designate the first contact as a vendor, enter the command:
@@ -643,26 +653,32 @@ Examples:
 ## Command summary
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG_NAME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
-**Assign Wedding**    | `assign-wedding PERSON_NUMBER w/WEDDING_NAME…​ [p1/] [p2/] [f/]` or `asw PERSON_NUMBER w/WEDDING_NAME…​ [p1/] [p2/] [f/]` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
+**Add**    | `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
+**Add Vendor**    | `add-vendor n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` or `addv n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` <br> e.g., `addv n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
+**Assign Task**    |  `assign-task PERSON_NUMBER TASK_NUMBER…​` or `atask PERSON_NUMBER TASK_NUMBER…​` <br> e.g., `assign-task 2 1 3`
+**Assign Vendor**    | `assign-vendor PERSON_NUMBER` or `asv PERSON_NUMBER` <br> e.g., `asv 2`
+**Assign Wedding**    | `assign-wedding PERSON_NUMBER w/WEDDING_NAME…​ [p1/] [p2/] [f/]` or `asw PERSON_NUMBER w/WEDDING_NAME…​ [p1/] [p2/] [f/]` <br> e.g., `asw 2 w/Casey's Wedding p1/ w/Wedding August 29th`
 **Clear**  | `clear`
 **Create Tag**  | `create-tag t/TAG_NAME` or `ctag t/TAG_NAME` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE] ...` or `ctask tk/TASK_DESCRIPTION [d/DATE] [d/DATE] ...` <br> e.g., `create-task tk/Order Wedding Cake` <br> `create-task tk/Book Venue d/2025-02-01` <br> `create-task tk/Meet Caterer d/2024-11-19 d/2024-11-20`
+**Create Task** | `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` <br> e.g., `create-task tk/Order Wedding Cake` <br> `ctask tk/Book Venue d/2025-02-01` <br> `create-task tk/Meet Caterer d/2024-11-19 d/2024-11-20`
 **Create Wedding**  | `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME` <br> e.g., `cw w/JJ's Wedding`
 **Delete** | `delete PERSON_NUMBER`<br> e.g., `delete 3`
 **Delete Tag** | `delete-tag t/TAG_NAME [f/]` or `dtag t/TAG_NAME [f/]` <br> e.g., `delete-tag t/photographer`
 **Delete Task** | `delete-task TASK_NUMBER` or `dtask TASK_NUMBER` <br> e.g., `dtask 6`
 **Delete Wedding** | `delete-wedding w/WEDDING_NAME [f/]` or `dw w/WEDDING_NAME [f/]` <br> e.g., `delete-wedding w/Lav's Wedding`
-**Edit**   | `edit PERSON_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Wedding**   | `edit-wedding WEDDING_NUMBER [p1/PERSON_NUMBER] [p2/PERSON_NUMBER] [a/ADDRESS] [d/DATE]…​`<br> or <br> `ew WEDDING_NUMBER [p1/PERSON_NUMBER] [p2/PERSON_NUMBER] [a/ADDRESS] [d/DATE]…​` <br> e.g.,`edit-wedding 2 p1/3 a/Jurong Christian Church`
+**Edit**   | `edit PERSON_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Wedding**   | `edit-wedding WEDDING_NUMBER [a/ADDRESS] [d/DATE]`<br> or <br> `ew WEDDING_NUMBER [a/ADDRESS] [d/DATE]` <br> e.g.,`edit-wedding 2 a/Jurong Christian Church`
 **Exit**   | `exit`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME] [w/WEDDING_NAME]`<br> e.g., `find n/James Jake`
+**Find**   | `find n/NAME…​` or `find p/PHONE…​` or `find e/EMAIL…​` or `find a/ADDRESS…​` or `find t/TAG_NAME…​` or `find w/WEDDING_NAME…​` or `find tk/TASK_NAME…​` <br> e.g., `find n/James Jake` <br> `find a/Serangoon a/Blk 13`
 **Help**   | `help`
-**List**   | `list`
+**List**   | `list` 
 **List Weddings**   | `list-weddings` or `lw`
+**List Tags**   | `list-tags` or `ltags`
 **List Tasks**   | `list-tasks` or `ltasks`
-**Mark Task**   | `mark-task TASK_NUMBER...` or `mtask TASK_NUMBER...` <br> e.g., `mark-task 1 ` <br>  `mark-task 1 2 3`
-**Tag**   | `tag PERSON_NUMBER [t/TAG_NAME]…​` <br> e.g., `tag 2 t/florist t/photographer`
+**Mark Task** | `mark-task TASK_NUMBER…​` or `mtask TASK_NUMBER…​` <br> e.g., `mark-task 1 ` <br> `mtask 1 2 3`
+**Tag**   | `tag PERSON_NUMBER t/TAG_NAME…​ [f/]` <br> e.g., `tag 2 t/florist t/photographer`
+**Unassign Task**    |  `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER…​` or `unatask PERSON_NUMBER PERSON_TASK_NUMBER…​` <br> e.g., `unatask 2 1 3`
+**Unassign Vendor**    | `unassign-vendor PERSON_NUMBER [f/]` or `uw PERSON_NUMBER [f/]` <br> e.g., `unassign-vendor 3`
 **Unassign Wedding**    | `unassign-wedding PERSON_NUMBER w/WEDDING_NAME…​` or `uw PERSON_NUMBER w/WEDDING_NAME…​` <br> e.g., `uw 2 w/John's Wedding`
-**Unmark Task**   | `unmark-task TASK_NUMBER...` or `untask TASK_NUMBER...` <br> e.g., `unmark-task 1 ` <br>  `unmark-task 1 2 3`
-**Untag**   | `untag PERSON_NUMBER [t/TAG_NAME]…​` <br> e.g., `untag 4 t/available t/chef`
+**Unmark Task** | `unmark-task TASK_NUMBER…​` or `untask TASK_NUMBER…​` <br> e.g., `untask 1 ` <br> `unmark-task 1 2 3`
+**Untag**   | `untag TASK_NUMBER t/TAG_NAME…​` <br> e.g., `untag 4 t/available t/chef`
