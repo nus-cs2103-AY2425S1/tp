@@ -245,7 +245,7 @@ Examples:
 
 ### Deleting a concert : `deletec`
 
-Deletes the specified person from the ConcertPhonebook.
+Deletes the specified concert from the ConcertPhonebook.
 
 Format: `deletec INDEX`
 
