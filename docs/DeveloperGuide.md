@@ -306,6 +306,19 @@ results based on the specified criteria.
 
 #### Implementation
 
+* the delete command is based on the index of the contact
+
+Below is a detailed process illustration using a sequential diagram:
+
+Step 1. The user input a delete command followed by an index,
+for example: `delete 1`, delete the contact with an index of 1.
+
+Step 2. The parser analysis the input command and returns a `DeleteCommand`.
+
+Step 3. The `DeleteCommand` get executed by the LogicManager and updates the filteredPersonList within the model.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
