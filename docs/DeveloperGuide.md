@@ -16,17 +16,18 @@ title: Developer Guide
   4.1. [Undo/redo feature](#undoredo-feature)<br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-6. [Appendix: Requirements](#appendix-requirements)<br>
-  6.1. [Product scope](#product-scope)<br>
-  6.2. [User stories](#user-stories)<br>
-  6.3. [Use cases](#use-cases)<br>
-  6.4. [Non-Functional Requirements](#non-functional-requirements)<br>
-  6.5. [Product scope](#product-scope)<br>
-  6.6. [Glossary](#glossary)<br>
-7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
-  7.1. [Launch and shutdown](#launch-and-shutdown)<br>
-  7.2. [Deleting a person](#deleting-a-person)<br>
-  7.3. [Saving data](#saving-data)<br>
+6. [Planned Enhancements](#planned-enhancements)
+7. [Appendix: Requirements](#appendix-requirements)<br>
+  7.1. [Product scope](#product-scope)<br>
+  7.2. [User stories](#user-stories)<br>
+  7.3. [Use cases](#use-cases)<br>
+  7.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+  7.5. [Product scope](#product-scope)<br>
+  7.6. [Glossary](#glossary)<br>
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
+  8.1. [Launch and shutdown](#launch-and-shutdown)<br>
+  8.2. [Deleting a person](#deleting-a-person)<br>
+  8.3. [Saving data](#saving-data)<br>
 
 ---
 
@@ -270,6 +271,27 @@ The following activity diagram summarizes what happens when a user executes a ne
 - [DevOps guide](DevOps.md)
 
 ---
+
+## **Planned Enhancements**
+
+1. Detailed errors for importing<br/>
+    When the user imports a file with the wrong extension and the importer fails to import the contents of the file, add 
+    a check to see whether the file has the right file extension.
+    <br/><br/>
+2. Warn the user when exporting will cause a file to be overwritten<br/>
+    When the export file location already has a file, warn and ask for permission from the user before overwriting the 
+    file.
+    <br/><br/>
+3. Maintaining focus on currently selected person after any command execution<br/>
+    The currently focused person should remain even after commands like `addnotes` or even `delete` as much as possible.
+    <br/><br/>
+4. Limit number of tags that can be displayed<br/>
+    The person list panel and the pinned person list panel should only show a summary of tags. If there are too many
+    tags or the tag names are too long, they should be hidden and only shown in the contact details panel when focused.
+    <br/><br/>
+5. Dynamic message box sizing<br/>
+    The message box should increase in height and wrap the text within it as needed so that the user can view the error
+    message or other command messages easily.
 
 ## **Appendix: Requirements**
 
