@@ -79,22 +79,25 @@ public class UntagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
 
-        Set<Tag> tagsToKeep = new HashSet<>();
-
         if (personToEdit.getTags().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        //OLD
-
         if (tagsToRemove.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
+
+        if (!updatedTags.containsAll(tagsToRemove)) {
+            throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+        }
+
         for (Tag tag : updatedTags) {
             if (tagsToRemove.contains(tag)) {
                 tag.decreaseTaggedCount();
             }
         }
+
+        updatedTags.removeAll(tagsToRemove);
 
         Person editedPerson;
         if (personToEdit instanceof Vendor) {
@@ -103,7 +106,7 @@ public class UntagCommand extends Command {
                     personToEdit.getPhone(),
                     personToEdit.getEmail(),
                     personToEdit.getAddress(),
-                    tagsToKeep,
+                    updatedTags,
                     personToEdit.getWeddings(),
                     personToEdit.getTasks());
         } else {
@@ -112,7 +115,7 @@ public class UntagCommand extends Command {
                     personToEdit.getPhone(),
                     personToEdit.getEmail(),
                     personToEdit.getAddress(),
-                    tagsToKeep,
+                    updatedTags,
                     personToEdit.getWeddings(),
                     personToEdit.getTasks());
         }
