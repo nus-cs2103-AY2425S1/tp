@@ -15,7 +15,7 @@ In this comprehensive user guide, we will take you to experience a full journey 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Content
+## Table of Contents
 
 [1. Introduction](#1-introduction)
 - [1.1 What is TrackMate-NUS](#1-1-what-is-trackmate)
@@ -292,7 +292,7 @@ To understand how a full command is interpreted, we will utilise the following e
 
 |                | Component        | Description                                                    |
 |----------------|------------------|----------------------------------------------------------------|
-| `addStu`       | Command          | Execute Add Command to add a student.                          |
+| `addStu`       | Command          | Executes Add Command to add a student.                         |
 | `n/`           | Parameter Prefix | Unique prefix to distinguish `STUDENT_NAME` from other prefix. |
 | `STUDENT_NAME` | Parameter        | Represents placeholder for name of the student.                |
 
