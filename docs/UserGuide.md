@@ -249,7 +249,7 @@ When you delete a person, you will also delete events which the person is the ce
 
 Examples:
 
-- `list person` followed by `delete person 2` deletes the 2nd person in the address book.
+- `list person` followed by `delete person 2` deletes the 2nd person in the TalentHub.
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
 <figure style="text-align: center;">
@@ -359,7 +359,7 @@ Format: `find event KEYWORD [MORE_KEYWORDS]`
 - The search is case-insensitive. e.g. `hiking` will match `Hiking`
 - The order of the keywords does not matter. e.g. `Hair Cut` will match `Cut Hair`
 - Only full words will be matched. e.g. `Oscar` will not match `Oscars`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Persons matching at least one keyword will be returned.
   e.g. `Hair Hiking` will return `Hair Cut`, `Park Hiking`, `Hiking`
 
 Examples:
@@ -436,7 +436,7 @@ Format: `delete event INDEX`
 
 Examples:
 
-- `list event` followed by `delete event 2` deletes the 2nd event in the address book.
+- `list event` followed by `delete event 2` deletes the 2nd event in the TalentHub.
 - `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
 <figure style="text-align: center;">
