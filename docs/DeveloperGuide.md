@@ -539,12 +539,10 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list students.
+1. User requests to list students.
 2. T_Assistant shows a list of students.
 3. User requests to edit a Student's information from the list.
 4. T_Assistant updates the Student's information as per user's input.
-
-Use case ends.
 
 **Extensions**
 
@@ -595,6 +593,23 @@ Use case ends.
     - 3a1. T_Assistant shows an error message.
 
       Use case ends.
+
+**Use case: Sort Students**
+
+**MSS**
+
+1. User requests to list students.
+2. T_Assistant shows a list of students.
+3. User requests to sort students.
+4. T_Assistant sorts students in ASCII order.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
 
 **Use case: Add a Group**
 
@@ -660,7 +675,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list groups.
+1. User requests to list groups.
 2. T_Assistant shows a list of groups.
 3. User requests to edit a Group's information from the list.
 4. T_Assistant updates the Group's information as per user's input.
@@ -732,29 +747,6 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Mark Team's task as Complete**
-
-**MSS**
-
-1. User marks task as complete.
-2. T_Assistant marks the task accordingly.
-
-Use case ends.
-
-**Extensions**
-
-- 1a. The Group/Task parameters are invalid.
-
-    - 1a1. T_Assistant shows an error message.
-
-      Use case ends.
-
-- 1b. The user marks an already complete task.
-
-    - 1b1. T_Assistant shows an error message.
-
-      Use case ends.
-
 **Use case: Delete Student from Group**
 
 **MSS**
@@ -788,8 +780,8 @@ Use case ends.
 
 **MSS**
 
-1. User lists all groups.
-2. T_Assistant displays all groups.
+1. User requests to list all groups.
+2. T_Assistant shows a list of all groups.
 
 Use case ends.
 
@@ -806,9 +798,7 @@ Use case ends.
 **MSS**
 
 1. User inputs a command to find groups with specific keywords.
-
 2. T_Assistant processes the input and searches for groups matching the keywords.
-
 3. T_Assistant displays a list of groups who match the search criteria.
 
 Use case ends.
@@ -827,12 +817,29 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Sort Groups**
+
+**MSS**
+
+1. User requests to list all groups.
+2. T_Assistant displays all groups.
+3. User requests to sort groups.
+4. T_Assistant sorts groups by ASCII order.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There are currently no groups.
+
+Use case ends.
+
 **Use case: List all Tasks**
 
 **MSS**
 
-1. User lists all tasks.
-2. T_Assistant displays all groups.
+1. User requests to list all tasks.
+2. T_Assistant shows a list of all tasks.
 
 Use case ends.
 
@@ -888,42 +895,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list tasks.
-2. T_Assistant shows a list of tasks.
-3. User requests to edit a Task's information from the list.
-4. T_Assistant updates the Task's information as per user's input.
-
-Use case ends.
-
-**Extensions**
-
-- 1a. The list is empty.
-
-  Use case ends.
-
-- 3a. The selected Student does not exist.
-
-    - 3a1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3b. The input Task parameters to edit are invalid.
-
-    - 3b1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3c. No changes are made to the Task’s information.
-
-    - 3c1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Edit a Task for a Group**
-
-**MSS**
-
-1. Users requests to list a group's tasks.
+1. User requests to list tasks.
 2. T_Assistant shows a list of tasks.
 3. User requests to edit a Task's information from the list.
 4. T_Assistant updates the Task's information as per user's input.
@@ -954,14 +926,70 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Edit a Task for a Group**
+
+**MSS**
+
+1. User requests to list a group's tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to edit a Task's information from the list.
+4. T_Assistant updates the Task's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Task does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Task parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Task’s information.
+
+    - 3c1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Mark Group's Task as Complete**
+
+**MSS**
+
+1. User marks task as complete.
+2. T_Assistant marks the task accordingly.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The Group/Task parameters are invalid.
+
+    - 1a1. T_Assistant shows an error message.
+
+      Use case ends.
+
+- 1b. The user marks an already complete task.
+
+    - 1b1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: Find Task**
 
 **MSS**
 
 1. User inputs a command to find tasks with specific keywords.
-
 2. T_Assistant processes the input and searches for tasks matching the keywords.
-
 3. T_Assistant displays a list of tasks who match the search criteria.
 
 Use case ends.
@@ -977,6 +1005,55 @@ Use case ends.
 - 3a. No Task match the search criteria.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Sort Tasks**
+
+**MSS**
+
+1. User requests to list all tasks.
+2. T_Assistant displays all tasks.
+3. User requests to sort tasks.
+4. T_Assistant sorts tasks by order of the deadline, from earliest to latest.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There are currently no tasks.
+
+Use case ends.
+
+**Use case: Undo**
+
+**MSS**
+
+1. User requests to undo.
+2. T_Assistant undoes previously executed command.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There was no previously executed command.
+
+Use case ends.
+
+**Use case: Redo**
+
+**MSS**
+
+1. User requests to redo.
+2. T_Assistant redoes previously executed undo command.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There was no previously executed undo command.
+
+    - 1a1. T_Assistant shows an error message.
 
       Use case ends.
 

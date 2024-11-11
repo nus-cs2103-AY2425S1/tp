@@ -51,7 +51,7 @@ public class AddStudentToGroupCommand extends Command {
             "Duplicate student(s) entered, only 1 will be added:";
     public static final String MESSAGE_ALL_STUDENTS_EXIST_IN_GROUPS = "All student(s) entered belong in a group";
     public static final String MESSAGE_STUDENTS_IN_GROUP =
-            "The following group(s) already exist and will not be added:";
+            "The following student(s) already belong in a group and will not be added:";
     public static final String MESSAGE_EXCEED_GROUP_SIZE = "Group exceeded the maximum size!";
 
     private final List<StudentNumber> toAdd;

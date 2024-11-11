@@ -277,7 +277,7 @@ Searches T_Assistant for students with fields that match the search query.
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
 </box>
 
-2. For information on the constraints for each parameter used in this command, go
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -309,6 +309,12 @@ This screenshot shows the result of executing `find_s q/!nogroup`.
 Sorts the list of students in ASCII order.
 
 **Format**: `sort_s`
+
+<box type="warning" seamless>
+
+**Caution:**
+The student list is sorted in ASCII order, not in alphabetical order as the message will say after successfully executing `sort_s`.
+</box>
 
 This screenshot shows the result of executing `sort_s`.
 
@@ -446,6 +452,12 @@ This screenshot shows the result of executing `find_g q/F11`.
 Sorts the list of groups in ASCII order.
 
 **Format**: `sort_g`
+
+<box type="warning" seamless>
+
+**Caution:**
+The group list is sorted in ASCII order, not in alphabetical order as the message will say after successfully executing `sort_g`.
+</box>
 
 This screenshot shows the result of executing `sort_g`.
 
