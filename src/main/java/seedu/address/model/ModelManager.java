@@ -167,6 +167,16 @@ public class ModelManager implements Model {
         addressBook.unlinkPersonFromEvent(person, event);
     }
 
+    @Override
+    public void clearAllEvents() {
+        addressBook.clearEvents(new AddressBook());
+    }
+
+    @Override
+    public void clearAllPersons() {
+        addressBook.clearPersons(new AddressBook());
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
