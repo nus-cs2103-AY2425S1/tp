@@ -131,6 +131,7 @@ public class AddPropertyCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ViewCommand.updateDisplay(personToEdit, editedPerson);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
@@ -181,5 +182,3 @@ public class AddPropertyCommand extends Command {
                 price);
     }
 }
-
-
