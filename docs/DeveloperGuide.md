@@ -362,21 +362,18 @@ Priorities:
 **MSS**
 
 1.  User requests to add a client.
-2.  HealthConnect adds client data and displays confirmation message.
-
+2.  HealthConnect adds client data and displays confirmation message.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a.  HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
 
 * 1b. HealthConnect detects a duplicate person entry.
-    * 1b1. HealthConnect shows an error message.
-  
+    * 1b1. HealthConnect shows an error message.<br>
         Use case ends.
 
 
@@ -385,31 +382,26 @@ Priorities:
 **MSS**
 
 1.  User requests to delete a client’s data.
-2.  HealthConnect deletes the person and displays confirmation message.
-
+2.  HealthConnect deletes the person and displays confirmation message.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a. HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-  
+    * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
     * 1b2. HealthConnect requests for correct data.
-    * 1b3. User enters new data.
-
-        Steps 1b1-1b3 are repeated until a unique person is found from details in input.
-  
+    * 1b3. User enters new data.<br>
+        Steps 1b1-1b3 are repeated until a unique person is found from details in input.<br>
         Use case resumes from step 2.
 
 
 * 1c. HealthConnect detects non-existent client.
-    * 1c1. HealthConnect shows an error message.
-
+    * 1c1. HealthConnect shows an error message.<br>
         Use case ends.
 
 **Use case: Edit client data** <br>
@@ -418,26 +410,22 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1.  User requests to edit details.
-2.  HealthConnect edits clients' information and displays client's updated details.
-
+2.  HealthConnect edits clients' information and displays client's updated details.<br>
     Use case ends.
 
 
 **Extensions**
 
 * 1a. HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
     Use case ends.
 
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
     * 1b2. HealthConnect requests for correct data.
-    * 1b3. User enters new data.
-
-        Steps 1b1-1b3 are repeated until the details inputted renders a unique person.
-
+    * 1b3. User enters new data.<br>
+        Steps 1b1-1b3 are repeated until the details inputted renders a unique person.<br>
         Use case resumes from step 2.
 
 **Use case: Add appointment date and time for client**
@@ -445,30 +433,26 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1. User requests to add appointment date and time. 
-2. HealthConnect adds appointment date and time and displays confirmation message. 
-
+2. HealthConnect adds appointment date and time and displays confirmation message.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a.  HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
 
 * 1b. HealthConnect detects an overlapping appointment date and time.
 
     * 1b1. HealthConnect shows an error message.
-    * 1b2. HealthConnect displays information on existing person with overlapped date and time.
-
+    * 1b2. HealthConnect displays information on existing person with overlapped date and time.<br>
         Use case ends.
 
 
 * 1c. HealthConnect detects non-existent client.
 
-    * 1c1. HealthConnect shows an error message.
-
+    * 1c1. HealthConnect shows an error message.<br>
         Use case ends.
 
 **Use case: Show schedule for the day**
@@ -476,15 +460,13 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1.  User requests to see the schedule for the day.
-2.  HealthConnect displays list of persons with matching date.
-
+2.  HealthConnect displays list of persons with matching date.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a.  HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
 **Use case: Find client's name by keywords**
@@ -492,15 +474,13 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1. User requests to find clients by keywords.
-2. HealthConnect displays the list of persons that matches keywords.
-
+2. HealthConnect displays the list of persons that matches keywords.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a. HealthConnect detects non-existent clients.
-  * 1a1. HealthConnect displays execution message.
-
+  * 1a1. HealthConnect displays execution message.<br>
     Use case ends.
 
 **Use case: Filter clients by parameters**
@@ -508,15 +488,13 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1. User requests to filter client.
-2. HealthConnect displays list of persons that matches parameters provided.
-
+2. HealthConnect displays list of persons that matches parameters provided.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a.  HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
 **To be added as potential future enhancements:**
@@ -526,31 +504,26 @@ Preconditions: HealthConnect has correct view, including client to edit
 **MSS**
 
 1.  User requests to record a payment and inputs client's details.
-2.  HealthConnect displays the payment due.
-
+2.  HealthConnect displays the payment due.<br>
     Use case ends.
 
 **Extensions**
 
 * 1a. HealthConnect detects an error in the command format.
-    * 1a1. HealthConnect shows an error message.
-
+    * 1a1. HealthConnect shows an error message.<br>
       Use case ends.
 
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
     * 1b2. HealthConnect requests for correct data.
-    * 1b3. User enters new data.
-
-      Steps 1b1-1b3 are repeated until a unique person is found from details in input.
-
+    * 1b3. User enters new data.<br>
+      Steps 1b1-1b3 are repeated until a unique person is found from details in input.<br>
       Use case resumes from step 2.
 
 
 * 1c. HealthConnect detects non-existent client.
-    * 1c1. HealthConnect shows an error message.
-
+    * 1c1. HealthConnect shows an error message.<br>
       Use case ends.
 
 ### Non-Functional Requirements
