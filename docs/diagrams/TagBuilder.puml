@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+!define TAGBUILDER_COLOR #8B4513
+!define TAG_COLOR #4B0082
+!define DIFF_COLOR #00008B
+!define SALARY_COLOR #8B0000
+!define WLB_COLOR #006400
+!define PERIOD_COLOR #8B8B00
+!define CALLER_COLOR #2F4F4F
+
+participant Caller CALLER_COLOR
+participant ":TagBuilder" as tagBuilder TAGBUILDER_COLOR
+participant ":Tag" as tag TAG_COLOR
+participant ":DifficultyTag" as difficultyTag DIFF_COLOR
+participant ":SalaryTag" as salaryTag SALARY_COLOR
+participant ":WorkLifeBalanceTag" as wlbTag WLB_COLOR
+participant ":PeriodTag" as periodTag PERIOD_COLOR
+
+Caller -> tagBuilder : build("difficulty_low")
+activate tagBuilder TAGBUILDER_COLOR
+tagBuilder -> difficultyTag : new DifficultyTag("Difficulty", "low")
+activate difficultyTag DIFF_COLOR
+difficultyTag --> tagBuilder : DifficultyTag instance
+deactivate difficultyTag
+tagBuilder --> Caller : DifficultyTag instance
+deactivate tagBuilder TAGBUILDER_COLOR
+
+Caller -> tagBuilder : build("salary_high")
+activate tagBuilder TAGBUILDER_COLOR
+tagBuilder -> salaryTag : new SalaryTag("Salary", "high")
+activate salaryTag SALARY_COLOR
+salaryTag --> tagBuilder : SalaryTag instance
+deactivate salaryTag
+tagBuilder --> Caller : SalaryTag instance
+deactivate tagBuilder TAGBUILDER_COLOR
+
+Caller -> tagBuilder : build("wlb_medium")
+activate tagBuilder TAGBUILDER_COLOR
+tagBuilder -> wlbTag : new WorkLifeBalanceTag("WLB", "medium")
+activate wlbTag WLB_COLOR
+wlbTag --> tagBuilder : WorkLifeBalanceTag instance
+deactivate wlbTag
+tagBuilder --> Caller : WorkLifeBalanceTag instance
+deactivate tagBuilder TAGBUILDER_COLOR
+
+Caller -> tagBuilder : build("period_Summer_2024")
+activate tagBuilder TAGBUILDER_COLOR
+tagBuilder -> periodTag : new PeriodTag("Period", "Summer", 2024)
+activate periodTag PERIOD_COLOR
+periodTag --> tagBuilder : PeriodTag instance
+deactivate periodTag
+tagBuilder --> Caller : PeriodTag instance
+deactivate tagBuilder TAGBUILDER_COLOR
+
+Caller -> tagBuilder : build("customTag")
+activate tagBuilder TAGBUILDER_COLOR
+tagBuilder -> tag : new Tag("customTag")
+activate tag TAG_COLOR
+tag --> tagBuilder : Tag instance
+deactivate tag
+tagBuilder --> Caller : Tag instance
+deactivate tagBuilder TAGBUILDER_COLOR
+
+@enduml

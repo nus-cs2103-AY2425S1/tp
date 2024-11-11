@@ -1,0 +1,81 @@
+{
+  "companies" : [
+    {
+      "name" : "Google",
+      "phone" : "00000001",
+      "email" : "google@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "careerPageUrl" : "www.google-careers.com",
+      "applicationStatus" : "",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Leading Tech company"
+    },
+    {
+      "name" : "Meta",
+      "phone" : "00000002",
+      "email" : "meta@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "careerPageUrl" : "www.meta-careers.com",
+      "applicationStatus" : "",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Social media giant"
+    },
+    {
+      "name" : "Grab",
+      "phone" : "00000003",
+      "email" : "grab@example.com",
+      "address" : "wall street",
+      "careerPageUrl" : "www.grab-jobs.com",
+      "applicationStatus" : "",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "Leading ride-hailing service in Southeast Asia"
+    },
+    {
+      "name" : "Shopee",
+      "phone" : "00000004",
+      "email" : "shopee@example.com",
+      "address" : "10th street",
+      "careerPageUrl" : "www.shopee-careers.com",
+      "applicationStatus" : "",
+      "tags" : [ "Salary:HIGH", "Difficulty:LOW", "Period:SUMMER-2025", "WLB:LOW" ],
+      "bookmark" : false,
+      "remark" : "E-commerce platform"
+    },
+    {
+      "name" : "Apple",
+      "phone" : "00000005",
+      "email" : "apple@example.com",
+      "address" : "Michigan Ave",
+      "careerPageUrl" : "www.apple-careers.com",
+      "applicationStatus" : "",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "Creators of the iPhone"
+    },
+    {
+      "name" : "ByteDance",
+      "phone" : "00000006",
+      "email" : "bytedance@example.com",
+      "address" : "Little Tokyo",
+      "careerPageUrl" : "www.bytedance-jobs.com",
+      "applicationStatus" : "",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "TikTok parent company"
+    },
+    {
+      "name" : "Amazon",
+      "phone" : "00000007",
+      "email" : "amazon@example.com",
+      "address" : "4th Street",
+      "careerPageUrl" : "www.amazon-jobs.com",
+      "applicationStatus" : "",
+      "tags" : [ ],
+      "bookmark" : false,
+      "remark" : "E-commerce and cloud computing leader"
+    }
+  ]
+}
