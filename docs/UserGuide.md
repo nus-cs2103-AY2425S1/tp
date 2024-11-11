@@ -208,7 +208,7 @@ Note:
     * Editing an item but providing no new values is invalid.
 * The existing values will be updated to the input values.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-    * e.g. `edit v/1 t/` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
+    * e.g. `edit v/1 t/` is run after `view v/2`. Even though the vendor with index 1 will not be visible, it can still be edited.
     * See [Off-Screen Operations](#off-screen-operations) for more details.
 * When editing tags, the existing tags of the vendor/event will be **overridden**.
     * Tags cannot be added cumulatively.
@@ -228,7 +228,7 @@ Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 Note:
 * Deletes the event or vendor at the specified `INDEX`.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-    * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion. 
+    * e.g. `delete v/1` is run after `view v/2`. Even though the vendor with index 1 will not be visible, it can still be specified for deletion. 
     * See [Off-Screen Operations](#off-screen-operations) for more details. 
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
