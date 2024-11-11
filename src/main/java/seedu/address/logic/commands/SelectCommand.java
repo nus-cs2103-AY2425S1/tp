@@ -44,7 +44,15 @@ public class SelectCommand extends Command {
     private List<Index> indexes;
     private SelectPredicate selectPredicate;
 
+    /**
+     * Constructs a {@code SelectCommand} with the specified list of indexes to be selected.
+     *
+     * @param indexes A list of {@code Index} objects representing the indexes to be processed by this command.
+     *                Must not be null.
+     * @throws NullPointerException if {@code indexes} is null.
+     */
     public SelectCommand(List<Index> indexes) {
+        requireNonNull(indexes);
         this.indexes = indexes;
     }
 
@@ -54,7 +62,6 @@ public class SelectCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        assert indexes != null : ASSERT_INDEX_LIST_NOT_NULL;
         assert !indexes.isEmpty() : ASSERT_INDEX_LIST_AT_LEAST_ONE_INDEX;
 
         logger.info(String.format(LOG_EXECUTING_SELECT_COMMAND, formatIndexes(indexes)));
