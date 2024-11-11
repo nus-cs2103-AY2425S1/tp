@@ -42,7 +42,7 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
     ![Ui](images/Ui.png)
     **Windows User Interface**:
     ![Windows Ui](images/windows_ui.jpg)
-    
+    <br/><br/>
     {: .alert .alert-info}
     > :information_source: **Note:**
     > * EduConnect will look slightly different on macOS and Windows. Specifically, the emojis on macOS will be in color, while those on Windows will appear in monochrome.
@@ -154,7 +154,7 @@ Example:
     * an emergency contact 8765 4321
 
 {: .alert .alert-secondary}
-> When a new student is added, with the example command above, he will be displayed as shown below, with the following example success message:
+> When a new student is added using the example command above, he will be displayed as shown below, with the following example success message:
 > 
 > ![result for addAppt command example](images/addStudentCommand.png)
 > 
@@ -191,12 +191,11 @@ Example:
     * the classes she teaches 5A and 8C
 
 {: .alert .alert-secondary}
-> When a new teacher is added, with the example command above, she will be displayed as shown below, with the following example success message:
+> When a new teacher is added using the example command above, she will be displayed as shown below, with the following example success message:
 > 
 > ![result for addTeacher command example](images/addTeacherCommand.png)
 >
 > _New teacher added: Elizabeth Chua; Gender: female; Phone: 95673211; Email: elizchua@yahoo.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subject: [English]; Classes: 8C, 5A; Tags:_
-
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -221,9 +220,13 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /name Betsy Crower` edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
-   <br/><br/>
 
-![edit command](images/edited_ui.png)
+{: .alert .alert-secondary}
+> When a person is edited using the example command above, they will be displayed as shown below, with the following example success message:
+>
+> ![edit command](images/edited_ui.png)
+>
+> [to be added]
 
 #### Deleting a person : `delete`
 
@@ -396,9 +399,13 @@ Format: `sort ATTRIBUTE`
 
 Examples:
 * `sort attendance` sorts the list of students by attendance in descending order.
-  <br/><br/>
 
-![sort attendance command](images/sort_attendance.png)
+{: .alert .alert-secondary}
+> When the list of persons is sorted by attendance using the example command above, they will be displayed as shown below, with the following example success message:
+>
+> ![sort attendance command](images/sort_attendance.png)
+>
+> List sorted successfully.
 
 [Back to Table of Contents](#table-of-contents)
 
