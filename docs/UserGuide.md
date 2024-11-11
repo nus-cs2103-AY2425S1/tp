@@ -259,8 +259,12 @@ Examples:
 
 ![after archiving contact](images/archivedcontact.png)
 
-Note:
-* You will not be able to use `inspect` and `edit` for archived contacts.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `inspect` and `edit` for archived contacts.
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -273,8 +277,12 @@ Examples:
 
 ![after archiving delivery](images/archiveddelivery.png)
 
-Note:
-* You will not be able to use `edit` for archived deliveries.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `edit` for archived deliveries.
+
+</box>
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
