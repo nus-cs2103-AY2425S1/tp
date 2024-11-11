@@ -11,9 +11,9 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to undo/redo previous commands, together with [Eline](elinengu.md).
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: I implemented the feature based on the *Proposed Features* section of AB3. I also wrote the tests for the feature.
+  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them. This is especially the case when the user accidentally `clear`s the entire address book.
+  * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it interacts with many components of the app.
+  * Credits: [Eline](elinengu.md) and I implemented the feature based on the *Proposed Features* section of AB3. I also wrote the tests for the feature.
 
 * **New Feature**: Added the ability to delete module roles using the `edit` command.
 
