@@ -428,7 +428,7 @@ Visual example of correct output (General Find) (Example 1):
 
 ![GeneralFindCommandShowcase.png](images/user-guide-images/GeneralFindCommandShowcase.png)
 
-Visual example of correct output (Specific Find) (Example 1):
+Visual example of correct output (Specific Find) (Example 2):
 
 ![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
