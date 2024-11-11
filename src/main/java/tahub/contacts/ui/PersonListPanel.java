@@ -2,6 +2,7 @@ package tahub.contacts.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -37,6 +38,7 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private PersonCard personCard;
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -44,17 +46,29 @@ public class PersonListPanel extends UiPart<Region> {
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
+                personCard = null;
             } else {
-                setGraphic(new PersonCard(logic, person, getIndex() + 1).getRoot());
+                if (personCard == null || !personCard.person.equals(person)) {
+                    personCard = new PersonCard(logic, person, getIndex() + 1);
+                } else {
+                    // Reuse existing card but refresh content
+                    personCard.refresh(getIndex() + 1);
+                }
+                setGraphic(personCard.getRoot());
             }
         }
     }
 
     /**
-     * Refreshes the person view to reflect any changes in tags
+     * Refreshes the person view to reflect any changes in person details or tags
      */
     public void refreshPersonView() {
-        personListView.refresh();
+        Platform.runLater(() -> {
+            // Force a complete refresh of the list view
+            ObservableList<Person> items = personListView.getItems();
+            personListView.setItems(null);
+            personListView.setItems(items);
+            personListView.refresh();
+        });
     }
-
 }

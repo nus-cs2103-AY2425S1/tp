@@ -2,6 +2,7 @@ package tahub.contacts.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -177,6 +178,13 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // Immediate refresh for person-edit command
+            if (commandText.startsWith("person-edit")) {
+                Platform.runLater(() -> {
+                    personListPanel.refreshPersonView();
+                });
+            }
 
             // Immediately refresh person list panel after course deletion or enrollment changes
             if (commandText.startsWith("course-delete") || commandText.startsWith("enroll")
