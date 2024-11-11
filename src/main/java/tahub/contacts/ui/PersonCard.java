@@ -1,7 +1,5 @@
 package tahub.contacts.ui;
 
-import java.util.Comparator;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

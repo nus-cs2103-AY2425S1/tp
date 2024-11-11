@@ -181,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
 
             // Immediate refresh for person-edit command
             if (commandText.startsWith("person-edit")) {
-                Platform.runLater (() -> {
+                Platform.runLater(() -> {
                     personListPanel.refreshPersonView();
                 });
             }
