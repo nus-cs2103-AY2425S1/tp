@@ -70,9 +70,11 @@ Now that you are familiar with the key terms and annotated boxes, you can procee
 
         `java -jar educonnect.jar`
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
-     - Take note, EduConnect will look slightly different on macOS, and on Windows. Particularly, the contact cards on macOS will be colourised, while those on Windows will be in monochrome. 
-     - The screenshots on this User Guide will be primarily on macOS.
 
+{: .alert .alert-info}
+> :information_source: **Note:**
+> * EduConnect will look slightly different on macOS, and on Windows. Particularly, the contact cards on macOS will be colourised, while those on Windows will be in monochrome. 
+> * The screenshots on this User Guide will be primarily on macOS.
 
 **macOS User Interface**: 
 ![Ui](images/Ui.png)
@@ -497,6 +499,7 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
