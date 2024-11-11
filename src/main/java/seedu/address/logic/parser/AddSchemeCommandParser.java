@@ -31,7 +31,11 @@ public class AddSchemeCommandParser implements Parser<AddSchemeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSchemeCommand.MESSAGE_USAGE));
         }
 
-        Index schemeIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
-        return new AddSchemeCommand(personIndex, schemeIndex);
+        try {
+            Index schemeIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).get());
+            return new AddSchemeCommand(personIndex, schemeIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSchemeCommand.MESSAGE_USAGE), pe);
+        }
     }
 }
