@@ -120,6 +120,8 @@ To install Java 17:
 * Follow the installation instructions on the website to complete the setup.
 * Once installed, verify the installation as per the [section above](#verify-java-version).
 
+<div style="page-break-after: always;"></div>
+
 > ℹ️ **What is Java?**
 >
 > Java is the platform that this AgentAssist runs on, providing the environment needed for smooth operation across different types of computers. Java is also used by many popular desktop applications, such as Minecraft and Apache OpenOffice. By using Java, we ensure that our app performs reliably on all supported systems, including Windows, macOS, and Linux.
@@ -149,7 +151,8 @@ Find or create a folder on your computer where you want to store the AgentAssist
 3. **Run the application:**
     - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
     - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
-      <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
+
+<img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
@@ -162,54 +165,52 @@ Find or create a folder on your computer where you want to store the AgentAssist
 
 The AgentAssist GUI is designed with intuitive sections and color-coded elements to optimize usability for credit card sales agents. Here’s an overview of the layout:
 
+<div style="page-break-after: always;"></div>
+
 ### Main Components of the AgentAssist GUI:
 
 <img src="images/UiSplitViewWithChartAnnotated.png" alt="UISplitViewWithChartAnnotated">
 
-#### <span style="color: #FF5C5C; font-size: 18px;">⬤</span> Command Box
+#### <span style="color: #FF5C5C; font-size: 16px;">⬤</span> Command Box
 The command box provides a CLI-style input field where you can type commands to execute various actions, such as searching for a client or updating details. This integration of CLI and GUI functionalities provides the efficiency of command-line input within a clear, visual interface.
 
-#### <span style="color: #FFC0CB; font-size: 18px;">⬤</span> Result Box
+#### <span style="color: #FFC0CB; font-size: 16px;">⬤</span> Result Box
 Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps you to quickly verify outcomes, ensuring accuracy and efficiency with each action.
 
-#### <span style="color: #22C7FF; font-size: 18px;">⬤</span> Clients’ Contacts List
+#### <span style="color: #22C7FF; font-size: 16px;">⬤</span> Clients’ Contacts List
 A scrollable list that concisely displays client contact information, with icons identifying each field. Colored labels highlight each client’s **credit card tier** and **case status** to empower you to track the urgency of each case. This allows you to view all key information at a glance and easily identify high-priority clients.
 
-#### <span style="color: #016D90; font-size: 18px;">⬤</span> Client Detail Panel
+#### <span style="color: #016D90; font-size: 16px;">⬤</span> Client Detail Panel
 When a client is selected from the contacts list via the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows you to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help you make informed, prioritized decisions.
 
-#### <span style="color: #B251CF; font-size: 18px;">⬤</span> Status Chart
+#### <span style="color: #B251CF; font-size: 16px;">⬤</span> Status Chart
 A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving you a clear overview of your workload distribution and case priorities.
 
 ### Tier Color Code for AgentAssist GUI:
 Each client’s tier is represented with a color-coded label located beside their name in the client list or under their name in the Client Detail Panel. This visual aid helps you quickly assess the importance of each client and serve them with tailored credit card promotions.
 
-#### <span style="color: #B59410; font-size: 18px;">⬤</span> Gold Tier
+<span style="color: #B59410; font-size: 16px;">⬤</span> Gold Tier
 
-#### <span style="color: #C0C0C0; font-size: 18px;">⬤</span> Silver Tier
+<span style="color: #C0C0C0; font-size: 16px;">⬤</span> Silver Tier
 
-#### <span style="color: #804a00; font-size: 18px;">⬤</span> Bronze Tier
+<span style="color: #804a00; font-size: 16px;">⬤</span> Bronze Tier
 
-#### <span style="color: #5C0002; font-size: 18px;">⬤</span> Reject Tier
-
+<span style="color: #5C0002; font-size: 16px;">⬤</span> Reject Tier
+    
 Clients that are not assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
 ### Status Color Code of AgentAssist GUI:
 Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This visual aid indicates the urgency level of each client’s case, helping you prioritize tasks.
 
-#### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
-#### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
+<span style="color: #B22222; font-size: 16px;">⬤</span> Urgent Status
+
+<span style="color: #C46210; font-size: 16px;">⬤</span> Non-Urgent Status
 
 Clients with **NA** status (no follow-up required) have no status label on the UI but are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) on the status pie chart to indicate that their cases are resolved or need no attention.
 
 To learn more about how to use commands in AgentAssist, proceed to the next section.
 
-[↑ Return to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
-
 
 # 4. Glossary
 This section contains a list of terms used in this user guide. Feel free to refer back to this section if you are unsure of what a term means!
@@ -244,6 +245,8 @@ This section contains a list of terms used in this user guide. Feel free to refe
 
 [↑ Return to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # 5. Understanding Commands in AgentAssist
 
@@ -354,6 +357,8 @@ Refer to the table below for more details.
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
 
+<div style="page-break-after: always;"></div>
+
 ### 5.4.2 Non-Flag Arguments
 
 Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
@@ -372,7 +377,6 @@ Refer to the table below for more details.
 
 **Note**: There is a known issue when the supplied index argument is too large. For more information, see [Known Issues in Section 8](#8-known-issues).
 
-<div style="page-break-after: always;"></div>
 
 ## 5.5 Using Commands
 To get started, simply type a command into the command box and hit **Enter**.
@@ -441,6 +445,8 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 ```
 - **Mandatory Components**: Flags such as `n/`, `p/`, `e/`, `a/`, `j/`, and `i/` must be followed by valid arguments like the name, phone number, and job title.
 - **Optional Components**: Flags like `t/`, `r/` and `s/` are enclosed in square brackets, indicating they are optional.
+
+<div style="page-break-after: always;"></div>
 
 ## 6.2 Data Modification Commands
 
@@ -521,8 +527,6 @@ Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for
 >
 > If you need to update details for an existing contact, use the `edit` command instead.
 > For more information, see Section [6.2.2 Editing a client](#622-edit-an-existing-clients-information).
-- If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
-
 
 
 ### 6.2.2 Edit an Existing Client's Information
@@ -584,7 +588,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       <div>After Edit</div>
       </div>
       </div>
-    
+        
 - **On Error:**
     - Error caused by invalid index
         - Message:
@@ -604,8 +608,10 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
-- **Note:** If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
-  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/ NA` .
+
+> 💡 **Pro Tip:**
+> If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), it will not be shown.
+> Thus, `edit <INDEX> rn/ NA` can be used to remove all remarks for a given client.
 
 
 
@@ -657,7 +663,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
 
 > 💡 **Pro Tip:**
-> No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
+> As mentioned in the `edit` command above, there is no need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 
 
 
@@ -689,6 +695,8 @@ This will permanently clear all contacts. Are you sure you want to execute this 
       ```
 - **On Error:**
     - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
+
+<div style="page-break-after: always;"></div>
 
 ## 6.3 Data Filtering Commands
 
@@ -773,6 +781,9 @@ For detailed explanations for the matching criteria of each flag and the accepta
       Use `<` to find clients with an income lower than the specified threshold.
       Example: `i/ <5000` will match clients with incomes below 5000.
 
+
+<div style="page-break-after: always;"></div>
+
 **What to Expect:**
 - **On Success:**
     - Message:
@@ -805,7 +816,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
 
-
+<div style="page-break-after: always;"></div>
 
 ## 6.4 General Commands
 
@@ -843,6 +854,9 @@ view <INDEX>
                 <figcaption>After View</figcaption>
             </figure>
         </div>
+
+<div style="page-break-after: always;"></div>
+
 - **On Error:**
     - Error caused by invalid index
       - Message:
@@ -886,6 +900,10 @@ close
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open.
 
+
+<div style="page-break-after: always;"></div>
+
+
 ### 6.4.3 Undo Previous Command
 
 **Purpose:** Undo previous command.
@@ -915,7 +933,12 @@ help
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
     - **Link to the User Guide**
-    ![HelpWindow](images/HelpWindow.png)
+
+**Note**: An image of the `help` dialog box can be seen on the next page.
+
+<div style="page-break-after: always;"></div>
+
+![HelpWindow](images/HelpWindow.png)
 
 
 
@@ -930,13 +953,11 @@ exit
 - After executing the command, the program will close, effectively exiting the application.
 
 
-
-
 ## 6.5 Saving Data
 
 AgentAssist **automatically saves** all client data to your computer after each command. There's no need to manually save anything.
 
-
+<div style="page-break-after: always;"></div>
 
 
 
@@ -987,6 +1008,8 @@ Each credit card tier and client status is visually distinguished in the UI with
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 8. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -1000,7 +1023,7 @@ Each credit card tier and client status is visually distinguished in the UI with
 [↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 
 ## 9. Command Summary
 
