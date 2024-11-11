@@ -4,8 +4,8 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
+SocialBook *-right-> "1" UniquePersonList
+SocialBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
@@ -18,9 +18,8 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Remark
-Person *--> Income
-Person *--> Priority
 Person *--> DateOfBirth
+Person *--> Priority
+Person *--> Income
 Person *--> FamilySize
 @enduml

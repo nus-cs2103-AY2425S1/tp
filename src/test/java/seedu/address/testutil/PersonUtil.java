@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -43,7 +42,6 @@ public class PersonUtil {
         sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
         sb.append(PREFIX_INCOME).append(person.getIncome().getValue()).append(" ");
         sb.append(PREFIX_FAMILY_SIZE).append(person.getFamilySize()).append(" ");
-        sb.append(PREFIX_REMARK).append(person.getRemark().value).append(" ");
         person.getTags().forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
         return sb.toString();
     }
@@ -63,7 +61,6 @@ public class PersonUtil {
         descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.getValue()).append(" "));
         descriptor.getFamilySize().ifPresent(familySize -> sb.append(PREFIX_FAMILY_SIZE).append(familySize.getValue())
                 .append(" "));
-        descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

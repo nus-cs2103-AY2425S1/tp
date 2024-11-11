@@ -15,7 +15,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
@@ -31,7 +30,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PRIORITY = "LOW";
-    public static final String DEFAULT_REMARK = "";
     public static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.of(2000, 1, 1);
     public static final double DEFAULT_INCOME = 0;
     public static final int DEFAULT_FAMILY_SIZE = 1;
@@ -44,7 +42,6 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Priority priority;
-    private Remark remark;
     private DateOfBirth dateOfBirth;
     private Income income;
     private FamilySize familySize;
@@ -62,7 +59,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         priority = Priority.valueOf(DEFAULT_PRIORITY);
-        remark = new Remark(DEFAULT_REMARK);
         dateOfBirth = new DateOfBirth(DEFAULT_DATE_OF_BIRTH);
         income = new Income(DEFAULT_INCOME);
         familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
@@ -81,7 +77,6 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         priority = personToCopy.getPriority();
-        remark = personToCopy.getRemark();
         dateOfBirth = personToCopy.getDateOfBirth();
         income = personToCopy.getIncome();
         familySize = personToCopy.getFamilySize();
@@ -128,14 +123,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withPriority(String priority) {
         this.priority = Priority.valueOf(priority);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withRemark(String remark) {
-        this.remark = new Remark(remark);
         return this;
     }
 
@@ -191,7 +178,7 @@ public class PersonBuilder {
      * Builds the {@code Person}.
      */
     public Person build() {
-        return new Person(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, schemes, updatedAt, isArchived);
+        return new Person(name, phone, email, address, priority, dateOfBirth, income, familySize, tags, schemes,
+                updatedAt, isArchived);
     }
 }

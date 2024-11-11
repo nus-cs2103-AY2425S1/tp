@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="SocialBook" minWidth="1300" minHeight="1000" onCloseRequest="#handleExit">
+         title="SocialBook" minWidth="1000" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -58,7 +58,7 @@
             <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
           </VBox>
 
-          <VBox fx:id="rightPane" minWidth="400" prefWidth="400" VBox.vgrow="ALWAYS">
+          <VBox fx:id="rightPane" minWidth="500" prefWidth="500" VBox.vgrow="ALWAYS">
             <StackPane fx:id="calendarViewPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
         </SplitPane>
