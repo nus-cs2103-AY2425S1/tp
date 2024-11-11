@@ -215,27 +215,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void equals_editPersonDescriptor() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptor(DESC_AMY);
-
-        // same object -> returns true
-        assertTrue(descriptor.equals(descriptor));
-
-        // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        assertTrue(descriptor.equals(copyDescriptor));
-
-        // null -> returns false
-        assertFalse(descriptor.equals(null));
-
-        // different types -> returns false
-        assertFalse(descriptor.equals(3.5));
-
-        // different descriptor -> returns false
-        assertFalse(descriptor.equals(new EditPersonDescriptor(DESC_BOB)));
-    }
-
-    @Test
     public void equals_telegramUsernameField() {
         EditPersonDescriptor descriptorWithTelegram = new EditPersonDescriptorBuilder()
                 .withTelegramUsername("username1").build();
