@@ -203,6 +203,12 @@ Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 * e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+> [!CAUTION]<br>
+> When multiple fields are specified, the order of the different fields in the command is ignored.<br>
+> Instead, the fields will be prioritised as follows(in decreasing order of priority):<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;Address -> Email -> Name -> Phone -> Tags -> Event<br>
+> The field with the highest priority will be searched, and the rest will be ignored.
+
 Examples:
 * `search a/street avenue`
 * `search e/gmail exampleEmail`
