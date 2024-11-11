@@ -22,6 +22,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 - **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list. The value provided should be a positive integer smaller than 2147483648.
 - **JSON**: JavaScript Object Notation, a lightweight data format that is easy to read and write for humans and easy to parse and generate for machines. TAHub saves its data in a `TAHub.json` file, which contains structured information about contacts, grades, and attendance records.
 
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -51,6 +52,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 6. Refer to the [Features](#features) below for details of each command.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Quick Start (Detailed)
 
@@ -153,6 +155,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 6. Refer to the [Features](#features) section below for details of each command.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -200,7 +203,6 @@ Refer to the specific sections for a detailed guide on how to use each command.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-<br></br>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -210,6 +212,8 @@ Format: `help`
 Expected output:
 
 ![result for 'help'](images/helpMessage.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -230,6 +234,8 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the TAHub.
@@ -238,6 +244,8 @@ Format: `list`
 
 Expected output:
 ![result for 'list'](images/listPersons.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -259,6 +267,8 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'edit 1 p/91234567 e/johndoe@example.com'](images/editPerson.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -279,6 +289,8 @@ Examples:
 Expected output:
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the TAHub.
@@ -296,6 +308,8 @@ Examples:
 
 Expected output:
 ![result for 'find John' followed by 'delete 1'](images/deletePerson.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding or editing a grade: `addGrade`
 
@@ -317,6 +331,8 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'addGrade 1 n/Midterm s/85 w/30'](images/addGrade.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a grade from a person: `deleteGrade`
 
 Deletes a grade for a person in the TAHub.
@@ -334,6 +350,8 @@ Examples:
 
 Expected output:
 ![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Performing grade aggregation operations: `aggGrade`
 
@@ -366,6 +384,8 @@ Expected output for `aggGrade median`:
 Expected output for `aggGrade median n/midterm`
 ![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Marking attendance: `mark`
 
 Marks the attendance record for the specified date for a person in the TAHub. If the attendance record for that date already exists, it will be overwritten.
@@ -385,6 +405,8 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'mark 1 d/31/01/2024 12:00 m/Absent'](images/markAttendance.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Unmarking attendance: `unmark`
 
 Deletes the attendance record for the specified date for a person in the TAHub. All the remaining attendance records for that person will be retained.
@@ -402,6 +424,8 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering people who were absent: `absentees`
 
 Finds all people who were absent on the specified date and time.
@@ -418,6 +442,8 @@ Examples:
 Expected output:
 ![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the TAHub.
@@ -426,6 +452,8 @@ Format: `clear`
 
 Expected output:
 ![result for 'clear'](images/clearMessage.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -453,6 +481,7 @@ Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g
 _Details coming soon ..._
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -484,8 +513,6 @@ _Details coming soon ..._
     - Open TAHub on the new computer by running the `.jar` file again.
     - Check that all your contacts, grades, and attendance records appear correctly, verifying that the data has been successfully transferred.
 
----
-
 By following these steps, you can easily transfer all your TAHub data to a new computer without losing any information.
 
 
@@ -497,6 +524,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
