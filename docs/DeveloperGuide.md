@@ -91,7 +91,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -103,13 +103,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -238,7 +238,7 @@ In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user in
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
 `AddressBookParser` first obtains the index from the user's input.
-`AddressBookParser` ensures that there is only 1 keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there is only one keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the user input.
 `DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
 
@@ -247,7 +247,7 @@ Upon execution, `DeleteCommand` gets the internship application to be deleted an
 
 <br></br>
 
-### Update the status of an Internship Application
+### Update the status of an internship application
 The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
 
 <puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
@@ -348,8 +348,8 @@ The implementation of the command follows the convention of a normal command, wh
 
 <puml src="diagrams/ExitSequenceDiagram.puml" alt="ExitSequenceDiagram" />
 
-`AddressBookParser` creates `ExitCommand`
-Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
+`AddressBookParser` creates `ExitCommand`.
+Upon execution, `ExitCommand` encapsulates the intent to close the application in `CommandResult`.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
@@ -380,7 +380,7 @@ Upon execution, `ExitCommand` gets encapsulates the intent to close the applicat
 * prefers typing to mouse interaction
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage internships faster than a typical mouse/GUI driven app
+**Value proposition**: HireMe is a free desktop application that helps you manage your extensive list of internship applications.
 
 <br></br>
 
@@ -400,6 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 | `* * *`  | CS Undergraduate              | load the internship from a saved file                                            | I can get back my data when I open the application                       |
 | `* * *`  | CS Undergraduate              | clear the list of internship application I have saved                            | I can restart a new list in the next internship application cycle        |
 | `* * *`  | CS Undergraduate              | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
+| `* * *`  | CS Undergraduate              | filter internship applications by status                                         | I can quickly view all applications of a specific status to follow up    |
 | `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
 | `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
 | `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                  | I know know the breakdown of each status                                 |
@@ -791,13 +792,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run java -jar hireme.jar in a terminal. <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running java -jar hireme.jar in a terminal.<br>
        Expected: The most recent window size and location is retained.
       
 <br></br>
@@ -808,7 +810,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: Help window is not open.
 
    2. Test case: `/help` <br>
-   Expected: Help window opens.
+      Expected: Help window opens.
 
 1. Opening Help window via `F1`
 
@@ -832,17 +834,17 @@ testers are expected to do more *exploratory* testing.
       Expected: Help window opens.
 
    3. Test case: Click on the minimise button of the Help window.<br>
-   Expected: Help window minimises.
+      Expected: Help window minimises.
 
    4. Test case: `/help` after the Help window is minimised.<br>
-   Expected: Help window does not pop open.
+      Expected: Help window does not pop open.
 
 1. Closing the Help window
 
    1. Prerequisite: Help window is open.
 
    2. Test case: Click on the close button on the Help window. <br>
-   Expected: Help window closes.
+      Expected: Help window closes.
 
 <br></br>
 
@@ -867,46 +869,43 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisite: The exact internship application should not already be in the list.
 
    2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
-   Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Google`, `google@gmail.com`, `Software Engineer Intern`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
+      Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Google`, `google@gmail.com`, `Software Engineer Intern`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
 
 2. Adding another valid internship application
 
    1. Prerequisite: The exact internship application should not already be in the list.
 
    2. Test case: `/add n/Yahoo r/Clerk e/yahoo@yahoo.com d/31/10/24`<br>
-   Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Yahoo`, `yahoo@yahoo.com`, `Clerk`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
+      Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Yahoo`, `yahoo@yahoo.com`, `Clerk`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
 
 3. Adding duplicated internship application
 
    1. Prerequisite: The exact internship application should already be in the list.
 
    2. Test case: `/add n/Yahoo r/Clerk e/yahoo@yahoo.com d/31/10/24`<br>
-   Expected: An error message stating that the internship application already exists in the list.
+      Expected: An error message stating that the internship application already exists in the list.
 
 4. Adding internship application with invalid fields
 
    1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
-   Expected: An error message stating what is considered a valid Company Name.<br>
-
+      Expected: An error message stating what is considered a valid Company Name.<br>
       1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
 
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
-   Expected: An error message stating what is considered a valid Role.<br>
-
+      Expected: An error message stating what is considered a valid Role.<br>
       1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br>
 
    3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
-   Expected: An error message stating what is considered a valid Email.
-
+      Expected: An error message stating what is considered a valid Email.
       1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br>
 
    4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
-   Expected: An error message stating what is considered a valid Date.
+      Expected: An error message stating what is considered a valid Date.
       1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br>
 
 5. Adding internship application with missing field(s)
    1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
-   Expected: An error message stating the valid use of the `/add` command.
+      Expected: An error message stating the valid use of the `/add` command.
 
 <br></br>
 
@@ -1126,12 +1125,12 @@ testers are expected to do more *exploratory* testing.
 1. Exit via Window's close button
 
    1. Test case: Close the window by clicking on the Window's close button.<br>
-   Expected: The window should close.
+      Expected: The window should close.
 
 2. Exit via exit command
 
    1. Test case: `/exit` to close the window.<br>
-   Expected: The window should close.
+      Expected: The window should close.
 
 --------------------------------------------------------------------------------------------------------------------
 
