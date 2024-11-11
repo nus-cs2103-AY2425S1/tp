@@ -93,7 +93,7 @@ public class ArchiveCommand extends Command {
     private CommandResult handleDeliveryArchive(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        List<Delivery> deliveryList= model.getFilteredDeliveryList();
+        List<Delivery> deliveryList = model.getFilteredDeliveryList();
         validateIndexes(deliveryList.size(), indexList, true);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
