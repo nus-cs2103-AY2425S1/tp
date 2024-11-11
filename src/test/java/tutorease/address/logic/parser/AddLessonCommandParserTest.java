@@ -58,8 +58,10 @@ public class AddLessonCommandParserTest {
     public void parse_allFieldsPresent_success() throws ParseException {
         Lesson expectedLesson = new LessonBuilder().build();
         StudentId studentId = new StudentId(VALID_STUDENT_ID);
+
         AddLessonCommand expectedCommand = new AddLessonCommand(studentId, expectedLesson.getFee(),
                 expectedLesson.getStartDateTime(), expectedLesson.getEndDateTime());
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
                         + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
@@ -70,21 +72,25 @@ public class AddLessonCommandParserTest {
         // missing all fields
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "", expectedMessage);
+
         // missing studentId
         String expectedStudentIdMessage = String.format(Messages.MISSING_PREFIX, PREFIX_STUDENT_ID,
                 AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, FEE_DESC + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedStudentIdMessage);
+
         // missing fee
         String expectedFeeMessage = String.format(Messages.MISSING_PREFIX, PREFIX_FEE,
                 AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, STUDENT_ID_DESC + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedFeeMessage);
+
         // missing startDateTime
         String expectedDateMessage = String.format(Messages.MISSING_PREFIX, PREFIX_START_DATE,
                 AddLessonCommand.MESSAGE_USAGE);
         assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + DURATION_DESC,
                 expectedDateMessage);
+
         // missing duration
         String expectedDurationMessage = String.format(Messages.MISSING_PREFIX, PREFIX_DURATION,
                 AddLessonCommand.MESSAGE_USAGE);
@@ -95,27 +101,34 @@ public class AddLessonCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedLessonString = STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC + DURATION_DESC;
+
         // multiple studentId
         assertParseFailure(parser, STUDENT_ID_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_STUDENT_ID));
+
         // multiple startDateTime
         assertParseFailure(parser, START_DATE_TIME_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_START_DATE));
+
         // multiple duration
         assertParseFailure(parser, DURATION_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DURATION));
+
         // multiple fee
         assertParseFailure(parser, FEE_DESC + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_FEE));
+
         // invalid value followed by valid value
         // invalid studentId followed by valid studentId
         assertParseFailure(parser, INVALID_STUDENT_ID_CHAR + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_STUDENT_ID));
         assertParseFailure(parser, INVALID_STUDENT_ID_ZERO + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_STUDENT_ID));
+
         // invalid fee followed by valid fee
         assertParseFailure(parser, INVALID_FEE + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_FEE));
+
         // invalid startDateTime followed by valid startDateTime
         assertParseFailure(parser, INVALID_START_DATE_DAY + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_START_DATE));
@@ -127,6 +140,7 @@ public class AddLessonCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_START_DATE));
         assertParseFailure(parser, INVALID_START_DATE_MINUTE + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_START_DATE));
+
         // invalid duration followed by valid duration
         assertParseFailure(parser, " " + PREFIX_DURATION + INVALID_DURATION_CHAR + validExpectedLessonString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_DURATION));
@@ -186,17 +200,22 @@ public class AddLessonCommandParserTest {
                 .withStartDateTime(VALID_START_DATE)
                 .withEndDateTime(VALID_END_DATE)
                 .build();
+
         AddLessonCommand expectedCommand = new AddLessonCommand(new StudentId(VALID_STUDENT_ID),
                 expectedLesson.getFee(), expectedLesson.getStartDateTime(), expectedLesson.getEndDateTime());
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + UPPERCASE_STUDENT_ID_DESC + FEE_DESC
                         + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + UPPERCASE_FEE_DESC
                         + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
                         + UPPERCASE_START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
+
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_ID_DESC + FEE_DESC
                 + START_DATE_TIME_DESC + UPPERCASE_DURATION_DESC,
                 expectedCommand);
