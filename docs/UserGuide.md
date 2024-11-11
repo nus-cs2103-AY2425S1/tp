@@ -367,6 +367,12 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 - `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
   Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
 
+<box type="warning" light>
+
+**Note:** Ensure that you enter a **unique name (case-insensitive) and phone number** for the person you are adding. Else, it will be detected as a duplicate, and an error message will be shown. 
+
+</box>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -590,6 +596,13 @@ You can add an appointment to DocTrack.
 
 **Note:** Although you type `DATE_TIME` in the format `yyyy-MM-dd HH:mm`, you will see it displayed as `Month Date, Year, Time`. <br>
 _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 12:30 PM`._
+
+</box>
+
+<box type="warning" light>
+
+**Note:** Ensure that you enter a **unique person, date and time,
+and appointment type** for the appointment you are adding. Else, it will be detected as a duplicate, and an error message will be shown.
 
 </box>
 
