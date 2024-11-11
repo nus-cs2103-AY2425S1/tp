@@ -74,30 +74,30 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                     |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                    | Format, Examples                                                                                                                                                                         |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTALCODE [t/TAG]…​`<br> e.g., `add n/James Ho p/88737204 e/jamesho@example.com a/Blk 310, Clementi Rd pc/1234665 t/friend t/colleague` |
-| **Add Order to Application**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
-| **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                       |
-| **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
-| **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                      |
-| **Clear**                 | `clear`                                                                                                                                                              |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
-| **Delete Order**          | `deleteOrder ORDER`<br> e.g., `deleteOrder pizza`                                                                                                                    |
-| **Delete by postal code** | `deletePC POSTALCODE`<br> e.g., `deletePC S118303`                                                                                                                   |
-| **Download**              | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Exit**                  | `exit`                                                                                                                                                                |
-| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
-| **Help**                  | `help`                                                                                                                                                               |
-| **History of a Customer** | `history NAME`<br> e.g., `history Alex`                                                                                                                              |
-| **Delete Shortcut**       | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
-| **List**                  | `list`                                                                                                                                                               |
-| **List Order**            | `listOrder`                                                                                                                                                          |
-| **List Shortcuts**        | `listShortCut`                                                                                                                                                       |
-| **List Archived**         | `listarchive`                                                                                                                                                        |
-| **Filter**                | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
-| **Unarchive**             | `unarchive INDEX`<br> e.g., `unarchive 2`                                                                                                                            |
+| **Add Order to Application**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                                    |
+| **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                                           |
+| **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                                                 |
+| **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                                          |
+| **Clear**                 | `clear`                                                                                                                                                                                  |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Delete Order**          | `deleteOrder ORDER`<br> e.g., `deleteOrder pizza`                                                                                                                                        |
+| **Delete by postal code** | `deletePC POSTALCODE`<br> e.g., `deletePC S118303`                                                                                                                                       |
+| **Download**              | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                                             |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]  [pc/POSTALCODE]  [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Exit**                  | `exit`                                                                                                                                                                                   |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
+| **Help**                  | `help`                                                                                                                                                                                   |
+| **History of a Customer** | `history NAME`<br> e.g., `history Alex`                                                                                                                                                  |
+| **Delete Shortcut**       | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                                                 |
+| **List**                  | `list`                                                                                                                                                                                   |
+| **List Order**            | `listOrder`                                                                                                                                                                              |
+| **List Shortcuts**        | `listShortCut`                                                                                                                                                                           |
+| **List Archived**         | `listarchive`                                                                                                                                                                            |
+| **Filter**                | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                                             |
+| **Unarchive**             | `unarchive INDEX`<br> e.g., `unarchive 2`                                                                                                                                                |
 
 > **Disclaimer**: NomNomNotifier only accepts inputs in english without any emojis, any inputs in other languages could cause unexpected behaviour
 
@@ -146,7 +146,7 @@ Adds a customer to the contact list.
 - Phone number (with `p/` prefix) should be an 8-digit mainstream Singaporean phone number starting with 9, 8, 7, or 6.
 - Postal code (with `pc/` prefix) should be a 6-digit number.
 
-> Note: Any name inputs with space before and after name string will be trimmed
+> Note: Leading and trailing spaces in name inputs will be automatically removed.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** Any further specification in ability to add or edit fields is described in the respective field's error message</div>
 
@@ -578,8 +578,8 @@ Exports the currently displayed contact list data as a CSV file with optional ta
 
 **Examples:**
 - `download` — Exports all contacts that exists in displayed list.
-- `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan" within the displayed list.
-- `download t/Vegan t/Vegetarian` — Exports contacts or orders tagged as "Vegan" and "Vegetarian" within the displayed list.
+- `download t/Vegan` — Exports only the contacts tagged as "Vegan" within the displayed list.
+- `download t/Vegan t/Vegetarian` — Exports contacts tagged as "Vegan" and "Vegetarian" within the displayed list.
 
 
 <div style="text-align: center;">
