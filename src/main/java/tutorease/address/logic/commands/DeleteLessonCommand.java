@@ -43,6 +43,7 @@ public class DeleteLessonCommand extends LessonCommand {
         if (targetIndex == null) {
             throw new NullPointerException("Index cannot be null");
         }
+        assert targetIndex != null : "targetIndex cannot be null";
         this.targetIndex = targetIndex;
     }
 
@@ -58,6 +59,7 @@ public class DeleteLessonCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
+        assert listIndex < model.getFilteredLessonListSize() : "listIndex cannot be out of range";
         Lesson lesson = model.getFilteredLesson(listIndex);
         model.deleteLesson(lesson);
         logger.log(Level.INFO, String.format(MESSAGE_SUCCESS, lesson));

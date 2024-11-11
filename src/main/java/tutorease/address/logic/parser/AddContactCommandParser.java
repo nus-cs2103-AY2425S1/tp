@@ -9,7 +9,10 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorease.address.logic.parser.ParserUtil.validatePrefixesPresent;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Address;
@@ -27,6 +30,7 @@ import tutorease.address.model.tag.Tag;
  */
 public class AddContactCommandParser implements Parser<AddContactCommand> {
 
+    private static Logger logger = LogsCenter.getLogger(AddContactCommandParser.class);
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -34,6 +38,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddContactCommand parse(String args) throws ParseException, IllegalArgumentException {
+        logger.log(Level.INFO, "Parsing AddContactCommand with args: " + args);
         ArgumentMultimap argMultimap = getArgumentMultimap(args);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
