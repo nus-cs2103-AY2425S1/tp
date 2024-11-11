@@ -43,10 +43,9 @@ You can reach us at the email `xingye[at]u.nus.edu`
 <img src="images/yyueyii.png" width="200px">
 
 [[github](http://github.com/yyueyii)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Software Development
 
 ### Paing Khant Kyaw
 
