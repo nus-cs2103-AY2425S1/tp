@@ -159,9 +159,11 @@ Format:
 addi in/INDEX i/INTEREST...
 ```
 
-- `in/INDEX`: Contact's position in the list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
-- **Note:** Only interests that were not part of the contact's interest list will be shown on the display message.
+- `in/INDEX`: Index of contact user wishes to add interests to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
+- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters at most.
+- **Note:** 
+  - Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
+  - The first letter of each new interest added will automatically be capitalized in both the display message and in the `interests` field under the specified contact.
 
 Example:
 
@@ -187,22 +189,29 @@ addw in/INDEX w/ROLE,COMPANY,YEAR
 Example:
 
 ```plaintext
-addw in/1 w/Software Engineer,Google,2023
+addw in/1 w/Engineer,Google,2023
 ```
 
-- `in/INDEX`: Index of contact user wishes to add work experience to.
-- `w/WORK EXPERIENCE` : Work Experience user wishes to add.
-- Index has to be a number from 1 to the total number of existing contacts in the contact list.
-- Work experience in the format `ROLE,COMPANY,YEAR`
-- If existing contact has a current work experience, it will just be replaced by the user input.
+- `in/INDEX`: Index of contact user wishes to add work experience to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
+- `w/ROLE,COMPANY,YEAR`: Work experience details user wishes to add.
+  - `ROLE`: Must be a single word without spaces, start with a capital letter, consist only of alphabetic characters.
+  - `COMPANY`: Must be a single word without spaces, start with a capital letter, consist of alphabetic characters. `&` and `-` are the only special characters allowed.
+  - `YEAR`: A four-digit year.
+- **Note:** If the specified contact already has existing work experience, it will just be replaced by the user input.
 
 Example:
 
 ```plaintext
-addw in/1 w/Intern,Google,2024
+addw in/1 w/Intern,Johnson&Johnson,2024
 ```
 
-- Adds the work experience `Intern,Google,2024` to the 1st person in the contact list.
+- Adds the work experience `Intern,Johnson&Johnson,2024` to the 1st person in the contact list.
+
+```plaintext
+addw in/2 w/Analyst,Procter-Gamble,2024
+```
+
+- Adds the work experience `Analyst,Procter-Gamble,2024` to the 2nd person in the contact list.
   
 <br>
 <div style="page-break-after: always;"></div>
@@ -230,13 +239,17 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
 [m/MAJOR] [u/UNIVERSITY]…​
 ```
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-- The index should not be longer than 1000. 
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+- **Index:**
+  - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  - The index should not be longer than 1000. 
+- **Updating Values:**
+  - At least one of the optional fields must be provided.
+  - Existing values will be updated to the input values.
+- **Removing Optional Fields:**
+  - `Interests`: If the edit command is executed with an empty `i/` field, it will remove the `interests` from the specified contact.
+  - `Work Experience`: If the edit command is executed with an empty `w/` field, it will remove the `work experience` from the specified contact.
+  - `Tag`: If the edit command is executed with an empty `t/` field, it will remove the `tag` from the specified contact.
+**Note:** When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 Examples:
 
@@ -249,6 +262,16 @@ edit 1 p/91234567 e/johndoe@example.com
 edit 2 n/Betsy Crower t/
 ```
 - Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+```plaintext
+edit 3 i/
+```
+- Removes all interests from the third contact.
+
+```plaintext
+edit 4 w/
+```
+- Removes the work experience for the fourth contact.
 
 <br>
 
@@ -537,9 +560,10 @@ _Details coming soon ..._
     - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
     - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
     - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
-4. **When adding a new user**, the birthday field is compulsory.
-5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
-6. **When adding a new user**, the birthday field can be a date in the future. 
+4. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
+5. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
+6. **When adding `interests` to contacts**, running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
+7. **When adding `work experience` to contacts**, the `role` and `company` fields for the `addw` command cannot contain numbers or special characters (other than `&` and `-` for `company` only). Additionally, `year` is allowed to be in the future.
 ---
 
 ## Glossary
