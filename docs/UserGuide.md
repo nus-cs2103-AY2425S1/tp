@@ -1,18 +1,53 @@
 
 # VendorVault User Guide
 
-VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency! 
+VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency!
 
 --- 
-
-### Table of Contents will be added here by Linkes
-
-
----
+# Table of Contents
+<!-- * Table of Contents -->
+1. [How to get started](#1-how-to-get-started)
+2. [Setting up VendorVault](#2-setting-up-vendorvault)
+3. [Features](#3-features)
+    - 3.1. [Understanding the Command Syntax](#3-1-understanding-the-command-syntax)
+    - 3.2. [General commands](#3-2-general-commands)
+        - 3.2.1. [Viewing help](#3-2-1-viewing-help-help)
+        - 3.2.2. [Viewing all deliveries and suppliers](#3-2-2-viewing-all-deliveries-and-suppliers-list-a)
+        - 3.2.3. [Clearing all suppliers and deliveries](#3-2-3-clearing-all-suppliers-and-deliveries-clear)
+        - 3.2.4. [Exiting the program](#3-2-4-exiting-the-program-exit)
+    - 3.3. [Supplier commands](#3-3-supplier-commands)
+        - 3.3.1. [Adding a supplier](#3-3-1-adding-a-supplier-add-s)
+        - 3.3.2. [Listing all suppliers](#3-3-2-listing-all-suppliers-list-s)
+        - 3.3.3. [Deleting a supplier](#3-3-3-deleting-a-supplier-delete-s)
+        - 3.3.4. [Marking a supplier with a status](#3-3-4-marking-a-supplier-with-a-status-mark-s)
+        - 3.3.5. [Finding suppliers](#3-3-5-finding-suppliers-find-s)
+        - 3.3.6. [Sorting suppliers](#3-3-6-sorting-suppliers-sort-s)
+    - 3.4. [Delivery commands](#3-4-delivery-commands)
+        - 3.4.1. [Adding a delivery](#3-4-1-adding-a-delivery-add-d)
+        - 3.4.2. [Listing all deliveries](#3-4-2-listing-all-deliveries-list-d)
+        - 3.4.3. [Deleting a delivery](#3-4-3-deleting-a-delivery-delete-d)
+        - 3.4.4. [Marking a delivery](#3-4-4-marking-a-delivery-mark-d)
+        - 3.4.5. [Finding deliveries](#3-4-5-finding-deliveries-find-d)
+        - 3.4.6. [Sorting deliveries](#3-4-6-sorting-deliveries-sort-d)
+        - 3.4.7. [Upcoming deliveries](#3-4-7-upcoming-deliveries-upcoming)
+    - 3.5. [Extended valid format guidelines](#3-5-extended-valid-format-guidelines)
+        - 3.5.1. [Valid email address format](#3-5-1-valid-email-address-format)
+        - 3.5.2. [Valid company name format](#3-5-2-valid-company-name-format)
+4. [Managing my data](#4-managing-your-data)
+   - 4.1. [Saving your data](#4-1-saving-the-data)
+   - 4.2. [Editing your data directly](#4-2-editing-the-data-file)
+   - 4.3. [Archiving your data files](#4-3-archiving-data-files-coming-in-v2-0)
+5. [FAQ](#5-faq)
+6. [Known Issues](#6-known-issues)
+7. [Command Summary](#7-command-summary)
+    - 7.1. [General Commands](#7-1-general-commands)
+    - 7.2. [Supplier-specific Commands](#7-2-supplier-specific-commands)
+    - 7.3. [Delivery-specific Commands](#7-3-delivery-specific-commands)
+8. [Glossary](#8-glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How to get started
+# 1 How to get started
 
 1. If you are new to Vendor Vault, we suggest starting from the [Setting up VendorVault section](#setting-up-vendorvault).
 
@@ -20,9 +55,11 @@ VendorVault is a **desktop app for managing supplier contact information and del
 
 3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#glossary) section for definitions and explanations.
 
+[[Back to Table of Contents]](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Setting up VendorVault 
+# 2 Setting up VendorVault 
 
 1. Java is the toolset that will allow you to use VendorVault on your system. Hence, first you need to ensure that you have Java `17` or above installed on your Computer. If you are unsure, you can check by following the steps below:
    - 1a. Open up your command terminal. 
@@ -62,9 +99,14 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 6. Refer to the [Features](#features) below for details of each command.
 <br>
+
+[[Back to Table of Contents]](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+# 3 Features
+
+## 3.1 Understanding the Command Syntax
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -91,9 +133,14 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+[[Back to Table of Contents]](#table-of-contents)
+
 ---
 
-### Viewing help : `help`
+## 3.2 General Commands
+
+### 3.2.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -103,29 +150,49 @@ Format: `help`
 
 ![help message](images/generalCommands/helpCommand.png)
 
-### Viewing all deliveries and suppliers : `list -a`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.2.2 Viewing all deliveries and suppliers : `list -a`
 
 Lists all suppliers and deliveries in the VendorVault.
 
 Format: `list -a`
 
-<box type="warning" seamless>
-**Warnings**:
+<box type="caution" seamless>
+Warnings:
 - No other parameters should be given for this command.
 - Give at least one space between list and -a.
 </box>
 
-### Clearing all suppliers and deliveries : `clear`
-
-Clear all data regarding suppliers and deliveries in vendor vault.
-
-Format: `clear`
+[[Back to Table of Contents]](#table-of-contents)
 
 ---
 
-## <ins> Supplier Commands </ins>
+### 3.2.3 Clearing all suppliers and deliveries : `clear`
 
-### Adding a supplier: `add -s`
+Clears all data regarding suppliers and deliveries in vendor vault.
+
+Format: `clear`
+
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.2.4 Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+## 3.3 Supplier Commands 
+
+### 3.3.1 Adding a supplier: `add -s`
 
 Adds a supplier to VendorVault.
 
@@ -177,7 +244,11 @@ Expected output:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add Command](images/addSupplierCommand.png)
 
-### Listing all suppliers: `list -s`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.3.2 Listing all suppliers: `list -s`
 
 Shows a list of all suppliers in VendorVault. The delivery list will not be affected.
 
@@ -191,7 +262,11 @@ Format: `list -s`
 
 </box>
 
-### Deleting a supplier : `delete -s`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.3.3 Deleting a supplier : `delete -s`
 
 Deletes a supplier from the list of suppliers in VendorVault.
 
@@ -223,7 +298,11 @@ Supplier at index 3 is deleted, assuming it existed initially. Otherwise, an err
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![delete command](images/deleteSupplierCommand.png)
 
-### Mark a supplier with a status : `mark -s`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.3.4 Marking a supplier with a status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**.
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
@@ -262,7 +341,11 @@ A success message will be displayed if the supplier is successfully marked as ac
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
 
-### Find a supplier: `find -s`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.3.5 Finding suppliers: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you to search for a supplier based on the supplier name, company, or product. 
@@ -306,7 +389,11 @@ To find the supplier whose name contains "link" and company contains "NU":
 #### Here's how it would look like in the app:
 ![find command](images/findSupplierCommand.png)
 
-### Sort suppliers: `sort -s`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.3.6 Sorting suppliers: `sort -s`
 
 The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
 This helps you to view the suppliers in a different order (ascending or descending).
@@ -341,11 +428,14 @@ To sort suppliers by name in descending order:
 A success message will be displayed if the suppliers are successfully sorted.
 #### Here's how it would look like in the app:
 ![sort command](images/sortSupplierCommand.png)
+
+[[Back to Table of Contents]](#table-of-contents)
+
 ---
 
-## <ins> Delivery Commands </ins>
+## 3.4 Delivery Commands 
 
-### Adding a delivery: `add -d`
+### 3.4.1 Adding a delivery: `add -d`
 
 Adds a delivery to VendorVault.
 
@@ -398,7 +488,11 @@ Expected output:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add delivery command](images/addDeliveryCommand.png)
 
-### Listing all deliveries: `list -d`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.2 Listing all deliveries: `list -d`
 
 Shows a list of all deliveries in VendorVault. The supplier list will not be affected.
 
@@ -412,7 +506,11 @@ Format: `list -d`
 
 </box>
 
-### Deleting a delivery : `delete -d`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.3 Deleting a delivery : `delete -d`
 
 Deletes the specified delivery from the address book.
 
@@ -446,7 +544,11 @@ Expected output:
 #### Here's how it would look like in the app:
 ![delete delivery command](images/deleteDeliveryCommand.png)
 
-### Marking a delivery : `mark -d`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.4 Marking a delivery : `mark -d`
 
 Marks the specified delivery in VendorVault with the specified `STATUS`.
 
@@ -458,7 +560,6 @@ Parameters:
 
 - `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
 - `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
-
 
 </box>
 
@@ -484,7 +585,11 @@ Expected output:
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
 
-### Find a delivery: `find -d`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.5 Finding deliveries: `find -d`
 
 Find deliveries based on attributes of the delivery, like the delivery date and time, status, supplier and product.
 
@@ -527,7 +632,11 @@ Expected output:
 #### Here's how it would look like in the app:
 ![find command](images/findDeliveryCommand.png)
 
-### Sort deliveries: `sort -d`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.6 Sorting deliveries: `sort -d`
 
 The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date and time or status.
 This helps you to view the deliveries in a different order (ascending or descending).
@@ -574,7 +683,11 @@ Expected output:
 #### Here's how it would look like in the app:
 ![sort command](images/sortDeliveriesCommand.png)
 
-### Upcoming deliveries: `upcoming`
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+### 3.4.7 Upcoming deliveries: `upcoming`
 
 Shows a list of pending deliveries in VendorVault based on delivery date and time. You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
@@ -600,8 +713,8 @@ Parameters:
 - When using more than one parameter, at least one space is needed between parameters.
 - At least one parameter must be provided.
 - If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
-
-</box>
+- 
+</box> 
 
 Examples:
 - `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
@@ -614,14 +727,13 @@ Expected output:
 #### Here's how it would look like in the app:
 ![upcoming command](images/upcomingCommand.png)
 
+[[Back to Table of Contents]](#table-of-contents)
+
 ---
-### Exiting the program : `exit`
 
-Exits the program.
+## 3.5 Extended valid format guidelines
 
-Format: `exit`
-
-#### Valid email address format
+#### 3.5.1 Valid email address format
 
 Valid email addresses are of the format: `local-part@domain`.  
 Both `local-part` and `domain` must start and end with alphanumeric characters.  
@@ -644,17 +756,26 @@ Invalid email address examples:
 - john--doe@example.com (Special character `-` cannot be used consecutively)
 - john.doe@example.c (Final `domain` part (i.e. `c`) must have at least 2 alphanumeric characters)
 
-#### Valid company name format
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+#### 3.5.2 Valid company name format
 
 Valid company names must be alphanumeric or punctuation characters, and spaces are allowed.  
 Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
 
+[[Back to Table of Contents]](#table-of-contents)
 
-### Saving the data
+---
+
+# 4 Managing your data
+
+## 4.1 Saving the data
 
 VendorVault data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## 4.2 Editing the data file
 
 VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
@@ -664,64 +785,73 @@ VendorVault automatically saves your data as a JSON file `[JAR file location]/da
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
----
 
-### Archiving data files `[coming in v2.0]`
+## 4.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
+[[Back to Table of Contents]](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# 5 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+[[Back to Table of Contents]](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+# 6 Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+[[Back to Table of Contents]](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+# 7 Command Summary
 
-### General Commands
+## 7.1 General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
-**[Clear](#clearing-all-suppliers-and-deliveries-clear)**   | `clear`
-**[Help](#viewing-help-help)**   | `help`
-**[Exit](#exiting-the-program-exit)**   | `exit`
+**[List]()**   | `list -a`
+**[Clear]()**   | `clear`
+**[Help]()**   | `help`
+**[Exit]()**   | `exit`
 
 
-### Supplier-specific Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List](#listing-all-suppliers-list-s)**   | `list -s`
-**[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find](#find-a-supplier-find-s)**   | `find -s n/KEYWORD_FOR_SUPPLIER NAME> com/KEYWORD_FOR_SUPPLIER_COMPANY pro/<KEYWORD_FOR_SUPPLIER_PRODUCT>` <br> e.g., `find -s n/link com/NU`
-**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
-
-
-### Delivery-specific Commands
+## 7.2 Supplier-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List](#listing-all-deliveries-list-d)**   | `list -d`
-**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find](#find-a-delivery-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort](#sort-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
-**[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+**[Add]()**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete]()** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List]()**   | `list -s`
+**[Mark]()**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Find]()**   | `find -s n/NAME com/COMPANY pro/PRODUCT` <br> e.g., `find -s n/link com/NU`
+**[Sort]()**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
-## Glossary
+
+## 7.3 Delivery-specific Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**[Add]()**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY  c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[Delete]()** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[List]()**   | `list -d`
+**[Mark]()**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find]()**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort]()**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
+**[Upcoming]()** | `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+
+[[Back to Table of Contents]](#table-of-contents)
+
+---
+
+# 8 Glossary
 
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **Command**: An instruction given to the application to perform a specific action. They are entered by the user in a text-based format and are used to interact with and manage data.
@@ -731,5 +861,4 @@ Action     | Format, Examples
 * **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
 
 
-
-[Back to Top](#vendor-vault-user-guide)
+[Back to Top](#vendorvault-user-guide)
