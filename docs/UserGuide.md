@@ -78,7 +78,7 @@ Action     | Format, Examples
 **Add**  : adds a student to UGTeach  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
 **Edit** : edits a student in UGTeach | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/SCHEDULE] [s/SUBJECT] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Delete** : deletes a student in UGTeach | `delete INDEX`<br> e.g., `delete 3`
-**Find** : finds a student in UGTeach with part of name matching one of keywords, **and** their schedule falling on one of the days specified | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
+**Find** : Finds students whose names contain any of the given keywords *and* their schedules contain any of the given days | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex John d/Friday`
 **Pay** : updates amount paid by a student | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **Owe** : updates amount owed by a student | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** : updates amount paid and owed by student (used when the student repays an amount owed to you) | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
@@ -268,7 +268,7 @@ Deletes the specified student from UGTeach.
 
 ### Finding students' information: `find`
 
-Finds students whose names contain any of the given keywords *and* their tuition day contains any of the given days.
+Finds students whose names contain any of the given keywords *and* their schedules contain any of the given days.
 
 **Format:** `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
