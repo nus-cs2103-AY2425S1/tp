@@ -369,10 +369,11 @@ Clears all entries from SocialBook.
 
 Format: `clear`
 
-* Both unarchived and archived entries, including those not currently shown in the last viewed person list, will be deleted.
+* Both unarchived and archived persons, including those not currently shown in the last viewed person list, will be deleted.
+* All existing appointments are also deleted.
 
 Examples:
-* `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
+* `find n/John` followed by `clear` will delete all persons and their associated appointments in SocialBook, not just those whose names start with `John`.
 
 <div style="page-break-after: always;"></div>
 
