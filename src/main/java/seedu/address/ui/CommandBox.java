@@ -58,6 +58,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    // Solution below adapted from addressbook-level4
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
 
