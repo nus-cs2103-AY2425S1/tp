@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -68,8 +68,6 @@ public class PersonCard extends UiPart<Region> {
             appointmentStart.setText(getDisplayableDateTime(person.getAppointmentStart()));
             appointmentEnd.setText(getDisplayableDateTime(person.getAppointmentEnd()));
         } else {
-            // Use of ChatGPT to see how to hide unwanted label
-            // Prompt: How to remove label if appointment is null
             appointmentDescription.setVisible(false); // Hide the label
             appointmentStart.setVisible(false);
             appointmentEnd.setVisible(false);

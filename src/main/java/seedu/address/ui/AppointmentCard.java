@@ -9,7 +9,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * An UI component that displays information of a {@code Appointment}.
+ * A UI component that displays information of a {@code Appointment}.
  */
 public class AppointmentCard extends UiPart<Region> {
 
@@ -43,6 +43,7 @@ public class AppointmentCard extends UiPart<Region> {
      */
     public AppointmentCard(Person person, int displayedIndex) {
         super(FXML);
+        assert person != null;
         this.person = person;
         id.setText("A" + displayedIndex + ". ");
         name.setText(person.getName().value);
@@ -60,8 +61,6 @@ public class AppointmentCard extends UiPart<Region> {
                     + getDisplayableDateTime(person.getAppointmentEnd());
             appointmentDuration.setText(duration);
         } else {
-            // Use of ChatGPT to see how to hide unwanted label
-            // Prompt: How to remove label if appointment is null
             appointmentDescription.setVisible(false); // Hide the label
             appointmentDuration.setVisible(false);
         }
