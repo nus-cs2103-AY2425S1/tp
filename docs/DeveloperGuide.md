@@ -742,8 +742,7 @@ hence reducing the usefulness of this command.
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
 
-2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields of a contact can be deleted, by editing the contact description field with
-an empty string (For Example: `edit 9 d/` removes description of the ninth contact in the current list), and not any other optional fields such as phone, email and address.
+2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields can be deleted, by specifying the corresponding prefix followed by an empty string (For Example: `edit 9 t/` removes all tags, while `edit 9 d/` removes the description of the ninth contact in the current list). However, other optional fields such as the phone, email and address cannot be removed as of v1.6.
 
 ![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
 (As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
@@ -768,3 +767,14 @@ For example, if the user attempts to execute `edit 1 d/For a/b testing`, the com
 The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
 We plan to follow a more standard approach of using a backslash to escape the special prefixes.
 More importantly, the parser will remove the backslash at the end of parsing, so that the user does not see the backslash in the final output.
+
+4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
+This is unrealistic, as an individual is typically either a student or a professor, but not both.
+
+![point4_screenshot](images/Planned_Enhancements_Screenshots/Point4_ConflictingRoleExample.png)<br>
+(As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
+
+We plan to enforce stricter role assignment, ensuring that:
+* A contact can be designated as a Professor across multiple modules. 
+* Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
+
