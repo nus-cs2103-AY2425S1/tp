@@ -292,7 +292,6 @@ _Figure 9: Success message displayed after adding a note to a patient's record_
 
 Possible Errors:
 
-- `This link does not exist in CareLink` - When trying to delete a link that doesn't exist
 - `Incorrect NRIC. Person not found` - When either the patient's or caregiver's NRIC cannot be found
 
 #### Listing all persons : `list`
