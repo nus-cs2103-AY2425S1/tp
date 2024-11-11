@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
-import java.time.format.DateTimeParseException;
-
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.log.AppointmentDate;
@@ -49,12 +47,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
         }
 
         // Parse date
-        AppointmentDate appointmentDate;
-        try {
-            appointmentDate = new AppointmentDate(argMultimap.getValue(PREFIX_DATE).get());
-        } catch (IllegalArgumentException | DateTimeParseException e) {
-            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
-        }
+        AppointmentDate appointmentDate = ParserUtil.parseAppointmentDate(argMultimap.getValue(PREFIX_DATE).get());
 
         // Parse log
         LogEntry logEntry;
