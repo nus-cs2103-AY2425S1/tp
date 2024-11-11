@@ -34,7 +34,6 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_NO_CRITERIA = "At least one filter criteria must be provided";
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Name should be a single word";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters persons by multiple criteria. "
             + "At least one field must be specified.\n"
             + "Parameters: [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...\n"

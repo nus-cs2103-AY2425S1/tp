@@ -1070,8 +1070,7 @@ Success action: When a person is successfully assigned:
         * Expected:
             - App creates new `addressbook.json` with empty data
             - Creata a new data file data/addressbook.json populated with a sample AddressBook.
-
-
+    
     3. Test case: Corrupt addressbook.json with invalid JSON
         * Steps:
             1. Navigate to data folder
