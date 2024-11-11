@@ -947,6 +947,15 @@ At least one field of the patient will be edited
       Step 1h1 is repeated until the NRIC to be changed to does not exist in the system<br>
       Use case resumes from step 2.
 
+#### Use case: UC09 - Return to homepage
+
+**MSS:**
+
+1.  User types command to return to homepage
+2.  ClinicConnect returns to homepage
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
