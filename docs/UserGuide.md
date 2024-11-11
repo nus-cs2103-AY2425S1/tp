@@ -436,7 +436,7 @@ Deletes a group.
 
 Format: `deleteGroup g/GROUP_NAME`
 
-* Deletes group named `GROUP_NAME`
+* Deletes group named `GROUP_NAME`.
 * Group named `GROUP_NAME` must exist.
 
 Example:

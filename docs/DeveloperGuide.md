@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 11. The final JAR or zip file should not exceed 100MB.
 12. The User Guide and Developer Guide must not exceed 15MB per file.
 13. Developer Guide and User Guide should be PDF-friendly.
-14. The final product should follow the object-oriented paradigm
+14. The final product should follow the object-oriented paradigm.
 
 --------------------------------------------------------------------------------------------------------------------
 
