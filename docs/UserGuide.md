@@ -80,8 +80,8 @@ Refer to the [Command Summary](#command-summary) section below for a quick overv
 
 | Action             | Format / Examples                                                                                                                                                 |
 | ------------------ |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_USERNAME [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
-| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_USERNAME] [tag/TAG]…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`        |
+| **Add member**     | `add_member n/NAME r/ROOM_NUMBER t/TELEGRAM [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
+| **Update member**  | `update_member INDEX [n/NAME] [r/ROOM_NUMBER] [t/TELEGRAM] [tag/TAG]…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`        |
 | **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                                 |
 | **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX…​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                     |
 | **Delete session** | `delete_session s/NAME m/INDEX…`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                                   |
@@ -132,7 +132,7 @@ Displays  an alphabetical list of all available commands for quick and easy refe
 
 Adds a member to Hall Pointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
 
-**Format:** `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_USERNAME [tag/TAG]…​​`
+**Format:** `add_member n/NAME r/ROOM_NUMBER t/TELEGRAM [tag/TAG]…​​`
 
 <box type="tip" seamless>
 
@@ -174,7 +174,7 @@ Shows a list of all members registered in Hall Pointer.
 
 Updates an existing member in Hall Pointer.
 
-**Format:** `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_USERNAME] [tag/TAG]…​​`
+**Format:** `update_member INDEX [n/NAME] [r/ROOM_NUMBER] [t/TELEGRAM] [tag/TAG]…​​`
 
 **Constraints:**
 
