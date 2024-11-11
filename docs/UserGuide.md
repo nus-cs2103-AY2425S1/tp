@@ -349,7 +349,7 @@ Data is saved in the hard disk automatically after any command that changes the 
 
 ### Editing the data file
 
-HallPointer data is saved automatically as a JSON file at `[JAR file location]/data/hallpointer.json`.
+HallPointer data is saved automatically as a JSON file at `[JAR file location]/data/hallpointer.json`. Advanced users are welcome to update data directly by editing that data file. 
 
 <box type="warning" seamless>
 
