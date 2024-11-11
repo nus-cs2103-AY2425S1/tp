@@ -426,12 +426,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Use case: Search for a patient by name**
+### **Use case: Search for a patient**
 
 **MSS**
 
-1.  User enters appropriate command keyword to search for a patient by name.
-2.  User enters the name of a patient.
+1.  User enters appropriate command keyword to search for a patient.
+2.  User enters the name or tag of a patient.
 3.  The system displays all patients with a name that matches with the user's input.
 
     Use case ends.
@@ -441,6 +441,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given name does not match any patient.
 
     * 2a1. The system shows an empty list.
+
+      Use case ends.
+
+* 2b. The given tag does not match any patient.
+
+    * 2b1. The system shows an empty list.
 
       Use case ends.
 
@@ -462,6 +468,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+---
+
 ### **Use case: Display a list of patients in a schedule by appointment dates**
 
 **MSS**
@@ -477,11 +485,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
     Use case ends.
+
 * 2b. There are no appointments scheduled.
 
     Use case ends.
 
 ---
+
+### **Use case: Sort list of patients by name or appointment**
+
+**MSS**
+
+1.  User enters appropriate command keyword to sort the list of patients.
+2.  User specifies the criteria for sorting (e.g., name | appointment).
+3.  The system displays a list of patients sorted by the specified criteria.
+4.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides an invalid sorting criteria.
+*
+    * 2a1. The system shows an error message indicating invalid input.
+    
+       Use case ends.
 
 ### **Use case: Log information to a patient's profile**
 
@@ -566,6 +594,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+### **Use case: Appointment pop-up alert on app start-up**
+
+**MSS**
+
+1.  User launches the app.
+2.  The system displays a pop-up alert for the day's appointments.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no appointments scheduled for the day, no pop-up alert.
+
+    Use case ends.
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. The app should hence not depend on any third-party software that is not available on all mainstream OS.
@@ -580,11 +625,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, MacOS
-* **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
 * **Timestamp**: A record of the date and time an event occurred
-* **Tag**: A keyword or term assigned to a piece of information (e.g., a patient) to describe or categorize it
+* **Tag**: A medical condition or status assigned to a piece of information (e.g., diabetes, G6PD) to describe or categorize it
 * **Command Line Interface**: A text-based interface for interacting with a computer program
 * **Graphical User Interface**: A visual interface for interacting with a computer program
 * **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents
