@@ -343,22 +343,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the student to the system.
 5.  System adds the student name to the student profile.
-6.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+6.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid name command format, with no special characters.
-      <br>Use case ends.
+    * 2a1. System displays an error message to ask for a valid name command format, with no special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the name field empty.
-    * 3a1. System displays an error message to ask for a valid name.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid name.<br>
+      Use case ends.
 
 * 3b. User enters a duplicate name.
-    * 3b1. System displays an error message notifying that the name already exists in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the name already exists in the system.<br>
+      Use case ends.
 
 
 **System: StudentManagerPro**
@@ -381,22 +381,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the email to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid email command format, with no special characters.
-      <br>Use case ends.
+    * 2a1. System displays an error message to ask for a valid email command format, with no special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the email field empty.
-    * 3a1. System displays an error message to ask for a valid email.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid email.<br>
+      Use case ends.
 
 * 3b. User enters a duplicate email.
-    * 3b1. System displays an error message notifying that the email already exists in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the email already exists in the system.<br>
+      Use case ends.
 
 
 **System: StudentManagerPro**
@@ -419,23 +419,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the register number to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid register number command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the register number field empty.
-    * 3a1. System displays an error message to ask for a valid register number.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid register number.<br>
+      Use case ends.
 
 * 3b. User enters a duplicate register number.
-    * 3b1. System displays an error message notifying that the register number already exists in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the register number already exists in the system.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -457,19 +457,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the sex to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid sex command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the sex field empty.
-    * 3a1. System displays an error message to ask for a valid sex.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid sex.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -491,19 +491,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the address to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid address command format, with only acceptable
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the address field empty.
-    * 3a1. System displays an error message to ask for a valid address.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid address.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -525,23 +525,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the contact number to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid contact number command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the contact number field empty.
-    * 3a1. System displays an error message to ask for a valid contact number.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid contact number.<br>
+      Use case ends.
 
 * 3b. User enters a duplicate contact number.
-    * 3b1. System displays an error message notifying that the contact number already exists in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the contact number already exists in the system.<br>
+      Use case ends.
 
 
 **System: StudentManagerPro**
@@ -564,19 +564,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the emergency contact name to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid emergency contact name command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the emergency contact name field empty.
-    * 3a1. System displays an error message to ask for a valid emergency contact name.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid emergency contact name.<br>
+      Use case ends.
 
 
 **System: StudentManagerPro**
@@ -599,19 +599,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the emergency contact number to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid emergency contact number command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the emergency contact number field empty.
-    * 3a1. System displays an error message to ask for a valid emergency contact number.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid emergency contact number.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -633,19 +633,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System adds the class to the student profile in the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid class command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the class field empty.
-    * 3a1. System displays an error message to ask for a valid class.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid class.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -667,23 +667,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input's format.
 3.  System validates the input.
 4.  System removes the student from the system.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid name command format, with no
-      special characters.
-      <br>Use case ends.
+      special characters.<br>
+      Use case ends.
 
 * 3a. User leaves the name field empty.
-    * 3a1. System displays an error message to ask for a valid name.
-      <br>Use case ends.
+    * 3a1. System displays an error message to ask for a valid name.<br>
+      Use case ends.
 
 * 3b. User enters a name that does not exist in the system.
-    * 3b1. System displays an error message to ask for a valid name of a student in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message to ask for a valid name of a student in the system.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -703,37 +703,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System validates the input’s format.
 3.  System validates the attendance data.
 4.  System adds the attendance record to the student’s profile.
-5.  System confirms the success by displaying a success message.
-    <br>Use case ends.
+5.  System confirms the success by displaying a success message.<br>
+    Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters in the attendance data.
-    * 2a1. System displays an error message asking for valid attendance format.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid attendance format.<br>
+      Use case ends.
 
 * 3a. User leaves the absent reason blank (indicating deletion of attendance).
-    * 3a1. System deletes the attendance record for that entry, and displays a confirmation message.
-      <br>Use case ends.
+    * 3a1. System deletes the attendance record for that entry, and displays a confirmation message.<br>
+      Use case ends.
 
 * 3b. User enters absent date in an invalid format.
-    * 3b1. System displays an error message asking for a valid absent date format.
-      <br>Use case ends.
+    * 3b1. System displays an error message asking for a valid absent date format.<br>
+      Use case ends.
 
 * 3c. User enters a date that does not exist (e.g., 30-02-2024).
     * 3c1. System displays an error message asking for a valid absent date.
       Use case ends
 
 * 3d. User enters absent reason in an invalid format.
-    * 3d1. System displays an error message asking for a valid absent reason format.
-      <br>Use case ends.
+    * 3d1. System displays an error message asking for a valid absent reason format.<br>
+      Use case ends.
 
 * 3e. User tries to add attendance for a student that does not exist.
-    * 3e1. System displays an error message notifying that the student does not exist in the system.
-      <br>Use case ends.
+    * 3e1. System displays an error message notifying that the student does not exist in the system.<br>
+      Use case ends.
 
 * 3f. User tries to add multiple attendances for a student at one go.
-    * 3f1. System displays an error message notifying that input with multiple attendances is not allowed.
+    * 3f1. System displays an error message notifying that input with multiple attendances is not allowed.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -752,16 +753,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the exam data.
 4. System adds the exam to every student currently in the system.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
-    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
 * 3a. User tries to add an exam that already exists in the system.
-    * 3a1. System displays an error message telling the user that the exam already exists.
-      <br>Use case ends.
+    * 3a1. System displays an error message telling the user that the exam already exists.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -780,22 +781,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the exam data.
 4. System adds the exam score to the specified exam in the student's profile.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
-    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
 * 2b. User enters invalid characters in the exam score.
-    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.
-      <br>Use case ends.
+    * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.<br>
+      Use case ends.
 * 3a. User tries to add a score to an exam that does not exist.
-    * 3a1. System displays an error message notifying that the exam does not exist in the system.
-      <br>Use case ends.
+    * 3a1. System displays an error message notifying that the exam does not exist in the system.<br>
+      Use case ends.
 * 3b. User tries to add a score to a student that does not exist.
-    * 3b1. System displays an error message notifying that the student does not exist in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -814,16 +815,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the submission data.
 4. System adds the submission to every student currently in the system.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
-    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
 * 3a. User tries to add a submission that already exists in the system.
-    * 3a1. System displays an error message telling the user that the submission already exists.
-      <br>Use case ends.
+    * 3a1. System displays an error message telling the user that the submission already exists.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -842,22 +843,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the submission data.
 4. System adds the submission status to the specified submission in the student's profile.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
-    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
 * 2b. User enters invalid characters in the submission status.
-    * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".
-      <br>Use case ends.
+    * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".<br>
+      Use case ends.
 * 3a. User tries to add a status to a submission that does not exist.
-    * 3a1. System displays an error message notifying that the submission does not exist in the system.
-      <br>Use case ends.
+    * 3a1. System displays an error message notifying that the submission does not exist in the system.<br>
+      Use case ends.
 * 3b. User tries to add a status to a student that does not exist.
-    * 3b1. System displays an error message notifying that the student does not exist in the system.
-      <br>Use case ends.
+    * 3b1. System displays an error message notifying that the student does not exist in the system.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -876,16 +877,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input's format.
 3. System validates the submission data.
 4. System deletes the submission from every student currently in the system.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
-    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
 * 3a. User tries to delete a submission that does not exist in the system.
-    * 3a1. System displays an error message telling the user that the submission does not exist.
-      <br>Use case ends.
+    * 3a1. System displays an error message telling the user that the submission does not exist.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -904,13 +905,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input attribute.
 3. System sorts the displayed list based on the attribute.
 4. System displays the sorted list.
-5. System confirms the success by displaying a success message.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
 
 **Extensions**
 * 2a. System detects an invalid attribute.
-    * 2a1. System displays an error message asking for valid input.
-      <br>Use case ends.
+    * 2a1. System displays an error message asking for valid input.<br>
+      Use case ends.
 
 **System: StudentManagerPro**
 
@@ -929,19 +930,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System validates the input predicates.
 3. System filters the student list based on the provided predicates.
 4. System displays the filtered list.
-5. System confirms the success by displaying a success message stating the number of filtered students.
-   <br>Use case ends.
+5. System confirms the success by displaying a success message stating the number of filtered students.<br>
+   Use case ends.
 
 **Extensions**
 * 1a. User inputs a filter command that is incomplete with no prefixes mentioned. 
-    * 1a1. System displays an error message showing the correct format of the filter command.
-      <br>Use case ends.
+    * 1a1. System displays an error message showing the correct format of the filter command.<br>
+      Use case ends.
 * 1b. User tries to filter by a predicate that is not supported by the filter functionality. 
-    * 1b1. System displays an error message that shows the attributes supported by the filter command and corresponding prefixes.
-      <br>Use case ends.
+    * 1b1. System displays an error message that shows the attributes supported by the filter command and corresponding prefixes.<br>
+      Use case ends.
 * 2a. System detects an empty predicate value after the attribute prefix.
-    * 2a1. System displays an error message stating that predicates cannot be empty.
-      <br>Use case ends.
+    * 2a1. System displays an error message stating that predicates cannot be empty.<br>
+      Use case ends.
 
 ### Non-Functional Requirements
 
