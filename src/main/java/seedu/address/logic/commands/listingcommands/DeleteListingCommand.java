@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
@@ -25,7 +26,6 @@ public class DeleteListingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_LISTING_SUCCESS = "Successfully deleted listing: %1$s";
-    public static final String MESSAGE_LISTING_NOT_FOUND = "This listing does not exist in EZSTATE";
 
     private final Index targetIndex;
 
@@ -39,9 +39,7 @@ public class DeleteListingCommand extends Command {
 
         List<Listing> lastShownList = model.getFilteredListingList();
         int zeroBased = targetIndex.getZeroBased();
-        if (zeroBased >= lastShownList.size() || zeroBased < 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
+        CommandUtils.handleInvalidListingIndex(zeroBased, lastShownList.size());
 
         Listing listingToDelete = lastShownList.get(targetIndex.getZeroBased());
 

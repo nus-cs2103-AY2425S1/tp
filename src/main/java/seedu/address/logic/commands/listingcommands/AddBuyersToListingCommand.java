@@ -10,11 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
  * Adds buyers to an existing listing in the system.
@@ -28,9 +28,6 @@ public class AddBuyersToListingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 buy/1 buy/3";
 
     public static final String MESSAGE_ADD_BUYERS_SUCCESS = "Buyers added to listing: %1$s";
-    public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
-    public static final String MESSAGE_DUPLICATE_BUYERS = "%1$s is already associated with this listing.";
-    public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
     public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person is not a buyer:\n"
             + "%d. %s";
     private final Index index;
@@ -56,52 +53,38 @@ public class AddBuyersToListingCommand extends Command {
 
         int zeroBased = index.getZeroBased();
         List<Listing> lastShownListingList = model.getFilteredListingList();
-        if (zeroBased >= lastShownListingList.size() || zeroBased < 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
 
-        Listing listingToEdit = model.getFilteredListingList().get(zeroBased);
+        CommandUtils.handleInvalidListingIndex(zeroBased, lastShownListingList.size());
 
-        Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
-        Set<Person> newBuyers = new HashSet<>();
+        Listing listingToEdit = lastShownListingList.get(zeroBased);
+        Set<Person> existingBuyers = listingToEdit.getBuyers();
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        for (Index buyerIndex : buyersToAdd) {
-            int zeroBasedBuyer = buyerIndex.getZeroBased();
-            int oneBasedBuyer = buyerIndex.getOneBased();
-            if (zeroBasedBuyer >= lastShownPersonList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person buyerToAdd = lastShownPersonList.get(zeroBasedBuyer);
-
-            // Check if the person is actually an instance of Buyer
-            if (!buyerToAdd.getRole().equals(Role.BUYER)) {
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
-                        oneBasedBuyer, buyerToAdd.getName()));
-            }
-
-            // Add the buyer to newBuyers set only if not already in existingBuyers
-            if (!existingBuyers.contains(buyerToAdd)) {
-                newBuyers.add(buyerToAdd);
-            }
-
-        }
-
-        existingBuyers.addAll(newBuyers);
-
-        Listing updatedListing = new Listing(
-                listingToEdit.getName(),
-                listingToEdit.getAddress(),
-                listingToEdit.getPrice(),
-                listingToEdit.getArea(),
-                listingToEdit.getRegion(),
-                listingToEdit.getSeller(),
-                existingBuyers
-        );
+        Set<Person> updatedBuyers = addBuyers(existingBuyers, lastShownPersonList);
+        Listing updatedListing = ListingCommandsUtil.updateListingWithBuyers(listingToEdit, updatedBuyers);
 
         model.setListing(listingToEdit, updatedListing);
         return new CommandResult(String.format(MESSAGE_ADD_BUYERS_SUCCESS, Messages.format(listingToEdit)));
+    }
+
+    private Set<Person> addBuyers(Set<Person> existingBuyers, List<Person> lastShownPersonList)
+            throws CommandException {
+        Set<Person> updatedBuyers = new HashSet<>(existingBuyers);
+
+        for (Index buyerIndex : buyersToAdd) {
+            int zeroBasedBuyer = buyerIndex.getZeroBased();
+            CommandUtils.handleInvalidPersonIndex(zeroBasedBuyer, lastShownPersonList.size());
+
+            Person buyerToAdd = lastShownPersonList.get(zeroBasedBuyer);
+            ListingCommandsUtil.verifyPersonIsNotBuyer(buyerToAdd, buyerToAdd.getRole(), buyerIndex);
+
+            // Add the buyer to newBuyers set only if not already in existingBuyers
+            if (!existingBuyers.contains(buyerToAdd)) {
+                updatedBuyers.add(buyerToAdd);
+            }
+        }
+
+        return updatedBuyers;
     }
 
     @Override

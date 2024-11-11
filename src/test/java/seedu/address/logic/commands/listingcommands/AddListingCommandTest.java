@@ -36,7 +36,7 @@ import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ListingBuilder;
 
@@ -152,7 +152,7 @@ public class AddListingCommandTest {
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
-                AddListingCommand.MESSAGE_INVALID_SELLER_INDEX, () -> addListingCommand.execute(modelStub));
+                Messages.MESSAGE_INVALID_SELLER_INDEX, () -> addListingCommand.execute(modelStub));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class AddListingCommandTest {
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
-                String.format(AddListingCommand.MESSAGE_INVALID_BUYER_INDEX,
+                String.format(Messages.MESSAGE_INVALID_BUYER_INDEX,
                         INDEX_THIRD_PERSON.getOneBased()), () -> addListingCommand.execute(modelStub));
     }
 

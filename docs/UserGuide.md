@@ -19,7 +19,7 @@ EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for
 **You could be part of the ideal target audience of EZSTATES if you meet the following criteria**:
 
 * `Job` : Real Estate Agent focused on managing buyer and seller relationships 
-* `Typing ability` : Comfortable with typing speeds of ~80 WPM or higher 
+* `Typing ability` : Comfortable typing at speeds of ~80 WPM or higher 
 * `Workflow Preference` : Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons 
 * `Tech Savviness` : Confident using command-based applications and prefers minimal mouse use 
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
@@ -213,21 +213,21 @@ The table below showcases the four different possible notations of prefixes:
 
 The prefixes used in **EZSTATES** are universal across all commands.
 
-| Prefix | Meaning | Constraints                                                                                                                                                                                                                                                                                                                                                         | Valid                                 | Invalid                                   |
-|--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------|
-| n/     | name    | Names should only contain `alphanumeric` characters and `spaces`, and it should not be `blank`.                                                                                                                                                                                                                                                                     | `n/wen xuan`, `n/muhammad`, `n/sean2` | `n/!@#`, `n/`                             |
-| p/     | phone   | Phone numbers should only contain `numbers`, and it should be at least `3` digits long.                                                                                                                                                                                                                                                                             | `p/123`, `p/91230000`                 | `p/12`, `p/abc123`, `p/`                  |
-| e/     | email   | Emails must follow the format `local-part@domain`. The local-part can contain alphanumeric characters and special characters (`+_.-`), but cannot start or end with special characters. The domain must have at least one label, with each label starting and ending with alphanumeric characters and being at least 2 characters long. Labels can contain hyphens. | `e/bobby@gmail.com`, `e/123@123`      | `e/bobby`, `e/123@.com`, `e/@example.com` |
-| t/     | tag     | Tag names should be `alphanumeric`.                                                                                                                                                                                                                                                                                                                                 | `t/friend1`, `t/colleague`, `t/`      | `t/friend@1`, `t/123@abc`                 |
-| d/     | date    | Dates should be in the format `dd-MM-yy` or `ddMMyy` (e.g., 25-12-24 or 251224).                                                                                                                                                                                                                                                                                    | `d/08-12-24`, `d/081224`              | `d/32-13-24`, `d/123456`, `d/`            |
-| fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `from` time must precede `to` time.                                                                                                                                                                                                                                                          | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
-| to/    | to      | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `to` time must supercede `from` time.                                                                                                                                                                                                                                                        | `to/1000`, `to/10:00`                 | `to/2500`, `to/110`, `to/`                |
-| pr/    | price   | Price should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                            | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
-| ar/    | area    | Area should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                             | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
-| add/   | address | Addresses can take any values, and it should not be `blank`.                                                                                                                                                                                                                                                                                                        | `add/123 PASIR RIS (S)123456`         | `add/`                                    |
-| reg/   | region  | Only the following `9` regions are allowed: `EAST`, `WEST`, `NORTHEAST`, `SOUTH`, `NORTH`, `NORTHWEST`, `SOUTHEAST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                        | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
-| sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
-| buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
+| Prefix | Meaning | Constraints                                                                                                                                                                                                                                                                                                                                                                                                       | Valid                                 | Invalid                                   |
+|--------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------|
+| n/     | name    | Names should only contain `alphanumeric` characters and `spaces`, and it should not be `blank`.                                                                                                                                                                                                                                                                                                                   | `n/wen xuan`, `n/muhammad`, `n/sean2` | `n/!@#`, `n/`                             |
+| p/     | phone   | Phone numbers should only contain `numbers`, and it should be at least `3` digits long.                                                                                                                                                                                                                                                                                                                           | `p/123`, `p/91230000`                 | `p/12`, `p/abc123`, `p/`                  |
+| e/     | email   | Emails must follow the format `local-part@domain`. The local-part can contain alphanumeric characters and special characters (`+_.-`), but cannot start or end with special characters. The special characters cannot be consecutive. The domain must have at least one label, with each label starting and ending with alphanumeric characters and being at least 2 characters long. Labels can contain hyphens. | `e/bobby@gmail.com`, `e/123@123`      | `e/bobby`, `e/123@.com`, `e/@example.com` |
+| t/     | tag     | Tag names should be `alphanumeric`.                                                                                                                                                                                                                                                                                                                                                                               | `t/friend1`, `t/colleague`, `t/`      | `t/friend@1`, `t/123@abc`                 |
+| d/     | date    | Dates should be in the format `dd-MM-yy` or `ddMMyy` (e.g., 25-12-24 or 251224).                                                                                                                                                                                                                                                                                                                                  | `d/08-12-24`, `d/081224`              | `d/32-13-24`, `d/123456`, `d/`            |
+| fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `from` time must precede `to` time.                                                                                                                                                                                                                                                                                                        | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
+| to/    | to      | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `to` time must supercede `from` time.                                                                                                                                                                                                                                                                                                      | `to/1000`, `to/10:00`                 | `to/2500`, `to/110`, `to/`                |
+| pr/    | price   | Price should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                                                                          | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
+| ar/    | area    | Area should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                                                                           | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
+| add/   | address | Addresses can take any values, and it should not be `blank`.                                                                                                                                                                                                                                                                                                                                                      | `add/123 PASIR RIS (S)123456`         | `add/`                                    |
+| reg/   | region  | Only the following `9` regions are allowed: `EAST`, `WEST`, `NORTHEAST`, `SOUTH`, `NORTH`, `NORTHWEST`, `SOUTHEAST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                                                                      | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
+| sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                                                                          | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
+| buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                                                                          | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
 
 #### Remarks
 
@@ -314,14 +314,17 @@ EZSTATES features (i.e. commands) are divided into **four** main categories:
 1. [Client Management Commands](#1-client-management-commands)
     - [Add Buyer](#add-buyer) (`buyer`) 
     - [Add Seller](#add-seller) (`seller`)
-    - [Find](#find) (`find`)
+    - [Find Clients](#find) (`find`)
+    - [Show Clients](#show-clients) (`showclients`)
     - [Edit Client](#edit-client) (`editclient`)
     - [Delete Client](#delete-client) (`deleteclient`)
 2. [Appointment Management Commands](#2-appointment-management) 
     - [Schedule Appointment](#schedule-appointment) (`apt`)
     - [Delete Appointment](#delete-appointment) (`deleteapt`)
+    - [Filter Appointments](#today) (`today`)
 3. [Listing Management Commands](#3-listing-management) 
     - [Add Listing](#add-listing) (`listing`)
+    - [Find Listings]() (`findlisting`)
     - [Show Listings](#show-listings) (`showlistings`)
     - [Edit Listing](#edit-listing) (`editlisting`)
     - [Add Buyers to Listing](#add-buyers-to-listing) (`addlistingbuyers`)
@@ -355,7 +358,9 @@ Commands for creating, updating, and deleting buyers and sellers.
 >
 > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
 >
-> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+> **Output**: <br> 
+New buyer added: Bobby. <br> 
+Phone: 91124444; Email: bobby123@gmail.com 
 >
 > ---
 >
@@ -363,7 +368,9 @@ Commands for creating, updating, and deleting buyers and sellers.
 >
 > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
 >
-> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+> **Output**: <br>
+New buyer added: Bobby. <br>
+Phone: 91124444; Email: bobby123@gmail.com
 >
 > ---
 
@@ -378,7 +385,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: buyer n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > ---
 >
@@ -390,7 +397,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: buyer n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > ---
 >
@@ -402,8 +409,10 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: buyer n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
+> ---
+> 
 > **User Error #4**: Buyer already exists
 >
 > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
@@ -424,7 +433,9 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
 >
-> **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+> **Output**: <br>
+New seller added: Bobby. <br>
+Phone number: 91124444 and Email: bobby123@gmail.com
 >
 > ---
 >
@@ -432,7 +443,9 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
 >
-> **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+> **Output**: <br>
+New seller added: Bobby. <br>
+Phone number: 91124444 and Email: bobby123@gmail.com
 >
 > ---
 
@@ -447,7 +460,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 Invalid command format! <br>
 seller: Adds a seller to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > ---
 >
@@ -459,7 +472,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 Invalid command format! <br>
 seller: Adds a seller to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > ---
 > **User Error #3**: Missing `EMAIL` field
@@ -470,7 +483,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 Invalid command format! <br>
 seller: Adds a seller to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > ---
 > 
@@ -478,7 +491,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > 
 > **Input**: `seller n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_ 
 > 
-> **Output**: This buyer already exists in the address book
+> **Output**: This seller already exists in the address book
 > 
 >  ---
 
@@ -517,30 +530,30 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 - **Description:** Finds the specified client(s) based on the provided keywords.
 - **Successful Execution:**
 > ---
-> **Use Case #1**: Finding `Bob`
+> **Use Case #1**: Finding `Alex`
 >
-> **Input**: `find Bob`
+> **Input**: `find Alex`
 >
 > **Output**: 1 persons listed!
 >
-> ![bob](images/bob.png)
+> ![bob](images/find_alex.png)
 >
 > ---
 >
-> **Use Case #2**: Finding `Bob` OR `Winter`
+> **Use Case #2**: Finding `Alex` OR `Bernice`
 >
-> **Input**: `find Bob Winter`
+> **Input**: `find Alex Bernice`
 >
 > **Output**: 2 persons listed!
 >
-> ![bobwinter](images/bob_winter.png)
+> ![bobwinter](images/find_alex_and_bernice.png)
 >
 > ---
 
 - **Failed Execution:**
 > ---
 >
-> **Use Case**: Client not found
+> **User Error**: Client not found
 > 
 > **Input**: `find Bob7`
 > 
@@ -563,7 +576,9 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > **Input**: `editclient 1 n/Bobby`
 >
-> **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+> **Output**: <br>
+Successfully edited Bobby. <br> 
+Phone number: 91124444 and Email: bobby123@gmail.com!
 >
 > ---
 >
@@ -571,19 +586,29 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > **Input**: `editclient 1 p/97774444`
 >
-> **Output**: 
-> Successfully edited Bobby.
-> Phone number: 97774444 and Email: bobby123@gmail.com!
+> **Output**: <br>
+Successfully edited Bobby. <br>
+Phone number: 97774444 and Email: bobby123@gmail.com!
 >
 > ---
 >
-> **Use Case #3**: Removing tags of `Bobby`
+> **Use Case #3**: Changing email of `Bobby` to `bobby321@gmail.com`
+>
+> **Input**: `editclient 1 e/bobby321@gmail.com`
+>
+> **Output**: <br>
+Successfully edited Bobby. <br>
+Phone number: 97774444 and Email: bobby321@gmail.com!
+>
+> ---
+>
+> **Use Case #4**: Removing tags of `Bobby`
 >
 > **Input**: `editclient 1 t/`
 >
-> **Output**: 
-> Successfully edited Bobby. 
-> Phone number: 97774444 and Email: bobby123@gmail.com!
+> **Output**: <br> 
+Successfully edited Bobby. <br> 
+Phone number: 97774444 and Email: bobby321@gmail.com!
 >
 > ---
 
@@ -591,7 +616,11 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 > **User Error #1**: No index found / Invalid type / Negative integer
 >
-> **Input**: `editclient n/Bobby` OR `editclient #a` OR `editclient -1`
+> **Input #a**: `editclient n/Bobby`
+> 
+> **Input #b**: `editclient #a`
+> 
+> **Input #c**: `editclient -1`
 >
 > **Output**:
 <br> Invalid command format!
@@ -611,26 +640,32 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t)
+2. Multiple prefixes can be used in a single command. The prefixes are not compulsory, and the command is executed with at least one prefix present.
 
 #### Delete Client
 - **Command:** `deleteclient INDEX`
 - **Description:** Deletes the specified client profile.
 - **Successful Execution:**
 > ---
-> **Use Case #1**: Delete `Bob` from the address book (Assuming displayed index is 1)
+> **Use Case**: Delete `Bob` from the address book (Assuming displayed index is 1)
 >
 > **Input**: `deleteclient 1`
 >
-> **Output**: `Successfully deleted Bob.
+> **Output**: <br> 
+`Successfully deleted Bob. <br>
 Phone number: 977774444 and Email: bobby123@gmail.com`
 >
 > ---
 
 - **Failed Execution:**
 > ---
-> **Use Case #1**: No index found / Invalid type / Negative integer
+> **User Error #1**: No index found / Invalid type / Negative integer
 >
-> **Input**: `deleteclient` OR `deleteclient #a` OR `deleteclient -1`
+> **Input #a**: `deleteclient`
+> 
+> **Input #b**: `deleteclient #a`
+> 
+> **Input #c**: `deleteclient -1`
 >
 > **Output**: 
 <br> Invalid command format! 
@@ -639,7 +674,7 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 <br>Example: deleteclient 1
 >
 > ---
-> **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
 > 
 > **Input**: `deleteclient 100`
 > 
@@ -649,8 +684,6 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints.
-
-
 
 ---
 
@@ -667,19 +700,23 @@ Commands for managing appointments between user and clients.
 > ---
 > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob` (Assuming displayed index is 1)
 >
-> **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
+> **Input**: `apt 1 d/08-10-24 fr/19:00 to/21:00`
 >
-> **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
+> **Output**: <br> 
+Appointment scheduled for Bob on: <br>
+Date: 08-10-24 (From: 19:00 To: 21:00)
 >
 > ![bob_apt](images/bob_apt.png)
 > 
 > ---
 >
-> **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
+> **Use Case #2**: Overwriting an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
 >
-> **Input**: `apt 1 d/09-10-24 fr/1000 to/1200`
+> **Input**: `apt 1 d/091024 fr/1000 to/1200`
 >
-> **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
+> **Output**: <br> 
+Appointment scheduled for Bob on: <br>
+Date: 09-10-24 (From: 10:00 To: 12:00)
 >
 > ![bob_apt_2](images/bob_apt_2.png)
 > 
@@ -687,7 +724,7 @@ Commands for managing appointments between user and clients.
 
 - **Failed Execution:**
 > ---
-> **Use Case #1**: Incorrect `DATE` format 
+> **User Error #1**: Incorrect `DATE` format 
 >
 > **Input #a**: `apt 1 d/09-10-2024 fr/1000 to/1200`
 >
@@ -697,7 +734,7 @@ Commands for managing appointments between user and clients.
 >
 > ---
 > 
-> **Use Case #2**: Incorrect `TIME` format
+> **User Error #2**: Incorrect `TIME` format
 > 
 > **Input #a**: `apt 1 d/20-10-24 fr/100000 to/1200`
 > 
@@ -706,9 +743,45 @@ Commands for managing appointments between user and clients.
 > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
 > 
 > ---
+> 
+> **User Error #3**: No index found / Invalid type / Negative integer
+>
+> **Input #a**: `apt -1`
+>
+> **Input #b**: `apt aa`
+> 
+> **Input #c**: `apt d/20-10-24 fr/0800 to/1000`
+>
+> **Output**: <br>
+Invalid command format! <br>
+apt: Adds an appointment to a client identified by the index number used in the displayed person list. Existing appointment will be overwritten with the new appointment. <br>
+Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to/ [TO] <br>
+Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
+>
+> ---
+> > ---
+> **User Error #1**: Client index out of bounds
+>
+> **Input**: `deleteapt 100`
+>
+> **Output**: The person index provided is invalid
+>
+> --- 
+> **User Error #4**: The `From` time is later than `To`
+>
+> **Input #a**: `apt d/111124 fr/0900 to/0800`
+>
+> **Output**: <br>
+Invalid command format! <br>
+apt: Adds an appointment to a client identified by the index number used in the displayed person list. Existing appointment will be overwritten with the new appointment. <br>
+Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to/ [TO] <br>
+Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
+>
+> ---
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to)
+2. Executing the command on a client with an appointment will overwrite the existing appointment, as per Successful Execution Use Case #2.
 
 #### Delete Appointment
 - **Command:** `deleteapt INDEX`
@@ -727,17 +800,58 @@ Commands for managing appointments between user and clients.
 
 - **Failed Execution:**
 > ---
-> **Use Case**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #1**: Client index out of bounds
 >
 > **Input**: `deleteapt 100`
 >
 > **Output**: The person index provided is invalid
 >
 > ---
+> > **User Error #2**: No index found / Invalid type / Negative integer
+>
+> **Input #a**: `deleteapt -1`
+> 
+> **Input #b**: `deleteapt aa`
+> 
+> **Input #c**: `deleteapt`
+>
+> **Output**: <br>
+Invalid command format! <br>
+deleteapt: Deletes the appointment identified by the index number used in the displayed person list. <br>
+Parameters: INDEX (must be a positive integer) <br>
+Example: deleteapt 1
+>
+> ---
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints and the remarks & constraints for the following prefixes: [d/](#d) [fr/](#fr) [to/](#to)
-      
+
+#### Today
+- **Command:** `today`
+- **Description:** Finds clients that have an appointment today
+- **Successful Execution:**
+> ---
+> **Use Case**: Finding clients with appointments today
+>
+> **Input**: `today`
+>
+> **Output**: You have 1 appointment(s) today!
+>
+> ![today](images/today.png)
+>
+> ---
+
+- **Failed Execution:**
+> ---
+> **User Error**: No appointments today
+>
+> **Input**: `today`
+>
+> **Output**: You have no appointments today
+> 
+> ![todayfailed](images/todayfailed.png)
+>
+> ---
 ---
 
 ### 3. Listing Management
@@ -751,11 +865,13 @@ Commands for managing property listings and associating clients with listings.
 - **Description:** Adds a new listing associated to the seller with the specified details.
 - **Successful Execution:**
 > ---
-> **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
+> **Use Case #1**: Adding a listing with name `Warton House`, price `400000`, area `100`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
 >
-> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
+> **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
 >
-> **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
+> **Output**: <br>
+New listing added: Warton House. <br>
+Address: 123 PASIR RIS (S)123456
 >
 > ![listing](images/warton_house_listing.png)
 > 
@@ -763,30 +879,52 @@ Commands for managing property listings and associating clients with listings.
 >
 > **Use Case #2**: Adding a listing with no buyers
 >
-> **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/2`
+> **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2`
 >
-> **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
->
+> **Output**: <br>
+New listing added: Warton House. <br>
+Address: 123 PASIR RIS (S)123456
+> 
 > ![listing2](images/warton_house_no_buyers.png)
 > 
 > ---
 
 - **Failed Execution:**
 > ---
-> **Use Case #1**: Attempting to add a listing for a non-existent seller
+> **User Error #1**: Attempting to add a listing for a non-existent seller
 >
-> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
+> **Input**: `listing n/Warton House pr/400000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
 >
 > **Output**: The seller index provided is invalid!
 >
 > ---
 > 
-> **Use Case #2**: Attempting to add non-existent buyers to a listing
+> **User Error #2**: Attempting to add non-existent buyers to a listing
 > 
-> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
+> **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
 > 
 > **Output**: The buyer index (100) provided is invalid!
 > 
+> ---
+> 
+> **User Error #3**: Attempting to add a buyer as a seller of a listing
+>
+> **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/1 buy/1`
+>
+> **Output**: <br>
+The seller index specified is not a seller: <br>
+1. Alex Yeoh
+>
+> ---
+>
+> **User Error #4**: Attempting to add a seller as a buyer of a listing
+>
+> **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/2`
+>
+> **Output**: <br>
+The buyer index specified is not a buyer: <br>
+2. Bernice Yu
+>
 > ---
 
 - **Special Comments**
@@ -799,7 +937,7 @@ Commands for managing property listings and associating clients with listings.
 > ---
 > **Use Case #1**: To show all listings in EZSTATES
 >
-> **Input**: showlistings
+> **Input**: `showlistings`
 >
 > **Output**: Here are your listings!
 >
@@ -809,7 +947,7 @@ Commands for managing property listings and associating clients with listings.
 > 
 > **Use Case #2**: To show all listings (when there are none)
 > 
-> **Input**: showlistings
+> **Input**: `showlistings`
 > 
 > **Output**: You have no listings available.
 > 
@@ -821,6 +959,22 @@ Commands for managing property listings and associating clients with listings.
 - **Special Comments:**
 1. You are able to show an empty list of listings, as per Successful Execution Use Case #2
 
+#### Find Listings
+- **Command:** `findlisting KEYWORD [KEYWORD]`
+- **Description:** Finds the specific listing(s) based on the provided keywords
+- **Successful Execution:**
+> ---
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> ---
+
 #### Edit Listing
 - **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`
 - **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use addlistingbuyers or removelistingbuyers to manage buyers.
@@ -828,7 +982,7 @@ Commands for managing property listings and associating clients with listings.
 > ---
 > **Use Case #1**: Editing listing `RC4` to become `RC445` with area `150`
 > 
-> **Input**: `editlisting 1 n/RC445 pr 1500000000 ar/150`
+> **Input**: `editlisting 1 n/RC445 ar/150`
 > 
 > **Output**: 
 Successfully edited listing: RC445.
@@ -846,30 +1000,46 @@ Address: test
 
 - **Failed Execution:**
 > ---
-> **User Error #1**: Out-of-bounds index
+> **User Error #1**: Listing index out of bounds
 > 
 > **Input**: `editlisting 1000` 
 > 
 > **Output**: The listing index provided is invalid!
 > 
-> 
-> **User Error #2**: Changing name to pre-existing name
+> ---
+> **User Error #2**: Changing name to pre-existing name (or address)
 > 
 > **Input**: `editlisting 1 n/RC5` _(assuming RC5 already exists in the system)_
 > 
 > **Output**: This listing name / address already exists in the system.
 > 
-> 
+> ---
 > **User Error #3**: No prefixes provided
 > 
-> **Input**: editlisting 1
+> **Input**: `editlisting 1`
 > 
 > **Output**: At least one field to edit must be provided.
 > 
 > ---
+> **User Error #4**: No index found / Invalid type / Negative integer
+>
+> **Input #a**: `editlisting n/aaaa`
+> 
+> **Input #b**: `editlisting a`
+>
+> **Input #c**: `editlisting -1`
+>
+> **Output**: <br>
+Invalid command format! <br>
+editlisting: Edits the details of the listing identified by the listing index number. Buyers cannot be edited using this command. Use addlistingbuyers or removelistingbuyers to manage buyers. <br>
+Parameters: LISTING_INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]... <br>
+Example: editlisting 2 pr/450000 ar/1200
+>
+> ---
 
 - **Special Commands**
 1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy)
+2. There is a known issue where a listing can be edited to assign a buyer as its seller. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Add Buyers to Listing
 - **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
@@ -878,39 +1048,41 @@ Address: test
 > ---
 > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming RC4 index is 1)
 >
-> **Input**: `addlistingbuyers 1 buy/1 buy/3`
+> **Input**: `addlistingbuyers 1 buy/1`
 >
-> **Output**: Buyers added to listing: RC4
+> **Output**: <br>
+Buyers added to listing: RC4. <br>
+Address: 134 Clementi Ave
 >
 > ---
 >
-> **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
+> **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB` (Assuming David HDB index is 2)
 >
 > **Input**: `addlistingbuyers 2 buy/1 buy/3`
 >
-> **Output**: Buyers added to listing: David HDB
+> **Output**: <br> 
+Buyers added to listing: David HDB. <br>
+Address: 123 Clementi Ave
 >
 > ---
 
 - **Failed Execution:**
 > ---
-> **Use Case #1**: Listing not found
+> **User Error #1**: Listing index out of bounds / Listing index not found / Invalid type / Negative integer
 >
-> **Input**: `addlistingbuyers 100 buy/1`
+> **Input #a**: `addlistingbuyers 100 buy/1`
+> 
+> **Input #b**: `addlistingbuyers buy/1`
+> 
+> **Input #c**: `addlistingbuyers aa`
+> 
+> **Input #d**: `addlistingbuyers -1 buy/1`
 >
 > **Output**: The listing index provided is invalid!
->
-> ---
-> 
-> **User Error #2**: Duplicate buyers
-> 
-> **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming RC4 contains Alex Yeoh already)_
-> 
-> **Output**: Some buyers are already associated with this listing.
 > 
 > --- 
 > 
-> **User Error #3**: Buyer not found
+> **User Error #2**: Buyer not found
 > 
 > **Input**: `addlistingbuyers 1 buy/100`
 > 
@@ -918,54 +1090,69 @@ Address: test
 > 
 > ---
 > 
-> **User Error #4**: Person is not a buyer
+> **User Error #3**: Person is not a buyer
 > 
 > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client with index 1 is a seller)_
 > 
-> **Output**: The specified person is not a buyer:<br>1.bob
-> 
+> **Output**: The specified person is not a buyer:<br>1. bob
 >
+> ---
+> 
+> **User Error #4**: Missing `buy/` prefix
+>
+> **Input**: `addlistingbuyers 1`
+>
+> **Output**: <br>
+Invalid command format! <br>
+addlistingbuyers: Adds buyers to the listing identified by its index. Parameters: LISTING_NAME buy/BUYER_NAME [buy/MORE_BUYER_NAMES]... <br>
+Example: addlistingbuyers 1 buy/1 buy/3
+> 
 > ---
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefix: [buy/](#sel--buy)
+2. There is a minor known issue regarding the failure messsage for User Error #4. The Result Display should show `LISTING_INDEX` instead of `LISTING_NAME`. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Remove Buyers from Listing
 - **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
 - **Description:** Removes buyers associated with a specified listing.
 - **Successful Execution:**
 > ---
-> **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
+> **Use Case #1**: Removing buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4` (Assuming RC4 index is 1)
 >
-> **Input**: `removelistingbuyers 1 buy/1` 
+> **Input**: `removelistingbuyers 1 buy/1 buy/3` 
 >
-> **Output**: Buyers removed from listing: RC4
->
-> ---
->
-> **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
->
-> **Input**: `removelistingbuyers 1 buy/1 buy/3`
->
-> **Output**: Buyers removed from listing: RC4
+> **Output**: <br>
+Buyers removed from listing: RC4. <br>
+Removed buyers: Alex Yeoh, Charlotte Oliveiro
 >
 > ---
 
 - **Failed Execution:**
 > ---
-> **User Error #1**: Listing not found
+> **User Error #1**: Listing index out of bounds / Listing index not found / Invalid type / Negative integer
 >
-> **Input**: `removelistingbuyers 100 buy/1`
+> **Input #a**: `removelistingbuyers 100 buy/1`
+>
+> **Input #b**: `removelistingbuyers buy/1`
+>
+> **Input #c**: `removelistingbuyers aa`
+>
+> **Input #d**: `removelistingbuyers -1 buy/1`
 >
 > **Output**: The listing index provided is invalid!
 > 
 > ---
 > 
-> **User Error #2**: Empty set of buyers
+> **User Error #2**: Buyer index not found / Invalid type / Negative integer 
 >
-> **Input**: `removelistingbuyers 1 buy/`
+> **Input #a**: `removelistingbuyers 1 buy/1000`
 >
-> **Output**: The person index provided is invalid!
+> **Input #b**: `removelistingbuyers 1 buy/aa`
+>
+> **Input #c**: `removelistingbuyers 1 buy/-1`
+>
+> **Output**: Index is not a non-zero unsigned integer.
 > 
 > ---
 > 
@@ -973,23 +1160,19 @@ Address: test
 >
 > **Input**: `removelistingbuyers 1 buy/2`
 >
-> **Output**: The person index provided is invalid!
-> 
+> **Output**: <br>
+The specified person is not a buyer: <br>
+2. Bernice Yu <br>
+>
 > ---
 > 
 > **User Error #4**: Person specified is not a buyer for the listing
 >
-> **Input**: `removelistingbuyers 1 buy/3`
+> **Input**: `removelistingbuyers 1 buy/1`
 >
-> **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
-> 
-> ---
-> 
-> **User Error #5**: Buyer not found
->
-> **Input**: `removelistingbuyers 1 buy/100`
->
-> **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
+> **Output**: <br>
+The specified buyer Alex Yeoh is not a buyer of the listing RC4. <br>
+Address: 134 Clementi Ave.
 > 
 > ---
 
@@ -1011,13 +1194,29 @@ Address: test
 
 - **Failed Execution:**
 > ---
-> **Use Error**: Listing not found
+> **User Error #1**: Listing index out of bounds
 >
-> **Input**: deletelisting 100
+> **Input**: `deletelisting 100`
 >
 > **Output**: This listing does not exist in EZSTATES
 >
 > ---
+> > **User Error #2**: No index found / Invalid type / Negative integer
+>
+> **Input #a**: `deletelisting`
+> 
+> **Input #b**: `deletelisting aa`
+> 
+> **input #c**: `deletelisting -1`
+>
+> **Output**: <br>
+Invalid command format! <br>
+deletelisting: Deletes the listing identified by its index number used in the displayed listing list. <br>
+Parameters: LISTING_INDEX <br>
+Example: deletelisting 1
+>
+> ---
+> 
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints.
@@ -1108,7 +1307,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Failed Execution:**
-> **User Error #1**: Out-of-bounds index
+> **User Error #1**: Client index out of bounds
 >
 > **Input**: `moreinfo 100`
 > 
@@ -1168,7 +1367,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 - **Failed Execution:**
 > ---
-> **Use Case #1**: Invalid Query
+> **User Error #1**: Invalid Query
 >
 > **Input**:
 ![invalidInput.png](images%2FinvalidInput.png)
@@ -1212,8 +1411,10 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
 4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
-5. **For the moreinfo command**, the `Output` for User Error #2 has a missing **parameters** line where the CLIENT_INDEX should be. Refer to the Special Comments section under [More Info](#more-info) for more clarification.
-6. **For the chatbot**, the text input field appears in black, which does not contrast well with its gray background.
+5. **For the Edit Listing command**, users can modify listings to assign a buyer as the seller of a listing.
+6. **For the Add Buyers to Listing command**, the Result Display displays an incorrect error message.
+7. **For the MoreInfo command**, the `Output` for User Error #2 has a missing **parameters** line where the CLIENT_INDEX should be. Refer to the Special Comments section under [More Info](#more-info) for more clarification.
+8. **For the Chatbot**, the text input field appears in black, which does not contrast well with its gray background.
 
 --------------------------------------------------------------------------------------------------------------------
 

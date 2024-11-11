@@ -69,10 +69,13 @@ public class Appointment {
             return false;
         }
 
-        Appointment a = (Appointment) other;
-        return date.equals(a.date)
-                && from.equals(a.from)
-                 && to.equals(a.to);
+        Appointment otherAppointment = (Appointment) other;
+
+        boolean hasSameDate = date.equals(otherAppointment.date);
+        boolean hasSameFrom = from.equals(otherAppointment.from);
+        boolean hasSameTo = to.equals(otherAppointment.to);
+
+        return hasSameDate && hasSameFrom && hasSameTo;
     }
 
     @Override

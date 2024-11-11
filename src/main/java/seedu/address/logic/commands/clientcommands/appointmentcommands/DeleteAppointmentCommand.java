@@ -6,15 +6,13 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * Deletes a client's appointment identified by the client's name.
@@ -55,36 +53,17 @@ public class DeleteAppointmentCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        int zeroBased = targetIndex.getZeroBased();
+        CommandUtils.handleInvalidPersonIndex(zeroBased, lastShownList.size());
 
-        Person personToDeleteAppointment = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDeleteAppointment = lastShownList.get(zeroBased);
+        Person personWithoutAppointment = AppointmentCommandsUtil
+                .createPersonWithAppointment(personToDeleteAppointment,
+                        personToDeleteAppointment.getRole(),
+                        Appointment.EMPTY_APPOINTMENT);
 
-        /*if (!lastShownList.contains(personToDeleteAppointment)) {
-            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
-
-            if (closestMatch != null) {
-                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
-            }
-        }*/
-
-        Person personWithoutAppointment;
-
-        if (personToDeleteAppointment instanceof Buyer) {
-            Buyer buyer = (Buyer) personToDeleteAppointment;
-            personWithoutAppointment = new Buyer(buyer.getName(), buyer.getPhone(),
-                    buyer.getEmail(), buyer.getTags(),
-                    Appointment.EMPTY_APPOINTMENT);
-        } else {
-            Seller seller = (Seller) personToDeleteAppointment;
-            personWithoutAppointment = new Seller(seller.getName(), seller.getPhone(),
-                    seller.getEmail(), seller.getTags(),
-                    Appointment.EMPTY_APPOINTMENT);
-        }
         model.setPerson(personToDeleteAppointment, personWithoutAppointment);
+
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 personToDeleteAppointment.getName()));
     }

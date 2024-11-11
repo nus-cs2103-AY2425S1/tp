@@ -20,14 +20,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -47,7 +49,7 @@ public class EditClientCommand extends Command {
               + "[" + PREFIX_EMAIL + "EMAIL] "
               + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited %1$s!";
@@ -73,22 +75,26 @@ public class EditClientCommand extends Command {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
+        int zeroBased = index.getZeroBased();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        CommandUtils.handleInvalidPersonIndex(zeroBased, lastShownList.size());
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToEdit = lastShownList.get(zeroBased);
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, personToEdit.getRole());
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        boolean isEditingSamePerson = personToEdit.isSamePerson(editedPerson);
+        boolean isExistingPerson = model.hasPerson(editedPerson);
+
+        if (!isEditingSamePerson && isExistingPerson) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateListingsAfterClientEdit(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredListingList(listing -> true);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -96,16 +102,19 @@ public class EditClientCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit,
+                                             EditPersonDescriptor editPersonDescriptor, Role role) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
         // edit command does not allow editing appointments
         Appointment updatedAppointment = personToEdit.getAppointment();
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        if (personToEdit instanceof Buyer) {
+
+        if (role.equals(Role.BUYER)) {
             return new Buyer(updatedName, updatedPhone, updatedEmail,
                     updatedTags, updatedAppointment);
         } else {
@@ -126,8 +135,11 @@ public class EditClientCommand extends Command {
         }
 
         EditClientCommand otherEditClientCommand = (EditClientCommand) other;
-        return index.equals(otherEditClientCommand.index)
-                && editPersonDescriptor.equals(otherEditClientCommand.editPersonDescriptor);
+
+        boolean hasSameIndex = index.equals(otherEditClientCommand.index);
+        boolean hasSameDescriptor = editPersonDescriptor.equals(otherEditClientCommand.editPersonDescriptor);
+
+        return hasSameIndex && hasSameDescriptor;
     }
 
     @Override
@@ -212,10 +224,13 @@ public class EditClientCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(email, otherEditPersonDescriptor.email);
+
+            boolean hasSameName = Objects.equals(name, otherEditPersonDescriptor.name);
+            boolean hasSamePhone = Objects.equals(phone, otherEditPersonDescriptor.phone);
+            boolean hasSameEmail = Objects.equals(email, otherEditPersonDescriptor.email);
+            boolean hasSameTags = Objects.equals(tags, otherEditPersonDescriptor.tags);
+
+            return hasSameName && hasSamePhone && hasSameEmail && hasSameTags;
         }
 
         @Override

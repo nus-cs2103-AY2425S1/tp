@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 
@@ -147,12 +147,18 @@ public class Listing {
         if (this == otherListing) {
             return true;
         }
-        return otherListing != null
-                && (otherListing.address.equals(this.address)
+
+        boolean isNull = otherListing == null;
+        if (isNull) {
+            return false;
+        }
+
+        boolean hasSameNameOrAddress = (otherListing.address.equals(this.address)
                 || otherListing.name.equals(this.name));
+
+        return hasSameNameOrAddress;
     }
 
-    // CHECK LOGIC FOR THIS
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -164,7 +170,12 @@ public class Listing {
         }
 
         Listing otherListing = (Listing) other;
-        return name.equals(otherListing.name) || address.equals(otherListing.address);
+
+        boolean hasSameName = name.equals(otherListing.name);
+        boolean hasSameAddress = address.equals(otherListing.address);
+
+        // Listings are the same if they have either the same name, or the same address, or both
+        return hasSameName || hasSameAddress;
     }
 
     @Override

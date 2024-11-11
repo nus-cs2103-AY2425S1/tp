@@ -28,8 +28,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class DeleteAppointmentCommandTest {
@@ -117,23 +117,6 @@ public class DeleteAppointmentCommandTest {
 
         assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
-    /*@Test
-    public void execute_similarIndex_throwsCommandException() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
-        Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
-
-        showPersonWithName(model, personToDelete.getName());
-
-        Index similarIncorrectIndex = Index.fromZeroBased(randomIndex + 1);
-
-        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(similarIncorrectIndex);
-
-        assertCommandFailure(deleteAppointmentCommand, model,
-                String.format(Messages.MESSAGE_SUGGESTION, personToDelete.getName()));
-    }*/
 
     @Test
     public void equals() {

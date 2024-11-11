@@ -34,7 +34,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.testutil.ListingBuilder;
 
 public class RemoveBuyersFromListingCommandTest {
@@ -113,8 +113,6 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_inputSeller_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, SELLER_INDEX);
-        System.out.println(INDEX_FIRST_LISTING.getOneBased());
-        System.out.println(SELLER_NAME);
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER,
                         INDEX_FIRST_LISTING.getOneBased(), SELLER_NAME));

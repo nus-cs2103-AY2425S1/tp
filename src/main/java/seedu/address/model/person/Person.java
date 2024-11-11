@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,23 +54,6 @@ public abstract class Person {
         this.tags.addAll(tags);
         this.remark = remark;
     }
-
-    /*
-    /**
-     * Constructs a {@code Person} object with the specified name.
-     * Initializes the phone number as {@code null}, sets the property to a default empty value,
-     * and creates an appointment with default values for the date, start time, and end time.
-     *
-     * @param name The {@code Name} of the person. Must not be {@code null}.
-     */
-    /*
-    public Person(Name name) {
-        this.name = name;
-        this.phone = null;
-        this.email = null;
-        this.property = new Property("");
-        this.appointment = new Appointment(new Date(""), new From(""), new To(""));
-    }*/
 
     public Name getName() {
         return name;
@@ -135,11 +119,12 @@ public abstract class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && tags.equals(otherPerson.tags);
 
+        boolean hasSameName = name.equals(otherPerson.name);
+        boolean hasSamePhone = phone.equals(otherPerson.phone);
+        boolean hasSameEmail = email.equals(otherPerson.email);
+        boolean hasSameTags = tags.equals(otherPerson.tags);
+        return hasSameName && hasSamePhone && hasSameEmail && hasSameTags;
     }
 
     @Override

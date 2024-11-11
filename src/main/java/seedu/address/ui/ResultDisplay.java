@@ -13,7 +13,7 @@ public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
     private static final String INITIAL_TEXT =
-            "Welome to EZSTATE! Here are some commands to help you get started: \n"
+            "Welcome to EZSTATES! Here are some commands to help you get started: \n"
             + "\t Add a buyer: buyer n/[NAME] p/[PHONE] e/[EMAIL]\n"
             + "\t Add a seller: seller n/[NAME] p/[PHONE] e/[EMAIL]\n"
             + "\t For more info: help";

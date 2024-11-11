@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.listingcommandparsers;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AREA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -36,16 +35,17 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
                 PREFIX_REGION, PREFIX_SELLER);
 
-        Index currentListingIndex;
+        Index currentListingIndex = ParserUtil.parseIndexWithInvalidCommandFormatMessage(argMultimap.getPreamble(),
+                EditListingCommand.MESSAGE_USAGE);
 
-        try {
-            currentListingIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditListingCommand.MESSAGE_USAGE), pe);
-        }
+        EditListingDescriptor editListingDescriptor = setEditListingDescriptor(argMultimap,
+                new EditListingDescriptor());
 
-        EditListingDescriptor editListingDescriptor = new EditListingDescriptor();
+        return new EditListingCommand(currentListingIndex, editListingDescriptor);
+    }
+
+    private EditListingDescriptor setEditListingDescriptor(ArgumentMultimap argMultimap,
+            EditListingDescriptor editListingDescriptor) throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editListingDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -66,6 +66,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             editListingDescriptor.setSellerIndex(sellerIndex);
         }
 
-        return new EditListingCommand(currentListingIndex, editListingDescriptor);
+        return editListingDescriptor;
     }
 }

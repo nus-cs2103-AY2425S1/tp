@@ -42,9 +42,11 @@ public class JsonAdaptedTo {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, To.class.getSimpleName()));
         }
+
         if (value.equals(EMPTY_TO_PLACEHOLDER)) {
             return To.EMPTY_TO;
         }
+
         return new To(value);
     }
 }

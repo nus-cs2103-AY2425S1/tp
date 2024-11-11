@@ -13,14 +13,14 @@ import seedu.address.model.person.Person;
 /**
  * Abstract class for adding clients (buyers or sellers) to the address book.
  */
-public abstract class AddClientProfile extends Command {
+public abstract class AddClientProfileCommand extends Command {
 
     protected final Person toAdd;
 
     /**
      * Adds a client profile.
      */
-    public AddClientProfile(Person toAdd) {
+    public AddClientProfileCommand(Person toAdd) {
         requireNonNull(toAdd);
         this.toAdd = toAdd;
     }
@@ -54,7 +54,7 @@ public abstract class AddClientProfile extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddClientProfile otherAddCommand)) {
+        if (!(other instanceof AddClientProfileCommand otherAddCommand)) {
             return false;
         }
 

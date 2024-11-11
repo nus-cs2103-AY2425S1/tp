@@ -18,6 +18,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Address;
@@ -25,7 +26,7 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,7 +52,6 @@ public class EditListingCommand extends Command {
     public static final String MESSAGE_EDIT_LISTING_SUCCESS = "Successfully edited listing: %1$s";
     public static final String MESSAGE_DUPLICATE_LISTING = "This listing name / address already exists in the system.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
 
     private final Index listingIndex;
     private final EditListingDescriptor editListingDescriptor;
@@ -74,27 +74,23 @@ public class EditListingCommand extends Command {
         List<Listing> lastShownListingList = model.getFilteredListingList();
 
         int zeroBasedListing = listingIndex.getZeroBased();
-        if (zeroBasedListing >= lastShownListingList.size() || zeroBasedListing < 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
+        CommandUtils.handleInvalidListingIndex(zeroBasedListing, lastShownListingList.size());
         Listing listingToEdit = lastShownListingList.get(zeroBasedListing);
 
         Optional<Index> sellerIndex = editListingDescriptor.getSellerIndex();
 
         Listing editedListing;
-        if (sellerIndex.isPresent()) {
-            List<Person> lastShownPersonList = model.getFilteredPersonList();
-            int zeroBasedPerson = sellerIndex.get().getZeroBased();
-            if (zeroBasedPerson >= lastShownPersonList.size() || zeroBasedPerson < 0) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            Person seller = lastShownPersonList.get(zeroBasedPerson);
-            editedListing = createEditedListing(listingToEdit, editListingDescriptor, seller);
-        } else {
-            editedListing = createEditedListing(listingToEdit, editListingDescriptor, listingToEdit.getSeller());
-        }
 
-        if (isIdentifierChanged(listingToEdit, editedListing) && model.canEditListing(listingToEdit, editedListing)) {
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+
+        // Gets the new seller if edited, or the original seller if not edited
+        Person seller = getUpdatedSeller(sellerIndex, lastShownPersonList, listingToEdit);
+
+        editedListing = createEditedListing(listingToEdit, editListingDescriptor, seller);
+
+        boolean canEditListingWithoutDuplicates = model.canEditListing(listingToEdit, editedListing);
+
+        if (isIdentifierChanged(listingToEdit, editedListing) && canEditListingWithoutDuplicates) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
         }
 
@@ -116,10 +112,21 @@ public class EditListingCommand extends Command {
         Area updatedArea = editListingDescriptor.getArea().orElse(listingToEdit.getArea());
         Address updatedAddress = editListingDescriptor.getAddress().orElse(listingToEdit.getAddress());
         Region updatedRegion = editListingDescriptor.getRegion().orElse(listingToEdit.getRegion());
-        Person updatedSeller = (seller != null) ? seller : listingToEdit.getSeller();
 
         return new Listing(updatedName, updatedAddress, updatedPrice, updatedArea, updatedRegion,
-                updatedSeller, listingToEdit.getBuyers());
+                seller, listingToEdit.getBuyers());
+    }
+
+    private Person getUpdatedSeller(Optional<Index> sellerIndex,
+                                    List<Person> lastShownPersonList, Listing listingToEdit) throws CommandException {
+        if (sellerIndex.isPresent()) {
+            int zeroBasedPerson = sellerIndex.get().getZeroBased();
+            CommandUtils.handleInvalidPersonIndex(zeroBasedPerson, lastShownPersonList.size());
+
+            return lastShownPersonList.get(zeroBasedPerson);
+        } else {
+            return listingToEdit.getSeller();
+        }
     }
 
     /**
@@ -147,8 +154,10 @@ public class EditListingCommand extends Command {
             return false;
         }
 
-        return listingIndex.equals(otherEditCommand.listingIndex)
-                && editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
+        boolean hasSameListingIndex = listingIndex.equals(otherEditCommand.listingIndex);
+        boolean hasSameDescriptor = editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
+
+        return hasSameListingIndex && hasSameDescriptor;
     }
 
     @Override
@@ -252,12 +261,15 @@ public class EditListingCommand extends Command {
             }
 
             EditListingDescriptor otherDescriptor = (EditListingDescriptor) other;
-            return Objects.equals(name, otherDescriptor.name)
-                    && Objects.equals(price, otherDescriptor.price)
-                    && Objects.equals(area, otherDescriptor.area)
-                    && Objects.equals(address, otherDescriptor.address)
-                    && Objects.equals(region, otherDescriptor.region)
-                    && Objects.equals(sellerIndex, otherDescriptor.sellerIndex);
+
+            boolean hasSameName = Objects.equals(name, otherDescriptor.name);
+            boolean hasSamePrice = Objects.equals(price, otherDescriptor.price);
+            boolean hasSameArea = Objects.equals(area, otherDescriptor.area);
+            boolean hasSameAddress = Objects.equals(address, otherDescriptor.address);
+            boolean hasSameRegion = Objects.equals(region, otherDescriptor.region);
+            boolean hasSameSellerIndex = Objects.equals(sellerIndex, otherDescriptor.sellerIndex);
+
+            return hasSameName && hasSamePrice && hasSameArea && hasSameAddress && hasSameRegion && hasSameSellerIndex;
         }
 
         @Override

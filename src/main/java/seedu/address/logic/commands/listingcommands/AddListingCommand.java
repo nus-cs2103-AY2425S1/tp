@@ -19,6 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Address;
@@ -26,9 +27,8 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
  * Adds a listing to the address book.
@@ -61,8 +61,6 @@ public class AddListingCommand extends Command {
             + "%d. %s";
     public static final String MESSAGE_NOT_BUYER = "The buyer index specified is not a buyer:\n"
             + "%d. %s";
-    public static final String MESSAGE_INVALID_SELLER_INDEX = "The seller index provided is invalid!";
-    public static final String MESSAGE_INVALID_BUYER_INDEX = "The buyer index (%d) provided is invalid!";
     public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in EZSTATE!";
     private final Name listingName;
     private final Price price;
@@ -93,42 +91,19 @@ public class AddListingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
         int zeroBasedSeller = sellerIndex.getZeroBased();
-        int oneBasedSeller = sellerIndex.getOneBased();
-        if (zeroBasedSeller >= lastShownList.size() || zeroBasedSeller < 0) {
-            throw new CommandException(MESSAGE_INVALID_SELLER_INDEX);
-        }
+        CommandUtils.handleInvalidSellerIndex(zeroBasedSeller, lastShownPersonList.size());
 
-        Person seller = lastShownList.get(zeroBasedSeller);
+        Person seller = lastShownPersonList.get(zeroBasedSeller);
 
-        if (!seller.getRole().equals(Role.SELLER)) {
-            throw new CommandException(String.format(MESSAGE_NOT_SELLER,
-                    oneBasedSeller, seller.getName()));
-        }
+        // Check if the person is actually an instance of a Seller
+        ListingCommandsUtil.handleNonSeller(seller, seller.getRole(), sellerIndex);
 
-        Set<Person> personBuyers = new HashSet<>();
+        // Gets buyers for the new listing
+        Set<Person> listingBuyers = getBuyers(buyerIndexes, lastShownPersonList);
 
-        if (!buyerIndexes.isEmpty()) {
-            for (Index buyerIndex : buyerIndexes) {
-                int zeroBasedBuyer = buyerIndex.getZeroBased();
-                int oneBasedBuyer = buyerIndex.getOneBased();
-                if (zeroBasedBuyer >= lastShownList.size() || zeroBasedBuyer < 0) {
-                    throw new CommandException(String.format(MESSAGE_INVALID_BUYER_INDEX, oneBasedBuyer));
-                }
-
-                Person buyer = lastShownList.get(zeroBasedBuyer);
-
-                if (!buyer.getRole().equals(Role.BUYER)) {
-                    throw new CommandException(String.format(MESSAGE_NOT_BUYER,
-                            oneBasedBuyer, buyer.getName()));
-                }
-
-                personBuyers.add(buyer);
-            }
-        }
-
-        Listing toAdd = new Listing(listingName, address, price, area, region, seller, personBuyers);
+        Listing toAdd = new Listing(listingName, address, price, area, region, seller, listingBuyers);
 
         if (model.hasListing(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
@@ -137,6 +112,25 @@ public class AddListingCommand extends Command {
         model.addListing(toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    private Set<Person> getBuyers(Set<Index> buyerIndexes, List<Person> lastShownPersonList) throws CommandException {
+        Set<Person> listingBuyers = new HashSet<>();
+
+        if (!buyerIndexes.isEmpty()) {
+            for (Index buyerIndex : buyerIndexes) {
+                int zeroBasedBuyer = buyerIndex.getZeroBased();
+                CommandUtils.handleInvalidBuyerIndex(zeroBasedBuyer, lastShownPersonList.size());
+
+                Person buyer = lastShownPersonList.get(zeroBasedBuyer);
+
+                // Check if the person is actually an instance of a Buyer
+                ListingCommandsUtil.handleNonBuyer(buyer, buyer.getRole(), buyerIndex);
+                listingBuyers.add(buyer);
+            }
+        }
+
+        return listingBuyers;
     }
 
     @Override
@@ -150,13 +144,16 @@ public class AddListingCommand extends Command {
         }
 
         AddListingCommand otherCommand = (AddListingCommand) other;
-        return listingName.equals(otherCommand.listingName)
-                && price.equals(otherCommand.price)
-                && area.equals(otherCommand.area)
-                && address.equals(otherCommand.address)
-                && region.equals(otherCommand.region)
-                && sellerIndex.equals(otherCommand.sellerIndex)
-                && buyerIndexes.equals(otherCommand.buyerIndexes);
+        boolean hasSameListingName = listingName.equals(otherCommand.listingName);
+        boolean hasSamePrice = price.equals(otherCommand.price);
+        boolean hasSameArea = area.equals(otherCommand.area);
+        boolean hasSameAddress = address.equals(otherCommand.address);
+        boolean hasSameRegion = region.equals(otherCommand.region);
+        boolean hasSameSellerIndex = sellerIndex.equals(otherCommand.sellerIndex);
+        boolean hasSameBuyerIndexes = buyerIndexes.equals(otherCommand.buyerIndexes);
+
+        return hasSameListingName && hasSamePrice && hasSameArea && hasSameAddress && hasSameRegion
+                && hasSameSellerIndex && hasSameBuyerIndexes;
     }
 
     @Override

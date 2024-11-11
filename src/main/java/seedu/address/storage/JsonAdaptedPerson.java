@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Seller;
@@ -76,53 +76,64 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        handleExceptions();
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
+        final Name modelName = new Name(name);
+        final Phone modelPhone = new Phone(phone);
+        final Email modelEmail = new Email(email);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Appointment modelAppointment = appointment.toModelType();
+
+        return createPerson(modelName, modelPhone, modelEmail, modelTags, modelAppointment, remark);
+    }
+
+    private Person createPerson(Name name, Phone phone,
+            Email email, Set<Tag> tags, Appointment appointment, String remark) {
+        if (role.equals("buyer")) {
+            return new Buyer(name, phone, email, tags, appointment, remark);
+        } else {
+            return new Seller(name, phone, email, tags, appointment, remark);
+        }
+    }
+
+    private void handleExceptions() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
+
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
+
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
+
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
 
         if (appointment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
         }
 
-        final Appointment modelAppointment = appointment.toModelType();
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "Remark"));
         }
-        final String modelRemark = remark;
-        if (role.equals("buyer")) {
-            return new Buyer(modelName, modelPhone, modelEmail, modelTags, modelAppointment, remark);
-        } else {
-            return new Seller(modelName, modelPhone, modelEmail, modelTags, modelAppointment, remark);
-        }
     }
-
 }

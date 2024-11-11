@@ -36,11 +36,7 @@ public class ConfirmationDialogController {
     public void initialize() {
         confirmationDialog.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                if (yesButton.isFocused()) {
-                    handleYesAction();
-                } else if (noButton.isFocused()) {
-                    handleNoAction();
-                }
+                actOnFocusedButton();
                 event.consume();
             } else if (event.getCode() == KeyCode.ESCAPE) {
                 handleNoAction();
@@ -49,6 +45,14 @@ public class ConfirmationDialogController {
 
         yesButton.setOnAction(e -> handleYesAction());
         noButton.setOnAction(e -> handleNoAction());
+    }
+
+    private void actOnFocusedButton() {
+        if (yesButton.isFocused()) {
+            handleYesAction();
+        } else if (noButton.isFocused()) {
+            handleNoAction();
+        }
     }
 
     /**

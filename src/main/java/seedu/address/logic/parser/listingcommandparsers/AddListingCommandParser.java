@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
@@ -19,13 +18,12 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new AddListingCommand object
@@ -42,13 +40,16 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
                         PREFIX_REGION, PREFIX_SELLER, PREFIX_BUYER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION,
-                PREFIX_SELLER)
-                || !argMultimap.getPreamble().isEmpty()) {
+        boolean hasMissingPrefix = !ArgumentMultimap.arePrefixesPresent(argMultimap,
+                PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS, PREFIX_REGION, PREFIX_SELLER);
+        boolean hasPreamble = !argMultimap.getPreamble().isEmpty();
+
+        if (hasMissingPrefix || hasPreamble) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddListingCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Area area = ParserUtil.parseArea(argMultimap.getValue(PREFIX_AREA).get());
@@ -61,14 +62,6 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
         }
 
         return new AddListingCommand(name, price, area, address, region, sellerIndex, buyerIndexSet);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

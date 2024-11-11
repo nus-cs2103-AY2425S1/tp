@@ -6,7 +6,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.ChatWindow" spacing="15"
       style="-fx-background-color: #1C1C1C; -fx-alignment: CENTER; -fx-padding: 20;">
 
-    <Label text="EZSTATE Help Bot"
+    <Label text="EZSTATES Help Bot"
            style="-fx-text-fill: #FFD700; -fx-font-size: 28pt; -fx-font-weight: bold; -fx-padding: 10;" />
 
     <TextArea fx:id="chatArea"
