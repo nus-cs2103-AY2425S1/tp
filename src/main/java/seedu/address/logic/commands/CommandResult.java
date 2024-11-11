@@ -112,11 +112,10 @@ public class CommandResult {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof CommandResult)) {
             return false;
         }
@@ -127,14 +126,14 @@ public class CommandResult {
                 && exit == otherCommandResult.exit
                 && list == otherCommandResult.list
                 && personIndex == otherCommandResult.personIndex
-                && hasPrompt == otherCommandResult.hasPrompt;
-        /*
+                && hasPrompt == otherCommandResult.hasPrompt
                 && isPopup == otherCommandResult.isPopup
-                && identityNumber.equals(otherCommandResult.identityNumber)
-                && appointmentDate.equals(otherCommandResult.appointmentDate)
-                && logEntry.equals(otherCommandResult.logEntry);
-         */
+                // Uses null safe equals method since the following fields can be null
+                && Objects.equals(identityNumber, otherCommandResult.identityNumber)
+                && Objects.equals(appointmentDate, otherCommandResult.appointmentDate)
+                && Objects.equals(logEntry, otherCommandResult.logEntry);
     }
+
 
     @Override
     public int hashCode() {
@@ -150,14 +149,11 @@ public class CommandResult {
                 .add("prompt", hasPrompt)
                 .add("list", list)
                 .add("personIndex", personIndex)
-                .toString();
-        /*
                 .add("isPopup", isPopup)
                 .add("identityNumber", identityNumber)
                 .add("appointmentDate", appointmentDate)
                 .add("logEntry", logEntry)
                 .toString();
-         */
     }
 
 }
