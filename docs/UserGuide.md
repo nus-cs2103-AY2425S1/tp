@@ -175,8 +175,6 @@ You are now ready to use AcademyAssist! If you encounter any issues during insta
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 # Command Summary
 ## General Format
 The general format of commands in AcademyAssist is as follows:
@@ -242,8 +240,6 @@ In this section, you'll find detailed information about the parameters for each 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -292,8 +288,6 @@ by the leading and trailing spaces.
 lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ## Student Management
 ### Adding a student : `add`
