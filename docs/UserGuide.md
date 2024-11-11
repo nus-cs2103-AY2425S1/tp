@@ -19,6 +19,7 @@ than traditional GUI apps.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -36,6 +37,8 @@ than traditional GUI apps.
    * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [macOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
    
 If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Sample data](images/sampleData.png)
+
+<div style="page-break-after: always;"></div>
 
 5. Type the commands where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open a help window.<br><br>
    Some example commands you can try:
@@ -91,7 +94,9 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
    * Valid Examples: `john.doe@example.com`, `jane-doe123@example.com`
    * Invalid Examples: `john.doe.@example.com`, `john.doe@exa_mple.com`
 
-5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format yyyy-MM-dd. <br> Prefix: `dob/`
+<div style="page-break-after: always;"></div>
+
+5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format `yyyy-MM-dd`. <br> Prefix: `dob/`
     * Valid Examples: `2000-01-01`, `1990-12-29`
     * Invalid Examples: `01-01-2001`, `1st Dec 1996`, `2030-02-01`
 
@@ -143,12 +148,15 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
   e.g. if the input specifies `statistics 123`, it will be interpreted as `statistics`.
 
 <box type="warning" seamless>
+
 **Caution**
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
 e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -190,6 +198,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
 * `add n/Betsy Crowe t/friend e/betsycrowe@outlook.com a/Newgate Prison p/12345678 dob/2002-12-25 pri/MEDIUM t/criminal`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing persons: `list`
 
 Shows the list of persons in SocialBook, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
@@ -211,7 +221,9 @@ Format: `list [archive/] [all/]`
 
 Example output for `list archive/`:
 
-![img.png](images/listArchive.png)
+![Listing archived people](images/listArchive.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person: `edit`
 
@@ -250,6 +262,8 @@ Examples:
 * `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
 * `find n/a n/b n/c pri/high pri/medium` returns `Alice Tan` and `Benny Lim`<br>
 
+<div style="page-break-after: always;"></div>
+
 Example output for `find pri/high`:
 
 ![Sample find result](images/findResult.png)
@@ -259,6 +273,8 @@ Example output for `find pri/high`:
 **Caution:** Finding is applied on the currently displayed list of persons. If you have narrowed down the list using the `find` command previously, and are trying to find someone not part of this filtered list, execute the `list` command with the appropriate format and execute the `find` command again. Refer to the [list](#listing-all-persons-list) feature above for the exact format required. 
 - Example: `find n/Alice` filters the list to only those whose names start with "Alice". Then, to find "David" in SocialBook, `list all/` followed by `find n/David` will help to find David, regardless of whether he is archived or not. 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting persons: `sort`
 
@@ -280,10 +296,6 @@ Format: `sort [name] [address] [priority] [income] [updated]`
 Examples:
 * `sort updated`
 * `sort name`
-
-Example output for `sort name`:
-
-![Sample sort result](images/sortResult.png)
 
 <box type="info" seamless>
 
@@ -311,6 +323,8 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person from last viewed person list.
 * `list all/` followed by `delete 1,1,2` deletes the 1st and 2nd person from all persons.
 
+<div style="page-break-after: always;"></div>
+
 ### Getting parameters of these people: `get` 
 
 Gets the specified parameters of each individual person in last viewed person list.
@@ -329,6 +343,26 @@ Examples:
 * `list archive/` followed by `get pHone phone` gets only one set of the phone numbers of the archived people in SocialBook.
 * `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people in the last viewed person list.
 
+Example output for `get phone EMAIL`:
+
+```
+Here are the PHONE NUMBER details:
+81234567,
+81234570,
+81234568,
+81234571,
+81234569,
+81234572
+
+Here are the EMAIL details:
+alice.tan@example.com,
+david.wong@example.com,
+benny.lim@example.com,
+evelyn.chua@example.com,
+catherine.lee@example.com,
+felix.ng@example.com
+```
+
 ### Clearing all entries: `clear`
 
 Clears all entries from SocialBook.
@@ -340,6 +374,7 @@ Format: `clear`
 Examples:
 * `find n/John` followed by `clear` will delete all persons in SocialBook and not just those with `John` in their names.
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an appointment: `addappt`
 
@@ -379,9 +414,11 @@ Examples:
 * `addappt 1 date/2024-11-15 from/16:00 to/17:45`
 * `addappt 2 date/2024-11-26 from/17:00 to/18:30`
 
-Example output from executing the first example:
+Example output for `addappt 1 date/2024-11-15 from/16:00 to/17:45`:
 
 ![Adding an appointment](images/addAppointment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all appointments: `listappt`
 
@@ -431,6 +468,8 @@ Examples:
 
 * `listappt` followed by `deleteappt 2` deletes the second appointment from SocialBook.
 
+<div style="page-break-after: always;"></div>
+
 ### Displaying overall statistics: `statistics`
 
 Displays the statistics of the last viewed person list.
@@ -448,6 +487,18 @@ Statistics include:
 Examples:
 * `find pri/HIGH` followed by `statistics` shows the above statistics for the high priority people in last viewed person list.
 
+Example output for `statistics`:
+
+```
+Here are the statistics for the current list:
+Total Number Of People: 6
+Number Of HIGH Priority People: 2
+Number Of MEDIUM Priority People: 2
+Number Of LOW Priority People: 2
+Number Of Appointments Scheduled Within Next 7 Days: 1
+Number Of People Eligible For At Least One Scheme: 6
+```
+
 ### Displaying eligible schemes: `scheme`
 
 Displays the schemes that a person in SocialBook is eligible for.
@@ -459,7 +510,7 @@ Format: `scheme INDEX`
 * The index **must be a positive integer** not exceeding the last index number in the last viewed person list.
 
 <box type="info">
-Currently only 2 schemes are available in the current version of SocialBook.
+Currently only two schemes are available in the current version of SocialBook.
 </box>
 
 Examples:
@@ -483,6 +534,8 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme from the list of eligible schemes to the 1st person in last viewed person list.
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing schemes attached to a person: `viewscheme`
 
@@ -545,6 +598,8 @@ Examples:
 **Tip:** To view archived persons, run `list archive/` or `list all/`
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Unarchiving a person: `unarchive`
 
 Unarchives the specified person from SocialBook.
@@ -574,6 +629,7 @@ Format: `undo`
 * Undo can be called multiple times till there is no longer a previous command to execute.
 
 <box type="info" seamless>
+
 If you exit and reopen the app, `undo` would not work to undo past commands that were executed before the app was exited.
 </box>
 
@@ -610,6 +666,8 @@ Furthermore, certain edits can cause SocialBook to behave in unexpected ways (e.
 will not update their appointments in `appointments.json`, which can cause inconsistencies. **Duplicate entries** in either file
 can also lead to **data loss**.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Going through entered commands
 
