@@ -454,6 +454,8 @@ Furthermore, certain edits can cause the SellSavvy to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 | Action                                | Command                     | Format and Examples                                                                                                                                                                  |
