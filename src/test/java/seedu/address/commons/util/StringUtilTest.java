@@ -1,7 +1,10 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.StringUtil.toCamelCase;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
@@ -138,6 +141,19 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    @Test
+    public void toCamelCase_nullOrEmptyStringGiven_returnNullOrEmptyInput() {
+        assertNull(toCamelCase(null));
+        assertTrue(toCamelCase("").isBlank());
+    }
+
+    @Test
+    public void toCamelCase_stringGiven_convertsToCamelCase() {
+        assertEquals("string", toCamelCase("string"));
+        assertEquals("string", toCamelCase("String"));
+        assertEquals("toCamelCase", toCamelCase("ToCamelCase"));
     }
 
 }
