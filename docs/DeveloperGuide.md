@@ -623,18 +623,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Un-favourite a restaurant
 
-1. Un-favourite a restaurant while all restaurants are being shown
+7. Un-favourite a restaurant while all restaurants are being shown
 
-1. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
-    In the test case below, we assume that the first restaurant in the list is marked as favourite as described by the previous test case mentioned above.
+    a. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
+       In the test case below, we assume that the first restaurant in the list is marked as favourite as described by the previous test case mentioned above.
 
-    1. Test case: `unfav 1`<br>
+    b. Test case: `unfav 1`<br>
        Expected: First contact has its border un-highlighted and brought back to its original index in the list before being set as a favourite.
 
-    1. Test case: `unfav 0`<br>
+    c. Test case: `unfav 0`<br>
        Expected: No favourite restaurant is turned back to normal. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect Un-favourite commands to try: `unfav`<br>
+    d. Other incorrect Un-favourite commands to try: `unfav`<br>
        Expected: Similar to previous.
 
 
