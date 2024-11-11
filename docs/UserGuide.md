@@ -90,6 +90,8 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -268,6 +270,8 @@ SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Resizing of UI elements
 
 SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown in the image below.
@@ -299,6 +303,8 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -309,6 +315,8 @@ Examples:
 6. **Automatic marking of delivered goods**: In a real-life scenario where it is possible for goods to be delayed or not delivered at all, this feature may cause confusion among users. As we still do not have a method to unmark the delivery status of goods, the remedy would be to delete and re-create the goods with a new arrival date.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 

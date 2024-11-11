@@ -65,6 +65,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -195,6 +196,8 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+<div style="page-break-after: always;"></div>
+
 ### SupplyCentral: Goods Classes
 
 <img src="images/GoodsClassDiagram.png" width="550">
@@ -243,6 +246,8 @@ After:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -287,6 +292,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | business owner                       | delete erroneous goods data                                                  | ensure the data integrity of my goods information                                             |
 | `*`      | business owner                       | view my pending deliveries                                                   | see what goods I should be expecting to arrive                                                |
 | `*`      | business owner who is bad at numbers | get statistical data for my goods                                            | do my cost and profit calculations                                                            |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -553,6 +560,7 @@ In efforts to cater to our persona, we have added features that would be useful 
 * **Automatically** marks goods as delivered when the time has passed without the need for any user actions.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
