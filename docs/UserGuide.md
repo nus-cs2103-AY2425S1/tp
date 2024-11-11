@@ -614,6 +614,8 @@ Do read up on our known issues and planned enhacements to see if we have already
 |**PHONE_NUMBER (placeholder)** | The field for users to input student's phone numbers |
 |**TAG (placeholder)** | The field for users to input student tags |
 
+---
+
 ## Acknowledgements
 
 GoonBook is a brownfield software project based off AddressBook Level-3, taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
