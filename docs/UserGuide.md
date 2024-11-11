@@ -124,12 +124,12 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
    ```
    Deletes all contacts.
 
-<box type="warning" seamless>
+  <box type="warning" seamless>
 
-**Warning:**
-The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
+  **Warning:**
+  The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
 
-</box>
+  </box>
 
    ```bash
    exit
@@ -289,12 +289,15 @@ edit ID m/ OLD_MODULE NEW_MODULE
 ```
   * Updates a module of the person identified by the studentId.
   * Existing module (`OLD_MODULE`) will be overwritten by the input module (`NEW_MODULE`).
+  * Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
 
 Examples:
+
 *  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
-*  `edit 12345678 c/Computer Science` will edit a person with student ID of `12345678` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
+*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
+
 
 <box type="tip" seamless>
 

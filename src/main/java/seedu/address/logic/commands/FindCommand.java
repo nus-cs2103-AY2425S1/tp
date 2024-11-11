@@ -20,8 +20,7 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds the student identified by the Student ID used and displays their details.\n"
-            + "Parameters: "
-            + "ID\n"
+            + "Parameters: ID \n"
             + "Example: " + COMMAND_WORD + " "
             + "12345678";
 
