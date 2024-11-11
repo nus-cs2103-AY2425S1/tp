@@ -641,6 +641,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Banking Agent**: A user of the system responsible for selling credit cards to clients.
 * **Contact**: A record in the AgentAssist system that contains cliental and financial details of a client.
 * **Client**: An individual whose information is managed within the AgentAssist system. This client may be a prospective or existing customer of the banking agent, expressing interest in or currently using credit card services.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
