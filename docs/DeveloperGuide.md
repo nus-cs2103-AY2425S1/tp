@@ -1357,7 +1357,7 @@ Prerequisites: Have a contact list with entries.
   2. Test case: `edit 2 n/Betsy Crowe t/`  
      **Expected:** Name of the person at index 2 changes, and all tags are cleared.
 3. Test case: `edit 2 n/Betsy Crowe r/`
-   **Expected:** Name of the person at index 2 changes, and remark is cleared.
+4. <br>**Expected:** Name of the person at index 2 changes, and remark is cleared.
 #### Negative test cases
 
 1. Invalid Input Cases: Test with missing mandatory fields  
@@ -1448,7 +1448,7 @@ Prerequisites: Have a contact list with entries.
   1. Test case: `log 1 d/2024-11-15 l/meet up`  
      **Expected:** Adds a history entry about a meet up on 2024-11-15 for the first person.
   2. Test case: `log 1 l/event`
-     **Expected:** Adds a history entry `event` on today (System time) for the first person.
+     <br>**Expected:** Adds a history entry `event` on today (System time) for the first person.
 
 #### Negative test cases
 
