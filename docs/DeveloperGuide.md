@@ -620,17 +620,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `pie`<br>
       Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
-   
-   2. Test case: `bar` with multiple months but varying numbers of students  
-      Expected: A bar chart is displayed with multiple bars, each representing a different month. The bars vary in height according to the number of students who paid in each month.
 
       
-2. Displaying a pie chart with data
+2. Displaying a pie chart error
 
-    1. Prerequisites: List all students in the address book, ensuring there are students in multiple classes.
+    1. Prerequisites: Empty list
 
-    1. Test case: `pie`  
-       Expected: A pie chart is displayed, showing the distribution of students across different classes. Each class is represented as a segment, with the segment size proportional to the number of students in that class. The chart is displayed in a new window.
+    1. Test case: `pie`<br>
+       Expected: Error message shown in the status bar. No bar chart displayed.
 
    
 ### Displaying a bar chart of the distribution of students against the number of months paid
@@ -643,11 +640,11 @@ testers are expected to do more *exploratory* testing.
       Expected: A bar chart is displayed showing the distribution of students against the number of months paid. The bar chart is displayed in a new window.
    
 2. Displaying a bar chart error
-    
-  1. Prerequisites: Empty list
-        
-  1. Test case: `bar`<br>
-      Expected: Error message shown in the status bar. No bar chart displayed.
+
+   1. Prerequisites: Empty list
+
+   1. Test case: `bar`<br>
+    Expected: Error message shown in the status bar. No bar chart displayed.
 
 ### Deleting a person
 
