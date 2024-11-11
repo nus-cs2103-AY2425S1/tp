@@ -83,9 +83,9 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Remark
+Person *--> "0..1" Email
+Person *--> "0..1" Address
+Person *--> "0..1" Remark
 Person *--> "*" Tag
 Person *--> "*" Order
 
@@ -99,8 +99,9 @@ OrderList --> "1..*" Order
 SupplyOrderList --> "1..*" SupplyOrder
 CustomerOrder *--> OrderStatus
 SupplyOrder *--> OrderStatus
-Customer *--> Information
-Supplier *--> "1..* ingredients supplied" Ingredients
+Customer *--> "0..1" Information
+Supplier *--> "0..*" Ingredients : ingredients supplied
+Order *--> "0..1" Remark
 ModelManager --> "~* filtered" Person
 
 Person -[hidden]up--> I
@@ -110,3 +111,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 @enduml
+
+
