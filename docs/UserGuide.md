@@ -637,7 +637,7 @@ Displaying the detailed command window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
+  <div style="width: 45%; margin-bottom: 20px; margin-top: 0px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%;" />
   </div>
@@ -651,17 +651,19 @@ Displaying the detailed command window can be done in two ways:
 
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
+    <p style="margin-top: 30px;"><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
     <img src="images/infocommandoutput2.png" alt="Info Command Input 2" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
+  <div style="width: 45%; margin-bottom: 30px; margin-top: 10px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
 
 </div>
+
+
 
 
 **Tips:**
