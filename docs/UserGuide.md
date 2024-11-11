@@ -18,7 +18,7 @@ pageNav: 3
 </div>
 
 
-EduLog is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLog can get your contact management tasks done faster than traditional GUI apps.
+EduLog is a **desktop app for managing students and lesson details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLog can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -133,8 +133,8 @@ Tip: A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/100`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 f/100 t/criminal`
 * `add n/Ben Lim p/98765432 e/ben@example.com a/John street, block 123, #01-01 f/100`
 #### 2.2 Listing all students : `list`
 
@@ -361,14 +361,14 @@ EduLog data are saved in the hard disk automatically after any command that chan
 EduLog data are saved automatically as a JSON file `[JAR file location]/data/edulog.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-**Caution:**
+Caution:
 If your changes to the data file makes its format invalid, EduLog will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 #### 6.3 Archiving data files `[coming in v2.0]`
 
-*Details coming soon ...*
+*Details will be given in v2.0*
 
 ## 
 
@@ -383,19 +383,6 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
-<h2 style="color: black; padding-top: 30px"> Command Summary </h2>
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 f/100 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [f/fee] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Gift**   | `gift`
-**Revenue**| `revenue` <br> e.g. `revenue paid`, `revenue unpaid`
 ### 1. General Commands
 
 | Action | Format, Examples |
