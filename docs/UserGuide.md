@@ -123,48 +123,56 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Filtering persons by name: `filter`
+### Filtering persons by attributes: `filter`
 
 Filters persons whose attributes contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
+**General Guidelines**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. both `filter n/Alex Yeoh` and `filter n/Yeoh Alex` will return the student, Alex Yeoh
-* Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Similar for emergency contact names and addresses
-* As for phone numbers and emergency phone numbers, the entire number does not have to be provided to filter, however must follow the phone number constraints of minimum 3 digits. 
-  e.g. `999` will return `99999999`, `27899988`
-* As for register numbers and class, the entire number or class name must be provided in the command to filter
-* Note on Emergency Contact Filtering
-  * If a student does not have an emergency contact name or number saved, using filter en/ (for emergency contact names) or filter ep/ (for emergency contact numbers) will not return any results. To filter these students, please use other attributes in your search criteria.
-* Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
-  e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice. This will be true for all attributes.
-  e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.
-* Special Considerations for Address Filtering: Unlike other fields, addresses with multiple words and spaces (e.g.123 Geylang Street) require careful handling in filters. 
-  * For filtering an address or multiple addresses in one command only works for single-word addresses 
-  e.g. `filter a/Geylang` returns students with addresses at `Geylang`. 
-  e.g. `filter a/Geylang Street` performs an `OR` search, meaning all contacts with either `Geylang` or `Street` or both are returned.
-* When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
-* When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
-* When multiple predicates and multiple values are to be filtered, both an `OR` and an`AND` search is run:
-  * e.g. Student 1 - name: Alex & phone number: 99999999, Student 2 - name: Bernice & phone number: 92443567, Student 3 - name: Christine & phone number: 88888888
-  * e.g. `filter n/Alex Bernice p/99999999 92443567` where the order of the names and phone numbers match, an AND search is run to make sure that the student has matched both a name and a phone number, and an OR search is run to see if multiple students match a name and a phone number. Hence, both Alex and Bernice out of 6 students are returned as depicted in the image below.
-![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)
-  * e.g. `filter n/Alex Bernice p/92443567 99999999` where the order of the phone numbers are reversed, still, both Alex and Bernice are returned. 
-  * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
-  * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as depicted in the image below.
-  ![Filter1 - Failure.png](images%2FFilter1%20-%20Failure.png)
+* Exact Word Match : Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`.
 * All attribute values will be validated to check if the format is correct, otherwise an error message will be displayed to show the correct format.
-  * e.g. `filter p/hello` will display an error message stating that phone numbers can only contain numbers.
+    * e.g. `filter p/hello` will display an error message stating that phone numbers can only contain numbers of minimum 3 digits.
+
+**Filtering Attributes**
+* For **names, tags, emergency contact names and addresses**, persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* For **register numbers and class**, the entire number or class name must be provided in the command to filter
+* For **phone numbers and emergency phone numbers**, a partial phone number will match, however must follow the phone number constraints of minimum 3 digits. 
+  e.g. `999` will return `99999999`, `27899988`
+* **Emergency Contact** Filtering
+  * If a student does not have an emergency contact name or number saved, using `filter en/` (for emergency contact names) or `filter ep/` (for emergency contact numbers) will not return any results. 
+  * To filter these students, please use other attributes in your search criteria instead.
+* **Address Filtering**: 
+  * Filtering an address only works for single-word addresses
+    e.g. `filter a/Geylang` returns students with addresses at `Geylang`.
+  * Filtering for multi-word addresses (e.g. `filter a/Geylang Street`) will match any word within the address (`OR` search).
+    e.g. `filter a/Geylang Street` returns all contacts with either `Geylang` or `Street` or both.
+
+**Search logic**
+* **Single Predicate with Multiple Values**: an `OR` search is run.
+  * e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` returns students with names `Alex` or `Bernice`. This will be true for all other attributes.
+
+* **Multiple Predicates**: an `AND` search is run to return students with all attributes mentioned. 
+  * e.g. `filter s/F p/99999999` returns female students with the phone number 99999999.
+
+* **Multiple Predicates with Multiple Values**: both an `OR` and an`AND` search is run.
+  * e.g. **Student 1**: Name - Alex; Phone number - 99999999, **Student 2**: Name - Bernice; Phone Number - 92443567, **Student 3**: Name - Christine; Phone Number: 88888888
+  * `filter n/Alex Bernice p/99999999 92443567` matches Alex and Bernice, as both students out of 6 students have at least one matching name and phone number, as seen below.
+![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)
+  
+
+  * Reversing the order of phone numbers, `filter n/Alex Bernice p/92443567 99999999` still returns Alex and Bernice.
+  * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
+  * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as Christine's phone number does not match as seen below.
+
 
 Examples:
 * `filter n/John` returns `john` and `John Doe`
 * `filter p/99999999` returns `Alex Yeoh`
 * `filter n/John Alex` returns `John Doe` and `Alex Yeoh` 
-* This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
 
 ### Deleting a person : `delete`
 
