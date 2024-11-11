@@ -602,15 +602,16 @@ This may result in inconsistent data entries and impact the professionalism and 
 Introduce validation for the address field to allow only common address characters (letters, numbers, spaces, commas, etc.) while restricting uncommon symbols and emojis.
 This will maintain consistent and realistic address entries.
 
-### Set a character limit for each tag to prevent truncation
+### Expand current `stats` command to include additional metrics
 
 **Feature Flaw in Current Implementation**
-Currently, tags without a character limit may result in overflow issues, which can cause tags to be truncated in the display. 
-This makes it difficult for users to read and understand the full tag, impacting the usability and clarity of the information.
+The existing `stats` command in BridalBuddy only provides statistics on guest attendance, such as counts of those attending, declining, or yet to respond.
+While this information is helpful, the feature could be improved by providing additional insights, such as the current budget—a crucial aspect of wedding planning. 
+Without budget metrics, planners may find it challenging to get a comprehensive view of the wedding's overall progress.
 
 **Proposed Enhancement**
-Introduce a character limit for each tag (e.g., 50 characters) to prevent truncation. 
-This will ensure that tags remain fully visible, concise, and easy to read, preserving the clarity and effectiveness of tag usage within the interface.
+Enhance the `stats` command to display both attendance and budget metrics, providing a more comprehensive overview.  
+By combining attendance statistics with budget metrics, the enhanced `stats` command will give planners a fuller picture of the wedding’s status, making it easier to manage both attendance and finances in one place.
 
 ### Support for multiple currencies in budget tracking
 
