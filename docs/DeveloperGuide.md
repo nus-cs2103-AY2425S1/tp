@@ -381,6 +381,30 @@ Use case ends.
     * 2a1. Clientell informs the financial consultant that no matches were found.
     * Use case ends.
 
+**Use case: Summarise transactions in given range**
+
+**Preconditions: Financial consultant is in transaction list view**
+
+**MSS**
+
+1. Financial consultant enters the summary command with the start and end months.
+2. Clientell calculates the total amount of transactions in the specified range.
+3. Clientell displays the transactions in the specified range and the total amount.
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters an invalid month.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+* 2b. The financial consultant enters an incorrect month format.
+    * 2b1. Clientell shows an error message.
+    * Use case ends.
+* 2c. No transactions found in the specified range.
+    * 2c1. Clientell displays no transactions.
+    * 2c2. Clientell displays the total amount as 0.
+    * Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `17` or above installed.
@@ -416,17 +440,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   2. Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Shutting down
+3. Shutting down
   1. Test case: `exit`<br>
      Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
   1. Test case: Click the `X` button on the window
@@ -575,7 +599,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `summary s/2024-11 e/2025-01`<br>
       Expected: The transactions from `2024-11-01` to `2025-01-31` are shown. The total amount of these transactions is shown in the status message.
    4. Test case: `summary s/2024-11 e/2024-10`<br>
-      Expected: Error details informing of invalid date range shown in the status message.
+      Expected: Error details informing of invalid month range shown in the status message.
    5. Test case: `summary s/2024-11 e/2024-13`<br>
       Expected: Error details informing of invalid month or incorrect format shown in the status message.
    6. Test case: `summary s/11-2024 e/12-2024`<br>
