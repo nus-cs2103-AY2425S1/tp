@@ -78,7 +78,7 @@ experience to their clients without being weighed down by administrative burdens
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/ankle sprain` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/ankle sprain`, `t/anklesprain t/acl tear` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/ankle sprain`, `t/ankle sprain t/acl tear` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
