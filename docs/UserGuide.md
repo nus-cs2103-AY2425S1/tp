@@ -821,7 +821,7 @@ VendorVault automatically saves your data as a JSON file `[JAR file location]/da
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warnings:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
@@ -847,26 +847,28 @@ _Details coming soon ..._
 **Q**: How do I access my data?<br>
 **A**: 
 
-step 1: Open the folder that contains vendorvault.jar and the data folder
+- Step 1: Open the folder that contains vendorvault.jar and the data folder
 
-![VendorVault_Folder](images/VendorVaultFiles.png)
+![VendorVault_Folder](images/VendorVaultFolder.png)
 
-step 2: Open the folder named "data" to access the data file "vendorvault.json"
+- Step 2: Open the folder named "data" to access the data file "vendorvault.json"
 
-![Data_Folder](images/DataFolder.png)
+![Data_Folder](images/DataFile.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**:
 
-step 1: Download the vendorvault.jar file and place it into an empty folder on a computer of your choice.
+- Step 1: Download the vendorvault.jar file and place it into an empty folder on a computer of your choice.
 
-step 2: Run the app and execute the `exit` command to create a data folder.
+- Step 2: Run the app and execute the `exit` command to create a data folder.
 
-step 3: On the previously used computer, copy the vendorvault.jar file which can be accessed by following the "How do I access my data?" FAQ above.
+- Step 3: Delete the vendorvault.json file in the data folder (underlined in red) of the new computer.
 
-step 4: Transfer the copied file to the newly created data folder (circled in red) in the new computer.
+- Step 4: On the previously used computer, copy the vendorvault.jar file which can be accessed by following the "How do I access my data?" FAQ above.
 
-![VendorVault_Folder](images/VendorVaultFolder.png)
+- Step 5: Transfer the copied file to the data folder (underlined in red) in the new computer.
+
+![VendorVault_Folder](images/UnderlinedData.png)
 
 **Q**: Will I be able to see my data the next time I use VendorVault after exiting?<br>
 **A**: Yes, all existing data that you have added will be loaded automatically and displayed.
