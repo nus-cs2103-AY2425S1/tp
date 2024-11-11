@@ -539,7 +539,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list students.
+1. User requests to list students.
 2. T_Assistant shows a list of students.
 3. User requests to edit a Student's information from the list.
 4. T_Assistant updates the Student's information as per user's input.
@@ -675,7 +675,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list groups.
+1. User requests to list groups.
 2. T_Assistant shows a list of groups.
 3. User requests to edit a Group's information from the list.
 4. T_Assistant updates the Group's information as per user's input.
@@ -747,29 +747,6 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Use case: Mark Team's task as Complete**
-
-**MSS**
-
-1. User marks task as complete.
-2. T_Assistant marks the task accordingly.
-
-Use case ends.
-
-**Extensions**
-
-- 1a. The Group/Task parameters are invalid.
-
-    - 1a1. T_Assistant shows an error message.
-
-      Use case ends.
-
-- 1b. The user marks an already complete task.
-
-    - 1b1. T_Assistant shows an error message.
-
-      Use case ends.
-
 **Use case: Delete Student from Group**
 
 **MSS**
@@ -803,8 +780,8 @@ Use case ends.
 
 **MSS**
 
-1. User lists all groups.
-2. T_Assistant displays all groups.
+1. User requests to list all groups.
+2. T_Assistant shows a list of all groups.
 
 Use case ends.
 
@@ -844,7 +821,7 @@ Use case ends.
 
 **MSS**
 
-1. User lists all groups.
+1. User requests to list all groups.
 2. T_Assistant displays all groups.
 3. User requests to sort groups.
 4. T_Assistant sorts groups by ASCII order.
@@ -861,8 +838,8 @@ Use case ends.
 
 **MSS**
 
-1. User lists all tasks.
-2. T_Assistant displays all groups.
+1. User requests to list all tasks.
+2. T_Assistant shows a list of all tasks.
 
 Use case ends.
 
@@ -918,7 +895,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list tasks.
+1. User requests to list tasks.
 2. T_Assistant shows a list of tasks.
 3. User requests to edit a Task's information from the list.
 4. T_Assistant updates the Task's information as per user's input.
@@ -953,7 +930,7 @@ Use case ends.
 
 **MSS**
 
-1. Users requests to list a group's tasks.
+1. User requests to list a group's tasks.
 2. T_Assistant shows a list of tasks.
 3. User requests to edit a Task's information from the list.
 4. T_Assistant updates the Task's information as per user's input.
@@ -984,6 +961,29 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Mark Group's Task as Complete**
+
+**MSS**
+
+1. User marks task as complete.
+2. T_Assistant marks the task accordingly.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The Group/Task parameters are invalid.
+
+    - 1a1. T_Assistant shows an error message.
+
+      Use case ends.
+
+- 1b. The user marks an already complete task.
+
+    - 1b1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: Find Task**
 
 **MSS**
@@ -1012,7 +1012,7 @@ Use case ends.
 
 **MSS**
 
-1. User lists all tasks.
+1. User requests to list all tasks.
 2. T_Assistant displays all tasks.
 3. User requests to sort tasks.
 4. T_Assistant sorts tasks by order of the deadline, from earliest to latest.
