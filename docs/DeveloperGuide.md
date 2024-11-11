@@ -274,22 +274,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ## **Planned Enhancements**
 
-1. Detailed errors for importing<br/>
+Team Size: 5
+
+1. **Detailed errors for importing**<br/>
     When the user imports a file with the wrong extension and the importer fails to import the contents of the file, add 
     a check to see whether the file has the right file extension.
     <br/><br/>
-2. Warn the user when exporting will cause a file to be overwritten<br/>
+2. **Warn the user when exporting will cause a file to be overwritten**<br/>
     When the export file location already has a file, warn and ask for permission from the user before overwriting the 
     file.
     <br/><br/>
-3. Maintaining focus on currently selected person after any command execution<br/>
+3. **Maintaining focus on currently selected person after any command execution**<br/>
     The currently focused person should remain even after commands like `addnotes` or even `delete` as much as possible.
     <br/><br/>
-4. Limit number of tags that can be displayed<br/>
+4. **Limit number of tags that can be displayed**<br/>
     The person list panel and the pinned person list panel should only show a summary of tags. If there are too many
     tags or the tag names are too long, they should be hidden and only shown in the contact details panel when focused.
     <br/><br/>
-5. Dynamic message box sizing<br/>
+5. **Dynamic message box sizing**<br/>
     The message box should increase in height and wrap the text within it as needed so that the user can view the error
     message or other command messages easily.
 
