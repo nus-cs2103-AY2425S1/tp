@@ -86,7 +86,6 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 <div style="page-break-after: always;"></div>
 
 ## Command Summary
-//& TO CHOOSE WHICH TABLE (PLEASE SEE VIA THE WEBSITE NOT BY .md). personally perfers that there should be a short descp.
 
 | Action                                                                                | Format, Examples                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -105,9 +104,6 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 ## Features
 //& Found why the clicking of Features didnt work, issue I forgot, but the fix is in _markbind/layouts/default.md
-
-//& CHECK IF REPLACING PARAMETERS WITH FIELDS MAKE SENSE <br>
-//& MIGHT WANT TO KEEP PARAMETERS, esp. on the part on any order. IF SO, TO UPDATE PICTURE
 
 <box type="info" seamless>
 
@@ -148,20 +144,16 @@ Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ 
 
 <box type="definition" seamless>
 
-**Action:** Adds a contact to the address book. (parameters do not need to be in order, nn/NICKNAME is optional)
+**Action:** Adds a contact to the address book. 
+Parameters do not need to be in order. <br/>
+`r/ROLE` can be used 1 to any number of times. <br/>
+`nn/NICKNAME` is optional. <br/>
 </box>
 
 <box type="tip" seamless>
 
-**Tip:** A contact must have at least one role. Roles should match\* the following:
-1. President
-2. Vice President
-3. Admin
-4. Marketing
-5. Events (Internal)
-6. Events (External)
-7. External Relations<br><br>
-\* The entered role must match exactly (but is not case-sensitive).
+**Tip:** Refer to [Contact Fields](#contact-fields-constraints) for constraints on each of the contact fields. 
+
 </box>
 
 Examples:
