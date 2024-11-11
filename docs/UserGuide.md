@@ -297,6 +297,11 @@ Do note that Jeff needs to have a role before he can be added to an event!
 - `ve/` – Vendor
 - `vo/` – Volunteer
 
+
+_While not required to complete to tutorial, 
+if you are curious about the strange bracket notations click [Features](#features) to read more about the command formats!_
+
+
 ### 4.5 Using Search Mode
 
 Now imagine your contact list has grown significantly,
@@ -328,6 +333,8 @@ are attendees.
 This will filter the list to show only those contacts named “Alex” with the role “attendee.” PlanPal will display these filtered results in the center panel. If the list still feels too broad, you can add more criteria to narrow it down further.
 
 Now try searching for someone from your own contact list!
+
+
 
 ### 4.7 Excluding Contacts from Search Results
 
