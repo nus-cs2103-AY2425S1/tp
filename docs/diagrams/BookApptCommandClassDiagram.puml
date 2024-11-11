@@ -1,0 +1,24 @@
+@startuml BookApptCommandClassDiagram
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class BookApptCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_APPT_ADDED_SUCCESS: String
+  +MESSAGE_PATIENT_NOT_FOUND: String
+  +MESSAGE_PAST_DATETIME: String
+  +MESSAGE_DUPLICATE_APPT: String
+  +MESSAGE_USAGE: String
+  -nric: Nric
+  -appt: Appt
+  +execute(Model): CommandResult
+}
+Class CommandException
+
+BookApptCommand -up-|> Command
+Command ..> CommandException: throws >
+BookApptCommand .right.> CommandException: throws >
+@enduml

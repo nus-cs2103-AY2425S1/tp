@@ -1,24 +1,21 @@
-@startuml BookApptCommand
+@startuml DeleteApptCommandClassDiagram
 hide circle
 skinparam classAttributeIconSize 0
 
 Class "{abstract}\nCommand" as Command {
   +execute(Model): CommandResult
 }
-Class BookApptCommand {
+Class DeleteApptCommand {
   +COMMAND_WORD: String
-  +MESSAGE_APPT_ADDED_SUCCESS: String
-  +MESSAGE_PATIENT_NOT_FOUND: String
-  +MESSAGE_PAST_DATETIME: String
-  +MESSAGE_DUPLICATE_APPT: String
   +MESSAGE_USAGE: String
+  +MESSAGE_DELETE_APPT_SUCCESS: String
   -nric: Nric
-  -appt: Appt
+  -apptDateTime: LocalDateTime
   +execute(Model): CommandResult
 }
 Class CommandException
 
-BookApptCommand -up-|> Command
+DeleteApptCommand -up-|> Command
 Command ..> CommandException: throws >
-BookApptCommand .right.> CommandException: throws >
+DeleteApptCommand .right.> CommandException: throws >
 @enduml
