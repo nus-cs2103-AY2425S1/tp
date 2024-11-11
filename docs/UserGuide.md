@@ -103,7 +103,7 @@ A client can have any number of tags (including 0)
 The following constraints apply to the `edit` command as well:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-  * The name should be within 150 characters long.
+  * The name should be within 100 characters long.
   * name must be unique (case-sensitive). Clients with the same name cannot be added to
     the system twice.
       - entering the commands:
