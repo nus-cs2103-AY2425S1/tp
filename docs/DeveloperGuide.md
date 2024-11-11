@@ -20,6 +20,10 @@ We also extend our gratitude to the creators of the following resources and libr
 * [JUnit](https://junit.org/junit5/)
 * [Jackson Library](https://github.com/FasterXML/jackson)
 
+AI Declaration:
+* Samriddh : Utilized ChatGPT for code completion, javadoc and writing test cases.
+* Nihirra : Used GitHub Copilot and ChatGPT for debugging and assistance with code implementation. 
+
 
 --------------------------------------------------------------------------------------------------------------------
 
