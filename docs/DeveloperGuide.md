@@ -254,13 +254,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The list is empty.
-
+- **2a.** The list is empty.  
   *Use case ends.*
 
 - **3a.** The given index is invalid.
     - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*<br>
+      *Use case resumes at step 2.*<br><br>
 
   *Use case ends.*
 
@@ -284,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **3a.** The given index is invalid.
     - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*<br>
+      *Use case resumes at step 2.*<br><br>
 
   *Use case ends.*
 
@@ -302,7 +301,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-
   *Use case ends.*
 
 ---
@@ -319,7 +317,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-
   *Use case ends.*
 
 ---
@@ -336,7 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-
   *Use case ends.*
 
 ---
@@ -354,15 +350,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **1a.** The given index is invalid.
     - **1a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
 
 - **1b.** The event does not exist.
     - **1b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
 
 - **1c.** The person is already linked to the event.
     - **1c1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
 
   *Use case ends.*
 
@@ -381,15 +377,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **1a.** The given index is invalid.
     - **1a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
 
 - **1b.** The event does not exist.
     - **1b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
 
 - **1c.** The person is not already linked to the event.
     - **1c1.** Eventory shows an error message.
-      *Use case resumes at step 1.*<br>
+      *Use case resumes at step 1.*<br><br>
       
   *Use case ends.*
 
@@ -424,7 +420,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-
     *Use case ends.*
 
 ---
