@@ -46,7 +46,7 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited Assignment: %1$s from %2$s";
     public static final String MESSAGE_NO_STUDENT_FOUND = "No such student found!";
     public static final String MESSAGE_NO_ASSIGNMENT_FOUND = "No such assignment found!";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "There are more than 1 student of the same name \n"
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name \n"
             + "Their student numbers are as follows: %1$s \n"
             + MESSAGE_USAGE;
 
