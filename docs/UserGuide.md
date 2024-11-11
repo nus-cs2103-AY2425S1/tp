@@ -77,6 +77,7 @@ If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMA
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
+Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words 😁
 
 | Action                                                             | Format, Examples                                                                                                                                                                                 |
 |--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -99,7 +100,14 @@ If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMA
 
 <box type="important" seamless>
 
-**IMPORTANT:** Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
+**IMPORTANT:**
+
+**Delete and clear operations in KnottyPlanners:**
+
+All delete and clear operations (except `tag-del`) in KnottyPlanner will be followed by a confirmation prompt to avoid accidental deletion. Therefore, delete and clear operations must be followed by either `y` command (confirm delete operation) or `n` command (remove pending operation). Otherwise, following delete and clear commands may be affected. Hence, if you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊.
+
+**TAKE NOTE:** `Y` and `N` will be considered as invalid commands as they are NOT same as `y` and `n`
+
 
 </box>
 
@@ -108,7 +116,9 @@ The table below provides a brief explanation of each parameter encountered in th
 
 <box type="important" seamless>
 
-**IMPORTANT:** Please ensure that all parameters adhere to the constraints mentioned below. If you choose not to do so, the command will not be executed and error messages will be shown.
+**IMPORTANT:** 
+* Please ensure that all parameters adhere to the constraints mentioned below. If you choose not to do so, the command will not be executed and error messages will be shown.
+* KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
 
 </box>
 
@@ -147,22 +157,21 @@ Each parameter is followed by examples that explains if the input is considered 
 `TAG` and `WEDDING NAME`
 * `John Stones & Mary Jane` is equivalent to `JOHN STONES & MARY JANE`, `John   Stones &   Mary Jane`, `john stones & mary jane` and `     John Stones & Mary Jane      `.
 * `John Stones & Mary Jane` is NOT the same as `Mary Jane & John Stones`.
-
 </box>
 
 
 
-| Parameter      | Prefix  | Definition                                        | Case-Sensitivity | Constraints                                                                                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                                                              |
-|----------------|---------|---------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`    | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing.                                                                                                                                                                                                      | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi`                    |
-| `PHONE`        | `p/`    | Phone number of the person.                       | NA               | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well.                                                                                                                                                                    | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)`                                                                  |
-| `EMAIL`        | `e/`    | Email address of the person.                      | Case-sensitive   | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com`                                                                                   |
-| `ADDRESS`      | `a/`    | Address of the person.                            | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767`                                                                                                     |
-| `JOB`          | `j/`    | Occupation of the person.                         | Case-insensitive | - All values are allowed. <br> - Should not be blank. <br> - We recommend that only one job is assigned per person for a better user experience.                                                                                                                                                                                                                                                                                                                                                    | :+1: `DJ`                                                                                                                                             |
-| `TAG`          | `t/`    | A tag is the wedding associated with that person. | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank.                                                                                                                                                                                                                                                           | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam`                                    |
+| Parameter      | Prefix  | Definition                                        | Case-Sensitivity | Constraints                                                                                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                                                        |
+|----------------|---------|---------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`    | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing.                                                                                                                                                                                                      | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi`              |
+| `PHONE`        | `p/`    | Phone number of the person.                       | NA               | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well.                                                                                                                                                                    | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)`                                                            |
+| `EMAIL`        | `e/`    | Email address of the person.                      | Case-sensitive   | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com`                                                                             |
+| `ADDRESS`      | `a/`    | Address of the person.                            | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767`                                                                                               |
+| `JOB`          | `j/`    | Occupation of the person.                         | Case-insensitive | - All values are allowed. <br> - Should not be blank. <br> - We recommend that only one job is assigned per person for a better user experience.                                                                                                                                                                                                                                                                                                                                                    | :+1: `DJ`                                                                                                                                       |
+| `TAG`          | `t/`    | A tag is the wedding associated with that person. | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank.                                                                                                                                                                                                                                                           | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam`                              |
 | `WEDDING NAME` | `w/`    | Name of a wedding.                                | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the exact format `NAME & NAME`. <br> - Both names must be unique <br> - Should not be blank.                                                                                                                                                                                                                    | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` <br> :x: `Jolyn &Max` <br> :x: `Sara & Sara` |
-| `VENUE`        | `v/`    | Location of the wedding.                          | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Fullerton Hotel, Ballroom 1, #01-05`                                                                                                            |
-| `DATE`         | `d/`    | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099`                                                                                                                                                                                                                           | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100`                                         |
+| `VENUE`        | `v/`    | Location of the wedding.                          | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Fullerton Hotel, Ballroom 1, #01-05`                                                                                                      |
+| `DATE`         | `d/`    | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099`                                                                                                                                                                                                                           | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100`                                   |
 
 
 ## Features
@@ -174,15 +183,13 @@ Each parameter is followed by examples that explains if the input is considered 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `list-wed`, `exit`, `clear-ab` and `clear-wb`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -216,6 +223,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
+* If you add tags of a weddings that does not exist, KnottyPlanners will still add the person and ignore invalid tags
 * We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
 
 </box>
@@ -240,8 +248,7 @@ Format: `del n/NAME` followed by `y` or `n`
 <box type="important" seamless>
 
 **IMPORTANT:** 
-* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
-* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
 
 </box>
 
@@ -279,15 +286,22 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 
 * You have to provide at least one of the optional fields.
 * Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
-['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
+['tag-del'](#deleting-tags-from-a-contact-tag-del--td) and add a new one using ['tag-add'](#adding-tags-to-a-contact-tag-add--ta)!
 
 <box type="important" seamless>
 
-**IMPORTANT:** 
+**IMPORTANT:**
 * Multiple inputs of the same parameter can be added but only the last one will be accepted.
 * Examples:
   - `edit n/John p/111 p/222` will edit John's phone number to `222`
   - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited)
+* Order of parameters does not matter and the person to edit will depend on the `n/NAME`.
+* Examples:
+  - `edit p/222 n/John` will edit John's phone number to `222`
+  - `edit a/Tampines Heights p/123 n/John` will edit John's address to `Tampines Heights` and John's phone number to `123`
+* Editing a field with the original value will be considered as a valid command
+  - `edit n/John new/John` is a valid command and no changes will be made, same applies to other fields.
+  - `edit n/John new/john` or `edit n/John new/   john` is a valid command and no changes will be made as names are auto-formatted to 'John'
 
 </box>
 
@@ -323,7 +337,15 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`.
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
+
+* <box type="important" seamless>
+
+**IMPORTANT:**
+
+* Please take not that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
+
+</box>
 
 ![add wedding message](images/addWeddingMsg.png)
 
@@ -346,8 +368,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 **IMPORTANT:** 
 
-* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
-* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
+* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
 * As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
 
@@ -537,9 +558,7 @@ Format:
 
 **IMPORTANT:** 
 
-* The clear command must be followed by either `y` or `n` command.
-* `y` and `n` are CASE-SENSITIVE. Inputting `Y` or `N` will not execute the confirmation.
-* If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending clear operations to ensure everything runs smoothly😊
+* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information ☺️.
 
 </box>
 
@@ -554,17 +573,15 @@ Format:
 * `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
 
 1. `clear-wb` / `cwb` clears all weddings in wedding book.
-3. The command will prompt for confirmation before deleting all entries.
-4. If you confirm with `y`, all entries will be deleted.
-5. If you cancel with `n`, no entries will be deleted.
+2. The command will prompt for confirmation before deleting all entries.
+3. If you confirm with `y`, all entries will be deleted.
+4. If you cancel with `n`, no entries will be deleted.
 
 <box type="important" seamless>
 
 **IMPORTANT:** 
 
-* The clear command must be followed by either `y` or `n` command.
-* `y` and `n` are CASE-SENSITIVE. Inputting `Y` or `N` will not execute the confirmation.
-* If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending clear operations to ensure everything runs smoothly😊
+* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information ☺️.
 
 </box>
 
