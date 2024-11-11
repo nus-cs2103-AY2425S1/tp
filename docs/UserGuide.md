@@ -188,9 +188,9 @@ Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* Tag search is case-sensitive, `Friends` will not match `friends`.
+* Tag search is case-sensitive. `Friends` will not match `friends`.
 * In tag search, the contacts have to contain all the specified TAGs in order to match.
-* If multiple parameters, `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
+* If multiple parameters, namely `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
 
 Examples:
 * `find n/John` Finds contacts who have the word John in their name.
@@ -212,7 +212,7 @@ Format: `delete INDEX`
 * There is a confirmation popout after the user enters the command but before the delete is actually done.
   click `OK` to continue or `Cancel` to abort the deletion.
 
-![delete popout](images/deleteConfirmation.png)
+![delete popup](images/Delete popup.png)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
