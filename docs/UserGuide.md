@@ -1158,9 +1158,11 @@ Removed buyers: Alex Yeoh, Charlotte Oliveiro
 > 
 > **User Error #2**: Buyer index not found / Invalid type / Negative integer
 >
-> **Input #a**: `removelistingbuyers 1 buy/aa`
+> **Input #a**: `removelistingbuyers 1 buy/`
+> 
+> **Input #b**: `removelistingbuyers 1 buy/aa`
 >
-> **Input #b**: `removelistingbuyers 1 buy/-1`
+> **Input #c**: `removelistingbuyers 1 buy/-1`
 >
 > **Output**: Index is not a non-zero unsigned integer.
 > 
