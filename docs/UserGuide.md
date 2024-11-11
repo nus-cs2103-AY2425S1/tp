@@ -9,24 +9,28 @@
 
 # TAHub Contacts User Guide
 
-If you are a busy Computer Science student juggling Teaching Assistant roles and
-struggling to keep track of your many
-students, *TAHub Contacts* is a desktop application for you to easily manage your
+If *you* are a busy Computer Science student juggling Teaching Assistant roles and
+struggling to keep track of *your* many
+students, *TAHub Contacts* is a desktop application for *you* to easily manage *your*
 student contact details!
 
+Think about *TAHub Contacts* as a little helper, residing on *your* computer,
+made just for *you*, the Computing TA.
+
 <box type="tip" theme="light">
-<md>
-    While it has a *GUI* (Graphical User Interface), most of the user interactions
-    happen using a *CLI* (Command Line Interface) with typed commands. A perfect
-    fit if you’re already a wizard at the keyboard.
-</md>
-<br>
-<md>
-    (_Or if you've already taken/suffered/enjoyed `CS2030S`_)
-</md>
+
+While it has a *GUI* (Graphical User Interface), most of the user interactions
+happen using a *CLI* (Command Line Interface) with typed commands. A perfect
+fit if you’re already a wizard at the keyboard.
+
+Also preferable would be being comfortable with the concept of entering
+configurable, text-based commands into a terminal.
+
+(*Or if you've already taken/suffered/enjoyed `CS2030S`*)
+
 </box>
 
-<!-- This section exists to correct a Markbind rendering bug. -->
+<!-- This section exists to correct a Markbind rendering bug. Don't worry about it-->
 <a name="TEMPFIX"><md>
 ![](404.png)
 </md></a>
@@ -173,7 +177,7 @@ student contact details!
 
 ### Main Commands
 
-The main commands for TAHub Contacts.
+The main basic commands for *TAHub Contacts*.
 
 <a name="help">
   <panel header="#### Viewing help : `help`" expanded no-close no-switch>
@@ -241,7 +245,15 @@ The main commands for TAHub Contacts.
 
 ### Student Commands
 
-Reminder: follow the [data formats](#data-formats)!
+This is for managing your individual **students**,
+modifying their attributes and information.
+
+See [Course Commands](#course-commands) or [Enrollment Commands](#enrollment-commands)
+regarding your students' **courses** and **tutorial groups**.
+
+<box type="warning">
+
+Reminder: follow the [:fa-solid-link: data formats](#data-formats)!
 </box>
 
 <a name="person-add">
@@ -348,6 +360,9 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 ### Course Commands
 
+This is for managing the **courses** you are (or previously were, *cuz why not*)
+teaching.
+
 <box type="warning">
 
 Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [:fa-solid-link: data format](#data-formats)!
@@ -424,6 +439,9 @@ Format: **`course-delete c/COURSE_CODE`**
 
 ### Enrollment Commands
 
+This is for you to attach ([enroll](#enroll)) and unattach ([unenroll](#unenroll)) students from
+specific courses and tutorials for better management.
+
 <a name="enroll">
 <panel header="#### Enrolling a student : `enroll`" expanded no-close no-switch>
 
@@ -478,9 +496,12 @@ Format: **`unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 
 ### Attendance Commands
 
-Each student has an attendance record associated with each unique course and tutorial.
-This record is to be edited over the duration of a semester, where you can mark and unmark
-attendance for for each consecutive session.
+This is for you to conveniently keep track of each one of your students' **attendance records**.
+
+Each of your students will have an attendance record associated with each unique course and tutorial group.
+This record is to be edited over the duration of a semester (or longer), where you can
+mark ([present :)](#attend-present) or [absent :(](#attend-absent)) and [unmark](#attend-remove)
+attendance for for **each** consecutive session.
 
 <box type="warning">
 
@@ -511,6 +532,12 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`*
 
 Marks a student in a particular course and tutorial group as having missed a session (was **absent**).
 
+<box type="info" seamless>
+
+*Tsk tsk tsk, remember to check with the student why they were absent, and
+whether they have an official valid reason or MC~*
+</box>
+
 <box type="definition" seamless><md>
 Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
@@ -526,6 +553,11 @@ Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 <panel header="#### Marking attendance : `attend-remove`" expanded no-close no-switch>
 
 Removes the last attendance session record of a student in a particular course and tutorial group.
+
+<box type="info" seamless>
+
+For when you accidentally marked a truant king as `present`. Oops!
+</box>
 
 <box type="definition" seamless><md>
 Format: **`attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
@@ -553,6 +585,10 @@ Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 | :--- |
 | `attend-clear m/A1234567Y c/CS1101S tut/T10` |
 
+<box type="important" theme="danger"><md>
+**Destructive** irreversible command. Be careful!
+</md></box>
+
 </panel>
 </a>
 
@@ -568,7 +604,8 @@ Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 
 #### Saving the data
 
-Ever experience the sinking feeling of being petrified when you *forgot* to `Ctrl/Cmd-S` something important?
+Ever experience the stomach-churning sinking feeling of being petrified when
+you *forgot* to `Ctrl/Cmd-S` something important?
 
 Don't worry!
 
@@ -582,10 +619,12 @@ the data**. You don’t need to save manually!
 
 #### Editing the data file
 
-Data are saved automatically in the [JSON](https://www.json.org/json-en.html)
-files `[JAR file location]/data/addressbook.json`, storing the list of persons
+Data is saved automatically in the [JSON](https://www.json.org/json-en.html)
+files `[JAR file location]/data/addressbook.json`, storing the list of your students
 and `[JAR file location]/data/courselist.json`, storing the list of courses.
+
 Advanced users are *welcome* to update data directly by editing that data file.
+The file structure *should* be decently self-explanatory.
 
 <box type="warning" seamless>
 
@@ -625,10 +664,12 @@ You have been duly warned.
 it creates with the file that contains the data of your previous TAHub Contacts home
 folder.
 
-**Q**: I accidentally performed the wrong command. Is there a way for me to
+**Q**: I accidentally performed the wrong command. Is there a way for me to...
 revert the change?<br>
-**A**: Unfortunately, we have not implemented an undo command for TAHub contacts.
+**A**: Unfortunately, we have **not** implemented an undo command for TAHub contacts.
 :pensive:
+<br>
+So be careful especially when you're using desctructive (deletion) commands!
 
 </a>
 
