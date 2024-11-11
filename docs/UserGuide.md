@@ -181,7 +181,7 @@ Refer to the [Features](#features) below for details of each command.
 * For commands that do not require parameters (e.g. `help`, `list`, `exit` etc), any additional parameters that are input will be ignored.<br>
   e.g. if you input `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, please exercise caution when copying and pasting commands that span multiple lines, as space characters adjacent to line breaks may be omitted when pasted into PROperty.  
+* If you are using a PDF version of this document, please exercise caution when copying and pasting commands that span multiple lines, as space characters adjacent to line breaks may be omitted when pasted into PROperty's CLI.  
 
 </div>
 
