@@ -83,7 +83,8 @@ public class DeleteCommandTest {
         model.addPerson(person);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("John Doe"));
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, person);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                "John Doe; Phone: 85355255; Email: amy@gmail.com; Address: 123, Jurong West Ave 6, #08-111; Birthday: 1990-10-10; Appointment: 2024-12-12 12:00; Tags: ");
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(person);
 
@@ -135,7 +136,8 @@ public class DeleteCommandTest {
         Index personIndex = Index.fromOneBased(model.getFilteredPersonList().indexOf(person) + 1);
         DeleteCommand deleteCommand = new DeleteCommand(personIndex);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, person);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                "John Doe; Phone: 85355255; Email: amy@gmail.com; Address: 123, Jurong West Ave 6, #08-111; Birthday: 1990-10-10; Appointment: 2024-12-12 12:00; Tags: ");
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(person);
 
