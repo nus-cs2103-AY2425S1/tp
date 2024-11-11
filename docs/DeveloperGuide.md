@@ -1071,7 +1071,7 @@ relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
 ### 7.4 Usage of reserved prefixes in parameters
 
 Currently, EduManage does not check whether reserved prefixes are used within parameters. A future version will ensure that
-all prefixes reserved will be restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
+all reserved prefixes are restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
 enhancement aims to improve system reliability by reducing potential errors arising from misuse of reserved prefixes.
 
 The reserved prefixes are: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
