@@ -9,7 +9,9 @@ package Logic as LogicPackage {
 package "Parser Classes" as ParserClasses{
 }
 Class XYZCommand
-Class CommandResult
+package "CommandResult Classes" as CommandResultClasses{
+}
+
 Class "{abstract}\nCommand" as Command
 
 
@@ -41,7 +43,7 @@ Command .[hidden]up.> Storage
 Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
-Logic ..> CommandResult
-LogicManager .down.> CommandResult
-Command .up.> CommandResult : <<create>>
+Logic ..> CommandResultClasses
+LogicManager .down.> CommandResultClasses
+Command .up.> CommandResultClasses : <<create>>
 @enduml
