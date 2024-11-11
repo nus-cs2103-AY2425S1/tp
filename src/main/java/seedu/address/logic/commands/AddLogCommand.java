@@ -59,8 +59,6 @@ public class AddLogCommand extends Command {
         requireNonNull(personToUpdate);
         model.addLog(personToUpdate, log);
 
-        assert model.hasLog(personToUpdate, log) : "Log was added successfully";
-
         return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()),
                 false, false, false, false, -1, false, identityNumber,
                 log.getAppointmentDate(), log.getEntry());
