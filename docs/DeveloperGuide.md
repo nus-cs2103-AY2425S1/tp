@@ -463,6 +463,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. AgentConnect shows an error message for the invalid client.
     * 2a2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
     * Use case resumes from step 2.
+  
+* 2b. Duplicate Policy
+    * 2b1. AgentConnect shows an error message "This policy already exist".
+    * 2b2. User modifies the policy name and resubmits the command.
+    * Use case resumes from step 2.
 
 **Use case: Filter client by policy**
 
@@ -732,6 +737,8 @@ Team size: 5
 
 1. Delete 0 shows that invalid name is entered. We plan on on improving to show the correct error message in the future
 2. Implement refresh feature to ensure UI is updated with the latest information after every command is executed.
+3. Implement a more robust email validation feature. 
+4. Implement a fix to prevent the application from crashing when attempting to close the program while the delete confirmation pop-up window is still present.
 
 
 --------------------------------------------------------------------------------------------------------------------
