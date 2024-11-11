@@ -109,7 +109,7 @@ For all parts of the input that accept special characters, they cannot be placed
   * Disallowed special characters e.g. `john!@example.com`
   * Missing `@` character e.g. `johnexample.com`
   * Last two characters not being alphanumeric e.g. `john@example.c`
-  
+
 ### Birthday
 
 * Valid inputs: Numerical characters in the format `DD MM YYYY`. Valid dates should be used e.g. `01 01 2000`, `02 03 2004`
@@ -155,7 +155,7 @@ Format: `help`
 <div markdown="block" class="alert alert-info">
   **:information_source: Note!**<br>
 The displayed client will persist and edits will not be reflected until you select another client or close the F.A.R.T book.If you made any changes to the current client on display, kindly double-click on the same client to refresh the detailed view.
-</div> 
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,8 +387,7 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes. We recommend using F.A.R.T. in full-screen mode.
 4. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
-5. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again. 
-
+5. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
