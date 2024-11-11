@@ -380,10 +380,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is `ClinicBuddy` and the **Actor** is the `user`, unless specified
 otherwise)
 
-(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
+(For all use cases below, the **System** is `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
 
 <div style="page-break-after: always;"></div>
 
@@ -634,7 +634,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a patient
 
-1. Deleting a patient while all patient are being shown
+1. Deleting a patient while all patients are being shown
 
     1. Prerequisites: List all patient using the `list` command. Multiple patients in the list.
 
@@ -652,7 +652,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a patient after filtering the list
 
-    1. Prerequisites: There should be a patient with a `NRIC` of `S1234567Z` in ClinicBuddy, else enter `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient. Filter the list using the `find S1234567Z`.
+    1. Prerequisites: There should be a patient with an `NRIC` of `S1234567Z` in ClinicBuddy, else enter `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient. Filter the list using the `find S1234567Z`.
 
     1. Test case: `delete S1234567Z`<br>
        Expected: Patient with NRIC `S1234567Z` is deleted from the list. Details of the deleted patient shown in the status message.
