@@ -103,7 +103,7 @@ public class Teacher extends Person {
      */
     public Person withIncrementedAttendance() {
         return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), getDaysAttended());
+                getTags(), getSubjects(), getClasses(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
     /**
@@ -124,26 +124,17 @@ public class Teacher extends Person {
      */
     public Person withResetAttendance() {
         return Person.createPerson(getType(), getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), getDaysAttended());
-    }
-
-    /**
-     * Returns true if both are teachers with the same name and email address.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson instanceof Teacher
-            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
+                getTags(), getSubjects(), getClasses(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
     @Override
     public String getType() {
         return TEACHER_TYPE;
 
+    }
+
+    @Override
+    public int getDaysAttendedValue() throws CommandException {
+        throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
     }
 }

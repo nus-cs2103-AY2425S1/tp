@@ -6,8 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -91,6 +93,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HARDWORKING = "hardworking";
     public static final String VALID_TAG_ATHLETE = "athlete";
     public static final int VALID_ATTENDANCE_MICHAEL = 10;
+    public static final String VALID_NEXT_OF_KIN_MICHAEL = "John Tan";
+    public static final String VALID_EMERGENCY_CONTACT_MICHAEL = "98765432";
 
     // Constants for Chris
     public static final String VALID_NAME_CHRIS = "Chris Lim";
@@ -101,6 +105,8 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_CHRIS = "Math";
     public static final String VALID_CLASSES_CHRIS = "7B";
     public static final String VALID_ATTENDANCE_CHRIS = "10";
+    public static final String VALID_NEXT_OF_KIN_CHRIS = "John Lim";
+    public static final String VALID_EMERGENCY_CONTACT_CHRIS = "98192727";
 
     // Descriptions for fields for Michael
     public static final String NAME_DESC_MICHAEL = " " + PREFIX_NAME + VALID_NAME_MICHAEL;
@@ -113,6 +119,9 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HARDWORKING = " " + PREFIX_TAG + VALID_TAG_HARDWORKING;
     public static final String TAG_DESC_ATHLETE = " " + PREFIX_TAG + VALID_TAG_ATHLETE;
     public static final String ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_MICHAEL;
+    public static final String NOK_DESC_MICHAEL = " " + PREFIX_NEXT_OF_KIN + VALID_NEXT_OF_KIN_MICHAEL;
+    public static final String EMERGENCY_DESC_MICHAEL = " " + PREFIX_EMERGENCY_CONTACT
+            + VALID_EMERGENCY_CONTACT_MICHAEL;
     public static final String INVALID_ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + "-1";
 
     // Descriptions for fields for Chris
@@ -123,6 +132,7 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_CHRIS = " " + PREFIX_SUBJECT + VALID_SUBJECT_CHRIS;
     public static final String CLASSES_DESC_CHRIS = " " + PREFIX_CLASSES + VALID_CLASSES_CHRIS;
     public static final String ATTENDANCE_DESC_CHRIS = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_CHRIS;
+
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

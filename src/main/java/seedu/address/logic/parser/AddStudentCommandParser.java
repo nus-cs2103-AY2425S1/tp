@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -48,11 +50,13 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     public AddStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SUBJECT, PREFIX_CLASSES, PREFIX_ATTENDANCE);
+                    PREFIX_ADDRESS, PREFIX_TAG, PREFIX_SUBJECT, PREFIX_CLASSES, PREFIX_ATTENDANCE, PREFIX_NEXT_OF_KIN,
+                        PREFIX_EMERGENCY_CONTACT);
 
         // Ensure all required prefixes are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_SUBJECT, PREFIX_CLASSES) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_EMAIL, PREFIX_SUBJECT,
+                PREFIX_CLASSES, PREFIX_NEXT_OF_KIN, PREFIX_EMERGENCY_CONTACT)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
@@ -65,11 +69,24 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         Set<String> classes = parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
-        DaysAttended daysAttended = ParserUtil.parseDaysAttended(
-                Integer.valueOf(argMultimap.getValue(PREFIX_ATTENDANCE).orElse(DEFAULT_INPUT_VALUE)));
+        String attendanceString = argMultimap.getValue(PREFIX_ATTENDANCE).orElse(DEFAULT_INPUT_VALUE);
+        int attendanceValue;
+        try {
+            attendanceValue = Integer.parseInt(attendanceString);
+            if (attendanceValue < 0) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e) {
+            throw new ParseException(DaysAttended.MESSAGE_CONSTRAINTS);
+        }
+
+        DaysAttended daysAttended = new DaysAttended(attendanceValue);
+        Name nextOfKin = ParserUtil.parseName(argMultimap.getValue(PREFIX_NEXT_OF_KIN).get());
+        Phone emergencyContact = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT).get());
 
         // Create the Student object
-        Student student = new Student(name, gender, phone, email, address, tagList, subjectList, classes, daysAttended);
+        Student student = new Student(name, gender, phone, email, address, tagList, subjectList, classes, daysAttended,
+                nextOfKin, emergencyContact);
 
         return new AddStudentCommand(student);
     }

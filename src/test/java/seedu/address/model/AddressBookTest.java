@@ -114,8 +114,10 @@ public class AddressBookTest {
     @Test
     public void markAttendance_marksAllStudentsAttendance_success() {
         // Arrange
-        Student student1 = new StudentBuilder().withName("Student One").build();
-        Student student2 = new StudentBuilder().withName("Student Two").build();
+        Student student1 = new StudentBuilder().withName("Student One")
+            .withEmail("StudentOne@example.com").withPhone("12345678").build();
+        Student student2 = new StudentBuilder().withName("Student Two")
+            .withEmail("StudentTwo@example.com").withPhone("22345678").build();
         addressBook.addPerson(student1);
         addressBook.addPerson(student2);
 
@@ -146,8 +148,10 @@ public class AddressBookTest {
     @Test
     public void resetAttendance_resetsAllStudentsAttendance_success() {
         // Arrange
-        Student student1 = new StudentBuilder().withName("Student One").build();
-        Student student2 = new StudentBuilder().withName("Student Two").build();
+        Student student1 = new StudentBuilder().withName("Student One")
+            .withEmail("StudentOne@example.com").withPhone("12345678").build();
+        Student student2 = new StudentBuilder().withName("Student Two")
+            .withEmail("StudentTwo@example.com").withPhone("22345678").build();
         addressBook.addPerson(student1);
         addressBook.addPerson(student2);
 

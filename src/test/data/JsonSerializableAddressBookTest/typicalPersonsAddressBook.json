@@ -9,7 +9,9 @@
     "tags" : [ "friends" ],
     "subjects" : [ "Mathematics" ],
     "classes" : [ "7A" ],
-    "daysAttended" : null
+    "daysAttended" : null,
+    "nextOfKin" : null,
+    "emergencyContact" : null
   }, {
     "name" : "Benson Meier",
     "gender": "male",
@@ -19,7 +21,9 @@
     "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "Chemistry", "Physics" ],
     "classes" : [ "7A" ],
-    "daysAttended" : 0
+    "daysAttended" : 0,
+    "nextOfKin" : "Bob Bee",
+    "emergencyContact" : "85355999"
   }, {
     "name" : "Carl Kurz",
     "gender": "male",
@@ -29,7 +33,9 @@
     "tags" : [ ],
     "subjects" : [ "Mathematics" ],
     "classes" : [ "7B" ],
-    "daysAttended" : 0
+    "daysAttended" : 0,
+    "nextOfKin" : "Bob Bee",
+    "emergencyContact" : "85355999"
   }, {
     "name" : "Daniel Meier",
     "gender": "male",
@@ -39,26 +45,32 @@
     "tags" : [ "friends" ],
     "subjects" : [ "Physics" ],
     "classes" : [ "8A", "8C" ],
-    "daysAttended" : null
+    "daysAttended" : null,
+    "nextOfKin" : null,
+    "emergencyContact" : null
   }, {
     "name" : "Elle Meyer",
     "gender": "female",
-    "phone" : "9482224",
+    "phone" : "94822224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
     "subjects" : [ "Mathematics" ],
     "classes" : [ "7A" ],
-    "daysAttended" : 0
+    "daysAttended" : 0,
+    "nextOfKin" : "Bob Bee",
+    "emergencyContact" : "85355999"
   }, {
     "name" : "Fiona Kunz",
     "gender": "female",
-    "phone" : "9482427",
+    "phone" : "94824277",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
     "subjects" : [ "Physics" ],
     "classes" : [ "7B" ],
-    "daysAttended" : 0
+    "daysAttended" : 0,
+    "nextOfKin" : "Bob Bee",
+    "emergencyContact" : "85355999"
   } ]
 }

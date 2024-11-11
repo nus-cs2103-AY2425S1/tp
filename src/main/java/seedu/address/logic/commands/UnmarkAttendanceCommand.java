@@ -2,14 +2,20 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Unmarks the attendance of a particular student.
@@ -18,50 +24,100 @@ public class UnmarkAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance of a particular student.\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unmarks the attendance of the student(s) identified "
+            + "by the index numbers used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer, multiple indices should be separated by spaces)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully.";
-    public static final String MESSAGE_NO_STUDENTS = "There is no student to unmark attendance.";
+    public static final String MESSAGE_SUCCESS = "Attendance unmarked successfully for:\n%1$s";
 
-    private final Index targetIndex;
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private final Index[] targetIndexArray;
 
     /**
-     * Creates an UnmarkAttendanceCommand to unmark the attendance of the student at the specified {@code Index}.
+     * @param targetIndexArray of the student in the filtered person list to unmark attendance
      */
-    public UnmarkAttendanceCommand(Index index) {
-        this.targetIndex = index;
+    public UnmarkAttendanceCommand(Index[] targetIndexArray) {
+        requireNonNull(targetIndexArray);
+        this.targetIndexArray = targetIndexArray;
+    }
+
+    /**
+     * @param targetIndex of the student in the filtered person list to unmark attendance
+     */
+    public UnmarkAttendanceCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
+        this.targetIndexArray = new Index[] { targetIndex };
     }
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Starting to execute unmark attendance command.");
+
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Person> studentsToUnmark = getStudentsToUnmark(lastShownList);
+
+        StringBuilder unmarkedStudents = new StringBuilder();
+        for (Person personToUnmark : studentsToUnmark) {
+            model.unmarkAttendance(personToUnmark);
+            unmarkedStudents.append(Messages.format(personToUnmark)).append("\n");
         }
-        Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
-        model.unmarkAttendance(personToUnmark);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        logger.info("Attendance unmarked successfully.");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, unmarkedStudents.toString().trim()));
     }
+
+    private List<Person> getStudentsToUnmark(List<Person> lastShownList) throws CommandException {
+        List<Person> studentsToUnmark = new ArrayList<>();
+
+        for (Index index : targetIndexArray) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                logger.warning("Invalid index provided: " + index.getOneBased());
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                        + ": " + index.getOneBased());
+            }
+
+            Person personToUnmark = lastShownList.get(index.getZeroBased());
+            assert personToUnmark != null;
+
+            if (!(personToUnmark instanceof Student)) {
+                logger.warning("Invalid student index: " + index.getOneBased());
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_INDEX);
+            }
+
+            if (personToUnmark.getDaysAttendedValue() <= 0) {
+                logger.warning("Attendance already at zero for student: " + Messages.format(personToUnmark));
+                throw new CommandException(Messages.MESSAGE_INVALID_ATTENDANCE);
+            }
+            if (studentsToUnmark.contains(personToUnmark)) {
+                logger.warning("Duplicate index detected: " + index.getOneBased());
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+                        + ": " + index.getOneBased());
+            }
+            studentsToUnmark.add(personToUnmark);
+        }
+        return studentsToUnmark;
+    }
+
 
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls
+
         if (!(other instanceof UnmarkAttendanceCommand)) {
             return false;
         }
 
-        UnmarkAttendanceCommand otherUnmarkAttendanceCommand = (UnmarkAttendanceCommand) other;
-        return targetIndex.equals(otherUnmarkAttendanceCommand.targetIndex);
+        UnmarkAttendanceCommand otherCommand = (UnmarkAttendanceCommand) other;
+        return Arrays.equals(targetIndexArray, otherCommand.targetIndexArray);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndexArray", Arrays.toString(targetIndexArray))
                 .toString();
     }
 }

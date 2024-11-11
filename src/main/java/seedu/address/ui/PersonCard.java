@@ -4,6 +4,8 @@ import static seedu.address.model.person.Address.EMPTY_ADDRESS;
 import static seedu.address.model.person.Student.STUDENT_TYPE;
 import static seedu.address.model.person.Teacher.TEACHER_TYPE;
 
+import java.util.Comparator;
+
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -55,7 +57,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label daysAttended;
     @FXML
+    private Label nextOfKin;
+    @FXML
+    private Label emergencyContact;
+    @FXML
     private HBox daysAttendedContainer;
+    @FXML
+    private HBox nextOfKinContainer;
+    @FXML
+    private HBox emergencyContactContainer;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Student} and index to display.
@@ -73,7 +83,13 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + student.getPhone().value);
         address.setText("📍 " + student.getAddress().value);
-
+        person.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.setStyle("-fx-background-color: #FF6F61");
+                tags.getChildren().add(tagLabel);
+            });
         if (student.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE;");
         }
@@ -92,6 +108,14 @@ public class PersonCard extends UiPart<Region> {
         );
         daysAttendedContainer.setVisible(true);
         daysAttendedContainer.setManaged(true);
+
+        nextOfKin.setText("👪 Next of Kin: " + student.getNextOfKinName().fullName);
+        nextOfKinContainer.setVisible(true);
+        nextOfKinContainer.setManaged(true);
+
+        emergencyContact.setText("📞 Emergency Contact: " + student.getEmergencyContact().value);
+        emergencyContactContainer.setVisible(true);
+        emergencyContactContainer.setManaged(true);
     }
 
     /**
@@ -110,7 +134,13 @@ public class PersonCard extends UiPart<Region> {
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + teacher.getPhone().value);
         address.setText("📍 " + teacher.getAddress().value);
-
+        person.getTags().stream()
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.setStyle("-fx-background-color: #FF6F61");
+                tags.getChildren().add(tagLabel);
+            });
         if (teacher.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE");
         }
@@ -126,6 +156,10 @@ public class PersonCard extends UiPart<Region> {
 
         daysAttendedContainer.setVisible(false);
         daysAttendedContainer.setManaged(false);
+        nextOfKinContainer.setVisible(false);
+        nextOfKinContainer.setManaged(false);
+        emergencyContactContainer.setVisible(false);
+        emergencyContactContainer.setManaged(false);
     }
 
     /**

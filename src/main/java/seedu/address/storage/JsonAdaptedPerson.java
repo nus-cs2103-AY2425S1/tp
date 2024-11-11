@@ -43,6 +43,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<String> classes = new ArrayList<>();
     private final Integer daysAttended;
+    private final String nextOfKin;
+    private final String emergencyContact;
 
 
     /**
@@ -55,7 +57,9 @@ class JsonAdaptedPerson {
                              @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("subjects") List<JsonAdaptedSubject> subjects,
                              @JsonProperty("classes") List<String> classes,
-                             @JsonProperty("daysAttended") Integer daysAttended) {
+                             @JsonProperty("daysAttended") Integer daysAttended,
+                             @JsonProperty("nextOfKin") String nextOfKin,
+                             @JsonProperty("emergencyContact") String emergencyContact) {
         this.type = type;
         this.name = name;
         this.gender = gender;
@@ -72,6 +76,8 @@ class JsonAdaptedPerson {
             this.classes.addAll(classes);
         }
         this.daysAttended = daysAttended;
+        this.nextOfKin = nextOfKin;
+        this.emergencyContact = emergencyContact;
     }
 
     /**
@@ -94,6 +100,8 @@ class JsonAdaptedPerson {
             .map(String::toString)
             .collect(Collectors.toList()));
         daysAttended = null;
+        nextOfKin = null;
+        emergencyContact = null;
     }
 
     /**
@@ -116,6 +124,8 @@ class JsonAdaptedPerson {
             .map(String::toString)
             .collect(Collectors.toList()));
         this.daysAttended = source.getDaysAttended().getValue();
+        this.nextOfKin = source.getNextOfKinName().fullName;
+        this.emergencyContact = source.getEmergencyContact().value;
     }
 
     /**
@@ -194,9 +204,29 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Name modelNextOfKin;
+        if (nextOfKin != null) {
+            if (!Name.isValidName(nextOfKin)) {
+                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            }
+            modelNextOfKin = new Name(nextOfKin);
+        } else {
+            modelNextOfKin = null;
+        }
+
+        final Phone modelEmergencyContact;
+        if (emergencyContact != null) {
+            if (!Phone.isValidPhone(emergencyContact)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelEmergencyContact = new Phone(emergencyContact);
+        } else {
+            modelEmergencyContact = null;
+        }
+
         if (daysAttended == null) {
             return Person.createPerson(TEACHER_TYPE, modelName, modelGender, modelPhone, modelEmail, modelAddress,
-                modelTags, modelSubjects, modelClasses, null);
+                    modelTags, modelSubjects, modelClasses, null, modelNextOfKin, modelEmergencyContact);
         }
 
         if (!DaysAttended.isValidDaysAttended(daysAttended)) {
@@ -205,7 +235,7 @@ class JsonAdaptedPerson {
         final DaysAttended modelDaysAttended = new DaysAttended(daysAttended);
 
         return Person.createPerson(STUDENT_TYPE, modelName, modelGender, modelPhone, modelEmail, modelAddress,
-            modelTags, modelSubjects, modelClasses, modelDaysAttended);
+                modelTags, modelSubjects, modelClasses, modelDaysAttended, modelNextOfKin, modelEmergencyContact);
     }
 
 }

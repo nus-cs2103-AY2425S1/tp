@@ -17,9 +17,16 @@ public class UnmarkAttendanceCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnmarkAttendanceCommand() throws Exception {
-        Index expectedIndex = Index.fromOneBased(1);
+        Index[] expectedIndexes = {Index.fromOneBased(1), Index.fromOneBased(2)};
+        UnmarkAttendanceCommand command = parser.parse("1 2");
+        assertEquals(new UnmarkAttendanceCommand(expectedIndexes), command);
+    }
+
+    @Test
+    public void parse_singleValidArg_returnsUnmarkAttendanceCommand() throws Exception {
+        Index[] expectedIndexes = {Index.fromOneBased(1)};
         UnmarkAttendanceCommand command = parser.parse("1");
-        assertEquals(new UnmarkAttendanceCommand(expectedIndex), command);
+        assertEquals(new UnmarkAttendanceCommand(expectedIndexes), command);
     }
 
     @Test
@@ -43,9 +50,16 @@ public class UnmarkAttendanceCommandParserTest {
 
     @Test
     public void parse_extraSpacesAroundArgs_returnsUnmarkAttendanceCommand() throws Exception {
-        // Test input with extra spaces
-        Index expectedIndex = Index.fromOneBased(2);
-        UnmarkAttendanceCommand command = parser.parse("  2  ");
-        assertEquals(new UnmarkAttendanceCommand(expectedIndex), command);
+        // Test input with extra spaces and multiple indices
+        Index[] expectedIndexes = {Index.fromOneBased(2), Index.fromOneBased(3)};
+        UnmarkAttendanceCommand command = parser.parse("  2   3  ");
+        assertEquals(new UnmarkAttendanceCommand(expectedIndexes), command);
+    }
+
+    @Test
+    public void parse_mixedValidAndInvalidArgs_throwsParseException() {
+        // Test input with a mix of valid and invalid args
+        assertThrows(ParseException.class, () -> parser.parse("1 a"),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }

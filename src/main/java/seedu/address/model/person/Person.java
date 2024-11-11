@@ -81,6 +81,14 @@ public abstract class Person {
         return null;
     }
 
+    public Name getNextOfKinName() {
+        return null;
+    }
+
+    public Phone getEmergencyContact() {
+        return null;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -90,11 +98,15 @@ public abstract class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same Email or Phone Number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        throw new InvalidPersonTypeException();
+        if (otherPerson == this) {
+            return true;
+        }
+        return otherPerson != null
+            && (otherPerson.getEmail().equals(getEmail()) || otherPerson.getPhone().equals(getPhone()));
     }
 
     /**
@@ -188,10 +200,11 @@ public abstract class Person {
      */
     public static Person createPerson(String type, Name name, Gender gender, Phone phone, Email email, Address address,
                                       Set<Tag> tags, Set<Subject> subjects, Set<String> classes,
-                                      DaysAttended daysAttended) {
+                                      DaysAttended daysAttended, Name nextOfKinName, Phone emergencyContact) {
         switch (type) {
         case STUDENT_TYPE:
-            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+            return new Student(name, gender, phone, email, address, tags, subjects, classes, daysAttended,
+                    nextOfKinName, emergencyContact);
         case TEACHER_TYPE:
             return new Teacher(name, gender, phone, email, address, tags, subjects, classes);
         default:
@@ -208,4 +221,11 @@ public abstract class Person {
     public String getType() {
         throw new InvalidPersonTypeException();
     }
+
+    /**
+     * Returns the number of days attended by the person.
+     *
+     * @return The number of days attended by the person.
+     */
+    public abstract int getDaysAttendedValue() throws CommandException;
 }

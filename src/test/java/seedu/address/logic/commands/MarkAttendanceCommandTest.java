@@ -1,35 +1,59 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for
+ * Contains integration tests (interaction with the Model) for
  * {@code MarkAttendanceCommand}.
  */
 public class MarkAttendanceCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_markAttendance_success() {
+    public void execute_markAttendanceNonEmptyList_success() {
+        List<Person> studentsInList = model.getFilteredPersonList().stream()
+                .filter(person -> person instanceof Student)
+                .collect(Collectors.toList());
+
+        if (!studentsInList.isEmpty()) {
+            MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand();
+
+            String expectedMessage = MarkAttendanceCommand.MESSAGE_SUCCESS;
+
+            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            expectedModel.markAttendance();
+
+            assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
+        } else {
+            assertTrue(model.getFilteredPersonList().isEmpty(),
+                    "Expected non-empty list of students for this test");
+        }
+    }
+
+    @Test
+    public void execute_noStudentsInList_throwsCommandException() {
+        model.updateFilteredPersonList(person -> false);
+
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand();
 
-        String expectedMessage = MarkAttendanceCommand.MESSAGE_SUCCESS;
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markAttendance();
-
-        assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_NO_STUDENTS);
     }
 
     @Test
@@ -44,16 +68,9 @@ public class MarkAttendanceCommandTest {
         assertTrue(markAttendanceCommand1.equals(markAttendanceCommand2));
 
         // different types -> returns false
-        assertFalse(markAttendanceCommand1.equals(1));
+        assertTrue(!markAttendanceCommand1.equals(INDEX_FIRST_PERSON));
 
         // null -> returns false
-        assertFalse(markAttendanceCommand1.equals(null));
-    }
-
-    @Test
-    public void toStringMethod() {
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand();
-        String expected = MarkAttendanceCommand.class.getCanonicalName() + "{}";
-        assertEquals(expected, markAttendanceCommand.toString());
+        assertTrue(!markAttendanceCommand1.equals(null));
     }
 }

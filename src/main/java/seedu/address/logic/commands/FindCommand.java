@@ -2,8 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
 /**
@@ -19,7 +22,9 @@ public class FindCommand extends Command {
             + "Parameters: /TAG KEYWORD [/MORE_TAGS MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " /name John";
 
-    public static final String MESSAGE_SUCCESS = "Found the required people!";
+    public static final String MESSAGE_SUCCESS = "Found %d matching entries!";
+
+    public static final String MESSAGE_NO_ACTION = "No possible entries in EduConnect to find!";
 
     private final PersonContainsKeywordsPredicate predicate;
 
@@ -33,7 +38,16 @@ public class FindCommand extends Command {
         requireNonNull(model);
         assert model != null : "Model should not be null";
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        List<Person> remainingPersons = model.getFilteredPersonList();
+        int newSize = remainingPersons.size();
+
+        if (newSize == 0) {
+            model.updateFilteredPersonList(x -> true);
+            return new CommandResult(MESSAGE_NO_ACTION);
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newSize));
     }
 
     @Override

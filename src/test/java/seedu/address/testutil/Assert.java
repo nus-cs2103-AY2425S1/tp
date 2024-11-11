@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * A set of assertion methods useful for writing tests.
  */
@@ -14,9 +16,12 @@ public class Assert {
      * with our custom {@link #assertThrows(Class, String, Executable)} method.
      * To standardize API calls in this project, users should use this method instead of
      * {@link Assertions#assertThrows(Class, Executable)}.
+     *
+     * @return
      */
-    public static void assertThrows(Class<? extends Throwable> expectedType, Executable executable) {
+    public static CommandException assertThrows(Class<? extends Throwable> expectedType, Executable executable) {
         Assertions.assertThrows(expectedType, executable);
+        return null;
     }
 
     /**
