@@ -19,7 +19,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 1. Copy the file to the folder you want to use as the _home folder_ for SupplyCentral.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SupplyCentral.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data, goods view will only show undelivered goods upon startup.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data and goods view will only show undelivered goods upon startup.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -171,7 +171,7 @@ Adds a specific goods item tied to a supplier. All fields are required for this 
 
 Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
 
-* Goods are uniquely identified by all fields. (i.e. Goods can be repeated if any of the fields are different)
+* Goods are uniquely identified by all fields. (e.g. Goods can be repeated if any of the fields are different)
 * Quantity should be a positive number `quantity > 0`.
 * Price cannot be a negative number `price >= 0.00`.
 * Procurement Date and Arrival Date should be in the format `YYYY-MM-DD HH:MM` (24-hour format).
@@ -276,7 +276,7 @@ Examples:
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **UI elements can be resized to be too small**: Each UI element can be resized to a point where it may not be visible at all. If this happens accidentally, the user may be confused about the missing UI element. There should be a minimum height/width for each UI element to prevent this issue.
 4. **Unit level and number in the address field are not bounded reasonably**: For commands like `add` and `edit`, the unit level and number in the address field are not reasonably bounded. This allows users to input excessively large unit numbers without any error message.
-5. **Inconsistent Capitalisation of Supplier Name for adding Goods**: When adding goods, the supplier name follows the user's exact capitalisation of input and not the capitalisation of the supplier name in the supplier list. This may lead to confusion if the user is not aware of the exact capitalisation of the supplier name.
+5. **Inconsistent Capitalization of Supplier Name for adding Goods**: When adding goods, the supplier name follows the user's exact capitalisation of input and not the capitalisation of the supplier name in the supplier list. This may lead to confusion if the user is not aware of the exact capitalisation of the supplier name.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,10 +284,10 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/friend t/colleague`
+**Add Supplier** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete NAME`<br> e.g. `delete Amy`
-**Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
+**Delete Supplier** | `delete NAME`<br> e.g. `delete Amy`
+**Edit Supplier** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g. `find James Jake c/CONSUMABLES`
 **List** | `list`
 **Help** | `help`
