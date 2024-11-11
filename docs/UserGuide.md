@@ -73,6 +73,9 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- Parameters are composed only of letters.<br>
+  e.g. `n` for the name parameter or `p` for the phone number parameter. Numbers are not valid parameter names.
+
 - Parameters in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -126,8 +129,8 @@ Only Singapore phone numbers are allowed by the application. Meaning, that only 
 A person can have any number of tags (including 0)
 </div>
 
-- Note that Name, Phone Number, Email and Address are compulsory fields. 
-- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
+- Note that Name, Phone Number, Email and Address are compulsory fields.
+- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not
 particularly sensitive as compared to Identification Number etc.
 - The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
@@ -185,6 +188,9 @@ Examples:
 
 - `find John` returns `john`, `John Doe` and `Johnny`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+**Result from `find alex david`:**
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -298,6 +304,11 @@ Format: `view INDEX`
 Examples:
 
 - `view 1` shows the contact details of the first person shown on the displayed person list.
+- `view 3`
+
+**Result from `view 3`:**
+
+  ![result for 'view 3'](images/ViewCommandResult.png)
 
 ### Pin a contact: `pin`
 
@@ -314,6 +325,10 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
+**Result from `pin 1`:**
+
+  ![result for 'pin 1'](images/PinCommandResult.png)
+
 ### Unpin a contact: `unpin`
 
 Unpins the contact of a person from the pinned list.
@@ -328,6 +343,14 @@ Format: `unpin INDEX`
 Examples:
 
 - `unpin 1` unpins the contact of the first person shown on the pinned person list.
+
+**State before`unpin 1`:**
+
+  ![state before `unpin`](images/BeforeUnpin.png)
+
+**State after `unpin 1`:**
+
+  ![state after `unpin 1`](images/UnpinCommandResult.png)
 
 ### Undo a previously executed command: `undo`
 
@@ -372,7 +395,7 @@ Examples:
 
 - `import f/vcf p/bizbook.vcf` imports the contacts from the file `bizbook.vcf` that is located in the same folder as
   this application.
-- `import f/vcf p//Users/Name/myAddress.bcf` imports the contacts from the file located at `/Users/Name/myAddress.bcf`
+- `import f/vcf p//Users/Name/myAddress.vcf` imports the contacts from the file located at `/Users/Name/myAddress.vcf`
 
 ### Export the contact list : `export`
 
@@ -396,14 +419,20 @@ Changes the application theme from light to dark or from dark to light.
 Format: `toggle`
 
 - If application is currently in light mode, toggle command will set it to dark mode.
-- If application is currently in dark mode, toggle command will set it to light mode. 
+- If application is currently in dark mode, toggle command will set it to light mode.
 - Please note that our application does not save your theme preference, so it will always open in dark mode by default.
 
 Examples:
 
 - `toggle` changes the application theme.
 
-### Navigating Command History : 
+**GUI in light mode:**
+![GUI in light mode](images/UiInLightMode.png)
+
+**GUI in dark mode:**
+![GUI in dark mode](images/UiInDarkMode.png)
+
+### Navigating Command History :
 
 Easily cycle through your previous **successfully executed** commands by using the Up and Down arrow keys on your keyboard.
 
@@ -430,7 +459,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bizbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -439,17 +468,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-## Future Features
-
-1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
-2) The current email validation does not check for the presence of a period (.) after the "@" symbol and only ensures that the domain name after the "@" is at least two characters long. Checking for the period is planned in a future release.
-
----
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: There are 2 ways to transfer data.
+1. If you want to use the `.json` file generated by BizBook, install the app in another computer and overwrite the data folder located at `[JAR file location]/data` with the file that contains the data from your previous BizBook home folder.
+2. If you want to import using a `.vcf` file, export the data using the `export` command in BizBook, i.e. `export f/vcf`. The `.vcf` file will be located in a folder at `[JAR file location]/export/bizbook.vcf`. You can rename and transfer this file to other devices using BizBook and to import the data use the `import` command, i.e. `import f/vcf p/[Path to the VCF file]/<file name>.vcf`. Also do note that **user preferences will not be transferred over**.
 
 ---
 
@@ -461,16 +485,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 4. **Only one note may be added at a time**. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
    is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
    feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
-5. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+5. **Maximum number of items**, the maximum number of items (contacts, notes, tags, etc.) in this application is 2147483647. If you enter a number larger than this, the program may behave unexpectedly. However, it is unlikely that you will ever have so many contacts or tags of one contact.
+6. **Contact name is a unique identifier**, this application uses the name of a contact as the unique identifier. This means that it cannot accept two of the same names in the application. Instead, consider adding the surname, use full names or, if really needed, adding numbers at the back of the name to distinguish different people.
+7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
+8. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+9. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
+
 ---
 
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                      |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
 | **List**            | `list`                                                                                                                                                                |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Deletetag**       | `deletetag INDEX t/TAG` <br> e.g. `deletetag 1 t/Client`                                                                                                              |
