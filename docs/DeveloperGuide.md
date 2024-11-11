@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student`, `Consultation` & `Lesson` objects residing in the `Model`.
 
 ### Logic component
 
@@ -212,7 +212,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `liststudents`. Commands that do not modify the address book, such as `liststudents`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -502,12 +502,12 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. There are no students enrolled in the given course.
-    * 2a1. TAHub shows a message indicating there are no students found.
+* 1a. There are no students enrolled in the given course.
+    * 1a1. TAHub shows a message indicating there are no students found.
     <br>
     Use case ends.
-* 2b. There are multiple courses containing the given string as a prefix.
-    * 2b1. TAHub displays a list of all students enrolled in those courses.
+* 1b. There are multiple courses containing the given string as a prefix.
+    * 1b1. TAHub displays a list of all students enrolled in those courses.
     <br>
     Use case ends.
 
@@ -521,8 +521,8 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. The list is empty.
-  * 2a1. TAHub displays a message that there were no students found.
+* 1a. The list is empty.
+  * 1a1. TAHub displays a message that there were no students found.
   <br>
   Use case ends.
 
@@ -944,7 +944,7 @@ Use case ends.
     <br>
     Use case ends.
 * 2d. Participation Score is Positive & Valid.
-  * 2d1. TAHub marks the student's attendance as Present
+  * 2d1. TAHub marks the student's attendance as Present.
     <br>
     Use case resumes from step 3.
 
@@ -1266,10 +1266,10 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addconsult d/2024-10-20 t/14:00` (when a consultation with the same date and time exists)  
    Expected: No consultation is added. Error message about duplicate consultation shown.
 
-### Listing all consultations: `listconsult`
+### Listing all consultations: `listconsults`
 
 1. Prerequisites: At least one consultation exists.
-2. Test case: `listconsult`  
+2. Test case: `listconsults`  
    Expected: Displays a list of all consultations.
 
 ### Adding students to a consultation: `addtoconsult`
@@ -1330,7 +1330,7 @@ with JSON, you can attempt to recover your data file by fixing issues in the fil
 ### Exporting data
 
 #### Exporting student data
-1. Prerequisites: List all students using the `list` command. Multiple students should be in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students should be in the list.
 
 2. Test case: `export students`<br>
    Expected: CSV file created in data directory and home directory. Success message shows number of students exported.

@@ -46,7 +46,6 @@ Student *--> Phone
 Student *--> Email
 Student *--> "0..*" Course
 
-
 Consultation *--> Date
 Consultation *--> Time
 Consultation -left-> "0..*" Student

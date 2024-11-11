@@ -32,7 +32,10 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 
 
 5. Type `java -jar addressbook.jar` and hit enter.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
+   Note how the app contains some sample data.<br>
+
+
    ![Ui](images/Ui.png)
 
 
@@ -41,9 +44,9 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 
    * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T;CS2101` : Adds a student named `John Doe` to TAHub.
 
-   * `delete 2` : Deletes the 2nd student shown in the current list.
+   * `delete 2` : Deletes the 2nd student shown in the current student list.
 
-   * `clear` : Deletes all students.
+   * `clear` : Deletes all students, consultations & lessons.
 
    * `exit` : Exits the app.
 
@@ -74,7 +77,7 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `liststudents`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -88,6 +91,8 @@ These apply to all commands unless specified otherwise.
 may not reflect this requirement, but changes for clarification are planned in the future.
 * When specifying an index, leading zeroes are ignored, i.e. `001` is equivalent to `1`.
 
+## General Commands
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -95,6 +100,18 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Clearing all entries : `clear`
+
+Clears all entries from TAHub.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ## Student Commands
 
@@ -126,11 +143,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T;CS2101`
 
-### Listing all students : `list`
+### Listing all students : `liststudents`
 
 Shows a list of all students in TAHub.
 
-Format: `list`
+Format: `liststudents`
 
 ### Editing a student : `edit`
 
@@ -150,23 +167,30 @@ Examples:
 *  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing courses.
 *  `edit 3 c/CS2103T;CS2101` Edits the courses of the 3rd student to be CS2103T & CS2101.
 
-### Locating students by name: `find`
+### Locating students by name and/or course: `find`
 
 Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `hans` will match `Hans`, `cs2103t` will match `CS2103T`
+* Can search for names and courses. Use the `n/` prefix to search for names and the `c/` prefix to search for courses.
+* Partial searches will be matched e.g. `Jam` will match `James` and `James Ho`
+* Each sequence of words not separated by `;` or a prefix will be used as a search. This means that `jam ho` will not match `James Ho`
+* If a semicolon was used to separate searches, students matching at least one keyword will be returned (i.e. `OR` search). 
+* If a prefix was used to separate searches, students matching all keywords will be returned (i.e. `AND` search).
+* If no names are provided to the find command (i.e. `find n/`), all students will be listed.
+* **Warning**: `find c/` will not be treated as an error and will return 0 students. Refer to the [Proposed Features](#proposed features) below for details of the proposed changes to this command.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex;david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/peter;john'](images/findPeterJohnResult.png)
+* `find n/alex n/david` returns `Alex David`, if a student with that name exists
+* `find c/CS2103T c/CS2100` will return students who are taking both `CS2103T` and `CS2100`
+* `find n/alex c/cs2103t;cs2100` will return all students whose names contain `alex` and are taking at least one of `CS2103T` or `CS2101`.
+* `find n/` will return all students.
+* `find c/` will return no students.
 
 ### Deleting a student : `delete`
 
@@ -181,9 +205,39 @@ Format: `delete INDEX[;INDEX]…`
 * Can delete multiple students at once by separating indices with semicolons (;).
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in TAHub.
-* `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
+* `liststudents` followed by `delete 2` deletes the 2nd student in TAHub.
+* `liststudents` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+### Exporting student data : `export`
+
+Exports the current list of students to a CSV file.
+
+Format: `export [-f] FILENAME`
+
+* Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
+* The `-f` flag is optional and allows overwriting of existing files
+* The filename cannot contain periods (.) or slashes (/ or \)
+
+Examples:
+* `export students` creates students.csv containing current student list
+* `export -f backup` overwrites backup.csv if it exists
+
+### Importing student data : `import`
+
+Imports students from a CSV file into TAHub.
+
+Format: `import FILENAME`
+
+* The CSV file must have the header: Name,Phone,Email,Courses
+* Students with validation errors will be logged in error.csv
+* Duplicate students are skipped and logged
+
+Examples:
+* `import students.csv` imports student data from students.csv
+* `import ~/documents/students.csv` imports from the home directory
+
+## Consultation Commands
 
 ### Adding a consultation : `addconsult`
 
@@ -193,20 +247,22 @@ Adds a new consultation to TAHub.
 
 * The date and time should not conflict with any existing consultation.
 * Date format: `YYYY-MM-DD`
-* Time format: `HH:MM`
+* Time format: `HH:mm`
 
 **Examples**:
 * `addconsult d/2024-10-20 t/14:00`
 * `addconsult d/2024-11-05 t/09:00`
 
-### Listing all consultations : `listconsults`
 
-Displays a list of all consultations in TAHub.
+### Refreshing the consultation list : `listconsults`
+
+Refreshes and displays the consultation list.
+Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
 
 **Format**: `listconsults`
 
 **Example**:
-* `listconsults`
+* `listconsults` 
 
 ### Adding students to a consultation : `addtoconsult`
 
@@ -224,8 +280,6 @@ index must be provided.
 * `addtoconsult 1 n/John Doe n/Harry Ng`
 * `addtoconsult 2 i/3 i/5` (adds students at indices 3 and 5 in the student list to the 2nd consultation)
 
----
-
 ### Removing students from a consultation : `removefromconsult`
 
 Removes specified students from a consultation, identified by its index.
@@ -239,8 +293,6 @@ Removes specified students from a consultation, identified by its index.
 **Examples**:
 * `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
 
----
-
 ### Deleting consultations : `deleteconsult`
 
 Deletes one or more consultations from TAHub by their indices.
@@ -252,20 +304,6 @@ Deletes one or more consultations from TAHub by their indices.
 **Examples**:
 * `deleteconsult 2`
 * `deleteconsult 1;3;5` (deletes the 1st, 3rd, and 5th consultations)
-
-### Exporting student data : `export`
-
-Exports the current list of students to a CSV file.
-
-Format: `export [-f] FILENAME`
-
-* Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
-* The `-f` flag is optional and allows overwriting of existing files
-* The filename cannot contain periods (.) or slashes (/ or \)
-
-Examples:
-* `export students` creates students.csv containing current student list
-* `export -f backup` overwrites backup.csv if it exists
 
 ### Exporting consultation data : `exportconsult`
 
@@ -280,20 +318,6 @@ Format: `exportconsult [-f] FILENAME`
 Examples:
 * `exportconsult sessions` creates sessions.csv containing current consultation list
 * `exportconsult -f consultbackup` overwrites consultbackup.csv if it exists
-
-### Importing student data : `import`
-
-Imports students from a CSV file into TAHub.
-
-Format: `import FILENAME`
-
-* The CSV file must have the header: Name,Phone,Email,Courses
-* Students with validation errors will be logged in error.csv
-* Duplicate students are skipped and logged
-
-Examples:
-* `import students.csv` imports student data from students.csv
-* `import ~/documents/students.csv` imports from the home directory
 
 ### Importing consultation data : `importconsult`
 
@@ -310,18 +334,6 @@ Format: `importconsult FILENAME`
 Examples:
 * `importconsult sessions.csv` imports consultation data from sessions.csv
 * `importconsult ~/documents/consultations.csv` imports from the home directory
-
-### Clearing all entries : `clear`
-
-Clears all entries from TAHub.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 # Lessons
 
@@ -358,16 +370,26 @@ Format: `addlesson d/DATE t/TIME`
 * `DATE` must be in the format `YYYY-MM-DD`, and must be a valid date.
 * `TIME` must be in the format `HH:mm`, and must be a valid time.
 
+### Refreshing the lesson list : `listlessons`
+
+Refreshes and displays the lesson list.
+Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
+
+**Format**: `listlessons`
+
+**Example**:
+* `listlessons`
+
 ### Deleting a lesson : `deletelesson`
 
 Deletes lesson(s) from TAHub.
 
 Format: `deletelesson LESSON_INDEX[;LESSON_INDEX]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 
 Examples:
-* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the list
+* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the lesson list
 
 ### Adding a student to a lesson : `addtolesson`
 
@@ -376,10 +398,10 @@ that lesson inside the lesson list.
 
 Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * At least one of the optional arguments must be provided. There must be at least one name or index.
 * `NAME` must be the full name of a student exactly as shown in the student list. Names are **case-sensitive**.
-* `STUDENT_INDEX` is the index of a student as displayed in the list.
+* `STUDENT_INDEX` is the index of a student as displayed in the student list.
 
 Examples:
 * `addtolesson 1 n/John Doe` adds `John Doe` to lesson number 1.
@@ -392,7 +414,7 @@ with them to that lesson, i.e. re-adding them defaults to no attendance and 0 pa
 
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 
 Examples:
@@ -405,7 +427,7 @@ color of their name tag under a lesson - **green** for present and **red** for a
 
 Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 * If multiple names are provided, all their attendances will be set to the given value.
 * `ATTENDANCE` must be one of the following: `Y`,`y`or`1` for yes (student is present) and `N`,`n`or`0` for no (student is absent).
@@ -424,8 +446,10 @@ will also automatically set their attendance to true.**
 
 Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
+* `NAME` must be the full name of a student in the lesson.
 * If multiple names are provided, all their participation points will be set to the given value.
 * `PARTICIPATION` must be an integer between 0 and 100 inclusive.
 * There must be exactly 1 `PARTICIPATION` argument, e.g. `pt/3 pt/3` is not allowed.
@@ -436,11 +460,6 @@ Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 Examples:
 * `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
 * `markp 2 n/John Doe n/Jane Doe pt/5` marks `John Doe` and `Jane Doe` as having 5 participation marks for lesson number 2.
-
-### Refreshing the lesson list : `listlessons`
-
-Refreshes and displays the lesson list.
-Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
 
 ## Storage Operations
 
@@ -504,6 +523,3 @@ Action | Format, Examples
 **Mark Attendance for Lesson** | `marka INDEX n/NAME…​ a/ATTENDANCE`<br> e.g., `marka 3 n/Jack a/y` <br> e.g., `marka 3 n/Jack n/Jill a/1` <br> e.g., `marka 3 n/Jack a/n` <br> e.g., `marka 3 n/Jack a/0`
 **Mark Participation for Lesson** | `markp INDEX n/NAME…​ pt/POINTS`<br> e.g., `markp 3 n/Jack pt/75`
 **Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson n/Jake John` <br> e.g., `removefromlesson n/Jake n/John`
-
-
-
