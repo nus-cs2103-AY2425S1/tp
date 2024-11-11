@@ -362,6 +362,10 @@ Expected output:
 
 Shows a list of **all project members of the specified project**.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Users can use the `listemployees` and `listassignments` commands to reset the display to show all employees and assignments again.
+</div>
+
 Format: `listprojectmembers pn/PROJECT_NAME`
 
 - PROJECT_NAME is case-sensitive. e.g. `Project` will not match `project`
