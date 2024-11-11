@@ -278,8 +278,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. KonTActs detects an error in the input format.
 
-  - 3a1.KonTActs requests for the corrected input.
-  - 3b2. User enters a new input.
+  - 3a1.KonTActs displays error message.
+  - 3a2. User enters a new input.
   - Steps 3a1 - 3a2 are repeated until input format is correct.
 
     Use cases resume from step 4.
@@ -296,7 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User indicates to delete a contact.
+1. User enters command to delete a contact.
 2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
@@ -305,8 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1.KonTActs requests for the user to try again.
-  - 1a2. User enters the command again
+  - 1a1.KonTActs displays error message.
+  - 1a2.User enters a new input.
   - Steps 1a1 - 1a2 are repeated until the input entered is correct.
 
     Use case resumes from step 2.
@@ -333,11 +333,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 4a. KonTActs detects an error in the entered data.
+- 3a. KonTActs detects an error in the entered data.
 
-  - 4a1. KonTActs requests for the correct data.
-  - 4a2. User enters new data.
-  - Steps 4a1-4a2 are repeated until the data entered are correct.
+  - 3a1. KonTActs requests for the correct data.
+  - 3a2. User enters new data.
+  - Steps 3a1-3a2 are repeated until the data entered are correct.
 
     Use case resumes from step 4.
 
@@ -350,7 +350,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to view the entire contact list.
-2. KonTActs displays the full list of contacts.\
+2. KonTActs displays the full list of contacts.
+
    Use case ends.
 
 **Extensions**
@@ -375,30 +376,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. TA chooses to edit a contact’s details.
-2. KonTActs requests the contact’s identifier.
-3. TA enters the identifier of the contact to update.
-4. KonTActs displays the current details and requests the changes.
-5. TA updates the relevant details.
-6. KonTActs saves and displays the changes.
+1. User chooses to edit a contact’s details. 
+2. User enters the identifier (person's index), and updated information of the contact
+3. KonTActs saves and displays the changes.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs identifies that there is no such contact.
+- 2a. KonTActs identifies that the index is invalid.
 
-  - 3a1. KonTActs requests for the correct data.
-  - 3a2. TA enters the new data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct.
+  - 2a1. Error message is displayed.
+  - 2a2. TA enters the new index.
+  - Steps 2a1-2a2 are repeated until the data entered are correct.
 
-    Use case resumes from step 4.
+    Use case resumes from step 3.
   
-- 4a. KonTActs identifies that the data to be updated is invalid.
+- 2b. KonTActs identifies that the data to be updated is invalid.
 
-    - 4a1. KonTActs requests for the correct data.
-    - 4a2. TA enters new data
-    - Steps 4a1-4a2 are repeated until the data entered are correct.
+    - 2b1. Error message is displayed.
+    - 2b2. TA enters new data to be updated.
+    - Steps 2b1-2b2 are repeated until the data entered are valid.
 
       Use case resumes from step 5.
 
@@ -411,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to filter the contact list.
-2. KonTActs requests the filter criteria (current overall grades, name, tele handle).
+2. KonTActs requests the filter criteria (current overall grades, name, telegram handle).
 3. User enters the filter criteria.
 4. KonTActs filters the contact list based on the entered criteria and displays the filtered list.
 
@@ -554,7 +552,8 @@ Duplicate names)
 
 1. Should work on any mainstream OS as long as it has Java 17 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+able to accomplish most of the tasks faster using commands than using the mouse.
 4. Commands should be easy to remember.
 5. Ui should be easy to navigate and intuitive.
 6. KonTActs should be easy to use for new users.
