@@ -252,7 +252,7 @@ The `StatusCommand` updates the status of an internship application to `PENDING`
 
 In this case, `AddressBookParser` creates `StatusCommandParser` to parse user input string.
 
-![StatusSequenceDiagram](diagrams/StatusSequenceDiagram.puml)
+<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
 The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
 
@@ -260,8 +260,10 @@ The sequence diagram above illustrates the flow for the `/accept` command. Simil
 `AddressBookParser` ensures that there is only one keyword found, which is a number. If no valid keyword is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
 
 Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `model::setItem` to update the status within the list.
-<puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
 > **_NOTE:_** The sequence diagram shows a simplified execution of the StatusCommand.
+
+<br></br>
+<puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
 
