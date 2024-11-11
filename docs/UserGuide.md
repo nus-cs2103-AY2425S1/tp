@@ -572,6 +572,13 @@ Manually loads the data from JSON file `[JAR file location]/data/save.json`.
 Format: `load`  
 Output: `The saved address book has been loaded!`
 
+<box type="warning" seamless>
+
+**Caution:**
+`load` is irreversible and cannot be undone by `undo`<br>
+All the data you have in `[JAR file location]/data/addressbook.json` prior to using `load` will be lost!
+</box>
+
 <br>
 
 #### Editing the data file
