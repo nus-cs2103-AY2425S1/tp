@@ -18,6 +18,5 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> comment
-Person *--> isVIP
+Person *--> Comment
 @enduml
