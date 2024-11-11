@@ -252,12 +252,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -396,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Wedding planner requests to edit the personal details of an existing contact
-2. PlanPerfect edits the contact's as specified by the wedding planner
+2. PlanPerfect edits the contact's as specified by the wedding planner.
 3. PlanPerfect shows a success message to the wedding planner.
 
 **Extensions**
@@ -405,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PlanPerfect shows an error message requesting for the correct input format.
 
       Use case ends.
-* 1b. Wedding planner requests to edit a contact's phone number to one that is held by another contact
+* 1b. Wedding planner requests to edit a contact's phone number to one that is held by another contact.
 
     *  1b1.  PlanPerfect shows an error message that the input phone number already exists in PlanPerfect.
 
@@ -516,8 +510,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Wedding planner requests to view contacts tagged with one or more tag
-2. PlanPerfect shows the list of all contacts tagged with the tags input by the user.
+1. Wedding planner requests to view contacts tagged with one or more tag.
+2. PlanPerfect shows the list of contacts tagged with the tags input by the user.
 
    Use case ends.
 
@@ -544,7 +538,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. The wedding planner enters input that cancels the action
+* 1a. The wedding planner enters input that cancels the action.
     * 1a1. PlanPerfect retains all data.
     * 1a2. PlanPerfect shows a message indicating that the wedding and contact data has not been cleared.
 
@@ -563,9 +557,9 @@ Use case ends.
 
 **Extensions**
 
-* 1a. The input format is invalid.
+* 1a. The given wedding index is invalid.
 
-    * 1a1. PlanPerfect shows an error message.
+    * 1a1. PlanPerfect shows an error message requesting for a valid wedding index.
 
       Use case ends.
 
@@ -577,7 +571,7 @@ Use case ends.
 **MSS**
 
 1. Wedding planner requests to add a new wedding.
-2. PlanPerfect adds the wedding with the specified details to PlanPerfect
+2. PlanPerfect adds the wedding with the specified details to PlanPerfect.
 
    Use case ends.
 
@@ -755,6 +749,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** The application will start with an empty contact list there is no data available or if the data has been corrupted.
       <br></br>
 
+--------------------------------------------------------------------------------------------------------------------
 ## Appendix: Effort
 
 To summarise, PlanPerfect extends the AB3 framework considerably by not only enhancing and adding new
@@ -782,6 +777,7 @@ management and changed the UI to increase its complexity and better reflect an i
   wedding management.
 - Achieving a passing code coverage of 76% reflecting thorough testing of core features.
 
+--------------------------------------------------------------------------------------------------------------------
 ## Appendix: Planned Enhancements
 
 1. **Enhanced duplicate detection handling for Wedding Names and Contacts**
@@ -811,5 +807,4 @@ management and changed the UI to increase its complexity and better reflect an i
 5. **Add support for names with non-alphanumeric characters (e.g., -, @, .).**
 
     Special characters like hyphens (-), at symbols (@), and periods (.), are common in some names, thus there will be an 
-    update to allow the addition of names with special characters. This update will ensure that users with such characters 
-    in their names can be added without errors thrown.
+    update to allow the addition of names with special characters. This update will ensure that names with such characters can be added without errors thrown.
