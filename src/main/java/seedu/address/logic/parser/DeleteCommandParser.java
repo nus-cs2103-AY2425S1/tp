@@ -33,19 +33,26 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FULL_RANGE));
                 }
+                int start;
+                int end;
                 try {
-                    int start = Integer.parseInt(range[0].trim());
-                    int end = Integer.parseInt(range[1].trim());
+                    start = Integer.parseInt(range[0].trim());
+                    end = Integer.parseInt(range[1].trim());
                     // Check for valid range
                     if (start > end) {
                         throw new ParseException("Invalid range: " + part);
                     }
-                    for (int i = start; i <= end; i++) {
-                        indices.add(ParserUtil.parseIndex(String.valueOf(i)));
-                    }
                 } catch (NumberFormatException | ParseException e) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_INVALID_RANGE), e);
+                }
+                try {
+                    for (int i = start; i <= end; i++) {
+                        indices.add(ParserUtil.parseIndex(String.valueOf(i)));
+                    }
+                } catch (ParseException e) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
                 }
             } else {
                 // Handle individual index
