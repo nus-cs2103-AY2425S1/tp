@@ -1160,6 +1160,18 @@ on why the command is invalid. The error message could be more specific to state
 If there is a very long text, the text will be cut off and the use would have to maximise the application's window in order to see the full text. 
 We plan to implement scroll bars within the list displayed in the application, to allow the user to scroll and see any long texts. <br>
 
-5. **Improve the validator for `email`:** The current email validator flags valid emails as invalid, such as `faceb__k@fb.com.sg`. This could cause some inconvenience to the users. 
-We plan to fix the validator for email to allow for more valid emails. <br>
+5. **Improve the validator for `email`** <br></br>
+   - Current behaviour: Although the current email validator accepts most valid email addresses, there are still certain valid email addresses (e.g. `faceb__k@fb.com.sg`) that it might incorrectly flag out as invalid addresses. <br></br>
+   - Planned enhancement: A fix for the email validator to accept valid emails with more combinations of special characters. <br></br>
+   - Justification: Company emails with uncommon combinations of special characters in their email addresses will be considered invalid and hence, users will not be able to include such internship application in the HireMe tracking system. <br></br>
+
+6. **User confirmation for `clear` command** <br></br>
+   - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation. <br></br>
+   - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain. <br></br>
+   - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately. <br></br>
+   
+7. **Backup file for storage** <br></br>
+   - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
+   - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
+   - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
 
