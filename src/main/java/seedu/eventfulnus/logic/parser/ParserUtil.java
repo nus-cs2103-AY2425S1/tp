@@ -42,11 +42,11 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    private static FilteredList<Person> personList;
+    private static List<Person> personList;
     private static FilteredList<Person> filteredPersonList;
     private static FilteredList<Event> filteredEventList;
 
-    public static void setPersonList(FilteredList<Person> personList) {
+    public static void setPersonList(List<Person> personList) {
         ParserUtil.personList = personList;
     }
 

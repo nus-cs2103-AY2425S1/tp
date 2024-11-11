@@ -333,3 +333,11 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+=======
+* Table of Contents
+  {:toc}
+
+EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
+at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
+
+>>>>>>> f4c87f7c1fb0e718886a98234f4f1017e499720b

@@ -59,8 +59,6 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
         return commandResult;
     }
 
