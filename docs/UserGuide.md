@@ -607,7 +607,7 @@ no duplicate tag(s) are found in all contacts.
   
 * To tag all students with the `paid` tag, simply use `track student` followed by `tag all t/paid`.
 
-- Tag labelled with `paid` will have green background:
+- `paid` tags are easily distinguishable! They will have a green background:
   - to indicate that a student has paid their membership fee, or
   - to indicate that a company has paid the club sponsorship.
 
