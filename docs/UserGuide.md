@@ -241,13 +241,13 @@ Format: `import FILENAME`
 
 <box type="tip" seamless>
 
-**Tip:** The import command is designed to work specifically with files exported by the app. If you export data using the export command, you can re-import it as needed using the same file.
+**Tip:** The import command is designed to work specifically with files exported by ClubConnect. If you export data using the export command, you can re-import it as needed using the same file.
 </box>
 
 <box type="warning" seamless>
 
 **Caution:**
-Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as the app expects the file to retain the exact format of the exported data.
+Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as ClubConnect expects the file to retain the exact format of the exported data.
 </box>
 
 Examples:
