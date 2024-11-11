@@ -688,16 +688,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Unmarking a Month as Paid
 
-    1. **Prerequisites**: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
+    1. Prerequisites: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
 
-    2. **Test Case**: `unmarkpaid 1 m/2020-10`
-        - **Expected**: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
+    2. Test Case: `unmarkpaid 1 m/2020-10`
+       Expected: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
 
-    3. **Test Case**: `unmarkpaid 1 m/2020-13`
-        - **Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
+    3. Test Case: `unmarkpaid 1 m/2020-13`
+       Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
 
-    4. **Test Case**: `unmarkpaid -10 m/2020-10`
-        - **Expected**: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
+    4. Test Case: `unmarkpaid -10 m/2020-10`
+       Expected: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
        
 ### Viewing Command History
 
