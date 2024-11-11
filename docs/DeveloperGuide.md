@@ -379,7 +379,7 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
 1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
@@ -1180,7 +1180,29 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-We intend to accommodate interview scheduling in the future.
+1. Currently, the summary statistics in the UI do not update automatically when the data is modified through add, edit, 
+delete, or clear commands. Users must manually run the summary command to refresh the statistics. To enhance user 
+experience, we plan to implement dynamic rendering, where the summary statistics will automatically update in real-time 
+as soon as any changes are made to the applicant data. This will eliminate the need for users to manually trigger updates.
+
+2. Currently, the filtering functionality in the app is limited to filtering by applicant status. However, many HR 
+professionals work with a variety of job roles simultaneously, and the inability to filter by job role is a significant 
+gap in functionality. To improve the user experience, we plan to expand the filtering capabilities to include filtering 
+by additional parameters, such as Desired Role.
+
+3. When the applicant list is empty while deleting, filtering, or after running any command, no panel is displayed due to 
+the nature of ListView and adding an empty field isn’t an option due to the regex restrictions. To improve it, a 
+placeholder can be placed when ListView is empty.
+
+4. Currently, after editing an applicant detail, the UI does not update automatically when data is modified through add,
+edit, delete, or clear commands in the overview panel.Users must manually run the view command to refresh the details. 
+Similar to the summary command issue, we can implement dynamic rendering to update details in real-time and eliminate the
+need for users to manually trigger updates.
+
+5. Currently, the content displayed in the overview card for each candidate is not perfectly vertically aligned with its
+respective field labels (e.g., "Skills" and "Experience" fields in the screenshot). This cosmetic alignment issue impacts
+the readability and visual consistency of the application.
+
 
 ---
 
