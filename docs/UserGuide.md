@@ -337,18 +337,34 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MindMap home folder.
+**A**: _Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MindMap home folder. Alternatively you can add individual patient along with their logs if your sample size is small._ 
 
 **Q**: Can the new **M** FIN series introduced in Singapore From 1 January 2022 onwards be used?<br>
-**A**:Unfortunately, no. Our application only supports the format of the **F** and **G** FIN series, and for the **S** and **T** series for the NRIC. Also note that while most valid NRIC/FIN are able to be recognised by our application, some would inevitably fail as the Singapore Government does not disclose the true method to verify NRIC/FIN.
+**A**: _Unfortunately, no. Our application only supports the format of the **F** and **G** FIN series, and for the **S** and **T** series for the NRIC. Also note that while most valid NRIC/FIN are able to be recognised by our application, some would inevitably fail as the Singapore Government does not disclose the true method to verify NRIC/FIN._
 
 **Q**: Why can't I edit or delete logs?<br>
-**A**: With regard to medical records, our research shows that it seems unethical to post-date or back-date medical information[1]. Moreover, our software is not designed to keep track of time stamps and medical information changes. As such there will be no way of detecting malicious practices. Hence, given the potential legal issues, we have decided to disallow the editing and deletion of logs.
+**A**: _With regard to medical records, our research shows that it seems unethical to post-date or back-date medical information[1]. Moreover, our software is not designed to keep track of time stamps and medical information changes. As such there will be no way of detecting malicious practices. Hence, given the potential legal issues, we have decided to disallow the editing and deletion of logs.
 
-However, there are mechanisms in place to prevent accidental inputs. The existence of save buttons in `addentry` helps prevent accidental saves as well as the text box being designed in a way that completely disallows users from saving empty logs.
+However, there are mechanisms in place to prevent accidental inputs. The existence of save buttons in `addentry` helps prevent accidental saves as well as the text box being designed in a way that completely disallows users from saving empty logs._
 
 [1] Singapore Medical Council. (2016). Ethical Code and Ethical Guidelines. Section B3 (6) and B4 (5). Retrieved from
 https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-smc-ethical-code-and-ethical-guidelines---(13sep16).pdf
+
+**Q:** Why is there a need for AddLogEntry when there is already AddLog?
+**A:** _AddLogEntry is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the AddLog command directly. Additionally, AddLogEntry supports flags like i/, l/ and d/ which would be recognised as duplicate flags in AddLog._
+
+**Q:** Why does the system display a "duplicate contact" error when the patient's name I entered is different?
+**A:** _The system identifies unique contacts by their NRIC rather than by their name. If 2 patients have the same NRIC, the system identifies them as duplicate contacts._
+
+**Q:** Why can I add session logs older than the current date?
+**A:** _Since there is no way for import and export of data for now, this facilitates the manual transfer of data from existing solutions into our app._
+
+**Q:** Why are multiple logs allowed in the same day?
+**A:** _Session logs may contain errors which only surfaces after the log is saved. As such you may need to add another session log on the same day to reference the incorrect log with amendments._
+
+**Q:** **Why can I input non-alphanumeric characters into logs?**
+**A:** _Our priority is to mainly support alphanumeric characters only, but remains functionally flexible enough to support non-alphanumeric characters (like emojis or other languages). As such you should only use it only when necessary and with caution as it could break cause unexpected behaviours._
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -369,6 +385,14 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 4. **New Line Handling in Log Entry**
    Entering "\n" in `addlog` or `addentry` will be treated as a new line. This feature is intended to allow flexible log formatting.
     > **Workaround**: This feature is intended
+
+6. **Possible misleading error message when using invalid index**
+   Specifically, when entering `delete 0`, it will cause the system to display a invalid command format error, instead of a invalid index error.
+    >**Workaround**: This is intended as stated in the command format, `INDEX` must be a positive integer and 0 is not a positive integer, therefore is not valid.
+
+7. **Possible misleading error message when entering invalid command**
+   When entering an invalid command like: ` add n/John Doe i/S7783844I invalidStuff p/98765432 e/johnd@example.com a/311, Clementi s/NEW`, the system will display an invalid NRIC error. Due to how commands are parsed in MindMap, invalid input will be treated as part of their previous prefix component. (In this case, the invalid input is treated as part of `IDENTITY_NUMBER`)
+    >**Workaround**: Check for possible invalid input near the indicated parts of the command.
 
 
 
@@ -403,7 +427,7 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
     - `p/PHONE_NUMBER` - Patient's phone number.
     - `e/EMAIL` - Email address.
     - `a/ADDRESS` - Address details.
-    - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
+    - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW. (This field is not case-sensitive)
     - `l/LOG_ENTRY` - Description of the session with the patient.
     - `i/NRIC` - Unique identifier (e.g., NRIC or FIN) of the patient.
     - `d/DATE` - Date of the log entry in the format `DD MMM YYYY`.
@@ -429,28 +453,18 @@ This data is not to be used for any purposes beyond application testing. Unautho
 
 </box>
 
-| **Index** | **Sample NRIC** |
-|-----------|-----------------|
-| 1         | S0088873G       |
-| 2         | T6498231H       |
-| 3         | F3135002Q       |
-| 4         | G7512224T       |
-| 5         | S0556162J       |
-| 6         | T8346779C       |
-| 7         | F0333341T       |
-| 8         | G7191281M       |
-| 9         | S4998948B       |
-| 10        | T3692411F       |
-| 11        | G3715173X       |
-| 12        | G2396162N       |
-| 13        | S4145708B       |
-| 14        | S7918626J       |
-| 15        | T3347267B       |
-| 16        | T9148887B       |
-| 17        | F3573604L       |
-| 18        | F1095991T       |
-| 19        | T9463574D       |
-| 20        | F7844260M       |
+| **Index** | **Sample NRIC** |               | **Index** | **Sample NRIC** |
+|-----------|-----------------|---------------|-----------|-----------------|
+| 1         | S0088873G       |               | 11        | G3715173X       |
+| 2         | T6498231H       |               | 12        | G2396162N       |
+| 3         | F3135002Q       |               | 13        | S4145708B       |
+| 4         | G7512224T       |               | 14        | S7918626J       |
+| 5         | S0556162J       |               | 15        | T3347267B       |
+| 6         | T8346779C       |               | 16        | T9148887B       |
+| 7         | F0333341T       |               | 17        | F3573604L       |
+| 8         | G7191281M       |               | 18        | F1095991T       |
+| 9         | S4998948B       |               | 19        | T9463574D       |
+| 10        | T3692411F       |               | 20        | F7844260M       |
 
 
 ---
@@ -459,9 +473,21 @@ This data is not to be used for any purposes beyond application testing. Unautho
 >New UI Arriving Soon!
 ![Ui](images/Ui.png)
 
-**Search by Sub-Strings**  
+1. **Search by Sub-Strings**  
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
 
-**Force execution of commands that require confirmation**  
+2. **Force execution of commands that require confirmation**  
 To bypass confirmation for commands like `add`, `edit`, `delete` and `clear`, we plan to add a flag that allows users to force the execution of these commands.
+
+3. **Individual session logs can be viewed in detail via a command**
+Currently, users have to either use their mouse to click on individual logs to view them in detail or hit the `tab` key multiple times with arrow key inputs. We aim to implement a command that enables users to view individual session logs in detail directly.
+
+4. **Better import and export features**
+Currently we only support convenient import and export from our app. We plan to use CSV files for better compatibility with other software programs.
+
+5. **Removal of Appointment date**
+   The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
+
+6. **Implementation of Edit and Delete Log Commands**
+   As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
 
