@@ -323,7 +323,7 @@ public class CommandBox extends UiPart<Region> {
         // Create a set of valid prefixes for easier lookup
         Set<String> validPrefixes = new HashSet<>(parameterMap.keySet());
 
-        String currentPrefix = null;  // Track current param prefix
+        String currentPrefix = null; // Track current param prefix
 
         for (String part : parts) {
             if (part.trim().isEmpty()) {
