@@ -82,7 +82,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.lookupAll(".list-cell").stream()
                 .filter(node -> node instanceof PersonListViewCell)
                 .map(node -> (PersonListViewCell) node)
-                .filter(cell -> cell.isVisible() && cell.getPersonCard() != null)
+                .filter(cell -> cell.getPersonCard() != null)
                 .forEach(cell -> {
                     PersonCard personCard = cell.getPersonCard();
                     personCard.refreshNextLesson();
