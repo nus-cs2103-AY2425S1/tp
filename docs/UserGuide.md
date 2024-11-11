@@ -25,8 +25,8 @@ done faster than traditional GUI apps.
 3. Copy the file to the folder you want to use as the _home folder_ for your Teletutors.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
-   A GUI similar to the one below should appear in a few seconds. <br>
-   <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
+   A GUI similar to the below should appear in a few seconds. <br>
+   <img src="images/Ui.png" alt="Ui" style="zoom: 45%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
@@ -106,6 +106,14 @@ Format: `undo`
 <div style="page-break-after: always;"></div>
 
 ## Student Commands
+
+### Student prefixes
+| Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `p/`   | Phone numbers should only contain numbers, and it should be at least 3 digits long                                                                                                                                                                         | valid: `p/98765432`</br> invalid:`p/1234 5678`               |
+| `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
+| `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `sn/A1234567Z`</br> invalid: `sn/1234567z`            |
 
 ### Adding a student: `adds`
 
