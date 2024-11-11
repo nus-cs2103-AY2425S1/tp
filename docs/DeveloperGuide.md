@@ -262,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* people who work in management/administration of tuition centres
+* people who work in management/administration of tuition centres for primary or secondary schools in Singapore
 * manages a tuition centre of small to medium size
 
 **Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
@@ -618,8 +618,9 @@ those subjects as well without losing the benefit of validation and duplication 
 2. **Enhance Subject Tracking with list sorted alphabetically or by enrolment:** Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
 to sort by alphabetical order or by enrolment numbers in the future to support easier accessing and allocation of resources.
 
-3. **Enhance UI for scrolling and viewing:** Currently, the UI (e.g. scrollbar) can experience some errors when resizing the window. In the future, we plan to improve 
-the UI responsiveness to work across various window sizes and different computer settings. 
+3. **Enhance UI for scrolling and viewing:** Currently, the UI (e.g. scrollbar) can experience some errors when the app first launches, 
+and pop-up windows may require users to manually resize in order to view all the data. In the future, we plan to improve the UI responsiveness 
+to work across various window sizes and different computer settings. 
 
 4. **Allowing additional special characters in names:** Currently, only the special characters (-/') are allowed in names. In the future, we plan to improve our validation checks 
 to include more special characters such as '.'. 
@@ -629,6 +630,15 @@ multiple spaces in names, which arise likely due to mistakes in entry, as just o
 
 6. **Improved verification of address:** Currently, any String is accepted as an address. In the future, we plan to improve the verification of the address field of 
 the add functionality, such that we can check that necessary fields are present, e.g. post code, country, street name etc., 
-to ensure that addresses saved are valid addresses. 
+to ensure that addresses saved are valid addresses.
+
+7. **Allowing Help window to be closed by keyboard shortcut:** Currently, the help window can only be closed by clicking on 
+the cross on the window. To improve convenience to the user, we plan to enable the help window to be closed by a keyboard shortcut 
+in the future. 
+
+8. **Automatically refresh tracksubject window:** Currently, whenever the user uses a command such as filter or find that 
+changes the student contacts listed, the user has to manually run the tracksubject command again to view updated enrolment 
+data according to the newly filtered student list. In the future, we plan to enhance the tracksubject method such that 
+the enrolment data will be refreshed automatically whenever the student list is changed. 
 
 --------------------------------------------------------------------------------------------------------------------
