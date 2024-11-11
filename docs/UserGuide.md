@@ -251,8 +251,9 @@ Format: `find n/NAME...` or `find p/PHONE...` or `find e/EMAIL...` or `find a/AD
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
 * The keyword after the prefix must be specified and cannot be empty. e.g. `find a/` is not allowed as the keyword to search should be specified.
 * The search will return partial matches and full matches.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by placing each keyword after the appropriate prefix. e.g. to search for people that live in either Neighborhood 1 or Neighborhood 2, you can enter the command find a/Neighborhood 1 a/Neighborhood 2. This will return all contacts that have either of these in their address.
-* Only the first prefix entered will be used for the search. For example, if you enter `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by placing each keyword after the appropriate prefix. e.g. to search for people whose phone number contains either 98 or 64, you can enter the command `find p/98 p/64`. 
+This will return all contacts that have either 98 ot 64 in their phone number.
+* You can only specify one prefix to search for at a time. For example, `find n/Alex a/` is not allowed as it searches for keywords in more than one field in the same command.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 * `find p/973` returns all Contacts whose phone number contains 973
