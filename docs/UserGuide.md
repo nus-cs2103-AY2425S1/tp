@@ -1016,3 +1016,4 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 3. **The commands are not case-insensitive**. The remedy is to ensure that all commands are either capitalised or not capitalised.
 4. Current **error message for invalid value** of `MONTHLY_RENT` and `DEPOSIT` is not precise enough (we use the term `numbers`). Please follow [Parameter Constraints Table](#parameter-constraints-table) for valid values.
 5. If a **parameter value is too long**, it will not display fully in the application. The excess characters will be cut off and replace by `...`. You should not provide a value that is too long to avoid this issue.
+6. The error message of `import` and `export` is displayed with a green color, which may be confusing for users.
