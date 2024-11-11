@@ -27,7 +27,10 @@ public class MainWindow extends UiPart<Stage> {
     public static final String LOG_INITIALIZING_MAIN_WINDOW = "Initializing MainWindow";
     public static final String LOG_GUI_SETTING_NULL = "GuiSettings is null.";
     public static final String LOG_GUI_EXECUTING_COMMAND = "GUI Executing command...";
+    public static final String LOG_ERROR_EXECUTING_COMMAND = "An error occurred while executing command: ";
+
     private static final String FXML = "MainWindow.fxml";
+
 
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -200,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
 
             return commandResult;
         } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + commandText);
+            logger.info(LOG_ERROR_EXECUTING_COMMAND + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
