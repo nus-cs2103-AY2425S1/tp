@@ -27,6 +27,12 @@ Add color indicators for transaction statuses (e.g., green for done, red for not
 
 0. **Add path to `transactionbook.json` in the footer bar.** Currently, only the path of `addressbook.json` is displayed in the footer bar. Add the path to `transactionbook.json` as well for users to easily locate.
 
+0. **Custom App Icon**
+Add custom app icon to enhance customizability.
+
+0. **"Track Only Not Done Balance" Checkbox**
+Currently, users can calculate all balances that are "Not Done" via `filterTxn status\Not Done`. However, this does not allow users to display a filtered list that includes done transaction while showing only the "Not Done" balance. Adding a checkbox in balance section would give users the flexibility to track only "Not Done" balances.
+
 0. **Add empty list "No [persons/transactions] in list" placeholder.** Add a placeholder message to person and transaction list views to indicate that there are no entries being rendered.
 
 These enhancements address search functionality, error handling, input validation, duplicate detection, and user interface improvements, collectively enhancing SpleetWaise’s usability and functionality.
