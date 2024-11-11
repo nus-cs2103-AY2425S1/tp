@@ -610,7 +610,7 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancement**
 Team size: 5
 
-1. **Add subject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
+1. **Allowing more subejcts to be added with the addsubject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
 Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
 define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
 those subjects as well without losing the benefit of validation and duplication checks. 
@@ -623,7 +623,7 @@ and pop-up windows may require users to manually resize in order to view all the
 to work across various window sizes and different computer settings. 
 
 4. **Allowing additional special characters in names:** Currently, only the special characters (-/') are allowed in names. In the future, we plan to improve our validation checks 
-to include more special characters such as '.'. 
+to include more special characters such as '.' and ',', and allowing names to end with some of the special characters (e.g. Robert Downey Jr.). 
 
 5. **Accepting consecutive spaces in names:** Currently, consecutive spaces in names are not allowed. We plan to improve the validation checks of names to treat  
 multiple spaces in names, which arise likely due to mistakes in entry, as just one space (e.g. treating Jane     Tan as Jane Tan). 
@@ -640,5 +640,15 @@ in the future.
 changes the student contacts listed, the user has to manually run the tracksubject command again to view updated enrolment 
 data according to the newly filtered student list. In the future, we plan to enhance the tracksubject method such that 
 the enrolment data will be refreshed automatically whenever the student list is changed. 
+
+9. **Display more information on a student's contact:** Currently, only a few fields of a student's contact is displayed 
+to keep the information concise and ensure ease of navigation. Although there is a workaround method (detail) provided to 
+let users view the full student details, we plan to improve the UI to include more essential information such as NRIC or student photo better 
+to reduce ambiguity when navigating through the contact lists.
+
+10. **Make the error message of the 'detail' command more specific:** Currently, when the user enters the detail command 
+with a StudentID that has an invalid format, the error message is too general. We plan to make it more specific by making it clearer  
+to the user that the failed execution was due to an error in the StudentID, and state what the expected format should be. This can help to reduce 
+ambiguity and help with troubleshooting. 
 
 --------------------------------------------------------------------------------------------------------------------
