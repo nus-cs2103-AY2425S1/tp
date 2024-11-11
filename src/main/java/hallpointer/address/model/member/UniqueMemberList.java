@@ -63,6 +63,8 @@ public class UniqueMemberList implements Iterable<Member> {
 
         if (!target.isSameMember(updatedMember) && contains(updatedMember)) {
             throw new DuplicateMemberException();
+        } else if (target.isSameMember(updatedMember) && countOccurrences(updatedMember) > 1) {
+            throw new DuplicateMemberException();
         }
 
         internalList.set(index, updatedMember);
