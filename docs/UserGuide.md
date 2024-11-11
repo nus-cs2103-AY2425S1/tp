@@ -199,6 +199,8 @@ OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDR
 * If NRIC is being updated, the updated NRIC must be unique.
 * You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 
@@ -232,12 +234,12 @@ Examples:
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the patient with 'S2345678E' in the results of the `find` command.
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="span" class="alert alert-primary">:bangbang: **Warning**
 Deletions only work if the displayed list contains the entry you are deleting. Hence, attempting to delete a record
 by NRIC if the record is not currently displayed will not work.
  </div>
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting a patient by Index:
 
@@ -312,6 +314,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 
@@ -445,6 +449,8 @@ These are useful to save the state of your current data at a specific point in t
 
 ![manual_backup](images/manual_backup.png)
 
+<div style="page-break-after: always;"></div>
+
 #### **Automated Backup: Ensure data safety with minimal effort**
 - ClinicBuddy automatically creates backups during critical operations:
     - **Before Deleting a Patient:** A backup is created before any record deletion.
@@ -453,7 +459,7 @@ These are useful to save the state of your current data at a specific point in t
 - How Automated Backup Works:
     - **Description Naming:** Backups are labeled with the action, such as `delete_<name>` or `clear`.
     - **No User Action Required:** These backups are generated automatically and stored in the same `/backups/` folder.
-    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain a timestamp of the creation time.
+    - **Formatting:** Automated backups also follow the indexed system (`0`–`9`) and contain a timestamp of the creation time.
 
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
@@ -462,6 +468,8 @@ These are useful to save the state of your current data at a specific point in t
   1_clear_2024-10-30_18-05-29-745.json
   ```
 ![automated_backup](images/automatedbackup.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all backups : `listbackups`
 
@@ -540,6 +548,8 @@ the data of your previous AddressBook home folder.
 
 **Q**: How can I view a history of my backups? <br>
 **A**: Use the `listbackups` command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
+
+<div style="page-break-after: always;"></div>
 
 **Q**: What happens if I enter incorrect or missing information in a command?<br>
 **A**: ClinicBuddy will display an error message and prompt you to check the format or required fields. Double-check command formats and required parameters to avoid errors.

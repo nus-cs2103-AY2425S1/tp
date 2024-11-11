@@ -281,6 +281,7 @@ public class ModelManager implements Model {
     @Override
     public boolean setOperatingHours(LocalTime openingHour, LocalTime closingHour) {
         OperatingHours newOperatingHours = new OperatingHours(openingHour, closingHour);
+
         if (newOperatingHours.isCalenderValid(calendar.getAppointments())) {
             addressBook.setOperatingHours(newOperatingHours);
             return true;

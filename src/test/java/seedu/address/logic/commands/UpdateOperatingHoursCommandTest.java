@@ -107,11 +107,26 @@ public class UpdateOperatingHoursCommandTest {
     public void execute_haveAppointment_success() {
         UpdateOperatingHoursCommand commandDefault = new UpdateOperatingHoursCommand(defaultHours);
         UpdateOperatingHoursCommand commandOpening = new UpdateOperatingHoursCommand(openingHours);
-        UpdateOperatingHoursCommand commandClosing = new UpdateOperatingHoursCommand(unreasonableClosingHours);
+
 
         assertCommandSuccess(commandDefault, expectedModel, expectedMessageDefault, expectedModel);
         assertCommandSuccess(commandOpening, expectedModel, expectedMessageOpening, expectedModel);
+    }
+
+    @Test
+    public void execute_haveAppointmentButBadOperatingHours_success() {
+        // closing hour before appointment start time
+        UpdateOperatingHoursCommand commandClosing = new UpdateOperatingHoursCommand(unreasonableClosingHours);
         assertCommandFailure(commandClosing, model, MESSAGE_FAILED);
+    }
+
+    @Test
+    public void execute_wrongOperatingHours() {
+
+        // opening hours after closing
+        OperatingHours wrongHours = new OperatingHours(LocalTime.of(10, 0), LocalTime.of(8, 0));
+        UpdateOperatingHoursCommand command = new UpdateOperatingHoursCommand(wrongHours);
+        assertCommandFailure(command, model, MESSAGE_FAILED);
     }
 
     @Test
