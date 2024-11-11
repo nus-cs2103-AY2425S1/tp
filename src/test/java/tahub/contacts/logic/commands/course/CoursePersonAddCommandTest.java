@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 import static tahub.contacts.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -98,6 +99,17 @@ public class CoursePersonAddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudentCourseAssociationList getStudentScaList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
