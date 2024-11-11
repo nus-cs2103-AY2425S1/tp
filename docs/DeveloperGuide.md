@@ -649,7 +649,25 @@ Team Size: 5
       2. The `add-doctor` command does not show the doctor's speciality
    2. We plan to make the success message show all the details of the patient/doctor added, including those above.
 
-3. **Implement Maximum Word Count for Fields**
+3. **Fixing issues with error messages.**
+    1. In the current implementation, some commands display the wrong error message when the user enters an invalid command.
+    2. We plan to correct these instances:
+       1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large or negative.
+       2. `delete` should display "The person index provided is invalid." when index `0` is entered.
+       3. `add-patient` should display "Invalid date of birth provided" when the date of birth is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
+       4. `add-appt` should display "Invalid date provided" when the date is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
+       5. `add-appt` should display "Invalid time provided" when the time is outside of the range 0000 - 2359, instead of the current generic message "Times must be in the format of HHmm".
+       6. Giving invalid tags error messaage needs to be updated to let user know that tags should not only contain alphanumeric characters, but also not contain any spaces.
+
+4. **Update `add-doctor` command to take in a wider range of specialties**
+   1. Currently, the `add-doctor` command only allows for specialties with no spaces and only alphabets.
+   2. We plan to update the command to allow for specialties with spaces and some special characters (e.g. `Cardiovascular Surgeon`, `General Practitioner`, `Orthopedic Surgeon`) to be supported.
+
+5. **Fix `find` command to behave similarly to `find-doctor` and `find-patient`**
+   1. Currently, `find` command does not check for invalid input (e.g `find eth1/`), unlike our `find-doctor` and `find-patient` commands.
+   2. We plan to update the `find` command to check for invalid input and display an error message if the input has an invalid characters (e.g special characters or numbers).
+
+6. **Implement Maximum Word Count for Fields**
    1. There are no restrictions on the length of fields like name and address, which can lead to excessively long inputs that affect display and usability.
    2. We plan to implement a maximum character count for specific fields:
       1. Name field: Limit to 50 characters to ensure readability and prevent display issues. 
@@ -657,19 +675,21 @@ Team Size: 5
    3. These restrictions will be enforced at both the command parsing level (to provide immediate feedback) and the model level (to ensure consistency).
    4. If the input exceeds the maximum length, the user will receive an error message explaining the character limit.
 
-4. **Ensure Minimum Window Size for Improved Layout** 
+7. **Ensure Minimum Window Size for Improved Layout** 
    1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
 
-5. **Increasing the maximum number of appointments.** 
+8. **Increasing the maximum number of appointments.** 
    1. Currently, the maximum number of appointments that can be stored is 10,000.
    2. We plan to increase this limit to a number that cannot be realistically reached, while ensuring the appointment IDs are still concise.
   
-6. **Fixing issues with error messages.** 
-   1. In the current implementation, some commands display the wrong error message when the user enters an invalid command. 
-   2. We plan to correct these instances:
-      1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large or negative.
-      2. `delete` should display "The person index provided is invalid." when index `0` is entered.
+9. **Ensure Minimum Window Size for Improved Layout** 
+   1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
+   2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+10. **Sort Appointment by Date** 
+   1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
+   2. Sorting of appointments will be in ascending order (earliest to latest).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
