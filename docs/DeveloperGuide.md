@@ -850,6 +850,11 @@ Our team size is 5.
 ### Improved duplication detection
 * Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
 
+
+### Setting a maximum for budget and asking price
+* Currently, there are no restrictions on the maximum value an asking price or budget can take. Therefore, the user can input unrealistic values such as 999,999,999,999. This also creates an issue of `long` overflow when the value is too large (exceeds `9223372036854775807`) as the application uses the `java.lang.Long.parseLong()` method. 
+* A planned enhancement will be to use validation regex to ensure that the asking price and budget values are below a maximum, which can be set to 1,000,000,000.
+
 ## **Appendix: Glossary**
 ### Glossary
 1. **ABCLI**  
