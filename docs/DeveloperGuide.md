@@ -778,3 +778,25 @@ testers are expected to do more *exploratory* testing.
    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
    5. Make sure to follow the constraints laid out in the user guide for each attribute of Client.
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
+
+## **Appendix: Effort**
+
+The AgentAssist project is a specialized Customer Relationship Management (CRM) system for credit card sales. This required domain-specific changes to the architecture, guided by Object-Oriented Programming (OOP) principles and design patterns.
+
+For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide. The `view` and `close` commands also enabled a split-pane view, allowing truncated client details on cards and displaying full details in a separate pane.
+### Other Challenging Features 
+- Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality. 
+
+
+- Error Messages for Invalid Arguments: To avoid increasing system coupling, we used a [`LinkedHashSet`]() to keep error messages ordered as per flag parsing. This data structure compiled errors into a single `ParserException` with a concatenated message for easy debugging.
+
+
+- `view` and `close` Commands: Implementing these commands with JavaFX’s split-pane required careful lifecycle management of UI components, handling divider positions and proportions. To maintain consistency between the list and detail views, we used a `ListChangeListener` class to track client list updates and handle cases such as clients being deleted, edited, or filtered out. This entailed intricate event handling and managing multiple change types to keep UI elements synchronized. 
+
+
+- Status Pie Chart: Implementing this feature involved tracking real-time status changes in the client list. We used an observer pattern to handle updates and ensured concurrent modifications ran safely by using `Platform.runLater()`. Extensive CSS customization supported dark theme compatibility, and the design featured color-coded status categories (`NA`, `NON_URGENT`, `URGENT`) with custom legends. Performance optimization was key, as frequent updates could impact UI performance. We employed efficient data structures to track status counts, minimizing redraws and maintaining smooth operation.
+
+Both the `view`/`close` commands and the `Status` Pie Chart required extensive testing to ensure they operated robustly under various conditions, with a clean code structure and separation of concerns.
+
+Overall, we estimate a 35% increase in base functionality from the AB3 system, due to additional features and the increased complexity of components such as `filter`, `view`/`close` commands, and `Status` Pie Chart. The `Parser` and `Predicate` classes also grew significantly in complexity to accommodate these enhancements.
+
