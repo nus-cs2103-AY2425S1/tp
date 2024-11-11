@@ -291,9 +291,12 @@ public class EditCommand extends Command {
          * Sets {@code roles} to this object's {@code roles}.
          * A defensive copy of {@code roles} is used internally.
          */
+        // @@author cth06-Github-reused
+        // Solution taken from https://stackoverflow.com/questions/17826854/creating-a-sorted-set
         public void setAndSortRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new TreeSet<>(roles) : null;
         }
+        // @author
 
         /**
          * Returns an unmodifiable roles set, which throws {@code UnsupportedOperationException}
