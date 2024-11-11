@@ -46,6 +46,7 @@
     * [Updating the status of an internship application](#updating-the-status-of-an-internship-application)
     * [Saving data](#saving-data)
     * [Exit HireMe](#exit-hireme-application)
+  * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 <!-- TOC -->
 <page-nav-print />
 
@@ -77,7 +78,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -111,13 +112,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipApplicationListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -134,7 +135,7 @@ The `ChartWindow` component is shown when you execute a chart command. It contai
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -159,7 +160,7 @@ How the parsing works:
 <br></br>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -175,7 +176,7 @@ The `Model` component:
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W09-3/tp/tree/master/src/main/java/seedu/hireme/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -425,14 +426,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **System**: HireMe application
 
-**Use Case: UC01 - Add a new internship entry**
+**Use Case: UC01 - Add a new internship application**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to add a new internship entry.
-2. HireMe creates a new entry.
+1. The user requests to add a new internship application.
+2. HireMe creates a new internship application.
 
    Use case ends.
 
@@ -458,20 +459,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC02 - List all internship entries**
+**Use Case: UC02 - List all internship applications**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to list all internship entries.
-2. HireMe shows all internship entries.
+1. The user requests to list all internship applications.
+2. HireMe shows all internship applications.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. There are no internship entries.
+* 1a. There are no internship applications.
+
     * 1a1. HireMe shows an empty list.
 
       Use case ends.
@@ -479,14 +481,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC03 - Delete an internship entry**
+**Use Case: UC03 - Delete an internship application**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to delete a particular internship entry.
-2. HireMe deletes the entry.
+1. The user requests to delete a particular internship application.
+2. HireMe deletes the application.
 
    Use case ends.
 
@@ -516,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 * 1a. User enters an invalid number of parameters.
     * 1a1. HireMe shows an error message 
   
-    Use case ends.
+      Use case ends.
 
 
 * 1b. User enters an invalid order.
@@ -541,14 +543,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 1. The user requests to find internship applications by entering a search pattern (e.g., `/find Goo`).
 2. HireMe searches for internship applications with company names that contain words starting with the specified pattern.
-3. HireMe displays a list of all matching internship applications.
+3. HireMe shows a list of all matching internship applications.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The user provides an empty search pattern.
-    * 1a1. HireMe displays an error message that explains how to use the find command and what parameters are valid.
+    * 1a1. HireMe shows an error message.
 
       Use case ends.
 
@@ -569,14 +571,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 1. The user requests to change the status of an internship application by specifying an index and the desired status (e.g., `/accept 2`, `/reject 3`, `/pending 4`).
 2. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
-3. HireMe displays a confirmation message indicating that the status has been successfully updated.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The user provides an invalid index (e.g., non-positive or non-integer value or integer out of range).
-    * 1a1. HireMe displays an error message that explains how to use the status command and what parameters are valid.
+    * 1a1. HireMe shows an error message.
 
       Use case ends.
 
@@ -610,38 +611,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC08 - Auto-save the current state of the internship list**
+**Use Case: UC08 - List all internship applications**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user performs an action that changes the internship list (e.g., adding, editing, or deleting an entry).
-2. The system automatically saves the updated internship list to `hireme.json`.
-3. The file is saved successfully without displaying a confirmation message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The file cannot be saved due to an error.
-    * 1a1. The system shows the error message: "Error! Unable to save file."
-    * 1a2. The system retries the auto-save after a short delay.
-    * 1a3. If the save operation still fails, the system logs the error and informs the user that changes might not have been saved.
-
-      Use case ends.
-
-<br></br>
-**System**: HireMe application
-
-**Use Case: UC09 - List all internship entries**
-
-**Actor**: User
-
-**MSS (Main Success Scenario)**
-
-1. The user requests to list all internship entries.
-2. HireMe shows all internship entries.
+1. The user requests to list all internship applications.
+2. HireMe shows all internship applications.
 
    Use case ends.
 
@@ -656,14 +633,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC10 - Summarise all internship entries**
+**Use Case: UC09 - Summarise all internship applications**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to view a summary of all internship entries.
-2. HireMe shows a summary chart of all internship entries.
+1. The user requests to view a summary of all internship applications.
+2. HireMe shows a summary chart of all internship applications.
 
    Use case ends.
 
@@ -678,14 +655,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC11 - Filter internship entries by status**
+**Use Case: UC10 - Filter internship applications by status**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user provides a status to filter internship entries.
-2. HireMe shows all internship entries with the given status.
+1. The user provides a status to filter internship applications.
+2. HireMe shows all internship applications with the given status.
 
    Use case ends.
 
@@ -699,14 +676,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC12 - Clear all internship entries**
+**Use Case: UC11 - Clear all internship applications**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to clear all internship entries.
-2. HireMe clears all internship entries.
+1. The user requests to clear all internship applications.
+2. HireMe clears all internship applications.
 
    Use case ends.
 
@@ -721,7 +698,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC13 - Exit HireMe application**
+**Use Case: UC12 - Exit HireMe application**
 
 **Actor**: User
 
@@ -748,9 +725,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 2. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
 3. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
 4. **User Accessibility**: The system should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
-5. **Project Scheduling**: The project should follow a **weekly delivery schedule**, releasing a set of features every week.
-6. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
-7. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
+5. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
+6. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
 
 <br></br>
 
@@ -1147,18 +1123,17 @@ testers are expected to do more *exploratory* testing.
 The team consists of 5 members.
 Given below are enhancements planned for future versions. <br>
 
-1. **Make 'Role' and 'Company Name' in the `add` command less restrictive:** 
+1. **Make 'Role' and 'Company Name' in the `add` command less restrictive** 
    - Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
    - Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
    - Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
 
-2. **Improve consistency in `find` feature:** Currently, while we prevent special characters in the `Company Name` (such as ~\`!@#),  
-we did not prevent the same characters from being used as keywords for the `find` feature. This leads to an inconsistent user experience, 
-since these characters would never be found in company names. We plan to be more consistent, 
-and check whether the keywords provided to the `find` command are valid characters that are allowed in `Company Name`. <br>
+2. **Improve consistency in `find` feature** 
+   - Current behaviour: The find feature currently allows special characters (e.g., ~\`!@#) to be used as keywords, despite these characters being disallowed in Company Name. This inconsistency can lead to a confusing user experience, as searches with these special characters will not yield any results. <br></br>
+   - Planned enhancement: Implement validation in the find feature to restrict keywords to only valid characters that are allowed in Company Name. This will ensure that users can only search using characters that are present in actual company names. <br></br>
+   - Justification: By enforcing consistency between allowed characters in `Company Name` and the `find` feature, we improve the user experience by preventing ineffective searches and aligning expectations for valid search terms. <br></br>
 
-3. **Make error message for `add` command more specific:**
-   <br></br>
+3. **Make error message for `add` command more specific** 
    - Current behaviour: The error message provided when the user inputs an invalid `add` command is too generic.
      For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
 on why the command is invalid. The error message could be more specific to state the email field is missing.
@@ -1168,23 +1143,42 @@ on why the command is invalid. The error message could be more specific to state
    - Justification: In doing so, users will have a clearer idea on what they did wrong when they typed in the command and they will be able to easily fix the issue. This enables the users to have a more pleasant experience when using HireMe.
    <br></br>
 
-4. **Improve UI to deal with long texts:** <br></br>
+4. **Improve UI to deal with long texts**
    - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text. <br></br>
    - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. <br></br>
    - Justification: This lets the user see the full text in application. <br></br>
 
-5. **Improve the validator for `email`** <br></br>
+5. **Improve the validator for `email`**
    - Current behaviour: Although the current email validator accepts most valid email addresses, there are still certain valid email addresses (e.g. `faceb__k@fb.com.sg`) that it might incorrectly flag out as invalid addresses. <br></br>
    - Planned enhancement: A fix for the email validator to accept valid emails with more combinations of special characters. <br></br>
    - Justification: Company emails with uncommon combinations of special characters in their email addresses will be considered invalid and hence, users will not be able to include such internship application in the HireMe tracking system. <br></br>
 
-6. **User confirmation for `clear` command** <br></br>
+6. **User confirmation for `clear` command**
    - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation. <br></br>
    - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain. <br></br>
    - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately. <br></br>
    
-7. **Backup file for storage** <br></br>
+7. **Improve error messaging for `status` commands**
+   - Current behaviour: The `/accept`, `/pending`, and `/reject` commands currently return the same generic error message when there’s an error, despite each command serving a distinct purpose. This shared error message does not provide clarity on which specific command failed, potentially confusing the user. <br></br>
+   - Planned enhancement: Separate error messages for each command (`/accept`, `/pending`, and `/reject`) within the status command to clarify which specific action encountered an error. This will help users understand and correct command-specific errors more effectively. <br></br>
+   - Justification: By providing distinct error messages for each command, we improve the user experience by making error feedback more specific and actionable. Users will be able to identify errors related to each command easily, reducing potential confusion and enhancing usability. <br></br>
+
+8. **Backup file for storage**
    - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
    - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
    - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
+   
+9. **Improve chart UI for empty statuses**
+   - Current behaviour: With multiple empty statuses (e.g. zero internship applications with `PENDING`/`ACCEPTED`/`REJECTED`), only one of the status labels will be shown. <br></br>
+   - Planned enhancement: Remove chart labels for empty statuses. <br></br>
+   - Justification: This ensures a consistent and user-friendly chart view which makes it easier for users to interpret the chart. <br></br>
+   
+10. **Fix popup window crash when on full-screen**
+    - Current behaviour: When the Java application is in full screen and the help or chart window popup is closed, the entire Java application crashes.
+      For example, when the Java application is in full screen, `/help` or `/chart` will open up a help or a chart window respectively. Closing the popup window when the application is in full screen will cause the entire Java application to crash.
+      <br></br>
+    - Planned enhancement: We plan to improve by ensuring that the `help` and `chart` displays open on the main window of the application instead of as a popup. Users can then go back to the list by typing `/list`.
+      <br></br>
+    - Justification: This ensures that the application will not suddenly crash when the user is trying to use it for a smoother user experience.
+      <br></br>
 
