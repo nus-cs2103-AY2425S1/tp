@@ -1,5 +1,5 @@
 # ![icon](images/hireme_logo.png) HireMe User Guide
-<br></br>
+
 ## Welcome to HireMe! 
 
 Thank you for choosing **HireMe** to simplify your internship journey.
@@ -122,8 +122,8 @@ Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5
 #### _Mac Users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="700"/>
-   
+    <img src="images/MacTerminal.png" alt="macsterminal" width="750"/>
+    <br></br>
     You will see a window like this.
 
     ![openmacterminal](images/OpenMacTerminal.png)
@@ -131,7 +131,7 @@ Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
    ![macfilepathinfo](images/Macfilepathinfo.png)
-
+    <br></br>
     On the new open that pops up, left click on `Where` and copy the file path.
    <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
    <br></br>
@@ -160,7 +160,6 @@ You will see a window like this.
      <br></br>
    - Mac Terminal:
       ![maccd](images/Maccd.png)
-     <br></br>
 <br></br>
 
 
@@ -331,7 +330,7 @@ Use these commands to update the status of a specified internship application to
 
 
 <box type="info" seamless>
-**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong><br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
 </box>
 
 <p>These are the before and after images of the first example</p>
