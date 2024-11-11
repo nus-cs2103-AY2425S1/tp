@@ -90,6 +90,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_PHONE = "\nWarning! There is a person with the same phone number";
     public static final String MESSAGE_DUPLICATE_EMAIL = "\nWarning! There is a person with the same email";
+    public static final String MESSAGE_ADD_DELIVERY_TO_EMPLOYEE =
+        "Warning! Not allowed to add delivery to employees. Add deliveries via the 'assign' command";
 
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
@@ -142,6 +144,9 @@ public class AddCommand extends Command {
             // but we can get the inspected person with this method. And if we have the inspected person here,
             // we can directly add delivery to their delivery list.
             Person inspectedPerson = InspectWindow.getInspectedPerson();
+            if (inspectedPerson.getRole().getValue().equals("employee")) {
+                throw new CommandException(MESSAGE_ADD_DELIVERY_TO_EMPLOYEE);
+            }
             Index targetIndex = inspectedPerson.getFirstArchivedIndex();
             inspectedPerson.addDelivery(targetIndex, this.deliveryToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS_DELIVERY,

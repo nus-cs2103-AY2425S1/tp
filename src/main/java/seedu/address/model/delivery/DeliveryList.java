@@ -162,7 +162,7 @@ public class DeliveryList {
     public void sortByCost() {
         internalList.sort((d1, d2) -> {
             if (isSameArchiveStatus(d1, d2)) {
-                return Float.compare(d1.getCost().asFloat(), d2.getCost().asFloat());
+                return Double.compare(d1.getCost().asDouble(), d2.getCost().asDouble());
             } else {
                 return d1.getArchive().value.compareTo(d2.getArchive().value);
             }
