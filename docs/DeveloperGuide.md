@@ -329,13 +329,13 @@ Additionally, certain command hints could benefit from more clarity on constrain
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
-**Current issue:** The parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+**Current issue:** The parsing requirements for the `filter` command are overly strict, particularly for the `income` and `email` fields. Specifically:
 - `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
 - `email` must be in a valid email format (e.g., `username@domain`).
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
-**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the filter command, allowing any input and matching based on substrings rather than strict validation.
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, allowing any input and matching based on substrings rather than strict validation.
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
@@ -742,11 +742,11 @@ testers are expected to do more *exploratory* testing.
       Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
    3. Test case: `filter i/ =<INCOME>`<br>
       Expected: The list will display all clients with incomes that match <INCOME>.
-   4. Other correct filter commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+   4. Other correct `filter` commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
    5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
       Expected: An error message is shown to the user. Error details shown in the status message.
-   6. Other incorrect filter commands to try:<br>
+   6. Other incorrect `filter` commands to try:<br>
       `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
       `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
       Expected: Similar to previous.
