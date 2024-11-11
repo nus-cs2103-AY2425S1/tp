@@ -111,6 +111,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 
 4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3. <br>
+
     ![hiremejar](images/HireMeJar.png)
 
 <br></br>
@@ -121,7 +122,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 #### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
+    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/> <br>
    
     You will see a window like this. <br>
 
@@ -129,6 +130,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
     
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
+
    ![macfilepathinfo](images/Macfilepathinfo.png)
     <br></br>
     On the new open that pops up, left click on `Where` and copy the file path.
@@ -137,14 +139,17 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
    <br></br>
 
 #### _Windows users_
-5. Use windows search and type Terminal, click on open. 
+5. Use windows search and type Terminal, click on open.<br>
+
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
 You will see a window like this. <br>
+
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
 6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.<br>
+
    ![windowsfilepath](images/Windowsfilepath.png)
    <box type="info" seamless>
    <strong>Note:</strong> File path here is highlighted in blue
@@ -157,10 +162,12 @@ You will see a window like this. <br>
 
 8. Type `java -jar hireme.jar` and press `Enter` to run the HireMe application.
 <br></br>
-   - Windows Terminal:
+   - Windows Terminal: <br>
+   
       ![windowscd](images/Windowscd.png)
      <br></br>
-   - Mac Terminal:
+   - Mac Terminal: <br>
+   
       ![maccd](images/Maccd.png)
 <br></br>
 
