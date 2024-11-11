@@ -44,7 +44,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
     * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
     * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
+    * [Updating the Status of an internship application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
     * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
@@ -243,7 +243,7 @@ Examples:
 </div>
 
 <box type="info" seamless>
-<strong>Note:</strong>  HireMe considers an entry to be a duplicate of all of its fields match <strong>(case-insensitive)</strong>  an existing internship application entry. An attempt to add duplicates will result in an error.
+<strong>Note:</strong> HireMe identifies an entry as a duplicate if its <em>NAME</em>, <em>ROLE</em>, <em>EMAIL</em> and <em>DATE</em> match <strong>(case-insensitive)</strong> with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
 </box>
 
 <br></br>
@@ -308,7 +308,7 @@ Examples:
 
 <br></br>
 
-### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
+### Updating the status of an internship application: `/accept`, `/pending`, `/reject`
 
 Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
@@ -323,7 +323,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 
 **Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have ten total applications, but after using `/filter ACCEPTED` only five applications are shown, then `/reject 5` will target the last item on this filtered list.
 
-**Examples:**
+Examples:
 1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
 2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
 3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
@@ -336,7 +336,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
   <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
 <box type="info" seamless>
-<strong>Note:</strong> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong> You can update an application’s status to its current state. For example, using <em>/accept INDEX</em> on an already accepted application will keep its status as <em>ACCEPTED</em>, <em>/pending INDEX</em> on a pending application will keep it as <em>PENDING</em>, and <em>/reject INDEX</em> on a rejected application will maintain its <em>REJECTED</em> status.
 </box>
 
 
