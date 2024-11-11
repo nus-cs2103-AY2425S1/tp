@@ -1,10 +1,10 @@
 {
   "guiSettings" : {
-    "windowWidth" : 740.0,
-    "windowHeight" : 600.0,
+    "windowWidth" : 1294.6666259765625,
+    "windowHeight" : 686.6666870117188,
     "windowCoordinates" : {
-      "x" : 270,
-      "y" : 24
+      "x" : -6,
+      "y" : -6
     }
   },
   "addressBookFilePath" : "data\\talentcy.json"
