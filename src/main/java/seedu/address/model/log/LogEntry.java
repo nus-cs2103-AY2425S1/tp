@@ -97,7 +97,7 @@ public class LogEntry {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LogEntry // instanceof handles nulls
-                && entry.equalsIgnoreCase(((LogEntry) other).entry)); // state check
+                && entry.equals(((LogEntry) other).entry)); // state check
     }
 
     /**
@@ -105,6 +105,6 @@ public class LogEntry {
      */
     @Override
     public int hashCode() {
-        return entry.toLowerCase().hashCode();
+        return entry.hashCode();
     }
 }
