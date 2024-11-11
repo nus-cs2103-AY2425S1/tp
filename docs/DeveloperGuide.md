@@ -626,7 +626,7 @@ testers are expected to do more *exploratory* testing.
 1. Un-favourite a restaurant while all restaurants are being shown
 
 1. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
-    In the test case below, we assume that the first restaurant in the list is a favourite as described by the previous test case mentioned above.
+    In the test case below, we assume that the first restaurant in the list is marked as favourite as described by the previous test case mentioned above.
 
     1. Test case: `unfav 1`<br>
        Expected: First contact has its border un-highlighted and brought back to its original index in the list before being set as a favourite.
