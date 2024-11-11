@@ -364,7 +364,7 @@ Format: `delete (INDEX)+`
 
 Examples:
 * `list` followed by `delete 1 2 3` deletes the 1st, 2nd and 3rd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries: `clear`
 
