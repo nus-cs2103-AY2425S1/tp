@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
+* The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser)
 * Github Copilot / ChatGPT 4.0 was used to autocomplete parts of code
 
 --------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ How the `Logic` component works:
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-4. If the command is one that triggers a `ConfirmationHandler`, e.g. delete, clear, add (duplicate), the `ConfirmationHandler` object will handle whether the user confirms or cancels the action. 
+4. If the command is one that triggers a `ConfirmationHandler`, e.g. delete, clear, add (duplicate), the `ConfirmationHandler` object will handle whether the user confirms or cancels the action.
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 <div style="page-break-after: always;"></div>
@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. F.A.R.T shows an error message<br>
   Use case ends.
 
-* 1c. Parameters are given but keywords are empty. 
+* 1c. Parameters are given but keywords are empty.
   * 1c1. F.A.R.T does not execute command and waits for more input by user. <br>
   Use case ends.
 
@@ -333,8 +333,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a contact. 
-2. F.A.R.T requests confirmation. 
+1. User requests to delete a contact.
+2. F.A.R.T requests confirmation.
 3. User confirms.
 4. F.A.R.T deletes the contact and shows a confirmation message.
 
@@ -391,10 +391,9 @@ Use case ends.
 
 * 2a. The user declines.
   * 2a1. F.A.R.T displays a confirmation message.
-  
+
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -455,8 +454,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by running the jar file via terminal.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Adding a client
 
 1. Adding a client while all clients are being shown
@@ -464,8 +461,8 @@ testers are expected to do more *exploratory* testing.
       Expected: A new client is added to the list. The new client is shown in the list.
    2. Test case: `add`<br>
       Expected: No client is added. Error details shown in status message.
-   3. Test case: `add n/John Cena p/12345678 e/johncena@gmail.com b/10 01 1990`<br> 
-      Expected: No client is added. Error details shown in status message. 
+   3. Test case: `add n/John Cena p/12345678 e/johncena@gmail.com b/10 01 1990`<br>
+      Expected: No client is added. Error details shown in status message.
    4. Test case: `add n/John Cena p/98765432 e/johncena@gmail.com `<br>
       Expected: No client is added. Error details shown in status message.
    5. Test case: `add n/John Cena p/98765432 b/10 01 1990`<br>
@@ -479,7 +476,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Clearing all clients while all clients are being shown
 
-   1. Test case: `clear`<br> 
+   1. Test case: `clear`<br>
       Expected: UI box is shown to confirm that user wants to clear all contacts from F.A.R.T. If user clicks yes, all contacts are removed from the list, otherwise it will cancel the operation.
 
 ### Opening help window
@@ -510,10 +507,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. 
+      Expected: No client is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -532,7 +529,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `find`<br>
       Expected: No client is found. Error details shown in the status message.
-   
+
    5. Test case: `find`<br>
       Expected: No output is given. Program waits for more user input.
 
@@ -590,7 +587,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data files
 
-   1. To simulate missing file delete addressbook.json file located at data/addressbook.json before launching the app. 
+   1. To simulate missing file delete addressbook.json file located at data/addressbook.json before launching the app.
    2. Launch the app
    3. The app should launch without any issues and show a list of sample contacts.
    4. Perform any command to create a new addressbook.json
@@ -612,9 +609,14 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Future**
 
 ### Future Enhancements
-
-1. Ensure all panels such as command panel are shown even in minimum resolution window
-2. Automatically update the client's detailed view page whenever a change is made to their details
-3. Allow for more flexible policy start dates as we currently assume all policies start on the 1st of the respective months
-4. Allow users to input their own template messages and update template message labels accordingly
-5. Allow for more flexibility regarding policy frequency, as now it is fixed at 1, 3, 6 or 12 months
+_Team size: 5_
+1. Ensure all panels such as command panel are shown even in minimum resolution window.
+2. Automatically update the client's detailed view page whenever a change is made to their details.
+3. Allow for more flexible policy start dates as we currently assume all policies start on the 1st of the respective months.
+4. Allow users to input their own template messages and update template message labels accordingly.
+5. Allow for more flexibility regarding policy frequency, as now it is fixed at 1, 3, 6 or 12 months.
+6. Enhance specificity for finding by birthday (find by month, day, year) as current implementation will match against the whole string representation of birthday.
+7. Enhance clarity of error messages for phone numbers (define what is Singapore numbers in the application itself).
+8. Rewording of error messages to provide greater clarity on what is done wrongly, especially for parameters in `Add` and `Edit` commands.
+9. Resizing of help window for better visibility
+10. Inclusion of hotkeys to open `PersonDetailedView` window and toggling between list selection and command input.
