@@ -51,6 +51,38 @@ We understand the importance of tracking as it allows you to follow up on your a
 **stay organised without having to put in much effort** because we know that you may be busy with your coursework. Let's get you
 started with HireMe!
 
+--------------------------------------------------------------------------------------------------------------------
+## How to use our User Guide
+
+First time using **HireMe**? Don't worry! We've got you covered! This tutorial will help maximise your usage of **HireMe**.
+* To get started, refer to the [Quick Start](#quick-start), which will walk you through getting **HireMe** all set up!
+* Need a quick refresher of the commands available for you? Check out our [Command Summary](#command-summary)!
+* Is there a burning question you want answers for? The [FAQ](#faq) might have the answer.
+
+Before continuing, here are some important information you need to know about the User Guide:
+1. There are 2 different kinds of boxes that provide extra information.
+    * *Notice boxes* provide important information that you should take note of.
+
+      <box type="info" seamless>
+
+      **Notice:** This is a notice box.
+      </box>
+
+    * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
+
+      <box type="warning" seamless>
+
+      **Warning:** This is a warning box.
+      </box>
+
+2. Words that are in <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different
+   part of the User Guide or an external link when you click on them.
+
+   <box type="tip" seamless>
+
+   </box>
+
+3. Refer to [Features](#features) for detailed explanations of each feature of **HireMe**!
 
 --------------------------------------------------------------------------------------------------------------------
 
