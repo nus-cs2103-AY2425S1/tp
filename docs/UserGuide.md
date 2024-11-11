@@ -434,7 +434,7 @@ Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `999
 **Q**: Can I customize the data file location?<br>
 **A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
 
-**Q**: How do I backup my data?<br>
+**Q**: How do I back up my data?<br>
 **A**: Simply copy the `clientell.json` file to a backup location.
 
 **Q**: What should I do if I accidentally delete a client?<br>
