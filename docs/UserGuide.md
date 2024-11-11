@@ -87,19 +87,19 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
-   * Example: `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
+   * Eg. `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
 
 1. Square brackets [ ] indicate the parameter is optional.<br>
-   * Example: `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
+   * Eg. `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
 
 1. Ellipsis `...` means you can repeat the parameter multiple times, or leave it out completely.<br>
-   * Example: `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
+   * Eg. `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
 
 1. You can enter parameters in any order.<br>
-   * Example: If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
+   * Eg. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 1. Commands that do not require parameters (`help`, `list`, `exit`, `clear`) will ignore anything extra you type.<br>
-   * Example: If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
+   * Eg. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
 
 1. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
 the app.
