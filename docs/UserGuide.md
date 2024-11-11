@@ -270,8 +270,10 @@ Format: `create-tag t/TAGNAME`
 * The `TAGNAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
-* Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
-* If you want to create a Tag with a long name, it might not be shown clearly in the list. You can use [Tasks](#task-features) instead for better visuals.
+* Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag.
+* If you want to create a Tag with a long name, it might not be shown clearly in the list.</br>
+We recommend keeping names of Tags to a maximum of 50 characters long.</br>
+You can use [list-tags](#listing-all-tags--list-tags) instead for better visuals.
 
 ### Assign tag to contact : `tag`
 
@@ -322,7 +324,9 @@ Format: `create-wedding w/WEDDINGNAME`
 * The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding--assign-wedding) command.
-* If you want to create a Wedding with a long name, it might not be shown clearly in the list.
+* If you want to create a Wedding with a long name, it might not be shown clearly in the list.</br>
+  We recommend keeping names of Weddings to a maximum of 50 characters long.</br>
+  You can use [list-weddings](#listing-all-weddings--list-weddings) instead for better visuals.
 
 ### Assign contact to a Wedding : `assign-wedding`
 
