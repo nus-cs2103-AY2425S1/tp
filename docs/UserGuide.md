@@ -43,7 +43,7 @@ tasks done faster than traditional GUI apps.
 
     </box>
 1. On the bottom left of the screen is a list of sample [weddings](#glossary). On the bottom right is a list of sample contacts.
-1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window. 
+1. Type commands in the command box and press Enter to execute them. e.g. typing `help` and pressing Enter will open the help window. 
    Some example commands you can try:
 
    * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a [contact](#glossary) named `John David` with the specified details to your contact list.
@@ -86,6 +86,8 @@ tasks done faster than traditional GUI apps.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/photographer` or as `n/John Doe`.
+
+  * All indexes (`CONTACT_INDEX` or `WEDDING_INDEX`) **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of contacts or weddings currently listed. `CONTACT_INDEX` is written as `INDEX` for commands that only involve contacts.
 
 * Parameter descriptions containing a `...` indicate that the parameter can take one or more inputs (compulsory parameters) or no inputs at all (only for optional parameters).<br>
   e.g. `[t/TAG1 TAG2 ...]` can be ignored (0 tags), replaced with `t/photographer` (1 tag), or replaced with `t/photographer videographer` (2 tags) and so on. Suppose the square brackets were not present for this example, a command input with 0 provided tags would not be accepted.
@@ -175,7 +177,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 Edits an existing [contact](#glossary) in the contact list.
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. 
 * At least one of the optional fields must be provided.
 * Inputs to the parameters must adhere to the constraints detailed in [Adding a contact](#adding-a-contact-add).
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
@@ -197,11 +199,11 @@ Examples:
 
 #### Tagging a contact: `tag`
 
-Format: `tag INDEX t/TAG1 TAG2 ...`
+Format: `tag INDEX t/TAG1 [TAG2 ...]`
 
 Adds one or more [tags](#glossary) to a specific [contact](#glossary) in the contact list.
 
-* Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
+* Tags the contact at the specified `INDEX`.
 * Tags specified in the command must be alphanumeric.
 * You can specify multiple tags in the same command by separating the tags with a space.
 * As such, each tag must be 1 word (i.e. does not contain spaces).
@@ -221,11 +223,11 @@ Examples:
 
 #### Untagging a contact : `untag`
 
-Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
+Format: `untag INDEX t/TAG1 [TAG2 ...]` or `untag INDEX t/all`
 
 Removes one or more [tags](#glossary) from a specific [contact](#glossary) in the contact list.
 
-* Untags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
+* Untags the contact at the specified `INDEX`. 
 * If you only want to remove specific tags from the contact, at least one tag to remove must be specified.
 * You can remove multiple tags from a contact by separating them with a space.
 * Alternatively, you can remove all tags associated with a contact by using `untag INDEX t/all`.
@@ -251,7 +253,7 @@ Lists the active [tags](#glossary) across *all* [contacts](#glossary) in the con
 
 #### Locating contacts by name: `find`
 
-Format: `find KEYWORD1 KEYWORD2 ...`
+Format: `find KEYWORD1 [KEYWORD2 ...]`
 
 Finds [contacts](#glossary) whose names contain any of the given keywords.
 
@@ -354,7 +356,7 @@ Clears all [contact](#glossary) and [wedding](#glossary) entries in the address 
 In this section, note that:
 * A `WEDDING_INDEX` refers to that [wedding's](#glossary) index number as shown in the wedding list.
 * A `CONTACT_INDEX` refers to the that [contact's](#glossary)'s index number in the contact list (the word `CONTACT` may be followed by a number to indicate its order of appearance in the command input).
-* Any `WEDDING_INDEX` or `CONTACT_INDEX` **must be a positive integer** 1, 2, 3, ...
+* Any `WEDDING_INDEX` or `CONTACT_INDEX` **must be a positive integer** 1, 2, 3, ... and must be not exceed the total number of weddings or contacts listed at the point of using the command.
 
 <br><br/>
 
@@ -400,7 +402,6 @@ Format: `view WEDDING_INDEX`
 
 Displays [contacts](#glossary) assigned to the [wedding](#glossary) at the specified `WEDDING_INDEX`. 
 
-* The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of weddings currently listed.
 * Please refer to the [General Notes](#general-notes) at the start of the Features section to learn more about how 
   entering a wedding 
   view using this command affects the behaviour of other commands.
@@ -582,11 +583,11 @@ Action     | Format, Examples
 **Add Contact**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]` <br> e.g., `add n/James Ho p/92372718 e/jamesho@gmail.com a/123, Clementi Rd, 672965 t/photographer`
 **List All Contacts**   | `list`
 **Edit Contact**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@yahoo.com`
-**Tag Contact**    | `tag INDEX t/TAG1 [TAG2] ...` <br> e.g., `tag 1 t/photographer`
-**Untag Contact**  | `untag INDEX t/TAG1 [TAG2] ...` or `untag INDEX t/all` <br> e.g., `untag 1 t/florist designer`
+**Tag Contact**    | `tag INDEX t/TAG1 [TAG2 ...]` <br> e.g., `tag 1 t/photographer`
+**Untag Contact**  | `untag INDEX t/TAG1 [TAG2 ...]` or `untag INDEX t/all` <br> e.g., `untag 1 t/florist designer`
 **Get List of (Active) Tags** | `taglist`
-**Find Contacts (by Keyword)**   | `find KEYWORD1 KEYWORD2 ...`<br> e.g., `find James Jake`
-**Filter Contacts (by Tag)** | `filter INDEX t/TAG1 [TAG2] ...` <br> e.g., `filter 2 t/caterer bartender`
+**Find Contacts (by Keyword)**   | `find KEYWORD1 [KEYWORD2 ...]`<br> e.g., `find James Jake`
+**Filter Contacts (by Tag)** | `filter INDEX t/TAG1 [TAG2 ...]` <br> e.g., `filter 2 t/caterer bartender`
 **Delete Contact** | `delete INDEX`<br> e.g., `delete 3`
 **Sort Contacts**   | `sort`
 **Clear All Contacts**  | `clear`
