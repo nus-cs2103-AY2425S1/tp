@@ -2147,7 +2147,7 @@ The following are **DUPLICATES** of the initial rental information:
 
 ### Appendix: Future Enhancements
 
-#### Additional Parameter Constraints
+#### 1. Additional Parameter Constraints
 
 <d-table>
 
@@ -2164,48 +2164,48 @@ The following are **DUPLICATES** of the initial rental information:
 
 </d-table>
 
-#### `cedit` Command
+#### 2. `cedit` Command
 
 The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
 command.
 In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain** as well as which tag to **edit**.
 
-#### `redit` Command
+#### 3. `redit` Command
 
 The current version of `redit` only supports replacing existing value to the newly specified value for all parameters used in `redit`.
 In the future, there will be an update to the `redit` command, where the user is able to choose whether to edit from the existing value or simply replace the existing value, offering greater convenience.
 
-#### `sort` Command
+#### 4. `sort` Command
 
 The current version of `sort` is case-sensitive.
 In the future, there will be an update to the `sort` command, where the sorting will be case-insensitive.
 
-#### `RENT_DUE_DATE` Parameter
+#### 5. `RENT_DUE_DATE` Parameter
 
 The current `RENT_DUE_DATE` meant to refer to the specific day (of the month) on which the rent payment is due for the property owned by the client. However, the term `DATE` may be misleading, as users might assume it requires the format `dd/mm/yyyy`.
 In the future, there will be an update to the `RENT_DUE_DATE` parameter, where it will be renamed to `RENT_DUE_DAY` for greater clarity.
 
-#### Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
+#### 6. Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
 
 The current error message for an invalid value of `MONTHLY_RENT` is: `Monthly Rent should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
 In the future, there will be an update to the error message for invalid value of `MONTHLY_RENT`, where it will be rephrased to `Monthly Rent should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
 
-#### Error Message For Invalid Value Of `DEPOSIT` Parameter
+#### 7. Error Message For Invalid Value Of `DEPOSIT` Parameter
 
 The current error message for an invalid value of `DEPOSIT` is: `Deposit should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
 In the future, there will be an update to the error message for invalid value of `DEPOSIT`, where it will be rephrased to `Deposit should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
 
-#### Duplicate Rental Information Detection
+#### 8. Duplicate Rental Information Detection
 
 Currently, rental information is considered a duplicate if and only if the `ADDRESS` parameter **matches exactly**, **including case sensitivity**. However, this approach may not be ideal as unique identifiers such as unit numbers can differentiate addresses that are otherwise the same.
 In the future, there will be an update to the duplicate rental information detection method, where rental information will be considered a duplicate if and only if the `ADDRESS` parameter **matches** (**case-insensitively**).
 
-#### Handling Long Text In The UI
+#### 9. Handling Long Text In The UI
 
 Currently, some long texts are truncated due to the window size constraints of the application, with excess text displayed as `...`.
 In the future, there will be an update to the UI and additional constraints on the parameter value. The UI will be updated such that all characters will be fully displayed without truncation or the use of `...`.
 
-#### Storage Related Error Handling
+#### 10. Storage Related Error Handling
 
 In some very rare cases, reading from or writing to data file may fail due to various reasons.
 In the future, there will be an update to the application, where a prompt will be displayed to notify the user of such failures.
