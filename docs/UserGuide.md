@@ -49,6 +49,8 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+<div style="page-break-after: always;"></div>
+
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -96,6 +98,8 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a table of basic commands and their usage syntax.
@@ -108,6 +112,8 @@ copied to clipboard instead.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
@@ -142,6 +148,8 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all persons : `list`
 
 Shows a list of everyone in the address book.
@@ -174,6 +182,8 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -195,6 +205,8 @@ Examples:
 **Result from `find alex david`:**
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -227,6 +239,8 @@ Examples:
 - `deletetag 1 t/friends` will delete the tag `friends` from the first person in the person list.
 - `deletetag 2 t/Client` will delete the tag `Client` from the second person shown in the person list.
 
+<div style="page-break-after: always;"></div>
+
 ### Add a note to an existing contact: `addnote`
 
 Adds a note to a person in the address book.
@@ -254,6 +268,8 @@ Examples:
 - `addnote 1 n/Supplier 1`
 - `addnote 2 n/Supplier 2`
 
+<div style="page-break-after: always;"></div>
+
 ### Edit a note of an existing contact: `editnote`
 
 Edits a note of a person in the address book.
@@ -275,6 +291,8 @@ Examples:
 - `editnote 1 i/1 n/Customer 1`
 - `editnote 2 i/1 n/Customer 2`
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a note from an existing contact: `deletenote`
 
 Deletes a note from a person in the address book.
@@ -292,6 +310,8 @@ Examples:
 
 - `deletenote 1 i/1`
 - `deletenote 2 i/2`
+
+<div style="page-break-after: always;"></div>
 
 ### View an existing contact's details : `view`
 
@@ -313,6 +333,8 @@ Examples:
 
 ![result for 'view 3'](images/ViewCommandResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Pin a contact: `pin`
 
 Pins the contact of a person into a dedicated panel.
@@ -331,6 +353,8 @@ Examples:
 **Result from `pin 1`:**
 
 ![result for 'pin 1'](images/PinCommandResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Unpin a contact: `unpin`
 
@@ -354,6 +378,8 @@ Examples:
 **State after `unpin 1`:**
 
 ![state after `unpin 1`](images/UnpinCommandResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Undo a previously executed command: `undo`
 
@@ -382,6 +408,8 @@ Format: `redo`
 - The redo feature saves the **5 most recent executed undo commands**.
 - The redo feature only tracks changed made by the undo command
 - The redo feature will clear the focus person panel upon execution.
+
+<div style="page-break-after: always;"></div>
 
 ### Import a contact list : `import`
 
@@ -416,6 +444,8 @@ Examples:
 - `export f/csv` exports the contact list into a csv file.
 - `export f/vcf` exports the contact list into a vcf file.
 
+<div style="page-break-after: always;"></div>
+
 ### Change the application's theme : `toggle`
 
 Changes the application theme from light to dark or from dark to light.
@@ -435,6 +465,8 @@ Examples:
 
 **GUI in dark mode:**
 ![GUI in dark mode](images/UiInDarkMode.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Navigating Command History :
 
@@ -461,6 +493,8 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bizbook.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -482,6 +516,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -497,6 +533,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 9. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
