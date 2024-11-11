@@ -121,7 +121,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="800" />
+<puml src="diagrams/ModelClassDiagram.puml" width="1000" />
 
 
 The `Model` component,
@@ -344,9 +344,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. The contact already exists in the NUStates.
     * 2b1. NUStates shows an error message indicating the duplicate contact.
@@ -356,9 +355,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2c. Required fields are missing.
     * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 The following activity diagram summarizes the steps involved in adding a contact:
 
@@ -379,13 +377,15 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 * 2a. The provided index is missing or not a positive integer.
     * 2a1. NUStates shows an error message indicating the invalid index.
+    * 2a2. User corrects the invalid details.
 
-      Use case ends.
+      Use case resumes at step 2.
 
 * 2b. The provided index is more than the number of contacts in the list.
     * 2b1. NUStates shows an error message indicating the invalid index.
+    * 2b2. User corrects the invalid details.
 
-      Use case ends.
+      Use case resumes at step 2.
 
 **Use case: UC03 - List all contacts**
 
@@ -410,7 +410,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 **Extensions**
 
-* 2a. The provided keyword is missing or invalid.
+* 2a. The provided keyword is missing.
     * 2a1. NUStates shows an error message indicating the invalid keyword.
 
       Use case ends.
@@ -547,9 +547,8 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC11 - Add a Property-To-Sell**
 
@@ -567,30 +566,26 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. The existing contact in the NUStates already has the same `Property-To-Sell` in the list.
     * 2b1. NUStates shows an error message indicating the duplicate `Property-To-Sell`.
     * 2b2. User corrects the invalid details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2c. Required fields are missing.
     * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2d. Someone in the NUStates is already wanting to sell the `Property-To-Sell` that the user specified.
     * 2d1. NUStates shows an error message indicating the existing `Property-To-Sell`
     * 2d2. User corrects the invalid details.
-    * 2d3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC12 - Add a Property-To-Buy**
 
@@ -608,23 +603,20 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. The existing contact in the NUStates already has the same `Property-To-Buy` in the list.
     * 2b1. NUStates shows an error message indicating the duplicate `Property-To-Buy`.
     * 2b2. User corrects the invalid details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2c. Required fields are missing.
     * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC13 - Delete a Property-To-Sell**
 
@@ -642,23 +634,20 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. The existing contact in the NUStates does not have the specified `Property-To-Sell` in the list.
     * 2b1. NUStates shows an error message indicating the missing `Property-To-Sell`.
     * 2b2. User corrects the invalid details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2c. Required fields are missing.
     * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC14 - Delete a Property-To-Buy**
 
@@ -676,23 +665,20 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. The existing contact in the NUStates does not have the specified `Property-To-Buy` in the list.
     * 2b1. NUStates shows an error message indicating the missing `Property-To-Buy`.
     * 2b2. User corrects the invalid details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2c. Required fields are missing.
     * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 **Use case: UC15 - Sort contact list**
@@ -711,16 +697,14 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. Required fields are missing.
     * 2b1. NUStates shows an error message indicating the missing fields.
     * 2b2. User provides the missing details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC16 - Sort property lists in a specific contact**
 
@@ -738,16 +722,14 @@ The following activity diagram summarizes the steps involved in adding a contact
 * 2a. The provided details are invalid.
     * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 * 2b. Required fields are missing.
     * 2b1. NUStates shows an error message indicating the missing fields.
     * 2b2. User provides the missing details.
-    * 2b3. NUStates re-validates the details.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 **Use case: UC17 - View statistics**
 
@@ -781,12 +763,21 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 * **L Order**: A sorting method where elements are arranged in ascending order, from the lowest to the highest value.
 * **H Order**: A sorting method where elements are arranged in descending order, from the highest to the lowest value.
+* * **Command Terminal**: A window into which users can type commands that are then executed by the computer's operating system. The cursor point in the terminal where you type the commands is known as the CLI.
+* **UI (User Interface)**: The layout of the visual elements that enable a user to interact with a computer system.
+* **CLI (Command Line Interface)**: A text-based User Interface (UI) where commands are typed and used to run programs, manage computer files and interact with the computer. This provides a faster and efficient alternative to GUI interactions.
+* **GUI (Graphical User Interface)**: A visual platform for users to interact with a computer using items such as windows, icons and menus. 
+* **Parameter value**: The inputs to the specific fields provided by a user when running a command in the CLI.
 
 ### Planned Enhancements
 
 1. Currently, the app allows contacts with the same name but in different cases. The future version will not permit this.
 2. Currently, the app allows names to be entered in any format, with no standardization. The future version will implement a standardized format for name entries.
 3. Currently, the app allows different people to have the same phone number. Future versions will enforce unique phone numbers for each contact.
+4. Currently, the app displays the statistical graphs with no labelling of the units of the x-axes and y-axes. Future versions will include this labelling.
+5. Currently, the app displays pie charts labels for categories that have no recorded values. Future versions of will hide the labelling until there are recorded values for those categories.
+6. Currently, the app displays dynamic statistics for any new properties bought/sold and the associated revenue/expense in the current session. Future versions will update the total properties bought/sold and the associated revenue/expense if contacts are deleted as well.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
