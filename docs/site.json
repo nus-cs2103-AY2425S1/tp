@@ -6,6 +6,9 @@
   "style": {
     "codeTheme": "light"
   },
+  "styles": [
+    "main.css"
+  ],
   "ignore": [
     "_markbind/layouts/*",
     "_markbind/logs/*",
