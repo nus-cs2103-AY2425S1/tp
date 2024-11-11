@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Logging guide
+title: Real Connect logging guide 
 ---
 
 * We are using `java.util.logging` package for logging.

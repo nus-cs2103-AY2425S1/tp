@@ -1,5 +1,6 @@
 ---
-# RealConnect User
+layout: page
+title: User Guide
 ---
 
 RealConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
@@ -16,8 +17,18 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Editing a person](#editing-a-person--edit)
     - [Adding history to a person](#adding-history-to-a-person--log)
     - [Remarking a person](#remarking-a-person--remark)
-    - [Single page person view](#single-page-person-view--view)
-    - [Adding a Property](#adding-a-property--addproperty)
+    - [Single page person view](#single-page-person-view-view)
+    - [Adding a Property](#adding-a-property-addproperty)
+    - [Closing single page person view](#closing-single-page-person-view-close)
+    - [Locating persons by name](#locating-persons-by-name-find)
+    - [Marking a person as favourite](#marking-a-person-as-favourite-favourite)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Exiting the program](#exiting-the-program--exit)
+    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
+    - [Birthday Reminder](#birthday-reminder)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
 4. [Parameter Requirements](#parameter-requirements)
 5. [Command Summary](#command-summary)
 6. [Coming Soon](#coming-soon)
@@ -29,7 +40,7 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -66,9 +77,9 @@ E.g. `addProperty`: `<Command> <Index> <X/parameter>`
 ##### Functional commands
 E.g. `help`: `<Command>`
 
-> X is a placeholder for prefixes
+> `X/` is a placeholder for prefixes
 
-Insert example command picture
+![Command Format](images/CommandFormat.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -109,7 +120,7 @@ Insert example command picture
 
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
 
@@ -148,7 +159,7 @@ Displays all persons stored in the address book.
 
 ---
 
-### Sorting contacts: `sort`
+### Sorting contacts : `sort`
 
 Sorts the contact list by name, either in ascending (A-Z) or descending (Z-A) order.
 
@@ -226,7 +237,7 @@ Examples:
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
   ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
 
-### Single page person view: `view`
+### Single page person view : `view`
 
 Shows all the information related to a contact on a single page.
 
@@ -250,7 +261,7 @@ Examples:
 > You can resize the detail window to extremely small size in case it blocks view of other windows.
 
 
-### Adding a Property: `addProperty`
+### Adding a Property : `addProperty`
 
 Add a property listing to an existing person in the address book.
 
@@ -264,7 +275,7 @@ Examples:
 * `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
 * `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
 
-### Closing single page person view: `close`
+### Closing single page person view : `close`
 
 Closes the UI page that shows the information of the person.
 
@@ -407,12 +418,6 @@ None, as it is an automatic feature.
 
 ![Birthday Reminder Example](images/Birthday.png)
 
----
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -428,16 +433,15 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Parameter Requirements
-| Paramter | Requirement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example                                                                              |
-|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| Name     | Only Alpha-numeric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan<br/>✅ Chris Paul 3 |
-| Birthday | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
-| Log Date | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
-| Email    | local-part@domain<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: end with a domain label at least 2 characters long; have each domain label start and end with alphanumeric characters; have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c<br/>✅ 1@a.com<br/>✅ ho@gmail.com                           |
-| address  | No contraint (right-to-left scripts will be displayed left-to-right)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | ✅ 123 Orchard<br/> ✅ 乌节路 123 号<br/> ✅ 123 بستان                                      |
 
+| Parameter  | Requirement                                                                                                                                                                                                                      | Example                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Name**   | Only Alpha-numeric                                                                                                                                                                                                               | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan <br> ✅ Chris Paul 3       |
+| **Birthday** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
+| **Log Date** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
+| **Email**   | local-part@domain <br> The local-part should only contain alphanumeric characters and these special characters (+_.-). The local-part may not start or end with special characters. <br> The domain name must: <br> - End with a domain label at least 2 characters long. <br> - Have each domain label start and end with alphanumeric characters. <br> - Consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c <br> ✅ 1@a.com <br> ✅ ho@gmail.com                                |
+| **Address** | No constraint (right-to-left scripts will be displayed left-to-right)                                                                                                                      | ✅ 123 Orchard <br> ✅ 乌节路 123 号 <br> ✅ 123 بستان                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
@@ -455,11 +459,11 @@ _Details coming soon ..._
 | **Log Interaction**     | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
 | **Add/Edit Remark**     | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
 | **View Contact**        | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
-| **Favourite Contact**   | `favourite INDEX`(on not favourited person)<br> e.g., `favourite 123`                                                                                                    |
-| **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
-| **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
-| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
---------------------------------------------------------------------------------------------------------------------
+| **Favourite Contact**   | `favourite INDEX` (on not favourited person)<br> e.g., `favourite 123`                                                                                                 |
+| **Unfavourite Contact** | `favourite INDEX` (on already favourited person)<br> e.g., `favourite 123`                                                                                             |
+| **Add Property**        | `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`<br> e.g., `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` |
+| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 b/2001-03-04`                                                                                                      |
+
 ## Coming soon:
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
