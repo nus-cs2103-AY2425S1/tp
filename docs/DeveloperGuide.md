@@ -838,7 +838,7 @@ A patient will be deleted from the system if the patient is already in the syste
 
 **Extensions**
 
-* 1a. User does not input the NRIC of a patient.
+* 1a. User does not input the NRIC of a patient or inputs the patient's NRIC in the wrong format.
     * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1a1 is repeated until the input entered is a valid NRIC of a patient in the system.<br>
       Use case resumes from step 2.
@@ -852,18 +852,37 @@ A patient will be deleted from the system if the patient is already in the syste
 <br>
 <br>
 
-* 1c. User inputs the patient's NRIC in the wrong format.
-    * 1c1. ClinicConnect prompts the user to fix the format of the NRIC and shows the correct format.<br>
-      Step 1c1 is repeated until the NRIC is in the correct format.<br>
-      Use case resumes from step 2.
-<br>
-<br>
-
 * 1d. User inputs an NRIC that does not exist in the system.
     * 1d1. ClinicConnect shows an error message saying the patient is not found in the system.<br>
       Step 1d1 is repeated until a valid NRIC that is in the system is inputted.<br>
       Use case resumes from step 2.
 
+### Use case: UC07 - View detailed information of a patient
+**Guarantees:**<br>
+Detailed information of a patient will be displayed if the patient exists in the system.
+
+**MSS:**
+
+1. User types command to view detailed information of a patient and inputs the patient's NRIC.
+2. ClinicConnect displays the detailed information of the patient.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. User inputs the patient's NRIC in the wrong format or a blank NRIC.
+    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1a1 is repeated until the input entered is valid containing the NRIC of an existing patient in the system.<br>
+      Use case resumes from step 2.
+<br> 
+<br>
+
+* 1b. User inputs an NRIC that does not exist in the system
+    * 1b1. ClinicConnect shows an error message saying the patient with the specified NRIC does not exist.<br>
+      Step 1b1 is repeated until a valid NRIC that exists in the system is inputted.<br>
+      Use case resumes from step 2.
+<br>
+<br>
 
 #### Use case: UC08 - Edit a patient
 **Preconditions:**<br>
