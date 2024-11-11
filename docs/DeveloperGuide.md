@@ -733,6 +733,23 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
+### Filter for clients
+1. Filtering for a client based on a criteria
+   1. Test case: `filter n/ <NAME>`<br>
+      Expected: The list will display all clients with names that include <NAME>.
+   2. Test case: `filter n/ <NAME> p/ <PHONE>`<br>
+      Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
+   3. Test case: `filter i/ =<INCOME>`<br>
+      Expected: The list will display all clients with incomes that match <INCOME>.
+   4. Other correct filter commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+      Expected: Similar to previous.
+   5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
+      Expected: An error message is shown to the user. Error details shown in the status message.
+   6. Other incorrect filter commands to try:<br>
+      `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
+      `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
+      Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
