@@ -114,6 +114,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
