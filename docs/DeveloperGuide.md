@@ -455,10 +455,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The student `John` is in the list
+    1. Prerequisites: List all students using the `list` command. The student `John` is in the list, but not the student `Jane`.
 
     1. Test case: `deletes n/John`<br>
-       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. 
 
     1. Test case: `deletes n/Jane`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
