@@ -233,7 +233,7 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
 
 ### Update the status of an Internship Application
-The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
 
 <puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
