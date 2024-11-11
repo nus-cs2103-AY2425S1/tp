@@ -431,3 +431,4 @@ testers are expected to do more *exploratory* testing.
   - Include address field, not just name to detect duplicates
   - Handle case-insensitive duplicates
     - Currently, the app does not handle case-insensitive duplicates. For example, "McDonalds" and "mcdonalds" are treated as different restaurants.
+  - Allow non-alphanumeric characters in restaurant names
