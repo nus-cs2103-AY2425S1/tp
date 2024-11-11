@@ -260,7 +260,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Private tutors
 
-* has a need to manage a small but significant number of students
+* has a need to manage a moderate number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -481,7 +481,7 @@ Use case ends.
 
 - **Response Time**: The system should respond to any command within **1 second** under normal operating conditions.
 - **Throughput**: Capable of processing **concurrent commands** from private tutor without significant delay.
-- **Capacity**: Should handle up to **1,000 students** without noticeable sluggishness in performance for typical usage.
+- **Capacity**: Should handle up to **100 students** without noticeable sluggishness in performance for typical usage.
 
 **2. Maintainability Requirements**
 
@@ -788,27 +788,27 @@ This project, EduTuTu, required a considerable amount of effort to design and im
 ### Difficulty Level and Challenges
 The development of EduTuTu presented several key challenges:
 - **Multi-Entity Management:** Managing multiple types of entities (students, payments, classes) required a flexible data structure and sophisticated command parsing to handle diverse commands like `add`, `markpaid`, and `pie`.
-- **Data Visualization:** Creating dynamic visualizations (pie and bar charts) to track class distributions and monthly payments required integration with a charting library and customization to suit EduTuTu’s specific data needs.
+- **Data Visualisation:** Creating dynamic visualisations (pie and bar charts) to track class distributions and monthly payments required integration with a charting library and customization to suit EduTuTu’s specific data needs.
 - **Error Handling and User Experience:** Ensuring robust error handling and clear user feedback was essential, particularly for commands related to data visualization and file manipulation (e.g., handling missing or corrupted files).
 
 ### Effort Required
 Significant effort went into:
 - **Designing a Scalable Data Model:** We created a model that supports various entity types, allowing for easy future expansion.
-- **Extensive Testing:** Due to the multi-entity structure and data visualization, thorough testing was necessary to handle a wide range of user inputs and edge cases, particularly for commands such as `clear`, `undo`, and `redo`.
+- **Extensive Testing:** Due to the multi-entity structure and data visualisation, thorough testing was necessary to handle a wide range of user inputs and edge cases, particularly for commands such as `clear`, `undo`, and `redo`.
 - **User Interface Improvements:** Balancing the CLI with GUI elements required additional effort to ensure that commands were intuitive and visualizations were accessible, providing a seamless user experience.
 
 ### Reuse of Libraries and Components
 To streamline development, we leveraged certain libraries and reused components where feasible:
-- **Charting Library for Visualizations:** The `javaFX` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `javaFX` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
+- **Charting Library for Visualisations:** The `javaFX` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `javaFX` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
 - **Command Framework from AB3:** We adapted AB3’s command framework to accommodate EduTuTu’s expanded command set, allowing us to save development time while maintaining a consistent structure. Additional commands such as `markpaid` and `info` were added to extend functionality for the specific needs of a tuition center.
 
 ### Achievements
 Despite the complexity, we achieved several milestones:
 - Designed a flexible and scalable multi-entity data model that can be expanded easily for future needs.
-- Successfully implemented user-friendly data visualization commands (`pie`, `bar`), providing private tutors with valuable insights at a glance.
+- Successfully implemented user-friendly data visualisation commands (`pie`, `bar`), providing private tutors with valuable insights at a glance.
 - Developed a robust system for error handling and user feedback, enhancing usability and reliability.
 
-In summary, EduTuTu required significant effort due to its multi-entity structure, visualizations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
+In summary, EduTuTu required significant effort due to its multi-entity structure, visualisations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
 
 ## Appendix: Planned Enhancement
 
@@ -818,49 +818,50 @@ In summary, EduTuTu required significant effort due to its multi-entity structur
 This section lists planned enhancements to address known feature flaws. These enhancements will be implemented after PE-D testing is completed and feedback is received.
 
 
-1. **Add Confirmation for ‘Clear’ Command**  
-   **Current Issue:** The `clear` command deletes all entries immediately without a confirmation prompt, which can lead to accidental data loss.  
-   **Planned Enhancement:** Add a confirmation dialog that appears when the `clear` command is entered. Users must confirm the action by typing “yes” to proceed with clearing all data. Example prompt: "Are you sure you want to clear all entries? Type 'yes' to confirm."
-
+1. **Enhance error messages for commands that use `INDEX`**  
+   **Current Issue:** The error message associated with an invalid `INDEX` contains the line `Also possible: unknown prefixes added after person index`, which may be confusing for commands that accept no prefixes. (e.g. `delete`, `info`)  
+   **Planned Enhancement:** Make the error message more specific, to only include the portion on unknown prefixes for commands that accept prefixes.
    
-2. **Make 'Undo' and 'Redo' Command Limit Clear**  
+
+2. **Make 'undo' and 'redo' command limit clear**  
    **Current Issue:** Users are unaware of the limit to the `undo` and `redo` command history, leading to potential confusion.  
    **Planned Enhancement:** Display a warning when the maximum undo/redo history has been reached. For example, "No further undo actions are available."
 
 
-3. **Emoji Handling in Input Fields**  
-   **Current Issue:** Input fields currently do not handle emojis correctly due to a regex limitation, which may cause unexpected behavior.  
+3. **Emoji handling in input fields**  
+   **Current Issue:** Input fields currently are not guaranteed to handle emojis correctly due to a regex limitation, which may cause unexpected behavior.  
    **Planned Enhancement:** Update the regex used for validation to allow emojis in names, addresses, and other text fields, or provide an informative error message if emojis are not supported.
 
 
-4. **Display List Sorting Options**  
+4. **Display list sorting options**  
    **Current Issue:** The `list` command displays entries in a default order, with no options for sorting.  
    **Planned Enhancement:** Add sorting options to the `list` command, allowing users to sort by name, class, or payment status. For example, `list sortby/name` or `list sortby/class`.
 
 
-5. **Improved Multi-Monitor Support**  
-   **Current Issue:** When switching between multiple monitors, the application may open off-screen if moved to a secondary screen and later switched back to a single-monitor setup.  
-   **Planned Enhancement:** Implement better positioning handling to ensure the application opens within the primary screen’s bounds if multiple monitors are disconnected.
+5. **Enhance the `pie` and `bar` commands**  
+   **Current Issue:** Currently, both commands generate a visualisation with fixed categories. (e.g. `pie` is fixed to only display `CLASS_ID`, and `bar` for `MONTH_PAID`)   
+   **Planned Enhancement:** Allow users to specify the data they wish to make a pie/bar chart of. This will naturally solve edge cases for instances where the legend generated is empty, or empty strings are displayed as a bar on the bar chart.
 
 
-6. **Allow Multiple Class Allocations for a Single Student**  
+6. **Allow multiple class allocations for a single student**  
    **Current Issue:** Currently, there are restrictions preventing a student from being assigned to more than one class, which can cause issues in managing class rosters.  
-   **Planned Enhancement:** Remove restrictions each student to a single class.
+   **Planned Enhancement:** Add additional features that accommodates assigning each student to more than one class (i.e. replace the class ID implementation with a different implementation).
 
 
-7. **Enable Multi-Word Search for Accurate Matching**  
-   **Current Issue:** Currently, the find command interprets multi-word entries with spaces (e.g., names or addresses) as separate search terms. For example, searching `n/Kim Woo Bin` returns any entries that match "Kim," "Woo," or "Bin" individually rather than finding the exact phrase "Kim Woo Bin." Similarly, searching for an address like "222 Greenwood Ave" matches "222," "Greenwood," and "Ave" separately, which could yield inaccurate results.  
+7. **Enable multi-word search for accurate matching**  
+   **Current Issue:** Currently, the find command interprets multi-word entries with spaces (e.g., names or addresses) as separate search terms. For example, searching `n/Kim Woo Bin` returns any entries that match `Kim`, `Woo`, or `Bin` individually rather than finding the exact phrase `Kim Woo Bin`. Similarly, searching for an address like `222 Greenwood Ave` matches `222`, `Greenwood`, and `Ave` separately, which could yield inaccurate results.  
    **Planned Enhancement:** Modify the find command to recognize multi-word search terms as complete phrases, enabling accurate matching for entries that include spaces. This enhancement will help avoid potential edge cases due to whitespace handling.
 
 
-8. **Enable distinction between office and hp numbers**  
+8. **Enable distinction between parent and personal numbers**  
    **Current Issue:** Currently, each student in EduTuTu can only store up to one phone number.  
-   **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Office Hp and Personal Phone Numbers)
+   **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Parent's Hp and Personal Phone Numbers)
 
 
 9. **Enable handling of larger fees**  
    **Current Issue:** Currently, the fees field only accepts up to 9 integers to prevent integer overflow.  
    **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees & fees in the form of floats.
+
 
 10. **Enable handling for more special characters in names**  
     **Current Issue:** Users may encounter issues when entering names with comma.  

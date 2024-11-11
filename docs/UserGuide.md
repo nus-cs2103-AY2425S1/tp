@@ -3,7 +3,7 @@ layout: page
 title: EduTuTu User Guide
 ---
 
-**EduTUTU** is a desktop application designed to streamline contact management for private tutors, making it easier to 
+**EduTuTu** is a desktop application designed to streamline contact management for private tutors, making it easier to 
 organise and access student information. Optimised for use through a [Command Line Interface (CLI)](#cli-command-line-interface) while incorporating 
 the convenience of a [Graphical User Interface (GUI)](#gui-graphical-user-interface), EduTUTU allows you to manage student details with speed and 
 efficiency. Whether you’re handling student registrations, updating records, or searching for students, EduTUTU helps 
