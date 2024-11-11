@@ -463,12 +463,14 @@ The `find` command allows you find student by a field or any combination of fiel
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; vertical-align: top;">
-    <p><b>Output:</b> The UI updates to show students matching the search keyword.</p>
+
+  <div style="width: 45%; vertical-align: top; margin-top: 20px;">
+    <p><b>Output:</b> The UI updates to show persons matching the search keyword.</p>
     <img src="images/find_output.png" alt="Find output example" style="width: 100%;" />
   </div>
 
 </div>
+
 
 **Tips:**
 - Searches are **case-insensitive**.
@@ -610,10 +612,11 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
   <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> A bar chart displays.</p>
-    <img src="images/barcommand.png" alt="Bar chart output" style="width: 100%;" />
+    <img src="images/barcommand.png" alt="Bar chart output" style="width: 100%; margin-top: -10px;" />
   </div>
 
 </div>
+
 
 **Tips:**
 - The bar chart is based on the currently displayed student list.
@@ -689,7 +692,7 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 30px; margin-top: 10px;">
+  <div style="width: 45%; margin-bottom: 30px; margin-top: 15px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
