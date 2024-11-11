@@ -155,6 +155,38 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Command History
+
+#### Implementation
+
+The command history functionality is implemented in three main components:
+
+1. `CommandHistory`: This class maintains a list of past commands and `currentIndex` to track the current position within the list. It includes methods for adding new commands and retrieving the previous or next command:
+
+* `add(command)` — Adds a command to the history and resets the pointer to the most recent position.
+* `getPreviousCommand()` — Moves the pointer to the previous command and returns it.
+* `getNextCommand()` — Moves the pointer to the next command and returns it.
+
+2. `LogicManager`: The `LogicManager` component integrates the `CommandHistory` to store each command upon execution. It provides access to the history for other components like the UI.
+
+
+3. `CommandBox` UI Component: This component captures key events when the user presses the up or down arrow keys. Based on these key events, it retrieves commands from `CommandHistory` via `LogicManager` and displays them in the command input field.
+
+#### Sequence Diagram
+
+The following sequence diagram illustrates the flow when a user presses the up arrow key to access the previous command in history:
+
+![CommandHistorySequence](images/CommandHistorySequenceDiagram.png)
+
+1. The user presses the up arrow key.
+2. `CommandBox` calls `LogicManager#getPreviousCommand()`.
+3. `LogicManager` delegates this request to `CommandHistory#getPrevious()`.
+4. `CommandHistory` retrieves the previous command and returns it to `LogicManager`.
+5. `LogicManager` then passes the command back to `CommandBox`.
+6. `CommandBox` displays the previous command in the input field.
+
+This streamlined structure keeps the history management isolated within CommandHistory, simplifying logic in other components. The result is an intuitive user experience that enhances the command-line interface.
+
 ### Undo/redo feature
 
 #### Implementation
@@ -233,6 +265,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. Update student and teacher success message (basically, when no tag added, it just says Tag: at the end)
+2. Update mark command's implementation (either have it work on filtered list or add optional indexes)
+3. Save theme preference on exit
+4. Prevent teacher command from accepting "/nok", "/attendance" and "/emergency" prefix
+5. Relax restrictions on phone number to allow international phone numbers
+6. Make gender keyword case-insensitive
+7. Allow editing of attendance for students
+8. Update find to be able to find with partial info (e.g. /find name han can find "Hans")
+9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact. We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
+10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names. We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
 --------------------------------------------------------------------------------------------------------------------
 
