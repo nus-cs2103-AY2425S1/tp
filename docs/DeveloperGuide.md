@@ -27,7 +27,7 @@ This project is adapted from the AddressBook-Level3 project created by the [SE-E
 ### Setting up
 
 <div class="note" markdown="span"> 
-:bulb: If you would like test our EZSTATES, you can refer to our [quick start](userguide.md#quick-start) in our user guide.
+If you would like test our EZSTATES, you can refer to our [quick start](userguide.md#quick-start) in our user guide.
 </div>
 
 In order to develop for EZSTATES you can follow the steps we have provided below:
@@ -64,7 +64,7 @@ The Gradle instructions provided are for macOS and Linux users. If you are using
 **General Update**
 - Add individual photos
 - Update AboutUs.md
-
+- 
 ### Milestone v1.2
 **Deciding MVP features**
 - Divided features amongst group mates
@@ -215,7 +215,7 @@ matching .fxml files in `src/main/resources/view` folder. For example, the layou
 
 This section will go through some additional information about each component in the `MainWindow`.
 
-##### 1. Command Box
+1. Command Box
 - The `CommandBox` is the main method by which the user interacts with EZSTATES.
 - The user types inputs into the `CommandBox` and hits `ENTER` to give a command to EZSTATES.
 - At any point in time, the user can press the `UP` and `DOWN` arrow keys to navigate the history of past inputs. 
@@ -227,34 +227,34 @@ Additionally, the history preserves
 all inputs given by the user, including duplicate and invalid inputs.
 </div>
 
-##### 2.Result Display
+2. Result Display
 - The `ResultDisplay` provides feedback to the user.
 - The `ResultDisplay` is scrollable if the output message is too long.
 
-##### 3. PersonListPanel
+3. PersonListPanel
 - The `PersonListPanel` contains the `clients` stored in EZSTATES.
 - The information of a relevant `client` is displayed using the `PersonCard` component
 - The `PersonListPanel` is a view of `PersonCard` components.
 - Commands such as `find` will filter the `PersonListPanel` to show certain `clients` based on a given predicate. Commands
 such as `showclients` displays all possible `clients` in the `PersonListPanel`.
-- A newly added `client` is added to the bottom of the `PersonListPanel`.
+A newly added `client` is added to the bottom of the `PersonListPanel`.
 
-    ##### PersonCard
-    - The `PersonCard` is the component that displays the essential information of a `client`.
-    - `Client ID`
-        - The `Client ID` specifies the `INDEX` value associated to the specific `client` relative to the position of 
-        the `PersonCard` in the `PersonListPanel`.
-        - The user will utilise the `Client ID` as an argument to run certain commands such as `deleteclient` and `editclient`.
-    - `Client Name`
-        - This box specifies the `name` of the `client`.
-    - `Client Phone Number`
-        - This box specifies the `phone` number of the `client`.
-    - `Client Email`
-        - This box specifies the `email` of the `client`.
-    - `Client Appointment`
-        - This box specifies the `Date` and `Time` of an `Appointment` with the relevant `client`. 
-    - `Client Tags`
-        - The green ribbons in the box define a tag for the client. 
+> **PersonCard**
+> - The `PersonCard` is the component that displays the essential information of a `client`.
+> - `Client ID`
+  >   - The `Client ID` specifies the `INDEX` value associated with the specific `client`, relative to the position of the `PersonCard` in the `PersonListPanel`.
+>   - The user will utilize the `Client ID` as an argument to run certain commands, such as `deleteclient` and `editclient`.
+> - `Client Name`
+  >   - This box specifies the `name` of the `client`.
+> - `Client Phone Number`
+  >   - This box specifies the `phone` number of the `client`.
+> - `Client Email`
+  >   - This box specifies the `email` of the `client`.
+> - `Client Appointment`
+  >   - This box specifies the `Date` and `Time` of an `Appointment` with the relevant `client`.
+> - `Client Tags`
+  >   - The green ribbons in the box define a tag for the c
+
 
 <div class="note" markdown="span"> 
 Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI's ability to fully
@@ -267,44 +267,46 @@ implemented proper UI/UX design to wrap the overflown text. Additionally, the `m
 fully expanded details of their client.
 </div>    
 
-##### 4. ListingListPanel
+4. ListingListPanel
 - This component mirrors the design implementation of `PersonListPanel`.
 - The `ListingListPanel` contains the `listings` stored in EZSTATES.
 - The information of a relevant `listing` is displayed using the `ListingCard` component
 - The `ListingListPanel` is a view of `ListingCard` components.
 - Commands such as `showlistings` displays all possible `listings` in the `ListingsListPanel`.
 - A newly added `listing` is added to the bottom of the `ListingListPanel`.
-
-  ##### ListingCard
-    - The `ListingCard` is the component that displays the essential information of a `listing`.
-    - `Listing ID`
-        - The `Listing ID` specifies the `INDEX` value associated to the specific `listing` relative to the position of
-          the `ListingCard` in the `ListingListPanel`.
-        - The user will utilise the `Listing ID` as an argument to run certain commands such as `deletelisting` and `editlisting`.
-    - `Listing Name`
-        - This box specifies the `name` of the `listing`.
-    - `Listing Price`
-        - This box specifies the `price` of the `listing`.
-    - `Listing Area`
-        - This box specifies the `area` of the `listing`.
-    - `Listing Address`
-        - This box specifies the `address` of the `listing`.
-    - `Listing Seller`
-        - This box specifies the `seller` of the `listing`.
-        - There can be only one `seller` for each `listing`.
-        - Every `listing` must have one `seller`.
-    - `Listing Buyers`
-        - This box specifies the `buyers` of the `listing`. 
-        - There can be more than one `buyer` for each `listing`.
-    - `Listing Region`
-        - This box specifies the `region` of the `listing`.
+    
+  
+  > **ListingCard**
+  > 
+  >- The `ListingCard` is the component that displays the essential information of a `listing`.
+  >- `Listing ID`
+  >    - The `Listing ID` specifies the `INDEX` value associated to the specific `listing` relative to the position of
+  >      the `ListingCard` in the `ListingListPanel`.
+  >    - The user will utilise the `Listing ID` as an argument to run certain commands such as `deletelisting` and `editlisting`.
+  >- `Listing Name`
+  >    - This box specifies the `name` of the `listing`.
+  >- `Listing Price`
+  >    - This box specifies the `price` of the `listing`.
+  >- `Listing Area`
+  >    - This box specifies the `area` of the `listing`.
+  >- `Listing Address`
+  >    - This box specifies the `address` of the `listing`.
+  >- `Listing Seller`
+  >    - This box specifies the `seller` of the `listing`.
+  >    - There can be only one `seller` for each `listing`.
+  >    - Every `listing` must have one `seller`.
+  >- `Listing Buyers`
+  >    - This box specifies the `buyers` of the `listing`. 
+  >    - There can be more than one `buyer` for each `listing`.
+  >- `Listing Region`
+  >    - This box specifies the `region` of the `listing`.
 
 <div class="note" markdown="span"> 
 The `Listing Region` color pattern follows the same colour scheme as the Mass Transportation System (MRT) in
 Singapore. 
 </div>       
 
-##### 5. Status Bar Footer
+5. Status Bar Footer
 - This component is a visual element located at the bottom of the `MainWindow`
 - The `StatusBarFooter` contains a button to access the `ChatWindow` via GUi means.
 
@@ -425,7 +427,7 @@ since a `listing` cannot exist without its `seller`.
 <div class="note" markdown="span"> 
 To facilitate the target audience which prefers CLI-focused interactions, the `ConfirmationDialog` window can be interacted with fully
 keyboard-only inputs. 
-<br>
+<br><br>
 In the window, the user can navigate between the Yes/No buttons using the `LEFT ARROW <` and `RIGHT ARROW >` keys. To confirm their
 decision, they can do so by pressing `ENTER`. Additionally, they can also exit the window by using the `ESC` key.
 </div>
@@ -441,10 +443,10 @@ it to the `ConfirmationDialogController`. `Window` then passes the `client` to t
 `MoreInfoController` handles the logic for which button has been pressed by the user and displays the `client` name in the window.
 
 <div class="note" markdown="span"> 
-:bulb: Why is it beneficial to create a Controller class?
+Why is it beneficial to create a Controller class?
 <br>
 This approach keeps the code modular and organized through the **Separation of Concerns** design principle. 
-<br>
+<br><br>
 The `Window` class handles the window setup and layout loading exclusively while the `Controller` class manages all
 UI interactions and dynamically updates the UI utilising `set` methods. By dividing responsibilities between classes, this
 simplifies code, improves maintainability and enhances reusability.
