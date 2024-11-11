@@ -39,7 +39,7 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
     - 4.2 [Commands](#4-2-commands)
     - 4.3 [Flags](#4-3-flags)
     - 4.4 [Arguments](#4-4-arguments)
-5. [Commands Overview](#5-commands-overview)
+5. [Command Overview](#5-commands-overview)
     - 5.1 [General Commands](#5-1-general-commands)
         - 5.1.1 [Viewing Help](#5-1-1-viewing-help-help)
         - 5.1.2 [Clearing All Entries](#5-1-2-clearing-all-entries-clear)
