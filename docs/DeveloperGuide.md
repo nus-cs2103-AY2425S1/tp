@@ -243,13 +243,15 @@ The `filter` command is used to view a specific subset of clients by applying sp
 The following diagrams provide a high-level overview of the `filter` command's logic flow:
 ![FilterActivityDiagramInputValidation.png](images/FilterActivityDiagramInputValidation.png)
 ![FilterActivityDiagramFilterAndDisplay.png](images/FilterActivityDiagramFilterAndDisplay.png)
-Note: The sequence diagram has been omitted due to its complexity.
+**Note:** The sequence diagram has been omitted due to its complexity.
 
 The filter command performs two primary checks:
 - **Flag Validation:**  Checks there are no invalid flags, no duplicate flags, and that at least one valid flag is specified.
 - **Argument Validation:** Checks that the argument values provided for each flag meet the required parsing criteria (as outlined in the User Guide).
 
 Once these validations are complete, each valid flag and its corresponding argument are used to create a specific `Predicate` object (e.g., `NameContainsSubstringPredicate`, `AddressContainsSubstringPredicate`). These predicates are then combined to form a `CombinedPredicate` object.
+
+- **Note:** `tier` and `status` use `TierStartsWithSubstringPredicate` and `StatusStartsWithSubstringPredicate` respectively, allowing partial matches based on the start of the provided substring.
 
 The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whether the client meets all filter criteria. Clients that satisfy the criteria are added to the filtered list. After all clients are evaluated, the filtered client list is displayed.
 
