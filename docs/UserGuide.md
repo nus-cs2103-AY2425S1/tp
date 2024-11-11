@@ -264,7 +264,7 @@ Find students by either their name, level or subject(s).
 * `find l/S3 NA` returns all students tagged with level `S3 NA`.
 * `find s/MATH` returns all students tagged with subject `MATH`.
 * `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.
-* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br><br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
@@ -470,7 +470,7 @@ Exits EduManage.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
 
 **Q**: How do I recover data if I accidentally `clear` all students?<br>
-**A**: Unfortunately, the clear command is irreversible. Ensure you regularly back up the data file stored at `[JAR file location]/data/addressbook.json` to prevent accidental data loss.
+**A**: Unfortunately, the `clear` command is irreversible. Ensure you regularly back up the data file stored at `[JAR file location]/data/addressbook.json` to prevent accidental data loss.
 
 **Q**: How do I back up my data?<br>
 **A**: Copy the data file located at `[JAR file location]/data/addressbook.json` to a secure location. This file contains all student and task information.
