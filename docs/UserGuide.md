@@ -9,7 +9,41 @@ pageNav: 3
 data_coNdUctorS is a **desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCAs) groups**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
-<!-- * Table of Contents -->
+
+# Table of Contents
+
+- [Quick Start](#quick-start)
+- [Command Summary](#command-summary)
+- [Features](#features)
+  - [General Notes about Command Format](#general-notes-about-command-format)
+  - [Adding a Contact: add](#adding-a-contact-add)
+  - [Editing a Contact: edit](#editing-a-contact-edit)
+    - [Edit by index](#edit-by-index)
+    - [Edit by name](#edit-by-name)
+  - [Deleting a Contact: delete](#deleting-a-contact-delete)
+    - [Delete by index](#delete-by-index)
+    - [Delete by name](#delete-by-name)
+  - [Finding Contacts by Contact Details: find](#finding-contacts-by-contact-details-find)
+  - [Listing all Contacts: list](#listing-all-contacts-list)
+  - [Viewing Help: help](#viewing-help-help)
+  - [Clearing all Entries: clear](#clearing-all-entries-clear)
+  - [Exiting the Program: exit](#exiting-the-program-exit)
+  - [Displaying Contacts in Pages -- Pagination](#displaying-contacts-in-pages----pagination)
+  - [Showing Total Number of Contacts -- Footer Status Bar](#showing-total-number-of-contacts----footer-status-bar)
+  - [Saving the Data](#saving-the-data)
+  - [Editing the Data File](#editing-the-data-file)
+- [What is Considered as Invalid Contacts](#what-is-considered-as-invalid-contacts)
+- [Contact Fields Constraints](#contact-fields-constraints)
+  - [Name](#name)
+  - [Telegram Handle](#telegram-handle)
+  - [Email](#email)
+  - [Student Status](#student-status)
+  - [Role](#role)
+  - [Nickname](#nickname)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+
+
 <page-nav-print/>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -51,7 +85,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 //& TO CHOOSE WHICH TABLE (PLEASE SEE VIA THE WEBSITE NOT BY .md). personally perfers that there should be a short descp.
 
 | Action                                                                                | Format, Examples                                                                                                                                                                                                                                                                                       |
@@ -77,7 +111,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 <box type="info" seamless>
 
-### General notes about Command Format
+### General Notes about Command Format
 
 * Terminologies used to refer to a specific part of the command format are shown below:
 ![Description for Command Line](images/commandLineDescription.png)
@@ -109,7 +143,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 <div style="page-break-after: always;"></div>
 
-### Adding a contact: `add`
+### Adding a Contact: `add`
 Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ [nn/NICKNAME]`
 
 <box type="definition" seamless>
@@ -142,7 +176,7 @@ Note:
 
 <div style="page-break-after: always;"></div>
 
-### Editing a contact: `edit`
+### Editing a Contact: `edit`
 
 <box type="definition" seamless>
 
@@ -189,7 +223,7 @@ Note:
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a contact: `delete`
+### Deleting a Contact: `delete`
 <box type="definition" seamless>
 
 **Action:**
@@ -240,7 +274,7 @@ Note:
 
 <div style="page-break-after: always;"></div>
 
-### Finding contacts by contact details: `find`
+### Finding Contacts by Contact Details: `find`
 
 //& ISSUE 261
 
@@ -254,8 +288,6 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
   * `find n/abc` &rarr; valid
   * `find abc n/rawr` &rarr; invalid
 </box>
-
-<br>
 
 * Role field `[r/ROLE]`:
     * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
@@ -282,7 +314,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Listing all contacts: `list`
+### Listing all Contacts: `list`
 
 Format: `list [all]... [contacts]...`
 
@@ -303,7 +335,7 @@ Format: `list [all]... [contacts]...`
 **Information:** Alphabetical Sorting?
 </box>
 
-### Viewing help: `help`
+### Viewing Help: `help`
 
 Format: `help`
 
@@ -327,7 +359,7 @@ From this, the user can get quick reminder on how to use the various commands wi
 
 <div style="page-break-after: always;"></div>
 
-### Clearing all entries: `clear`
+### Clearing all Entries: `clear`
 
 Format: `clear`
 
@@ -339,7 +371,7 @@ Format: `clear`
 ![clear message](images/clearSuccess.png)
 
 
-### Exiting the program: `exit`
+### Exiting the Program: `exit`
 
 Format: `exit`
 <box type="definition" seamless>
@@ -350,7 +382,7 @@ Exits the program.
 
 <div style="page-break-after: always;"></div>
 
-### Displaying contacts in pages -- Pagination
+### Displaying Contacts in Pages -- Pagination
 
 The app comes with a pagination at the bottom of the list. It supports navigation to a specific page or navigation to
 the next or previous page. Each page contains a maximum of **10** items. The pagination supports a maximum of **10** pages
@@ -364,7 +396,7 @@ Pagination UI:
 
 <div style="page-break-after: always;"></div>
 
-### Showing total number of contacts -- Footer status bar
+### Showing Total Number of Contacts -- Footer Status Bar
 
 A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
 at the bottom of the app. It shows the total number of contacts being listed in the app.
@@ -379,11 +411,11 @@ Examples:
 //& defines what is per page, displayed, full complete list (consider putting at the front also) ISSUE 267
    </box>
 
-### Saving the data
+### Saving the Data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the Data File
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -398,7 +430,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 <div style="page-break-after: always;"></div>
 
 //& TO REVIEW IF EDITS IS OKAY
-## What is considered as invalid contacts
+## What is considered as Invalid Contacts
 
 There must not be duplicate fields. For example, if there are contacts with the following data:
 
@@ -510,6 +542,6 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
