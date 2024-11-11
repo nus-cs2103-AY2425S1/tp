@@ -288,8 +288,8 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
     * Not case-sensitive e.g. `find r/pResiDent` &rarr; valid
-    * Specifying multiple roles returns contacts who own all specified roles
-      e.g. `find r/Vice President r/Admin` will only return contacts which holds **both** Roles.
+    * Specifying multiple roles returns contacts holding all specified roles
+      e.g. `find r/Vice President r/Admin` will only return contacts holding **both** Roles.
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
     * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
@@ -487,7 +487,7 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 <box type="tip" seamless>
 
 **Tip:** Case sensitivity
-- `Telegram Handle`, `Email`, and `Nickname` are case-sensitive, and will and will retain the exact format as provided by the user.
+- `Telegram Handle`, `Email`, and `Nickname` are case-sensitive, and will retain the exact format as provided by the user.
 - `Name`, `Student Status`, and `Role` are not case-sensitive, and will be automatically converted into their official format.
 
 </box>
