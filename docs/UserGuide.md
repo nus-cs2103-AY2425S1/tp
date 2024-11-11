@@ -89,7 +89,7 @@ Here are the different components of the TutorEase UI:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows pop-up window with a message explaining how to access the help page.
 
 ![help message](images/help_message.png)
 
@@ -148,7 +148,8 @@ Remarks:
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * `ROLE` is not editable!
-* All constraints from `contact add` command still stands with `contact edit` command.
+* All constraints from `contact add` command still stands with `contact edit` command. 
+* In particular, we cannot edit contact to have same name, phone number or email as existing contacts.
 
 Examples:
 
@@ -164,7 +165,7 @@ Format: `contact find KEYWORD [MORE_KEYWORDS]`
 
 Remarks:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -255,7 +256,7 @@ Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 
 Remarks:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -306,6 +307,46 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+--------------------------------------------------------------------------------------------------------------------
+
+## Future Enhancements
+
+#### 1. **Unique Attributes and Relationship Modeling for Students and Guardians**
+Recognizing the importance of capturing more details about different types of contacts, we plan to incorporate additional attributes for students, such as grade levels, subjects and exam dates. 
+To support clear organization, we’ll also implement a tagging system that links each student to their respective guardian, making it easier to manage relationships and access relevant information at a glance.
+
+#### 2. **Exam Date Management**
+We understand the importance of staying prepared for exams, so we’re adding a feature to track upcoming exam dates for each student. 
+With this addition, guardians and you will receive timely reminders or notifications, ensuring students are ready and supported in their preparation.
+
+#### 3. **Fee and Payment Tracking**
+Keeping track of fees is essential in the business aspect, so we plan to implement a detailed payment tracking system. 
+This feature will log due dates, total payment amounts, and any outstanding fees for each student, while also linking this information to the responsible guardian.
+
+#### 4. **Recurring Lessons**
+Recognizing that most tuition lessons occur weekly at the same time, we plan to introduce a feature that allows you to set lessons as either one-time sessions or recurring events. 
+You will be able to stipulate the frequency of recurrence, whether weekly, bi-weekly, or custom intervals, to fit their specific scheduling needs.
+
+#### 5. **Overlapping Lesson Time Handling**
+We recognize the need for clarity around overlapping lesson scheduling. Options for managing overlaps will include:
+
+* Allowing overlapping sessions for group lessons or pair lessons.
+* Enabling you to customize settings for overlap permissions based on the type of lesson.
+
+#### 6. **Enhanced Name Field Support**
+To accommodate a more diverse range of names, such as names with commas or accented characters, we plan to update the application to allow names with these characters.
+In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
+
+Additionally, if extra whitespace is accidentally added between names (e.g., double space between first and last name), the system will show a warning to alert you of potential duplicate entries due to spacing inconsistencies.
+
+#### 7. **Past Lesson Management**
+To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
+You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
+
+#### 8. **Support for Decimal Places in Fees**
+We have acknowledged that it might be possible to charge an odd number (ie $25) per lesson for an even number of hours (ie 2 hours), resulting in the fee per hour not being an integer.
+To provide more flexibility in fee management, we plan to introduce support for decimal places in fee amounts.
+This will allow you to input and manage fees with greater precision, catering to scenarios where fees are calculated to fractional values (e.g., for hourly rates or partial payments).
 
 --------------------------------------------------------------------------------------------------------------------
 
