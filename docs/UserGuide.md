@@ -850,6 +850,8 @@ This means that your machine is running Java version 17.0.11, which means that J
 >:information_source: **Note**
 >Depending on your system setup, you may need to install JavaFX separately. You can refer to the [OpenJFX installation guide](https://openjfx.io/openjfx-docs/#install-javafx) for detailed instructions.
 
+<div style="page-break-after: always;"></div>
+
 {: .alert .alert-info}
 > :information_source: **Note**
 > For users of other operating systems, as long as you have the following installed, you can use MediBase3:
