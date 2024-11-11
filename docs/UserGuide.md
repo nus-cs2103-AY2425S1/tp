@@ -53,9 +53,12 @@ faster than traditional GUI apps.
   e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
 * Commands, not including their parameters, are case-insensitive.<br>
-  e.g. if the command specifies `adD CONTact`, it will be interpreted as `add contact`. 
+  e.g. if the command specifies `adD CONTact ...`, it will be interpreted as `add contact ...`. 
+ 
+* `lower_case` items in square brackets are mandatory keyword, separated by slashes. <br>
+  e.g. `add [contact/job/company]` can be used as  `add contact n/...` or as `add job n/...`, but not `add n/...`.
 
-* Items in square brackets are optional.<br>
+* `UPPER_CASE` items in square brackets are optional parameters.<br>
   e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
