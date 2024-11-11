@@ -821,6 +821,53 @@ Guarantees: Valid appointments will be deleted if they are already in the patien
 
       Use case ends.
 
+#### Use case: UC05 - Filter
+**Guarantees:**<br>
+* A patient will be added to the system
+
+**MSS:**
+
+1.  User types command to add patient and inputs details for the new patient
+2.  ClinicConnect adds the patient to the system
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User does not input all the required parameters
+    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1b. User inputs an invalid prefix
+    * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
+      Step 1b1 is repeated until the input entered only contains valid prefixes<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1c. User inputs a field in the wrong format
+    * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
+      Step 1c1 is repeated until the field is in the correct format<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1d. User inputs duplicate prefixes (except for `al`)
+    * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
+      Step 1d1 is repeated until the input entered has distinct prefixes<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1e. User inputs an NRIC that already exists in the system
+    * 1e1. ClinicConnect shows an error message saying the patient already exists in the system.<br>
+      Step 1e1 is repeated until a new NRIC that is not in the system is inputted<br>
+      Use case resumes from step 2.
+
+
 
 
 ### Non-Functional Requirements
