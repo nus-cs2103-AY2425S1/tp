@@ -590,7 +590,6 @@ ___
 * **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
 * **Member**: A member is a special type of contact that has the role `Member` in its `roles`
 - **Profile**: A collection of contacts in the system, identified by a profile name
-- **Addressbook**:  
 
 ___
 
