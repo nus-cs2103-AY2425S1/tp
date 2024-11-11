@@ -169,6 +169,67 @@ This section describes some noteworthy details on how certain features are imple
 #### Add Command : `add`
 
 #### Add Full Command : `addf`
+The `addf` command is used to add a patient to the patient list.
+
+The user has to specify the patient's:
+* NRIC (`Nric`)
+* Name (`Name`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Sex (`Sex`)
+
+Additionally, the user can provide additional information for the following optional fields:
+* Address (`Address`)
+* Blood type (`BloodType`)
+* Email (`Email`)
+* Existing condition (`ExistingCondition`)
+* Risk level (`HealthRisk`)
+* Note (`Note`)
+* Next-of-Kin name (`Name`)
+* Next-of-Kin phone number (`Phone`)
+* and Allergies (`Allergy`)
+
+##### Parsing User Input
+The `AddFCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes (except for `al` which is used for allergy)
+
+##### Executing the Command
+The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `addf` command: `execute(addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care)`
+
+![AddFSequenceDiagram](images/AddFSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The parsing of the fields is as follows:
+![AddFParseFieldsSequenceDiagram](images/AddFParseFieldsSequenceDiagram.png)
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `addf` command since both commands are fundamentally similar.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to serve a patient.
+* NRIC (`Nric`)
+* Name (`Name`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Sex (`Sex`)
+
+The following fields are optional as they are not essential in serving a patient.
+* Address (`Address`)
+* Blood type (`BloodType`)
+* Email (`Email`)
+* Existing condition (`ExistingCondition`)
+* Risk level (`HealthRisk`)
+* Note (`Note`)
+* Next-of-Kin name (`Name`)
+* Next-of-Kin phone number (`Phone`)
+* and Allergies (`Allergy`)
 
 #### Edit Command : `edit`
 
