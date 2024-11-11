@@ -696,7 +696,7 @@ testers are expected to do more *exploratory* testing.
       **Expected:** The error message "One or more indices provided are invalid" should be printed.
    
    5. Test case: `search n/John`   
-      **Expected:** "0 persons listed!" should be printed.
+      **Expected:** "0 person(s) listed!" should be printed.
       The area below the output should not have any contacts displayed.
    
    6. Test case: `sort s/name`   
@@ -818,10 +818,10 @@ displayed person list. If he does not, you should use the respective index that 
    **Expected:** "1 person listed!" is printed. The displayed list shows the person(s) who fulfill the search condition.
    2. Test case - search for multiple people:  
    `search n/Tyson Jason`  
-   **Expected:** "2 persons listed!" is printed. The displayed list shows the person(s) whose names contain Jason and Tyson.
+   **Expected:** "2 person(s) listed!" is printed. The displayed list shows the person(s) whose names contain Jason and Tyson.
    3. Test case - search for a field that exists but no person has:  
    `search n/Whoevenhassuchalongnameitsnotpossible`  
-   **Expected:** "0 persons listed!" is printed. The displayed list does not show anybody.
+   **Expected:** "0 person(s) listed!" is printed. The displayed list does not show anybody.
    4. The tester can explore searching with other prefixes and incorrect inputs.
 2. Search for a person with a field that does not exist in the app
    1. Test case:
