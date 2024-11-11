@@ -34,7 +34,6 @@ Package Model as ModelPackage <<Rectangle>>{
         Class Ingredient
         Class IngredientCatalogue
         Class Ingredients
-        Class Inventory
         Class Pastry
         Class PastryCatalogue
         Class Product
@@ -64,12 +63,10 @@ PastryCatalogue -up-|> Catalogue
 Ingredient -up-|> Product
 Pastry -up-|> Product
 
-Inventory --> "1..*" Ingredient
-Inventory --> "1..*" Pastry
 IngredientCatalogue --> "1..*" Ingredient
 PastryCatalogue --> "1..*" Pastry
 Catalogue --> "1..*" Product
-Ingredients *-- Ingredient
+Ingredients --> "*" Ingredient
 
 HiddenOutside ..> Model
 
@@ -88,8 +85,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Information
+Person *--> "*" Remark
 Person *--> "*" Tag
+Person *--> "*" Order
 
 CustomerOrderList -up-|> OrderList
 SupplyOrderList -up-|> OrderList
@@ -101,8 +99,8 @@ OrderList --> "1..*" Order
 SupplyOrderList --> "1..*" SupplyOrder
 CustomerOrder *--> OrderStatus
 SupplyOrder *--> OrderStatus
-Customer *--> Address
-Supplier *--> Address
+Customer *--> Information
+Supplier *--> "1..* ingredients supplied" Ingredients
 ModelManager --> "~* filtered" Person
 
 Person -[hidden]up--> I
