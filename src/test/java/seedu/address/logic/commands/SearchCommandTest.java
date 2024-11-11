@@ -76,6 +76,7 @@ public class SearchCommandTest {
         // different values -> returns false
         assertFalse(searchCommand.equals(searchBeginCommand));
         assertFalse(searchCommand.equals(searchEndCommand));
+        assertFalse(searchBeginCommand.equals(searchEndCommand));
         assertFalse(searchCommand.equals(searchSecondCommand));
         // different types -> returns false
         assertFalse(searchCommand.equals(1));
