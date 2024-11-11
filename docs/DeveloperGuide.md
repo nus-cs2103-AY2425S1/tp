@@ -629,7 +629,7 @@ otherwise)
 
   Use case ends.
 
-#### Use case 9: Sort a [_client_] list by name
+#### Use case 9: Sort a [_client_](#glossary-client) list by name
 
 **MSS**
 
