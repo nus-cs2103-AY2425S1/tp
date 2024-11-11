@@ -1,11 +1,8 @@
 ---
 layout: page
-title: User Guide
+title: CareLink User Guide
 ---
 
-
-
-# CareLink User Guide
 * Table of Contents
 {:toc}
 
