@@ -264,17 +264,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Grading an assignment (for one student)**
 
-**Actor: Tutor, Student**
-
 **MSS**
 
 1.  Tutor requests to add a new assignment for the specified student upon release of the assignment.
 2.  Teletutors App confirms the assignment has been successfully added and displays the newly added assignment.
-3.  Student completes and submits the assignment.
-4.  Tutor requests to mark the assignment's submission status as submitted.
-5.  Teletutors App confirms the assignment has been successfully marked as submitted and displays the assignment as submitted.
-6.  Tutor requests to give the assignment a grade.
-7.  Teletutors App confirms the assignment has been successfully graded and displays the grade for the assignment.
+3.  Upon receiving the assignment, tutor requests to mark the assignment's submission status as submitted.
+4.  Teletutors App confirms the assignment has been successfully marked as submitted and displays the assignment as submitted.
+5.  Tutor requests to give the assignment a grade.
+6.  Teletutors App confirms the assignment has been successfully graded and displays the grade for the assignment.
     
     Use case ends.
 
