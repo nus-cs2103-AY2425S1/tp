@@ -15,7 +15,7 @@ end box
 activate FindCommandParser
 
 
-FindCommandParser -> Predicate : new NameContainsKeywordsPredicate()
+FindCommandParser -> Predicate : new NameContainsKeywordsPredicate(...)
 activate Predicate
 Predicate --> FindCommandParser : p
 deactivate Predicate
