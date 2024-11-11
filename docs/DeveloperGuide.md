@@ -651,3 +651,4 @@ However, once we managed to get an intuitive understanding of the AB3 code, the 
 2. AB3 UI Component
 3. AB3 Logic and Parsing Component
 4. Overall AB3 Architecture
+5. Rake SVG for PlantUML from this [forum](https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol)
