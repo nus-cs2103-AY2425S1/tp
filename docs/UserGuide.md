@@ -82,7 +82,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 **Tip 1:** Phone number can take on multiple formats, including Singapore and foreign
 numbers (without the + symbol). This supports insurance agents with an international customer base. </br>
-**Tip 2:** A client can have any number of tags (including 0).
+**Tip 2:** A client can have any number of tags (including 0). <br>
+**Tip 3:** Emails must at least have an "@" character to be considered valid.
 </box>
 
 Examples:
@@ -198,6 +199,7 @@ Format: `addInsurance INDEX iid/INSURANCE_ID`
     <span circle slot="icon"><md>:warning:</md></span>
     Warnings:
 </box>
+
 - The prefix `iid` is case-sensitive.
 
 <box type="info">
@@ -236,6 +238,7 @@ Format: `deleteInsurance INDEX iid/INSURANCE_ID`
     <span circle slot="icon"><md>:warning:</md></span>
     Warnings:
 </box>
+
 - The prefix `iid` is case-sensitive.
 
 <box type="info">
@@ -285,8 +288,8 @@ as a placeholder claim for now.
     Warnings:
 </box>
 
-- Same claim ID cannot be added to different plans of the same person.
-- A claim is considered a duplicate if there exists another claim of same claim ID for the same person.
+- Same claim ID cannot be added to different plans of the same client.
+- A claim is considered a duplicate if there exists another claim of same claim ID for the same client.
 - Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
 - Do not add alphabets or any other special characters including but not limited to "$", "£" and "€" in front or behind
 the claim amount.
@@ -330,7 +333,7 @@ Format: `deleteClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`
     Warnings:
 </box>
 
-- A claim is considered a duplicate if there exists another claim of same claim ID for the same person.
+- A claim is considered a duplicate if there exists another claim of same claim ID for the same client.
 - Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
 - Do not add alphabets or any other special characters including but not limited to "$", "£" and "€" in front or behind
   the claim amount.
