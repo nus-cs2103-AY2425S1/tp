@@ -162,10 +162,10 @@ The **GUI** is divided into five main sections:
 | **Unfavourite**| `unfav INDEX`                                                                                                                                                                   |
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                        |
 | **View**     | `view INDEX`                                                                                                                                                                 |
+| **Reopen**   | `reopen INDEX`                                                                                                                                                                   |
 | **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                        |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                       |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                              |
-| **Reopen**   | `reopen INDEX`                                                                                                                                                                   |
 | **Help**     | `help`                                                                                                                                                                           |
 | **Clear**    | `clear`                                                                                                                                                                          |
 | **Exit**     | `exit`                                                                                                                                                                           |
@@ -407,6 +407,16 @@ Format: `view INDEX`
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Reopening company: `reopen`
+
+Changes the status of a company from `CLOSED` to `INTERESTED`
+
+Format: `reopen INDEX`
+* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* The company at the provided index **must have status** `CLOSED`.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Adding application record for a company: `apply`
 
 Adds an internship application record to an existing company in the address book.
@@ -473,19 +483,6 @@ The index refers to the index number shown in the displayed company list. The in
 
 ![withdrawn application](images/withdrawCommand.png)
 > Result after executing `withdraw c/2 app/1`
-
---------------------------------------------------------------------------------------------------------------------
-
-### Reopening company: `reopen`
-
-Changes the status of a company from `CLOSED` to `INTERESTED`
-
-Format: `reopen INDEX`
-* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-* The company at the provided index **must have status** `CLOSED`.
-
-![reopened for applications](images/reopenCommand.png)
-> Result after executing `reopen 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -583,7 +580,6 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## Glossary
 - <a id="stem"/>**STEM**: An acronym for the four related fields of study; **S**cience, **T**echnology, **E**ngineering, and **M**athematics.
