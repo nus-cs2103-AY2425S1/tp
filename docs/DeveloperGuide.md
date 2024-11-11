@@ -33,6 +33,8 @@ title: Developer Guide
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 - [ez-vcard](https://github.com/mangstadt/ez-vcard) by [mangstadt](https://github.com/mangstadt/)
@@ -45,6 +47,8 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -95,6 +99,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/ui/Ui.java)
@@ -111,6 +117,8 @@ The `UI` component,
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -147,6 +155,8 @@ How the parsing works:
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/model/Model.java)
@@ -168,6 +178,8 @@ The `Model` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/storage/Storage.java)
@@ -185,6 +197,8 @@ The `Storage` component,
 Classes used by multiple components are in the `bizbook.commons` package.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -263,6 +277,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
@@ -304,6 +320,8 @@ Team Size: 5
    Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
    hidden content in the next line.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -320,6 +338,8 @@ particular, this representative works with B2B sales.
 - is reasonably comfortable using CLI apps
 
 **Value proposition**: This product aims to streamline and simplify sales management for Food and Beverage outlets. By providing an organized, easy-to-use platform for managing business contacts, it helps sales representatives save time and improve efficiency.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -365,6 +385,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
 | `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is the `Bizbook` and the **Actor** is the `user`, unless specified otherwise)
@@ -407,6 +429,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC3 - Delete a person**
 
 **MSS**
@@ -448,6 +472,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC5 - View person contact**
 
@@ -505,6 +531,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC8 - Edit a note of a person contact**
 
 **MSS**
@@ -559,6 +587,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC10 - Pin a person**
 
 **MSS**
@@ -603,6 +633,8 @@ _Similar to UC10 except without extension 2b._
   - 3a1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC13 - Redo a command**
 
@@ -668,6 +700,8 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC16 - Toggle application's theme**
 
 **MSS**
@@ -702,6 +736,8 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC18 - Edit a person's information**
 
 **MSS**
@@ -726,6 +762,8 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -745,6 +783,8 @@ _{More to be added}_
 - **Device**: system with dialing and calling capabilities
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -775,6 +815,8 @@ testers are expected to do more *exploratory* testing.
 
    3a. Open the help window, and click the "Open URL" button.<br>
    Expected: The user guide page should automatically open in the browser.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person
 
