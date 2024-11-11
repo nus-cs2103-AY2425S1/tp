@@ -310,6 +310,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+- 2d Invalid email format.
+
+  - 2d1. PawPatrol shows an error message:
+
+    Use case resumes at step 1.
+
+- 2e Invalid IC number format.
+
+  - 2e1. PawPatrol shows an error message:
+
+    Use case resumes at step 1.
+
 **Use case: Delete a pet**
 
 **MSS**
