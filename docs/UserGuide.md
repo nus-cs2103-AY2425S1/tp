@@ -402,7 +402,7 @@ Clears all data from the data file of UGTeach.
 
 <box type="warning" header ="##### Caution">
 
-This action is irreversible and your deleted data cannot be recovered. 
+This action is irreversible and your deleted data cannot be recovered. Do not use this command unless you are sure you want to delete **all data**.
 
 </box>
 
@@ -420,11 +420,19 @@ UGTeach data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users are welcome to update data directly by editing that data file.
+UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users can update data directly by editing that data file, although **not recommended**.
 
 <box type="warning" header="##### Caution">
-If your changes to the data file makes its format invalid, UGTeach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<markdown>
+If you are **not fully comfortable with JSON formatting** or **unsure about the data constraints specified in this guide**, we **strongly advise** against directly editing the data file.
+
+However, if you choose to proceed, we recommend creating a backup (e.g., by copying the file to another location) to safeguard against potential errors.
+
+Please note:
+* **Invalid format**: If your edits render the file format invalid, UGTeach will reset to an empty data file on the next run.
+* **Unexpected behavior**: Certain edits—such as entering values outside the acceptable range or causing duplicate entries—can result in unpredictable application behavior, such as complete wipe out of data. Only proceed if you are confident in making accurate updates.
+
+</markdown>
 </box>
 
 --------------------------------------------------------------------------------------------------------------------

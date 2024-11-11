@@ -921,3 +921,43 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
     Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
     e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
+
+1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
+    This might be inconvenient for the user, as the user might accidentally type the `clear command` and lose all the students' data.
+    Therefore, we plan to enforce a double confirmation for the `clear command`. When the user types the `clear command`, UGTeach will prompt the user to confirm the deletion of all students in the list.
+    The user will have to type `yes` (case-insensitive) to confirm the deletion of all students in the list. If the user types anything else, the deletion will not be executed. Even typing 'y' will not be accepted as confirmation, to prevent accidental deletion of all students in the list.
+    While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
+    We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
+
+1. **Enhance storage component to save data in a backup file**: Assuming user have not changed the `preferences.json` file, the current storage component for UGTeach only saves data in the `ugteach.json` file. If the `ugteach.json` file is corrupted or deleted, **all** the data will be lost.
+    This might be inconvenient for the user, as the user might accidentally delete the `ugteach.json` file or the file might be corrupted due to some reasons.
+    Therefore, we plan to save data in a backup file named `ugteachbackup.json`. The `ugteachbackup.json` file will be updated whenever the `ugteach.json` file is updated.
+    The read and write operations will be done only on the `ugteach.json` file, while the `ugteachbackup.json` file will only be updated when the application needs to save the data.
+    If the `ugteach.json` file is corrupted or deleted, the user can restore the data from the `ugteach_backup.json` file.
+    This will prevent accidental data loss due to the deletion or corruption of the `ugteach.json` file.<br>
+    Example of the two files:<br>
+    ![backupDataFile.png](images/backupData.png)
+    
+    The following code snippet shows the planned enhancement for the storage component to save data in a backup file. Specifically, this will be the updated `saveAddressBook` method for `JsonAddressBookStorage` class.
+    ```
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+         requireNonNull(addressBook);
+         requireNonNull(filePath);
+
+         // Save to the primary file
+         FileUtil.createIfMissing(filePath);
+         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+
+         // Create backup file path with "backup" before ".json"
+         String fileName = filePath.getFileName().toString();
+         String backupFileName = fileName.replace(".json", "backup.json");
+         Path backupFilePath = filePath.resolveSibling(backupFileName);
+
+         // Save to the backup file
+         FileUtil.createIfMissing(backupFilePath);
+         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), backupFilePath);
+     }
+    ```
+    This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
+    The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
+    While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
