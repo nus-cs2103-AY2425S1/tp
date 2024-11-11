@@ -958,7 +958,7 @@ The buyer index specified is not a buyer:
 - **Description:** Finds the specific listing(s) based on the provided keywords
 - **Successful Execution:**
 > ---
-> **Use Case #1: Finding listings with `David` 
+> **Use Case #1**: Finding listings with `David` 
 > 
 > **Input**: `findlisting david`
 > 
@@ -978,7 +978,7 @@ The buyer index specified is not a buyer:
 
 - **Failed Execution:**
 > ---
-> **User Error: No matching listings
+> **User Error**: No matching listings
 > 
 > **Input**: `findlisting noMatchingListings`
 > 
