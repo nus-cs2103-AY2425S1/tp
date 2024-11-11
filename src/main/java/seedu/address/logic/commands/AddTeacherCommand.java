@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,9 +22,11 @@ public class AddTeacherCommand extends Command {
             + PREFIX_GENDER + " GENDER "
             + PREFIX_PHONE + " PHONE "
             + PREFIX_EMAIL + " EMAIL "
-            + PREFIX_ADDRESS + " ADDRESS "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
             + PREFIX_SUBJECT + " SUBJECT "
+            + "[" + PREFIX_SUBJECT + " SUBJECT]... "
             + PREFIX_CLASSES + " CLASSES "
+            + "[" + PREFIX_TAG + " TAG]..."
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
