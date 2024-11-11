@@ -21,11 +21,12 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Tag> personTags = person.getTags();
-        Set<String> keywordSet = new HashSet<>(keywords);
-
-        // Check if person's tags contain all the tags specified in keywordSet
+        Set<String> keywordSet = new HashSet<>();
+        for (String keyword : keywords) {
+            keywordSet.add(keyword.toLowerCase());
+        }
         return personTags.stream()
-                .map(tag -> tag.tagName)
+                .map(tag -> tag.tagName.toLowerCase())
                 .collect(Collectors.toSet())
                 .containsAll(keywordSet);
     }
