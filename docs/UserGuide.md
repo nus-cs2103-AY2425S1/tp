@@ -217,7 +217,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find Betsy` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find n/Betsy` command.
 
 
 ### Clearing all entries : `clear`
@@ -286,7 +286,7 @@ Format: `import fp/FILE_PATH`
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * `FILE_PATH` must correspond to an actual json file in the device.
-> * `Import` will not work if the json file to be imported would result in any invalid data in DorManagerPro!
+> * `import` will not work if the json file to be imported would result in any invalid data in DorManagerPro!
 > * Use `.` in the FILE_PATH to refer to the home folder of the application.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
 > * The home folder of the application is the folder that contains the jar file!
 
