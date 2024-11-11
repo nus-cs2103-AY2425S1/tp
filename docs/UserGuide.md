@@ -103,7 +103,6 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 
 ## Feature Details
-//& Found why the clicking of Features didnt work, issue I forgot, but the fix is in _markbind/layouts/default.md
 
 <box type="info" seamless>
 
@@ -124,14 +123,12 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* Extraneous parameters **//& OR FIELDS? BUT SOUND WEIRD** for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.<br>
-//& ARE HELP AND LIST CONSIDERED "COMMANDS THAT DO NOT TAKE IN PARAMETERS?"
-// no
 
 * The COMMAND_WORD is **not case-sensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
-* A limit of 1000 characters //& REPHRASE IF NEEDED
+* A limit of 1000 characters 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -262,16 +259,19 @@ Note:
 <box type="tip" seamless>
 
 **Tip:** How to edit / delete contacts by full names when more than 1 contact has the same name?<br>
-//& write the content here, ISSUE 262
-//& indicate the fact you can literally find: ISSUE 272
+
+* If you input `edit` or `delete` followed by a `REPEATED_FULL_NAME` in the address book, an error will arise, prompting you to delete by index instead
+* Hence, you should:
+  1. Use the command `find REPEATED_FULL_NAME` which can be found [below](finding-contacts-by-contact-details-find)
+  2. This displays the contacts with the `REPEATED_FULL_NAME`
+  3. Search for the one you want to edit / delete and note down its `index`
+  4. Edit / Delete accordingly based on the `index`
 
 </box>
 
 <div style="page-break-after: always;"></div>
 
 ### Finding Contacts by Contact Details: `find`
-
-//& ISSUE 261
 
 Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 <box type="definition" seamless>
@@ -327,13 +327,11 @@ Format: `list [all]... [contacts]...`
 <box type="definition" seamless>
 
 **Action:** Shows a list of all contacts in the address book.
-* optional parameters of `all` or `contacts` of any combination are accepted
+* optional parameters of `all` or `contacts` or any combinations and permutations of these two words are accepted
 </box>
 
 
 ![list message](images/listSuccess.png)
-
-//& repharse to include another command format- ISSUE 250
 
 
 <box type="info" seamless>
@@ -407,14 +405,14 @@ Pagination UI:
 A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
 at the bottom of the app. It shows the total number of contacts being listed in the app.
 
+**Definition:** List / show. The footer will display `x out of y contacts listed`, where x is the number of contacts in filtered list while y is the number of contacts in the total list
+
 Examples:
-* `find n/Adam` may show only 1 contact out of 19. 1 refers to the number of found contacts, 19 refers to the total number of contacts in address book.
+* `find n/Adam` may show only 1 contact out of 19. 1 refers to the number of found contacts, 19 refers to the total number of contacts in the address book.
   ![ui of footer status bar](images/footer_status_bar_ui.png)
 
 <box type="definition" seamless>
 
-**Definition:** List / show
-//& defines what is per page, displayed, full complete list (consider putting at the front also) ISSUE 267
    </box>
 
 ### Saving the Data
@@ -425,7 +423,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless> //& SETTLE FORMATTING LATER
+<box type="warning" seamless> 
 
 **Caution:**  If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -457,9 +455,7 @@ For example, if there are contacts with the following data:
 **Note:** Alice Tan's lack of nickname is considered a unique nickname to Alice Tan. Also, John has the role of President.
 </box>
 
-![example john doe](images/ExampleJohnDoe.png) //& NEED TO CHANGE PICTURE IF EDITS ARE OKAY
-
-//& ADDRESSING ISSUE 235, 252
+![example john doe](images/ExampleJohnDoe.png) 
 
 Assuming the above entry in the address book, you must enter an add / edit command with the following constraints with the following fields:
 1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname`. Nickname must be **unique**. If a Contact with a Name without a Nickname already exist, another same Name without Nickname cannot be added / edited.
@@ -500,7 +496,7 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 </box>
 
 ### Name
-- Must contain english alphabets and spaces only, with the following exceptions:
+- Must contain English alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
       - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
@@ -517,10 +513,11 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 - LOCAL_PART 
   - Must only contain alphabets, numbers, and special characters `+_.-`.
   - Must not start or end with any special characters.
-- DOMAIN //& EDIT TO ADDRESS ISSUE 247 and 278
+- DOMAIN 
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
+  - Domain does not have to include a `.`, e.g. `.com`, `.edu` etc
 
 ### Student Status
 - Must take one of the following values:
