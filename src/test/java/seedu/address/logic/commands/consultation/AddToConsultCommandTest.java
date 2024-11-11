@@ -51,6 +51,9 @@ public class AddToConsultCommandTest {
             new Name(CARL.getName().fullName), new Name(CARL.getName().fullName));
     private final ObservableList<Index> validStudentIndices = FXCollections.observableArrayList(
             INDEX_FIRST_STUDENT, INDEX_SECOND_STUDENT); //contains Alice and Bob
+
+    private final ObservableList<Index> duplicateIndices = FXCollections.observableArrayList(
+            INDEX_FIRST_STUDENT, INDEX_FIRST_STUDENT);
     private ObservableList<Index> invalidIndices;
 
     @BeforeEach
@@ -166,16 +169,58 @@ public class AddToConsultCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentByIndex_throwsCommandException() {
-        ObservableList<Index> duplicateIndices = FXCollections.observableArrayList(
-                INDEX_FIRST_STUDENT, INDEX_FIRST_STUDENT);
+    public void execute_duplicateStudentByIndexSuccess() throws Exception {
+
         AddToConsultCommand command = new AddToConsultCommand(validConsultIndex5,
                 validStudentNames, duplicateIndices);
 
-        String error = String.format(MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_INDEX, ALICE.getName().fullName,
-                INDEX_FIRST_STUDENT.getOneBased());
 
-        assertCommandFailure(command, model, error);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        CommandResult result = command.execute(model);
+
+        Consultation targetConsultation = expectedModel.getFilteredConsultationList()
+                .get(validConsultIndex5.getZeroBased());
+        Consultation editedConsultation = new Consultation(targetConsultation);
+
+        editedConsultation.addStudent(CARL);
+        editedConsultation.addStudent(DANIEL);
+        editedConsultation.addStudent(ALICE);
+        expectedModel.setConsult(targetConsultation, editedConsultation);
+
+        String expectedMessage = String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(editedConsultation));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredConsultationList().get(validConsultIndex5.getZeroBased()),
+                model.getFilteredConsultationList().get(validConsultIndex5.getZeroBased()));
+
+    }
+
+    public void execute_duplicateStudentByNameSuccess() throws Exception {
+
+        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex5,
+                duplicateStudentNames, validStudentIndices);
+
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        CommandResult result = command.execute(model);
+
+        Consultation targetConsultation = expectedModel.getFilteredConsultationList()
+                .get(validConsultIndex5.getZeroBased());
+        Consultation editedConsultation = new Consultation(targetConsultation);
+
+        editedConsultation.addStudent(CARL);
+        editedConsultation.addStudent(ALICE);
+        editedConsultation.addStudent(BENSON);
+        expectedModel.setConsult(targetConsultation, editedConsultation);
+
+        String expectedMessage = String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(editedConsultation));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredConsultationList().get(validConsultIndex5.getZeroBased()),
+                model.getFilteredConsultationList().get(validConsultIndex5.getZeroBased()));
+
     }
 
     @Test
@@ -204,16 +249,6 @@ public class AddToConsultCommandTest {
                 MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_NAME, ALICE.getName());
 
         assertCommandFailure(command, model, duplicateStudentInConsultError);
-    }
-
-    @Test
-    public void execute_duplicateStudentByName_throwsCommandException() {
-        AddToConsultCommand command = new AddToConsultCommand(validConsultIndex5,
-                duplicateStudentNames, validStudentIndices);
-
-        String error = String.format(MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_NAME, CARL.getName().fullName);
-
-        assertCommandFailure(command, model, error);
     }
 
     @Test

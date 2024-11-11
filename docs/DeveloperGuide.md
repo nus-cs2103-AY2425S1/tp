@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student`, `Consultation` & `Lesson` objects residing in the `Model`.
 
 ### Logic component
 
@@ -124,10 +124,14 @@ The `Model` component,
 
 * stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Consultation` objects (which are contained in a `UniqueConsultList` object).
+* stores the currently 'selected' `Consultation` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Consultation>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Lesson` objects (which are contained in a `UniqueLessonList` object).
+* stores the currently 'selected' `Lesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Course` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Course` object per unique Course, instead of each `Student` needing their own `Course` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -212,7 +216,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `liststudents`. Commands that do not modify the address book, such as `liststudents`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -237,10 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-
-### \[Proposed\] Consultation Management
+### Consultation Management
 
 The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
 
@@ -505,12 +506,12 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. There are no students enrolled in the given course.
-    * 2a1. TAHub shows a message indicating there are no students found.
+* 1a. There are no students enrolled in the given course.
+    * 1a1. TAHub shows a message indicating there are no students found.
     <br>
     Use case ends.
-* 2b. There are multiple courses containing the given string as a prefix.
-    * 2b1. TAHub displays a list of all students enrolled in those courses.
+* 1b. There are multiple courses containing the given string as a prefix.
+    * 1b1. TAHub displays a list of all students enrolled in those courses.
     <br>
     Use case ends.
 
@@ -524,8 +525,8 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. The list is empty.
-  * 2a1. TAHub displays a message that there were no students found.
+* 1a. The list is empty.
+  * 1a1. TAHub displays a message that there were no students found.
   <br>
   Use case ends.
 
@@ -947,7 +948,7 @@ Use case ends.
     <br>
     Use case ends.
 * 2d. Participation Score is Positive & Valid.
-  * 2d1. TAHub marks the student's attendance as Present
+  * 2d1. TAHub marks the student's attendance as Present.
     <br>
     Use case resumes from step 3.
 
@@ -1074,15 +1075,31 @@ This should be treated as an invalid format.
 Though not strictly wrong, the index parser currently already checks for `+` and treats it as invalid.
 For consistency, this should also apply to participation.
 
-**<u>Restrict `addconsult` and `addlesson` commands from accepting date `0000`</u>**
+**<u>Make year 0000 an illegal value for the date</u>**
 
 **Description**
 
-Currently, the `addconsult` and `addlesson` commands accept `0000` as a valid date input, and we intend to restrict this behaviour, explicitly disallowing `0000` as a date format.
+Currently, year 0000 is accepted as a valid year.
+This should be changed to no longer be valid.
 
 **Rationale**
 
-Allowing `0000` as a date can introduce ambiguity and inconsistency in data entries, as it does not represent a valid date. By continuing to disallow `0000`, we enforce a standard that prevents the use of unspecified or placeholder dates, ensuring that all date inputs are meaningful and valid within the system. This aligns with best practices for data integrity and accuracy.
+According to Wikipedia, a year 0 does not exist in the Anno Domini calendar year.
+Therefore, it should not be allowed.
+
+**<u>Standardise error messages involving index</u>**
+
+**Description**
+
+For some commands, entering specific indexes (like 0) will show an error message
+stating that the index is invalid (not an unsigned nonzero integer), while other times
+it will show the default error message for incorrect format.
+
+**Rationale**
+
+These error messages should be standardised to avoid confusion.
+Any errors when parsing the index specifically ideally should specify that the index
+specifically is invalid to help the user correct it.
 
 ### Glossary
 
@@ -1122,92 +1139,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Adding a student
-1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
-   Expected: Student `TestOne` is added to the list. Details of the added student is shown.
-
-2. Test case: `add n/TestOne p/11111111`<br>
-   Expected: No student is added. Error details shown.
-
-3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
-   Expected: No student is added. Error details shown.
-
-4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
-   Expected: No student is added. Error details shown.
-
-### Finding a student (by course)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
-   Expected: Displays students details with course `CS2103T`.
-
-3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
-   Expected: No Students Found. Displays 0 students.
-
-4. Test case: `find c/1234`
-   Expected: No Students Found. Error details shown.
-
-5. Test case: `find c/CS2103T;CS2109S`
-   Expected: Displays students enrolled in either CS2103T or CS2109S.
-
-6. Test case: `find c/CS2103T c/CS2109S`
-   Expected: Displays students enrolled in both CS2103T and CS2109S.
-
-
-### Finding a student (by name)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
-   Expected: Displays students details with name `TestOne`.
-
-3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
-   Expected: No Students Found. Displays 0 students.
-
-4. Test case: `find n/Test1`
-   Expected: No Students Found. Error details shown.
-
-5.	Test case: `find n/John;Doe`
-   Expected: Displays students with either John or Doe in their names.
-
-6.	Test case: `find n/John n/Doe`
-   Expected: Displays students with both John and Doe in their names.
-
-### Editing a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-2. Test case: `edit 1 n/TestOne p/11111111`<br>
-   Expected: 1st student is edited. Details of the edited student is shown.
-
-3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
-   Expected: 2nd student is edited. Details of the edited student is shown.
-
-4. Test case: `edit 2 n/Test 2`<br>
-   Expected: No student is edited. Error details shown.
-
-5. Test case: `edit 1 c/CS2103T;CS2109S`
-   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
-
-6. Test case: `edit 1 c/CS2103T c/CS2109S`
-   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
-
-5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-   Expected: No student is edited. Error details shown.
-
-### Deleting a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-2. Test case: `delete 1`<br>
-   Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
-
-3. Test case: `delete 0`<br>
-   Expected: No student is deleted. Error details shown in the status message.
-
-4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-   Expected: No student is deleted. Error details shown in the status message.
-
-5. Test case: `delete 1;2`
-   Expected: Both the 1st and 2nd students are deleted from the list. Confirmation message is shown.
-
 ### Student Test Cases
 
 ### Adding a student
@@ -1224,7 +1155,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is added. Error details shown.
 
 ### Finding a student (by course)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
    Expected: Displays students details with course `CS2103T`.
@@ -1237,7 +1168,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Finding a student (by name)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
    Expected: Displays students details with name `TestOne`.
@@ -1249,7 +1180,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No Students Found. Error details shown.
 
 ### Editing a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `edit 1 n/TestOne p/11111111`<br>
    Expected: 1st student is edited. Details of the edited student is shown.
@@ -1264,7 +1195,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is edited. Error details shown.
 
 ### Deleting a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `delete 1`<br>
    Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
@@ -1399,11 +1330,10 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addconsult d/2024-10-20 t/14:00` (when a consultation with the same date and time exists)  
    Expected: No consultation is added. Error message about duplicate consultation shown.
 
-### Listing all consultations: `listconsult`
+### Listing all consultations: `listconsults`
 
 1. Prerequisites: At least one consultation exists.
-
-2. Test case: `listconsult`  
+2. Test case: `listconsults`  
    Expected: Displays a list of all consultations.
 
 ### Adding students to a consultation: `addtoconsult`
@@ -1469,7 +1399,7 @@ with JSON, you can attempt to recover your data file by fixing issues in the fil
 ### Exporting data
 
 #### Exporting student data
-1. Prerequisites: List all students using the `list` command. Multiple students should be in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students should be in the list.
 
 2. Test case: `export students`<br>
    Expected: CSV file created in data directory and home directory. Success message shows number of students exported.

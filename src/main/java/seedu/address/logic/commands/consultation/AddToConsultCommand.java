@@ -5,11 +5,14 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_CONSULTATION_DISPLAYE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -20,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Adds students to a specific consultation.
@@ -34,7 +36,7 @@ public class AddToConsultCommand extends Command {
             + "by the index number used in the displayed consultation list. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME]… [" + PREFIX_INDEX + "INDEX]…\n"
-            + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "John Doe " + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to the Consultation: %1$s";
 
@@ -43,6 +45,7 @@ public class AddToConsultCommand extends Command {
             "%s is already added to the consultation!";
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_INDEX =
             "%s at index %d is already added to the consultation!";
+    private final Logger logger = LogsCenter.getLogger(AddToConsultCommand.class);
 
 
 
@@ -80,16 +83,27 @@ public class AddToConsultCommand extends Command {
         Consultation targetConsultation = lastShownList.get(index.getZeroBased());
         Consultation editedConsultation = new Consultation(targetConsultation);
 
+        Set<Student> studentsToAddSet = new HashSet<>();
+        ArrayList<Student> studentsToAddArr = new ArrayList<>();
+
         for (Name studentName : studentNames) {
             Student student = model.findStudentByName(studentName)
                     .orElseThrow(() -> new CommandException(
                             String.format(MESSAGE_STUDENT_NOT_FOUND, studentName)));
-            try {
-                editedConsultation.addStudent(student);
-            } catch (DuplicateStudentException e) {
+
+            // if student was already in the lesson before this command, throw error
+            if (editedConsultation.hasStudent(student)) {
+                logger.warning("Students were not added to consult " + targetConsultation.toString()
+                    + " because the student " + studentName + " was already in consult");
                 throw new CommandException(
                         String.format(MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_NAME, studentName));
             }
+
+            //if student was not previously in the lesson before this command, add it to the set
+            if (!studentsToAddSet.contains(student)) {
+                studentsToAddArr.add(student);
+            }
+            studentsToAddSet.add(student);
         }
 
         // check if any of the indices are out of bounds of the filtered student list
@@ -104,25 +118,38 @@ public class AddToConsultCommand extends Command {
         }
 
         if (throwException) {
+
             String formattedOutOfBoundIndices = outOfBounds.stream()
                     .map(index -> String.valueOf(index.getOneBased()))
                     .collect(Collectors.joining(", "));
+            logger.warning("Students were not added to consult " + targetConsultation.toString()
+                    + " because indices " + formattedOutOfBoundIndices + " were out of bounds");
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN, formattedOutOfBoundIndices));
         }
 
         // Make sure that there are no duplicate students. Since logic handling duplicate students is done here for
         // adding students by name, logic for handling duplicate indices are also handled here
-        for (Index studentIndices : indices) {
-            Student student = lastShownStudentList.get(studentIndices.getZeroBased());
-            try {
-                editedConsultation.addStudent(student);
-            } catch (DuplicateStudentException e) {
+        for (Index studentIndex : indices) {
+            Student student = lastShownStudentList.get(studentIndex.getZeroBased());
+
+            if (editedConsultation.hasStudent(student)) {
+                logger.warning("Students were not added to lesson " + targetConsultation.toString()
+                    + " because student " + student.getName() + " was already in the consult");
                 throw new CommandException(
                         String.format(MESSAGE_DUPLICATE_STUDENT_IN_CONSULTATION_BY_INDEX, student.getName(),
-                                studentIndices.getOneBased()));
+                                studentIndex.getOneBased()));
             }
+
+            if (!studentsToAddSet.contains(student)) {
+                studentsToAddArr.add(student);
+            }
+            studentsToAddSet.add(student);
         }
 
+        // actually adding the students into the lesson
+        for (Student student: studentsToAddArr) {
+            editedConsultation.addStudent(student);
+        }
         model.setConsult(targetConsultation, editedConsultation);
 
         return new CommandResult(

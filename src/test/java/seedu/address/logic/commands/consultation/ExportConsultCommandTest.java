@@ -246,6 +246,27 @@ public class ExportConsultCommandTest {
         assertEquals(anotherExpected, anotherActual);
     }
 
+    @Test
+    public void execute_filenameWithWildcard_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test*", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '*'));
+    }
+
+    @Test
+    public void execute_filenameWithForwardSlash_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test/file", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '/'));
+    }
+
+    @Test
+    public void execute_filenameWithBackslash_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test\\file", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '\\'));
+    }
+
     private class ModelStubWithConsultations extends ModelStub {
         private final List<Consultation> consultations;
 
@@ -256,6 +277,102 @@ public class ExportConsultCommandTest {
         @Override
         public ObservableList<Consultation> getFilteredConsultationList() {
             return FXCollections.observableList(consultations);
+        }
+    }
+
+    @Test
+    public void execute_existingFiles_throwsCommandException() throws IOException {
+        // Create existing files
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Files.createFile(dataFile);
+
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+        Files.createFile(homeFile);
+
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        ExportConsultCommand exportCommand = new ExportConsultCommand(filename, false, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        // Test data file exists
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.MESSAGE_FILE_EXISTS, dataFile));
+
+        // Delete data file to test home file exists
+        Files.delete(dataFile);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.MESSAGE_HOME_FILE_EXISTS, homeFile));
+    }
+
+    @Test
+    public void execute_forceExport_overwritesExistingFiles() throws IOException, CommandException {
+        // Create existing files
+        String filename = "test";
+        Path dataFile = dataDir.resolve(filename + ".csv");
+        Files.createFile(dataFile);
+
+        Path testHomeDir = temporaryFolder.resolve("home");
+        Files.createDirectories(testHomeDir);
+        Path homeFile = testHomeDir.resolve(filename + ".csv");
+        Files.createFile(homeFile);
+
+        filesToCleanup.add(dataFile);
+        filesToCleanup.add(homeFile);
+
+        ExportConsultCommand exportCommand = new ExportConsultCommand(filename, true, dataDir) {
+            @Override
+            protected Path getHomeFilePath(String filename) {
+                return testHomeDir.resolve(filename + ".csv");
+            }
+        };
+
+        CommandResult result = exportCommand.execute(model);
+        assertTrue(Files.exists(dataFile));
+        assertTrue(Files.exists(homeFile));
+    }
+
+    @Test
+    public void escapeSpecialCharacters_withSpecialChars() {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test", false, dataDir);
+
+        // Test with comma
+        assertEquals("\"test,data\"", exportCommand.escapeSpecialCharacters("test,data"));
+
+        // Test with double quote
+        assertEquals("\"test\"\"data\"", exportCommand.escapeSpecialCharacters("test\"data"));
+
+        // Test with single quote
+        assertEquals("\"test'data\"", exportCommand.escapeSpecialCharacters("test'data"));
+
+        // Test with multiple special characters
+        assertEquals("\"test,\"\"'data\"", exportCommand.escapeSpecialCharacters("test,\"'data"));
+    }
+
+    @Test
+    public void execute_filenameWithSpecialCharacters_throwsCommandException() {
+        String[] invalidFilenames = {
+            "test-file",
+            "test_file",
+            "test file",
+            "test!file",
+            "test@file",
+            "test#file",
+            "test$file",
+            "test.file"
+        };
+
+        for (String filename : invalidFilenames) {
+            ExportConsultCommand exportCommand = new ExportConsultCommand(filename, false, dataDir);
+            assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                    ExportConsultCommand.INVALID_FILENAME_MESSAGE);
         }
     }
 }
