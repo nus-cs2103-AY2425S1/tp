@@ -108,7 +108,7 @@ Parameter     | Notes
 
 3. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. <br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. Alternatively, you can double-click the jar file to run the application. <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png) 
 
@@ -151,12 +151,12 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 
 <box type="tip">
 
-**Tip:** A candidate can have any number of tags and skills (including 0)
+**Tip:** A candidate can have any number of tags and skills (including 0).
 </box>
 
 <box type="info">
 
-**Note:** Candidates are considered duplicates if they have the same name and same job
+**Note:** Candidates are considered duplicates if they have the same name and same job.
 </box>
 
 Examples:
@@ -303,6 +303,11 @@ Format: `sort ORDER`
 
 * `ORDER` can be either `a`(ascending) or `d`(descending).
 
+<box type="info">
+
+**Note:** Sorting the list will override the original ordering of the candidate list.
+</box>
+
 Examples:
 * `find alex bernice david` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
 * `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores, as shown below:
@@ -347,7 +352,7 @@ Format: `exit`
 
 <box type="warning">
 
-**Caution:** If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+**Caution:** If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 <br><br>
