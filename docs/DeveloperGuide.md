@@ -159,6 +159,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Patient feature
+#### Implementation
+The `add` command is used to add a new patient into NovaCare. 
+
+### Add Task feature
+#### Implementation
+The `addTask` command is used to add a new task to a patient in NovaCare.
+
 ### \[Proposed\] Undo/Redo feature
 
 #### Proposed Implementation
@@ -633,9 +641,17 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
-5.  The codebase should be modular, allowing easy updates or feature additions without affecting other parts of the system.
+3.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
+6.  The codebase should be modular, allowing easy updates or feature additions without affecting other parts of the system.
+7.  The application should be packaged as a single jar file for easy deployment.
+8.  The User Guide and Developer Guide should be PDF-friendly. No animated GIFs, embbedded videos, etc.
+9. The data should be stored in a local file in an editable text file that is easy to read and edit manually.
+10. The data should not be stored in a Database Management System. 
+11. The application should function without internet access as it is an offline tool. 
+12. The application should run for extended periods without crashing.
+
 
 *{More to be added}*
 

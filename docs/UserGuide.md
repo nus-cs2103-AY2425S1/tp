@@ -769,6 +769,8 @@ _Details coming soon ..._
 **Q**: Can I run NovaCare without internet connection?<br>
 **A**: NovaCare is able to run without internet connection.
 
+**Q**: What is the difference between INDEX and ID?<br>
+**A**: Both are referring to the same thing as shown in the [glossary](#10-glossary). 
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -779,6 +781,7 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Adding patients of same name** is possible, and task added may be confusing if they have the same name. The remedy is to use `findtask` to find the task specific to the patient.
+4. **UG using INDEX and NovaCare GUI using ID** may cause confusion. Both are referring to the same meaning in [glossary](#10-glossary).
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
