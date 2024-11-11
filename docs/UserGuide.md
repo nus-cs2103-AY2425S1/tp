@@ -85,9 +85,9 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 <br>
 
 
-### <i class="fa-solid fa-user-plus"></i> Adding a patient: `add`
+### <i class="fa-solid fa-user-plus"></i> Adding a patient contact: `add`
 
-Adds a patient record to the address book.
+Adds a patient contact to the address book.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 <md>**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX
 [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
@@ -164,7 +164,7 @@ Clears all patient entries from the address book.
 
 **Confirmation Requirement:**
 
-* A confirmation window will appear before clearing all contacts in MediContact, 
+* A confirmation window will appear before clearing all patient contacts in MediContact, 
 asking you to confirm if you are sure you want to proceed. 
 You must select `OK` to clear the address book. If you select `Cancel`, 
 the action will be aborted, and the address book will remain unchanged.
@@ -178,9 +178,9 @@ the action will be aborted, and the address book will remain unchanged.
 <br>
 
 
-### <i class="fa-solid fa-user-slash"></i> Deleting a person : `delete`
+### <i class="fa-solid fa-user-slash"></i> Deleting a patient contact: `delete`
 
-Deletes the specified patient record from the address book.
+Deletes the specified patient contact from the address book.
 
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
@@ -197,14 +197,14 @@ Deletes the specified patient record from the address book.
 * The `NAME` refers to the full name as shown in the displayed patient contact list.
 * The `INDEX` refers to the index number shown in the displayed patient contact list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `NAME` provided must be the person's full name.
+* The `NAME` provided must be the patient's full name.
 <box type="important" light no-background>
 
 **Confirmation Requirement:**
 
-* A confirmation window will appear before deleting a person, asking you to confirm the deletion.
+* A confirmation window will appear before deleting a patient contact, asking you to confirm the deletion.
   You must select `OK` to proceed with the deletion. If you select `Cancel` the action will be aborted,
-  and the person will not be deleted.
+  and the patient contact will not be deleted.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
 <img src="images/deleteConfirmation.png" width="800">
@@ -213,9 +213,9 @@ Deletes the specified patient record from the address book.
 
 **Examples**:
 
-* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the person with name `Evie Sage` in the address book.
-* `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.<br>
+* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the patient with name `Evie Sage` in the address book.
+* `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd patient contact in the address book.
+* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st patient contact in the results of the `find` command.<br>
 
 **Input**<br>
 
@@ -230,9 +230,9 @@ Deletes the specified patient record from the address book.
 <br>
 <br>
 
-### <i class="fa-solid fa-pen"></i> Editing a person : `edit`
+### <i class="fa-solid fa-pen"></i> Editing a patient contact : `edit`
 
-Edits an existing patient record in the address book.
+Edits an existing patient contact in the address book.
 
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
@@ -294,7 +294,7 @@ Exits the program.
 <br>
 
 
-### <i class="fa-solid fa-filter"></i> Filtering persons by age group or appointment dates: `filter`
+### <i class="fa-solid fa-filter"></i> Filtering patient contacts by age group or appointment dates: `filter`
 
 Filter patients whose age and/or appointment dates are within the specified range.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -342,7 +342,7 @@ Filter patients whose age and/or appointment dates are within the specified rang
 <br>
 <br>
 
-### <i class="fa-solid fa-magnifying-glass"></i> Locating persons by name or phone number: `find`
+### <i class="fa-solid fa-magnifying-glass"></i> Locating patient contacts by name or phone number: `find`
 
 Finds patients whose names or phone numbers contain any of the given keywords.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -410,7 +410,7 @@ Shows you a help window with useful resources which includes:
 <br>
 <br>
 
-### <i class="fa-solid fa-file-import"></i> Importing contacts: `import`
+### <i class="fa-solid fa-file-import"></i> Importing patient contacts: `import`
 
 Imports patient contact info from the given json file into MediContact.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -497,7 +497,7 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
+- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient contacts before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
 
   ````
   {
@@ -527,7 +527,7 @@ The following is an example of a valid JSON file content.
 <br>
 
 
-### <i class="fa-solid fa-list"></i> Listing all persons : `list`
+### <i class="fa-solid fa-list"></i> Listing all patient contacts : `list`
 
 Shows an alphabetically sorted list of all patients in the address book.
 
@@ -557,9 +557,9 @@ Shows an alphabetically sorted list of all patients in the address book.
 <br>
 
 
-### <i class="fas fa-clipboard-list"></i> Listing starred persons : `list *`
+### <i class="fas fa-clipboard-list"></i> Listing starred patient contacts : `list *`
 
-Shows a list of all starred patients in the address book.
+Shows a list of all starred patient contacts in the address book.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `list *`
@@ -585,7 +585,7 @@ Shows a list of all starred patients in the address book.
 <br>
 <br>
 
-### <i class="fa-solid fa-note-sticky"></i> Editing a person's notes : `note`
+### <i class="fa-solid fa-note-sticky"></i> Editing a patient's notes : `note`
 
 Edits an existing patient's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -605,13 +605,13 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 
 - At least one of the fields must be provided.
 
-- When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+- When editing fields, the existing fields of the patient will be added i.e adding of medications is cumulative.
 
-- You can remove all the person’s previous appointments by typing `ap/` without specifying any appointments after it.
+- You can remove all the patient’s previous appointments by typing `ap/` without specifying any appointments after it.
 
-- You can remove all the person’s medications by typing `m/` without specifying any medications after it.
+- You can remove all the patient’s medications by typing `m/` without specifying any medications after it.
 
-- You can remove all the person’s remarks by typing `r/` without specifying any remarks after it.
+- You can remove all the patient’s remarks by typing `r/` without specifying any remarks after it.
 
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
@@ -634,7 +634,7 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 <br>
 
 
-### <i class="fa-solid fa-arrow-up-wide-short"></i> Sorting list based on Appointment Dates : `sort`
+### <i class="fa-solid fa-arrow-up-wide-short"></i> Sorting patient contact list based on Appointment Dates : `sort`
 
 Sorts the patient contact list in the address book on the basis of their earliest appointment dates.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -670,9 +670,9 @@ Sorts the patient contact list in the address book on the basis of their earlies
 <br>
 <br>
 
-### <i class="fa-solid fa-star"></i> Adding a person to favourites list : `star`
+### <i class="fa-solid fa-star"></i> Adding a patient contact to favourites list : `star`
 
-Stars the specified patient record from the address book into favourites.
+Stars the specified patient contact from the address book into favourites.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `star INDEX` / `star NAME`
@@ -687,9 +687,9 @@ Stars the specified patient record from the address book into favourites.
 
 **Examples**:
 
-* `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
-* `list` followed by `star 2` stars the 2nd person in the address book.
-* `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+* `star Alex Yeoh` stars the patient with name `Alex Yeoh` in the address book.
+* `list` followed by `star 2` stars the 2nd patient contact in the address book.
+* `find Betsy` followed by `star 1` stars the 1st patient contact in the results of the `find` command.
 
 **Input**<br>
 
@@ -705,9 +705,9 @@ Stars the specified patient record from the address book into favourites.
 <br>
 
 
-### <i class="fa-regular fa-star"></i> Removing a person from favourites list : `unstar`
+### <i class="fa-regular fa-star"></i> Removing a patient contact from favourites list : `unstar`
 
-Unstars the specified patient record from the address book removing them from favourites.
+Unstars the specified patient contact from the address book removing them from favourites.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `unstar INDEX` / `unstar NAME`
@@ -722,9 +722,9 @@ Unstars the specified patient record from the address book removing them from fa
 
 **Examples**:
 
-* `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
-* `list` followed by `unstar 2` unstars the 2nd person in the address book.
-* `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
+* `unstar Alex Yeoh` unstars the patient with name `Alex Yeoh` in the address book.
+* `list` followed by `unstar 2` unstars the 2nd patient contact in the address book.
+* `find Betsy` followed by `unstar 1` unstars the 1st patient contact in the results of the `find` command.
 
 **Input**<br>
 
@@ -739,7 +739,7 @@ Unstars the specified patient record from the address book removing them from fa
 <br>
 <br>
 
-### <i class="fa-solid fa-eye"></i> Viewing a person's notes : `view`
+### <i class="fa-solid fa-eye"></i> Viewing a patient's notes : `view`
 
 Views an existing patient's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 <box type="definition" icon=":fa-solid-spell-check:" light no-background>
@@ -757,7 +757,7 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 **Examples**:
 
 *  `view John Doe`
-*  `view 1` shows all details of the 1st person's details including notes.
+*  `view 1` shows all details of the 1st patient's details including notes.
 
 **Input**<br>
 
