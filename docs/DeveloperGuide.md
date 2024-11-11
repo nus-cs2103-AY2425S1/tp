@@ -21,8 +21,8 @@
     * [Create new internship application](#create-new-internship-application)
     * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
+    * [Update the status of an Internship Application](#update-the-status-of-an-internship-application)
     * [Find internship applications](#find-internship-applications)
-    * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
     * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
     * [Clear](#clear)
@@ -215,7 +215,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
 `AddCommand` comprises of the internship application to be added, which is an instance of `InternshipApplication`.
 
-Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then calls on `model::addItem` to add the internship application into the data.
+Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then adds the internship application into the data.
 
 <br></br>
 
@@ -247,16 +247,10 @@ Upon execution, `DeleteCommand` gets the internship application to be deleted an
 
 <br></br>
 
-### Find internship applications
-The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
+### Update the status of an Internship Application
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
 
-<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
-
-`AddressBookParser` first obtains the keyword from the user's input.
-`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
-Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
-  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
+<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
 Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
 `setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
@@ -282,6 +276,22 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 <puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
+
+<br></br>
+
+### Find internship applications
+The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+`AddressBookParser` first obtains the keyword from the user's input.
+`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
+
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
+`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
 <br></br>
 
@@ -346,7 +356,6 @@ The implementation of the command follows the convention of a normal command, wh
 
 `AddressBookParser` creates `ExitCommand`
 Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
-`MainWindow` checks for the intent via `isExit`, after which, it calls `handleExit` to close the application.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
@@ -385,6 +394,7 @@ Upon execution, `ExitCommand` gets encapsulates the intent to close the applicat
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (future plans) - `*`
 
+
 | Priority | As a …​                       | I want to …​                                                                     | So that …​                                                               |
 |----------|-------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
 | `* * *`  | CS Undergraduate              | list all the internship applications                                             | I can view all my past applications                                      |
@@ -398,6 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 | `* * *`  | CS Undergraduate              | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
 | `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
 | `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
+| `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                  | I know know the breakdown of each status                                 |
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
 | `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
