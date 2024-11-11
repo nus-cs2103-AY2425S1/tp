@@ -57,7 +57,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     <img src="images/QuickStart.png" alt="Ui" width="350"/>
     <br>
     <em>Figure 1: Shows what the application should look like</em>
-</div>
+    </div>
 
 
 5. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
@@ -247,12 +247,11 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 - `find S550 Bob` — Finds all customers with postal codes containing "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom:20px">
     <img src="images/find_name_and_number_postal.png" alt="find customers" width="350"/>
     <br>
     <em>Figure 5: Shows multiple people found using prefix search of name, number and postal code </em>
 </div>
-
 
 **Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
 
@@ -471,7 +470,7 @@ Examples:
     - `edit 1 t/vg t/v` — Tags the contact at index 1 with "Vegetarian" and "Vegan".
     - `add n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2, #02-25 pc/123456 t/v` — Creates a contact tagged as "Vegan".
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom:20px">
     <img src="images/using_shortcut.png" alt="using shortcuts" width="350"/>
     <br>
     <em>Figure 16: Shows shortcut being used to edit tags</em>
