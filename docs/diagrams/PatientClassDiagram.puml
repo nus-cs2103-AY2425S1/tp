@@ -21,6 +21,7 @@ Class HealthRisk
 Class ExistingCondition
 Class Note
 Class Appt
+Class HealthService
 
 Class I #FFFFFF
 }
@@ -41,5 +42,6 @@ Patient *-down-> "1" HealthRisk
 Patient *-down-> "1" ExistingCondition
 Patient *-down-> "1" Note
 ApptList *-down-> "*" Appt
+Appt *-down-> "1" HealthService
 AllergyList *-down-> "*" Allergy
 @enduml
