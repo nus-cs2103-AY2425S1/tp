@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,12 +32,14 @@ public class AddStudentCommand extends Command {
             + PREFIX_GENDER + " GENDER "
             + PREFIX_PHONE + " PHONE "
             + PREFIX_EMAIL + " EMAIL "
-            + PREFIX_ADDRESS + " ADDRESS "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
             + PREFIX_SUBJECT + " SUBJECT "
+            + "[" + PREFIX_SUBJECT + " SUBJECT]... "
             + PREFIX_CLASSES + " CLASSES "
-            + PREFIX_ATTENDANCE + " ATTENDANCE"
-            + PREFIX_NEXT_OF_KIN + " NEXT_OF_KIN"
-            + PREFIX_EMERGENCY_CONTACT + " EMERGENCY_CONTACT"
+            + "[" + PREFIX_ATTENDANCE + " ATTENDANCE] "
+            + PREFIX_NEXT_OF_KIN + " NEXT_OF_KIN "
+            + PREFIX_EMERGENCY_CONTACT + " EMERGENCY_CONTACT "
+            + "[" + PREFIX_TAG + " TAG]..."
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
