@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, it should be an 8-digit number Singapore number "
-                    + "starting with 8 or 9.\";";
+                    + "starting with 8 or 9.";
     public static final String VALIDATION_REGEX = "[89]\\d{7}";
     public final String value;
 
