@@ -59,6 +59,6 @@ public class Income {
     }
 
     private static double roundTwoDecimalPlaces(double value) {
-        return Math.floor(Math.round(value * 100.0) / 100.0);
+        return Math.round(value * 100.0) / 100.0;
     }
 }

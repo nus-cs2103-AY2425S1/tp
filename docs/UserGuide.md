@@ -105,6 +105,11 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = 
 * Phone numbers should contain at least 3 digits.
 * For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
 
+<box type="info" seamless>
+
+**Info:** The input value for the income field is automatically rounded to the nearest 2 decimal places, so values like `900.01` remain unchanged, while values like `900.015` are rounded to `900.02`.
+</box>
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
