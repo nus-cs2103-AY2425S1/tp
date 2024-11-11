@@ -179,15 +179,26 @@ Command: `add`
 
 Usage: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…`
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Fields wrapped in square brackets `[]` are optional, so the TAG field here is optional.
+</div>
+
+<div markdown="span" class="alert alert-success">:bulb:
+**Tip:**
+
+This command is best used with reference to its usages in the [Prefix Table](#11-prefix-table)
+</div>
+
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
-* `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
-* `PHONE`: Should only contain numbers and must be at least 3 digits long
-* `EMAIL`: Should be of the format local-part@domain
-* `ADDRESS`: Can take in any values and should not be blank
-* `TAG`: Should only contain alphanumeric characters and no spaces
+* `NAME`: Name of the student to add
+* `PHONE`: Phone number of the student to add
+* `EMAIL`: Email of the student to add
+* `ADDRESS`: Address of the student to add
+* `TAG`: Tag(s) of the student to add
 
 </div>
 {% endraw %}
@@ -420,7 +431,7 @@ Edit the personal information of students within EduVault
 
 Command: `edit`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Usage: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
@@ -490,7 +501,7 @@ If there is a student with name `John Doe` and phone number `87654321` in the li
 
 Command:  `addfees`
 
-Usage: addfees `INDEX pay/PAYMENT`
+Usage: `addfees INDEX pay/PAYMENT`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -529,7 +540,7 @@ Invalid usages
 
 Command:  `markpaid`
 
-Usage: markpaid `INDEX pay/PAYMENT`
+Usage: `markpaid INDEX pay/PAYMENT`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
