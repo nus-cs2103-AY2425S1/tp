@@ -168,14 +168,15 @@ Format: `exit`
 
 Adds a specific goods item tied to a supplier. All fields are required for this command.
 
-Constraints:
+
+Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
+
+* Goods are uniquely identified by all fields. (i.e. Goods can be repeated if any of the fields are different)
 * Quantity should be a positive number `quantity > 0`.
 * Price cannot be a negative number `price >= 0.00`.
 * Procurement Date and Arrival Date should be in the format `YYYY-MM-DD HH:MM` (24-hour format).
 * The Arrival Date should be after the Procurement Date.
 * The Category has to be fully capitalized and one of `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY`.
-
-Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
 
 Examples:
 
