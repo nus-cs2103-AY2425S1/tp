@@ -763,6 +763,11 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
+### Closing the detailed view of a client
+1. Closing the view of the currently viewed client
+   1. Prerequisites: The detailed view of a client is currently open.
+   2. Test case: `close`<br>
+      Expected: The detailed view closes.
 
 ### Saving data
 
