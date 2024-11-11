@@ -238,8 +238,6 @@ public class ExportCommand extends Command {
                         // Assuming the tags come in as a set represented by a JSON-like structure
                         // Parse the cell value if it's formatted as JSON-like, i.e., "{key1 : value1, key2 : value2}"
                         cellValue = cellValue.replaceAll("[{}\"]", ""); // Remove curly braces and quotes
-                        String[] tagsArray = cellValue.split(","); // Split tags by comma if needed
-                        cellValue = "[ " + String.join(", ", tagsArray) + " ]"; // Join with comma and wrap in brackets
                     } else {
                         // For other fields, clean up quotes, commas, newline characters, and backslashes
                         cellValue = cellValue
