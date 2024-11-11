@@ -627,6 +627,7 @@ otherwise)
 
     * 3a1. System fills command box with empty command
 
+
   Use case ends.
 
 #### Use case 9: Sort a [_client_](#glossary-client) list by name
