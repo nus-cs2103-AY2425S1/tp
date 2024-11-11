@@ -620,7 +620,7 @@ Deletes a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
-   based on the list when `list_t` is called.
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 4. For information on the constraints for each parameter used in this command, go
@@ -649,7 +649,9 @@ Delete a task from all groups that contain it.
 ##### Notes
 
 1. The index must be valid and should be the index of task list.
-2. For information on the constraints for each parameter used in this command, go
+2. `del_t` deletes a task identified by the index. It only accepts a valid index
+      based on the list when `list_t` is called.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -674,11 +676,13 @@ Edits a task from a group.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. `Group Name` must exist in the T_Assistant.
-3. At least 1 optional parameter must be provided, else an error will be thrown.
-4. This command is case-insensitive.
+2. `edit_t_g` edits a task identified by the index. It only accepts a valid index
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+3. `Group Name` must exist in the T_Assistant.
+4. At least 1 optional parameter must be provided, else an error will be thrown.
+5. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-5. For information on the constraints for each parameter used in this command, go
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -703,9 +707,9 @@ Edits a task from all groups that contain it.
 ##### Notes
 
 1. The index must be valid and should be the index of task list.
-2. At least 1 optional parameter must be provided, else an error will be thrown.
-3. This command is case-insensitive.
-   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+2. `edit_t` edits a task identified by the index. It only accepts a valid index
+   based on the list when `list_t`.
+3. At least 1 optional parameter must be provided, else an error will be thrown.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -731,8 +735,10 @@ Marks a task as done or undone.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. If a task is complete it will be marked as pending/overdue, and vice versa.
-3. For information on the constraints for each parameter used in this command, go
+2. `mark_t` marks a task identified by the index. It only accepts a valid index
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+3. If a task is complete it will be marked as pending/overdue, and vice versa.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
