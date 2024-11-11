@@ -277,6 +277,8 @@ Format: `untag INDEX t/TAGNAME`
 * Untag a specified contact based on their `INDEX` with a `Tag`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
+* **Known issue:** the untag command is case-sensitive, so if person 2 is tagged with the tag Hotel Manager, only entering the command `untag 2 t/Hotel Manager` 
+will remove the tag from person 2 and `untag 2 t/hotel manager` will not.
 
 ### Deleting a tag : `delete-tag`
 
@@ -332,6 +334,8 @@ Format: `unassign-wedding INDEX w/WEDDINGNAME`
 * Unassign a contact that is assigned in a `Wedding`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
+* **Known issue:** the unassign-wedding command is case-sensitive, so if person 2 is assigned to the wedding, Wedding 2, only entering the command `unassign-wedding 2 w/Wedding 2` or `uw 2 w/Wedding 2`
+    will unassign the wedding from person 2 and `unassign-wedding 2 w/wedding 2` or `uw 2 w/wedding 2` will not.
 
 ### Deleting a Wedding : `delete-wedding`
 
@@ -430,6 +434,7 @@ Format: `unassign-venor PERSONINDEX`
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. The commands `untag` and `unassign-wedding` are case-sensitive. So, if a person, person 2, is assigned to a wedding, Wedding 2, entering the command `unassign-wedding 2 w/wedding 2` will not remove Wedding 2 from person 2. 
 
 --------------------------------------------------------------------------------------------------------------------
 
