@@ -60,6 +60,7 @@ public class CommandTestUtil {
     public static final String ALLERGY_DESC_AMY = " " + PREFIX_ALLERGY + VALID_ALLERGY_AMY;
     public static final String ALLERGY_DESC1_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY1_BOB;
     public static final String ALLERGY_DESC2_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGY2_BOB;
+    public static final String ALLERGY_DESC_NONE = " " + PREFIX_ALLERGY + "None";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

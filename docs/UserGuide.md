@@ -70,6 +70,7 @@ Health Connect is an application designed to **streamline client management** fo
    Some example commands you can try:
     * `view`: Displays all contacts.
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
+    * `delete n/John Doe` : Deletes contact named John Doe from the current list.
     * `filter t/High Risk`: Displays all entries which are tagged High Risk.
     * `clear`: Deletes all contacts.
     * `exit`: Exits the app.
@@ -112,6 +113,7 @@ Health Connect is an application designed to **streamline client management** fo
    Some example commands you can try:
     * `view`: Displays all contacts.
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
+    * `delete n/John Doe` : Deletes contact named John Doe from the current list.
     * `filter t/High Risk`: Displays all entries which are tagged High Risk.
     * `clear`: Deletes all contacts.
     * `exit`: Exits the app.
@@ -287,7 +289,7 @@ Additional Details:
 * The search is case-sensitive.
 * At least 1 `PREFIX/FEATURE_NAME` must provided.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* You can filter by **tag, email, allergy, address, phone number and allergies**
+* You can filter by **tag, email, address, phone number and allergies.** Allergy is the only feature that allows filter by multiple parameters.
 * Only full words will be matched e.g. `99999999` will not match `999`
 * Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
 * The filter search uses AND logic between different attributes (e.g., tag and allergies) — all specified attributes must match. If multiple allergies are specified, it uses OR logic — an entry will match allergies attribute if it has any one of the specified allergies, or all. 
