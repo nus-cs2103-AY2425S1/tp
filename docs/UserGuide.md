@@ -258,7 +258,7 @@ Format: `del n/NAME` followed by `y` or `n`
 <box type="important" seamless>
 
 **IMPORTANT:** 
-* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information. ☺️
 
 </box>
 
