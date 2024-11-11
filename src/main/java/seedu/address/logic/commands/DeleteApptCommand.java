@@ -60,6 +60,7 @@ public class DeleteApptCommand extends Command {
 
         List<Patient> lastShownList = model.getFilteredPatientList();
 
+        // Source adapted from ChatGPT
         Patient patientToDeleteAppt = lastShownList.stream()
                 .filter(patient -> patient.getNric().equals(nric))
                 .findFirst()
@@ -70,6 +71,7 @@ public class DeleteApptCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_NRIC);
         }
 
+        // Source adapted from ChatGPT
         Appt apptToDelete = patientToDeleteAppt.getImmutableApptList().stream()
                 .filter(appt -> appt.getDateTime().equals(apptDateTime))
                 .findFirst()

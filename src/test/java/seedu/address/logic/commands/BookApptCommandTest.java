@@ -28,6 +28,7 @@ public class BookApptCommandTest {
 
     private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
 
+    // Source adapted from Git Copilot
     @Test
     public void execute_validAppointment_success() {
         Patient patientToBookAppt = DANIEL;

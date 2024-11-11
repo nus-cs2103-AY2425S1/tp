@@ -62,6 +62,7 @@ public class BookApptCommand extends Command {
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         // Find the patient with the given name
+        // Source adapted from ChatGPT
         Optional<Patient> optionalPatient = lastShownList.stream()
             .filter(patient -> patient.getNric().equals(nric))
             .findFirst();
