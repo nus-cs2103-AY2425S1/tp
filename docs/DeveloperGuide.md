@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `EventTory` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below, the **System** is the `EventTory` unless specified otherwise.
 
 **Use case: UC01 - Create an event**
 
