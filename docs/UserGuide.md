@@ -5,8 +5,13 @@ pageNav: 3
 ---
 <h2 style="color: #FF6347;">NovaCare</h2>
 
-A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#10-glossary) while still having the benefits of a Graphical User Interface [(GUI)](#10-glossary).
-Tailored to handle the demanding workload of private nurses managing numerous patients, NovaCare is built for speed—ideal for users who type quickly, enabling faster patient management than traditional GUI-based applications.
+**NovaCare** is a **desktop application designed specifically for private nurses** who need a fast, reliable solution to manage patient care efficiently.
+By combining the speed and precision of a **Command Line Interface** [(CLI)](#10-glossary) with the ease and clarity of a **Graphical User Interface** [(GUI)](#10-glossary),
+NovaCare empowers private nurses to handle their demanding workloads with greater speed than traditional GUI-based apps.
+
+With **NovaCare**, nurses can seamlessly manage tasks such as tracking patient information, updating medical notes and organizing contact and emergency details — 
+all through a streamlined, keyboard-friendly interface that minimizes clicks and maximizes productivity. 
+This tool is tailored to **support the unique needs of private nurses**, enabling them to deliver high-quality care with accuracy and ease.
 
 In this guide, users will be able to learn the following details:
 
@@ -102,17 +107,17 @@ This section provides a quick overview of how to set up and run NovaCare on your
 
 For **Windows** users, you can type **Command Prompt** in the search bar.
 Type `java -version` to check if you have Java installed.
-Upon successful installation, you should see something like this:
+Upon successful installation, you should see something like this:<br></br>
 ![Windows Java](images/windows-java.png)
 
 For **Mac/Linux** users, you can type **Terminal** in the search bar.
 Type `java -version` to check if you have Java installed.
-Upon successful installation, you should see something like this:
+Upon successful installation, you should see something like this:<br></br>
 ![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
-1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.
-   ![Assets](images/assets.png)
+1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.<br></br>
+   ![Assets](images/assets.png)<br></br>
 2. Click on the `NovaCareApp.jar` file to download it.
 3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
 
@@ -228,12 +233,13 @@ This section provides a detailed explanation of the features available in NovaCa
 ### 6.1 Parameter Information
 The table below explains each of the parameter available in NovaCare.
 It will provide the limitations and examples of the parameter.
+
 <box type = "warning" seamless>
 
 **Warning:**<br>
 
 The parameters must follow the limitations as shown below.
-Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br>
+Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br></br>
 ![failCommand](images/failAdd.png)
 </box>
 
@@ -404,6 +410,7 @@ Deletes the specified patient and tasks associated to that patient from NovaCare
 **Warning:**
 Deleting a patient will also **delete all tasks associated with that patient**.
 </box>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in NovaCare.
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
@@ -433,7 +440,7 @@ Adds an emergency contact and details to a patient in NovaCare.
 **Tip:**
 * A patient can only have 1 registered emergency contact.
 * Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!
-  </box>
+</box>
 
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
@@ -620,7 +627,7 @@ Unmarks a task at a specific index.
 * Unmarks a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
+</box>
 
 Example:
 * `unmarktask 1` marks the 1st-indexed task in the task list as `Incomplete`.
@@ -686,7 +693,8 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 Shows a message explaining how to access the help page.
 
-Format: `help`
+:pencil: Format: `help`
+
 <box type="info" seamless>
 
 **Note:**
@@ -746,23 +754,17 @@ NovaCare data are saved in the hard disk automatically after any command that ch
 
 #### 6.5.2 Editing the data file
 
-NovaCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NovaCare's data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update the data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Warning:**
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range, NovaCare will skip and delete the data related to that invalid patient or task). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-<br></br>
-
-#### 6.5.3 Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 [⬆️ Back to Table of Contents](#table-of-contents)
-
+<br></br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. FAQ
