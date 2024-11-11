@@ -409,7 +409,7 @@ Use case ends.
 
 
 * 2b. SellSavvy detects that there are no customers with the specified index.
-  * 2b1. SellSavvy displays an error that the customer index is invalid. 
+  * 2b1. SellSavvy displays an error that the customer index is invalid.
 
   Use case ends.
 
@@ -807,7 +807,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a customer
 
-**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br> 
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order.<br>
 
 **Tips:** All the prerequisites below will be fulfilled if you start off with the default sample data and follow the test cases in sequence.
 
@@ -821,10 +821,10 @@ testers are expected to do more *exploratory* testing.
 2. Adding a unique customer with all parameters specified using the command alias.
 
     1. Prerequisites: Customer with name `Betsy Crowe` or other similar names does not already exist in the address book.
-   
+
     2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
-   
+
 3. Adding a customer with an identical name.
 
    1. Prerequisites: Customer with name `Betsy Crowe` already exists in the address book.
@@ -876,10 +876,10 @@ testers are expected to do more *exploratory* testing.
 1. Finding customers with one keyword.
 
     1. Test case: `findcustomer bernice` <br>
-       Expected: 
+       Expected:
        - All customers with 'bernice' in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.<br>
-       
+
 2. Finding customers with multiple keywords using the command alias.
 
     1. Test case: `findc alex david` <br>
@@ -894,7 +894,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `findcustomer khengyang` <br>
        Expected: No customers listed. A success message shown in the status message. A message informing user that no related customers are found is shown in the customer list.
 
-   
+
 ### Editing an existing customer
 
 1. Editing a customer while all customers are being shown.
@@ -929,7 +929,7 @@ testers are expected to do more *exploratory* testing.
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
         - The customer to be edited is not `Betsy Crowe`.<br>
-       
+
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
        Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
 
@@ -952,7 +952,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `editcustomer 1 n/@#$%` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
-   
+
 ### Deleting a customer
 
 1. Deleting a customer while all customers are being shown.
@@ -985,7 +985,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a unique order with all parameters specified while all customers is being shown.
 
-    1. Prerequisites: 
+    1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
         - There are no orders similar to the order to be added under the first customer.<br>
@@ -1022,25 +1022,25 @@ testers are expected to do more *exploratory* testing.
 
 5. Adding an order with delivery date elapsed.
 
-    1. Prerequisites: 
+    1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
         - No order similar to order to be added under the first customer.<br>
 
     2. Test case: `addo 1 i/phone d/02-03-2020` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
-   
+
 ### Listing all orders under a customer.
 
 1. Listing all orders with or without aliasing.
 
     1. Prerequisites: At least 2 customers and at most 99 customers is displayed in the customer list.
-   
+
     2. Test case: `listorder 1` <br>
        Expected: All orders under the first customer are listed. A success message shown in the status message.
 
     3. Test case: `listo 2` <br>
        Expected: All orders under the second customer are listed. A success message shown in the status message.
-   
+
     4. Test case: `listo 100` <br>
        Expected: No change to the order list. Error details shown in the status message. Status bar remains the same.
 
@@ -1058,7 +1058,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
        Example `listorder 1`.
-       
+
     2. Test case: `filterorder completed` <br>
        Expected: Only completed orders remain in the order list. A success message shown in the status message.
 
@@ -1149,7 +1149,7 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `marko 0`<br>
       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
-   
+
 3. Marking an already completed order as completed.
 
     1. Prerequisites:
