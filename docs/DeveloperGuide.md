@@ -961,7 +961,7 @@ Team size: 5
    * **Description**: The current implementation allows users to key in an invalid date range for PENDING deliveries for the upcoming command without any warning.
    * **Tasks**:
      * We plan to add an error message when a user tries to use the upcoming command with an invalid date range where the `bef/DELIVERY_DATE_TIME` parameter has an earlier date and time than the `aft/DELIVERY_DATE_TIME` parameter.
-     * e.g. "Error: End date should be later than start date."
+     * e.g. "Warning: `The DELIVERY_DATE_TIME` value for the `aft/ DELIVERY_DATE_TIME` parameter should be earlier than the value for `bef/DELIVERY_DATE_TIME`."
 
 
 8. **Enhancement 8**: Allow for adding a supplier name with special characters.
