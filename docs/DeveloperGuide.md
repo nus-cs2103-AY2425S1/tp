@@ -69,7 +69,13 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" width="800" />
+
+<box type="info" seamless>
+
+**Note:** The `UiPart` class that UI components inherit from was removed from the class diagram to reduce clutter.
+
+</box>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VendorListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -123,7 +129,13 @@ How commands work:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="640" />
+
+<box type="info" seamless>
+
+**Note** To reduce visual clutter, auxiliary classes within the `Vendor`, `Event` and `Association` classes have been omitted from the diagram.
+
+</box>
 
 
 The `Model` component,
@@ -136,15 +148,6 @@ The `Model` component,
     * the current trailing index offset for assigned vendors/events in view mode as a `ObservableIntegerValue` object
 * stores a `UserPref` object that represents the user’s preferences. This is exposed as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `EventTory`, which `Vendor` and `Event` references. This allows `EventTory` to only require one `Tag` object per unique tag, instead of each `Event` and `Vendor` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 
 ### Storage component
 
@@ -181,15 +184,19 @@ Step 3. To unassign the `Event` from the vendor, use the command `unassign 1`. T
 
 The `AssignCommand` and `UnassignCommand` classes were introduced to represent these commands. To support parsing the arguments to both commands, the `AssignCommandParser` and `UnassignCommandParser` classes were added.
 
-For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command:
+For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command. The first sequence diagram shows what happens when a user enters the assign command:
 
-<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+<puml src="diagrams/AssignParserSequenceDiagram.puml" width="800" />
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `AssignCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+During the execution of the command itself, the behaviour of the command depends on the current view of the user, as shown in the following sequence diagram:
+
+<puml src="diagrams/AssignSequenceDiagram.puml" width="600" />
 
 #### Changes to Model
 
@@ -791,3 +798,8 @@ Enable users to unassign multiple vendors from an event or multiple events from 
 
 ### Enhanced Support for Foreign Phone Numbers
 Improve the system’s ability to handle phone numbers in various international formats and with non-standard characters. This includes recognizing and storing diverse formats such as country codes, extensions, and special characters to accommodate a wider range of contact details. The current approach relies on users adding these specifiers without symbols or using tags to identify them, which can be confusing and cumbersome.
+
+### Case Sensitivity for Commands
+Make commands case-insensitive to allow users more input flexibility e.g. accidentally hitting the shift key midway through typing a command word.
+* Current command words e.g. `create`, `list` require user inputs to be strictly lowercase.
+* `lISt`, `List` or `LIST` would not be recognised as valid commands.
