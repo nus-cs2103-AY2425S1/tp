@@ -858,7 +858,6 @@ testers are expected to do more *exploratory* testing.
    - mark a task as done: `mark-task` or `mtask`
    - unmark a task as done: `unmark-task` or `untask`
    - list all task: `list-tasks` or `ltasks`
-   - add a vendor: `add-vendor` or `addv`
    - assign a person as a vendor: `assign-vendor` or `asv`
    - unassign a person as a vendor: `unassign-vendor` or `uv`
    - create a wedding: `create-wedding` or `cw`
@@ -910,6 +909,7 @@ testers are expected to do more *exploratory* testing.
       * `find n/` (where name keyword is blank)
       * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in Wedlinker)
 
+      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
@@ -931,6 +931,7 @@ testers are expected to do more *exploratory* testing.
         * `find a/` (where name keyword is blank)
         * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in Wedlinker)
 
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
@@ -952,7 +953,7 @@ testers are expected to do more *exploratory* testing.
         * `find p/` (where name keyword is blank)
         * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in Wedlinker)
 
-
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
@@ -974,6 +975,7 @@ testers are expected to do more *exploratory* testing.
         * `find e/` (where email keyword is blank)
         * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in Wedlinker)
 
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
@@ -998,6 +1000,8 @@ testers are expected to do more *exploratory* testing.
         * `find`
         * `find t/` (where tag keyword is blank)
         * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in Wedlinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
@@ -1029,6 +1033,8 @@ testers are expected to do more *exploratory* testing.
         * `find w/` (where wedding keyword is blank)
         * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in Wedlinker)
 
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
 <br>
 
 7. Finding a person by task
@@ -1052,6 +1058,48 @@ testers are expected to do more *exploratory* testing.
         * `find`
         * `find tk/` (where task keyword is blank)
         * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in Wedlinker)
+       
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command. 
+
+<br>
+
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `edit 1 p/9927364`<br>
+       Expected: First contact has their phone number updated to `9927364`. Details of the edited contact shown in the status message.
+       List of `Persons` is updated to show the first contact's new details.
+
+    3. Test case: `edit 2 a/Blk 99, Adams Avenue e/newemail@gmail.com` (assuming there are at least 2 people in the current `Person` list displayed) <br>
+       Expected: Second contact has their address updated to `Blk 99, Adams Avenue` and their email updated to `newemail@gmail.com`. Details of the edited contact shown in the status message.
+       List of `Persons` is updated to show the second contact's new details.
+
+    4. Incorrect delete commands to try:
+        * `edit`
+        * `edit 1` (where no prefixes are specified)
+        * `edit x a/Blk 99` (where x is an integer larger than the list size)
+        * `edit 1 tk/XXX` (where tk/ is the task prefix, which the edit command does not support - similarly, can test w/ and t/ prefixes)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br> 
+
+2. Editing a person when a filtered list is being shown.
+
+    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    Multiple persons in the list, but not the same number as the list of all contacts.
+
+       1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
+       Refer to the [find command](#finding-a-person) for more details. 
+
+    2. Valid test cases similar to 1.2 and 1.3 of [Editing a person](#editing-a-person) can be tested in filtered view.
+
+    3. Incorrect test cases similar to 1.4 of [Editing a person](#editing-a-person) can be tested in filtered view, accounting for the lesser
+       number of `Persons` in the currently displayed list.
+
 
 <br>
 
@@ -1069,11 +1117,13 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try:
        * `delete`
-       * `delete x` (where x is an integer is larger than the list size)
+       * `delete x` (where x is an integer larger than the list size)
        * `delete e` (where e is a string, a non-integer, or any other data type)
        * `delete 1 random` (where the list of persons has at least 1 person, and random is an extraneous input of any data type) <br>
        
         Expected: Similar to previous.
+
+<br>
 
 2. Deleting a person when a filtered list is being shown
 
