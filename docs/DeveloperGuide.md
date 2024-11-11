@@ -18,8 +18,8 @@
    5. [Storage Component](#storage-component)
    6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [(Proposed) Undo/redo feature](#proposed-undoredo-feature)
-   2. [(Proposed) Data archiving](#proposed-data-archiving)
+   1. [Add Patient Feature](#add-patient-feature)
+   2. [Add Appointment Feature](#add-appointment-feature)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix](#appendix)
@@ -249,8 +249,8 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
    Uses the `index` from the parser to locate the patient in the address book.
 
 2. **Create New Person Instance with Appointment**:
-    - Combines patient information with the new `Appointment` details.
-    - Creates an updated `Person` instance, including the appointment data.
+    - utilises patient information from the current patient (identified by the index) and the new `Appointment` details.
+    - Creates an updated `Person` instance with patient information and appointment instance.
 
 3. **Replace Existing Patient Record**:
     - The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
@@ -994,38 +994,54 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** WardWatch shows the message `Displayed all appointments` and the appointment list will show all appointments.
       <br><br>
 
-## **Appendix: Efforts**
+# Appendix: Efforts
 
-This appendix provides an overview of the effort and complexity involved in modifying the original AB3 (Address Book Level 3) to create WardWatch. WardWatch extends AB3’s basic structure to support a healthcare-focused system, which manages multiple entity types and introduces new functionalities like handling patient information, medications, and appointments.
+This section presents an overview of the work invested by our team in developing WardWatch. We will discuss the complexity and scope, obstacles encountered, and effort required to bring this project to completion.
 
-### Logic (Parser)
-1. The Parser component required significant modifications to accommodate the new entity types and fields introduced in WardWatch. Challenges included:
+## Complexity and Scope
+WardWatch expands on the Person entity originally found in AB3 by adding new entities, such as Appointment and Medication, to meet healthcare-specific demands. These additions introduced new requirements for feature interactions, data management, and storage, which proved more intricate than initially expected.
 
-    * **Tokenization**: Setting specific conditions for the tokenizer to handle new fields, such as medication and appointment, was complex. This required carefully configuring the tokenizer to recognize and differentiate between new input formats and ensure accurate data processing.
-    * **Input Validation**: To handle healthcare-related data, validation had to be strict to avoid incorrect entries. This involved refining the Parser logic to enforce stricter data checks than AB3, requiring additional time to test and ensure robust error handling.
+Beyond adapting AB3’s original features to better fit our target users, WardWatch introduces numerous commands to enhance the application’s usability, particularly for managing patient information and healthcare operations. Integrating these features smoothly with existing functionality demanded considerable attention to detail.
 
-2. The FindCommandParser was challenging to implement as we wanted the command to be able to search different fields of patients, which meant that there were many different scenarios we had to account for. This increase in complexity made it harder for us to ensure that error inputs would fail graciously, as there were now more cases to consider.
+While each of us contributed fewer lines of code than in individual assignments, the group project required substantial coordination and teamwork. This collaboration was essential to ensure cohesive integration and functionality across all new features.
 
-### Logic (Command)
-1. Creating new commands, especially the AddAppointment and AddMedication commands, presented unique challenges:
-    * **Command Structure Adaptation**: Extending the existing command structure for WardWatch was necessary to support new types of commands without impacting AB3’s base functionality. This required carefully designing new command classes to integrate seamlessly with existing entities.
-    * **Difficulty in Implementing AddAppointment**: The AddAppointment command was particularly challenging because it required understanding how to schedule and validate appointments within the existing architecture. This command also had to be compatible with patient data, ensuring appointments were correctly linked.
+## Effort Invested
 
-### Model
-1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
-   * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
+### Improvements to Existing Features
 
-2. We had difficulty trying to implement a `SortedList` that was meant to keep track of the schedules that are meant to be shown, and returning them in a sorted manner. Challenges included:
-   * **List type**: Although it might have been more intuitive to create a `FilteredList` of `Appointment` rather than `Person`, we require certain details about the patient. Hence, we had to make the list keep track of `Person` to ensure this functionality.
-   * **Sorting a filtered list**: As we wanted to have the appointments be returned in order, we had to sort the list. However, we could not find a way to do this seamlessly, other than to create a `filteredList` and sort it from there. This could potentially be because of our lack of familiarity with `javaFX`.
-   
-### Storage
-1. With the addition of the `Appointment` class, we had to learn how the JSON format worked, and how we could utilise its functionalities to allow for the successful storing and reading of data, now that every `Person` has an `Appointment` field.
-2. It was necessary to get a basic understanding of how JSON files work. Upon creating our new Json class that adapts to appointment, a weak understanding of `@JsonCreator` property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
+**New Patient Data Fields**  
+To meet the requirements of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments were incorporated to provide a more comprehensive patient profile.
 
-### UI
-1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
-2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
-3. Choice or colour to make the app aesthetic is also non-trivial as it is difficult to find matching colours that are aesthetic.
-4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements.
+**Enhanced Search Capabilities**  
+Our team upgraded the find command from AB3 to offer greater flexibility, allowing searches by not only name but also fields like diagnosis and medications. The enhanced find feature also enables filtering by specific criteria, which involved a full redesign of the search logic and thorough testing.
 
+**User Interface (UI) Enhancements**  
+We revamped the interface to align with WardWatch’s new features and a healthcare-oriented theme. Additionally, the UI logic was refined to enable future developers to make changes with ease.
+
+### Newly Added Features
+
+**Appointment and Medication Tracking**  
+The appointment tracking features represent one of the most significant additions, necessitating major changes to existing structures and multiple new commands to manage appointment schedules. This feature was the most complex and required a substantial effort to coordinate data interactions across various entities.
+
+## Challenges Encountered
+
+**Understanding the AB3 Codebase**  
+One major hurdle was grasping the existing AB3 codebase, including the structure, class dependencies, and functionality. This required us to carefully analyze how existing features would interact with our additions, which took considerable time and planning.
+
+**Data Interaction Between New and Existing Entities**  
+Linking new entities like Appointment and Medication with the Person entity required a thoughtful approach. We needed to create a clear data structure to maintain relationships without introducing dependencies that could hinder usability.
+
+**UI Space Constraints**  
+Designing a user-friendly interface within limited screen space was a significant challenge. We needed to balance providing sufficient information with maintaining a streamlined layout. After several iterations, we finalized a design that offers essential data without cluttering the interface.
+
+**Implementation of Appointments and Medications**  
+The appointment and medication functionalities were more intricate than anticipated. These features required careful planning to account for various scenarios in a collaborative environment. Regular discussions helped distribute tasks and address any arising conflicts efficiently.
+
+**Data Management Strategy**  
+Deciding on a data management structure for appointments and medications presented additional challenges. We carefully considered how to balance the storage of patient data within main entities or across relevant contexts.
+
+**Debugging and Testing**  
+Testing and debugging were crucial for ensuring a stable and smooth experience for users. While unit testing was straightforward, identifying edge cases was challenging. Rigorous testing was essential to guarantee proper error handling and avoid application crashes due to unexpected inputs.
+
+## Achievements
+In conclusion, our team manged to design and implement features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and medication management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
