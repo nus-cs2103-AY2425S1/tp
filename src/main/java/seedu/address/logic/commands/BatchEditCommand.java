@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,6 +34,8 @@ public class BatchEditCommand extends Command {
     public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED = "Tag Changed: %s -> %s";
     public static final String MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG = "No person with Tag(s) %s is found";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Tag oldTag;
     private final Tag newTag;
     private final PersonContainsTagsPredicate predicate;
@@ -55,6 +59,7 @@ public class BatchEditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("----------------Execute batch-edit----------------");
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
@@ -62,33 +67,46 @@ public class BatchEditCommand extends Command {
         StringBuilder feedbackToUser = new StringBuilder();
 
         if (nonObservableList.isEmpty()) {
+            logger.info("No Person edited");
             return new CommandResult(String.format(MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG, oldTag));
         }
         feedbackToUser.append(String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, oldTag, newTag));
 
-        for (Person person : nonObservableList) {
-            if (person instanceof Student) {
-                Student student = (Student) person;
-                Student updatedStudent = changeTagStudent(student, oldTag, newTag);
-                model.setPerson(person, updatedStudent);
-            } else {
-                Person updatedPerson = changeTagPerson(person, oldTag, newTag);
-                model.setPerson(person, updatedPerson);
-            }
+        switchTagListOfPerson(nonObservableList, model);
 
-        }
+        logger.info("Person(s) edited: "
+                + nonObservableList.stream().map(person -> person.getName().toString()).toList());
 
         PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));
         model.updateFilteredPersonList(newPredicate);
+
+        logger.info("----------------Execute batch-edit successful----------------");
         return new CommandResult(feedbackToUser.toString());
     }
 
-    private Person changeTagPerson(Person person, Tag oldTag, Tag newTag) {
+    private void switchTagListOfPerson(ArrayList<Person> personList, Model model) {
+        for (Person person : personList) {
+            if (person instanceof Student student) {
+                Student updatedStudent = changeTagStudent(student);
+                model.setPerson(person, updatedStudent);
+            } else {
+                Person updatedPerson = changeTagPerson(person);
+                model.setPerson(person, updatedPerson);
+            }
+        }
+    }
+
+    private Set<Tag> switchTag(Person person) {
         Set<Tag> withoutOldTag = person
                 .getTags()
                 .stream()
-                .filter(tag -> !tag.equals(oldTag)).collect(Collectors.toSet());
-        withoutOldTag.add(newTag);
+                .filter(tag -> !tag.equals(this.oldTag)).collect(Collectors.toSet());
+        withoutOldTag.add(this.newTag);
+        return withoutOldTag;
+    }
+
+    private Person changeTagPerson(Person person) {
+        Set<Tag> newTagList = switchTag(person);
         return new Person(
                 person.getName(),
                 person.getSex(),
@@ -96,16 +114,12 @@ public class BatchEditCommand extends Command {
                 person.getPhone(),
                 person.getEmail(),
                 person.getAddress(),
-                withoutOldTag
+                newTagList
         );
     }
 
-    private Student changeTagStudent(Student student, Tag oldTag, Tag newTag) {
-        Set<Tag> withoutOldTag = student
-                .getTags()
-                .stream()
-                .filter(tag -> !tag.equals(oldTag)).collect(Collectors.toSet());
-        withoutOldTag.add(newTag);
+    private Student changeTagStudent(Student student) {
+        Set<Tag> newTagList = switchTag(student);
         return new Student(
                 student.getName(),
                 student.getSex(),
@@ -113,7 +127,7 @@ public class BatchEditCommand extends Command {
                 student.getPhone(),
                 student.getEmail(),
                 student.getAddress(),
-                withoutOldTag,
+                newTagList,
                 student.getAttendanceCount()
         );
     }
