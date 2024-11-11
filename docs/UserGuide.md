@@ -17,7 +17,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
    1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java 17
    1. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.4).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.5).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your F.A.R.T.
    1. A good home folder would be the Downloads folder as it makes the next step easier.
@@ -312,7 +312,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Uploading a client's profile picture \[WINDOWS ONLY\]: `upload`
+## Uploading a client's profile picture: `upload` \[WINDOWS ONLY\]
 
 Too many clients? Keep track of their faces by uploading a profile picture of them.
 
@@ -322,7 +322,9 @@ Format: `upload INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
+<div markdown="block" class="alert alert-info">
+
+**:bulb: Note!:**<br>
 
 * This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
 * The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend square images approximately 300px x 300px. You can achieve this by cropping with your computer's image editor or an online one like this one from [Adobe](https://www.adobe.com/express/feature/image/crop).
