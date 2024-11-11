@@ -165,7 +165,7 @@ The `add_guest` command creates and adds a new `Guest` object into the address b
 
 The sequence diagrams below provide an overview for the execution flow of an `add_guest` command.
 <br>
-In the diagrams below:
+Note: In the diagrams below,
 - Let **C** represent the command: "add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus"
 - Let **args** represent the arguments provided in the command: "n/Joe p/98765432 e/joe@gmail.com a/Nexus"
 
