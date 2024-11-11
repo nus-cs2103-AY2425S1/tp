@@ -226,6 +226,13 @@ Currently: The view wedding command in KnottyPlanners does not require a need fo
 
 Plan: To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
 
+2. Forced Deletion and Clearing
+
+Currently: To prevent accidental deletions and clearing of data in KnottyPlanners, a confirmation will be required from the user to ensure that the deletion or clearing is intentional.
+
+Plan: To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
+
+3. 
 // Support for Multi-Languages
  
 --------------------------------------------------------------------------------------------------------------------
