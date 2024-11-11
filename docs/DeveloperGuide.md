@@ -1533,14 +1533,27 @@ All _clients_ will be displayed in the client list panel.
 
 </box>
 
-#### Find a keyword within all [_clients_](#glossary-client) and [_rental information_](#glossary-rental-information)
+#### Find [_clients_](#glossary-client) based on criteria
 
-Finding a keyword from all _clients_ and _rental information_.
+Find _clients_ based on certain criteria such as **name contains `Amy`**, **is tagged with `Friends`**, etc.
+Additionally, find _clients_ whose details or _rental information_ contains a keyword.
 
 <box type="warning">
 
-**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ with names
-`Amy Tan` in the list.
+**Prerequisite**: List all _clients_ using the `list` command. Suppose the list contains the following clients
+
+1. `Amy Tan; Phone: 98765432; Email: amytan@example.com; Tags: [Rich]`
+   1. `Blk 321 Ang Mo Kio Ave 3, #09-123; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2500.00; Deposit: $7500.00; Customer List: Jackson;Yummi`
+   2. `Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2026; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Ryan Low;Matthew`
+   3. `BLK 2 Bishan; Rental Start Date: 01 Jan 2024; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: —`
+2. `Bernice Yu; Phone: 99272758; Email: berniceyu@email.com; Tags: [Friends][Rich]`
+   1. `Blk 321 Ang Mo Kio Ave 3, #09-123; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2500.00; Deposit: $7500.00; Customer List: Jackson;Yummi`
+   2. `BLK 1 Bishan; Rental Start Date: 01 Jan 2024; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Amy Tan;David`
+3. `Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Tags: [Friends]`
+   1. `Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Dec 2021; Rental End Date: 31 Dec 2025; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $4500.00; Customer List: Michelle`
+4. `David Li; Phone: 91031282; Email: lidavid@example.com; Tags: [Friends]`
+5. `Irfan Ibrahim; Phone: 92492021; Email: irfan@email.com; Tags: [Colleagues]`
+6. `Roy Balakrishnan; Phone: 92624417; Email: royb@email.com; Tags: [Colleagues]`
 
 </box>
 
@@ -1551,7 +1564,8 @@ Finding a keyword from all _clients_ and _rental information_.
 <box type="success">
 
 Clients whose details or rental information include the keyword `Amy Tan` will be displayed on the client list panel.
-Command success message will be displayed in the result display box.
+Command success message will be displayed in the result display box. 
+In this case, the clients `Amy Tan` and `Bernice Yu` will be displayed.
 
 </box>
 
@@ -1559,11 +1573,63 @@ Command success message will be displayed in the result display box.
 
 <box type="info" seamless>
 
-**Test case 2**: `find k/Yong Li`, given that no client within the list has name `Yong Li`
+**Test case 2**: `find n/Bernice`
+
+<box type="success">
+
+Clients whose name contain `Bernice` will be displayed on the client list panel.
+In this case, only the client `Bernice Yu` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `find e/@example.com`
+
+<box type="success">
+
+Clients whose email contain `@example.com` will be displayed on the client list panel.
+In this case, the clients `Amy Tan`, `Charlotte Oliveiro` and `David Li` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `find p/92492021`
+
+<box type="success">
+
+Clients whose phone number contain `92492021` will be displayed on the client list panel.
+In this case, only the client `Irfan Ibrahim` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `find t/Friends`
+
+<box type="success">
+
+Clients who are tagged with `Friends` will be displayed on the client list panel.
+In this case, the clients `Amy Tan`, `Bernice Yu`, `Charlotte Oliveiro` and `David Li` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `find t/Friend`
 
 <box type="wrong">
 
-No client or rental information matches the particular keyword `Yong Li`.
+No clients are tagged with `Friend` **exactly**.
 
 </box>
 
@@ -1571,11 +1637,11 @@ No client or rental information matches the particular keyword `Yong Li`.
 
 <box type="info" seamless>
 
-**Test case 3**: `find Amy`
+**Test case 7**: `find k/Yong Li`
 
 <box type="wrong">
 
-No prefix k/ given. An invalid command will be shown in the result display box.
+No client or rental information matches the keyword `Yong Li`.
 
 </box>
 
@@ -1583,7 +1649,31 @@ No prefix k/ given. An invalid command will be shown in the result display box.
 
 <box type="info" seamless>
 
-**Test case 4**: `find k/`
+**Test case 8**: `find Amy`
+
+<box type="wrong">
+
+No prefix given. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 9**: `find k/`
+
+<box type="wrong">
+
+Keywords cannot be empty. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 10**: `find`
 
 <box type="wrong">
 
@@ -1592,22 +1682,6 @@ No parameters given. An invalid command will be shown in the result display box.
 </box>
 
 </box>
-
-<box type="info" seamless>
-
-**Test case 5**: `find`
-
-<box type="wrong">
-
-No prefix and/or parameters given. An invalid command will be shown in the result display box.
-
-</box>
-
-</box>
-
-#### Find a information from all [_clients_](#glossary-client)
-
-<!-- TODO!! @Nathan follow format above for n/ e/ t/ p/ -->
 
 #### Deleting a [_client_](#glossary-client)
 
@@ -1745,7 +1819,7 @@ Step 12: Press ↓ down-arrow key on the keyboard.
 
 <box type="success">
 
-`cdelete 3` is shown in the command box.
+`cdelete 2` is shown in the command box.
 
 </box>
 

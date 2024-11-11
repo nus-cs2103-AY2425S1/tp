@@ -872,7 +872,7 @@ Please set up the following commands before proceeding with the example inputs a
 9. **Expected**: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. **Expected**: `rview 1` is shown in the command box.
 11. **Expected**: `list` is shown in the command box.
-12. **Expected**: `cdelete 3` is shown in the command box.
+12. **Expected**: `cdelete 2` is shown in the command box.
 13. **Expected**: : Nothing is shown in the command box.
 
 </box>
