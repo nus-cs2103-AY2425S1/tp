@@ -429,6 +429,7 @@ Format: `restore`
 **:information_source: Notes about the `restore` command:**<br>
 
 * Restores the last person deleted from the address book by the [`delete`](#deleting-a-person--delete) command.
+* The restored person will be added to the end of the current list.
 * Only works if person has been deleted by the 'delete' command within the session.
 * Does not work if same person has been added to the address book after deletion using add command.
 
