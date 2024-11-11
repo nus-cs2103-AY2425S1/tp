@@ -66,7 +66,7 @@ public class Role implements Comparable<Role> {
     public static boolean isValidRoleName(String test) {
         requireNonNull(test);
         return Arrays.stream(AVAILABLE_ROLES)
-                .map(role -> role.toLowerCase())
+                .map(String::toLowerCase)
                 .anyMatch(role -> role.equals(test.trim().toLowerCase()));
     }
 
@@ -82,13 +82,7 @@ public class Role implements Comparable<Role> {
     }
 
     private int assignRoleIndex(String roleName) {
-        assert roleName.equals(PRESIDENT) // must be case sensitive
-                || roleName.equals(VICE_PRESIDENT)
-                || roleName.equals(ADMIN)
-                || roleName.equals(MARKETING)
-                || roleName.equals(EVENTS_INTERNAL)
-                || roleName.equals(EVENTS_EXTERNAL)
-                || roleName.equals(EXTERNAL_RELATIONS);
+        assert Arrays.asList(AVAILABLE_ROLES).contains(roleName);
 
         int errorStatus = -1;
 
