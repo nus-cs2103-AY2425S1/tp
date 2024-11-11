@@ -1,6 +1,6 @@
 @startuml
 start
-:User enters command add_contact;
+:User enters command filter;
 if () then ([PREFIX ap/,  b/, or t/ is present])
     :Parse command arguments;
     if () then ([All fields are valid])
