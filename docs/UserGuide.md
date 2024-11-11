@@ -15,8 +15,8 @@ Overview of key features:
 1. [How to get started](#1-how-to-get-started)
 2. [Setting up VendorVault](#2-setting-up-vendorvault)
 3. [Features](#3-features)
-    - 3.1. [Understanding the Command Syntax](#3-1-understanding-the-command-syntax)
-    - 3.2. [General commands](#3-2-general-commands)
+    - &#8203; 3.1. [Understanding the Command Syntax](#3-1-understanding-the-command-syntax)
+    - &nbsp; 3.2. [General commands](#3-2-general-commands)
         - 3.2.1. [Viewing help](#3-2-1-viewing-help-help)
         - 3.2.2. [Viewing all deliveries and suppliers](#3-2-2-viewing-all-deliveries-and-suppliers-list-a)
         - 3.2.3. [Clearing all suppliers and deliveries](#3-2-3-clearing-all-suppliers-and-deliveries-clear)
@@ -844,14 +844,18 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Can I undo my commands?
+**A**: Currently there isn't a way to undo your commands. Hence, be careful before inputting in your commands!
+
+
 [[Back to Table of Contents]](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 # 6. Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application window will open off-screen. The remedy is to delete the `preferences.json` file created by the application and then run the application again.
+2. **Minimizing the Help Window**: If the Help Window is minimized, and you try to reopen it (using the help command, Help menu, or F1), it will continue to stay minimized. To fix this, you need to manually restore the minimized Help Window.
 
 [[Back to Table of Contents]](#table-of-contents)
 
