@@ -125,4 +125,5 @@ public interface Model {
      * Replaces the current student list with the given list.
      */
     void replaceStudentList(ObservableList<Student> studentList);
+
 }

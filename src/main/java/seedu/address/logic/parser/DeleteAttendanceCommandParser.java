@@ -28,6 +28,7 @@ public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCom
                 PREFIX_DATE
         );
         argMultimap.verifyNoInvalidPrefixesFor(args);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENT_NUMBER, PREFIX_DATE);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

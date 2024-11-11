@@ -21,6 +21,7 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
                 PREFIX_NAME, PREFIX_STUDENT_NUMBER
         );
         argMultimap.verifyNoInvalidPrefixesFor(userInput);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENT_NUMBER);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
