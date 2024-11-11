@@ -22,7 +22,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     - **To check:** Open a command terminal (Terminal for macOS, Command Prompt for Windows), and type `java -version` to check if Java is installed and which version is installed.
     - **To install:** Visit Oracle’s Java 17 download page. Download the version for your operating system (Windows, macOS, or Linux). Follow the instructions provided by Oracle to install Java 17.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
