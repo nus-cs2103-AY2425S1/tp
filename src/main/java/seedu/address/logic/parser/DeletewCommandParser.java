@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.isNumeric;
 
 import java.util.Arrays;
 
@@ -10,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 
 /**
- * Parses input arguments and creates a new DeletewCommand object
+ * Parses input arguments and creates a new {@code DeletewCommand} object
  */
 public class DeletewCommandParser implements Parser<DeletewCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the DeletewCommand
-     * and returns a DeletewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code DeletewCommand}
+     * and returns a {@code DeletewCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeletewCommand parse(String args) throws ParseException {
@@ -42,9 +43,4 @@ public class DeletewCommandParser implements Parser<DeletewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletewCommand.MESSAGE_USAGE), pe);
         }
     }
-
-    private boolean isNumeric(String str) {
-        return str != null && str.matches("-?\\d+");
-    }
-
 }

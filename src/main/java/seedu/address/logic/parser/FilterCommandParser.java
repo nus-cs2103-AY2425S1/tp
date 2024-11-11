@@ -19,12 +19,17 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 
 /**
- * Parses input arguments and creates a new FilterCommand object.
+ * Parses input arguments and creates a new {@code FilterCommand} object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     public static final String MESSAGE_ROLE_CANNOT_BE_EMPTY = "Inputted role to be filtered cannot be blank.";
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the {@code FilterCommand}
+     * and returns an {@code FilterCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public FilterCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
@@ -79,14 +84,22 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     /**
-     * Returns true if at least one of the prefixes contains values in the argument multimap.
+     * Checks if all specified prefixes are present in the provided {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap {@code ArgumentMultimap} containing the prefixes and their values.
+     * @param prefixes Array of {@code Prefix} objects to check for presence in {@code argumentMultimap}.
+     * @return true if all specified prefixes are present, false otherwise.
      */
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
-     * Returns true if any of the present prefixes has an empty value.
+     * Checks if any of the prefixes has an empty value.
+     *
+     * @param argumentMultimap {@code ArgumentMultimap} containing the prefixes and their values.
+     * @param prefixes Array of {@code Prefix} objects to check for presence in {@code argumentMultimap}.
+     * @return true if any of the present prefixes has an empty value, false otherwise.
      */
     private static boolean areAnyPrefixesEmpty(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes)

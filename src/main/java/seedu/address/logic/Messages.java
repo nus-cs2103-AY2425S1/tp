@@ -73,7 +73,7 @@ public class Messages {
     }
 
     /**
-     * Formats a {@code Wedding} for display to the user.
+     * Formats the {@code wedding} for display to the user.
      */
     public static String format(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
@@ -95,7 +95,4 @@ public class Messages {
                 .map(Messages::format) // Calls the static format method in Wedding for each wedding
                 .collect(Collectors.joining(", \n"));
     }
-
-
-
 }

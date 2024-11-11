@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.isNumeric;
 
 import java.util.Arrays;
 
@@ -11,13 +12,13 @@ import seedu.address.model.person.Name;
 import seedu.address.model.wedding.NameMatchesWeddingPredicate;
 
 /**
- * Parses input arguments and creates a new ViewwCommand object
+ * Parses input arguments and creates a new {@code ViewwCommand} object
  */
 public class ViewwCommandParser implements Parser<ViewwCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewwCommand
-     * and returns a ViewwCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code ViewwCommand}
+     * and returns a {@code ViewwCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewwCommand parse(String args) throws ParseException {
@@ -44,9 +45,5 @@ public class ViewwCommandParser implements Parser<ViewwCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewwCommand.MESSAGE_USAGE), e);
         }
-    }
-
-    private boolean isNumeric(String str) {
-        return str != null && str.matches("-?\\d+");
     }
 }

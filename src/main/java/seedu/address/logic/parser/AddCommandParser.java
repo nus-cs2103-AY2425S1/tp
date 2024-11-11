@@ -23,13 +23,14 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new {@code AddCommand} object
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code AddCommand}
+     * and returns an {@code AddCommand} object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
@@ -70,8 +71,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Checks if all specified prefixes are present in the provided {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap {@code ArgumentMultimap} containing the prefixes and their values.
+     * @param prefixes Array of {@code Prefix} objects to check for presence in {@code argumentMultimap}.
+     * @return true if all specified prefixes are present, false otherwise.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
