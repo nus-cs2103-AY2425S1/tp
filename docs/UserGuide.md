@@ -94,7 +94,7 @@ Before we proceed with the commands, here are some important points to note on t
     * Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
     * Be registered in the system <br>
 
-
+<br>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
