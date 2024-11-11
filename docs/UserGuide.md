@@ -127,6 +127,8 @@ Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+  ![add John Doe](images/ownerJohnDoe.jpeg)  
+<div style="text-align: center;"><em>John Doe added to owners list</em></div>
 
 #### <u>Adding a pet</u>
 
@@ -158,8 +160,10 @@ Duplicate pets are not allowed in the system. Pets with identical name, breed, s
 Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
 
 Examples:
-* `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
 * `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
+* `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+    ![add Fluffy](images/petFluffy.png)
+<div style="text-align: center;"><em>Fluffy added to pets list</em></div>
 
 ### Linking owners and pets: `link`
 
@@ -237,7 +241,8 @@ Format:
 * `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol.
 
 Example:
-*  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
+*  `edit o2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd owner to be `91234567` and `johndoe@example.com` respectively as shown below.
+   ![edit John](images/editJohn.jpeg)
 
 #### <u>Editing a pet</u>
 
@@ -245,7 +250,8 @@ Format:
 * `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol.
 
 Example:
-*  `edit p2 n/Fluffy t/` Edits the name of the 2nd pet to be `Fluffy` and clears all existing tags.
+*  `edit p1 n/Kobi t/` Edits the name of the 1st pet to be `Kobi` and clears all existing tags as shown below.
+   ![edit Buddy](images/editp1.jpeg)
 
 ### Finding entities by name: `find`
 
