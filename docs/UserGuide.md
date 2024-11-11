@@ -9,11 +9,11 @@
 
 Are you a Singaporean private tutor who has trouble keeping track of your student's details? Ever thought of having an easier and more efficient way to keep track of students and their parents? Introducing GOATS!
 <br><br>
-The Greatest Offline Addressbook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of students information such as phone number, grades and education level, it also helps you access the students' parents information as well. GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
+The Greatest Offline AddressBook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of student information (such as phone number, grades and education level), it also helps you access your students' parents' information as well! GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
 <br><br>
-The GOATS app is intended for private tutors who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the command terminal. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional addressbook apps!
+The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the command terminal. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
 <br><br>
-This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use. If you are a beginner or a first-time user, we recommend that you start with the [Quick start] section. Otherwise, feel free to explore the various features either through the [Command Summary](#command-summary) or the Table of Contents right below this section.
+This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use. If you are a beginner or a first-time user, we recommend that you start with the [Quick start](#quick-start) section. Otherwise, feel free to explore the various features either through the [Command Summary](#command-summary) or the Table of Contents right below this section.
 <br><br><br>
 This User Guide also includes highlighted sections to aid in your reading:
 <br><br>
@@ -56,7 +56,7 @@ This User Guide also includes highlighted sections to aid in your reading:
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-   * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 edu/primary lt/wed:13:00 t/friend t/colleague` : Adds a student named James Ho in GOATS.
+   * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague` : Adds a student named James Ho in GOATS.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all contacts.
    * `exit` : Exits the app.
@@ -67,30 +67,30 @@ This User Guide also includes highlighted sections to aid in your reading:
 ## Command summary
 
 
-| Action                         | Format (Example)                                                                                                                                                                                                                 |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add Parent**                 | `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` (`addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`)                                                                           |
-| **Add Student**                | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/EDUCATION [t/TAG]…` (`addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 edu/primary lt/wed:13:00 t/friend t/colleague`) |
-| **Archive**                    | `archive INDEX [MORE_INDICES]…` (`archive 1 2 3 4`)                                                                                                                                                                             |
-| **Assign Grade**               | `grade INDEX g/GRADE_index` (`grade 1 g/1`)                                                                                                                                                                                      |
-| **Clear**                      | `clear`                                                                                                                                                                                                                          |
-| **Delete**                     | `delete INDEX [MORE_INDICES]…` (`delete 1 2 3 4`)                                                                                                                                                                               |
-| **Edit**                       | `INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION] [t/TAG]…` (`edit 1 p/91234567 e/johndoe@example.com`)                                                                                          |
-| **Exit**                       | `exit`                                                                                                                                                                                                                           |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]…` (`find James Jake`)                                                                                                                                                                             |
-| **Find By Lesson Day**         | `findday KEYWORD [MORE_KEYWORDS]…` (`findday Tuesday`)                                                                                                                                                                          |
-| **Find By Tag**                | `findtag KEYWORD [MORE_KEYWORDS]…` (`findtag math science`)                                                                                                                                                                     |
-| **Help**                       | `help`                                                                                                                                                                                                                           |
-| **Link Student To Parent**     | `link ch/STUDENT_NAME pa/PARENT_NAME` (`link ch/James Ho pa/Jane Doe`)                                                                                                                                                           |
-| **List**                       | `list`                                                                                                                                                                                                                           |
-| **List Archive**               | `listarchive`                                                                                                                                                                                                                    |
-| **List Students**              | `liststudents`                                                                                                                                                                                                                   |
-| **List Parents**               | `listparents`                                                                                                                                                                                                                    |
-| **Pin**                        | `pin INDEX [MORE_INDICES]…` (`pin 1 2 3 4`)                                                                                                                                                                                     |
-| **Sort**                       | `sort`                                                                                                                                                                                                                           |
-| **Unarchive**                  | `unarchive INDEX [MORE_INDICES]…` (`unarchive 1 2 3 4`)                                                                                                                                                                         |
-| **Unlink Student from Parent** | `unlink ch/STUDENT_NAME` (`unlink ch/James Ho`)                                                                                                                                                                                  |
-| **Unpin**                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                 |
+| Action                         | Format (Example)                                                                                                                                                                                                                     |
+| ------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Parent**                 | `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` (`addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`)                                                                                |
+| **Add Student**                | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/EDUCATION_LEVEL [t/TAG]…` (`addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague`) |
+| **Archive**                    | `archive INDEX [MORE_INDICES]…` (`archive 1 2 3 4`)                                                                                                                                                                                  |
+| **Assign Grade**               | `grade INDEX g/GRADE_INDEX` (`grade 1 g/1`)                                                                                                                                                                                          |
+| **Clear**                      | `clear`                                                                                                                                                                                                                              |
+| **Delete**                     | `delete INDEX [MORE_INDICES]…` (`delete 1 2 3 4`)                                                                                                                                                                                    |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION_LEVEL] [t/TAG]…` (`edit 1 p/91234567 e/johndoe@example.com`)                                                                                    |
+| **Exit**                       | `exit`                                                                                                                                                                                                                               |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]…` (`find James Jake`)                                                                                                                                                                                  |
+| **Find By Lesson Day**         | `findday KEYWORD [MORE_KEYWORDS]…` (`findday Tuesday`)                                                                                                                                                                               |
+| **Find By Tag**                | `findtag KEYWORD [MORE_KEYWORDS]…` (`findtag math science`)                                                                                                                                                                          |
+| **Help**                       | `help`                                                                                                                                                                                                                               |
+| **Link Student To Parent**     | `link ch/STUDENT_NAME pa/PARENT_NAME` (`link ch/James Ho pa/Jane Doe`)                                                                                                                                                               |
+| **List**                       | `list`                                                                                                                                                                                                                               |
+| **List Archive**               | `listarchive`                                                                                                                                                                                                                        |
+| **List Students**              | `liststudents`                                                                                                                                                                                                                       |
+| **List Parents**               | `listparents`                                                                                                                                                                                                                        |
+| **Pin**                        | `pin INDEX [MORE_INDICES]…` (`pin 1 2 3 4`)                                                                                                                                                                                          |
+| **Sort**                       | `sort`                                                                                                                                                                                                                               |
+| **Unarchive**                  | `unarchive INDEX [MORE_INDICES]…` (`unarchive 1 2 3 4`)                                                                                                                                                                              |
+| **Unlink Student from Parent** | `unlink ch/STUDENT_NAME` (`unlink ch/James Ho`)                                                                                                                                                                                      |
+| **Unpin**                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                      |
 
 ## Features
 
@@ -164,6 +164,33 @@ Format: `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 * `addparent n/Billie t/friend e/billie@example.com a/Newgate Prison p/1234567 t/criminal`
 </box>
 
+### Editing a person : `edit`
+
+Edits an existing person in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION] [t/TAG]…`
+
+<box type="info">
+
+**Notes about `edit`:**
+Edits the person at the specified `INDEX`.
+
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
+  </box>
+
+<box type="definition">
+
+**Examples:**
+Assuming a list of 7 contacts in the main list,
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+  </box>
+
 ### Assigning grade to students: `grade`
 
 Assigns grade to students in the address book.
@@ -189,12 +216,6 @@ The grade index ranges from 0 to 4:
 * `grade 1 g/1` changes grade of first person on list to `Failing`
 * `grade 2 g/4` changes grade of second person on list to `Excellent`<br>
   </box>
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
 
 ### Deleting a person : `delete`
 
@@ -229,32 +250,11 @@ will be unlinked from parent `John`. However, if `Betsy` is deleted, then only `
 The link between `John` and `James` remain intact.
 </box>
 
-### Editing a person : `edit`
+### Clearing all entries : `clear`
 
-Edits an existing person in the address book.
+Clears all entries from the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION] [t/TAG]…`
-
-<box type="info">
-
-**Notes about `edit`:**
-Edits the person at the specified `INDEX`.
-
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
-</box>
-
-<box type="definition">
-
-**Examples:**
-Assuming a list of 7 contacts in the main list,
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-</box>
+Format: `clear`
 
 ### Locating persons by name: `find`
 
