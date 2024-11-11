@@ -32,7 +32,7 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
    If you don't know what that means, fret not - see [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt).
 
 
-5. Type `java -jar addressbook.jar` and hit enter.<br>
+5. Type `java -jar tahub.jar` and hit enter.<br>
    A GUI similar to the below should appear in a few seconds.<br>
    Note how the app contains some sample data.<br>
 
@@ -86,11 +86,13 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 
 **Additional Notes**
 
-These apply to all commands unless specified otherwise.
+Here are more detailed notes regarding certain parameters that apply to all commands unless specified otherwise.
+
+* When specifying an index, leading zeroes are ignored, i.e. `001` is equivalent to `1`.
 
 * When specifying an index, it should be between 1 and 2147483647, inclusive. The current error message
 may not reflect this requirement, but changes for clarification are planned in the future.
-* When specifying an index, leading zeroes are ignored, i.e. `001` is equivalent to `1`.
+
 * When targeting a student by their index, TAHub uses the indexes **as currently displayed** on the
 student list. For example, if you run a `find` command that only lists one student out of originally five, trying
 to select a student at index 2 will fail.
