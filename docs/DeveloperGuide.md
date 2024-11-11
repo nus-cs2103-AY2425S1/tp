@@ -32,6 +32,7 @@ title: Developer Guide
 
 
 ---
+<div class="page-break"></div>
 
 ## **Acknowledgements**
 
@@ -47,6 +48,7 @@ as well as the JavaDocs for code written by BuffWuff1712. ChatGPT was also used 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Design**
 
@@ -114,6 +116,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div class="page-break"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F15-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -145,6 +149,8 @@ How the parsing works:
 
 * When called upon to parse a user command, the `PROpertyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PROpertyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div class="page-break"></div>
 
 ### Model component
 
@@ -182,6 +188,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Implementation**
 
@@ -249,6 +256,7 @@ Similarly, the sorting process within the `Model` component is shown below:
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -283,6 +291,8 @@ simpler to use while being even more functional than alternatives on the market.
 * Keep track of the various landlords who own the houses
 * Easy for agent to remember who to try to sell unit to
 * Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
+
+<div class="page-break"></div>
 
 ### User stories
 
@@ -334,6 +344,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
 | `*`      | user                                    | search up other client information other than name         | find clients based on other information                      |
 | `*`      | user with many clients                 | find and search client besides the name                    | find clients more easily with different kinds of input       |
+
+<div class="page-break"></div>
 
 ### Use cases
 
@@ -808,6 +820,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Priority Tagging**: The act of marking certain clients to appear at the top of the client list for quick access.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Appendix B: Planned Enhancements**
 
@@ -862,6 +875,7 @@ This enhancement will improve the user experience by informing the user when the
 and prevent confusion when the user checks their CSV file to find there has been no updates to its contents.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Appendix C: Instructions for Manual Testing**
 
