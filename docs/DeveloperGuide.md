@@ -1101,7 +1101,7 @@ testers are expected to do more *exploratory* testing.
       A new wedding with name `NEW WEDDING` is added to the `Wedding` list. The new contact, `Tatiana Komarova`, will be tagged with `NEW TAG` and
       will be assigned to the wedding `NEW WEDDING`.
 
-   4. Test case (following Test Case 4): `add n/Tatiana Komarova` <br>
+   4. Test case (following Test case 4): `add n/Tatiana Komarova` <br>
       Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in Wedlinker.
 
    5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in Wedlinker) <br>
@@ -1200,23 +1200,51 @@ testers are expected to do more *exploratory* testing.
 ### Vendor Features
 
 #### Assigning vendors
+   
+<box type="info" seamless>
+   **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+   </box>
 
 1. Assigning a `Person` as a vendor
-
-<box type="info" seamless>
-      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
-</box>
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, not all of whom are `Vendors`.
 
    2. Test case: `assign-vendor 2` (assuming the second `Person` **is not** a `Vendor`) <br>
       Expected: Contact 2 is updated to be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor assignment.
 
-   3. Test case: `assign-vendor 1` (assuming the first `Person` **is** a `Vendor`) <br> 
-      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is already a `Vendor`.
+   3. Test case (following Test case 2): `assign-vendor 2` (assuming the second `Person` **is now** a `Vendor`) <br> 
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 2 is already a `Vendor`.
 
    4. Test case: `assign-vendor` <br>
          Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
+
+<br>
+
+#### Unssigning vendors
+
+<box type="info" seamless>
+      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+</box>
+
+1. Unassigning a `Person` as a vendor
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, some of whom are `Vendors`.
+
+   2. Test case: `unassign-vendor 1` (assuming the first `Person` **is** a `Vendor` with no tasks assigned) <br>
+      Expected: Contact 1 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor unassignment.
+
+   3. Test case (following Test case 2): `unassign-vendor 1` (assuming the first `Person` is now **no longer** a `Vendor`) <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is not a `Vendor`.
+
+   4. Test case: `unassign-vendor 4` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is a `Vendor` with tasks still assigned.
+
+   5. Test case: `unassign-vendor 4 f/` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      Expected: Contact 4 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. All previously assigned tasks are removed from contact 4.
+      Status message shows successful vendor unassignment.
+
+   6. Test case: `assign-vendor` <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
 
 <br>
 
