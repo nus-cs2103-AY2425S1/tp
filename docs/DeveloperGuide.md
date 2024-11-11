@@ -652,3 +652,8 @@ Even though this is vacuously true, we plan to make the displayed message when t
 2. Increase specificity of `Invalid Email` error message:<br/>
 The current error message for the `email` field in `add` and `edit` identifies the possible issues with the entered email, but does not specifically identify which part of the email input is violated. 
 We plan to make the error message more specific to let the user know of which exact part (e.g. `local-part` or `domain`) the email input is invalid.
+
+
+3. Increase length tolerance for `role`:<br/>
+Currently, the `role` field is restricted to a maximum of 20 characters. This was done to prevent clutter in the UI, since the team felt that it was sufficient at this point to impose a restriction that should not affect the vast majority of named roles.
+In the future, we plan to implement UI truncation measures to allow for users to specify roles that are longer than the current limit.
