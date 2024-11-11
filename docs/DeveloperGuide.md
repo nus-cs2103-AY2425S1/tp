@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -632,6 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Audit**: A record of all changes made in the system, including who made the changes and when.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Planned Enhancements**
 Team Size: 5
 1. **Update `add-patient` and `add-doctor` commands to check the date of birth and phone number input for logical inputs**
@@ -647,6 +648,7 @@ Team Size: 5
       1. The `add-patient` command does not show the patient's date of birth and gender
       2. The `add-doctor` command does not show the doctor's speciality
    2. We plan to make the success message show all the details of the patient/doctor added, including those above.
+
 3. **Implement Maximum Word Count for Fields**
    1. There are no restrictions on the length of fields like name and address, which can lead to excessively long inputs that affect display and usability.
    2. We plan to implement a maximum character count for specific fields:
@@ -654,9 +656,21 @@ Team Size: 5
       2. Address field: Limit to 100 characters, allowing detailed addresses without causing layout overflow.
    3. These restrictions will be enforced at both the command parsing level (to provide immediate feedback) and the model level (to ensure consistency).
    4. If the input exceeds the maximum length, the user will receive an error message explaining the character limit.
+
 4. **Ensure Minimum Window Size for Improved Layout** 
    1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+
+5. **Increasing the maximum number of appointments.** 
+   1. Currently, the maximum number of appointments that can be stored is 10,000.
+   2. We plan to increase this limit to a number that cannot be realistically reached, while ensuring the appointment IDs are still concise.
+  
+6. **Fixing issues with error messages.** 
+   1. In the current implementation, some commands display the wrong error message when the user enters an invalid command. 
+   2. We plan to correct these instances:
+      1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large or negative.
+      2. `delete` should display "The person index provided is invalid." when index `0` is entered.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
