@@ -19,25 +19,24 @@ the process of accessing and updating resident student details. What's more, Dor
 
 
 <!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
 - [Quick start](#quick-start)
 - [Features](#features)
-    - [Viewing help : `help`](#viewing-help-help)
-    - [Adding a person : `add`](#adding-a-person-add)
-    - [Listing all persons : `list`](#listing-all-persons-list)
-    - [Editing a person : `edit`](#editing-a-person-edit)
-    - [Finding a person : `find`](#finding-a-person-find)
-    - [Deleting a person : `delete`](#deleting-a-person-delete)
-    - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-    - [Cleaning graduated students : `clean`](#cleaning-graduated-students-clean)
-    - [Undoing the previous command : `undo`](#undoing-the-previous-command-undo)
-    - [Exiting the program : `exit`](#exiting-the-program-exit)
-    - [Manual saving : `export`](#manual-saving-export)
-    - [Manual data restoration : `import`](#manual-data-restoration-import)
+  - [Viewing help : `help`](#viewing-help-help)
+  - [Adding a person : `add`](#adding-a-person-add)
+  - [Listing all persons : `list`](#listing-all-persons-list)
+  - [Editing a person : `edit`](#editing-a-person-edit)
+  - [Finding a person : `find`](#finding-a-person-find)
+  - [Deleting a person : `delete`](#deleting-a-person-delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  - [Cleaning graduated students : `clean`](#cleaning-graduated-students-clean)
+  - [Undoing the previous command : `undo`](#undoing-the-previous-command-undo)
+  - [Exiting the program : `exit`](#exiting-the-program-exit)
+  - [Manual saving : `export`](#manual-saving-export)
+  - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -55,7 +54,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Its installer can be downloaded [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if you do not have it.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
@@ -71,15 +70,15 @@ the process of accessing and updating resident student details. What's more, Dor
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+   * `list` : Lists all contacts.
 
-    * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
+   * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -87,31 +86,30 @@ the process of accessing and updating resident student details. What's more, Dor
 
 ## Features
 
-<box type="info" seamless>
-
-**Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> **Some notes about the command format:**<br>
+>
+>* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+>  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+>
+>* Items in square brackets are optional.<br>
+>  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+>
+>* Items with `…`​ after them can be used multiple times including zero times.<br>
+>  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+>
+>* Parameters can be in any order.<br>
+>  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+>
+>* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
+>  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+>
+>* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -129,15 +127,15 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 >
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
-> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `NAME` consists of alphabets, numbers, dashes (-), commas (,) and apostrophes (').
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format local-part@domain
 > * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
 > * You cannot set graduation year when adding a person. Use the `edit` command to add graduation year.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 > <span style="color:Tomato"> WARNING! </span> <br>
-> 
+>
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
@@ -169,8 +167,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 * Existing values will be updated to the input values.
 * Once `ADDRESS`, `ROOM_NUMBER`, `EMERGENCY_NAME`, `EMERGENCY_PHONE`, and/or `GRADUATION_YEAR` has been specified, you cannot remove these fields.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all of a person’s tags by typing `t/` without specifying any tags after it.
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
@@ -201,23 +198,29 @@ The following screenshot shows the results of executing `edit 2 en/Betsy Crower 
 
 Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 
-* any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+> All possible orders and combinations of the 4 parameters `NAME`, `PHONE`, `ROOM_NUMBER` and `TAG` are accepted.
 
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`
+* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
+* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
+* When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for ROOM_NUMBER and PHONE, the arguments
-  should be exactly the same as the person's room number and phone number
-* Order of the tags do not matter `t/friends colleagues` works the same
-  as `t/colleagues friends`
+* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
+  as `t/colleagues t/friends`
+* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`
+* When searching by `TAG`, the contact must match every `TAG` in the input fields to appear in the listed results.
+* If the user inputs multiple fields for the `find`, then only contacts that match all the input fields will appear in the listed results.
 
 Examples:
-* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
-  finds people whose both your friend and colleagues. 
-  They have Alex Jones as their name, 94509592 as their contact number, and lives in room 08-1234.
+* `find n/John` Finds contacts who have the word John in their name.
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues` Finds contacts who have the tags `friends` and `colleagues`. They also must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
+
+The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`
+
+![FindCommandExampleUsage](images/FindCommandExampleUsage.png)
 
 ### Deleting a person : `delete`
 
@@ -228,14 +231,14 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* After user enters the command, the window will show a confirmation popout,
-  click 'OK' to continue, 'cancel' to abort the deletion.
+* There is a confirmation popout after the user enters the command but before the delete is actually done.
+  click `OK` to continue or `Cancel` to abort the deletion.
 
 ![delete popout](images/deleteConfirmation.png)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find n/Betsy` command.
 
 
 ### Clearing all entries : `clear`
@@ -249,6 +252,11 @@ Format: `clear`
 Removes all graduated students from the address book by removing all students with GRADUATION_YEAR fields earlier than the current year.
 
 Format: `clean`
+
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * If you execute `clean` after executing a `find` command, the search results of the `find` command remains in place. Use `list` to see the full effects of the `clean` command.
+> * This is such that the results of your query with `find` are not lost after applying `clean`. 
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
@@ -264,7 +272,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 ### Undoing the previous command : `undo`
 
-Undoes the previous command that changes the data in the address book.
+Undoes the latest command that changed the data in the address book.
 
 Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
@@ -278,7 +286,7 @@ Format: `exit`
 
 ### Saving the data
 
-DorManagerPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually although there is an option to do so in the `export` and `import` functions.
+DorManagerPro data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually, although there is an option to do so in the [export](#manual-saving-export) and [import](#manual-data-restoration-import) functions.
 
 ### Manual saving: `export`
 
@@ -292,8 +300,6 @@ Format: `export`
 
 Example:
 
-`export`
-
 The following screenshots shows the results of executing `export`
 ![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 ![ExportToFolderExample.png](images/ExportToFolderExample.png)
@@ -306,7 +312,9 @@ Format: `import fp/FILE_PATH`
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * `FILE_PATH` must correspond to an actual json file in the device.
-> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+> * `import` will not work if the json file to be imported would result in any invalid data in DorManagerPro!
+> * Use `.` in the FILE_PATH to refer to the home folder of the application.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+> * The home folder of the application is the folder that contains the jar file!
 
 Examples:
 
@@ -319,21 +327,19 @@ The following screenshot shows the results of executing `import fp/./data/11-08-
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
 > Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+> However, if you mistakenly entered this command, you can always undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
 
 ### Editing the data file
 
 DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/DorManagerPro.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning"
-seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+> <span style="color:Tomato"> WARNING! </span> <br>
+>
+> If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Similarly, when trying to import a invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
-Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+>Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -341,7 +347,7 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DorManagerPro home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -381,7 +387,7 @@ Constraints:
 * `name` can contain any alphanumeric character or whitespace.
 * `name` can contain hyphens, commas and apostrophes.
 * `name` can be 1 to 300 characters long.
-  
+
 Duplicate handling:
 * Two resident student contacts with the same name are not allowed.
 
@@ -415,9 +421,9 @@ Format: `l@d`, where `l` is the local part of the email and `d` is the domain of
 
 Constraints:
 * The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` is made up of domain labels separated by periods.
 * The domain name `d` must end with a domain label at least 2 characters long.
-* Each domain label must start and end with alphanumeric characters 
+* Each domain label must start and end with alphanumeric characters.
 * Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
 * `l`, `@` and `d` are not supposed to be separated by whitespace.
 
@@ -497,7 +503,7 @@ Duplicate handling:
 
 ### Emergency contact phone number
 
-Format: same as [Phone number](#phone-number)
+Format: Same as [Phone number](#phone-number)
 
 Constraints:
 Same as [Phone number](#phone-number)
@@ -532,8 +538,8 @@ Duplicate handling:
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Dorm**: A university or college hall of residence / hotel for students and teachers
 * **Dorm resident**: Student and / or teacher currently staying in a dorm
-* **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
-* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
+* **Dorm manager**: User of DorManager Pro that has to keep track of the residents in their dorm
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in DorManager Pro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
 * **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
