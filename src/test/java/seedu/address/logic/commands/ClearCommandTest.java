@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -54,6 +55,11 @@ public class ClearCommandTest {
 
         assertCommandSuccess(new ClearCommand(confirmationBypassController), model,
                 ClearCommand.MESSAGE_CLEAR_CANCELLED, expectedModel);
+    }
+
+    @Test
+    public void execute_nullConfirmationWindow_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new ClearCommand(null));
     }
 
 }

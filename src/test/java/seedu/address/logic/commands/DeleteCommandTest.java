@@ -126,6 +126,16 @@ public class DeleteCommandTest {
             new DeleteCommand(negativeIndex);
         });
     }
+
+    @Test
+    public void execute_nullConfirmationController_throwsAssertionError() {
+        Name targetName = new Name("Alice");
+        assertThrows(AssertionError.class, () -> new DeleteCommand(targetName, null));
+
+        Index targetIndex = Index.fromOneBased(1);
+        assertThrows(AssertionError.class, () -> new DeleteCommand(targetIndex, null));
+    }
+
     @Test
     public void equals() {
         DeleteCommand deleteNameCommand = new DeleteCommand(new Name("Alice"));

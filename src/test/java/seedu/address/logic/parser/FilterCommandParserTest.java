@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_AGE;
+import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_AGE_AND_RANGE;
 import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_DATE_FORMAT;
 import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_RANGE;
 
@@ -29,8 +29,8 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFilterCommand() {
-        // age
+    public void parse_validAge_returnsFilterCommand() {
+
         String age = " b/ 10-99";
         List<Range<?>> firstRanges = new ArrayList<>();
         firstRanges.add(new Range<Integer>(10, 99));
@@ -38,36 +38,69 @@ public class FilterCommandParserTest {
         FilterCommand expected = new FilterCommand(criteriaPredicate);
         assertParseSuccess(parser, age, expected);
 
-        // appointment
+        // lower boundary age range
+        String ageLowerBoundary = " b/ 0-0";
+        List<Range<?>> lowerBoundaryRanges = new ArrayList<>();
+        lowerBoundaryRanges.add(new Range<Integer>(0, 0));
+        PersonWithCriteriaPredicate lowerBoundaryPredicate = new PersonWithCriteriaPredicate(lowerBoundaryRanges);
+        FilterCommand expectedLowerBoundaryCommand = new FilterCommand(lowerBoundaryPredicate);
+        assertParseSuccess(parser, ageLowerBoundary, expectedLowerBoundaryCommand);
+
+        // upper boundary age range using Integer.MAX_VALUE
+        String ageUpperBoundary = " b/ " + Integer.MAX_VALUE + "-" + Integer.MAX_VALUE;
+        List<Range<?>> upperBoundaryRanges = new ArrayList<>();
+        upperBoundaryRanges.add(new Range<Integer>(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        PersonWithCriteriaPredicate upperBoundaryPredicate = new PersonWithCriteriaPredicate(upperBoundaryRanges);
+        FilterCommand expectedUpperBoundaryCommand = new FilterCommand(upperBoundaryPredicate);
+        assertParseSuccess(parser, ageUpperBoundary, expectedUpperBoundaryCommand);
+    }
+
+    @Test
+    public void parse_validAppointment_returnsFilterCommand() {
+
         String appointment = " ap/ 01/01/2024-01/01/2025";
         LocalDate firstDate = LocalDate.of(2024, 1, 1);
         LocalDate secondDate = LocalDate.of(2025, 1, 1);
         List<Range<?>> ranges = new ArrayList<>();
         ranges.add(new Range<LocalDate>(firstDate, secondDate));
-        criteriaPredicate = new PersonWithCriteriaPredicate(ranges);
-        expected = new FilterCommand(criteriaPredicate);
+        PersonWithCriteriaPredicate criteriaPredicate = new PersonWithCriteriaPredicate(ranges);
+        FilterCommand expected = new FilterCommand(criteriaPredicate);
         assertParseSuccess(parser, appointment, expected);
 
-        // tag
+        // single day appointment range
+        String singleDayRange = " ap/ 01/01/2025-01/01/2025";
+        LocalDate singleDate = LocalDate.of(2025, 1, 1);
+        List<Range<?>> singleDayRanges = new ArrayList<>();
+        singleDayRanges.add(new Range<LocalDate>(singleDate, singleDate));
+        PersonWithCriteriaPredicate singleDayPredicate = new PersonWithCriteriaPredicate(singleDayRanges);
+        FilterCommand expectedSingleDayCommand = new FilterCommand(singleDayPredicate);
+        assertParseSuccess(parser, singleDayRange, expectedSingleDayCommand);
+    }
+
+    @Test
+    public void parse_validTag_returnsFilterCommand() {
         String tagStr = " t/ obesity";
         String differentCaseTagStr = " t/ OBesity";
         Tag tag = new Tag("obesity");
         Set<Tag> tagSet = Set.of(tag);
-        criteriaPredicate = new PersonWithCriteriaPredicate(new ArrayList<>(), tagSet);
-        expected = new FilterCommand(criteriaPredicate);
+        PersonWithCriteriaPredicate criteriaPredicate = new PersonWithCriteriaPredicate(new ArrayList<>(), tagSet);
+        FilterCommand expected = new FilterCommand(criteriaPredicate);
         assertParseSuccess(parser, tagStr, expected);
         assertParseSuccess(parser, differentCaseTagStr, expected);
     }
+
 
     @Test
     public void parse_invalidRange_throwsParseException() {
         // invalid age range
         String age = " b/ 10-";
-        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
         age = " b/ 10-fifty";
-        assertParseFailure(parser, age, String.format(INCORRECT_AGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
         age = " b/ 100-0";
-        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
+        age = " b/ -5--1";
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
 
         // invalid appointment range
         String appointment = " ap/ 01/01/2024-01-01-2026";

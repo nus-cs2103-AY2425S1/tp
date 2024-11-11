@@ -14,7 +14,7 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("delete 1")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> ui : isDeletionConfirmed()
+logic -[LOGIC_COLOR]> ui : isConfirmed()
 activate ui UI_COLOR
 ui -[UI_COLOR]-> logic
 deactivate ui UI_COLOR
