@@ -437,7 +437,7 @@ Finds clients whose tags contain any of the given words.
 
 Format: `findtag TAG [MORE_TAGS]`
 
-* The search is case-insensitive. e.g., `HDB` will match `hdb`. 
+* The search is case-insensitive. e.g.`HDB` will match `hdb`. 
 * The order of the tags does not matter. 
 * clients with at least one matching tag will be returned (i.e., an `OR` search). 
 * List of possible tags you can search for are found in the [Tag Table](#tag-table)
@@ -669,8 +669,8 @@ PROperty data are saved in the hard disk automatically after any command that ch
 PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file with valid inputs only.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file results in an invalid format, PROperty may not load the data and will reset the `property.json` file after you exit application. Hence, it is recommended to make a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or manually add tags not stated in the glossary, etc). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file results in an invalid format, PROperty may not load the data and will reset the `property.json` file after you exit the application. Hence, it is recommended to make a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or manually add tags not stated in the glossary etc). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 <div class="no-print" markdown="span">
@@ -721,23 +721,23 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 
 ## Command Summary
 
-| Action             | Format, Examples                                                                                                                                                            |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
-| **List**           | `list`                                                                                                                                                                      |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                     |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                   |
-| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag hdb buyer`                                                                                                                     |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
-| **Clear**          | `clear`                                                                                                                                                                     |
-| **Exit**           | `exit`                                                                                                                                                                      |
-| **Help**           | `help`                                                                                                                                                                      |
-| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g., `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                                    |
-| **Show**           | `show INDEX`<br> e.g., `show 2`                                                                                                                                             |
-| **Add Listing**    | `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`<br> e.g., `listing add 1 t/condo a/123 NUS Street`                                                                     |
-| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g., `listing delete 1 1`                                                                                                        |
-| **Export**         | `export`                                                                                                                                                                    |
-| **Sort**           | `sort`                                                                                                                                                                      |
+| Action             | Format, Examples                                                                                                                                                    |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**            | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/buyer` |
+| **List**           | `list`                                                                                                                                                              |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/client_TAG] [r/REMARK]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`              |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g. `find James Jake`, `find s/James Jake s/23 Philip Street`                            |
+| **Findtag**        | `findtag TAG [MORE_TAGS]`<br> e.g. `findtag hdb buyer`                                                                                                              |
+| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                  |
+| **Clear**          | `clear`                                                                                                                                                             |
+| **Exit**           | `exit`                                                                                                                                                              |
+| **Help**           | `help`                                                                                                                                                              |
+| **Remark**         | `remark INDEX r/[REMARKS]`<br> e.g. `remark 1 r/Prefers a higher floor apartment`, `remark 1 r/` (to delete the remark)                                             |
+| **Show**           | `show INDEX`<br> e.g. `show 2`                                                                                                                                      |
+| **Add Listing**    | `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`<br> e.g. `listing add 1 t/condo a/123 NUS Street`                                                              |
+| **Delete Listing** | `listing delete INDEX LISTING_INDEX `<br> e.g. `listing delete 1 1`                                                                                                 |
+| **Export**         | `export`                                                                                                                                                            |
+| **Sort**           | `sort`                                                                                                                                                              |
 
 <div class="no-print" markdown="span">
 
@@ -782,7 +782,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **HDB**: Public housing flats governed by the Housing & Development Board.
 - **CONDO**: Private residential units with shared amenities.
 - **RESIDENTIAL**: Properties intended for residential use.
-- **LANDED**: Homes built on their own land, without shared walls (e.g., bungalows, terraces).
+- **LANDED**: Homes built on their own land, without shared walls (e.g. bungalows, terraces).
 - **EC**: Executive Condominium – a subsidised option bridging public and private property.
 - **COMMERCIAL**: Properties zoned for business operations.
 - **RETAIL**: Space designated for shops and consumer-facing businesses.
