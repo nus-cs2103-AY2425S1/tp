@@ -42,7 +42,7 @@ Given below are my contributions to the project.
     * Add activity diagram that illustrates the command parsing and execution process within Prudy. [\#223](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/223)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments) [\#143](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/143) 
+  * PRs reviewed (with non-trivial review comments) [\#143](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/143)
   [\#106](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/106) [\#112](https://github.com/AY2425S1-CS2103T-T14-1/tp/pull/112)
 
 * **Tools**:
