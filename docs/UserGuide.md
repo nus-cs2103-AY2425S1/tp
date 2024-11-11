@@ -46,7 +46,7 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
     </div>
 
-    - `exit` : Exits the app.
+    - `exit` : Exits the app.<br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -157,6 +157,7 @@ You can delete a person's tags, email or address by leaving their fields empty, 
 Examples:
 
 - `edit person 7 p/91234567 e/ a/123 Clementi Rd` Edits the phone number and address of the 7th person to be `91234567` and `123 Clementi Rd` respectively and clears the email address.
+
 - `edit person 2 n/Bernice Yu a/ t/` Edits the name of the 2nd person to be `Bernice Yu` and clears the address and all existing tags.
 
 <figure style="text-align: center;">
@@ -179,6 +180,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find person John` returns `john` and `John Doe`
+
 - `find person john bernice` returns `John Doe`, `Bernice Yu`
 
 <figure style="text-align: center;">
@@ -202,6 +204,7 @@ Format: `view person KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `view person Bernice Yu` returns the details for `Bernice Yu`
+
 - `view person John Doe` returns the details for `John Doe`
 
 <figure style="text-align: center;">
@@ -222,6 +225,7 @@ Format: `filter person TAG`
 Examples:
 
 - `filter person Hairdresser` returns the person with tag `HairDresser`.
+
 - `filter person Celebrity` returns the person with tag `Celebrity`.
 
 <figure style="text-align: center;">
@@ -246,6 +250,7 @@ When you delete a person, you will also delete events which the person is the ce
 Examples:
 
 - `list person` followed by `delete person 2` deletes the 2nd person in the TalentHub.
+
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
 <figure style="text-align: center;">
@@ -291,6 +296,7 @@ The venue field is also optional!
 Examples:
 
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
+
 - `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
 <figure style="text-align: center;">
@@ -335,6 +341,7 @@ You can delete a event's venue or points of contact by leaving their fields empt
 Examples:
 
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
+
 - `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact.
 
 <figure style="text-align: center;">
@@ -357,6 +364,7 @@ Format: `find event KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find event Hiking` returns `Hiking` and `Park Hiking`
+
 - `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
 <figure style="text-align: center;">
@@ -381,6 +389,7 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `view event Oscars` returns the details for `Oscars`
+
 - `view event Hair Cut` returns the details for `Hair Cut`
 
 <figure style="text-align: center;">
@@ -404,6 +413,7 @@ Format: `filter event CELEBRITY_NAME`
 Examples:
 
 - `filter event Alex Yeoh` returns the events for celebrity `Alex Yeoh`
+
 - `filter event Bernice Yu` returns the events for celebrity `Bernice Yu`
 
 <figure style="text-align: center;">
@@ -429,6 +439,7 @@ Format: `delete event INDEX`
 Examples:
 
 - `list event` followed by `delete event 2` deletes the 2nd event in the TalentHub.
+
 - `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
 <figure style="text-align: center;">
