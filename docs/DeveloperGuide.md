@@ -315,7 +315,7 @@ Otherwise, it creates a new instance of `SortCommand` that corresponds to the us
 `SortCommand` comprises of a `DateComparator` which contains the sorting order, according to date of application, that the internship application list should be sorted by.
 
 Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
-`sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
+`sortItems` updates the `filteredList` in `Model` to sort the internship applications in the list according to the order specified by the user.
 
 <br></br>
 
@@ -336,7 +336,7 @@ The implementation of the chart command follows the convention of a normal comma
 <puml src="diagrams/ChartSequenceDiagram.puml" alt="ChartSequenceDiagram" />
 
 `AddressBookParser` creates `ChartCommand`.
-Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
+Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`.
 
 <br></br>
 
