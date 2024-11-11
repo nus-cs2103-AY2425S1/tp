@@ -15,7 +15,7 @@ public class LevelContainsKeywordsPredicate extends ContainsKeywordsPredicate {
     @Override
     public boolean test(Student student) {
         return keywords.stream()
-                .anyMatch(keyword -> student.getLevel().toString().equals(keyword));
+                .anyMatch(keyword -> student.getLevel().levelName.equals(keyword));
     }
 
     @Override
