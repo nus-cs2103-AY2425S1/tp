@@ -42,7 +42,7 @@ public class ModelManager implements Model {
 
         ParserUtil.setFilteredPersonList(filteredPersons);
         ParserUtil.setFilteredEventList(filteredEvents);
-        ParserUtil.setPersonList(this.addressBook.getPersonList());
+        ParserUtil.setPersonList(filteredPersons);
     }
 
     public ModelManager() {
