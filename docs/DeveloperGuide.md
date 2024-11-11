@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StudentManagerPro` and the **Actor** is the `user`, unless specified otherwise)
 
 **System: StudentManagerPro**
 
@@ -968,6 +968,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **EcName**: Emergency contact name of a student
 * **EcNumber**: Emergency contact number of a student
 * **SortAttribute**: Particular attribute of a student that can be compared for sorting purposes
+* **Predicate**: A condition that evaluates to true or false, used to filter or match specific items
 
 --------------------------------------------------------------------------------------------------------------------
 
