@@ -292,6 +292,7 @@ New company added: (details of the company added)
 **Examples**:
 
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry: `Education` is acceptable.
+
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry:`Automotives` is NOT acceptable.
 
 </div>
@@ -411,7 +412,7 @@ To delete all students with the `oneYearMembership` tag, simply use `filtertag o
 
 <div markdown="block" class="alert alert-warning">
 
-⚠️ **Important: Behavior of delete Command with Repeated Indices** <br>
+⚠️ **Important: Behaviour of delete Command with Repeated Indices** <br>
 When using the delete command with the same index repeated multiple times (e.g., `delete 2 2`), the command processes each deletion sequentially:
 
 1. The first instance deletes the contact at the specified index (e.g., index 2).
@@ -494,9 +495,12 @@ Finds contacts whose [tags](#tag) are the same as the specified keyword.
 🔔 **Notes**: <br>
 
 - The filter is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
+
 - Only full words will be matched e.g. `partner` will not match `partners`.
+
 - Contacts matching at least one tag will be returned (i.e. `OR` search). <br>
 e.g. `filtertag paid year2` finds all contacts who have tags saved as `paid` or `year2`.
+
 </div>
 
 **Examples**:
@@ -577,13 +581,11 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 
 - The index refers to the index number shown in the displayed contact list.
 
-- For both formats 1 and 2,
 
-  - The tag is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
-
-  - Only full words will be matched e.g. `partner` will not match `partners`.
-
-  - The added tags are displayed on the contact in alphabetical order. <br>
+* For both formats 1 and 2,
+  * The tag is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
+  * Only full words will be matched e.g. `partner` will not match `partners`.
+  * The added tags are displayed on the contact in alphabetical order. <br>
     e.g. `t/partner t/education` will display `education` before `partner`.
 
 </div>
@@ -611,14 +613,18 @@ no duplicate tag(s) are found in all contacts.
 
 </div>
 
-**Expected outcome for the above tip on `tag all`:**
 
-- `track student`
+**Expected outcome for the above tip on `tag all`:** <br>
+
+* `track student` <br>
+
   ![Track student](images/trackStudentBeforeTagAll.png)
-- `tag all t/paid`
-![Tag all paid tag](images/tagAll.png)
-_Note: in this case, only all students are tagged with the paid tag._
-</div>
+
+* `tag all t/paid` <br>
+
+  ![Tag all paid tag](images/tagAll.png)
+
+*Note: in this case, only all students are tagged with the paid tag.*
 
 #### Deleting tag(s) from contact: `deletetag`
 
@@ -658,7 +664,9 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 - The index refers to the index number shown in the displayed contact list.
 
 * `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
+
 * `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
+
 * For both formats 1 and 2,
   - The tag is ([case-sensitive](#case-sensitive)). For example, `partner` will not match `PartnEr`.
   - Only full words will be matched e.g. `partner` will not match `partners`.
@@ -667,13 +675,13 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 
 **Examples**:
 
-- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
-- `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
+- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list.
+- `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list.
 
 <div markdown="span" class="alert alert-primary">💡
  **Tip**:
 
-To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `deletetag all t/Y3`
+To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `deletetag all t/Y3`.
 
  </div>
 
@@ -699,7 +707,7 @@ The `import` command allows you to bring data from a CSV file into the applicati
 - Example: `data/File.csv` or `./data/hackers_2022.csv`
 - If the application runs in `/home/user/project`, `import data/File.csv` points to `/home/user/project/data/File.csv`.
 
-<div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
+<div markdown="block" class="alert alert-info"> 📂 **Important Notes**:
 
 - Windows paths use backslashes (e.g., `C:\\Users\\username\\data\\File.csv`).
 
@@ -744,7 +752,7 @@ The `export` command is used to save your current contacts database into a CSV f
 - Refers to paths relative to the current directory.
 - Example: `./data/Output.csv` saves to `data` in the current directory.
 
-<div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
+<div markdown="block" class="alert alert-info"> 📂 **Important Notes**:
 
 - Ensure that the directories exist before exporting. For Windows paths, use double backslashes (e.g., `C:\\Users\\user\\data\\File.csv`).
 
