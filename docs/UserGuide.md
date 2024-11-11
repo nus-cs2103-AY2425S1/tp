@@ -151,7 +151,7 @@ Adds a patient to the address book.
 
 Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
-* **Names** only allow alphanumeric characters and spaces. Case-sensitive
+* **Names** only allow alphanumeric characters and spaces. Case-sensitive.
 * **Age** should only contain numbers and should be between 0-999 inclusive.
 * **Gender** is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
 * **NRIC** must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier.
