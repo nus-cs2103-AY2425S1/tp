@@ -6,7 +6,7 @@
 
 # EduManage User Guide
 
-Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a tuition teacher.
+Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher.
 
 This detailed guide will walk you through how to make the most of **EduManage** and unlock its full potential. We’re thrilled to help you streamline and organize your contact management process.
 ***
