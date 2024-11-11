@@ -309,7 +309,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void isNumeric() throws Exception {
+    public void isNumeric() {
+        // null string
+        assertFalse(ParserUtil.isNumeric(null));
+
         // blank string
         assertFalse(ParserUtil.isNumeric("")); // empty string
         assertFalse(ParserUtil.isNumeric(" ")); // spaces only
