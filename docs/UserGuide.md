@@ -199,7 +199,7 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123,
 
 **Outcome**:
 
-![TagCommandOutcome4](images/TagCommandOutcome4.png)
+<img src="images/TagCommandOutcome4.png" alt="Tag Command Outcome 4">
 
 ---
 
@@ -232,7 +232,7 @@ cp/www.shopee-career-url.com t/period_summer_2025
 
 **Outcome**:
 
-![TagCommandOutcome3](images/TagCommandOutcome3.png)
+<img src="images/TagCommandOutcome3.png" alt="Tag Command Outcome 3">
 
 ##### **Unsupported and Invalid Tag values**
 
@@ -280,7 +280,7 @@ bookmark 1
 
 **Outcome**:
 
-![BookmarkOutcome2](images/BookmarkOutcome2.png)
+<img src="images/BookmarkOutcome2.png" alt="Bookmark Outcome">
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -468,11 +468,11 @@ Removes the application status from the 2nd company.
 
 **Before**
 
-![StatusRemoveBefore1](images/StatusRemoveBefore1.png)
+<img src="images/StatusRemoveBefore1.png" alt="Status Remove Before 1">
 
 **After**
 
-![StatusRemoveAfter1](images/StatusRemoveAfter1.png)
+<img src="images/StatusRemoveAfter1.png" alt="Status Remove After 1">
 
 [Back to Table of Contents](#table-of-contents)
 
