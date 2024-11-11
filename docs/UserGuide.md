@@ -232,11 +232,11 @@ The designated names for each component of the User Interface will be used consi
 * **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
 
 * **Tutorial Class allocated to student:** This component appears just below the student id. The component displays the tutorial class that the student is allocated to.
-* Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
-* However, if there are no tutorial class added to the student. Then it will display "No Tutorial Assigned" instead.
+  * Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
+  * However, if there are no tutorial class added to the student. Then it will display "No Tutorial Assigned" instead.
 
 * **Attendance Tag:** The attendance tag displays all of the dates in which the student has attended the tutorial class.
-* The tag uses a datetime format of the form `yyyy/mm/dd`.
+  * The tag uses a datetime format of the form `yyyy/mm/dd`.
 
 
 * **Selected Student:** Highlighted in blue, this component indicates the selected Student Panel Card for viewing in the Student Card.
@@ -329,10 +329,13 @@ section for detailed information
 **Format:** `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]`
 
 >**Tip:** You can add a student without specifying a tutorial ID!
->
->**Warning** You will need to add a tutorial before assigning the student to new tutorial.
->
->**Note** Since this application is only catered to one module, each student can only be assigned to one tutorial.
+> 
+>**Note:** Since this application is catered to only one module, each student can only be assigned to one tutorial.
+
+<box type="warning" seamless>
+<b>Warning:</b>
+You will need to add a tutorial before assigning the student to new tutorial.
+</box>
  
 Command detail & constraints:
 
@@ -416,7 +419,10 @@ Example:
 
 ### 4.2 Tutorial Data Related Commands:
 
->**Warning:** This application is only catered to only one module, thus one student can only be added to one tutorial.
+<box type="warning" seamless>
+<b>Warning:</b>
+This application is catered to only one module, thus one student can only be added to one tutorial.
+</box>
 
 #### 4.2.1 Adding a tutorial: `addTut`
 
@@ -424,10 +430,13 @@ Example:
 
 Format: `addTut tn/[TUTORIAL NAME] c/[TUTORIAL ID]`
 
->**Warning:** This application is only catered to only one module, thus you cannot have Tutorial Names being named after different modules.
->
->**Tip:** For applications that you have trouble giving a name in, use the module name as the tutorial name. (ie. CS2103T)
->
+<box type="warning" seamless>
+<b>Warning:</b>
+This application is catered to only one module, thus you should not have tutorials being named after different modules.
+</box>
+
+>**Tip:** For tutorials that you have trouble in naming, use the module name as the tutorial name. (ie. CS2103T)
+
 
 Command Details & Constraints:
 * Adds the tutorial based on its `TUTORIAL_NAME` and `TUTORIAL_ID`
@@ -661,7 +670,7 @@ The TrackMate data are automatically saved as JSON files at the following locati
 - `[JAR file location]/data/assignments.json`
 
 <box type="warning" seamless>
-<b>Caution:</b>
+<b>Warning:</b>
 If your changes to the data file makes its format invalid, the TrackMate application will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the TrackMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
