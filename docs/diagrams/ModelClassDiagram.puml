@@ -47,7 +47,7 @@ Person *--> "1" Email
 Person *--> "1" Year
 Person *--> "1" GroupList
 GroupList *--> "*" Group
-Person *--> "1" Comment
+Person *--> "0...1" Comment
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
