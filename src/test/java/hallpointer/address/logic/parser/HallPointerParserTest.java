@@ -2,22 +2,41 @@ package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_DATE_MEETING;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_ONE;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_POINTS_MEETING;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_SESSION_NAME_MEETING;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_POINTS;
+import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.AddMemberCommand;
+import hallpointer.address.logic.commands.AddSessionCommand;
 import hallpointer.address.logic.commands.ClearCommand;
 import hallpointer.address.logic.commands.DeleteMemberCommand;
+import hallpointer.address.logic.commands.DeleteSessionCommand;
 import hallpointer.address.logic.commands.ExitCommand;
 import hallpointer.address.logic.commands.FindMemberCommand;
+import hallpointer.address.logic.commands.FindSessionCommand;
 import hallpointer.address.logic.commands.HelpCommand;
 import hallpointer.address.logic.commands.ListCommand;
 import hallpointer.address.logic.commands.UpdateMemberCommand;
@@ -25,8 +44,12 @@ import hallpointer.address.logic.commands.UpdateMemberCommand.UpdateMemberDescri
 import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
+import hallpointer.address.model.member.SessionContainsKeywordsPredicate;
+import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.MemberUtil;
+import hallpointer.address.testutil.SessionBuilder;
 import hallpointer.address.testutil.UpdateMemberDescriptorBuilder;
 
 public class HallPointerParserTest {
@@ -38,6 +61,43 @@ public class HallPointerParserTest {
         Member member = new MemberBuilder().build();
         AddMemberCommand command = (AddMemberCommand) parser.parseCommand(MemberUtil.getAddCommand(member));
         assertEquals(new AddMemberCommand(member), command);
+    }
+
+    @Test
+    public void parseCommand_addSession() throws Exception {
+        Session session = new SessionBuilder(MEETING).build();
+        Set<Index> indices = new HashSet<Index>();
+        indices.add(INDEX_FIRST_MEMBER);
+
+        String arguments = PREFIX_SESSION_NAME + VALID_SESSION_NAME_MEETING + " "
+                + PREFIX_DATE + VALID_DATE_MEETING + " "
+                + PREFIX_POINTS + VALID_POINTS_MEETING + " "
+                + PREFIX_MEMBER + VALID_MEMBER_INDEX_ONE;
+        AddSessionCommand command = (AddSessionCommand) parser.parseCommand(
+                  AddSessionCommand.COMMAND_WORD + " " + arguments);
+        assertEquals(new AddSessionCommand(session, indices), command);
+    }
+
+    @Test
+    public void parseCommand_deleteSession() throws Exception {
+        SessionName sessionName = MEETING.getSessionName();
+        Set<Index> indices = new HashSet<Index>();
+        indices.add(INDEX_FIRST_MEMBER);
+
+        String arguments = PREFIX_SESSION_NAME + VALID_SESSION_NAME_MEETING + " "
+                + PREFIX_MEMBER + VALID_MEMBER_INDEX_ONE;
+        DeleteSessionCommand command = (DeleteSessionCommand) parser.parseCommand(
+                DeleteSessionCommand.COMMAND_WORD + " " + arguments);
+        assertEquals(new DeleteSessionCommand(sessionName, indices), command);
+    }
+
+    @Test
+    public void parseCommand_findSession() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindSessionCommand command = (FindSessionCommand) parser.parseCommand(
+                FindSessionCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindSessionCommand(new SessionContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

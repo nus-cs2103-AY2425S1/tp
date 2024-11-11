@@ -9,10 +9,17 @@ import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.commands.DeleteMemberCommand;
+import hallpointer.address.logic.commands.FindMemberCommand;
 
 public class DeleteMemberCommandParserTest {
 
     private DeleteMemberCommandParser parser = new DeleteMemberCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE));
+    }
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
