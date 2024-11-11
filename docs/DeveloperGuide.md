@@ -960,7 +960,7 @@ Team size: 5
 7. **Enhancement 7**: Make upcoming command throw an error when the date and time input for the `aft/DELIVERY_DATE_TIME` parameter is later than the date and time input for parameter `bef/DELIVERY_DATE_TIME`.
    * **Description**: The current implementation allows users to key in an invalid date range for PENDING deliveries for the upcoming command without any warning.
    * **Tasks**:
-     * We plan to add an error message when a user tries to find deliveries with end date earlier than start date.
+     * We plan to add an error message when a user tries to use the upcoming command with an invalid date range where the `bef/DELIVERY_DATE_TIME` parameter has an earlier date and time than the `aft/DELIVERY_DATE_TIME` parameter.
      * e.g. "Error: End date should be later than start date."
 
 
