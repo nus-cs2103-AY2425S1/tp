@@ -48,6 +48,7 @@ public class Address {
      * @return A normalized version of the address as a lowercase alphanumeric string.
      */
     public String normaliseAddress() {
+        // The regular expression was produced by chatgpt to only include letters upper case and lower case and numbers
         return value.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
 
