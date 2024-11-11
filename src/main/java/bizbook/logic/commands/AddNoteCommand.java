@@ -28,7 +28,7 @@ public class AddNoteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "n/High profile client.";
+            + "n/High profile client";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
@@ -50,6 +50,9 @@ public class AddNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        assert model != null : "Model should not be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -60,6 +63,8 @@ public class AddNoteCommand extends Command {
 
         ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
+        assert note != null : "Note to be added should not be null";
+
         if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         }
@@ -69,6 +74,8 @@ public class AddNoteCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), notesList);
+
+        assert editedPerson != null : "Edited person should be created and not be null";
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

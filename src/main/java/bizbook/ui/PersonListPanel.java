@@ -46,6 +46,7 @@ public class PersonListPanel extends UiPart<Region> {
             focusedPerson.set(selectedPerson);
             logger.info("Clicked on person: " + selectedPerson + " at index " + index);
         } else {
+            // Known issue: once a person is selected, clicking on the empty area would not be triggered
             logger.info("Clicked on an empty area of the ListView");
         }
     }
