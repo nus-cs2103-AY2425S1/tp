@@ -247,9 +247,9 @@ list of contacts to contacts with role matching the name.
 * Contacts that are already matched will not be shown. 
 * The index refers to the index number shown in the displayed job list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The filter is case-insensitive i.e. `Cleaner` will match `cleaner`.
+* The filter is case-insensitive can be partial. e.g. Role `software engineer` will match to job name `Junior Java Software Engineer, Depart...`
 
-Examples:
+  Examples:
 * If the job at index 1 has name `Software Engineer`, `screen job 1` will
 show a contact with role `Software Engineer`.
 * If the job at index 2 has name `Data Scientist`, `screen job 2` will 
