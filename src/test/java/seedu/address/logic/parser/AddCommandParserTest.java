@@ -166,7 +166,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidAllergyNone_failure() {
-
+        Person expectedPerson = new PersonBuilder(BOB).withAllergies("None").build();
         // Allergy list contains "none" and another allergy
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB, Allergy.MESSAGE_CONSTRAINTS);
@@ -178,8 +178,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB
                 + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
+        // Allergy list with only valid allergies (size > 1, should succeed)
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE, new AddCommand(expectedPerson));
     }
 
 
