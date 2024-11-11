@@ -151,44 +151,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements**
-Do note we have 4 members in our group.
-
-### 1. addClaim ID
-A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error.
-This will be fixed in a future version such that claim ID is unique across all clients.
-
-### 2. addClaim amount
-Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
-the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our
-restriction on claim amount (claim amount cannot exceed 1 million)
-
-### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
-Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
-name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
-duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
-the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
-number, email and addresses simultaneously.
-
-### 4. Flexible Command Keywords.
-Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
-will make command keywords case-insensitive in a future update by parsing the prefixes differently.
-
-### 5. No Wrapping for very long ui details
-Currently, if the name, tags or other details are very long, they are cut off in the UI. This will be fixed in a future
-version by enabling wrapping for texts in the UI such that they are more easily viewable.
-
-### 6. Some common names are not allowed to be entered
-Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
-is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
-commands.
-
-### 7. Currently, our find function only supports finding by name
-This may not be ideal when you want to search clients by what insurance plans or claim ID they have. This will be supported
-in a future version when we enhance the search function to search by either insurance plan type or claim ID.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -504,3 +466,54 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with corrupted data files 
    1. Add a new field `"newField" : "newField"` to a client. Expected: All data is lost. The app starts on a clean slate.
    2. Remove `"insurancePlans"` field from a client. Expected: All data is lost. The app starts on a clean slate.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix : Planned Enhancements**
+Do note we have 4 members in our group.
+
+### 1. addClaim ID
+A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error.
+This will be fixed in a future version such that claim ID is unique across all clients.
+
+### 2. addClaim amount
+Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
+the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our
+restriction on claim amount (claim amount cannot exceed 1 million)
+
+### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
+name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
+duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
+the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
+number, email and addresses simultaneously.
+
+### 4. Flexible Command Keywords.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
+will make command keywords case-insensitive in a future update by parsing the prefixes differently.
+
+### 5. No Wrapping for very long ui details
+Currently, if the name, tags or other details are very long, they are cut off in the UI. This will be fixed in a future
+version by enabling wrapping for texts in the UI such that they are more easily viewable.
+
+### 6. Some common names are not allowed to be entered
+Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
+is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
+commands.
+
+### 7. Currently, our find function only supports finding by name
+This may not be ideal when you want to search clients by what insurance plans or claim ID they have. This will be supported
+in a future version when we enhance the search function to search by either insurance plan type or claim ID.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+Most of the difficulty in our project stems from the challenge of trying to **integrate mutable objects into an established immutable project**. While we knew the project was developed based on the principles of immutability, we felt in our case, it was better to use mutable objects for insurance plans and claims as the lists and claims were objects that were changed frequently unlike details that were currently found in addressbook level-3 such as names, emails and phone numbers. This would allow future developers to also work more easily with the given code base as adding and removing plans, introducing new insurance related features would be much more easily implemented with less code. We also wanted to challenge ourselves to see if this was possible at all.
+
+The **biggest hurdle** to overcome with this project was **modifying the testing methods**. The test methods were mostly designed for immutable objects and there were strict tests like JsonSerializableAddressBookTest which were the most difficult to pass. This is because the test compares the hardcoded file of clients to a generated file of clients. However, at first since we were making the objects mutable, the generated file becomes different in comparison to the hardcoded file ONLY during the full testing sequence. When the test was done individually, the test passes. We scratched our heads over this for a very long time and eventually managed to solve this problem by changing the equals method for `Client` object and also the `InsurancePlansManager` object.
+
+However, **this fix initially caused other tests break**. This includes tests like `addClaimCommandTest.java` as the `assertCommandSuccess` method in `TestUtil.java` did not compare actual and expected models correctly. This meant that even if there were some changes in the insurance plan manager, sometimes the two models are evaluated as equal to each other. We then had to create new assert methods for commands (like assertInsuranceCommandSuccess) for all the insurance plan related objects.
+
+Our implementations were at **least as difficult compared to half of AB-3 effort**. While we did not have to create many huge structures from scratch like the `ModelManager`, `Logic` and `Storage` components, we had to work with moving parts compared to AB-3. AB-3 does not support auto-sort of clients. However, we wanted a quick and easy way for insurance managers to view their most critical claims and as such auto sorted claims for each client to show open claims first.
+
+Lastly, as **our project involved money**, which is a sensitive value that we must get right. We decided to store all values in cents to avoid having to use float (and having issues with floating point accuracy). However, this led to **greater care required to parse and convert values** to cents and ended up being a very time consuming method to unit test. This method was still not completely fixed (the constraint of 1million was yet to be implemented).
