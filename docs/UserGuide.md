@@ -522,16 +522,16 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 
 ### File Operations
 
-#### Importing CSV Files: `import`
+#### Importing [CSV](#csv) Files: `import`
 
 **Format**: `import FILE_PATH`
 
-**Absolute Path**:
-- Specifies the full path from the root directory.
+**[Absolute Path](#absolute-path)**:
+- Specifies the full path from the root [directory](#directory).
 - **Unix/Linux/Mac**: `/home/user/data/hackers_2022.csv`
 - **Windows**: `C:\\Users\\user\\data\\hackers_2022.csv`
 
-**Relative Path**:
+**[Relative Path](#relative-path)**:
 - Starts from the current working directory of the application.
 - Example: `data/File.csv` or `./data/hackers_2022.csv`
 - If the application runs in `/home/user/project`, `import data/File.csv` points to `/home/user/project/data/File.csv`.
@@ -548,16 +548,16 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 **Troubleshooting**:
 - For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
 
-#### Exporting CSV Files: `export`
+#### Exporting [CSV](#csv) Files: `export`
 
 **Format**: `export FILE_PATH`
 
-**Absolute Path**:
-- Specifies the full path, starting from the root directory.
+**[Absolute Path](#absolute-path)**:
+- Specifies the full path, starting from the root [directory](#directory).
 - **Unix/Linux/Mac**: `/home/user/data/output_data.csv`
 - **Windows**: `C:\\Users\\user\\data\\output_data.csv`
 
-**Relative Path**:
+**[Relative Path](#relative-path)**:
 - Refers to paths relative to the current directory.
 - Example: `./data/Output.csv` saves to `data` in the current directory.
 
@@ -579,7 +579,7 @@ AdmiNUS data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-AdmiNUS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AdmiNUS data are saved automatically as a [JSON](#json) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.
@@ -591,14 +591,22 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Glossary
 
+<a name="absolute-path"></a>
 - **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
+<a name="csv"></a>
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
+<a name="directory"></a>
+- **_Directory_** : A file system structure that contains references to other files and directories. It is commonly referred to as a folder and is used to organize files hierarchically within a file system.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
+<a name="json"></a>
+- **_JSON (JavaScript Object Notation)_**: A lightweight data interchange format that is easy for humans to read and write and easy for machines to parse and generate. JSON represents data using key-value pairs and supports data types such as strings, numbers, arrays, objects, and booleans. It is widely used for transmitting structured data over network connections, particularly in web applications.
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
 <a name="parameter-like-sequence"></a>
 - **_Parameter-like Sequence_**: A combination of a forward slash (`/`) and a single character that resembles the prefixes used in commands (e.g., `n/`, `p/`, `e/`). These are used to specify input fields in commands and should not appear in any text fields.
+- **_Path_**: A sequence of symbols and names that identifies the location of a file or folder within a computer's file system. Paths can be absolute, starting from the root of the file system (e.g., /home/user/documents/file.txt), or relative, which are based on the current directory (e.g., documents/file.txt).
+<a name="relative-path"></a>
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
 - **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
 - **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
