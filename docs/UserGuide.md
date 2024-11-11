@@ -68,6 +68,8 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
