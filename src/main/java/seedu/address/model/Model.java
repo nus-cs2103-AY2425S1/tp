@@ -161,6 +161,8 @@ public interface Model {
      */
     void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
 
+    List<GoodsReceipt> findGoodsReceipts(Predicate<GoodsReceipt> predicate);
+
     /**
      * Returns the total quantity of the filtered goods list.
      */

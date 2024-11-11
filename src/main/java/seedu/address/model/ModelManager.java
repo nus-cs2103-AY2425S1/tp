@@ -303,6 +303,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<GoodsReceipt> findGoodsReceipts(Predicate<GoodsReceipt> predicate) {
+        return this.goodsList.getReceiptList().stream().filter(predicate).toList();
+    }
+
+    @Override
     public int getFilteredGoodsQuantityStatistics() {
         return GoodsReceiptUtil.sumQuantity(filteredReceipts);
     }

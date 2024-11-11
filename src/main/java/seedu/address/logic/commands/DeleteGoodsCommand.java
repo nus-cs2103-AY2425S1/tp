@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -45,12 +47,18 @@ public class DeleteGoodsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        GoodsReceipt receipt = model
-                .findGoodsReceipt(
-                        r -> (r.isFromSupplier(supplierName)
-                                && r.getGoods().goodsName().equals(goodsName)))
-                .orElseThrow(() -> new CommandException(Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND));
-        model.deleteGoods(receipt);
+
+        List<GoodsReceipt> receiptList =
+                model.findGoodsReceipts(
+                        r -> (r.isFromSupplier(supplierName) && r.getGoods().goodsName().equals(goodsName)));
+
+        if (receiptList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
+        }
+
+        for (GoodsReceipt receipt : receiptList) {
+            model.deleteGoods(receipt);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, goodsName));
     }
 
