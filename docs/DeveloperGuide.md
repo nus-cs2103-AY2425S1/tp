@@ -18,7 +18,9 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-* We referred to our TA's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
+  * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
+* We referred to our TA (Wu Xiaoyun) team's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide.
 
 ---
 
@@ -570,7 +572,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Should work on any mainstream OS as long as it has Java 17 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+able to accomplish most of the tasks faster using commands than using the mouse.
 4. Commands should be easy to remember.
 5. Ui should be easy to navigate and intuitive.
 6. KonTActs should be easy to use for new users.
@@ -607,6 +610,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+## **Appendix: Planned Enhancements**
+
+Team member count: 5
+
+1. **Implement commands to add/edit assignment details:** Currently, one has to edit the `kontacts.json` file manually to add or remove assignment details. This could be an issue as the information keyed in may be incorrect. We are planning to create commands which can add/edit assignment details (such as assignment name `Ex04` and its respective `maxGrade` fields) to the `assignment.json` file. This is to make the adding/editing of new assignments easier and prevent wrong information being entered.
+2. **Include validation for Telegram ID:** Currently, KonTActs does not check for the Telegram ID's length despite it not being a valid username in Telegram. In future updates, we are planning to provide proper Telegram ID validation to prevent users from inputting usernames that are not accepted by Telegram.
+3. **Add flexibility to attendance:** Currently, the maximum number of weeks that can be inputted is 14 since there are 14 weeks in a semester (from week 0 to week 13). However, it is possible that the user would want to use it for a different amount of weeks such as during special terms. Thus, we plan on incorporating commands to edit the start or end week of the attendance.
+4. **Improve UI of Result Display box:** Currently, the Result Display only shows three lines of message to the user. However, some of the details require more than three lines to be seen. We plan to improve the UI such that users are able to adjust the size of the Result Display box to display more information.
+5. **Improve scroll-ability of application:** Currently, when there is a long tag, and the View Window is closed, the scroll of the application does not work. Although there is a [workaround](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html#known-issues) to it, it is not efficient and prevents fast usage. So, we plan on editing the View Window and the Main Window to make it more user-friendly.
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -641,14 +654,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete name/John Doe`<br>
+      Expected: Deletes the contact named John Doe. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete n/ABC`, `...` (where name `ABC` does not exist in the list)<br>
+      Expected: An error message redirecting to the correct format.
 
 1. _{ more test cases …​ }_
 
