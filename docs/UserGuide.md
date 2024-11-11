@@ -7,30 +7,37 @@ title: User Guide
 Thank you for choosing AdmiNUS as your go-to contact management tool. Designed specifically for [NUS Club Administrators](#nus-club-admin). AdmiNUS aims to make your contact management experience easy and efficient. Whether you prefer the speed of typing commands or the clarity of a user-friendly GUI, AdmiNUS has you covered.
 
 ---
+
 ## Why Choose AdmiNUS?
+
 AdmiNUS streamlines contact management by combining the speed of CLI commands with an intuitive GUI. It is especially useful for [NUS Club Administrator](#nus-club-admin) who need to manage contacts efficiently for events, vendors, and participants.
+
 ### What AdmiNUS Offers:
-* Add, edit, delete, and search student and company contacts easily.
 
-* Track contacts by categories (e.g., students, companies) and tags.
+- Add, edit, delete, and search student and company contacts easily.
 
-* Seamlessly switch between CLI and GUI for versatile interaction.
+- Track contacts by categories (e.g., students, companies) and tags.
 
-* Import and export contact data via CSV files to facilitate data sharing.
+- Seamlessly switch between CLI and GUI for versatile interaction.
+
+- Import and export contact data via CSV files to facilitate data sharing.
 
 The application is designed to optimize workflows for users managing events, coordinating groups, and ensuring smooth communication.
+
 ## Example Use Case
+
 Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
 
 ```shell
 student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
 ```
 
-This command adds John Doe instantly, tagged as a volunteer. You can then use `filtertag volunteer` to find all volunteers, saving time compared to traditional methods. 
+This command adds John Doe instantly, tagged as a volunteer. You can then use `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
 
 AdmiNUS helps you stay organized and efficient, allowing you to focus on running successful events.
 
 ## Who Benefits from AdmiNUS?
+
 AdmiNUS is designed primarily for [NUS Club Administrators](#nus-club-admin) who need an efficient way to manage member and participant lists. The tool helps streamline contact organization, track participants effectively, and ensures smooth event coordination, making it an essential resource for those responsible for handling large contact databases.
 
 ---
@@ -110,6 +117,7 @@ AdmiNUS is designed primarily for [NUS Club Administrators](#nus-club-admin) who
 
 - Items with `…`​ after them can be used from zero times to multiple times.<br>
   e.g. `[t/TAG]…​` can be used as:
+
   - ` ` (i.e. 0 times),
   - `t/paid` (i.e. 1 times),
   - `t/paid t/Computing` (i.e. 2 times), or
@@ -141,7 +149,6 @@ Showing list of possible commands on the right.
 
 ![Help Command UI](images/helpCommandUI.png)
 
-
 #### Link to the user guide: `helpwindow`
 
 Pops up a window, where there is a link to the user guide for the user to easily access.
@@ -156,13 +163,11 @@ For more information, please head to the user guide.
 
 ![](images/helpWindowUI.png)
 
-
 #### Listing all contacts: `list`
 
 Shows a list of all persons in AdmiNUS.
 
 **Format**: `list`
-
 
 #### Viewing a contact: `view`
 
@@ -202,19 +207,20 @@ Adds a student to AdmiNUS.
 student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-**Expected Message**: 
+**Expected Message**:
+
 ```
 New student added: (details of the student added)
 ```
 
-| Parameter Name   | Description                | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required  |
-|------------------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `n/NAME`         | Name of the student        | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                  | Compulsory |
-| `id/STUDENT_ID`  | Student ID issued by NUS   | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                               | Compulsory |
-| `p/PHONE_NUMBER` | Contact number             | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                     | Compulsory                                                                                                                                                                                       |
-| `e/EMAIL`        | Email address              | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory                                                                                                                                                                                       |
-| `a/ADDRESS`      | Physical address           | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
-| `t/TAG`          | Tag to categorize contact | Must be alphanumeric characters and no spaces ([case sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                   | Optional                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter Name   | Description               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
+| ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `n/NAME`         | Name of the student       | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                   | Compulsory |
+| `id/STUDENT_ID`  | Student ID issued by NUS  | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                             | Compulsory |
+| `p/PHONE_NUMBER` | Contact number            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Compulsory |
+| `e/EMAIL`        | Email address             | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory |
+| `a/ADDRESS`      | Physical address          | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
+| `t/TAG`          | Tag to categorize contact | Must be alphanumeric characters and no spaces ([case sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
@@ -246,18 +252,18 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 New company added: (details of the company added)
 ```
 
-| Parameter Name   | Description   | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
-| ---------------- |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| `n/NAME`         | Name of the company | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Compulsory |
+| Parameter Name   | Description                               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
+| ---------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `n/NAME`         | Name of the company                       | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Compulsory |
 | `i/INDUSTRY`     | Industry type (e.g., Security, Education) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Compulsory |
-| `p/PHONE_NUMBER` | Contact number | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                 | Compulsory |
-| `e/EMAIL`        | Email address   | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory |
-| `a/ADDRESS`      | Physical address     | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
-| `t/TAG`          | Tag to categorize contact  | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
+| `p/PHONE_NUMBER` | Contact number                            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Compulsory |
+| `e/EMAIL`        | Email address                             | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory |
+| `a/ADDRESS`      | Physical address                          | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
+| `t/TAG`          | Tag to categorize contact                 | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
 
-<div markdown="block" class="alert alert-info"> 
+<div markdown="block" class="alert alert-info">
 
-🔔 **Notes**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. 
+🔔 **Notes**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed.
 
 **Examples**:
 
@@ -265,8 +271,6 @@ New company added: (details of the company added)
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry:`Automotives` is NOT acceptable.
 
 </div>
-
-
 
 **Examples**:
 
@@ -292,22 +296,22 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 Edited Person: (details of the updated contact)
 ```
 
-| Parameter Name   | Description                               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required                                                                              |
-| ---------------- |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `INDEX`          | Index number of the contact to edit       | Positive integer only (e.g., 1, 2, 3)                                                                                                                                                                                                                                                                                                                                                                | Compulsory                                                                            |
-| `n/NAME`         | Updated name of the contact               | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Optional                                                                              |
-| `id/STUDENT_ID`  | Updated student ID (for students only)    | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                                                                                            | Optional                                                                              |
-| `i/INDUSTRY`     | Updated industry type (for companies only) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Optional                                                                                                                                                  |
-| `p/PHONE_NUMBER` | Updated phone number                      | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Optional                                                                                                                                                  |
-| `e/EMAIL`        | Updated email address                     | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Optional                                                                                                                                                  |
-| `a/ADDRESS`      | Updated physical address                  | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                                                                           | Optional                                                                                                                                                                                                                                                                                                                                                                                             |
-| `t/TAG`          | Updated tags (replaces existing tags) | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional                                                                                                                                                                                                                                                                                                                                                                                             |
+| Parameter Name   | Description                                | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
+| ---------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `INDEX`          | Index number of the contact to edit        | Positive integer only (e.g., 1, 2, 3)                                                                                                                                                                                                                                                                                                                                                                | Compulsory |
+| `n/NAME`         | Updated name of the contact                | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Optional   |
+| `id/STUDENT_ID`  | Updated student ID (for students only)     | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                             | Optional   |
+| `i/INDUSTRY`     | Updated industry type (for companies only) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Optional   |
+| `p/PHONE_NUMBER` | Updated phone number                       | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Optional   |
+| `e/EMAIL`        | Updated email address                      | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Optional   |
+| `a/ADDRESS`      | Updated physical address                   | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                                                                           | Optional   |
+| `t/TAG`          | Updated tags (replaces existing tags)      | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
 
-- The index refers to the index number shown in the displayed person list. 
+- The index refers to the index number shown in the displayed person list.
 
 - At least one of the optional fields must be provided.
 
@@ -331,30 +335,30 @@ Edited Person: (details of the updated contact)
 You can remove all the person’s tags by typing `t/` without
 specifying any tags after it. </div>
 
-
 #### Deleting contact(s): `delete`
 
 Deletes the contact(s) at the specified indices or all contacts currently shown in the list from AdmiNUS.
 
-**Format 1**: `delete INDEX [MORE_INDEX]…​` 
+**Format 1**: `delete INDEX [MORE_INDEX]…​`
 
-**Expected Message**: 
+**Expected Message**:
 
 ```
-Deleted Contacts: 
+Deleted Contacts:
 (list of contact(s) specified at INDEX and MORE_INDEX if present)
 ```
 
-| Parameter Name | Description                                     | Constraint                                                 | Required   |
-| -------------- |-------------------------------------------------|------------------------------------------------------------| ---------- |
-| `INDEX`        | Index number of the contact to delete           | Positive integer only (e.g., 1, 2, 3)                      | Compulsory                     |
-| `MORE_INDEX`   | Additional index numbers of contacts to delete (separate by spaces) | Positive integer only (e.g., 1, 2, 3)  | Optional   |
+| Parameter Name | Description                                                         | Constraint                            | Required   |
+| -------------- | ------------------------------------------------------------------- | ------------------------------------- | ---------- |
+| `INDEX`        | Index number of the contact to delete                               | Positive integer only (e.g., 1, 2, 3) | Compulsory |
+| `MORE_INDEX`   | Additional index numbers of contacts to delete (separate by spaces) | Positive integer only (e.g., 1, 2, 3) | Optional   |
 
 **Format 2**: `delete all`
 
 **Expected Message**:
+
 ```
-Deleted Contacts: 
+Deleted Contacts:
 (list of all contacts shown in the list)
 ```
 
@@ -362,35 +366,38 @@ Deleted Contacts:
 
 🔔 **Notes**: <br>
 
-* Split the indices by spaces.
+- Split the indices by spaces.
 
-* The index refers to the index number shown in the displayed contact list.
+- The index refers to the index number shown in the displayed contact list.
 
-* `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
+- `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
 <div markdown="span" class="alert alert-primary">💡 **Tip**:
 
 To delete all students with the `oneYearMembership` tag, simply use `filtertag oneYearMembership` followed by `delete all`
+
  </div>
 
 **Examples**:
 
-* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS given that there are more than 3 contacts in the list.
-* `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
+- `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS given that there are more than 3 contacts in the list.
+- `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
 
 <div markdown="block" class="alert alert-warning">
 
 ⚠️ **Important: Behavior of delete Command with Repeated Indices** <br>
 When using the delete command with the same index repeated multiple times (e.g., `delete 2 2`), the command processes each deletion sequentially:
+
 1. The first instance deletes the contact at the specified index (e.g., index 2).
 2. The second instance attempts to delete the contact now at index 2 after the first deletion, which may have shifted from its original position (e.g., originally at index 3).
 
 **Example Scenario**:
-* If the command `delete 2 2` is entered and the contact at index 2 is deleted successfully:
-  * The app will then delete the new contact at index 2 after the first deletion.
-* If there are not enough contacts remaining to fulfill the repeated deletion (e.g., only two contacts were present initially), the app will display a message indicating that the index is invalid for the second attempt.
+
+- If the command `delete 2 2` is entered and the contact at index 2 is deleted successfully:
+  - The app will then delete the new contact at index 2 after the first deletion.
+- If there are not enough contacts remaining to fulfill the repeated deletion (e.g., only two contacts were present initially), the app will display a message indicating that the index is invalid for the second attempt.
 
 **Note**: When an index becomes invalid after the initial deletion, the app will display an invalid index message instead of the expected success message for the contact that was deleted in the earlier step.
 
@@ -406,10 +413,10 @@ Finds persons whose names contain any of the given keywords.
 
 **Format**: `find KEYWORD [MORE_KEYWORDS]…​`
 
-| Parameter Name | Description   | Constraint                    | Required   |
-|----------------|-----------------------|-------------------------------|------------|
-| `KEYWORD`      | Keyword of the contact's name to search | Can take any values           | Compulsory |
-| `MORE_KEYWORD` | Additional keyword to search (separate by spaces) | Can take any values |  Optional  |
+| Parameter Name | Description                                       | Constraint          | Required   |
+| -------------- | ------------------------------------------------- | ------------------- | ---------- |
+| `KEYWORD`      | Keyword of the contact's name to search           | Can take any values | Compulsory |
+| `MORE_KEYWORD` | Additional keyword to search (separate by spaces) | Can take any values | Optional   |
 
 <div markdown="block" class="alert alert-info">
 
@@ -442,21 +449,34 @@ Finds contacts whose tags are the same as the specified keyword.
 **Format**: `filtertag KEYWORD [MORE_KEYWORD]…​`
 
 | Parameter Name | Description                                                       | Required   |
-|----------------|-------------------------------------------------------------------| ---------- |
+| -------------- | ----------------------------------------------------------------- | ---------- |
 | `KEYWORD`      | Keyword of the tag's name to filter through the list of contacts. | Compulsory |
 | `MORE_KEYWORD` | More keywords to filter                                           | Optional   |
 
 **Examples**:
 
-- `filtertag paidFee` finds contacts who have tags saved as `paidFee`.
+- `filtertag paid` finds contacts who have tags saved as `paid`.
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
+- The index refers to the index number shown in the displayed contact list.
+
+- `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
+- `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
+- For both formats 1 and 2,
+  - The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
+  - Only full words will be matched e.g. `partner` will not match `partners`.
+
+</div>
 
 #### Tracking contacts by category: `track`
 
 Tracks and lists all contacts who are in the category of the specified keyword.
 
 | Parameter Name | Description                         | Required   |
-|----------------|-------------------------------------| ---------- |
+| -------------- | ----------------------------------- | ---------- |
 | `CATEGORY`     | Either student or company to filter | Compulsory |
 
 **Examples**:
@@ -478,42 +498,42 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 
 </div>
 
-
 #### Adding tag(s) to contact: `tag`
+
 Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                         | Required   |
-|----------------|-------------------------------------|------------|
+| -------------- | ----------------------------------- | ---------- |
 | `INDEX`        | Index number of the contact to tag  | Compulsory |
 | `t/TAG`        | Tag to add to the specified contact | Compulsory |
-| `t/MORE_TAG` |  More tags to add | Optional|
+| `t/MORE_TAG`   | More tags to add                    | Optional   |
 
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                                                              | Required   |
-|----------------|--------------------------------------------------------------------------|------------|
+| -------------- | ------------------------------------------------------------------------ | ---------- |
 | `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
 | `t/TAG`        | Tag to add to every contact in the list                                  | Compulsory |
-| `t/MORE_TAG`   | More tags to add                                                         | Optional|
+| `t/MORE_TAG`   | More tags to add                                                         | Optional   |
 
-* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
+- Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
   no duplicate tag(s) are found in all contacts.
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed contact list.
+- The index refers to the index number shown in the displayed contact list.
 
-* The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …​
 
-* The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+- The tag is case-insensitive. For example, `partner` will match `PartnEr`.
 
-* Only full words will be matched e.g. `partner` will not match `partners`.
+- Only full words will be matched e.g. `partner` will not match `partners`.
 
-* The added tags are displayed on the contact in alphabetical order. <br>
+- The added tags are displayed on the contact in alphabetical order. <br>
   e.g. `t/partner t/education` will display `education` before `partner`.
 
 </div>
@@ -522,11 +542,12 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 - `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list.
 
-<div markdown="span" class="alert alert-primary">💡 **Tip:**
-Tag labelled with "paid" will have green background to indicate student has paid their membership fee.
+<div markdown="span" class="alert alert-primary">💡 **Tip:** <br>
+- Tag labelled with "paid" will have green background:
+  - to indicate that a student has paid their membership fee, or
+  - to indicate that a company has paid the club sponsorship.
 </div>
-![View Contact UI](images/paidTag.png)
-
+<img src="images/paidTag.png" alt="View Contact UI" width="350"/>
 
 #### Deleting tag(s) from contact: `deletetag`
 
@@ -541,7 +562,7 @@ Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 ```
 
 | Parameter Name | Description                                                                    | Constraint                                    | Required   |
-|----------------|--------------------------------------------------------------------------------|-----------------------------------------------|------------|
+| -------------- | ------------------------------------------------------------------------------ | --------------------------------------------- | ---------- |
 | `INDEX`        | Index number of the contact in the currently displayed list to delete tag from | Positive integer only (e.g. 1, 2, 3)          | Compulsory |
 | `t/TAG`        | Tag to be deleted from the specified contact                                   | Must be alphanumeric characters and no spaces | Compulsory |
 | `t/MORE_TAG`   | More tags to be deleted                                                        | Must be alphanumeric characters and no spaces | Optional   |
@@ -555,7 +576,7 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 ```
 
 | Parameter Name | Description                                                               | Constraint                                    | Required   |
-|----------------|---------------------------------------------------------------------------|-----------------------------------------------|------------|
+| -------------- | ------------------------------------------------------------------------- | --------------------------------------------- | ---------- |
 | `all`          | Indicates that the deletion operation applies to all contacts in the list |                                               | Compulsory |
 | `t/TAG`        | Tag to be deleted from every contact in the list with the tag             | Must be alphanumeric characters and no spaces | Compulsory |
 | `t/MORE_TAG`   | More tags to be deleted                                                   | Must be alphanumeric characters and no spaces | Optional   |
@@ -564,15 +585,13 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed contact list.
+- The index refers to the index number shown in the displayed contact list.
 
-* `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
-  
-* `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
-  
-* For both formats 1 and 2, 
-  * The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
-  * Only full words will be matched e.g. `partner` will not match `partners`.
+- `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
+- `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
+- For both formats 1 and 2,
+  - The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
+  - Only full words will be matched e.g. `partner` will not match `partners`.
 
 </div>
 
@@ -580,12 +599,13 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
  **Tip**:
 
 To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `deletetag all t/Y3`
+
  </div>
 
 **Examples**:
 
-* `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
-* `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
+- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
+- `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
 
 ---
 
@@ -596,16 +616,19 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 **Format**: `import FILE_PATH`
 
 **Absolute Path**:
+
 - Specifies the full path from the root directory.
 - **Unix/Linux/Mac**: `/home/user/data/hackers_2022.csv`
 - **Windows**: `C:\\Users\\user\\data\\hackers_2022.csv`
 
 **Relative Path**:
+
 - Starts from the current working directory of the application.
 - Example: `data/File.csv` or `./data/hackers_2022.csv`
 - If the application runs in `/home/user/project`, `import data/File.csv` points to `/home/user/project/data/File.csv`.
 
 **Examples**:
+
 - Absolute: `import /home/user/data/hackers_2022.csv`
 - Relative: `import ./data/hackers_2022.csv`
 
@@ -615,6 +638,7 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 </div>
 
 **Troubleshooting**:
+
 - For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
 
 #### Exporting CSV Files: `export`
@@ -622,15 +646,18 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 **Format**: `export FILE_PATH`
 
 **Absolute Path**:
+
 - Specifies the full path, starting from the root directory.
 - **Unix/Linux/Mac**: `/home/user/data/output_data.csv`
 - **Windows**: `C:\\Users\\user\\data\\output_data.csv`
 
 **Relative Path**:
+
 - Refers to paths relative to the current directory.
 - Example: `./data/Output.csv` saves to `data` in the current directory.
 
 **Examples**:
+
 - Absolute: `export /home/user/data/output_data.csv`
 - Relative: `export ./data/Output.csv`
 
@@ -640,6 +667,7 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 </div>
 
 **Troubleshooting**:
+
 - Confirm the file path is valid and distinguish between absolute and relative paths as needed. Adjust directory permissions if "permission denied" errors occur.
 
 ### Saving the data
@@ -655,23 +683,22 @@ If your changes to the data file make its format invalid, AdmiNUS will discard a
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-
 ---
 
 ## Glossary
 
 - **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
-<a name="case-insensitive"></a>
+  <a name="case-insensitive"></a>
 - **_Case-Insensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as the same. For example, Apple, apple, and APPLE would be considered equivalent values.
-<a name="case-sensitive"></a>
+  <a name="case-sensitive"></a>
 - **_Case-Sensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as distinct. For example, Apple, apple, and APPLE would be considered different values.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
-<a name="nus-club-admin"></a>
+  <a name="nus-club-admin"></a>
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
-<a name="parameter-like-sequence"></a>
+  <a name="parameter-like-sequence"></a>
 - **_Parameter-like Sequence_**: A combination of a forward slash (`/`) and a single character that resembles the prefixes used in commands (e.g., `n/`, `p/`, `e/`). These are used to specify input fields in commands and should not appear in any text fields.
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
 - **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
@@ -699,21 +726,21 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 ## Command summary
 
 | Action            | Format                                                                                              | Example                                                                                                             |
-|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| ----------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Add a student** | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`      |
 | **Clear**         | `clear`                                                                                             | `clear`                                                                                                             |
-| **Delete**        | `delete INDEX [MORE_INDEX]…​`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
+| **Delete**        | `delete INDEX [MORE_INDEX]…​`                                                                       | `delete 3` or `delete 2 4`                                                                                          |
 | **Edit**          | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
-| **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                                 | `filtertag bestie` or `filtertag bestie slay`                                                                       |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]…​`                                                                      | `find James Jake`                                                                                                   |
+| **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                               | `filtertag bestie` or `filtertag bestie slay`                                                                       |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]…​`                                                                    | `find James Jake`                                                                                                   |
 | **List**          | `list`                                                                                              | `list`                                                                                                              |
 | **Help**          | `help`                                                                                              | `help`                                                                                                              |
 | **Help Window**   | `helpwindow`                                                                                        | `helpwindow`                                                                                                        |
 | **Track**         | `track CATEGORY`                                                                                    | `track student`                                                                                                     |
 | **View**          | `view INDEX`                                                                                        | `view 1`                                                                                                            |
-| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]…​`                                                                      | `tag 1 t/year2 t/computerScience`                                                                                   |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]…​`                                                                | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
+| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]…​`                                                                    | `tag 1 t/year2 t/computerScience`                                                                                   |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]…​`                                                              | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
 | **Import CSV**    | `import FILE_PATH`                                                                                  | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
 | **Export CSV**    | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
 | **Exit**          | `exit`                                                                                              | `exit`                                                                                                              |
