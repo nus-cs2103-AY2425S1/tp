@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 15
+
+start
+:User executes Schedule Date Command;
+:Parse Arguments;
+
+if () then ([Compulsory Date Field Present and Valid])
+  :Create AppointmentContainsDatePredicate object;
+  :Update FilteredAppointmentList with new Predicate;
+  :Display Appointments from FilteredAppointmentList;
+  stop
+else ([Invalid Date Format or Missing Arguments])
+    :Throw ParseException;
+  stop
+@enduml
