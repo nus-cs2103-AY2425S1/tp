@@ -179,7 +179,7 @@ Deletes the specified person from ClientHub.
 
 Format: `delete NAME` or `d NAME` or `delete NAME$`
 
-* Deletes the client with the specified `NAME`
+* Deletes the client with name that begins with specified `NAME` keyword
 * `$` is used to indicate specific name to delete
 
 
@@ -226,7 +226,7 @@ Format: `find p/PHONE_NUMBER` or `fp PHONE_NUMBER`
 
 Examples:
 * `find p/9103` returns `91031282`
-* `fp 8433` returns `8433 4567`
+* `fp 8433` returns `84334567`
 
 Result for `find p/9103`:
 ![result for 'find 9103'](images/result_for_find_phone.png)
@@ -259,7 +259,7 @@ Examples:
 * `find c/Invest` returns every contact that has `CLIENT_TYPE` beginning with `Invest`
 * `find c/Investment Healthcare` returns every contact that has `CLIENT_TYPE` beginning with `Investment` and `Healthcare`
 * `fc Investment` returns `Investment Plan`
-* `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
+* `fc Investment Healthcare` returns every contact that has `CLIENT_TYPE` beginning with `Investment Plan` and `Healthcare Plan`
 
 Result for `find c/Investment`:
 ![result for 'find c/Investment`](images/result_for_find_clienttypes.png)
