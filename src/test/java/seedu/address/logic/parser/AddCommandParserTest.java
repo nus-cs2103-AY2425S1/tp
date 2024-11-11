@@ -34,7 +34,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -168,15 +168,17 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void testAllergyListWithNoneAndOtherAllergies_throwsParseException() {
+    public void parse_allergyListContainsNoneAndMoreThanOneEntry_throwsParseException() {
         // Arrange
-        List<Allergy> allergyList = new ArrayList<>();
-        allergyList.add(new Allergy("none"));
-        allergyList.add(new Allergy("peanut"));
+        List<Allergy> allergyList = Arrays.asList(
+                new Allergy("None"),
+                new Allergy("Peanuts")
+        );
 
         // Act & Assert
         assertThrows(ParseException.class, () -> {
-            if (allergyList.contains(new Allergy("none")) && allergyList.size() > 1) {
+            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                    && allergyList.size() > 1) {
                 throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
             }
         });
