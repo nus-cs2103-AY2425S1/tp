@@ -379,7 +379,7 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
 1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
@@ -600,6 +600,28 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 <img src="images/ViewCommandSequenceDiagram.png" width="800" />
 
+#### **Design Considerations**
+
+## Aspect: Command-Based Updates vs. Direct Modifications in `executeCommand`
+
+### Alternative 1 (Current choice): Direct Update in `executeCommand`
+Modify UI components such as `personListPanel` and `overviewPanel` directly within `executeCommand`, without relying
+solely on `CommandResult` to signal UI updates.
+
+- **Pros**: Provides immediate control over UI elements based on the command type (e.g., selecting a person in 
+`personListPanel` or showing the summary in `overviewPanel`). This approach eliminates the need to interpret `CommandResult` externally, centralizing UI updates in `executeCommand`.
+- **Cons**: Tightly couples the `executeCommand` method with the internal details of UI components. This can make the 
+`MainWindow` class harder to maintain or extend, especially if more components or command types are added.
+
+### Alternative 2: Use `CommandResult` with External Processing
+Use `CommandResult` as an intermediate data structure, allowing other methods or classes to handle the UI updates based on `CommandResult`.
+
+- **Pros**: Maintains separation of concerns by keeping `executeCommand` focused on obtaining a result, 
+while another part of the codebase interprets and applies `CommandResult`. This separation is beneficial for 
+maintainability, extensibility, and testing, especially when handling multiple types of commands.
+- **Cons**: Additional handlers may need to be implemented for different `CommandResult` types, potentially leading to extra code complexity.
+
+
 ---
 
 ### Summary Feature
@@ -644,6 +666,33 @@ The sequence diagram below illustrates the above process of executing the `summa
 
 ![SummaryCommandSequenceDiagram.png](images%2FSummaryCommandSequenceDiagram.png)
 
+#### **Design Considerations**
+
+## Aspect: Separation of Concerns in `SummaryCommand`
+
+### Alternative 1: Refactor Counting and Formatting into Separate Helper Methods
+Refactor the counting and formatting logic into separate helper methods or utility classes, separating the data processing (counting) from the presentation (formatting).
+
+- **Pros**:
+    - Promotes separation of concerns by clearly dividing the responsibility for counting and formatting, making the code easier to understand and maintain.
+    - Easier to test each part of the functionality independently, as the counting logic and formatting can be tested in isolation.
+    - More extensible: Additional logic (e.g., more complex formatting) can be added without affecting the core data processing.
+
+- **Cons**:
+    - Requires refactoring the existing logic into multiple parts, increasing the number of methods or classes.
+    - Adds complexity in managing additional methods or classes.
+
+### Alternative 2: Handling Counting and Formatting Together in `SummaryCommand`
+The `SummaryCommand` currently handles both counting the application statuses and formatting the summary message in the `execute` method.
+
+- **Pros**:
+    - Simplicity: All logic related to the summary is in one place, making it straightforward to understand in the context of a single command.
+    - Fewer classes to manage, keeping the flow of logic centralized.
+
+- **Cons**:
+    - Mixing counting logic and presentation logic (formatting the summary) within the same method violates the principle of separation of concerns.
+    - Makes it harder to extend or test each part of the logic independently.
+    - Reduces maintainability as the class grows, as any changes to either the counting or formatting logic will require modifications in the same place.
 ---
 
 ### Help Feature
@@ -1002,6 +1051,9 @@ Java `11` or above installed.
 3. **Candidate Profile**:
 - A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
 
+4. **Mainstream OS:**:
+- Windows, Linux, Unix, MacOS
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1180,7 +1232,29 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-We intend to accommodate interview scheduling in the future.
+1. Currently, the summary statistics in the UI do not update automatically when the data is modified through add, edit, 
+delete, or clear commands. Users must manually run the summary command to refresh the statistics. To enhance user 
+experience, we plan to implement dynamic rendering, where the summary statistics will automatically update in real-time 
+as soon as any changes are made to the applicant data. This will eliminate the need for users to manually trigger updates.
+
+2. Currently, the filtering functionality in the app is limited to filtering by applicant status. However, many HR 
+professionals work with a variety of job roles simultaneously, and the inability to filter by job role is a significant 
+gap in functionality. To improve the user experience, we plan to expand the filtering capabilities to include filtering 
+by additional parameters, such as Desired Role.
+
+3. When the applicant list is empty while deleting, filtering, or after running any command, no panel is displayed due to 
+the nature of ListView and adding an empty field isn’t an option due to the regex restrictions. To improve it, a 
+placeholder can be placed when ListView is empty.
+
+4. Currently, after editing an applicant detail, the UI does not update automatically when data is modified through add,
+edit, delete, or clear commands in the overview panel.Users must manually run the view command to refresh the details. 
+Similar to the summary command issue, we can implement dynamic rendering to update details in real-time and eliminate the
+need for users to manually trigger updates.
+
+5. Currently, the content displayed in the overview card for each candidate is not perfectly vertically aligned with its
+respective field labels (e.g., "Skills" and "Experience" fields in the screenshot). This cosmetic alignment issue impacts
+the readability and visual consistency of the application.
+
 
 ---
 
