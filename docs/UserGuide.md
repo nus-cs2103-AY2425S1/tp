@@ -246,7 +246,7 @@ Finds Udders by specified keywords for each field.
 **Format:** `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [t/TAG_KEYWORD] [a/ADDRESS_KEYWORD] [e/EMAIL_KEYWORD] [m/MAJOR_KEYWORD] [r/ROLE_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
+* Udders matching every keyword will be returned. e.g. `bob` will match `bobby`
 * For finding Udders based on **EMAIL_KEYWORD**, the keyword provided has to be a valid email (i.e 123example@gmail.com) using exact string matching.
 
 <box type="warning">
