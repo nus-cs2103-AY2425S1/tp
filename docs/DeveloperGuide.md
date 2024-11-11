@@ -975,7 +975,114 @@ Use case ends.
 8. The data should be stored locally and should be in a human editable text file.
 9. The software should work without requiring an installer.
 
-*{More to be added}*
+### Planned Enhancements
+
+**<u>Make command names case-insensitive</u>**
+
+**Description**
+
+Make command names case-insensitive, i.e. `Find` is safe to substitute for
+`find` in the `find` command.
+
+**Rationale**
+
+Users may make small mistakes in capitalisation when typing quickly.
+It can save time to ensure minor mistakes such as these in the command keyword
+(not the arguments) will not prevent the command from working.
+
+**<u>Allow students with same name to be added</u>**
+
+**Description**
+
+Allow students with the same name to be added (still case-sensitive).<br>
+Instead, disallow students with the same **phone number** or **email address** to be added.<br>
+Commands that currently use student **names** as arguments should instead use their **index**
+in the student list.
+
+**Rationale**
+
+It is arguably rarer for students to share a phone number or email address (university email?) with
+another student than it is to share a name.
+
+**<u>Allow more commands to use student index instead of full name</u>**
+
+**Description**
+
+Currently, some commands such as `marka` and `markp` require the user to type
+out the full name of the student.<br>
+Instead, change it so that they use the student's index in the student list, similar to commands
+like `addtolesson`.
+
+**Rationale**
+
+Under normal conditions, it is impossible for a consultation or lesson to have a student
+that is not in the student list. Thus, it is safe to specify students by their index
+in the student list.<br>
+Additionally, doing so is faster to type.
+
+**<u>Allow certain special characters to be used in names</u>**
+
+**Description**
+
+Allow more special characters such as `/` and `-` to be used in student names.
+
+**Rationale**
+
+It is possible for students' legal names to contain `-` (e.g. Mary-Ann) or `/` (e.g. S/O).
+Relaxing current restrictions to allow such characters will allow such names to be input.
+
+**<u>Add clearer error message for integers/indexes </u>**
+
+**Description**
+
+Currently, when an invalid or sufficiently large number is given as an index, the error message says:<br>
+Index is not an unsigned non-zero integer.
+This should be changed to specify the requirement that indexes should be between
+1 and `Integer.MAX_VALUE`.
+
+**Rationale**
+
+The current error message can be confusing for non-technical users who do not know what
+*unsigned* means, and misleading when it also shows for large inputs that exceed Java's
+integer limit, such as `104890385925902379`.
+Clearer error messages can help to mitigate such confusion.
+
+**<u>Make `find c/` throw an error</u>**
+
+**Description**
+
+Currently, `find c/` does not throw an error. Instead, it runs successfully but always
+returns 0 students.
+This should be changed so an appropriate error message is shown (courses cannot be empty).
+
+**Rationale**
+
+A user might expect `find c/` to find students who are taking no courses.
+However, this is not the case, and will result in confusion.<br>
+Hence, this command should not execute successfully.
+
+**<u>Make participation not accept + before the number</u>**
+
+**Description**
+
+Currently, the participation argument in the `markp` command accepts the use of `+` before it,
+i.e. `+3` is treated as `3`.
+This should be treated as an invalid format.
+
+**Rationale**
+
+Though not strictly wrong, the index parser currently already checks for `+` and treats it as invalid.
+For consistency, this should also apply to participation.
+
+**<u>Restrict `addconsult` and `addlesson` commands from accepting date `0000`</u>**
+
+**Description**
+
+Currently, the `addconsult` and `addlesson` commands accept `0000` as a valid date input, and we intend to restrict this behaviour, explicitly disallowing `0000` as a date format.
+
+**Rationale**
+
+Allowing `0000` as a date can introduce ambiguity and inconsistency in data entries, as it does not represent a valid date. By continuing to disallow `0000`, we enforce a standard that prevents the use of unspecified or placeholder dates, ensuring that all date inputs are meaningful and valid within the system. This aligns with best practices for data integrity and accuracy.
 
 ### Glossary
 
