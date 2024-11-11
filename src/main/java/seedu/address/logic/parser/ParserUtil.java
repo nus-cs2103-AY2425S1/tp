@@ -138,8 +138,6 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-
-        // Parse date, then check if tbe date and format are valid
         LocalDate parsedDate;
 
         try {
