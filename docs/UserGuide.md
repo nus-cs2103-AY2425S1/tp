@@ -727,7 +727,7 @@ Unstars the specified patient contact from the address book removing them from f
 <img src="images/unstarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up"></i>](#medicontact)
 <br>
 <br>
 
