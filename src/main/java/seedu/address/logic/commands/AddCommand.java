@@ -23,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to Ward Watch.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to Ward Watch.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "ID "
