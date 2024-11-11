@@ -226,27 +226,26 @@ Use case ends.
 * 1b. Client name is identical to another client that already exists inside the system.
     * 1b1. System sends a warning about identical client to user.
 
-    Use case resumes from step 3.
+    Use case resumes from step 2.
 ---
 <a name = "UC02"></a> **Use case 02: Select a client**
 
 **MSS**
 
 1. User requests to select a client.
-2. System checks if the index is valid.
-3. System selects the client.
+2. System selects the client.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. Client index is invalid.
-    * 2a1. System shows invalid index error message.
-    * 2a2. User enters new index.
+* 1a. Client index is invalid.
+    * 1a1. System shows invalid index error message.
+    * 1a2. User enters new index.
 
-    Steps 2a1-2a2 are repeated until the index is valid.
+    Steps 1a1-1a2 are repeated until the index is valid.
 
-    Use case resumes from step 3.
+    Use case resumes from step 2.
 ---
 **Use case 03: Delete a client**
 
@@ -261,9 +260,8 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-Use case ends.
+* 2a. The list is empty. <br>
+    Use case ends.
 
 ---
 <a name = "UC04"></a>**Use case 04: Select an insurance plan**
@@ -277,13 +275,13 @@ Use case ends.
 
 **Extensions**
 
-* 1b. The insurance plan id is invalid.
-    * 1b1. System shows an error message to user.
+* 1a. The insurance plan id is invalid.
+    * 1a1. System shows an error message to user.
 
     Use case ends.
 
-* 1a. The client does not have the specified insurance plan.
-    * 1a1. System shows an error message to user.
+* 1b. The client does not support the specified insurance plan.
+    * 1b1. System shows an error message to user.
 
     Use case ends.
 
@@ -361,8 +359,8 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The claim already exists for the client.
-    * 2a1. System shows an error message.
+* 1a. The claim already exists for the client.
+    * 1a1. System shows an error message.
 
     Use case ends.
 ---
