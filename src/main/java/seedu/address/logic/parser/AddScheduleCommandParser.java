@@ -47,6 +47,15 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                             throw new RuntimeException(e); // Wrap ParseException to unchecked exception
                         }
                     }).collect(Collectors.toList());
+            
+            // Simple comparison for duplicates
+            for (int i = 0; i < contactIndexes.size(); i++) {
+                for (int j = i + 1; j < contactIndexes.size(); j++) {
+                    if (contactIndexes.get(i).equals(contactIndexes.get(j))) {
+                        throw new ParseException("One or more contact indexes are invalid.");
+                    }
+                }
+            }
 
             // Parse the schedule name
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
