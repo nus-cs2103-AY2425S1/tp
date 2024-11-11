@@ -18,7 +18,7 @@ In this guide, users will be able to learn the following details:
 1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
 2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
 3) Quickly learn and master various [commands](#10-glossary) and actions available in NovaCare.
-4) General [FAQs](#7-faq) (Frequently asked questions) of NovaCare.
+4) General [FAQs](#7-faq) (Frequently Asked Questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -116,10 +116,10 @@ Upon successful installation, you should see something like this:<br></br>
 ![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
-1. Download NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
+1. Download the NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
    ![Assets](images/assets.png)<br></br>
 2. Click on the `NovaCareApp.jar` file to download it.
-3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
+3. Upon downloading, save the app to your preferred location. (e.g. `Desktop`)
 
 ### Step 3. Run the application
 1. Open `Command Prompt` for Windows users or `Terminal` for Mac/Linux users.
@@ -140,7 +140,7 @@ The GUI is broken down into different **sections** as shown in the image below:
 1. **Command Box:** This is where you can type your commands to interact with the application.
 2. **Result Display Box:** Displays the result of commands.
 3. **Patient List:** Displays all the patients in the application.
-4. **Task List:** Displays all the task for all patients.
+4. **Task List:** Displays all the tasks for all patients.
 5. **Menu Bar:** Contains the `File` and `Help` menu. (to exit or view the help menu)
 
 [⬆️ Back to Table of Contents](#table-of-contents)
