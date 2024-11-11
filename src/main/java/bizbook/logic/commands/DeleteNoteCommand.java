@@ -54,6 +54,8 @@ public class DeleteNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert model != null : "Model should not be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -63,6 +65,9 @@ public class DeleteNoteCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         List<Note> notesList = new ArrayList<>(personToEdit.getNotes());
+
+        assert notesList != null : "Notes list should not be null";
+        assert noteIndex != null : "Note index should not be null";
 
         // if there are no notes with this index
         if (noteIndex.getOneBased() > notesList.size()) {
@@ -78,6 +83,8 @@ public class DeleteNoteCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), updatedNotesList);
+
+        assert editedPerson != null : "Edited person should not be null";
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
