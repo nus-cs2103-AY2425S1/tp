@@ -9,7 +9,7 @@
 BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a text-based interface** while retaining the advantages of a visual and mouse-based interface.
 It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
 
-As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
+As wedding planners, we understand that you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
 
 With BridalBuddy, you can easily:
