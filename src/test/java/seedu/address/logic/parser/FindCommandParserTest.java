@@ -28,11 +28,49 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parseValidPrefix_returnsFindCommand() {
+        // name
+        FindCommand expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("Amy"), "name"));
+        assertParseSuccess(parser, " n/ Amy", expectedFindCommand);
+
+        // id
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("4517"), "id"));
+        assertParseSuccess(parser, " i/ 4517", expectedFindCommand);
+
+        // ward
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("B09"), "ward"));
+        assertParseSuccess(parser, " w/ B09", expectedFindCommand);
+
+        // diagnosis
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("fever"), "diagnosis"));
+        assertParseSuccess(parser, " d/ fever", expectedFindCommand);
+
+        // medication
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("paracetamol"), "medication"));
+        assertParseSuccess(parser, " m/ paracetamol", expectedFindCommand);
+
+        // patient notes
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("handicap"), "patientnotes"));
+        assertParseSuccess(parser, " pn/ handicap", expectedFindCommand);
+
+        // appointment description
+        expectedFindCommand =
+                new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("surgery"), "apptdesc"));
+        assertParseSuccess(parser, " a/ surgery", expectedFindCommand);
+    }
+
+    @Test
     public void parse_validArgs_returnsFindCommand() {
-        // no trailing whitespaces
+        // trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new FieldContainsKeywordsPredicate(Arrays.asList("Amy", "Ben"), "name"));
-        assertParseSuccess(parser, " n/ Amy Ben", expectedFindCommand);
+        assertParseSuccess(parser, " n/ Amy Ben  ", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "    n/  \n Amy \n \t Ben  \t", expectedFindCommand);

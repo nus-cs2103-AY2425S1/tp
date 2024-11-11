@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 
 /**
  * Tests that a {@code Person}'s {@code Field}'s content matches any of the keywords given.
@@ -14,6 +17,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class FieldContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
     private final String field;
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
      * @param keywords A list of keywords to search by
@@ -28,6 +32,7 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        logger.info("testing patient list's predicate!");
         requireNonNull(person);
         return switch (this.field) {
         case "name" -> keywords.stream()

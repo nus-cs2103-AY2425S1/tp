@@ -71,12 +71,13 @@ public class AppointmentTest {
         assertFalse(Appointment.isValidDescription("")); // empty string
         assertFalse(Appointment.isValidDescription("      ")); // spaces only
         assertFalse(Appointment.isValidDescription("1VgV6jNGQ*mz!W7TTE51GX#RH81UOWM0G&t+7ssTtBuf9bpFYkn8XWKcdrAOss"
-                + "EVSMRb#KqMvghtO9#V7bkkGkRXT2O2jG20tXB6d")); // 101 characters
+                + "EVSMRb#KqMvghtO9#V7")); // 81 characters
 
         // valid description
         assertTrue(Appointment.isValidDescription("Surgery")); // alphabetic characters only
         assertTrue(Appointment.isValidDescription("L4-L5 spine check")); // with special characters and numbers
-        // 50 characters
-        assertTrue(Appointment.isValidDescription("VgV6jNGQ*mz!W7TTE51GX#RH81UOWM0Gadsfdkn8XWKcdrAOss"));
+        // 80 characters
+        assertTrue(Appointment.isValidDescription("VgV6jNGQ*mz!W7TTE51GX#RH81UOWM0Gadsfdkn8XWKcdrAOsstgbfreasdb"
+                + "fgbhtygnbffertgvbhyt"));
     }
 }
