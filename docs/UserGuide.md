@@ -51,7 +51,7 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
-   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
+   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to the client indexed 1 in the list.
 
    * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **transaction list view**.
 
@@ -434,7 +434,7 @@ Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `999
 **Q**: Can I customize the data file location?<br>
 **A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
 
-**Q**: How do I backup my data?<br>
+**Q**: How do I back up my data?<br>
 **A**: Simply copy the `clientell.json` file to a backup location.
 
 **Q**: What should I do if I accidentally delete a client?<br>
