@@ -723,11 +723,11 @@ testers are expected to do more *exploratory* testing.
      <br></br>
 2. Editing a wedding's details
     - Test case: `editw 1 n/Emmy and Johnny d/29/12/2024` <br>
-        **Expected:** The wedding's details at index 1 has been updated with the name and date provided
+        **Expected:** The name and date at the wedding at index 1 have been updated with the specified name and date.
     <br></br>
 3. Deleting a wedding
     - Test case: `deletew 1` <br>
-      **Expected:** The wedding of the specified index has been deleted 
+      **Expected:** The wedding at index 1 has been deleted 
       <br></br>
 4. Viewing wedding details
    - Test case: `view 1`<br>
