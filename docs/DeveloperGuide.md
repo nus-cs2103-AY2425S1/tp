@@ -353,30 +353,30 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
-  * 1a1. TAHub requests correction of the invalid input.
-    Use case ends.
+  * 1a1. TAHub requests correction of the invalid input.  
+  Use case ends.
 * **1b.** TAHub detects that the contact already exists  
   * 1b1. TAHub ignores the entry and notifies the TA.  
     Use case ends.
 
 ---
 
-#### **2\. Use Case: View Student Contact Information**
+#### **2\. Use Case: Find Student Contact Information**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
 **Use Case ID:** UC02 \- View Contact  
 **Main Success Scenario (MSS):**
 
-1. TA requests to view a specific student’s contact information.
-2. TAHub displays the student's name, phone number, email, Telegram ID, matriculation number, and other relevant details.
+1. TA searches for a specific student’s contact information by name.
+2. TAHub displays the student(s) name, phone number, email, and other relevant details.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TA enters a number that is out of bounds or not a number.  
-  * 1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
+* **1a.** TA does not enter a name   
+  * 1a1. TAHub notifies the TA with an error message (e.g. "Invalid command format").  
     Use case ends.
 
 ---
@@ -405,24 +405,31 @@ Use case ends.
 
 ---
 
-#### **4\. Use Case: View Student Grades**
+#### **4\. Use Case: Find Absentees**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
-**Use Case ID:** UC04 \- View Grades  
+**Use Case ID:** UC04 - View Absentees  
 **Main Success Scenario (MSS):**
 
-1. TA finds a student in the system.
-2. TA views the student’s grades.
-3. TAHub displays the student's grades for all tests.
+1. TA requests a list of students absent on a specified date and time.
+2. TAHub displays a list of all students marked as "Absent" on the specified date and time.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TA enters a number that is out of bounds or not a number.  
-  * 1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
-    Use case ends.
+* **1a.** TAHub detects an invalid date or time.
+  * 1a1. TAHub displays an error message (e.g. "Invalid date or time") and requests correction of the input.  
+  Use case ends.
+
+* **1b.** TAHub detects date is not in the correct format.
+  * 1b1. TAHub displays an error message (e.g. "Date must be in the format: dd/MM/yyyy HH:mm") and requests correction of the input.  
+  Use case ends.
+
+* **1c.** TAHub detects incorrect command usage.
+  * 1c1. TAHub displays an error message (e.g. "Invalid command format") and requests correction of the input.  
+  Use case ends.
 
 ---
 
@@ -456,15 +463,15 @@ Use case ends.
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 500 students without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be a standalone application and must not depend on any external or remote servers
+4. Should be a standalone application and must not depend on any external or remote servers.
 5. Should respond to user input (e.g., adding a student contact, viewing information) within two seconds under normal operating conditions.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g., course name and email).
-* **Index**: A numerical value representing the position of a student’s contact in the TAHub system. TAs use this index to refer to a student’s record in commands.
+* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g. course name and email).
+* **Index**: An integer value between 0 and 2147483648 representing the position of a student’s record in the TAHub system. TAs use this index to refer to a student’s record in commands.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
