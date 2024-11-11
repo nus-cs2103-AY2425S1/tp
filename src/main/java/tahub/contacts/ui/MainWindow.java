@@ -178,8 +178,9 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            // Immediately refresh the person list panel after enrollment/unenrollment commands
-            if (commandText.startsWith("enroll") || commandText.startsWith("unenroll")) {
+            // Immediately refresh person list panel after course deletion or enrollment changes
+            if (commandText.startsWith("course-delete") || commandText.startsWith("enroll")
+                    || commandText.startsWith("unenroll")) {
                 personListPanel.refreshPersonView();
             }
 
