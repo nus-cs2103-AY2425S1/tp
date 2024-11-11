@@ -15,7 +15,7 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project created by the  [SE-EDU initiative](https://se-education.org)., whose resources and documentation provided a valuable foundation. We would like to express our gratitude to the SE-EDU team and contributors for their well-designed framework, which facilitated our extensions and customizations, allowing us to build on a robust foundation.
 
 --------------------------------------------------------------------------------------------------------------------
 
