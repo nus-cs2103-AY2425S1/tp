@@ -17,11 +17,19 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
 public class CoursePersonDeleteCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
+    private Model model;
 
+    public CoursePersonDeleteCommandTest() {
+        StudentCourseAssociationList scaList = new StudentCourseAssociationList();
+        AddressBook addressBook = new AddressBook();
+        UniqueCourseList courseList = new UniqueCourseList();
+        UserPrefs userPrefs = new UserPrefs();
+        this.model = new ModelManager(addressBook, userPrefs, courseList, scaList);
+    }
     @Test
     public void execute_validCourseCodeUnfilteredList_success() {
         Course courseToDelete = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
@@ -30,8 +38,15 @@ public class CoursePersonDeleteCommandTest {
 
         String expectedMessage = String.format(CourseDeleteCommand.MESSAGE_DELETE_COURSE_SUCCESS, courseToDelete);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList(), null);
+        StudentCourseAssociationList expectedScaList = new StudentCourseAssociationList();
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()),
+                new UserPrefs(),
+                new UniqueCourseList(),
+                expectedScaList
+        );
+        expectedModel.addCourse(courseToDelete);
+        expectedModel.deleteCourse(courseToDelete);
 
         assertCommandSuccess(courseDeleteCommand, model, expectedMessage, expectedModel);
     }
