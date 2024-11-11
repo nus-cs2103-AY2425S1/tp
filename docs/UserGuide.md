@@ -375,6 +375,7 @@ Examples:
 * The status of the target order **must be `Completed`**.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Filter orders by order status : `filterorder`
 
