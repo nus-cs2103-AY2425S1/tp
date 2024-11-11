@@ -465,12 +465,15 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 10.  The user should be promptly informed of the outcome of their action (success/failure) via the feedback box.
 
 ### Glossary
+* **API (Application Programming Interface)**: A set of defined interfaces that allow different components or systems to interact with each other. In the context of the architecture, each component (e.g., UI, Logic, Model, Storage) defines its own API to enable communication with other components without exposing implementation details.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Command-Line Interface (CLI)**: A text-based interface that allows users to interact with the system by typing commands
 * **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
 * **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
 * **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
+* **JavaFX**: A framework used for building rich graphical user interfaces (GUIs) in Java. The UI component of the app is built using JavaFX to handle the user interface elements and interactions.
+* **Model**: The part of the application responsible for managing data and business logic. It is independent of the UI and controls the application's data. The Model component stores and manipulates data like user preferences and contact details.
 * **Use case**: A description of a sequences of actions that the user or system performs, resulting in an observable outcome
 * **Actor**: In the context of use cases, actor refers to the role played by the user
 * **Main Success Scenario (MSS)**: The sequence of interactions that is the most straightforward and assumes that nothing goes wrong
