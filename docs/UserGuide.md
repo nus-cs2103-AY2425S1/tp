@@ -505,11 +505,11 @@ Disclaimer: After an undo/redo command is executed, EduTuTu will display every p
 * The `redo` command can be used only if an `undo` was performed previously.
 
 **Example Usage:**
-*Input: User enters the `undo` command to reverse the last change.*
+**Input:** User enters the `undo` command to reverse the last change.
 ![Ui](images/undo_input.png)
-*Output: The UI updates to reflect the reversal of the most recent change.*
+**Output:** The UI updates to reflect the reversal of the most recent change.*
 ![Ui](images/undo_output.png)
-*Input: User then enters the `redo` command to reapply the change.
+**Input:** User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redo.png)
 
@@ -723,7 +723,7 @@ Exiting the program can be done in two ways:
 <p>3. The program will close.</p>
 
 
-### Method 2:
+#### Method 2:
 1. Type the command [exit](#exit) in the command box and press Enter.
    ![Ui](images/exitcommandinput.png)
 
