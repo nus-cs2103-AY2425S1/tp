@@ -286,7 +286,8 @@ Allows tagging a student by their level and subject. A student must have a level
 <box type="warning" seamless>
 
 **Caution:** Tagging with only subject(s) will only work if the student has a level assigned previously. Additionally,
-the subject(s) tagged must be valid for the previously assigned level.
+the subject(s) tagged must be valid for the previously assigned level. Furthermore, when tagging subjects, the existing 
+subjects of the student will be replaced i.e. tagging of subjects is not cumulative.
 
 </box>
 
