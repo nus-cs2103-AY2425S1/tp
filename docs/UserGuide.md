@@ -42,9 +42,13 @@ in this user guide.
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
 
+<br>
+
 ---
 
 <div style="page-break-after: always;"></div>
+
+<br>
 
 ## **Introduction**
 
