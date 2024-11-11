@@ -28,7 +28,7 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all students in the contact list.
@@ -148,7 +148,7 @@ Sets the specified tutorial(s) as present for the student at the given index.
 
 Format: `mark INDEX tut/TUTORIAL`
 
-- Records the student at the specified `INDEX` as present. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
+- `Index` refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
 - `TUTORIAL` can be in the format of:
   - A positive number between 1 - 12 (inclusive) e.g. `1`.
   - A list of numbers e.g. `[1,3,5]`.
@@ -174,7 +174,7 @@ Sets the specified tutorial(s) as absent for the student at the given index.
 
 Format: `unmark INDEX tut/TUTORIAL`
 
-- Records the student at the specified `INDEX` as absent. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, ...).
+- `Index` refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, ...).
 - `TUTORIAL` can be in the format of:
     - A positive number between 1 - 12 (inclusive) e.g. `1`.
     - A list of numbers e.g. `[1,3,5]`.
@@ -199,7 +199,7 @@ Resets attendance for the specified tutorial(s) for the student at the given ind
 
 Format: `reset INDEX tut/TUTORIAL`
 
-- Resets the attendance of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** (1, 2, 3, ...).
+- `Index` refers to the index number shown in the displayed student list. The index **must be a positive integer** (1, 2, 3, ...).
 - `TUTORIAL` can be in the format of:
     - A positive number between 1 - 12 (inclusive) e.g. `1`.
     - A list of numbers e.g. `[1,3,5]`.
