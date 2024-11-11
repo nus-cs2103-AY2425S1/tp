@@ -166,10 +166,10 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODUL
 The command accepts either one phone number, one email, or both.
 </box>
 
-* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
-* `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
+* `NAME` can take any values and can not be blank.
+* `PHONE_NUMBER` is almost a free-form text field with minimal validation.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
-* `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
+* `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`, if explicitly supplied.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
@@ -178,6 +178,8 @@ The command accepts either one phone number, one email, or both.
 * `ADDRESS` can take any values and can not be blank.
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
+
+For more explanation on the format and design of each input field, refer to the [input format section](#input-format).
 
 <box type="info" seamless>
 
@@ -462,7 +464,7 @@ _Details coming soon ..._
 
 ### `NAME` field
 
-In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
+In our application, we understand that everyone's names can have various characters and symbols, and of any length, thus we decided that as long as it is not a blank string, it is considered acceptable.
 
 ### Concept of a phone number
 
@@ -482,14 +484,66 @@ Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a valid phone number.
 
 Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (office 1) 91234567 (office 2)`.
-
-This allows you to add extra annotations if you wish to.
+Since a contact may have different phone numbers at the same time, such as mobile, office, home etc, and any length of annotation to differentiate between them,
+we decide not to enforce any input length restriction on this field, to offer you more flexibility when taking down and annotating phone numbers of a contact.
 
 <box type="caution" seamless>
 
 **Caution:**
 To allow more flexibility in the input format, we have to sacrifice some validation checks. As such, it is important to ensure that the phone number you input is correct.
 </box>
+
+### `MODULE_ROLE` field
+
+The `MODULE_ROLE` field represents the role of a contact, such as CS1101S Student, CS1231S Tutor or MA1522 Professor and so on.
+It consists of two sub-fields: `MODULECODE` and `ROLETYPE`.
+
+#### `MODULECODE` field
+The `MODULECODE` field refers to the module codes of modules in NUS, and is defined by at least one alphabet followed by at least one number
+and lastly ended by an optional sequence of numbers.
+
+Some valid module code inputs include `CS1231S`, `CS1231`, `CFG2002MY` and `DMA1201CH`.
+
+Take note that even though the modules that can be taken by NUS Y1 CS Students are quite limited, we recognize that they may take on double majors/minors, or courses from
+DYOC (Design Your Own Course) Scheme, hence we do not enforce strict validation to check whether the provided module code represents a valid NUS CS module and only checks on its
+basic format. Since DYOC courses may have potentially longer module code, we do not enforce input length restrction either.
+
+#### `ROLETYPE` field
+The `ROLETYPE` field refers to the role related to the module code provided, such as student, professor and tutor.
+Some valid role type inputs include:
+* leave blank or student for student role(default value)
+* ta or tutor for tutor role
+* prof or professor for professor role
+
+Take note that each role type only represents a single role, and you should define the role type of a person based on
+the most accurate description of this person' role. For example, if a professor is also the tutor of the course, it is
+better to specify the role of this contact as the professor of this course instead of tutor. Similarly, even though it is
+unlikely for a contact to be a professor and a student at the same time, we do not enforce strict validation on this to give
+you more flexibility in annotating your contact and avoid potential input issues in rare scenario due to overzealous validation.
+
+### `ADDRESS` field
+
+The `ADDRESS` field can be used to refer to the address of any location related to a contact, such as home, office, consultation venue etc.
+Since the length of address input may differ drastically because of the nature of the location and the complexity in its address name structure,
+we do not enforce restriction on the input length and as long as the input is not blank, it is considered as valid address.
+
+Some valid `ADDRESS` values include `COM3-01-20`, `#05-03, Blk 211, Any Place Street 123, Singapore 123456`, `Utown Residence #12-34 etc`.
+
+### `TAG` field
+
+The `TAG` field allows you to classify contacts in the address book easily, and you can use find by tag feature to query them more easily.
+For more detail on find by tag feature, refer to [find contacts by tag section](#by-tag) for more details.
+
+Some valid `TAG` values include `friends`, `office` and `classmates`.
+
+### `DESCRIPTION` field
+
+The `DESCRIPTION` field aims to provide you a simple way to annotate a contact with some basic information for easy reference in the future.
+For example, you can use it to record down how you feel about a professor's way of teaching, or remember the important birthday of a friend in NUS SOC
+or even zoom link of a lecture/tutorial session taught by a professor/tutor.As you can see, we try to provide as much flexibility to you as possible to
+allow you to record any short pieces of information about the contact, but we also want it to be short. Hence, we restrict the input size of the description
+to be 500 characters which should be enough for most users.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
