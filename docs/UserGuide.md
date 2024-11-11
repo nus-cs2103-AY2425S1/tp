@@ -47,9 +47,10 @@ This section explains the different types of annotated boxes used in the user gu
 >
 > This box contains warnings about potential issues or important things to be aware of.
 
---------------------------------------------------------------------------------------------------------------------
+Now that you are familiar with the key terms and annotated boxes, you can proceed to the [Quick Start](#quick-start) guide to get started or explore the [Features](#features) and [Commands Summary](#command-summary) available in EduConnect.
 
-## Quick start
+--------------------------------------------------------------------------------------------------------------------
+## Quick Start
 
 1. Check that Java is installed:
    - EduConnect requires **Java 17 or higher** to run. If you're not sure if you have the correct Java version installed, you can click [here for the relevant instructions](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
@@ -101,7 +102,9 @@ The table below provides a quick overview of each parameter associated with a te
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 >
-> Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
+> * Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
+>
+> * A Person is considered as duplicate if they share the same phone number or email address regardless of whether they are a student or teacher and are considered as errors in EduConnect. For example, a student with the phone number `12345678` cannot be added if another student or teacher already has the same phone number. 
 
 | Parameter           | Definition                                                        | Constraints                                                                                                            | Examples                                                                   |
 |---------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -114,8 +117,8 @@ The table below provides a quick overview of each parameter associated with a te
 | `CLASSES`           | The classes associated with the person.                           | - Must only contain alphanumeric characters <br/> - Multiple classes are separates by a comma <br/> - Compulsory field | `7A`, `5A, 8C`                                                             |
 | `ATTENDANCE`        | The attendance count of the student.                              | - Must be a non-negative integer <br/> - Optional field for Students                                                   | `0`, `5`                                                                   |
 | `INDEX`             | The position of the person in the displayed list.                 | - Must be a positive integer and less than or equal to the largest index displayed on the GUI                          | `1`, `2`, `3`                                                              |
-| `ATTRIBUTE`         | The attribute by which the list is to be sorted.                  | - Must be one of `name`, `subject`, `class` or `attendance`.                                                           | `name`, `subject`, `class`, `attendance`                                   |
-| `TAG`               | A label assigned to a person for categorization.                  | - Must be a non-empty string.                                                                                          | `friend`, `family`                                                         |
+| `ATTRIBUTE`         | The attribute by which the list is to be sorted.                  | - Must be one of `name`, `subject`, `class` or `attendance`                                                            | `name`, `subject`, `class`, `attendance`                                   |
+| `TAG`               | A label assigned to a person for categorization.                  | - Must only contain alphanumeric characters  <br/> - Optional field                                                    | `friend`, `family`                                                         |
 | `NEXT_OF_KIN`       | The next of kin of the student.                                   | - Follows the same specifications as `NAME`                                                                            | `John Doe`, `Elizabeth Chua`                                               |
 | `EMERGENCY_CONTACT` | The contact to use in cases of emergencies involving the student. | - Follows the same specifications as `PHONE_NUMBER`                                                                    | `98765432`, `12345678`                                                     |
 
@@ -126,7 +129,7 @@ The table below provides a quick overview of each parameter associated with a te
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add /name NAME`, `NAME` is a parameter which can be used as `add /name John Doe`.
 >
->* Items in square brackets are optional.<br>
+> * Items in square brackets are optional.<br>
   e.g. `edit INDEX [/name NAME] [/contact PHONE_NUMBER]` can be used as `edit 1 /name John` or as `edit 2 /contact 94567732` or as `edit /name John /contact 94567732`.
 >
 > * Items followed by `…`​ can be repeated multiple times, or not used at all.<br>
@@ -138,6 +141,8 @@ The table below provides a quick overview of each parameter associated with a te
 > * Any extra parameters entered for commands that don’t require them (like `help`, `list`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
+> * In the event where a non-repeating parameter is given multiple times, the last parameter supplied will be taken into account. For example, if the command specifies `/name NAME` but `/name John Doe /name Bob Doe` is given, `Bob Doe` will be registered as the name parameter.
+> 
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters around line-breaks may not transfer correctly when pasted into the application.
 
 
@@ -164,15 +169,16 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 
 ### Command History:
 
-Allows users to navigate through previously entered commands in the command box by pressing the `Up` and `Down` arrow keys.
+Allows users to navigate through previously entered valid commands in the command box by pressing the `Up` and `Down` arrow keys. For example, if you have entered `delete 1` and then `delete 2`, pressing the `Up` arrow key will display `delete 2`, and pressing it again will display `delete 1`.
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 >
 > The command history is only stored for the current session. When you close EduConnect, the history is cleared and cannot be retrieved in future sessions.
 
+### Adding a person
 
-### Adding a student: `student`
+#### Adding a student: `student`
 
 Adds a student to EduConnect.
 
@@ -182,12 +188,17 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 > :information_source: **Note:**
 >
 > The address, attendance and tag fields are optional when creating a student.
-> If not specified, attendance will default to 0.
+> If not specified, attendance will default to 0, and the address field will be greyed out in the GUI.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
 > The parameters can be entered in any order when adding a student.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The `student` command will show an error if the student's phone number or email address matches another person's phone number or email address. For more information, refer to the [Parameter Details](#parameter-details) section.
 
 Example:
 * The command `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` adds a student with the following details:
@@ -202,7 +213,7 @@ Example:
   * the next of kin whose name is Bob Doe
   * an emergency contact 8765 4321
 
-### Adding a teacher: `teacher`
+#### Adding a teacher: `teacher`
 
 Adds a teacher to EduConnect.
 
@@ -217,6 +228,11 @@ Format: `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 > :bulb: **Tip:**
 >
 > The parameters can be entered in any order when adding a teacher.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The `teacher` command will show an error if the teacher's phone number or email address matches another person's phone number or email address. For more information, refer to the [Parameter Details](#parameter-details) section.
 
 Example:
 * The command `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C` adds a teacher with the following details:
@@ -249,6 +265,13 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 > :bulb: **Tip:**
 >
 > The parameters can be entered in any order when editing multiple fields.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+> 
+> The `edit` command will show an error if the edited field results in a duplicate entry. For example, if you try to edit a person's phone number which match another person's phone number, the command will not be executed. For more information, refer to the [Parameter Details](#parameter-details) section.
+
+{: .alert .alert-info}
 
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` Edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
@@ -287,7 +310,7 @@ Examples:
 
 Sorts the list of people by name, subject, class, or attendance.
 
-Format: `sort [ATTRIBUTE]`
+Format: `sort ATTRIBUTE`
 
 * Sorts the results based on the specified `ATTRIBUTE`. The available attributes are `name`, `subject`, `class`, `attendance`.
 * `sort name` Sorts the results by name in alphabetical order.
@@ -308,7 +331,7 @@ Format: `sort [ATTRIBUTE]`
 > :exclamation: **Warning:**
 >
 > The `sort` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
-
+ 
 Examples:
 * `list` followed by `sort attendance` sorts the list of students by attendance in descending order.
    <br/><br/>
@@ -360,8 +383,14 @@ Deletes the specified person or persons from EduConnect.
 Format: `delete INDEX…​`
 
 * You can delete one or more people by specifying their `INDEX`(es) in the list.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list. 
 * The index **must be a positive integer** 1, 2, 3, …​
+* The indexes entered must be unique.
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> If any index provided is invalid, the command will not be executed.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EduConnect.
@@ -425,6 +454,11 @@ Example:
 
 Resets the attendance of all students in EduConnect to 0.
 
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> The `resetAttendance` command works on the overall list of contacts and not on a filtered list produced by the `find` command. It affects the attendance of all student contacts.
+
 Format: `resetAttendance`
 
 ### Exiting the program : `exit`
@@ -443,8 +477,8 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> If your changes to the data file makes its format invalid, EduConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-  Furthermore, certain edits can cause the EduConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+> * If your changes to the data file makes its format invalid, EduConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+> * Furthermore, certain edits can cause the EduConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -460,25 +494,25 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+Below is a summary of the commands available in EduConnect. For more details, please navigate to the corresponding header by clicking on the table below.
 
-| Action                | Format, Examples                                                                                                                                                                                                                                                                                                                                                                         |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**       | `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0 /nok Bob Doe /emergency 87654321` |
-| **Add Teacher**       | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ /subject SUBJECT /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`                                                       |
-| **Clear**             | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                             |
-| **Delete**            | `delete INDEX...`<br> e.g., `delete 3`, `delete 1 2 4`                                                                                                                                                                                                                                                                                                                                   |
-| **Sort**              | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                                                                                     |
-| **Undo**              | `undo`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Redo**              | `redo`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Edit**              | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                                                                                                                                 |
-| **Find**              | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                              |
-| **List**              | `list`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Mark Attendance**   | `mark`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Unmark Attendance** | `unmark INDEX…​` <br/> e.g., `unmark 1`, `unmark 1 2 3`                                                                                                                                                                                                                                                                                                                                  |
-| **Reset Attendance**  | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                        |
-| **Help**              | `help`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Exit**              | `exit`                                                                                                                                                                                                                                                                                                                                                                                   |
+| Action                                                      | Format, Examples                                                                                                                                                                                                                                                                                                                                                                         |
+|-------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add Student**](#adding-a-student-student)                | `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0 /nok Bob Doe /emergency 87654321` |
+| [**Add Teacher**](#adding-a-teacher-teacher)                | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ /subject SUBJECT /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`                                                       |
+| [**Clear**](#clearing-entries--clear)                       | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                      |
+| [**Delete**](#deleting-a-person--delete)                    | `delete INDEX...`<br> e.g., `delete 3`, `delete 1 2 4`                                                                                                                                                                                                                                                                                                                                   |
+| [**Sort**](#sorting-persons--sort)                          | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                                                                                     |
+| [**Undo**](#undoing-the-last-command--undo)                 | `undo`                                                                                                                                                                                                                                                                                                                                                                                   |
+| [**Redo**](#redoing-the-last-command--redo)                 | `redo`                                                                                                                                                                                                                                                                                                                                                                                   |
+| [**Edit**](#editing-a-person--edit)                         | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                         |
+| [**Find**](#locating-persons-by-name-find)                  | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                      |
+| [**List**](#listing-all-persons--list)                      | `list`                                                                                                                                                                                                                                                                                                                                                                                   |
+| [**Mark Attendance**](#marking-attendance--mark)            | `mark`                                                                                                                                                                                                                                                                                                                                                                                   |
+| [**Unmark Attendance**](#unmarking-attendance--unmark)      | `unmark INDEX…​` <br/> e.g., `unmark 1`, `unmark 1 2 3`                                                                                                                                                                                                                                                                                                                                  |
+| [**Reset Attendance**](#reset-attendance-resetAttendance)   | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                        |
+| [**Help**](#viewing-help--help)                             | `help`                                                                                                                                                                                                                                                                                                                                                                                   |
+| [**Exit**](#exiting-the-program--exit)                      | `exit`                                                                                                                                                                                                                                                                                                                                                                                   |
