@@ -297,6 +297,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 1. User requests MediBase3 to edit the patient data
 2. User provides the new patient detail
 3. MediBase3 updates the patient detail
+   
    Use case ends
 
 **Extensions:**
