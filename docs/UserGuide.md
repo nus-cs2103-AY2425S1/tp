@@ -534,28 +534,28 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **Q**: **How do I transfer my data to another Computer?**<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: **What do I need to start using PlanPerfect?**  
+**Q**: **What do I need to start using PlanPerfect?**  <br>
 **A**: Ensure Java 17 or above is installed on your computer. Then, download the `PlanPerfect.jar` file and follow the Quick Start instructions to set up and run the application.
 
-**Q**: **How do I add a contact?**  
+**Q**: **How do I add a contact?**  <br>
 **A**: Use the `add` command followed by the contact details. For example: `add n/John Doe p/98765432 e/johnd@example.com a/123 Street Name`. You can also add optional tags like this: `add n/John Doe p/98765432 e/johnd@example.com a/123 Street Name t/photographer florist`.
 
-**Q**: **How can I organize my contacts with tags?**  
+**Q**: **How can I organize my contacts with tags?**  <br>
 **A**: You can add tags to each contact using the `tag` command. To see contacts with specific tags, use the `filter` command. Use `taglist` to view all active tags in alphabetical order.
 
-**Q**: **What if PlanPerfect opens off-screen after moving it to a secondary monitor?**  
+**Q**: **What if PlanPerfect opens off-screen after moving it to a secondary monitor?**  <br>
 **A**: If this happens, delete the `preferences.json` file in the PlanPerfect folder and restart the app to reset the screen position.
 
 **Q**: **What if my contact or wedding name contains symbols such as @, (, ) and /?** <br>
 **A**: PlanPerfect currently only supports alphanumeric contact and wedding names. We understand that there are names containing these characters, and plan to include support for these characters in a future release.
 
-**Q**: **What do I do if the data I entered does not appear in full or is truncated which I do not want?** 
+**Q**: **What do I do if the data I entered does not appear in full or is truncated which I do not want?** <br>
 **A**: You can expand your window size to view the full details of the information you entered, do this for all fields you can't fully see.
 
-**Q**: **Are "John" and "john" considered duplicate wedding names?** 
+**Q**: **Are "John" and "john" considered duplicate wedding names?** <br>
 **A**: No, checking for duplicates in wedding names is **case-sensitive**.
 
-**Q**: **How are duplicate contacts determined?**
+**Q**: **How are duplicate contacts determined?** <br>
 **A**: Two contacts are considered duplicates if they have the **same phone number**. An error message will be shown if you attempt to add a duplicate contact or edit the phone number of a contact to be the same as another phone number already in the contact list. 
 
 <br><br/>
