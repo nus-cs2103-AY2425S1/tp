@@ -2,6 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 skinparam style strictuml
+skinparam ArrowFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -16,7 +17,7 @@ end box
 [-> LogicManager : execute("mark t/johnDoe d/2024-11-10")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("mark t/johnDoe d/2024-11-10")
+LogicManager -> AddressBookParser : parseCommand(...)
 activate AddressBookParser
 
 create AttendanceMarkingCommandParser
@@ -26,7 +27,7 @@ activate AttendanceMarkingCommandParser
 AttendanceMarkingCommandParser --> AddressBookParser
 deactivate AttendanceMarkingCommandParser
 
-AddressBookParser -> AttendanceMarkingCommandParser : parse("t/johnDoe d/2024-11-10")
+AddressBookParser -> AttendanceMarkingCommandParser : parse(...)
 activate AttendanceMarkingCommandParser
 
 create MarkAttendanceCommand
