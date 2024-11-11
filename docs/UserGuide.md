@@ -135,11 +135,7 @@ Adds a person to CampusConnect.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
+* A person can have any number of tags (including 0)
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
 * Duplicate contacts cannot be added to the list.
 * Names are case-sensitive. For example, “Alice” and “alice” are considered distinct names.
