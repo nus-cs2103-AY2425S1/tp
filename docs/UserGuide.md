@@ -278,7 +278,7 @@ Avoid editing or modifying the exported file. Any changes to its structure, form
 </box>
 
 Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
+* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.<br>
   ![result for 'import contacts'](images/importContactsResult.png)
 
 --------------------------------------------------------------------------------------------------------------------
