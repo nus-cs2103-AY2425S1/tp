@@ -370,6 +370,7 @@ Furthermore, certain edits can cause the Teletutors to behave in unexpected ways
 5. Input field for assignment grade is case-sensitive.
 6. Students with the same phone number can be added to the list.
 7. The Attendance Window does not refresh properly when editing names in a filtered view, after the `view` command is executed.
+8. The `closeat` command will not account for windows that are manually closed using the `X` button.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
