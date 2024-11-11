@@ -151,18 +151,18 @@ Adds a patient to the address book.
 
 Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
-* Names only allow alphanumeric characters and spaces. Case-sensitive
-* Age should only contain numbers and should be between 0-999 inclusive.
-* Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
-* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier.
-* Phone numbers should only contain numbers, and it should be `3-10` digits long.
-* Addresses can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
-* Emails should be of the format local-part@domain. Case-sensitive.
-* Appointments should be in a format of `dd/MM/yyyy HH:mm`.
-* Tags are alphanumeric with the exception of blood types, which must contain a + or - (e.g. A+, AB-, O+ etc.). Case-sensitive.
-* Appointments are made in 15 minute intervals starting from given time and cannot be made after 14 minutes before closing time.
-* Appointments cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
-* Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
+* **Names** only allow alphanumeric characters and spaces. Case-sensitive
+* **Age** should only contain numbers and should be between 0-999 inclusive.
+* **Gender** is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
+* **NRIC** must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier.
+* **Phone numbers** should only contain numbers, and it should be `3-10` digits long.
+* **Addresses** can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
+* **Emails** should be of the format local-part@domain. Case-sensitive.
+* **Appointments** should be in a format of `dd/MM/yyyy HH:mm` and within the operating hours.
+* **Appointments** are made in 15 minute intervals starting from given time and cannot be made after 14 minutes before closing time.
+* **Appointments** cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
+* **Appointments** can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
+* **Tags** are alphanumeric with the exception of blood types, which must contain a + or - (e.g. A+, AB-, O+ etc.). Case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:warning: **Note:** A person can have any number of tags (including 0).
  </div>
@@ -170,7 +170,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINT
  Try using tags to describe the patient! This helps you to remember specific information about them.
  </div>
  <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
- There is a unique tag for Blood Type, Try putting a tag named 'A+'
+ There is a unique tag for Blood Type, try putting a tag named 'A+'
  </div>
 
 <div style="page-break-after: always;"></div>
@@ -192,12 +192,12 @@ Format:
 OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
 * Edits the patient at the specified `INDEX` or `NRIC`.
-* The index and NRIC refers to the index number and NRIC shown in the displayed patient list respectively.
+* The **index** and **NRIC** refers to the index number and NRIC shown in the displayed patient list respectively.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed (i.e adding of tags is not cumulative).
-* If NRIC is being updated, the updated NRIC must be unique.
-* You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
+* When editing **tags**, the existing tags of the patient will be removed (i.e adding of tags is not cumulative).
+* If **NRIC** is being updated, the updated NRIC must be unique.
+* You can remove all the patient’s **tags** by typing `t/` without specifying any tags after it.
 
 <div style="page-break-after: always;"></div>
 
@@ -210,7 +210,7 @@ Examples:
 
 ![update](images/update%20patient.png)
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning:** <br>
 Updating only works if the displayed list contains the entry you are updating. Hence, attempting to update a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -226,15 +226,15 @@ Deletes the specified patient from ClinicBuddy either by **NRIC** or **Index** o
 Format: `delete NRIC`
 
 * Deletes the patient that has the specified `NRIC`.
-* The NRIC refers to the NRIC shown in the displayed patient list.
-* The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
+* The **NRIC** refers to the NRIC shown in the displayed patient list.
+* The **NRIC** must start with 'S', 'T', 'F', 'G' or 'M', have 7 digits, and end with a letter.
 
 Examples:
 
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the patient with 'S2345678E' in the results of the `find` command.
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning:** <br>
 Deletions only work if the displayed list contains the entry you are deleting. Hence, attempting to delete a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -243,11 +243,11 @@ by NRIC if the record is not currently displayed will not work.
 
 #### Deleting a patient by Index:
 
-Format: `delete Index`
+Format: `delete INDEX`
 
-* Deletes the patient at the specified `Index`.
-* The Index refers to the patient's position in the displayed patient list.
-* The Index **must be a positive whole number no larger than the size of the list.**
+* Deletes the patient at the specified `INDEX`.
+* The **index** refers to the patient's position in the displayed patient list.
+* The **index** must be a positive whole number no larger than the size of the list.
 
 Examples:
 
@@ -287,10 +287,10 @@ Format: `list`
 Format: `find NRIC`
 
 * The search is case-insensitive. e.g `s1234567z` will match `S1234567Z`
-* The NRIC must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.
-* In a single command, only one record with the given NRIC can be found. e.g. `find S1234567Z T7654321Z` does not work
+* The **NRIC** must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.
+* In a single command, only one record with the given **NRIC** can be found. e.g. `find S1234567Z T7654321Z` does not work
   as it attempts to find 2 records containing the given NRICs.
-* Only full NRICs will be matched e.g. `S12345` will not match `S1234567Z`
+* Only full **NRICs** will be matched e.g. `S12345` will not match `S1234567Z`
 
 Example:
 
@@ -323,7 +323,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning:** <br>
 If only one input is keyed in and it has an NRIC format (e.g S1234567Z), the find command will search for the patient 
 with that NRIC rather than a patient with that name. The application assumes that single inputs of NRIC format are 
 NRICs. When multiple keywords are used, the application treats the keywords as names, regardless of whether they
@@ -342,8 +342,8 @@ Format: `bookings DATE`
 * `DATE` has to be of the format `dd/MM/yyyy` OR `dd-MM-yyyy` OR `dd MM yyyy`
 
 Examples:
-* `bookings 12/08/2024`
-* `bookings 12-08-2024`
+* `bookings 12/08/2024` finds all patients with appointments on 12 August 2024.
+* `bookings 14-10-2024` finds all patients with appointments on 14 October 2024. 
 
   ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
 
@@ -357,7 +357,7 @@ Format: `deleteappt NRIC DATE HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
 * `NRIC` refers to the unique identifier displayed in the current patient list.
-* `NRIC` **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
+* `NRIC` must start with 'S', 'T', 'F', 'G' or 'M', have 7 digits, and end with a letter.
 
 Example:
 * `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
@@ -381,16 +381,16 @@ Updates Operating Hours
 
 Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
 
-* Opening & Closing hours have to be of the format `HH:mm`.
-* Default Opening & Closing hours are `00:00` & `23:59` respectively.
-* Opening hours must fall before Closing hours.
+* **Opening** & **closing** hours have to be of the format `HH:mm`.
+* Default **opening** & **closing** hours are `00:00` & `23:59` respectively.
+* **Opening** hours must fall before **closing** hours.
 * If an argument is empty, it will set the hours to default.
 * All current appointments must fall within new operating hours for update to take effect.
 
 Examples:
-* `hours`
-* `hours o/09:30 c/18:00`
-* `hours c/18:00`
+* `hours` updates the operating hours to 00:00 - 23:59.
+* `hours o/09:30 c/18:00` updates the operating hours to 09:30 - 18:00.
+* `hours c/18:00` updates the operating hours to 00:00 - 18:00.
 
 ![hours](images/update%20operating%20hours.png)
 
@@ -433,15 +433,12 @@ These are useful to save the state of your current data at a specific point in t
   - The index will reset to `0` after reaching `9`, **overwriting** the oldest backup file.
   
 - File Naming Format:
-  ```
-  INDEX_DESCRIPTION_TIMESTAMP.json
-  ```
-- Example:
-  ```
-  3_After updating John's contact info_2024-10-30_15-45-00-000.json
-  ```
+  * `INDEX_DESCRIPTION_TIMESTAMP.json`
 
-<div markdown="span" class="alert alert-primary">:bulb:
+- Example:
+  * `3_After updating John's contact info_2024-10-30_15-45-00-000.json`
+
+<div markdown="span" class="alert alert-primary">:warning:
 **Important Notes:** <br>
 - Use clear and unique descriptions to distinguish backup files. <br>
 - A backup name is limited to 250 characters only.
@@ -460,13 +457,11 @@ These are useful to save the state of your current data at a specific point in t
     - **Description Naming:** Backups are labeled with the action, such as `delete_<name>` or `clear`.
     - **No User Action Required:** These backups are generated automatically and stored in the same `/backups/` folder.
     - **Formatting:** Automated backups also follow the indexed system (`0`–`9`) and contain a timestamp of the creation time.
+    
+- Example:
+    * `0_delete_John Doe_2024-10-30_18-05-29-745.json`
+    * `1_clear_2024-10-30_18-05-29-745.json`
 
-  ```
-  0_delete_John Doe_2024-10-30_18-05-29-745.json
-  ```
-  ```
-  1_clear_2024-10-30_18-05-29-745.json
-  ```
 ![automated_backup](images/automatedbackup.png)
 
 <div style="page-break-after: always;"></div>
@@ -489,7 +484,7 @@ Format: `listbackups`
   0 [clinicbuddy] Created on: 21 May 2024 13:20:07
   ```
 
-<div markdown="span" class="alert alert-primary">:bulb:
+<div markdown="span" class="alert alert-primary">:warning:
 **Important Note:** <br>
 The date format used is dd MMM yyyy HH:mm:ss.
  </div>
@@ -508,9 +503,7 @@ Format: `restore INDEX`
 - **View Available Backups:** Use the listbackups command to display all backup files. 
 - **Restore Command:** Enter restore INDEX to restore the backup with the specified index. 
 - Example:
-  ```
-  restore 2
-  ```
+  `restore 2` restores the backup from index 2.
   
 <div markdown="span" class="alert alert-primary">:bangbang:
 **Warnings:** <br>
@@ -518,7 +511,7 @@ Format: `restore INDEX`
 - It is suggested to create a manual backup before restoring to preserve recent changes.<br>
  </div>
 
-![resto re](images/restore.png)
+![restore](images/restore.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -549,8 +542,6 @@ the data of your previous AddressBook home folder.
 **Q**: How can I view a history of my backups? <br>
 **A**: Use the `listbackups` command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
 
-<div style="page-break-after: always;"></div>
-
 **Q**: What happens if I enter incorrect or missing information in a command?<br>
 **A**: ClinicBuddy will display an error message and prompt you to check the format or required fields. Double-check command formats and required parameters to avoid errors.
 
@@ -559,6 +550,8 @@ the data of your previous AddressBook home folder.
 
 **Q**: What if I forget the command formats?<br>
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
+
+<div style="page-break-after: always;"></div>
 
 **Q**: How are backups sorted in the listbackups command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
