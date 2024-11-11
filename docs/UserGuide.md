@@ -186,7 +186,7 @@ Users can locate customers by entering the beginning letters (prefix) of their n
 
 **Examples:**
 - `find al` — Finds all customers with names starting with "al".
-- `find al ch` — Finds all customers with names starting with "al" and "ch".
+- `find al ch` — Finds all customers with names starting with "al" or "ch".
 
 #### Search by Phone Number
 
