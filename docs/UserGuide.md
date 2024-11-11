@@ -1156,13 +1156,11 @@ Removed buyers: Alex Yeoh, Charlotte Oliveiro
 > 
 > ---
 > 
-> **User Error #2**: Buyer index not found / Invalid type / Negative integer 
+> **User Error #2**: Buyer index not found / Invalid type / Negative integer
 >
-> **Input #a**: `removelistingbuyers 1 buy/1000`
+> **Input #a**: `removelistingbuyers 1 buy/aa`
 >
-> **Input #b**: `removelistingbuyers 1 buy/aa`
->
-> **Input #c**: `removelistingbuyers 1 buy/-1`
+> **Input #b**: `removelistingbuyers 1 buy/-1`
 >
 > **Output**: Index is not a non-zero unsigned integer.
 > 
@@ -1185,6 +1183,14 @@ The specified person is not a buyer:
 > **Output**: <br>
 The specified buyer Alex Yeoh is not a buyer of the listing RC4. <br>
 Address: 134 Clementi Ave.
+> 
+> ---
+> 
+> **User Error #5**: Buyer index out of bounds
+> 
+> **Input**: `removelistingbuyers 1 buy/1000`
+> 
+> **Output**: The person index provided is invalid!
 > 
 > ---
 
