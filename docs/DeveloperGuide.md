@@ -304,7 +304,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​           | I want to …​                           | So that I can…​                                                        |
-| -------- | ----------------- |----------------------------------------|------------------------------------------------------------------------|
+| -------- | ----------------- | -------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user          | see usage instructions                 | refer to instructions when I forget how to use the App                 |
 | `* * *`  | concert organiser | add a new person                       |                                                                        |
 | `* * *`  | concert organiser | delete a person                        | remove entries that I no longer need                                   |
@@ -541,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC9 - Find concert contact**
+**Use case: UC10 - Find concert contact**
 
 **MSS**
 
@@ -578,7 +578,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **GUI**: Graphical User Interface
 - **CLI**: Command Line Interface
 - **ConcertPhonebook**: Refers to the application
-- **ConcertContact**: Link between a Concert and Person in the ConcertPhonebook
+- **Concert contact**: Link between a Concert and Person in the ConcertPhonebook
 
 ---
 
