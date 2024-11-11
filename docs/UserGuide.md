@@ -531,9 +531,15 @@ Fields
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
     * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+    * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+If the student has attendance marked for the corresponding week, the attendance of the student will not be marked.
+</div>
 
 <div markdown="span" class="alert alert-success">:bulb: **Tip:**
 If you want to mark the attendance of all students in a tutorial, 
@@ -577,6 +583,8 @@ Fields
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
     * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+    * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+      For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
@@ -599,8 +607,8 @@ Invalid usages
     * *Error message: No tutorial class with the name TUTORIAL is found*
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-* Marking attendance of a tutorial where **all students** already has attendance marked for the corresponding week
-    * *Error message: All students in TUTORIAL tutorial has attendance marked 
+* Marking attendance of a tutorial where **all students** already have attendance marked for the corresponding week
+    * *Error message: All students in TUTORIAL tutorial have attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
 
@@ -623,6 +631,8 @@ Fields
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
   * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+  * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
@@ -897,10 +907,11 @@ dd/MM/yyyy</code>
   </td>
 </tr>
 <tr>
-  <td><u>Format</u><br>The keyword provided should be a valid date of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  <td><u>Format</u><br>The keyword provided should be a valid date of the format <code>dd/MM/yyyy</code>.<br><br>Note: If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
 </tr>
 <tr>
-  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be in date format...</i></td>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be a valid date in the format...</i></td>
 </tr>
 
  <!-- t/ prefix row -->
