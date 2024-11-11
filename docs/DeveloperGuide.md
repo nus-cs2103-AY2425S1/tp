@@ -762,3 +762,5 @@ We detail some achievements accomplished by completing our iteration of the proj
 5.	More specific error messages so that the messages are not too long to improve readability
 6.	Allow a contact to have multiple phone numbers, emails, addresses and social media handles
 7.	If `edit` command does not actually edit the contact, raise an error message to the user
+8.  Additional validation checks for email address
+      1. Email domain portion should have more than one domain label
