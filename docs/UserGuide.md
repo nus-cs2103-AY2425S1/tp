@@ -432,7 +432,7 @@ Adds an emergency contact and details to a patient in NovaCare.
 
 **Tip:**
 * A patient can only have 1 registered emergency contact.
-* Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!.
+* Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!
   </box>
 
 Example:
