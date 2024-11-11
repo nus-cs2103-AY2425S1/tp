@@ -22,6 +22,16 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+## **Minor definitions**
+
+The documentation uses the terms "client list view" and "transaction list view" to refer to the environment displayed on the UI when the respective list is shown. This table informs you how to switch between these views, which will be useful for later parts of this Developer Guide, such as in some test cases.
+
+Switching between... | Command | Format
+---------------|---------------|------------
+Client to transaction list view | List Transactions | `listt INDEX`
+Transaction to client list view | List Clients | `list`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
@@ -205,98 +215,6 @@ The following sequence diagram shows an example execution of command `findt keys
 
 <puml src="diagrams/FindTransactionsDiagram.puml" />
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -473,6 +391,30 @@ Use case ends.
     * 2a1. Clientell informs the financial consultant that no matches were found.
     * Use case ends.
 
+**Use case: Summarise transactions in given range**
+
+**Preconditions: Financial consultant is in transaction list view**
+
+**MSS**
+
+1. Financial consultant enters the summary command with the start and end months.
+2. Clientell calculates the total amount of transactions in the specified range.
+3. Clientell displays the transactions in the specified range and the total amount.
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters an invalid month.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+* 2b. The financial consultant enters an incorrect month format.
+    * 2b1. Clientell shows an error message.
+    * Use case ends.
+* 2c. No transactions found in the specified range.
+    * 2c1. Clientell displays no transactions.
+    * 2c2. Clientell displays the total amount as 0.
+    * Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `17` or above installed.
@@ -508,17 +450,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   2. Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Shutting down
+3. Shutting down
   1. Test case: `exit`<br>
      Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
   1. Test case: Click the `X` button on the window
@@ -551,7 +493,28 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
+### Finding clients
 
+1. Finding a client in the client list view
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `find Alex`<br>
+      Expected: All clients whose name or company contain Alex are shown. Details of the search shown in the status message.
+
+   3. Test case: `find`<br>
+      Expected: Error details informing of invalid command format shown in the status message.
+
+   4. Test case: `find Alex innovative`<br>
+      Expected: All clients whose name or company contain Alex or innovative are shown. Details of the search shown in the status message.
+
+
+2. Finding a client in the transaction list view
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+   2. Test case: `find Alex`<br>
+      Expected: Error details informing of environment discrepancy shown in the status message.
 
 ### Adding a transaction to a client 
 
@@ -602,6 +565,52 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `listt x`<br>
        Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
+
+### Finding transactions
+
+1. Finding transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `findt invest`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+
+2. Finding transactions in the transaction list view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `findt invest`<br>
+       Expected: All transactions whose description contain "invest" are shown. Details of the search shown in the status message.
+
+    3. Test case: `findt`<br>
+       Expected: Error details informing of invalid command format shown in the status message. 
+   
+    4. Test case: `findt invest stocks`<br>
+        Expected: All transactions whose description contain "invest" or "stocks" are shown. Details of the search shown in the status message.
+
+### Summarising transactions
+
+1. Summarising transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `summary s/2024-11 e/2024-12`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+   
+
+2. Summarising transactions in the transaction list view.
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+   2. Test case: `summary s/2024-12 e/2024-12`<br>
+      Expected: The transactions from `2024-12-01` to `2024-12-31` are shown. The total amount of these transactions is shown in the status message.
+   3. Test case: `summary s/2024-11 e/2025-01`<br>
+      Expected: The transactions from `2024-11-01` to `2025-01-31` are shown. The total amount of these transactions is shown in the status message.
+   4. Test case: `summary s/2024-11 e/2024-10`<br>
+      Expected: Error details informing of invalid date range shown in the status message.
+   5. Test case: `summary s/2024-11 e/2024-13`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
+   6. Test case: `summary s/11-2024 e/12-2024`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
 
 ### Saving data
 
