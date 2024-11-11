@@ -126,12 +126,13 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
 6. Verify the GUI: If you are successful in opening the application, a GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    **Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+    </div>
 
 7. Here is a quick guide to the GUI.<br>
    ![GuiGuide](images/GuiGuide.png)
+
 8. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -175,10 +176,10 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 </div>
 
 <a id="general"></a>
-<span style="font-size: 30px; font-weight: bold; color: #e0da87">General</span>
+<span style="font-size: 30px; font-weight: bold; color: #baa856">General</span>
 
 <a id="general-help"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Viewing help : `help`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Viewing help : `help`</span>
 
 Shows a message explaining how to access the help page.
 
@@ -187,19 +188,19 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 <a id="general-exit"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Exiting the program : `exit`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Exiting the program : `exit`</span>
 
 Exits the program.
 
 Format: `exit`
 
 <a id="general-save"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Saving the data</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Saving the data</span>
 
 Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <a id="general-edit"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Editing the data file</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Editing the data file</span>
 
 All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
 
@@ -212,7 +213,7 @@ Furthermore, certain edits can cause the JSON files to behave in unexpected ways
 </div>
 
 <a id="general-switch"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Switching parser modes : `switch`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Switching parser modes : `switch`</span>
 
 Switches the parser mode to the specified parser mode.
 
@@ -475,7 +476,7 @@ Using the clear command will delete all the meet-ups from the MeetUpList, and th
 </div>
 
 <a id="properties"></a>
-<span style="font-size: 30px; font-weight: bold; color: #56d676">Properties</span>
+<span style="font-size: 30px; font-weight: bold; color: #2fba54">Properties</span>
 
 Properties represent each property in your portfolio. The property list helps you keep track of each property's details such as the landlord's name and phone number, as well as the property's address, type (e.g. apartment, landed house, etc) and asking price.
 
@@ -492,14 +493,14 @@ Properties represent each property in your portfolio. The property list helps yo
 </div>
 
 <a id="view-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Viewing all properties : `view`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Viewing all properties : `view`</span>
 
 Shows a list of all properties in the property list.
 
 Format: `view`
 
 <a id="add-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Adding a property: `add`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Adding a property: `add`</span>
 
 Adds a property to the property list.
 
@@ -515,7 +516,7 @@ Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
 
 <a id="edit-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Editing a property : `edit`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Editing a property : `edit`</span>
 
 Edits an existing property in the property list.
 
@@ -532,7 +533,7 @@ Examples:
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
 <a id="find-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Finding properties: `find`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Finding properties: `find`</span>
 
 Find existing properties in the property list based on either name or address keywords.
 
@@ -552,7 +553,7 @@ Examples:
 ![FindPropertySequence](images/FindPropertySequence.png)
 
 <a id="delete-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Deleting a property: `delete`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Deleting a property: `delete`</span>
 
 Deletes the specified property from the property list
 
@@ -568,7 +569,7 @@ Examples:
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
 
 <a id="clear-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Clearing all properties : `clear`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Clearing all properties : `clear`</span>
 
 Clears all entries from the property list.
 
@@ -598,7 +599,7 @@ Using the clear command will delete all the properties from the PropertyList, an
 --------------------------------------------------------------------------------------------------------------------
 
 <a id="known-issues"></a>
-<span style="font-size: 30px; font-weight: bold; color: #ba6356">Known issues</span>
+<span style="font-size: 30px; font-weight: bold; color: #eb3f64">Known issues</span>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -625,9 +626,9 @@ Using the clear command will delete all the properties from the PropertyList, an
     </tr>
     <tr>
         <td><b>View</b></td>
-        <td><code>view</code>
-        <td><code>view</code>
-        <td><code>view</code>
+        <td><code>view</code></td>
+        <td><code>view</code></td>
+        <td><code>view</code></td>
     </tr>
     <tr>
         <td><b>Add</b></td>
@@ -655,9 +656,9 @@ Using the clear command will delete all the properties from the PropertyList, an
     </tr>
     <tr>
         <td><b>Clear</b></td>
-        <td><code>clear</code>
-        <td><code>clear</code>
-        <td><code>clear</code>
+        <td><code>clear</code></td>
+        <td><code>clear</code></td>
+        <td><code>clear</code></td>
     </tr>
     <tr>
         <td><b>Help</b></td>
