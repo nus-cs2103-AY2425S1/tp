@@ -226,7 +226,8 @@ only the last one will be recorded.
 - `b/` The contact’s birthday `yyyy-mm-dd` format.
 
 **Examples:**
-- `birthday 123 b/1990-05-15`
+- `birthday 1 b/1990-05-15` adds birthday `1990-05-15` to the person at index 1.
+- `birthday 1 b/` and `birthday 1` both removes the existing birthday of the person at index 1.
 
 ---
 
