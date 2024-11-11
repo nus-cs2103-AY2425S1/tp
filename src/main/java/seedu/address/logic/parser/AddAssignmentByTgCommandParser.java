@@ -25,6 +25,7 @@ public class AddAssignmentByTgCommandParser implements Parser<AddAssignmentByTgC
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TUTORIAL_GROUP, PREFIX_ASSIGNMENT, PREFIX_DEADLINE);
         argMultimap.verifyNoInvalidPrefixesFor(args);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_GROUP, PREFIX_ASSIGNMENT, PREFIX_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
             || !argMultimap.getPreamble().isEmpty()) {
