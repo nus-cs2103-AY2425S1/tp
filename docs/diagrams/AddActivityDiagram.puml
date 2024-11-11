@@ -1,0 +1,25 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 15
+
+start
+:User executes add command;
+:Parse Arguments;
+
+if () then ([Compulsory fields present])
+  :Create Person object;
+
+  if () then ([Is Duplicate Person])
+    :Throw CommandException;
+    stop
+  else ([else])
+    :Add Person to WardWatch;
+  endif
+else ([Missing field or duplicate arguments])
+    :Throw ParseException;
+  stop
+
+endif
+stop
+@enduml
