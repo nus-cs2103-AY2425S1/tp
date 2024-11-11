@@ -300,6 +300,24 @@ The following sequence diagram shows how the user can get previous command:
 The following activity diagram summarizes what happens when a user interacts with this feature:
 ![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
 
+### NRIC Validation
+NRICs are stored in the `Nric` class. The method `Nric#isValidNric(String nric)` is used to validate the NRIC.
+
+#### Implementation
+The NRIC validation is done by checking if the NRIC is in the correct format, with this Regex pattern `"[STFG]\\d{7}[A-Z]"`.
+
+Thereafter, the NRIC is checked for its validity using the checksum algorithm that the Singapore Government uses. This algorithm is widely public and is as follows:
+
+1. Multiply each number in the NRIC by a weight. The mapping is as follows, in order, `2, 7, 6, 5, 4, 3, 2` (e.g. the weight of the first digit is `2`, that of the second digit is `7`)
+2. Sum up the products of the multiplication.
+3. If the first letter of the NRIC is `T` or `G`, add `4` to the sum.
+4. Get the remainder of the sum divided by `11`.
+5. Find the checksum alphabet based on this remainder to checksum mapping:
+   * If the first letter is `S` or `T`: The checksum mapping is `0=J, 1=Z, 2=I, 3=H, 4=G, 5=F, 6=E, 7=D, 8=C, 9=B, 10=A`.
+   * If the first letter is `F` or `G`: The checksum mapping is `0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K`.
+   * For example, if the remainder is `3` and the first letter is `S`, the checksum alphabet is `H`.
+6. Check if the last letter of the NRIC is the same as the checksum alphabet. If it is, the NRIC is valid, otherwise, it is invalid.
+
 #### Future Improvements:
 
 * Implement a feature to clear the command history.
@@ -375,9 +393,10 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
  | `*` | Expert User            | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised                                                            | 
 
 ### Use cases
-(For all use cases below, the **System** is `ContactMate` and the **Actor** is `Staff`, unless specified otherwise)
 
-**Use case: UC01 \- Mark elderly as called**\
+**System: ContactMate**  
+**Use case: UC01 \- Mark elderly as called**  
+**Actor: Staff**  
 **Guarantees:** 
 
 * Marks elderly’s details to contact book only if input has no errors.
@@ -405,7 +424,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
   * Use case resumes from step 3\.
 
 <br/><br/>
-**Use case: UC02 \- List elderly contacts by priority**\
+**System: ContactMate**  
+**Use case: UC02 \- List elderly contacts by priority**  
+**Actor: Staff**  
 **Guarantees:** 
 
 * List of elderly sorted by priority of who to call next will be shown.
@@ -418,7 +439,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
       Use case ends.
 
 <br/><br/>
-**Use case: UC03 \- List individual elderly call history**\
+**System: ContactMate**  
+**Use case: UC03 \- List individual elderly call history**  
+**Actor: Staff**  
 **Guarantees:** 
 
 * Elderly call history will be listed only if the input has no errors.
@@ -442,7 +465,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 2\.
 
 <br/><br/>
-**Use case: UC04 \- Delete elderly from the call list**\
+**System: ContactMate**  
+**Use case: UC04 \- Delete elderly from the call list**  
+**Actor: Staff**  
 **Guarantees:** 
 
 * Delete elderly from the contact list only if input has no errors.
@@ -466,7 +491,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 2\.
 
 <br/><br/>
-**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**\
+**System: ContactMate**  
+**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
+**Actor: Staff**  
 **Guarantees:** 
 
 * Adds elderly to contact book only if input has no errors.
@@ -492,8 +519,10 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
 
-<br/><br/> 
-**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**       \
+<br/><br/>
+**System: ContactMate**     
+**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
+**Actor: Staff**    
 **Guarantees:**
 
 * Edits the elderly in the contact book only if input has no errors.
@@ -526,7 +555,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 3\.
 
 <br/><br/>
-**Use case: UC07 \- Search elderly by name or NRIC**\
+**System: ContactMate**     
+**Use case: UC07 \- Search elderly by name or NRIC**    
+**Actor: Staff**  
 **Guarantees:**
 
 * Shows the filtered list of elderly that matches the name or NRIC.
@@ -538,8 +569,10 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
     Use case ends.
 
-<br/><br/> 
-**Use case: UC08 \- Mark an elderly as called, given that elderly's name**       \
+<br/><br/>
+**System: ContactMate**      
+**Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
+**Actor: Staff**        
 **Guarantees:**     
 
 * Marks the elderly as called only if the input has no errors.
@@ -816,7 +849,7 @@ Common prerequisite: List all elderly using the `list` command.
 ## **Appendix: Planned Enhancements**
 Team size: 5
 
-1. **Standardise uppercase for NRIC displayed in the person card:** If using lowercase NRIC when adding elderly: `add i/s5305394G n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7`, it is displayed as `s5305394G` in the person card (no change in case). We plan to standardise the displayed NRIC to be in uppercase in the person card for easier reading for users: `S5305394G`.
+1. **Change validation of email**: Currently, the email field is validated using a simple regex pattern. It might not be able to catch all invalid email addresses, and might reject some valid emails. We plan to change the validation to use a more robust email validation algorithm, based on this [RFC 3696](https://www.rfc-editor.org/rfc/pdfrfc/rfc3696.txt.pdf) standard.
 2. **Relax constraint for name field:** The current constraint for the name field is alphanumeric characters and spaces which could be too restrictive if users want to add elderly with names that include other special characters (e.g. `João da Silva` or `Arjun Singh s/o Vijay Singh`). We plan to relax this constraint so that other characters that are commonly used in names are allowed. A non-exhaustive list of characters that will be allowed after this enhancement consists of diacritics (e.g. `ç`, `ñ`, `é`, `ü`), punctuation and symbols (e.g. `-`, `'`, `.`, `/`),  extended Latin characters (e.g. `ø`, `å`, `ð`), Chinese characters (e.g. `陈`, `小`, `明`) and Tamil characters (e.g.`ர`, `ஜ`).
 3. **Allow modification to elderly in the history view:** Currently, users can view the call history and profile view of the elderly in the history view together. This allows users to view the details of the elderly, which may give the wrong impression that they can make modifications to the elderly such as performing mark command using NRIC in the history view (e.g. `mark SXXXXXXXH`). However, users are unable to perform any modification to elderly in the history view. We plan to allow users to make modifications to the elderly whose details are specified in the history view such as making changes to the elderly details and marking the elderly as called, etc.
 4. **Maintain the filtered person list view after modification:** Currently, if a user uses the `find` command to filter the person list, and then proceeds to modify the person list (with `add`, `edit`, `mark`  etc.), the person list will update, **but will also reset to show all entries**. We plan to change this behaviour such that the current filtered person list will stay filtered (with the same filter as applied by the `find` command previously), even after the person list is updated after modifications. <br/><br/>
@@ -832,3 +865,4 @@ This is an example of the result of the enhancement:
 
     How we plan to implement this is to allow users to use the `delete` command in the history view. The user can specify the index of the call to delete. For example, `delete 1` will delete the first call in the call history. Deleting by `NRIC` (e.g. `delete S1021013E`) will also be disabled in the call history view. The `delete` command will remain unchanged, if the user is on the person list view. 
 7. **Place cursor at the back of the command text after navigating command history:** Currently, when the user presses the `UP` or `DOWN` arrow key to navigate to the previous/next command, the cursor is placed at the front of the command text. We plan to change this behaviour such that the cursor is placed at the back of the command text after navigating the command history. This will allow users to continue typing the command without having to move the cursor to the back of the command box. This also aligns with the behaviour of most command-line interfaces.
+8. **Allow commands using the NRIC field to function independently of the displayed person list:** Currently, commands that use the NRIC field (e.g. `mark S5305394G`) require the elderly with that NRIC (e.g. `S5305394G`) to be in the displayed person list for command to execute. We plan to allow such commands to be executed directly on the full, unfiltered person list (regardless of the current display or filters) to improve efficiency of commands.
