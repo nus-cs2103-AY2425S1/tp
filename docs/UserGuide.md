@@ -152,6 +152,11 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = 
 * Adding duplicate persons with the same name is not allowed.
 * For full information on the input parameters, refer to [User Input](#user-input) above.
 
+<box type="info" seamless>
+
+**Info:** The input value for the income field is automatically rounded to the nearest 2 decimal places, so values like `900.01` remain unchanged, while values like `900.015` are rounded to `900.02`.
+</box>
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
