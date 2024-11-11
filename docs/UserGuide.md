@@ -101,6 +101,9 @@ be in the address book.
 
 Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
+* A unique pairing of job's name and job's company is consider a unique job. e.g. `add job n/Barista c/Starbucks ...` and `add job n/Barista c/McCafe ...` are different jobs. 
+* The name company of the job are case-insensitive when used to identify duplicate jobs. e.g. `add job n/Barista c/Starbucks ...` is considered the same job as `add job n/barista c/starbucks ...`.
+
 Examples:
 * `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
 * `add job n/Data Scientist c/Apple s/90000 d/Needs to know AI r/Python`
