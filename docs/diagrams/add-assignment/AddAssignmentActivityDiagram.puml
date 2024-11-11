@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User requests to add assignment for a student;
+:Parser handles user's input;
+if () then ([prefixes present])
+  :Parser verifies duplicate prefixes;
+  if () then ([duplicate prefixes present])
+    :Parser extracts arguments;
+    if () then ([valid arguments])
+      :Parser creates AddAssignmentCommand;
+      :AddAssignmentCommand verifies student index;
+      if () then ([index is out of range])
+        :Show error message of index out of range;
+        stop
+      else ([else])
+        :AddAssignmentCommand finds student;
+        :AddAssignmentCommand verifies if duplicate assignment;
+        if () then ([else])
+            :AddAssignmentCommand adds assignment to student;
+            :Show success message;
+            stop
+        else ([duplicate assignment])
+            :Show error message of duplicate assignment;
+            stop
+        endif
+      endif
+    else ([else])
+      :Show error message;
+      stop
+    endif
+  else ([else])
+    :Show error message of duplicate prefixes;
+    stop
+  endif
+else ([else])
+    :Show error message and example message usage;
+    stop
+endif
+
+@enduml

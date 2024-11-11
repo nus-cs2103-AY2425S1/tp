@@ -1,19 +1,32 @@
+.root {
+    -blue-darkest: #455e7e;
+    -blue-dark: #426695;
+    -blue-light: #4ba1f1;
+    -white-dark: #d4e2ee;
+    -white-light: #eef4fa;
+    -white-border: #C8C2C2;
+    -tag-color: #db6b3d;
+    -text-dark: #1d1b1a;
+    -status-submitted: #54be56;
+    -status-unsubmitted: #d55050;
+}
+
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: #ffffff;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: -blue-dark;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: -fx-focus-color;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(-blue-dark, 20%);
 }
