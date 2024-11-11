@@ -208,7 +208,7 @@ Format: `delete INDEX` or `del INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in NetBook.
-* `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
 ### Add a remark to a person : `remark`
 
