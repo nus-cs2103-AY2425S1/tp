@@ -509,7 +509,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
     1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1 t/hired t/reJecteD t/Pending` (adding additional status tags)
-        Expected: The additional status tags are omitted and a default "pending" status tag still remains.
+       Expected: The additional status tags are omitted and a default "pending" status tag still remains.
 
 ### Deleting a candidate
 
