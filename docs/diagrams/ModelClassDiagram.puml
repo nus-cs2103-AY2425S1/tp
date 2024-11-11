@@ -18,8 +18,8 @@ Class Student
 Class Address
 Class Email
 Class Name
-Class Role
 Class Sex
+Class Role
 Class Phone
 Class Tag
 Class AttendanceCount
