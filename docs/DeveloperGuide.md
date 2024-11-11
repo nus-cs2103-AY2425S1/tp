@@ -158,8 +158,6 @@ AgentAssist is designed to support credit card sales, making it essential to hav
 
 Additionally, the inclusion of a status attribute for clients enhances customer service by indicating whether follow-up action is required. This feature helps agents keep track of promised actions, reducing missed commitments and ensuring a reliable client experience.
 
-This section details the current implementation and design considerations for these two attributes.
-
 #### Current implementation
 
 The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
@@ -185,53 +183,49 @@ Similarly, `Status` is implemented using `enum` values to define a set of predef
 By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
 
 ### 2. Add Command
-The add command is used to add new clients into the existing list of clients. The `add` client will refuse to add any clients that are 'duplicates' of any existing clients. 
-
-The next section will describe in detail the current implementation and design considerations of the command.
+The `add` command is used to add new clients into the existing list of clients. However, the command will prevent adding any clients who are considered 'duplicates' of existing clients.
 
 #### Current implementation
-This is a high-level view of what occurs when the `add` command is executing. 
+This is a high-level view of what occurs when the `add` command is executed: 
 ![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
 
 There are a total of 3 checks that occur:
-1. A check for invalid flags and missing mandatory flags.
-2. A check for invalid values provided to any of the flags specified.
-3. A check as to whether there already exists a client with the same details, that would make these two client the same people.
-![AddActivityDiagram-Add_Activity_Diagram.png](images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+- **Flag Validation:** Checks that all required flags are present and that there are no invalid flags.
+- **Value Validation:** Checks that the values provided for each specified flag are valid.
+- **Duplicate Check:** Checks that there is no existing client with the same details (same `name`, `phone` and `email`) to prevent duplicate entries.
+![AddActivityDiagram-Add_Activity_Diagram.png]
 
-Take note that the error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+(images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+
+Note: The error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+
+    
 ### 3. Edit Command
 The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
 
-The next section will describe in detail the current implementation and design considerations of the command.
-
-Here is a high-level view of the logic flow when the `edit` command is run.
+#### Current implementation
+Here is a high-level view of the logic flow when the `edit` command is executed:
 ![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
 
-There are a total of 5 checks that occur, and they occur in sequential order:
-1. Index specified is not negative.
-2. At least one flag is specified.
-3. Both the `remark new` and `remark append` flags are not used together.
-4. Index specified is within range of the current filtered list.
-5. All values passed are valid fort
+The `edit` command performs five sequential checks:
+- **Index Validation:** Checks that the specified index is not negative.
+- **Flag Presence:** Checks  that at least one flag has been specified.
+- **Remark Flag Validation:** Checks that the `remark new` and `remark append` flags are not used together.
+- **Range Check:** Checks that the specified index is within the range of the current viewed client list.
+- **Value Validation:** Checks that all values provided are valid.
 
-#### Current implementation
-When users enter in the `edit` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
-1. Positive
-2. Is an index inside the current viewed list of clients.
+Note: Users must specify a valid client index from the currently viewed list, ensuring it is a positive number and within list bounds.
 
 
 ### 4. Delete Command
 The `delete` command is used to remove client's contacts from the existing list of clients saved in AgentAssist.
 
-The next section will describe in detail the current implementation and design considerations of the command.
-
 #### Current implementation
-When users enter in the `delete` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
-1. Positive
-2. Is an index inside the current viewed list of clients. 
+To execute the delete command, users must specify a valid client index from the currently viewed client list, ensuring the following:
+1. The index is a **positive number**.
+2. The index is **within the bounds** of the currently viewed client list.
 
-Here is a high-level view of the methods involved when the `delete` command is run and the user approves of the deletion after a confirmation prompt is showed.
+Here is a high-level view of the methods involved when the `delete` command is executed, and the user approves of the deletion after a confirmation prompt is showed.
 ![DeleteSequenceDiagram.png](images%2FDeleteSequenceDiagram.png)
 
 This follows the activity diagram shown below:
