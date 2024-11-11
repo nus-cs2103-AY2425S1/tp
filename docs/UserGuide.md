@@ -5,7 +5,7 @@ title: User Guide
 ![Banner](images/AgentAssistBanner.png)
 # Welcome to the AgentAssist User Guide!
 
-The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
+The **AgentAssist User Guide** is here to help you unlock the full potential of AgentAssist and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
 
 In this guide, you'll learn how to:
 * **Set Up AgentAssist** to be used to manage clients.
@@ -140,19 +140,16 @@ Find or create a folder on your computer where you want to store the AgentAssist
     - **macOS**: press `Command + Space`, type `Terminal`, and press `Enter`.
     - **Linux**: open your **Terminal** application from the system menu.
 
-
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
     - In the terminal, type: `cd <folder path>` and press **Enter**. (Replace <folder path> with the actual location of AgentAssist.)
     - For example, if AgentAssist is stored in your **Downloads** folder:
        - **Windows**: `cd C:\Users\<YourUsername>\Downloads`
        - **macOS/Linux**: `cd /Users/<YourUsername>/Downloads`
 
-
 3. **Run the application:**
     - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
     - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
-
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
@@ -195,10 +192,10 @@ Each client’s tier is represented with a color-coded label located beside thei
 
 #### <span style="color: #5C0002; font-size: 18px;">⬤</span> Reject Tier
 
-Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
+Clients that are not assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
 ### Status Color Code of AgentAssist GUI:
-Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping you prioritize tasks.
+Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This visual aid indicates the urgency level of each client’s case, helping you prioritize tasks.
 
 #### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
 #### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
@@ -250,7 +247,7 @@ This section contains a list of terms used in this user guide. Feel free to refe
 
 # 5. Understanding Commands in AgentAssist
 
-The true power of **AgentAssist** lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
+The true power of AgentAssist lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
 
 ## 5.1 Command Structure Overview
 Each command in AgentAssist consists of three key components: the **command**, **flag(s)**, and **argument(s)**.
@@ -326,7 +323,7 @@ Here’s a reference table of available flags and the type of data they correspo
 Arguments are the values that are used in a command. 
 - Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
 - **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
-- When an argument is entered, any spaces before or after the argument are **ignored**. Example: `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
+- When an argument is entered, any spaces before or after the argument are **ignored**. For example, `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
 - In this guide we often add a space before any arguments to improve readability, however this is purely cosmetic (i.e., it is still correct without a space).
 
 ### 5.4.1  Flag Arguments
@@ -357,7 +354,7 @@ Refer to the table below for more details.
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
 
-### 5.4.2 Non-Flag Arguments 
+### 5.4.2 Non-Flag Arguments
 
 Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
 
@@ -424,7 +421,7 @@ Refer to the [Commands Section](#6-commands) for more comprehensive details of e
 
 ## 6.1 How to Read Commands
 
-When working with commands in **AgentAssist**, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
+When working with commands in AgentAssist, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
 
 If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 5.1](#51-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
 
@@ -479,7 +476,18 @@ Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for
       New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>
       ```
     - If `Tier`, `Status` or `Remark` is not provided, they will be set to "NA" and displayed as such in the success message.
-
+  - The image below shows the GUI before and after using `add n/ John Doe p/ 91234567 e/ john@example.com a/ Blk 30 Geylang Street 29, #06-40 j/ engineer i/ 87654 t/ gold`:
+    <div style="text-align: left">
+    <div style="display: inline-block;">
+    <img src="images/BeforeAddCommand.png" width="300">
+    <div>Before Add</div>
+    </div>
+    <div style="display: inline-block;">
+    <img src="images/AfterAddCommand.png" width="300">
+    <div>After Add</div>
+    </div>
+    </div>
+    
 - **On Error**
   - Error caused by missing mandatory fields
       - Message:
@@ -513,7 +521,7 @@ Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for
 >
 > If you need to update details for an existing contact, use the `edit` command instead.
 > For more information, see Section [6.2.2 Editing a client](#622-edit-an-existing-clients-information).
-- **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
+- If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
 
 
 
@@ -529,7 +537,7 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments-).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#641-viewing-a-clients-details).
 
@@ -565,6 +573,18 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       ```
       Edited Client: <CLIENT DETAILS>
       ```
+    - The image below shows the GUI before and after using `edit 1 t/ gold s/ urgent`:
+      <div style="text-align: left">
+      <div style="display: inline-block;">
+      <img src="images/BeforeEditCommand.png" width="300">
+      <div>Before Edit</div>
+      </div>
+      <div style="display: inline-block;">
+      <img src="images/AfterEditCommand.png" width="300">
+      <div>After Edit</div>
+      </div>
+      </div>
+    
 - **On Error:**
     - Error caused by invalid index
         - Message:
@@ -584,7 +604,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
-- **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
+- **Note:** If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
   - This can be used to remove all remarks for a given client: `edit <INDEX> rn/ NA` .
 
 
@@ -696,7 +716,7 @@ filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMA
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
-    - Example: `i/ >5000` will filter clients with an income greater than 5000.
+    - **Example:** `i/ >5000` will filter clients with an income greater than 5000.
     - See [Matching Criteria for Income](#filter-by-income) for more information.
 
 For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
@@ -733,8 +753,8 @@ For detailed explanations for the matching criteria of each flag and the accepta
   - To filter by phone number, enter a complete and valid phone number (refer to [5.4 Arguments](#54-arguments)). This filter requires an exact match with the specified phone number.
   - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
 
-- **Tier (Prefix Matching):**
-    - Tier filtering use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
+- **Tier/Status (Prefix Matching):**
+    - Searches in these fields use **prefix matching**, meaning the search term must match the beginning of the field exactly.
     - **Example:**
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
@@ -760,6 +780,17 @@ For detailed explanations for the matching criteria of each flag and the accepta
       x client(s) listed!
       ```
       where `x` is the number of matching results.
+    - The image below shows the GUI before and after using `filter t/ gold s/ urgent`:
+      <div style="text-align: left">
+      <div style="display: inline-block;">
+      <img src="images/BeforeFilterCommand.png" width="300">
+      <div>Before Filter</div>
+      </div>
+      <div style="display: inline-block;">
+      <img src="images/AfterFilterCommand.png" width="300">
+      <div>After Filter</div>
+      </div>
+      </div>
 - **On Error:**
     - If no valid flags are used:
       - Message:
@@ -788,7 +819,7 @@ view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments-).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 
 **Examples:**
 - **View client no.1**
@@ -801,6 +832,17 @@ view <INDEX>
 - **On Success:**
     - A split view opens showing the selected client's complete information
     - The main list remains visible and functional on the left while detailed information appears on the right
+    - The images below show the GUI before and after using `view 1`:
+        <div style="display: flex; gap: 10px;">
+            <figure markdown>
+                <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 100%;">
+                <figcaption>Before View</figcaption>
+            </figure>
+            <figure markdown>
+                <img src="images/UIAfterView.png" alt="UI After View" style="width: 100%;">
+                <figcaption>After View</figcaption>
+            </figure>
+        </div>
 - **On Error:**
     - Error caused by invalid index
       - Message:
@@ -830,6 +872,17 @@ close
 - **On Success:**
     - The split view closes.
     - The main list view returns to full width.
+    - The images below show the GUI before and after using `close`:
+      <div style="display: flex; gap: 10px;">
+          <figure markdown>
+              <img src="images/UIAfterView.png" alt="UI Before View" style="width: 100%;">
+              <figcaption>Before Close</figcaption>
+          </figure>
+          <figure markdown>
+              <img src="images/UIAfterClose.png" alt="UI After View" style="width: 100%;">
+              <figcaption>After Close</figcaption>
+          </figure>
+      </div>
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open.
 
@@ -862,7 +915,7 @@ help
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
     - **Link to the User Guide**
-
+    ![HelpWindow](images/HelpWindow.png)
 
 
 

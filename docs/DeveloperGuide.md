@@ -74,16 +74,21 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `ClientDetailPanel`, `StatusBarFooter`, `StatusPieChart` etc. All these UI components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `ClientListPanel` contains multiple `ClientCard` components, each representing a client's information with six `ClientCardField` elements that utilize the Ikonli package for icons. The `MainWindow` also includes a `ClientDetailPanel` that acts as a split view within the main window, and a `HelpWindow` that can be launched as a separate window.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Client` object residing in the `Model`.
+* Executes user commands using the `Logic` component through both the `UiManager` and `MainWindow`.
+* Updates the display based on changes to `Model` data, particularly through the `ClientCard` and `ClientDetailPanel` components which directly observe the `Model`.
+* Maintains a hierarchical structure where `UiManager` manages the `MainWindow`, which in turn contains and manages all other UI components.
+* Features several dynamic elements:
+    * A `ClientDetailPanel` that functions as an integrated split view within the main window
+    * A separate `HelpWindow` that can be opened as a popup window
+    * A `StatusPieChart` for visual data representation of status
 
 ### Logic component
 
@@ -352,6 +357,13 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 **Proposed Enhancement:** Improve the `edit` command functionality for flag `/ra` such that it displays a text-editable window with that allows for the entire remark text to be edited.
 
 **Status:** Scheduled for future releases as current manual process provides a workable solution.
+
+### 10. Close Command Response Enhancement
+**Current issue:** The feedback messages for the `close` command lack context sensitivity. When users request to close a detailed view that is not opened, the system returns "Detailed view closed" rather than a more accurate message indicating that no client was viewed. While the command functions correctly and maintains system integrity, this response could be more informative.
+
+**Proposed Enhancement:** Implement context-aware feedback messages for the `close` command. When no client is viewed, the system should return a more appropriate message such as "No client currently being viewed" rather than indicating a closure action that did not occur. This would better align with user expectations and improve clarity.
+
+**Status:** Scheduled for future release as the current behavior, while not optimal, does not impact system functionality or data integrity. The enhancement is purely cosmetic and aimed at improving user experience through more precise feedback messaging.
 
 --------------------------------------------------------------------------------------------------------------------
 
