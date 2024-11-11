@@ -513,15 +513,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 In developing BridalBuddy, we've identified areas that can benefit from enhancement. We believe in transparency and keeping our users informed, so we want to acknowledge these feature limitations.
 
+### Support for managing multiple weddings
+
+**Feature Flaw in Current Implementation**
+Currently, BridalBuddy is designed to manage only a single wedding at a time. 
+This limits its functionality for users who may be planning multiple weddings simultaneously or managing various events, 
+such as wedding planners working with several clients. 
+Without support for multiple weddings, users may face challenges in organizing and accessing information for each event separately.
+
+**Proposed Enhancement**
+Introduce functionality to manage multiple weddings within the application. 
+This would include separate profiles or dashboards for each wedding, with individual guest and vendor lists. 
+Users could easily switch between weddings, ensuring all information remains organized and accessible. 
+This enhancement would broaden BridalBuddy's usability for professional planners or users involved in multiple wedding events.
+
 ### Enhance name to accept special characters
 
 **Feature Flaw in Current Implementation**
 
-Currently, names do not accept `.` and `/` and other special characters which might appear in a person's legal name.
+Currently, names do not accept `.` and `/` and other special characters that might appear in a person's legal name.
 
 **Proposed Enhancement**
 
-We should remove strict alphanumeric checks for names to support special characters.
+We should remove strict alphanumeric checks for names to support special characters, allowing for more accurate entries.
 
 ### Make Guest/Vendor phone, email and address fields optional
 
@@ -529,8 +543,8 @@ We should remove strict alphanumeric checks for names to support special charact
 
 Currently, the phone, email and address are mandatory inputs for `add_guest` and `add_vendor` commands. However, not all contacts require full details.
 
-A planner might only have a name without contact information for certain guests, especially in cases where a plus-one or placeholder name is added.
-Similarly, a planner might also not have complete contact information of a vendor.
+A planner might only have a name without contact information for certain guests, especially in cases like plus-ones or placeholder names.
+Similarly, a planner might not have complete contact information for a vendor.
 
 **Proposed Enhancement**
 
@@ -542,7 +556,7 @@ The phone, email and address fields should be updated to optional parameters in 
 
 Currently, the phone number field only accepts integers as valid input.
 However, planners might encounter scenarios, such as keeping track of overseas guests, where symbols like `()`, `+`, `-` and `.` are needed.
-The current restriction prevents users from indicating country codes, and might cause confusion about the origin of the number.
+The current restriction limits users from including such details, potentially causing confusion about the origin of the number.
 
 **Proposed Enhancement**
 
@@ -563,10 +577,45 @@ With this enhancement, a search query would return all results containing the sp
 ### Enhance `find` command to allow multiple types of prefixes to be used for each `find` command
 
 **Feature Flaw in Current Implementation**
-Currently, users can only use one type of prefix for each `find` command. As such, users are unable to use multiple types of prefixes within the same `find` command. For example, `find n/John p/98765432` is an invalid command.
+Currently, users can only use one type of prefix for each `find` command. As such, users are unable to use multiple types of prefixes within the same `find` command. 
+For example, `find n/John p/98765432` is an invalid command.
 
 **Proposed Enhancement**
-Enhance `find` command to allow multiple types of prefixes to be used for each `find` command. When multiple types of prefixes are specified, the `find` command returns all guest(s) and vendor(s) that match all the specified fields. For example, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
+Enhance `find` command to allow multiple types of prefixes to be used for each `find` command. 
+When multiple types of prefixes are specified, the `find` command returns all guest(s) and vendor(s) that match all the specified fields. 
+For example, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
+
+### Restrict special characters in the address field
+
+**Feature Flaw in Current Implementation**
+Currently, the address field accepts any character, including symbols like `$`, `%` or emojis, which are generally uncommon in typical addresses.
+This may result in inconsistent data entries and impact the professionalism and readability of the contact list.
+
+**Proposed Enhancement**
+Introduce validation for the address field to allow only common address characters (letters, numbers, spaces, commas, etc.) while restricting uncommon symbols and emojis.
+This will maintain consistent and realistic address entries.
+
+### Set a character limit for each tag to prevent truncation
+
+**Feature Flaw in Current Implementation**
+Currently, tags without a character limit may result in overflow issues, which can cause tags to be truncated in the display. 
+This makes it difficult for users to read and understand the full tag, impacting the usability and clarity of the information.
+
+**Proposed Enhancement**
+Introduce a character limit for each tag (e.g., 50 characters) to prevent truncation. 
+This will ensure that tags remain fully visible, concise, and easy to read, preserving the clarity and effectiveness of tag usage within the interface.
+
+### Support for multiple currencies in budget tracking
+
+**Feature Flaw in Current Implementation**
+Currently, BridalBuddy's budget tracking feature only supports the dollar symbol (`$`), 
+which may not be suitable for users in countries where other currency symbols (such as `£`, `€`, `¥`, etc.) are standard. 
+This limitation can lead to confusion and reduce usability for international users who need their local currency symbol represented.
+
+**Proposed Enhancement**
+Update the budget tracking feature to allow users to input their preferred currency symbol. 
+This enhancement would enable planners to use a symbol that reflects their local currency, making the budget tracking experience more intuitive and globally accessible. 
+This change would improve clarity and provide a more personalized experience for users in various regions.
 
 --------------------------------------------------------------------------------------------------------------------
 
