@@ -206,6 +206,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Potential user | see the app populated with some sample commands                                  | easily learn how to use the app.                                                          |
 | `*`      | User           | use the app to work offline                                                      | use it even when there is no internet connection.                                         |
 
+
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
