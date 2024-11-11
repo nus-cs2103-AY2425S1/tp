@@ -207,24 +207,18 @@ section below.
 **Notes about the command format: :fa-solid-lightbulb:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a parameter which can be used as `person-add m/A1234567L`.
+  e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a
+  parameter which can be used as `person-add m/A1234567L`.
 
-- Items in square brackets are optional.<br>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
-=======
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+- Items in square brackets are optional. e.g.
+  - `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+  - `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as
   ``
    (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
->>>>>>> master
-=======
-  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
->>>>>>> 65b2133aca34831d2baea8f0c028e8a7e33e3dea
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
