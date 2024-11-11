@@ -185,6 +185,8 @@ Format: `list -a`
 
 </box>
 
+[[Back to Table of Contents]](#table-of-contents)
+
 ---
 
 ### 3.2.3. Clearing all suppliers and deliveries : `clear`
@@ -221,9 +223,9 @@ Parameters:
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `p/PHONE`: `PHONE` is the supplier's phone number. It must be numeric, and contain at least 3 digits.
 - `e/EMAIL`: `EMAIL` is the supplier's email address. It must be in a valid email address format, and cannot be blank.
-  - Please see [below](#valid-email-address-format) for more information on what constitutes a valid email address format.
+  - Please see [below](#3-5-1-valid-email-address-format) for more information on what constitutes a valid email address format.
 - `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
-  - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
+  - Please see [below](#3-5-2-valid-company-name-format) for more information on what constitutes a valid company name format.
 - `[t/TAG]`: `TAG` is the tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
 - `[pro/PRODUCT]`: `PRODUCT` is the product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
   - One space is counted as one character.
@@ -383,7 +385,7 @@ Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 Parameters:
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
-    - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
+    - Please see [below](#3-5-2-valid-company-name-format) for more information on what constitutes a valid company name format.
 - `pro/PRODUCT`: `PRODUCT` is the product associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - A `PRODUCT` cannot be made up of only spaces.
@@ -693,7 +695,7 @@ Parameters:
 
 </box>
 
-<box type="warning" seamless>
+
 
 <box type="tip" seamless>
 
@@ -701,6 +703,8 @@ Parameters:
 - Sorting deliveries by status in ascending order will display deliveries in the following order: `CANCELLED`, `DELIVERED`, `PENDING`
 
 </box>
+
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `sort` and `-d`.
@@ -900,10 +904,12 @@ Action     | Format, Examples
 
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **Command**: An instruction given to the application to perform a specific action. They are entered by the user in a text-based format and are used to interact with and manage data.
+* **Command Terminal**: A text-based interface where users type commands to interact with the app or operating system.
 * **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
-* **Java**: Java is the main language used to build and manage the app’s features, ensuring it runs smoothly and securely.
+* **Java**: Java is the main programming language used to build and manage the app’s features, ensuring it runs smoothly and securely.
 * **Parameter**: Contains words in `UPPER_CASE` that needs to be supplied by user. Some parameters also contain a prefix that should be followed by the user.
 * **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
+* **Tag**: An one-word descriptive label users can add to a supplier to provide extra information.
 
 
 [Back to Top](#vendorvault-user-guide)
