@@ -121,7 +121,7 @@ Refer to the [Features](#features) below to know more about the commands you cou
 > Commands that do not require parameters (such as `help`, `exit`, and `clear`) will ignore any extra inputs.
 > - **Example**: Typing `help 123` or `help -10` will be interpreted as `help`.
 
-<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px; ">
     <strong>📝 Note:</strong> 
     <ul>
         <li><strong>Parameter Order:</strong> Parameters can be entered in any order.</li>

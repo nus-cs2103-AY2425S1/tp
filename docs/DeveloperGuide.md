@@ -9,19 +9,39 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+## Table of contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+    - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [Logic Component](#logic-component)
+    - [Model Component](#model-component)
+    - [Storage Component](#storage-component)
+    - [Common classes](#common-classes)
+4. [Implementation](#implementation)
+5. [Documentations](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix: Requirements](#appendix-requirements)
+   - [Product Scope](#product-scope)
+   - [User Stories](#user-stories)
+   - [Use Cases](#use-cases)
+   - [Non functional Requirements](#non-functional-requirements)
+   - [Glossary](#glossary)
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+
+---
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Our code is just extended ideas of AB3 AddressBook. No third party library is used except plantUML for DG diagrams.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
@@ -50,7 +70,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_supplier su/Hayley`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -65,15 +85,17 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+---
+
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [Ui.java](https://github.com/AY2425S1-CS2103T-T17-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [MainWindow](https://github.com/AY2425S1-CS2103T-T17-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [MainWindow.fxml](https://github.com/AY2425S1-CS2103T-T17-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -82,22 +104,21 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Supplier` object residing in the `Model`.
 
+---
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [Logic.java](https://github.com/AY2425S1-CS2103T-T17-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_supplier su/Hayley")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete_supplier su/Hayley` Command" />
 
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
+> **NOTE:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 
 How the `Logic` component works:
 
@@ -115,6 +136,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+---
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -129,18 +152,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Supplier` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Supplier` needing their own `Tag` objects.<br>
+> **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Supplier` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Supplier` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-</box>
-
+---
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [Storage.java](https://github.com/AY2425S1-CS2103T-T17-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -153,13 +173,13 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Assign product to supplier feature
 
 #### Proposed Implementation
 
@@ -252,12 +272,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -275,7 +290,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-This application is aimed towards convenience store managers who often need to manage their inventories. This application will help convenience store managers who:
+This application is aimed towards neighbourhood convenience store/inventory managers who often need to manage their inventories. This application will help convenience store managers who:
 
 * Manage a significant number of information about their suppliers and products
 * Monitor the performance of their suppliers
@@ -290,7 +305,6 @@ The three main aspects of this product are:
 
 * **Streamlined Supplier Management**: The product simplifies managing relationships with multiple suppliers, providing tools to track orders, and monitor supplier performance.
 * **Efficient Inventory Control**: It offers features for real-time inventory tracking and stock alerts based on predefined thresholds, helping prevent stockouts and overstocking.
-* **Performance Insights**: The product provides performance metrics to evaluate supplier reliability and order accuracy, facilitating better decision-making.
 
 ### User stories
 
@@ -304,7 +318,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a supplier by name        | locate details of suppliers without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many suppliers in the address book | sort suppliers by name         | locate a supplier easily                                                 |
-| `* * *`  | inventory manager                          | add a new supplier           |                                                                        |
 | `* * *`  | inventory manager                          | add a new product           |                                                                        |
 | `* * *`  | inventory manager                          | assign products to suppliers  | collectively manage products which corresponding suppliers supply                |
 | `* * `  | inventory manager                          | remove suppliers/products              | prune obsolete data   |
@@ -312,26 +325,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | inventory manager                          | set pre-defined max stock level for products              | determine quantity to request for an order   |
 | `* * `  | experienced inventory manager                          | set pre-defined minimum stock level for a product              | ensure availability of the product at all times   |
 | `* * `  | experienced inventory manager                          | request an order from a supplier | replenish stocks of the corresponding products |
-| `* *`      | inventory manager             | set up automatic reordering based on stock levels and pre-defined thresholds | prevent stockouts and overstocking efficiently |
+| `* `     | inventory manager             | set up automatic reordering based on stock levels and pre-defined thresholds | prevent stockouts and overstocking efficiently |
 | `* * `  | novice inventory manager                          | easily search suppliers/products      | browse large datasets quickly                            |
-| `* *`      | inventory manager             | receive automated re-order alerts | reduce the risk of stockouts or overstocking |
-| `* *`      | inventory manager             | view payment/order history for a supplier | so that I have a clear understanding of past cash flow and plan future expenses |
-| `* *`      | inventory manager             | get alerts in case of any supplier issues        | find a convenient replacement in time  |
-| `* *`      | inventory manager             | quickly send standardized communication to suppliers via email or messaging without leaving the interface        | streamline communication and reduce errors  |
-| `* *`      | inventory manager             | I can store contracts and terms of agreements with suppliers in the system        | quickly refer to them when negotiating orders  |
-| `* *`      | inventory manager             | be able to get printable txt of relevant information  |  get hard-copy of the information  |
+| `* `     | inventory manager             | receive automated re-order alerts | reduce the risk of stockouts or overstocking |
+| `* *`    | inventory manager             | view payment/order history for a supplier | so that I have a clear understanding of past cash flow and plan future expenses |
+| `* *`    | inventory manager             | get alerts in case of any supplier issues        | find a convenient replacement in time  |
+| `* *`    | inventory manager             | quickly send standardized communication to suppliers via email or messaging without leaving the interface        | streamline communication and reduce errors  |
+| `* *`    | inventory manager             | I can store contracts and terms of agreements with suppliers in the system        | quickly refer to them when negotiating orders  |
+| `* *`    | inventory manager             | be able to get printable txt of relevant information  |  get hard-copy of the information  |
 | `*`      | experienced inventory manager             | sort suppliers by some criterion        | organize data based on my needs |
 | `*`      | experienced inventory manager             | customize my dashboard to show only the relevant information        | work more efficiently based on my specific needs |
 | `*`      | inventory manager             | weekly summaries of inventory levels, orders and supplier communications | stay on top of opertions without manually checking the system |
 | `*`      | experienced inventory manager             | assign a product to multiple suppliers | have alternative options if one supplier is unable to fulfil the order |
 | `*`      | experienced inventory manager             | create macros/shortcuts for frequently used commands | save time |
 | `*`      | experienced inventory manager             | be able to see most used commands | make common processes faster |
-| `* `      | inventory manager             | update supplier information        | organize data based on my needs      |
+| `* `     | inventory manager             | update supplier information        | organize data based on my needs      |
 | `*`      | inventory manager             | be able to generate insights on supplier performance based on past interactions (e.g., delivery timeliness, order accuracy)  | make informed decisions about ongoing supplier relationships.  |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `Inventory Records` and the **Actor** is the `Inventory Manager`, unless specified otherwise)
+
+**Use case: Add Products/Suppliers**
+
+**Preconditions:**
+* The Inventory Manager is logged into the InvenTrack system.
+
+**MSS**
+1. Inventory Manager tries to add a product/supplier.
+2. System validates that the product name/supplier name exists in the list.
+3. The system adds the specified product/supplier.
+4. System updates the product/supplier information in the system.
+5. System confirms the assignment with a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Product/Supplier name is in invalid format:
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+
+* 2a. Product/Supplier name exists:
+    * 2a1. System displays an error message - duplicate product/supplier found.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
 
 **Use case: Assign Products to Suppliers**
 
@@ -360,6 +399,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a2. System prompts the Inventory Manager to re-enter the command.
   * 2a3. Use case resumes at step 1.
 
+* 3a. Product is assigned to other supplier:
+  * 3a1. System displays an error message
+  * 2a2. System prompts the Inventory Manager to re-enter the command.
+  * 2a3. Use case resumes at step 1.
+
+**Use case: Unassign Products**
+
+**Preconditions:**
+* The Inventory Manager is logged into the InvenTrack system.
+* Product must be already assigned to any supplier in the system.
+
+**MSS**
+1. Inventory Manager tries to unassign a product to a supplier.
+2. System validates that the product name & supplier name exists in the list.
+3. System validates the product is assigned to any one of the supplier.
+4. The system unassigns the specified product.
+5. System updates the product-supplier information in the system.
+6. System confirms the unassignment with a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Product/Supplier name is in invalid format:
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+
+* 2a. Product or Supplier name does not exist:
+    * 2a1. System displays an error message.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
+* 3a. Product is not assigned to other supplier:
+    * 3a1. System displays an error message - not previously assigned.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
 **Use case: Delete Suppliers/Products**
 
 Preconditions:
@@ -387,15 +464,16 @@ Preconditions:
     * 2a2. System prompts the Inventory Manager to re-enter the command.
     * 2a3. Use case resumes at step 1.
 
-**Use case: Set Minimum Thresholds for Products Stock**
+**Use case: Setting Thresholds for Products Stock**
 
 Preconditions:
 * The Inventory Manager is logged into the InvenTrack system.
+* The product for which the threshold is being set exists in the system.
 
 **MSS**
 1. Inventory Manager tries to set a threshold for a product.
 2. System validates that the product name exists in the list.
-3. System sets the specified threshold for the product.
+3. System sets the specified threshold for the product as per the input prefixes.
 4. System updates the product information in the list.
 5. System confirms the threshold setting with a success message.
 
@@ -412,12 +490,61 @@ Preconditions:
     * 2a2. System prompts the Inventory Manager to re-enter the command.
     * 2a3. Use case resumes at step 1.
 
+**Use case: Updating stock levels for Products**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+* The product for which the stock level is being updated exists in the system.
+
+**MSS**
+1. Inventory Manager tries to update stock level for a product.
+2. System validates that the product name exists in the list.
+3. System updates the specified stock level for the product.
+4. System updates the product information in the list.
+5. System confirms the threshold setting with a success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. stock level is in invalid format(not numeric):
+    * 1a1. System displays an error message.
+    * 1a2. System prompts the Inventory Manager to re-enter the command.
+    * 1a3. Use case resumes at step 1.
+
+* 2a. Product name does not exist:
+    * 2a1. System displays an error message.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
+**Use case: Viewing Products/Suppliers**
+
+Preconditions:
+* The Inventory Manager is logged into the InvenTrack system.
+
+**MSS**
+1. Inventory Manager tries to view a product/supplier.
+2. System checks whether a keyword or other optional prefixes are found.
+3. System matches the keywords to product/supplier name and other data accordingly.
+4. System displays the product/supplier names respectively.
+5. System confirms the view with a result message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1b. Product name does not exist:
+    * 2a1. System displays an error message.
+    * 2a2. System prompts the Inventory Manager to re-enter the command.
+    * 2a3. Use case resumes at step 1.
+
+* 2a. No keyword or other prefixes found:
+    * 1a1. System displays all the existing products/suppliers respectively.
+
 **Use case: Access help guide**
 * User - Any user with access to the system
 
 **Preconditions:**
 * The user is logged into the InvenTrack system.
-* The product for which the threshold is being set exists in the system.
 
 **MSS**
 1. User requests for help guide.
@@ -437,14 +564,13 @@ Preconditions:
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to handle up to 50 suppliers and 3000 products without a noticeable sluggishness in performance for typical usage.
-3.  The system should respond to user commands within 500ms, even with large data.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5.  All private supplier and store data must be encrypted to protect sensitive information.
-6.  The system should automatically back up critical data and support easy recovery in case of abrupt power or network loss.
-7.  Error messages should be clear, helping users understand and rectify their mistakes.
-8.  The system’s architecture must allow developers to easily update components without affecting the overall functionality.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to handle up to 50 suppliers and 3000 products without a noticeable sluggishness in performance for typical usage.
+3. The system should respond to user commands within 500ms, even with large data.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. The system should automatically back up critical data and support easy recovery in case of abrupt power or network loss.
+6. Error messages should be clear, helping users understand and rectify their mistakes.
+7. The system’s architecture must allow developers to easily update components without affecting the overall functionality.
 
 ### Glossary
 
@@ -455,9 +581,7 @@ Preconditions:
 * **ObservableList**: A list that the UI can listen to and update itself automatically when the data changes.
 * **API (Application Programming Interface)**: A set of methods that different components use to interact with each other.
 * **Parser**: Converts user commands (entered as text) into objects the system can understand and execute.
-* **Undo/Redo**: A feature allowing users to reverse or reapply previous actions, supported by a history-tracking mechanism in the system.
 * **Tag**: A label associated with items in the inventory or suppliers to categorize them, stored centrally to avoid redundancy.
-* **VersionedAddressBook**: A data structure used to support the undo/redo functionality, storing multiple states of the address book.
 * **JavaFX**: A framework used to build the graphical user interface, managing visual elements like windows and buttons.
 * **.fxml Files**: XML-based files used to define the layout of the UI components in JavaFX.
 * **CommandResult**: Encapsulates the result of a command execution, such as success or error messages.
@@ -470,12 +594,8 @@ Preconditions:
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-
-**Note:** These instructions only provide a starting point for testers to work on;
+> **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
-</box>
 
 ### Launch and shutdown
 
