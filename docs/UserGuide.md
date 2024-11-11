@@ -195,7 +195,7 @@ Note:
 **Action:**
 Deletes the specified contact from the address book.<br> You may delete by specifying the index of
 the contact in the displayed address book, or you by specifying the full name
-of the contact that is currently displayed that you wish to delete. <br>
+of any currently displayed contact that you wish to delete. <br>
 </box>
 
 #### Delete by index
