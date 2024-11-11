@@ -262,7 +262,10 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
     * Have to take a valid role value (Refer to **Tip** section above in [adding a contact](#adding-a-contact-add))<br>
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
-    * Only perfect matches returned e.g. `find r/Vice President r/Admin` will only return contacts which holds **both** Roles.
+    * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
+    * Only perfect matches returned
+    * Specifying multiple roles returns contacts who own all specified roles
+      e.g. `find r/Vice President r/Admin` will only return contacts which holds **both** Roles.
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
     * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
@@ -275,7 +278,7 @@ Examples:
 * `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
-//& ISSUE 292: It seems that it is already written here...MAYBE we need to make this BIGGEr, more OBVIOUS?
+
 
 <div style="page-break-after: always;"></div>
 
