@@ -524,11 +524,11 @@ otherwise)
    
    `[2024-02-05]:`
    
-   &nbsp;&nbsp;`[2024-02-05] Negotiated condo deal`
+   &nbsp;&nbsp;`Negotiated condo deal`
    
    `[2024-03-03]:`
    
-   &nbsp;&nbsp;`[2024-03-03] Follow-up on condo purchase`
+   &nbsp;&nbsp;`Follow-up on condo purchase`
    
    `PropertyList: Property List:`
    
