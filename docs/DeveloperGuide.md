@@ -315,9 +315,15 @@ for example: `delete 1`, delete the contact with an index of 1.
 
 Step 2. The parser analysis the input command and returns a `DeleteCommand`.
 
-Step 3. The `DeleteCommand` get executed by the LogicManager and updates the filteredPersonList within the model.
+Step 3. The `DeleteCommand` get executed by the LogicManager and delete popup get displayed. 
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+Step 4. If user click ok on the popup, model updates the filteredPersonList, otherwise cancel deletion.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
+
+Below is the DeletePopupActivityDiagram
+
+<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
 
 --------------------------------------------------------------------------------------------------------------------
 
