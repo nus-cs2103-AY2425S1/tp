@@ -192,20 +192,10 @@ This section describes some noteworthy details on how certain features and comma
 * [Add Student Command](#add-student-command)
 * [Add Parent Command](#add-parent-command)
 * [Edit Person Command](#edit-person-command)
-* [Grade Command](#grade-command)
 * [Delete Person Command](#delete-person-command)
 * [Link Command](#link-command)
-* [Unlink Command](#unlink-command)
 * [Find Command](#find-command)
-* [Find Tag Command](#find-tag-command)
-* [Find Day Command](#find-day-command)
-* [Sort Command](#sort-command)
 * [Pin Command](#pin-command)
-* [Unpin Command](#unpin-command)
-* [Clear Command](#clear-command)
-* [List Command](#list-command)
-* [List Student Command](#list-student-command)
-* [List Parent Command](#list-parent-command)
 * [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
 
 <br>
@@ -396,8 +386,8 @@ The format of the `link` command can be found [here](https://ay2425s1-cs2103t-t0
 #### Feature details
 
 1. The user executes the `link` command.
-2. If the index field is not provided, an error message with the correct command usage will be shown.
-3. If invalid index field is provided, an error message with the correct command usage will be shown.
+2. If the `index` field is not provided, an error message with the correct command usage will be shown.
+3. If invalid `index` field is provided, an error message with the correct command usage will be shown.
 4. If all previous steps are completed without exceptions, the new `Person` will be successfully deleted from the address book.
 
 <br>
@@ -418,6 +408,43 @@ The following sequence diagram shows how the `link` command works:
 <puml src="diagrams/LinkParseSequenceDiagram.puml" />
 
 <puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="600" />
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Find Command
+
+#### Overview
+
+The `find` command is used to find a person from the address book. The person can only be found if it is already present in the address book.<br>
+
+The format of the `find` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#locating-persons-by-name-find).<br>
+
+#### Feature details
+
+1. The user executes the `find` command.
+2. If the `keyword` field is not provided, an error message with the correct command usage will be shown. 
+3. If all previous steps are completed without exceptions, all `Person` matching at least one keyword will be successfully returned from the address book.
+
+<br>
+
+The sequence of the `find` command is as follows:<br>
+
+1. The user inputs the `find` command.<br>
+   e.g. `find Alex Bernice`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `FindCommandParser` to parse the fields provided by the user and a new `FindCommand` and `NameContainsKeywordsPredicate` is created.
+4. The `FindCommand` updates the filter of the filtered person list in the address book by calling `Model#updateFilteredPersonList`.
+5. The `FindCommand` sorts the filtered person list in the address book by calling `Model#sortByPin`.
+
+The following sequence diagram shows how the `find` command works:
+
+<puml src="diagrams/FindParseSequenceDiagram.puml" />
+
+<puml src="diagrams/FindExecuteSequenceDiagram.puml" width="600" />
 
 <br>
 
