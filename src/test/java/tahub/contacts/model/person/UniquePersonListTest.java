@@ -2,6 +2,7 @@ package tahub.contacts.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static tahub.contacts.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -171,5 +172,28 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void getPersonByMatricNumberString_personNotInList_returnsNull() {
+        assertNull(uniquePersonList.getPersonByMatricNumber("A1234567X"));
+    }
+
+    @Test
+    public void getPersonByMatricNumberString_personInList_returnsPerson() {
+        uniquePersonList.add(ALICE);
+        assertEquals(ALICE, uniquePersonList.getPersonByMatricNumber(ALICE.getMatricNumber().toString()));
+    }
+
+    @Test
+    public void getPersonByMatricNumber_personNotInList_returnsNull() {
+        MatriculationNumber matricNumber = new MatriculationNumber("A1234567X");
+        assertNull(uniquePersonList.getPersonByMatricNumber(matricNumber));
+    }
+
+    @Test
+    public void getPersonByMatricNumber_personInList_returnsPerson() {
+        uniquePersonList.add(ALICE);
+        assertEquals(ALICE, uniquePersonList.getPersonByMatricNumber(ALICE.getMatricNumber()));
     }
 }

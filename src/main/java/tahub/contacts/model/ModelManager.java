@@ -110,6 +110,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteCourse(Course target) {
         courseList.remove(target);
+        if (scaList != null) {
+            scaList.remove(target);
+        }
     }
 
     @Override
@@ -210,6 +213,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteSca(StudentCourseAssociation target) {
         scaList.remove(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

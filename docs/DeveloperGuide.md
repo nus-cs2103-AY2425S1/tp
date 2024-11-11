@@ -962,3 +962,6 @@ Expected: Attendance cleared. Success message shown.
    3. Test case: **corrupted** file(s) - corrupt one or more of the `.json` files in `./data`,
       for instance, by deleting the trailing `}` and invalidating the JSON format. <br>
       **Expected**: TAHub Contacts loads with empty data.
+
+## **Appendix: Planned Enhancements**
+1. Add a `course-list` command to list all courses so that user can view courses in the system.
