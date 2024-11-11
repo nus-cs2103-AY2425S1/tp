@@ -6,7 +6,7 @@
 
 # SeeRee 2.0 User Guide
 
-SeeRee 2.0 is a **desktop app for managing contacts and meetings, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SeeRee 2.0 can get your contact management tasks done faster than traditional GUI apps.
+SeeRee 2.0 is a **desktop app for managing contacts and meetings, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SeeRee 2.0 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -19,9 +19,9 @@ SeeRee 2.0 is a **desktop app for managing contacts and meetings, optimized for 
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F13-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your SeeRee2.0.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar see-ree-2.0.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SeeRee2.0.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -83,7 +83,19 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br>
+_Some of these conditions mentioned below may apply to `edit` command also._
+* Names should only contain alphanumeric characters and spaces, and it should not be blank.
+* Phone numbers should only contain numbers, and it should be at least 3 digits long.
+* Emails should be of the format local-part@domain and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+        - end with a domain label at least 2 characters long
+        - have each domain label start and end with alphanumeric characters
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* Addresses can take any values, and it should not be blank
+    * Address will accept invalid prefixes e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 x/123` will display address as `John street, block 123, #01-01 x/123`
 
 <box type="tip" seamless>
 
@@ -99,6 +111,8 @@ Examples:
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+* Everything after the command `list` will be ignored.
 
 ### Editing a person : `edit`
 
@@ -121,8 +135,9 @@ Examples:
 
 Finds persons whose names or tags contain any of the given keywords.
 
-Format: `find n/NAME [n/ANOTHER_NAME] ... [t/TAG]...`
+Format: `find [n/NAME]... [t/TAG]...`
 
+* At least one of the two search fields must be present: either `n/NAME`, `t/TAG`, or both.
 * Persons matching at least field will be returned (i.e. `OR` search). e.g. `n/Hans t/family` will return `Hans Gruber`, `Bo Yang`, and any other persons with `family` tag.
 * For `n/`:
     * The search is case-insensitive. e.g `n/hans` will match `Hans`
@@ -145,20 +160,27 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If the person exists in any meeting, the person will not be deleted.
+    * To delete the person, remove them from any meetings first before deleting the person.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Favouriting a person : `favourite`
 
 Favourites the specified person from the address book.
 
-Format: `favourite INDEX`
+Format: `favourite c/INDEX ...`
 
 * Favourites the person at the specified `INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+Assuming there are multiple contacts on display,
+* `favourite c/1`
+* `favourite c/1 2 3`
 
 ### Clearing all entries : `clear`
 
@@ -243,6 +265,7 @@ Filter and view list of contacts that is in the specified meeting.
 
 Format: `meeting-contacts INDEX`
 - `INDEX`: Refers to the meeting you want to view the contacts in. The index is based on the current schedule view and **must** be specified.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
 
@@ -263,17 +286,21 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SeeRee2.0 data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SeeRee2.0 data are saved automatically as a JSON file under two separate files in the following default locations:
+* `[JAR file location]/data/addressbook.json` for contacts list, and
+* `[JAR file location]/data/schedule.json` for schedule list
+
+Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SeeRee2.0 **may** discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SeeRee2.0 to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -283,7 +310,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SeeRee2.0 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,9 +333,9 @@ Action                   | Format, Examples
 **List**                 | `list`
 **Help**                 | `help`
 **Add Meeting**          | `add-schedule c/CONTACT n/NAME d/DATE t/TIME`<br> e.g. `add-schedule n/meeting d/01-01-2001 t/1200 c/1 2`
-**Delete Meeting**       | `delete-schedule INDEX`<br> e.g. delete-schedule 2`
+**Delete Meeting**       | `delete-schedule INDEX`<br> e.g. `delete-schedule 2`
 **Edit Meeting**         | `edit-schedule INDEX [n/NAME] [d/DATE] [t/TIME] [c/INDEX]`<br> e.g. `edit-schedule 1 c/2 3 4 n/Discussion t/1300 d/02-02-2001`
 **Find meeting contacts**| `meeting-contacts INDEX`<br> e.g. `meeting-contacts 8`
 **List all Meetings**    | `list-schedule`
 **Find schedule**        | `see d/dd-MM-YYYY`<br> e.g. `see d/10-10-2024`
-**Favourite contact**    | `favourite INDEX`
+**Favourite contact**    | `favourite c/INDEX`<br> e.g. `favourite c/1`
