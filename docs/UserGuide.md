@@ -192,13 +192,13 @@ Each parameter is followed by examples that explains if the input is considered 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Ensure that an empty space ` ` comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
+* Ensure that an empty space comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
   e.g. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
+  e.g. `[t/TAG]…​` can be used as (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `list-wed`, `exit`, `clear-ab` and `clear-wb`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -258,7 +258,7 @@ Format: `del n/NAME` followed by `y` or `n`
 <box type="important" seamless>
 
 **IMPORTANT:** 
-* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information. ☺️
 
 </box>
 
