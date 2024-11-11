@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CategoryContainsKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new TrackCommand object
  */
 public class TrackCommandParser implements Parser<TrackCommand> {
     private static final Set<String> PREDEFINED_CATEGORIES = new HashSet<>(Arrays.asList("student", "company"));
@@ -33,11 +33,11 @@ public class TrackCommandParser implements Parser<TrackCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, TrackCommand.MESSAGE_USAGE));
         }
 
-        // Splits by whitespace to handle multiple words input
+        // Splits by whitespace to handle multiple words input case
         String[] words = trimmedArgs.split("\\s+");
         String category = words[0].toLowerCase(Locale.ROOT);
 
-        // Checks if the provided category to track is in multiple words or not from the predefined list
+        // Checks if the provided category to track is in multiple words or not found in the predefined list
         if (words.length != 1 || !PREDEFINED_CATEGORIES.contains(category)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_INPUT, TrackCommand.MESSAGE_INVALID_INPUT_ERROR));

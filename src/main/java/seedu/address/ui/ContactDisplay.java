@@ -25,7 +25,7 @@ public class ContactDisplay extends UiPart<Region> {
             + LINE_BREAK + "\n"
             + "Adding a contact : student OR company\n"
             + "Adds either a student or a company to the address book.\n"
-            + "\n" + "Format: student n/NAME s/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
+            + "\n" + "Format: student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
             + "\n" + "Format: company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B"
             + "\n" + LINE_BREAK + "\n"
             + "Listing all persons : list\n"
