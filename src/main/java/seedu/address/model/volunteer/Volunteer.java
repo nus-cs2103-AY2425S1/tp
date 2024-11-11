@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 
@@ -149,12 +150,14 @@ public class Volunteer {
 
     /**
      * Removes a given string list of dates from the volunteer's available dates
+     *
      * @param dateList
+     * @param participatingEvents
      */
-    public void removeAvailableDates(String dateList) throws DateTimeParseException,
+    public void removeAvailableDates(String dateList, List<Event> participatingEvents) throws DateTimeParseException,
             VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         String[] dates = dateList.split(",");
-        this.availableDates.removeStringOfDatesFromAvailList(dates);
+        this.availableDates.removeStringOfDatesFromAvailList(participatingEvents, dates);
     }
 
     /**

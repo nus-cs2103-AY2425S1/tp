@@ -12,6 +12,7 @@ import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerIsAssignedToUnfreeDayTargetException;
 import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -241,8 +242,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         volunteerManager.addDatesToVolunteer(volunteerToAddDate, dateList);
     }
 
+    /**
+     * Removes free dates from a volunteer
+     * @param volunteerToRemoveDate
+     * @param dateList
+     * @throws VolunteerDeleteMissingDateException
+     * @throws VolunteerNotAvailableOnAnyDayException
+     * @throws VolunteerIsAssignedToUnfreeDayTargetException
+     */
     public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
-        volunteerManager.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException,
+            VolunteerIsAssignedToUnfreeDayTargetException {
+        List<Event> participatingEvents = getEventFromListOfNames(volunteerToRemoveDate.getEvents());
+        volunteerManager.removeDatesFromVolunteer(volunteerToRemoveDate, dateList, participatingEvents);
     }
 }
