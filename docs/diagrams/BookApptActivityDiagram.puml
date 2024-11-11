@@ -1,4 +1,5 @@
 @startuml BookApptActivityDiagram
+skin rose
 start
 :Parse input arguments;
 :Validate input arguments;
