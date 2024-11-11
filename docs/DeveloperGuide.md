@@ -303,8 +303,8 @@ Additionally, certain command hints could benefit from more clarity on constrain
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
 **Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
-- `income` must be a full, valid 8-digit phone number.
-- `email` must be a valid email address.
+- `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
+- `email` must be in a valid email format (e.g., `username@domain`).
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
