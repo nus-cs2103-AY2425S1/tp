@@ -20,7 +20,7 @@ public class Name {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}.][\\p{Alnum}. ]*( s/o [\\p{Alnum}. ]"
-            + "+| d/o [\\\\p{Alnum}. ]+| S/O [\\p{Alnum}. ]+| D/O [\\p{Alnum}. ]+)?";
+            + "+| d/o [\\p{Alnum}. ]+| S/O [\\p{Alnum}. ]+| D/O [\\p{Alnum}. ]+)?";
 
 
     public final String fullName;
