@@ -591,6 +591,6 @@ Team size : 5
   2. Name Field Validation: To ensure accuracy, the name field will be enhanced to prevent the entry of numerical characters, 
      allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
-
-  3. 
+  3. Users will be able to search by job title and, making it easier to locate candidates with specific job positions
+     and skills.
 
