@@ -46,8 +46,10 @@ public class AssignVendorCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
+            ));
         }
 
         Person personToAssign = lastShownList.get(targetIndex.getZeroBased());
@@ -70,11 +72,10 @@ public class AssignVendorCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AssignVendorCommand)) {
+        if (!(other instanceof AssignVendorCommand otherAssignVendorCommand)) {
             return false;
         }
 
-        AssignVendorCommand otherAssignVendorCommand = (AssignVendorCommand) other;
         return targetIndex.equals(otherAssignVendorCommand.targetIndex);
     }
 
