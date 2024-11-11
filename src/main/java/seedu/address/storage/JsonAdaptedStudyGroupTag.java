@@ -14,8 +14,8 @@ class JsonAdaptedStudyGroupTag {
     private final String studyGroupName;
 
     /**
-     * Constructs a {@code JsonAdaptedStudyGroupTag} with the given
-     * {@code studyGroupName}.
+     * Constructs a {@code JsonAdaptedStudyGroupTag}
+     * with the given {@code studyGroupName}.
      */
     @JsonCreator
     public JsonAdaptedStudyGroupTag(String studyGroupName) {
@@ -23,7 +23,8 @@ class JsonAdaptedStudyGroupTag {
     }
 
     /**
-     * Converts a given {@code StudyGroupTag} into this class for Jackson use.
+     * Converts a given {@code StudyGroupTag}
+     * into this class for Jackson use.
      */
     public JsonAdaptedStudyGroupTag(StudyGroupTag source) {
         studyGroupName = source.studyGroupName;
@@ -35,11 +36,13 @@ class JsonAdaptedStudyGroupTag {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's
+     * Converts this Jackson-friendly
+     * adapted tag object into the model's
      * {@code StudyGroupTag} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in
-     *                               the adapted study group tag.
+     * @throws IllegalValueException if there were
+     *              any data constraints violated in
+     *              the adapted study group tag.
      */
     public StudyGroupTag toModelType() throws IllegalValueException {
         if (!StudyGroupTag.isValidStudyGroupName(studyGroupName)) {
