@@ -1145,7 +1145,8 @@ we did not prevent the same characters from being used as keywords for the `find
 since these characters would never be found in company names. We plan to be more consistent, 
 and check whether the keywords provided to the `find` command are valid characters that are allowed in `Company Name`. <br>
 
-3. **Make error message for `add` command more specific:** 
+3. **Make error message for `add` command more specific:**
+   <br></br>
    - Current behaviour: The error message provided when the user inputs an invalid `add` command is too generic.
      For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
 on why the command is invalid. The error message could be more specific to state the email field is missing.
