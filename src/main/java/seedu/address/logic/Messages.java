@@ -21,7 +21,7 @@ public class Messages {
     // Parsing Messages
     // Parse by index usages
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-            "The person index %d provided is invalid, please enter an index that is between 1 and %1$d";
+            "The person index %1$d provided is invalid, please enter an index that is between 1 and %2$d";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX =
             "The wedding index %d provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
