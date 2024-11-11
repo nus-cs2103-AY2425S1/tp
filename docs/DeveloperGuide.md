@@ -591,7 +591,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an appointment
 
-1. Deleting appointment in the appointment list
+1. Deleting an appointment in the appointment list
 
     1. Prerequisites: List appointment list using the `listappt` command. Ensure there are multiple appointments in this list.
 
@@ -668,3 +668,39 @@ testers are expected to do more *exploratory* testing.
       * **Expected**: If either file contains corrupted data, the application will erase affected data:
         * Corrupting `socialbook.json` will clear both person and appointment data.
         * Corrupting `appointments.json` will clear only the appointment data.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+**Team Size: 5**
+
+### 1. **Adding appointments that span multiple days:**
+- **Currently:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming.
+- **Plan:** To support multi-day appointments, allowing users to add them in one step.
+### 2. **Imposing constraints on archived people:**
+- **Currently:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar.
+- **Plan:** To restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can do `list archive/`.
+### 3. **Enhancing duplicate detection:**
+- **Currently:** Duplicates are taken as persons with the exact same full name.
+- **Plan:** To enhance duplicate detection, we will disallow other details such as phone numbers or emails to be duplicated instead as these are always unique and should not be allowed to be repeated.
+### 4. **Enhancing validation checks:**
+- **Currently:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace.
+- **Plan:** To improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace and ensure standardization of the representation of these fields.
+### 5. **Viewing the details of the different schemes:**
+- **Currently:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits.
+- **Plan:** To allow the user to view these details about available schemes in SocialBook using the `scheme` command, so that the details are easily retrievable while checking which schemes a person is eligible for.
+### 6. **Adding images to a person:**
+- **Currently:** SocialBook only shows text based information about the persons added.
+- **Plan:** To allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier.
+### 7. **Make the command result box in UI bigger:**
+- **Currently:** The result of commands is displayed in a box that may be too small for some results. For instance, executing the statistics command results in all statistics being displayed but to view all the results, the user has to scroll through, which causes some minor inconvenience.
+- **Plan:** To allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results.
+### 8. **Imposing constraints on extreme inputs:**
+- **Currently:** When a user is adding/editing the details of a person, they are free to make the text inputs as long as possible or the numerical inputs as large as possible. For instance, a name of 1000 characters or an income of more than 1,000,000 can be added, which is unrealistic.
+- **Plan:** To restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more expected upper limit like 10,000.
+### 9. **Representing entire families:**
+- **Currently:** A person represents a family that requires assistance and that person is regarded as the point of contact with the family.
+- **Plan:** To allow the user to add all people that are part of a family together, so that everyone in a family is represented together. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on.
+### 10. **Modifying available schemes:**
+- **Currently:** We have added two schemes that are available within SocialBook, which a person may be eligible for.
+- **Plan:** To extend this feature by allowing the user to add or delete schemes into SocialBook, so that they can add new schemes that are introduced in future or delete outdated schemes.
