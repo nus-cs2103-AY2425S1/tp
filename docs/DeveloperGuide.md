@@ -553,7 +553,7 @@ testers are expected to do more *exploratory* testing.
    3. Re-launch the app by double-clicking the jar file. <br>
       Expected: Changes made previously are loaded into the displayed data
 
-## **Appendix: Planned enhancements**
+## **Appendix: Planned Enhancements**
 
 Team size: 5
 
