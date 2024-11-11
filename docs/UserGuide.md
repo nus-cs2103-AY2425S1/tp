@@ -188,10 +188,9 @@ Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* Tag search is case-sensitive, `Friends` will not match `friends`
-* In tag search, the contacts have to contain all the specified TAGs in order to match
-* If the user inputs multiple fields in parameter, then only the contacts that match all the field
-in the parameter will be listed out.
+* Tag search is case-sensitive, `Friends` will not match `friends`.
+* In tag search, the contacts have to contain all the specified TAGs in order to match.
+* If multiple parameters, `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
 
 Examples:
 * `find n/John` Finds contacts who have the word John in their name.
