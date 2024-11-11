@@ -617,7 +617,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `fav 0`<br>
        Expected: No restaurant is turned to favourite. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `fav`<br>
+    1. Other incorrect Favourite commands to try: `fav`<br>
        Expected: Similar to previous.
 
 
