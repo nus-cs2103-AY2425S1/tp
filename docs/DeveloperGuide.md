@@ -539,13 +539,13 @@ Use case ends.
 
       Use case ends.
 
-* 1c. A duplicate event is detected:
+* 1c. A duplicate event is detected.
   
   * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
-* 1d. Time clash is detected:
+* 1d. Time clash is detected.
 
   * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not add it.
 
