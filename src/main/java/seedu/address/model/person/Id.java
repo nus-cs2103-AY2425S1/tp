@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Id {
     public static final String MESSAGE_CONSTRAINTS =
-            "ID should only contain numbers and it should not be blank";
+            "ID is in an invalid format. Refer to the User Guide in the help command for more information.";
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String DOCTOR = "DOCTOR";
     private static final String PATIENT = "PATIENT";
