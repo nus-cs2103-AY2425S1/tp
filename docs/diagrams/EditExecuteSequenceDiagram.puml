@@ -23,11 +23,11 @@ deactivate Model
 EditCommand -> EditCommand : personToEdit = lastShownList.get(index)
 
 alt Person is not Student and contains education field
-    EditCommand -> EditCommand : throw CommandException()
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
 alt Person is not Student and contains lesson time field
-    EditCommand -> EditCommand : throw CommandException()
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
 EditCommand -> EditCommandClass : createEditedPerson(...)
@@ -36,7 +36,7 @@ EditCommandClass --> EditCommand : editedPerson
 deactivate EditCommandClass
 
 alt editedPerson is duplicate
-    EditCommand -> EditCommand : throw CommandException (duplicate person)
+    EditCommand -> EditCommand : throw CommandException(...)
 end
 
 EditCommand -> Model : setPerson(personToEdit, editedPerson)
