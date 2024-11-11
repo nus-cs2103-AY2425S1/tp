@@ -41,19 +41,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> targetNric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToDelete = personWithMatchingNric.get();
-            model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-        } else {
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
-        }*/
         model.updateFilteredPersonList(predicate);
         if (!model.getFilteredPersonList().isEmpty()) {
             Person personToDelete = model.getFilteredPersonList().get(0);

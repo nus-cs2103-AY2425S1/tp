@@ -50,24 +50,6 @@ public class LogCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
-
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
-            Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
-                    personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),
-                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult("Log added to " + personToEdit.getName());
-        } else {
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
-        }*/
         model.updateFilteredPersonList(predicate);
         if (!model.getFilteredPersonList().isEmpty()) {
             Person personToEdit = model.getFilteredPersonList().get(0);

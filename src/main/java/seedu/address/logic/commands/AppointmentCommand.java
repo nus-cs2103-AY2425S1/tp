@@ -44,8 +44,8 @@ public class AppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
 
+        model.updateFilteredPersonList(predicate);
         if (!model.getFilteredPersonList().isEmpty()) {
             Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
@@ -79,7 +79,6 @@ public class AppointmentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                //.add("targetIndex", index)
                 .add("targetNric", nric)
                 .add("appointmentString", appointmentString)
                 .toString();

@@ -88,26 +88,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
-            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
-
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-        } else {
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
-        }*/
         model.updateFilteredPersonList(predicate);
         if (!model.getFilteredPersonList().isEmpty()) {
             Person personToEdit = model.getFilteredPersonList().get(0);

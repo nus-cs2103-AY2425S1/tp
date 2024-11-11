@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -49,26 +50,7 @@ public class RemarkCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
-
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
-            Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
-                    personToEdit.getAddress(), personToEdit.getTriage(), remark, personToEdit.getTags(),
-                    personToEdit.getAppointment(), personToEdit.getLogEntries());
-
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-            return new CommandResult(generateSuccessMessage(editedPerson));
-        } else {
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
-        }*/
+        requireNonNull(model);
 
         model.updateFilteredPersonList(predicate);
         if (!model.getFilteredPersonList().isEmpty()) {
