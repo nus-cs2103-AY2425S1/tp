@@ -157,6 +157,7 @@ If a duplicate email is used in an `add` or `edit` command, our app will display
 * Email, gender and study group tags are **case-insensitive**.
 * Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. 
 * Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
+* Valid entries for email follow the format in this section: [email format](#information_source-misc---valid-email-field-format)
 * Valid entries for gender are M/m/F/f.
 * Age must be a non-negative integer between 0 and 150 (both inclusive).
 * Two contacts are considered **duplicates** if they share the same **email** address (see tip above).
@@ -378,3 +379,16 @@ Action | Format, Examples
 **Clear** | `clear` then `confirm`
 **Export** | `export FILENAME`<br> e.g., `export exported_email`
 **Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Misc. - Valid email field format:**<br>
+
+1. The local-part should **only contain alphanumeric characters** and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+</div>
