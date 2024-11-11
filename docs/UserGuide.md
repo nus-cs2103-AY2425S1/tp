@@ -127,17 +127,17 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 ## Summary of a `Person`
 
 This table will explain the fields that a `Person` in EduContacts possesses and its respective constraints. Each person
-in EduContacts is assumed to be Singaporean. All fields should not be blank upon the initialisation of a Student, except for `Module`.
+in EduContacts is assumed to be Singaporean. You should not leave any fields blank when adding a `Person` to EduContacts, except for `Module`.
 
 Field      | Details
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**StudentID**   | The StudentID that belongs to the `Person`. The input for this field can only contain digits and should be exactly 8 digits long. <br><br> This field also serves as the unique identifier for a `Person`.
-**Name**   | The name that belongs to the `Person`. The input for this field can only contain alphanumeric characters.
-**Course** | The course that the `Person` studies. The input for this field can only contain alphabetical characters.
+**StudentID**   | The student ID that belongs to the `Person`. The input for this field can only contain digits and should be exactly 8 digits long. <br><br> This field also serves as the unique identifier for a `Person`.
+**Name**   | The name that belongs to the `Person`. The input for this field can only contain alphanumeric characters and whitespaces.
+**Course** | The course that the `Person` studies. The input for this field can only contain alphabetical characters and whitespaces.
 **Email**  | The email that belongs to the `Person`. The input for this field should be of the format local-part@domain. <br><br> The local-part should only contain alphanumeric characters and these special characters: `+ _ . -` The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. <br><br> The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br> - End with a domain label at least 2 characters long <br> - Have each domain label start and end with alphanumeric characters <br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **Address**   | The address that belongs to the `Person`. The first character for the input for this field can only contain alphanumeric characters and these special characters: `# , -`. <br><br> After the first character, any additional characters are allowed, including whitespace and further text.
 **Phone Number**  | The phone number that belongs to the `Person`. The input for this field can only contain digits and must at least be 8 digits long.
-**Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+**Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
 **Role**   | The role assigned to the `Person`. A person can either be a "Student" or "Tutor".
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
