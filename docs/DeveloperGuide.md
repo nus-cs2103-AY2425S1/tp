@@ -353,9 +353,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target user profile**:
 
 * Administrative staff in small clinics
-* has a need an organized system for managing patient data
+* has a need for an organized system for managing patient data
 * has a need to manage a significant number of patient data entries
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
@@ -374,14 +374,15 @@ such as contact information, address and other basic personal data.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​              | I want to …​                       | So that …​                                                                                                        |
-|--------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| `* * *` | user                 | add a new patient                  | I can create new patient records                                                                                  |
-| `* * *` | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
-| `* * *` | user                 | delete a patient's record          | I can remove entries that I no longer need                                                                        |
-| `* * *` | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
-| `* * *` | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
-| `* * ` | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
-| `* `   | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
+|----------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user                 | add a new patient                  | I can create new patient records                                                                                  |
+| `* * *`  | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
+| `* * *`  | user                 | delete a patient's record          | I can remove entries that I no longer need                                                                        |
+| `* * *`  | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
+| `* * *`  | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
+| `* * `   | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
+| `* `     | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
+
 
 <div style="page-break-after: always;"></div>
 
