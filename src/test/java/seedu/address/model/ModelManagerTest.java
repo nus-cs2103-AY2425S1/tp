@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(GOOGLE).withPerson(META).build();
+        AddressBook addressBook = new AddressBookBuilder().withCompany(GOOGLE).withCompany(META).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
