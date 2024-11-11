@@ -10,6 +10,6 @@ class "<<enumeration>>\nAttendanceStatus" {
     NOT_TAKEN_PLACE
 }
 
-Person -r-> "*" Tutorials
-Tutorials -r-> "1""<<enumeration>>\nAttendanceStatus"
+Person -r-> "12" Tutorial
+Tutorial -r-> "1""<<enumeration>>\nAttendanceStatus"
 @enduml
