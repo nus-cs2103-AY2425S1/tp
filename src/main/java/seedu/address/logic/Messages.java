@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -61,7 +62,9 @@ public class Messages {
                 .append("; Major: ")
                 .append(person.getMajor())
                 .append("; Interests: ")
-                .append(person.getInterests());
+                .append(person.getInterests())
+                .append("; Birthday: ")
+                .append(person.getBirthday().value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         return builder.toString();
     }
 }
