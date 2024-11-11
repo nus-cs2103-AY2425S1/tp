@@ -315,8 +315,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User searches for a person by name
-2.  CFG shows a list of persons which fit the criteria
+1.  User searches for a person by name.
+2.  CFG shows a list of persons which fit the criteria.
 
     Use case ends.
 
@@ -334,16 +334,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to delete a specific person in the list
-4.  CFG deletes the person
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to delete a specific person in the list.
+4.  CFG deletes the person.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -361,16 +361,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to add some number of volunteer hours to a specific person in the list
-4.  CFG adds the specified number of volunteer hours to the specified person's existing hours
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to add some number of volunteer hours to a specific person in the list.
+4.  CFG adds the specified number of volunteer hours to the specified person's existing hours.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
  
   Use case resumes at step 2.
 
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The specified person is not a Volunteer
+* 3b. The specified person is not a Volunteer.
 
     * 3b1. CFG shows an error message.
 
@@ -394,16 +394,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to get emails of persons on the list
-4.  CFG copies to the user's clipboard a list of all emails of persons on the list
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to get emails of persons on the list.
+4.  CFG copies to the user's clipboard a list of all emails of persons on the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -416,16 +416,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons
-2. CFG shows a list of relevant persons
-3. User requests to create a group, with specified persons in the list as members
-4. CFG successfully creates the group
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to create a group, with specified persons in the list as members.
+4. CFG successfully creates the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. A group with the same name already exists.
-  * 3a1. CFG shows an error message telling the user that the group already exists.
+  * 3a1. CFG shows an error message.
 
     Use case ends.
 
@@ -443,8 +443,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see all existing groups
-2. CFG shows a list of all existing groups
+1. User requests to see all existing groups.
+2. CFG shows a list of all existing groups.
 
     Use case ends.
 
@@ -460,9 +460,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>see a list of groups (UC06)</ins>
-2. User requests to see members of a group
-3. CFG lists all the members of the group
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to see members of a group.
+3. CFG lists all the members of the group.
 
     Use case ends.
 
@@ -476,6 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. CFG shows an error message.
 
     Use case ends.
+  
 * 3b. The group currently has no members.
   * 3b1. CFG displays an empty list.
 
@@ -485,16 +486,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC08 - Add members to a group**
 
 **MSS**
-1. User requests to list persons
-2. CFG shows a list of relevant persons
-3. User requests to add specified persons in the list to a group
-4. CFG adds the persons to the group
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to add specified persons in the list to a group.
+4. CFG adds the persons to the group.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -514,10 +515,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC09 - Remove members from a group**
 
 **MSS**
-1. User requests to <ins>see a list of groups (UC06)</ins>
-2. User requests to <ins>view members of a group (UC07)</ins>
-3. User requests to remove one or more members from a group
-4. CFG removes the specified members from the group
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to <ins>view members of a group (UC07)</ins>.
+3. User requests to remove one or more members from a group.
+4. CFG removes the specified members from the group.
 
     Use case ends.
 
@@ -546,12 +547,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC10 - Delete a group**
+**Use case: UC10 - Rename a group**
 
 **MSS**
-1. User requests to <ins>see a list of groups (UC06)</ins>
-2. User requests to delete a group
-3. CFG deletes the group
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to change the name of a group to a new name.
+3. CFG successfully renames the group.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+  Use case resumes at step 2.
+* 2a. The group referenced by the user does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+* 2b. A group with the new name already exists.
+  * 2b1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC11 - Delete a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to delete a group.
+3. CFG deletes the group.
 
     Use case ends.
 
@@ -565,18 +587,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: UC11 - Sort contacts**
+**Use case: UC12 - Sort contacts**
 
 **MSS**
-1. User requests to list persons
-2. CFG shows a list of relevant persons
-3. User requests to sort the list by name
-4. CFG shows the list of persons sorted by name
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to sort the list by name.
+4. CFG shows the list of persons sorted by name.
 
     Use case ends.
 
 **Extensions**
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 * 2a. The list of persons is empty.
