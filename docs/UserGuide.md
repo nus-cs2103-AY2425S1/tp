@@ -103,6 +103,7 @@ MATER offers a feature-rich platform with the following capabilities:
 MATER is designed for **small to medium-sized car workshop managers** and their team members who:
 - **Need faster, streamlined data access** for client and vehicle information.
 - **Prefer a hands-on approach** to managing their client lists with minimal steps.
+- **Have basic familiarity with command-line interfaces** or are willing to learn simple command syntax.
 
 Whether you're a workshop owner, a mechanic, or an administrative staff member responsible for managing records, MATER empowers you to achieve efficient, accurate, and consistent data handling with ease.
 
@@ -124,7 +125,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
    - **Option 1: Open MATER by Double-Clicking**
      - Go to the folder where you saved the `.jar` file.
      - **On Windows or Linux**: Double-click the `.jar` file to open it.
-     - **On Mac**: Right-click the `.jar` file, select “Open With”, and choose Java.
+     - **On Mac**: It is recommended to open MATER from the terminal (see Option 2) due to system security settings and configurations.
      - If MATER does not open, you may need to open it from the terminal (see Option 2).
 <br><br>
    - **Option 2: Open MATER from the Terminal**
@@ -338,7 +339,7 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 **Notes:**
 
 - `vrn` is validated using a [checksum letter](#glossary). Invalid `vrn` provided will be rejected by MATER.
-- The client must not already have a car.
+- Ensure the client does not already have a car before adding a new one.
 
 <box type="tip" seamless>
 
@@ -512,7 +513,7 @@ find KEYWORD [MORE_KEYWORDS]...
 - The search is case-insensitive (e.g., `hans` will match `Hans`).
 - The order of the keywords does not matter (e.g., `Hans Bo` will match `Bo Hans`).
 - Only full words will be matched (e.g., `Han` will not match `Hans`).
-- Clients matching at least one keyword will be returned (i.e., an `OR` search).
+- Clients matching **any** of the keywords will be returned (i.e., an **OR** search).
 
 **Examples:**
 
@@ -632,7 +633,7 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 **Caution: FOR EXPERT USERS ONLY**
 
-- Should edits to the `addressbook.json` data file make its format invalid, MATER will not load any client data in the next run. During this event, should you execute any commands such as `help`, `add-client`, `list`, `find`, or `exit`, the previously existing data would be wiped out. It is strongly recommended to create a backup of the file before editing it.
+- If edits to the `addressbook.json` data file make its format invalid, MATER will not load any client data in the next run. In this event, executing any commands will result in the previously existing data being wiped out. It is **strongly recommended** to create a backup of the file before editing it.
 - Certain edits can cause MATER to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
@@ -644,7 +645,7 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 <h2 style="color: #8E44AD;"> <i class="fas fa-question-circle icon"></i>  FAQ</h2>
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the MATER app on your other Computer. Next, overwrite its empty `addressbook.json` data file which it created with the `addressbook.json` data file of your current Computers' MATER home folder.
+**A**: Install the MATER app on your other Computer. Next, overwrite the empty `addressbook.json` data file it created with the `addressbook.json` data file from the MATER home folder on your current computer.
 
 **Q**: What happens if I enter an invalid command?<br>
 **A**: MATER will display an error message. You can refer to the [Features](#features) section for the correct command format or reference the `help` window in the app.
