@@ -101,7 +101,7 @@
   * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
   * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
   * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
-    but `5 - 9` or `5 -9` or `5- 9` is incorrect).
+    but `5 - 9` or `5 -9` or `5- 9` are incorrect).
   * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
 
 <br>
