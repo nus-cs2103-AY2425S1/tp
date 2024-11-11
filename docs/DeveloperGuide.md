@@ -444,3 +444,14 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+Team Size: 5
+
+1. Adding appointments that span multiple days: Currently, to add an appointment that spans over multiple days, a new appointment has to be created for each day. We plan to allow users to add a single appointment that can span over multiple days so it is easier to track such appointments.
+2. Enhancing duplicate detection: Currently, duplicates are taken as persons with the exact same name. We plan to enhance this by disallowing other details such as phone numbers and emails to be duplicated as these are unique too and should not be allowed to be repeated. 
+3. Enhancing validation checks: Currently, the validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace. Therefore, we plan to improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace and ensure standardization.
+4. Adding more available schemes: Currently, SocialBook has two available schemes that a person can be eligible for. We plan to allow the user to add more schemes into SocialBook that could be applicable for persons they are dealing with.
+5. Imposing constraints on archived people: Currently, archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar. We plan to restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how list works.
