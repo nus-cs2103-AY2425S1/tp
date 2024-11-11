@@ -72,7 +72,7 @@ Here are some example commands you can try:
    - `exit` : Exits the app.
 
 6. **Learn more about the commands:**\
-Refer to the [Command Summary](#command-summary) seciton below for a quick overview of each command, and to the [Features](#features) section below for further details for each command.
+Refer to the [Command Summary](#command-summary) section below for a quick overview of each command, and to the [Features](#features) section below for further details for each command.
 
 ---
 
