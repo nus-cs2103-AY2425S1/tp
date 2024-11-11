@@ -18,16 +18,34 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - To check your Java version, you can follow the instructions [here](https://www.java.com/en/download/help/version_manual.html)
+   .
+   - If your computer doesn’t have Java 17 or a newer version installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
+3. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. **Windows**:
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+   **MacOS**: 
+       Right click on the homefolder. Then select "New terminal at Folder". A terminal will pop up. Type `java -jar Talentcy.jar` and press enter.
+       <p align="center">
+       <img src="images/Mac_open_terminal.png" alt="Mac_open_terminal" width="350"/>
+       </p>
+        <p align="center"><em>Right-clicking the home folder and selecting "New Terminal at Folder" on MacOS</em></p>
+
+   **Linux**:
+       Open the folder where you placed the Talentcy.jar file.
+       Right-click inside the folder and select "Open in Terminal" (or use the Ctrl + Alt + T shortcut to open the terminal, then navigate to the folder using the cd command).
+       In the terminal, type java -jar Talentcy.jar and press Enter.
+
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+![Ui](images/Ui.png)
+
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -41,8 +59,11 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
+
+**Notes**:
+When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -60,9 +81,6 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
     e.g. `[n/NAME] | [p/PHONE] | [e/EMAIL]}1..*` means at least one or more of the fields is needed.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -107,13 +125,11 @@ Examples:
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
 * `add n/John t/A e/johnnie@example.com j/CS2103 p/444888 r/Good at drawing`
 
-### Listing persons based on attribute : `list`
+### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. `list` does not take in any parameters.
 
-Format:
-
-`list`
+Format: `list`
 
 
 
@@ -145,10 +161,11 @@ Format:
 
 Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
-* `find t/TP` returns the list of persons with `TP` tag <br>
-  <img src="images/findTp.png" alt="result for 'findTp'" width="400"/>
-
-* `find n/alex yeoh t/TP` return the list of persons with name containing `alex yeoh` whose tag is `TP`
+* `find t/TP` returns the list of contacts with `TP` tag <br>
+    <p align="center">
+        <img src="images/findTp.png" alt="result for 'findTp'" width="300"/>
+    </p>
+* `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
 
@@ -256,7 +273,7 @@ _Details coming soon ..._
 
 <box type="info" seamless>
 
-**Notes about each valid input field:**<br>
+**Notes about each valid input field:**
 
 ### NAME
 - Must be between 1 and 50 characters, excluding leading and trailing whitespaces.
@@ -316,6 +333,52 @@ for list of valid tags:
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
 </box>
+--------------------------------------------------------------------------------------------------------------------
+
+## Context Menu Options
+
+Context menu options allow users to perform typical text actions, which are available in the command box and feedback box. To see the context menu options, click right on the command box or feedback box.
+
+<box type="info" seamless>
+
+**Descriptions of each context menu option in command box:**<br>
+
+### Undo
+- Reverses the most recent text editing action within the command box, restoring text that was removed or modified.
+- Note that this applies to the text editing action, not undoing the command applied to the app.
+
+### Redo
+- Reapplies the last undone text editing action if "Undo" was used, restoring changes that were reversed.
+
+### Cut
+- Removes the selected text from the command box and copies it to the clipboard, allowing you to paste it elsewhere.
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the command box.
+
+### Paste
+- Inserts text from the clipboard into the command box at the cursor’s location or replaces selected text.
+
+### Delete
+- Deletes the selected text from the command box without copying it to the clipboard.
+
+### Select All
+- Highlights all text within the command box, making it easier to apply other actions like cut, copy, or delete.
+
+</box>
+
+<box type="info" seamless>
+
+**Descriptions of each context menu option in feedback box:**<br>
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the feedback box.
+
+### Select All
+- Highlights all text within the feedback box, making it easier to apply other actions like cut, copy, or delete.
+
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
