@@ -126,7 +126,7 @@ Format: `clear`
 
 ### Exiting the Program: `exit`
 
-Automatically saves all the user's client data and exits the program.
+Automatically saves all of the user's client data and exits the program.
 
 Format: `exit`
 
