@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
+import java.util.function.Predicate;
+
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,6 +37,7 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
 
     private final Student toAdd;
+    private Predicate<Student> previousPredicate;
 
     /**
      * Creates an AddStudentCommand to add the specified {@code Student}
@@ -51,6 +55,11 @@ public class AddStudentCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        FilteredList<Student> filteredStudents = (FilteredList<Student>) model.getFilteredStudentList();
+        @SuppressWarnings("unchecked")
+        Predicate<Student> tmp = (Predicate<Student>) filteredStudents.getPredicate();
+        previousPredicate = tmp;
+
         model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatStudentName(toAdd)));
     }
@@ -65,6 +74,7 @@ public class AddStudentCommand extends Command {
     @Override
     public boolean undo(Model model) {
         model.deleteStudent(toAdd);
+        model.updateFilteredStudentList(previousPredicate);
         return true;
     }
 }

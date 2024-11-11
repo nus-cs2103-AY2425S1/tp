@@ -6,11 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -106,7 +109,7 @@ public class AddStudentCommandTest {
      * A Model stub that always accept the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Student> studentsAdded = new ArrayList<>();
+        final ObservableList<Student> studentsAdded = FXCollections.observableArrayList();
 
         @Override
         public boolean hasStudent(Student student) {
@@ -129,6 +132,16 @@ public class AddStudentCommandTest {
         public int deleteStudent(Student target) {
             studentsAdded.remove(target);
             return 0;
+        }
+
+        @Override
+        public ObservableList<Student> getFilteredStudentList() {
+            return new FilteredList<>(studentsAdded);
+        }
+
+        @Override
+        public void updateFilteredStudentList(Predicate<Student> predicate) {
+            // do nothing
         }
     }
 }
