@@ -588,7 +588,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 4.
 * 4a. User could continue to request for a different list of persons, by <ins>searching (UC01)</ins>,
     <ins>viewing members in a group (UC07)</ins>, etc.
-  * 4a1. Sort option is maintained.
+  * 4a1. Sort option persists for the new list.
 
     Use case ends.
 
