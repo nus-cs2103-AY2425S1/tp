@@ -4,18 +4,51 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
+Class UniqueCustomerList
+Class Customer
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Tag
+Class OrderList
+Class Order {
+    status: Status
+}
+Class Item
+Class Date
+Class Quantity
+
+enum Status <<enumeration>> {
+    PENDING
+    COMPLETED
+}
+
+AddressBook *-right-> "1" UniqueCustomerList
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniqueCustomerList
+UniqueTagList -[hidden]down- UniqueCustomerList
 
 UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
+UniqueCustomerList -right-> "*" Customer
 
-Person -up-> "*" Tag
+Customer -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Customer *--> Name
+Customer *--> Phone
+Customer *--> Email
+Customer *--> Address
+Customer *--> OrderList
+
+OrderList *--> "*" Order
+
+Order *--> Item
+Order *--> Date
+Order *--> Quantity
+
+Order -[hidden]left-> Status
+
+show Order members
+hide Order methods
+
 @enduml

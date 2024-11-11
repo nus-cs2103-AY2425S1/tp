@@ -1,0 +1,83 @@
+{
+  "_comment": "AddressBook save file which contains the same Customer values as in TypicalCustomers#getTypicalAddressBook()",
+  "customers" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "friends" ],
+    "orderList" : [ ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "tags" : [ "owesMoney", "friends" ],
+    "orderList" : [ ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "tags" : [ ],
+    "orderList" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "tags" : [ "friends" ],
+    "orderList" : [ {
+      "item" : "Abacus",
+      "quantity" : "2",
+      "date" : "10-10-2025",
+      "status": "Pending"
+    }, {
+      "item" : "Blocks",
+      "quantity" : "101",
+      "date" : "05-05-2025",
+      "status": "Completed"
+    }, {
+      "item" : "Camera with spare lens",
+      "quantity" : "1",
+      "date" : "03-03-2020",
+      "status": "Pending"
+    }, {
+      "item" : "Damascus daggers",
+      "quantity" : "5",
+      "date" : "12-12-2025",
+      "status": "Pending"
+    } ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "tags" : [ ],
+    "orderList" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "tags" : [ ],
+    "orderList" : [ {
+      "item" : "Abacus",
+      "quantity" : "2",
+      "date" : "10-10-2025",
+      "status": "Pending"
+    } ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "tags" : [ ],
+    "orderList" : [ {
+      "item" : "Abacus",
+      "quantity" : "2",
+      "date" : "10-10-2025",
+      "status": "Pending"
+    } ]
+  } ]
+}

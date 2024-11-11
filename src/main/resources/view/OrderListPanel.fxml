@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox styleClass="label-title">
+        <Label fx:id="orderListTitle" text="Orders" styleClass="label-title-text" VBox.vgrow="NEVER" maxWidth="Infinity"/>
+        <Label fx:id="closingParenthesis" text=")" styleClass="label-title-text">
+            <minWidth>
+                <!-- Ensures that the quantity text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+        </Label>
+    </HBox>
+    <ListView fx:id="orderListView" VBox.vgrow="ALWAYS" />
+    <Label fx:id="orderListEmpty" styleClass="label-instruction" VBox.vgrow="ALWAYS" maxWidth="Infinity" wrapText="true" />
+    <Label fx:id="orderGuide" styleClass="label-instruction" VBox.vgrow="ALWAYS" maxWidth="Infinity" wrapText="true" />
+</VBox>
