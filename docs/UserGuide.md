@@ -706,7 +706,7 @@ Shows a message explaining how to access the help page.
 
 Clears all entries from the MediBase3 database. 
 
-**Format: `clear`
+**Format**: `clear`
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
