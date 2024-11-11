@@ -1,6 +1,7 @@
 package seedu.ddd.model.contact.common.predicate;
 
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_SERVICE;
+import static seedu.ddd.logic.parser.ParserUtil.parseService;
 import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
@@ -30,10 +31,12 @@ public class VendorPredicateBuilder extends ContactPredicateBuilder {
     private Predicate<Contact> addServicePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_SERVICE).isPresent()) {
-            if (!Service.isValidService(argMultimap.getValue(PREFIX_SERVICE).get())) {
-                throw new ParseException(Service.MESSAGE_CONSTRAINTS);
-            }
+
             String args = verifyNoEmptyInput(argMultimap, PREFIX_SERVICE);
+
+            // Verify whether input is a valid service
+            Service service = parseService(args);
+
             String[] serviceKeywords = args.split("\\s+");
             Predicate<Vendor> servicePredicate = new ServiceContainsKeywordsPredicate(Arrays.asList(serviceKeywords));
             //Convert Predicate<Vendor> into Predicate<Contact>
