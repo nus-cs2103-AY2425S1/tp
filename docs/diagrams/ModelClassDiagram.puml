@@ -21,6 +21,7 @@ Package Model as ModelPackage <<Rectangle>>{
     Class Phone
     Class Tag
     Class ModuleRoleMap
+    Class Description
 
     Class I #FFFFFF
 }
@@ -38,8 +39,8 @@ ModelManager -up-> "1" UserPrefs
 VersionedAddressBook .up.|> AddressBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-VersionedAddressBook -up-> "1" AddressBook
-VersionedAddressBook -up-> "1..*" AddressBook
+VersionedAddressBook -up-> "1 current" AddressBook
+VersionedAddressBook -up-> "1..* history" AddressBook
 
 VersionedAddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
@@ -52,6 +53,7 @@ Email .. N1
 Person *--> "0..1" Address
 Person *--> "*" Tag
 Person *--> "1" ModuleRoleMap
+Person *--> "0..1" Description
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
