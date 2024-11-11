@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClinicConnectSystemParser" as ClinicConnectSystemParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "argMultimap:ArgumentMultiMap" as ArgumentMultiMap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "a:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ClinicConnectSystemParser : parseCommand(...)
+activate ClinicConnectSystemParser
+
+create EditCommandParser
+ClinicConnectSystemParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> ClinicConnectSystemParser
+deactivate EditCommandParser
+
+ClinicConnectSystemParser -> EditCommandParser : parse(...)
+activate EditCommandParser
+
+EditCommandParser -> ArgumentTokenizer : checkPrefixPresentAndValidPrefix(...)
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> EditCommandParser
+deactivate ArgumentTokenizer
+
+EditCommandParser -> ArgumentTokenizer : tokenize(...)
+activate ArgumentTokenizer
+
+create ArgumentMultiMap
+ArgumentTokenizer -> ArgumentMultiMap
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> ArgumentTokenizer
+deactivate ArgumentMultiMap
+
+ArgumentTokenizer --> EditCommandParser
+deactivate ArgumentTokenizer
+
+EditCommandParser -> ArgumentMultiMap : getPreamble()
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> EditCommandParser : nric
+deactivate ArgumentMultiMap
+
+alt nric.isEmpty()
+else
+    EditCommandParser -> ParserUtil : parserNric(nric)
+    activate ParserUtil
+    ParserUtil --> EditCommandParser
+    deactivate ParserUtil
+end
+note left:If NRIC is empty, throws ParseException: No NRIC provided in input
+
+EditCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(...)
+note right: Verify for all prefixes except "al|" and "rmal|"
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> EditCommandParser
+deactivate ArgumentMultiMap
+
+EditCommandParser -> EditCommandParser : createEditPersonDescriptor(...)
+activate EditCommandParser
+
+EditCommandParser --> EditCommandParser : editPatientDescriptor
+deactivate EditCommandParser
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser
+deactivate EditCommand
+
+EditCommandParser --> ClinicConnectSystemParser : a
+deactivate EditCommandParser
+destroy EditCommandParser
+destroy ArgumentMultiMap
+
+ClinicConnectSystemParser --> LogicManager : a
+deactivate ClinicConnectSystemParser
+
+destroy EditCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml

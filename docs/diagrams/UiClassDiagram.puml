@@ -1,12 +1,15 @@
 @startuml UiClassDiagram
+
+!include style.puml
 top to bottom direction
-hide circle
+skinparam arrowThickness 1.1
+skinparam classBackgroundColor UI_COLOR
 skinparam classAttributeIconSize 0
 
-package "UI" <<Rectangle>> {
-    class Ui <<interface>>{
+skinparam defaultFontColor White
 
-    }
+package "UI" <<Rectangle>> {
+    Class Ui <<interface>>
 
     class UiManager {
         -Logic logic
@@ -18,25 +21,11 @@ package "UI" <<Rectangle>> {
         +showAppts(TreeSet<FilteredAppointment> appts)
     }
 
-    class HelpWindow {
-
-    }
-
-    class HelpKeywordWindow {
-
-    }
-
-    class ResultDisplay {
-
-    }
-
-    class PatientListPanel {
-
-    }
-
-    class PatientCard {
-
-    }
+    Class HelpWindow
+    Class HelpKeywordWindow
+    Class ResultDisplay
+    Class PatientListPanel
+    Class PatientCard
 
     class StatusBarFooter {
 
@@ -64,16 +53,17 @@ package "UI" <<Rectangle>> {
 }
 
 package Model <<Rectangle>> {
-
+    skinparam classBackgroundColor UI_COLOR
 }
 
 package Logic <<Rectangle>> {
-
+    skinparam classBackgroundColor UI_COLOR
 }
 
 package ExternalComponents <<Rectangle>> {
-
+   Class HiddenLogic #FFFFFF
 }
+
 
 ExternalComponents ..> Ui
 Ui <|-.- UiManager
