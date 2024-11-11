@@ -21,7 +21,6 @@ import hallpointer.address.model.member.Member;
 class JsonSerializableHallPointer {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
-    private static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate session(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
 
@@ -30,8 +29,7 @@ class JsonSerializableHallPointer {
      */
     @JsonCreator
     public JsonSerializableHallPointer(
-            @JsonProperty("members") List<JsonAdaptedMember> members,
-            @JsonProperty("sessions") List<JsonAdaptedSession> sessions) {
+            @JsonProperty("members") List<JsonAdaptedMember> members) {
         if (members != null) {
             this.members.addAll(members);
         }

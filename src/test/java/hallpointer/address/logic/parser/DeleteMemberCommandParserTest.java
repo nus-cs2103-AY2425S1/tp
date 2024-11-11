@@ -15,6 +15,12 @@ public class DeleteMemberCommandParserTest {
     private DeleteMemberCommandParser parser = new DeleteMemberCommandParser();
 
     @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteMemberCommand(INDEX_FIRST_MEMBER));
     }

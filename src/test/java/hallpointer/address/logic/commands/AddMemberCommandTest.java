@@ -1,5 +1,7 @@
 package hallpointer.address.logic.commands;
 
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static java.util.Objects.requireNonNull;
@@ -47,12 +49,24 @@ public class AddMemberCommandTest {
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
+        // same name and same telegram
         Member validMember = new MemberBuilder(ALICE).build();
         AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
-
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
+
+        // same name and different telegram
+        Member differentTelegramMember = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        AddMemberCommand differentTelegramAddMemberCommand = new AddMemberCommand(differentTelegramMember);
+        assertThrows(CommandException.class,
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> differentTelegramAddMemberCommand.execute(modelStub));
+
+        // same telegram and different name
+        Member differentNameMember = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        AddMemberCommand differentNameAddMemberCommand = new AddMemberCommand(differentNameMember);
+        assertThrows(CommandException.class,
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> differentNameAddMemberCommand.execute(modelStub));
 
         // not case-sensitive
         Member modifiedMember = new MemberBuilder(ALICE).withName("alice Pauline").build();

@@ -177,7 +177,6 @@ class AddSessionCommandTest {
         AddSessionCommand addSessionCommand3 = new AddSessionCommand(session1, indices3);
         AddSessionCommand addSessionCommand4 = new AddSessionCommand(session1, indices4);
 
-
         // same object -> returns true
         assertTrue(addSessionCommand1.equals(addSessionCommand1));
 

@@ -215,5 +215,4 @@ public class AddSessionCommandParserTest {
         String pointsExceedMax = SESSION_NAME_DESC_MEETING + DATE_DESC_MEETING + " p/101" + MEMBER_INDEX_DESC_ONE;
         assertParseFailure(parser, pointsExceedMax, MESSAGE_MAX_SESSION_POINTS);
     }
-
 }
