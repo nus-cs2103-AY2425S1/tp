@@ -18,8 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
+
 
 class SearchCommandParserTest {
 
