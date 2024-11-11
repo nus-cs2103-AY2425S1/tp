@@ -109,7 +109,7 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 
 - WardWatch data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
 
-- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/wardwatch.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
