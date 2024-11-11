@@ -14,6 +14,7 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User Stories](#user-stories)
@@ -24,15 +25,14 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+* RealConnect is a CLI application based on [Address Book 3 (AB3).](https://github.com/nus-cs2103-AY2425S1/tp)
 * The use cases within the Developer Guide and the commands in User Guide were formatted into GFMD style using GPT-4o. The content itself was self-written by the team.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+For more information on the codebase, refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -166,7 +166,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component,
@@ -182,7 +182,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -324,12 +324,19 @@ Given below is a sequence diagram to highlight the differences in implementation
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
+
 ### Log Command
 Log command add a log entry to person at given index.
 Given below is a sequence diagram of favourite command usage.
 
 ![ViewSequenceDiagram](images/LogCommandSequenceDiagram.png)
 ![ViewSequenceDiagram](images/LogWithDateSequenceDiagram.png)
+
+
+<div markdown="span" class="alert alert-info">:information_source: 
+The log command is a command that updates the person model. Similar commands within RealConnect follow the same
+sequence diagram.
+</div>
 
 
 ### Favourite Command
@@ -1295,14 +1302,14 @@ These instructions only provide a starting point for testers to work on; testers
 
 1. **Initial Launch**
 
-  1. Download the jar file and copy it into an empty folder.
-  2. Run `java -jar RealConnect.jar` in the same directory.  
+- Download the jar file and copy it into an empty folder. 
+- Run `java -jar RealConnect.jar` in the same directory.  
      **Expected:** The GUI displays with a set of sample contacts. The window size may not be optimal.
 
 2. **Saving Window Preferences**
 
-  1. Resize the window to an optimal size. Move the window to a different location and close it.
-  2. Re-launch the app by running the jar file again.  
+- Resize the window to an optimal size. Move the window to a different location and close it. 
+- Re-launch the app by running the jar file again.  
      **Expected:** The window opens with the last used size and location.
 
 ### Viewing Help
@@ -1314,51 +1321,59 @@ These instructions only provide a starting point for testers to work on; testers
 
 ### Adding a Person
 
-1. **Adding Persons with Various Details**
 
   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
      **Expected:** John Doe is added to the contact list with the specified details.
 
-  2. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`  
+  2. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/followUp`  
      **Expected:** Alice Tan is added with multiple tags and a remark.
+  
+  #### Negative test cases
 
-  3. Invalid Input Cases: Test with missing mandatory fields  
+  1. Invalid Input Cases: Test with missing mandatory fields  
      **Expected:** Error message is displayed indicating missing information.
+  2. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 r/Interested in modern properties t/prospect t/follow-up`  
+          **Expected:** Corresponding error message, as mandatory field email has not been included.
+  3. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`  
+     **Expected:** Corresponding error message, due to improper input format (non Alpha-Numeric Tag).
+4. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/followUp`
+<br>**Expected:** In the case `Alice Tan` already exists in the address book, this input is a duplicate and results in the corresponding error message.
 
 ### Listing Contacts
-
-1. **Listing All Persons**
 
   1. Execute `list`.  
      **Expected:** Displays all persons stored in the address book.
 
-### Sorting Contacts
-
-1. **Sorting the Contact List**
-
-  1. Prerequisites: Multiple contacts with various names.
-  2. Test Case: `sort asc`  
-     **Expected:** Contacts are sorted in alphabetical order (A-Z) by name.
-
-  3. Test Case: `sort desc`  
-     **Expected:** Contacts are sorted in reverse alphabetical order (Z-A).
 
 ### Editing a Person
 
-1. **Editing Details of a Person**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
 
-  1. Prerequisites: Have a contact list with multiple entries.
-  2. Test case: `edit 1 p/91234567 e/johndoe@example.com`  
+  1. Test case: `edit 1 p/91234567 e/johndoe@example.com`  
      **Expected:** Person at index 1's phone number and email are updated to new details.
 
-  3. Test case: `edit 2 n/Betsy Crowe t/`  
+  2. Test case: `edit 2 n/Betsy Crowe t/`  
      **Expected:** Name of the person at index 2 changes, and all tags are cleared.
+3. Test case: `edit 2 n/Betsy Crowe r/`
+   **Expected:** Name of the person at index 2 changes, and remark is cleared.
+#### Negative test cases
+
+1. Invalid Input Cases: Test with missing mandatory fields  
+   **Expected:** Error message is displayed indicating missing information.
+2. Test case: `edit 1 a/`  
+   **Expected:** Corresponding error message, any field defined as compulsory for a person when adding cannot be left blank.
+3. Test case: `edit -100 n/Jonny Lim`  
+   **Expected:** Corresponding error message, due to improper input format (Index).
+4. Test case: `edit 1 n/Alice Tan`
+   <br>**Expected:** In the case `Alice Tan` already exists in the address book, this input is a duplicate and results in the corresponding error message.
 
 ### Deleting a Person
 
-1. **Deleting a specific Person**
-
-  1. Prerequisites: List has multiple persons using the `list` command.
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
   2. Test Case: `delete 1`  
      **Expected:** First contact is deleted from the list. The status message shows details of the deletion.
 
@@ -1369,93 +1384,164 @@ These instructions only provide a starting point for testers to work on; testers
 
 1. **Sorting the Contact List**
 
-  1. Prerequisites: Multiple contacts understood by their names.
-  2. Test Case: `sort asc`  
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with multiple entries.
+</div>
+
+  1. Test Case: `sort asc`  
      **Expected:** Contacts are sorted in ascending order (A-Z) by name.
 
-  3. Test Case: `sort desc`  
+  2. Test Case: `sort desc`  
      **Expected:** Contacts are sorted in descending order (Z-A).
 
 ### Remarking a Person
 
-1. **Adding or Editing Remarks**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
 
   1. Test case: `remark 1 r/remark message`  
      **Expected:** Adds or updates remark to say 'remark message' for the 1st person.
+2.   Test case: `remark 1 r/`  
+        **Expected:** Updates remark to an empty remark.
 
 ### Single Page Person View
 
-1. **Viewing a Person's Details**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
 
   1. Test case: `view 1`  
      **Expected:** Displays all information about the person at index 1 in a new window.
+  
+  2. Test case: `view 1, view 2`  
+          **Expected:** Displays all information about the person at index 1 in a new window, then closes it an opens window for the person at index 2.
+3. Test case: `view 1, edit 1 n/ new name` 
+4.  **Expected:** Displays all information about the person at index 1 in a new window, then updates the name of the person in the view window.
 
 ### Adding a Property
 
 1. **Adding Property to a Contact**
 
-  1. Prerequisites: Have contacts in the list.
-  2. Test case: `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000`  
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
+
+  1. Test case: `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000`  
      **Expected:** Adds a property listing to the person at index 1.
+
+#### Negative test cases
+
+1. Invalid Input Cases: Test with missing mandatory fields  
+   **Expected:** Error message is displayed indicating missing information.
+2. Test case:`addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1`
+   <br>**Expected:** Corresponding error message due to missing price.
 
 ### Adding History to a Person
 
 1. **Adding History Entries**
 
-  1. Prerequisites: Contact list exists with entries.
-  2. Test case: `log 1 d/2024-11-15 l/meet up`  
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
+
+  1. Test case: `log 1 d/2024-11-15 l/meet up`  
      **Expected:** Adds a history entry about a meet up on 2024-11-15 for the first person.
-  3. Test case: `log 1 l/event`
+  2. Test case: `log 1 l/event`
      **Expected:** Adds a history entry `event` on today (System time) for the first person.
+
+#### Negative test cases
+
+1. Invalid Input Cases: Test with missing mandatory fields  
+   **Expected:** Error message is displayed indicating missing information.
+2. Test case:`log 1 l/`
+   <br>**Expected:** Corresponding error message due to missing log activity.
+
+
 ### Closing Single Page Person View
 
-1. **Closing the Person View Window**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: The view window is open.
+</div>
 
-  1. Test case: `close`  
-     **Expected:** Closes the currently open person view window.
+1. Test case: `close`  
+   **Expected:** Closes the currently open person view window.
+
 
 ### Locating Persons by Name
 
-1. **Finding Contacts**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with multiple entries.
+</div>
 
   1. Test case: `find John`  
-     **Expected:** Lists contacts whose names include 'John'.
+     **Expected:** Lists contacts whose names include 'John'. Returns empty address book if there is no one called `john`
+
+#### Negative test cases
+
+1. Invalid Input Cases: Test with missing mandatory fields  
+   **Expected:** Error message is displayed indicating missing information.
+2. Test case:`find`
+   <br>**Expected:** Corresponding error message due to missing keyword.
+
 
 ### Managing Favourites
 
-1. **Marking and Unmarking as Favourite**
+**Marking and Unmarking as Favourite**
 
-  1. Prerequisites: Have a contact list with multiple entries.
-  2. Test case: `favourite 2`  
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with entries.
+</div>
+
+
+  1. Test case: `favourite 2`  
      **Expected:** Toggles the favourite status of the contact at index 2. If the contact was not a favourite, it is added to favourites, and vice versa.
 
-  3. Test Case: `favourite`  
+  2. Test Case: `favourite`  
      **Expected:** Lists all contacts marked as favourites at the front of the contact list.
 
 ### Adding Birthday
 
-1. **Adding a Person's Birthday**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with multiple entries.
+</div>
 
-  1. Prerequisites: Having contacts in the list
-  2. Test case: `birthday 1 b/1986-08-23`
-  3. **Expected:** Adds birthday for the person at index 1.
+  1. Test case: `birthday 1 b/1986-08-23`
+<br>**Expected:** Adds birthday for the person at index 1.
+  2. Test case:`birthday 1 b/`
+<br>**Expected:** Removes birthday for the person at index 1.
+  3. Test case:`birthday 1`
+     <br>**Expected:** Removes birthday for the person at index 1.
+
+#### Negative test cases
+
+1. Invalid Input Cases: Test with invalid input formats (yyyy-mm-dd).  
+   **Expected:** Error message is displayed indicating missing information.
+2.   Test case:`birthday 1 b/ 2002-11-9`
+<br>**Expected:** Error message is displayed indicating missing information.
+2.   Test case:`birthday 1 b/ 2002/10/19`
+     <br>**Expected:** Error message is displayed indicating missing information.
 
 ### Reminder for Birthday
-1. **Viewing Reminder for a Person's Birthday**
- 
-  1. Prerequisites: Having contacts in the list whose birthday is stated and is within a week from today.
-  2. Test case: `birthday 1 b/<date witihin a week>`
-  3. **Expected:** When the app is closed and re-opened, a reminder showing the person's birthday shows on the result display.
+
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact with birthday within the week.
+</div>
+
+  1. Test case: `birthday 1 b/<date witihin a week>`
+  2. **Expected:** When the app is closed and re-opened, a reminder showing the person's birthday shows on the result display.
 
 ### Deleting a Person
 
-1. **Deleting a Contact from the List**
+<div markdown="span" class="alert alert-info">:information_source: 
+Prerequisites: Have a contact list with multiple entries.
+</div>
 
-  1. Prerequisites: Contact list with several entries.
-  2. Test case: `delete 2`  
+  1. Test case: `delete 2`  
      **Expected:** Deletes the contact at index 2 from the address book. Confirmation message is shown.
 
-  3. Invalid indices: Enter commands like `delete 0` or `delete 1000`  
+#### Invalid test cases
+  1. Invalid indices: Enter commands like `delete 0` or `delete 1000`  
      **Expected:** Error message indicating invalid index.
 
 ### Clearing All Entries

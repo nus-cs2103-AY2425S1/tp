@@ -325,6 +325,13 @@ Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUM
 * The property details include the address, town, property type, size, number of bedrooms, number of bathrooms, and price. All fields are required.
 * Size is in square meters.
 
+Success output when a property is added:
+![Add Property Success Message](images/PropertySuccessMessage.png)
+
+Existing properties in a view window:
+![Properties in View Window](images/PropertyInView.png)
+
+
 Examples:
 * `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
 * `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
