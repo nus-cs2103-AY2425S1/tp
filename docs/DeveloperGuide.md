@@ -637,19 +637,21 @@ A patient will be added to the system if the patient is not already in the syste
 
 **Extensions**
 
-* 1a. User does not input all the required parameters.
-    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
-      Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
+* 1a. User inputs an invalid prefix
+    * 1a1. ClinicConnect shows an error message stating that the prefix is invalid.<br>
+      Step 1a1 is repeated until the input entered only contains valid prefixes<br>
       Use case resumes from step 2.
-<br>
-<br>
+      <br>
+      <br>
 
-* 1b. User inputs an invalid prefix.
-    * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
-      Step 1b1 is repeated until the input entered only contains valid prefixes<br>
+
+* 1b. User does not input all the required parameters
+    * 1b1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1b1 is repeated until the input entered is valid containing all the required parameters<br>
       Use case resumes from step 2.
-<br>
-<br>
+      <br>
+      <br>
+
 
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
@@ -660,7 +662,7 @@ A patient will be added to the system if the patient is not already in the syste
 
 
 * 1d. User inputs duplicate prefixes.
-    * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
+    * 1d1. ClinicConnect shows an error message stating that there is a duplicate prefix.<br>
       Step 1d1 is repeated until the input entered has distinct prefixes<br>
       Use case resumes from step 2.
 <br>
@@ -685,17 +687,17 @@ A patient will be added to the system if the patient is not already in the syste
 
 **Extensions**
 
-* 1a. User does not input all the required parameters
-    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
-      Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
+* 1a. User inputs an invalid prefix
+    * 1a1. ClinicConnect shows an error message stating that the prefix is invalid.<br>
+      Step 1a1 is repeated until the input entered only contains valid prefixes<br>
       Use case resumes from step 2.
       <br>
       <br>
 
 
-* 1b. User inputs an invalid prefix
-    * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
-      Step 1b1 is repeated until the input entered only contains valid prefixes<br>
+* 1b. User does not input all the required parameters
+    * 1b1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1b1 is repeated until the input entered is valid containing all the required parameters<br>
       Use case resumes from step 2.
       <br>
       <br>
@@ -710,7 +712,7 @@ A patient will be added to the system if the patient is not already in the syste
 
 
 * 1d. User inputs duplicate prefixes (except for `al`)
-    * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
+    * 1d1. ClinicConnect shows an error message stating that there is a duplicate prefix.<br>
       Step 1d1 is repeated until the input entered has distinct prefixes<br>
       Use case resumes from step 2.
       <br>
@@ -723,8 +725,9 @@ A patient will be added to the system if the patient is not already in the syste
       Use case resumes from step 2.
 
 #### Use case: UC03 - Book an upcoming appointment for a patient
-**Preconditions:** The patient with the corresponding NRIC is already registered in the system.<br>
-**Guarantees:** Appointments only will be booked if they consist of valid date and time in the future.
+**Preconditions:**<br>The patient with the corresponding NRIC is already registered in the system.<br>
+**Guarantees:**<br>Appointments only will be booked if they consist of valid date and time in the future
+
 
 **MSS**
 
@@ -776,8 +779,9 @@ A patient will be added to the system if the patient is not already in the syste
       Use case resumes from step 2.
 
 #### Use case: US04 - Delete an appointment for a patient
-**Preconditions:** The patient with the corresponding NRIC is already registered in the system.<br>
-**Guarantees:** Valid appointments will be deleted if they are already in the patient's list of appointments.
+**Preconditions:**<br>
+The patient with the corresponding NRIC is already registered in the system.<br>
+**Guarantees:**<br>Valid appointments will be deleted if they are already in the patient's list of appointments.
 
 **MSS**
 
@@ -858,6 +862,89 @@ A patient will be deleted from the system if the patient is already in the syste
 * 1d. User inputs an NRIC that does not exist in the system.
     * 1d1. ClinicConnect shows an error message saying the patient is not found in the system.<br>
       Step 1d1 is repeated until a valid NRIC that is in the system is inputted.<br>
+      Use case resumes from step 2.
+
+
+#### Use case: UC08 - Edit a patient
+**Preconditions:**<br>
+The patient with the corresponding NRIC is already registered in the system.<br>
+**Guarantees:**<br>
+At least one field of the patient will be edited
+
+**MSS:**
+
+1.  User types command to edit a patient
+2.  ClinicConnect edits the patient in the system
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs an invalid prefix
+    * 1a1. ClinicConnect shows an error message stating that the prefix is invalid.<br>
+      Step 1a1 is repeated until the input entered only contains valid prefixes<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+
+* 1b. User does not input a field to be edited
+    * 1b1. ClinicConnect shows an error message stating 'No valid prefixes found'.<br>
+      Step 1b1 is repeated until the input entered is valid containing all the required parameters<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+      
+* 1c. User inputs a field in the wrong format
+    * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
+      Step 1c1 is repeated until the field is in the correct format<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+
+* 1d. User inputs duplicate prefixes (except for `al` and `rmal`)
+    * 1d1. ClinicConnect shows an error message stating that there is a duplicate prefix.<br>
+      Step 1d1 is repeated until the input entered has distinct prefixes<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+* 1e. User inputs an invalid NRIC
+    * 1e1. ClinicConnect prompts the user to fix the NRIC and shows the correct format.<br>
+      Step 1e1 is repeated until NRIC is in the correct format<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+* 1f. User inputs an NRIC that is not in the system
+    * 1f1. ClinicConnect shows an error message stating that a patient with that NRIC does not exist <br>
+      Step 1f1 is repeated until a patient corresponding to the NRIC exists in the system<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+
+* 1g. User attempts to add an allergy that already exists
+    * 1g1. ClinicConnect shows an error message stating that the allergy already exists.<br>
+      Step 1g1 is repeated until the allergy to be added does not already exist for the patient<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+
+* 1h. User attempts to remove an allergy that does not exist
+    * 1h1. ClinicConnect shows an error message stating that the allergy does not exist for the patient.<br>
+      Step 1h1 is repeated until the allergy to be removed exists<br>
+      Use case resumes from step 2.
+      <br>
+      <br>
+
+
+* 1h. User attempts to change the patient's NRIC to another NRIC that exists in the system
+    * 1h1. ClinicConnect shows an error message stating that this patient already exists in the system.<br>
+      Step 1h1 is repeated until the NRIC to be changed to does not exist in the system<br>
       Use case resumes from step 2.
 
 
