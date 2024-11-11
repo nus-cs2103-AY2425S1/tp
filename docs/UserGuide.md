@@ -311,7 +311,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched. e.g. `Han` will not match `Hans`
 * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -381,9 +381,9 @@ Updates Operating Hours
 
 Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
 
-* **Opening** & **closing** hours have to be of the format `HH:mm`.
-* Default **opening** & **closing** hours are `00:00` & `23:59` respectively.
-* **Opening** hours must fall before **closing** hours.
+* Opening & closing hours have to be of the format `HH:mm`.
+* Default opening & closing hours are `00:00` & `23:59` respectively.
+* **Opening hours** must fall before **closing hours**.
 * If an argument is empty, it will set the hours to default.
 * All current appointments must fall within new operating hours for update to take effect.
 
@@ -549,12 +549,11 @@ the data of your previous AddressBook home folder.
 **A**: ClinicBuddy’s current structure does not support custom fields. However, you can use the `tag` option to include additional details in a flexible way.
 
 **Q**: What if I forget the command formats?<br>
-**A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
+**A**: You can use the `help` command in ClinicBuddy for a quick reference. Alternatively, you can refer back to this user guide. This guide includes command formats and examples to assist you.
 
-<div style="page-break-after: always;"></div>
-
-**Q**: How are backups sorted in the listbackups command?<br>
+**Q**: How are backups sorted in the `listbackups` command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
+<div style="page-break-after: always;"></div>
 
 **Q**: Is there a limit on the number of backups I can store?<br>
 **A**: Yes. ClinicBuddy retains only the 10 most recent backups for storage efficiency. Older backups are automatically overwritten when a new backup is created.
