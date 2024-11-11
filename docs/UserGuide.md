@@ -78,19 +78,20 @@ Health Connect is an application designed to **streamline client management** fo
 7. Refer to the [Features](#features) below for details of each command.
 
 ### For Mac Users:
-1. Ensure you have the `zulu` version of Java `17` installed in your Computer.
+1. Ensure you have the `Azul` version of Java `17` installed in your Computer.
     1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
        ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
     2. Once Terminal is open, type: `java -version` and click `Enter`.
        ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
-    3. If Java `17` and `zulu` version is displayed, you are good to go! Proceed to **step 3**.
+    3. If Java `17` and `Zulu17` are displayed, you are good to go! Proceed to **step 3**.
        ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
     4. Otherwise, proceed to step 2.
        <br>
-2. If you do not have the `zulu` version of Java `17` from the previous step, install the correct version of Java.
-    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download the `zulu` version of Java `17`.
+2. If you do not have the `Azul` version of Java `17` from the previous step, install the correct version of Java.
+    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`.
     2. Download the appropriate installer for Mac.
-    3. After installation, follow the instructions in **Step 1**.
+    3. To ensure that you have the correct `Azul` version, follow the instructions on [this page](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+    4. After installation, follow the instructions in **Step 1**.
        <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
