@@ -22,7 +22,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     - **To check:** Open a command terminal (Terminal for macOS, Command Prompt for Windows), and type `java -version` to check if Java is installed and which version is installed.
     - **To install:** Visit Oracle’s Java 17 download page. Download the version for your operating system (Windows, macOS, or Linux). Follow the instructions provided by Oracle to install Java 17.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -532,22 +532,23 @@ Assuming there's at least one person that is archived.
 ---
 
 ### **Downloading Data: `download`**  
-Exports Address Book as a CSV file with optional tag-based filtering.
+Exports the currently displayed Address Book data as a CSV file with optional tag-based filtering.
 
 **Format:**  
 `download [t/TAG1] [t/TAG2] ...`
 
 **Details:**
+- The command will export only the currently displayed data in the Address Book (based on active filters or views) and not the absolute data stored in the Address Book.
 - Creates a CSV file containing the people that match the specified tags.
-- The exported file will be saved in the same directory as the application.
+- The exported file will be saved in the `./data` subdirectory.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
-- If no tags are specified, all data will be exported.
+- If no tags are specified, all currently displayed data will be exported.
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
-- `download` — Exports all contacts or orders.
-- `download t/Vegan` — Exports only wthe contacts or orders tagged as "Vegan."
-- `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague."
+- `download` — Exports all contacts.
+- `download t/Vegan` — Exports only the contacts tagged as "Vegan."
+- `download t/friend t/colleague` — Exports contacts tagged as both, "friend" and "colleague."
 
 <div style="text-align: center;">
     <img src="images/dowload.png" alt="download" width="350"/>
@@ -558,7 +559,7 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 <div style="text-align: center;">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 21: Shows only people with vegan tag being added</em>
+    <em>Figure 21: Shows only people with vegan tag being downloaded</em>
 </div>
 
 ---
