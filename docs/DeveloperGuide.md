@@ -152,6 +152,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 #### Help Command : `help`
+The `help` command opens a separate help window detailing a summary of the commands available and their functions. <br>
+
+The user can optionally provide a `COMMAND_KEYWORD` which opens a separate help window showing more information about the specified command. <br>
+
+##### Parsing User Input
+The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display. 
+It uses the `trim` method to remove any leading and trailing white-space characters from the user input.
+If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid. 
+The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches one of the command keywords supported by the application.
+
+##### Executing the Command
+The `HelpCommand` creates a `KeywordCommandResult` object which is handled in `MainWindow.java` to display the appropriate help window.
+
+##### Activity Diagram
+The following activity diagram illustrates the workflow of the execution of the `help` command:
+![HelpCommandActivityDiagram](images/HelpCommandActivityDiagram.png)
+
+##### Design Considerations
+The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
+Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
+For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.  
 
 #### Home Command : `home`
 The `home` command returns the user to the home UI where all the patients are displayed.
