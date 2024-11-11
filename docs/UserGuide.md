@@ -80,18 +80,19 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book with the provided information.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
 
+* The only required fields for a person are a name and a phone number, 
+so you can create a contact with just those 2 fields. 
+Providing an email, address, date of last visit, emergency contact or tags is optional.
+* This `add` command allows users to fill in all information fields about a person, except for the "remarks" field.
+  * The "remarks" field is intended for long-form information about a person, so it is recommended that the addition of remarks be done with the `remark` command or `edit` command (which are explained below).
+  * More information about the fields within a contact are located [here](#contact-field-requirements).
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0).<br>
-
-</box>
-<box type="tip" seamless>
-
-**Tip:** The only required fields for a person are a name and a phone number, so you can create a contact with just those 2 fields. Providing an email, address, date of last visit, emergency contact or tags is optional.
 
 </box>
 
@@ -337,8 +338,12 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
+**Q1**: How do I transfer my data to another Computer?<br>
+- Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
+
+**Q2**: Why can't I include a remark when using the `add` command to add a person to the address list?<br>
+- The "remarks" field is meant for long form notes about a person. This is likely to be quite cumbersome to enter at the same time that a person is being added for the first time.
+- Users are recommended to first `add` the person to the address list, and then subsequently use the `edit` or `remark` commands to write remarks about a contact. 
 
 --------------------------------------------------------------------------------------------------------------------
 
