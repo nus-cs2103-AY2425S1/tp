@@ -757,8 +757,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -774,15 +772,49 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Test case: Edit the addressbook.json 
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Exporting data
 
-1. _{ more test cases …​ }_
+1. Exporting a contact list with one or more contacts.
+   1. Prerequisites: There is at least one person in DorManagerPro
+   2. Test case: `export` <br>
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export.
+   3. More positive tests can be done for different numbers of people in DorManagerPro
+
+2. Exporting a contact list with zero contacts
+   1. Prerequisites: There are no people in DorManagerPro
+   2. Test case: `export` <br>
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : [ ] }
+
+### Importing data
+
+1. Importing a json file with valid data
+   1. Prerequisites: There is a json file with valid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   2. Test case: `import fp/./data/SaveFile.json` <br>
+      Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
+
+2. Importing a json file with invalid data
+   1. Prequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   2. Test case: `import fp/./data/SaveFile.json`
+   Expected: No information is imported into DorManagerPro. Error details shown in the status message.
+
+3. Trying to import a file that does not exist on the device
+   1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
+      Expected: Same as above.
+
+4. Importing a file that is not of json format
+   1. Prerequisites: There is a file not of json format on the device. In this case, it is assumed the file path to this file is `./data/text`.
+   2. Test case: `import fp/./data/text`
+      Expected: Same as above.
+
+5. Importing a folder
+   1. Prerequisites: There is a folder on the device. In this case, it is assumed the file path to this file is `./data`.
+   2. Test case: `import fp/./data`
+      Expected: Same as above.
 
 
 ### Adding a person
