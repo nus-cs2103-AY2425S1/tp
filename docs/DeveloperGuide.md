@@ -24,7 +24,9 @@ title: Developer Guide
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
 * [Appendix-B: Planned Enhancements](#appendix-b-planned-enhancements)
-    * [Enhance Phone Numbers to Accept Special Characters](#enhance-phone-numbers-to-accept-special-characters)
+    * [Enhance Phone Numbers to Accept Special Characters](#1-enhance-phone-numbers-to-accept-special-characters)
+    * [Enhance Search Flexibility](#2-enhance-search-flexibility)
+    * [Enhance Export Feature to Handle Export Errors.](#3-enhance-export-feature-to-handle-export-errors)
 * [Appendix-C: Instructions for Manual Testing](#appendix-c-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Adding a client](#adding-a-client)
@@ -39,7 +41,7 @@ title: Developer Guide
 This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
 
 ChatGPT by OpenAI was used by [BuffWuff1712](https://github.com/BuffWuff1712) to generate the 
-Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712. 
+Tag Table and [Glossary](#glossary) sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712. 
 
 ChatGPT was also used by [tayxuenye](https://github.com/tayxuenye) and cited in the code where applicable.
 
