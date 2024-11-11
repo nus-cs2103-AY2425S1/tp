@@ -796,15 +796,40 @@ We detail some achievements accomplished by completing our iteration of the proj
 
 ## **Appendix: Planned Enhancements**
 
-1.	Removing of social media handles
-2.	Duplicate detection for `name` field
-      1. Add the contact into the contact list, but
-      2. Notify the user that there is another contact with an existing name
-      3. Near-matches will be considered (i.e. same spelling, but different cases)
-3.	Enhance `name` field to accept more special characters such as dashes, slashes, apostrophes
-4.	Phone number validation to allow more different lengths and country code
-5.	More specific error messages so that the messages are not too long to improve readability
-6.	Allow a contact to have multiple phone numbers, emails, addresses and social media handles
-7.	If `edit` command does not actually edit the contact, raise an error message to the user
-8.  Additional validation checks for email address
-      1. Email domain portion should have more than one domain label
+Team size: 4
+
+1.	**Option to remove social media handles**: Currently, users are only allowed to add and update a contact's social media.
+We plan to allow users to have the option to remove the handle by a command as such: `socialMedia INDEX` while will delete
+the social media handle for the contact at `INDEX`.
+2.	**Duplicate detection for `name` field**: Currently, duplicate names are not allowed (case-specific) EG. `John Doe` and 
+another `John Doe` is not allowed. In the future, we will allow duplicate names considering some names are very common
+while also notify the user of the name duplication Eg. `New person added: John Doe; Phone: 12345678. Note that there is already
+an existing contact with the name John Doe.`. Additionally, near-matches (same spelling, different cases) will be considered: Adding `john doe` when there is already
+a `John Doe` will also result in the duplication notification.
+3.	**Enhance `name` field to accept more special characters**: Currently, we only accept alphanumeric characters in a contact's name.
+We plan to expand this restriction to include other characters such as `-`, `/`, and `'` to accommodate for a bigger variety of names.
+4.	**Phone number validation to allow more lengths and country code**: Currently, there is a limit of 8 - 15 
+numeric digits allowed for contacts' phone number, but some countries have phone numbers longer than 15. We plan to
+expand the limit to 3 - 20, and allow the inclusion of the `+` character for users to indicate country codes if needed.
+5.	**More specific error messages so that the messages are not too long to improve readability**: Some of our error messages
+such as the one for `add` can get a little long and users have to scroll to read the entire message. This message is shown regardless
+of the type of error (invalid input, format issues) which results in the error message having to include much information about `add`.
+We plan to use more specific error messages like `Invalid email! Emails must have multiple domains` and `Invalid prefix! Valid prefixes: n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] 
+[cs/SOCIAL_MEDIA_HANDLE] [fb/SOCIAL_MEDIA_HANDLE] [ig/SOCIAL_MEDIA_HANDLE] [t/TAG]...` to shorten each error message and
+let the user know which specific problem he is facing.
+6.	**Allow a contact to have multiple phone numbers, emails, addresses and social media handles**: Currently, each contact
+can only have 1 phone number, email, address and social media handle. We plan to accept multiple fields. Here is an example 
+in the context of `socialMedia`:
+If the contact at index 2 already has the social media handle `[ig-alexyeoh]`, 
+running `socialMedia 2 fb/alexyh` will just update the handle to `[fb-alexyh]` instead of adding a Facebook handle on top 
+of the Instagram one. We plan to improve on this, such that running `socialMedia 2 ig/alexyeoh fb/alexyh` will add both handles
+to the contact, and running `socialMedia 2 fb/alexyh` when the contact already has `[ig-alexyeoh]` will add the handle `[fb-alexyh]` 
+instead of replacing `[ig-alexyeoh]`.
+7.	**If `edit` command does not actually edit the contact, raise an error message to the user**: Currently, if the user uses
+the `edit` command on a contact but is editing it to the original details anyway (basically no change to the contact),
+the `edit` success message will be shown, which can be misleading. We plan to return an error message `There was no change to the contact!` 
+to notify the user instead.
+8.  **Additional validation checks for email address**: Currently, we accept single domain email addresses, but we have realised
+that it can cause security issues. So, we plan to add the restriction where each email address must have more than one domain label,
+else an error message will be shown. Eg. `johnd@example` will no longer be accepted and only those with multiple domains can be
+accepted Eg. `johnd@example.com`.
