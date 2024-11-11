@@ -562,7 +562,7 @@ Given below are instructions to test the app manually.
 
 1. Deleting a lesson when there are lessons shown in the lesson schedule.
 
-    1. Prerequisites: There are multiple lessons in the lesson schedule
+    1. Prerequisites: There are multiple lessons in the lesson schedule.
 
     1. Test case: `lesson delete 1`<br>
        Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the status message.
@@ -575,10 +575,10 @@ Given below are instructions to test the app manually.
        Expected: Similar to previous.
 
 
-2. Deleting a lesson when there are lessons shown in the filtered lesson schedule
+2. Deleting a lesson when there are lessons shown in the filtered lesson schedule.
 
     1. Prerequisites: Executed a lesson find command and there are multiple lessons in the filtered lesson 
-       schedule
+       schedule.
 
     1. Test case: `lesson delete 1`<br>
        Expected: First lesson is deleted from the filtered lesson schedule. Details of the deleted lesson 
@@ -593,7 +593,7 @@ Given below are instructions to test the app manually.
 
 ### Finding a lesson
 
-1. Finding a lesson when there are lessons shown in the lesson schedule
+1. Finding a lesson when there are lessons shown in the lesson schedule.
 
     1. Prerequisites: There are multiple lessons in the lesson schedule, with at least one lesson with a 
        student whose name is `Alice` and at least one lesson with a student whose name is `Bob`. None of the 
@@ -611,5 +611,3 @@ Given below are instructions to test the app manually.
        student who does not have a lesson, a name that does not belong to any of the students that have a 
        lesson or a word that is not in the names of the students that have a lesson)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
