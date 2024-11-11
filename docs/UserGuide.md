@@ -103,7 +103,7 @@ A client can have any number of tags (including 0)
 The following constraints apply to the `edit` command as well:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-  * The name should be within 100 characters long.
+  * The name is recommended to be within 100 characters long to be displayed properly.
   * name must be unique (case-sensitive). Clients with the same name cannot be added to
     the system twice.
       - entering the commands:
@@ -121,12 +121,12 @@ The following constraints apply to the `edit` command as well:
   * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
 
 * Client's phone number should only contain numbers, without spaces and special characters.
-  * The phone number should be within 20 characters long.
+  * The phone number is recommended to be within 20 characters long to be displayed properly.
   - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`.
   - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`.
 
 * Client's email address should be of the format local-part@domain and adhere to the following constraints:
-    * The email address should be within 100 characters long.
+    * The email address is recommended to be within 100 characters long to be displayed properly.
     1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
         - The local-part may not start or end with any special characters.
         - The local-part may not have consecutive special characters.
@@ -139,12 +139,12 @@ The following constraints apply to the `edit` command as well:
     * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`.
 
 * Client's addresses can take any values, and it should not be blank
-    * The address should be within 100 characters long.
+    * The address is recommended to be within 100 characters long to be displayed properly.
     - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`.
     - Unacceptable address format: ``.
 
 * Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
-    * The tag name should be within 50 characters long.
+    * The tag name is recommended to be within 50 characters long to be displayed properly.
     - Acceptable tag format: `friend`, `colleague`, `newComer`.
     - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`.
 </div>
