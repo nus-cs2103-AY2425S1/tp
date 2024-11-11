@@ -104,8 +104,8 @@ Note:
 * Does not show an exhaustive list of all available commands, only the most helpful. 
 
 <box type="tip" seamless>
-
 **Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
+</box>
 
 Format: `help`
 
@@ -120,7 +120,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
 
 <br>
 Note: 
@@ -225,13 +225,13 @@ Format: `finddel ITEM [MORE_ITEMS]`
 
 Examples:
 * `finddel Chair` returns any delivery that contains the item chair.
-* `find Chair Desk` returns any delivery that contains the item chair, desk, or both.
+* `finddel Chair Desk` returns any delivery that contains the item chair, desk, or both.
 
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
 Archives the specified contact(s) from the contacts list.<br>
-Archived contact(s) will be less visible and moved to the bottom of the list.
+Archived contact(s) will be less visible (greyed out) and moved to the bottom of the list.
 
 Format: `archive [INDEXES]...`
 
@@ -288,7 +288,9 @@ Examples:
 
 Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Archived contacts will be sorted separately from unarchived contacts, and appear at the bottom of the contacts list.
+
+Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: date, email, name, phone, role.
 
@@ -300,7 +302,9 @@ Examples:
 
 Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Archived deliveries will be sorted separately from unarchived deliveries, and appear at the bottom of the delivery list.
+
+Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: address, cost, date, eta, id, status.
 
@@ -389,13 +393,13 @@ Takes you back to the main window.
 Format: `back`
 
 ### Clearing all entries : `clear`
-**<ins>When in the main or inspect window**
+**<ins>When in the main window**
 
 Clears all contacts from the contacts list.
 
 Format: `clear`
 
-**<ins>When in the main or inspect window**
+**<ins>When in the inspect window**
 
 `clear` does not work in the inspect window.
 
@@ -444,7 +448,7 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
+**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
 **Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
 **Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
 **Back**   | <ins>Both Windows:</ins><br> `back`
