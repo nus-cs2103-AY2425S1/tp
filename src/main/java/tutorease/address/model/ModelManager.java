@@ -196,7 +196,7 @@ public class ModelManager implements Model {
 
     @Override
     public int getFilteredPersonListSize() {
-        return filteredLesson.size();
+        return filteredPersons.size();
     }
 
     @Override
