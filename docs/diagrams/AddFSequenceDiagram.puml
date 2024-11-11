@@ -97,12 +97,6 @@ destroy ArgumentMultiMap
 ClinicConnectSystemParser --> LogicManager
 deactivate ClinicConnectSystemParser
 
-LogicManager -> AddFCommand : execute()
-activate AddFCommand
-
-
-AddFCommand --> LogicManager : result
-deactivate AddFCommand
 destroy AddFCommand
 [<--LogicManager
 deactivate LogicManager

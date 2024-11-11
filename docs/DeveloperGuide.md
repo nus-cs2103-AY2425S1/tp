@@ -159,6 +159,10 @@ This section describes some noteworthy details on how certain features are imple
 #### Help Command : `help`
 
 #### Home Command : `home`
+The `home` command returns the user to the home UI where all the patients are displayed.
+
+##### Executing the Command
+
 
 #### Clear Command : `clear`
 
@@ -194,10 +198,6 @@ The `AddFCommandParser` class parses the user input to extract the various param
 It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted all the prefixes and their corresponding values.
 The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes (except for `al` which is used for allergy)
 
-##### Executing the Command
-The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
-
-##### Sequence Diagram
 The sequence diagram below illustrates the process behind the parsing of the user input.
 In this example, it takes an `addf` command: `execute(addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care)`
 
@@ -205,7 +205,16 @@ In this example, it takes an `addf` command: `execute(addf n|Abraham Tan i|S9758
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
 The parsing of the fields is as follows:
+
 ![AddFParseFieldsSequenceDiagram](images/AddFParseFieldsSequenceDiagram.png)
+
+
+##### Executing the Command
+The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
+
+The activity diagram below illustrates the worflow behind the execution of the `addf` command.
+
+![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
 ##### Design Considerations
 **Using `Nric` Field as a Unique Identifier**<br>
