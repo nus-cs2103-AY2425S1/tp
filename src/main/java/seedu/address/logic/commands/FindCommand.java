@@ -15,7 +15,7 @@ public abstract class FindCommand<T> extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds owners or pets in PawPatrol whose "
-            + "relevant fields contain the specified keywords (case-insensitive) and displays them as a list with "
+            + "name contain the specified keywords (case-insensitive) and displays them as a list with "
             + "index numbers.\n"
             + "To find owners: find owner KEYWORD [MORE_KEYWORDS]...\n"
             + "To find pets: find pet KEYWORD [MORE_KEYWORDS]...\n"
