@@ -77,6 +77,7 @@ tasks done faster than traditional GUI apps.
 
 <details open>
 
+<a id="general-notes"> </a>
 <summary> <b> General Notes about the PlanPerfect Command Format </b> </summary>
  
 
@@ -147,8 +148,8 @@ Adds a [contact](#glossary)  to the contact list.
 
 A [contact](#glossary) can have **up to 6 [tags](#glossary)** (including 0). No two **contacts** can have the **same phone number**.
 
-After adding a [contact](#glossary), you will return to the main contact list view, regardless of whether you were in a [wedding](#glossary) or 
-filtered view.
+After adding a [contact](#glossary), you will return to the "all contacts" view, regardless of whether you were in a 
+[wedding](#glossary) or filtered view. 
 </box>
 
 Examples:
@@ -371,13 +372,13 @@ Adds a [wedding](#glossary) to PlanPerfect with the specified date. Optionally a
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
 
-<box type="warning">
+<box type="info">
 
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts **BEFORE** using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
   
 </box>
 
-<box type="info">
+<box type="warning">
 
 * Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected. 
 
@@ -403,7 +404,9 @@ Format: `view WEDDING_INDEX`
 Displays [contacts](#glossary) assigned to the [wedding](#glossary) at the specified `WEDDING_INDEX`. 
 
 * The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of weddings currently listed.
-* Please refer to the 'General Notes' at the start of the Features section to learn more about how entering a wedding view using this command affects the behaviour of other commands.
+* Please refer to the [General Notes](#general-notes) at the start of the Features section to learn more about how 
+  entering a wedding 
+  view using this command affects the behaviour of other commands.
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
@@ -487,6 +490,11 @@ Format: `deletew WEDDING_INDEX`
 
 Deletes the [wedding](#glossary) at the specified `WEDDING_INDEX`.
 
+<box type="info">
+Deleting a wedding does not remove the contacts assigned to the wedding from the all contacts list, it only 
+deletes the wedding from the weddings panel.
+</box>
+
 Examples:
 * `deletew 4` deletes the 4th wedding shown on the weddings panel.
 
@@ -568,11 +576,11 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 
 ## Glossary
 
-| Term                               | Explanation                                                                                                                                                                                          |
-|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <a id="contact">Person/Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                |
-| <a id="wedding">Wedding</a>        | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/>Weddings are considered duplicate if they have identical names (case-sensitive). |
-| <a id="tag">Tag</a>                | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                     | 
+| Term                        | Explanation                                                                                                                                                                                                 |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a id="contact">Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                       |
+| <a id="wedding">Wedding</a> | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/> <br/> Weddings are considered duplicate if they have identical names (case-sensitive). |
+| <a id="tag">Tag</a>         | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                            | 
 
 ## Command summary
 
