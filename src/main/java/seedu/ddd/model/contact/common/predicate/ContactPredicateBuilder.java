@@ -6,7 +6,6 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.ddd.logic.parser.ParserUtil.parseAddress;
 import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
@@ -64,7 +63,7 @@ public class ContactPredicateBuilder {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             String args = verifyNoEmptyInput(argMultimap, PREFIX_ADDRESS);
             // Verify whether input is a valid address
-            Address address = parseAddress(args);
+            Address address = ParserUtil.parseAddress(args);
 
             String[] addressKeywords = args.split("\\s+");
             return combinedPredicate.and(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
