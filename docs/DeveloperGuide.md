@@ -13,8 +13,19 @@
 
 ## **Acknowledgements**
 
-WedLinker is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+WedLinker is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). <br>
+The following java classes in the directory `tp\src\main\java\seedu\address\model\task` were taken from one of our team member's [CS2103T Individual Project (IP)](https://github.com/DanzaSeah/tp/tree/master/src/main/java/seedu/address/model/task). These classes were modified to align with the requirements of the project
+- Task, Todo, Deadline, Event <br>
 
+ChatGPT by OpenAI was used by DanzaSeah to:
+- Rephrase the JavaDocs of Task and Tag related classes to be more concise and clear, 
+- Seek suggestions for organising and improving existing test cases, 
+- Come up with better or more appropriate class and method names. 
+
+External Java libraries were also used in the project for various functionalities:
+- JavaFX: for the GUI
+- JUnit5: for Unit testing
+- Jackson: for processing JSON files
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
