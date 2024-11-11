@@ -50,6 +50,7 @@ public class AddSupplierCommand extends Command {
             + "Please use a different phone number.";
     public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. "
             + "Please add it using the addIngredient command.";
+    public static final String MESSAGE_INVALID_TAG = "The tag 'Customer' is not allowed for suppliers.";
 
     private final Supplier toAdd;
 
@@ -91,6 +92,10 @@ public class AddSupplierCommand extends Command {
             if (person.getPhone().equals(toAdd.getPhone())) {
                 throw new CommandException(MESSAGE_DUPLICATE_PHONE);
             }
+        }
+        // Check for the "Supplier" tag and throw an exception if present
+        if (toAdd.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase("Customer"))) {
+            throw new CommandException(MESSAGE_INVALID_TAG);
         }
 
         // Add the new supplier if no duplicates are found
