@@ -11,12 +11,12 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 1. [Quick Start](#quick-start)
 2. [ClinicConnect Features](#clinicconnect-features)
     * [Viewing help : `help`](#viewing-help--help)
-    * [Adding a patient : `add`](#adding-a-patient-add)
-    * [Adding a patient with additional information : `addf`](#adding-a-patient-with-additional-information-addf)
-    * [Viewing a patient's full profile : `view`](#viewing-a-patients-full-profile-view)
-    * [Editing a patient : `edit`](#editing-a-patient-edit)
+    * [Adding a patient : `add`](#adding-a-patient--add)
+    * [Adding a patient with additional information : `addf`](#adding-a-patient-with-additional-information--addf)
+    * [Viewing a patient's full profile : `view`](#viewing-a-patients-full-profile--view)
+    * [Editing a patient : `edit`](#editing-a-patient--edit)
     * [Returning to home page : `home`](#returning-to-home-page--home)
-    * [Booking an upcoming appointment : `bookappt`](#booking-an-upcoming-appointment-bookappt)
+    * [Booking an upcoming appointment : `bookappt`](#booking-an-upcoming-appointment--bookappt)
     * [Deleting an appointment : `deleteappt`](#deleting-an-appointment--deleteappt)
     * [Filtering appointments : `filter`](#filtering-appointments--filter)
     * [Deleting a patient : `delete`](#deleting-a-patient--delete)
@@ -93,6 +93,7 @@ Before we proceed with the commands, here are some important points to note on t
     * Be a 9 character uppercase sequence with an alphabet at the start and at the end
     * Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
     * Be registered in the system <br>
+
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
