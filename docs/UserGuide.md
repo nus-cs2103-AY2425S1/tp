@@ -32,6 +32,7 @@ With MedConnect, connecting with on-call doctors, family members, or other essen
 This User Guide is designed to help you understand and use MedConnect effectively. Here are some tips on how to navigate and use this guide:
 1. **[Table of Contents](#table-of-contents)**: At the beginning of the guide, you will find a Table of Contents. Use this to quickly jump to the section you are interested in.
 1. **[Quick Start](#quick-start)**: If you are new to MedConnect, start with the Quick Start section. It provides step-by-step instructions on how to set up and start using the application.
+1. **[Overview of GUI](#overview-of-gui)**: This section provides an overview of the graphical user interface (GUI) of MedConnect. Use this section to familiarize yourself with the different components of the application.
 1. **[Features](#features)**: This section details all the commands available in MedConnect. Each command is explained with its format, parameters, and examples. Use this section to learn how to perform specific tasks.
 1. **[Command Summary](#command-summary)**: At the end of the guide, there is a Command Summary table that provides a quick reference for all commands. Use this table to quickly look up the format of a command.
 1. **[FAQ](#faq)**: The FAQ section addresses common questions and issues. Check this section if you encounter any problems or have questions about using MedConnect.
