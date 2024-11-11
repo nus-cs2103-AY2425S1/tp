@@ -211,7 +211,6 @@ Clients with **NA** status (no follow-up required) have no status label on the U
 [↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 # 4. Glossary
 This section contains a list of terms used in this user guide. Feel free to refer back to this section if you are unsure of what a term means!
