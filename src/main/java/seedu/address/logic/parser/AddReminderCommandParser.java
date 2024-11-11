@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
-import static seedu.address.model.person.Reminder.FORMATTER;
+import static seedu.address.model.person.LastSeen.FORMATTER;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;

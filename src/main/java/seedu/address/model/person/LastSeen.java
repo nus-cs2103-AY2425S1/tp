@@ -6,15 +6,19 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents the date a person was last seen in the address book
  */
 public class LastSeen {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date should be in the format DD-MM-YYYY";
+    public static final String MESSAGE_CONSTRAINTS = "Date input is incorrect. Please check if the date is valid and "
+            + "follows the DD-MM-YYYY format";
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+
     public final LocalDate value;
 
     /**
