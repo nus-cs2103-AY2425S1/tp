@@ -156,7 +156,7 @@ First-time users are strongly encouraged to read the Getting Started section bef
 
 ### 3.1 Installation
 
-1. Ensure that you have Java `17` installed on your computer. TrackMate works the best for the version,
+1. Ensure that you have Java `17` installed on your computer. TrackMate works the best with Java `17`
    while there may be other versions that it can function on as well.
 
 
