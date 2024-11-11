@@ -30,12 +30,15 @@ public class SeeScheduleCommandParser implements Parser<SeeScheduleCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE));
         }
         try {
-            LocalDate date = LocalDate.parse(argMultimap.getValue(PREFIX_DATE).get(),
-                    DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            LocalDate date = LocalDate.parse(
+                    argMultimap.getValue(PREFIX_DATE).get(),
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            );
             return new SeeScheduleCommand(new SameWeekAsDatePredicate(date));
         } catch (DateTimeParseException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SeeScheduleCommand.MESSAGE_USAGE)
+            );
         }
     }
 }

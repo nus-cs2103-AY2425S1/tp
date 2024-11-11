@@ -765,24 +765,20 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `delete-schedule 1`
     1. Expected: First scheduled meeting of the week is deleted from the list. Details of the deleted meeting shown in the status message. Timestamp in the status bar is updated.
-   
     1. Test case: `delete-schedule 0`
     1. Expected: No meeting is deleted. Error details shown in the status message. Status bar remains the same.
-   
     1. Other incorrect delete commands to try `delete`, `delete x`, `delete words` (where x is larger than list size)
     1. Expected: Similar to previous
 
 2. Deleting a meeting from any week
 
-    1. Prerequisites: List the given weeks schedule using `see d\date` (where date is within the week to be tested). There should be meetings scheduled in that week.
-   
+    1. Prerequisites: List the given weeks schedule using `see d\date` (where date is within the week to be tested). There should be meetings scheduled in that week. 
     1. Test Cases: Similar to Scenario 1
     1. Expected: Similar to Scenario 1
 
 3. Deleting a meeting while all meetings are shown
 
     1. Prerequisites: List all meetings using the `list-schedule` command. There should be meetings scheduled.
-   
     1. Test Cases: Similar to Scenario 1
     1. Expected: Similar to Scenario 1
 
@@ -799,3 +795,5 @@ Team size: 5
 1. **Modify meeting sample data to generate whole number timings.**
    Currently time fields for meetings sample data is generated using `LocalTime#now` which provides very precise timing up to the milliseconds.
    While it is not wrong, some user complained that it looks wrong or invalid to display timings as such, and it would be much appropriate to display time fields as available to the users through other commands, i.e. if user cannot add time field up to milliseconds of precision, do not display time fields up to milliseconds of precision.
+1. **Modify Date Time Logic for Invalid Dates**
+   Currently, Java LocalDate library helps to correct the string if the user types in invalid dates like `29-02-2023` to `28-02-2023`. We plan to improve the logic such that our application has better logic to detect Leap Year Dates.
