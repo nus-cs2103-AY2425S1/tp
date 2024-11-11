@@ -1459,67 +1459,28 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 | **More Info**                  | `moreinfo INDEX`<br>e.g., `moreinfo 1`                                                                                                                                                            |
 | **Chat Window**                | `chatbot`                                                                                                                                                                                         |
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Glossary of Terms
 
-### **Buyer**
-A person interested in purchasing a property. In EZSTATES, a buyer has a name, phone number, and email.
-
-### **Seller**
-A person who is selling a property. Similar to a buyer, a seller's information includes a name, phone number, and email.
-
-### **Listing**
-A property available for sale. Each listing contains details like the property name, price, area, address, region, and the associated seller and optional buyer.
-
-### **Contact**
-A person, either a buyer or seller, whose details are stored in EZSTATES. Contacts can be added, edited, deleted, and searched for within the application.
-
-### **Index**
-The position of an item in a list. Each contact or listing is assigned an index number that can be used to refer to it when performing commands such as delete or edit.
-
-### **Command**
-A user input that performs an action in the application. Examples of commands include `add`, `delete`, `edit`, `find`, and `clear`.
-
-### **Command Format**
-The structure or syntax in which a command must be entered in the application. Command formats specify the necessary fields and their order (e.g., `add` requires a name, phone number, and email).
-
-### **UI (User Interface)**
-The graphical interface that allows users to interact with EZSTATES. The UI displays the current list of contacts, listings, and other application information, and it allows users to enter commands.
-
-### **Home Folder**
-The folder on your computer where the `EZSTATES.jar` file is located. This is the directory from which you run the application.
-
-### **Error Handling**
-The process of managing unexpected or incorrect user inputs. EZSTATES provides error messages to inform the user when commands are invalid, or inputs are not properly formatted.
-
-### **Sample Data**
-Pre-populated data that is included with the app during the first launch. This allows users to explore the app’s features without needing to add their own contacts and listings initially.
-
-### **Java 17 (or above)**
-A version of the Java programming language required to run EZSTATES. Users need to have at least Java 17 installed to execute the `.jar` file.
-
-### **.jar File**
-A Java ARchive file, which is a package format used to distribute and run Java applications. EZSTATES is distributed as a `.jar` file.
-
-### **.json (JavaScript Object Notation)**
-A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. In EZSTATES, `.json` files are used to store and exchange data, such as user contact details or listings, in a structured and easily accessible way. JSON files consist of key-value pairs and can be used to store complex data structures.
-
-### **Terminal**
-A command-line interface used to interact with the operating system. In EZSTATES, the terminal is used to run the application and enter commands.
-
-### **GUI (Graphical User Interface)**
-A visual interface with icons, buttons, and windows that allows users to interact with the app more intuitively. EZSTATES provides a GUI that displays contacts, listings, and related information.
-
-### **Find Command**
-A command used to search for contacts or listings based on a keyword. The `find` command allows users to locate items that match the search term.
-
-### **Clear Command**
-A command used to remove all contacts and listings from the application. The `clear` command resets the *entire* EZSTATES .json files, while the `clearlistings` command removes all listings.
-
-### **Invalid Index**
-An index number that refers to a non-existent item in the list. If a user attempts to access a contact or listing by an index that exceeds the current list size, the system will return an error indicating that the index is invalid.
-
-### **Invalid Command**
-A command that is improperly formatted or contains missing or incorrect parameters. Invalid commands will prompt an error message to guide the user in correcting the input.
-
-### **Bug**
-An error or flaw in the software that prevents it from functioning as expected. Bugs can arise from issues in the code or unexpected user inputs.
+| **Term**           | **Definition**                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **.json**          | A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. In EZSTATES, `.json` files are used to store and exchange data, such as user contact details or listings, in a structured and easily accessible way. JSON files consist of key-value pairs and can be used to store complex data structures. |
+| **Index**          | A number representing the position of an item in a list. In EZSTATES, it is commonly used to refer to client or listing positions. Valid index values are positive integers within the bounds of the displayed list.                                                                                                                                                       |
+| **Command**        | A directive given to the EZSTATES application, typically entered by the user, that triggers specific actions such as adding, editing, or deleting data (e.g., `add`, `edit`, `delete`).                                                                                                                                                                                    |
+| **Buyer**          | A person or entity interested in purchasing properties. In EZSTATES, buyers can be added and associated with listings.                                                                                                                                                                                                                                                     |
+| **Seller**         | A person or entity who is selling properties. In EZSTATES, sellers are added and associated with properties they wish to sell.                                                                                                                                                                                                                                             |
+| **Listing**        | A property available for sale in EZSTATES. Each listing contains details such as price, area, and the seller associated with it.                                                                                                                                                                                                                                           |
+| **GUI**            | Graphical User Interface. The visual interface of the application that allows users to interact with the system via buttons, fields, and other visual elements. In EZSTATES, the GUI includes features like adding, editing, and viewing client details.                                                                                                                   |
+| **Client**         | A person or entity whose contact details are managed in the system. A client can either be a buyer, a seller, or both, depending on their interaction with the listings.                                                                                                                                                                                                   |
+| **Command Prefix** | A specific keyword or shorthand that precedes arguments in a command. Examples include `add/`, `edit/`, and `delete/` for actions in the EZSTATES CLI. Each prefix is followed by specific parameters for the desired action.                                                                                                                                              |
+| **Data File**      | A file that stores all of the data associated with EZSTATES, such as contacts, listings, and appointments. These are often stored in `.json` format and can be loaded into the app.                                                                                                                                                                                        |
+| **Tag**            | A label associated with a client or listing, used for categorization or filtering. Tags can be added, modified, or removed for clients or listings in EZSTATES.                                                                                                                                                                                                            |
+| **Valid Index**    | A valid index refers to an index number that is within the range of available items, such as clients or listings. Indexes must be positive integers and not exceed the total number of items in the list.                                                                                                                                                                  |
+| **Invalid Index**  | An invalid index refers to a number that is either non-positive, exceeds the total number of items in the list, or is not a valid integer. The system will return an error when such an index is used.                                                                                                                                                                     |
+| **Command Error**  | An error caused by an invalid command, such as missing required parameters, incorrect formatting, or invalid argument values. EZSTATES provides feedback to help correct the command.                                                                                                                                                                                      |
+| **Known Issue**    | A documented problem or limitation within the software that is known to the developers. These issues may have workarounds or fixes pending in future releases.                                                                                                                                                                                                             |
+| **App Launch**     | The initial startup of EZSTATES, where the app loads and displays a GUI for user interaction. On the first launch, sample data may be shown to help users get started.                                                                                                                                                                                                     |
+| **Sample Data**    | Predefined data loaded into the application on its initial launch to demonstrate features. Users can edit, delete, or replace this data with their own information.                                                                                                                                                                                                        |
+| **Exit Command**   | The command used to close the EZSTATES application. The command is typically `exit`, which allows users to safely terminate the application session.                                                                                                                                                                                                                       |
+| **Help Command**   | A command that provides the user with a list of available commands and their descriptions, often used to get guidance on how to use the application.                                                                                                                                                                                                                       |
