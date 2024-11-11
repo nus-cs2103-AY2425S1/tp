@@ -37,7 +37,8 @@ public class MarkAbsentAllCommandParserTest {
                 TutorialGroup.MESSAGE_CONSTRAINTS);
 
         // invalid date
-        String dateConstraints = "Invalid date format or invalid date. Please provide a correct date in YYYY-MM-DD format.";
+        String dateConstraints = "Invalid date format or invalid date. "
+                + "Please provide a correct date in YYYY-MM-DD format.";
         assertParseFailure(parser, " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
                 + PREFIX_DATE + "2 Jan 2024", dateConstraints);
     }
