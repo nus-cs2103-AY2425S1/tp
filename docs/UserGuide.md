@@ -10,7 +10,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Table of Contents
+## Table of Contents
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
@@ -28,8 +28,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
   - [Viewing Help: help](#viewing-help-help)
   - [Clearing all Entries: clear](#clearing-all-entries-clear)
   - [Exiting the Program: exit](#exiting-the-program-exit)
-  - [Displaying Contacts in Pages -- Pagination](#displaying-contacts-in-pages----pagination)
-  - [Showing Total Number of Contacts -- Footer Status Bar](#showing-total-number-of-contacts----footer-status-bar)
+  - [Displaying Contacts in Pages: Pagination](#displaying-contacts-in-pages-pagination)
+  - [Showing Total Number of Contacts: Footer Status Bar](#showing-total-number-of-contacts-footer-status-bar)
   - [Saving the Data](#saving-the-data)
   - [Editing the Data File](#editing-the-data-file)
 - [What is Considered as Invalid Contacts](#what-is-considered-as-invalid-contacts)
@@ -43,8 +43,6 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
-
-<page-nav-print/>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -63,20 +61,16 @@ data_coNdUctorS is a **desktop address book application for managing contact det
    Note how the app:
    * Contains some sample data 
    * Displays contacts in alphabetical order
-   * Utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
+   * Utilises [Pagination](#displaying-contacts-in-pages-pagination) where 10 contacts are displayed per page at any one time 
    * Shows both the number of contacts listed in the displayed pages and the total number of contacts stored in the app in the status bar footer</br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list`: Lists all contacts.
-
     * `add n/John Doe th/johnny_9876_haha ss/undergraduate 3 e/johnd@example.com r/Admin`: Adds a contact named `John Doe` to the Address Book.
-
     * `delete 3`: Deletes the 3rd contact shown in the current displayed list.
-
     * `clear`: Deletes all contacts.
-
     * `exit`: Exits the app.
 
 6. Refer to [Command Summary](#command-summary) for a general overview of the commands available.
@@ -100,6 +94,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 
 ## Feature Details
@@ -133,11 +129,12 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+---
 
 <div style="page-break-after: always;"></div>
 
 ### Adding a Contact: `add`
-Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ [nn/NICKNAME]`
+Format:`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ [nn/NICKNAME]`
 
 <box type="definition" seamless>
 
@@ -146,7 +143,6 @@ Parameters do not need to be in order. <br/>
 `r/ROLE` can be used 1 to any number of times. <br/>
 `nn/NICKNAME` is optional. <br/>
 </box>
-
 <box type="tip" seamless>
 
 **Tip:** Refer to [Contact Fields](#contact-fields-constraints) for constraints on each of the contact fields. 
@@ -169,14 +165,12 @@ Note:
 <div style="page-break-after: always;"></div>
 
 ### Editing a Contact: `edit`
-
 <box type="definition" seamless>
 
 **Action:** Edits an existing contact in the address book. <br> You may edit by specifying the index of 
 the contact in the displayed address book, or by specifying the full name
 of any currently displayed contact that you wish to edit. <br>
 </box>
-
 In both methods of editing:
 * Only contacts shown in the displayed list can be edited.
 * After the command is successfully executed, the full contact list will be displayed.
@@ -185,19 +179,18 @@ In both methods of editing:
 * When editing roles, the existing roles of the contact will be removed.
 
 #### Edit by index
-Format:<br> `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
+Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * Edits the contact at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed contact list. 
 * The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it will be treated as a non-zero unsigned integer**)
 
-Examples:<br>
-
+Examples:
 *  `edit 1 th/johndoe123 e/johndoe@example.com`<br>Edits the telegram handle and email address of the 1st displayed contact to be `johndoe123` and `johndoe@example.com` respectively.<br>
 *  `edit 2 r/Admin r/President` <br> Edits the roles of the 2nd displayed contact to be `Admin` and `President`, this replaces all existing roles of the contact.
 
 #### Edit by name
-Format:<br> `edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
+Format: `edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 * Edits the contact specified by `FULL_NAME`.
 * The `FULL_NAME` has to be an exact match to an existing contact which is displayed.
 * The `FULL_NAME` is not case-sensitive.
@@ -238,7 +231,7 @@ Examples:
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 #### Delete by name
-Format `delete FULL_NAME` or `delete n/FULL_NAME`
+Format: `delete FULL_NAME` or `delete n/FULL_NAME`
 
 * Delete the contact whose name matches the specified `FULL_NAME`.
 * Only contacts shown in the displayed contact list will be deleted. 
@@ -252,7 +245,7 @@ Examples:
 
 <box type="tip" seamless>
 
-Note: 
+**Note**: 
 * You may not delete by multiple ways concurrently. (eg. `delete FULL_NAME n/FULL_NAME_2` or `delete INDEX n/FULL_NAME`)
 * In the event of `FULL_NAME` matching to multiple contacts that exist, you will have to `find FULL_NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `FULL_NAME` you wish to edit.
 </box>
@@ -304,21 +297,19 @@ Examples:
 * `find n/john` returns `Johnny Tan` and `John Doe`. <br>
 * `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`. <br>
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`. <br>
-  ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
+![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
 <box type="tip" seamless>
 
 **Note:** Searching by Name does not include Nicknames (and vice versa). `find n/Alex` does not include Contacts with the field `nn/alex`
 * If you do not find the contact via searching by Name, you may want to search via Nickname instead.
 </box>
-
 <box type="tip" seamless>
 
 **Tip:** How to revert back to the full contact list after `find`? <br>
 * Execute command `list` to display the full contact list. Refer to [List](#listing-all-contacts-list) for more details.
 * The displayed list will automatically revert to the full list after the successful execution of `add` or `edit`.
 </box>
-
 <div style="page-break-after: always;"></div>
 
 ### Listing all Contacts: `list`
@@ -331,8 +322,9 @@ Format: `list [all]... [contacts]...`
 * optional parameters of all or contacts or allcontacts or any combinations of these three words separated by spaces are accepted
 </box>
 
-
 ![list message](images/listSuccess.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing Help: `help`
 
@@ -379,9 +371,11 @@ Format: `exit`
 Exits the program.
 </box>
 
+---
+
 <div style="page-break-after: always;"></div>
 
-### Displaying Contacts in Pages -- Pagination
+### Displaying Contacts in Pages: Pagination
 
 The app comes with a pagination at the bottom of the list. It supports navigation to a specific page or navigation to
 the next or previous page. Each page contains a maximum of **10** items. The pagination supports a maximum of **10** pages
@@ -393,22 +387,20 @@ that they have at least one click on the pagination before using keyboard to mak
 Pagination UI:
 ![ui of pagination](images/pagination_ui.png)
 
-<div style="page-break-after: always;"></div>
-
-### Showing Total Number of Contacts -- Footer Status Bar
+### Showing Total Number of Contacts: Footer Status Bar
 
 A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
 at the bottom of the app. It shows the total number of contacts being listed in the app.
 
-**Definition:** List / show. The footer will display `x out of y contacts listed`, where x is the number of contacts in filtered list while y is the number of contacts in the total list
+<box type="definition" seamless>
+
+The footer will display `x out of y contacts listed`, where `x` is the number of contacts in filtered list while `y` is the number of contacts in the total list
+</box>
 
 Examples:
 * `find n/Adam` may show only 1 contact out of 19. 1 refers to the number of found contacts, 19 refers to the total number of contacts in the address book.
   ![ui of footer status bar](images/footer_status_bar_ui.png)
 
-<box type="definition" seamless>
-
-   </box>
 
 ### Saving the Data
 
@@ -425,7 +417,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## What is considered as Invalid Contacts
@@ -440,11 +431,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 - Note that `Telegram Handle`, `Email`, and `Nickname` are all case-sensitive, and will only be considered duplicate entries if the case matches exactly.
 - In the entire address book, there can only be 1 President.
 
-For example, if there are contacts with the following data:
-
-`n/Alice Tan th/alicetan123 e/alicetan123@example.com ss/phd r/Marketing`<br>
-`n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny` <br>
-
+For example, if there are contacts with the following data: <br/>
+- `n/Alice Tan th/alicetan123 e/alicetan123@example.com ss/phd r/Marketing`
+- `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny` <br>
 <box type="definition" seamless>
 
 **Note:** Alice Tan's lack of nickname is considered a unique nickname to Alice Tan. Also, John has the role of President.
@@ -461,8 +450,6 @@ Assuming the above entry in the address book, the following parameters passed in
 | 3         | `e/notjohnd@example.com ...`                                                                                                                      | `e/johnd@example.com ...`     &rarr; email already belongs to an existing contact                                                                                                                                                                     |
 | 4         | `r/Admin r/Marketing ...` (and `r/President` not inside)                                                                                          | `r/Admin r/President ...` &rarr; John is already President                                                                                                                                                                                            |
 
-
-
 <div style="page-break-after: always;"></div>
 
 ## Contact Fields Constraints
@@ -476,7 +463,7 @@ Assuming the above entry in the address book, the following parameters passed in
 | [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                        | `Events(Internal)`                                                                                                     |
 | [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                                |                                                                                                                        |
 
-*_By default, all fields must be non-empty when prefix is specified_
+*_By default, all fields inputted after the prefix must be non-empty when prefix is specified (except nn/).
 
 <box type="tip" seamless>
 
@@ -508,7 +495,9 @@ Assuming the above entry in the address book, the following parameters passed in
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
-  - Domain does not have to include a `.`, e.g. `.com`, `.edu` etc
+  - Domain does not have to include a period `.`, e.g. `.com`, `.edu` etc
+
+<div style="page-break-after: always;"></div>
 
 ### Student Status
 - Must take one of the following values:
@@ -535,8 +524,6 @@ Roles for each contact are displayed in the order listed above.
 
 ### Nickname
 - Is an optional field.
-
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
