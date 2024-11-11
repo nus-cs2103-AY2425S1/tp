@@ -1,12 +1,5 @@
 {
   "persons" : [ {
-    "name" : "ALEX YEOH",
-    "phone" : "87438807",
-    "email" : "alexyeoh@example.com",
-    "jobCode" : "SWE2025",
-    "tag" : "N",
-    "remark" : ""
-  }, {
     "name" : "BERNICE YU",
     "phone" : "99272758",
     "email" : "berniceyu@example.com",

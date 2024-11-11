@@ -5,7 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "s:StatisticsCommand" as StatisticsCommand LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "f:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,41 +14,57 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("statistics")
+[-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("statistics")
+LogicManager -> AddressBookParser : parseCommand("delete 1")
 activate AddressBookParser
 
-create StatisticsCommand
-AddressBookParser -> StatisticsCommand
-activate StatisticsCommand
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
 
-StatisticsCommand --> AddressBookParser
-deactivate StatisticsCommand
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
 
-AddressBookParser --> LogicManager : s
+AddressBookParser -> DeleteCommandParser : parse("1")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> StatisticsCommand : execute(m)
-activate StatisticsCommand
+LogicManager -> DeleteCommand : execute(m)
+activate DeleteCommand
 
-StatisticsCommand -> Model : getFilteredPersonList()
+DeleteCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model --> StatisticsCommand : l
+Model --> DeleteCommand
 deactivate Model
 
 create CommandResult
-StatisticsCommand -> CommandResult
+DeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> StatisticsCommand
+CommandResult --> DeleteCommand :r
 deactivate CommandResult
 
-StatisticsCommand --> LogicManager
-deactivate StatisticsCommand
+DeleteCommand --> LogicManager : r
+deactivate DeleteCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
