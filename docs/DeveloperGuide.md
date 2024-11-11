@@ -16,6 +16,7 @@ pageNav: 3
 * [AB3](https://github.com/nus-cs2103-AY2425S1/tp) for being the base of our project.
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * [imPoster](https://github.com/AY2021S2-CS2103T-T12-4/tp), a CS2103T senior group where we adapted our `MainWindow.fxml` code from.
+* [Stackoverflow post on Java password hashing](https://stackoverflow.com/a/2861125): We followed this post from Stackoverflow to guide us in the password hashing function in `PasswordManager.java`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,7 +379,7 @@ Step 1. The user initiates an export by executing `:export`. The `ExportCommand`
 before exporting it.
 
 Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with
-`EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
+`EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `vbook.json`.
 
 Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays
 a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process
@@ -654,13 +655,13 @@ Listed below are user stories that represent features that we have not implement
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `VBook` and the **Actor** is the user, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 
-1.  User requests to add a specific person to the addressbook.
+1.  User requests to add a specific person to VBook.
 2.  VBook adds the person.
 
     Use case ends.
@@ -748,10 +749,85 @@ Listed below are user stories that represent features that we have not implement
     * 1a1. VBook displays a message indicating that no persons were found.
 
       Use case ends.
-* 1b. The command entered is invalid
-    * 1b1. VBook displays a message indicating that no persons were found.
+
+* 1b. The command entered is invalid.
+
+    * 1b1. VBook shows an error message.
 
       Use case ends.
+
+
+
+**Use case: Export data**
+
+**MSS**
+
+1.  User requests to export data.
+2.  VBook opens the file explorer window.
+3.  User chooses the destination and name of the exported data.
+4.  VBook exports the data to the destination folder in JSON format.
+    Use case ends.
+
+**Extensions**
+* 2a. User closes the file explorer window without selecting a destination.
+  Use case ends.
+* 3a. The name of the exported data clashes with an existing name in the same file destination.
+    * 3a1. The file explorer displays an error message.
+      Use case returns to step 2.
+
+* 3b. The user enters an invalid name.
+    * 3b1. The file explorer displaus an error message.
+      Use case returns to step 2.
+
+
+**Use case: Enter password**
+
+**Preconditions:** User has already set a password previously.
+
+**MSS**
+1.  User starts the app.
+2.  VBook displays a window prompting the user to enter a password.
+3.  User enters the correct password.
+4.  VBook closes the password prompt window and opens the main app window.
+    Use case ends.
+
+
+**Extensions**
+* 2a. User enters the wrong password.
+    * 2a1. VBook displays an error message.
+      Use case returns to step 2.
+
+
+**Use case: Undo command**
+**MSS**
+1.  User requests to undo the last command.
+2.  VBook undoes the last change to the data.
+3.  Use case ends.
+
+**Extensions**
+* 1a. There is no previously done add/edit/delete command found.
+    * 1a1. VBook displays a message that there are no more commands to undo.
+      Use case ends.
+
+* 1b. User has undone more commands than the maximum amount allowed.
+    * 1b1. VBook displays a message that there are no more commands to undo.
+      Use case ends.
+
+
+**Use case: Redo command**
+**MSS**
+1.  User requests to redo the last undone command.
+2.  VBook redoes the last undone command.
+    Use case ends.
+    **Extensions**
+* 1a. There is no previously undone command.
+    * 1a1. VBook displays a message that there are no more commands to redo.
+      Use case ends.
+
+* 1b. User has redone more commands than the maximum amount allowed.
+    * 1b1. VBook displays a message that there are no more commands to redo.
+      Use case ends.
+
 
 <br>
 <br>
@@ -795,9 +871,9 @@ Team Size: 4
 2. **Expanded contact information:** The current contact list wraps around long text so the user can see the information. However, this makes the list uneven and very long remarks can make one contact unreasonably long. We plan to create a contact page per contact that contains full information about every contact, while keeping a truncated view for the main window.
 3. **Improved input validation for tags:** Currently, our tags have no restriction on size, which cause them to exceed the UI space. We plan to add a maximum length for the tags to be 50 characters, as the longest English word is 45 characters.
 4. **Add input validation for find command:** Currently, the find command does not check if parameters like name / phone number etc. are valid before executing the find command. We plan to add input validation for the find command so that searching with an invalid parameter will fail with an error.
-5. **Add input validation for location:** The location field will be split into three distinct fields: postal code, street name, and block number. Input validation will ensure specificity, restrict ambiguity, and allow only valid special characters relevant to location data.
-6. **Add input validation for phone numbers:** We plan to add input validation for phone numbers. The current phone number field does not have a strict limit on the kind of values it accepts. We will use regular expressions to validate phone number inputs.
-
+5. **Add input validation for location:** Currently, the location field takes in any values. However, this is not specific and the user can enter in values that are clearly not locations, such as `0000000`. Hence, we plan to split the location field into three distinct fields: postal code, street name, and block number. Input validation will ensure specificity, restrict ambiguity, and allow only valid special characters relevant to location data.
+6. **Add input validation for phone numbers:** The current phone number field does not have a strict limit on the kind of values it accepts. We plan to use regular expressions to validate phone number inputs.
+7. **Address integer overflow issues for index:** Currently, when a number larger than the maximum value for the data type `integer` is entered into our index field, the error message displays: `Invalid command format!` instead of `The person index provided is invalid`. This is likely due to an integer overflow error throwing a different exception than expected. We plan to fix this by adding a check for overflow and returning the appropriate error message afterwards.
 --------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -859,7 +935,13 @@ java -jar {{ jarFile }}
 
 1. Dealing with missing data files
 
-    1. Prerequisites: There is an existing /data/addressbook.json file in the home folder of the .jar file.
-    2. Delete the /data/addressbook.json file. Close the address book and open it again.
+    1. Prerequisites: There is an existing data/vbook.json file in the home folder of the .jar file.
+    2. Delete the data/vbook.json file. Close the address book and open it again.
 
        Expected: The data is replaced with the sample data that shows when the app is first open.
+
+## Appendix: Effort
+
+This project was challenging to implement, especially with our ambition of making it as keyboard-friendly as possible. Implementing keyboard shortcuts, as well as keyboard-friendly UI was not easy.
+
+While we didn't expand the fields much from AB3, certain features like the Export feature took us a lot of time to debug, especially given known bugs with the Windows system (see [failing tests on Windows when run more than once](#failing-tests-on-windows-when-run-more-than-once))
