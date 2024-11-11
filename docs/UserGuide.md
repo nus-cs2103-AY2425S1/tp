@@ -4,7 +4,10 @@
   pageNav: 3
 ---
 
+<br>
+
 # Tuteez User Guide
+
 <br>
 
 ## Welcome aboard Tuteez
@@ -19,21 +22,21 @@ By letting Tuteez handle your organizational tasks, you can focus on what matter
 In this guide, we will walk you through Tuteez’s key features and demonstrate how it can transform your tutoring experience.
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Table of Contents
-<br>
 
 <!-- TOC start -->
 1. [Welcome Aboard Tuteez](#welcome-aboard-tuteez)<br>
     1.1 [Table of Contents](#table-of-contents)<br>
     1.2 [User Guide Overview](#user-guide-overview)<br>
-    1.3 [How to Read this Guide](#how-to-read-this-guide)<br>
-
+2. [How to Use this Guide](#how-to-use-this-guide)<br>
+    2.1 [Notations Used](#notations-used)<br>
+    2.2 [Recommended Sections Based on User Experience](#recommended-sections-based-on-user-experience)<br>
 2. [Quick start](#quick-start)<br>
     2.1 [Prerequisites](#prerequisites)<br>
     2.2 [Setting up](#setting-up)<br>
-
 3. [GUI Overview](#gui-overview)<br>
-
 4. [Beginner's Tutorial](#beginner-s-tutorial)<br>
     4.1 [Before You Begin](#before-you-begin)<br>
     4.2 [Exploring the Application](#exploring-the-application)<br>
@@ -43,7 +46,6 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
     4.6 [Editing Student Details](#editing-student-details)<br>
     4.7 [Deleting a Student](#deleting-a-student)<br>
     4.8 [Wrapping Up](#wrapping-up)<br>
-
 5. [Features](#features)<br>
     5.1 [Viewing Help : `help`](#viewing-help-help)<br>
     5.2 [Adding a Student: `add`](#adding-a-student-add)<br>
@@ -59,25 +61,20 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
     5.12 [Navigating command history: `↑` or `↓`](#navigating-command-history-or)<br>
     5.13 [Clearing all entries : `clear`](#clearing-all-entries-clear)<br>
     5.14 [Exiting the program : `exit`](#exiting-the-program-exit)<br>
-
 6. [Things You Should Definitely Know](#things-you-should-definitely-know)<br>
     6.1 [Constraints on Adding a Lesson](#constraints-on-adding-a-lesson)<br>
     6.2 [Current Limitations](#current-limitations)<br>
     6.3 [Saving the Data](#saving-the-data)<br>
     6.4 [Editing the Data File](#editing-the-data-file)<br>
-
 7. [Future Features](#future-features)
-
 8. [FAQ](#faq)
-
 9. [Known Issues](#known-issues)
-
 10. [Glossary](#glossary)
-
 11. [Command Summary](#command-summary)
 <!-- TOC end -->
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### User Guide Overview
 
@@ -94,7 +91,35 @@ Here is a quick look at the various sections in this user guide:
 - **[Known issues](#known-issues)**: A list of known issues that you may encounter while using Tuteez. <br>
 - **[Command summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez. <br>
 
-#### Recommended Sections Based on User Experience
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+<br>
+
+## How to Use this Guide
+
+<br>
+
+### Notations Used
+
+Here's how to read this User Guide! We use these visual styles to help you navigate better:
+
+| **Text Styles**              | **Description**                              |
+|------------------------------|----------------------------------------------|
+| `Command text`               | Used to represent command syntax.            |
+| **Bold text**                | Highlights important keywords.               |
+| [Hyperlink](#notations-used) | Provides clickable links for your reference. |
+
+| **Call-outs**                                                                                    | **Description**                          |
+|--------------------------------------------------------------------------------------------------|------------------------------------------|
+| <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>    | For additional information.             |
+| <div style="background-color: #FFA07A; padding: 4px; border-radius: 4px;">⚠️ **Warning**</div> | A caution or important warning.         |
+| <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>   | Helpful tips to make your experience smoother. |
+
+<br>
+
+### Recommended Sections Based on User Experience
 
 | **User Experience** | **Recommended Sections**                                                                                                                            |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,25 +128,9 @@ Here is a quick look at the various sections in this user guide:
 
 <br>
 
-### How to Read this Guide
-
-Here's how to read this User Guide! We use these visual styles to help you navigate better:
-
-| **Text Styles** | **Description**                              |
-|-----------------|----------------------------------------------|
-| **Monospace**   | Used to represent code syntax.               |
-| **Bold text**   | Highlights important keywords.               |
-| **Hyperlink**   | Provides clickable links for your reference. |
-
-| **Call-outs**                                                                                    | **Description**                          |
-|--------------------------------------------------------------------------------------------------|------------------------------------------|
-| <div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>    | For additional information.             |
-| <div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**</div> | A caution or important warning.         |
-| <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>   | Helpful tips to make your experience smoother. |
-
-<br>
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -172,6 +181,8 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 <br>
 
 ## GUI Overview
@@ -181,15 +192,16 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 | Component      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Menu Bar** | - Located at the top of the application. <br> - Contains essential functions including File and Help menus.                                                                                                                                                                                                                                                                                                                                                         |
-| **Left Panel** | - Prioritizes important information such as student's phone number, address, and next lesson based on your computer's current time.  <br> - If a lesson is currently ongoing, it will show that lesson as the next lesson on the left panel. <br><br> <div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  If your computer's time has been changed, please restart the app to sync our internal clock to your new time!</div> |
-| **Right Panel** | - Provides the full view of a student's information when you use the `display` command. <br> - Shows all the student's lesson details and remarks you have left them. <br><br><div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  Refer to the [Displaying Student Information](#displaying-student-information-display) section for more details on the `display` command. </div>                                            |
+| **Left Panel** | - Prioritizes important information such as student's phone number, address, and next lesson based on your computer's current time.  <br> - If a lesson is currently ongoing, it will show that lesson as the next lesson on the left panel. <br><br> <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  If your computer's time has been changed, please restart the app to sync our internal clock to your new time!</div> |
+| **Right Panel** | - Provides the full view of a student's information when you use the `display` command. <br> - Shows all the student's lesson details and remarks you have left them. <br><br><div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  Refer to the [Displaying Student Information](#displaying-student-information-display) section for more details on the `display` command. </div>                                            |
 | **Results Box** | - Displays the results of the commands you have entered.                                                                                                                                                                                                                                                                                                                                                                                                            |
 | **Command Box** | - The area where you can enter commands to interact with the application.                                                                                                                                                                                                                                                                                                                                                                                           |
 
 <br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ## Beginner's Tutorial
 
@@ -238,7 +250,7 @@ If everything went well, you'll be greeted by this view:
 
 ![add_command](images/add_command_tutorial.png)
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
 </div>
@@ -269,7 +281,7 @@ If everything went well, you'll be greeted by this view:
 
 ![edit_command](images/edit_command_tutorial.png)
 
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 </div>
@@ -297,6 +309,8 @@ Simply visit the [Features](#features) section to learn more about the various c
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -330,7 +344,7 @@ Simply visit the [Features](#features) section to learn more about the various c
 
 If you are confused while using the app any point in time, you may use this command to view the help message which explains how to access the web-based user guide.
 
-Format: `help`
+**Format**: `help`
 
 ![help message](images/helpMessage.png)
 
@@ -340,20 +354,20 @@ Format: `help`
 
 This command will allow you to add a new student and their personal details to your list of students on the left panel.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.
 </div>
 <br>
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
 </div>
 
 
-Acceptable values for each parameter:
+Acceptable values for each parameter:  
 
 | Parameter    | Format                                                                                                                                                                     | Example            |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
@@ -379,7 +393,7 @@ Examples:
 
 This command will help you view the list of all your students in Tuteez on the left panel.
 
-Format: `list`
+**Format**: `list`
 
 <br>
 
@@ -387,7 +401,7 @@ Format: `list`
 
 This command will allow you to edit an existing student's details in Tuteez, allowing you to easily update outdated information on the fly.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -406,7 +420,7 @@ Examples:
 
 This simple command will allow you to add a remark for a specific student in Tuteez.
 
-Format: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
+**Format**: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
 
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * You can add any text as a remark, and remarks are displayed in the order they were added.
@@ -425,7 +439,7 @@ Examples:
 
 This command will allow you to delete a remark for a specific student in Tuteez.
 
-Format: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
+**Format**: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
 
 * Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
 * When deleting, if the `REMARK_INDEX` is not valid, an error will be shown on your screen.
@@ -439,19 +453,19 @@ Examples:
 
 This command will allow you to add lesson(s) to a specific student in Tuteez.
 
-Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
+**Format**: `addlesson INDEX l/LESSON [l/LESSON]…​`
 
 * short form: `addlsn INDEX l/LESSON [l/LESSON]…​`
 * This adds new lesson(s) to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
 
-<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
 </div>
 <br>
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
 </div>
@@ -466,7 +480,7 @@ Examples:
 
 This command will help you in deleting lesson(s) from a specific student in Tuteez.
 
-Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
+**Format**: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
 * short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
@@ -489,7 +503,7 @@ Examples:
 This command will assist you in finding students whose names, addresses, tags or lessons contain any of the given keywords. 
 Lessons are split into lesson day and lesson time.
 
-Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`
+**Format**: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -513,7 +527,7 @@ Examples:
 
 This simple command allows you to delete the specified student from Tuteez.
 
-Format: `delete INDEX` or `delete NAME`
+**Format**: `delete INDEX` or `delete NAME`
 
 * Deletes the student at the specified `INDEX` or by their full `NAME` (case-insensitive).
     - When using the `NAME` option, the full name of the student must be provided.
@@ -536,7 +550,7 @@ Examples:
 
 This helpful command will help you view comprehensive personal information of a student in Tuteez on the right panel.
 
-Format: `display INDEX` or `display NAME`
+**Format**: `display INDEX` or `display NAME`
 
 * This displays the details of the student at the specified `INDEX` or with the specified `NAME`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
@@ -552,7 +566,7 @@ Examples:
 
 These keyboard shortcuts will allow you to navigate through your command history in the command box, making it easy to access and reuse previously executed commands.
 
-Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
+**Format**: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 * <kbd>&uarr;</kbd> will allow you to navigate to the previous command you have entered.
 * <kbd>&darr;</kbd> will allow you to navigate to the next command you have entered.
@@ -562,7 +576,7 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.
 </div>
 <br>
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: Only correctly executed commands are saved. Commands that result in errors will not be added to the history.
 </div>
@@ -573,12 +587,12 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 This will allow you clears all student entries from Tuteez.
 
-<div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+**Format**: `clear`
+
+<div style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!
 </div>
-
-Format: `clear`
 
 <br>
 
@@ -586,14 +600,16 @@ Format: `clear`
 
 This command will allow you to shut down and exit the program.
 
-<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+**Format**: `exit`
+
+<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.
 </div>
 
-Format: `exit`
-
 <br>
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
