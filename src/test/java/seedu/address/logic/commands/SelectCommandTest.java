@@ -61,12 +61,20 @@ public class SelectCommandTest {
     }
 
     @Test
-    public void execute_multipleMatch() {
-        List<Index> indexes = List.of(Index.fromZeroBased(0), Index.fromZeroBased(3));
+    public void execute_duplicateAndDistinct_multipleMatch() {
+        // Equivalence partition: Multiple matches, where multiple persons are selected
+        // Where some indexes are duplicate and some are different (e.g., 0th, 1st, 3rd and 3rd indexes)
+        List<Index> indexes = List.of(Index.fromZeroBased(0), Index.fromZeroBased(1),
+                Index.fromZeroBased(3), Index.fromZeroBased(3));
         SelectCommand selectCommand = new SelectCommand(indexes);
         expectedModel.updateFilteredPersonList(prepareSelectPredicate(indexes));
+
+        // Expected success message when multiple persons are selected
+        List<Index> uniqueIndexes = List.of(Index.fromZeroBased(0), Index.fromZeroBased(1),
+                Index.fromZeroBased(3));
         String expectedMessage = String.format(MESSAGE_SELECT_PERSON_SUCCESS,
-                formatSelectedPersons(prepareSelectedPersons(indexes)));
+                formatSelectedPersons(prepareSelectedPersons(uniqueIndexes)));
+
         assertCommandSuccess(selectCommand, model,
                 expectedMessage, expectedModel);
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -74,11 +82,15 @@ public class SelectCommandTest {
 
     @Test
     public void execute_oneMatch() {
+        // Equivalence partition: Single match, where only one person is selected (e.g., 2nd index)
         List<Index> indexes = List.of(Index.fromZeroBased(2));
         SelectCommand selectCommand = new SelectCommand(indexes);
         expectedModel.updateFilteredPersonList(prepareSelectPredicate(indexes));
+
+        // Expected success message when one person is selected
         String expectedMessage = String.format(MESSAGE_SELECT_PERSON_SUCCESS,
                 formatSelectedPersons(prepareSelectedPersons(indexes)));
+
         assertCommandSuccess(selectCommand, model,
                 expectedMessage, expectedModel);
         assertEquals(model.getFilteredPersonList(), expectedModel.getFilteredPersonList());
@@ -86,20 +98,21 @@ public class SelectCommandTest {
 
     @Test
     public void execute_noMatchIndexOutOfBound_thenThrowExceptions() {
+        // Equivalence partition: Index out of bounds, where the index is greater than the available range
         String invalidIndexes = String.valueOf(Index.fromZeroBased(getTypicalPersons().size() + 1).getOneBased());
         String expectedMessage = String.format(MESSAGE_INVALID_PERSONS_DISPLAYED_INDEX, invalidIndexes);
+
         List<Index> indexes = List.of(Index.fromZeroBased(getTypicalPersons().size() + 1));
         SelectCommand selectCommand = new SelectCommand(indexes);
+
         assertCommandFailure(selectCommand, model, expectedMessage);
         assertThrows(CommandException.class, () -> selectCommand.execute(model));
     }
 
     @Test
-    public void whenIndexIsOutOfBounds_thenThrowsException() {}
-
-    @Test
     public void formatIndexesMethod_multipleIndexes_returnsFormattedString() throws Exception {
-        // Prepare test data, using indexes 0, 2, 7
+        // Equivalence partition: Multiple valid indexes, indexes within the valid range
+        // Prepare test data with indexes 0, 2, and 7
         List<Index> indexes = List.of(Index.fromZeroBased(0),
                 Index.fromZeroBased(2), Index.fromZeroBased(7));
 
@@ -107,25 +120,27 @@ public class SelectCommandTest {
         method.setAccessible(true);
 
         String result = (String) method.invoke(null, indexes);
-        String expectedString = "1, 3, 8";
+        String expectedString = "1, 3, 8"; // The formatted output should be 1-based indexes
         assertEquals(expectedString, result);
     }
 
     @Test
     public void testFormatIndexesMethod_emptyIndexes_returnsEmptyString() throws Exception {
+        // Equivalence partition: Empty list of indexes, should return an empty string
         List<Index> indexes = List.of();
 
         Method method = SelectCommand.class.getDeclaredMethod("formatIndexes", List.class);
         method.setAccessible(true);
 
         String result = (String) method.invoke(null, indexes);
-        String expectedString = "";
+        String expectedString = "none"; // Empty input should result in an empty string output
         assertEquals(expectedString, result);
     }
 
     @Test
     public void testFormatSelectedPersons_multiplePersons_returnsFormattedString() throws Exception {
-        // Prepare test data, using 2, 7th person from the typical person list
+        // Equivalence partition: Multiple valid persons, should return a comma-separated formatted string
+        // Prepare test data, using indexes 2 and 7 for persons from the typical person list
         List<Index> indexes = List.of(Index.fromZeroBased(2), Index.fromZeroBased(7));
         List<Person> persons = prepareSelectedPersons(indexes);
 
@@ -134,13 +149,12 @@ public class SelectCommandTest {
 
         StringBuilder expectedString = new StringBuilder();
 
-        // Iterate over each person in the list
+        // Build the expected formatted string for the persons
         for (int i = 0; i < persons.size(); i++) {
             Person person = persons.get(i);
             Name name = person.getName();
             expectedString.append(name.fullName);
 
-            // If it's not the last person, append a comma and space
             if (i < persons.size() - 1) {
                 expectedString.append(", ");
             }
@@ -152,7 +166,8 @@ public class SelectCommandTest {
 
     @Test
     public void testFormatSelectedPersons_emptyPersonsList_returnsEmptyString() throws Exception {
-        // Prepare test data, using an empty person list
+        // Equivalence partition: Empty list of persons, should return a "none" string
+        // Prepare test data with an empty list of indexes
         List<Index> indexes = List.of();
         List<Person> persons = prepareSelectedPersons(indexes);
 
@@ -160,15 +175,30 @@ public class SelectCommandTest {
         method.setAccessible(true);
 
         String result = (String) method.invoke(null, persons);
-        String expectedString = "none";
+        String expectedString = "none"; // When no persons are selected, the output should be "none"
         assertEquals(expectedString, result);
     }
 
     @Test
     public void toStringMethod() {
-        List<Index> indexes = List.of(Index.fromZeroBased(0));
+        // Equivalence partition: Non-empty list of indexes, should return a formatted string with indexes
+        // Prepare test data with indexes 0 and 1
+        List<Index> indexes = List.of(Index.fromZeroBased(0), Index.fromZeroBased(1));
         SelectCommand command = new SelectCommand(indexes);
+
         String expected = SelectCommand.class.getCanonicalName() + "{indexes=" + indexes + "}";
+
+        assertEquals(expected, command.toString());
+    }
+
+    @Test
+    public void toStringMethod_emptyIndexes() {
+        // Equivalence partition: Empty list of indexes, should return a formatted string with empty indexes
+        List<Index> indexes = List.of();
+        SelectCommand command = new SelectCommand(indexes);
+
+        String expected = SelectCommand.class.getCanonicalName() + "{indexes=" + indexes + "}";
+
         assertEquals(expected, command.toString());
     }
 

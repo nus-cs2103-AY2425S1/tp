@@ -267,12 +267,19 @@ Examples:
 
 Where INDEX refers to the position of the person in the currently displayed list of persons.
 - INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
+- If multiple persons are selected, the application will filter to show only those selected contacts, and their names will be highlighted in the UI.
 - You can specify multiple indexes separated by spaces to select more than one person at a time.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons,
 consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
 For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3.
 - `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you enter duplicate indexes in the `select` command, only the unique persons corresponding to those indexes will be selected. For example, entering `select 1 2 2 2` will only select the persons at indexes `1` and `2`, and the feedback box will display:
+"Selected Person(s): [Name of person at index 1], [Name of person at index 2]"
+e.g., "Selected Person(s): John Doe, Alice Tan".
+</div>
 
 ### Editing tag in a batch: `batch-edit`
 Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
