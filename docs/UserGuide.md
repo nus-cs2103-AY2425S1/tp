@@ -445,8 +445,6 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * If both unique and non-existent conditions are entered in a single command, an error will be returned, and none of the conditions will be deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-<div style="page-break-after: always;"></div>
-
 **Example**:
 * `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
 
