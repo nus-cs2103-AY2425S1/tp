@@ -15,44 +15,44 @@ Equipped with features like **attendance marking**, **contact management**, **co
 <!-- Table of Content -->
 ## Table of Contents
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. [How to check?](https://www.java.com/en/download/help/version_manual.html)
 
-1. Download the latest `ccaconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-2/tp/releases).
+2. Download the latest `ccaconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data
+3. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data. For example, if you put `ccaconnect.jar` in a folder named `CCA`, then `CCA` will the _home folder_.
 
-1. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. E.g. If you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
+4. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. E.g. If you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
     ```dtd
     cd ~/Desktop/CCA
     ```
 
-1. Launch the CCAConnect application by typing in the following command:
+5. Launch the CCAConnect application by typing in the following command:
     ```dtd
     java -jar ccaconnect.jar
     ```
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe` : Adds a person named `John Doe`, with those specified information.
+    * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe` : Adds a person named `John Doe`, with those specified information.
 
-   * `delete 1` : Deletes the 1st contact shown in the current list.
+    * `delete 1` : Deletes the 1st contact shown in the current list.
 
-   * `clear` : Deletes all contacts stored in the current profile.
+    * `clear` : Deletes all contacts stored in the current profile.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command, and check the [Glossary](#glossary) if you need a reminder on any terms.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -62,15 +62,15 @@ Equipped with features like **attendance marking**, **contact management**, **co
   <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
 * Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
-  * e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.<br><br>
+    * e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.<br><br>
 * Items in square brackets are optional.<br>
-  * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
+    * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
 * Items in square brackets are optional.<br>
-  * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
+    * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
 * Items with <code>…</code>​ after them can be used multiple times. If the item is optional, e.g. <code>[r/ROLE]…​</code>, it can also be used zero times<br>
-  * e.g. <code>[r/ROLE]…​</code> can be used as <code> </code> (i.e. 0 times), <code>r/exco</code>, <code>r/member r/exco</code> etc. <br><br>
+    * e.g. <code>[r/ROLE]…​</code> can be used as <code> </code> (i.e. 0 times), <code>r/exco</code>, <code>r/member r/exco</code> etc. <br><br>
 * Parameters can be in any order.<br>
-  * e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.<br><br>
+    * e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.<br><br>
 * The parameter prefixes (e.g. <code>n/</code>) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </details>
 
@@ -96,7 +96,7 @@ Adds a person to the address book.
 
 #### Format
 ```
-add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
+add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]
 ```
 
 #### Alias
@@ -104,21 +104,25 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                      |
-|----------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                            |
-| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).   |
-| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).             |
-| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                    |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.          |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact. |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                         |
+|----------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                               |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                      |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                       |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                        |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                    |
+|                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact.<br> Contacts are not favourite by default. |
+
+* Both `f/` and `nf/` cannot be present in the command at once.
+* Both `f/` and `nf/` can be absent in the command, in which the contact is not favourited by default.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-A person is uniquely identified by his/her **telegram handle**
+A person is uniquely identified by his/her **telegram handle**.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-A person can have any number of roles (including 0)
+A person can have any number of roles (including 0).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -134,7 +138,7 @@ When adding/editing a person with the role of `Member`, the spelling of `Member`
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book. <br/>
-This can be used to reset the list of contacts back to its unfiltered state
+This can be used to reset the list of contacts back to its unfiltered state.
 
 #### Format
 ```
@@ -150,7 +154,7 @@ Edits an existing person in the address book.
 
 #### Format
 ```
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]
 ```
 #### Alias
 `e` can be used in place of `edit`.
@@ -184,6 +188,7 @@ You can remove all the person’s roles by typing `r/` without specifying any ro
 Record attendances for previous "Member" contacts are not wiped to allow for future reference and verification of participation. It is also important for tracking overall attendance trends and patterns over time.
 </div>
 
+<a id="find-command"></a>
 ### Locating persons: `find`
 
 Search for contact(s) whose contact details satisfy either of the following:
@@ -208,35 +213,40 @@ When using `find`, at least **one** of the optional parameters must be included.
 
 | Parameter         | Prefix | Compulsory? | Remarks                                                                                                                                                                    |
 |-------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
+| `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name.                                                                                |
 | `ROLEKEYWORD`     | `r/`   | No          | Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role. <br/> Contacts with roles matching at least one `ROLEKEYWORD` will be returned. |
-| `TELEGRAMKEYWORD` | `t/`   | No          | Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle                                                        |
-|                   | `f/`   | No          | Represents finding all contacts that have been favourited                                                                                                                  |
+| `TELEGRAMKEYWORD` | `t/`   | No          | Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle.                                                       |
+|                   | `f/`   | No          | Represents finding all contacts that have been favourited.                                                                                                                 |
 
-* The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
+* The search is case-insensitive for all parameters. E.g `hans` will match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+Invalid parameters will be accepted and 0 people will be returned.
+</div>
 
 #### Example
 ##### Usage: Find by name
-* `find n/david` returns `David Li`<br>
+* `find n/david` returns `David Li`.<br>
   ![result for 'find n/david'](images/findDavidLiResult.png)
 
 ##### Usage: Find by role
-* `find r/treasurer` returns `Irfan Ibrahim` who has a role `Treasurer`<br>
+* `find r/treasurer` returns `Irfan Ibrahim` who has a role `Treasurer`.<br>
   ![result for 'find r/treasurer'](images/findTreasurerResult.png)
 
 ##### Usage: Find by telegram
-* `find t/alexyeoh` returns `Alex Yeoh` who has the telegram handle `alexYeoh`<br>
+* `find t/alexyeoh` returns `Alex Yeoh` who has the telegram handle `alexYeoh`.<br>
   ![result for 'find t/alexyeoh'](images/findAlexYeohResult.png)
 
 ##### Usage: Find by favourite
-* `find f/` returns 1 favourite contact<br>
+* `find f/` returns 1 favourite contact.<br>
   ![result for 'find f/'](images/findFavouriteResult.png)
 
 ##### Usage: Find composition
 Composing all 4 types of search will give an `OR` search, a contact that has at least one matching criteria will be returned.
-* `find n/david f/` returns all contacts with a name that partially matches `david`, **OR** are favourited contacts
+* `find n/david f/` returns all contacts with a name that partially matches `david`, **OR** are favourited contacts.
 
+<a id="sort-command"></a>
 ### Sorting the contacts: `sort`
 
 Sorts the list of contacts by name, in a user-specified order.<br/>
@@ -246,7 +256,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 `sort ORDER`
 
 #### Alias
-`so` can be used in place of `sort`
+`so` can be used in place of `sort`.
 
 #### Parameters
 
@@ -255,7 +265,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 | `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
 
 ### Example
-* `sort asc` sorts the current list of contacts by name, in ascending order
+* `sort asc` sorts the current list of contacts by name, in ascending order.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
@@ -275,11 +285,11 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                              |
-|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list. | 
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  | 
 
-* The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
+* The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
 #### Examples
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -324,7 +334,7 @@ mark t/TELEGRAM…​ d/DATE
 
 #### Example
 
-**Please note the following code will display a different GUI if used on a different day (other than 7th November 2024)**
+**Please note the following code will display a different GUI if used on a different day (other than 7th November 2024)**.
 
 * `mark t/alexYeoh t/berniceYu d/2024-11-07`
 
@@ -335,6 +345,10 @@ mark t/TELEGRAM…​ d/DATE
 * If the input date matches the current date, the checkbox for marked members will be automatically selected upon successful attendance marking.
 
 * If the input telegrams include members who have already been marked on input date, the result will remind user of these repeatedly marked members while still marking other members as usual.
+</div>
+
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
+Do not be alarmed if your checkbox looks different from the one displayed in the examples. The checkbox styling depends on your current operating system, and have no impact on CCAConnect's functionality.
 </div>
 
 ### Unmarking attendance : `unmark`
@@ -387,7 +401,7 @@ clear
 ```
 
 #### Alias
-`c` can be used in place of `clear`
+`c` can be used in place of `clear`.
 
 
 ### Viewing a specific contact : `view`
@@ -406,8 +420,9 @@ view t/TELEGRAM_HANDLE
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> Multiple `t/` entries are accepted, but all `t/` entries except for the terminating `t/` entry will be disregarded. |
 
 Examples:
-* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`.<br>
 ![result for `view t/bob12`](images/viewBob12.png)
+
 
 <div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
 The use of any other commands (other than another <code>view</code> command) will close the view page and revert back to the list of contacts!
@@ -415,23 +430,21 @@ The use of any other commands (other than another <code>view</code> command) wil
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Safely exits the program.
 
 #### Format
 ```
 exit
 ```
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
+To ensure data is saved properly, always use the `exit` command or the window's close button to exit. Using any unintended exit methods may lead to data loss.
+</div>
+
 ### Switching a profile : `switch`
-The `switch` command allows you to change the current session to a specified profile.
-- If a valid profile name is provided, the session will switch to that profile.
-  - If the profile does not exist, a new profile with the specified name will be created.
-  - If the profile already exists, it will switch to that profile.
-
-
-- If no profile name is provided (empty input) and other profiles exist, the command will display a list of
-available profiles to switch to.
-- Attempting to switch to the currently active profile will not perform a switch.
+The `switch` command offers an alternative way to organize your contacts by creating separate profiles, each tailored to a specific context or purpose.
+Each profile has its own independent set of contacts, allowing you to freely modify the data of one profile without affecting others.
+For instance, you may create a 'competition-team' profile to keep track of personnel involved in an upcoming competition, and quickly switch between it and your main profile to view the participants.
 
 #### Format
 ```
@@ -439,19 +452,33 @@ switch PROFILE
 ```
 
 #### Alias
-`sw` can be used in place of `switch`
+`sw` can be used in place of `switch`.
 
-#### Parameters
 <a id="switch-remarks"></a>
+#### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                             |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                        |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+If the specified `PROFILE` does not already exist, switch will create it; otherwise, it will switch to the existing profile.
+</div>
+
+
 #### Example
-  - `switch john-doe` switches to a profile named 'john-doe'
-  - `sw ALICE` switches to a profile named 'alice'
-  - `switch` lists all available profiles that you can switch to, if they exist.
+
+- `switch competition-team` switches to a profile named 'competition-team'
+- `sw ALL-CAPS` switches to a profile named 'all-caps'
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+The current profile is indicated at the bottom left window. ![current-profile](images/current-profile.png)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+The most recent [sort](#sort-command) and [find](#find-command) settings (referred to as "active settings") are automatically applied when you switch profiles, enhancing search efficiency by removing the need to reapply them after each switch. For example, if you use `find f/` in the 'addressbook' profile to view favourite  contacts, this "find favourite " filter will stay active when you switch to another profile like 'competition-team', until a different [valid](#command-summary) command (except `switch`) is issued which removes this active setting.
+</div>
+
 
 ### Deleting a profile: `deleteProfile`
 
@@ -463,34 +490,34 @@ deleteProfile PROFILE
 ```
 
 #### Alias
-`delp` can be used in place of `deleteProfile`
+`delp` can be used in place of `deleteProfile`.
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                               |
-|-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all [requirements](#switch-remarks) from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                           |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all [requirements](#switch-remarks) from the `switch` command, and should be an **existing** profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile (the profile you're on). |
 
 
 #### Example
-This is a logical sequence of commands, assuming your current profile is addressbook:
-* `deleteProfile addressbook` is not allowed because `addressbook` is the active profile.
-* `sw alice` switches the current profile to `alice`
-* `delp addressbook` deletes the `addressbook` profile after switching to 'alice'
 
+This is a logical sequence of commands, assuming your current profile is 'addressbook':
+* `deleteProfile addressbook` is not allowed because 'addressbook' is the active profile.
+* `sw alice` switches the current profile to 'alice'
+* `delp addressbook` deletes the 'addressbook' profile after switching to 'alice'
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CCAConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file at the directory `[JAR file location]/data/`. Advanced users are welcome to update data directly by editing the data file.
+### Editing the files
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Modifying (Creating, Editing, Deleting) any files used by CCAConnect—such as those in the `data` folder or the `preferences.json` file—can lead to data loss or cause the program to behave unexpectedly. Only **experienced** users should attempt these changes outside of the CCAConnect app. **Beginners** should make any file changes only through the CCAConnect app to keep the program stable and avoid potential issues.
 </div>
+
+CCAConnect contact data is automatically saved as individual [JSON](https://en.wikipedia.org/wiki/JSON) files in the `data` folder located in the [home folder](#glossary), and profile data is saved in the `preference.json` file in the home folder. For example, if your home folder is `CCA` then `data` folder is located at `CCA/data/` and profile data file is saved in `CCA/preferences.json`. Advanced users are welcome to edit the files directly, while beginners should rely on CCAConnect app for any modifications.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -498,36 +525,50 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
+
 **A**: To transfer your data:
 1. [Install](#quick-start) the app on the new computer.
-2. Copy the data folder: Locate the data folder in your original CCAConnect home folder. Replace the default data folder in the new installation with this folder.
-3. Transfer profiles: In the original CCAConnect home folder, locate the preference.json file. Copy this file and overwrite the default preference.json in the new computer's CCAConnect home folder.
+2. Ensure the app is closed on both computers.
+3. Locate the `data` folder in your [home folder](#glossary). Replace the default `data` folder in the new installation with this folder.
+4. In the original home folder, locate the `preference.json` file. Copy this file and overwrite the default `preference.json` in the new computer's home folder.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. Forcing the application to close (e.g., using the terminal or Task Manager) will be treated as a system crash and may result in data loss.
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                | Format                                                                  | Example Usage                                                           |
-|-----------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​`                | `add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics` |
-| **Clear**             | `clear`                                                                 | `clear`                                                                 |
-| **Delete**            | `delete INDEX`                                                          | `delete 3`                                                              |
-| **Delete Profile**    | `deleteProfile PROFILE`                                                 | `deleteProfile alice`                                                   |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​` | `edit 2 n/James Lee e/jameslee@example.com`                             |
-| **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`   | `find n/James Jake`                                                     |
-| **Sort**              | `sort ORDER`                                                            | `sort ASC`                                                              |
-| **Switch**            | `switch PROFILE`                                                        | `switch alice`                                                          |
-| **List**              | `list`                                                                  | `list`                                                                  |
-| **Help**              | `help`                                                                  | `help`                                                                  |
-| **Attendance**        | `attendance`                                                            | `attendance`                                                            |
-| **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                              | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
-| **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            | `unmark t/berniceYu d/2024-11-02`                                       |
-| **View**              | `view t/TELEGRAM_HANDLE`                                                | `view t/bob12`                                                          |
+| Action                | Format                                                                                        | Example Usage                                                           |
+|-----------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]`              | `add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics` |
+| **Clear**             | `clear`                                                                                       | `clear`                                                                 |
+| **Delete**            | `delete INDEX`                                                                                | `delete 3`                                                              |
+| **Delete Profile**    | `deleteProfile PROFILE`                                                                       | `deleteProfile alice`                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TELEGRAM] [r/ROLE] [f/ or nf/ (NOT BOTH)]` | `edit 2 n/James Lee e/jameslee@example.com`                             |
+| **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`                         | `find n/James n/Jake`                                                   |
+| **Sort**              | `sort ORDER`                                                                                  | `sort ASC`                                                              |
+| **Switch**            | `switch PROFILE`                                                                              | `switch alice`                                                          |
+| **List**              | `list`                                                                                        | `list`                                                                  |
+| **Help**              | `help`                                                                                        | `help`                                                                  |
+| **Attendance**        | `attendance`                                                                                  | `attendance`                                                            |
+| **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                                                    | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
+| **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                                                  | `unmark t/berniceYu d/2024-11-02`                                       |
+| **View**              | `view t/TELEGRAM`                                                                             | `view t/bob12`                                                          |
+
+## Glossary
+
+- **Home folder**: The folder that `ccaconnect.jar` is placed in
+- **Directory**: A synonym for a folder on the computer
+- **GUI**: Graphical User Interface. This represents the graphical interface that the user can interact with
+- **User**: The individual using the app
+- **System/Application**: The CCAConnect program
+- **Parameter**: A variable that the command uses
+- **JSON**: JavaScript Object Notation. A lightweight data-interchange format used for storing and exchanging data. It is human-readable and easy for machines to parse and generate.
+- **Non-zero unsigned integer**: An integer that ranges 1 to 2147483647 both inclusive
+- **Profile**: A collection of contacts in the system, identified by a profile name
+

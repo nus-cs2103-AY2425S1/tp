@@ -203,8 +203,6 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 
 </div>
 
-How a `mark` operation goes through the `Model` component is shown below:
-
 ![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)
 
 The `unmark` command does the opposite with the similar flow between `Logic` and `Model` component.
@@ -213,6 +211,16 @@ The `unmark` command does the opposite with the similar flow between `Logic` and
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
+
+### Find feature
+
+#### Implementation
+
+The `find` command relies on the various `Predicate` classes, each of which encapsulates specific criteria to determine whether a contact matches the search conditions. These `Predicate` classes enable flexible and modular search logic, allowing the `find` command to filter contacts based on attributes such as `Name`, `Telegram`, `Role`, `FavouriteStatus`.
+
+The following sequence diagram shows how a `find f/` command goes through both `Logic` component and interacts with `Model`
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 ### Switch Profile Feature
 
@@ -312,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
 | `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
- 
+
 
 ### Use cases
 
