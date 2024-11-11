@@ -598,4 +598,4 @@ Team Size: 5
 7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Adjust the message to accurately reflect this requirement.
 8. Modify categories to be case-insensitive in the related commands for ease of use. Currently, the program only considers strictly fully upper-cased categories to be valid.
 9. Modify the deletegoods function to either delete all items with the same name when multiple identical goods are present or allow the user to select which specific items to delete. Currently, deletegoods only removes one item when multiple items with the same name exist, without prompting the user to specify which one.
-10. 
+10. Modify addgoods to accept special characters for real-world applicability. Current functionality does not allow a goods name with special characters.
