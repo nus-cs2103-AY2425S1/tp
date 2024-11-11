@@ -480,6 +480,20 @@ Extensions:
    * Proposed change: Implement case-insensitive validation for email addresses during buyer creation or modification. If a duplicate email (regardless of case) is detected, an error message will inform the user and prevent the action.
    * Planned behavior: The second command will fail with an error message such as: `Error: The email "example@gmail.com" is already in use.`
    * Benefit: Ensures email address uniqueness across the application, eliminating potential conflicts and improving data integrity.
+5. ClientGrid will make `Ask` and `Bid` prices optional in the `filterproperty` command:
+   * Current issue: Agent may not have found a suitable buyer and hence, may not have details of the `Bid` price. Likewise, the owner of the property may not have stated the selling price and hence, agent may not have `Ask` price.
+   * Proposed change: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE [a/ASK] [b/BID]`
+   * Planned behavior: `addproperty` will make `Ask` and `Bid` parameters options (as denoted by `[]`).
+   * Benefit: Agents will be able to add properties based on the most recent `Ask` and `Bid` prices available to them.
+6. ClientGrid will allow decimal numbers in `Ask` and `Bid`:
+    * Current issue: `Ask` and `Bid` prices only takes numbers in increments of 1 thousand but a sizeable number of agents require pricing precision to be in the hundreds as well. 
+    * Proposed change: `Ask` and `Bid` prices will include up to 3 decimal points.
+    * Benefit: `Ask` and `Bid` prices better reflects their needs in price precision without overburdening them with too much details.
+7. Unit number will allow letters for landed properties who share the same postal code but have different but owned by different people:
+    * Current issue: There exists certain `LANDED` properties such as the semi-detached types that share the same postal code but have their unit numbers with letters to distinguish them. 
+    * Proposed change: Allow `LANDED` properties to have different unit numbers with their maximum level number (digits on the left hand side of the `-` delimiter) limited to `01` because these properties expand horizontally.
+    * Planned behavior: `LANDED` properties will not default to `00-00` and will only produce an error if the number on the left hand side of delimiter is not `01`. Comparison of properties with `LANDED` will also include unit numbers as well.
+    * Benefit: Agents will have greater flexibility in distinguishing between `LANDED`properties.
 
 ## **Appendix: Instructions for manual testing**
 

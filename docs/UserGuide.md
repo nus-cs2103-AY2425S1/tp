@@ -10,7 +10,7 @@ ClientGrid is an address book targeted for English-speaking real estate agents h
 
 <box type="info" seamless>
 
-**CLientGrid Context TLDR:**<br>
+**ClientGrid Context TLDR:**<br>
 
 * The app is designed specifically for the Singapore residential property market only.
 * The default language of communication is English. Using other languages may produce errors or unexpected results.
@@ -61,7 +61,7 @@ ClientGrid is an address book targeted for English-speaking real estate agents h
 
 **Notes about the command format:**<br>
 
-* All the commands in ClientGrid (e.g. `list`, `addbuyer`, `addproperty`, `addmeeting`, etc...) are case-sensitive and must be entered in lower case
+* All the commands in ClientGrid (e.g. `list`, `addbuyer`, `addproperty`, `addmeeting`, etc...) are case-sensitive and must be entered in lower case.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME` is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
@@ -125,7 +125,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters).
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
-The BUYER_EMAIL should follow the format `local-part@domain` and adhere to the following constraints:
+* The `BUYER_EMAIL` should follow the format `local-part@domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by an `@` and then a `domain`.
@@ -133,10 +133,9 @@ The BUYER_EMAIL should follow the format `local-part@domain` and adhere to the f
     * consist of one or more domain labels separated by single periods.
       * each domain label must start and end with alphanumeric characters.
       * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
-  * `domain`s with multiple domain labels should be separated by a single period.
   * Examples:
-    * Single-label domain: example@gmail.com (where gmail.com is the domain and .com is the TLD). 
-    * Multi-label domain: example@u.nus.edu (where u.nus.edu is the domain and .edu is the TLD).
+    * Single-label domain: `example@gmail.com` (where `gmail.com` is the domain and `.com` is the TLD). 
+    * Multi-label domain: `example@u.nus.edu` (where `u.nus.edu` is the domain and `.edu` is the TLD).
 
 <box type="info" seamless>
 
@@ -150,7 +149,7 @@ No duplicate emails are allowed. Duplicate emails are detected if
 
 <box type="warning" seamless>
 
-**Special Scenario 1:** It's possible to have a buyer and seller with the same phone number but different names/ emails. This flexibility provided by ClientGrid allows users to record the same client under different names/ emails in buying and selling roles, which may be useful for clients operating under separate business identities (e.g. personal vs. professional roles).
+**Special Scenario:** It's possible to have a buyer and seller with the same phone number but different names/ emails. This flexibility provided by ClientGrid allows users to record the same client under different names/ emails in buying and selling roles, which may be useful for clients operating under separate business identities (e.g. personal vs. professional roles).
 
 </box>
 
