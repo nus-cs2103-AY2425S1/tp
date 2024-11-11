@@ -565,7 +565,7 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **The UI components move around slightly** when clicking "Contacts", "Events", and pressing the `tab` key. This does not affect the function of the app, it is caused by JavaFX, the rendering software.
-4. **Linking a person who is off-screen** will not update the UI of said person. Enter `link` to refresh the UI for the person card.
+4. **Linking a person who is off-screen** will not update the UI of said person. Enter `list` or restart the app to refresh the UI for the person card.
 
 --- {.border-primary .thick}
 
