@@ -36,7 +36,9 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
 * [Glossary](#glossary)
-<div style="page-break-after: always;"></div>
+
+<page-nav-print />
+
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
@@ -68,7 +70,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
