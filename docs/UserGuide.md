@@ -29,7 +29,8 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 ## Installation and Quick Start
 
 1. **Check your Java version**: Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or
-   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.
+   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.<br>
+   Ensure that the version returned is 17 or above, or install it if you have not done so.
 
 2. **Download GamerBook Pro Max**: Download the latest `gamerbook.jar` file
    from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).  
