@@ -657,6 +657,10 @@ Team Size: 5
 4. **Ensure Minimum Window Size for Improved Layout** 
    1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+5. **Sort Appointment by Date** 
+   1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
+   2. Sorting of appointments will be in ascending order (earliest to latest).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
