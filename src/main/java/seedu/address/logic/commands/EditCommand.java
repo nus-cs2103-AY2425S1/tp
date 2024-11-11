@@ -51,8 +51,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_APPEND_REMARK + " ADD-ON TO EXISTING REMARK] "
             + "[" + PREFIX_STATUS + " STATUS] \n"
             + "Example Usage: '" + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com'";
+            + PREFIX_PHONE + " 91234567 "
+            + PREFIX_EMAIL + " johndoe@example.com'";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
             + "by the index number used in the displayed client list. "

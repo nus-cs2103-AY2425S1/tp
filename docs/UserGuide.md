@@ -448,7 +448,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         The following mandatory prefixes are missing: [...]
         Invalid command format!
         add: Adds a client to the address book. Parameters: n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME [t/ TIER]...
-        [r/REMARK]...[s/STATUS]...
+        [r/ REMARK]...[s/ STATUS]...
         Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
   - Error caused by invalid values for some fields
@@ -457,7 +457,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         Invalid command format!
         <INDIVIDUAL FIELD'S ERROR MESSAGES>...
         add: Adds a client to the address book. Parameters: n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME [t/ TIER]...
-        [r/REMARK]...[s/STATUS]...
+        [r/ REMARK]...[s/ STATUS]...
         Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
 
@@ -532,7 +532,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
           Required Parameters: INDEX (must be a positive integer)
           Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
-          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
+          Example Usage: 'edit 1 p/ 91234567 e/ johndoe@example.com'
           ```
     - Error caused by invalid values for some fields
         - Message:
@@ -544,7 +544,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
-  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/NA` .
+  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/ NA` .
 
 
 
