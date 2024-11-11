@@ -32,7 +32,7 @@ public class FindSessionCommandTest {
 
     @Test
     public void execute_matchingSessions_successMessage() {
-        String expectedMessage = String.format(FindSessionCommand.MESSAGE_SUCCESS, "Rehearsal W1");
+        String expectedMessage = FindSessionCommand.MESSAGE_SUCCESS;
         SessionContainsKeywordsPredicate predicate = new SessionContainsKeywordsPredicate(Arrays.asList("rehearsal"));
         FindSessionCommand command = new FindSessionCommand(predicate);
         expectedModel.updateFilteredMemberList(predicate);
@@ -42,8 +42,7 @@ public class FindSessionCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleSessionsFound() {
-        String sessionNames = "Meeting W1\nRehearsal W1\nMeeting W1";
-        String expectedMessage = String.format(FindSessionCommand.MESSAGE_SUCCESS, sessionNames);
+        String expectedMessage = FindSessionCommand.MESSAGE_SUCCESS;
         SessionContainsKeywordsPredicate predicate =
                 new SessionContainsKeywordsPredicate(Arrays.asList("rehearsal", "meeting"));
         FindSessionCommand command = new FindSessionCommand(predicate);
