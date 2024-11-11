@@ -465,7 +465,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
 * Optional Fields: `t/`, `r/`, `s/`
 
-Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for detailed explanations of each flag and acceptable arguments
+Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for detailed explanations of each flag and acceptable arguments.
 
 **Examples:**
 - Add new client (without optional fields):
@@ -545,7 +545,7 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
     - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
-- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#641-viewing-a-clients-details).
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additionally, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#641-viewing-a-clients-details).
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments).
 
@@ -631,7 +631,7 @@ delete <INDEX>
     - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
+For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments).
 
 **Examples:**
 - Remove a client with a specific index (e.g. at index 12):
@@ -729,7 +729,7 @@ filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMA
     - **Example:** `i/ >5000` will filter clients with an income greater than 5000.
     - See [Matching Criteria for Income](#filter-by-income) for more information.
 
-For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
+For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments).
 
 **Examples:**
 - Filter clients by name:
@@ -843,8 +843,8 @@ view <INDEX>
 
 **What to Expect:**
 - **On Success:**
-    - A split view opens showing the selected client's complete information
-    - The main list remains visible and functional on the left while detailed information appears on the right
+    - A split view opens showing the selected client's complete information.
+    - The main list remains visible and functional on the left while detailed information appears on the right.
     - The images below show the GUI before and after using `view 1`:
         <div style="display: flex; gap: 10px;">
             <figure markdown>
@@ -1018,7 +1018,7 @@ Each credit card tier and client status is visually distinguished in the UI with
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Names Containing `/`**: Using `/` in names can result in an invalid command error or may inadvertently assign incorrect attributes to the client. To avoid this, spell out names fully. For example, instead of "Ramesh s/o Ravichandran," use "Ramesh Son Of Ravichandran".
 4. **Names Containing `@`**: The system does not currently support names with the `@` symbol, but it is planned for a future enhancement. To avoid errors in the meantime, please replace `@` with an alternative format, such as "John at Doe" instead of "John @ Doe."
-5. **Using non-english text input can cause bugs**. This release fully supports only standard English text input and does not support the extended Latin alphabet or non-English characters. Using accented characters (e.g., é, ñ), non-Latin scripts (e.g., Chinese), or right-to-left text (e.g., Arabic) may lead to unexpected behavior, including display issues, data processing errors, or even command parsing failures. Expanded support for international characters and languages is planned for future releases.
+5. **Using non-English text input can cause bugs**. This release fully supports only standard English text input and does not support the extended Latin alphabet or non-English characters. Using accented characters (e.g., é, ñ), non-Latin scripts (e.g., Chinese), or right-to-left text (e.g., Arabic) may lead to unexpected behavior, including display issues, data processing errors, or even command parsing failures. Expanded support for international characters and languages is planned for future releases.
 6. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
 7. **For the edit command**, edits that do not result in changes to client details are currently considered valid. We are working on adding warnings to notify users of unchanged edits in future releases.
 
