@@ -10,6 +10,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -126,6 +127,16 @@ public class DeleteCommandTest {
             new DeleteCommand(negativeIndex);
         });
     }
+
+    @Test
+    public void execute_nullConfirmationController_throwsAssertionError() {
+        Name targetName = new Name("Alice");
+        assertThrows(AssertionError.class, () -> new DeleteCommand(targetName, null));
+
+        Index targetIndex = Index.fromOneBased(1);
+        assertThrows(AssertionError.class, () -> new DeleteCommand(targetIndex, null));
+    }
+
     @Test
     public void equals() {
         DeleteCommand deleteNameCommand = new DeleteCommand(new Name("Alice"));
