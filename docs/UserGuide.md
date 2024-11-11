@@ -452,6 +452,8 @@ The `find` command allows you find student by a field or any combination of fiel
 - `find n/john joe` returns students whose names contain `john` or `joe`.
 - `find e/asdf p/123` returns students whose email contains `asdf` and phone number contains `123`.
 
+<div style="page-break-after: always;"></div>
+
 **Example Usage:** `find n/Kim`
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
@@ -532,10 +534,18 @@ The `undo` and `redo` commands allow you to undo/redo the most recent changes ma
 - `redo` – Reverses the latest `undo` command.
 
 **Example Usage:**
+
 **Input:** User enters the `undo` command to reverse the last change.
 ![Ui](images/undo_input.png)
+
+<div style="page-break-after: always;"></div>
+
 **Output:** The UI updates to reflect the reversal of the most recent change.*
 ![Ui](images/undo_output.png)
+
+<div style="page-break-after: always;"></div>
+
+
 **Input:** User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redo.png)
