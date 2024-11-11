@@ -175,6 +175,7 @@ The following is an example JSON output for a person:
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## General Flow
 The activity diagram below illustrates the general flow of an interaction between the user and StoreClass.
 
@@ -187,6 +188,7 @@ The activity diagram below illustrates the general flow of an interaction betwee
 5. The `UI` component displays the result of the command execution to the user. <br>
 
 ---
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
