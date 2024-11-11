@@ -19,7 +19,8 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed on your Computer.
+[//]: # (Quick start guide below adapted from https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html)
+1. Ensure you have Java `17` or above installed in your Computer.
    1. To check if you have Java installed, open a command terminal:
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
       * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
@@ -27,6 +28,11 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
    1. In the terminal, type `java -version`.
    1. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
    1. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+
+       [//]: # (
+        @@author CS2103T-F12-4-reused
+        Reused from https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html
+        )
    1. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` File:
@@ -72,7 +78,7 @@ Action     | Format, Examples
 **Add**  : adds a student to UGTeach  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
 **Edit** : edits a student in UGTeach | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/SCHEDULE] [s/SUBJECT] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Delete** : deletes a student in UGTeach | `delete INDEX`<br> e.g., `delete 3`
-**Find** : finds a student in UGTeach with part of name matching one of keywords, **and** their schedule falling on one of the days specified | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
+**Find** : finds students whose names contain any of the given keywords *and* their schedules contain any of the given days | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex John d/Friday`
 **Pay** : updates amount paid by a student | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **Owe** : updates amount owed by a student | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** : updates amount paid and owed by student (used when the student repays an amount owed to you) | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
@@ -220,9 +226,11 @@ Edits an existing student in UGTeach.
 <box type="important" header="##### Constraints">
 
 * The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 * At least one of the optional fields must be provided. You may refer to
-[Constraints of Add command](#constraints) for acceptable values of each field.
+  [Constraints of Add command](#constraints) for acceptable values of each field.
 * Existing values will be updated to the input values.
+
 </box>
 
 <box type="tip" header="##### Tips">
@@ -254,6 +262,7 @@ Deletes the specified student from UGTeach.
 
 * The **INDEX** refers to the index number shown in the **displayed** student list.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
@@ -261,7 +270,7 @@ Deletes the specified student from UGTeach.
 
 ### Finding students' information: `find`
 
-Finds students whose names contain any of the given keywords *and* their tuition day contains any of the given days.
+Finds students whose names contain any of the given keywords *and* their schedules contain any of the given days.
 
 **Format:** `find [n/KEYWORD [MORE_KEYWORDS...]] [d/DAY [MORE_DAYS...]]`
 
@@ -324,6 +333,7 @@ When he/she pays the outstanding fees at a later time, you should use the [`sett
 
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 * **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
 
 </box>
@@ -355,7 +365,8 @@ Settles the amount owed by the student and adds it to the paid amount. To record
 
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX** **must be a positive integer** 1, 2, 3, …​
-* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
+* **AMOUNT** must be a positive value and must not be more than the current amount owed by the student.
 
 </box>
 
@@ -486,6 +497,7 @@ Please note:
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
+1. **For commands with INDEX, INDEX cannot be larger than 2147483647** (e.g. `3000000000`, `4000000000`, `1500000000`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `1`, `2`, `3`, assuming there are that many students in UGTeach. 
 1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to exclude the special characters. E.g. replace the `S/O` with `s o` or `son of`, likewise for `D/O`.
 1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
 e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>

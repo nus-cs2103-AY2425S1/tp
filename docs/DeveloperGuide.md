@@ -509,7 +509,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+[//]: # (The non-functional requirement below inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
+
 1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
 1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
 1. The application should provide clear help sections for users, explaining how to use its features.
@@ -531,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The application must use a version control system to track changes and maintain multiple versions of the software.
 
 **Logging**
-1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
+1. Activity Logs: The system should log all user activities and critical events for security auditing and troubleshooting.
 
 
 ### Glossary
@@ -872,6 +875,30 @@ We plan to make the `add command` shorter by making the `email` field **optional
 `add n/NAME p/PHONE_NUMBER a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [e/EMAIL] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`, where parameters in square brackets are optional.
 
 
+1. **Improve duplicate detection to meet real-world use cases**: The current version only considers students with **both** the same name and the same phone number as duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address could also serve as a unique identifier for students. <br>
+   In the future version, we plan to include email address as another criterion for detecting duplicates. To be specific,
+   * Two students with the same name and the same phone number are duplicates;
+   * Two students with the same name and the same email address are duplicates;
+   * Two students with different names, but the same phone number or the same email address, are acceptable. <br>
+    
+    The following code snippet shows how 2 students are differentiated. Specifically, this will be the updated `isSameStudent` method of the `Student` class.
+    ```java
+    public boolean isSameStudent(Student otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+        
+        if (otherStudent == null || !otherStudent.getName().equals(getName())) {
+            return false;
+        }
+
+        return otherStudent.getPhone().equals(getPhone())
+                || getEmail() == null
+                || otherStudent.getEmail().equals(getEmail());
+    }
+    ```
+
+
 1. **Allow students to have multiple classes:** Currently, UGTeach only allow 1 student to have 1 subject and 1 schedule. UGTeach also forbid users from duplicating contacts.
 Hence, users are unable to record multiple classes for students who require tutoring for **more than one subject**.
 Therefore, we plan to combine the `subject` and `schedule` parameters to form a `class` parameter that takes in 1 or more classes (comma-separated). For instance, the input
@@ -922,6 +949,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
     e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
 
+
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
     This might be inconvenient for the user, as the user might accidentally type the `clear command` and lose all the students' data.
     Therefore, we plan to enforce a double confirmation for the `clear command`. When the user types the `clear command`, UGTeach will prompt the user to confirm the deletion of all students in the list.
@@ -929,12 +957,6 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
     We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
 
-1. **Improve duplicate detection to meet real-world use cases**:
-* The current version only considers students with **both** the same name and the same phone number as duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address could also serve as a unique identifier for students. <br>
-* In the future version, we plan to include email address as another criterion for detecting duplicates. To be specific,
-    * two students with the same name and the same phone number are duplicates;
-    * two students with the same name and the same email address are duplicates;
-    * two students with different names, but the same phone number or the same email address, are acceptable.
 
 1. **Enhance storage component to save data in a backup file**: Assuming user have not changed the `preferences.json` file, the current storage component for UGTeach only saves data in the `ugteach.json` file. If the `ugteach.json` file is corrupted or deleted, **all** the data will be lost.
     This might be inconvenient for the user, as the user might accidentally delete the `ugteach.json` file or the file might be corrupted due to some reasons.
@@ -946,7 +968,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     ![backupDataFile.png](images/backupData.png)
 
     The following code snippet shows the planned enhancement for the storage component to save data in a backup file. Specifically, this will be the updated `saveAddressBook` method for `JsonAddressBookStorage` class.
-    ```
+    ```java
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
          requireNonNull(addressBook);
          requireNonNull(filePath);
@@ -968,3 +990,11 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
     The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
+
+
+1. **Integrate `pay` and `settle` command to reduce user confusion**: In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users. 
+   * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
+       * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
+       * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
+       * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
+   * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want.

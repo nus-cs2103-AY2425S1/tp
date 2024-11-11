@@ -90,7 +90,7 @@ public class Student {
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Returns true if both students have the same name and same phone number
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
