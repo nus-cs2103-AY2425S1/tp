@@ -568,6 +568,9 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
 
+**Q**: Can I add multiple identical applications to the same company?
+**A**: Yes, of course you can! This is not unlike a real-life scenario, where you could possibly apply for the same role multiple times, to the same company. However many times you apply to the same company, `InternBuddy` is here for you! 
+
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -584,7 +587,6 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 7. **The error message** for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the `domain` between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the notes in [features](#features).
 8. `InternBuddy` **currently accepts invalid phone numbers**, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
 9. `InternBuddy` **currently has no limit on the tag length.** However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
-10. `InternBuddy` **currently accepts multiple applications with the same name and descriptions.** In the real world, one may apply for the same role in a company multiple times, hence this is not considered to be a bug to be rectified.
 
 
 [back to top](#internbuddy-user-guide)
