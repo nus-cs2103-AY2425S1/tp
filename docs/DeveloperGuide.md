@@ -351,9 +351,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 **Extensions**
 * 1a. Cher detects an invalid or out-of-range index.
     - 1a1. Cher shows an error message with the list of invalid indexes.
+    - 1a2. Cher shows correct input format.<br>
       Use case ends.
 * 1b. User enters an index that is not displayed in the current displayed list.
     - 1b1. Cher shows an error indicating the index is not displayed.
+    - 1a2. Cher shows correct input format.<br>
       Use case ends.
 
 #### Use case: UC9 - Filter and then select contacts
@@ -368,14 +370,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 **Extensions**
 * 1a. Cher detects an error in user input for the filter criteria.
     - 1a1. Cher shows an error message and provides the correct filter input format.
+    - 1a2. Cher shows correct input format.<br>
       Use case ends.
 * 3a. Cher detects an invalid index or indexes outside the filtered list.
     - 3a1. Cher displays an error message indicating the invalid indexes.
+    - 3a2. Cher shows correct input format.<br>
       Use case ends.
-* 3b. No contacts match the filter criteria.
-    - 3b1. Cher shows a message that no contacts matched the criteria.
-      Use case ends.
-
 
 #### Use case: UG10 - Mark attendance
 **MSS**
