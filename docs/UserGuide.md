@@ -212,7 +212,7 @@ Note that the participants must be valid persons in the database.
 Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
   
-Remember that faculties and sports use shortcuts found in [this section.](#using-shortcuts-coming-in-v20)
+Please take note that faculties and sports use ONLY shortcuts found in [this section](#using-shortcuts).
 
 ### Editing an event : `editevent`
 
