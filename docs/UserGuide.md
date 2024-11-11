@@ -741,11 +741,7 @@ Examples:
 
 ### Unmarking a task  : `unmark-task` or `untask`
 
-<<<<<<< HEAD
 You can mark one or more `Tasks` as not completed by using the `unmark-task` command.
-=======
-You can mark one or more Tasks as not completed by using the `unmark-task` command.
->>>>>>> master
 
 Format: `unmark-task TASK_NUMBER...` or `untask TASK_NUMBER...`
 
@@ -763,11 +759,7 @@ Examples:
 
 ### Deleting a Task : `delete-task` or `dtask`
 
-<<<<<<< HEAD
-You can delete a specific Task using the `delete-task` command.
-=======
 You can delete a specific Task from WedLinker by using the `delete-task` command.
->>>>>>> master
 
 Format: `delete-task TASK_NUMBER` or `dtask TASK_NUMBER`
 
@@ -792,17 +784,16 @@ You can use the `assign-vendor` command to designate a contact to be a Vendor.
 
 Format: `assign-vendor PERSON_NUMBER` or `asv PERSON_NUMBER`
 
-To designate a contact as a vendor, type `assign-vendor` followed by the positional number of the person in the contact list.
+To designate a contact as a Vendor, type `assign-vendor` followed by the positional number of the person in the contact list.
 
-> [!NOTE]
-> Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, can be assigned with tags etc.
-
+* Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, can be assigned with tags etc.
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Vendor` can now have `Tasks` assigned to them.
 
 Examples:
 * To designate the first contact in the person list as a vendor, enter the command:
     * `assign-vendor 1`.
+<br>
 
 ### Unassigning a Vendor : `unassign-vendor` or `uv`
 
@@ -814,9 +805,8 @@ To remove a `Vendor` designation from a contact, type `unassign-vendor` followed
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * Unassigns a `Vendor` at the specified `PERSON_NUMBER` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
-* No tasks should be assigned to the `Vendor` before it is unassigned.
+* No tasks should be assigned to the `Vendor` before they are unassigned.
 * However, if the specified `Vendor` has tasks assigned to them, you can use the label `f/` to force the removal of the vendor designation and remove all tasks currently assigned to that `Vendor`.
-* A regular contact can no longer have `Tasks` assigned them.
 
 Examples:
 * To remove a vendor designation from the first contact, enter the command:
