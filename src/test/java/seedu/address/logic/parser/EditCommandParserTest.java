@@ -61,8 +61,6 @@ public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String MESSAGE_INVALID_INDEX_FOR_EDIT =
-            Messages.getErrorMessageWithUsage(MESSAGE_INVALID_INDEX, EditCommand.MESSAGE_USAGE);
     private static final String MESSAGE_MISSING_INDEX_FOR_EDIT =
             Messages.getErrorMessageWithUsage(MESSAGE_MISSING_INDEX, EditCommand.MESSAGE_USAGE);
     private EditCommandParser parser = new EditCommandParser();
@@ -79,19 +77,23 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_MISSING_INDEX_FOR_EDIT);
     }
 
+    private String getMessageInvalidIndexForEdit(String invalidIndex) {
+        return Messages.getErrorMessageWithUsage(
+                String.format(MESSAGE_INVALID_INDEX, invalidIndex), EditCommand.MESSAGE_USAGE);
+    }
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX_FOR_EDIT);
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY, getMessageInvalidIndexForEdit("-5"));
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX_FOR_EDIT);
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, getMessageInvalidIndexForEdit("0"));
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_INDEX_FOR_EDIT);
+        assertParseFailure(parser, "1 some random string", getMessageInvalidIndexForEdit("1 some random string"));
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_INDEX_FOR_EDIT);
+        assertParseFailure(parser, "1 i/ string", getMessageInvalidIndexForEdit("1 i/ string"));
     }
 
     @Test

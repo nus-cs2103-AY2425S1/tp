@@ -13,7 +13,10 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+1. The Undo/Redo features of ContactCS are implemented with references to the `[Proposed] Undo/redo feature` section in the
+[original AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+During the development process of these two features, the codes are written by our own developers, based on the suggested
+architectural design and APIs mentioned in the above documentation.
 
 --------------------------------------------------------------------------------------------------------------------
 
