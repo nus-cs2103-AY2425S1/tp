@@ -235,6 +235,7 @@ public class EditCommandParserTest {
         // Test input with duplicate group names
         String input = "1 g/ group 1 g/ group 1";
 
+        // AI was used to check the syntax for testing exceptions
         // Expect a ParseException to be thrown due to duplicate groups
         assertThrows(ParseException.class, () -> parser.parse(input));
     }
