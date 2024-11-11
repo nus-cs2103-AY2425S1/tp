@@ -322,8 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **TalentHub** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
-
 **Use case: UC01 - Add Contact**
 
 **MSS**
@@ -363,8 +361,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager requests to edit the information a specific contact
-2. TalentHub change the information of the target person
+1. Talent Manager requests to edit the information of a specific contact
+2. TalentHub changes the information of the target person
 
 Use case ends.
 
@@ -417,7 +415,7 @@ Use case ends.
 2. TalentHub requests for confirmation of deletion
 3. TalentHub deletes the person and all his/her corresponding events
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -445,7 +443,7 @@ Use case ends.
 
 * 2b. Talent Manager cancels the deletion.
 
-  * 2b1. TalentHub outputs an successful cancellation message.
+  * 2b1. TalentHub outputs a successful cancellation message.
 
     Use case ends.
 
@@ -462,7 +460,7 @@ Use case ends.
 1. Talent Manager requests to list contacts
 2. TalentHub shows a list of all contacts
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -476,7 +474,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find persons whose name contains `keywords`
+1. Talent Manager requests to find persons whose name contains `keywords`
 2. TalentHub processes and list person(s) whose name contains `keywords`
 
    Use case ends.
@@ -491,7 +489,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-  * 1b1. TalentHub shows an error message.
+  * 1b1. TalentHub outputs an error message.
 
     Use case ends.
 
@@ -499,10 +497,10 @@ Use case ends.
 
 **MSS**
 
-1. User requests to filter persons with `tag`
-2. TalentHub processes and list person(s) with `tag`
+1. Talent Manager requests to filter persons with `tag`
+2. TalentHub processes and lists person(s) with `tag`
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -558,7 +556,7 @@ Use case ends.
 **MSS**
 
 1. Talent Manager requests to edit the information of an event for a specific celebrity
-2. TalentHub change the information of the event
+2. TalentHub changes the information of the event
 
 Use case ends.
 
@@ -593,7 +591,7 @@ Use case ends.
 **MSS**
 
 1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
 
    Use case ends.
 
@@ -602,16 +600,16 @@ Use case ends.
 **MSS**
 
 1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
 
-   Use case ends.
+Use case ends.
 
 **Use case: UC13 - Delete Event**
 
-1. Talent Manager requests to delete a specific event in the list
+1. Talent Manager requests to delete a specific event from the list
 2. TalentHub deletes the event
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -623,13 +621,13 @@ Use case ends.
 
 * 1b. The list is empty.
 
-    * 1b1. TalentHub shows an index error message.
+    * 1b1. TalentHub outputs an index error message.
 
       Use case ends.
 
 * 1c. The given index is invalid.
 
-    * 1c1. TalentHub shows an index error message.
+    * 1c1. TalentHub outputs an index error message.
 
       Use case ends.
 
@@ -641,7 +639,7 @@ Use case ends.
 1. Talent Manager requests to list all events.
 2. TalentHub retrieves and displays all events in chronological order.
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -651,14 +649,14 @@ Use case ends.
 
       Use case ends.
 
-**Use case: UC15 - Find Contact by Name**
+**Use case: UC15 - Find Event by Name**
 
 **MSS**
 
-1. User requests to find event with name contains `keywords`
+1. Talent Manager requests to find event with name contains `keywords`
 2. TalentHub processes and list event with name contains `keywords`
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -670,7 +668,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-    * 1b1. TalentHub shows an error message.
+    * 1b1. TalentHub outputs an error message.
 
       Use case ends.
 
@@ -679,10 +677,10 @@ Use case ends.
 
 **MSS**
 
-1. User requests to filter event by celebrity's name
-2. TalentHub processes and list target celebrity's events
+1. Talent Manager requests to filter event by celebrity's name
+2. TalentHub processes and lists target celebrity's events
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -694,7 +692,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-    * 1b1. TalentHub shows an error message.
+    * 1b1. TalentHub outputs an error message.
 
       Use case ends.
 
@@ -704,7 +702,7 @@ Use case ends.
 2. TalentHub requests for confirmation of clear
 3. TalentHub clears all events in the list
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -730,7 +728,7 @@ Use case ends.
 
       Use case resumes from step 2.
 
-**Use case: UC17 - Clear Persons and Events**
+**Use case: UC18 - Clear Persons and Events**
 
 1. Talent Manager requests to clear all persons and events in the list
 2. TalentHub requests for confirmation of clear
@@ -752,7 +750,7 @@ Use case ends.
 
 * 2b. Talent Manager cancels the clear.
 
-    * 2b1. TalentHub outputs an successful cancellation message.
+    * 2b1. TalentHub outputs a successful cancellation message.
 
       Use case ends.
 
