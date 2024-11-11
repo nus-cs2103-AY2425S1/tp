@@ -520,9 +520,9 @@ Those without any stars are user stories that were considered but will not be im
 
 (For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `user`, unless specified otherwise)
 
-> Use Cases beginning with 'UC' cover core Wedlinker functionalities.
+> Use Cases beginning with 'UC' cover core WedLinker functionalities.
 >
-> Use Cases beginning with 'UCSH' cover non-core Wedlinker functionalities.
+> Use Cases beginning with 'UCSH' cover non-core WedLinker functionalities.
 ---
 ### **Use case: UC01 — List all Contacts**
 
@@ -820,7 +820,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Resetting sample data
 
-   1. Open the folder where the `Wedlinker.jar` file is.
+   1. Open the folder where the `WedLinker.jar` file is.
 
    2. Directly delete the `data` folder in the same directory.
 
@@ -914,7 +914,7 @@ testers are expected to do more *exploratory* testing.
    7. Other incorrect find name commands to try:
       * `find`
       * `find n/` (where name keyword is blank)
-      * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in Wedlinker)
+      * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in WedLinker)
 
       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -936,7 +936,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect find address commands to try:
         * `find`
         * `find a/` (where name keyword is blank)
-        * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in Wedlinker)
+        * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in WedLinker)
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -958,7 +958,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect find phone commands to try:
         * `find`
         * `find p/` (where name keyword is blank)
-        * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in Wedlinker)
+        * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in WedLinker)
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -980,7 +980,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect find email commands to try:
         * `find`
         * `find e/` (where email keyword is blank)
-        * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in Wedlinker)
+        * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in WedLinker)
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -1006,7 +1006,7 @@ testers are expected to do more *exploratory* testing.
     6. Other incorrect find tag commands to try:
         * `find`
         * `find t/` (where tag keyword is blank)
-        * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in Wedlinker)
+        * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in WedLinker)
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -1038,7 +1038,7 @@ testers are expected to do more *exploratory* testing.
     8. Other incorrect find wedding commands to try:
         * `find`
         * `find w/` (where wedding keyword is blank)
-        * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in Wedlinker)
+        * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in WedLinker)
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
@@ -1064,7 +1064,7 @@ testers are expected to do more *exploratory* testing.
     6. Other incorrect find task commands to try:
         * `find`
         * `find tk/` (where task keyword is blank)
-        * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in Wedlinker)
+        * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in WedLinker)
        
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command. 
 
@@ -1093,15 +1093,15 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `add n/Nancy Drew p/9911882 e/nancy.drew@hotmail.com` <br>
       Expected: A new contact with name `Nancy Drew`, phone `9911882`, and email `nancy.drew@hotmail.com` is added to the `Person` list.
 
-   3. Test case: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in Wedlinker) <br>
+   3. Test case: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in WedLinker) <br>
       Expected: A new contact with name `Tatiana Komarova` is added to the `Person` list. A new tag with name `NEW TAG` is added to the `Tag` list.
       A new wedding with name `NEW WEDDING` is added to the `Wedding` list. The new contact, `Tatiana Komarova`, will be tagged with `NEW TAG` and
       will be assigned to the wedding `NEW WEDDING`.
 
    4. Test case (following Test case 4): `add n/Tatiana Komarova` <br>
-      Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in Wedlinker.
+      Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in WedLinker.
 
-   5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in Wedlinker) <br>
+   5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in WedLinker) <br>
       Expected: A new contact with name `Felicia D'Alimaty` is added to the `Person` list. No new tags or weddings will be created. The new contact, `Felicia D'Alimaty`, will be tagged with `EXISTING TAG` and
       will be assigned to the wedding `EXISTING WEDDING`.
 
@@ -1249,18 +1249,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving data altered during application use <br>
 
-    1. Wedlinker automatically saves data to the hard disk during operation. Any operations that change details of contacts,
+    1. WedLinker automatically saves data to the hard disk during operation. Any operations that change details of contacts,
     weddings, tags, or tasks will be saved immediately following the operations is successfully executed.
 
 
 2. Dealing with missing/corrupted data files
 
-    1. Upon booting up WedLinker and the contact/wedding/tag/task list is not as per expected, open the `data` folder where Wedlinker stores data.
+    1. Upon booting up WedLinker and the contact/wedding/tag/task list is not as per expected, open the `data` folder where WedLinker stores data.
    
     2. Within the folder, open `addressBook.json` and identify any mistakes with stored data.<br>
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
-    3. If the data is beyond repair, delete the entire `data` folder or the `AddressBook.json` file to start afresh with sample data.
+    3. If the data is beyond repair, delete the entire `data` folder or the `addressbook.json` file to start afresh with sample data.
 
 <br>
 
