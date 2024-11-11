@@ -243,7 +243,7 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 <box type="tip" seamless>
 
 **Tip 1:** A company can have any number of tags (including 0) <br>
-**Tip 2:** Tags can be a useful way to categorise different companies into various groups!
+**Tip 2:** Tags can be a useful way to categorise different companies into various groups! <br>
 **Tip 3:** A company requires a name and email at the minimum
 </box>
 

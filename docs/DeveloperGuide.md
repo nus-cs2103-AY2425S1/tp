@@ -414,11 +414,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | STEM major planning to apply for internships                | find a specific company by name                               | retrieve information about a company without having to go through the entire list                        |
 | `* * *`  | STEM major planning to apply for internships                | find specific companies based on tags                         | retrieve information on companies attached to a certain tag without having to go through the entire list |
 | `* * *`  | STEM major planning to apply for internships                | find specific companies based on application names or details | retrieve information about companies without having to go through the entire list                        |
-| `* *`    | STEM major planning to apply for internships                | add additional info about the company                         |                                                                                                          |
+| `* *`    | STEM major planning to apply for internships                | add additional info about the company                         | track the relevant information pertaining to the company                                                 |
 | `* *`    | STEM major planning to apply for internships                | update the information for a specific company                 | ensure my information is up-to-date                                                                      |
 | `*`      | STEM major planning to apply for internships                | add referral contacts to companies                            | remember to include them when applying                                                                   |
-| `* * *`  | STEM major planning to apply for internships                | favourite a company                                           | mark that company as a priority                                                                          |
-| `* * *`  | STEM major planning to apply for internships                | unfavourite a company                                         | unmark that company as a priority if no longer relevant                                                  |
+| `* *`    | STEM major planning to apply for internships                | favourite a company                                           | mark that company as a priority                                                                          |
+| `* *`    | STEM major planning to apply for internships                | unfavourite a company                                         | unmark that company as a priority if no longer relevant                                                  |
 | `*`      | STEM major planning to apply for internships                | sort companies by hiring status                               | better prioritize certain companies                                                                      |
 | `*`      | STEM major planning to apply for internships                | sort companies by location distance                           | better prioritize certain companies                                                                      |
 | `*`      | STEM major planning to apply for internships                | sort companies by remote work availability                    | better prioritize certain companies                                                                      |
@@ -431,10 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | STEM major currently applying for internships               | add notes for upcoming / completed interviews                 | find a specific piece of info for that interview in the future                                           |
 | `*`      | STEM major currently applying for internships               | organize interview timings                                    | ensure that they do not overlap                                                                          |
 | `* * *`  | STEM major planning to apply or is applying for internships | remove companies which are no longer relevant to me           | reduce clutter in my list of potential companies                                                         |
-| `* * *`  |                                                             |                                                               |                                                                                                          |
 
-
-*{More to be added}*
 
 ### Use cases
 
