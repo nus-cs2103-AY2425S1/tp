@@ -78,6 +78,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
@@ -445,6 +447,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -457,9 +461,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-<div style="page-break-after: always;"></div>
 
 ## Documentation, Logging, Testing, Configuration, Dev-Ops
 
@@ -826,6 +827,8 @@ Given below are instructions to test the app manually.
 4. Re-launch the app by double-clicking the `jar` file.
     - **Expected:** The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a customer
 
 #### Adding a new customer with all valid fields
@@ -842,6 +845,8 @@ Given below are instructions to test the app manually.
     - **Expected:** Error message indicating the missing name field.
 2. Test case: `addCustomer n/John Doe p/abc e/johndoe@example.com a/123 Baker Street, #01-02 i/Regular customer` (invalid phone number)
     - **Expected:** Error message indicating the invalid phone number.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a supplier's details
 
@@ -860,6 +865,8 @@ Given below are instructions to test the app manually.
 2. Test case: `editContact 10 p/91234567` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a customer order
 
 #### Adding a new customer order
@@ -877,6 +884,8 @@ Given below are instructions to test the app manually.
 3. Test case: addCustomerOrder n/Caleb p/94519909 o/-1
     - **Expected:** Error message indicating that the pastry id cannot be negative.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a customer order
 
 #### Deleting an existing customer order
@@ -893,6 +902,8 @@ Given below are instructions to test the app manually.
     - **Expected:** Error message indicating an invalid index.
 2. Test case: `deleteCustomerOrder 100` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a supply order
 
@@ -926,6 +937,7 @@ Given below are instructions to test the app manually.
 3. **Test case**: `addPastry Blueberry Muffin 3.00`
     - **Expected**: Error message indicating that at least one ingredient must be provided.
 
+<div style="page-break-after: always;"></div>
 
 ### Filtering contacts by tags
 
@@ -950,6 +962,8 @@ Given below are instructions to test the app manually.
     - **Expected:** App starts with sample data and a new data file is created.
 2. **Simulating a corrupted data file**: Introduce invalid JSON syntax in the data file and restart the app.
     - **Expected:** App shows an error message and starts with an empty address book or sample data.
+
+<div style="page-break-after: always;"></div>
 
 ## Future Enhancements
 1. **Allow bakery owners to edit ingredient cost after input**
