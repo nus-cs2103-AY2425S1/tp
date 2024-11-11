@@ -511,9 +511,9 @@ testers are expected to do more *exploratory* testing.
        Expected: New person is not added. Error details shown in the status message for duplicate prefix.
 
     1. Test case: `add n/Jane Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
-       Expected: New person is not added as the phone number and email are already used by John Doe. Error details shown in the status message for person already exists.
+       Expected: New person is not added as the course name and email are already used by John Doe. Error details shown in the status message for person already exists.
 
-    1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add x/XXX` where `x/` is an unknown prefix.
+    1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add x/XXX` where `x/` is an unknown prefix.<br>
        Expected: Similar to previous.
 
 ### Editing a person
@@ -527,19 +527,19 @@ testers are expected to do more *exploratory* testing.
        ```
        Then list all persons using the `list` command.
 
-    1. Test case: `edit 1 n/Jane Doe`
+    1. Test case: `edit 1 n/Jane Doe`<br>
        Expected: Name of the first person is changed to Jane Doe. Details of the edited person shown in the status message.
 
-    1. Test case: `edit 2 p/87654321`
+    1. Test case: `edit 2 p/87654321`<br>
        Expected: Phone number of the second person is changed to 87654321. Details of the edited person shown in the status message.
 
-    1. Test case: `edit 1 e/invalid`
+    1. Test case: `edit 1 e/invalid`<br>
        Expected: Email of the second person is not changed. Error details shown in the status message for invalid email.
 
-    1. Test case: `edit 0 n/John Doe`
+    1. Test case: `edit 0 n/John Doe`<br>
        Expected: No person is edited. Error details shown in the status message for invalid index.
 
-    1. Other incorrect edit commands to try: `edit`, `edit 1 x/XXX` where `x/` is an unknown prefix.
+    1. Other incorrect edit commands to try: `edit`, `edit 1 x/XXX` where `x/` is an unknown prefix.<br>
        Expected: Similar to previous.
 
 ### Adding a grade to a person
@@ -552,19 +552,19 @@ testers are expected to do more *exploratory* testing.
        ```
        Then list all persons using the `list` command.
 
-    1. Test case: `addGrade 1 n/midterm s/90 w/40`
+    1. Test case: `addGrade 1 n/midterm s/90 w/40`<br>
        Expected: New grade is added to the first person. Details of the new grade shown in the status message.
 
-    1. Test case: `addGrade 1 n/midterm s/85 w/30`
+    1. Test case: `addGrade 1 n/midterm s/85 w/30`<br>
        Expected: Old grade is overwritten with the new grade. Details of the edited grade shown in the status message.
 
-    1. Test case: `addGrade 1 n/final s/150 w/50`
+    1. Test case: `addGrade 1 n/final s/150 w/50`<br>
        Expected: No grade is added. Error details shown in the status message for invalid score.
 
-    1. Test case: `addGrade 1 n/final s/80 w/90`
+    1. Test case: `addGrade 1 n/final s/80 w/90`<br>
        Expected: No grade is added. Error details shown in the status message for total weightage exceeding 100%.
 
-    1. Other incorrect edit commands to try: `addGrade`, `addGrade 1 x/XXX` where `x/` is an unknown prefix.
+    1. Other incorrect edit commands to try: `addGrade`, `addGrade 1 x/XXX` where `x/` is an unknown prefix.<br>
        Expected: Similar to previous.
 
 ### Marking a person's attendance
@@ -577,19 +577,19 @@ testers are expected to do more *exploratory* testing.
        ```
        Then list all persons using the `list` command.
 
-    1. Test case: `mark 1 d/31/01/2024 12:00 m/attended`
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/attended`<br>
        Expected: Attendance is marked for the first person. Details of the attendance shown in the status message.
 
-    1. Test case: `mark 1 d/31/01/2024 12:00 m/absent`
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/absent`<br>
        Expected: Old attendance is overwritten with the new attendance. Details of the edited attendance shown in the status message.
 
-    1. Test case: `mark 1 d/31/01/2024 12:00 m/invalid`
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/invalid`<br>
        Expected: No attendance is marked. Error details shown in the status message for invalid attendance status.
 
-    1. Test case: `mark 1 d/31/01/2024 m/attended`
+    1. Test case: `mark 1 d/31/01/2024 m/attended`<br>
        Expected: No attendance is marked. Error details shown in the status message for invalid date or time.
 
-    1. Other incorrect edit commands to try: `mark`, `mark 1 x/XXX` where `x/` is an unknown prefix.
+    1. Other incorrect edit commands to try: `mark`, `mark 1 x/XXX` where `x/` is an unknown prefix.<br>
        Expected: Similar to previous.
 
 ### Performing grade aggregation operations
