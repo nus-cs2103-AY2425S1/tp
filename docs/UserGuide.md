@@ -204,6 +204,14 @@ Invalid usages
 
 The student to be added cannot have the same name and phone number as an existing student, but having either one field the same is alright.
 
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
+
 </div>
 
 #### **3.2 Creating a new tutorial**
@@ -455,6 +463,14 @@ Invalid usage:
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
 The student cannot be edited to have the same name and phone number as an existing student, but having either one field the same is alright.
+
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
 
 </div>
 
