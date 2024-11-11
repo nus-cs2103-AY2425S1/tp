@@ -895,3 +895,32 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `exit`<br>
        Expected: The app closes.
+
+## **Appendix: Effort**
+
+### Difficulty Level
+VendorVault is significantly more complex than Address Book 3 (AB3). While AB3 deals with a single entity (Person), 
+VendorVault deals with two entities (Supplier and Delivery), thus more effort is required to manage and integrate the two entities seamlessly. 
+Apart from introducing new commands, the UI was also improved to support displaying both entities in a user-friendly manner.
+
+### Challenges Faced
+
+#### New Commands
+New commands, such as sorting, had to be integrated with existing commands to ensure the expected and accurate behaviour was achieved.
+
+#### Data Storage
+JSON storage architecture had to be updated to accommodate both suppliers and deliveries, while ensuring format consistency and ease of retrieval.
+
+#### UI Design
+Designing and implementing an intuitive user interface that displays all required information in a non-cluttered way took considerable time. 
+Ensuring a smooth user experience for all user actions required additional logic to ensure commands work seamlessly together.
+
+### Effort Required
+VendorVault is estimated to have taken 1.5x the expected effort. This was due to:
+- Improving existing commands and implementing new commands from scratch.
+- Providing comprehensive test coverage across all commands.
+- Performing extensive manual testing to ensure a smooth user experience and cohesive user interface.
+
+### Achievements
+The team managed to successfully implement various essential and helpful commands in VendorVault to meet the needs of small convenience/grocery stores. 
+The wide variety of commands and intuitive user interface serves to benefit the target users greatly.
