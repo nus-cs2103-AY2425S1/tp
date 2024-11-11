@@ -49,7 +49,7 @@ public class EditCommand extends Command {
             + PREFIX_TELEGRAM_HANDLE + "johnny_9876_haha "
             + PREFIX_EMAIL + "johnd@example.com\n"
             + "Example Two: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "John Doe\n"
-            + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + PREFIX_NICKNAME + " "
+            + "Example Three: " + COMMAND_WORD + " 2 " + PREFIX_NAME + " John Doe" + " " + PREFIX_NICKNAME + " "
             + "johnny";
     public static final String MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT =
             COMMAND_FORMAT_PREAMBLE + WHITESPACE
