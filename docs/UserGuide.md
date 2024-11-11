@@ -248,6 +248,8 @@ Format: `remark INDEX r/[REMARK]…​`
 * Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 
 Examples:
+* `remark 1` removes remark of person at index 1. 
+* `remark 1 r/` also removes remark of person at index 1.
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
   ![result for 'remark 1 r/remark message'](images/Remark.png)
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
@@ -386,7 +388,7 @@ Clears all entries from the address book.
 Exits the program.
 
 > ###### ⚠️ **Warning**
-> Users are strongly encouraged to use `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
+> Users are strongly encouraged to use `close` command to close view windows and `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
 
 
 **Command Format:**  
