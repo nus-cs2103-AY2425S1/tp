@@ -169,7 +169,7 @@ The following sequence diagram shows how the `Event` object is created and assoc
 The following sequence diagram shows how `findPerson` method is executed and the `Person` object is retrieved:
 ![FindPerson](images/FindPersonSequenceDiagram.png)
 
-Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, the updated `Person` replaces all original `Person` in relevant `Events` through the `replacePerosnInEvents` method in the `Model`. 
+Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, the updated `Person` replaces all original `Person` in relevant `Events` through the `replacePersonInEvents` method in the `Model`. 
 
 The following sequence diagram shows how the `Person` object is edited:
 ![EditPerson](images/EditPersonSequenceDiagram.png)
