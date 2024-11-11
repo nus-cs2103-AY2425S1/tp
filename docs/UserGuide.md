@@ -80,7 +80,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 | **Add Order to Application**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
 | **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                       |
 | **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
-| **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                      |
+| **Archive**               | `archive INDEX`<br> e.g., `archive 3`                                                                                                                                      |
 | **Clear**                 | `clear`                                                                                                                                                              |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
 | **Delete Order**          | `deleteOrder ORDER`<br> e.g., `deleteOrder pizza`                                                                                                                    |
