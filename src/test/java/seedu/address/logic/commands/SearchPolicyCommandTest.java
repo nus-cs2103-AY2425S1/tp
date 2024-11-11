@@ -26,21 +26,46 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class SearchPolicyCommandTest {
 
+    public SearchPolicyCommand initialiseTestVar(String policyName) {
+        try {
+            SearchPolicyCommand output = new SearchPolicyCommand(policyName);
+            return output;
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    SearchPolicyCommand searchFirstCommand = initialiseTestVar("HealthInsurance");
+    SearchPolicyCommand searchSecondCommand = initialiseTestVar("AutoInsurance");
+
     @Test
-    public void equals() throws CommandException {
-        SearchPolicyCommand searchFirstCommand = new SearchPolicyCommand("HealthInsurance");
-        SearchPolicyCommand searchSecondCommand = new SearchPolicyCommand("AutoInsurance");
-
+    public void execute_sameCommandObject() {
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
+    }
 
-        SearchPolicyCommand searchFirstCommandCopy = new SearchPolicyCommand("healthinsurance"); // different case
+    @Test
+    public void execute_sameValueObject() throws CommandException {
+        SearchPolicyCommand searchFirstCommandCopy = new SearchPolicyCommand("healthinsurance");
         assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
+    }
 
+    @Test
+    public void execute_differentObject() {
         assertFalse(searchFirstCommand.equals(1));
+    }
 
+    @Test
+    public void execute_nullCompare() {
         assertFalse(searchFirstCommand.equals(null));
+    }
+
+    @Test
+    public void execute_differentPolicyName() {
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
+
+
 
     @Test
     public void constructor_nullPolicyName_throwsNullPointerException() {

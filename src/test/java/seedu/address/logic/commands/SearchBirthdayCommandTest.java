@@ -39,37 +39,56 @@ public class SearchBirthdayCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Test
-    public void equals() {
-        SearchBirthdayCommand searchFirstCommand = null;
-        SearchBirthdayCommand searchSecondCommand = null;
+    public SearchBirthdayCommand initialiseTestVar(String birthday) {
         try {
-            searchFirstCommand = new SearchBirthdayCommand("2000-04-25");
-            searchSecondCommand = new SearchBirthdayCommand("2001-05-30");
+            SearchBirthdayCommand output = new SearchBirthdayCommand(birthday);
+            return output;
         } catch (CommandException e) {
             e.printStackTrace();
         }
+        return null;
+    }
 
-        // same object -> returns true
+    SearchBirthdayCommand searchFirstCommand = initialiseTestVar("2000-04-25");
+    SearchBirthdayCommand searchSecondCommand = initialiseTestVar("2001-05-30");
+
+    @Test
+    public void execute_sameCommandObject() {
+        // This test case checks that the same Command is the same
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
+    }
 
-        // same values -> returns true
+    @Test
+    public void execute_sameValueObject() {
+        // This test case checks that Command object with the same value should be the same
         try {
             SearchBirthdayCommand searchFirstCommandCopy = new SearchBirthdayCommand("2000-04-25");
+            // check if is True, else throw Exception
             assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
         } catch (CommandException e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void execute_differentObject() {
         // different types -> returns false
         assertFalse(searchFirstCommand.equals(1));
+    }
 
+    @Test
+    public void execute_nullCompare() {
         // null -> returns false
         assertFalse(searchFirstCommand.equals(null));
 
+    }
+
+    @Test
+    public void execute_differentDate() {
         // different date -> returns false
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
+
 
     @Test
     public void constructor_invalidDateFormat_throwsCommandException() {
