@@ -111,6 +111,14 @@ Format: `undo`
 
 ## Student Commands
 
+### Student prefixes
+| Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `p/`   | Phone numbers should only contain numbers, and it should be at least 3 digits long                                                                                                                                                                         | valid: `p/98765432`</br> invalid:`p/1234 5678`               |
+| `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
+| `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `sn/A1234567Z`</br> invalid: `sn/1234567z`            |
+
 ### Adding a student: `adds`
 
 Adds a student to the contact list.
@@ -192,6 +200,15 @@ Format: `deleteall`
 
 ## Attendance Commands
 
+### Attendance prefixes
+| Prefix | Constraints                                                                            | Example                                                                       |
+|-------|----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `n/`  | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `dt/` | Dates should be in the format "YYYY-MM-DD"                                             | valid: `dt/2019-01-01`</br> invalid: `dt/`, `dt/1 Jan 2019`                   |
+| `pr/` | Attendance should either be "p" or "a".                                                | valid: `pr/p`, `pr/a` </br> invalid:`pr/P`, `pr/A`, `pr/present`, `pr/absent` |
+| `tg/` | Tutorial group should only be in the format of a letter followed by two numbers.       | valid: `tg/G01`</br> invalid: `tg/G1`                                         |
+| `sn/` | Student number should be in the format of a letter followed by 7 numbers and a letter. | valid: `sn/A1234567Z`</br> invalid: `sn/1234567z`                             |
+
 <box type="tip" seamless>
 
 **Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
@@ -256,6 +273,16 @@ Closes all attendance windows if any is currently open.
 
 ## Assignment Commands
 
+### Assignment Prefixes
+| Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `a/`   | Assignment names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, assignment names should be **unique**.                                                                                            | valid: `a/Assignment 5` </br> invalid:`a/ Assignmment@2`     |
+| `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
+| `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `A1234567N` </br> invalid: `B1234567C`, `A123B`       |
+| `d/`   | Dates should be in the format YYYY-MM-DD                                                                                                                                                                                                                   | valid: `2024-12-01` </br> invalid: `2023-5-1`, `5-1-2024`    |
+| `g/`   | Grade is an integer between 0 and 100 inclusive or null.                                                                                                                                                                                                   | valid: `null`, `5`, `98` </br> invalid: `101`, `92.5`        |
+
 ### Adding Assignments : `adda`
 
 Adds an assignment to the specified student
@@ -272,7 +299,7 @@ with `STUDENT_NUMBER` and `NAME`.
 
 Deletes an assignment for the specified student
 
-Format: `adda n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
+Format: `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
 * Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
 this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
@@ -348,10 +375,10 @@ Furthermore, certain edits can cause the Teletutors to behave in unexpected ways
 | Action                                          | Format, Examples                                                                                                                                                              |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**                                 | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                        |
-| **Clear list**                                  | `deleteall`                                                                                                                                                                   |
+| **Clear Contact List**                          | `deleteall`                                                                                                                                                                   |
 | **Delete Student**                              | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                              |
-| **Edit Student Details**                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
-| **View**                                        | `view NAME`<br> e.g., `view James Jake`                                                                                                                       |
+| **Edit Student**                                | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
+| **View Student(s)**                             | `view NAME`<br> e.g., `view James Jake`                                                                                                                                       |
 | **List**                                        | `list`                                                                                                                                                                        |
 | **Help**                                        | `help`                                                                                                                                                                        |
 | **Undo**                                        | `undo`                                                                                                                                                                        |
