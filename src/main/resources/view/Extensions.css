@@ -3,6 +3,18 @@
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
 }
 
+.focusable {
+    -fx-border-color: transparent transparent #1F2937 #1F2937 !important;
+    -fx-border-width: 1 !important;
+    -fx-border-style: solid !important;
+    -fx-border-radius: 3 !important;
+}
+
+.focusable:focused {
+    -fx-border-width: 1 !important;
+    -fx-border-color: #4d91fe !important;
+}
+
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
     -fx-background: #383838;

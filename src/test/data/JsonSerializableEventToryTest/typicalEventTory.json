@@ -1,0 +1,43 @@
+{
+  "_comment": "EventTory save file for testing JsonSerializableEventTory",
+  "vendors": [
+    {
+      "id": "a1e2c3d4-5f67-4890-8a1b-123456789abc",
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "description": "123, Jurong West Ave 6, #08-111",
+      "tags": ["friends"]
+    },
+    {
+      "id": "b2f3d4e5-6a78-491a-9b2c-23456789abcd",
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "description": "311, Clementi Ave 2, #02-25",
+      "tags": ["owesMoney", "friends"]
+    }
+  ],
+  "events": [
+    {
+      "id": "a1e2c3d4-5f67-4890-8a1b-123456789abd",
+      "name": "Alice Pauline Wedding",
+      "date": "2021-10-10",
+      "tags": []
+    },
+    {
+      "id": "b2e3c4d5-6f78-49a1-9b2c-23456789abcd",
+      "name": "Benson Meier Birthday",
+      "date": "2021-11-11",
+      "tags": ["alcohol", "classmates", "party"]
+    }
+  ],
+  "associations": [
+    {
+      "vendorId": "a1e2c3d4-5f67-4890-8a1b-123456789abc",
+      "eventId": "a1e2c3d4-5f67-4890-8a1b-123456789abd"
+    },
+    {
+      "vendorId": "b2f3d4e5-6a78-491a-9b2c-23456789abcd",
+      "eventId": "b2e3c4d5-6f78-49a1-9b2c-23456789abcd"
+    }
+  ]
+}

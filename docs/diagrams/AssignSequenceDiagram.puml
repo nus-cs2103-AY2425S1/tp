@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AssignCommand" as AssignCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+-> AssignCommand : execute(m)
+activate AssignCommand
+
+AssignCommand -> Model : getUiState()
+activate Model
+Model --> AssignCommand : uiState
+deactivate Model
+
+alt Viewing vendor details
+    AssignCommand -> AssignCommand : assignVendorToEvent(m)
+else Viewing event details
+    AssignCommand -> AssignCommand : assignEventToVendor(m)
+else else
+    <-- AssignCommand : CommandException()
+end
+
+create CommandResult
+AssignCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AssignCommand
+deactivate CommandResult
+
+<-- AssignCommand : r
+deactivate AssignCommand
+
+@enduml

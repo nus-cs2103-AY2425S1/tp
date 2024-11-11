@@ -1,0 +1,11 @@
+{
+  "vendors": [ {
+    "name": "Valid Vendor",
+    "phone": "9482424",
+    "description": "4th street"
+  }, {
+    "name": "Vendor With Invalid Phone Field",
+    "phone": "948asdf2424",
+    "description": "4th street"
+  } ]
+}
