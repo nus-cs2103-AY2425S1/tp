@@ -356,11 +356,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays an error message to ask for a valid name.<br>
       Use case ends.
 
-* 3b. User enters a duplicate name.
-    * 3b1. System displays an error message notifying that the name already exists in the system.<br>
-      Use case ends.
-
-
 **System: StudentManagerPro**
 
 **Use case: UC02 Add Student's Email**
@@ -398,7 +393,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message notifying that the email already exists in the system.<br>
       Use case ends.
 
-
 **System: StudentManagerPro**
 
 **Use case: UC03 Add Student's Register Number**
@@ -431,10 +425,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User leaves the register number field empty.
     * 3a1. System displays an error message to ask for a valid register number.<br>
-      Use case ends.
-
-* 3b. User enters a duplicate register number.
-    * 3b1. System displays an error message notifying that the register number already exists in the system.<br>
       Use case ends.
 
 **System: StudentManagerPro**
@@ -543,7 +533,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. System displays an error message notifying that the contact number already exists in the system.<br>
       Use case ends.
 
-
 **System: StudentManagerPro**
 
 **Use case: UC07 Add Student's Emergency Contact Name**
@@ -577,7 +566,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User leaves the emergency contact name field empty.
     * 3a1. System displays an error message to ask for a valid emergency contact name.<br>
       Use case ends.
-
 
 **System: StudentManagerPro**
 
@@ -760,6 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User enters invalid characters in the exam name.
     * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.<br>
       Use case ends.
+
 * 3a. User tries to add an exam that already exists in the system.
     * 3a1. System displays an error message telling the user that the exam already exists.<br>
       Use case ends.
