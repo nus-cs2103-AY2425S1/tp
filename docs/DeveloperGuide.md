@@ -457,13 +457,13 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC7 - Delete participant**\
+**Use case: UC7 - Delete person**\
 **Actor: User**\
-**Guarantee: MSS → The participant at the specified index will not be present in the system after the command is entered**
+**Guarantee: MSS → The person at the specified index will not be present in the system after the command is entered**
 
 MSS:
-1. User requests to delete a participant
-2. System deletes the participant and displays a message indicating no errors.
+1. User requests to delete a person
+2. System deletes the person and displays a message indicating no errors.
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -472,7 +472,7 @@ Extensions:\
 Steps 1a1-1a2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
-1b. System does not find specified participant in the system.\
+1b. System does not find specified person in the system.\
 1b1. System prompts user to re-enter data.\
 1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.\
