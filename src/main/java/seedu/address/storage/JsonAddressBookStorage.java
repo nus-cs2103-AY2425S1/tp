@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,12 +27,14 @@ import seedu.address.security.EncryptionManager;
 public class JsonAddressBookStorage implements AddressBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
-
+    private static final String PASSWORD_PATH = "password.txt";
     private Path filePath;
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
+
+
 
     public Path getAddressBookFilePath() {
         return filePath;
@@ -52,6 +55,19 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(filePath);
 
         try {
+            // Check if password file exists
+            File file = new File(PASSWORD_PATH);
+            if (!file.exists()) {
+                try {
+                    // Password file doesn't exist
+                    // Start with empty data
+                    Files.deleteIfExists(Path.of("data/addressbook.json"));
+                    Files.deleteIfExists(Path.of(PASSWORD_PATH));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
             byte[] encryptedData = Files.readAllBytes(filePath);
             String jsonData = EncryptionManager.decrypt(encryptedData, null);
             JsonSerializableAddressBook jsonAddressBook = JsonUtil.fromJsonString(

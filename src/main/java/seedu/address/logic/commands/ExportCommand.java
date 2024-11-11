@@ -130,6 +130,15 @@ public class ExportCommand extends Command {
         return fileChooser.showSaveDialog(stage);
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+
+        return object instanceof ExportCommand;
+    }
+
     public void setDestinationFile(File destinationFile) {
         this.destinationFile = destinationFile;
     }
