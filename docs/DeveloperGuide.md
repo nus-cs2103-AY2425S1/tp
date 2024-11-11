@@ -668,7 +668,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking a Payment Date
 
-1. Marking a payment date
+1. Marking a month as paid
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -684,9 +684,9 @@ testers are expected to do more *exploratory* testing.
    2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
       Expected: Similar to previous.
 
-### Unmarking MonthsPaid for a Specific Month
+### Unmarking a payment date
 
-1. Unmarking a Month as Paid
+1. Unmarking a month as paid
 
     1. Prerequisites: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
 
