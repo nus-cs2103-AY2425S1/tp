@@ -33,7 +33,7 @@ create AddClaimCommand
 AddClaimCommandParser -> AddClaimCommand
 activate AddClaimCommand
 
-AddClaimCommand --> AddClaimCommandParser : a
+AddClaimCommand --> AddClaimCommandParser
 deactivate AddClaimCommand
 
 AddClaimCommandParser --> AddressBookParser : a
