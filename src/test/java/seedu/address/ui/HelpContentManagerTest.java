@@ -83,7 +83,7 @@ public class HelpContentManagerTest {
             "Editing a client", "Locating clients by attribute", "Deleting a client",
             "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
             "Uploading a client's profile picture", "Exiting the program", "Viewing a client's details",
-            "Visual Features", "Saving and Editing Data",  "FAQ", "Known Issues"
+            "Visual Features", "Saving and Editing Data", "FAQ", "Known Issues"
         };
 
 
