@@ -46,7 +46,7 @@ title: User Guide
 
 6. [FAQ](#faq)
 
-7. [Planned Features](#planned-features)
+7. [Upcoming Features](#upcoming-features)
 
 8. [Glossary](#glossary)
 
@@ -71,6 +71,7 @@ and automated data saving**, AcademyAssist is set to revolutionize how you manag
 Let's embark on this journey to **simpler, faster, and more effective** student management!
 
 ---
+<div style="page-break-after: always;"></div>
 
 # Quick start
 This guide provides step-by-step instructions for installing and running the AcademyAssist application for both non-technical
@@ -97,6 +98,8 @@ Before you begin, ensure you have Java `17` or above installed in your computer.
 Download the latest `academyassist.jar` file from the latest release in our [GitHub repository](https://github.com/AY2425S1-CS2103T-W11-3/tp/releases).
 You can find the file under the `Assets` section of the release.
 
+<div style="page-break-after: always;"></div>
+
 ## Things to note before you start
 When you first use AcademyAssist, some sample student contacts have been added to help you familiarise yourself with
 our features. Once you are ready to manage your tuition center's students, simply use the clear command
@@ -122,6 +125,8 @@ Please note that clear action is <span style="color:red;font-weight:bold">IRREVE
 3. Navigate to the directory where the `academyassist.jar` file is located.
 4. Type `java -jar academyassist.jar` and press Enter to start the app.
 
+<div style="page-break-after: always;"></div>
+
 ## Getting Started
 For all users, upon first running the application, a help window will appear automatically, providing details on some basic features.
 You may refer to the [Command Summary](#command-summary) section for a quick overview of the available commands. The [Features](#features) section provides a more detailed explanation of each feature.
@@ -136,6 +141,9 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
 2. **Command Box**: Enter your commands here to interact with the application.
 3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
 4. **Student List**: Displays the list of students in the system. Each student is represented by a Student Card.
+
+<div style="page-break-after: always;"></div>
+
 
 #### Student Card
 ![Student Card Overview](images/studentCard.png)
@@ -167,6 +175,8 @@ You are now ready to use AcademyAssist! If you encounter any issues during insta
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Command Summary
 ## General Format
 The general format of commands in AcademyAssist is as follows:
@@ -181,6 +191,8 @@ Where:
 Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
 Refer to the tables below or the [Features](#features) section for more details on each command.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## Command Format and Examples
 This section provides a quick overview of the available commands for managing student records. Each command is accompanied by its format and an example to help you understand how to use it effectively.
@@ -200,6 +212,8 @@ This section provides a quick overview of the available commands for managing st
 | **Clear Data**      | `clear`                                                                                   |                                                                                             |
 | **Get Help**        | `help`                                                                                    |                                                                                             |
 | **Exit**            | `exit`                                                                                    |                                                                                             |
+
+<div style="page-break-after: always;"></div>
 
 ## Command Parameters Reference
 In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
@@ -227,6 +241,9 @@ In this section, you'll find detailed information about the parameters for each 
 | **Exit**                | -                 | -                                                  | No parameters required.                                                                                                                        | -                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -276,6 +293,8 @@ lines as space characters surrounding line-breaks may be omitted when copied ove
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## Student Management
 ### Adding a student : `add`
 
@@ -318,7 +337,7 @@ will be added.
 <div markdown="span" class="alert alert-note">:memo: **Note:**
 * A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
-<div>
+</div>
 
 Examples:
 * `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street \Science`
@@ -333,6 +352,8 @@ Some contact fields such as address and email are intentionally hidden to avoid 
 the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Exceptionally long names will be cut off on the display, but you can read the student's full name using the 
@@ -365,6 +386,8 @@ Examples:
   * Deletes the student with the ID S00001.
 
 ![Delete Success Message](images/delete.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a student : `edit`
 
@@ -412,6 +435,8 @@ For example, if the student is taking English and Math and you use the command '
 only be taking Science.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all students : `list`
 
 Shows a list of all students in the system.
@@ -437,6 +462,8 @@ Examples:
   * Displays the details of the student with the ID S00001.
 
 ![Detail Success Message](images/detail.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Searching and Sorting
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -474,6 +501,8 @@ After finding, you can use `list` command to return to the full list of students
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting students : `sort`
 
 Sort the list of students based on a specified field.
@@ -510,6 +539,8 @@ group 2 students will be sorted.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering students : `filter`
 
 Shows a list of students filtered by year group or subject.
@@ -540,6 +571,8 @@ will be displayed.
 Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
 
@@ -567,6 +600,8 @@ Examples:
 
 ![Addsubject Success Message](images/addsubject.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Tracking student count for each subject : `tracksubject`
 
 Displays a window that shows how many students are taking each of all the subjects.
@@ -589,6 +624,8 @@ Please ensure to close the tracker to view the most current information.
 </div>
 
 ![TrackSubject Success Message](images/tracksubject.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Utility Features
 ### Clearing all entries : `clear`
@@ -619,6 +656,8 @@ Exits the program.
 Format: `exit`
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 # Data Management in AcademyAssist
 
@@ -672,6 +711,7 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # FAQ
 This section provides answers to frequently asked questions about AcademyAssist. If you have any other questions or
@@ -711,6 +751,7 @@ main window for a cleaner user interface. To view more detailed information abou
 command followed by the student's ID. This will provide you with all the additional details you need.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
@@ -736,6 +777,8 @@ users to manage student interactions effectively<br><br>
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # Glossary
 1. **Command**: An instruction given by a user to a computer program.
 2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
