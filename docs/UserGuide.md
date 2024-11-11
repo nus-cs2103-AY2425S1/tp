@@ -27,8 +27,8 @@ We’ll walk you through each feature, so you can discover with ease **DLTbooks*
 # Contents
 
 - [Introduction](#introduction)
-- [How to use this user guide](#how-to-use-this-user-guide)
-- [Quick Start](#quick-start)
+- [Beginner's Guide](#beginners-guide)
+- [Setup Guide](#setup-guide)
 - [GUI Summary](#gui-summary)
 - [Features](#features)
     - [Basic Features](#basic-features)
@@ -69,12 +69,10 @@ We’ll walk you through each feature, so you can discover with ease **DLTbooks*
 
 # Introduction
 
-**DLTbook** is a application for users to manage DLT public addresses.
+**DLTbook**:
 
-**DLTbook** is:
-
-- Essentially a basic address book with the added functionality to effectively manage public addresses of contact.
-- Is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
+- is essentially a basic address book with the added functionality to effectively manage public addresses of contact.
+- is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
   Interface** (GUI).
 
 [Back to Top]
@@ -83,9 +81,7 @@ We’ll walk you through each feature, so you can discover with ease **DLTbooks*
 
 <div style="page-break-after: always"></div>
 
-### Beginner
-
-## Beginner's Guide
+# Beginner's Guide
 
 <panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
@@ -615,9 +611,9 @@ Based on contacts displayed, it searches for a contact using the unique public a
 
 Format: `searchpa pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation          | Constraints                                                                                                               | Safeguards                                                                                      |
-|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters | This field is **case-insensitive** and searches for contacts based on lowercase public address. |
+| Parameter        | Explanation          | Details                                                                                                                                                             | 
+|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters<br/> - This field is **case-insensitive** |
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
