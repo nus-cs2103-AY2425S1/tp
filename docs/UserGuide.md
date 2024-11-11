@@ -33,21 +33,24 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds.<br>
+   A GUI similar to the below should appear in a few seconds.
+
    ![StartUpPage](images/StartUpPage.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - `list` : Lists all contacts.
-
-    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the TAHub.
-
-    - `delete 3` : Deletes the 3rd contact shown in the current list.
-
-    - `clear` : Deletes all contacts.
-
-    - `exit` : Exits the app.
+    - `list`<br>
+    Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+    Adds a contact named `John Doe` to the TAHub.
+    - `delete 3`<br>
+    Deletes the 3rd contact shown in the current list.
+    - `clear`<br>
+    Deletes all contacts.
+    - `exit`<br>
+    Exits the app.
+    <br></br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -59,7 +62,6 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 1. Ensure you have Java `17` or above installed in your Computer.
 
     - **Check if Java is installed:**
-
         1. Open your command terminal:
             - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
             - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
@@ -68,39 +70,36 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
            ```bash
            java -version
            ```
-        3. If your system has Java `17` or above, you should see something like:
+        3. If your system has Java `17` or above, you should see something like:<br>
            ```bash
            java version "17.0.x" 2024-xx-xx LTS
            ```
         4. If your Java version is lower than `17`, proceed to the next step to install Java.
+           <br></br>
 
     - **Install Java `17` if not installed:**
         1. Go to [Oracle's Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
         2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
         3. After installation, repeat the `java -version` command to ensure Java is properly installed.
+           <br></br>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
     1. Visit the [GitHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
     2. Download the `.jar` file (`TAHub.jar`) from the latest release.
     3. Save the `.jar` file to the folder where you want to store your TAHub project.
+       <br></br>
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
     1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
-
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select Copy.
         - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
-        <br></br>
-
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
-
         - Open the **Finder** and go to your `Downloads` folder.
         - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
         - Go to the folder where you want to keep the file, then right-click and select Paste.
-        <br></br>
-
     3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
         - Right-click on the `.jar` file, choose Copy.
@@ -110,7 +109,6 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
     1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
-
         - Open the folder where you saved the `.jar` file.
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
@@ -125,7 +123,6 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```bash
           java -jar TAHub.jar
           ```
-
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
         - To get the full path of the folder where the `.jar` file is located:
@@ -142,15 +139,24 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
+   
    ![StartUpPage](images/StartUpPage.png)
+   <br></br>
 
-5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
+5. Type commands in the command box and press Enter to execute them.<br>
+   Some example commands you can try:
 
-    - `list`: Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`: Adds a contact named `John Doe`.
-    - `delete 3`: Deletes the 3rd contact shown in the current list.
-    - `clear`: Deletes all contacts.
-    - `exit`: Exits the app.
+    - `list`<br>
+      Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+      Adds a contact named `John Doe` to the TAHub.
+    - `delete 3`<br>
+      Deletes the 3rd contact shown in the current list.
+    - `clear`<br>
+      Deletes all contacts.
+    - `exit`<br>
+      Exits the app.
+      <br></br>
 
 6. Refer to the [Features](#features) section below for details of each command.
 
@@ -180,7 +186,7 @@ Refer to the specific sections for a detailed guide on how to use each command.
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -222,6 +228,7 @@ Adds a person to the TAHub.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
 Expected output:
+
 ![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
 
 <box type="tip" seamless>
@@ -243,6 +250,7 @@ Shows a list of all persons in the TAHub.
 Format: `list`
 
 Expected output:
+
 ![result for 'list'](images/listPersons.png)
 
 <div style="page-break-after: always;"></div>
@@ -265,6 +273,7 @@ Examples:
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
 
 Expected output:
+
 ![result for 'find John' followed by 'edit 1 p/91234567 e/johndoe@example.com'](images/editPerson.png)
 
 <div style="page-break-after: always;"></div>
@@ -287,6 +296,7 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 Expected output:
+
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <div style="page-break-after: always;"></div>
@@ -307,6 +317,7 @@ Examples:
 - `find John` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'delete 1'](images/deletePerson.png)
 
 <div style="page-break-after: always;"></div>
@@ -329,6 +340,7 @@ Examples:
 - `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 Expected output:
+
 ![result for 'find John' followed by 'addGrade 1 n/Midterm s/85 w/30'](images/addGrade.png)
 
 <div style="page-break-after: always;"></div>
@@ -349,6 +361,7 @@ Examples:
 - `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
 
 <div style="page-break-after: always;"></div>
@@ -379,9 +392,11 @@ Example:
 - `aggGrade median n/Midterm` Shows the median for midterm tests of the current filtered list.
 
 Expected output for `aggGrade median`:
+
 ![result for 'aggGrade median'](images/aggGrade_normal.png)
 
-Expected output for `aggGrade median n/midterm`
+Expected output for `aggGrade median n/midterm`:
+
 ![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
 
 <div style="page-break-after: always;"></div>
@@ -403,6 +418,7 @@ Examples:
 - `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent` Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'mark 1 d/31/01/2024 12:00 m/Absent'](images/markAttendance.png)
 
 <div style="page-break-after: always;"></div>
@@ -422,6 +438,7 @@ Examples:
 - `find John` followed by `unmark 1 d/31/01/2024 12:00` deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
 
 <div style="page-break-after: always;"></div>
@@ -440,6 +457,7 @@ Examples:
 - `absentees d/31/01/2024 10:00` Finds all people who were absent on the 10 AM of January 31st, 2024.
 
 Expected output:
+
 ![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
 
 <div style="page-break-after: always;"></div>
@@ -451,6 +469,7 @@ Clears all entries from the TAHub.
 Format: `clear`
 
 Expected output:
+
 ![result for 'clear'](images/clearMessage.png)
 
 <div style="page-break-after: always;"></div>
@@ -492,23 +511,23 @@ _Details coming soon ..._
     - Open the folder where TAHub saves its data. By default, the data file is located at `[JAR file location]/data/TAHub.json`.
     - If you installed TAHub in a custom folder, look for the `data` folder within that location.
     - Copy the `TAHub.json` file to a USB drive, cloud storage, or any other method you prefer for transferring files between computers.
-
+      <br></br>
 2. **Install TAHub on the New Computer**:
     - Download the latest `.jar` file from the [TAHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases).
     - Place the `.jar` file in a folder on the new computer where you want to use TAHub.
-
+      <br></br>
 3. **Run TAHub Once on the New Computer**:
     - Open a terminal, `cd` into the folder containing the `.jar` file, and run the command:
       ```bash
       java -jar TAHub.jar
       ```
     - This creates a new `data` folder in the same directory as the `.jar` file with an empty `TAHub.json` file.
-
+      <br></br>
 4. **Replace the Empty Data File**:
     - Close the TAHub application on the new computer.
     - Go to the `data` folder where the new `TAHub.json` file was created.
     - Delete the empty `TAHub.json` file and replace it with the `TAHub.json` file you copied from the old computer.
-
+      <br></br>
 5. **Verify the Data Transfer**:
     - Open TAHub on the new computer by running the `.jar` file again.
     - Check that all your contacts, grades, and attendance records appear correctly, verifying that the data has been successfully transferred.
