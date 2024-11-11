@@ -49,7 +49,7 @@ public class CheckAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
 
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 
         if (doctorToCheckAppointment == null) {

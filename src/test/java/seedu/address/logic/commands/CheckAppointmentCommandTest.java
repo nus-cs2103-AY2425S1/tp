@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -170,7 +171,10 @@ public class CheckAppointmentCommandTest {
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             return null;
@@ -280,6 +284,10 @@ public class CheckAppointmentCommandTest {
                 }
             }
             return null;
+        }
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            return FXCollections.observableArrayList(personList);
         }
         @Override
         public ObservableList<Person> getFilteredPersonList() {

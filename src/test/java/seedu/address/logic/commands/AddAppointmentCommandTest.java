@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 //import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -11,9 +12,12 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 //import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -42,26 +46,65 @@ public class AddAppointmentCommandTest {
 
         assertEquals(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
                 commandResult.getFeedbackToUser());
-        String expectedAppointments = String.format("All appointments for you in the database:\n"
-                + "Appointment: Id{id=%1$d} (patient id) "
-                + "with Id{id=%2$d} (doctor id). Remarks: "
-                + "\n", validPatient.getId(), validDoctor.getId());
-
-        //        assertEquals(expectedAppointments, validDoctor.getAllAppointments()); TODO
     }
-    //    @Test
-    //    public void execute_duplicateAppointment_throwsCommandException() {
-    //        Person validPatient = new PersonBuilder().buildPatient();
-    //        Person validDoctor = new PersonBuilder().buildDoctor();
-    //        validPatient.addAppointment(defaultTime, validPatient.getId(), validDoctor.getId(), defaultRemark);
-    //        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
-    //                validPatient.getId(), validDoctor.getId(), defaultRemark);
-    //        AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest
-    //                .ModelStubWithAppointment(validPatient, validDoctor);
-    //
-    //        assertThrows(CommandException.class, AddAppointmentCommand
-    //                .MESSAGE_DUPLICATE_APPOINTMENT, () -> addAppointmentCommand.execute(modelStub));
-    //    } TODO PLS
+
+    @Test
+    public void execute_duplicateAppointment_throwsCommandException() {
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        validPatient.addAppointment(defaultTime, validPatient.getId(), validDoctor.getId(), defaultRemark);
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
+                validPatient.getId(), validDoctor.getId(), defaultRemark);
+        AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest
+                .ModelStubWithAppointment(validPatient, validDoctor);
+
+        assertThrows(CommandException.class, AddAppointmentCommand
+                .MESSAGE_UNAVAILABLE_SLOT, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addAppointmentWithMultiplePatientID_throwsCommandException() {
+        AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded modelStub = new AddAppointmentCommandTest
+                .ModelStubAcceptingAppointmentAdded();
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPersonToList(validPatient);
+        modelStub.addPersonToList(validDoctor);
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
+                validPatient.getId(), validPatient.getId(), defaultRemark);
+        assertThrows(CommandException.class, Messages
+                .MESSAGE_MULTIPLE_PATIENT_ID, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addAppointmentWithMultipleDoctorID_throwsCommandException() {
+        AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded modelStub = new AddAppointmentCommandTest
+                .ModelStubAcceptingAppointmentAdded();
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPersonToList(validPatient);
+        modelStub.addPersonToList(validDoctor);
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
+                validDoctor.getId(), validDoctor.getId(), defaultRemark);
+        assertThrows(CommandException.class, Messages
+                .MESSAGE_MULTIPLE_DOCTOR_ID, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addAppointmentWithWrongSequenceID_throwsCommandException() {
+        AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded modelStub = new AddAppointmentCommandTest
+                .ModelStubAcceptingAppointmentAdded();
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
+        modelStub.addPersonToList(validPatient);
+        modelStub.addPersonToList(validDoctor);
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
+                validDoctor.getId(), validPatient.getId(), defaultRemark);
+        assertThrows(CommandException.class, Messages
+                .MESSAGE_MIXED_SEQUENCE_ID, () -> addAppointmentCommand.execute(modelStub));
+    }
+
+
     /**
      * A default model stub that have all methods failing.
      */
@@ -129,7 +172,10 @@ public class AddAppointmentCommandTest {
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             return null;
@@ -177,6 +223,10 @@ public class AddAppointmentCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return person.isSamePerson(patient) || person.isSamePerson(doctor);
+        }
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            return javafx.collections.FXCollections.observableArrayList(patient, doctor);
         }
 
         @Override
@@ -235,6 +285,10 @@ public class AddAppointmentCommandTest {
                 }
             }
             return null;
+        }
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            return FXCollections.observableArrayList(personList);
         }
         @Override
         public ObservableList<Person> getFilteredPersonList() {

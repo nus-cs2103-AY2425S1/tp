@@ -11,6 +11,7 @@ import java.util.Objects;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,9 +54,15 @@ public class CreatePatientCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             if (model.getPersonRole(toAdd).equals("PATIENT")) {
+                if (toAdd.getId() == Id.getCurrentPatientIdCounter() - 2) {
+                    Id.reduceCurrentPatientIdCounter();
+                }
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
             if (model.getPersonRole(toAdd).equals("DOCTOR")) {
+                if (toAdd.getId() == Id.getCurrentPatientIdCounter() - 2) {
+                    Id.reduceCurrentPatientIdCounter();
+                }
                 throw new CommandException(MESSAGE_OVERLAPPING_DOCTOR);
             }
         }
