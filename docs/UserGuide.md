@@ -35,23 +35,23 @@ Health Connect is an application designed to **streamline client management** fo
 ## Quick Start
 
 ### For Windows Users:
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` installed in your Computer.
     1. Open Command Prompt. You can do this by clicking the Windows Start or Search button and type `cmd`.
        ![Opening Terminal on Windows](./images/QuickStartWindowsOpenCommandPrompt.png)
     2. Once Command Prompt is open, type: `java -version` and click `Enter`.
        ![Checking Java Version on Windows - Command](./images/QuickStartWindowsCheckVersionCommand.png)
-    3. If Java `17` or higher is displayed, you are good to go! Proceed to **Step 3**.
+    3. If Java `17` is displayed, you are good to go! Proceed to **Step 3**.
        ![Checking Java Version on Windows - Display](./images/QuickStartWindowsCheckVersionDisplay.png)
     4. Otherwise, proceed to **Step 2**.
        <br>
-2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
+2. If you do not have Java `17` from the previous step, install the correct version of Java.
     1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`.
     2. Download the appropriate installer for Windows.
     3. After installation, follow the instructions in **Step 1**.
        <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
-4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+4. Copy the file to the folder you want to use as the _home folder_ for Health Connect. The _home folder_ should only contain the jar file.
    <br>
 5. Use Command Prompt to open the JAR file.
     1. Find the file path of the file you just copied. To do so, right-click on the file in the folder and press `Properties`.
@@ -63,38 +63,36 @@ Health Connect is an application designed to **streamline client management** fo
        ![Entering File Path on Windows](./images/QuickStartWindowsNavigateFilePath.png)
     4. In Command Prompt, enter `java -jar healthconnect.jar`.
        ![Entering JAR Command on Windows](./images/QuickStartWindowsEnteringJarCommand.png)
-    5. A GUI similar to the below should appear in a few seconds.
+    5. A GUI similar to the screenshot below should appear in a few seconds.
        ![Ui](images/Ui.png)
        <br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `view`: Displays all contacts.
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
-    * `delete n/John Doe` : Deletes contact named John Doe from the current list.
-    * `filter t/High Risk`: Displays all entries which are tagged High Risk.
+    * `delete n/John Doe` : Deletes contact named `John Doe` from the current list.
+    * `filter t/High Risk`: Displays all entries which are tagged `High Risk`.
     * `clear`: Deletes all contacts.
     * `exit`: Exits the app.
       <br>
 7. Refer to the [Features](#features) below for details of each command.
 
 ### For Mac Users:
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have the `Azul` version of Java `17` installed in your Computer.
     1. Open Terminal. You can do this by searching for it using Spotlight Search. To do so, press `Command + Space` and search "Terminal".
        ![Opening Terminal on Mac](./images/QuickStartMacOpenTerminal.png)
     2. Once Terminal is open, type: `java -version` and click `Enter`.
        ![Checking Java Version on Mac - Command](./images/QuickStartMacCheckVersionCommand.png)
-    3. If Java `17` or higher is displayed, you are good to go! Proceed to **step 3**.
+    3. If Java `17` and `Zulu17` are displayed, you are good to go! Proceed to **step 3**.
        ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
     4. Otherwise, proceed to step 2.
        <br>
-2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
-    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-    2. Download the appropriate installer for Mac.
-    3. After installation, follow the instructions in **Step 1**.
+2. If you do not have the `Azul` version of Java `17` from the previous step, install the correct version of Java by following the instructions on [this page](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   1. After installation, follow the instructions in **Step 1**.
        <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
-4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+4. Copy the file to the folder you want to use as the _home folder_ for Health Connect. The _home folder_ should only contain the jar file.
    <br>
 5. Use Terminal to open the JAR file.
     1. Find the file path of the file you just copied. To do so, right-click on the file in Finder and press `Get Info`.
@@ -113,8 +111,8 @@ Health Connect is an application designed to **streamline client management** fo
    Some example commands you can try:
     * `view`: Displays all contacts.
     * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
-    * `delete n/John Doe` : Deletes contact named John Doe from the current list.
-    * `filter t/High Risk`: Displays all entries which are tagged High Risk.
+    * `delete n/John Doe` : Deletes contact named `John Doe` from the current list.
+    * `filter t/High Risk`: Displays all entries which are tagged `High Risk`.
     * `clear`: Deletes all contacts.
     * `exit`: Exits the app.
       <br>
@@ -139,19 +137,16 @@ Health Connect is an application designed to **streamline client management** fo
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
-* Prefixes are case sensitive, and must be in lower case. <br>
+* Prefixes are case-sensitive, and must be in lower case. <br>
   e.g. `n/` is allowed but `N/` is not allowed
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-* If multiple tags `t/... t/...` are provided as an input only the last tag will be taken.
-    - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient John Doe will be assigned the tag `High Risk`.
 
 * The following are considered duplicate patients:
   * Same name AND same phone number
   * Same name AND same email
   * Same name, same phone number AND same email
-  * Note: same phone number AND same email are not considered as a duplicate patient since the patient might use their Next Of Kin's contact details
+  * Note: same phone number AND same email AND different name are not considered as a duplicate patient since the patient might use their Next Of Kin's contact details
 
 
 
@@ -165,13 +160,13 @@ Health Connect is an application designed to **streamline client management** fo
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
     - Only numeric characters are allowed.
 * **EMAIL**
-    - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
+    - Must follow a valid email format and include a domain `[name]@[domain].[TLD]` e.g. `name@example.com`
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
 * **ADDRESS**
     - Address cannot be blank
     - Since an address can consist of any combination of characters (including `/`), there are no restrictions on the input format for this field. 
     - Be aware that adding unrecognized parameters (e.g., g/) after the address tag `a/` will not trigger an error. 
-      - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/[unrecognized parameter] t/low risk m/None` 
+      - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/UNRECOGNISED_PARAMETER t/low risk m/None` 
       will still be accepted as valid input without any errors.
 * **TAG**
     - A patient must have one of the following priority tags:
@@ -219,6 +214,10 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`
 
 [Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
 
+Additional Details:
+* If multiple tags `t/... t/...` are provided as an input, only the last tag will be taken.
+    - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient `John Doe` will be assigned the tag `High Risk`.
+
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Lactose m/Gluten`
@@ -241,7 +240,7 @@ Edits an existing patient in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]...`
 
-[Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
+[Parameter Constraints](#parameter-constraints): `INDEX`, `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
 
 Additional Details:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
@@ -249,13 +248,16 @@ Additional Details:
 * Existing values will be updated to the input values.
 * When editing tags, the inputted tag will completely replace the current tag.
 * You cannot remove a person's tag using the edit feature, as the tag is a required field.
+* If multiple tags `t/... t/...` are provided as an input, only the last tag will be taken.
+    - For example: `edit 2...t/Low Risk t/High Risk`. The patient at index `2` will be assigned the tag `High Risk`.
 * When editing allergies, the inputted allergies will completely replace the current allergies.
 
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person at index `1` to be `91234567` and `johndoe@example.com` respectively.
    <br>
 * `edit 2 n/Betsy Crower`
-  Edits the name of the 2nd person to be `Betsy Crower`.
+  Edits the name of the person at index `2` to be `Betsy Crower`.
 
 ### Locating patients by name: `find`
 
@@ -267,10 +269,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Additional Details:
 * At least 1 keyword must be provided.
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Only full words will be matched. e.g. `Han` will not match `Hans`.
+  * Slashes `/` and hyphens `-` will be considered as part of the full word. e.g. `Betsy` will not match `Betsy-Crowe`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -294,13 +297,13 @@ Additional Details:
 * The search is case-sensitive.
 * At least 1 `PREFIX/FEATURE_NAME` must be provided.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* You can filter by **tag, email, address, phone number and allergies.** Allergy is the only feature that allows filter by multiple parameters.
+* You can filter by **tag, email, address, phone number and allergies.** 
 * Only full words will be matched e.g. `99999999` will not match `999`
 * Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags - `filter t/ High Risk t/Low Risk` is considered invalid format and not accepted.)
 * The filter search uses AND logic between different attributes (e.g., tag and allergies) — all specified attributes must match. If multiple allergies are specified, it uses OR logic — an entry will match allergies attribute if it has any one of the specified allergies, or all. 
 For example:
-`filter t/High Risk m/Peanuts m/Dairy` will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
-`filter m/Peanuts m/Dairy` will return entries with either "Peanuts" or "Dairy" allergy, or both.
+`filter t/High Risk m/Peanuts m/Dairy` will return entries with the `High Risk` tag and any of the allergies "Peanuts" or "Dairy".
+`filter m/Peanuts m/Dairy` will return entries with either `Peanuts` or `Dairy` allergy, or both.
 * Specifying any parameters beyond those required will result in an error.
 * Filter requires at least one feature to filter by (e.g. `filter` is an invalid format but `filter t/High Risk` and `filter p/99999999` are both accepted.)
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
@@ -308,11 +311,11 @@ For example:
 
 Examples:
 * `filter t/High Risk a/John street, block 123, #01-01` 
-returns all patients who are at high risk AND have address `John street, block 123, #01-01`
+returns all patients who are `High Risk` AND have address `John street, block 123, #01-01`
   ![Example of Filter Command ](./images/FeatureFilterExample.png)
   <br>
 * `filter m/Penicillin p/88451234`
-  returns all patients who have an allergy to penicillin AND have the phone number `88451234`
+  returns all patients who have an allergy to `penicillin` AND have the phone number `88451234`
   <br>
 
 
@@ -326,7 +329,7 @@ Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
 
 Additional Details:
 - Deletes the person that matches the following `NAME`, `PHONE` and/or `EMAIL`
-- If the `NAME` cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided.
+- If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match to a person.
 
 Examples:
 * `delete n/john`
@@ -345,7 +348,7 @@ Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
 Additional Details:
 * Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`.
-* If the attribute provided matches more than one person, more attributes need to be provided to uniquely match to a person.
+* If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match to a person.
 * To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for their appointment.
 * If no date and time are set, none are displayed.

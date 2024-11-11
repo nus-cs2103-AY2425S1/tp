@@ -34,13 +34,13 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-              ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ALLERGY, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ALLERGY, PREFIX_DATE);
 
         //ensure no invalid prefixes are used
         if (Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                  EditCommand.MESSAGE_USAGE));
+                    EditCommand.MESSAGE_USAGE));
         }
         Index index;
 
@@ -71,7 +71,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
         }
         parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPersonDescriptor::setAllergies);
-
+        Set<Allergy> allergyList = editPersonDescriptor.getAllergies().orElse(Set.of());
+        if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                && allergyList.size() > 1) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

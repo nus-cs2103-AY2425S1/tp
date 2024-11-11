@@ -23,6 +23,7 @@ Class PersonHasFeaturePredicate {
   -email: Email
   -tag: Tag
   -address: Address
+  -allergies: List<Allergy>
   test(Person): boolean
 }
 
@@ -33,11 +34,6 @@ Class ModelManager {
   -filteredPersons: FilteredList<Person>
   updateFilteredPersonList(Predicate<Person>)
 }
-
-Class Phone
-Class Email
-Class Tag
-Class Address
 
 FilterCommandParser .up.|> Parser
 
@@ -53,9 +49,4 @@ ModelManager -right-> PersonHasFeaturePredicate: utilizes >
 
 
 PersonHasFeaturePredicate .up.|> Predicate
-PersonHasFeaturePredicate *-down-> Name: has >
-PersonHasFeaturePredicate *-down-> Phone: has >
-PersonHasFeaturePredicate *-down-> Email: has >
-PersonHasFeaturePredicate *-down-> Tag: has >
-PersonHasFeaturePredicate *-down-> Address: has >
 @enduml

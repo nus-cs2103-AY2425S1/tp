@@ -23,9 +23,6 @@ Class Person {
   -phone : Phone
   -email: Email
 }
-Class Name
-Class Phone
-Class Email
 
 DeleteCommandParser .up.|> Parser
 
@@ -36,9 +33,6 @@ DeleteCommandParser .right.> ParserUtil: utilizes >
 DeleteCommand .down.> CommandResult: outputs >
 
 
-DeleteCommand -right-> Person: Deletes >
-Person *-down-> Name: has >
-Person *-down-> Phone: has >
-Person *-down-> Email: has >
+DeleteCommand -right-> Person: deletes >
 
 @enduml
