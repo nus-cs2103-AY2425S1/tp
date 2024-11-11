@@ -44,11 +44,7 @@ Main Features:
 
    * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the address nook.
 
-   * `delete p 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts and events.
-
-   * `exit` : Exits the app.
+   * `delete p 1` : Deletes the first contact shown in the current list.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -125,8 +121,11 @@ Format: `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="info" seamless>
 
-**Note:** Two persons cannot have the same name, use disambiguation if needed
-eg: James (Office)
+**Note:**
+* Two persons cannot have the same name with the same capitalization <br> use disambiguation if needed e.g. `James (Office)`
+* Person's name cannot contain dash `-`, at `@`, or slash `/`
+* Person's tag cannot contain spaces
+* Persons can have two tags with different capitalization e.g. `Friend` and `friend`
 </box>
 
 Examples:
@@ -146,8 +145,11 @@ Format: `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​`
 
 <box type="info" seamless>
 
-**Note:** Two events cannot have the same name, use disambiguation if needed
-eg: Book Fair (Orchard)
+**Note:**
+* Two events cannot have the same name with the same capitalization <br> use disambiguation if needed e.g. `Book Fair (Orchard)`
+* Event's name cannot contain dash `-`, at `@`, or slash `/`
+* Event's tag cannot contain spaces
+* Events can have two tags with different capitalization e.g. `Party` and `party`
 </box>
 
 Examples:
@@ -247,7 +249,7 @@ Format: `find p KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched. e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -265,9 +267,9 @@ Format: `find e KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `sentosa` will match `Sentosa`
 * The order of the keywords does not matter. e.g. `Sentosa Party` will match `Party Sentosa`
 * Only the name is searched.
-* Only full words will be matched e.g. `Sentos` will not match `Sentosa`
+* Only full words will be matched. e.g. `Sentos` will not match `Sentosa`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Sentosa Party` will return events with the words `Party`, `Sentosa`
+  e.g. `Sentosa Party` will return `Sentosa Vacation`, `Beach Party`
 
 Examples:
 * `find e Sentosa` returns `sentosa` and `Sentosa Party`
@@ -290,9 +292,9 @@ Format: `search p KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * The order of the keywords does not matter. e.g. `Work Friends` will match `Friends Work`
 * Only the tag name is searched.
-* Only full words will be matched e.g. `Friend` will not match `Friends`
+* Only full words will be matched. e.g. `Friend` will not match `Friends`
 * Persons with tags matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Work Friends` will return persons with tags `Hobby Friends`, `Work Partners`
+  e.g. `Work Friends` will return persons with tags `Friends` or `Work`
 
 Examples:
 * `search p Friends` returns persons with tags named `Friends`
@@ -313,9 +315,9 @@ Format: `search e KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * The order of the keywords does not matter. e.g. `Summer Fashion` will match `Fashion Summer`
 * Only the tag name is searched.
-* Only full words will be matched e.g. `Friend` will not match `Friends`
+* Only full words will be matched. e.g. `Friend` will not match `Friends`
 * Events with tags matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Work Friends` will return persons with tags `Hobby Friends`, `Work Partners`
+  e.g. `Summer Fashion` will return events with tags `Summer` or `Fashion`
 
 Examples:
 * `search e Friends` returns events with tags named `Friends`
@@ -359,8 +361,8 @@ Examples:
 
 ### Display events in schedule : `schedule`
 
-- If non-negative integer given, find all events happening in the next given number of days.
-- If negative integer given, find all events that happened in the past given number of days.
+- If non-negative integer given e.g. 0,1,2..., find all events happening in the next given number of days.
+- If negative integer given e.g. -1,-2..., find all events that happened in the past given number of days.
 - If date time is given, find all events happening on the given date.
 
 Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
@@ -376,7 +378,8 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Displays a confirmation, enter exactly "Y" or "Yes" to clear all persons and events from the address book.
+Displays a confirmation, enter **exactly** "Y" or "Yes" to clear all persons and events from the address book. <br>
+Entering anything else will cancel the clear command.
 
 Format: `clear` then `Y` or `Yes`
 
@@ -384,14 +387,16 @@ Format: `clear` then `Y` or `Yes`
 
 ### Clearing all persons : `clear p`
 
-Displays a confirmation, enter exactly "Y" or "Yes" to clear all persons from the address book.
+Displays a confirmation, enter **exactly** "Y" or "Yes" to clear all persons from the address book. <br>
+Entering anything else will cancel the clear command.
 
 Format: `clear p` then `Y` or `Yes`
 
 
 ### Clearing all events : `clear e`
 
-Displays a confirmation, enter exactly "Y" or "Yes" to clear all events from the address book.
+Displays a confirmation, enter **exactly** "Y" or "Yes" to clear all events from the address book. <br>
+Entering anything else will cancel the clear command.
 
 Format: `clear e` then `Y` or `Yes`
 
