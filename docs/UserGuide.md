@@ -11,7 +11,7 @@ Are you a Singaporean private tutor who has trouble keeping track of your studen
 <br><br>
 The Greatest Offline AddressBook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of student information (such as phone number, grades and education level), it also helps you access your students' parents' information as well! GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
 <br><br>
-The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the command terminal. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
+The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the terminal emulator. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
 <br><br>
 This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use.
 Please first ensure that you meet the [Minimum System Requirements](#minimum-system-requirements) in order to run GOATS.
@@ -52,7 +52,7 @@ Please ensure that you have the following:
 * A computer running on Windows, macOS or Linux.
 * Ensure you have **Java 17** or above installed on your computer.
   * To check if you have Java 17 installed on your computer, follow the following steps:
-    1. Open a Command Terminal.
+    1. Open a Terminal Emulator.
        * On Windows: Open up `Windows Powershell` from the list of applications.
        * On Linux: Click on the `Activities` item at the top left of the screen, then type in `terminal` and open the displayed application.
        * On macOS: Type in `terminal` in the search field in the list of applications and open the displayed application.
@@ -64,7 +64,7 @@ Please ensure that you have the following:
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-4/tp/releases).
 2. Copy the file to the folder you want to use as the **home folder** for GOATS.
-3. Open a Command Terminal. For those unfamiliar with opening a command terminal, follow the instructions in the [Minimum System Requirements](#minimum-system-requirements).
+3. Open a Terminal Emulator. For those unfamiliar with opening a terminal emulator, follow the instructions in the [Minimum System Requirements](#minimum-system-requirements).
 4. Type in the following command to navigate to the GOATS home folder: `cd`, followed by the location of your home folder.<br>
    e.g. `cd Documents/GOATS_Home_Folder`
 5. Type in the following command to launch the GOATS application: `java -jar GOATS.jar`<br>
@@ -85,30 +85,30 @@ Please ensure that you have the following:
 ## Command summary
 
 
-| Action                         | Format (Example)                                                                                                                                                                                                                     |
-| ------------------------------ |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Parent**                 | `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` (`addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`)                                                                                |
-| **Add Student**                | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/EDUCATION_LEVEL [t/TAG]…` (`addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague`) |
-| **Archive**                    | `archive INDEX [MORE_INDICES]…` (`archive 1 2 3 4`)                                                                                                                                                                                  |
-| **Assign Grade**               | `grade INDEX g/GRADE_INDEX` (`grade 1 g/1`)                                                                                                                                                                                          |
-| **Clear**                      | `clear`                                                                                                                                                                                                                              |
-| **Delete**                     | `delete INDEX [MORE_INDICES]…` (`delete 1 2 3 4`)                                                                                                                                                                                    |
-| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION_LEVEL] [t/TAG]…` (`edit 1 p/91234567 e/johndoe@example.com`)                                                                                    |
-| **Exit**                       | `exit`                                                                                                                                                                                                                               |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]…` (`find James Jake`)                                                                                                                                                                                  |
-| **Find By Lesson Day**         | `findday KEYWORD [MORE_KEYWORDS]…` (`findday Tuesday`)                                                                                                                                                                               |
-| **Find By Tag**                | `findtag KEYWORD [MORE_KEYWORDS]…` (`findtag math science`)                                                                                                                                                                          |
-| **Help**                       | `help`                                                                                                                                                                                                                               |
-| **Link Student To Parent**     | `link ch/STUDENT_NAME pa/PARENT_NAME` (`link ch/James Ho pa/Jane Doe`)                                                                                                                                                               |
-| **List**                       | `list`                                                                                                                                                                                                                               |
-| **List Archive**               | `listarchive`                                                                                                                                                                                                                        |
-| **List Students**              | `liststudents`                                                                                                                                                                                                                       |
-| **List Parents**               | `listparents`                                                                                                                                                                                                                        |
-| **Pin**                        | `pin INDEX [MORE_INDICES]…` (`pin 1 2 3 4`)                                                                                                                                                                                          |
-| **Sort**                       | `sort`                                                                                                                                                                                                                               |
-| **Unarchive**                  | `unarchive INDEX [MORE_INDICES]…` (`unarchive 1 2 3 4`)                                                                                                                                                                              |
-| **Unlink Student from Parent** | `unlink ch/STUDENT_NAME` (`unlink ch/James Ho`)                                                                                                                                                                                      |
-| **Unpin**                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                      |
+| Action                                                                      | Format (Example)                                                                                                                                                                                                                     |
+|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add Parent](#adding-a-parent-addparent)**                                | `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` (`addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`)                                                                                |
+| **[Add Student](#adding-a-student-addstudent)**                             | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/EDUCATION_LEVEL [t/TAG]…` (`addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague`) |
+| **[Archive](#archiving-contacts-archive)**                                  | `archive INDEX [MORE_INDICES]…` (`archive 1 2 3 4`)                                                                                                                                                                                  |
+| **[Assign Grade](#assigning-a-grade-to-a-student-grade)**                   | `grade INDEX g/GRADE_INDEX` (`grade 1 g/1`)                                                                                                                                                                                          |
+| **[Clear](#clearing-all-entries-clear)**                                    | `clear`                                                                                                                                                                                                                              |
+| **[Delete](#deleting-contacts-delete)**                                     | `delete INDEX [MORE_INDICES]…` (`delete 1 2 3 4`)                                                                                                                                                                                    |
+| **[Edit](#editing-a-contact-edit)**                                         | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION_LEVEL] [t/TAG]…` (`edit 1 p/91234567 e/johndoe@example.com`)                                                                                    |
+| **[Exit](#exiting-the-program-exit)**                                       | `exit`                                                                                                                                                                                                                               |
+| **[Find](#locating-contacts-by-name-find)**                                 | `find KEYWORD [MORE_KEYWORDS]…` (`find James Jake`)                                                                                                                                                                                  |
+| **[Find By Lesson Day](#locating-students-by-lesson-day-findday)**          | `findday KEYWORD [MORE_KEYWORDS]…` (`findday Tuesday`)                                                                                                                                                                               |
+| **[Find By Tag](#locating-contacts-by-tag-findtag)**                        | `findtag KEYWORD [MORE_KEYWORDS]…` (`findtag math science`)                                                                                                                                                                          |
+| **[Help](#viewing-help-help)**                                              | `help`                                                                                                                                                                                                                               |
+| **[Link Student To Parent](#linking-a-parent-to-a-student-link)**           | `link ch/STUDENT_NAME pa/PARENT_NAME` (`link ch/James Ho pa/Jane Doe`)                                                                                                                                                               |
+| **[List](#listing-all-contacts-list)**                                      | `list`                                                                                                                                                                                                                               |
+| **[List Archive](#listing-all-archived-contacts-listarchive)**              | `listarchive`                                                                                                                                                                                                                        |
+| **[List Students](#listing-students-liststudents)**                         | `liststudents`                                                                                                                                                                                                                       |
+| **[List Parents](#listing-parents-listparents)**                            | `listparents`                                                                                                                                                                                                                        |
+| **[Pin](#pinning-contacts-pin)**                                            | `pin INDEX [MORE_INDICES]…` (`pin 1 2 3 4`)                                                                                                                                                                                          |
+| **[Sort](#sorting-all-contacts-alphabetically-sort)**                       | `sort`                                                                                                                                                                                                                               |
+| **[Unarchive](#unarchiving-contacts-unarchive)**                            | `unarchive INDEX [MORE_INDICES]…` (`unarchive 1 2 3 4`)                                                                                                                                                                              |
+| **[Unlink Student from Parent](#unlinking-a-parent-from-a-student-unlink)** | `unlink ch/STUDENT_NAME` (`unlink ch/James Ho`)                                                                                                                                                                                      |
+| **[Unpin](#unpinning-contacts-unpin)**                                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                      |
 
 ## Features
 
@@ -131,7 +131,7 @@ Please ensure that you have the following:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Adding a student: `addstudent`
+### Adding a student: `addstudent` 
 
 Adds a student to the address book.
 
@@ -575,3 +575,18 @@ Do **NOT** edit the contents in the file. Changes made in JSON file can cause GO
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
+
+## Glossary
+
+| Term                              | Definition                                                                                                      |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Alphanumeric                      | Text consisting of English letters or/and Arabic numerals                                                       |
+| Command                           | An instruction given by the user for the program to perform a certain action                                    |
+| Command Line Interface (CLI)      | A way to interact with a program by inputting lines of text called command-lines                                |
+| Terminal Emulator                 | A software that emulates a traditional text-based terminal interface in modern graphical interfaces             |
+| Graphical User Interface (GUI)    | A way to interact with a program which makes use of graphics or visuals as opposed to purely text               |
+| Home Folder                       | The main folder where all GOATS-related files will be created and stored                                        |
+| Java Archive File (JAR)           | A package file that makes it easy to download and launch java-based programs such as GOATS                      |   
+| Java                              | The programming language and platform used to create GOATS                                                      |
+| JavaScript Object Notation (JSON) | A format for storing data as human-readable text                                                                |
+| Parameter                         | Details to be specified for a command. (e.g. When adding a Student to GOATS, the student's name is a parameter) |
