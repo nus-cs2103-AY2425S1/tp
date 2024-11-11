@@ -32,7 +32,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a Co
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John` to Bridal Boss.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `view 3` : Views the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -263,22 +263,35 @@ Displays detailed information about a specified person.
 Deletes a specified person from the address book or removes wedding jobs assigned to specified person.
 
 - **Formats**:
-    - **By Index**: `delete INDEX [w/WEDDING_INDEX]...`
-    - **By Name**: `delete NAME [w/WEDDING_INDEX]...`
+    - **By Index**: `delete INDEX`
+    - **By Name**: `delete NAME`
 - **Notes**:
     - **Deleting a person**:
+        - If multiple matches are found when using name-based format, the system will prompt for index.
         - Cannot delete a client who has an active wedding.
           - Error: "Cannot delete this person as they are a client in a wedding. Please delete their wedding first."
-        - If multiple matches are found when using name-based format, the system will prompt for index.
-  - **Removing wedding jobs assigned to a person**:
-      - Can remove multiple weddings jobs a person is assigned to.
-      - Wedding indices must be valid and refer to weddings that person is already assigned to.
+        - Deleting a person will remove them from their assigned weddings.
+
 - **Examples**:
     - `delete 2` deletes the person at index 2.
     - `delete Betsy` deletes Betsy if there's only one match.
-    - `delete 1 w/1` unassigns wedding at index 1 from person at index 1.
-    - `delete Alice w/1 w/2` unassigns Alice from weddings at index 1 and 2 if there's only one match to 'Alice'.
+  
+#### Removing Wedding Jobs Assigned to a Person: `delete`
 
+Removes wedding jobs assigned to specified person.
+
+- **Formats**:
+    - **By Index**: `delete INDEX [w/WEDDING_INDEX]...`
+    - **By Name**: `delete NAME [w/WEDDING_INDEX]...`
+- **Notes**:
+    - **Removing wedding jobs assigned to a person**:
+        - If multiple matches are found when using name-based format, the system will prompt for index.
+        - Can remove multiple weddings jobs a person is assigned to.
+        - Wedding indices must be valid and must refer to weddings that the specified person is already assigned to.
+        - If no wedding indices are provided, the contact specified will be deleted.
+- **Examples**:
+    - `delete 1 w/1` removes wedding job at index 1 that person at index 1 is assigned to.
+    - `delete Alice w/1 w/2` removes wedding jobs at index 1 and 2 assigned to Alice, if there's only one match to 'Alice'.
 
 ---
 
@@ -682,6 +695,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
     - Cannot assign the same person to the same wedding multiple times.
 - **Deletion Effects**:
     - Deleting a wedding removes all vendor assignments related to that wedding.
+    - Can delete a vendor who is assigned weddings
 
 #### Role-Person Relationship
 
@@ -712,7 +726,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 **A**: No, each client can only have one wedding at a time.
 
 **Q**: Can I assign multiple roles to a person?<br>
-**A**: No, each person can only have one role at a time. Assigning a new role will replace the existing one.
+**A**: No, each person can only have at most one role at a time. Assigning a new role will replace the existing one.
 
 **Q**: What happens when I delete a wedding?<br>
 **A**: Deleting a wedding will remove all vendor assignments to that wedding and remove the client-wedding relationship. The contacts themselves are not deleted.
