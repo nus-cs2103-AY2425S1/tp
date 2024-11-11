@@ -8,6 +8,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * Table of Contents
 {:toc}
 
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
