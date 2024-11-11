@@ -65,7 +65,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
 4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
    and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following window appear.<br>
-   ![Ui](images/TemplateUi.png)
+   <img src="images/TemplateUi.png" alt="Ui screenshot" height=auto width="850"/>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -148,7 +148,7 @@ Examples:
 
 The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`.
 
-![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
+<img src="images/AddCommandExampleUsage.png" alt="AddCommand screenshot" height=auto width="850"/>
 
 ### Listing all persons : `list`
 
@@ -193,27 +193,29 @@ Examples:
 
 The following screenshot shows the results of executing `edit 2 en/Betsy Crower p/+65 91235678 t/`.
 
-![EditCommandExampleUsage.png](images/EditCommandExampleUsage.png)
+<img src="images/EditCommandExampleUsage.png" alt="EditCommand screenshot" height=auto width="850"/>
 
 ### Finding a person: `find`
 
-Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
+Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 > All possible orders and combinations of the 4 parameters `NAME`, `PHONE`, `ROOM_NUMBER` and `TAG` are accepted.
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
-* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`.
-* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`.
-* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`.
-* When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * The search is case-insensitive. e.g. `hans` will match `Hans`.
+> * The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+> * Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`.
+> * Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`.
+> * Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`.
+> * When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same.
-  as `t/colleagues t/friends`
-* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`.
-* When searching by `TAG`, the contact must match every `TAG` in the input fields to appear in the listed results.
-* If the user inputs multiple fields for the `find`, then only contacts that match all the input fields will appear in the listed results.
+> * The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
+  as `t/colleagues t/friends`.
+> * Tag search is case-sensitive. `Friends` will not match `friends`.
+> * In tag search, the contacts have to contain all the specified TAGs in order to match.
+> * If multiple parameters, namely `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
 
 Examples:
 * `find n/John` Finds contacts who have the word John in their name.
@@ -221,7 +223,7 @@ Examples:
 
 The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`.
 
-![FindCommandExampleUsage](images/FindCommandExampleUsage.png)
+<img src="images/FindCommandExampleUsage.png" alt="FindCommand screenshot" height=auto width="850"/>
 
 ### Deleting a person : `delete`
 
@@ -229,13 +231,15 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* There is a confirmation pop-out after the user enters the command but before the deletion is finalised. Click `OK` to continue or `Cancel` to abort the deletion.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+>* Deletes the person at the specified `INDEX`.
+>* The index refers to the index number shown in the displayed person list.
+>* The index **must be a positive integer** 1, 2, 3, …​
+>* There is a confirmation pop-out after the user enters the command but before the deletion is finalised. Click `OK` to continue or `Cancel` to abort the deletion.
 
 The following screenshot shows the delete pop-out.
-![delete popout](images/deleteConfirmation.png)
+<img src="images/Delete popup.png" alt="Delete popup screenshot" height=auto width="850"/>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -267,7 +271,7 @@ Example:
 * `clean`, executed in 2024.
 
 The following screenshot shows the result of `clean`, executed in 2024, which deletes all students who graduate in 2023 or earlier.  
-![img.png](images/CleanCommandExampleUsage.png)
+<img src="images/CleanCommandExampleUsage.png" alt="CleanCommand screenshot" height=auto width="850"/>
 
 
 ### Undoing the previous command : `undo`
@@ -309,8 +313,10 @@ Format: `export`
 Example:
 
 The following screenshots shows the results of executing `export`.
-![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
-![ExportToFolderExample.png](images/ExportToFolderExample.png)
+
+<img src="images/ExportCommandExampleUsage.png" alt="ExportCommand screenshot" height=auto width="850"/>
+
+<img src="images/ExportToFolderExample.png" alt="ExportToFolder screenshot" height=auto width="850"/>
 
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
@@ -330,7 +336,8 @@ Examples:
 * `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
 The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`.
-![ImportCommandExampleUsage.png](images/ImportCommandExampleUsage.png)
+
+<img src="images/ImportCommandExampleUsage.png" alt="ImportCommand screenshot" height=auto width="850"/>
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
