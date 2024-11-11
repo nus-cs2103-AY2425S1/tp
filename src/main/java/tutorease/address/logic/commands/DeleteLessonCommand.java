@@ -54,7 +54,7 @@ public class DeleteLessonCommand extends LessonCommand {
         int listIndex = targetIndex.getZeroBased();
 
         if (listIndex >= model.getFilteredLessonListSize()) {
-            logger.log(Level.WARNING, "Invalid target index: {0}", targetIndex.getOneBased());
+            logger.log(Level.WARNING, "Invalid target index: {0}", targetIndex.getZeroBased());
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 

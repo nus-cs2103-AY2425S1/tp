@@ -56,7 +56,7 @@ public class DeleteContactCommand extends ContactCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            logger.log(Level.WARNING, "Invalid target index: {0}", targetIndex.getOneBased());
+            logger.log(Level.WARNING, "Invalid target index: {0}", targetIndex.getZeroBased());
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
