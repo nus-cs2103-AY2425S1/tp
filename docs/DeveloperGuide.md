@@ -749,8 +749,8 @@ This section lists 9 planned enhancements, adhering to the team size x 2 limit.
 3. **Expected Outcome:** This will accommodate real-world contact details where a person may have multiple phone numbers, emails and addresses.
 
 ### 10. **Support for more languages**
-1. **Feature Flaw:** The application is developed and tested in English, the use of other languages may result in unintended behaviour or bugs
-2. **Proposed Fix:** Add support for various languages
+1. **Feature Flaw:** The application is developed and tested in English, the use of other languages may result in unintended behaviour or bugs.
+2. **Proposed Fix:** Add support for various languages for various commonly used languages in the region.
 3. **Expected Outcome:** This improvement will improve usability of Eventory for those who do not have English as a primary language.
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **Eventory**.
