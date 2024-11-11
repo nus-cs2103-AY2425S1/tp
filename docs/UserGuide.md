@@ -223,7 +223,7 @@ A patient can have any number of tags (including 0)
 
 ### Listing all patients : `list`
 
-Shows a list of every patient in the address book.
+Shows a list of every patient in the address book and sets the sort order of the list.
 
 Format: `list [SORT_ORDER]`
 
