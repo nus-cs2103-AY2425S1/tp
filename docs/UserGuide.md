@@ -65,8 +65,10 @@ done faster than traditional GUI apps.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `deleteall`, `undo`) will be ignored.<br>
+* Extraneous parameters for commands that **do not** take in parameters (such as `help`, `list`, `exit`, `deleteall`, `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters for commands that **do** take in parameters (such as `adds`, `deletes`) will result in undefined behaviour.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
