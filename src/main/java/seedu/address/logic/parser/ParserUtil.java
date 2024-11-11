@@ -132,7 +132,7 @@ public class ParserUtil {
      *
      * @param date The date string to be parsed.
      * @return A {@code LocalDate} object representing the parsed date.
-     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is null.
+     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is otherwise invalid.
      */
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
