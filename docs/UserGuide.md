@@ -23,7 +23,7 @@ and make planning a breeze — so you can focus more on what matters and spend l
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-1/tp/releases).
 
@@ -38,7 +38,7 @@ and make planning a breeze — so you can focus more on what matters and spend l
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
 
     * `delete 3` : Deletes the 3rd contact shown in the current contact list.
 
@@ -89,7 +89,6 @@ All commands that use the indices shown in the displayed contact list can also b
 Shows a list of all persons stored in ClubConnect's contact list.
 
 Format: `list`
-
 ![result for 'list'](images/list.png)
 
 
@@ -302,7 +301,7 @@ Look out for future updates where we will fix this issue! More information can b
 Examples:
 * `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
 * `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`<br>
-  ![result for 'add a event orbital workshop'](images/addEventResult.png)
+  ![result for 'add event orbital workshop'](images/addEventResult.png)
 
 
 ### Editing an event: `edit_event`
@@ -407,7 +406,6 @@ Examples:
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -432,12 +430,12 @@ Format: `exit`
 
 ### Saving the data
 
-ClubConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClubConnect data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 ### Editing the data file
 
-ClubConnect data are saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
+ClubConnect data is saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -454,8 +452,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubConnect home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on another computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
