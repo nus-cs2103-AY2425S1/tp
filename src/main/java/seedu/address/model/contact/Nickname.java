@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Nickname in the address book.
- * Guarantees: immutable}
+ * Guarantees: immutable
  */
 public class Nickname {
 
@@ -17,9 +17,8 @@ public class Nickname {
      */
     public Nickname(String nickname) {
         requireNonNull(nickname);
-        this.value = nickname.trim(); // in ParserUtil.java also have trim()
+        this.value = nickname.trim();
     }
-
 
     /**
      * Returns true if a given nickname is empty.
@@ -49,7 +48,7 @@ public class Nickname {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return value;

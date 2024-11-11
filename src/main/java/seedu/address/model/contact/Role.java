@@ -139,7 +139,7 @@ public class Role implements Comparable<Role> {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return '[' + roleName + ']';

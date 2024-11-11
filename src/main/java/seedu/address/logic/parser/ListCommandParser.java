@@ -1,11 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.List;
 
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -13,8 +9,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-    public static final String NO_UNACCEPTABLE_WORDS = " There shouldn't be any words after "
-            + "the list command word except for a few special cases. ";
     private static final List<String> ACCEPTED_ARGUMENTS =
             List.<String>of("all", "contacts", "allcontacts");
 
@@ -27,10 +21,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         String trimmedLowerArgs = args.trim().toLowerCase();
         boolean isValidArgument = validateArgument(trimmedLowerArgs);
         if (!isValidArgument) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, NO_UNACCEPTABLE_WORDS
-                            + String.format(
-                                    MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD)));
+            throw new ParseException(ListCommand.MESSAGE_WRONG_ARGUMENTS);
         }
         return new ListCommand();
     }
@@ -42,13 +33,14 @@ public class ListCommandParser implements Parser<ListCommand> {
     }
 
     private static boolean checkifArgumentPresentAndValid(String argument, boolean isArgumentEmpty) {
-        boolean isArgumentPresentAndValid = false;
-        if (!isArgumentEmpty) {
-            List<String> commandDescription = List.of(argument.split("\\s+"));
-            isArgumentPresentAndValid =
-                    commandDescription.stream()
-                            .allMatch(word -> ACCEPTED_ARGUMENTS.contains(word));
+        if (isArgumentEmpty) {
+            return false;
         }
-        return isArgumentPresentAndValid;
+        assert !argument.isEmpty();
+        final String regexWhitespaceWithRepeats = "\\s+";
+
+        List<String> commandDescription = List.of(argument.split(regexWhitespaceWithRepeats));
+        return commandDescription.stream()
+                .allMatch(word -> ACCEPTED_ARGUMENTS.contains(word));
     }
 }

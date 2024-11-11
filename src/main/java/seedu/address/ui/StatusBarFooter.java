@@ -27,7 +27,7 @@ public class StatusBarFooter extends UiPart<Region> {
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
     public StatusBarFooter(Path saveLocation, ObservableList<Contact> contactListForUi,
-                           ObservableList<Contact> allContactList) { //ObservableList<Contact> fullContacts
+                           ObservableList<Contact> allContactList) {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
         setContactListStatus(contactListForUi.size(), allContactList.size());
@@ -42,7 +42,7 @@ public class StatusBarFooter extends UiPart<Region> {
         // @@author
     }
 
-    // @@author cth06-Github*/
+    // @@author cth06-Github
     private void setContactListStatus(int contactCountListed, int contactCountAll) {
         contactListStatus.setText(contactCountListed + " out of " + contactCountAll
                 + " contacts listed");

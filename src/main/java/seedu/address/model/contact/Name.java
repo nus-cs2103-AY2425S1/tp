@@ -14,6 +14,7 @@ public class Name {
     public static final String SON_OF = "S/O";
     public static final String DAUGHTER_OF = "D/O";
     public static final String BRACKET_PAIR = "(INSERT_NAME)";
+    public static final String OPEN_BRACKET ="(";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "
@@ -22,11 +23,19 @@ public class Name {
                     + "appear once. " + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle "
                     + "of the name while " + BRACKET_PAIR + " must be after the given name (at the end of the"
                     + " full name)";
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
+
+    // @@author cth06-Github-reused
+    // Regex obtained mainly through chatGPT (see developer guide)
     public static final String VALIDATION_REGEX = "^([A-Za-z\\s]+)$";
+    public static final String REGEX_OPEN_BRACKET = "\\" + OPEN_BRACKET; // to be compatible with regex
+    public static final String REGEX_CLOSE_BRACKET_AT_END_ONLY = ".*\\)$";
+    // @@author
+
+    // Regex obtained from teammate author wuzengfu's suggestion
+    public static final String REGEX_WHITESPACE_WITH_REPEATS = "\\s+";
+
+    private static final String EMPTY_STRING = "";
+    private static final String SINGLE_WHITESPACE = " ";
 
     public final String fullName;
 
@@ -48,21 +57,22 @@ public class Name {
         String testInNameCase = convertToNameCase(test);
         String validSpecialCharForRegex = identifyValidSpecialChar(testInNameCase);
         boolean hasNoSpecialChar = validSpecialCharForRegex.isEmpty();
-        boolean hasOpenBracket = validSpecialCharForRegex.equals("(");
-        boolean hasCloseBracketAtEnd = testInNameCase.matches(".*[)]$"); // mmmmm
+        boolean hasOpenBracket = validSpecialCharForRegex.equals(OPEN_BRACKET);
+        boolean hasCloseBracketAtEnd = testInNameCase.matches(REGEX_CLOSE_BRACKET_AT_END_ONLY);
 
-        // if no special cases, just check that it is only alphabets
+        // if no special character, just check that it is only alphabets
         if (hasNoSpecialChar) {
             return testInNameCase.matches(VALIDATION_REGEX);
         }
 
-        // if found special character, determine if its a bracket case
+        // if found special character, determine if it's a bracket case
         if (hasOpenBracket && !hasCloseBracketAtEnd) {
             return false;
         }
+
         if (hasOpenBracket) {
-            validSpecialCharForRegex = "\\("; // to be compatible with regex
-            testInNameCase = testInNameCase.substring(0, testInNameCase.length() - 1); // minus off the close bracket
+            validSpecialCharForRegex = REGEX_OPEN_BRACKET; // to be compatible with regex
+            testInNameCase = testInNameCase.substring(0, testInNameCase.length() - 1); // excludes end close bracket
         }
         assert validSpecialCharForRegex.equals(validSpecialCharForRegex.toUpperCase());
 
@@ -72,34 +82,54 @@ public class Name {
 
     private static String identifyValidSpecialChar(String nameInput) {
         List<String> specialCharactersAllowed = List.of(ALIAS, SON_OF, DAUGHTER_OF,
-                BRACKET_PAIR.substring(0, 1));
+                OPEN_BRACKET);
         for (String word : specialCharactersAllowed) {
             if (nameInput.toUpperCase().contains(word)) {
                 return word;
             }
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     private static String convertToNameCase(String nameInput) {
         if (nameInput.isEmpty()) {
             return nameInput;
         }
-        List<String> words = List.of(nameInput.toLowerCase().split(" +"));
+        List<String> words = List.of(nameInput.toLowerCase().split(REGEX_WHITESPACE_WITH_REPEATS));
         return words.stream()
                 .map(word -> convertCase(word))
-                .reduce("", (name, word) -> name + " " + word).trim();
+                .reduce(EMPTY_STRING, (name, word) -> name + SINGLE_WHITESPACE + word)
+                .trim();
     }
 
     private static String convertCase(String word) {
-        if (word.equalsIgnoreCase("s/o") || word.equalsIgnoreCase("d/o")) {
+        assert !word.contains(SINGLE_WHITESPACE); // word here contains no whitespace characters
+
+        if (word.equalsIgnoreCase(SON_OF) || word.equalsIgnoreCase(DAUGHTER_OF)) {
             return word.toUpperCase();
         }
-        if (word.substring(0, 1).equals("(")) {
-            return word.substring(0, 1) + Character.toUpperCase(word.charAt(1))
-                    + word.substring(2, word.length());
+
+        String startingLetter = word.substring(0, 1);
+        if (startingLetter.equals(OPEN_BRACKET)) {
+            assert word.length() >= 2; // word is not just an open bracket
+            return startingLetter + Character.toUpperCase(word.charAt(1))
+                    + word.substring(2);
         }
-        return Character.toUpperCase(word.charAt(0)) + word.substring(1, word.length());
+
+        // @@author cth06-Github-reuse
+        // Idea to use Character.toUpperCase obtained from https://www.baeldung.com/java-string-to-camel-case
+        return Character.toUpperCase(word.charAt(0)) + word.substring(1);
+        // @@author
+    }
+
+    /**
+     * Compares the name of another contact in alphabetical order.
+     *
+     * @param otherName Name of another contact
+     * @return Integer status of the comparison
+     */
+    public int compareTo(Name otherName) {
+        return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
 
     @Override
@@ -137,15 +167,5 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
-    }
-
-    /**
-     * Compares the name of another contact in alphabetical order.
-     *
-     * @param otherName Name of another contact
-     * @return Integer status of the comparison
-     */
-    public int compareTo(Name otherName) {
-        return fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
 }

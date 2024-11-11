@@ -25,13 +25,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Button goToButton;
-
-    @FXML
     private Label helpMessage;
-
-    @FXML
-    private Label linkMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -70,7 +64,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        getRoot().initStyle(StageStyle.UTILITY); // prevent minimise
+        getRoot().initStyle(StageStyle.UTILITY); // removes top bar with minimisation function
         getRoot().show();
         getRoot().centerOnScreen();
     }

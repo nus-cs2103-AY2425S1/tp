@@ -78,6 +78,9 @@ public class Messages {
     // help prompt
     public static final String MESSAGE_HELP_PROMPT = "Type `%1$s` for examples and details";
 
+    /**
+     * Formats messages representing commands with backticks at the start and end.
+     */
     public static String styleCommand(String command) {
         return "`" + command + "`";
     }

@@ -91,7 +91,7 @@ public interface Model {
      */
     void setContact(Contact target, Contact editedContact);
 
-    /** Returns an unmodifiable view of the contact list in full*/
+    /** Returns an unmodifiable view of the entire contact list in full*/
     ObservableList<Contact> getAllContactList();
 
     /** Returns an unmodifiable view of the filtered contact list */
