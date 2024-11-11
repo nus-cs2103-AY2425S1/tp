@@ -988,7 +988,9 @@ and does not accept duplicate names, so there will never be a case where more th
 
 ## **Appendix: Planned Enhancements**
 
-### **Support Multiple clients with the Same Name**
+**Team Size - 5**
+
+### **1. Support Multiple clients with the Same Name**
 **Current Feature Flaw**<br>
 
 PhysioPal currently does not allow duplicate names, which does not reflect real-world scenarios where different clients may have identical names.
@@ -1004,7 +1006,7 @@ PhysioPal currently does not allow duplicate names, which does not reflect real-
          - A list of all clients with the same name is displayed.
          - Users can select the desired client by modifying the command input to include the appropriate index number.
 
-### **Allow Special Characters in Names**
+### **2. Allow Special Characters in Names**
 **Current Feature Flaw**<br>
 
 PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a person's legal name.
@@ -1013,7 +1015,7 @@ PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a p
 
 Change the check in the add command to allow for special characters in names.
 
-### **Enhance Name Display**
+### **3. Enhance Name Display**
 **Current Feature Flaw**<br>
 
 PhysioPal's UI displays all names in lowercase, which may not reflect the actual case formatting of users' names.    
