@@ -4,18 +4,36 @@ skinparam ArrowFontStyle plain
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":CampusConnect" as CampusConnect MODEL_COLOR
+participant ":VersionedCampusConnect" as VersionedCampusConnect MODEL_COLOR
 end box
 
-[-> Model : undoAddressBook()
+[-> Model : undoCampusConnect()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> CampusConnect: recoverPreviousState()
+activate CampusConnect
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+CampusConnect -> VersionedCampusConnect: extractOldData()
+activate VersionedCampusConnect
+
+VersionedCampusConnect -> VersionedCampusConnect: saveCurrentData()
+activate VersionedCampusConnect
+
+VersionedCampusConnect --> VersionedCampusConnect
+deactivate VersionedCampusConnect
+
+VersionedCampusConnect --> CampusConnect:
+deactivate VersionedCampusConnect
+
+CampusConnect --> Model: cc
+deactivate CampusConnect
+
+Model -> Model: setCampusConnect(cc)
+activate Model
+
+Model --> Model
+deactivate Model
 
 [<-- Model
 deactivate Model

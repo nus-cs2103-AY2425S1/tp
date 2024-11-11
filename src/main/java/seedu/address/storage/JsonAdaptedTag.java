@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * Jackson-friendly version of {@link Tag}.
@@ -12,13 +13,24 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedTag {
 
     private final String tagName;
+    private final String tagCategory;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName} and {@code tagCategory}.
+     */
+    @JsonCreator
+    public JsonAdaptedTag(@JsonProperty("tagName") String tagName,
+                          @JsonProperty("tagCategory") String tagCategory) {
+        this.tagName = tagName;
+        this.tagCategory = tagCategory;
+    }
+
+    /**
+     * Overloaded constructor for default tag creation.
      */
     @JsonCreator
     public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+        this(tagName, "GENERAL");
     }
 
     /**
@@ -26,11 +38,7 @@ class JsonAdaptedTag {
      */
     public JsonAdaptedTag(Tag source) {
         tagName = source.tagName;
-    }
-
-    @JsonValue
-    public String getTagName() {
-        return tagName;
+        tagCategory = source.getTagCategory().toString();
     }
 
     /**
@@ -42,7 +50,8 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        TagCategory tagCat = TagCategory.fromString(tagCategory); // convert to TagCategory enum
+        return new Tag(tagName, tagCat);
     }
 
 }

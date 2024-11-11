@@ -1,0 +1,176 @@
+.background {
+    -fx-background-color: #2B3A67; /* Deep blue background */
+}
+.pane-with-border {
+    -fx-background-color: #ADD8E6;
+}
+
+.result-display {
+    -fx-font-size: 12pt; /* Increase font size for better visibility */
+    -fx-font-family: "Segoe UI", sans-serif; /* Use a clean, modern font */
+    -fx-text-fill: #1E90FF; /* Dodger blue color for the text */
+    -fx-font-weight: bold;
+    -fx-border-width: 0px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #FFA500; /* Orange text */
+    -fx-opacity: 0.9;
+}
+
+.label:hover {
+    -fx-cursor: hand;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #FFA500; /* Orange text for headers */
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #2D4059; /* Slightly lighter blue */
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-border-radius: 4px;
+}
+
+/* Table and List Views */
+.table-view {
+    -fx-base: #2B3A67;
+    -fx-control-inner-background: #2B3A67;
+    -fx-background-color: #2B3A67;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #FFA500 transparent; /* Orange bottom border */
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #3C4B76; /* Intermediate blue */
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #445C87; /* Another shade for contrast */
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #FFA500; /* Orange for selection */
+    -fx-text-fill: #2B3A67;
+}
+
+/* Styling for selected cardPane in list */
+.list-cell:filled:selected #cardPane {
+    -fx-border-color: #FF8C00; /* Darker orange border */
+    -fx-border-width: 1;
+}
+
+/* Styling for cards when not selected and hovered over */
+.list-cell:filled:hover {
+    -fx-background-color: #2B3A67; /* darker blue on hover */
+    -fx-cursor: hand;
+}
+
+/* Styling for cards when selected and hovered over */
+.list-cell:selected:hover {
+    -fx-background-color: #FF8C00; /* Dark orange when selected and hovered */
+    -fx-cursor: hand;
+}
+
+.list-cell .label {
+    -fx-text-fill: white;
+}
+
+/* Button Styles */
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #FFA500; /* Orange border */
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #2B3A67;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-bar {
+    -fx-background-color: #34495E; /* A lighter blue than background */
+}
+
+.menu-bar .label {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI SemiBold";
+    -fx-text-fill: #FF8C00;
+    -fx-opacity: 0.9;
+    -fx-font-weight: bold;
+}
+
+.status-bar {
+    -fx-background-color: #2D4059; /* Dark blue for status bar */
+}
+
+.status-bar .label {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-padding: 6px;
+    -fx-pref-height: 30px;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #FFA500; /* Orange for label text */
+}
+
+#tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91; /* Consistent with subdued blue tone */
+    -fx-padding: 3px 5px;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+/* Panel Styling */
+.tag-list-panel, .person-list-panel {
+    -fx-background-color: #2B3A67; /* Deep blue for consistency */
+    -fx-padding: 10px;
+    -fx-border-color: #FF8C00; /* Darker orange border */
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+

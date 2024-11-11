@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from CampusConnect.
  */
 public class DeleteCommand extends Command {
 
@@ -24,6 +24,8 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+    public static final String MESSAGE_DELETE_LIST_EMPTY = "\nThe contact list is empty! :(";
 
     private final Index targetIndex;
 
@@ -42,7 +44,12 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+
+        String result = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
+        if (model.getFilteredPersonList().isEmpty()) {
+            result += MESSAGE_DELETE_LIST_EMPTY;
+        }
+        return new CommandResult(result);
     }
 
     @Override

@@ -9,20 +9,35 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric. "
+            + "Tags that have multiple words can be separated by a hyphen (-)";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+(-\\p{Alnum}+)*";
 
     public final String tagName;
+    private TagCategory tagCategory;
+    private int occurrences = 0;
+
+    /**
+     * Constructs a {@code Tag}.
+     * Category of the tag is {@code GENERAL} by default.
+     *
+     * @param tagName A valid tag name.
+     */
+    public Tag(String tagName) {
+        this(tagName, TagCategory.GENERAL);
+    }
 
     /**
      * Constructs a {@code Tag}.
      *
      * @param tagName A valid tag name.
+     * @param category A valid {@code TagCategory}.
      */
-    public Tag(String tagName) {
+    public Tag(String tagName, TagCategory category) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagCategory = category;
     }
 
     /**
@@ -30,6 +45,48 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Set the tag category.
+     * @param tagCategory
+     */
+    public void setTagCategory(TagCategory tagCategory) {
+        assert tagCategory != null;
+        this.tagCategory = tagCategory;
+    }
+
+    /**
+     * Returns the tag category.
+     */
+    public TagCategory getTagCategory() {
+        return this.tagCategory;
+    }
+
+    /**
+     * Returns the colour code corresponding to the tag category.
+     * @return String containing the hex code for the colour.
+     */
+    public String getTagColour() {
+        return this.tagCategory.getColorCode();
+    }
+
+    public int getOccurrences() {
+        return occurrences;
+    }
+
+    /**
+     * Tncrease the recorded occurrences by 1.
+     */
+    public void incrementOccurrences() {
+        occurrences = occurrences + 1;
+    }
+
+    /**
+     * Decrease the recorded occurrences by 1.
+     */
+    public void decrementOccurrences() {
+        occurrences = occurrences - 1;
     }
 
     @Override

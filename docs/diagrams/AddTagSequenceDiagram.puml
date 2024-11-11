@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CampusConnectParser" as CampusConnectParser LOGIC_COLOR
+participant ":AddTagCommandParser" as AddTagCommandParser LOGIC_COLOR
+participant "a:AddTagCommand" as AddTagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+endbox
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addtag 2 t/mate")
+activate LogicManager
+
+LogicManager -> CampusConnectParser : parseCommand("addtag 2 t/mate")
+activate CampusConnectParser
+
+create AddTagCommandParser
+CampusConnectParser -> AddTagCommandParser
+activate AddTagCommandParser
+
+AddTagCommandParser --> CampusConnectParser
+deactivate AddTagCommandParser
+
+CampusConnectParser -> AddTagCommandParser: parse("2 t/mate")
+activate AddTagCommandParser
+
+create AddTagCommand
+AddTagCommandParser -> AddTagCommand
+activate AddTagCommand
+
+AddTagCommand --> AddTagCommandParser :
+deactivate AddTagCommand
+
+AddTagCommandParser --> CampusConnectParser : addTagCommand
+AddTagCommandParser -[hidden]-> CampusConnectParser
+destroy AddTagCommandParser
+
+CampusConnectParser --> LogicManager : addTagCommand
+deactivate CampusConnectParser
+
+LogicManager -> AddTagCommand : execute(m)
+activate AddTagCommand
+
+AddTagCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> AddTagCommand : lastShownList
+deactivate Model
+
+AddTagCommand -> Model : get(index)
+activate Model
+
+Model --> AddTagCommand : personToEdit
+deactivate Model
+
+AddTagCommand -> Model : addPersonTags(person, tags)
+activate Model
+
+Model --> AddTagCommand
+deactivate Model
+
+create CommandResult
+AddTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTagCommand : r
+deactivate CommandResult
+
+AddTagCommand --> LogicManager
+deactivate AddTagCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

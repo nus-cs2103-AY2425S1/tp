@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagCategory;
 
 /**
  * The API of the Model component.
@@ -37,20 +41,25 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCampusConnectFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCampusConnectFilePath(Path campusConnectFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code campusConnect}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCampusConnect(ReadOnlyCampusConnect campusConnect);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CampusConnect */
+    ReadOnlyCampusConnect getCampusConnect();
+
+    /**
+     * Refreshes the current data in CampusConnect.
+     */
+    void refreshCampusConnect();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -64,10 +73,26 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes a tag from a person.
+     * The person must exist as well as the tag.
+     */
+    void deletePersonTag(Person p, Tag tag);
+
+    /**
+     * Adds a set of tag to person.
+     */
+    void addPersonTags(Person p, Set<Tag>t);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Inserts person at the specific position.
+     */
+    void insertPerson(Person p, int ind);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -80,8 +105,48 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns a list of tags currently defined in CampusConnect
+     */
+    ObservableList<Tag> getListOfCurrentTags();
+
+    /**
+     * Returns true if the specified {@code Tag} exists in CampusConnect
+     */
+    boolean containsTag(Tag tag);
+
+    /**
+     * Sets {@code TagCategory cat} to be the category of {@code Tag t}.
+     */
+    void setTagsCategory(Tag t, TagCategory cat);
+
+    /**
+     * Gets the recorded {@code TagCategory} of {@Tag t}.
+     */
+    TagCategory getTagCategory(Tag t);
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Undoes the previous actions of users.
+     */
+    void undoCampusConnect() throws CommandException;
+
+    /**
+     * Restores state before previous undo actions of users.
+     */
+    void redoCampusConnect() throws CommandException;
+
+    /**
+     * Saves current state of model before execution.
+     */
+    void saveCurrentCampusConnect();
+
+    /**
+     * Undoes a state without saving current state when execution fails.
+     */
+    void undoExceptionalCommand() throws CommandException;
 }

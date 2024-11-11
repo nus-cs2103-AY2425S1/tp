@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+Class HiddenOutside #FFFFFF
+
+package "Command Classes" as CommandClasses {
+    package "Original AB3 Classes" as OAC {
+    }
+
+    package "CampusConnect Classes" {
+        Class "AddTagCommand" as ATC
+        Class "CategorizeTagCommand" as CTC
+        Class "DeleteTagCommand" as DTC
+        Class "UndoCommand" as UC
+        Class "RedoCommand" as RC
+        Class "SuperFindCommand" as SFC
+    }
+}
+HiddenOutside ..> Command
+
+ATC -u-|> Command
+ATC -[hidden]right CTC
+
+CTC -u-|> Command
+CTC -[hidden]right DTC
+
+DTC -u-|> Command
+DTC -[hidden]right UC
+
+UC -u-|> Command
+UC -[hidden]right RC
+
+RC -u-|> Command
+RC -[hidden]right SFC
+
+SFC -u-|> Command
+
+OAC -u|> Command
+@enduml

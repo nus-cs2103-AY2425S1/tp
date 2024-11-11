@@ -18,7 +18,13 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_TAG = "The person does not contain the tag";
+    public static final String MESSAGE_TAG_NOT_FOUND = "There is no tag presented in the command!";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Tag %1$s is deleted from student %2$s";
+    public static final String MESSAGE_ADD_TAG_EMPTY_TAGS = "Should not add empty tag to a person";
+    public static final String MESSAGE_UNDO_FAILURE = "Already at the oldest change";
 
+    public static final String MESSAGE_REDO_FAILURE = "Already at the latest change";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -41,10 +47,8 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getOrderedTags().forEach(builder::append);
         return builder.toString();
     }
 

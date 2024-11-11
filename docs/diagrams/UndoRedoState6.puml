@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After command "clear"
+
+package Future {
+}
+
+package History <<rectangle>> {
+    class State1 as "<u>cc0:CampusConnect</u>"
+    class State2 as "<u>cc1:CampusConnect</u>"
+
+}
+
+class State3 as "<u>cc3:CampusConnect</u>"
+History -[hidden]left-> Future
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+
+class Pointer as "Current State" #FFFFFF
+
+Pointer -up-> State3
+note right on link: State cc2 deleted and Future stack is cleared.
+@end
