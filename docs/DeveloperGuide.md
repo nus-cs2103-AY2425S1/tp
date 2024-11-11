@@ -638,7 +638,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Add an existing client
     1. Prerequisites: There exists a client in AddressBook which has the same name, phone number and email as the client to be added.
-    2. Test case: `add n/ SAME_NAME p/ SAME_PHONE e/ SAME_EMAIL a/ <ADDRESS> j/ <JOB> i/ <INCOME>`<br>
+    2. Test case: `add n/ <SAME_NAME> p/ <SAME_PHONE> e/ <SAME_EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>` (where <SAME_NAME>, <SAME_PHONE> and <SAME_EMAIL> are the name, phone number and email of an existing client) <br>
        Expected: An error message indicating that the client already exists is shown to user. No client is added.
 
 ### Deleting a client
