@@ -162,6 +162,8 @@ This section provides details on the usage of each command.
 
 ### Basic Commands
 
+<br>
+
 #### **Viewing help :** `help`
 
 Displays the help window. Also accessible by pressing the `F1` key.
@@ -273,7 +275,7 @@ Output: `Address book has been cleared!`
 
 <br>
 
-#### Exiting the program : `exit`
+#### **Exiting the program :** `exit`
 
 Exits the program.
 
@@ -282,9 +284,13 @@ Output: None
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Game Management Commands
 
-#### Adding a game : `addgame`
+<br>
+
+#### **Adding a game :** `addgame`
 
 Adds a game to an existing person in the GamerBook.
 
@@ -395,7 +401,13 @@ Examples:
 
 * `unfavgame 3 g/LoL` Removes the "favourite" status from the game "LoL" of the 3rd person.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Search Commands
+
+<br>
 
 #### **Locating persons by name :** `find`
 
@@ -479,7 +491,13 @@ Examples:
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any
   one of the specified ranges.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Utility Commands
+
+<br>
 
 #### **Undoing previous command :** `undo`
 
@@ -498,6 +516,8 @@ Format: `undo`
 Output: `Undid previous command: PREVIOUS COMMAND`
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Data storage
 
