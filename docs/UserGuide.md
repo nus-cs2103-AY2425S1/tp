@@ -5,14 +5,19 @@ pageNav: 3
 ---
 <h2 style="color: #FF6347;">NovaCare</h2>
 
-A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#10-glossary) while still having the benefits of a Graphical User Interface [(GUI)](#10-glossary).
-Tailored to handle the demanding workload of private nurses managing numerous patients, NovaCare is built for speed—ideal for users who type quickly, enabling faster patient management than traditional GUI-based applications.
+**NovaCare** is a **desktop application designed specifically for private nurses** who need a fast, reliable solution to manage patient care efficiently.
+By combining the speed and precision of a **Command Line Interface** [(CLI)](#10-glossary) with the ease and clarity of a **Graphical User Interface** [(GUI)](#10-glossary),
+NovaCare empowers private nurses to handle their demanding workloads with greater speed than traditional GUI-based apps.
+
+With **NovaCare**, nurses can seamlessly manage tasks such as tracking patient information, updating medical notes and organizing contact and emergency details — 
+all through a streamlined, keyboard-friendly interface that minimizes clicks and maximizes productivity. 
+This tool is tailored to **support the unique needs of private nurses**, enabling them to deliver high-quality care with accuracy and ease.
 
 In this guide, users will be able to learn the following details:
 
 1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
 2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
-3) Quickly learn and master various [commands](#9-command-summary) and actions available in NovaCare.
+3) Quickly learn and master various [commands]((#10-glossary)) and actions available in NovaCare.
 4) General [FAQs](#7-faq) (Frequently asked questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -102,17 +107,17 @@ This section provides a quick overview of how to set up and run NovaCare on your
 
 For **Windows** users, you can type **Command Prompt** in the search bar.
 Type `java -version` to check if you have Java installed.
-Upon successful installation, you should see something like this:
+Upon successful installation, you should see something like this:<br></br>
 ![Windows Java](images/windows-java.png)
 
 For **Mac/Linux** users, you can type **Terminal** in the search bar.
 Type `java -version` to check if you have Java installed.
-Upon successful installation, you should see something like this:
+Upon successful installation, you should see something like this:<br></br>
 ![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
-1. Download the `NovaCareApp.jar` file from the link provided by scrolling down to Assets as shown below.
-   ![Assets](images/assets.png)
+1. Download the NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
+   ![Assets](images/assets.png)<br></br>
 2. Click on the `NovaCareApp.jar` file to download it.
 3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
 
@@ -159,13 +164,13 @@ Here will be a basic guide on how to use the application.
 4. **Edit patient information**:
    * Type the following command in the command box and press Enter to **edit a patient's information**:
       > `edit 1 p/91234567`
-   * This example command edits the phone number of patient at index 1 of NovaCare, in this case being the patient `Johnson` who was just added!
+   * This example command edits the phone number of patient at [index](#10-glossary) 1 of NovaCare, in this case being the patient `Johnson` who was just added!
 <br></br>
 
 5. **Delete a patient**:
    * Type the following command in the command box and press Enter to **delete a patient**:
       > `delete 1
-   * This example command deletes the patient at index 1 of NovaCare!
+   * This example command deletes the patient at [index](#10-glossary) 1 of NovaCare!
 <br></br>
 
 6. **Add another patient**:
@@ -177,7 +182,7 @@ Here will be a basic guide on how to use the application.
 7. **Add a task**:
     * Type the following command in the command box and press Enter to **add a task to the patient**:
        > `addtask 1 d/Eat paracetamol 1000mg`
-    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of NovaCare, in this case being the patient `Lily` who was just added! 
+    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at [index](#10-glossary) 1 of NovaCare, in this case being the patient `Lily` who was just added! 
 <br></br>
 
 8. **Exit**:
@@ -202,10 +207,10 @@ This section provides a detailed explanation of the features available in NovaCa
   `COMMAND prefix/PARAMETERS…​`
   e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `add` is the `COMMAND`, `n/`, `p/` and `e/` are `prefixes` and `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the [parameters](#10-glossary) to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a [parameter](#10-glossary) which can be used as `add n/John Doe`.
 
-* Items in square brackets `[]` are optional.<br>
+* [Items in square brackets](#10-glossary) `[]` are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -226,29 +231,30 @@ This section provides a detailed explanation of the features available in NovaCa
 [⬆️ Back to Table of Contents](#table-of-contents)
 
 ### 6.1 Parameter Information
-The table below explains each of the parameter available in NovaCare.
-It will provide the limitations and examples of the parameter.
+The table below explains each of the [parameters](#10-glossary) available in NovaCare.
+It will provide the limitations and examples of each parameter.
+
 <box type = "warning" seamless>
 
 **Warning:**<br>
 
 The parameters must follow the limitations as shown below.
-Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br>
+Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br></br>
 ![failCommand](images/failAdd.png)
 </box>
 
-| Parameter                    | Description                       | Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                      |
-|------------------------------|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| **NAME**                     | Name of patient                   | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                     | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
-| **EMERGENCY_CONTACT_NAME**   | Name of emergency contact         | * Names should only contain alphanumeric characters and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
-| **PHONE_NUMBER**             | Phone number of patient           | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.<br/>* In the event where phone number is unknown, please key in `000` as phone number, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                          | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
-| **EMERGENCY_CONTACT_NUMBER** | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Allow international numbers.                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
-| **EMAIL**                    | Email of patient                  | * Format must be in `LOCAL-PART@DOMAIN`.<br/> * No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters.<br/>* In the event where email is unknown, please key in `unknown@x.com` as email, you can edit this later. This serves as a temporary field, and does not mean anything. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
-| **ADDRESS**                  | Address of patient                | * Address should not be blank.<br/> * Address can take any values.<br/>* In the event where address is unknown, please key in `unknown address` as address, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                                                                                                                | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
-| **TAG**                      | Tag of patient                    | * Tags take alphanumeric and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
-| **INDEX**                    | Index of patient on GUI           | * Index should be a positive integer.<br/> * Index should not be blank, and will be auto incremented by NovaCare.                                                                                                                                                                                                                                                                                                                                                                                                                                 | :white_check_mark: `1`<br/>:x: `0`                                                           |
-| **DESCRIPTION**              | Description of task               | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
-| **PRIORITY_LEVEL**           | Priority level of patient         | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `1`<br/>:x: `4`                                                           |
+| Parameter                          | Description                       | Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                      |
+|------------------------------------|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| **NAME**                           | Name of patient                   | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                     | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+| **EMERGENCY_CONTACT_NAME**         | Name of emergency contact         | * Names should only contain alphanumeric characters and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+| **PHONE_NUMBER**                   | Phone number of patient           | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.<br/>* In the event where phone number is unknown, please key in `000` as phone number, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                          | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMERGENCY_CONTACT_NUMBER**       | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Allow international numbers.                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMAIL**                          | Email of patient                  | * Format must be in `LOCAL-PART@DOMAIN`.<br/> * No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters.<br/>* In the event where email is unknown, please key in `unknown@x.com` as email, you can edit this later. This serves as a temporary field, and does not mean anything. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
+| **ADDRESS**                        | Address of patient                | * Address should not be blank.<br/> * Address can take any values.<br/>* In the event where address is unknown, please key in `unknown address` as address, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                                                                                                                | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
+| **[TAG](#10-glossary)**            | Tag of patient                    | * Tags take alphanumeric and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
+| **[INDEX](#10-glossary)**          | Index of patient on GUI           | * Index should be a positive integer.<br/> * Index should not be blank, and will be auto incremented by NovaCare.                                                                                                                                                                                                                                                                                                                                                                                                                                 | :white_check_mark: `1`<br/>:x: `0`                                                           |
+| **DESCRIPTION**                    | Description of task               | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
+| **[PRIORITY_LEVEL](#10-glossary)** | Priority level of patient         | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `1`<br/>:x: `4`                                                           |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -404,6 +410,7 @@ Deletes the specified patient and tasks associated to that patient from NovaCare
 **Warning:**
 Deleting a patient will also **delete all tasks associated with that patient**.
 </box>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in NovaCare.
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
@@ -433,7 +440,7 @@ Adds an emergency contact and details to a patient in NovaCare.
 **Tip:**
 * A patient can only have 1 registered emergency contact.
 * Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!
-  </box>
+</box>
 
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
@@ -620,7 +627,7 @@ Unmarks a task at a specific index.
 * Unmarks a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Task list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
+</box>
 
 Example:
 * `unmarktask 1` marks the 1st-indexed task in the task list as `Incomplete`.
@@ -686,7 +693,8 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 Shows a message explaining how to access the help page.
 
-Format: `help`
+:pencil: Format: `help`
+
 <box type="info" seamless>
 
 **Note:**
@@ -746,23 +754,17 @@ NovaCare data are saved in the hard disk automatically after any command that ch
 
 #### 6.5.2 Editing the data file
 
-NovaCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NovaCare's data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update the data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Warning:**
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range, NovaCare will skip and delete the data related to that invalid patient or task). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-<br></br>
-
-#### 6.5.3 Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 [⬆️ Back to Table of Contents](#table-of-contents)
-
+<br></br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. FAQ
@@ -827,20 +829,21 @@ _Details coming soon ..._
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### 10. Glossary
+## 10. Glossary
 As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
 
 | Term               | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **JAR**            | A Java Archive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                                                                                                                                                                                                                                                                                         |
 | **CLI**            | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                                                                                                                                                                                                                                                                                                                             |
+| **Command**        | A command is an input action given to the software to perform a specific action.                                                                                                                                                                                                                                                                                                                                                                         |
+| **GUI**            | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                                                                                                                                                                                                                                                                                                 |
+| **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                                                                                                                                                                                                                                                                                      |
+| **JAR**            | A Java Archive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                                                                                                                                                                                                                                                                                         |
 | **PARAMETER**      | A parameter is the text that is passed to a software to perform a specific action.                                                                                                                                                                                                                                                                                                                                                                       |
 | **Prefix**         | A prefix is a keyword that is used to identify the type of parameter that is being passed to the software.                                                                                                                                                                                                                                                                                                                                               |
-| **GUI**            | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                                                                                                                                                                                                                                                                                                 |
-| **Command**        | A command is an input action given to the software to perform a specific action.                                                                                                                                                                                                                                                                                                                                                                         |
-| **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                                                                                                                                                                                                                                                                                      |
-| **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                                                                                                                                                                                                                                                                                                 |
 | **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. A priority level of 1 indicates a critical condition, 2 indicates a serious but non-critical condition, while 3 indicates a non-critical condition. **Caution: Priority level is a relative level, and may vary between nurses. This is intended as a gauge for the condition of a patient and it is not meant to diagnose or treat any illness.** |
+| **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                                                                                                                                                                                                                                                                                                 |
 | **[Word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                                                                                                                                                                                                                                                                                                    |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
+                  
