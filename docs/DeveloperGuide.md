@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
 
     * 1a2. User corrects the input and enters the command again.
 
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
 
     * 1a2. User corrects the input and enters the command again.
   
@@ -419,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
 
-    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a1. SocialBook informs user that the input is invalid.
 
     * 2a2. User corrects the input and enters the command again.
   
@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
   
     * 1a2. User corrects the input and enters the command again.
   
@@ -462,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
 
-    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a1. SocialBook informs user that the input is invalid.
   
     * 2a2. User corrects the input and enters the command again.
   
