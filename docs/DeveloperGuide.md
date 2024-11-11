@@ -38,13 +38,13 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 17**.
-1. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
+2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
    <box type="warning" seamless>
    Note: Importing a Gradle project is slightly different from importing a normal Java project.
    </box>
-1. **Verify the setup**:
-    1. Run the `seedu.address.Main` and try a few commands.
-    1. [Run the tests](#running-tests) to ensure they all pass.
+3. **Verify the setup**:
+   1. Run the `seedu.address.Main` and try a few commands.
+   2. [Run the tests](#running-tests) to ensure they all pass.
 
 ### Running Tests
 
@@ -78,11 +78,11 @@ There are two ways to run tests.
 
    </box>
 
-1. **Set up CI**
+2. **Set up CI**
 
    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up required.
 
-1. **Learn the design**
+3. **Learn the design**
 
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [TrueRental’s architecture](DeveloperGuide.md#architecture).
 
@@ -201,12 +201,12 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`)
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`)
    which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -263,9 +263,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
-* Separately, it has another portion within the storage component to store the current's session command history into a
-  text file.
+  that belong to the `Model`).
+* has a separate portion to store the current session's command history into a text file.
 
 ### Common classes
 
@@ -697,28 +696,26 @@ testers are expected to do more *exploratory* testing.
        some sample data.
        ![image](images/uiWithDescription.png)
 
-1. Shut down
+2. Shut down
 
     1. Click on the cross at the top of the application window.
         1. MacOS: Red cross button at the top-left of the application window.
         2. Windows / Linux: Red cross button at the top-right of the application window.<br>
            Expected: The application will exit and close safely.
-
     2. Enter `exit` into the command box of the application.<br>
        Expected: The application will exit and close safely.
 
-1. Subsequent Launches
+3. Subsequent Launches
 
     1. Relaunch the application by `cd` into the respective folder with the `truerental.jar` file.
     2. Use `java --version` to ensure your java version is `Java 17`.
     3. Use `java -jar truerental.jar` command to run the application.
     4. Expected: The application should retain all changes made to the data within the application previously.
 
-1. Saving window preferences
+4. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-    1. Re-launch the app by typing `java -jar truerental.jar`.<br>
+    2. Re-launch the app by typing `java -jar truerental.jar`.<br>
        Expected: The most recent window size and location is retained.
 
 ### Basic Usage
@@ -1601,12 +1598,13 @@ Retrieving previously entered commands.
 <box type="warning">
 
 **Prerequisites**: Below commands were previously entered.
-<br>1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
-<br>2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
-<br>3. `cadd n/Amy Tan p/99887766`
-<br>4. `rview 1`
-<br>5. `list`
-<br>6. `cdelete 2`
+
+1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
+2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
+3. `cadd n/Amy Tan p/99887766`
+4. `rview 1`
+5. `list`
+6. `cdelete 2`
 
 </box>
 
@@ -1725,7 +1723,7 @@ Nothing is shown in the command box.
 
 #### Autofill Commands Feature
 
-1. Autofills command name.
+1. Autofill command name.
 
 <box type="warning">
 
@@ -1787,7 +1785,7 @@ Value of the input command changes from "rview" to "radd".
 
 </box> <br>
 
-2. Autofills parameter prefix for a command.
+2. Autofill parameter prefix for a command.
 
 <box type="warning">
 
