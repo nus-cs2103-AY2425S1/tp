@@ -668,7 +668,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking a Payment Date
 
-1. Marking a payment date
+1. Marking a month as paid
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -684,20 +684,20 @@ testers are expected to do more *exploratory* testing.
    2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
       Expected: Similar to previous.
 
-### Unmarking MonthsPaid for a Specific Month
+### Unmarking a payment date
 
-1. Unmarking a Month as Paid
+1. Unmarking a month as paid
 
-    1. **Prerequisites**: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
+    1. Prerequisites: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
 
-    2. **Test Case**: `unmarkpaid 1 m/2020-10`
-        - **Expected**: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
+    2. Test Case: `unmarkpaid 1 m/2020-10`
+       Expected: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
 
-    3. **Test Case**: `unmarkpaid 1 m/2020-13`
-        - **Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
+    3. Test Case: `unmarkpaid 1 m/2020-13`
+       Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
 
-    4. **Test Case**: `unmarkpaid -10 m/2020-10`
-        - **Expected**: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
+    4. Test Case: `unmarkpaid -10 m/2020-10`
+       Expected: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
        
 ### Viewing Command History
 
