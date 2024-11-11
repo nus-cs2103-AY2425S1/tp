@@ -456,7 +456,7 @@ Preconditions: AddressBook has correct view, including client to edit
 
 * 2c. Client Does Not Exist
 
-    * 4c1. AddressBook shows an error message.
+    * 2c1. AddressBook shows an error message.
 
         Use case ends.
 
