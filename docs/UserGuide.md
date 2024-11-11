@@ -6,7 +6,7 @@
 
 # ServiceTrack User Guide
 
-ServiceTrack is a **desktop app for managing customer contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ServiceTrack can get your contact management tasks done faster than traditional GUI apps.
+ServiceTrack is a **desktop app for managing customer contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ServiceTrack can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,13 +15,16 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. To check this, open a command
+ terminal, and type `java -version`.
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ServiceTrack.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in
+  (e.g., If the jar file is stored in `/Desktop/ServiceTrackFile`, then the command should be `cd /Desktop/ServiceTrackFile`),
+  and use the `java -jar ServiceTrack.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
