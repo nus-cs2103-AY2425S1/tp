@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
+* Github Copilot / ChatGPT 4.0 was used to autocomplete parts of code
 
 --------------------------------------------------------------------------------------------------------------------
 
