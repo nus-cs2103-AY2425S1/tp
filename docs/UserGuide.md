@@ -106,7 +106,7 @@ A patient profile can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/S1234123A a/John Street, Block 123, #01-01 t/2`
-* `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/1 tag/Diabetic tag/G6PD`
+* `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Clementi Ave 1, Block 230 t/1 tag/Diabetic tag/G6PD`
 
 ### Adding a remark to a patient profile : `remark`
 
@@ -119,6 +119,8 @@ Examples:
 * `remark S1234567A r/allergic to dogs`
 * `remark T1231231D r/keep away from flashing lights`
 
+Note: Patients can only have one remark.
+
 ### Adding an appointment : `appointment`
 
 Adds the appointment date (in format DD-MM-YYYY HH:MM) of a patient to the patient profile.
@@ -128,11 +130,13 @@ Format: `appointment NRIC app/DD-MM-YYYY HH:MM`
 * If the patient already has an appointment, the new appointment will overwrite the existing one.
 * Invalid dates and times (eg. 30th February, 24:59) will not be accepted.
 
+Note: Patients can only have one appointment at any one time.
+
 ### Changing Triage Stage : `triage`
 
-Changes the existing triage stage of a patient to another stage. Stages are categorised from 1 to 5.
+Changes the existing triage stage of a patient to another stage. Triage stage refers to the severity of patient's condition.
 
-Triaging stages follows the Phase of Illness Model:
+Stages are categorised from 1 to 5. Triaging stages follows the Phase of Illness Model:
 
 1 - Stable
 
@@ -313,20 +317,20 @@ You can check your Java version by running `java -version` in the command termin
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                            |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/Diabetic t/G6PD` |
-| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                             |
-| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                  |
-| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                    |
-| **Clear**           | `clear`                                                                                                                                                                                     |
-| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                  |
-| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`<br> e.g.,`edit S1234567A n/James Lee e/jameslee@example.com`                                           |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br/> `find tag/TAG [MORE_TAGS]` <br> e.g., `find tag/diabetic`                                                                   |
-| **List**            | `list`                                                                                                                                                                                      |
-| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                         |                                             |
-| **Sort**            | `sort name`, `sort appointment`                                                                                                                                                             |
-| **Schedule**        | `schedule`                                                                                                                                                                                  |
-| **View**            | `view NRIC`<br> e.g `view S1234567A`                                                                                                                                                        |
-| **Help**            | `help`                                                                                                                                                                                      |
-| **Exit**            | `exit`                                                                                                                                                                                      |
+| Action              | Format, Examples                                                                                                                                                                                               |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Clementi Ave 1, Block 230 t/1 tag/Diabetic tag/G6PD` |
+| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                                                |
+| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                                     |
+| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                                       |
+| **Clear**           | `clear`                                                                                                                                                                                                        |
+| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                                     |
+| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`<br> e.g.,`edit S1234567A n/James Lee e/jameslee@example.com`                                                              |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br/> `find tag/TAG [MORE_TAGS]` <br> e.g., `find tag/diabetic`                                                                                      |
+| **List**            | `list`                                                                                                                                                                                                         |
+| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                                            |                                             |
+| **Sort**            | `sort name`, `sort appointment`                                                                                                                                                                                |
+| **Schedule**        | `schedule`                                                                                                                                                                                                     |
+| **View**            | `view NRIC`<br> e.g `view S1234567A`                                                                                                                                                                           |
+| **Help**            | `help`                                                                                                                                                                                                         |
+| **Exit**            | `exit`                                                                                                                                                                                                         |
