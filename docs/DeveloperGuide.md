@@ -592,5 +592,9 @@ Team size : 5
      allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
   3. Users will be able to search by job title and, making it easier to locate candidates with specific job positions
-     and skills.
+     and skills
+
+  4. Enhance the view command such that it can also use indexing to view a candidate's status (e.g. view 1). We plan
+     to make the view command format much simpler by adopting a similar command format from the delete command where
+     indexing was used instead of having to input both the candidate's name and the job position.
 
