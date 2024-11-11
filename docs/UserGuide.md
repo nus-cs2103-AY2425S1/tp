@@ -134,9 +134,10 @@ Examples:
 A client can have any number of tags (including 0)
 </div>
 
-<div markdown="block" class="alert alert-info">
+<div id="input-format" markdown="block" class="alert alert-info">
 
 **:information_source: Notes about input formats:**<br>
+The following constraints apply to the `edit` command as well:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
     * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`
@@ -180,6 +181,33 @@ A client can have any number of tags (including 0)
     - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`
 </div>
 
+### Editing a client : `edit`
+
+Edits an existing client in the case management system.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about input formats:**<br>
+
+The same constraints on the input formats apply to the `edit` command, refer to [Notes about 
+input formats](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#input-format) in the 
+`add` command 
+section for more details.
+</div>
+
 
 ### Listing all beneficiaries : `list`
 
@@ -200,70 +228,6 @@ Format: `view INDEX`
 Examples:
 * `list` followed by `view 2` opens up the record of the 2nd client in the case management system.
 * `find Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
-
-### Editing a client : `edit`
-
-Edits an existing client in the case management system.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
-* You can remove all the client’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about input formats:**<br>
-
-* Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-    * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`
-    * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`
-    * name must be unique (case-sensitive). Clients with the same name cannot be added to
-      the system twice.
-        - entering the commands:
-            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-            * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
-              different block, different unit`
-              will not be allowed.
-        - However, clients with the same name spelling but different case can be added. Entering
-          the commands:
-            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-            * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-              different block, different unit`
-              will successfully add both `John Doe` and `John doe` to the case management system.
-
-* Client's phone number must not contain any spaces or special characters.
-    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
-    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
-
-* Client's email address should be of the format local-part@domain and adhere to the following constraints:
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
-        - The local-part may not start or end with any special characters.
-        - The local-part may not have consecutive special characters.
-    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-       The domain name must:
-        - end with a domain label at least 2 characters long
-        - have each domain label start and end with alphanumeric characters
-        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`
-    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
-
-* Client's addresses can take any values, and it should not be blank
-    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`
-    - Unacceptable address format: ``
-
-* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
-  - Acceptable tag format: `friend`, `colleague`, `newComer`
-  - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`
-</div>
-
 
 ### Tagging a client: `tag`
 
@@ -463,9 +427,9 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
 **Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
