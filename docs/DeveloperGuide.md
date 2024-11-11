@@ -674,16 +674,28 @@ testers are expected to do more *exploratory* testing.
 - Verify that the UI updates correctly and reflects the changes made by each feature.
 - Confirm that error messages and prompts are displayed appropriately for invalid operations.
 
+## Appendix: Planned Enhancements
+Team Size: *5*<br/>
+
+1. Make `sort` success message more specific:<br/>
+The current success message for `sort` does not distinguish between cases where there are contacts in the list, and the case where there are no contacts in the list.
+E.g. If a user executes `sort` on an empty contact list, the standard `sort` success message is displayed.
+Even though this is vacuously true, we plan to make the displayed message when there are no contacts in the contact list more specific: `There are no contacts to be sorted`.
 
 
-___
+2. Increase specificity of `Invalid Email` error message:<br/>
+The current error message for the `email` field in `add` and `edit` identifies the possible issues with the entered email, but does not specifically identify which part of the email input is violated.
+We plan to make the error message more specific to let the user know of which exact part (e.g. `local-part` or `domain`) the email input is invalid.
 
-## Future Enhancement
 
-1. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact.
+3. Increase length tolerance for `role`:<br/>
+Currently, the `role` field is restricted to a maximum of 20 characters. This was done to prevent clutter in the UI, since the team felt that it was sufficient at this point to impose a restriction that should not affect the vast majority of named roles.
+In the future, we plan to implement UI truncation measures to allow for users to specify roles that are longer than the current limit.
+
+
+4. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact.
 
    Current error message just warns user the input contains non-member telegram handle,
    we plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
 
-
-2. Add command to view members with attendance on the input date.
+5. Add command to view members with attendance on the input date.
