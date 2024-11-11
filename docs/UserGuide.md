@@ -76,7 +76,7 @@ involved in IFG events.** Learn more about IFG [here](https://www.instagram.com/
 Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -198,6 +198,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<div style="page-break-after: always;"></div>
 ## Events
 
 ### Adding an event : `addevent`
@@ -205,9 +206,8 @@ Format: `addevent sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/P
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have zero or more participants.
-Note that the participants must be valid persons in the database.
+Note that the participants must be valid persons in the database.</div>
 
-</div>
 
 Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
@@ -289,6 +289,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+<div style="page-break-after: always;"></div>
 ### Using Shortcuts
 
 To use EventfulNUS faster, you may find these shortcuts useful.
@@ -360,7 +361,7 @@ Volunteer Roles (Code - Role Name):
 6. BMA - Booth Manner
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
