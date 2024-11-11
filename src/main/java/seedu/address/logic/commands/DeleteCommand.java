@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,6 +30,9 @@ public class DeleteCommand extends Command {
     private final Nric targetNric;
     private final NricMatchesPredicate predicate;
 
+    /**
+     * @param targetNric nric of the person to be deleted
+     */
     public DeleteCommand(Nric targetNric) {
         this.targetNric = targetNric;
         this.predicate = new NricMatchesPredicate(targetNric.toString());
