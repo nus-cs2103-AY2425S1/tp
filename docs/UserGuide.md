@@ -85,6 +85,9 @@ Adds a contact to the address book.
 
 Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 
+* A contact's role represents the job that they are applying for, 
+and is used when screening contacts with a certain job.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
 </div>
@@ -96,10 +99,13 @@ Examples:
 ### Adding a job : `add job`
 
 Adds a job to the address book. 
-The company attributed to the job being added must already 
-be in the address book.
 
 Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
+
+* `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.
+* Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
+* A job with the same `NAME` and `COMPANY` as an existing job is considered a duplicate and cannot be added.
+* It is acceptable for a job to have the same `NAME` if it has a different `COMPANY` and vice versa.
 
 Examples:
 * `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
@@ -110,6 +116,13 @@ Examples:
 Adds a company to the address book.
 
 Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+
+* The name of the company is case-insensitive when used to identify duplicates 
+and to associate jobs to companies.
+* The billing date is a number from 1 to 28 that signifies the day of the month
+(with reference to the start of the month) that a company will pay their
+employees' salaries.
+* Future enhancement: accommodate for more billing date formats (reference from end of the month).
 
 Examples:
 * `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
