@@ -196,6 +196,8 @@ Format: `listemployees`
 Expected output:
 - System message noting success
 - All persons shown in the displayed employee list
+- Result for `listemployees` with sample data:
+![result for `listemployees`](images/listEmployees.png)
 
 [Return to Top](#table-of-contents)
 
@@ -343,6 +345,8 @@ Format: `listprojects`
 Expected output:
 - System message noting success, including number of projects listed
 - All projects shown in the displayed project list
+- Result of `listprojects` with sample data:
+![result for `listprojects`](images/listProjects.png)
 
 [Return to Top](#table-of-contents)
 
@@ -480,6 +484,8 @@ Expected output:
 
 - System message noting success
 - All assignments shown in the top display list
+- Result of `listassignments` with sample data:
+![result of `listassignments`](images/listAssignments.png)
 
 [Return to Top](#table-of-contents)
 
@@ -525,6 +531,7 @@ Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+
 Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
