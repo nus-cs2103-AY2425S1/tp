@@ -15,6 +15,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
 import seedu.address.testutil.PersonBuilder;
+
+
 public class PhoneNumberContainsKeywordPredicateTest {
 
     @Test
@@ -58,6 +60,31 @@ public class PhoneNumberContainsKeywordPredicateTest {
         PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(
                 Collections.singletonList("Jurong"));
         assertFalse(predicate.test(new PersonStubNullPhoneNumber()));
+    }
+
+    @Test
+    public void equals_sameObject_returnTrue() {
+        PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(
+                Collections.singletonList("98765432"));
+
+        assertTrue(predicate.equals(predicate));
+    }
+
+    @Test
+    public void equals_sameValues_returnTrue() {
+        List<String> keywords = Collections.singletonList("98765432");
+        PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(keywords);
+        PhoneNumberContainsKeywordPredicate predicateCopy = new PhoneNumberContainsKeywordPredicate(keywords);
+
+        assertTrue(predicate.equals(predicateCopy));
+    }
+
+    @Test
+    public void equals_differentType_returnFalse() {
+        List<String> keywords = Collections.singletonList("98765432");
+        PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(keywords);
+
+        assertFalse(predicate.equals(5.0f));
     }
 
     private class PersonStubNullPhoneNumber extends Person {

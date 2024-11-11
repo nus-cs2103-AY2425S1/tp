@@ -193,7 +193,6 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, telegramUsername, roles);
-
         }
 
         public void setName(Name name) {

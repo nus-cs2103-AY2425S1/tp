@@ -28,6 +28,12 @@ public class ExcludePersonCommandParserTest {
     }
 
     @Test
+    public void parse_missingPrefix_failure() {
+        ExcludePersonCommandParser excludePersonCommandParser = new ExcludePersonCommandParser();
+        assertThrows(ParseException.class, () -> excludePersonCommandParser.parse("exclude 0"));
+    }
+
+    @Test
     public void parse_invalidIndex_failure() {
         ExcludePersonCommandParser excludePersonCommandParser = new ExcludePersonCommandParser();
         assertThrows(ParseException.class, () -> excludePersonCommandParser.parse("exclude ci/0"));

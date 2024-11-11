@@ -80,4 +80,13 @@ public class PersonInEventPredicateTest {
         String expected = PersonInEventPredicate.class.getCanonicalName() + "{Event=" + SPORTS_FESTIVAL + "}";
         assertEquals(expected, predicate.toString());
     }
+
+    @Test
+    public void getEvent() {
+        Event event = new Event("event1");
+
+        PersonInEventPredicate predictate = new PersonInEventPredicate(event);
+
+        assertEquals(event, predictate.getEvent());
+    }
 }

@@ -93,6 +93,15 @@ public class TelegramUsernameTest {
     }
 
     @Test
+    public void hashCode_nullTelegramUsername() {
+        TelegramUsername username1 = new TelegramUsername(null);
+        TelegramUsername username2 = new TelegramUsername(null);
+
+        assertEquals(username1.hashCode(), 0);
+        assertEquals(username1.hashCode(), username2.hashCode());
+    }
+
+    @Test
     public void hashCode_correctlyConvertsForSameUsername() {
         TelegramUsername username1 = new TelegramUsername("Valid_Name");
         TelegramUsername username2 = new TelegramUsername("Valid_Name");

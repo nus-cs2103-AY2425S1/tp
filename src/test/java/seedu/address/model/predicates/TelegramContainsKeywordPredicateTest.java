@@ -23,6 +23,7 @@ public class TelegramContainsKeywordPredicateTest {
     public void test_diffUsername() {
         List<String> keywords = Collections.singletonList("amybee");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
         assertFalse(predicate.test(new PersonBuilder().withTelegramUsername("amybe").build()));
     }
 
@@ -30,6 +31,7 @@ public class TelegramContainsKeywordPredicateTest {
     public void test_samePartial_returnFalse() {
         List<String> keywords = Collections.singletonList("amybeee");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
         assertFalse(predicate.test(new PersonBuilder().withTelegramUsername("amybee").build()));
     }
 
@@ -37,6 +39,7 @@ public class TelegramContainsKeywordPredicateTest {
     public void test_partialUsername_returnTrue() {
         List<String> keywords = Collections.singletonList("amybe");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.test(new PersonBuilder().withTelegramUsername("amybee").build()));
     }
 
@@ -44,6 +47,7 @@ public class TelegramContainsKeywordPredicateTest {
     public void test_multipleComplete_returnTrue() {
         List<String> keywords = Arrays.asList("amybee", "john");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.test(new PersonBuilder().withTelegramUsername("amybee").build()));
         assertTrue(predicate.test(new PersonBuilder().withTelegramUsername("john123").build()));
     }
@@ -52,6 +56,7 @@ public class TelegramContainsKeywordPredicateTest {
     public void equals_sameObject_returnTrue() {
         List<String> keywords = Collections.singletonList("amybee");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.equals(predicate));
     }
 
@@ -60,7 +65,16 @@ public class TelegramContainsKeywordPredicateTest {
         List<String> keywords = Collections.singletonList("amybee");
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
         TelegramContainsKeywordsPredicate predicateCopy = new TelegramContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.equals(predicateCopy));
+    }
+
+    @Test
+    public void equals_differentType_returnFalse() {
+        List<String> keywords = Collections.singletonList("amybee");
+        TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+
+        assertFalse(predicate.equals(5.0f));
     }
 
     @Test
@@ -69,6 +83,7 @@ public class TelegramContainsKeywordPredicateTest {
         TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
         Person personWithNoTelegramUsername = new Person(new Name("Zeke Yaeger"), new Phone("8425131"),
                 new Email("zeke@example.com"), new Address("Eldia"), new TelegramUsername(null), new HashSet<>());
+
         assertFalse(predicate.test(personWithNoTelegramUsername));
     }
 }

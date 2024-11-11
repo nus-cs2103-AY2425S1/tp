@@ -29,6 +29,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -189,16 +190,16 @@ public class EditCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_editCommand() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
-
-        // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
@@ -211,8 +212,6 @@ public class EditCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
-
-
     }
 
     @Test
@@ -269,6 +268,22 @@ public class EditCommandTest {
 
         // Assert the expected result
         assertEquals(person, editedPerson);
+    }
+
+    @Test
+    public void isAnyFieldEdited_false() {
+        // Not edited
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+
+        assertFalse(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_true() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setName(new Name("Alice"));
+
+        assertTrue(descriptor.isAnyFieldEdited());
     }
 
 }

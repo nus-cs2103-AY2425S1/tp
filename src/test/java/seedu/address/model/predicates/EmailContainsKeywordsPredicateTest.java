@@ -20,6 +20,7 @@ public class EmailContainsKeywordsPredicateTest {
     public void test_diffEmail() {
         List<String> keywords = Collections.singletonList("emailer@gmail.com");
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
+
         assertFalse(predicate.test(new PersonBuilder().withEmail("emailer2@gmail.com").build()));
     }
 
@@ -27,6 +28,7 @@ public class EmailContainsKeywordsPredicateTest {
     public void test_partial_returnTrue() {
         List<String> keywords = Collections.singletonList("test@gmai");
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.test(new PersonBuilder().withEmail("test@gmail.com").build()));
     }
 
@@ -34,6 +36,7 @@ public class EmailContainsKeywordsPredicateTest {
     public void equals_sameObject_returnTrue() {
         List<String> keywords = Collections.singletonList("test@gmail.com");
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.equals(predicate));
     }
 
@@ -42,13 +45,23 @@ public class EmailContainsKeywordsPredicateTest {
         List<String> keywords = Collections.singletonList("test@gmail.com");
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
         EmailContainsKeywordsPredicate predicateCopy = new EmailContainsKeywordsPredicate(keywords);
+
         assertTrue(predicate.equals(predicateCopy));
+    }
+
+    @Test
+    public void equals_differentType_returnFalse() {
+        List<String> keywords = Collections.singletonList("test@gmail.com");
+        EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(keywords);
+
+        assertFalse(predicate.equals(5.0f));
     }
 
     @Test
     public void test_nullEmail_returnsFalse() {
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(
                 Collections.singletonList("Jurong"));
+
         assertFalse(predicate.test(new PersonStubNullEmail()));
     }
 
