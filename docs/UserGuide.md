@@ -6,8 +6,8 @@ title: User Guide
 BizBook (BB) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BB can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
-1. [Quick start](#Quick-start)
-2. [Features](#Features)<br>
+1. [Quick start](#quick-start)
+2. [Features](#features)<br>
   2.1 [Viewing help : `help`](#viewing-help--help)<br>
   2.2 [Adding a person: `add`](#adding-a-person-add)<br>
   2.3 [Listing all persons : `list`](#listing-all-persons--list)<br>
