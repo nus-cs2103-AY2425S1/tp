@@ -150,7 +150,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - A person's phone number must be unique.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
@@ -328,7 +328,7 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
@@ -422,7 +422,7 @@ Format: `delete event INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-  :bulb: **Tip: **
+  :bulb: **Tip:** 
   If you would like to delete all events at once, you can use the <a href="#clearing-all-events--clear-event">clear event</a> command.
 </div>
 
