@@ -50,6 +50,7 @@ PawPatrol *--> "1" UniquePetList
 UniqueOwnerList -down-> "~* all" Owner
 UniquePetList -down-> "~* all" Pet
 
+Owner "1"-- "*" Pet : > owns
 Owner *--> Name
 Owner *--> Phone
 Owner *--> Email
@@ -80,4 +81,3 @@ Species -[hidden]right-> Sex
 ModelManager --> "~* filtered" Owner
 ModelManager --> "~* filtered" Pet
 @enduml
-
