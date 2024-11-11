@@ -145,7 +145,7 @@ Format: `help`
 
 ## Viewing a client's details
 * When the app starts, a placeholder on the right panel will prompt you to select a client on the list.
-* You may use your arrow keys to traverse the client list, then **double-click** or **press `Enter`** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
+* You may use your arrow keys to traverse the client list, then **double-click** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
 ![detailedView.png](images/detailedView.png)
 * The detailed view can be broken down into three main sections:
   * The client's profile picture, highlighted by the purple box. A default profile picture is given to all clients. This can be updated via the `upload` command.
@@ -388,7 +388,7 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 3. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes. We recommend using F.A.R.T. in full-screen mode.
 4. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
 5. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again. 
-
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
