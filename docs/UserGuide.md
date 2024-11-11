@@ -117,8 +117,11 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 * Parameters in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Parameters with `…`​ after them can be used multiple times including zero times.<br>
+* Parameters **with** `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters **without** `…`​ after them can only be used once.<br>
+  e.g. `n/NAME` can only be used once.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -172,7 +175,7 @@ Format: `list -a`
 
 ### 3.2.3 Clearing all suppliers and deliveries : `clear`
 
-Clears all data regarding suppliers and deliveries in vendor vault.
+Clears all data regarding suppliers and deliveries in VendorVault.
 
 Format: `clear`
 
@@ -287,10 +290,11 @@ Parameters:
 <box type="caution" seamless>
 
 **Warnings**:
-- At least one space is needed between `list` and `-s`.
+- At least one space is needed between `delete` and `-s`.
+- A space is not necessary between `-s` and `INDEX`.
 - All parameters must be given.
 - Only one supplier can be deleted by one command.
-  - `delete -d 1 2` is not allowed.
+  - `delete -s 1 2` is not allowed.
 
 </box>
 
@@ -318,7 +322,7 @@ Format: `mark -s INDEX STATUS`
 
 Parameters:
 - `INDEX`: The index of the supplier to be marked in the displayed list. It must be a number between 1 and the total number of suppliers displayed (inclusive), and cannot be blank.
-- `STATUS`: The suppler status that you want to change to. It must be one of the following values: `active`, `inactive`, and cannot be blank.
+- `STATUS`: The supplier status that you want to change to. It must be one of the following values: `active`, `inactive`, and cannot be blank.
 
 </box>
 
@@ -343,8 +347,8 @@ Examples:
 - Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 inactive`
 
 Expected outputs:
-- Supplier at index 3 of the displayed list has status marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `INACTIVE`. Otherwise, an error message will be shown.
-- Supplier at index 1 of the displayed list has status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `INACTIVE`. Otherwise, an error message wil be shown.
+- Supplier at index 3 of the displayed list has status marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `inactive`. Otherwise, an error message will be shown.
+- Supplier at index 1 of the displayed list has status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `ianctive`. Otherwise, an error message wil be shown.
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
@@ -397,7 +401,7 @@ Example:
 - `find -s n/link com/NU`
 
 Expected output:
-- All suppliers with `name` containing `link` and `COMPANY` containing `NU` is shown.
+- All suppliers with `name` containing `link` and `COMPANY` containing `NU` are shown.
 
 #### Here's how it would look like in the app:
 ![find command](images/findSupplierCommand.png)
@@ -415,9 +419,8 @@ Format: `sort -s so/SORT_ORDER sb/SORT_BY`
 <box type="info" seamless>
 
 Parameters:
-- `SORT_ORDER`: The sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
-  - `SORT_ORDER` is case-sensitive.
-- `SORT_BY`: The field to sort by. It must be `n` for name, and cannot be blank.
+- `so/SORT_ORDER`: `SORT_ORDER` is the sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
+- `sb/SORT_BY`: `SORT_BY` is the field to sort by. It must be `n` for name, and cannot be blank.
 
 </box>
 
@@ -545,7 +548,7 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `delete` and `-d`.
-- Spacing between `-d` and `INDEX` is not compulsory.
+- A space is not necessary between `-d` and `INDEX`.
 - All parameters must be given.
 - Only one delivery can be deleted by one command.
   - `delete -d 1 3 5` is not allowed.
@@ -674,9 +677,8 @@ Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 
 Parameters:
 
-- `SORT_ORDER`: The sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
-    - `SORT_ORDER` is case-sensitive.
-- `SORT_BY`: The field to sort by. It must be either `c` for `COST`, `d` for `DELIVERY_DATE_TIME` or `s` for `STATUS`, and cannot be blank.
+- `so/SORT_ORDER`: `SORT_ORDER` is the sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
+- `sb/SORT_BY`: `SORT_BY` is the field to sort by. It must be either `c` for `COST`, `d` for `DELIVERY_DATE_TIME` or `s` for `STATUS`, and cannot be blank.
 
 </box>
 
