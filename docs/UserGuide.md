@@ -50,7 +50,7 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 
 ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments to filtering appointments.
 
-The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each feature to make the most out of the system's capabilities. 
+The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each feature to make the most out of the system's capabilities.
 
 ### Legend
 These boxes might offer some additional information of different types:
