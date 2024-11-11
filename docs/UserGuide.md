@@ -250,7 +250,7 @@ Since property prices in Singapore typically start in the thousands, `Ask` and `
 </box>
 
 Examples:
-* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` Adds a property with postal code `124894` and unit number `#15-20` whose type is a `HDB` with an ask price of `$600 (thousand)` and bid price of `$500 (thousand)`.
+* `addproperty c/124894 u/15-20 t/HDB a/600 b/500` adds a property with postal code `124894` and unit number `#15-20` whose type is a `HDB` with an ask price of `$600 (thousand)` and bid price of `$500 (thousand)`.
 
   ![result for 'addproperty c/124894 u/15-20 t/HDB a/600 b/500'](images/addproperty.png)
 
@@ -281,7 +281,7 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 </box>
 
 Examples:
-* `filterproperty t/HDB gte/400 lte/700` Filters and lists properties which is type `HDB` and [matching price](#glossary) is greater than or equal to `$400 (thousand)` and less than or equal to `$700 (thousand)`.
+* `filterproperty t/HDB gte/400 lte/700` filters and lists properties which is type `HDB` and [matching price](#glossary) is greater than or equal to `$400 (thousand)` and less than or equal to `$700 (thousand)`.
 
   ![result for 'filterproperty t/HDB gte/400 lte/700'](images/filterproperty.png)
 
