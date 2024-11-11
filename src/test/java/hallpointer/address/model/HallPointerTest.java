@@ -4,6 +4,7 @@ import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
+import static hallpointer.address.testutil.TypicalMembers.BOB;
 import static hallpointer.address.testutil.TypicalMembers.getTypicalHallPointer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -81,6 +82,29 @@ public class HallPointerTest {
     @Test
     public void getMemberList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> hallPointer.getMemberList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        hallPointer.addMember(ALICE);
+
+        // same values -> returns true
+        HallPointer otherHallPointer = new HallPointer();
+        otherHallPointer.addMember(ALICE);
+        assertTrue(hallPointer.equals(otherHallPointer));
+
+        // same object -> returns true
+        assertTrue(hallPointer.equals(hallPointer));
+
+        // null -> returns false
+        assertFalse(hallPointer.equals(null));
+
+        // different types -> returns false
+        assertFalse(hallPointer.equals(6.0f));
+
+        // different members in member list -> returns false
+        otherHallPointer.addMember(BOB);
+        assertFalse(hallPointer.equals(otherHallPointer));
     }
 
     @Test

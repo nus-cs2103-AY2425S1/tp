@@ -43,6 +43,7 @@ public class Tag {
             return false;
         }
 
+        // Tag here is case-sensitive, unlike other places
         Tag otherTag = (Tag) other;
         return tagName.equals(otherTag.tagName);
     }
