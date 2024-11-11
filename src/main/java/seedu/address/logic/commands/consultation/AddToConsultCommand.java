@@ -36,7 +36,7 @@ public class AddToConsultCommand extends Command {
             + "by the index number used in the displayed consultation list. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME]… [" + PREFIX_INDEX + "INDEX]…\n"
-            + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "John Doe " + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to the Consultation: %1$s";
 
