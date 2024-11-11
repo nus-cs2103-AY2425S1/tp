@@ -17,6 +17,8 @@ Given below are my contributions to the project.
   * What it does: Allows users to update the status of an internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
   * Justification: This feature is crucial for tracking the current stage of each application, enabling users to keep organized records.
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=woke02&tabRepo=AY2425S1-CS2103T-W09-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+
 * **Project management**:
   * Managed releases `v1.3` and `v1.5` on GitHub, overseeing feature completeness and stability.
 
@@ -31,7 +33,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * **User Guide**:
     * Documented the `help`, `status`, `clear`, and `exit` features.
-    * Provided instructions on how to download and run the app.
+    * Documented on how to use the user guide
   * **Developer Guide**:
     * Added implementation details for the `status` feature.
     * Created sequence diagrams for `status` features.
