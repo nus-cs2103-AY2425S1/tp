@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4b. The edited contact results in a duplicate
   * 4b1. UniLink shows an error message indicating that a duplicate contact already exists.
-  
+
   Use case ends.
 
 **Use case: UC004 - View contact list**
@@ -601,7 +601,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Launch the app by double-clicking the jar file.<br>
        Expected: The app loads with no contacts.
-                                 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
