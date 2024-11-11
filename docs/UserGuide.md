@@ -396,12 +396,12 @@ Format: `find KEYWORD`
 Examples:
 * `find john` <br>
   **Output**: <br>
-  One person listed! Key in [list] to view all patients
+  One person listed! Key in 'list' to view all patients
 
 * `find ` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search ID for! <br>
-  Key in [list] to view all patients
+  Key in 'list' to view all patients
 
 * `find johnny` <br>
   **Output**: <br>
