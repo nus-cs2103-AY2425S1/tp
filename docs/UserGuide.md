@@ -41,12 +41,12 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 <br>
 4. [GUI Overview](#gui-overview)  
 <br>
-5. [Beginner's Tutorial](#beginners-tutorial)  
+5. [Beginner's Tutorial](#beginner-s-tutorial)  
    5.1 [Before You Begin](#before-you-begin)  
    5.2 [Exploring the Application](#exploring-the-application)  
    5.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)  
    5.4 [Adding Your First Student](#adding-your-first-student)  
-   5.5 [Adding a Lesson to Your Student's Details](#adding-a-lesson-to-your-students-details)  
+   5.5 [Adding a Lesson to Your Student's Details](#adding-a-lesson-to-your-student-s-details)  
    5.6 [Editing Student Details](#editing-student-details)  
    5.7 [Deleting a Student](#deleting-a-student)  
    5.8 [Wrapping Up](#wrapping-up)  
