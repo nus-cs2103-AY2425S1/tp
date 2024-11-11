@@ -546,7 +546,6 @@ Listed all persons under category: CATEGORY
 Adds additional specified tag(s) to the specified contact or all contacts in the list provided no duplicate tags(s) are found in all contacts without overwriting existing tags.
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`<br>
-Tagging operation applies to specified contact in the list
 
 **Expected message**:
 
@@ -562,7 +561,6 @@ to Person: (details of the person)
 | `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
 
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`<br>
-Tagging operation applies to **all contacts currently shown in the list**, not all contacts in the database.
 
 **Expected message**:
 
@@ -586,6 +584,8 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
   * Only full words will be matched e.g. `partner` will not match `partners`.
   * The added tags are displayed on the contact in alphabetical order. <br>
     e.g. `t/partner t/education` will display `education` before `partner`.
+
+* For format 2, tagging operation applies to all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
@@ -622,11 +622,11 @@ no duplicate tag(s) are found in all contacts.
 
   ![Tag all paid tag](images/tagAll.png)
 
-*Note: in this case, only all students are tagged with the paid tag.*
+  *Note: in this case, only all students are tagged with the paid tag.*
 
 #### Deleting tag(s) from contact: `deletetag`
 
-Deletes the specified tag(s) from the specified contact.
+Deletes the specified tag(s) from the specified contact or from all the contacts in the list provided they all have the specified tag(s).
 
 **Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]…​`
 
@@ -666,7 +666,7 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 * `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
 
 * For both formats 1 and 2,
-  - The tag is ([case-sensitive](#case-sensitive)). For example, `partner` will not match `PartnEr`.
+  - The tag is [case-sensitive](#case-sensitive). For example, `partner` will not match `PartnEr`.
   - Only full words will be matched e.g. `partner` will not match `partners`.
 
 </div>
@@ -766,10 +766,16 @@ AdmiNUS data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-AdmiNUS data are saved automatically as a [JSON](#json) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AdmiNUS data are saved automatically as a [JSON](#json) file 
+
+```
+[JAR file location]/data/addressbook.json
+```
+ 
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to make a backup of the file before editing it.
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -825,7 +831,11 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 A: Install the app on the new computer, then replace its default data file with the data file from your previous AdmiNUS home folder. Alternatively, export your data to a CSV file from the original computer using the [export command](#exporting-csv-files-export) and import it on the new computer using the [import command](#importing-csv-files-import).
 
 **Q: How do I back up my AdmiNUS data?**  
-A: The data is saved automatically in a JSON file located in the `[JAR file location]/data/addressbook.json`. You can make a backup by copying this file to a safe location. Alternatively, you can export your data to a CSV file using the [export command](#exporting-csv-files-export).
+A: The data is saved automatically in a JSON file located in the 
+```
+[JAR file location]/data/addressbook.json
+``` 
+You can make a backup by copying this file to a safe location. Alternatively, you can export your data to a CSV file using the [export command](#exporting-csv-files-export).
 
 **Q: Can I use AdmiNUS without Java installed on my computer?**  
 A: No, AdmiNUS requires Java 17 or above to run. You need to ensure that the correct version of Java is installed before using the application.
@@ -856,9 +866,9 @@ A: You can use the `delete INDEX [MORE_INDEX]…​` command to delete multiple 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Entering [parameter-like sequences](#parameter-like-sequence) in input fields**: If a user enters text that resembles a parameter prefix (e.g., `n/`, `p/`, `e/`) within an input field like `Name` or `Address`, it may cause unexpected parsing errors or rejections. Ensure that parameter-like sequences are avoided within fields that do not expect them.
-4. **Case Sensitivity of the Industry Field**: The industry field is currently [case-sensitive](#case-sensitive). This means that entries with different capitalization (e.g., `University` and `UNiversity`) will be treated as separate and distinct values, even though they appear visually identical in the interface. This behavior can lead to unintended duplicates if users do not input industry names with consistent capitalization.
+4. **Case Sensitivity of the Industry Field**: The industry field is currently [case-sensitive](#case-sensitive). This means that entries with different capitalisation (e.g., `University` and `UNiversity`) will be treated as separate and distinct values, even though they appear visually identical in the interface. This behavior can lead to unintended duplicates if users do not input industry names with consistent capitalisation.
 
 ---
 
