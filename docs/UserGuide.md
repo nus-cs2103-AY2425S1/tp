@@ -196,6 +196,15 @@ Format: `deleteall`
 
 ## Attendance Commands
 
+### Attendance prefixes
+| Prefix | Constraints                                                                            | Example                                                                       |
+|-------|----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `n/`  | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `dt/` | Dates should be in the format "YYYY-MM-DD"                                             | valid: `dt/2019-01-01`</br> invalid: `dt/`, `dt/1 Jan 2019`                   |
+| `pr/` | Attendance should either be "p" or "a".                                                | valid: `pr/p`, `pr/a` </br> invalid:`pr/P`, `pr/A`, `pr/present`, `pr/absent` |
+| `tg/` | Tutorial group should only be in the format of a letter followed by two numbers.       | valid: `tg/G01`</br> invalid: `tg/G1`                                         |
+| `sn/` | Student number should be in the format of a letter followed by 7 numbers and a letter. | valid: `sn/A1234567Z`</br> invalid: `sn/1234567z`                             |
+
 <box type="tip" seamless>
 
 **Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
@@ -260,6 +269,7 @@ Closes all attendance windows if any is currently open.
 
 ## Assignment Commands
 
+### Assignment Prefixes
 | Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
 |--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
