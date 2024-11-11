@@ -788,7 +788,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 1. Currently, the app allows contacts with the same name but in different cases. The future version will not permit this.
 2. Currently, the app allows names to be entered in any format, with no standardization. The future version will implement a standardized format for name entries.
-3. 
+3. Currently, the app allows different people to have the same phone number. Future versions will enforce unique phone numbers for each contact.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

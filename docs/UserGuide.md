@@ -197,6 +197,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
 
+- No parameters except name are currently checked for duplicates; for example, two contacts can have the same phone number, email ID, and address.
+
 - The phone number can have any number of digits, not just limited to 8 digits as in Singapore.
 
 Examples:
