@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * **User Guide**:
     * Documented the `help`, `status`, `clear`, and `exit` features.
-    * Provided instructions on how to download and run the app.
+    * Documented on how to use the user guide
   * **Developer Guide**:
     * Added implementation details for the `status` feature.
     * Created sequence diagrams for `status` features.
