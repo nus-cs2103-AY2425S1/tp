@@ -1384,6 +1384,10 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 <div class="alert" markdown="span">
 **ALERT:** For this command, `input` refers to the command box **inside** the chat window, and not the one in EZSTATES main GUI.
+<br>
+<br>
+For clarity, the first `Output` demonstration will utilise a screenshot. Subsequent `Output` demonstrations will be written out. It will be understood that they are referring to the output inside the `Result Display` of the chat window. 
+
 </div>
 
 - **Command:** `chatbot`
@@ -1405,18 +1409,16 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > **Input**: `how do i add a listing`
 >
 >**Output**:
-> 
-> ![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
-> 
+<br>Assistant: This is how to add a listing!<br>
+listing n/{name} pr/{price} ar/{area} add/{address} reg/{region} sel/{seller} (Optional: buy/{buyer1} buy/{buyer2} ...)
+>
 > ---
 >
 > **Use Case #3**: Valid Farewell
 >
 > **Input**: `see ya`
 >
-> **Output**:
-> 
-> ![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
+> **Output**: Assistant: Goodbye! Have a great day!
 >
 > ---
 
@@ -1426,10 +1428,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 >
 > **Input**: `invalid input`
 >
-> **Output**:
-> 
-> ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
-> 
+> **Output**: Assistant: I'm sorry, I didn't understand that. Can you please
+rephrase?
+>
 > ---
 
 - **Special Comments:**
