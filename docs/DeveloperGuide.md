@@ -795,7 +795,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Test Coverage**: The percentage of the system's code that is covered by automated tests, ensuring that key features and functionality are reliably tested.
 
 
---------------------------------------------------------------------------------------------------------------------
+
+
+## **Appendix: Planned Enhancements**
+
+Team size: 4
+
+The current version of MedConnect has its flaws so here are our plans for future enhancements to improve future versions of MedConnect.
+
+### Importing large number of contacts
+
+Currently, depending on the limitations of the PC hardware that MedConnect is running on, importing a large number of contacts may cause an OutOfMemory error. Our planned enhancement is to change the import feature to import contacts in smaller batches of 25 contacts at a time rather than the entire `.json` file at once.
+
+### Duplicate detection
+
+Currently, MedConnect's duplicate person detection only works within each class. There is no duplicate person detection between a patient and a doctor. In reality, there should not be a case where a patient is also a doctor. We plan to implement duplicate person detection across classes to prevent a person from being both a patient and a doctor in the future.
+
+### Whitespaces in names
+
+Currently, MedConnect is able to remove leading and trailing whitespaces from names. However, the functionality to remove whitespaces in between words in a name is not yet implemented. We plan to implement this in the future to prevent users from entering names such as `Bob     Ross` in the future as it may reduce readability.
+
+### Multiple Language Support
+
+Currently, MedConnect is only available for usage in English. We recognise that our target users may not be able to read English proficiently as it may not be their first language. Our planned enhancement is to translate MedConnect into other languages such as Chinese, Malay and Tamil to accomodate for healthcare administrators who are more fluent in these languages.
+
+### Emergency Contact UI
+
+Currently, clicking on a emergency contact card of a patient in the GUI, followed by clicking the same patient card results in the emergency contact card being unselected. This behavior is not ideal for users who select the card to focus on viewing the correct contact in the list. Our planned enhancement is to update the behaviour of selecting the patient card so that it will not refresh the user's selection upon clicking it.
+
+### Autocomplete field suggestion
+
+Currently, the autocomplete feature does not suggest square brackets for optional fields, such as in the Edit command. Users would have to refer to the User Guide or error message to know which fields are optional. We plan to add the square brackets to optional parameters in the autocomplete feature in future iterations of MedConnect to minimise the need for users to continuously reference the User Guide.
+
+### Autocomplete visual errors
+
+Currently, the autocomplete feature has visual bugs if users enter a whitespace after command prefixes (e.g., `add n/    John`). To mitigate this issue, our temporary solution is to prevent users from typing whitespaces in the command box immediately after the slash of the command prefix. We plan to better resolve this issue by removing the autocomplete suggestion upon incorrect user input that does not follow the command syntax.
 
 <div style="page-break-after: always;"></div>
 
