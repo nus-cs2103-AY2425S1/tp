@@ -53,6 +53,7 @@ public class ImportCommandTest {
     private Path invalidNameFilePath; // New path for invalid name entry file
     private Path malformedFilePath; // Malformed line entry file
     private Path nonExistentFilePath;
+    private Path incorrectFileFormatPath;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -68,6 +69,7 @@ public class ImportCommandTest {
         invalidNameFilePath = Paths.get(TEST_DIRECTORY, "InvalidNameEntry.csv");
         malformedFilePath = Paths.get(TEST_DIRECTORY, "MalformedLineEntry.csv");
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
+        incorrectFileFormatPath = Paths.get(TEST_DIRECTORY, "IncorrectFileFormat.json");
 
         // Ensure the directory exists
         Files.createDirectories(validFilePath.getParent());
@@ -119,6 +121,11 @@ public class ImportCommandTest {
             writer.newLine();
             writer.write("."); // Missing name and phone number
         }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(incorrectFileFormatPath)) {
+            writer.write(VALID_CSV_HEADERS);
+            writer.newLine();
+        }
     }
 
     @AfterEach
@@ -146,6 +153,9 @@ public class ImportCommandTest {
         }
         if (Files.exists(malformedFilePath)) {
             Files.delete(malformedFilePath); // Clean up malformed line file
+        }
+        if (Files.exists(incorrectFileFormatPath)) {
+            Files.delete(incorrectFileFormatPath);
         }
     }
 
@@ -257,6 +267,17 @@ public class ImportCommandTest {
         try {
             importCommand.execute(model);
         } catch (CommandException e) {
+            assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
+        }
+    }
+
+    @Test
+    public void execute_incorrectFileFormat_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("IncorrectFileFormat.json");
+        try {
+            System.out.println(importCommand.execute(model));
+        } catch (CommandException e) {
+            System.out.println("actual:" + e.getMessage());
             assertTrue(e.getMessage().contains(ImportCommand.MESSAGE_INCORRECT_FILE_FORMAT));
         }
     }

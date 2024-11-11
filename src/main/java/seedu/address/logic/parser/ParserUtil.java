@@ -204,16 +204,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a String containing the field to search and keywords,
-     * into a String representing the field to search.
-     */
-    public static String parseField(String fieldAndKeywords) {
-        requireNonNull(fieldAndKeywords);
-        String field = fieldAndKeywords.split(" ")[0].trim();
-        return field;
-    }
-
-    /**
      * Parses a List containing keyword arguments,
      * into a List containing the keywords.
      */
