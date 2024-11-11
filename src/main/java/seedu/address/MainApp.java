@@ -16,14 +16,18 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCommandHistory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CommandHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,9 +62,11 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CommandHistoryStorage commandHistoryStorage = new JsonCommandHistoryStorage(config.getCommandHistoryFilePath());
+        CommandHistory commandHistory = initCommandHistory(commandHistoryStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, commandHistoryStorage);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, commandHistory);
 
         logic = new LogicManager(model, storage);
 
@@ -68,11 +74,13 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, {@code userPrefs}
+     * and {@code commandHistory}. <br>
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs,
+                                   ReadOnlyCommandHistory commandHistory) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -90,7 +98,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, commandHistory);
     }
 
     private void initLogging(Config config) {
@@ -162,10 +170,40 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save prefs file : " + StringUtil.getDetails(e));
         }
 
         return initializedPrefs;
+    }
+
+    /**
+     * Returns a {@code CommandHistory} using the file at {@code storage}'s command history file path,
+     * or a new {@code CommandHistory} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected CommandHistory initCommandHistory(CommandHistoryStorage storage) {
+        Path commandHistoryFilePath = storage.getCommandHistoryFilePath();
+        logger.info("Using command history file : " + commandHistoryFilePath);
+        CommandHistory initializedCommandHistory;
+        try {
+            Optional<CommandHistory> historyOptional = storage.readCommandHistory();
+            if (!historyOptional.isPresent()) {
+                logger.info("Creating new command history file " + commandHistoryFilePath);
+            }
+            initializedCommandHistory = historyOptional.orElse(new CommandHistory());
+        } catch (DataLoadingException e) {
+            logger.warning("Command history file at " + commandHistoryFilePath + " could not be loaded. "
+                    + "Using default (blank) command history.");
+            initializedCommandHistory = new CommandHistory();
+        }
+
+        //Update command history file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveCommandHistory(initializedCommandHistory);
+        } catch (IOException e) {
+            logger.warning("Failed to save command history file : " + StringUtil.getDetails(e));
+        }
+        return initializedCommandHistory;
     }
 
     @Override

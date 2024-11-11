@@ -9,8 +9,10 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,25 +21,58 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final HistoricalAddressBook historicalAddressBook;
     private final UserPrefs userPrefs;
+    private final CommandHistory commandHistory;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs, and commandHistory.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, ReadOnlyCommandHistory commandHistory) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + " and command history " + commandHistory);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.historicalAddressBook = new HistoricalAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.commandHistory = new CommandHistory(commandHistory);
+        filteredPersons = new FilteredList<>(this.historicalAddressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new HistoricalAddressBook(), new UserPrefs(), new CommandHistory());
+    }
+
+
+    //=========== CommandHistory Related =====================================================================
+
+    @Override
+    public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
+        requireNonNull(commandHistory);
+        this.commandHistory.resetData(commandHistory);
+    }
+
+    @Override
+    public ReadOnlyCommandHistory getCommandHistory() {
+        return commandHistory;
+    }
+
+    @Override
+    public void addCommand(String commandString) {
+        commandHistory.addCommand(commandString);
+    }
+
+    @Override
+    public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandHistory.getEarlierCommandGetterResult(commandGetterResult);
+    }
+
+    @Override
+    public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+        return commandHistory.getLaterCommandGetterResult(commandGetterResult);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,28 +114,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        historicalAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return historicalAddressBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return historicalAddressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        historicalAddressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        historicalAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +143,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        historicalAddressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -128,6 +163,28 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Undo/Redo ==================================================================================
+
+    @Override
+    public boolean canUndoAddressBook() {
+        return historicalAddressBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return historicalAddressBook.canRedo();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        historicalAddressBook.undo();
+    }
+
+    @Override
+    public void redoAddressBook() {
+        historicalAddressBook.redo();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -138,11 +195,20 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return historicalAddressBook.equals(otherModelManager.historicalAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
+                && commandHistory.equals(otherModelManager.commandHistory)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("logger", logger)
+                .add("historicalAddressBook", historicalAddressBook)
+                .add("userPrefs", userPrefs)
+                .add("commandHistory", commandHistory)
+                .add("filteredPersons", filteredPersons)
+                .toString();
+    }
 }

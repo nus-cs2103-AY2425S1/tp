@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Utilized JavaFX for creating interactive and visual components such as charts (e.g., bar charts, pie charts).
+* Use of ChatGPT and Co-pilot to improve code quality
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the javaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -151,15 +152,15 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Proposed Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Proposed Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -237,11 +238,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -260,73 +258,255 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Private tutors
 
-* has a need to manage a significant number of contacts
+* has a need to manage a moderate number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+* manage student contacts faster than a typical mouse/GUI driven app
+* one-shot command focus for significantly quicker usage
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​       | I want to …​                                                                                | So that I can…​                                                          |
+|----------|---------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | Private Tutor | search for contacts based on multiple criteria (name, role, or ID)                          | find a specific person quickly without manually scrolling the list       |
+| `* * *`  | Private Tutor | have a user-friendly command-line interface with clear and concise command options          | quickly perform tasks without a user guide                               |
+| `* * *`  | Private tutor | manage, retrieve and update the contact information for my students                         | smoothly communicate across all parties without any confusions or delays |
+| `* * *`  | Private Tutor | perform multiple actions at once                                                            | boost efficiency by cutting down administrative time on repetitive tasks |
+| `* * *`  | Private Tutor | add note about individual students (e.g. learning preferences, special needs, etc)          | personalise learning experience                                          |
+| `* *`    | Private Tutor | send automated payment notifications to parents                                             | ensure timely payments                                                   |
+| `* *`    | Private Tutor | integrate a billing system that automatically calculates monthly fees and generate invoices | lower administrative burden by minimising manual billing tasks           |
+| `* *`    | Private Tutor | log and track communication history with my students                                        | ensure continuity in communication                                       |
 
-*{More to be added}*
 
-### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+## Use cases
 
-**MSS**
+#### **Use Case UC01: Add Student**
+**Actor**: Private Tutor
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command to add a new student with the required details in a single line.
+2. EduTuTu validates the input details.
+3. EduTuTu adds the new student to the system and logs the action.
 
-    Use case ends.
+Use case ends.
 
-**Extensions**
+**Extensions**:
 
-* 2a. The list is empty.
+- **2a. Invalid or Missing Data**:
+    - 2a1. EduTuTu logs an error message specifying the invalid fields.
+    - Use case resumes from step 1.
 
-  Use case ends.
+- **2b. Duplicate Student Detected**:
+    - 2b1. EduTuTu logs an error message.
+    - Use case resumes from step 1.
 
-* 3a. The given index is invalid.
+---
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+#### **Use Case UC02: Delete Student**
+**Actor**: Private Tutor
 
-*{More to be added}*
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command to delete a student using their unique index:
+2. EduTuTu validates the index.
+3. EduTuTu deletes the student and logs the details of the deleted student.
 
+Use case ends.
+
+**Extensions**:
+
+- **2a. Invalid Index Entered**:
+    - 2a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC03: List All Students**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command to list all students.
+2. EduTuTu retrieves all student records and outputs the list in the terminal with unique indices.
+
+Use case ends.
+
+---
+
+#### **Use Case UC04: Find Students**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command to search for students by any field.
+2. EduTuTu validates the search criteria.
+3. EduTuTu searches the system and outputs matching students with unique indices.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. Invalid Search Criteria**:
+    - 2a1.EduTuTu logs an error message specifying the invalid input.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC05: Mark Fees as Paid**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor first searches for the student using the find command.
+2. EduTuTu displays a list of students with unique indices.
+3. Private tutor types the command to mark a student's fees as paid, including the student index and date.
+4. EduTuTu validates the student index and date format.
+5. EduTuTu updates the student's record and logs the payment confirmation.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **3b.  Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+
+#### **Use Case UC06: Unmark Fees as Paid**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Private tutor types the command to unmark a student's fees as paid, including the student index and date.
+4. EduTuTu validates the student index and month format.
+5. EduTuTu updates the student’s record, removing the payment record for the specified month, and logs the removal confirmation.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **3b. Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC07: Edit Student Record**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Private tutor types the command to edit a student's record, including the student index.
+4. EduTuTu validates the student index.
+5. Private tutor edits the selected the field with new value.
+6. EduTuTu updates the student’s record with the new information and logs a confirmation of the successful edit.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **5a. Invalid Field Value Entered**:
+    - 5a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC08: Display Class Pie Chart**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command `pie` to view the distribution of students across classes.
+2. EduTuTu generates and displays a pie chart, representing the number of students per class, with each class labeled clearly.
+3. Private tutor reviews the chart for insights into class sizes.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Students Enrolled in Classes**:
+    - 2a1. EduTuTu logs a message indicating that no data is available for display.
+    - **Use case ends.**
+
+---
+
+#### **Use Case UC09: Display Monthly Payment Bar Chart**
+**Actor**: Private Tutor
+
+**Main Success Scenario (MSS)**:
+1. Private tutor types the command `bar` to view the monthly payment data.
+2. EduTuTu generates and displays a bar chart with the y-axis representing the number of students and the x-axis representing each month.
+3. Private Tutor reviews the chart for insights into monthly payment patterns.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Student Data Available**:
+    - 2a1. EduTuTu logs a message indicating that no student data is available for display.
+    - **Use case ends.**
+  
+
+---
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+---
 
-*{More to be added}*
+**1. Performance Requirements**
 
+- **Response Time**: The system should respond to any command within **1 second** under normal operating conditions.
+- **Throughput**: Capable of processing **concurrent commands** from private tutor without significant delay.
+- **Capacity**: Should handle up to **100 students** without noticeable sluggishness in performance for typical usage.
+
+**2. Maintainability Requirements**
+
+- **Code Quality**: The codebase should be **modular**, well-documented, and adhere to standard coding conventions to facilitate maintenance.
+- **Documentation**: Provide **comprehensive technical documentation** for future developers and maintainers.
+- **Automated Testing**: Implement **unit tests** and **integration tests** to ensure that new changes do not break existing functionality.
+
+**3. Portability Requirements**
+
+- **Cross-Platform Compatibility**: The application must run on any mainstream operating system (**Windows, macOS, Linux**) with **Java 17** or above installed.
+- **Minimal Dependencies**: Avoid platform-specific dependencies to ensure **ease of deployment** across different environments.
+
+**4. Ethical Requirements**
+
+- **Non-Discrimination**: The system should be designed to avoid biases, especially in features like **sorting** or **filtering**.
+- **Transparency**: Actions performed by the system should be **transparent** to users, avoiding hidden processes that could cause confusion.
+
+---
+
+This version uses clear formatting with bullet points for better readability and structure.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Data Migration**: The process of transferring data from one system to another. This feature ensures that contacts, communication history, and other data can be shared across different platforms or stakeholders.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,7 +534,117 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a person
+
+1. Adding a person with all fields
+
+   1. Prerequisites: No persons in the list.
+
+   1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
+
+   2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2106`<br>
+      Expected: No person added. Error details shown in the status message. Status bar remains the same.
+
+   3. Test case: `add n/Alice d/o Sally p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2107`<br>
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
+
+### Editing a person
+
+1. Editing a person with all fields
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 c/CS2106`<br>
+      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message.
+
+   2. Test case: `edit 0 c/CS2106`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+   3. Test case: `edit 1 f/200`<br>
+      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message.
+
+   4. Test case: `edit 2 f/200 c/CS2106`<br>
+      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message.
+
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
+      Expected: Similar to 2nd test case above.
+
+### Finding a person
+
+1. Finding a person by name
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `find n/Mario`<br>
+      Expected: The person with the name Mario is shown in the list. The person card in the UI is highlighted.
+
+   2. Test case: `find n/Alice`<br>
+      Expected: The person with the name Alice is shown in the list. The person card in the UI is highlighted.
+
+   3. Test case: `find n/`
+      Expected: Error message shown in the status bar. 
+
+2. Finding a person by ClassID
+   
+   1. Pre-requisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   1. Test case: `find c/CS2105`<br>
+      Expected: The person with the class ID CS2105 is shown in the list. 
+
+   2. Test case: `find c/` <br>
+      Expected: Error message shown in the status bar. 
+
+3. Finding a person by name and ClassID
+   1. Prerequisites: List all person using the `list` command. Multiple persons in the list.
+    
+   1. Test case: `find n/Mario c/CS2105`<br>
+     Expected: The person with the name Mario and class ID CS2105 is shown in the list. 
+
+   2. Test case: `find n/Alice c/`<br>
+     Expected: Error message shown in status bar.
+
+   3. Test case: `find n/ c/CS2105`<br>
+     Expected: Error message showin in status bad.
+
+   4. Test case: `find n/ c/`<br>
+     Expected: Error message shown in the status bar. 
+
+
+### Displaying a pie chart of the number of students in each class
+
+1. Displaying a pie chart
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `pie`<br>
+      Expected: A pie chart is displayed showing the number of students in each class. The pie chart is displayed in a new window.
+
+      
+2. Displaying a pie chart error
+
+    1. Prerequisites: Empty list
+
+    1. Test case: `pie`<br>
+       Expected: Error message shown in the status bar. No bar chart displayed.
+
+   
+### Displaying a bar chart of the distribution of students against the number of months paid
+
+1. Displaying a bar chart
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `bar`<br>
+      Expected: A bar chart is displayed showing the distribution of students against the number of months paid. The bar chart is displayed in a new window.
+   
+2. Displaying a bar chart error
+
+   1. Prerequisites: Empty list
+
+   1. Test case: `bar`<br>
+    Expected: Error message shown in the status bar. No bar chart displayed.
 
 ### Deleting a person
 
@@ -371,12 +661,212 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Marking a Payment Date
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Marking a month as paid
 
-1. _{ more test cases …​ }_
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `markpaid 1 m/2024-12`<br>
+      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message.
+
+   1. Test case: `markpaid 0 m/2023-10`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect mark as paid commands to try: `markpaid`, `markpaid x`, `markpaid x m/1` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+   2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
+      Expected: Similar to previous.
+
+### Unmarking a payment date
+
+1. Unmarking a month as paid
+
+    1. Prerequisites: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
+
+    2. Test Case: `unmarkpaid 1 m/2020-10`
+       Expected: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
+
+    3. Test Case: `unmarkpaid 1 m/2020-13`
+       Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
+
+    4. Test Case: `unmarkpaid -10 m/2020-10`
+       Expected: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
+       
+### Viewing Command History
+
+1. Viewing command history
+
+   1. Prerequisites: Multiple commands have been executed.
+
+   1. Test case: up arrow key<br>
+      Expected: A previous command is shown in the status message.
+
+### Viewing Student Details
+
+1. Viewing student details
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `info 1` <br>
+      Expected: The first person's details are shown in the status message. The person card in the UI is highlighted.
+
+   1. Test case: `info 0` <br>
+      Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Clearing all entries
+
+1. Clearing all entries while all entries are being shown
+
+    1. Prerequisites: List all entries using the `list` command. Ensure there is at least one entry on the list.
+
+    1. Test case: `clear`  
+       Expected: All entries are removed from the address book. A message "Address book has been cleared!" is displayed in the command box. UI updates to show an empty address book.
+
+    1. Test case: `clear` on an already empty address book  
+       Expected: No change, as there are no entries to delete. Message "Address book has been cleared!" is displayed again. Status bar remains the same.
+
+    1. Other clear commands to try: `clear x`, `clear 123`, `clear all`  
+       Expected: Address book will ignore parameters after the "clear" keyword, hence the address book will still be cleared.
+
+### Undoing and Redoing changes
+
+1. Undoing the most recent change
+
+    1. Prerequisites: Perform a command that modifies the address book (e.g., `add`, `delete`, `edit`).
+
+    1. Test case: `undo`  
+       Expected: The most recent change is reversed. The address book reverts to the state before the last modification. A message indicating the undo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `undo` with no prior changes  
+       Expected: No change, as there are no actions to undo. A message "No Command to undo" is shown in the command box. 
+
+1. Redoing the most recent undone change
+
+    1. Prerequisites: Perform an `undo` action to revert a change.
+
+    1. Test case: `redo`  
+       Expected: The most recently undone change is reapplied. The address book reflects the state as if the original command was executed again. A message indicating the redo action is displayed in the command box. Status bar timestamp is updated.
+
+    1. Test case: `redo` with no prior `undo`  
+       Expected: No change, as there are no actions to redo. An error message is shown in the command box "No command to redo".
+
+    1. Other incorrect undo/redo commands to try: `undo x`, `redo x` (where `x` is any additional parameter)  
+       Expected: Error message indicating an unrecognized command format. Address book remains unaffected.
+
+### Exiting the Program
+
+1. Exiting the program using the `exit` command
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: `exit`  
+       Expected: The program closes immediately. Data written to EduTuTu should be saved. No further interaction is possible as the program window closes.
+
+1. Exiting the program using the GUI
+
+    1. Prerequisites: Ensure the program is running with the address book open.
+
+    1. Test case: Click `File` > `Exit` in the GUI toolbar  
+       Expected: The program closes immediately. Similar to the `exit` command, data written to EduTuTu should be saved.
+
+    1. Other exit commands to try: `exit now`, `quit`, `close`  
+       Expected: Program will ignore arguments after the exit command and close immediately.
+
+
+
+## Appendix: Effort
+
+This project, EduTuTu, required a considerable amount of effort to design and implement due to its functionality and the combination of both Command Line Interface (CLI) and Graphical User Interface (GUI) components. Unlike simpler applications like AB3, which deals with only one entity type, EduTuTu manages multiple entities such as students, payments, and classes. Each entity has unique properties and relationships, adding complexity to the data model, command handling, and user interface design.
+
+### Difficulty Level and Challenges
+The development of EduTuTu presented several key challenges:
+- **Multi-Entity Management:** Managing multiple types of entities (students, payments, classes) required a flexible data structure and sophisticated command parsing to handle diverse commands like `add`, `markpaid`, and `pie`.
+- **Data Visualisation:** Creating dynamic visualisations (pie and bar charts) to track class distributions and monthly payments required integration with a charting library and customization to suit EduTuTu’s specific data needs.
+- **Error Handling and User Experience:** Ensuring robust error handling and clear user feedback was essential, particularly for commands related to data visualization and file manipulation (e.g., handling missing or corrupted files).
+
+### Effort Required
+Significant effort went into:
+- **Designing a Scalable Data Model:** We created a model that supports various entity types, allowing for easy future expansion.
+- **Extensive Testing:** Due to the multi-entity structure and data visualisation, thorough testing was necessary to handle a wide range of user inputs and edge cases, particularly for commands such as `clear`, `undo`, and `redo`.
+- **User Interface Improvements:** Balancing the CLI with GUI elements required additional effort to ensure that commands were intuitive and visualizations were accessible, providing a seamless user experience.
+
+### Reuse of Libraries and Components
+To streamline development, we leveraged certain libraries and reused components where feasible:
+- **Charting Library for Visualisations:** The `javaFX` library was used to implement the `pie` and `bar` chart commands. This allowed us to focus on integrating visualization rather than building charting functionality from scratch. Our work on adapting `javaFX` to fit EduTuTu’s data structure is encapsulated in the `ChartAdapter.java` class.
+- **Command Framework from AB3:** We adapted AB3’s command framework to accommodate EduTuTu’s expanded command set, allowing us to save development time while maintaining a consistent structure. Additional commands such as `markpaid` and `info` were added to extend functionality for the specific needs of a tuition center.
+
+### Achievements
+Despite the complexity, we achieved several milestones:
+- Designed a flexible and scalable multi-entity data model that can be expanded easily for future needs.
+- Successfully implemented user-friendly data visualisation commands (`pie`, `bar`), providing private tutors with valuable insights at a glance.
+- Developed a robust system for error handling and user feedback, enhancing usability and reliability.
+
+In summary, EduTuTu required significant effort due to its multi-entity structure, visualisations, and user interface improvements. By reusing existing libraries and frameworks strategically, we maintained high functionality and usability while optimizing development time.
+
+## Appendix: Planned Enhancement
+
+**Team size:** 5  
+**Total planned enhancements:** 10
+
+This section lists planned enhancements to address known feature flaws. These enhancements will be implemented after PE-D testing is completed and feedback is received.
+
+
+1. **Enhance error messages for commands that use `INDEX`**  
+   **Current Issue:** The error message associated with an invalid `INDEX` contains the line `Also possible: unknown prefixes added after person index`, which may be confusing for commands that accept no prefixes. (e.g. `delete`, `info`)  
+   **Planned Enhancement:** Make the error message more specific, to only include the portion on unknown prefixes for commands that accept prefixes.
+   
+
+2. **Make 'undo' and 'redo' command limit clear**  
+   **Current Issue:** Users are unaware of the limit to the `undo` and `redo` command history, leading to potential confusion.  
+   **Planned Enhancement:** Display a warning when the maximum undo/redo history has been reached. For example, "No further undo actions are available."
+
+
+3. **Emoji handling in input fields**  
+   **Current Issue:** Input fields currently are not guaranteed to handle emojis correctly due to a regex limitation, which may cause unexpected behavior.  
+   **Planned Enhancement:** Update the regex used for validation to allow emojis in names, addresses, and other text fields, or provide an informative error message if emojis are not supported.
+
+
+4. **Display list sorting options**  
+   **Current Issue:** The `list` command displays entries in a default order, with no options for sorting.  
+   **Planned Enhancement:** Add sorting options to the `list` command, allowing users to sort by name, class, or payment status. For example, `list sortby/name` or `list sortby/class`.
+
+
+5. **Enhance the `pie` and `bar` commands**  
+   **Current Issue:** Currently, both commands generate a visualisation with fixed categories. (e.g. `pie` is fixed to only display `CLASS_ID`, and `bar` for `MONTH_PAID`)   
+   **Planned Enhancement:** Allow users to specify the data they wish to make a pie/bar chart of. This will naturally solve edge cases for instances where the legend generated is empty, or empty strings are displayed as a bar on the bar chart.
+
+
+6. **Allow multiple class allocations for a single student**  
+   **Current Issue:** Currently, there are restrictions preventing a student from being assigned to more than one class, which can cause issues in managing class rosters.  
+   **Planned Enhancement:** Add additional features that accommodates assigning each student to more than one class (i.e. replace the class ID implementation with a different implementation).
+
+
+7. **Enable multi-word search for accurate matching**  
+   **Current Issue:** Currently, the find command interprets multi-word entries with spaces (e.g., names or addresses) as separate search terms. For example, searching `n/Kim Woo Bin` returns any entries that match `Kim`, `Woo`, or `Bin` individually rather than finding the exact phrase `Kim Woo Bin`. Similarly, searching for an address like `222 Greenwood Ave` matches `222`, `Greenwood`, and `Ave` separately, which could yield inaccurate results.  
+   **Planned Enhancement:** Modify the find command to recognize multi-word search terms as complete phrases, enabling accurate matching for entries that include spaces. This enhancement will help avoid potential edge cases due to whitespace handling.
+
+
+8. **Enable distinction between parent and personal numbers**  
+   **Current Issue:** Currently, each student in EduTuTu can only store up to one phone number.  
+   **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Parent's Hp and Personal Phone Numbers)
+
+
+9. **Enable handling of larger fees**  
+   **Current Issue:** Currently, the fees field only accepts up to 9 integers to prevent integer overflow.  
+   **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees & fees in the form of floats.
+
+
+10. **Enable handling for more special characters in names**  
+    **Current Issue:** Users may encounter issues when entering names with comma.  
+    **Planned Enhancement:** Modify EduTuTu to allow the storage of names with more special characters.
+ 
+These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
+
+

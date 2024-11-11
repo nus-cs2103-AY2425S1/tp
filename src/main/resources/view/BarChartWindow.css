@@ -1,0 +1,25 @@
+* {
+    -LightPink: #FFB6C1;
+    -LightCoral: #F08080;
+    -background-color: #D2C0BD;
+    -bar-colour-1: #3498db;
+    -bar-colour-2: #e74c3c;
+    -bar-colour-3: #2ecc71;
+}
+
+HBox {
+    -fx-background-color: -background-color;
+}
+.default-color0.chart-bar {
+    -fx-bar-fill: -LightPink;
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: -LightCoral;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+
+

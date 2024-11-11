@@ -11,7 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,19 +31,33 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String fees;
+    private final String classId;
+    private final List<JsonAdaptedMonthPaid> monthsPaid = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("fees") String fees,
+            @JsonProperty("classId") String classId,
+            @JsonProperty("monthsPaid") List<JsonAdaptedMonthPaid> monthsPaid,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.fees = fees;
+        this.classId = classId;
+
+        if (monthsPaid != null) {
+            this.monthsPaid.addAll(monthsPaid);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +71,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        fees = source.getFees().value;
+        classId = source.getClassId().value;
+        monthsPaid.addAll(source.getMonthsPaid().stream()
+                .map(JsonAdaptedMonthPaid::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -65,11 +87,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
+        // Check name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -78,6 +96,7 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        // Check phone
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -86,6 +105,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        // Check email
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,6 +114,7 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        // Check address
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -101,9 +122,42 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        // Check fees
+        if (fees == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fees.class.getSimpleName()));
+        }
+        if (!Fees.isValidFees(fees)) {
+            throw new IllegalValueException(Fees.MESSAGE_CONSTRAINTS);
+        }
+        final Fees modelFees = new Fees(fees);
+        //check classId
+        if (classId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassId.class.getSimpleName()));
+        }
+        if (!ClassId.isValidClassId(classId)) {
+            throw new IllegalValueException(ClassId.MESSAGE_CONSTRAINTS);
+        }
+        final ClassId modelClassId = new ClassId(classId);
 
+        // Check and create monthsPaid
+        final List<MonthPaid> personMonthsPaid = new ArrayList<>();
+        for (JsonAdaptedMonthPaid monthPaid : monthsPaid) {
+            if (!MonthPaid.isValidMonthPaid(monthPaid.getMonthPaidValue())) { // TODO weak slap?
+                throw new IllegalValueException(MonthPaid.MESSAGE_CONSTRAINTS);
+            }
+            personMonthsPaid.add(monthPaid.toModelType());
+        }
+        final Set<MonthPaid> modelMonthsPaid = new HashSet<>(personMonthsPaid);
+
+        // Create tags
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelFees, modelClassId, modelMonthsPaid,
+                modelTags);
     }
 
 }

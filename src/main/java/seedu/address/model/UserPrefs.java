@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Represents User's preferences.
@@ -14,7 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "EduTuTu.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -79,10 +80,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        return sb.toString();
+        return new ToStringBuilder(this)
+                .add("guiSettings", guiSettings)
+                .add("addressBookFilePath", addressBookFilePath)
+                .toString();
     }
 
 }

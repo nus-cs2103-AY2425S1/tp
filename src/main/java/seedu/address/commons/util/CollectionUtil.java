@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -31,5 +32,29 @@ public class CollectionUtil {
      */
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
+    }
+
+    /**
+     * Returns true if {@code collectionA} has the same items in the same ordering as {@code collectionB}.
+     */
+    public static boolean isCollectionEqual(Collection<?> collectionA, Collection<?> collectionB) {
+        requireAllNonNull(collectionA, collectionB);
+        if (collectionA.size() != collectionB.size()) {
+            return false;
+        }
+        if (collectionA.isEmpty()) {
+            return true;
+        }
+
+        //adapted from https://stackoverflow.com/questions/77306409/java-how-to-tell-if-two-arraydeque-are-equal
+        Iterator<?> aIter = collectionA.iterator();
+        Iterator<?> bIter = collectionB.iterator();
+
+        while (aIter.hasNext()) {
+            if (!Objects.equals(aIter.next(), bIter.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

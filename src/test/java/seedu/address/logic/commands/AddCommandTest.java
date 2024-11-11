@@ -15,12 +15,14 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.CommandGetterResult;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyCommandHistory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -31,6 +33,7 @@ public class AddCommandTest {
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
+
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
@@ -43,6 +46,14 @@ public class AddCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
+
+    @Test
+    public void format_validPerson_correctFormat() {
+        Person validPerson = new PersonBuilder().build();
+        String expectedFormat = Messages.format(validPerson);
+        assertEquals(expectedFormat, Messages.format(validPerson));
+    }
+
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
@@ -95,6 +106,21 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommand(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCommandHistory getCommandHistory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,6 +182,36 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getEarlierCommandGetterResult(CommandGetterResult commandGetterResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandGetterResult getLaterCommandGetterResult(CommandGetterResult commandGetterResult) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called");
         }
     }
 
