@@ -4,5 +4,6 @@
 
 ![Ui.png](docs/images/Ui.png)
 
-* Hello! This is the repo for inSUREance :)
-* This will be updated as the project progresses.
+Hello, and welcome to the InSUREance app :). To get started, download the JAR file in our latest release.
+
+For more information, refer to our project site [here](https://ay2425s1-cs2103-f12-1.github.io/tp/).
