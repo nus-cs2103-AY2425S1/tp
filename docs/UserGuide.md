@@ -15,11 +15,6 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 ## Quick start
 
-<<<<<<< HEAD
-1. Ensure you have Java `17` or above installed in your Computer. To check this, open a command
- terminal, and type `java -version`.
-=======
->>>>>>> 17cf3901f223399c3881d8a760d841ef62c4671b
 
 1. Ensure you have Java `17` or above installed in your Computer. <br>(If you are  a mac user, you will need to download 
 javaFX first via the following commands) <br>
@@ -31,13 +26,7 @@ javaFX first via the following commands) <br>
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-<<<<<<< HEAD
-1. Open a command terminal, `cd` into the folder you put the jar file in
-  (e.g., If the jar file is stored in `/Desktop/ServiceTrackFile`, then the command should be `cd /Desktop/ServiceTrackFile`),
-  and use the `java -jar ServiceTrack.jar` command to run the application.<br>
-=======
 1. Open a command terminal, [navigate](https://riptutorial.com/cmd/example/8646/navigating-in-cmd) into the folder you put the jar file in, then enter `java -jar ServiceTrack.jar` into the command line to run the application.<br>
->>>>>>> 17cf3901f223399c3881d8a760d841ef62c4671b
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
