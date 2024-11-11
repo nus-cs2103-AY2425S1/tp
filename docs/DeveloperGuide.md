@@ -608,5 +608,20 @@ The following planned enhancements address known feature flaws identified during
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
     - **Expected Outcome**: More flexible search results.
 
+3. **Dynamic UI Updates**
+    - **Feature Flaw**: Unassign Volunteers from Events while viewing said event would still show volunteer is involved
+    - **Proposed Fix**: UI would dynamically update the results it shows after every command is ran.
+    - **Expected Outcome**: UI would display accurate and the most updated information.
+
+4. **Multiple Date Tracking**
+    - **Feature Flaw**: The error message for validating if the volunteer is free only returns the first date which the volunteer is already free.
+    - **Proposed Fix**: The error message should show all dates which the volunteer is already free.
+    - **Expected Outcome**: Users would know all the dates that volunteer is already free for.
+
+5. **Add Support For Leap Years**
+    - **Feature Flaw**: Currently the date does not parse leap days accordingly
+    - **Proposed Fix**: The program should output the specific error that the leap day is not valid.
+    - **Expected Outcome**: Users would know that the invalid error is due to leap day.
+
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
 
