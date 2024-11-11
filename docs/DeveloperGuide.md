@@ -517,12 +517,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list all/` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in this list.
 
    1. Test case: `delete 1,2`<br>
-      Expected: First and second contact is deleted from the list. Names of the deleted people shown in the display message.
+      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
    2. Test case: `delete 1,1,1,2`<br>
-      Expected: First and second contact is deleted from the list. Names of the deleted people shown in the display message. 
+      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message. 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details about invalid format shown in the display message.
    4. Test case: `delete 1,10000`<br>
@@ -530,12 +530,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Archiving a person
 
-1. Archiving a person while all persons are being shown
+1. Archiving a person while all current (i.e. not archived) persons are being shown
 
-    1. Prerequisites: List persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list.
 
-    2. Test case: `archive <index_of_current_person>`<br>
-       Expected: The specified person is marked as archived in the list. His/her name is shown in the display message.
+    2. Test case: `archive 1`<br>
+       Expected: First person is archived from the list. Name of the archived person shown in the display message.
     3. Test case: `archive 0`<br>
        Expected: No person is archived. Error details about invalid format shown in the display message.
     4. Test case: `archive john`<br>
@@ -543,21 +543,21 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `archive`<br>
          Expected: No person is archived. Error details about invalid format shown in the display message.
 
-2. Archiving an archived person
+2. Archiving an already archived person
 
-    1. Prerequisites: At least one person in the list is already archived.
+    1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
 
-    2. Test case: `archive <index_of_archived_person>`<br>
-       Expected: No change in the list. Error message is displayed indicating that the person is currently archived.
+    2. Test case: `archive 1`<br>
+       Expected: No change in the list. Error message is displayed indicating that the person is already archived.
 
 ### Unarchiving a person
 
-1. Unarchiving a person while all persons are being shown
+1. Unarchiving a person while all archived persons are being shown
 
-   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+   1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
 
-   2. Test case: `unarchive <index_of_archived_person>`<br>
-     Expected: The specified person is marked as not archived in the list. His/her name is shown in the display message.
+   2. Test case: `unarchive 1`<br>
+     Expected: First person is unarchived from the list. Name of the archived person shown in the display message.
    3. Test case: `unarchive 0`<br>
      Expected: No person is unarchived. Error details about invalid format shown in the display message.
    4. Test case: `unarchive john`<br>
@@ -567,9 +567,9 @@ testers are expected to do more *exploratory* testing.
 
 2. Unarchiving a current person
 
-    1. Prerequisites: At least one person in the list is currently not archived.
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list.
 
-    2. Test case: `unarchive <index_of_current_person>`<br>
+    2. Test case: `unarchive 1`<br>
        Expected: No change in the list. Error message is displayed indicating that the person is currently not archived.
 
 ### Saving data
