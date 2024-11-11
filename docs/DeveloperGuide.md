@@ -776,7 +776,7 @@ Team size: 5
 6. **Standardize the command success messages:** The current implementation of the command success messages is 
    inconsistent. Some commands like `edit_student` displays student details, while others like `view_student` do not.
    This should be standardized to ensure that users receive feedback in consistent formats.
-7. **Allow for "s/" in student names:** The current implementation does not allow for student names to contain "/", which isolates them. This should be fixed to allow for a wider range of valid names.
+7. **Allow for "/" in student names:** The current implementation does not allow for student names to contain "/", which isolates students who have them in their names. This should be fixed to allow for a wider range of valid names.
 8. **Reject new students with the same Student Identifiers, but different capitalisation of email:** The current implementation allows for students with the same Student Identifiers but a different capitalisation of email to be added. This does not make sense as email are traditionally not case-sensitive. It should be fixed to allow better identification of users.
 9. **Reject duplicate phone numbers and/or duplicate emails**: The current implementation only checks that new students added have a unique combination of student identifiers (name, email and phone number). This means that the current implementation allows for the addition of students with different names, but the same phone number/email. A more thorough implementation can instead prevent adding of students that have the exact same number or email.  
 
