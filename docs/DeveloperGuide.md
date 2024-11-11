@@ -966,10 +966,10 @@ valid, but it should not be.
 
 8. We will use a better duplicate detection method such as NRIC to detect duplicates. Currently, if there are 2 people 
 named "John Doe", it will be impossible to insert them. The duplicate detection is also flawed as "John Doe" and
-"john doe" are seen as different people
+"john doe" are seen as different people.
 
 9. We will cater to different types of contract in the future. For example, contracts with no contract end date.
 
 10. We will improve find command to search for users based on similarity score like Google's search engine. For example,
  "find n/John Doe" will return all the names with "John Doe" first before returning the names with "John" and the names 
-with "Doe"
+with "Doe".
