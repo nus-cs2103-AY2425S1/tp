@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kaixuan477.png" width="200px">
 
 [[github](https://github.com/kaixuan477)]
-[[portfolio](team/kaixuan.md)]
+[[portfolio](team/kaixuan477)]
 
 * Role: Developer
 * Responsibilities: Code Quality
