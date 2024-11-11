@@ -115,9 +115,19 @@ For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows
 Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6. 
 
 #### _Mac Users_
-5. Use mac search and type Terminal, click on open. 
+5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
+
+    <img src="images/MacTerminal.png" alt="macsterminal" width="700"/>
+   
     You will see a window like this.
-6. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
+
+    ![openmacterminal](images/OpenMacTerminal.png)
+
+6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
+   ![macfilepathinfo](images/Macfilepathinfo.png)
+
+    On the new open that pops up, left click on `Where` and copy the file path.
+   <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
 
 #### _Windows Users_
 5. Use windows search and type Terminal, click on open. 
@@ -134,6 +144,7 @@ You will see a window like this.
    - Windows Terminal:
       ![windowscd](images/Windowscd.png)
    - Mac Terminal:
+      ![maccd](images/Maccd.png)
    <br>
 
 #### _Using the HireMe application_
@@ -213,7 +224,7 @@ Examples:
 </div>
 
 <box type="info" seamless>
-**Note:**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
+<strong>Note:</strong>  HireMe considers an entry to be a duplicate of all of its fields match <strong>(case-insensitive)</strong>  an existing internship application entry. An attempt to add duplicates will result in an error.
 </box>
 
 
@@ -301,16 +312,16 @@ Use these commands to update the status of a specified internship application to
 5. `/list` followed by `/accept 4` when there are only 3 internship applications returns an error message.
 
 ---
-
-<box type="info" seamless>
-**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
-</box>
-
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
   <img src="images/accept-status-before.png" width="350" alt="Accept-Status-Before" style="margin-right: 20px;">
   <img src="images/accept-status-after.png" width="350" alt="Accept-Status-After">
 </div>
+
+<box type="info" seamless>
+<strong>Note:</strong><br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+</box>
+
 
 <br></br>
 
