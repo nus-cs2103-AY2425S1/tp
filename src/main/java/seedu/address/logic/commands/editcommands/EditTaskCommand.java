@@ -2,6 +2,7 @@ package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.ListMarkers.LIST_GROUP_TASK_MARKER;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
@@ -78,6 +79,9 @@ public class EditTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Group group = model.getGroupByName(groupName);
+        if (group == null) {
+            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
+        }
         List<Task> lastShownList = group.getTasks().stream().toList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
