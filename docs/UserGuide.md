@@ -116,8 +116,8 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 <br></br>
 ### Part 2: Using the HireMe application
-For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows Users](#_windows-users_) section that matches your computer system.
-Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6.
+For steps 5 and 6, refer to **either** [Mac Users](#mac-users) **or** [Windows Users](#windows-users) section that matches your computer system.
+Continue to [Using the terminal](#using-the-terminal) after completing steps 5 and 6.
 <br></br>
 #### _Mac Users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
@@ -306,17 +306,16 @@ Examples:
 
 <br></br>
 
-### Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`
+### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
 
-Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
+Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED.
 
-**Commands:**
-- `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
-- `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
-- `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
+Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 
-**Details:**
-- The `INDEX` refers to the position of the application in the current displayed list. The index is relative to the list shown on the screen after filtering or listing commands.
+* `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
+* `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
+* `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
+* The `INDEX` refers to the position of the application in the current displayed list. The index is relative to the list shown on the screen after filtering or listing commands.
 - `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
 - `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than 5 applications in the displayed list).
 
@@ -331,7 +330,7 @@ Use these commands to update the status of a specified internship application to
 
 
 <box type="info" seamless>
-**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
 </box>
 
 <p>These are the before and after images of the first example</p>
@@ -339,10 +338,6 @@ Use these commands to update the status of a specified internship application to
   <img src="images/accept-status-before.png" width="360" alt="Accept-Status-Before" style="margin-right: 20px;">
   <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
-
-<box type="info" seamless>
-<strong>Note:</strong><br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
-</box>
 
 
 <br></br>
