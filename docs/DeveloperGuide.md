@@ -1165,7 +1165,7 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** Success message is generated and the valid appointment is added to the patient with NRIC T0123456A.
 
 2. Booking an appointment with an invalid NRIC.
-    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `bookappt T01234567A dt|2024-12-29 13:00 h|Consult`
     * **Expected:** Error message is generated to show invalid NRIC format.
 
@@ -1192,16 +1192,16 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** Success message is generated and the valid appointment is deleted for the patient with NRIC T0123456A.
 
 2. Deleting an appointment with an invalid NRIC.
-    * **Prerequisite:** The appointment to be deleted must be an existing appointment of the patient. 
+    * **Prerequisite:** The appointment to be deleted must be an existing appointment of the patient.
     * **Test case:** `deleteappt T01234567A dt|2024-12-29 13:00 h|Consult`
     * **Expected:** Error message is generated to show invalid NRIC format.
 
 3. Deleting an appointment with an invalid date and time.
-    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `deleteappt T0123456A dt|2024-12-32 13:00`
     * **Expected:** Error message is generated to show invalid date and time format.
 
 4. Deleting an appointment with an invalid prefix.
-    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
     * **Expected:** Error message is generated to show invalid prefix entered.
