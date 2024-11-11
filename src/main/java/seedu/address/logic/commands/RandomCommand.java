@@ -21,7 +21,7 @@ public class RandomCommand extends Command {
             + "Any parameters specified are ignored."
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Success. Displaying randomly selected student.";
+    public static final String MESSAGE_SUCCESS = "Success. Displaying randomly selected student.\n%s";
     public static final String MESSAGE_RANDOM_INSUFFICIENT_STUDENTS = "The current list is too small for a student to"
             + " be randomly selected."
             + "\n"
@@ -31,7 +31,7 @@ public class RandomCommand extends Command {
     private String message;
 
     /**
-     * Creates a RandomCommand .
+     * Creates a RandomCommand.
      */
     public RandomCommand() {
         this.random = new Random();
@@ -61,9 +61,11 @@ public class RandomCommand extends Command {
         int randomIndex = random.nextInt(sizeOfCurrentList);
         Person randomPerson = model.getFilteredPersonList().get(randomIndex);
 
+        assert randomPerson != null;
+
         model.updateFilteredPersonList((person) -> person.equals(randomPerson));
 
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + message);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }
 
     @Override

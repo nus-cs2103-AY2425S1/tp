@@ -60,9 +60,11 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+
         return new Name(trimmedName);
     }
 
@@ -75,16 +77,13 @@ public class ParserUtil {
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedStudentId = studentId.trim();
+
         if (!StudentId.isValidStudentId(trimmedStudentId)) {
-            String errorMsg = StudentId.MESSAGE_CONSTRAINTS;
+            handleAdditionalPrefix(trimmedStudentId, StudentId.MESSAGE_CONSTRAINTS);
 
-            if (trimmedStudentId.contains("/")) {
-                errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
-            }
-
-            throw new ParseException(errorMsg);
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
+
         return new StudentId(trimmedStudentId);
     }
 
@@ -130,14 +129,9 @@ public class ParserUtil {
         String trimmedNetId = netId.trim();
 
         if (!Email.isValidNetId(trimmedNetId)) {
-            String errorMsg = Email.MESSAGE_CONSTRAINTS;
+            handleAdditionalPrefix(trimmedNetId, Email.MESSAGE_CONSTRAINTS);
 
-            if (trimmedNetId.contains("/")) {
-                errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
-            }
-
-            throw new ParseException(errorMsg);
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
 
         return Email.makeEmail(trimmedNetId + Email.DOMAIN);
@@ -167,26 +161,14 @@ public class ParserUtil {
      */
     public static Year parseYear(String year) throws ParseException {
         requireNonNull(year);
-        String trimmedYear = year.trim();
+        String cleanedYear = removeLeadingZeroes(year.trim());
 
+        if (!Year.isValidYear(cleanedYear)) {
+            handleAdditionalPrefix(cleanedYear, Year.MESSAGE_CONSTRAINTS);
 
-        Pattern yearFormat = Pattern.compile("(?<leadingZeroes>0+)(?<year>[1-9]\\d*)");
-        Matcher matcher = yearFormat.matcher(trimmedYear);
-        if (matcher.matches()) {
-            trimmedYear = matcher.group("year");
+            throw new ParseException(Year.MESSAGE_CONSTRAINTS);
         }
-
-        if (!Year.isValidYear(trimmedYear)) {
-            String errorMsg = Year.MESSAGE_CONSTRAINTS;
-
-            if (trimmedYear.contains("/")) {
-                errorMsg = errorMsg + "\n"
-                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
-            }
-
-            throw new ParseException(errorMsg);
-        }
-        return Year.makeYear(trimmedYear);
+        return Year.makeYear(cleanedYear);
     }
 
     /**
@@ -230,5 +212,23 @@ public class ParserUtil {
             groupList.addGroup(parseGroup(groupName));
         }
         return groupList;
+    }
+
+    private static String removeLeadingZeroes(String trimmedYear) {
+        Pattern yearFormat = Pattern.compile("(?<leadingZeroes>0+)(?<year>[1-9]\\d*)");
+        Matcher matcher = yearFormat.matcher(trimmedYear);
+
+        if (matcher.matches()) {
+            return matcher.group("year");
+        }
+
+        return trimmedYear;
+    }
+
+    private static void handleAdditionalPrefix(String input, String errorMsg) throws ParseException {
+        if (input.contains("/")) {
+            throw new ParseException(errorMsg + "\n"
+                    + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES));
+        }
     }
 }
