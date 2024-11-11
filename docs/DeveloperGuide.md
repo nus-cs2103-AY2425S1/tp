@@ -273,7 +273,7 @@ Given below are instructions to test the app manually.
 
    2. Test cases: Initial Filter on App Startup<br>
       Expected: The list displays all transactions (both done and not done) by default when the app starts.
-      <img src="/images/initial_txn_filter_state.png">
+      ![Initial txn filter state](images/initial_txn_filter_state.png)
 
 ### Saving data
 
