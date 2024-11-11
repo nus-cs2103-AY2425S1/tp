@@ -9,6 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Icon used: [Google Font](https://fonts.google.com/)
 * GitHub Copilot was used in this project for efficiency in writing code.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -575,3 +576,16 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Data is stored automatically
+
+### Planned Enhancements
+
+Team Size: 4
+
+1. **Enhance multi-screen support**: Ensure that the GUI opens on the primary screen when switching from a secondary screen, without requiring the user to delete the `preferences.json` file.
+2. **Improve Help Window behavior**: Automatically restore the minimized Help Window when the `help` command is run, or when the `Help` menu or `F1` keyboard shortcut is used.
+3. **Implement length restrictions**: Add length restrictions for tags, names, and phone numbers to prevent UI display issues.
+4. **Allow special characters in tag names**: Modify tag name validation to accept special characters like hyphens.
+5. **Expand phone number validation**: Allow more symbols in phone numbers beyond just the "+" symbol at the beginning.
+6. **Enable filtering for empty fields**: Add functionality to filter for empty fields.
+7. **Improve edit command parameter handling**: Ensure the `edit` command processes multiple INCOME or AGE parameters correctly, rather than using only the last value.
+8. **Normalize contact name case sensitivity**: Implement case-insensitive contact name handling to prevent duplicate entries with different capitalization.
