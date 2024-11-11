@@ -8,6 +8,7 @@
 
 <!-- TOC -->
 * [HireMe Developer Guide](#hireme-developer-guide)
+  * [**Acknowledgements**](#acknowledgements)
   * [**Setting up, getting started**](#setting-up-getting-started)
   * [**Design**](#design)
     * [Architecture](#architecture)
@@ -48,6 +49,13 @@
   * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 <!-- TOC -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
+- HireMe is based on the AddressBook-Level3 project created by the SE-EDU initiative
+- It incorporates the following third-party libraries: JavaFX, Jackson, JUnit5.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -408,6 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
 | `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
+| `*`      | Organised CS Undergraduate    | filter internship applications by role                                           | I can find applications of certain role                                  |
 
 *{More to be added}*
 
@@ -982,7 +991,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/accept 1`<br>
-       Expected: The status of the 1st application (e.g., "Google") is updated to `ACCEPTED`.
+       Expected: The status of the first application (e.g., "Google") is updated to `ACCEPTED`.
    
     3. Test case: `/accept 0`<br>
        Expected: An error message should be shown which explains how to use the status command and what parameters are valid.
@@ -992,14 +1001,14 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/pending 2`<br>
-       Expected: The status of the 2nd application (e.g., "Yahoo") is updated to `PENDING`.
+       Expected: The status of the second application (e.g., "Yahoo") is updated to `PENDING`.
 
 3. Update status to `REJECTED`
 
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/reject 1`<br>
-       Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
+       Expected: The status of the first application (e.g., "Google") is updated to `REJECTED`.
 
 <br></br>
 
