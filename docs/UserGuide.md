@@ -390,8 +390,8 @@ Add your contacts to a particular wedding!
 
 Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to add the contact to.
-
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -399,7 +399,6 @@ Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully tag a person to a wedding.
-
 * If multiple tags of the same wedding are added, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -424,8 +423,8 @@ Remove your contacts from a particular wedding!
 
 Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to delete the contact from.
-
 * You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -433,7 +432,6 @@ Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully delete a person from a wedding.
-
 * If multiple tags of the same wedding are deleted, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -500,7 +498,7 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 * `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
-  e.g. `Alice` will not return `Alice & Bob`
+  e.g. `Alice` will not return `Alice & Bob`.
 
 <box type="warning" seamless>
 
@@ -613,5 +611,5 @@ There is no need to save manually.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
+3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`).
 --------------------------------------------------------------------------------------------------------------------
