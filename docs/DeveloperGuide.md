@@ -2,31 +2,56 @@
 layout: page
 title: Developer Guide
 ---
+
 # Table of Contents
+
 1. [Acknowledgements](#Acknowledgements)
+
 2. [Setting up, getting started](#Setting_up,_getting_started)
+
 3. [Design](#Design)
-  3.1. [Architecture](#Architecture)
-  3.2. [UI component](#UI-component)
-  3.3. [Logic component](#Logic-component)
-  3.4. [Model component](#Model-component)
-  3.5. [Storage component](#Storage-component)
-  3.6. [Common classes](#Common-classes)
+
+   3.1. [Architecture](#Architecture)
+
+   3.2. [UI component](#UI-component)
+
+   3.3. [Logic component](#Logic-component)
+
+   3.4. [Model component](#Model-component)
+
+   3.5. [Storage component](#Storage-component)
+
+   3.6. [Common classes](#Common-classes)
+
 4. [Implementation](#Implementation)
-  4.1. [Undo/redo feature](#Undo/redo-feature)
-    4.1.1. [Implementation](#Implementation)
+
+   4.1. [Undo/redo feature](#Undo/redo-feature)
+
+   &nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#Implementation)
+
 5. [Documentation, logging, testing, configuration, dev-ops](#Documentation,-logging,-testing,-configuration,-dev-ops)
+
 6. [Appendix: Requirements](#Appendix:-Requirements)
-  6.1. [Product scope](#Product-scope)
-  6.2. [User stories](#User-stories)
-  6.3. [Use cases](#Use-cases)
-  6.4. [Non-Functional Requirements](#Non-Functional-Requirements)
-  6.5. [Product scope](#Product-scope)
-  6.6. [Glossary](#Glossary)
+
+   6.1. [Product scope](#Product-scope)
+
+   6.2. [User stories](#User-stories)
+
+   6.3. [Use cases](#Use-cases)
+
+   6.4. [Non-Functional Requirements](#Non-Functional-Requirements)
+
+   6.5. [Product scope](#Product-scope)
+
+   6.6. [Glossary](#Glossary)
+
 7. [Appendix: Instructions for manual testing](#Appendix:-Instructions-for-manual-testing)
-  7.1. [Launch and shutdown](#Launch-and-shutdown)
-  7.2. [Deleting a person](#Deleting-a-person)
-  7.3. [Saving data](#Saving-data)
+
+   7.1. [Launch and shutdown](#Launch-and-shutdown)
+
+   7.2. [Deleting a person](#Deleting-a-person)
+
+   7.3. [Saving data](#Saving-data)
 
 ---
 
@@ -260,7 +285,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
@@ -293,7 +317,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -567,9 +591,9 @@ _Similar to UC10 except without extension 2b._
 
 - 3a. There is no version to revert to.
 
-    - 3a1. System shows an error message.
+  - 3a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC13 - Redo a command**
 
@@ -585,9 +609,9 @@ _Similar to UC10 except without extension 2b._
 
 - 2a. There is no version to revert to.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC14 - Export contact list**
 
@@ -625,17 +649,17 @@ _Similar to UC10 except without extension 2b._
 
 - 1a. System detects that the file does not exist.
 
-    - 1a1. System shows an error message
+  - 1a1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
 - 1b. System detects that the file is not supported by the program
 
-    - 1b1. System shows an error message
+  - 1b1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC16 - Toggle application's theme** 
+**Use case: UC16 - Toggle application's theme**
 
 **MSS**
 
@@ -652,23 +676,22 @@ _Similar to UC10 except without extension 2b._
 2. System processes the command and confirms its success.
 3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 - 2a. Command fails.
 
-    - 2a1. System displays an error message indicating the failure reason.
+  - 2a1. System displays an error message indicating the failure reason.
 
-      Use case resumes from step 1.
-  
+    Use case resumes from step 1.
+
 - 3a. Multiple previous commands available.
 
-    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
-    - 3a2. System displays each previous command in sequence.
+  - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+  - 3a2. System displays each previous command in sequence.
 
-      Use case ends.
-
+    Use case ends.
 
 **Use case: UC18 - Edit a person's information**
 
@@ -684,16 +707,15 @@ _Similar to UC10 except without extension 2b._
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 - 2b. The details entered are invalid or are in the wrong format.
 
-    - 2b1. System shows an error message.
+  - 2b1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 ### Non-Functional Requirements
 
