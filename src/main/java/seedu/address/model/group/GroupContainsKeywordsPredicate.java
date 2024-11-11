@@ -84,6 +84,7 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
      * @return boolean indicating if any group name starts with any of the keywords.
      */
     public boolean hasPrefixMatch(List<String> keywords, GroupList groups) {
+        // AI was used here to check the proper syntax for "startsWith"
         return keywords.stream().anyMatch(keyword -> groups.getUnmodifiableGroups().stream()
                 .anyMatch(group -> group.getGroupName().toLowerCase().startsWith(keyword.toLowerCase())));
     }
