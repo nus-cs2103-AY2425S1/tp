@@ -264,7 +264,7 @@ A wedding planner who:
 * Intuitive organisation and customisation
 * Stress-free and efficient planning process
 * One-stop companion for wedding planners
-* Simplifies time-intensive and tedious tasks of managing guest lists, schedules, and vendor contacts
+* Simplifies time-intensive and tedious tasks of managing guest lists and vendor contacts
 * Enhances efficiency by reducing time spent navigating complex GUIs
 
 
