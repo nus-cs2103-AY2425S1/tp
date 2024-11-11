@@ -83,11 +83,15 @@ Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Phone numbers can contain only numbers and should be exactly 8 digits long. 
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
-A person can have any number of tags (including 0)
+   
+* A person can have any number of tags (including 0)
+* Cher considers people with the identical phone numbers as duplicates. You will not be able to add two entries with the same phone number.
+
 </div>
 
 Examples:
-* `add n/John Doe s/m r/student p/98765431 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/John Doe s/m r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
    ![results for 'add'](images/addExample.png)
 * `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Street p/12345678`
 
@@ -162,23 +166,27 @@ Examples:
    ![results for 'find'](images/findExample.png)
 
 
-### Sorting persons by name: `sort`
+### Sorting persons: `sort`
 
-Sorts list of persons alphabetically by specified predicate.
+Sorts list of persons in a case-insensitive order based on ASCII values, 
+meaning letters and numbers are organized as if in alphabetical and numerical order, 
+with no distinction between uppercase and lowercase letters.
 
-Format: `sort PREDICATE`
+Format: `sort [name] [role] [phone] [email] [address]`
 
-* Sorts the list alphabetically by given predicate.
-* The predicate refers to attributes used to sort the list by.
-* The predicate **must be a valid attribute** name, role, phone, email and address only
+* Exactly one of the optional fields is required
+* The field refers to attributes used to sort the list by.
+* The field **must be a valid attribute** name, role, phone, email or address.
+* The field is case-insensitive. <br>
+e.g. Both `sort name` and `sort NAME` will be accepted.
 
 Examples:
-* `sort name` sorts the list alphabetically by name.
-   ![result for 'sort name'](images/sortNameExample.png)
-* `sort role` sorts the list alphabetically by role.
-* `sort phone` sorts the list alphabetically by phone.
-* `sort email` sorts the list alphabetically by email.
-* `sort address` sorts the list alphabetically by address.
+* `sort phone` returns list sorted by phone number.
+* `sort name` returns list sorted by name.
+  ![result for 'sort name'](images/sortMessage.png)
+
+:exclamation: **Caution:** using `list`, `edit`, `mark`, `unmark`, `batch-mark`, `batch-unmark`, `reset-att`, 
+or `add` command after the `sort` command will revert the list to its original, unsorted order.
 
 ### Deleting a person : `delete`
 
@@ -250,64 +258,6 @@ Examples:
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
 * `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
 
-### Mark attendance for a single student: `mark`
-
-Marks the attendance of a specified student.
-
-Format: `mark INDEX`
-
-* Marks the attendance for the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
-  ![results for 'mark'](images/mark-attendanceExample.png)
-
-### Unmark attendance for a single student: `unmark`
-
-Unmarks the attendance of a specified student.
-
-Format: `unmark INDEX`
-
-* Unmarks the attendance for the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
-  ![results for 'unmark'](images/unmark-attendanceExample.png)
-
-### Reset attendance: `reset-att`
-
-Resets the attendance count of all students in displayed list to 0.
-
-Format: `reset-att`
-
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
-To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
-</div>
-
-![results for 'reset-att'](images/reset-attendanceExample.png)
-
-### Mark attendance for a group of students: `batch-mark`
-
-Marks attendance for all students in the displayed list.
-
-Format: `batch-mark`
-
-Example:
-* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries 1, 2 and 3
-
-### Unmark attendance for a group of students: `batch-unmark`
-
-Unmarks attendance for all students in the displayed list.
-
-Format: `batch-unmark`'
-
-Example:
-* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
-
 ### Selecting persons by index: `select`
 The `select` command allows users to select one or more persons from the displayed list of persons in the address book. Once a person is selected, the application highlights the selected person(s) in the UI and displays their names in the feedback box.
 
@@ -327,16 +277,95 @@ Where INDEX refers to the position of the person in the currently displayed list
 - If multiple persons are selected, the application will filter to show only those selected contacts, and their names will be highlighted in the UI.
 - You can specify multiple indexes separated by spaces to select more than one person at a time.
 
-<div markdown="span" class="alert alert-primary">:bulb: Tip: To increase efficiency when performing actions on multiple persons,
-consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
-For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3.
-- `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If you enter duplicate indexes in the `select` command, only the unique persons corresponding to those indexes will be selected. For example, entering `select 1 2 2 2` will only select the persons at indexes `1` and `2`, and the feedback box will display:
 "Selected Person(s): [Name of person at index 1], [Name of person at index 2]"
 e.g., "Selected Person(s): John Doe, Alice Tan".
 </div>
+
+
+### Mark attendance for a single student: `mark`
+
+Marks the attendance of a specified student.
+
+Format: `mark INDEX`
+
+* Marks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* You cannot mark attendance for a parent. 
+
+Example:
+* `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
+  ![results for 'mark'](images/mark-attendanceExample.png)
+
+### Unmark attendance for a single student: `unmark`
+
+Unmarks the attendance of a specified student.
+
+Format: `unmark INDEX`
+
+* Unmarks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* You cannot unmark attendance for a parent.
+* If the student's attendance count is initially at 0, it will remain at 0 after an unmark. You will receive a corresponding error message. 
+
+Example:
+* `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
+  ![results for 'unmark'](images/unmark-attendanceExample.png)
+
+### Reset attendance: `reset-att`
+
+Resets the attendance count of all students in the displayed list to 0.
+
+Format: `reset-att`
+
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
+</div>
+
+![results for 'reset-att'](images/reset-attendanceExample.png)
+
+### Mark attendance for a group of students: `batch-mark`
+
+Marks attendance for all students in the displayed list.
+
+Format: `batch-mark`
+
+* Having parents in the list will not affect the batch marking of student attendance. Parents are ignored. 
+* If the list has only parents and no students, you will receive an error message.
+* You will return to the list of all contacts after executing the command. 
+
+Example:
+* Enter `select 1 2 3` and then `batch-mark` marks the attendance of students at index 1, 2 and 3. Parents are ignored. 
+* Enter `find t/tue 4-6` and then `batch-mark` marks the attendance of all students with the tag `tue 4-6`.
+
+
+### Unmark attendance for a group of students: `batch-unmark`
+
+Unmarks attendance for all students in the displayed list.
+
+Format: `batch-unmark`'
+
+* Having parents in the list will not affect the batch unmarking of student attendance. Parents are ignored.
+* If there are students whose attendance is already at 0 in the list, their attendance will remain at 0.
+* If the list has only parents and no students, you will receive an error message.
+* You will return to the list of all contacts after executing the command. 
+
+Example:
+* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of students at index 1, 2 and 3. Parents are ignored.
+* Enter `list` and then `batch-unmark` unmarks the attendance of all students in Cher.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use a mix of `find`, `select` and attendance commands to take attendance efficiently. 
+ * `find t/tue 4-6` then `batch-mark` will mark attendance for all students with the tag `tue 4-6`. 
+ * `select` absentees by index and `batch-unmark` to unmark attendance of any absentees
+</div>
+
+Example:
+* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
+
 
 ### Editing tag in a batch: `batch-edit`
 Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
@@ -398,13 +427,16 @@ Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME r/ROLE s/SEX p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student s/M p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
+**Add** | `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `delete 3`
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given <br> e.g., `sort name`
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`

@@ -173,16 +173,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 * secondary school teachers, often working independently, managing their classes and responsibilities on their own.
 * secondary school teachers who manage multiple classes of different levels
-* have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
-* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
-* have a need to edit data regarding students and parents/guardians in case of updates
+* have a need to track and organise details of students and parents (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students and parents for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
+* have a need to edit data regarding students and parents in case of updates
 
 **Target user profile 2**: Secondary School Tuition Teachers working under administrations
 
 * secondary school tuition teachers who work alongside or under the supervision of education administrators or managers.
 * secondary school tuition teachers who manage multiple classes across various subjects
 * have a need to track and organise details of students (e.g. phone numbers, emails, addresses)
-* Parent/Guardian contacts are overseen by institution admin staff
+* Parent contacts are overseen by institution admin staff
 * have a need to efficiently access information regarding students for communication during various situations (e.g. emergencies, administrative tasks, class schedules)
 * have a need to edit data regarding students in case of updates
 
@@ -300,10 +300,18 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 #### Use case: UC6 - Sort
 **MSS**
-1. User enters sort contact command with the predicate name.
+1. User enters sort contact command with the field name.
 2. Cher shows list of contacts sorted alphabetically by name.
 3. Cher shows success message that list has been sorted by name.<br>
-Use case ends
+   Use case ends.
+
+**Extensions**
+* 1a. User leaves the sort field empty.
+    - 1a1. Cher detects error in user input and shows correct input format. <br>
+      Use case ends.
+* 2a. User enters invalid field.
+    - 2a1. Cher detects error in user input and shows correct input format. <br>
+      Use case ends.
 
 #### Use case: UC7 - Batch edit
 **MSS**
@@ -373,72 +381,77 @@ Use case ends
 **MSS**
 1. User enters mark command with the index of a specific contact.
 2. Cher increases the attendance count of the specified contact by 1.
-3. Cher shows success message that the attendance of the specified contact have been marked.
-4. Cher shows the list of all contacts. <br>
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows success message that the attendance of the specified contact have been marked.
+5. Cher shows the list of all contacts.<br>
    Use case ends. 
 
 **Extensions**
-* 1a. Cher detects an error in the input.
-   - 1a1. Cher shows the correct input format. <br>
+* 2a. Cher detects an error in the input.
+   - 2a1. Cher shows the correct input format. <br>
      Use case ends.
-* 1b. Cher detects that the specified contact is not a student.
-   - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
+* 2b. Cher detects that the specified contact is not a student.
+   - 2b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
      Use case ends.
 
 #### Use case: UG11 - Unmark attendance
 **MSS**
 1. User enters unmark command with the index of a specific contact.
 2. Cher decreases the attendance count of the specified contact by 1.
-3. Cher shows success message that the attendance of the specified contact have been unmarked.
-4. Cher shows the list of all contacts. <br>
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows success message that the attendance of the specified contact have been unmarked.
+5. Cher shows the list of all contacts. <br>
    User case ends.
 
 **Extensions**
-* 1a. Cher detects an error in the input.
-  - 1a1. Cher shows the correct inout format. <br>
-  Use case ends. 
-* 1b. Cher detects that the specified contact is not a student.
-  - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
-  Use case ends. 
-* 1c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 1c1. Cher shows error message that the attebdabce count is already at 0. <br>
-  Use case ends.
+* 2a. Cher detects an error in the input.
+  - 2a1. Cher shows the correct inout format. <br>
+    Use case ends. 
+* 2b. Cher detects that the specified contact is not a student.
+  - 2b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
+    Use case ends. 
+* 2c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 2c1. Cher shows error message that the attebdance count is already at 0. <br>
+    Use case ends.
 
 #### Use case: UG12 - Reset attendance 
 **MSS**
 1. User enters the reset attendance command.
 2. Cher resets the attendance count of all students in list to 0.
-3. Cher shows the success message with the names of students whose attendance have been reset.
-4. Cher shows the list of all contacts. <br>
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the success message with the names of students whose attendance have been reset.
+5. Cher shows the list of all contacts. <br>
    Use case ends.
 
 **Extensions**
-* 1a. Cher detects that there is no student in the list.
-  - 1a1. Cher shows error message that there is no student in the list. <br>
+* 2a. Cher detects that there is no student in the list.
+  - 2a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG13 - Mark group attendance
 **MSS**
 1. User enters the batch-mark command.
 2. Cher increases the attendance count of all students in the list by 1.
-3. Cher shows the success message with the names of all students whose attendance have been marked.
-4. Cher shows the list of all contacts. <br>
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the success message with the names of all students whose attendance have been marked.
+5. Cher shows the list of all contacts. <br>
    Use case ends.
 
 **Extensions**
-* 1a. Cher detects that there is no student in the list.
-  - 1a1. Cher shows error message that there is no student in the list. <br>
+* 2a. Cher detects that there is no student in the list.
+  - 2a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG14 - Unmark group attendance
 **MSS**
 1. User enters the batch-unmark command.
 2. Cher ignores students whose attendance count is already 0 and decreases the attendance count of other students by 1.
-3. Cher shows the sucess message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the sucess message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
    Use case ends.
 
 **Extensions**
-* 1a. Cher detects that there is no student in the list.
+* 2a. Cher detects that there is no student in the list.
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
 
@@ -509,64 +522,141 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Sorting persons
+
+1. Prerequisites: <br>
+Execute the following:
+   - add n/Charlie s/m r/student p/56789312 a/Bukit batok e/nus@dfsh.dsfvc  t/tag1 
+   - add n/anna s/f r/parent p/23456121 a/Jurong e/sutd@dfsh.dsfvc  t/tag1 
+   - add n/Benet s/m r/student p/34682621 a/Pungol e/rjc@dfsh.dsfvc  t/tag1 t/tag2 
+   - List all persons using the `list` command.
+2. Sorting list by name
+   1. Test case: `sort name` <br>
+      Expected: Feedback box will show message: `Sorted by name` <br>
+      Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in 
+      the name, in the following order: anna, Benet, Charlie
+3. Sorting list by role
+   1. Prerequisites: <br>
+      List all persons using the `list` command.
+   2. Test case: `sort role` <br>
+      Expected: Feedback box will show message: `Sorted by role` <br>
+      Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
+      the role, (parents followed by students) in the following order: anna, Charlie, Benet
+4. Sorting list by phone
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort phone` <br>
+       Expected: Feedback box will show message: `Sorted by phone` <br>
+       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
+       the phone, in the following order: anna, Benet, Charlie
+5. Sorting list by email
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort email` <br>
+       Expected: Feedback box will show message: `Sorted by email` <br>
+       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
+       the email, in the following order: Charlie, Benet, anna 
+6. Sorting list by address
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort address` <br>
+       Expected: Feedback box will show message: `Sorted by address` <br>
+       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
+       the address, in the following order: Charlie, anna, Benet
+7. Sorting list by invalid field
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort k` <br>
+       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. <br>
+       Parameters: [name] [role] [phone] [email] [address] Example: sort name` <br>
+       Contact entries will remain unsorted.
+
 ### Marking attendance for a person 
 
 1. Marking the attendance of a selected student while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student at index 1 and a person with the role Parent at index 2. 
-  
+   1. Prerequisites:
+      Execute the following in a blank Cher:
+         - `add n/Alex Yeoh s/m r/student p/12345678 a/Alex Street e/alexy@example.com`
+         - `add n/Bernuce Yu s/f r/parent p/98765432 a/Bernice Street e/bernice@example.com`
+         - List all persons with the `list` command  
    1. Test case: `mark 1`<br>
-      Expected: The attendance field of the first contact is incremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+      Expected: The attendance field of Alex Yeoh is incremented by 1. Name of the contact, Alex Yeoh, is shown in the status message. The list of all contacts is shown in the contact list. 
 
    1. Test case: `mark 0`<br>
       Expected: Error details shown in the status message.
 
    1. Test case: `mark 2`<br>
-      Expected: Similar to previous.
+      Expected: Error details shown in the status message.
 
 ### Unmarking attendance for a person
 
 1. Unmarking the attendance of a selected student while all persons are shown
 
-   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student and attendance count of 1 at index 1, a person with the role Student      and  attendance count of 0 at index 2, and a person with the role Parent at index 3. 
+   1. Prerequisites:
+      Execute the following in a blank Cher:
+         - `add n/Alex Yeoh s/m r/student p/12345678 a/Alex Street e/alexy@example.com`
+         - `add n/Bernice Yu s/f r/student p/98765432 a/Bernice Street e/bernice@example.com`
+         - `add n/Charlotte Oliveiro s/f r/parent p/99998888 a/ Charlotte Street e/charlotte@example.com`
+         - `mark 1`
+         - List all persons with the `list` command
 
    1. Test case: `unmark 1`<br>
-   Expected: The attendance field of the first contact is decremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+   Expected: The attendance field of Alex Yeoh is decremented by 1. Name of the contact, Alex Yeoh, is shown in the status message. The list of all contacts is shown. 
 
    1. Test case: `unmark 2` <br>
-   Expected: Attendance field of the person remains at 0. Error details shown in the satus message.
+   Expected: Attendance field of Bernice Yu remains at 0. Error details shown in the satus message.
 
-   1. Test case: `unmark 2`<br>
+   1. Test case: `unmark 3`<br>
+   Expected: Error details shown in the status message.
+
+   1. Test case: `unmark 0` <br>
    Expected: Error details shown in the status message. 
 
 ### Resetting attendance
 
 1. Resetting the attendance count of all students in list while all persons are shown
 
-   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+   1. Prerequisites: 
+      Execute the following in a blank Cher:
+         - `add n/Alex Yeoh s/m r/student p/12345678 a/Alex Street e/alexy@example.com`
+         - `add n/Bernice Yu s/f r/student p/98765432 a/Bernice Street e/bernice@example.com`
+         - `add n/Charlotte Oliveiro s/f r/parent p/99998888 a/ Charlotte Street e/charlotte@example.com`
+         - `mark 1`
+         - `mark 2`
+         - List all persons with the `list` command
   
    1. Test case: `reset-att` <br>
-      Expected: The attendance field of all students in the list resets to 0. Name(s) of student(s) whose attendance is reset is shown in the status message. The list of all contacts is shown.
+      Expected: The attendance field of Alex Yeoh and Bernice Yu resets to 0. Names of Alex Yeoh and Bernice Yu are shown in the status message. The list of all contacts is shown.
 
 ### Marking attendance for a group of persons
 
 1. Marking the attendance of all students in list while all persons are shown
 
-   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+   1. Prerequisites:
+      Execute the following in a blank Cher:
+      - `add n/Alex Yeoh s/m r/student p/12345678 a/Alex Street e/alexy@example.com`
+      - `add n/Bernice Yu s/f r/student p/98765432 a/Bernice Street e/bernice@example.com`
+      - `add n/Charlotte Oliveiro s/f r/parent p/99998888 a/ Charlotte Street e/charlotte@example.com`
+      - List all persons with the `list` command
 
    1. Test case: `batch-mark`<br>
-      Expected: The attendance count of all students in the list increases by 1. Names of students whose attendance is marked are shown in the status message. The list of all contacts is shown. 
+      Expected: The attendance count of Alex Yeoh and Bernice Yu in the list increases by 1. Names Alex Yeoh and Bernice Yu are shown in the status message. The list of all contacts is shown. 
 
 ### Unmarking attendance for a group of persons
 
 1. Unmarking the attendance of all students in list while all persons are shown
 
-   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student and attendance count of more than 0 and 1 person with the role Student and the attendance count of 0.
-
+   1. Prerequisites:
+      Execute the following in a blank Cher:
+      - `add n/Alex Yeoh s/m r/student p/12345678 a/Alex Street e/alexy@example.com`
+      - `add n/Bernice Yu s/f r/student p/98765432 a/Bernice Street e/bernice@example.com`
+      - `add n/Charlotte Oliveiro s/f r/parent p/99998888 a/ Charlotte Street e/charlotte@example.com`
+      - `mark 1`
+      - List all persons with the `list` command
+     
    1. Test case: `batch-unmark`<br>
-      Expected: The attendance count of all students whose attendance count was originally at 0 remain at 0. The attendance count of all other students in the list decreases by 1. Names of all students whose attendance is unmarked (including those whose attendance count remained at 0) are shown. The list of all contacts is shown.
-
-   
+      Expected: The attendance count of Alex Yeoh decrements to 0, attendance count of Bernice remains at 0. Names of Alex Yeoh and Bernice Yu are shown in the status message. The list of all contacts is shown.
 
 
 ### Batch deleting a group of people
