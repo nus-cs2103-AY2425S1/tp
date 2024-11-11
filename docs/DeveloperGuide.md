@@ -32,6 +32,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Architecture
 
 ![](images/ArchitectureDiagram.png){:width="280"}
@@ -124,6 +127,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -143,6 +149,9 @@ The `Model` component,
 ![](images/BetterModelClassDiagram.png){:width="740"}
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -199,6 +208,8 @@ When executed, this command parses user input and creates an internal representa
 >
 > Immutability in `Person` objects prevents data conflicts by ensuring the `AddressBook` only stores updated versions, eliminating orphaned data. Each update cycle refreshes the relevant list views, automatically redrawing the necessary UI elements in the correct order.
 
+<div style="page-break-after: always;"></div>
+
 #### Sequence Diagram
 
 When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmentName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
@@ -209,6 +220,8 @@ When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` g
 :information_source: **Note:** The lifeline for `AddApptCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
