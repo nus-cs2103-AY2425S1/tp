@@ -95,10 +95,10 @@ Format: `help`
 
 You can add a student to StoreClass using this command.
 
-Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
+Format: `add n/NAME p/PHONE g/GENDER m/MODULE... [t/TAG]…​`
 
 * `n/NAME` : The full name of the student to be added.
-* `p/PHONE_NUMBER` : The phone number of the student to be added.
+* `p/PHONE` : The phone number of the student to be added.
 * `g/GENDER` : The gender of the student to be added.
 * `m/MODULE` : The module that the student is taking.
 * `t/TAG` : The tag of the student.
@@ -116,7 +116,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 - Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
-<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
 - Students with same name, regardless of case-sensitivity, will be considered as the same student and will not be added.
 - Modules and tags are case-sensitive and will be added as they are.
 </div>
@@ -158,7 +158,7 @@ Examples:
 
 You can find students whose names or tags contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]…`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -179,7 +179,7 @@ Examples:
 
 You can filter students who meet all specified conditions.
 
-Format: `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`
+Format: `filter [n/NAME] [p/PHONE] [g/GENDER] [t/TAG]… [m/MODULE]…`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter.
@@ -312,7 +312,7 @@ Executing a command that modifies the address book (like `add`, `edit`, or `dele
 
 You can assign a grade to a module that a student is taking.
 
-**Format:** `grade INDEX [m/MODULE s/GRADE]`
+**Format:** `grade INDEX m/MODULE s/GRADE`
 
 - Assigns a numerical grade (between 0 and 100) to the module identified by the `INDEX` number shown in the displayed person list.
 - `INDEX`: The index number of the student in the displayed person list (must be a positive integer).
@@ -492,18 +492,18 @@ Furthermore, certain edits can cause the StoreClass to behave in unexpected ways
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
+**Add** | `add n/NAME p/PHONE g/GENDER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`
-**Filter** | `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`<br> e.g., `filter n/James`
-**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/History s/85`
+**Filter** | `filter [n/NAME] [p/PHONE] [g/GENDER] [t/TAG]… [m/MODULE]…`<br> e.g., `filter n/James`
+**Grade** | `grade INDEX m/MODULE s/GRADE`<br> e.g., `grade 1 m/History s/85`
 **Undo** | `undo`
 **Redo** | `redo`
 **List** | `list`
 **Help** | `help`
-**Archive** | `archive pa/PATH`
-**Load** | `load pa/PATH`
+**Archive** | `archive pa/FILENAME`
+**Load** | `load pa/FILENAME`
 
 
