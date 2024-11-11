@@ -82,6 +82,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     private static Year parseOptionalYear(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
         Year year = Year.makeYear("");
 
         if (isPrefixPresent(argumentMultimap, PREFIX_YEAR)) {
@@ -92,6 +94,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     private static Major parseOptionalMajor(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
         Major major = Major.makeMajor("");
 
         if (isPrefixPresent(argumentMultimap, PREFIX_MAJOR)) {
@@ -102,6 +106,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     private static Email parseOptionalNetId(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
         Email email = Email.makeEmail("");
 
         if (isPrefixPresent(argumentMultimap, PREFIX_NETID)) {

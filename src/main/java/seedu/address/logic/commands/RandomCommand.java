@@ -45,6 +45,9 @@ public class RandomCommand extends Command {
      */
     public RandomCommand(String message) {
         this();
+
+        assert message != null;
+
         this.message = message;
     }
 

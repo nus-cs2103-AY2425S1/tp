@@ -68,6 +68,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private EditPersonDescriptor createEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

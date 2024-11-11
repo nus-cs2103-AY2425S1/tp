@@ -25,7 +25,9 @@ public class PersonCount extends UiPart<Region> {
      */
     public PersonCount(ObservableList<Person> filteredPersonList, ReadOnlyAddressBook addressBook) {
         super(FXML);
-        
+
+        assert addressBook != null;
+
         this.addressBook = addressBook;
 
         personCountDisplay.setText(String.format(DISPLAY_FORMAT, filteredPersonList.size(),
