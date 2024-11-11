@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
             "length should not exceed the limit of 30 characters";
     public static final String MESSAGE_CONSTRAINTS_ALPHANUMERIC =
-            "name(s) should be alphanumeric, \nand multiple spaces are not allowed between letters or words.";
+            "name(s) should be alphanumeric, \nand multiple spaces are not allowed between letters and/or words.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
