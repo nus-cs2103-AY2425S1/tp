@@ -1003,6 +1003,8 @@ The buyer index specified is not a buyer:
 Successfully edited listing: RC445.
 Address: test
 > 
+> ---
+> 
 > **Use Case #2**: Editing listing `RC4` region to become `central`
 > 
 > **Input**: `editlisting 1 reg/central`
@@ -1022,6 +1024,7 @@ Address: test
 > **Output**: The listing index provided is invalid!
 > 
 > ---
+> 
 > **User Error #2**: Changing name to pre-existing name (or address)
 > 
 > **Input**: `editlisting 1 n/RC5` _(assuming RC5 already exists in the system)_
@@ -1029,6 +1032,7 @@ Address: test
 > **Output**: This listing name / address already exists in the system.
 > 
 > ---
+> 
 > **User Error #3**: No prefixes provided
 > 
 > **Input**: `editlisting 1`
@@ -1036,6 +1040,7 @@ Address: test
 > **Output**: At least one field to edit must be provided.
 > 
 > ---
+> 
 > **User Error #4**: No index found / Invalid type / Negative integer
 >
 > **Input #a**: `editlisting n/aaaa`
