@@ -748,7 +748,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/John`<br>
        Expected: Following parameters are missing : p/, e/, a/, t/, m/
-       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG [m/ALLERGY]...
+       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...
        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Low Risk m/Peanuts
    
 3. Adding a duplicate patient

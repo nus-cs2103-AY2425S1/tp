@@ -92,6 +92,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
 
         Set<Allergy> allergyList = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
+        if (allergyList.contains(new Allergy("none")) && allergyList.size() > 1) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
         Date date = Date.NO_DATE; // add command does not allow adding an appointment date straight away
         Person person = new Person(name, phone, email, address, tag, allergyList, date);
         return new AddCommand(person);
