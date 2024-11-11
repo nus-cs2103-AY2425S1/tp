@@ -309,14 +309,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Search for person(s)**
 
 **MSS**
 
-1.  User searches for a person by name
-2.  CFG shows a list of persons which fit the criteria
+1.  User searches for a person by name.
+2.  CFG shows a list of persons which fit the criteria.
 
     Use case ends.
 
@@ -334,16 +334,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to delete a specific person in the list
-4.  CFG deletes the person
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to delete a specific person in the list.
+4.  CFG deletes the person.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -361,16 +361,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to add some number of volunteer hours to a specific person in the list
-4.  CFG adds the specified number of volunteer hours to the specified person's existing hours
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to add some number of volunteer hours to a specific person in the list.
+4.  CFG adds the specified number of volunteer hours to the specified person's existing hours.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
  
   Use case resumes at step 2.
 
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The specified person is not a Volunteer
+* 3b. The specified person is not a Volunteer.
 
     * 3b1. CFG shows an error message.
 
@@ -394,16 +394,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to get emails of persons on the list
-4.  CFG copies to the user's clipboard a list of all emails of persons on the list
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to get emails of persons on the list.
+4.  CFG copies to the user's clipboard a list of all emails of persons on the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -411,6 +411,208 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
+**Use case: UC05 - Create a group**
+
+**MSS**
+
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to create a group, with specified persons in the list as members.
+4. CFG successfully creates the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. A group with the same name already exists.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC06 - List groups**
+
+**MSS**
+
+1. User requests to see all existing groups.
+2. CFG shows a list of all existing groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no existing groups.
+  * 2a1. CFG shows an empty list.
+
+    Use case ends.
+
+
+**Use case: UC07 - View members of a group**
+
+**MSS**
+
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to see members of a group.
+3. CFG lists all the members of the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+  
+    Use case resumes at step 2.
+
+* 2a. The group with specified name does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+  
+* 3b. The group currently has no members.
+  * 3b1. CFG displays an empty list.
+
+    Use case ends.
+
+
+**Use case: UC08 - Add members to a group**
+
+**MSS**
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to add specified persons in the list to a group.
+4. CFG adds the persons to the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+
+**Use case: UC09 - Remove members from a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to <ins>view members of a group (UC07)</ins>.
+3. User requests to remove one or more members from a group.
+4. CFG removes the specified members from the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+    
+    Use case resumes at step 2.
+
+* 2a. User may not require viewing members in a group.
+
+    Use case resumes at step 3.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+   
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+* 3c. One or more of the specified members is not currently in the group.
+  * 3c1. CFG shows an error message.
+    
+    Use case ends.
+
+
+**Use case: UC10 - Rename a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to change the name of a group to a new name.
+3. CFG successfully renames the group.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+  Use case resumes at step 2.
+* 2a. The group referenced by the user does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+* 2b. A group with the new name already exists.
+  * 2b1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC11 - Delete a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to delete a group.
+3. CFG deletes the group.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+    Use case resumes at step 2.
+* 2a. The group does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC12 - Sort contacts**
+
+**MSS**
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to sort the list by name.
+4. CFG shows the list of persons sorted by name.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+* 2a. The list of persons is empty.
+
+    Use case ends
+* 3a. User could also request to sort by default order (insertion order), volunteer hours, donation amount, or partnership end date.
+  * 3a1. CFG would sort by the specified sort option instead.
+
+    Use case resumes at step 4.
+* 4a. User could continue to request for a different list of persons, by <ins>searching (UC01)</ins>,
+    <ins>viewing members in a group (UC07)</ins>, etc.
+  * 4a1. Sort option persists for the new list.
+
+    Use case ends.
 
 
 ### Non-Functional Requirements
