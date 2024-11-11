@@ -676,8 +676,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. NomNomNotifier shows an error message
   * Use Case Ends
 
-* 1a. Manager tags customer using pre-assigned shortcut
-  * 1a1. Abbreviation is mapped to pre-assigned tag name
+* 1b. Manager tags customer using pre-assigned shortcut
+  * 1b1. Abbreviation is mapped to pre-assigned tag name
   * Use Case resumes at step 2
 
 **Use case: Edit for a customer**
