@@ -11,6 +11,8 @@
 
 ## Introduction
 
+Hi there! :wave:
+
 If *you* are a busy Computer Science student juggling Teaching Assistant roles and
 struggling to keep track of *your* many
 students, *TAHub Contacts* is a desktop application for *you* to easily manage *your*
