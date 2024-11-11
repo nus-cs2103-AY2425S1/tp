@@ -28,7 +28,7 @@ public class UnassignTaskCommand extends Command {
             + ": Removes one or multiple tasks from the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TASK_INDEX_IN_PERSON (must be a positive integer) \n"
+            + "TASK_INDEX_IN_PERSON (must be a positive integer)... \n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
     private final Index index;
