@@ -205,9 +205,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 ## **Customer and Supplier Contact Management**
 
 | Command | Format                                                                                        | Example |
@@ -226,9 +223,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX`                                                           | `deleteCustomerOrder 2` |
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                             | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                           | `unmarkCustomerOrder 1` |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Supply Order Management**
 
@@ -257,9 +251,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS]...` | `addPastry Croissant 3.50 Flour Cream Sugar` |
 | [Remove Pastry](#remove-pastry-command) | `removePastry NAME`                                    | `removePastry Croissant` |
 | [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue`                                  | `viewPastryCatalogue` |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **General Commands**
 
@@ -427,8 +418,7 @@ addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 
 **Example:**
 ```bash
-addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
-03-04 
+addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
 ```
 **Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-2.png)
