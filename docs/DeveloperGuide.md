@@ -174,6 +174,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.sellsavvy.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
