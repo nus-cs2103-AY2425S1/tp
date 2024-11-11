@@ -273,7 +273,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## Planned Enhancements
 
-- Currently, if the application is waiting for a command to be confirmed, users are not allowed to execute any other
+### Improve user feedback during command confirmation
+Currently, if the application is waiting for a command to be confirmed, users are not allowed to execute any other
 command, and will be prompted to confirm by keying in 'y' or 'n' into the command box. However, the application will 
 still attempt to parse the user's input and display a parse error message if the input is not a valid command. This
 causes the previous command feedback to be overridden, which may lead to confusion for the user. This is not fixed in
@@ -282,6 +283,15 @@ i.e., user will still be prompted to confirm his previous command. The applicati
 any other command which is the correct behavior, it is just that the feedback provided might be confusing. Ideally, the
 message requesting for confirmation should supersede any parse error message.
 
+### Strengthen Duplicate Detection
+We aim to enhance the robustness of duplicate detection. Currently, the system checks for exact string matches, which means a name like "John Doe" is treated as distinct from "john doe" due to case sensitivity. This approach is limited because minor differences, such as capitalization, should not classify records as different. To address this, we plan to implement fuzzy string matching, allowing the system to identify similar entries more effectively even if minor variations exist. Additionally, if a new user entry closely resembles an existing one, a warning will prompt the user to review before creating the new entry, reducing accidental duplicates.
+
+### Enhance Log Scrolling Experience
+We are also planning to improve the log scrolling functionality. Currently, users may experience issues where not all parts of a log entry are visible due to two scenarios:
+- **Long Logs**: When logs are lengthy, scrolling through them with the arrow keys causes the view to jump to the next log instead of continuing within the current log.
+- **End-of-Log Visibility**: If the last log is active, and part of it is hidden from view, users cannot scroll further down to see the entire entry, as there are no additional logs to continue the scroll.
+
+To address these issues, we plan to refine the scrolling behavior to ensure smooth navigation within individual logs, regardless of length, and to enable full visibility of the last log entry when selected.
 
 --------------------------------------------------------------------------------------------------------------------
 
