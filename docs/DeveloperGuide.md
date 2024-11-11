@@ -308,6 +308,10 @@ results based on the specified criteria.
 
 ### Implementation
 
+The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a json file in the data folder of the app. The name of the json file is the time of export in the format MM-dd-yyyy-HHmmssPM.
+
+Given below is an example usage scenario and how the `import` command behaves at each step.
+
 Step 1: The user executes `export`
 
 Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder.
@@ -316,6 +320,9 @@ The name of the JSON file is the time of export.
 The following sequence diagram shows how a `export` command goes through the `Logic` component:
 <puml src="diagrams/ExportSequenceDiagram.puml"
  alt="ExportSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user executes an `export` command:
+
 
 ### Design considerations:
 
