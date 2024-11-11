@@ -178,8 +178,8 @@ Edits the contact at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed list of contacts. The index **must be a positive integer** (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed.
+* You can remove all the contacts’s tags by typing `t/` without
   specifying any tags after it.
   </box>
 
@@ -187,8 +187,8 @@ Edits the contact at the specified `INDEX`.
 
 **Examples:**
 Assuming a list of 7 contacts in the main list,
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
   </box>
 
 ### Assigning a grade to a student: `grade`
@@ -217,8 +217,8 @@ Assigns `GRADE_INDEX` to the contact at the specified `INDEX`.
 
 **Examples:**
 
-* `grade 1 g/1` changes grade of first person on list to `Failing`
-* `grade 2 g/4` changes grade of second person on list to `Excellent`<br>
+* `grade 1 g/1` changes the grade of the first contact in the displayed list of contacts to `Failing`
+* `grade 2 g/4` changes the grade of the second contact in the displayed list of contacts to `Excellent`<br>
   </box>
 
 ### Deleting contacts : `delete`
@@ -276,7 +276,7 @@ Finds contacts with names containing one or more of the specified `KEYWORDS`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
@@ -302,7 +302,7 @@ Finds contacts with tags matching any of the specified `KEYWORDS`.
 * The search is case-insensitive. e.g. `dyslexic` will match `Dyslexic`
 * The order of the keywords does not matter. e.g. `dyslexic vegetarian` will match `vegetarian dyslexic`
 * Only full words will be matched e.g. `veg` will not match `vegetarian`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `vegetarian dyslexic` will return all users with tags containing `vegetarian` or `dyslexic`
 </box>
 
@@ -329,7 +329,7 @@ Finds students who have lessons on any of the specified `DAYS`.
 * The search is case-insensitive. e.g `tuesday` will match `Tuesday`
 * The order of the keywords does not matter. e.g. `tuesday wednesday` will match `wednesday tuesday`
 * Only full words will be matched e.g. `tues` will not match `tuesday`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `tuesday wednesday` will return all students with lessons on Tuesday and students with lessons on Wednesday.
 </box>
 
@@ -385,7 +385,7 @@ Format: `unpin INDEX [MORE_INDICES]…`
 **Notes about `unpin`:**
 Unpins the contacts at the specified `INDEX` or`INDICES`.
 
-* The `INDICES` refer to the index numbers shown in the displayed person list.
+* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
 * The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
   </box>
 
