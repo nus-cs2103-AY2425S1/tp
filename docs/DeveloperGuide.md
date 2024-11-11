@@ -289,35 +289,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                             | I want to …​                                    | So that I can…​                                            |
-|----------|-----------------------------------------------------|-------------------------------------------------|------------------------------------------------------------|
-| `* * *`  | prepared teacher                                    | add student's email                             | email the student when I need to                           |
-| `* * *`  | caring teacher                                      | add student's name                              | call a student by his/her name                             |
-| `* * *`  | efficient teacher                                   | add student's register number                   | identify a student more quickly                            |
-| `* * *`  | teacher wanting to split students for group project | add student's sex                               | see how many students of each gender I have                |
-| `* * *`  | caring teacher                                      | add student's address                           | visit a student who may be sick at home                    |
-| `* * *`  | prepared teacher                                    | add student's contact number                    | call up the student when I need to contact him/her         |
-| `* * *`  | prepared teacher                                    | add student's emergency contact name            | identify the person I am calling if there are emergencies  |
-| `* * *`  | prepared teacher                                    | add student's emergency contact number          | notify the person in case of emergencies                   |
-| `* * *`  | prepared teacher                                    | add student's class                             | identify which student is in which class                   |
-| `* * *`  | diligent teacher                                    | remove a student from the app                   | ensure my records are accurate when they drop out          |
-| `* *`    | caring teacher                                      | add student's photo                             | know what my students look like                            |
-| `* *`    | lazy teacher                                        | mass add student information                    | save the trouble of adding them one by one                 |
-| `* *`    | lazy teacher                                        | mass delete all dummy data                      | save the trouble of removing them one by one               |
-| `* *`    | diligent teacher                                    | assign roles to students                        | manage students with the specific roles                    |
-| `* *`    | neat teacher                                        | group students by their class                   | manage and access information by class                     |
-| `* *`    | teacher wanting to split students for group project | separate students into project groups           | manage their project work within the app                   |
-| `* *`    | prepared teacher                                    | update a student's information                  | have the most current details when there is a change       |
-| `* *`    | diligent teacher                                    | assign progress tags to individual students     | categorise their performance in class                      |
-| `* *`    | efficient teacher                                   | sort the students by name                       | arrange the students lexicographically for exam conditions |
-| `* *`    | caring teacher                                      | add a comment for a student                     | take note of that student's particular trait               |
-| `* *`    | strict teacher                                      | track a student's submissions                   | see which students did not submit tasks on time            |
-| `* *`    | strict teacher                                      | track student attendance                        | address absenteeism and its impact on student performance  |
-| `* *`    | diligent teacher                                    | add a new test for all my students              | keep track of all the students' results                    |
-| `* *`    | diligent teacher                                    | add the scores of the students                  | have an overview of everyone's results                     |
-| `*`      | picky teacher                                       | customize the app settings                      | align the configuration with my preferences                |
-| `*`      | teacher who likes to have everything in one app     | create a seating arrangement for the class      | edit the seating arrangement any time                      |
-| `*`      | diligent teacher                                    | export information of all my graduated students | store them into the school database                        |
+| Priority | As a …​                                             | I want to …​                                    | So that I can…​                                                     |
+|----------|-----------------------------------------------------|-------------------------------------------------|---------------------------------------------------------------------|
+| `* * *`  | prepared teacher                                    | add student's email                             | email the student when I need to                                    |
+| `* * *`  | caring teacher                                      | add student's name                              | call a student by his/her name                                      |
+| `* * *`  | efficient teacher                                   | add student's register number                   | identify a student more quickly                                     |
+| `* * *`  | teacher wanting to split students for group project | add student's sex                               | see how many students of each gender I have                         |
+| `* * *`  | caring teacher                                      | add student's address                           | visit a student who may be sick at home                             |
+| `* * *`  | prepared teacher                                    | add student's contact number                    | call up the student when I need to contact him/her                  |
+| `* * *`  | prepared teacher                                    | add student's emergency contact name            | identify the person I am calling if there are emergencies           |
+| `* * *`  | prepared teacher                                    | add student's emergency contact number          | notify the person in case of emergencies                            |
+| `* * *`  | prepared teacher                                    | add student's class                             | identify which student is in which class                            |
+| `* * *`  | diligent teacher                                    | remove a student from the app                   | ensure my records are accurate when they are no longer in the class |
+| `* *`    | caring teacher                                      | add student's photo                             | know what my students look like                                     |
+| `* *`    | lazy teacher                                        | mass add student information                    | save the trouble of adding them one by one                          |
+| `* *`    | lazy teacher                                        | mass delete all dummy data                      | save the trouble of removing them one by one                        |
+| `* *`    | diligent teacher                                    | assign roles to students                        | manage students with the specific roles                             |
+| `* *`    | neat teacher                                        | group students by their class                   | manage and access information by class                              |
+| `* *`    | teacher wanting to split students for group project | separate students into project groups           | manage their project work within the app                            |
+| `* *`    | prepared teacher                                    | update a student's information                  | have the most current details when there is a change                |
+| `* *`    | diligent teacher                                    | assign progress tags to individual students     | categorise their performance in class                               |
+| `* *`    | efficient teacher                                   | sort the students by name                       | arrange the students lexicographically for exam conditions          |
+| `* *`    | caring teacher                                      | add a comment for a student                     | take note of that student's particular trait                        |
+| `* *`    | strict teacher                                      | track a student's submissions                   | see which students did not submit tasks on time                     |
+| `* *`    | strict teacher                                      | track student attendance                        | address absenteeism and its impact on student performance           |
+| `* *`    | diligent teacher                                    | add a new test for all my students              | keep track of all the students' results                             |
+| `* *`    | diligent teacher                                    | add the scores of the students                  | have an overview of everyone's results                              |
+| `*`      | picky teacher                                       | customize the app settings                      | align the configuration with my preferences                         |
+| `*`      | teacher who likes to have everything in one app     | create a seating arrangement for the class      | edit the seating arrangement any time                               |
+| `*`      | diligent teacher                                    | export information of all my graduated students | store them into the school database                                 |
 
 
 ### Use cases
