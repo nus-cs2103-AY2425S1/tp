@@ -21,12 +21,12 @@ public class DeleteNotesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient notes from the person identified by the index number used in the "
-            + "displayed person list if they have notes.\n"
+            + "displayed patient list if they have notes.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Removed notes from Patient: %1$s";
-    public static final String MESSAGE_NO_NOTES = "This person does not have any notes";
+    public static final String MESSAGE_NO_NOTES = "This patient does not have any notes";
 
     private final Index index;
     private final Notes emptyNotes;

@@ -103,7 +103,8 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 **Save and Storage information:**
 
 - WardWatch data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
-- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/wardwatch.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -148,10 +149,9 @@ Parameters often take up the form of `p/[PARAMETER]` where p is the parameter sy
 
 ### Appointment Parameters
 
-
 | Symbol  | Parameter     | Constraints                                                                                                                                                    |
 | ------- | ------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`a`** | `DESCRIPTION` | - Must contain at least 1 alphabetic character and has a limit of 40 characters.                                                                               |
+| **`a`** | `DESCRIPTION` | - Must contain at least 1 alphabetic character and has a limit of 80 characters.                                                                               |
 | **`s`** | `START`       | - A singular`DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute. |
 | **`e`** | `END`         | - A singular`DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute. |
 
