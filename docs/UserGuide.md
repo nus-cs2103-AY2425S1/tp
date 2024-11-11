@@ -1051,7 +1051,7 @@ Address: test
 >
 > **Output**: <br>
 Invalid command format! <br>
-editlisting: Edits the details of the listing identified by the listing index number. Buyers cannot be edited using this command. Use addlistingbuyers or removelistingbuyers to manage buyers. <br>
+editlisting: Edits the details of the listing identified by the listing index number. Buyers cannot be edited using this command. Use `addlistingbuyers` or `removelistingbuyers` to manage buyers. <br>
 Parameters: LISTING_INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]... <br>
 Example: editlisting 2 pr/450000 ar/1200
 >
