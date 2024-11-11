@@ -260,9 +260,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Step 1 is repeated until user inputs all required fields.
 
 
-* 1c. ClientHub detects a duplicate client
+* 1c. ClientHub detects a multiple clients match the same name
 
-  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a
+  * 1c1. ClientHub informs user that more than one client matches the same name and prompt the user to input a
     different name.
 
     Step 1 is repeated until user inputs a unique name.
@@ -292,11 +292,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case ends.
 
-* 1c. ClientHub detects multiple clients of the same name
+* 1c. ClientHub detects multiple clients match the same name
 
-    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
+    * 1c1. ClientHub informs the user that multiple clients match the same name and requests the user to input a more specific name of the client
 
-        Step 1 is repeated until user inputs full name of the client.
+        Step 1 is repeated until user inputs a more specific name that only one client matches.
 
 **Use case: List clients**
 
@@ -330,10 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple clients that matches the same name
-    * 1c1. ClientHub informs the user that multiple clients matches the same name and requests the user to input the full name of the client
 
-        Step 1 is repeated until user inputs full name of the client.
 
 **Use case: Edit a client**
 
@@ -354,10 +351,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple clients of the same name
-    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
+* 1c. ClientHub detects multiple clients match the same name
+    * 1c1. ClientHub informs the user that multiple clients matches the same name and requests the user to input a more specific name of the client
 
-        Step 1 is repeated until user inputs full name of the client.
+        Step 1 is repeated until user inputs a more specific name that only one client matches.
 
 **Use case: Sort clients**
 
@@ -391,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-1. ClientHub detects invalid input format
+* 1a. ClientHub detects invalid input format
     * 1a1. ClientHub shows an error message that the input is in the wrong format
 
         Step 1 is repeated until user inputs the correct format.
@@ -399,10 +396,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple clients of the same name
-    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
+* 1c. ClientHub detects multiple clients match the same name
+    * 1c1. ClientHub informs the user that multiple clients match the same name and requests the user to input a more specific name of the client
 
-        Step 1 is repeated until user inputs full name of the client.
+        Step 1 is repeated until user inputs a more specific name that only one client matches.
 
 **Use case: Add reminder**
 
@@ -423,14 +420,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
-* 1c. ClientHub detects multiple clients of the same name
-    * 1c1. ClientHub informs the user that there are multiple clients with the same name and requests the user to input the full name of the client
+* 1c. ClientHub detects multiple clients match the same name
+    * 1c1. ClientHub informs the user that multiple clients match the same name and requests the user to input a specific name of the client
 
-        Step 1 is repeated until user inputs full name of the client.
-* 1d. ClientHub detects that the reminder is already added
-    * 1d1. ClientHub shows an error message that the reminder is already added
-
-        Use case ends.
+        Step 1 is repeated until user inputs a more specific name that only one client matches.
 
 **Use case: Delete reminder**
 
@@ -447,10 +440,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. ClientHub shows an error message that the input is in the wrong format
 
       Step 1 is repeated until user inputs the correct format.
-* 2a. ClientHub detects the given index is out of range
-    * 2a1. ClientHub shows an error message that the index is out of range
+* 1b. ClientHub detects the given index is out of range
+    * 1b1. ClientHub shows an error message that the index is out of range
 
-        Step 1 is repeated until user inputs the correct format.
+        Step 1 is repeated until user inputs a valid index.
 
 
 **Use case: Edit reminder**
@@ -467,10 +460,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ClientHub shows an error message that the input is in the wrong format
 
         Step 1 is repeated until user inputs the correct format.
-* 2a. ClientHub detects the given index is out of range
-    * 2a1. ClientHub shows an error message that the index is out of range
+* 1b. ClientHub detects the given index is out of range
+    * 1b1. ClientHub shows an error message that the index is out of range
 
-        Step 1 is repeated until user inputs the correct format.
+        Step 1 is repeated until user inputs a valid index.
 
 ### Non-Functional Requirements
 
