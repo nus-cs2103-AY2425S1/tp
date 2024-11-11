@@ -161,7 +161,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 
 6. Refer to the [Features](#features) section below for details of each command.
 
---
+---
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -231,6 +231,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 - `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to valid name, phone number, and email of the person.
 - `COURSE` refers to the course this person is taking.
 - `TAG` refers to any additional information about the person and should only contain alphanumeric characters. A person can have any number of tags (including 0).
+- There should be no person with the same email and course after adding someone.
 
 <box type="tip" seamless>
 
@@ -240,7 +241,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
+- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/struggling`
 
 Expected output:
 
@@ -267,6 +268,7 @@ Edits an existing person in the TAHub.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- There should be no person with the same email and course after editing someone.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -461,7 +463,7 @@ Expected output:
 
 Deletes the attendance record for the specified date for a person in the TAHub. All the remaining attendance records for that person will be retained.
 
-Format: `unmark INDEX d/DATETIME`
+Format: `unmark INDEX d/DATE_TIME`
 
 - Deletes attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `DATE_TIME` refers to the date and time of attendance that you want to delete. It must be written in the format `dd/MM/yyyy HH:mm`.
@@ -576,6 +578,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. When using the `add` or `edit` command, **if the name, tag, or course has a known prefix (e.g. having `c/method e/a` as the course name parameter)**, the application will interpret it as another parameter instead of being one whole parameter. The remedy is to avoid using any known prefixes inside parameters, or separate the letter and slash character with a space if absolutely necessary.
 
 ---
 <div style="page-break-after: always;"></div>
