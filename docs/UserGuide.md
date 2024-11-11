@@ -305,8 +305,7 @@ the entering the command, which will either confirm or cancel the command, respe
 execute another command until the `delete` command is either confirmed or cancelled.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the case management system.
-* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+* `delete 2` deletes the 2nd client in the case management system.
 
 
 ### Adding a log entry : `addlog`
