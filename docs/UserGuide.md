@@ -56,7 +56,7 @@ Move the downloaded `.jar` file into the _home folder_ where you want to store y
 
 4. **Run HallPointer:**
 - Open a command terminal, and use the `cd` command to navigate to the folder where you saved the `.jar` file.
-- Type the folowing command and press Enter: `java -jar hallpointer.jar`
+- Type the following command and press Enter: `java -jar hallpointer.jar`
 - A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the app comes with some sample data to help you get started.<br>
    ![Ui](images/Ui.png)
 
@@ -137,7 +137,7 @@ Displays  an alphabetical list of all available commands for quick and easy refe
 
 ### Adding a member:
 
-Adds a member to Hall Pointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
+Adds a member to HallPointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
 
 **Format:** `add_member n/NAME r/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
@@ -162,26 +162,26 @@ Adds a member to Hall Pointer. A member must have a name, room assignment, and T
 **Examples:**
 
 - `add_member n/John Doe r/4-3-301 t/johndoe123` adds a member with name `John Doe` in room `4-3-301` and Telegram username `johndoe123`.
-- `add_member n/Betsy Crowe s/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
+- `add_member n/Betsy Crowe d/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe d/o Alice Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
  
 ![result for 'add_member n/John Doe r/4-3-301 t/johndoe123'](images/addCommandResult.png)
 ---
 
 ### Listing all members:
 
-Shows a list of all members registered in Hall Pointer.
+Shows a list of all members registered in HallPointer.
 
 **Format:** `list`
 
 **Example:**
-- `list` shows all members in Hall Pointer.
+- `list` shows all members in HallPointer.
 
 ![result for 'list'](images/listCommandResult.png)
 ---
 
 ### Updating a member: 
 
-Updates an existing member in Hall Pointer.
+Updates an existing member in HallPointer.
 
 **Format:** `update_member INDEX [n/NAME] [r/ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
@@ -241,7 +241,7 @@ Finds members whose names contain any of the given keywords.
 
 ### Deleting a member:
 
-Deletes the specified member from Hall Pointer.
+Deletes the specified member from HallPointer.
 
 **Format:** `delete_member INDEX`
 
@@ -253,7 +253,7 @@ Deletes the specified member from Hall Pointer.
 
 **Examples:**
 
-- `list` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
+- `list` followed by `delete_member 2` deletes the 2nd member in HallPointer.
 - `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ![result for 'delete_member 2'](images/deleteMemberResult.png)
@@ -261,7 +261,7 @@ Deletes the specified member from Hall Pointer.
 
 ### Adding a Session:
 
-Adds a session to Hall Pointer and associates it with specified members. A session contains a name, date, and points awarded to each member attending the session. You can add multiple members to a session.
+Adds a session to HallPointer and associates it with specified members. A session contains a name, date, and points awarded to each member attending the session. You can add multiple members to a session.
 
 **Format:** `add_session s/NAME d/DATE p/POINTS m/INDEX [m/INDEX]…`
 
@@ -310,7 +310,7 @@ This command finds members who have attended sessions with names that contain an
 
 ### Deleting a Session:
 
-Deletes a session associated with one or more members in Hall Pointer.
+Deletes a session associated with one or more members in HallPointer.
 
 **Format:** `delete_session s/NAME m/INDEX [m/INDEX]…`
 
@@ -327,7 +327,7 @@ Deletes a session associated with one or more members in Hall Pointer.
 
 ### Clearing all entries:
 
-Clears all entries from Hall Pointer.
+Clears all entries from HallPointer.
 
 **Format:** `clear`
 
