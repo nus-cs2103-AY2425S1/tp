@@ -124,7 +124,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the ClinicConnect system data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
-* stores all `FilteredAppointment` objects 
+* stores all `FilteredAppointment` objects
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -157,9 +157,9 @@ The `help` command opens a separate help window detailing a summary of the comma
 The user can optionally provide a `COMMAND_KEYWORD` which opens a separate help window showing more information about the specified command. <br>
 
 ##### Parsing User Input
-The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display. 
+The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display.
 It uses the `trim` method to remove any leading and trailing white-space characters from the user input.
-If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid. 
+If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid.
 The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches one of the command keywords supported by the application.
 
 ##### Executing the Command
@@ -171,8 +171,8 @@ The following activity diagram illustrates the workflow of the execution of the 
 
 ##### Design Considerations
 The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
-Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
-For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.  
+Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application.
+For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.
 
 #### Home Command : `home`
 The `home` command returns the user to the home UI where all the patients are displayed.
@@ -228,7 +228,7 @@ The parsing of the fields is as follows:
 ##### Executing the Command
 The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
 
-The activity diagram below illustrates the worflow behind the execution of the `addf` command.
+The activity diagram below illustrates the workflow behind the execution of the `addf` command:
 
 ![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
@@ -264,6 +264,27 @@ The following fields are optional as they are not essential in serving a patient
 ### Appointment Management Features
 
 #### Book Appointment : `bookappt`
+The `bookappt` command is used to book an upcoming appointment for the patient with the corresponding NRIC.
+
+The user has to specify:
+* Patient's NRIC (`Nric`)
+* Upcoming appointment date and time to be booked (`LocalDateTime`)
+* Health service the patient is receiving (`Healthservice`)
+
+##### Parsing User Input
+The `BookApptCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted the NRIC before any prefixes, all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+##### Executing the Command
+The `BookApptCommand` class is initialized with a new `Appt` object created from the parsed input. With the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. After checking for duplicates in appointment and whether the date and time inputs are past today's date, the `Appt` object is then added to the `Patient` identified.
+
+##### Activity Diagram
+The activity diagram below illustrates the workflow behind the execution of the `bookappt` command:
+
+
+##### Design Considerations
+The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each appointment for the patient is unique and fulfills the command's purpose.
 
 #### Delete Appointment : `deleteappt`
 
