@@ -144,6 +144,7 @@ Health Connect is an application designed to **streamline client management** fo
 
 * If multiple tags `t/... t/...` are provided as an input only the last tag will be taken.
     - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient John Doe will be assigned the tag `High Risk`.
+
 * The following are considered duplicate patients:
   * Same name AND same phone number
   * Same name AND same email
@@ -167,7 +168,7 @@ Health Connect is an application designed to **streamline client management** fo
 * **ADDRESS**
     - Address cannot be blank
     - Since an address can consist of any combination of characters (including `/`), there are no restrictions on the input format for this field. 
-    - Be aware that adding unrecognized parameters (e.g., /g) after the address tag `a/` will not trigger an error. 
+    - Be aware that adding unrecognized parameters (e.g., g/) after the address tag `a/` will not trigger an error. 
       - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/[unrecognized parameter] t/low risk m/None` 
       will still be accepted as valid input without any errors.
 * **TAG**
@@ -182,14 +183,17 @@ Health Connect is an application designed to **streamline client management** fo
     - Must not be empty or contain special characters other than commas and spaces.
     - If a patient has multiple allergies, they can be listed in the add command like this: `m/Allergy1 m/Allergy2`
     - If a patient has no allergies, use this format: `m/None`
+    - A patient cannot have any other allergy if he or she has `m/None` as an allergy. (i.e. `m/None m/Allergy2` is not valid)
       
 * **INDEX**
     - Must be a positive integer: 1, 2, 3, ...
     - Must be an index number shown in the displayed patient list
 
 * **DATE_TIME**
-    - Follows the format of d/M/yyyy HHmm
-    - Can only contain numbers, '/', and spaces.
+    - Follows the format of `d/M/yyyy HHmm`
+    - `02/02/2024 1400` and `2/2/2024 1400` are both valid and accepted date and time formats.
+    - Can only contain numbers, '/', and spaces. 
+    - No spaces are allowed within the date and time format. For example, `2/ 0 2/ 20 24 1400` will result in an invalid date and time format error.
 
 * **DATE**
     - Follows the format of `d/M/yyyy`
@@ -217,7 +221,7 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Lactose m/Gluten`
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
+* `add n/Jane Doe p/98765432 e/janed@example.com a/Jane street, block 123, #01-01 t/High Risk m/Insulin m/Penicillin`
   
 * `add n/Betsy-Crowe p/81239873 e/betsycrowe@example.com a/01 Clementi Road #04-03 Singapore 4374538 t/Low Risk m/None`
 
@@ -243,6 +247,7 @@ Additional Details:
 * Existing values will be updated to the input values.
 * When editing tags, the inputted tag will completely replace the current tag.
 * You cannot remove a person's tag using the edit feature, as the tag is a required field.
+* When editing allergies, the inputted allergies will completely replace the current allergies.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -285,23 +290,23 @@ Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 
 Additional Details:
 * The search is case-sensitive.
-* At least 1 `PREFIX/FEATURE_NAME` must provided.
+* At least 1 `PREFIX/FEATURE_NAME` must be provided.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
-* You can filter by **tag, email, allergy, address, phone number and allergies**
+* You can filter by **tag, email, address, phone number and allergies**
 * Only full words will be matched e.g. `99999999` will not match `999`
-* Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags (eg. ‘filter t/ High Risk t/Low Risk’ is considered invalid format and not accepted.
+* Allergies is the only attribute that allows multiple parameters. For other attributes, there can only be one of each feature as a maximum (i.e. cannot filter by two tags - `filter t/ High Risk t/Low Risk` is considered invalid format and not accepted.)
 * The filter search uses AND logic between different attributes (e.g., tag and allergies) — all specified attributes must match. If multiple allergies are specified, it uses OR logic — an entry will match allergies attribute if it has any one of the specified allergies, or all. 
 For example:
-filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
-filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
+`filter t/High Risk m/Peanuts m/Dairy` will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
+`filter m/Peanuts m/Dairy` will return entries with either "Peanuts" or "Dairy" allergy, or both.
 * Specifying any parameters beyond those required will result in an error.
-* Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
+* Filter requires at least one feature to filter by (e.g. `filter` is an invalid format but `filter t/High Risk` and `filter p/99999999` are both accepted.)
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
 
 Examples:
 * `filter t/High Risk a/John street, block 123, #01-01` 
-* returns all patients who are at high risk AND have address `John street, block 123, #01-01`
+returns all patients who are at high risk AND have address `John street, block 123, #01-01`
   ![Example of Filter Command ](./images/FeatureFilterExample.png)
   <br>
 * `filter m/Penicillin p/88451234`
@@ -318,8 +323,8 @@ Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
 [Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`
 
 Additional Details:
-- Deletes the person that matches the following NAME, PHONE and/or EMAIL
-- If the NAME cannot uniquely identify the patient, then more details (e.g. PHONE or EMAIL) need to be provided.
+- Deletes the person that matches the following `NAME`, `PHONE` and/or `EMAIL`
+- If the `NAME` cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided.
 
 Examples:
 * `delete n/john`
@@ -337,22 +342,22 @@ Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 [Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `DATE_TIME`
 
 Additional Details:
-* Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
-* If the attribute provided matches more than one person, more attributes need to be provided to uniquely match to a person
+* Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`.
+* If the attribute provided matches more than one person, more attributes need to be provided to uniquely match to a person.
 * To remove the date and time from a person, use `d/None` in the command.
-* 2 patients cannot have the same date and time for the appointment
+* 2 patients cannot have the same date and time for their appointment.
 * When no date and time is set, no date and time is displayed.
 * In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in their order and selection. 
 This does not mean that all three fields can be left out. 
 Instead, it allows the user to include any one or more of these fields, but at least one must be provided. 
 This flexibility helps in cases where only one of these details is available or relevant, but still ensures there is enough information to uniquely identify a contact.
 * This feature supports the year 0001 onwards. Any years before that is not supported.
-* The month must be between 1 and 12.
-* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year.
+* If the day, month, hour, or minute values are not in range of valid possible values (e.g. month is between 1 and 12 or day is between 1 and 31), an error will be shown to the user for them to ensure their inputs are in range. 
+* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. e.g. if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
 * The time is in the 24-hour format. (e.g. 1800 for 6:00 PM)
-* The format of the date and time, as well the values must be valid, or there will be an error. Note that, to allow fast typing and avoid unnecessary inconvenience, leading zeroes for day and month is allowed in the format and will be parsed. 
+* The format of the date and time, as well the values, must be valid or there will be an error. Note that, to allow fast typing and avoid unnecessary inconvenience, leading zeroes for day and month is allowed in the format and will be parsed. 
 (e.g. 01/01/2024 1400 will be parsed the same way as 1/1/2024 1400)
-* For consistency and ease of validation, spaces between slashes in the date (e.g., 1 / 1 / 2024) are not allowed. This ensures that all dates are uniformly formatted, which helps prevent errors and speeds up processing. Please enter dates without spaces, such as 1/1/2024 or 01/01/2024.
+* For consistency and ease of validation, spaces between slashes in the date (e.g., 1 / 1 / 2024) are not allowed. This ensures that all dates are uniformly formatted, which helps prevent errors and speeds up processing. Please enter dates without spaces, such as 1/1/2024.
 * The app allows users to enter dates and times that are in the past to provide flexibility in managing and storing patient information. This feature prevents unnecessary limitations, enabling healthcare professionals to record historical data, update past appointments, and maintain a comprehensive record of all patient interactions, even those that have already occurred.
 
 
@@ -380,8 +385,7 @@ Format: `schedule d/DATE`
 [Parameter Constraints](#parameter-constraints): `DATE`
 
 Additional Details:
-* Date in the `schedule` feature differs from the date in the `date` feature.
-* Date in the `schedule` feature does not accept a time.
+* `DATE` in the `schedule` feature differs from the `DATE_TIME` in the `date` feature as it does not accept a time.
 * All patients with an appointment date on that given day will be listed regardless of what their appointment time is.
 * Refer to additional details under the [appointment date feature](#adding-or-updating-an-appointment-date-and-time-to-a-person--date) above for details on the date format and valid values.  
 
@@ -444,18 +448,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command Summary
 
-| Action   | Format & Examples                                                                   | Examples                                                                                  |
-|----------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Action   | Format & Examples                                                            | Examples                                                                                  |
+|----------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | Add      | `add n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`                    | `add n/James Ho p/98765432 e/jamesho@example.com a/123 Clementi Rd t/High Risk m/peanuts` |
 | Edit     | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]...` | `edit 2 n/James Lee e/jameslee@example.com`                                               |
-| Delete   | `delete [n/NAME] [p/PHONE] [e/EMAIL]`                                               | `delete n/Nayana p/98765432 e/nayana@gmail.com`                                           |
-| Clear    | `clear`                                                                             | -                                                                                         |
-| View     | `view`                                                                              | -                                                                                         |
-| Find     | `find KEYWORD [MORE_KEYWORDS]`                                                      | `find James Jake`                                                                         | 
-| Filter   | `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`                                  | `filter t/High Risk`                                                                      |
-| Date     | `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`                                     | `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`                                                                                          |
-| Schedule | `schedule d/DATE`                                                                   | `schedule d/23/10/2024`                                                                                          |
-| Exit     | `exit`                                                                              | -                                                                                         |
-| Help     | `help`                                                                              | -                                                                                         |
+| Delete   | `delete [n/NAME] [p/PHONE] [e/EMAIL]`                                        | `delete n/Nayana p/98765432 e/nayana@gmail.com`                                           |
+| Clear    | `clear`                                                                      | -                                                                                         |
+| View     | `view`                                                                       | -                                                                                         |
+| Find     | `find KEYWORD [MORE_KEYWORDS]`                                               | `find James Jake`                                                                         | 
+| Filter   | `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`                           | `filter t/High Risk`                                                                      |
+| Date     | `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`                              | `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`                      |
+| Schedule | `schedule d/DATE`                                                            | `schedule d/23/10/2024`                                                                   |
+| Exit     | `exit`                                                                       | -                                                                                         |
+| Help     | `help`                                                                       | -                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
