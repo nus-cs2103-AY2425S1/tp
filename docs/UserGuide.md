@@ -512,7 +512,6 @@ Command Details & Constraints:
 Example:
 1. `deleteAsg n/CS2101 CA3` deletes the assignment with Assignment Name `Assignment CS2101 CA3`, provided the assignment exists.
 
-
 #### 4.3.3 List assignments: `listAsg`
 
 > List all assignments tracked in the TrackMate application.
@@ -673,6 +672,7 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackMate home folder.
+
 **Q**: Can this app be used to handle multiple modules?              
 **A**: While this app allows for flexibility in naming your tutorials, it should not be used to handle multiple modules.
 --------------------------------------------------------------------------------------------------------------------
