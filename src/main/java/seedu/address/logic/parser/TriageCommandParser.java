@@ -26,6 +26,7 @@ public class TriageCommandParser implements Parser<TriageCommand> {
 
         // Tokenize the arguments using the defined PREFIX_TRIAGE
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TRIAGE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TRIAGE);
 
         Nric nric;
         Triage triage;
