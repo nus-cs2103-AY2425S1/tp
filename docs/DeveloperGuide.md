@@ -382,7 +382,7 @@ The following sequence diagram shows how the above steps for delete group works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `EditTaskCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifelines for `EditTaskCommandParser`, `CommandResult`, and `EditTaskCommand` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
