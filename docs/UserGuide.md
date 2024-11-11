@@ -398,6 +398,8 @@ This command will allow you to edit the details of the guest identified by the `
 
 **Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 > :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
 > :warning: At least 1 field of a `Guest` has to be specified for the command to be valid.
@@ -426,6 +428,8 @@ Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the
 This command will help you delete a guest from your existing guest list, identified by the `INDEX` number used in the displayed guest list.
 
 **Format:** `delete_guest INDEX`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
@@ -477,6 +481,8 @@ This command will allow you to edit the details of the vendor identified by the 
 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 > :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
 > :warning: At least 1 field of a `Vendor` has to be specified for the command to be valid.
@@ -505,6 +511,8 @@ Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns th
 This command will help you delete a vendor from your existing vendor list, identified by the `INDEX` number used in the displayed vendor list.
 
 **Format:** `delete_vendor INDEX`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
 
@@ -557,7 +565,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
 
-3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable). This also applies if the `INDEX` provided is non-positive.
+3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable).
 
 [_Back to Top_](#table-of-contents)
 
