@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <box type="info" seamless>
 
-**Note:** The `UiPart` class that UI components inherit from was removed the class diagram to reduce clutter.
+**Note:** The `UiPart` class that UI components inherit from was removed from the class diagram to reduce clutter.
 
 </box>
 
