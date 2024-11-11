@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added Notes to inform users of the auto-correct behaviour of dates such as `29-02-2023
+    * Added Notes to inform users of the autocorrect behaviour of dates such as `29-02-2023`
   * Developer Guide:
     * Added Planned Enhancement to refine the Date Input Logic
 

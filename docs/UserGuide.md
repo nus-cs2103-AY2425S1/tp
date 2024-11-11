@@ -224,7 +224,7 @@ Example:
 
 ![add schedule example](images/add-schedule_example.png)
 
-- `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`add
+- `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`
 - **Before**: no Dinner event at 10-10-2024 1800.
 - **After**: Dinner event at 10-10-2024 1800 is added.
 
