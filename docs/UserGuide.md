@@ -133,7 +133,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
 
-Format: `find KEYWORD [KEYWORD]`
+Format: `find KEYWORD [KEYWORD]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -294,6 +294,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [KEYWORD]...`<br> e.g., `find James Jake`
 **List** | `list [s/<name/email/income/age>] [r/]`
 **Help** | `help`
