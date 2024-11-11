@@ -136,7 +136,7 @@ This command allows you to edit an existing person in TalentHub!
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
+- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -244,7 +244,7 @@ Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647
+- The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647
   ) e.g. 1, 2, 3 …​
 
 <div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
@@ -329,7 +329,7 @@ This command allows you to edit an existing event on TalentHub!
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
-- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3, …​
+- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
@@ -434,7 +434,7 @@ This command allows you to delete the specified event from the list of events on
 Format: `delete event INDEX`
 - Deletes the event at the specified `INDEX`.
 - The index refers to the index number shown in the displayed event list.
-- The index **must be a positive integer** and smaller than or equal to `Integer.MAX_VALUE` (2147483647)
+- The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647)
   e.g. 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
@@ -572,7 +572,7 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Contact or Event name.
 3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 4. **When using the `add person` and `add event` commands**, if you enter an empty prefix for tags and contacts to set as no tags or points of contacts (e.g., `t/` or `p/`), the application will not recognize the empty prefix. The remedy is to remove the prefix entirely if you are not adding any tags or points of contacts.
-5. **When inputting indexes for commands**, if you enter a large integer (greater than 2147483648), the application will not recognize the index as it is too large.
+5. **When inputting indexes for commands**, if you enter a large integer (greater than 2147483647), the application will not recognize the index as it is too large.
 
 ---
 
