@@ -735,8 +735,8 @@ up one level from the current directory and then navigates to data folder, and i
 
 <md>**CSV file formatting:**</md>
 
-* The CSV file must have header with the exact required order {"Name", "Email", "Telegram", "Tags", "Github",
-  "Assignments", "WeeksPresent"} (Case-insensitive).
+* The CSV file must have header with the exact required order `{"Name", "Email", "Telegram", "Tags", "Github",
+  "Assignments", "WeeksPresent"}` (Case-insensitive).
 * The CSV file must contain information about at least 1 person.
 * The data fields for Name, Email, Telegram, Github is compulsory.
   * Do note that each of these field have their own restrictions. These are defined in the 
