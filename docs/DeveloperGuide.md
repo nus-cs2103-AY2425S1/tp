@@ -302,16 +302,36 @@ It first makes use of the `ArgumentTokenizer` class to ensure that the correct p
 The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
 
 ##### Executing the Command
-The `BookApptCommand` class is initialized with a new `Appt` object created from the parsed input. With the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. After checking for duplicates in appointment and whether the date and time inputs are past today's date, the `Appt` object is then added to the `Patient` identified.
+The `BookApptCommand` class is initialized with a new `Appt` object, which represents appointment, created from the parsed input. With the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. After checking for duplicates in appointment and whether the date and time inputs are past today's date, the `Appt` object is then added to the `Patient` identified.
 
 ##### Activity Diagram
 The activity diagram below illustrates the workflow behind the execution of the `bookappt` command:
 
 
 ##### Design Considerations
-The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each appointment for the patient is unique and fulfills the command's purpose.
+The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each upcoming appointment added for the `Patient` is unique.
 
 #### Delete Appointment : `deleteappt`
+The `deleteappt` command is used to delete an appointment for the patient with the corresponding NRIC.
+
+The user has to specify:
+* Patient's NRIC (`Nric`)
+* Appointment date and time to be deleted (`LocalDateTime`)
+
+##### Parsing User Input
+The `DeleteApptCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted the NRIC before any prefixes, the `dt|` prefix and its corresponding value.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+##### Executing the Command
+In `DeleteApptCommand`, with the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. The `Appt` object, which represents appointment, with the corresponding date and time is then identified. After checking for the validity of the appointment, the `Appt` object is then deleted from the `Patient` identified.
+
+##### Activity Diagram
+The activity diagram below illustrates the workflow behind the execution of the `deleteappt` command:
+
+
+##### Design Considerations
+The `deleteappt` command uses `Nric` as a unique identifier to delete an appointment for the patient identified. `LocalDateTime` is the required field to ensure that a unique appointment is deleted from the `Patient`.
 
 #### Filter Appointment : `filter`
 
