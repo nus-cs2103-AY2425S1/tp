@@ -167,6 +167,8 @@ Adds an Udder to the address book.
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/mUdder m/ceg t/potential connection`
 * `add n/Charlie Brown e/snoopy@gmail.com a/Yellow House p/24157842 m/cs r/brUdder t/friend`
 
+![before add](images/BeforeAndAfterAdd.jpg)
+
 ### Listing all Udders : `list` 📜
 
 Shows a list of all Udders in the address book. 
@@ -279,6 +281,10 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 * Deletes the Udder at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Udders list.
 
+![before](images/BeforeDelete.jpg)
+
+![after](images/AfterDelete.jpg)
+
 <box type="warning">
 
 **IMPORTANT:** This command will follow the indexing shown on the Udders list.
@@ -293,6 +299,8 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 Clears all Udders from the Udders List.
 
 **Format:** `clear`
+
+![clear](images/ClearUI.JPG)
 
 ### Exiting the program : `exit` 👋
 
