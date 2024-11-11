@@ -213,6 +213,7 @@ and clearing persons/appointments.
 
 Here are some **key points** to keep in mind when you are using the commands:
 
+- Appointments are sorted by date and Patients are sorted in chronological order.
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
 
