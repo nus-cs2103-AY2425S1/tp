@@ -678,8 +678,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. **Memory Usage**: The app should not exceed 500MB of memory usage.
 
-1. **Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
-
 1. **Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
 
 1. **Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
