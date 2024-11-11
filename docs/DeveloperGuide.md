@@ -310,6 +310,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+- 2d Invalid email format.
+
+  - 2d1. PawPatrol shows an error message:
+
+    Use case resumes at step 1.
+
+- 2e Invalid IC number format.
+
+  - 2e1. PawPatrol shows an error message:
+
+    Use case resumes at step 1.
+
 **Use case: Delete a pet**
 
 **MSS**
@@ -335,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to search for a pet with the relevant data type and search value.
+1. User requests to search for a pet with the relevant search parameter.
 2. PawPatrol validates the input.
 3. PawPatrol performs the search and retrieves matching records.
 4. PawPatrol displays the list of contacts matching the `dataType` and `searchValue`.
@@ -350,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2b. No matching contacts found.
+- 2b. No matching pet contacts found.
 
   - 2b1. PawPatrol shows an error message:
 
