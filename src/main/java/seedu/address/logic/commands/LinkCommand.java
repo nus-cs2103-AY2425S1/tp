@@ -145,4 +145,19 @@ public class LinkCommand extends Command {
     private String generateSuccessMessage() {
         return String.format(MESSAGE_SUCCESS, childName.fullName, parentName.fullName);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LinkCommand)) {
+            return false;
+        }
+
+        LinkCommand otherLinkCommand = (LinkCommand) other;
+        return childName.equals(otherLinkCommand.childName) && parentName.equals(otherLinkCommand.parentName);
+    }
 }

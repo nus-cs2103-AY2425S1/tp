@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 
 import seedu.address.model.person.Name;
 
@@ -15,7 +16,10 @@ public class TypicalNames {
     public static final Name VALID_NAME_JANE = new Name(VALID_NAME_STRING_JANE);
     public static final String VALID_CHILD_NAME_DESC_JOHN = " " + PREFIX_CHILD + VALID_NAME_STRING_JOHN;
     public static final String VALID_CHILD_NAME_DESC_JANE = " " + PREFIX_CHILD + VALID_NAME_STRING_JANE;
+    public static final String VALID_PARENT_NAME_DESC_JOHN = " " + PREFIX_PARENT + VALID_NAME_STRING_JOHN;
+    public static final String VALID_PARENT_NAME_DESC_JANE = " " + PREFIX_PARENT + VALID_NAME_STRING_JANE;
 
     public static final String INVALID_CHILD_NAME = "!@#$%^&*()";
     public static final String INVALID_CHILD_NAME_DESC = " " + PREFIX_CHILD + INVALID_CHILD_NAME;
+    public static final String INVALID_PARENT_NAME_DESC = " " + PREFIX_PARENT + INVALID_CHILD_NAME;
 }
