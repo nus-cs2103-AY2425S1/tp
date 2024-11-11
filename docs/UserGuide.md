@@ -199,6 +199,8 @@ Refer to the [Features](#features) below for details of each command.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a client: `add`
 
 Adds a client to PROperty.
