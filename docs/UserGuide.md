@@ -212,7 +212,7 @@ Format: `delete INDEX`
 * There is a confirmation popout after the user enters the command but before the delete is actually done.
   click `OK` to continue or `Cancel` to abort the deletion.
 
-![delete popup](images/Delete popup.png)
+<img src="images/Delete popup.png" alt="Delete popup screenshot" height=auto width="850"/>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
