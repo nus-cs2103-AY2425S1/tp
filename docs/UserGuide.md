@@ -9,7 +9,6 @@
 LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts and their associated delivery information from your desktop.
 Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
 
-
 If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
 
 Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
@@ -81,7 +80,9 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
-    <img src="images/Ui.png" alt="ui" width="600">
+    <img src="images/Ui.png" alt="ui" width="600"> 
+
+
   - **Inspect window**: the window you see when inspecting a contact.
     <img src="images/Ui2.png" alt="ui2" width="600">
     <br></br>
