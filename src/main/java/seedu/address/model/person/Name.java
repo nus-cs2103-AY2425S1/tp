@@ -11,8 +11,8 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names must only contain \n"
-                    + "1. Alphanumeric characters or \n"
-                    + "2. apostrophes, commas and dashes or \n"
+                    + "1. Alphabets or \n"
+                    + "2. apostrophe character, ',' , '@', '/' and '-' or \n"
                     + "3. spaces (not as the first character) and \n"
                     + "4. be at most 70 characters in length";
 
@@ -21,7 +21,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9'\\-,][a-zA-Z0-9 ',\\-]*$";
+    public static final String VALIDATION_REGEX = "[a-zA-Z,'@/\\- ]{1,70}$";
 
     public final String fullName;
 

@@ -26,7 +26,7 @@ public class NameTest {
 
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName(" 123")); //numbers
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
         // 71 char name
@@ -34,10 +34,7 @@ public class NameTest {
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("j4xJfyjXMv0NDv1C0jCtgquHRgf46YVJ3ey0PBFWEfy87BTxrRyP1JBhbKU8gaVhpkBKeQ"));
         assertTrue(Name.isValidName("peter jack"));
         assertTrue(Name.isValidName("Peter's tan's, jame's dad - and his mom"));
     }

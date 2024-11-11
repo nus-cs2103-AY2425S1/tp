@@ -14,7 +14,7 @@ import seedu.address.model.person.TagsContainsKeywordsPredicate;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private static final String VALID_KEYWORD_REGEX = "^[a-zA-Z]+$";
+    private static final String VALID_KEYWORD_REGEX = "^[a-zA-Z0-9]+$";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand

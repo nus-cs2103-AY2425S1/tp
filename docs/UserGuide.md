@@ -7,12 +7,35 @@ Welcome to the NomNomNotifier User Guide, your essential toolkit for mastering c
 
 NomNomNotifier brings powerful features right to your desktop, enabling quick and accurate access to customer data like names, addresses, contact details, and dietary preferences. Our app enhances the speed of customer service while helping teams manage VIPs and special requests with ease. Combining a Command Line Interface (CLI) with a user-friendly Graphical Interface (GUI), NomNomNotifier offers the flexibility to work however you prefer—type commands to streamline actions or navigate visually to find exactly what you need.
 
+
 * Table of Contents
-  * Quick start
-  * Command summary
-  * Features
-  * FAQ
-  * Known Issues
+    * [Quick start](#quick-start)
+    * [Command summary](#command-summary)
+    * Features
+        * [Add Customer: `add`](#adding-a-customer-add)
+        * [List Customers: `list`](#listing-all-customers--list)
+        * [Edit Customer: `edit`](#editing-a-customer--edit)
+        * [Find Customers: `find`](#locating-customers-by-name-find)
+        * [Delete Customer: `delete`](#deleting-a-customer--delete)
+        * [Delete Customers by Postal Code: `deletePC`](#deleting-customers-by-postal-code-deletepc)
+        * [Clear all Customers: `clear`](#clearing-all-entries--clear)
+        * [Add Order: `order`](#adding-an-order-order)
+        * [Delete Order: `deleteOrder`](#deleting-an-order-deleteorder)
+        * [List Orders: `listOrder`](#listing-all-orders-listorder)
+        * [Assign Order to Customer: `put`](#adding-an-order-history-to-a-customer-put)
+        * [View Order History for Customer: `history`](#listing-all-order-histories-of-a-customer-history)
+        * [Create Shortcut for Tags: `addShortCut`](#creating-shortcuts-for-tags-addshortcut)
+        * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcuts-for-tags-delshortcut)
+        * [List All Shortcuts: `listShortCut`](#listing-existing-shortcuts-listshortcut)
+        * [Using Shortcuts for Tagging](#using-shortcuts-for-tagging)
+        * [Filter Customers by Tags: `filter`](#filtering-by-tags-filter)
+        * [Archive Customer: `archive`](#archive-customer-archive)
+        * [View Archived Customers: `listarchive`](#list-archived-customer-listarchive)
+        * [Unarchive Customer: `unarchive`](#unarchive-customer-unarchive)
+        * [Download Customer Data: `download`](#downloading-customer-data-download)
+        * [Exit Command: `exit`](#exiting-the-program--exit)
+    * [FAQ](#faq)
+    * [Known Issues](#known-issues)
   
 ---
 
@@ -34,13 +57,13 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     <img src="images/QuickStart.png" alt="Ui" width="350"/>
     <br>
     <em>Figure 1: Shows what the application should look like</em>
-</div>
+    </div>
 
 
 5. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     * `list` : Lists all contacts.
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pc/567333` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pc/567333` : Adds a contact named `John Doe` to the contact list.
     * `delete 3` : Deletes the 3rd contact shown in the current list.
     * `clear` : Deletes all contacts.
     * `exit` : Exits the app.
@@ -76,8 +99,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 | **Filter**                | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
 | **Unarchive**             | `unarchive INDEX`<br> e.g., `unarchive 2`                                                                                                                            |
 
-
-> **Note**: NomNomNotifier only accepts inputs in english without any emojis
+> **Disclaimer**: NomNomNotifier only accepts inputs in english without any emojis, any inputs in other languages could cause unexpected behaviour
 
 ---
 
@@ -90,7 +112,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 * Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
   e.g., in `add n/NAME`, `NAME` is a parameter that can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
-  e.g., `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply as `n/John Doe`.
+  e.g., `n/NAME [t/TAG]` can be used as `n/John Doe t/Vegan` or simply as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times, including zero times.<br>
   e.g., `[t/TAG]…​` can be used as ` ` (i.e., 0 times), `t/Vegan`, or `t/Vegetarian t/VIP`.
 * Parameters can be in any order.<br>
@@ -105,7 +127,11 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<div style="text-align: center; margin-top:20px">
+    <img src="images/helpMessage.png" alt="adding customer" width="500"/>
+    <br>
+    <em>Figure 1: Shows help message displayed</em>
+</div>
 
 **Format:** `help`
 
@@ -113,12 +139,16 @@ Shows a message explaining how to access the help page.
 
 ### Adding a customer: `add`
 
-Adds a customer to the address book.
+Adds a customer to the contact list.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]…​`
 
-- Phone number (with `p/` prefix) should be an 8-digit number starting with 9, 8, 7, or 6.
+- Phone number (with `p/` prefix) should be an 8-digit mainstream Singaporean phone number starting with 9, 8, 7, or 6.
 - Postal code (with `pc/` prefix) should be a 6-digit number.
+
+> Note: Any name inputs with space before and after name string will be trimmed
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Any further specification in ability to add or edit fields is described in the respective field's error message</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** A person can have any number of tags (including 0)</div>
 
@@ -136,7 +166,7 @@ Adds a customer to the address book.
 
 ### Listing all customers : `list`
 
-Shows a list of all customers in the address book.
+Shows a list of all customers in the contact list.
 
 **Format:** `list`
 
@@ -150,7 +180,7 @@ Shows a list of all customers in the address book.
 
 ### Editing a customer : `edit`
 
-Edits an existing customer in the address book.
+Edits an existing customer in the contact list.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]…​`
 
@@ -201,20 +231,13 @@ Users can search for customers by entering part or all of their phone number.
 - `find 9123` — Finds any customers with phone numbers containing "9123".
 - `find 98124572` — Finds any customers with the exact phone number "98124572".
 
-<div style="text-align: center;">
-    <img src="images/find_name_and_number.png" alt="find customers" width="350"/>
-    <br>
-    <em>Figure 5: Shows multiple people found using prefix search and number</em>
-</div>
-
-
 #### Search by Postal Code
 
-Users can search for customers by entering part or all of their postal code. Postal codes should follow the format of a 6-digit number.
+Users can search for customers by entering part or all of their postal code. Postal code inputs for find command should follow the format prefixed by "S" followed by a number.
 
 **Examples:**
-- `find 560123` — Finds any customers with the postal code "560123".
-- `find 560` — Finds any customers with postal codes starting with "560".
+- `find S560123` — Finds any customers with the postal code "560123".
+- `find S560` — Finds any customers with postal codes containing "560".
 
 
 #### Simultaneous Search with Multiple Criteria
@@ -224,15 +247,14 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 **Examples:**
 - `find Alice 9876` — Finds all customers with the name "Alice" **or** a phone number containing "9876".
 - `find 9456 S630123` — Finds all customers with phone numbers containing "9456" **or** postal code "630123".
-- `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
+- `find S550 Bob` — Finds all customers with postal codes containing "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
-<div style="text-align: center;">
-    <img src="images/find_name.png" alt="find customers" width="350"/>
+<div style="text-align: center; margin-bottom:20px">
+    <img src="images/find_name_and_number_postal.png" alt="find customers" width="350"/>
     <br>
-    <em>Figure 6: Shows multiple people found using prefix search</em>
+    <em>Figure 5: Shows multiple people found using prefix search of name, number and postal code </em>
 </div>
-
 
 **Note:** The `find` command performs an `OR` search across the criteria, meaning that customers matching any of the provided keywords will be returned.
 
@@ -240,7 +262,7 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 
 ### Deleting a customer : `delete`
 
-Deletes the specified customer from the address book.
+Deletes the specified customer from the contact list.
 
 **Format:** `delete INDEX`
 
@@ -249,19 +271,20 @@ Deletes the specified customer from the address book.
 - The index **must be a positive integer** 1, 2, 3, …
 
 **Examples:**
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `list` followed by `delete 2` deletes the 2nd person in the contact list.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 <div style="text-align: center;">
     <img src="images/delete_customer.png" alt="delete customers" width="350"/>
     <br>
-    <em>Figure 7: Shows customer being deleted using the delete command</em>
+    <em>Figure 6: Shows customer being deleted using the delete command</em>
 </div>
 
 ---
 
-### Deleting customers by PostalCode: `deletePC`
-* Delete all persons from the address book with the given postal code.
+### Deleting customers by postal code: `deletePC`
+
+* Delete all persons from the contact list with the given postal code.
 
 Format: `deletePC POSTALCODE`
 
@@ -269,19 +292,19 @@ Format: `deletePC POSTALCODE`
 * The postal code **must be a 6 digits** 
 
 Examples:
-* `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the address book.
+* `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the contact list.
 
 <div style="text-align: center;">
     <img src="images/delete_by_pc.png" alt="deletePC customers" width="350"/>
     <br>
-    <em>Figure 8: Customer being deleted using deletePC command</em>
+    <em>Figure 7: Customer being deleted using deletePC command</em>
 </div>
 
 ---
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
 **Format:** `clear`
 
@@ -303,7 +326,7 @@ Adds an order to NomNomNotifier.
 <div style="text-align: center;">
     <img src="images/order.png" alt="order" width="350"/>
     <br>
-    <em>Figure 9: Shows new order being added</em>
+    <em>Figure 8: Shows new order being added</em>
 </div>
 
 ---
@@ -324,7 +347,7 @@ Deletes an order from NomNomNotifier.
 <div style="text-align: center;">
     <img src="images/deleteOrder.png" alt="delete order" width="350"/>
     <br>
-    <em>Figure 10: Shows order being deleted</em>
+    <em>Figure 9: Shows order being deleted</em>
 </div>
 
 ---
@@ -338,7 +361,7 @@ Shows a list of all orders in NomNomNotifier.
 <div style="text-align: center;">
     <img src="images/listOrder.png" alt="list order" width="350"/>
     <br>
-    <em>Figure 11: Shows all orders being listed</em>
+    <em>Figure 10: Shows all orders being listed</em>
 </div>
 
 ---
@@ -360,7 +383,7 @@ Adds an order history to a customer.
 <div style="text-align: center;">
     <img src="images/put_order.png" alt="put order" width="350"/>
     <br>
-    <em>Figure 12: Shows order being associated with customer</em>
+    <em>Figure 11: Shows order being associated with customer</em>
 </div>
 
 ---
@@ -377,7 +400,7 @@ Lists all order histories of a customer, including the time of each order.
 <div style="text-align: center;">
     <img src="images/history.png" alt="history" width="350"/>
     <br>
-    <em>Figure 13: Shows order history of John Doe</em>
+    <em>Figure 12: Shows order history of John Doe</em>
 </div>
 
 ---
@@ -401,7 +424,7 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
 <div style="text-align: center;">
     <img src="images/add_shortcut.png" alt="adding shortcuts" width="350"/>
     <br>
-    <em>Figure 14: Shows shortcut being added</em>
+    <em>Figure 13: Shows shortcut being added</em>
 </div>
 
 ---
@@ -418,7 +441,7 @@ You can delete an existing shortcut by specifying its alias and tag name.
 <div style="text-align: center;">
     <img src="images/del_shortcut.png" alt="deleting shortcuts" width="350"/>
     <br>
-    <em>Figure 15: Shows shortcut being deleted</em>
+    <em>Figure 14: Shows shortcut being deleted</em>
 </div>
 
 ---
@@ -432,7 +455,7 @@ View all current shortcuts to see the mappings of aliases to tag names.
 <div style="text-align: center;">
     <img src="images/list_shortcut.png" alt="listing shortcuts" width="350"/>
     <br>
-    <em>Figure 16: Shows shortcuts being listed</em>
+    <em>Figure 15: Shows shortcuts being listed</em>
 </div>
 
 ---
@@ -450,18 +473,22 @@ Examples:
     - `edit 1 t/vg t/v` — Tags the contact at index 1 with "Vegetarian" and "Vegan".
     - `add n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2, #02-25 pc/123456 t/v` — Creates a contact tagged as "Vegan".
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom:20px">
     <img src="images/using_shortcut.png" alt="using shortcuts" width="350"/>
     <br>
-    <em>Figure 17: Shows shortcut being used to edit tags</em>
+    <em>Figure 16: Shows shortcut being used to edit tags</em>
 </div>
 
-> **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`/t`) in commands, they are case-sensitive.
+> **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`t/`) in commands, they are case-sensitive.
+> 
+> This means that when the shortcut, "v" (alias) is set to "Vegan" (tag name), the shortcut, "V" (alias) cannot be set "VEGAN". 
+>
+> However, when using the command `edit 1 t/Vegan t/VEGAN`, where the tags of contact at index 1 is being replaced with "Vegan" and "VEGAN", those two tags are considered different
 
 Example:
 - Assuming the shortcut "v" maps to "Vegan":
-    - `add ... t/v` — Tags with "Vegan".
-    - `add ... t/V` — Tags with "V".
+    - `add ... t/v` — Tags Person with "Vegan".
+    - `add ... t/V` — Tags Person with "V".
 
 ---
 
@@ -469,28 +496,19 @@ Example:
 You can filter the customer list by tags or shortcuts to view only the relevant contacts. The filter command supports prefix searches, is case-insensitive, and allows multiple keywords.
 
 Format: `filter [TAG1] [TAG2] ...`
-* Filters the list by the specified tags. 
-* Shortcuts can also be used to filter, allowing quick access to commonly used tags.
+* Filters the list by the specified tags.
 
 Examples:
-* Assuming "v" (Vegan) and "vg" (Vegetarian) shortcuts are set:
-    - `filter Vegan Vegetarian` — Shows all customers with tags starting with "Vegan" or "Vegetarian" (e.g., "VeganPlus").
-    - `filter v vg` — Uses shortcuts to show customers tagged as "Vegan" or "Vegetarian" or tags that start with those aliases (e.g., "VeganFriendly").
+* `filter Vegan Vegetarian` — Shows all customers with tags containing keywords listed, "Vegan" or "Vegetarian" (e.g., "VeganPlus").
 
 <div style="text-align: center;">
     <img src="images/filter.png" alt="filter" width="350"/>
     <br>
-    <em>Figure 18: Shows filter based on tag: Vegan</em>
-</div>
-
-<div style="text-align: center;">
-    <img src="images/filter_shortcuts.png" alt="filter shortcuts" width="350"/>
-    <br>
-    <em>Figure 19: Shows filters based on preassigned shortcut</em>
+    <em>Figure 17: Shows filter based on tag: Vegan</em>
 </div>
 
 ---
-### **Archive user: `archive`**
+### **Archive customer: `archive`**
 
 Archive a customer so that it doesn't show when we run `list`
 
@@ -509,9 +527,13 @@ Assuming there's at least one person that is unarchived.
 2. `archive 1`
 
 ---
+<<<<<<< HEAD
 ### **List archived users: `listarchive`**
+=======
+### **List archived customer: `listarchive`**
+>>>>>>> master
 
-Shows all archived users only in address book
+Shows all archived customers only in contact list
 
 **Format:**
 `listarchive`
@@ -523,7 +545,7 @@ Assuming there's at least one person that is archived.
 1. `listarchive`
 
 ---
-### **Unarchive user: `unarchive`**
+### **Unarchive customer: `unarchive`**
 
 Unarchive a customer so that it shows when we run `list`
 
@@ -543,14 +565,15 @@ Assuming there's at least one person that is archived.
 
 ---
 
-### **Downloading Data: `download`**  
-Exports the currently displayed Address Book data as a CSV file with optional tag-based filtering.
+### **Downloading Customer Data: `download`**
+Exports the currently displayed contact list data as a CSV file with optional tag-based filtering.
+
 
 **Format:**  
 `download [t/TAG1] [t/TAG2] ...`
 
 **Details:**
-- The command will export only the currently displayed data in the Address Book (based on active filters or views) and not the absolute data stored in the Address Book.
+- The command will export only the currently displayed data in the contact list (based on active filters or views) and not the absolute data stored in the contact list.
 - Creates a CSV file containing the people that match the specified tags.
 - The exported file will be saved in the `./data` subdirectory.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
@@ -558,20 +581,21 @@ Exports the currently displayed Address Book data as a CSV file with optional ta
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
-- `download` — Exports all contacts.
-- `download t/Vegan` — Exports only the contacts tagged as "Vegan."
-- `download t/friend t/colleague` — Exports contacts tagged as both, "friend" and "colleague."
+- `download` — Exports all contacts that exists in displayed list.
+- `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan" within the displayed list.
+- `download t/Vegan t/Vegetarian` — Exports contacts or orders tagged as "Vegan" and "Vegetarian" within the displayed list.
+
 
 <div style="text-align: center;">
     <img src="images/dowload.png" alt="download" width="350"/>
     <br>
-    <em>Figure 20: Shows entire contact list being downloaded</em>
+    <em>Figure 18: Shows entire contact list being downloaded</em>
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 20px">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 21: Shows only people with vegan tag being downloaded</em>
+    <em>Figure 19: Shows only people with vegan tag being downloaded</em>
 </div>
 
 ---

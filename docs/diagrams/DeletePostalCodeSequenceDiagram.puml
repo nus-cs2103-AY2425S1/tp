@@ -1,0 +1,81 @@
+@startuml DeletePostalCodeCommandSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.1
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeletePostalCodeCommandParser" as DeletePostalCodeCommandParser LOGIC_COLOR
+participant "d:DeletePostalCodeCommand" as DeletePostalCodeCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+participant "c:PostalCode" as PostalCode MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletePC 540123")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deletePC 540123")
+activate AddressBookParser
+
+create DeletePostalCodeCommandParser
+AddressBookParser -> DeletePostalCodeCommandParser : parse("deletePC 540123")
+activate DeletePostalCodeCommandParser
+
+DeletePostalCodeCommandParser -> DeletePostalCodeCommandParser : validate postal code format
+alt invalid format
+    DeletePostalCodeCommandParser -> LogicManager : ParseException (Invalid format)
+    deactivate DeletePostalCodeCommandParser
+else
+    create PostalCode
+    DeletePostalCodeCommandParser -> PostalCode : new PostalCode("540123")
+    activate PostalCode
+    PostalCode --> DeletePostalCodeCommandParser : c
+    deactivate PostalCode
+
+    create DeletePostalCodeCommand
+    DeletePostalCodeCommandParser -> DeletePostalCodeCommand : new DeletePostalCodeCommand(c)
+    activate DeletePostalCodeCommand
+    DeletePostalCodeCommand --> DeletePostalCodeCommandParser
+    deactivate DeletePostalCodeCommand
+
+    DeletePostalCodeCommandParser --> AddressBookParser : d
+    deactivate DeletePostalCodeCommandParser
+end
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeletePostalCodeCommand : execute(m)
+activate DeletePostalCodeCommand
+
+DeletePostalCodeCommand -> Model : getPeopleByPostalCode(c)
+activate Model
+Model --> DeletePostalCodeCommand : peopleToDelete (List<Person>)
+deactivate Model
+
+alt peopleToDelete is empty
+    DeletePostalCodeCommand -> LogicManager : CommandException (No match)
+else
+    loop for each person in peopleToDelete
+        DeletePostalCodeCommand -> Model : deletePerson(person)
+    end
+end
+
+create CommandResult
+DeletePostalCodeCommand -> CommandResult : new CommandResult("Deleted customers with postal code 540123: [names]")
+activate CommandResult
+CommandResult --> DeletePostalCodeCommand
+deactivate CommandResult
+
+DeletePostalCodeCommand --> LogicManager : r
+deactivate DeletePostalCodeCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

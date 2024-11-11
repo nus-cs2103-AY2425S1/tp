@@ -12,6 +12,7 @@ title: Developer Guide
     * Product scope
     * User stories
     * Use cases
+    * Planned Enhancements
     * Non-functional Requirements
     * Glossary
 
@@ -261,7 +262,10 @@ Given below is an example usage scenario and how the add shortcut mechanism work
 * After successfully adding the shortcut, `AddShortCutCommand` creates a `CommandResult` with a success message, such as `"New Shortcut added: v -> Vegan"`.
 * The result is returned back to `LogicManager`, completing the `addShortCut` command execution.
 
-![AddShortCutSequenceDiagram](images/AddShortCutSequenceDiagram.png)
+<div style="text-align: center;">
+    <img src="images/AddShortCutSequenceDiagram.png" alt="Delete Shortcut Sequence Diagram" style="width: 100%; max-width: 1200px; height: auto;">
+    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Add Shortcut Sequence Diagram</p>
+</div>
 ---
 
 ### Delete Shortcut feature
@@ -300,12 +304,18 @@ Below is a step-by-step usage scenario of the `delShortCut` feature, illustratin
 * After successfully deleting the shortcut, `DelShortCutCommand` creates a `CommandResult` with the success message `"Shortcut Deleted: v"`.
 * The result is returned to `LogicManager`, completing the `delShortCut` command execution.
 
-![DelShortCutSequenceDiagram](images/DelShortCutSequenceDiagram.png)
-
+<div style="text-align: center;">
+    <img src="images/DelShortCutSequenceDiagram.png" alt="Delete Shortcut Sequence Diagram" style="width: 100%; max-width: 1200px; height: auto;">
+    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Delete Shortcut Sequence Diagram</p>
+</div>
 
 Additional Info
 * This implementation ensures users can delete shortcuts with feedback on success or failure. If the shortcut does not exist, the system provides a clear error message, and `Tag.updateShortCutMappings` ensures shortcut mappings remain up-to-date across components.
 * This implementation allows users to create new shortcuts while enforcing uniqueness. It provides meaningful error feedback if a conflict exists, and updates the model with new shortcuts. The `Tag.updateShortCutMappings` method ensures all components are aware of the new mapping, maintaining consistency across the application.
+
+> Design Explanation:
+> 
+> When creating a Shortcut, ALIAS and TAG_NAME are case-insensitive: the methods `Model.hasAlias` and `Model.hasTagName` checks if the value exist in storage regardless of how it is captialised. This was done to avoid confusion between different aliases set. eg. "V" and "v". We still wanted to enforce case-sensitivity for commands with `t/` when creating custom tags to offer flexibility to the user
 
 ---
 
@@ -596,14 +606,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `manager`, unless specified otherwise)
+(For all use cases below, the **System** is the `NomNomNotifier` and the **Actor** is the `manager`, unless specified otherwise)
 
 **Use case: Add a customer**
 
 **MSS**
 1. Manager requests to add customer
-2. AddressBook adds the person
-    Use Case Ends
+2. AddressBook adds the person 
+3. Use Case Ends
 
 **Extension**
 * 1a. Manager request/invalid/incomplete
@@ -614,6 +624,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. Abbreviation is mapped to pre-assigned tag name
   * Use Case resumes at step 2
 
+**Use case: Edit for a customer**
+
+**MSS**
+1. Manager requests to list the customers
+2. NomNomNotifier shows a list of customers
+3. Manager requests to edit customer details at a given index
+4. NomNomNotifier changes the customer detail accordingly
+5. Use Case Ends
+
+**Extension**
+* 2a. List is empty
+  * 
+* 3a. Manager request does not adhere to field's restrictions
+  * 3a1. NomNomNotifier shows an error message
+  * Use Case resumes at 3
+
 **Use case: Search for a customer**
 
 **MSS**
@@ -621,11 +647,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AddressBook shows a list of customers
 3. Manager requests to search for customer by name/phone number
 4. AddressBook shows the customer
-   Use Case Ends 
+5. Use Case Ends
 
 **Extension**
-* 1a. Manager request/invalid/incomplete
-  * 1a1. AddressBook shows an error message.
+* 3a. Manager request/invalid/incomplete
+  * 3a1. AddressBook shows an error message.
   * Use Case Ends
 * 2a. The list is empty
   * User Case Ends
@@ -685,6 +711,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ShortCut does not exist in AddressBook
     * 1b1. AddressBook shows error message
     * Use Case ends
+
+### Planned Enhancements
+
+Team Size: 5
+
+1. **Enforce Case-Insensitivity for Tags to Promote Consistency**
+
+    The current behavior for tag handling creates a discrepancy between shortcut creation (case-insensitive) and tag usage (`t/` command is case-sensitive), which can lead to user confusion. We plan to align the behavior for consistency and improve user experience.
+       We plan to make tags case-insensitive to promote consistency between shortcut handling and custom tagging. 
+
+
+2. **Enforce Prefix Usage (`t/`) on Filter Command:**
+    
+    The current behaviour regarding the filter feature, involves the multiple keywords being parsed into `TagsContainKeywordPredicate` which uses the `contain` method against all current tags and filtering the people based on the keywords. As Tag Names are allowed to have spaces, possible tags could be "No Pork" and "Pork Lover". 
+    When using the filter feature for "Pork Lover" as input, the result would show people containing both tags as both contain the keyword: "Pork". This may limit the usage of this feature. As such, we plan to use prefix `t/` within the filter command so that the entire keyword "Pork Lover" can be parsed, with relevant customer details being listed. 
+
+
+3. **Enhance the unique identifier of a `Person` to be both name and phone number**
+    
+    The current behaviour includes the unique identifier of a Person to the name attribute. However, we acknowledge that people can have the same name. As such, this enhancement would entail
+    the name and phone number to be unique identifier for a `Person`. We understand that this may interfere with order put command. This would also entail the inclusion of a phone number field when using the `put` command. 
+
+4. **Being able to edit/delete order history of a customer**
+
+   Add editHistory and deleteHistory command that allows order history of a customer to be modified
+
+
+5.**Being able to export customer order history into csv file**
+
+* Add downloadOrderHistory to export all customer data alongside the order history
+
 
 ### Non-Functional Requirements
 
@@ -758,10 +815,4 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Instructions for manual testing**
-1. **Being able to edit/delete order history of a customer**
-- Add `editHistory` and `deleteHistory` command that allows order history of a customer to be modified
-
-2. Being able to export customer order history into csv file
-- Add `downloadOrderHistory` to export all customer data alongside the order history
 
