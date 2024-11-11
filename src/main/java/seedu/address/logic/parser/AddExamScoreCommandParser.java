@@ -11,6 +11,8 @@ import seedu.address.logic.commands.AddExamScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
 
+import java.util.logging.Level;
+
 /**
  * Parses input arguments and creates a new {@code AddExamScoreCommand} object.
  */
@@ -24,6 +26,10 @@ public class AddExamScoreCommandParser implements Parser<AddExamScoreCommand> {
     public AddExamScoreCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EXAM, PREFIX_EXAM_SCORE);
+
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));
+        }
 
         if (!argMultimap.getValue(PREFIX_EXAM).isPresent() || !argMultimap.getValue(PREFIX_EXAM_SCORE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));
