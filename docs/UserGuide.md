@@ -405,8 +405,8 @@ Examples:
 
 * `find johnny` <br>
   **Output**: <br>
-  Two persons listed that suits your keyword! <br>
-  enters more specific name keywords to retrieve the ID of the person
+  2 persons listed that suits your keyword! <br>
+  Enter more specific name keywords to retrieve the ID of the person
 
 <div style="page-break-after: always;"></div>
 
