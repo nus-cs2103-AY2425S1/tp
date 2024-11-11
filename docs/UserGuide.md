@@ -3,18 +3,16 @@ layout: page
 title: User Guide
 ---
 
-TalentHub is a desktop app designed for **Celebrity Talent Managers**, to help with the **management of celebrity and relevant industrial contacts**.
+Welcome to TalentHub, an all-in-one desktop app designed to help you and other **Celebrity Talent Managers** with the **management of celebrity and relevant industrial contacts**.
 
 TalentHub is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: CLI and GUI:**<br>
-This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
+Having access to both a Command Line Interface (CLI) and a Graphical User Interface (GUI) means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
 
 </div>
-
-If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 * Table of Contents
 {:toc}
@@ -82,7 +80,7 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
 ### Adding a person: `add person`
 
-Adds a person to TalentHub.
+This command allows you to add a person to a list of persons on TalentHub!
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -126,7 +124,7 @@ You can add the prefixes in any order you want!
 
 ### Listing all persons : `list person`
 
-Shows a list of all persons in TalentHub.
+This command allows you to view a list of all persons on TalentHub!
 
 Format: `list person`
 
@@ -139,7 +137,7 @@ Example: Calling `list person` would yield the following output
 
 ### Editing a person : `edit person`
 
-Edits an existing person in TalentHub.
+This command allows you to edit an existing person in TalentHub!
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -175,7 +173,7 @@ Examples:
 
 ### Finding persons by name: `find person`
 
-Finds persons whose names contain any of the given keywords.
+This command allows you to find persons whose names contain any of the given keywords on TalentHub!
 
 Format: `find person KEYWORD [MORE_KEYWORDS]`
 
@@ -197,8 +195,8 @@ Examples:
 
 ### Viewing person by name: `view person`
 
-Views the comprehensive details, which includes address and email address, of a specific person
-whose name exactly matches the given keywords.
+This command allows you to view the comprehensive details, which includes address and email address, of a specific person
+whose name exactly matches the given keywords on TalentHub!
 
 Format: `view person KEYWORD [MORE_KEYWORDS]`
 
@@ -220,7 +218,7 @@ Examples:
 
 ### Filtering person by tag: `filter person`
 
-Filters persons based on the exact tag provided, ensuring only persons with that tag are displayed.
+This command allows you to filter persons based on the exact tag provided, ensuring only persons with that tag are displayed on TalentHub!
 
 Format: `filter person TAG`
 
@@ -240,7 +238,7 @@ Examples:
 
 ### Deleting a person : `delete person`
 
-Deletes the specified person from the address book.
+This command allows you to delete the specified person from the lists of persons on TalentHub!
 
 Format: `delete person INDEX`
 
@@ -276,7 +274,7 @@ Examples:
 
 ### Adding an event: `add event`
 
-Adds an event to TalentHub.
+This command allows you to add an event to a list of events on TalentHub!
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
@@ -313,7 +311,7 @@ You can add the prefixes in any order you want!
 
 ### Listing all events: `list event`
 
-Shows a list of all events in TalentHub.
+This command allows you to view a list of all events on TalentHub!
 
 Format: `list event`
 
@@ -326,7 +324,7 @@ Example: Calling `list event` would yield the following output
 
 ### Editing an event : `edit event`
 
-Edits an existing event in TalentHub.
+This command allows you to edit an existing event on TalentHub!
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
@@ -357,7 +355,7 @@ Examples:
 
 ### Finding events by name: `find event`
 
-Finds events whose names contain any of the given keywords.
+This command allows you to find events whose names contain any of the given keywords on TalentHub!
 
 Format: `find event KEYWORD [MORE_KEYWORDS]`
 
@@ -379,8 +377,8 @@ Examples:
 
 ### Viewing event by name: `view event`
 
-Views the comprehensive details, which includes points of contact, of a specific event whose
-name exactly matches the given keywords.
+This command allows you to view the comprehensive details, which includes points of contact, of a specific event whose
+name exactly matches the given keywords on TalentHub!
 
 Format: `view event KEYWORD [MORE_KEYWORDS]`
 
@@ -403,8 +401,7 @@ Examples:
 
 ### Filtering events by celebrity name: `filter event`
 
-Filters events based on the exact celebrity name provided,
-ensuring that only events associated with that celebrity are displayed.
+This command allows you to filter events based on the exact celebrity name provided, ensuring that only events associated with that celebrity are displayed on TalentHub!
 
 Format: `filter event CELEBRITY_NAME`
 
@@ -427,7 +424,7 @@ Examples:
 
 ### Deleting an event : `delete event`
 
-Deletes the specified event from the address book.
+This command allows you to delete the specified event from the list of events on TalentHub!
 
 Format: `delete event INDEX`
 
@@ -452,7 +449,7 @@ Examples:
 
 ### Clearing all events : `clear event`
 
-Clears all event entries from the address book after receiving confirmation from you.
+This command allows you to clear all event entries from the TalentHub after receiving confirmation from you!
 
 Format: `clear event`
 
@@ -481,7 +478,7 @@ Example:
 
 ### Clearing all entries : `clear all`
 
-Clears all entries from TalentHub.
+This command allows you to clear all entries from TalentHub!
 
 <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
 Running this command will clear all persons and events in TalentHub. This action is irreversible after confirmation.
@@ -508,14 +505,14 @@ Example:
 
 ### Exiting the program : `exit`
 
-Exits TalentHub.
+This command allows you to exit TalentHub!
 
 Format: `exit`
 
 ### More information on Commands : `help`
 
-Provides users with a link to the application's user guide in a new window. This link can be copied using the copy URL button to access
-the user guide online.
+This command provides you with a link to the application's user guide in a new window. This link can be copied using the copy URL button to access
+the user guide online!
 
 Format: `help`
 
@@ -528,15 +525,15 @@ Example:
 
 ### Saving the data
 
-TalentHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data that you store into TalentHub is saved in the hard disk automatically after any command that changes the data. There is no need for you to save your data manually!
 
 ### Editing the data file
 
-TalentHub data are saved automatically as a JSON file `[JAR file location]/data/talenthub.json`. Advanced users are welcome to update data directly by editing that data file.
+Your data is saved automatically as a JSON file `[JAR file location]/data/talenthub.json`! If you are experienced with handling such files, you are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly!
 </div>
 
 ---
