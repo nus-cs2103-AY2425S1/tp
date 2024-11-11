@@ -57,4 +57,10 @@ public class ListAppointmentsCommandParserTest {
         assertParseFailure(parser, " d/2024-10-15 invalid-time",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAppointmentsCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_missingPrefixWithDate_throwsParseException() {
+        assertParseFailure(parser, "2024-10-15",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAppointmentsCommand.MESSAGE_USAGE));
+    }
 }
