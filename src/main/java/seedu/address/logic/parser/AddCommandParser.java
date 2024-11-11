@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS,
                         PREFIX_TAG);
             //Check if name is present
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_PERSON));
@@ -86,7 +86,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         AddCommand.MESSAGE_USAGE_DELIVERY));
             }
 
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS);
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST, PREFIX_STATUS);
             //Set default values if prefixes not present
             Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).orElse("2026-10-12"));
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
