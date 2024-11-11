@@ -113,6 +113,24 @@ Exits the program.
 
 Format: `exit`
 
+# Students
+
+The student list is shown on the left side of TAHub.<br>
+Currently, you can:
+- Add, Edit and delete student
+- Find Students by Name or Course
+- Export & Import Student Data
+
+In a student, courses are represented by course tags.
+Name, Phone Number & Email are represented as texts.<br>
+
+![UgStudent.png](images/UgStudent.png)
+
+This is an example of a student. In this example,
+the student's name is `Fyodor Dostoevsky`,
+studying courses CS2100, CS2101, CS2103T, HSS1000, MA2104 & MA2108,
+has Phone Number 98765432 and Email fyodor@gmail.com.
+
 ## Student Commands
 
 ### Adding a student: `add`
@@ -252,6 +270,7 @@ The consultation list is shown in the middle of TAHub.<br>
 Currently, you can:
 - Add and delete consultations
 - Add and remove students from consultations
+- Export and Import Consultation Data
 
 In a consultation, students are represented by name tags.<br>
 
