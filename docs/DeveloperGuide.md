@@ -322,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | inexperienced user       | be informed a customer already made an identical order    | take note of duplicate orders made by the same customer    |
 | `*`      | inexperienced user       | be informed if a new order's delivery date has passed     | take note of erroneous creation of historical orders       |
 
-*{More to be added}*
 
 For **all** use cases, the system is **SellSavvy** and the actor is the **user**.
 
