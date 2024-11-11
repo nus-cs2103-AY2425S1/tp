@@ -73,6 +73,9 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- Parameters are composed only of letters.<br>
+  e.g. `n` for the name parameter or `p` for the phone number parameter. Numbers are not valid parameter names.
+
 - Parameters in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
