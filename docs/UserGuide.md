@@ -200,7 +200,7 @@ For more details on the `add_vendor` command, such as the additional optional fi
 
 Suppose the bride tells us that she has a preferred florist in mind, and so you need to delete the florist you previously added to the vendor list.
 
-Let's try the entering the following command in the Command Line: `delete_vendor 1`.
+Let's try entering the following command in the Command Line: `delete_vendor 1`.
 
 This means you are deleting the first person that is currently being listed on your vendor list, which is `Jane Tan`.
 
