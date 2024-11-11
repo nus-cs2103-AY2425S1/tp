@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> ViewStudentCommand : execute(m)
 activate ViewStudentCommand
 
-ViewStudentCommand -> Model : deletePerson(d)
+ViewStudentCommand -> Model : updateFilteredList(predicate)
 activate Model
 
 Model --> ViewStudentCommand
