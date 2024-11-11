@@ -432,9 +432,9 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. System shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+4. System deletes the person
 
    Use case ends.
 
@@ -446,9 +446,16 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. Specified person exists in one or more meetings.
+
+    * 3b1. System does not delete specified user
+    * 3b2. System shows an error message.
+
+      Use case ends.
 
 <u>**Use Case: UC1 - Adding events to a schedule**</u>
 
@@ -473,15 +480,15 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
 - 1a. System detects an error in the entered data command format.
 
-    - 1a1. System requests the user to enter the proper command format.
+    - 1a1. System displays error message.
 
-      Use case resume from step 1.
+      Use case ends.
 
 - 1b. System detects a duplicate error in the entered data command.
 
-    - 1b1. System requests the user to enter a non-conflicting time for the event.
+    - 1b1. System displays error message.
 
-      Use case resumes from step 1.
+      Use case ends.
 
 <u>**Use Case: UC2 - Delete events of a schedule**</u>
 
@@ -612,7 +619,7 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 5. The data should be stored locally and should be in a human editable text file.
 6. The product should be for a single user.
 7. The product is not required to use a Database Management System to store data.
-8. The product is not required to depend on your a remote server.
+8. The product is not required to depend on a remote server.
 9. The GUI should work well, the GUI should be usable.
 10. The product should be packaged into a single JAR file.
 11. The product is not required to use third-party frameworks/libraries/services.
@@ -657,8 +664,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -675,15 +680,27 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Test case: Dealing with missing data files.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete all existing data files such as `addressbook.json` and `schedule.json`.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: `addressbook.json` and `schedule.json` will be created an populated with sample data.
 
-1. _{ more test cases …​ }_
+2. Test case: Dealing with corrupted files. In this test, corrupted refers to invalid JSON format.
+
+    1. **Prerequisites**: Ensure `addressbook.json` and `schedule.json` exists and are populated.
+    1. From both of the files, remove the first line with the opening bracket `{`. This will render both files as invalid JSON format.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: Program will render both files invalid JSON format and empty `addressbook` and `schedulelist` will be created.
+
+3. Test case: Dealing with corrupted files. In this test, corrupted refers to valid JSON format with missing fields.
+
+    1. **Prerequisites**: Ensure `addressbook.json` and `schedule.json` exists and are populated.
+    1. From both of the files, remove some fields while maintaining valid JSON format.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: Program will remove entries which has invalid/missing fields while keeping valid entries. A backup of the invalid file is created as `schedule.json.*.bak` and `addressbook.json.*.bak`.
 
 ### Adding a Schedule
 
@@ -697,7 +714,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Expected: New schedule added: Team Meeting on 2024-10-11 at 14:00
 
-3. Test case: `add-schedule c/1 n/Team Meeting d/10-10-2024 t/1400` (duplicated command)
+3. Test case: `add-schedule c/1 n/Team Meeting d/11-10-2024 t/1400` (duplicated command)
 
     1. Expected: This schedule conflicts with an existing schedule.
 
