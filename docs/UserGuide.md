@@ -580,13 +580,10 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, NUStates might fail to run, or discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause NUStates to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If your changes to the data file makes its format invalid, NUStates might fail to run, or discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+- Certain edits can cause NUStates to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- If all the data files are corrupted and there is no way of retrieving the original file made before the edit, delete the data file and restart NUStates. NUStates will reinitialise and run with the default data loaded.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
