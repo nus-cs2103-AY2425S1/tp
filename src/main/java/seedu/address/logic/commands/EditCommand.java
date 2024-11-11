@@ -48,13 +48,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TELEHANDLE + "TELEHANDLE] "
+            + "[" + PREFIX_TELEHANDLE + "TELEGRAM HANDLE] "
             + "[" + PREFIX_CONTACTTYPE + "CONTACT TYPE] "
             + "[" + PREFIX_MOD + "MODULE NAME] "
             + "[" + PREFIX_REMARK + "REMARK]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEHANDLE + "@johndoe"
+            + PREFIX_TELEHANDLE + "@johndoe "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";

@@ -9,12 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ModuleName {
 
     public static final String MESSAGE_CONSTRAINTS = "Module name should consist of:\n"
-            + "- 2 to 3 letters (eg. 'CS'),\n"
+            + "- 2 to 4 letters (eg. 'CS'),\n"
             + "- followed by exactly 4 digits (eg. '1231'),\n"
             + "- optionally ending with either a single letter (eg. 'S') or a dash and one letter (eg. '-T').\n"
             + "Examples of valid module names: CS1231, CS1231S, CS2103-T";
 
-    public static final String VALIDATION_REGEX = "^([A-Za-z]{2,3}\\d{4}([A-Za-z]|-[A-Za-z])?)$";
+    public static final String VALIDATION_REGEX = "^([A-Za-z]{2,4}\\d{4}([A-Za-z]|-[A-Za-z])?)$";
 
     private final String moduleName;
 

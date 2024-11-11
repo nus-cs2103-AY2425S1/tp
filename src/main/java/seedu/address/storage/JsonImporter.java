@@ -38,7 +38,7 @@ public class JsonImporter {
             jsonAddressBook = JsonUtil.readJsonFile(
                     filePath, JsonSerializableAddressBook.class);
         } catch (DataLoadingException e) {
-            throw new ImporterException(e);
+            throw new ImporterException(e.getMessage());
         }
         if (!jsonAddressBook.isPresent()) {
             throw new ImporterException("jsonAddressBook is Null");
@@ -48,7 +48,7 @@ public class JsonImporter {
             model.addAllPersons(jsonAddressBook.get().toModelType(true));
             return model;
         } catch (IllegalValueException ive) {
-            throw new ImporterException(ive);
+            throw new ImporterException(ive.getMessage());
         }
     }
 

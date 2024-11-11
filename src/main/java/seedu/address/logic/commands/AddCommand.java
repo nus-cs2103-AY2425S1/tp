@@ -23,15 +23,15 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. \n"
             + "Parameters: "
-            + PREFIX_CONTACTTYPE + "CONTACT TYPE "
             + PREFIX_NAME + "NAME "
-            + "[" + PREFIX_TELEHANDLE + "TELEGRAMHANDLE] "
-            + PREFIX_MOD + "MODULE NAME "
-            + PREFIX_REMARK + "REMARK "
+            + PREFIX_CONTACTTYPE + "CONTACT TYPE "
+            + "[" + PREFIX_TELEHANDLE + "TELEGRAM HANDLE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_MOD + "MODULE NAME] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CONTACTTYPE + "work "
@@ -64,6 +64,25 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // Check for duplicate phone numbers
+        if (toAdd.getPhone().isPresent() && model.getAddressBook().hasPhoneNumber(toAdd.getPhone().get())) {
+            throw new CommandException("This phone number already exists in the address book. "
+                    + "Please use a different phone number.");
+        }
+
+        // Check for duplicate Telegram handle
+        if (toAdd.getTelegramHandle().isPresent()
+                && model.getAddressBook().hasTelegramHandle(toAdd.getTelegramHandle().get())) {
+            throw new CommandException("This Telegram handle already exists in the address book. "
+                    + "Please use a different telegram handle.");
+        }
+
+        // Check for duplicate email
+        if (toAdd.getEmail().isPresent() && model.getAddressBook().hasEmail(toAdd.getEmail().get())) {
+            throw new CommandException("This email address already exists in the address book. "
+                    + "Please use a different email address.");
         }
 
         model.addPerson(toAdd);
