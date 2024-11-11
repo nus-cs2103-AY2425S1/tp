@@ -734,7 +734,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
    1. Using the relevant `add` or `add-wed` commands, create dummy data that is to be stored in the storage.
 
-   2. To simulate a corrupted file, locate the addressbok.json or weddingbook.json file in the data folder.
+   2. To simulate a corrupted file, locate the addressbook.json or weddingbook.json file in the data folder.
 
    3. Delete a random line in the .json file, and relaunch KnottyPlanners.
         Expected: KnottyPlanners will launch with all previous data wiped and cleared.

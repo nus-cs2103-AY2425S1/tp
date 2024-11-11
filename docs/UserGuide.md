@@ -46,7 +46,7 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 3. If your version of Java is 17 and above, skip to step 6. If it is less than 17, click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java 17.
 
-4. For Windows users, download the Windows x64 Installer. For MacBook users, download the macOS Arm 64 DMG Installer. Follow the respective installation guides.
+4. For Windows users, download the Windows x64 Installer. For MacBook users, download the macOS ARM 64 DMG Installer. Follow the respective installation guides.
 
 5. After successfully completing the installation, repeat steps 1 to 3 to ensure that you have Java 17.
 
@@ -350,7 +350,7 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DAT
 
 **IMPORTANT:**
 
-* Please take not that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
+* Please take note that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
 
 </box>
 
@@ -498,7 +498,7 @@ Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]
 
 **Tip:** 
 * You can filter by multiple name and/or job fields at once!
-* Keep in mind that partial matches within the name (e.g., middle or last names alone) won’t return results.
+* Keep in mind that partial matches within the name (e.g. middle or last names alone) won’t return results.
 To ensure a match, start from the beginning of the full name or first name.
 
 </box>
@@ -617,7 +617,7 @@ There is no need to save manually.
   
 * If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
-* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
