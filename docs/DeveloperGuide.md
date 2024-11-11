@@ -768,7 +768,7 @@ and does not accept duplicate names, so there will never be a case where more th
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
        Expected: The most recent window size and location is retained.
 
 ### Adding a person
