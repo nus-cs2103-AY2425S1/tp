@@ -32,13 +32,16 @@ title: Developer Guide
 
 
 ---
+<div class="page-break"></div>
 
 ## **Acknowledgements**
 
-This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
+This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
 
-ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
-as well as the JavaDocs for code written by BuffWuff1712. ChatGPT was also used by tayxuenye and cited in the code where applicable.
+ChatGPT by OpenAI was used by [BuffWuff1712](https://github.com/BuffWuff1712) to generate the 
+Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712. 
+
+ChatGPT was also used by [tayxuenye](https://github.com/tayxuenye) and cited in the code where applicable.
 
 ---
 
@@ -47,6 +50,7 @@ as well as the JavaDocs for code written by BuffWuff1712. ChatGPT was also used 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Design**
 
@@ -114,6 +118,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div class="page-break"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F15-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -145,6 +151,8 @@ How the parsing works:
 
 * When called upon to parse a user command, the `PROpertyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `PROpertyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div class="page-break"></div>
 
 ### Model component
 
@@ -182,6 +190,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Implementation**
 
@@ -205,7 +214,7 @@ Upon execution, `AddCommand` first queries the supplied model if it contains a c
 
 ### Add Listing Feature
 
-the ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
+The ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
 When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
 In this case, `AddressBookParser` creates `ListingCommandsParser` to parse user input string.
 
@@ -249,6 +258,7 @@ Similarly, the sorting process within the `Model` component is shown below:
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -283,6 +293,8 @@ simpler to use while being even more functional than alternatives on the market.
 * Keep track of the various landlords who own the houses
 * Easy for agent to remember who to try to sell unit to
 * Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
+
+<div class="page-break"></div>
 
 ### User stories
 
@@ -334,6 +346,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
 | `*`      | user                                    | search up other client information other than name         | find clients based on other information                      |
 | `*`      | user with many clients                 | find and search client besides the name                    | find clients more easily with different kinds of input       |
+
+<div class="page-break"></div>
 
 ### Use cases
 
@@ -808,10 +822,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Priority Tagging**: The act of marking certain clients to appear at the top of the client list for quick access.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Appendix B: Planned Enhancements**
 
-Team Size: 5 members
+**Team Size:** 5 members
 
 As we continue to develop PROperty, we are focused on refining and expanding its capabilities to better meet user needs. 
 Through identifying current limitations, we’re able to target areas that can benefit most from enhancement. 
@@ -862,6 +877,7 @@ This enhancement will improve the user experience by informing the user when the
 and prevent confusion when the user checks their CSV file to find there has been no updates to its contents.
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## **Appendix C: Instructions for Manual Testing**
 
