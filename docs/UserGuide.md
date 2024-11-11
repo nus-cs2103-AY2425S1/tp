@@ -4,7 +4,7 @@ title: CareLink User Guide
 ---
 
 - Table of Contents
-{:toc}
+  {:toc}
 
 ## Introduction
 
@@ -170,7 +170,8 @@ For detailed instructions on all commands, you can proceed to the [Features](#fe
 
 - **Copying Commands from PDF**
   - If copying commands from a PDF, check for any missing spaces, as line breaks may remove spaces when pasted.
-  </div>
+
+</div>
 
 ### Viewing help : `help`
 
