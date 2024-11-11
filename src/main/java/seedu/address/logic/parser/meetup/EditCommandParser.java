@@ -9,9 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.meetup.EditCommand;
@@ -19,6 +19,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meetup.AddedBuyer;
 
@@ -76,8 +77,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses {@code Collection<String> addedBuyers} into a {@code Set<AddedBuyer>}
      * if {@code addedBuyers} is non-empty.
-     * If {@code addedBuyers} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<AddedBuyer>} containing zero addedBuyer.
+     *
      */
     private Optional<Set<AddedBuyer>> parseAddedBuyersForEdit(Collection<String> addedBuyers) throws ParseException {
         assert addedBuyers != null;
@@ -85,8 +85,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (addedBuyers.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> addedBuyerSet = addedBuyers.size() == 1 && addedBuyers.contains("")
-                ? Collections.emptySet() : addedBuyers;
-        return Optional.of(ParserUtil.parseAddedBuyers(addedBuyerSet));
+
+        return Optional.of(ParserUtil.parseAddedBuyers(addedBuyers));
+    }
+
+    /**
+     * Returns true if at least one of the prefixes contains a non-empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean atLeastOnePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
