@@ -61,6 +61,8 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 ### Compulsory Fields: 
 
 1. NAME: Names should only contain alphanumeric characters (letters and digits) and spaces, and should not be blank. **Duplicate names are not allowed**. <br> Prefix: `n/` 
+    * Valid Examples: `John Doe`, `Alice Tan`
+    * Invalid Examples: `#John Do&`, `@l!ce T@n`
 
 <box type="tip" seamless>
 
@@ -70,8 +72,11 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 </box>
 
 2. ADDRESS: Addresses can take any values, and should not be blank. <br> Prefix: `a/`
+    * Valid Examples: `Blk 10 Serangoon Ave 3, #12-12`, `Blk 410 Clementi Ave 2, #08-08`
 
 3. PHONE NUMBER: Phone numbers should contain only numbers, and should be at least 3 digits long. <br> Prefix: `p/`
+    * Valid Examples: `81234567`, `69876543`
+    * Invalid Examples: `99`, `9123 4567`, `9 1 2 3 4 5 6 7`
 
 4. EMAIL: Emails should be of the format local-part@domain. **Most common emails will be accepted** but refer to the specifications below if you need more information: <br> Prefix: `e/`
    * "local-part" can only contain alphanumeric characters and the following special characters: .+_- (Cannot start/end with any special characters)
@@ -83,16 +88,26 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
    * Invalid Examples: `john.doe.@example.com`, `john.doe@exa_mple.com`
 
 5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format yyyy-MM-dd. <br> Prefix: `dob/`
+    * Valid Examples: `2000-01-01`, `1990-12-29`
+    * Invalid Examples: `01-01-2001`, `1st Dec 1996`, `2030-02-01`
 
 ### Optional Fields:
 
-1. PRIORITY: Priority should be HIGH, MEDIUM, or LOW. Default: LOW <br> Prefix: `pri/` 
+1. PRIORITY: Priority should be HIGH, MEDIUM, or LOW. The input is case-insensitive, meaning `high` is the same as `HIGH`. Default: LOW <br> Prefix: `pri/` 
+    * Valid Examples: `HIGH`, `medium`
+    * Invalid Examples: `middle`, `less`
 
 2. INCOME: Income should be a non-negative decimal number. Default: 0 <br> Prefix: `income/`
+    * Valid Examples: `2000.00`, `1500`
+    * Invalid Examples: `-10`, `80.0%`
 
 3. FAMILY SIZE: Family size should be a positive integer. Default: 1 <br> Prefix: `famsize/`
+    * Valid Examples: `5`, `10`
+    * Invalid Examples: `0`, `-3`, `2.5`
 
 4. TAGS: Tag names should be alphanumeric. <br> Prefix: `t/`
+    * Valid Examples: `childcare`, `educational`
+    * Invalid Examples: `#needslegalhelp`, `almost-done`
 
 <box type="info" seamless>
 
