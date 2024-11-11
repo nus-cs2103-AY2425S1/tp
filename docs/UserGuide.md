@@ -587,7 +587,7 @@ If your changes to the data file makes its format invalid, HRConnect will discar
 
 Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
 
-When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
+If you decide to edit employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
 [Return to Top](#table-of-contents)
@@ -599,7 +599,7 @@ Similar to [Editing the data file](#editing-the-data-file), advanced users are w
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to this file makes its format invalid, HRConnect will discard all data and start with an empty file at the next run. Hence, it is recommended to backup the file before editing it.<br>
 
-Likewise, certain edits can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
+Like the data file, certain edits to this file can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
 
 </div>
 
@@ -608,7 +608,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 ## FAQ
 
 **Q**: How do I install Java?<br>
-**A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows). Click on the downloaded file and follow the instructions to install.
+**A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17). Click on the downloaded file and follow the instructions to install.
 
 **Q**: Where is my data stored?<br>
 **A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
@@ -700,7 +700,7 @@ List of certain technical terms / uncommon words used in this user guide.
 
 ### Java
 - The programming language HRConnect is primarily developed with.
-- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
+- It can be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
 
 ### JSON
 - JavaScript Object Notation, a format for storing and transferring data.
