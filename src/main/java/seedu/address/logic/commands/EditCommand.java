@@ -67,7 +67,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    //private final Index index;
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -192,7 +191,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, tags, appointment);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, triage, tags, appointment);
         }
 
         public void setName(Name name) {
