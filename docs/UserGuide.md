@@ -23,6 +23,9 @@ CareConnect is a **CLI-first** **case management application** that enables soci
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
+1. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
+   content being cut-off if the window size is too small.
+
 1. Type the command in the command box.
 
    - Note that invalid commands will be coloured in red.
@@ -87,13 +90,93 @@ Adds a client to the case management system.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
-</div>
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can have any number of tags (including 0).
+</div>
+
+<div id="input-format" markdown="block" class="alert alert-info">
+
+**:information_source: Notes about input formats:**<br>
+The following constraints apply to the `edit` command as well:
+
+* Client's name should only contain alphanumeric characters and spaces, and it should not be blank
+  * The name is recommended to be within 100 characters long to be displayed properly.
+  * name must be unique (case-sensitive). Clients with the same name cannot be added to
+    the system twice.
+      - entering the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit`
+            will not be allowed.
+      - However, clients with the same name spelling but different case can be added. Entering
+        the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit` will successfully add both `John Doe` and `John 
+            doe` to the case management system.
+  * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
+  * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
+
+* Client's phone number should only contain numbers, without spaces and special characters.
+  * The phone number is recommended to be within 20 characters long to be displayed properly.
+  - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`.
+  - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`.
+
+* Client's email address should be of the format local-part@domain and adhere to the following constraints:
+    * The email address is recommended to be within 100 characters long to be displayed properly.
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
+        - The local-part may not start or end with any special characters.
+        - The local-part may not have consecutive special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+        - end with a domain label at least 2 characters long.
+        - have each domain label start and end with alphanumeric characters.
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`.
+    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`.
+
+* Client's addresses can take any values, and it should not be blank.
+    * The address is recommended to be within 100 characters long to be displayed properly.
+    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`.
+    - Unacceptable address format: ``.
+
+* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+    * The tag name is recommended to be within 50 characters long to be displayed properly.
+    - Acceptable tag format: `friend`, `colleague`, `newComer`.
+    - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`.
+</div>
+
+### Editing a client : `edit`
+
+Edits an existing client in the case management system.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about input formats:**<br>
+
+The same constraints on the input formats apply to the `edit` command, refer to [Notes about 
+input formats](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#input-format) in the 
+`add` command 
+section for more details.
+</div>
+
 
 ### Listing all beneficiaries : `list`
 
@@ -113,24 +196,7 @@ Format: `view INDEX`
 
 Examples:
 * `list` followed by `view 2` opens up the record of the 2nd client in the displayed client list.
-* `find n/Betsy` followed by `view 1` opens up the record of the 1st client in the results of the `find` command.
-
-### Editing a client : `edit`
-
-Edits an existing client in the case management system.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
-* You can remove all the client’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+* `find n/Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
 
 ### Tagging a client: `tag`
 
@@ -139,8 +205,9 @@ Tags a client in the case management system.
 Format: `tag INDEX t/TAG_NAME`
 
 * Adds the tag to the client at the specific `INDEX`.
-* The tag must not contain any spaces
-* Only one tag can be added at once
+* The tag names should be alphanumeric. They should not contain any spaces or special characters.
+* Only one tag can be added at once.
+* Adding a tag that has the same tag name as a pre-existing tag will override the original tag.
 
 Example:
 - `tag 1 t/urgent`
@@ -152,23 +219,29 @@ Untags a client in the case management system.
 Format: `untag INDEX t/TAG`
 
 * Removes the tag from the client at the specific `INDEX`.
-* Only one tag can be removed at once
-* If the tag is not found, a warning will be displayed
+* Only one tag can be removed at once.
+* If the tag is not found, a warning will be displayed.
 
 Example:
 - `untag 1 t/urgent`
 
 ### Setting an appointment: `setappointment`
 
-Sets an appointment date for a client
+Sets an appointment date for a client.
 
 Format: `setappointment INDEX d/[YYYY-MM-DD]`
 
-* Sets appointment date for the client at the specific `INDEX`
-* If the date is left empty, the current appointment date will be removed
+* Sets appointment date for the client at the specific `INDEX`.
+* Setting the appointment date to the same date will override the original date, no changes will 
+  be made effectively.
 
 Example:
 - `setappointment 1 d/2024-11-23`
+
+* If the date is left empty, the current appointment date will be removed.
+
+Example:
+- `setappointment 1 d/` removes the appointment date for the client at index 1.
 
 ### Searching and filtering clients: `find`
 
@@ -180,36 +253,39 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * All other invalid parameters will be ignored (eg. `u/` or `e/`)
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The command searches from all clients, not just the one that are currently listed
+
 * The order of the keywords does not matter. 
-  * e.g. `n/Hans Bo` will match name `Bo Hans`
-  * `a/Ave Clementi` will match the address`Clementi Ave`
-* Partial names and addresses will also be matched 
-  * e.g. `Han` will match `Hans`
-  * e.g. `Cle` will match `Clementi`
-* Note that tags is a complete string match
-  * e.g. `elderly` will match `elderly`
-  * e.g. `urg` will not match `urgent`
+  * e.g. `n/Hans Bo` will match name `Bo Hans`.
+  * `a/Ave Clementi` will match the address`Clementi Ave`.
+* Partial names and addresses will also be matched. 
+  * e.g. `Han` will match `Hans`.
+  * e.g. `Cle` will match `Clementi`.
+* Note that tags is a complete string match.
+  * e.g. `elderly` will match `elderly`.
+  * e.g. `urg` will not match `urgent`.
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
-  - e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
-  - This is to search as a filtering function 
-  - e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags
-  - e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`
+  * This is to search as a filtering function.
+  * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags.
+  * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`.
 
 * If multiple parameters are used, only those matching all parameters will be returned
-    to help quickly filter and narrow down searches
-    - e.g. `find n/Hans Bo a/serangoon` will return 
-        1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`
-        2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`
-        3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`
+    to help quickly filter and narrow down searches.
+  * e.g. `find n/Hans Bo a/serangoon` will return:
+        1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`.
+        2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`.
+        3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`.
 
 
 Examples:
-* `find n/ John` returns `johnny` and `John Doe`
-* `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`<br>
-* `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`
-* `find a/ cl av` will return `Carl` with address `Blk 777 Clementi Ave 2`
-* `find n/john a/Bishan t/urgent` will return `John Hans` with address `9 Bishan road, 302534` and tags `urgent`, `ill`
+* `find n/ John` returns `johnny` and `John Doe`.
+* `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`.<br>
+* `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, 
+  #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`.
+* `find a/ cl av` will return `Carl` with address `Blk 777 Clementi Ave 2`.
+* `find n/john a/Bishan t/urgent` will return `John Hans` with address `9 Bishan road, 302534` 
+  and tags `urgent`, `ill`.
 ![img.png](images/findJohnHans.png)
 
 ### Deleting a client : `delete`
@@ -235,13 +311,19 @@ Examples:
 Adds a log entry to the specified client in the case management system.
 
 Format: `addlog INDEX r/REMARK [d/DATE]`
+
 * Adds a log entry to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The remark is mandatory. It can be any non-empty string. e.g. `Client is doing well`
+* The remark is mandatory. It can be any non-empty string within 500 characters. e.g. `Client is 
+  doing well`.
 * The date is optional and defaults to the current date and time if not provided.
-* The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`
+* The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`.
 
+Examples:
+* `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
+* `find n/Alice` followed by `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the results of the `find` command.
+* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the case management system with the remark `Client is doing well` and the current date and time.
 
 ### Deleting a log entry : `deletelog`
 
@@ -257,6 +339,11 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * Note that the `deletelog` command requires confirmation. You will be prompted to key in either `y` or `n` after 
   the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
   execute another command until the `deletelog` command is either confirmed or cancelled.
+
+Examples:
+* `deletelog 2 l/3` deletes the 3rd log entry from the 2nd client in the case management system.
+* `find n/Alice` followed by `deletelog 1 l/2` deletes the 2nd log entry from the 1st client in the 
+  results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -328,9 +415,9 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `view 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
 **Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`

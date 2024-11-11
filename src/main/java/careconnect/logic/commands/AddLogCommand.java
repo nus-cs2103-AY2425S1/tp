@@ -32,8 +32,7 @@ public class AddLogCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a log to the person "
             + "identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + CliSyntax.PREFIX_REMARK + "REMARK "
             + "[" + CliSyntax.PREFIX_DATE + "DATE]\n"
