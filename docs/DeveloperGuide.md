@@ -3,8 +3,28 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+## **Table of Contents**
+
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+* [Implementation](#implementation)
+  * [Parser Mode Switching](#parser-mode-switching)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Apppendix: Product Details](#appendix-product-details)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+* [Appendix: Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -850,8 +870,13 @@ Our team size is 5.
 ### Improved duplication detection
 * Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
 
+
+### Setting a maximum for budget and asking price
+* Currently, there are no restrictions on the maximum value an asking price or budget can take. Therefore, the user can input unrealistic values such as 999,999,999,999. This also creates an issue of `long` overflow when the value is too large (exceeds `9223372036854775807`) as the application uses the `java.lang.Long.parseLong()` method. 
+* A planned enhancement will be to use validation regex to ensure that the asking price and budget values are below a maximum, which can be set to 1,000,000,000.
+
 ### `Find` using more parameters
-* `Find` will be updated to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `Find` command to accept more types of parameters. 
+* `Find` will be updated for all 3 modes to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `Find` command to accept more types of parameters. 
 
 ## **Appendix: Glossary**
 ### Glossary

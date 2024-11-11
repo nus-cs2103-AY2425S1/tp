@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -78,8 +77,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses {@code Collection<String> addedBuyers} into a {@code Set<AddedBuyer>}
      * if {@code addedBuyers} is non-empty.
-     * If {@code addedBuyers} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<AddedBuyer>} containing zero addedBuyer.
+     *
      */
     private Optional<Set<AddedBuyer>> parseAddedBuyersForEdit(Collection<String> addedBuyers) throws ParseException {
         assert addedBuyers != null;
@@ -87,9 +85,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (addedBuyers.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> addedBuyerSet = addedBuyers.size() == 1 && addedBuyers.contains("")
-                ? Collections.emptySet() : addedBuyers;
-        return Optional.of(ParserUtil.parseAddedBuyers(addedBuyerSet));
+
+        return Optional.of(ParserUtil.parseAddedBuyers(addedBuyers));
     }
 
     /**
