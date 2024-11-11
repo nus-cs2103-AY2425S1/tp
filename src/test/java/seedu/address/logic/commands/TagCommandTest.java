@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,8 +96,11 @@ public class TagCommandTest {
 
     @Test
     public void execute_addTagToAllContacts_success() {
-        Tag newTag = new Tag("commonTag");
-        Set<Tag> tagsToAdd = Collections.singleton(newTag);
+        Tag commonTag1 = new Tag("commonTag1");
+        Tag commonTag2 = new Tag("commonTag2");
+        Set<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(commonTag1);
+        tagsToAdd.add(commonTag2);
 
         TagCommand addTagCommand = new TagCommand(tagsToAdd);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -110,8 +114,8 @@ public class TagCommandTest {
                     : new CompanyBuilder((Company) person).withTags(tagNames).build();
             expectedModel.setPerson(person, updatedPerson);
         }
-
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_TO_ALL_SUCCESS, tagsToAdd);
+        String addedTags = tagsToAdd.stream().map(Tag::toString).collect(Collectors.joining(", "));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_TO_ALL_SUCCESS, addedTags);
 
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
 
