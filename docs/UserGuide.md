@@ -16,13 +16,13 @@ you complete these tasks more quickly than traditional applications, making it a
 1. [Installation](#1-installation)
 2. [Command Instructions](#2-command-instructions)
    - [2.1 Viewing Help](#21-viewing-help-help)
-   - [2.2 Adding a Person](#22-adding-a-person-add)
-   - [2.3 Deleting a Person](#23-deleting-a-person-delete)
+   - [2.2 Adding a student](#22-adding-a-student-add)
+   - [2.3 Deleting a student](#23-deleting-a-student-delete)
    - [2.4 Marking a Payment Date](#24-marking-a-payment-date-markpaid)
    - [2.5 Unmarking a Payment Date](#25-unmarking-a-payment-date-unmarkpaid)
-   - [2.6 Editing a Person](#26-editing-a-person-edit)
-   - [2.7 Listing All Persons](#27-listing-all-persons-list)
-   - [2.8 Finding a Person](#28-finding-a-person-find)
+   - [2.6 Editing a student](#26-editing-a-student-edit)
+   - [2.7 Listing All students](#27-listing-all-students-list)
+   - [2.8 Finding a student](#28-finding-a-student-find)
    - [2.9 Clearing All Entries](#29-clearing-all-entries-clear)
    - [2.10 Undo/Redo Commands](#210-undoredo-commands-undo-and-redo)
    - [2.11 Displaying Pie Chart of Class Distribution](#211-displaying-pie-chart-of-class-distribution-pie)
@@ -73,42 +73,86 @@ you complete these tasks more quickly than traditional applications, making it a
 ## 2. Command Instructions
 ### Command Format Guidelines
 
-* `[ ]`: Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+- **Optional Parameters**: Parameters in square brackets `[ ]` are **optional**.
+  <br> e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* `…`: Items with `…` after them can be used multiple times including zero times.
 
-* `UPPER_CASE`: Words in `UPPER_CASE` are the parameters to be supplied by the user.
+- **Repeatable Parameters**: Parameters followed by `…` can be used **zero or more times**.
+  <br> e.g. `n/NAME [t/TAG]…` can be used as `n/John Doe t/friend t/family` or as `n/John Doe`.
 
-* `INDEX`: Refers to the index number shown in the displayed person list.
 
-* `MONTH_PAID`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+- **Parameters in `UPPER_CASE`**: These represent user-supplied values.
+  <br> e.g. `MONTH_PAID` should be replaced with a value like `2024-10`.
 
-* `KEYWORD`: Refers to the search term used to find persons.
 
-* `MORE_KEYWORDS`: Refers to additional search terms used to find persons.
+- **INDEX**: Refers to the index number of a student shown in the displayed student list.
+  <br> e.g. `1` for the first student in the list.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
+- **KEYWORD** and **MORE_KEYWORDS**: These are search terms used to find students.
+  <br> e.g. `John Doe`, `John Doe friend`.
 
-* The commands help, list, exit, pie, bar and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* EduTuTu allows the handling of alphanumeric characters, some special characters and spaces . Emojis are not supported.
+- **Parameter Order**: Parameters can be in **any order**.
+  <br> e.g. If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+- **Prefixes**: They are consistent across every command that uses prefixes.
+  <br> `n/` for **name**
+  <br> `p/` for **phone number**
+  <br> `e/` for **email**
+  <br> `a/` for **address**
+  <br> `f/` for **fees**
+  <br> `c/` for **class ID**
+  <br> `m/` for **month paid**
+  <br> `t/` for **tags**
+
+
+- **Commands Without Parameters**: Provided parameters will be **ignored**.
+  <br> e.g. `help 123` will be interpreted as `help`.
+
+
+- **Copying Commands from PDF**
+  <br> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Space characters surrounding line breaks **may be omitted when copied over** to the application.
+
 
 ### Field Constraints
-* Names support alphanumeric characters and spaces. In addition, it supports the addition of special characters of common name formats.
 
-* Phone numbers accepts hyphen and spaces between the numbers and + (for country code) as special characters. Only one or zero hyphen/spaces are allowed. eg.(91088231, 9108 8231, 9108-8231, +6591088231)
+- **Name**: Accepts **alphanumeric** characters and **spaces**.
+  <br> e.g. `John Doe`
 
-* Fees accepts only a maximum of only 9 digits due to integer overflow constraints.
 
-* Class ID does not accept special characters.
+- **Phone Number**: Accepts **digits**. A **hyphen/space** between numbers, and a **plus character** as the first character can be added. **At most one hyphen/space/plus can be entered.**
+  <br> e.g. `91088231`, `9108 8231`, `9108-8231`, `+65 91088231` are **valid**.
+  <br> e.g. `9123-4567 8910`, `123 456 789`, `+96+91234567` are **invalid**.
 
-* Tags support alphanumeric characters without spaces.
+
+- **Email**: Accepts **alphanumeric** characters, and the following **special characters**: `@+_.-`
+  <br> e.g. `joe@duck.com`, `johnny_123@gmail.com`, `joe@localhost`
+  <br> For more detailed information, refer to the Internet Protocol Standards ([RGC 5322 Section 3.4.1](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)).
+
+
+- **Address**: No specific restrictions.
+  <br> e.g. `Kent Ridge 123123`
+  <br> Note: Rare characters such as **emojis** and **Chinese characters** are not guaranteed to be displayed properly.
+
+
+- **Fees**: Accepts a **maximum of 9 digits** due to technical constraints. **Must be a whole number**.
+  <br> e.g. `0`, `500`, `123456789` are **valid**.
+  <br> e.g. `10.50`, `12345678910` are **invalid**.
+
+
+- **Class ID**: Accepts alphanumeric characters only. **Spaces are not accepted.**
+  <br> e.g. `12345`
+
+
+- **Month Paid**: Uses the format `YYYY-MM`. It must be within the range `1900-01` to `2099-12` inclusive.
+  <br> e.g. `2024-01`, `2024-12` are **valid**.
+  <br> e.g. `2024-1`, `2024-13` are **invalid**.
+
+
+- **Tag**: Accepts alphanumeric characters only. **Spaces are not accepted.**
+  <br> e.g. `friend`, `family`, `class123`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -118,32 +162,32 @@ you complete these tasks more quickly than traditional applications, making it a
 
 **[Command Format](#command-format):** `help`
 
-Shows a message explaining how to access the help page.
+Opens a window explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 **Tips:**
-- Press "esc" to close the help window.
+- Press Esc to close the help window.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.2 Adding a Person: `add`
+### 2.2 Adding a student: `add`
 
-Adds a person to [EduTuTu](#edututu).
+Adds a student.
 
 **[Command Format](#command-format):** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASS_ID [t/TAG]…`
 
 **[Command Word Alias](#command-word-alias):** `a`
 
-> **Remark:** A person can have any number of tags (including 0). Fields can be empty provided the prefix is specified.
-> eg. add n/ p/ e/ a/ f/ c/
+> **Remark:** A student can have any number of tags (including 0). Fields other than NAME can be empty provided the prefix is specified.
+
+**Examples of Add:**
+- `add n/John p/ e/ a/ f/ c/` adds a student with the name `John`, and all other fields blank. 
 
 
-**Example Usage:**
-
-`add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1`
+**Example Usage:** `add n/Ryan p/82154565 e/Ryan@gmail.com a/3 Padang Chancery f/550 c/1`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
@@ -153,7 +197,7 @@ Adds a person to [EduTuTu](#edututu).
       <p><b>Input:</b> User enters the `add` command.</p>
     </div>
     <div style="width: 45%;">
-      <p><b>Output:</b> The UI updates to show the added person.</p>
+      <p><b>Output:</b> The UI updates to show the added student.</p>
     </div>
   </div>
 
@@ -170,29 +214,20 @@ Adds a person to [EduTuTu](#edututu).
 </div>
 
 **Tips:**
-
-- Use the `add` command to add a new person with their name, phone number, email, address, fees, and [class id](#class-id).
-- [Tag](#tag) can be added to classify or group persons for easier management.
-- The `add` command is helpful when setting up new contacts in [EduTuTu](#edututu).
 - `MONTH_PAID` cannot be specified for `add`.
-- Duplicate Tags will be added as a singular tag.
-- Adding duplicate tags require the use of multiple t/ prefix.
+- Duplicate tags will be added as a singular tag.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.3 Deleting a Person: `delete`
+### 2.3 Deleting a student: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 **[Command Format](#command-format):** `delete INDEX`
 
 **[Command Word Alias](#command-word-alias):** `d`
-
-* Deletes the person at the specified `INDEX`.
-* The [index](#index) refers to the index number shown in the displayed person list.
-* The [index](#index) **must be a positive integer** 1, 2, 3, …
 
 **Example Usage:** `delete 4`
 
@@ -201,10 +236,10 @@ Deletes the specified person from the address book.
   <!-- Text Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <p><b>Input:</b> User enters the `delete 4` command to remove the 3rd person in the displayed list.</p>
+      <p><b>Input:</b> User enters the `delete 4` command to remove the 3rd student in the displayed list.</p>
     </div>
     <div style="width: 45%;">
-      <p><b>Output:</b> The UI updates to reflect the deletion of the person.</p>
+      <p><b>Output:</b> The UI updates to reflect the deletion of the student.</p>
     </div>
   </div>
 
@@ -226,23 +261,19 @@ Deletes the specified person from the address book.
 
 ### 2.4 Marking a Payment Date: `markpaid`
 
-Updates the [payment status](#payment-status) of a student to completed.
+Adds the month paid for specified months of a student, or all students.
 
-**[Command Format](#command-format):** `markpaid INDEX m/MONTH_PAID` & `markpaid all m/MONTH_PAID`
-
-
+**[Command Format](#command-format):** `markpaid MARK_TARGET m/MONTH_PAID…`
+<br>`MARK_TARGET`: `INDEX`, or the word `all`
 
 **[Command Word Alias](#command-word-alias):** `mp`
 
-* Marks the payment of the person at the specified `INDEX` for the given month and year.
-* The `INDEX` refers to the index number shown in the displayed person list.
-* The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
-* The [index](#index) **must be within the range** of the number of people in the list.
-* The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
-* The `markpaid all m/MONTH_PAID` command marks all students as paid for the specified month.
-* Can accept multiple months as input. eg. `markpaid 1 m/2024-10 m/2024-11`
+**Examples of Markpaid:**
+- `markpaid 1 m/2024-01` adds the month paid `2024-01` to that student, if it is absent.
+- `markpaid all m/2024-01` adds the month paid `2024-01` to all students currently displayed.
 
-**Example Usage:**
+
+**Example Usage:** `markpaid 1 m/2024-10`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
@@ -268,6 +299,11 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 </div>
 
+**Tips:**
+- `markpaid all` can be used with `find` to target all filtered students.
+- `markpaid` will not modify a student's months paid, if the specified month paid to be added is already present.
+
+
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -275,21 +311,18 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 ### 2.5 Unmarking a Payment Date: `unmarkpaid`
 
-Updates the [payment status](#payment-status) of a student by removing the completed status for a specific month.
+Removes the month paid for specified months of a student, or all students.
 
-**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_PAID` & `unmarkpaid all m/MONTH_PAID`
+**[Command Format](#command-format):** `unmarkpaid MARK_TARGET m/MONTH_PAID…`
+<br>`MARK_TARGET`: `INDEX`, or the word `all`
 
 **[Command Word Alias](#command-word-alias):** `ump`
 
-* Removes the payment mark of the person at the specified `INDEX` for the given month and year.
-* The `INDEX` refers to the index number shown in the displayed person list.
-* The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
-* The [index](#index) **must be within the range** of the number of people in the list.
-* The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
-* The `unmarkpaid all m/MONTH_PAID` command removes the payment status of all students with the specified month.
-* Can accept multiple months as input. eg. `unmarkpaid 1 m/2024-10 m/2024-11`
+**Examples of Unmarkpaid:**
+- `unmarkpaid 1 m/2024-01` removes the month paid `2024-01` from that student, if it is present.
+- `unmarkpaid all m/2024-01` removes the month paid `2024-01` from all students currently displayed.
 
-**Example Usage:**
+**Example Usage:** `unmarkpaid 1 m/2024-10`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
@@ -315,26 +348,26 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 
 </div>
 
+**Tips:**
+- `unmarkpaid all` can be used with `find` to target all filtered students.
+- `unmarkpaid` will not modify a student's months paid, if the specified month paid to be removed is not present.
+
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.6 Editing a Person: `edit`
+### 2.6 Editing a student: `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [m/MONTH_PAID] [t/TAG]…​`
+**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASS_ID] [m/MONTH_PAID]… [t/TAG]…`
 
 **[Command Word Alias](#command-word-alias):** `e`
 
-* Edits the person at the specified `INDEX`. The [index](#index) refers to the [index](#index) number shown in the displayed person list.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
-* You can remove all the person’s [tags](#tags) by typing `t/` without specifying any [tags](#tags) after it.
-* Editing Monthspaid will remove all current Monthspaid and replace them with the new Monthspaid.
+**Examples of Edits:**
+- `edit 1 n/John Doe p/91234567` will edit that student to have the name `John Doe` and phone number `91234567`.
 
-**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com m/2024-10`
+**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
 
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -342,7 +375,7 @@ Edits an existing person in the address book.
   <!-- Text Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <p><b>Input:</b> User enters the `edit` command to change the phone number and email address of the 1st person.</p>
+      <p><b>Input:</b> User enters the `edit` command to change the phone number and email address of the 1st student.</p>
     </div>
     <div style="width: 45%;">
       <p><b>Output:</b> The UI updates to show the edited details.</p>
@@ -361,19 +394,25 @@ Edits an existing person in the address book.
 
 </div>
 
+**Tips**
+- When editing a student's tags/months paid, all old tags/months paid will be overridden by the provided new tags.
+<br> e.g. `edit 1 t/slacker` will edit that student to only have the tag `slacker`.
+<br> e.g. `edit 1 m/2024-10` will edit that student to only have `2024-10` as their month paid.
+<br> e.g. `edit 1 t/` and `edit 1 m/` will remove all tags and months paid from that student respectively.
+
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.7 Listing All Persons: `list`
+### 2.7 Listing All students: `list`
 
-The `list` command displays a list of all persons currently stored in [EduTuTu](#edututu).
+The `list` command displays a all students currently stored in [EduTuTu](#edututu).
 
 **[Command Format](#command-format):** `list`
 
 **[Command Word Alias](#command-word-alias):** `l`
 
-After entering the `list` command, all persons stored in the address book will be displayed in the UI.
+After entering the `list` command, all students stored will be displayed in the UI.
 
 **Example Usage:**
 
@@ -387,51 +426,31 @@ After entering the `list` command, all persons stored in the address book will b
 
   <!-- Output Section -->
   <div style="width: 40%;">
-    <p><b>Output:</b> The UI updates to show all persons.</p>
+    <p><b>Output:</b> The UI updates to show all students.</p>
     <img src="images/list_output.png" alt="Command Output Example" style="width: 100%;" />
   </div>
 
 </div>
 
-**Tips:**
-- The `list` command is particularly useful after adding, editing, or deleting records to confirm changes.
-
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.8 Finding A Person: `find`
+### 2.8 Finding a Student: `find`
 
-The `find` command allows you find specific people by any fields or a combination of fields.
+The `find` command allows you find student by a field or any combination of fields.
 
 
-**[Command Format](#command-format):** `find`
+**[Command Format](#command-format):** `find [n/NAME_PATTERN] [p/PHONE_PATTERN] [e/EMAIL_PATTERN] [f/EXACT_FEES] [c/CLASSID_PATTERN] [m/MONTH_PAID_PATTERN] [!m/MONTH_NOT_PAID_PATTERN]`
 
 **[Command Word Alias](#command-word-alias):** `f`
 
-- **By Name Substring:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING]`
-- **By Phone Number Substring:** `find p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
-- **By Address Substring:** `find a/ADDRESS_SUBSTRING [MORE_ADDRESS_SUBSTRING]`
-- **By Email Substring:** `find e/EMAIL_SUBSTRING [MORE_EMAIL_SUBSTRING]`
-- **By Fees (Exact Match):** `find f/FEES [MORE_FEES]`
-- **By Class ID Substring:** `find c/CLASSID_SUBSTRING [MORE_CLASSIDS_SUBSTRING]`
-- **By Months Paid Substring:** `find m/MONTH_PAID [MORE_YEARS-MONTHS]`
-- **By Months Not Paid Substring:** `find !m/MONTH_PAID [MORE_YEARS-MONTHS]`
-
-
-**Examples of Combined Searches**
-- **By Name and Phone Substring:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING] p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
-- **By Email and Address Substring:** `find e/EMAIL_SUBSTRING [MORE_EMAIL_SUBSTRING] a/ADDRESS_SUBSTRING [MORE_ADDRESS_SUBSTRING]`
-- **By Name, Class ID, and Fees:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING] c/CLASSID_SUBSTRING [MORE_CLASSID_SUBSTRING] f/FEES [MORE_FEES]`
-
-**Notes:**
-- Searches are case-insensitive. For example, `serangoon` will match `Serangoon`.
-- The order of keywords does not matter. For example, `find n/Esther p/832` will match the same as `find p/832 n/Esther`.
-- Fuzzy matches are supported for **Name**, **Phone**, **Email**, **Address**, **Class ID**, and **Months Paid** fields, meaning partial matches will return results (e.g., `832` will match phone numbers starting with `832`).
-- **Exact match** is required for the **Fees** field, so `find f/350` will only return results with an exact fee of 350.
-- Only individuals matching all specified criteria will be included in the search results.
-
-
+**Examples of Searches**
+- `find n/alice` returns students whose names contain `alice`. 
+- `find !m/2024` returns students whose months paid does not contain any instance of `2024`.
+- `find f/100` returns students whose fees is exactly `100`. (i.e. `1000` is not matched.)
+- `find n/john joe` returns students whose names contain `john` or `joe`.
+- `find e/asdf p/123` returns students whose email contains `asdf` and phone number contains `123`.
 
 **Example Usage:** `find n/Kim`
 
@@ -439,17 +458,31 @@ The `find` command allows you find specific people by any fields or a combinatio
 
   <!-- Input Section -->
   <div style="width: 45%; vertical-align: top;">
-    <p><b>Input:</b> User enters the `find` command to search for persons whose names contain the keyword `Kim`.</p>
+    <p><b>Input:</b> User enters the `find` command to search for students whose names contain the keyword `Kim`.</p>
     <img src="images/find_input.png" alt="Find input example" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
+
   <div style="width: 45%; vertical-align: top; margin-top: 20px;">
     <p><b>Output:</b> The UI updates to show persons matching the search keyword.</p>
     <img src="images/find_output.png" alt="Find output example" style="width: 100%;" />
   </div>
 
 </div>
+
+
+**Tips:**
+- Searches are **case-insensitive**.
+  <br> e.g. `serangoon` will match `Serangoon`.
+- **Exact matching** is implemented for **Fees**.
+  <br> e.g. `find f/350` will only match students with an exact fee of `350`.
+- For all other fields, the keyword can be a **single word** or **multiple words separated by a space**.
+  - Single word: [Substring matching](#substring-matching).
+  <br> e.g. `find p/832` will match students with phone numbers that contain `832`.
+  - Multiple words **separated by a space**: [Substring matching](#substring-matching) with each word.
+  <br> Each word will be treated as its own keyword, and students that match **any of these keywords** will be included in the results.
+  <br> e.g. `find n/john alice` will match students with a name that contains `john` or `alice`.
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -462,8 +495,7 @@ The `find` command allows you find specific people by any fields or a combinatio
 
 **[Command Format](#command-format):** `clear`
 
-Upon entering the command, all entries will be cleared from [EduTuTu](#edututu). A message  
-"Address book has been cleared!" will be displayed in the command box.
+Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 
 **Example Usage:** `clear`
 
@@ -484,9 +516,7 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 </div>
 
 **Tips:**
-- Be careful when using this command, as it deletes all current entries.
-- If you do accidentally clear, you can use the `undo` command to reverse the action.
-- Consider exporting your data before using the `clear` command if you need a [backup](#backup).
+- If `clear` is executed unintentionally, you may use the `undo` command to reverse the action.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -496,14 +526,11 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 
 **[Command Format](#command-format):** `undo` and `redo`
 
-The `undo` and `redo` commands allow you to reverse or reapply the most recent changes made to the address book.
-Disclaimer: After an undo/redo command is executed, EduTuTu will display every person present. The list of persons displayed by the latest find command will not be preserved!
+The `undo` and `redo` commands allow you to undo/redo the most recent changes made to student data.
 
 **Format:**
-- `undo` – Reverses the most recent change to the address book.
-- `redo` – Reapplies the most recent change that was undone.
-* The `undo` command can be used to revert the last command that modified the address book.
-* The `redo` command can be used only if an `undo` was performed previously.
+- `undo` – Undoes the latest change to the address book.
+- `redo` – Reverses the latest `undo` command.
 
 **Example Usage:**
 **Input:** User enters the `undo` command to reverse the last change.
@@ -516,9 +543,12 @@ The UI updates to reflect the reapplication of the previously undone change*
 
 **Tips:**
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
-- Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive [backups](#backup), consider exporting your data regularly.
-- The `undo` and `redo` history will be cleared after closing EduTuTu. (i.e. undo cannot be executed when EduTuTu is first open.)
-- Only the last 200 executed commands are saved in the `undo` / `redo` history.
+- The `undo` and `redo` history will be cleared after closing EduTuTu. (i.e. `undo` cannot be executed when EduTuTu is first opened.)
+- Only the last 200 executed commands are saved in the `undo` and `redo` history.
+
+**Known Issues:**
+- After `undo` or `redo` is executed, EduTuTu will display every student present. 
+<br> The list of students displayed by the latest `find` command **will not be preserved**.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -526,14 +556,15 @@ The UI updates to reflect the reapplication of the previously undone change*
 
 ### 2.11 Displaying Pie Chart of Class Distribution: `pie`
 
-Creates a pie chart showing the distribution of students in each class. This feature allows private tutors to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
+Creates a pie chart of the distribution of students in each class, by `CLASS_ID`.
 
 **[Command Format](#command-format):** `pie`
 
-For example, given the following data set with 4 students:
-- 1 student in class 1
-- 2 students in class 2
-- 1 student in class 3
+For example, given the following currently displayed student with 7 students:
+- 2 student in class MA1522
+- 2 students in class CS2103T
+- 2 student in class CS2100
+- 1 student in class MA1521
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
 
@@ -552,8 +583,9 @@ For example, given the following data set with 4 students:
 </div>
 
 **Tips:**
-- Make sure the data is up-to-date before using the `pie` command for accurate visualisation.
-- Press "esc" to close the pie chart window.
+- The pie chart is based on the currently displayed student list.
+- Data shown on the window is not live. (i.e. if student data is modified, the old data will persist on the window.)
+- Press Esc while the window is in focus to close it.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -561,11 +593,11 @@ For example, given the following data set with 4 students:
 
 ### 2.12 Displaying Bar Chart: `bar`
 
-Displays a [bar chart](#bar-chart) showing the number of students who made payments for each month. This feature allows you to visually track payment trends over time.
+Displays a [bar chart](#bar-chart) showing the number of students who made payments for each month, by `MONTH_PAID`.
 
 **[Command Format](#command-format):** `bar`
 
-* The x-axis represents the months (e.g., 2024-01, 2024-02, etc.).
+* The x-axis represents the months (e.g., 2024-01, 2024-02).
 * The y-axis shows the number of students who made their payments during each month.
 * If no payments were made in a given month, the value for that month will be zero.
 
@@ -587,10 +619,13 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 
 
 **Tips:**
-- Use the bar command to monitor payment trends and identify any seasonal patterns.
-- Ensure that all payment records are updated for accurate chart visualisation.
-- If you edited a monthpaid to be an empty string, the empty string may appear in the bar chart
-- Press "esc" to close the bar chart window.
+- The bar chart is based on the currently displayed student list.
+- Data shown on the window is not live. (i.e. if student data is modified, the old data will persist on the window.)
+- Press Esc while the window is in focus to close it.
+
+**Known Issues:**
+- If students with empty `MONTH_PAID` are present in the currently displayed list, they will be represented in the bar chart as an empty string.
+<br> **Fix:** Use the `find` command to filter only for students with non-empty `MONTH_PAID`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -608,7 +643,8 @@ Allows users to quickly access previously entered commands using the up and down
 
 
 **Tips**
-- Command history persists even after the program is closed. It is saved in `commandhistory.json`.
+- Only commands that are executed successfully are saved in command history.
+- Command history persists even after the program is closed. It is saved in `[JAR file location]/commandhistory.json`.
 - By default, the last 2000 executed commands are saved.
 
 [Back to Table of Contents](#table-of-contents)
@@ -617,16 +653,14 @@ Allows users to quickly access previously entered commands using the up and down
 
 ### 2.14 Viewing Student Details: `info`
 
-Displays the detailed information of a student in the list.
+Opens a window with detailed information of a specified student.
 
 **[Command Format](#command-format):** `info INDEX`
 
-* Shows the detailed information of the person at the specified `INDEX`.
-* `INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` refers to the index number shown in the displayed student list.
 * The [index](#index) **must be within the range** of the number of people in the list.
-* Additionally, clicking on a student’s entry in the [GUI](#gui-graphical-user-interface) triggers a pop-up window displaying the same detailed information.
 
-Displaying the detailed command window can be done in two ways:
+Displaying the detailed information window can be done in two ways:
 
 #### Method 1:
 **Example Usage:**
@@ -668,8 +702,8 @@ Displaying the detailed command window can be done in two ways:
 
 
 **Tips:**
-- Ensure that data is updated for accurate visualisation.
-- Press "esc" to close the detailed information window.
+- Data shown on the window is not live. (i.e. if the data of the student is modified, the old data will persist on the window.)
+- Press Esc while the window is in focus to close it.
 - The text from the detailed information window can be highlighted and copied.
 
 [Back to Table of Contents](#table-of-contents)
@@ -678,10 +712,10 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.15 Editing the Data File
 
-[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/EduTuTu.json`. Advanced users can modify data directly by editing that file.
+[EduTuTu](#edututu) data is stored in a [JSON](#json-file) file at `[JAR file location]/data/EduTuTu.json`. Advanced users can edit that file directly to modify student data.
 
 > **Caution:**
-> - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
+> - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to create a backup of the file before making any edits.
 > - Certain edits can cause EduTuTu to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
@@ -690,7 +724,7 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.16 Saving Data
 
-[EduTuTu](#edututu) data is saved in the hard disk automatically after the execution of any command that modifies the data. There is no need for manual saving.
+[EduTuTu](#edututu) data is saved on the hard disk automatically after executing any command that modifies the data. There is no need for manual saving.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -740,14 +774,11 @@ Exiting the program can be done in two ways:
 
 # 3. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduTuTu home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app onto the other computer. Overwrite the all data files it creates with your the data files from your previous EduTuTu folder.
 
 **Q**: How do I save my data?<br> 
-**A**: EduTuTu automatically saves any changes. No manual saving is needed.
-
-**Q**: What if I forget to add the fees when creating a student entry?<br> 
-**A**: You can update the fee amount later using the edit command, like edit 1 f/500 to set fees to 500 for the first student.
+**A**: EduTuTu automatically saves changes after data is modified. No manual saving is needed.
 
 **Q**: What if I accidentally execute the clear command? <br>
 **A**: You can use the undo command to reverse the clear command.
@@ -759,71 +790,54 @@ Exiting the program can be done in two ways:
 
 # 4. Glossary
 
-<a id="edututu"></a>
-- **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
-
-<a id="command-word-alias"></a>
-- **Command Word Alias**: A shorter version of a command word that can be used to perform the same action.
+<a id="class-id"></a>
+- **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
 
 <a id="cli-command-line-interface"></a>
 - **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
 
-<a id="gui-graphical-user-interface"></a>
-- **GUI (Graphical User Interface)**: A user-friendly interface with graphical elements like buttons, icons, and windows, allowing users to interact with the application more visually.
-
 <a id="command-format"></a>
 - **Command Format**: The specific way a command should be typed to work properly in EduTuTu. Following the exact format is essential for the command to be understood by the application.
-
-<a id="index"></a>
-- **Index**: A unique number assigned to each person entry in EduTuTu, used to identify and select entries for actions like editing or deleting.
-
-<a id="tag"></a>
-- **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
-
-<a id="MONTH_PAID"></a>
-- **Month Paid**: A month and year combination, used for representing a month when a person has paid. (e.g., `2024-01`, `2024-12`).
-
-<a id="class-id"></a>
-- **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
-
-<a id="pie-chart"></a>
-- **Pie Chart**: A circular chart divided into slices that shows the proportion of students in each class. It provides a visual overview of class distributions.
-
-<a id="bar-chart"></a>
-- **Bar Chart**: A chart with rectangular bars representing data (e.g., monthly payments) on the x-axis and values on the y-axis, helpful for viewing trends over time.
 
 <a id="command-history"></a>
 - **Command History**: A feature that stores a log of previously entered commands. Users can navigate this history using arrow keys to quickly repeat recent commands.
 
+<a id="command-word-alias"></a>
+- **Command Word Alias**: A shorter version of a command word that can be used to perform the same action.
+
+<a id="edututu"></a>
+- **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
+
+<a id="gui-graphical-user-interface"></a>
+- **GUI (Graphical User Interface)**: A user-friendly interface with graphical elements like buttons, icons, and windows, allowing users to interact with the application more visually.
+
+<a id="index"></a>
+- **Index**: A unique number assigned to each person entry in EduTuTu, used to identify and select entries for actions like editing or deleting.
+
 <a id="json-file"></a>
 - **JSON File**: A text file format for storing data in an organised way, readable by humans and computers. EduTuTu saves all data in a JSON file for easy access and editing.
 
-<a id="payment-status"></a>
-- **Payment Status**: Indicates whether a student’s monthly payment is complete or pending. EduTuTu includes commands to mark payments as completed.
+<a id="month-paid"></a>
+- **Month Paid**: A month and year combination, used for representing a month when a person has paid. (e.g., `2024-01`, `2024-12`).
 
 <a id="parameter"></a>
 - **Parameter**: A value or setting provided by the user within a command to specify details like a name or phone number. Parameters help customise commands to suit specific actions.
 
-<a id="backup"></a>
-- **Backup**: A saved copy of data, which can be restored if the original data is lost or corrupted. It’s advisable to back up the JSON data file before editing it directly.
+<a id="substring-matching"></a>
+- **Substring Matching**: A search method that returns all items containing a provided keyword.
 
-<a id="clear"></a>
-- **Clear**: A command used to remove all entries from the address book, resetting the data.
-
-<a id="exit"></a>
-- **Exit**: A command that closes the EduTuTu application safely.
-
-<a id="storage-file"></a>
-- **Storage File**: The file where EduTuTu data is automatically saved. No manual saving is needed, as data is updated after every command.
+<a id="tag"></a>
+- **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-## Known issues
+### Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
+1. **Multiple Screens:**
+<br> If you move the application to a secondary screen and later switch to using only the primary screen, the GUI might open off-screen.
+<br> **Fix:** Delete the `preferences.json` file created by the application before running it again.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -831,26 +845,23 @@ Exiting the program can be done in two ways:
 <div style="page-break-after: always;"></div>
 
 ## Command summary
-Here's the updated table with the **Unmark Paid** action added:
 
-| Action                      | Format                                                                                                          |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>                                                    |
-| **Bar Chart**               | `bar`                                                                                                           |
-| **Clear**                   | `clear`                                                                                                         |
-| **Delete**                  | `delete INDEX`<br>                                                                                              |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> |
-| **Exit**                    | `exit`                                                                                                          |
-| **Help**                    | `help`                                                                                                          |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                              |
-| **List**                    | `list`                                                                                                          |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                 |
-| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                               |
-| **Pie Chart**               | `pie`                                                                                                           |
-| **Undo**                    | `undo`<br>                                                                                                      |
-| **Redo**                    | `redo`<br>                                                                                                      |
-| **Viewing Command History** | *No command needed, just the use of arrow keys*<br>                                                             |
-| **Viewing Student Details** | `info INDEX` <br>                                                                                               |
-| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                      |
-| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                              |
+| Action                      | Format, Examples                                                                                               |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`                                                         |
+| **Bar Chart**               | `bar`                                                                                                          |
+| **Clear**                   | `clear`                                                                                                        |
+| **Delete**                  | `delete INDEX`<br>                                                                                             |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> |
+| **Exit**                    | `exit`                                                                                                         |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                             |
+| **Help**                    | `help`                                                                                                         |
+| **List**                    | `list`                                                                                                         |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                |
+| **Pie Chart**               | `pie`                                                                                                          |
+| **Redo**                    | `redo`<br>                                                                                                     |
+| **Undo**                    | `undo`<br>                                                                                                     |
+| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                              |
+| **Viewing Student Details** | `info INDEX` <br>                                                                                              |
+
 [Back to Table of Contents](#table-of-contents)
