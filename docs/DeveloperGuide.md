@@ -208,10 +208,6 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 The `unmark` command does the opposite with the similar flow between `Logic` and `Model` component.
 
 
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
 ### Find feature
 
 #### Implementation
