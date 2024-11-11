@@ -181,7 +181,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
 
 **:information_source: Note employee details:**<br>
 
-Since each employee is uniquely identified by their employee ID, users can add employees who share the same name, or who have a common department phone number, email, or address.
+Since each employee is uniquely identified by their employee ID, users can add employees who share the same name, or who have a common department-wide phone number, email, or address.
 
 </div>
 
