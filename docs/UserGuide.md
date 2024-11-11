@@ -149,12 +149,17 @@ Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`
 A person can have any number of study group tags (including 0), and any extra duplicate study group tags will be ignored automatically.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Each person is distinguished using their **email address**. When working with large participant groups, people might have the same name. Thus, it is best to distinguish them by **email address**.
+If a duplicate email is used in an `add` or `edit` command, our app will display an error message indicating that the person already exists.
+</div>
+
 * Email, gender and study group tags are **case-insensitive**.
 * Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. 
 * Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
 * Valid entries for gender are M/m/F/f.
 * Age must be a non-negative integer between 0 and 150 (both inclusive).
-* Two contacts are considered **duplicates** if they share the same **email** address.
+* Two contacts are considered **duplicates** if they share the same **email** address (see tip above).
 
 Examples:
 * `add n/John Doe e/johnd@example.com g/M a/30 d/to be assigned t/1A t/2B`
@@ -178,7 +183,8 @@ Any extra duplicate study group tags in the input will be ignored automatically.
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** (e.g., 1, 2, 3, …).
-* At least one of the optional fields must be provided.
+* **At least one** of the optional fields must be provided.
+  * Fields provided **must** use the proper format specified in the [add command](#adding-a-person--add)
 * When editing tags:
   * Prefix:`[t/ADD-TAG]`
     - the added tags will be **appended** to the list of existing tags (i.e., adding of tags does not overwrite existing tags).
@@ -188,6 +194,7 @@ Any extra duplicate study group tags in the input will be ignored automatically.
     - the tags specified will be **deleted** from the list of existing tags.
     - if the tag name you entered to delete **does not exist**, the edit will be successful, but you will get the warning:
       `You tried removing a nonexistent study group tag.`
+* When editing **emails** : The list should not already contain that email (Unique persons are distinguished by unique email addresses. See [add command](#adding-a-person--add))
 * When editing **all other fields** : Existing values will be updated to the input values.
 
 Examples:
@@ -352,7 +359,6 @@ _Details coming soon ..._
 3. **When opening the url to the User Guide on WSL2**, the operation might fail silently. The remedy is to copy the url link, and manually open the page in your browser.
 4. **When exporting to a directory**, if the directory does not exist, the export will fail due to `unexpected I/O error`. The remedy is to create the required directory in the same folder as the `researchroster.jar` file.
 5. **When editing a person**, you can add and remove the same tag in one command. As tags are added before they are removed, the duplicate tags will be processed without any visible change (with respect to the duplicate tag) to the person. An incorrect warning "`You tried removing a non-existent study group tag`" is then displayed.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
