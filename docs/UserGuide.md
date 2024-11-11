@@ -435,7 +435,8 @@ Format: `untag INDEX t/TAG [t/TAG]…​`
 ![UnTag](images/Untag.png)
 
 Examples:
-
+- `untag 8 t/Silent`
+  - Successfully removes `silent` tag from 8th student
 - `untag 1 t/needs consult t/quiet`
   - Successfully removes `needs consult` tag and `quiet` tag from 1st student
 - `untag 1 t/qquiet`
