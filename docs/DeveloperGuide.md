@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Common operating systems like Windows, Linux, Unix, and macOS supported by the application.
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the app by typing commands instead of using a graphical interface (mouse-driven).
 * **Banking Agent**: A user of the system responsible for selling credit cards to clients.
-* **Contact**: A record in the AgentAssist system that contains cliental and financial details of a client.
+* **Contact**: A record in the AgentAssist system that contains cliental and financial details of a client.<br>
 * **Client**: An individual whose information is managed within the AgentAssist system. This client may be a prospective or existing customer of the banking agent, expressing interest in or currently using credit card services.
 --------------------------------------------------------------------------------------------------------------------
 
