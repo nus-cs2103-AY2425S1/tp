@@ -409,11 +409,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC02 - Edit profile**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one profile added into DorManagerPro.**
 
 **MSS:**
 
-1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags 
+1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags. 
 2. DorManagerPro updates the profile with the new or updated information.
 
    Use case ends.
@@ -447,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC03 - Delete all graduated students**
 
-**Precondition: There is at least one graduated student profile added into DorManagerPro**
+**Precondition: There is at least one graduated student profile added into DorManagerPro.**
 
 **MSS:**
 
@@ -476,13 +476,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC04 - View profiles**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one profile added into DorManagerPro.**
 
 **MSS:**
 
 1. User requests to view all profiles.
 2. DorManagerPro displays all profiles.
-3. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name)
+3. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name).
 4. DorManagerPro displays all profiles with all attached information.
 
    Use case ends.
@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC05 - Delete a profile**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one profile added into DorManagerPro.**
 
 **MSS:**
 
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC06 - Undoing an action**
 
-**Precondition: There is at least one undoable action in the current session of DorManagerPro that has yet to be undone**
+**Precondition: There is at least one undoable action in the current session of DorManagerPro that has yet to be undone.**
 
 **MSS:**
 
@@ -606,7 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case: UC08 - Importing data from a json file**
 
-**Precondition: There is a json file in the valid format required to load to the address book**
+**Precondition: There is a json file in the valid format required to load to the address book.**
 
 **MSS:**
 
