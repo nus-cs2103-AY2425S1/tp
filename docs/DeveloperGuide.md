@@ -184,108 +184,6 @@ Classes used by multiple components are in the `tutorease.address.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `contact delete 5` command to delete the 5th person in the address book. The `contact delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `contact delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `contact add /nDavid …​` to add a new person. The `contact add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `contact delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -316,7 +214,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Reducing scheduling conflicts
 * Providing a clear overview of classes and finances
 
-It enables seamless tutor coordination with students and parents, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
+It enables seamless tutor coordination with primary to junior college level students and parents, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
 
 ### User stories
 
@@ -335,16 +233,17 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | As a  | I want to                                                              | So that I can                                            | Priority |
 |-------|------------------------------------------------------------------------|----------------------------------------------------------|----------|
 | Tutor | Add and delete my students' contacts                                   | Keep track of my students                                | MVP      |
-| Tutor | Add and delete my students' guardians' contacts                        | Keep track of my students’ guardians                     | 2        |
+| Tutor | Add and delete my students' guardians' contacts                        | Keep track of my students’ guardians                     | MVP      |
 | Tutor | Keep track of the house address of a student for home tuition          | Easily go to their house when their tuition starts       | MVP      |
-| Tutor | Keep track of Zoom meeting link of a student for online tuition        | Easily go to the online meeting room when tuition starts | MVP      |
+| Tutor | Keep track of Zoom meeting link of a student for online tuition        | Easily go to the online meeting room when tuition starts | 2        |
 | Tutor | Store what was done in the lessons                                     | Track what was done and plan for next lessons easier     | 2        |
 | Tutor | Create and delete lesson slots in my schedule                          | Keep track of my lessons                                 | MVP      |
 | Tutor | List all my lesson slots in my schedule                                | Keep track of my lessons                                 | MVP      |
 | Tutor | List all my contacts                                                   | Keep track of my contacts                                | MVP      |
 | Tutor | Categorize my students based on subjects or grade levels               | Know what type of lesson it is                           | 2        |
 | Tutor | Keep track of my students' exam dates                                  | Prepare my students adequately by then                   | 2        |
-| Tutor | Edit student details (address, fees, exam, subject, grade level, etc.) | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit student details (name, phone number, email, address, tags, etc.)  | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit guardian details (name, phone number, email, address, tags, etc.) | Ensure guardians' details are up to date                 | 2        |
 
 ### A little bit familiar with the software
 
@@ -354,11 +253,13 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Be able to make my lesson slots repeat every week                        | Avoid creating the same lesson slot every week                            | 2        |
 | Tutor | Keep track of my students' homework (i.e., done status, deadline)        | Track the progress of my students and <br/>keep them accountable          | 2        |
 | Tutor | Change the lesson slot just for that week/all subsequent weeks           | Easily reschedule lessons                                                 | 2        |
-| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after <br/>agreeing on a time slot | 2        |
+| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after <br/>agreeing on a time slot | MVP      |
 | Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                     | 2        |
 | Tutor | Tag students under their guardian                                        | Track total fees to collect                                               | 2        |
 | Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                      | 2        |
 | Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                              | 2        |
+| Tutor | Find a student's or guardian's contact details quickly                   | Contact them quickly                                                      | 2        |
+| Tutor | Find a student's lesson details quickly                                  | Know the location for their tuition                                       | 2        |
 
 ### Expert user
 
@@ -449,6 +350,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Use case resumes from Step 2 or ends if cancelled.  
 
 **Use Case: UC05 - Add lesson for student**  
+Precondition: Student exists in the system.
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
@@ -463,10 +365,16 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-* **1b**. TutorEase detects that the student does not exist.
-    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+* **1b**. TutorEase detects that the student index is invalid.
+    * **1b1**. TutorEase prompts Tutor to key in an index for a student that exists.
     * **1b2**. Tutor enters new data.  
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+* **1c**. TutorEase detects there is an overlapping lesson at the specified date time.
+    * **1c1**. TutorEase prompts Tutor that there is an overlapping lesson.
+    * **1c2**. Tutor enters new data.  
+      Steps 1c1 to 1c2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
 **Use Case: UC06 - Delete lesson for student**  
@@ -601,7 +509,7 @@ Given below are instructions to test the app manually.
     1. Prerequisites: List all persons using the `contact list` command. Multiple persons in the list.
    
     1. Test case: `contact delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    
     1. Test case: `contact delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -617,21 +525,14 @@ Given below are instructions to test the app manually.
 
     1. Prerequisites: There are multiple lessons in the lesson schedule _{ may change when we can filter lessons}_
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `lesson delete 1`<br>
        Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `lesson delete 0`<br>
        Expected: No lesson is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x`, `...` (where x is larger 
+       than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-    
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
