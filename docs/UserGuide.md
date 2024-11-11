@@ -250,7 +250,9 @@ Format: `export [-f] FILENAME`
 
 * Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
 * The `-f` flag is optional and allows overwriting of existing files
-* The filename cannot contain periods (.) or slashes (/ or \)
+* The filename must contain only alphanumeric characters (A-Z, a-z, 0-9)
+* Files are saved in both the data directory and home directory
+* If the home directory copy fails, only the data directory file is created
 
 Examples:
 * `export students` creates students.csv containing current student list
@@ -263,8 +265,14 @@ Imports students from a CSV file into TAHub.
 Format: `import FILENAME`
 
 * The CSV file must have the header: Name,Phone,Email,Courses
+* Files can be read from:
+  * Data directory (./data/): `import students.csv`
+  * Current directory: `import ./students.csv`
+  * Home directory (using ~ prefix): `import ~/documents/students.csv`
+  * Absolute paths: `import /path/to/students.csv`
 * Students with validation errors will be logged in error.csv
 * Duplicate students are skipped and logged
+* Courses should be semicolon-separated in the CSV
 
 Examples:
 * `import students.csv` imports student data from students.csv
@@ -372,7 +380,9 @@ Format: `exportconsult [-f] FILENAME`
 
 * Exports consultation data to 'FILENAME.csv' in both the data directory and user's home directory
 * The `-f` flag is optional and allows overwriting of existing files
-* The filename cannot contain periods (.) or slashes (/ or \)
+* The filename must contain only alphanumeric characters (A-Z, a-z, 0-9)
+* Files are saved in both the data directory and home directory
+* If the home directory copy fails, only the data directory file is created
 
 Examples:
 * `exportconsult sessions` creates sessions.csv containing current consultation list
@@ -385,10 +395,16 @@ Imports consultations from a CSV file into TAHub.
 Format: `importconsult FILENAME`
 
 * The CSV file must have the header: Date,Time,Students
+* Files can be read from:
+  * Data directory (./data/): `importconsult sessions.csv`
+  * Current directory: `importconsult ./sessions.csv`
+  * Home directory (using ~ prefix): `importconsult ~/documents/sessions.csv`
+  * Absolute paths: `importconsult /path/to/sessions.csv`
 * Date must be in YYYY-MM-DD format
 * Time must be in HH:mm format (24-hour)
 * Students must be semicolon-separated and exist in TAHub
-* Invalid entries will be logged in error.csv
+* Consultations with validation errors will be logged in error.csv 
+* Duplicate consultations are skipped and logged
 
 Examples:
 * `importconsult sessions.csv` imports consultation data from sessions.csv
