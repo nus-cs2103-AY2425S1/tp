@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/travisim.png" width="200px">
 
 [[github](http://github.com/travisim)]
-[[portfolio](team/travisim.md)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Team lead, Deliverables and deadlines, Scheduling and tracking, Blockchain expert, Developer
 * Responsibilities: Overall Project Coordination. Ensures that project deliverables are completed on time and in the correct format. In charge of defining, assigning, and tracking project tasks. Helps other team member with Blockchain matters
