@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
+It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-reliant apps.
 
 ---
 
@@ -38,6 +38,7 @@ The user guide contains formatting to highlight important info. The standards us
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
+  - **Employee Commands**
   - [Adding an employee : `add`](#adding-an-employee-add)
   - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
@@ -45,6 +46,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Locating employees by name : `find`](#locating-employees-by-name-find)
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
+  - **Project Commands**
   - [Adding a project : `addproject`](#adding-a-project--addproject)
   - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
   - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
@@ -52,9 +54,11 @@ The user guide contains formatting to highlight important info. The standards us
   - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - **Assignment Commands**
   - [Create an assignment : `assign`](#create-assignment--assign)
   - [List assignments : `listassignments`](#list-assignments--listassignments)
   - [Delete Assignment : `unassign`](#delete-assignment-unassign)
+  - **Other Commands**
   - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [Saving / Editing the data file](#saving-the-data)
 - [FAQ](#faq)
@@ -207,7 +211,9 @@ Format: `listemployees`
 
 Expected output:
 - System message noting success
-- All persons shown in the displayed employee list
+- All employees shown in the displayed employee list
+- Result for `listemployees` with sample data:
+![result for `listemployees`](images/listEmployees.png)
 
 [Return to Top](#table-of-contents)
 
@@ -240,7 +246,7 @@ Expected output:
 
 ### Filtering employees by skills: `filter`
 
-Finds employees who have **at least one skill or tag matching** at least one of the search items.
+**Finds employees who have at least one skill or tag matching** at least one of the search items.
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
@@ -300,8 +306,8 @@ Format: `delete INDEX`
 
 Examples:
 
-- `listemployees` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `listemployees` followed by `delete 2` deletes the 2nd employee in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Expected output:
 - System message noting success
@@ -312,7 +318,10 @@ Expected output:
 ### Clearing all employee entries : `clear`
 
 **Clears all employee entries** from the address book.
-**<span style="color:red">This deletes all employee data!</span>**
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This deletes all employee data!
+</div>
 
 Format: `clear`
 
@@ -354,13 +363,19 @@ Format: `listprojects`
 Expected output:
 - System message noting success, including number of projects listed
 - All projects shown in the displayed project list
+- Result of `listprojects` with sample data:
+![result for `listprojects`](images/listProjects.png)
 
 [Return to Top](#table-of-contents)
 
 
 ### Listing all members of a project : `listprojectmembers`
 
-Shows a list of **all project members**.
+Shows a list of **all project members of the specified project**.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Users can use the `listemployees` and `listassignments` commands to reset the display to show all employees and assignments again.
+</div>
 
 Format: `listprojectmembers pn/PROJECT_NAME`
 
@@ -401,7 +416,7 @@ Expected output:
 
 ### Finding projects by name : `findproject`
 
-Finds projects whose **names contain any of the given keywords**.
+**Finds projects whose names contain any of the given keywords**.
 
 Format: `findproject KEYWORD [MORE_KEYWORDS]`
 
@@ -447,7 +462,10 @@ Expected output:
 ### Clear all project entries : `clearproject`
 
 **Clears all project entries** from HRConnect.<br>
-<span style="color:red">This will delete all project records AND their assignments\!</span>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This will delete all project records AND their assignments!
+</div>
 
 Format: `clearproject`
 
@@ -459,7 +477,7 @@ Expected output:
 
 ### Create Assignment : `assign`
 
-**Creates an assignment** between a Person and a Project.
+**Creates an assignment** between an Employee and a Project.
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
@@ -468,7 +486,7 @@ Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
   - Assignment IDs are compared numerically. `0001` is treated the same as `1`.
 
 - The `PROJECT_ID` must belong to an existing project.
-- The `EMPLOYEE_ID` must belong to an existing person.
+- The `EMPLOYEE_ID` must belong to an existing employee.
 - There must not be an existing assignment with the same `PROJECT_ID` and `EMPLOYEE_ID`.
 
 Examples:
@@ -490,14 +508,16 @@ Format: `listassignments`
 Expected output:
 
 - System message noting success
-- All assignments shown in the top display list
+- All assignments shown in the assignment display list
+- Result of `listassignments` with sample data:
+![result of `listassignments`](images/listAssignments.png)
 
 [Return to Top](#table-of-contents)
 
 ### Delete Assignment: `unassign`
 
-**Deletes an assignment** between a Person and a Project.<br>
-This does not delete the Person nor the Project.
+**Deletes an assignment** between an Employee and a Project.<br>
+This does not delete the Employee nor the Project.
 
 Format: `unassign aid/ASSIGNMENT_ID`
 
@@ -515,7 +535,7 @@ Expected output:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+**Exits the program.**
 
 Format: `exit`
 
@@ -536,7 +556,9 @@ Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
+
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
@@ -553,7 +575,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 **A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see the data files anywhere.<br>
@@ -565,8 +587,9 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
+1. **If your computer has multiple displays**, if you move the application to a secondary display, and later switch to using only the primary display, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Running and using multiple instances of HRConnect at the same time** will result in unpredictable behavior, including inconsistent data saving and displaying. 
 
 [Return to Top](#table-of-contents)
 
@@ -645,7 +668,8 @@ List of certain technical terms / uncommon words used in this user guide.
 - It can be opened in Notepad, or other text or code editors.
 
 ### Numeric
-- Consisting of the digits 0 to 9.
+- Consisting only of the digits 0 to 9.
+- Does not include the negative sign (-), the decimal point (.), spaces, or other symbols.
 
 ### Prefix
 - 1 or more characters, followed by a `/`. 
