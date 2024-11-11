@@ -210,7 +210,7 @@ Examples:
 
 ![update](images/update%20patient.png)
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning** <br>
 Updating only works if the displayed list contains the entry you are updating. Hence, attempting to update a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -234,7 +234,7 @@ Examples:
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
 * `find Betsy` followed by `delete S2345678E` deletes the patient with 'S2345678E' in the results of the `find` command.
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning** <br>
 Deletions only work if the displayed list contains the entry you are deleting. Hence, attempting to delete a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -323,7 +323,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning** <br>
 If only one input is keyed in and it has an NRIC format (e.g S1234567Z), the find command will search for the patient 
 with that NRIC rather than a patient with that name. The application assumes that single inputs of NRIC format are 
 NRICs. When multiple keywords are used, the application treats the keywords as names, regardless of whether they
@@ -549,8 +549,6 @@ the data of your previous AddressBook home folder.
 **Q**: How can I view a history of my backups? <br>
 **A**: Use the `listbackups` command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
 
-<div style="page-break-after: always;"></div>
-
 **Q**: What happens if I enter incorrect or missing information in a command?<br>
 **A**: ClinicBuddy will display an error message and prompt you to check the format or required fields. Double-check command formats and required parameters to avoid errors.
 
@@ -559,6 +557,8 @@ the data of your previous AddressBook home folder.
 
 **Q**: What if I forget the command formats?<br>
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
+
+<div style="page-break-after: always;"></div>
 
 **Q**: How are backups sorted in the listbackups command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
