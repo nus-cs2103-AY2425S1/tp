@@ -74,38 +74,12 @@ public class Name {
      *
      * @param word Any word.
      */
-    private static boolean isRomanNumeral(String word) {
+    public static boolean isRomanNumeral(String word) {
         // Convert to uppercase for checking
         word = word.toUpperCase();
-
-        // Check if the word only contains valid Roman numeral characters
-        if (!word.matches("^[IVXLCDM]+$")) {
-            return false;
-        }
-
-        // Additional validation rules for Roman numerals
-        // Check for valid patterns and combinations
-        if (word.matches(".*I{4,}.*")
-                || word.matches(".*V{2,}.*")
-                || word.matches(".*X{4,}.*")
-                || word.matches(".*L{2,}.*")
-                || word.matches(".*C{4,}.*")
-                || word.matches(".*D{2,}.*")
-                || word.matches(".*M{4,}.*")) {
-            return false;
-        }
-
-        // Check for invalid sequences
-        if (word.matches(".*I[LCDM].*")
-                || word.matches(".*V[XLCDM].*")
-                || word.matches(".*X[CDM].*")
-                || word.matches(".*L[CDM].*")
-                || word.matches(".*D[M].*")) {
-            return false;
-        }
-
-        return true;
+        return word.matches("^M*(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
     }
+
 
     /**
      * Returns true if a given string is a valid name.
