@@ -4,6 +4,7 @@
   pageNav: 3
 ---
 
+
 <!-- no toc -->
 
 # TAHub Contacts User Guide
@@ -25,6 +26,11 @@ student contact details!
 </md>
 </box>
 
+<!-- This section exists to correct a Markbind rendering bug. -->
+<a name="TEMPFIX"><md>
+![](404.png)
+</md></a>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -45,6 +51,7 @@ student contact details!
     - [Adding a course: `course-add`](#course-add)
     - [Editing a course: `course-edit`](#course-edit)
     - [Deleting a course : `course-delete`](#course-edit)
+  - [ENROLLMENT](#enrollment-commands)
     - [Enrolling a student : `enroll`](#enroll)
     - [Unenrolling a student : `unenroll`](#unenroll)
   - [ATTENDANCE](#attendance-commands)
@@ -94,8 +101,8 @@ student contact details!
    - `clear` : Deletes all contacts.
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features :computer:) below for details of each command.
-   Alternatively check the [Command Summary](#command-summary-ledger) for a quick
+6. Refer to the [Features](#FEATURES) below for details of each command.
+   Alternatively check the [Command Summary](#CMD-SUMMARY) for a quick
    list of the available commands. Have fun!
 
 </a>
@@ -155,6 +162,8 @@ student contact details!
 | `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 2 or 3 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -402,6 +411,10 @@ Format: **`course-delete c/COURSE_CODE`**
 
 </panel>
 </a>
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
