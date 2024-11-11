@@ -11,7 +11,7 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Contains utility methods for parsing numbers.
  */
 public class NumbersUtil {
-    private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
+    private static Logger logger = LogsCenter.getLogger(NumbersUtil.class);
 
     /**
      * Parses a string into an integer.

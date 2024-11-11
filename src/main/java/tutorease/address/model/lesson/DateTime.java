@@ -16,7 +16,7 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Represents a DateTime in the address book.
  */
 public class DateTime implements Comparable<DateTime> {
-    private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
+    private static Logger logger = LogsCenter.getLogger(DateTime.class);
     private final LocalDateTime dateTime;
 
     /**
