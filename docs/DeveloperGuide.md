@@ -645,11 +645,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5. Should take less than 1000 milliseconds to finish every command operation.
 6. Should take less 1 gigabyte of storage.
-7. Should have an upper limit of 10000 contacts on the list.
-8. Should take no more than one contact for each person.
-9. Should take no more than 1 emergency contact for each person.
-
-*{More to be added}*
+7. Should be able to work offline.
+8. A new user should be able to be reasonably familiar with the commands within 30 minutes.
+9. DorManagerPro should support all input in English and not other languages.
 
 ### Glossary
 
