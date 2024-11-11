@@ -263,7 +263,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | a tutor                                                                      | receive alerts when upcoming tasks and lessons are nearing                                                   | I can better stay on schedule                                                                                                                                  |
 | `*`      | a tech savvy tutor                                                           | set up macros to quickly switch between commonly used features                                               | I can customise the application to my preferences and master the features of the application                                                                   |
 
-*{More to be added}*
 
 ### Use cases
 
