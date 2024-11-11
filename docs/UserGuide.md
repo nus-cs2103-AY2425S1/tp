@@ -206,7 +206,7 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 
 <box type="warning">
 
-**Caution:** Attempting to edit the tags to include variations of "hired", "rejected" or "pending" as additional tags will reset the status tag to the default "pending"
+**Caution:** Attempting to edit the tags to include variations of "hired", "rejected" or "pending" as additional tags prevent their addition while maintaining the original status tag.
 </box>
 <br><br>
 
