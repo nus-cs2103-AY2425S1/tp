@@ -328,7 +328,7 @@ Format: `create-wedding w/WEDDINGNAME`
 
 Assigns a contact to a `Wedding`.
 
-Format: `assign-wedding INDEX w/WEDDINGNAME`
+Format: `assign-wedding INDEX w/WEDDINGNAME [f/]`
 
 * Assigns a specified contact to the `Wedding` based on their `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -434,7 +434,7 @@ Format: `assign-venor PERSONINDEX`
 * The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Unassigning a Vendor : `unassign-vendor`
-Format: `unassign-venor PERSONINDEX`
+Format: `unassign-venor PERSONINDEX f/`
 
 * Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
 * The index refers to the index number shown in the displayed person list.
