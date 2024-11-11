@@ -322,8 +322,6 @@ Best practices for remarks:
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
-### Q5: How do I add orders for customers/suppliers with a large order?
-**A:** For now, you can use the "remarks" to specify the order quantity instead 
 
 ## **Q5: How are orders sorted in the list?**
 **A:** Orders are automatically sorted in this priority:
@@ -395,6 +393,12 @@ For the best experience:
 **A:** No, phone number is the unique identification number in the contact book. When a different name is attached to an 
 order with a phone number that is already in the address book, the person's name in the address book will be treated as 
 the entity who places the order.
+
+## **Q11: Can I place a customer order from a supplier or vice versa?**
+**A:** Yes, you can. You can feel free to add customer orders from a supplier (or less frequently, place supply orders 
+to a customer). They will be distinguished by the order type under the person's contact card. However, the additional 
+information of suppliers and customers will remain the same - ingredients supplied and information respectively. For 
+additional remarks, please use the remark feature.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
