@@ -87,12 +87,12 @@ any traditional point-and-click management app.
 * Names should only contain alphanumeric characters and spaces
 * Phone numbers should only contain numbers, start with 6, 8 or 9, and it must be 8 digits long
 * Emails should be of the format `local-part@domain` and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-   The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+     The domain name must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * Tag names should be alphanumeric. Tags that have multiple words can be separated by a hyphen (-)
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -196,7 +196,6 @@ How `find` works with multiple parameters:
 Examples:
 * `find n/bernice t/is1108` returns `Bernice Yu`<br>
   ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png){ width="750px" }
-
 
 * `find t/floor t/run` returns all contacts with any tag containing `floor` or `run` <br>
   ![result for 'find t/floor t/run'](images/findFloorRunResult.png){ width="750px" }
