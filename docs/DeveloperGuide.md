@@ -268,7 +268,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Prefers typing over mouse interactions.
 * Familiar with the workings of CLI and commands.
 
-**Value proposition**: Our address book seamlessly combines client contacts,
+**Value proposition**: Clientele+ seamlessly combines client contacts,
 payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
@@ -445,13 +445,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **API**: A set of functions that enable communication between software components
+* **API**: A set of functions that enable communication between software components.
 * **fxml**: File format used to format/structure a JavaFX application's UI.
-* **JavaFX**: A third-party software for Java, used to run our builds and tests
+* **JavaFX**: A third-party software for Java, used to run our builds and tests.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Parser**: The software component responsible for interpreting user input into commands
-* **PlantUML**: A third-party tool that facilitates the creation of various software diagrams
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Parser**: The software component responsible for interpreting user input into commands.
+* **PlantUML**: A third-party tool that facilitates the creation of various software diagrams.
 * **Versioned AddressBook**: An extension to the AddressBook class that allows undoing/redoing actions.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -557,7 +556,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete id/0`<br>
       Expected: No client is deleted. Error details shown in the status message.
 
-   4. Test case `delete n/John Doe` <br>
+   4. Test case: `delete n/John Doe` <br>
       Expected: Client with name `John Doe` is deleted. Details of the deleted client shown in the status message. <br>
       If multiple `John Doe`s exist, list of all `John Doe`s is displayed. <br>
       User prompted to delete by index in status message.
