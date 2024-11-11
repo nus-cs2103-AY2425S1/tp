@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ClinicConnect is **the *ideal* patient management and appointment tracker system for health-screening clinics.** With *unique* functions and layouts tailored to your workflows as health screening clinic assistants, ClinicConnect can get your patient management tasks done faster, more efficiently, and hassle-free.
+ClinicConnect is **the *ideal* patient management and appointment tracker system for health screening clinics.** With *unique* functions and layouts tailored to your workflows as health screening clinic assistants, ClinicConnect can get your patient management tasks done faster, more efficiently, and hassle-free.
 
 ---
 
@@ -74,27 +74,51 @@ Before we proceed with the commands, here are some important points to note on t
 
 **:information_source: Important:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
+<ul>
+<li>
 
-* Parameters in square brackets are optional.<br>
+Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
+</li>
+<li>
+
+Parameters in square brackets are optional.<br>
   e.g. `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|nuts` or as `n|John Doe`.
+</li>
+<li>
 
-* Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
+Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
   e.g. `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
+</li>
+<li>
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
+Parameters can be in any order.<br>
+e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
+</li>
+<li>
 
-* Extraneous parameters for commands that do not take in parameters (such as `home`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `home 123`, it will be interpreted as `home`.
+Extraneous parameters for commands that do not take in parameters (such as `home`, `exit` and `clear`) will be ignored.<br>
+e.g. if the command specifies `home 123`, it will be interpreted as `home`.
+</li>
+<li>
 
-* For these commands requiring NRIC to specify the patient (`bookappt`, `deleteappt`, `delete`, `edit` and `view`), NRIC should:
-    * Be a 9 character uppercase sequence with an alphabet at the start and at the end
-    * Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
-    * Be registered in the system
-<br>
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+For these commands requiring NRIC to specify the patient (`bookappt`, `deleteappt`, `delete`, `edit` and `view`), NRIC should:
+<ul>
+<li>
+Be a 9 character uppercase sequence with an alphabet at the start and at the end
+</li>
+<li>
+
+Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
+</li>
+<li>
+Be registered in the system
+</li></ul>
+</li>
+<li>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</li>
+</ul>
 
 </div>
 
@@ -483,7 +507,7 @@ Not be blank
 Not start with a whitespace
 </li>
 <li>
-Should follow the specifications given below
+Follow the specifications given below
 </li>
 </div>
 
