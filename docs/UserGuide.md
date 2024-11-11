@@ -920,6 +920,14 @@ computer?<br>
 **A**: Since the data is saved in the `addressbook.json` and `appointmentbook.json` files in the `data` 
 folder, you can copy these files to another location as a backup.
 
+<br>
+
+**Q**: How many patients and appointments does DocTrack support? <br>
+**A**: DocTrack technically supports up to 4 billion total **historical** patients and appointments. However,
+depending on your system, it might lag with larger numbers of patients and appointments. 
+We recommend that you do not exceed 10,000 total patients and appointments.
+
+
 <br><br>
 
 ---
