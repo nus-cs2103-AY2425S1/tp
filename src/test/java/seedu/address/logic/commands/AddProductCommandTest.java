@@ -77,7 +77,9 @@ public class AddProductCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public void addProduct(Product product) { throw new AssertionError("This method should not be called."); }
+        public void addProduct(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -110,6 +112,7 @@ public class AddProductCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasSupplier(Supplier supplier) {
             throw new AssertionError("This method should not be called.");
