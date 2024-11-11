@@ -11,7 +11,7 @@ Class Person
 Class GoodsName {
     - name : String
 }
-enum "<<enumeration>>\n GoodsCatgeories" as GoodsCategories {
+enum "<<enumeration>>\n GoodsCategories" as GoodsCategories {
     CONSUMABLES
     LIFESTYLE
     SPECIALTY
