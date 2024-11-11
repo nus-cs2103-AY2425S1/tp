@@ -11,8 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.StudyGroupTag;
 
 /**
- * Represents a Person in the address book. Guarantees: details are present and
- * not null, field values are validated, immutable.
+ * Represents a Person in the address book. Guarantees: details are present
+ * and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -69,8 +69,10 @@ public class Person {
 
     /**
      * Returns true if both persons have the same email. This weaker notion of
-     * equality between two persons allows researchers to differentiate participants
-     * by email.
+     * equality between two persons allows researchers to differentiate
+     * participants by email.
+     *
+     * @return true if samePerson, otherwise false.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -82,8 +84,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields. This
-     * defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {

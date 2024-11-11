@@ -11,8 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given. Tests that a {@code Person}'s
- * {@code Gender} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given.
  */
 public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
     public static final String VALIDATION_REGEX = "^[FfMm]$";
@@ -36,6 +35,8 @@ public class GenderMatchesKeywordsPredicate implements Predicate<Person> {
 
     /**
      * Returns true if a given string is a valid gender.
+     *
+     * @return true if valid, otherwise false
      */
     public static boolean isValidInput(String test) {
         return test.matches(VALIDATION_REGEX);

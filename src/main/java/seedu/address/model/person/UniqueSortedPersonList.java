@@ -15,13 +15,13 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * A sorted list of persons that enforces uniqueness between its elements and does not allow nulls.
  *
  * The list is sorted based on the lexicographical ordering of names using {@code String#compareToIgnoreCase(String)}.
- * Whenever a person is added or updated, the list will automatically reorder to maintain this sorting, to improve user
- * experience.
+ * Whenever a person is added or updated, the list will automatically reorder to maintain this sorting, to
+ * improve user experience.
  *
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniqueSortedPersonList. However, the removal of a person uses
- * Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
+ * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and
+ * updating of persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added
+ * or updated is unique in terms of identity in the UniqueSortedPersonList. However, the removal of a person
+ * uses Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -57,7 +57,8 @@ public class UniqueSortedPersonList implements Iterable<Person> {
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The person identity of {@code editedPerson} must not be the same as another existing
+     * person in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);

@@ -38,8 +38,11 @@ public class AgeContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns true if a given string is a valid input. A valid input should be a non-negative integer, in the format
+     * Returns true if a given string is a valid input.
+     * A valid input should be a non-negative integer, in the format
      * 'number' or 'number-number'.
+     *
+     * @return true if valid, otherwise false
      */
     public static boolean isValidInput(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
