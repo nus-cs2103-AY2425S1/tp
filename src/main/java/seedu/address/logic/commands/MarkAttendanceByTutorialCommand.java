@@ -39,9 +39,9 @@ public class MarkAttendanceByTutorialCommand extends Command {
     public static final String MESSAGE_MARK_TUTORIAL_ATTENDANCE_SUCCESS =
             "Marked attendance of all students in %1$s tutorial for %2$s";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_ALL_STUDENTS =
-            "All students in %1$s tutorial has attendance marked for the corresponding week of date %2$s";
+            "All students in %1$s tutorial have attendance marked for the corresponding week of date %2$s";
     public static final String MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE_SOME_STUDENTS = """
-            Some students in %1$s tutorial has attendance marked for the corresponding week of date %2$s
+            Some students in %1$s tutorial have attendance marked for the corresponding week of date %2$s
             Marked attendance for the following students: %3$s
             Students with duplicate weekly attendance: %4$s
             """;
