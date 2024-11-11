@@ -14,20 +14,20 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
 1. Ensure you have Java `17` or above installed in your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F10-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for SupplyCentral.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SupplyCentral.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/old-Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data and goods view will only show undelivered goods upon startup.<br>
+   ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all suppliers.
 
-   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to SupplyCentral.
+   * `add n/John Doe p/98765432 a/125 Orchard Road #12-34 ABC Building Singapore 123456` : Adds a supplier named `John Doe` to SupplyCentral.
 
    * `delete Alex Yeoh` : Deletes the supplier "Alex Yeoh".
 
@@ -81,7 +81,7 @@ Adds a supplier to the SupplyCentral.
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0). Tags are differentiated by case-sensitive characters.
 </div>
 
 #### Address format
@@ -168,7 +168,15 @@ Format: `exit`
 
 Adds a specific goods item tied to a supplier. All fields are required for this command.
 
+
 Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
+
+* Goods are uniquely identified by all fields. (e.g. Goods can be repeated if any of the fields are different)
+* Quantity should be a positive number `quantity > 0`.
+* Price cannot be a negative number `price >= 0.00`.
+* Procurement Date and Arrival Date should be in the format `YYYY-MM-DD HH:MM` (24-hour format).
+* The Arrival Date should be after the Procurement Date.
+* The Category has to be fully capitalized and one of `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY`.
 
 Examples:
 
@@ -246,7 +254,10 @@ The elements will resize according to the position of the divider, allocating mo
 
 The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
 
-This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.)
+This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time.<br>
+
+Examples:
+* If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.
 
 ![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
@@ -263,6 +274,9 @@ This is a **key** feature of our application and deliveries are automatically ma
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **UI elements can be resized to be too small**: Each UI element can be resized to a point where it may not be visible at all. If this happens accidentally, the user may be confused about the missing UI element. There should be a minimum height/width for each UI element to prevent this issue.
+4. **Unit level and number in the address field are not bounded reasonably**: For commands like `add` and `edit`, the unit level and number in the address field are not reasonably bounded. This allows users to input excessively large unit numbers without any error message.
+5. **Inconsistent Capitalization of Supplier Name for adding Goods**: When adding goods, the supplier name follows the user's exact capitalisation of input and not the capitalisation of the supplier name in the supplier list. This may lead to confusion if the user is not aware of the exact capitalisation of the supplier name.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -270,10 +284,10 @@ This is a **key** feature of our application and deliveries are automatically ma
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Supplier** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete NAME`<br> e.g. `delete Amy`
-**Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
+**Delete Supplier** | `delete NAME`<br> e.g. `delete Amy`
+**Edit Supplier** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g. `find James Jake c/CONSUMABLES`
 **List** | `list`
 **Help** | `help`
