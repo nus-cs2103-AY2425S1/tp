@@ -125,7 +125,7 @@ Format: `exit`
 Adds a student to the edulog.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]...` <br>
-*For phone numbers, only alphanumeric characters are supported.*
+*For names, only alphanumeric characters are supported.*
 
 <box type="tip" seamless>
 Tip: A person can have any number of tags (including 0)
