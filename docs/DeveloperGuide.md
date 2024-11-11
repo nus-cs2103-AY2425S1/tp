@@ -1487,6 +1487,7 @@ maintainability of our code. We went the extra mile for passion and our own lear
 ---------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
+Team size: 5
 1. **Improve Responsiveness of User Interface**: Our current application uses JavaFX for the GUI. However, as the application
 has grown in complexity, users may occasionally experience lag and need to refresh the GUI to view updated information.
 To address this issue, we plan to implement an automatic refresh functionality for our GUI after every command to 
@@ -1506,17 +1507,16 @@ improve categorization and management, we plan to add an “Education Level” (
 6. **Support For Special Characters in Names**: Currently, special characters such as '/' are not allowed in the name
 field.
 In the future, we plan to enhance the application to allow such characters in name inputs.
-7. **Batch Enroll/Unenroll for Multiple Students and Tutorials**: The current system allows enrolling or unenrolling one
+7. **Batch Enroll/Unenroll for Multiple Students**: The current system allows enrolling or unenrolling one
 student into one tutorial at a time. We plan to add functionality for batch enrollments and unenrollments, allowing
-administrators to enroll or unenroll multiple students from a tutorial at once. As well as enroll and unenroll
-a student from multiple tutorials.
+administrators to enroll or unenroll multiple students from a tutorial at once
 8. **Enhance Error Message specificity**: Currently, certain error messages related to invalid user input are either too
 vague or not displayed at all. Specifically, if a user includes a prefix that does not fall within the command's scope,
 the command will not return an error message. Instead, it might process the prefix as a string input and passes it to
 other fields, potentially causing additional errors. Moving forward, we plan to restrict the use of invalid prefixes based on
 the specific command to ensure more precise error handling.
 9. **Allowing Multiple Attendance Records**: Currently, attendance can only be recorded once per tutorial per week.
-This is to ensure user do not accidentally key in the wrong attendance. We plan to allow multiple attendance within the
+This is to ensure user do not accidentally key in the wrong attendance, which results in duplicate weekly attendance. We plan to allow multiple attendance within the
 same week for the same tutorial, but the system will show a warning message. This is to give users more flexibility
 to plan additional classes.
 10. **Enhance Find Command with list sorted by relevance**: The current “Find” command uses AND logic to combine multiple
