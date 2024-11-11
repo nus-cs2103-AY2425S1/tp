@@ -77,18 +77,21 @@ Adds a person to Cher.
 
 Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Role can either be ```student``` or ```parent```, case-insensitive.
+* Name can only contain alphabets and spaces. 
 
-Sex can either be ```f``` or ```m```, case-insensitive.
+* Role can either be ```student``` or ```parent```, case-insensitive.
 
+* Sex can either be ```f``` or ```m```, case-insensitive.
+
+* Phone numbers can contain only numbers and should be exactly 8 digits long. 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe s/m r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Prison p/1234567`
+* `add n/John Doe s/m r/student p/987654321 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Street p/12345678`
 
 ### Listing all persons : `list`
 
@@ -108,6 +111,7 @@ Format: `edit INDEX [n/NAME] [s/SEX] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Note that role cannot be edited. 
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -199,7 +203,7 @@ Examples:
 
 ### Mark attendance for a single student: `mark`
 
-Marks the attendance of a specified student. 
+Marks the attendance of a specified student.
 
 Format: `mark INDEX`
 
@@ -212,7 +216,7 @@ Example:
 
 ### Unmark attendance for a single student: `unmark`
 
-Unmarks the attendance of a specified student. 
+Unmarks the attendance of a specified student.
 
 Format: `unmark INDEX`
 
@@ -225,7 +229,7 @@ Example:
 
 ### Reset attendance: `reset-att`
 
-Resets the attendance count of all students in displayed list to 0. 
+Resets the attendance count of all students in displayed list to 0.
 
 Format: `reset-att`
 
@@ -235,7 +239,7 @@ To reset the attendance count of all students to 0, enter `list` to get a list o
 
 ### Mark attendance for a group of students: `batch-mark`
 
-Marks attendance for all students in the displayed list. 
+Marks attendance for all students in the displayed list.
 
 Format: `batch-mark`
 
@@ -245,7 +249,7 @@ Example:
 
 ### Unmark attendance for a group of students: `batch-unmark`
 
-Unmarks attendance for all students in the displayed list. 
+Unmarks attendance for all students in the displayed list.
 
 Format: `batch-unmark`
 
@@ -253,16 +257,33 @@ Example:
 * Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
 
 ### Selecting persons by index: `select`
-Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the 
-specified contacts will remain in view.
+The `select` command allows users to select one or more persons from the displayed list of persons in the address book. Once a person is selected, the application highlights the selected person(s) in the UI and displays their names in the feedback box.
 
 Format: select INDEX [MORE_INDEXES]...
 
 Examples:
 
-* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts.
-* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show 
-  only these selected contacts.
+* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts. The person at index 2 and 4 will be selected. The feedback box will display:
+  "Selected Person(s): [Name of person at index 2 and 4]" (e.g., "Selected Person(s): John Doe, Alice Tan").
+* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show
+  only these selected contacts. The person at index 3, 5 and 7 will be selected. The feedback box will display:
+  "Selected Person(s): [Name of person at index 3, 5 and 7]" (e.g., "Selected Person(s): John Doe, Alice Tan, Joshua Chou").
+
+Where INDEX refers to the position of the person in the currently displayed list of persons.
+- INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
+- If multiple persons are selected, the application will filter to show only those selected contacts, and their names will be highlighted in the UI.
+- You can specify multiple indexes separated by spaces to select more than one person at a time.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons,
+consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
+For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3.
+- `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you enter duplicate indexes in the `select` command, only the unique persons corresponding to those indexes will be selected. For example, entering `select 1 2 2 2` will only select the persons at indexes `1` and `2`, and the feedback box will display:
+"Selected Person(s): [Name of person at index 1], [Name of person at index 2]"
+e.g., "Selected Person(s): John Doe, Alice Tan".
+</div>
 
 ### Editing tag in a batch: `batch-edit`
 Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
@@ -273,7 +294,7 @@ Format: `batch-edit t/OLDTAG t/NEWTAG`
 Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
-* After successful execution, the contact list will show `Alex Yeoh`, `Bernice Yu` and `Charlotte Oliveiro` 
+* After successful execution, the contact list will show `Alex Yeoh`, `Bernice Yu` and `Charlotte Oliveiro`
   as they all have the `fren` tag.
 
 
@@ -335,6 +356,6 @@ Action | Format, Examples
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
 **Batch Mark** | `batch-mark`
 **Batch Unmark** | `batch-unmark`
-**Reset Attendance** | `reset-att` 
+**Reset Attendance** | `reset-att`
 **List** | `list`
 **Help** | `help`

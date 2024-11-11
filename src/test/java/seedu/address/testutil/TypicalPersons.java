@@ -32,6 +32,7 @@ public class TypicalPersons {
             .withRole("student")
             .withTags("friends")
             .withAttendanceCount("3").build();
+
     public static final Student BENSON = new StudentBuilder()
             .withName("Benson Meier")
             .withSex("M")
@@ -60,7 +61,7 @@ public class TypicalPersons {
     public static final Student ELLE = new StudentBuilder()
             .withName("Elle Meyer")
             .withSex("F")
-            .withPhone("9482224")
+            .withPhone("94822244")
             .withRole("student")
             .withAttendanceCount("3")
             .withEmail("cornelia@example.com")
@@ -68,7 +69,7 @@ public class TypicalPersons {
     public static final Person CARLMEIER = new PersonBuilder()
             .withName("Carl Meier")
             .withSex("M")
-            .withPhone("876452533")
+            .withPhone("87645253")
             .withRole("Parent")
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
@@ -76,7 +77,7 @@ public class TypicalPersons {
     public static final Student FIONA = new StudentBuilder()
             .withName("Fiona Kunz")
             .withSex("F")
-            .withPhone("9482427")
+            .withPhone("94824272")
             .withRole("sTuDenT")
             .withAttendanceCount("3")
             .withEmail("lydia@example.com")
@@ -84,16 +85,16 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder()
             .withName("George Best")
             .withSex("M")
-            .withPhone("9482442")
+            .withPhone("94822442")
             .withRole("parent")
             .withEmail("anna@example.com")
             .withAddress("4th street").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withSex("M").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withSex("M").withPhone("84824242")
             .withRole("parent")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withSex("F").withPhone("8482131")
+    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withSex("F").withPhone("84821311")
             .withRole("student").withAttendanceCount("5")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 

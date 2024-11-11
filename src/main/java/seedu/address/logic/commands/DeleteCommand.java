@@ -14,13 +14,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.prefix.PrefixHandler;
+import seedu.address.logic.parser.AttributeParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.predicates.FilterListPredicate;
+import seedu.address.model.person.predicates.IsPersonInListPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -41,8 +41,8 @@ public class DeleteCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_EMAIL + " johndoe@example.com";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -52,14 +52,15 @@ public class DeleteCommand extends Command {
     private Address address = null;
     private Email email = null;
     private Set<Tag> tags = null;
-    private PrefixHandler prefixHandler = new PrefixHandler();
+    private AttributeParser attributeParser = new AttributeParser();
 
     /**
-     * Constructs a {@code DeleteCommand} that deletes a person identified by a name predicate (partial match).
+     * Constructs a {@code DeleteCommand} for deleting a person by partial name match.
      *
-     * @param predicate The predicate used to find the person by name.
+     * @param predicate The predicate used to match the person by name.
      */
     public DeleteCommand(NameContainsKeywordsPredicate predicate) {
+        //defensive programming
         requireNonNull(predicate);
         this.predicate = predicate;
     }
@@ -70,6 +71,7 @@ public class DeleteCommand extends Command {
      * @param targetIndex The index of the person to be deleted.
      */
     public DeleteCommand(Index targetIndex) {
+        //defensive programming
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
@@ -80,6 +82,7 @@ public class DeleteCommand extends Command {
      * @param phoneNumber The phone number of the person to be deleted.
      */
     public DeleteCommand(Phone phoneNumber) {
+        //defensive programming
         requireNonNull(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
@@ -90,6 +93,7 @@ public class DeleteCommand extends Command {
      * @param address The address of the person to be deleted.
      */
     public DeleteCommand(Address address) {
+        //defensive programming
         requireNonNull(address);
         this.address = address;
     }
@@ -100,6 +104,7 @@ public class DeleteCommand extends Command {
      * @param tags The set of tags used to find the person to be deleted.
      */
     public DeleteCommand(Set<Tag> tags) {
+        //defensive programming
         requireNonNull(tags);
         this.tags = tags;
     }
@@ -110,6 +115,7 @@ public class DeleteCommand extends Command {
      * @param email The email of the person to be deleted.
      */
     public DeleteCommand(Email email) {
+        //defensive programming
         requireNonNull(email);
         this.email = email;
     }
@@ -124,26 +130,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        //defensive programming
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person personToDelete;
+
+        //ensure last shown list is not null, for subsequent code
+        assert lastShownList != null : "Last shown list should not be null";
 
         if (targetIndex != null) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            return executeDeleteByIndex(model, lastShownList);
         } else if (phoneNumber != null) {
             return deletePersonByAttribute(model, phoneNumber, Messages.MESSAGE_INVALID_PHONE_NUMBER);
         } else if (predicate != null) {
-            model.updateFilteredPersonList(predicate);
-            if (model.getFilteredPersonList().size() == 1) {
-                personToDelete = model.getFilteredPersonList().get(0);
-            } else {
-                return new CommandResult(
-                        String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                                model.getFilteredPersonList().size()));
-            }
+            return executeDeleteByPredicate(model);
         } else if (address != null) {
             return deletePersonByAttribute(model, address, Messages.MESSAGE_INVALID_ADDRESS);
         } else if (email != null) {
@@ -151,7 +150,49 @@ public class DeleteCommand extends Command {
         } else {
             return deletePersonByAttribute(model, tags, Messages.MESSAGE_INVALID_TAGS);
         }
+    }
 
+    /**
+     * Executes the delete operation by index.
+     *
+     * @param model The model that holds the list of persons.
+     * @param lastShownList The list of persons currently displayed.
+     * @return The result of the delete command execution.
+     * @throws CommandException If the index is out of bounds.
+     */
+    public CommandResult executeDeleteByIndex(Model model, List<Person> lastShownList)
+            throws CommandException {
+        int zeroBasedIndex = targetIndex.getZeroBased();
+        int lastShownListSize = lastShownList.size();
+        if (zeroBasedIndex >= lastShownListSize) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete)));
+
+    }
+
+    /**
+     * Executes the delete operation using a name predicate.
+     *
+     * @param model The model that holds the list of persons.
+     * @return The result of the delete command execution.
+     */
+    public CommandResult executeDeleteByPredicate(Model model) {
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredList = model.getFilteredPersonList();
+        Person personToDelete;
+        int filteredListSize = filteredList.size();
+        if (filteredListSize == 1) {
+            personToDelete = model.getFilteredPersonList().get(0);
+        } else {
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                            filteredListSize));
+        }
         model.deletePerson(personToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
@@ -170,23 +211,49 @@ public class DeleteCommand extends Command {
     private CommandResult deletePersonByAttribute(Model model, Object attribute,
                                                   String errorMessage) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> personsToDelete = prefixHandler.findPersonByAttribute(lastShownList, attribute);
+        List<Person> personsToDelete = attributeParser.findPersonByAttribute(lastShownList, attribute);
         if (personsToDelete.isEmpty()) {
             throw new CommandException(errorMessage);
         } else if (personsToDelete.size() == 1) {
-            Person personToDelete = personsToDelete.get(0);
-            model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                    Messages.format(personToDelete)));
+            return deleteSingleMatchPerson(personsToDelete, model);
         } else {
-            FilterListPredicate filter = new FilterListPredicate(personsToDelete);
-            model.updateFilteredPersonList(filter);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                            model.getFilteredPersonList().size()));
+            return deleteMultipleMatchPersons(personsToDelete, model);
         }
     }
 
+    /**
+     * Deletes a single matching person from the provided list of persons to delete.
+     *
+     * @param personsToDelete The list containing a single matching person to delete.
+     * @param model The model that holds the list of persons.
+     * @return The result of the delete command execution, indicating successful deletion.
+     */
+    private CommandResult deleteSingleMatchPerson(List<Person> personsToDelete, Model model) {
+        Person personToDelete = personsToDelete.get(0);
+        model.deletePerson(personToDelete);
+        String deletedPersons = Messages.format(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+                deletedPersons));
+    }
+
+    /**
+     * Updates the filtered list with multiple matching persons and returns a command result
+     * showing the number of matches.
+     *
+     * @param personsToDelete The list of persons matching the delete criteria.
+     * @param model The model that holds the list of persons.
+     * @return The result of the delete command, displaying the number of matches.
+     */
+    private CommandResult deleteMultipleMatchPersons(List<Person> personsToDelete, Model model) {
+        IsPersonInListPredicate filter = new IsPersonInListPredicate(personsToDelete);
+        model.updateFilteredPersonList(filter);
+        List<Person> filteredList = model.getFilteredPersonList();
+        int filteredListSize = filteredList.size();
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        filteredListSize));
+
+    }
 
     /**
      * Checks if this {@code DeleteCommand} is equal to another object.
@@ -196,26 +263,86 @@ public class DeleteCommand extends Command {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        if (targetIndex != null) {
-            return targetIndex.equals(otherDeleteCommand.targetIndex);
-        } else if (phoneNumber != null) {
-            return phoneNumber.equals(otherDeleteCommand.phoneNumber);
-        } else if (address != null) {
-            return address.equals(otherDeleteCommand.address);
-        } else if (email != null) {
-            return email.equals(otherDeleteCommand.email);
-        } else if (tags != null) {
-            return tags.equals(otherDeleteCommand.tags);
-        } else {
-            return predicate.equals(otherDeleteCommand.predicate);
-        }
+
+        return isSameTargetIndex(otherDeleteCommand)
+                || isSamePhoneNumber(otherDeleteCommand)
+                || isSameAddress(otherDeleteCommand)
+                || isSameEmail(otherDeleteCommand)
+                || isSameTags(otherDeleteCommand)
+                || isSamePredicate(otherDeleteCommand);
+    }
+
+    /**
+     * Checks if the target index of this {@code DeleteCommand} matches that of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the target indexes match, otherwise false.
+     */
+    public boolean isSameTargetIndex(DeleteCommand other) {
+        Index otherTargetIndex = other.targetIndex;
+        return targetIndex != null && targetIndex.equals(otherTargetIndex);
+    }
+
+    /**
+     * Checks if the phone number of this {@code DeleteCommand} matches that of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the phone numbers match, otherwise false.
+     */
+    public boolean isSamePhoneNumber(DeleteCommand other) {
+        Phone otherPhone = other.phoneNumber;
+        return phoneNumber != null && phoneNumber.equals(otherPhone);
+    }
+
+    /**
+     * Checks if the address of this {@code DeleteCommand} matches that of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the addresses match, otherwise false.
+     */
+    public boolean isSameAddress(DeleteCommand other) {
+        Address otherAddress = other.address;
+        return address != null && address.equals(otherAddress);
+    }
+
+    /**
+     * Checks if the email of this {@code DeleteCommand} matches that of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the emails match, otherwise false.
+     */
+    public boolean isSameEmail(DeleteCommand other) {
+        Email otherEmail = other.email;
+        return email != null && email.equals(otherEmail);
+    }
+
+    /**
+     * Checks if the tags of this {@code DeleteCommand} match those of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the tag sets match, otherwise false.
+     */
+    public boolean isSameTags(DeleteCommand other) {
+        Set<Tag> otherTags = other.tags;
+        return tags != null && tags.equals(otherTags);
+    }
+
+    /**
+     * Checks if the predicate of this {@code DeleteCommand} matches that of another.
+     *
+     * @param other The other DeleteCommand to compare.
+     * @return True if the predicates match, otherwise false.
+     */
+    public boolean isSamePredicate(DeleteCommand other) {
+        NameContainsKeywordsPredicate otherPredicate = other.predicate;
+        return predicate != null && predicate.equals(otherPredicate);
     }
 
     /**
