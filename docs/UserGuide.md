@@ -436,7 +436,7 @@ Sorts the list of contacts by a specified field and order, with pinned contacts 
 Format: `sort f/FIELD o/ORDER`
 
 * The parameters FIELD and ORDER are case-sensitive.
-* The FIELD parameter can be `Name` or `NumProp`.
+* The FIELD parameter can be `Name` or `NumProp`. The `Name` field is the name of the contact and the `NumProp` field is the number of properties associated with the contact. Users can sort the contact list based on these fields.
 * The ORDER parameter can be `L` for ascending (Low to High) and `H` for descending (High to Low).
 
 Examples:
