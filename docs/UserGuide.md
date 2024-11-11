@@ -696,6 +696,7 @@ list-policies INDEX
 **Note:**
 * No filtering or sorting is applied by this command.
 * The command shows all policies regardless of type or expiry date.
+* The `list-policies` command does not alter the main client list display. Instead, it only shows the claim details in the message output box at the top. This behavior is different from `list-clients`, which modifies the main display.
 </div>
 
 **Examples:**
