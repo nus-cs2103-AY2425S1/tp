@@ -54,7 +54,7 @@ public class SupplierCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(supplier.getName().fullName);
         phone.setText(supplier.getPhone().value);
-        company.setText(supplier.getCompany().value);
+        company.setText(supplier.getCompany().displayValue);
         email.setText(supplier.getEmail().value);
         supplier.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

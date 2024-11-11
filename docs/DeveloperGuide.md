@@ -130,15 +130,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Supplier` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Supplier` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -153,110 +144,6 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th supplier in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new supplier. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the supplier was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the supplier being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,9 +178,9 @@ Match with the appropriate suppliers to find products correctly.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                | I want to …​                                      | So that I can…​                                                                                            |
+| Priority | As a …​                | I want to …​                                      | So that …​                                                                                                 |
 |----------|------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `* * *`  | first time shop owner  | can get help on using the application             | I can quickly get up to speed with all the commands                                                        |
+| `* * *`  | first time shop owner  | learn how to use the application                  | I can better use the application to store and manage my supplier contacts and deliveries                   |
 | `* * *`  | shop owner             | view all my supplier contacts                     |                                                                                                            |
 | `* * *`  | shop owner             | add supplier contact                              |                                                                                                            |
 | `* * *`  | shop owner             | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
@@ -311,9 +198,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | shop owner             | find deliveries by date                           | I can find the deliveries happening on a certain date                                                      |
 | `* *`    | shop owner             | find deliveries by supplier                       | I can find the deliveries associated with a supplier                                                       |
 | `* *`    | shop owner             | find deliveries by supplier status                | I can find the deliveries that are pending or have been delivered or cancelled                             |
-| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can view the deliveries in ascending/descending order sorted by delivery cost                            |
-| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can view the deliveries in ascending/descending order sorted by delivery date and time                   |
-| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can view the deliveries in ascending/descending order sorted by delivery status                          |
+| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can quickly identify high-cost or low-cost deliveries and manage my expenses more effectively            |
+| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can easily find upcoming deliveries and focus on the urgent deliveries first                             |
+| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can maintain a clear overview of which deliveries have been delivered, cancelled or pending              |
 | `* *`    | shop owner             | view deliveries that are upcoming                 | I can view the deliveries that are within a certain time period                                            |
 | `* `     | shop owner             | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
 | `* `     | shop owner             | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
@@ -568,13 +455,13 @@ ___
 2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
 
 #### Scalability Requirements
-3. The system should be able to handle at least 100 contacts and 200 deliveries without noticeable degradation in performance
+3. The system should be able to handle at least 100 contacts and 200 deliveries without noticeable degradation in performance.
 
 #### Usability Requirements
-4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 #### Compatibility / Portability Requirements
-5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
+5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies.
 6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
 
 #### Data Requirements
@@ -582,7 +469,7 @@ ___
 8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
 
 #### Security Requirements
-9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
+9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine.
 
 #### Maintainability Requirements
 10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
@@ -603,7 +490,7 @@ ___
 * **Delivery Information**: Details about a specific delivery, including date, supplier, products, and status.
 * **Human-Editable File**: A plain text file that can be easily opened, read, and modified by users, typically in formats such as JSON, CSV, or TXT, without needing specialised software.
 * **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
-* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of objects, which can contain data and methods.
 * **Supplier Contact**: A record containing information about a supplier, including name, contact details, and associated products.
 * **Unit and Integration Testing**:
@@ -750,7 +637,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a delivery with invalid supplier
     1. Test case: `add -d on/18-01-2023 15:00 s/0 pro/bread q/500 g c/5.50`<br>
-       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.
+       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.<br> </br>
 
 3. Adding a delivery with invalid units for QUANTITY
     1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
@@ -909,3 +796,117 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `exit`<br>
        Expected: The app closes.
+
+## **Appendix: Effort**
+
+### Difficulty Level
+VendorVault is significantly more complex than Address Book 3 (AB3). While AB3 deals with a single entity (Person), 
+VendorVault deals with two entities (Supplier and Delivery), thus more effort is required to manage and integrate the two entities seamlessly. 
+Apart from introducing new commands, the UI was also improved to support displaying both entities in a user-friendly manner.
+
+### Challenges Faced
+
+#### New Commands
+New commands, such as sorting, had to be integrated with existing commands to ensure the expected and accurate behaviour was achieved.
+
+#### Data Storage
+JSON storage architecture had to be updated to accommodate both suppliers and deliveries, while ensuring format consistency and ease of retrieval.
+
+#### UI Design
+Designing and implementing an intuitive user interface that displays all required information in a non-cluttered way took considerable time. 
+Ensuring a smooth user experience for all user actions required additional logic to ensure commands work seamlessly together.
+
+### Effort Required
+VendorVault is estimated to have taken 1.5x the expected effort. This was due to:
+- Improving existing commands and implementing new commands from scratch.
+- Providing comprehensive test coverage across all commands.
+- Performing extensive manual testing to ensure a smooth user experience and cohesive user interface.
+
+### Achievements
+The team managed to successfully implement various essential and helpful commands in VendorVault to meet the needs of small convenience/grocery stores. 
+The wide variety of commands and intuitive user interface serves to benefit the target users greatly.
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Enhancement 1**: Make deletion of suppliers with pending deliveries throw a warning and error message.
+   * **Description**: The current implementation allows users to delete suppliers with pending deliveries without any warning. 
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to delete a supplier with pending deliveries.
+     * e.g. "Warning: Unable to delete supplier. There are pending deliveries associated with this supplier."
+
+
+2. **Enhancement 2**: Make marking an active supplier with pending deliveries inactive throw a warning and error message.
+   * **Description**: The current implementation allows users to mark active suppliers with pending deliveries as inactive without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to mark an active supplier with pending deliveries as inactive.
+     * e.g. "Warning: Unable to mark supplier as inactive. There are pending deliveries associated with this supplier."
+     
+
+3. **Enhancement 3**: Make improvements to detect duplicate suppliers. 
+   * **Description**: The current implementation defines duplicate suppliers as suppliers with the same name and company name.
+   However, it allows users to add duplicate suppliers with names with different case (e.g. "John Doe" and "john doe")
+   and multiple spacings (e.g. "John Doe" and "John   Doe").
+   * **Tasks**:
+     * We plan to redefine duplicate suppliers as suppliers with the same name and phone number. 
+     For the supplier name, we plan to make improvements to detect duplicate suppliers case-insensitively.
+     Supplier names with multiple spacings will also be considered as the same supplier.
+     Under this new implementation, suppliers are not allowed to have the same name and phone number. 
+     * e.g. "Warning: Duplicate supplier 'John Doe' already exists. Please use a different name."
+     * e.g. "Warning: Duplicate supplier with the same phone number '98765432' already exists. Please use a different phone number."
+     
+
+4. **Enhancement 4**: Make adding a delivery of a product that is not supplied by the supplier throw a warning and error message.
+   * **Description**: The current implementation allows users to add a delivery of a product that is not supplied by the supplier without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to add a delivery of a product that is not supplied by the supplier.
+     * e.g. "Warning: Unable to add delivery. The product is not supplied by the selected supplier."
+     
+
+5. **Enhancement 5**: Make adding supplier tags check for duplicates case-insensitively and throw a warning message.
+   * **Description**: The current implementation allows users to add duplicate tags with different case (e.g. "friends" and "Friends").
+   * **Tasks**:
+     * We plan to check for duplicate tags case-insensitively and throw a warning message.
+     * e.g. "Warning: Duplicate tag 'friends' already exists. Please use a different tag."
+     
+
+6. **Enhancement 6**: Make improvements to detect duplicate deliveries. 
+   * **Description**: The current implementation defines duplicate deliveries as deliveries
+   with the same supplier, product, delivery date and time, cost, and quantity.
+   However, it allows users to add duplicate deliveries with different case for the product name (e.g. "bread" and "Bread").
+   * **Tasks**:
+     * We plan to check for duplicate deliveries case-insensitively for the product name and throw a warning message.
+     * "Warning: Duplicate supplier detected. Please use a different name/phone number."
+
+
+7. **Enhancement 7**: Make upcoming command throw an error when the date and time input for the `aft/DELIVERY_DATE_TIME` parameter is later than the date and time input for parameter `bef/DELIVERY_DATE_TIME`.
+   * **Description**: The current implementation allows users to key in an invalid date range for PENDING deliveries for the upcoming command without any warning.
+   * **Tasks**:
+     * We plan to add an error message when a user tries to use the upcoming command with an invalid date range where the `bef/DELIVERY_DATE_TIME` parameter has an earlier date and time than the `aft/DELIVERY_DATE_TIME` parameter.
+     * e.g. "Warning: `The DELIVERY_DATE_TIME` value for the `aft/ DELIVERY_DATE_TIME` parameter should be earlier than the value for `bef/DELIVERY_DATE_TIME`."
+
+
+8. **Enhancement 8**: Allow for adding a supplier name with special characters.
+   * **Description**: The current implementation only allows for alphanumeric characters in the supplier name.
+   * **Tasks**:
+     * We plan to allow for adding a supplier name with special characters.
+     * e.g. "add -s n/John Doe & Sons p/98765432
+
+
+9. **Enhancement 9**: Better input checks for invalid date in commands that require date input.
+   * **Description**: The current implementation allows for certain invalid dates
+    because the LocalDateTime module automatically converts the date to the first previous valid date
+   * e.g. "add -d on/31-04-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For months with less than 31 days,
+   the date is converted to the last day of the previous month)
+   * e.g. "add -d on/29-02-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For non-leap years, the date is converted to 28-02-2023)
+   * No error message is shown.
+   * **Tasks**:
+     * We plan to add better input checks for invalid dates in commands that require date input.
+
+
+10. **Enhancement 10**: Allow finding deliveries by date and time range.
+   * **Description**: The current implementation only allows finding deliveries by a single date and time.
+   * **Tasks**:
+     * We plan to allow users to find deliveries within a specified date and time range.
+     * e.g. "find -d aft/18-01-2023 12:00 bef/18-01-2023 18:00 stat/DELIVERED"

@@ -13,7 +13,7 @@ public class ListSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all suppliers";
+    public static final String MESSAGE_SUCCESS = "Listed all supplier(s)";
 
     @Override
     public CommandResult execute(Model model) {
