@@ -22,7 +22,7 @@ Action | Format (with examples)
 [**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 [**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
 [**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
-[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
+[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1231`
 [**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
@@ -61,9 +61,9 @@ Action | Format (with examples)
    
    * `list-patient`: Lists all patients.
 
-   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the Address Book.
+   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the address book.
    
-   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the Address Book.
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the address book.
 
    * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100`: Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
 
@@ -213,9 +213,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for persons with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched. e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only persons matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only persons matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -235,9 +237,11 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for doctors with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only doctors matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only doctors matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -256,9 +260,11 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for patients with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only patients matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only patients matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -280,7 +286,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Before deleting a doctor or patient, ensure that there are no appointments associated with them. Otherwise, deleting that doctor or patient will give an error, prompting the user to delete all appointments associated with that doctor or patient first.
+Before deleting a doctor or patient, ensure that there are no appointments associated with them. Otherwise, deleting that doctor or patient will give an error, prompting the user to delete all appointments associated with them first.
 </div>
 
 **Examples:**
@@ -305,7 +311,7 @@ MediContacts data are saved in the hard disk automatically after any command mod
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The app can only save a maximum of 10,000 appointments. If the limit is reached, the app may react in unexpected ways.
-Therefore, ensure that the data file is regularly archived to prevent data loss.
+Therefore, ensure that the data file is regularly archived to prevent data loss and any unexpected behaviour.
 </div>
 
 ### Editing the data file
