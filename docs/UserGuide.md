@@ -39,8 +39,8 @@ Refer to the sidebar if you are on the website.
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
 
-**InternBuddy** is an offline desktop application for university students studying a STEM major to manage 
-the contacts of companies that they are potentially applying or have already applied for internships. 
+**InternBuddy** is an offline desktop application for university students studying a STEM major to manage
+the contacts of companies that they are potentially applying or have already applied for internships.
 
 **InternBuddy** allows users to:
 * store and manage companies' contact information for various internship applications.
@@ -66,23 +66,23 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
     * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
-   
+
       <box type="tip" seamless>
-   
+
       **Tip:** This is a tip box.
       </box>
-      
+
     * *Notice boxes* provide important information that you should take note of.
-   
+
       <box type="info" seamless>
-      
+
       **Notice:** This is a notice box.
       </box>
-   
+
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
-   
+
       <box type="warning" seamless>
-      
+
       **Warning:** This is a warning box.
       </box>
 
@@ -91,7 +91,7 @@ Before continuing, here are some important information you need to know about th
    brings you back to the top of the User Guide.
 
    <box type="tip" seamless>
-   
+
    **Tip:** If you are viewing this guide on our website, you can hover over links to see where the hyperlink takes you!
    </box>
 
@@ -128,7 +128,7 @@ Before continuing, here are some important information you need to know about th
     * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-1. Make sure to check out the [Glossary](#glossary) for definitions of some vocabulary used in this guide. 
+1. Make sure to check out the [Glossary](#glossary) for definitions of some vocabulary used in this guide.
 
 [back to top](#internbuddy-user-guide)
 
@@ -194,7 +194,7 @@ not** put any parameters or prefixes that are not recognised by the command.
 
 * Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is **case-sensitive** and thus
   must be used exactly as shown <br>
-  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
+  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
@@ -349,8 +349,8 @@ have made the right edits!
 
 <box type="info" seamless>
 
-**Note about `edit` command**: 
-* Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for 
+**Note about `edit` command**:
+* Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for
 the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
 * If you are current in the filtered view of a `find` or `view` command, an execution of `edit` command will return the application
 view to the full list of companies. Hence, please be mindful when running consecutive edits to prevent accidental changes to wrong company.
@@ -385,7 +385,7 @@ Format: `fav INDEX`
 
 <box type="tip" seamless>
 
-**Tip:** 
+**Tip:**
 * Favourite companies have a filled star icon to the right of their name while others have a hollow star instead.
 * Favourite companies will always be visible at the top of the list (provided it is not hidden by other commands such as `find`).
 
@@ -577,7 +577,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
 4. **Indicating multiple `APPLICATION_STATUS` in `apply` command**, if you specify more than one `APPLICATION_STATUS` (eg: `apply n/SWE Intern d/Requires Java as/APPLIED as/OA`) will result in InternBuddy in applying the last `APPLICATION_STATUS` (`OA` in the given example); provided that the last `APPLICATION_STATUS` is valid.
 5. **Indicating multiple parameters in `update` command**, if you specify multiple parameters with the same prefix, only the right most parameter will be used by InternBuddy. <br>
-   For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
+   For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid.
 6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
 7. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
 8. The AddressBook currently accepts invalid phone numbers, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
