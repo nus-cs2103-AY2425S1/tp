@@ -227,7 +227,7 @@ The parsing of the fields is as follows:
 ##### Executing the Command
 The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
 
-The activity diagram below illustrates the worflow behind the execution of the `addf` command.
+The activity diagram below illustrates the workflow behind the execution of the `addf` command:
 
 ![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
@@ -289,6 +289,27 @@ The following fields are required as they are essential details that the clinic 
 ### Appointment Management Features
 
 #### Book Appointment : `bookappt`
+The `bookappt` command is used to book an upcoming appointment for the patient with the corresponding NRIC.
+
+The user has to specify:
+* Patient's NRIC (`Nric`)
+* Upcoming appointment date and time to be booked (`LocalDateTime`)
+* Health service the patient is receiving (`Healthservice`)
+
+##### Parsing User Input
+The `BookApptCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted the NRIC before any prefixes, all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+##### Executing the Command
+The `BookApptCommand` class is initialized with a new `Appt` object created from the parsed input. With the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. After checking for duplicates in appointment and whether the date and time inputs are past today's date, the `Appt` object is then added to the `Patient` identified.
+
+##### Activity Diagram
+The activity diagram below illustrates the workflow behind the execution of the `bookappt` command:
+
+
+##### Design Considerations
+The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each appointment for the patient is unique and fulfills the command's purpose.
 
 #### Delete Appointment : `deleteappt`
 
