@@ -88,8 +88,7 @@ public class MarkAttendanceByTutorialCommandTest {
 
         // add updated participation for Alice
         List<Attendance> updatedAttendanceAlice = new ArrayList<>(ALICE_MATH.getAttendanceList());
-        updatedAttendanceAlice.add(
-                new Attendance(LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT)));
+        updatedAttendanceAlice.add(new Attendance(attendance.attendanceDate));
 
         Participation updatedParticipationAlice = new Participation(ALICE_MATH.getStudent(),
                 ALICE_MATH.getTutorial(), updatedAttendanceAlice);
