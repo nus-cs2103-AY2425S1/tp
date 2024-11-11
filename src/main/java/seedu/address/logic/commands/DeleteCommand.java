@@ -55,7 +55,9 @@ public class DeleteCommand extends Command {
         if (targetIndex != null) {
             // Deletion by index
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                        + ". Your list only contains "
+                        + lastShownList.size() + " customers.");
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
         } else {
