@@ -190,7 +190,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the car
 ![UndoRedoState1](images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified careconnect book state to be saved into the `addressBookStateList`.
-
+- Note that the command here is not complete. For the complete `add` command exmample, you can reference the [UG](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#adding-a-client-add)
 ![UndoRedoState2](images/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the careconnect book state will not be saved into the `addressBookStateList`.
