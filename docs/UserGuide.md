@@ -253,6 +253,7 @@ Format: `archive INDEXES...`
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+
 ![after archiving contact](images/archivedcontact.png)
 
 Note:
