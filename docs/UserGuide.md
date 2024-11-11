@@ -214,6 +214,11 @@ Adds one or more [tags](#glossary) to a specific [contact](#glossary) in the con
 You cannot tag contacts with the word 'all'. It is restricted for the `untag` command to remove all of a contact's tags at once.
 
 </box>
+<box type="info">
+
+Tag names are case-insensitive. A tag named "florist" and another tag named "Florist" are considered the same tag. Thus, although not enforced, it is recommended to use consistent capitalization.
+
+</box>
 
 Examples:
 * `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1.
@@ -568,11 +573,11 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 
 ## Glossary
 
-| Term                        | Explanation                                                                                                                                                                                                 |
-|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <a id="contact">Contact</a> | Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                                             |
-| <a id="wedding">Wedding</a> | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/> <br/> Weddings are considered duplicate if they have identical names (case-sensitive). |
-| <a id="tag">Tag</a>         | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                            | 
+| Term                        | Explanation                                                                                                                                                                                                                |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a id="contact">Contact</a> | Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                                                            |
+| <a id="wedding">Wedding</a> | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/> <br/> Weddings are considered duplicate if they have identical names (case-sensitive).                |
+| <a id="tag">Tag</a>         | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword. Tags are considered equal if they have identical names (case-insensitive) | 
 <div style="page-break-after: always;"></div>
 
 ## Command summary
