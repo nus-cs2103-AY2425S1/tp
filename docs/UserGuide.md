@@ -257,7 +257,7 @@ Usages:
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
   * Updates the details of the person identified by the studentId assigned to the corresponding student. 
-  * At least one of the optional fields must be provided.
+  * At least one of the optional fields must be provided: name, phone, email, address, course, role. Note that studentId cannot be edited as it is the person's identifier.
   * Existing values will be overwritten by the input values.
 
 **2. Edit person's module:**
@@ -275,6 +275,10 @@ Examples:
 
    ![result for 'edit command result'](images/editCommandResult.png)
 
+<box type="tip" seamless>
+
+**Tip:**  Use the `find` command to view the full detail of the student first before proceeding with `edit`. This allows you to view the changes and verify the edit immediately.</box>
+
 <br>
 
 ### Adding a grade : `grade`
@@ -285,14 +289,14 @@ Adds a grade to a person's module.
 grade ID m/MODULE g/GRADE
 ```
 
-* Adds a grade to a person according to the specified student ID and Module.
+* Adds a grade to a person according to the specified studentId and Module.
 * Module specified must exist prior to execution grade command.
 * Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`.
 * Existing grade will be updated to the input grade.
 
 Examples:
-* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with student ID of `23876767`.
-* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with student ID of `14141414`.
+* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with studentId of `23876767`.
+* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with studentId of `14141414`.
 
 <br>
 
@@ -308,7 +312,7 @@ Format:
 filter n/KEYWORD [MORE_KEYWORDS]
 ```
 
-  * Use prefix `n/`.
+  * `n/` prefix is used.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -323,7 +327,7 @@ filter m/KEYWORD
 
 <!-- -->
 
-  * Use prefix `m/`.
+  * `m/` prefix is used.
   * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
 
 **3. Filter by course:**
@@ -335,7 +339,7 @@ filter c/KEYWORD
 
 <!-- -->
 
-  * Use prefix `c/`
+  * `c/` prefix is used. 
   * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
@@ -370,11 +374,11 @@ Format 1:
 delete ID
 ```
 
-* Deletes person with the specified student ID.
+* Deletes person with the specified studentId.
 
 Examples:
-* `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
-* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
+* `delete 15151515` will delete a person with studentId of `15151515` from EduContacts.
+* `delete 71271222` will delete a person with studentId of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
@@ -383,10 +387,10 @@ Format 2:
 delete ID m/MODULE
 ```
 
-* Deletes a module from the person with the specified student ID.
+* Deletes a module from the person with the specified studentId.
 
 Examples: 
-* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
+* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with studentId of `13131313` (the result of this command is shown in the screenshot below).
 
   ![result for 'delete_13131313'](images/deleteModuleResult.png)
 <div style="page-break-after: always;"></div>
@@ -400,7 +404,7 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find a person with student ID of `12345678` and display their details.
+* `find 12345678` will find a person with studentId of `12345678` and display their details.
 
 <br>
 
