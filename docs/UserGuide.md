@@ -15,6 +15,8 @@ GoonBook is a **modern desktop application designed for educators to efficiently
 
 Perfect for educators who value efficiency and prefer keyboard-based interactions. With GoonBook, managing your student records becomes faster, simpler, and more organized than traditional GUI-only applications.
 
+<div style="page-break-after: always"></div>
+
 ## **Table of Contents**
 
 1. [Getting Started](#getting-started)
@@ -56,6 +58,8 @@ Perfect for educators who value efficiency and prefer keyboard-based interaction
 17. [Acknowledgements](#acknowledgements)
 
 ---
+
+<div style="page-break-after: always"></div>
 
 ## How to Use This Guide
 
@@ -237,8 +241,6 @@ Format: `list`
 
 ![List](images/List.png)
 
-<div style="page-break-after: always"></div>
-
 ### Editing a student : `edit`
 
 Edits an existing student in the GoonBook.
@@ -272,8 +274,6 @@ Examples:
 - `edit 1 c/W-08`
   - Returns `Student's class names cannot be empty and should be alphanumeric`
 
-<div style="page-break-after: always"></div>
-
 ### Deleting a student : `delete`
 
 Deletes the specified student from the GoonBook.
@@ -294,8 +294,6 @@ Examples:
   - Successfully deletes the 1st person in the results of the `find` command.
 - `delete 100`
   - If contains fewer than 100 students, returns `The index provided is greater than the max students`
-
-<div style="page-break-after: always"></div>
 
 ### Locating students by name: `find`
 
@@ -390,8 +388,6 @@ Examples:
 
 - Use the `listGroups` command to display all groups again.
 
-<div style="page-break-after: always"></div>
-
 ### Deleting a group : `deleteGroup`
 
 Deletes the specified Group from the GoonBook.
@@ -435,8 +431,6 @@ Examples:
 - `tag 100 t/hardworking`
   - If contains fewer than 100 students, returns `The person index provided is invalid`
 
-<div style="page-break-after: always"></div>
-
 ### Deleting a tag : `untag`
 
 Deletes a tag of a specified student.
@@ -456,8 +450,6 @@ Examples:
   - Successfully removes `needs consult` tag and `quiet` tag from 1st student
 - `untag 1 t/qquiet`
   - Returns `The tag(s) does not exist`
-
-<div style="page-break-after: always"></div>
 
 ## Importing and Exporting Data
 
@@ -502,7 +494,6 @@ Format: `export`
 
 ![Export](images/Export.png)
 
-<div style="page-break-after: always"></div>
 
 ### Exported csv data file location
 
@@ -521,8 +512,6 @@ Format: `clear`
 ![Clear](images/Clear.png)
 
 **Warning:** The `clear` command has no confirmation prompt and will delete all data immediately. Use with caution.
-
-<div style="page-break-after: always"></div>
 
 ## Exiting the Program
 
