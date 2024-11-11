@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 Murphy's List is a **desktop app for managing patient contact info for institutes providing palliative care, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, Murphy's List can get your healthcare administrative tasks done faster than other traditional GUI apps.
+If you can type fast, Murphy's List can get your **healthcare administrative tasks** done faster than other traditional GUI apps.
 
 ## Table of Contents
 1. [Quick Start](#quick-start)
@@ -33,18 +33,36 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+Welcome! This short guide will help you launch the **Murphy's List** application on your computer. Don't worry if you're not familiar with technical terms—we'll walk you through each step in simple language.
+
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-1a/tp/releases).
+2. Download the latest `murphys_list.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-1a/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Murphy's List.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar murphys_list.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal (Known as "Command Prompt" on Windows or "Terminal on Mac).
+
+6. In the command terminal, type the following command and press **Enter**:
+    ```bash
+    cd path_to_your_folder
+    ```
+- Replace `path_to_your_folder` with the actual path to your folder. For example:
+    - **Windows**:
+      ```bash
+      cd C:\Users\YourName\Downloads
+      ```
+    - **Mac/Linux**:
+      ```bash
+      cd /Users/YourName/Downloads
+      ```
+
+
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
