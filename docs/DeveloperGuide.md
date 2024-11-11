@@ -9,6 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* Icon used: [Google Font](https://fonts.google.com/)
 * GitHub Copilot was used in this project for efficiency in writing code.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -240,10 +241,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -575,3 +572,16 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Data is stored automatically
+
+### Planned Enhancements
+
+Team Size: 4
+
+1. **Improve Help Window content**: The current Help Window content is quite wordy, and some command formats are cut off halfway. We will fix this by allowing resizing of the help window, so users are better able to read the content.
+2. **Improve Help Window behavior**: The Help Window remains minimized when the `help` command is run again. We will fix this by automatically restoring the minimized Help Window when the `help` command is run, or when the `Help` menu or `F1` keyboard shortcut is used.
+3. **Add horizontal scroll bar**: The fields UI is cut off for any contacts with lengthy fields. We will fix this issue by adding a horizontal scroll bar to cells, so everything can be seen even for contacts with lengthy fields.
+4. **Allow special characters in tag names**: Tag names currently only accept alphanumeric characters. We will fix this by modifying tag name validation to accept special characters like hyphens.
+5. **Improve phone number error message**: The error message currently only states that "+" is allowed, but does not mention that it should be at the beginning. We will fix this by updating the error message to clearly indicate that the "+" symbol should be at the beginning of the phone number.
+6. **Enable filtering for empty fields**: The application cannot filter for empty fields. We will fix this by adding functionality to filter for empty fields.
+7. **Improve edit command parameter handling**: The `edit` command processes multiple INCOME or AGE parameters incorrectly, using only the last value. We will fix this by ensuring the `edit` command does not allow multiple INCOME or AGE parameters.
+8. **Normalize contact name case sensitivity**: Contact names are case-sensitive, potentially allowing duplicate entries with different capitalization. We will fix this by implementing case-insensitive contact name handling to prevent duplicate entries with different capitalization.  

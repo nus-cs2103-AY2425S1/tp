@@ -342,10 +342,6 @@ If your changes to the data file makes its format invalid, SalesContactPro will 
 Furthermore, certain edits can cause the SalesContactPro to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -355,10 +351,18 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known limitations
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **Help Window content issues**: The current Help Window content is quite wordy, and some command formats are cut off halfway.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **No horizontal scrolling for lengthy fields**, which may cause UI display issues.
+4. **Tag names only accept alphanumeric characters**, special characters like hyphens are not allowed.
+5. **Phone number error message**: The error message only states that "+" is allowed, but does not mention that it should be at the beginning.
+6. **Cannot filter for empty fields**.
+7. **The edit command processes multiple INCOME or AGE parameters** in a single command, using only the last value.
+8. **Contact names are case-sensitive**, potentially allowing duplicate entries with different capitalization.
+
+Please keep these limitations in mind when using the application. We are working to address them in future updates.
 
 --------------------------------------------------------------------------------------------------------------------
 
