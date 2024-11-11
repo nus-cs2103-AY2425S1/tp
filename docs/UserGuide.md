@@ -432,7 +432,7 @@ Format: `untag INDEX t/TAG [t/TAG]…​`
 - `INDEX` **must be a positive integer** 1, 2, 3, …​
 - `TAG` letters must match exactly (case-insensitive)
 
-![UnTag](images/untag.png)
+![UnTag](images/Untag.png)
 
 Examples:
 
