@@ -89,10 +89,10 @@ public class RemovePersonFromEventCommand extends Command {
     private static void updateContactsIfInEventViewToShowRemovedContact(Model model, EventManager eventManager,
                                                                         Event event) {
         // check the last shown list if it is event
-        model.setIsFindEvent(false);
         Predicate<Person> lastPred = model.getLastPredicate();
         if (lastPred instanceof PersonInEventPredicate) {
             if (((PersonInEventPredicate) lastPred).getEvent().equals(event)) {
+                model.setIsFindEvent(false);
                 //create a new predicate for changed event
                 model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
                 FindEventCommand.updateContactsUiWithEventSpecificRoles(model, event);

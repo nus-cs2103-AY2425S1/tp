@@ -3,16 +3,20 @@ package seedu.address.logic.commands.contact.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInEventPredicate;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -47,8 +51,20 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete);
         eventManager.removeAllPersonsInEvents(personToDelete);
         eventManager.updateEvents();
-        model.setIsFindEvent(false);
+        updateContactsIfInEventViewToShowDeletedContact(model, eventManager);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private static void updateContactsIfInEventViewToShowDeletedContact(Model model, EventManager eventManager) {
+        // check the last shown list if it is event
+        Predicate<Person> lastPred = model.getLastPredicate();
+        if (lastPred instanceof PersonInEventPredicate) {
+            model.setIsFindEvent(false);
+            Event event = ((PersonInEventPredicate) lastPred).getEvent();
+            //create a new predicate for changed event
+            model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
+            FindEventCommand.updateContactsUiWithEventSpecificRoles(model, event);
+        }
     }
 
     @Override
