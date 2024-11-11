@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Our project was made with AI assistance from [GitHub Copilot](https://github.com/features/copilot/) to finish small snippets of code and to provide suggestions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -885,6 +885,32 @@ The patient with the corresponding NRIC is already registered in the system.<br>
       Step 1e1 is repeated until a valid appointment in the patient's list of appointments is inputted.<br>
       Use case resumes from step 2.
 
+#### Use case: UC05 - Open the help window with a command keyword
+**Guarantees:**<br> The help window corresponding to the specified command keyword will be displayed if the command keyword is valid.
+
+**MSS:**
+
+1. User types the command to open the help window, together with the command keyword.
+2. ClinicConnect displays the help window corresponding to the specified command keyword.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs an invalid command keyword or multiple command keywords.
+    * 1a1. ClinicConnect shows an invalid command format error.<br>
+      Step 1a1 is repeated until the help command is inputted with a valid command keyword.<br>
+      Use case resumes from step 2.
+
+#### Use case: UC05 - Open the help window without a command keyword
+
+**MSS:**
+
+1. User types the command to open the help window, without any command keywords.
+2. ClinicConnect displays the main help window.
+
+    Use case ends.
+
 #### Use case: UC06 - Delete a patient
 **Guarantees:**<br>
 A patient will be deleted from the system if the patient is already in the system.
@@ -941,8 +967,6 @@ Detailed information of a patient will be displayed if the patient exists in the
     * 1b1. ClinicConnect shows an error message saying the patient with the specified NRIC does not exist.<br>
       Step 1b1 is repeated until a valid NRIC that exists in the system is inputted.<br>
       Use case resumes from step 2.
-<br>
-<br>
 
 #### Use case: UC08 - Edit a patient
 **Preconditions:**<br>
@@ -1107,6 +1131,24 @@ Displays appointments that matches with the specified `HealthService`.
       Step 2a1 is repeated until the user inputs a valid `HealthService` that is offered by the clinic.<br>
       Use case resumes from step 2.
       <br>
+
+#### Use case: UC11 - Clear data in ClinicConnect
+
+**MSS:**
+
+1.  User types the command to clear all patient records in ClinicConnect.
+2.  ClinicConnect deletes all the patient records from the system successfully.
+
+    Use case ends.
+
+#### Use case: UC12 - Exit ClinicConnect
+
+**MSS:**
+
+1.  User types the command to exit ClinicConnect.
+2.  ClinicConnect GUI closes successfully.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
