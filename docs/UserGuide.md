@@ -362,7 +362,7 @@ Furthermore, certain edits can cause the PhysioPal to behave in unexpected ways 
 * **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
 * **Appointment details**: Information on the appointment including date, time, notes and payment details.
 * **Client**: A person receiving services from the physiotherapist. He/she should have 
-a unique name (not case-sensitive).
+a unique name (case-insensitive).
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, tags etc.
 * **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement,
