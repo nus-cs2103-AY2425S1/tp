@@ -43,7 +43,6 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> Comment
-Person *--> isVip
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
