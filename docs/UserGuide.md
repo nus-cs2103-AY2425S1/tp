@@ -271,7 +271,7 @@ _Details coming soon ..._
 
 <box type="info" seamless>
 
-**Notes about each valid input field:**<br>
+**Notes about each valid input field:**
 
 ### NAME
 - Must be between 1 and 50 characters, excluding leading and trailing whitespaces.
@@ -331,6 +331,52 @@ for list of valid tags:
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
 </box>
+--------------------------------------------------------------------------------------------------------------------
+
+## Context Menu Options
+
+Context menu options allow users to perform typical text actions, which are available in the command box and feedback box.
+
+<box type="info" seamless>
+
+**Descriptions of each context menu option in command box:**<br>
+
+### Undo
+- Reverses the most recent text editing action within the command box, restoring text that was removed or modified.
+- Note that this applies to the text editing action, not undoing the command applied to the app.
+
+### Redo
+- Reapplies the last undone text editing action if "Undo" was used, restoring changes that were reversed.
+
+### Cut
+- Removes the selected text from the command box and copies it to the clipboard, allowing you to paste it elsewhere.
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the command box.
+
+### Paste
+- Inserts text from the clipboard into the command box at the cursor’s location or replaces selected text.
+
+### Delete
+- Deletes the selected text from the command box without copying it to the clipboard.
+
+### Select All
+- Highlights all text within the command box, making it easier to apply other actions like cut, copy, or delete.
+
+</box>
+
+<box type="info" seamless>
+
+**Descriptions of each context menu option in feedback box:**<br>
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the feedback box.
+
+### Select All
+- Highlights all text within the feedback box, making it easier to apply other actions like cut, copy, or delete.
+
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
