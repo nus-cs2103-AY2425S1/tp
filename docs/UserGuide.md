@@ -141,15 +141,17 @@ Adds a client to Client Hub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE…​`
 
+* Clients cannot have the same name.
+    * If a client with the same name already exists, an error will be thrown.
+    * Example of an error: `add n/John Doe p/98765432...` if a John Doe already exists in ClientHub
+    * To add a client with the same name, the name must be differentiated through means such as `(NUS)` or `(S/O Bob)`.
+* Clients can have the same phone number, email, address, description, and client type.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01  d/likes bubble tea c/Investment`
 * `add n/Betsy Crowe p/12345678 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
 
-* Clients cannot have the same name.
-  * If a client with the same name already exists, an error will be thrown.
-  * Example of an error: `add n/John Doe p/98765432...` if a John Doe already exists in ClientHub
-  * To add a client with the same name, the name must be differentiated through means such as `(NUS)` or `(S/O Bob)`.
-* Clients can have the same phone number, email, address, description, and client type.
+
 
 Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes bubble tea c/Investment`:
 ![result for 'add'](images/result_for_add.png)
@@ -432,6 +434,9 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you view a client that already has an existing view pop-up**, a duplicate view pow-up window will be shown. This is a feature that is allowed in the application. The remedy is to close the duplicate view pop-up window manually.
+4. **If you input more than 300 characters for name, email or address**, the view pop-up will not be able to display the full name, email or address. The remedy is to input less than 300 characters for name, email or address.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
