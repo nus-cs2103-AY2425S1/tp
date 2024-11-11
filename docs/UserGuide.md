@@ -335,14 +335,14 @@ Examples:
 
 Sorts the list of students based on the students attributes.
 
-Format: `sort [ATTRIBUTE]`
+Format: `sort ATTRIBUTE`
 
 <box type="tip" seamless>
 
 **Tip:** Students attributes include: name, phone, email, address, sex, register number, student class, emergency contact name, emergency contact number.
 </box>
 
-* Sorts the list based on the ATTRIBUTE lexicographically in increasing order
+* Sorts the list based on the attribute lexicographically in increasing order
 * Sorts the list based on one attribute at a time
 * Empty attributes will be shifted to the end of the list (only for emergency contact name and emergency contact number)
 * Unsort the list when the attribute is `none`
