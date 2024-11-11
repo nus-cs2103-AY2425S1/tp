@@ -99,7 +99,7 @@ By following these sections, you can quickly find the information you need and m
 * Clicking `Help` will show `Help F1` which when clicked will link you to this User Guide.
 
 <span style="font-size: 20px; font-weight: bold; color: #00bf63">Command Box</span><a name="command-box"></a>
-* This is where you will be typing the commands for MedConnect. The full list of commands can be found at [Features](#features).
+* This is where you will be typing the commands for MedConnect. The full list of commands can be found under [Features](#features).
 
 <span style="font-size: 20px; font-weight: bold; color: #0d00ff">Result Box</span>
 * This is where MedConnect will give you feedback after you type in a command. It will provide information on whether a command was successful or an invalid input was provided. For more information on the valid command inputs, head to [Features](#features).
