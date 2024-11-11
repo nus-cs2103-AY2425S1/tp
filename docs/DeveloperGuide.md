@@ -22,8 +22,10 @@
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
-- **References to Other Team Projects (TPs)**:
-    - For our User Guide, we referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraint and tips boxes.
+- **References to Other Team Projects (TPs):**
+
+  - **User Guide**: We referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraints and tips boxes.
+  - **Developer Guide**: For the *Saving Data* section under the appendix, we referred to the [AY2425S1-CS2103T-F14a-1 Developer Guide](https://ay2425s1-cs2103t-f14a-1.github.io/tp/DeveloperGuide.html#saving-data) on how to handle missing or corrupted data files.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -189,11 +191,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `deletecustomer 5` command to delete the 5th customer in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `deletecustomer 5` command to delete the 5th customer in the address book. The `deletecustomer` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `deletecustomer 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new customer. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `addcustomer n/David …​` to add a new customer. The `addcustomer` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -237,11 +239,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `listcustomer`. Commands that do not modify the address book, such as `listcustomer`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `addcustomer n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -259,7 +261,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
+  * Pros: Will use less memory (e.g. for `deletecustomer`, just save the customer being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -319,26 +321,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+For **all** use cases, the system is **SellSavvy** and the actor is the **user**.
+
 ### Use cases
 
 **Use case 1: View List of Customers**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC01 - View List of Customers
 
 **MSS**
 
 1.  User chooses to view the list of customers.
-2.  SellSavvy retrieves all customers from the database.
-3.  SellSavvy displays all customers along with their details.
+2. SellSavvy displays all customers along with their details.
 
 Use case ends.
 
 **Use case 2: Add a Customer**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC02 - Add Customer
 * **Guarantees**:
     * Customer will be added to customer list if input parameters are valid.
@@ -347,20 +346,20 @@ Use case ends.
 
 1.  User chooses to add a new customer and specifies the customer details.
 2.  SellSavvy adds the customer into the list.
-3.  SellSavvy confirms the addition by displaying the newly added customer's details.
+3.  SellSavvy confirms the addition is successful by displaying the newly added customer's details.
 
 Use case ends.
 
 **Extensions**
 
-* 1a. SellSavvy detects required details missing.
-  * 1a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
+* 1a. SellSavvy detects that there are required parameters missing.
+  * 1a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
 
-* 1b. SellSavvy detects that there is a parameter not satisfying its constraint.
-  * 1b1. SellSavvy states the constraint of the invalid parameter.
+* 1b. SellSavvy detects that there is a parameter not satisfying its constraints.
+  * 1b1. SellSavvy states the constraints of the invalid parameter.
 
   Use case ends
 
@@ -378,14 +377,13 @@ Use case ends.
 
 
 * 2b. SellSavvy detects that the new customer has tags with similar names.
-  * 2b1. SellSavvy gives a warning that there are similar tags in the new customer.
+  * 2b1. SellSavvy gives a warning that there are similar tags on the new customer.
 
   Use case resumes from step 3.
 
+
 **Use case 3: Delete Customer and All Orders Related to The Customer**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC03 - Delete Customer and All Orders related to the customer
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
@@ -393,219 +391,354 @@ Use case ends.
 
 **MSS**
 
-1. User wants to delete a customer.
-2. User finds the customer index from the list.
-3. User deletes the customer by their index.
-4. SellSavvy updates the displayed list of customers and indicates that delete is successful.
+1. User finds the customer index from the list.
+2. User deletes the customer by their index.
+3. SellSavvy updates the displayed list of customers.
+4. SellSavvy confirms that the deletion is successful by displaying the deleted order's details.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects that there are no customers with the specified index.
-  * 3a1. SellSavvy displays an error that the customer index is invalid.
+* 2a. SellSavvy detects customer index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
 
-* 3b. SellSavvy detects that there are no customers with the specified index.
-    * 3a1. SellSavvy displays an error that the customer index is invalid.
+* 2b. SellSavvy detects that there are no customers with the specified index.
+  * 2b1. SellSavvy displays an error that the customer index is invalid. 
 
   Use case ends.
+
+
+* 3a. The deleted customer's order list is being displayed.
+  * SellSavvy configures the order panel to not display anyone's orders.
+
+  Use case resumes from step 4.
 
 **Use case 4: Find the Customer by their Name**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC04 - Find the Customer by their Name
 * **Guarantees**:
     * All customers displayed will have at least one of the specified keywords in their name.
 
 **MSS**
 
-1. User wants to search for a specific customer.
-2. User specifies keyword(s) of the name of the customer
-3. SellSavvy displays all customers whose names have at least one of the keywords.
-
-Use case ends.
-
-**Use case 5: Add an Order under a Customer**
-
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC06 - Add an Order under a Customer
-* **Preconditions**: There are customers displayed in the customer list.
-* **Guarantees**:
-    * A new pending order will be added under the specified customer, if input parameters are valid.
-
-**MSS**
-
-1. User wants to add an order under a specific customer.
-2. User finds the customer index from the list.
-3. User adds the customer using the index, specifying the details of the order.
-4. SellSavvy adds the order under the customer.
-5. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
+1. User specifies keyword(s) of the name of the customer(s) they want to find.
+2. SellSavvy displays all customers whose names have at least one of the keywords.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects required details missing.
-    * 3a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
+* 1a. SellSavvy cannot find any customers with at least one matching keyword.
+  * 1a1. SellSavvy tells the user that no related customers are found.
+
+  Use case ends.
+
+**Use case 5: Edit a Customer's Details**
+
+* **Use Case**: UC05 - Edit a Customer's Details
+* **Preconditions**: There are customers displayed in the customer list.
+* **Guarantees**:
+  * The specified customer's details will be overwritten if the input parameters are valid.
+
+**MSS**
+
+1. User finds the index of the customer they want to edit.
+2. User specifies the customer index along with modifications they want to make to the customer's details.
+3. SellSavvy updates the customer list with the modifications made to the customer and lists all customers.
+4. SellSavvy confirms the modification by stating the updated customer's details.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The customer index is missing or non-positive.
+  * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
 
-* 3b. SellSavvy detects that there is a parameter not satisfying its constraint.
-    * 3b1. SellSavvy states the constraint of the invalid parameter.
+* 2b. SellSavvy detects that there are no customers with the specified index.
+    * 2b1. SellSavvy displays an error that the customer index is invalid.
+
+  Use case ends.
+
+
+* 2c. There are no customer details specified for modification.
+  * 2c1. SellSavvy tells the user that at least one field has to be edited.
+
+  Use case ends.
+
+
+* 2d. SellSavvy detects that the updated fields do not satisfy its constraints.
+    * 2d1. SellSavvy states the constraints of the invalid parameter.
 
   Use case ends
 
 
-* 3c. SellSavvy detects that there are no customers with the specified index.
-    * 3c1. SellSavvy displays an error that the customer index is invalid.
+* 2e. SellSavvy detects that a customer with identical name already exists.
+    * 2e1. SellSavvy displays an error that the customer already exists.
 
   Use case ends.
 
 
-* 4a. SellSavvy detects that there is an existing pending order under the customer with a similar details.
-    * 4a1. SellSavvy gives a warning that an order with a similar details already exists.
+* 3a. SellSavvy detects that the new name of the customer is similar to that of an existing customer.
+    * 3a1. SellSavvy gives a warning that a customer with a similar name already exists.
 
-  Use case resumes from step 5.
+  Use case resumes from step 4.
 
-**Use case 6: List a Customer's Orders**
 
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC06 - List a Customer's Orders
+* 3b. SellSavvy detects that there are tags with similar names among the updated tags.
+    * 3b1. SellSavvy gives a warning that there are similar tags on the customer.
+
+  Use case resumes from step 4.
+
+**Use case 6: Add an Order under a Customer**
+
+* **Use Case**: UC06 - Add an Order under a Customer
+* **Preconditions**: A customer's list of orders is being displayed.
+* **Guarantees**:
+    * A new pending order will be added under the specified customer, if input parameters are valid.
+
+**MSS**
+
+1. User finds the customer index from the list.
+2. User adds the order using the customer index and details of the order.
+3. SellSavvy adds the order under the customer.
+4. SellSavvy confirms the addition is successful by displaying the newly added order's details and customer's list of orders.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. SellSavvy detects that the required parameters are missing or the customer index is non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there is a parameter not satisfying its constraints.
+    * 2b1. SellSavvy states the constraints of the invalid parameter.
+
+  Use case ends
+
+
+* 2c. SellSavvy detects that there are no customers with the specified index.
+    * 2c1. SellSavvy displays an error that the customer index is invalid.
+
+  Use case ends.
+
+
+* 3a. SellSavvy detects that there is an existing pending order under the customer with similar details.
+    * 3a1. SellSavvy gives a warning that an order with similar details already exists.
+
+  Use case resumes from step 4.
+
+**Use case 7: List a Customer's Orders**
+
+* **Use Case**: UC07 - List a Customer's Orders
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
     * Orders made by specific customer will be displayed as a list, if input parameters are valid.
 
 **MSS**
 
-1. User wants to view all orders made by a specific customer.
-2. User finds the customer index from the customer list.
-3. User inputs command to list all orders, by the index of customer in customer list.
-4. SellSavvy retrieves a list of all orders made by specified customer.
-5. SellSavvy displays the orders in a list in GUI.
+1. User finds the index of the customer in the customer list whose orders they want to view.
+2. User inputs command to list all orders under the index of customer.
+3. SellSavvy displays the orders under the specified customer.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects that there are no customers with the specified index.
-    * 3a1. SellSavvy displays an error that the customer index is invalid.
+* 2a. SellSavvy detects that the customer index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no customers with the specified index.
+    * 2b1. SellSavvy displays an error that the customer index is invalid.
 
     Use case ends.
 
-**Use case 7: Mark Order as Completed**
 
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC07 - Mark Order as Completed
+* 2c. There are no orders under the specified customer.
+  * SellSavvy displays that the customer does not have any orders currently.
+
+  Use case ends.
+
+**Use case 8: Mark Order as Completed**
+
+* **Use Case**: UC08 - Mark Order as Completed
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be marked as “Completed” if the input parameters are valid.
 
 **MSS**
 
-1. User wants to mark an order by a customer as completed.
-2. User finds the order they want to mark as completed.
-3. User specifies the index of the order.
-4. SellSavvy updates the status of the order and indicates that the action is successful.
+1. User finds the order they want to mark as completed.
+2. User specifies the index of the order.
+3. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
 **Extensions**
 
-* 3a.  The specified order is already marked as "Completed".
-    * 3a1. SellSavvy displays a message stating that the order is already marked as completed.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b.  The specified order is already marked as "Completed".
+    * 2b1. SellSavvy displays a message stating that the order is already marked as completed.
 
     Use case ends.
 
 
-* 3b. There are no orders with the specified index.
-  * 3b1. SellSavvy displays an error that the order index is invalid.
+* 2c. There are no orders with the specified index.
+  * 2c1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
-**Use case 8: Remove "Completed" Marking from Order**
+**Use case 9: Remove "Completed" Marking from Order**
 
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC08 - Remove "Completed" Marking from Order
+* **Use Case**: UC09 - Remove "Completed" Marking from Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be reverted to "Pending" status if the input parameters are valid.
 
 **MSS**
 
-1. User wants to remove "Completed" Marking from Order due to mistake.
-2. User finds the order they want to mark as completed.
-3. User specifies the index of the order.
-4. SellSavvy updates the status of the order and indicates that the action is successful.
+1. User finds the order they want to mark as completed.
+2. User specifies the index of the order.
+3. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
 **Extensions**
 
-* 3a.  The specified order is not marked as “Completed” in the first place.
-    * 3a1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
 
-* 3b. There are no orders with the specified index.
-    * 3b1. SellSavvy displays an error that the order index is invalid.
+* 2b.  The specified order is not marked as “Completed” in the first place.
+    * 2b1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
 
   Use case ends.
 
-**Use case 9: Delete an order**
 
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC09 - Delete an Order
+* 2c. There are no orders with the specified index.
+    * 2c1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+**Use case 10: Delete an order**
+
+* **Use Case**: UC10 - Delete an Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * An order made by the customer will be deleted if input parameters are valid.
 
 **MSS**
 
-1. User wants to delete an order.
-2. User finds the order they want to delete.
-3. User deletes the order by their index.
-4. SellSavvy updates the displayed list of orders that the action is successful.
+1. User finds the order they want to delete.
+2. User deletes the order by its index.
+3. SellSavvy updates the displayed list of orders.
+4. SellSavvy confirms that the deletion is successful by displaying the deleted order's details.
 
 Use case ends.
 
+**Extensions**
 
-* 3a. There are no orders with the specified index.
-    * 3a1. SellSavvy displays an error that the order index is invalid.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
-**Use case 10: Filter order list by order status**
 
-* **System**: SellSavvy
-* **Actor**: User
-* **Use Case**: UC10 - Filter an Order List by Order Status
+* 2b. There are no orders with the specified index.
+    * 2b1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+**Use case 11: Edit an Order's Details**
+
+* **Use Case**: UC11 - Edit a Order's Details
+* **Preconditions**: A customer's list of orders is being displayed.
+* **Guarantees**:
+    * The specified order's details will be overwritten if the input parameters are valid.
+
+**MSS**
+
+1. User finds the index of the order they want to edit.
+2. User specifies the order index along with modifications they want to make to the order's details.
+3. SellSavvy updates the order list with the modifications made to the customer.
+4. SellSavvy confirms the modification by stating the updated order's details.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no orders with the specified index.
+    * 2b1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+
+* 2c. There are no order details specified for modification.
+    * 2c1. SellSavvy tells the user that at least one field has to be edited.
+
+  Use case ends.
+
+
+* 2d. SellSavvy detects that the updated fields do not satisfy its constraints.
+    * 2d1. SellSavvy states the constraints of the invalid parameter.
+
+  Use case ends
+
+
+* 3a. SellSavvy detects that the updated order has similar details to another existing order under the same customer.
+    * 3a1. SellSavvy gives a warning that the customer already has an order with similar details.
+
+  Use case resumes from step 4.
+
+**Use case 12: Filter order list by order status**
+
+* **Use Case**: UC12 - Filter an Order List by Order Status
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Orders with specified status under the customer will be displayed as a list, if input parameters are valid.
 
 **MSS**
 
-1. User wants to filter an order list.
-2. User filters the order list of the customer by the status keyword.
-3. SellSavvy displays the orders with specified status in a list in GUI.
+1. User filters the order list of the customer by the status keyword.
+2. SellSavvy displays the orders with specified status in a list in GUI.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. There is no such status with specified status keyword.
-  * 2a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
+* 1a. The status keyword is missing or invalid.
+  * 1a1. SellSavvy displays an error and provides the available status keywords.
+
+  Use case ends.
+
+
+* 1a. There are no orders with the specified status.
+  * 1a1. SellSavvy tells the user that no related orders are found.
 
   Use case ends.
 
@@ -615,9 +748,8 @@ Use case ends.
 2. Should be able to hold up to 100 customers and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to be used offline (i.e. without internet connection)
-5. Should provide clear error messages to indicate issues to the user.
-6. Should log user inputs and errors for analysis and debugging.
-7. The system should respond within 2 seconds from any user input.
+5. Should log user inputs and errors for analysis and debugging.
+6. The system should respond within 2 seconds from any user input.
 
 ### Glossary
 
@@ -629,7 +761,9 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
-* **Similar names**: Names which are identical if whitespaces and case sensitivity are ignored.
+
+<a id="similar"></a>
+* **Similar names (for customers, orders and tags)**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -651,11 +785,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
@@ -671,29 +805,453 @@ testers are expected to do more *exploratory* testing.
    1.  Re-launch the app by double-clicking the jar file.<br>
        Expected: The newest order added is retained.
 
-1. _{ more test cases …​ }_
+### Adding a customer
 
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br> 
+
+**Tips:** All the prerequisites below will be fulfilled if you start off with the default sample data and follow the test cases in sequence.
+
+1. Adding a unique customer with all parameters specified.
+
+    1. Prerequisites: Customer with name `John Doe` or other similar names does not already exist in the address book.
+
+    2. Test case: `addcustomer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`<br>
+       Expected: The customer is successfully added. Details of the added customer shown in the status message.
+
+2. Adding a unique customer with all parameters specified using the command alias.
+
+    1. Prerequisites: Customer with name `Betsy Crowe` or other similar names does not already exist in the address book.
+   
+    2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
+       Expected: The customer is successfully added. Details of the added customer shown in the status message.
+   
+3. Adding a customer with an identical name.
+
+   1. Prerequisites: Customer with name `Betsy Crowe` already exists in the address book.
+
+   2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+
+4. Adding a customer with a [similar name](#similar) and without the optional `tag` field.
+
+    1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the address book.
+
+    2. Test case: `addcustomer n/Betsy crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` <br>
+       Expected: The customer is successfully added. A warning and details of the added customer shown in the status message.
+
+5. Adding a customer with duplicate tags.
+
+    1. Prerequisites: Customer with name `Yu Sutong` or other similar names does not already exist in the address book.
+
+    2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
+       Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
+
+6. Adding a customer with [similar tags](#similar).
+
+    1. Prerequisites: Customer with name `Foo Chao` or other similar names does not already exist in the address book.
+
+    2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
+       Expected: The customer is successfully added with both similar tags accepted. A warning and details of the added customer shown in the status message.
+
+7. Adding a customer with missing compulsory field.
+
+   1. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com a/69, Sembawang Road. #01-01` <br>
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+
+   2. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com p/12345678` <br>
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+
+### Listing all customers
+
+1. Listing all customers with or without aliasing.
+
+    1. Test case: `listcustomer` <br>
+       Expected: All customers are listed. A success message shown in the status message.
+
+    2. Test case: `listc` <br>
+       Expected: All customers are listed. A success message shown in the status message.
+
+### Finding customers by name.
+
+1. Finding customers with one keyword.
+
+    1. Test case: `findcustomer bernice` <br>
+       Expected: 
+       - All customers with 'bernice' in their names are listed. A success message shown in the status message.
+       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
+       
+2. Finding customers with multiple keywords using the command alias.
+
+    1. Test case: `findc alex david` <br>
+       Expected:
+       - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
+       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+   
+### Editing an existing customer
+
+1. Editing a customer while all customers are being shown.
+
+    1. Prerequisites: All customers are listed using the `listcustomer` command with at least 1 customer listed.
+
+    2. Test case: `editcustomer 1 p/91234567 e/johndoe@example.com` <br>
+       Expected: The customer is successfully edited. Details of the edited customer shown in the status message.
+
+2. Editing a customer in a filtered list using the command alias.
+
+    1. Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+       Example: `findcustomer john`
+
+    2. Test case: `editc 1 n/Betsy Crower t/` <br>
+       Expected: The customer is successfully edited with all tags removed. Details of the edited customer shown in the status message. The displayed customer list becomes unfiltered and all customers are displayed.
+
+3. Editing a customer to an exact same name as an existing customer.
+
+    1. Prerequisites:
+       - Customer with name `Betsy Crowe` already exist in the address book.
+       - At least 1 customer is listed.
+       - The customer to be edited is not `Betsy Crowe`.
+
+    2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
+       Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+
+4. Editing a customer to have a [name similar to an existing customer](#similar).
+
+    1. Prerequisites:
+        - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
+        - At least 1 customer is listed.
+        - The customer to be edited is not `Betsy Crowe`.
+       
+    2. Test case: `editcustomer 1 n/betsy crowe` <br>
+       Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
+
+5. Editing a customer to have duplicate tags.
+
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 t/friends t/friends` <br>
+       Expected: The customer's tags is successfully edited with one of the duplicated tags ignored. Details of the edited customer shown in the status message.
+
+6. Editing a customer to have [similar tags](#similar).
+
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 t/Friends t/friends` <br>
+       Expected: The customer is successfully edited with both similar tags accepted. A warning and details of the added customer shown in the status message.
+
+7. Editing a customer with invalid inputs.
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 n/@#$%` <br>
+       Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+   
 ### Deleting a customer
 
-1. Deleting a customer while all customers are being shown
+1. Deleting a customer while all customers are being shown.
 
-   1. Prerequisites: List all customers using the `listcustomer` command. Multiple customers in the list.
+   1. Prerequisites: List all customers using the `listcustomer` command with at least 1 customer listed.
 
-   1. Test case: `deletecustomer 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+   2. Test case: `deletecustomer 1`<br>
+      Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message.
 
-   1. Test case: `deletecustomer 0`<br>
+   3. Test case: `deletecustomer 0`<br>
       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect `deletecustomer` commands to try: `deletecustomer`, `deletecustomer x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a customer from a filtered customer list using the command alias.
+
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.<br>
+       Example: `findcustomer john`
+
+    2. Test case: `deletec 1`<br>
+       Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message.
+
+    3. Test case: `deletec 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Adding an order
+
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing orders with duplicate/similar names. You are advised to follow the test cases in order. <br>
+
+1. Adding a unique order with all parameters specified while all customers is being shown.
+
+    1. Prerequisites: 
+        - At least 1 customer is displayed in the customer list.
+        - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
+        - There are no orders similar to the order to be added under the first customer.
+
+    2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
+       Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
+
+2. Adding a unique order with optional field omitted using the command alias when the customer list is filtered.
+
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.<br>
+       Example: `findcustomer bernice`
+
+    2. Test case: `addo 1 i/Books d/02-03-2026` <br>
+       Expected: The order is successfully added with default quantity of `1`. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
+
+3. Adding an order with missing compulsory field(s).
+
+    1. Prerequisites: At least 1 customer is displayed in the customer list.
+
+    2. Test case: `addorder 1 i/books` <br>
+       Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+
+    3. Test case: `addo 1 q/100` <br>
+        Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+
+4. Adding a [similar order](#similar).
+
+    1. Prerequisites:
+        - At least 1 customer is displayed in the customer list.
+        - There is an existing order similar to the order to be added under the first customer.
+
+    2. Test case: `addo 1 i/books d/02-03-2026` <br>
+       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
+
+5. Adding an order with delivery date elapsed.
+
+    1. Prerequisites: 
+        - At least 1 customer is displayed in the customer list.
+        - No order similar to order to be added under the first customer.
+
+    2. Test case: `addo 1 i/phone d/02-03-2020` <br>
+       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
+   
+### Listing all orders under a customer.
+
+1. Listing all orders with or without aliasing.
+
+    1. Prerequisites: At least 2 customers and at most 99 customers is displayed in the customer list.
+   
+    2. Test case: `listorder 1` <br>
+       Expected: All orders under the first customer are listed. A success message shown in the status message.
+
+    3. Test case: `listo 2` <br>
+       Expected: All orders under the second customer are listed. A success message shown in the status message.
+   
+    4. Test case: `listo 100` <br>
+       Expected: No change to the order list. Error details shown in the status message. Status bar remains the same.
+
+### Filter orders by status.
+
+1. Filtering order list to display all `pending` orders.
+
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
+       Example `listorder 1`.
+
+    2. Test case: `filterorder pending` <br>
+       Expected: Only pending orders remain in the order list. A success message shown in the status message.
+
+2. Filtering order list to display all `completed` orders. using the command alias.
+
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
+       Example `listorder 1`.
+       
+    2. Test case: `filterorder completed` <br>
+       Expected: Only completed orders remain in the order list. A success message shown in the status message.
+
+### Editing an existing order
+
+1. Editing an order while all orders under a customer are being shown.
+
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed. <br>
+       Example: `listorder 1`
+
+    2. Test case: `editorder 1 i/Light bulb d/21-11-2025` <br>
+       Expected: The order is successfully edited. Details of the edited order shown in the status message.
+
+2. Editing an order in a filtered order list using the command alias.
+
+    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
+       Example: `filterorder pending`
+
+    2. Test case: `edito 2 q/22` <br>
+       Expected: The order is successfully edited. Details of the edited order shown in the status message.
+
+3. Editing an order to a [similar order](#similar).
+
+    1. Prerequisites:
+        - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
+        - The first order must be `pending` status.
+
+    2. Adding the similar order: `addo 1 i/test d/21-11-2025 q/1`
+
+    3. Test case: `edito 1 i/test d/21-11-2025 q/1` <br>
+       Expected: The order is successfully edit. A warning and details of the edited order shown in the status message.
+
+4. Editing an order with invalid inputs.
+    1. Prerequisites: At least one order is listed.
+
+    2. Test case: `editorder 1 q/1 2` <br>
+       Expected: No order is edited. Error details shown in the status message. Status bar remains the same.
+
+### Deleting an order
+
+1. Deleting an order while all orders under a customer are being shown.
+
+    1. Prerequisites: List all orders using the `listorder 1` command with at least 1 order listed.
+
+    2. Test case: `deleteorder 1`<br>
+       Expected: First order is deleted from the list. Details of the deleted order shown in the status message.
+
+    3. Test case: `deleteorder 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `deleteorder` commands to try: `deleteorder`, `deleteorder x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting an order from a filtered list using the command alias.
+
+    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
+       Example: `filterorder pending`
+
+    2. Test case: `deleteo 1`<br>
+       Expected: First order is deleted from the list. Details of the deleted order shown in the status message.
+
+    3. Test case: `deleteo 0`<br>
+       Expected: No order is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Marking an order as completed
+
+1. Marking an order as completed while all orders under a customer are being shown.
+
+    1. Prerequisites:
+       - List all customers using the `listorder 1` command with at least 1 order listed.
+       - The first order's status is not `Completed`.
+
+    2. Test case: `markorder 1`<br>
+       Expected: First order is marked as completed. Details of the marked order shown in the status message.
+
+    3. Test case: `markorder 0`<br>
+       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `markorder` commands to try: `markorder`, `markorder x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Marking an order from a filtered list as completed using the command alias.
+
+   1. Prerequisites: Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
+
+   2. Test case: `marko 1`<br>
+      Expected: First order is marked as completed. Details of the marked order shown in the status message. The marked order will disappear from the filtered order list as it is no longer `Pending`.
+
+   3. Test case: `marko 0`<br>
+      Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+   
+3. Marking an already completed order as completed.
+
+    1. Prerequisites:
+        - At least 1 order listed. <br>
+        - The first order's status is `Completed`.
+
+    2. Test case: `marko 1`<br>
+       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+
+### Reverting an order to pending status.
+
+1. Reverting an order to pending status while all orders under a customer are being shown.
+
+    1. Prerequisites:
+        - List all customers using the `listorder 1` command with at least 1 order listed.
+        - The first order's status is not `Pending`.
+
+    2. Test case: `unmarkorder 1`<br>
+       Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message.
+
+    3. Test case: `unmarkorder 0`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `unmarkorder` commands to try: `unmarkorder`, `unmarkorder x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Reverting an order from a filtered list to pending status using the command alias.
+
+    1. Prerequisites: Orders filtered using `filterorder completed` command with at least 1 order listed. <br>
+
+    2. Test case: `unmarko 1`<br>
+       Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message. The unmarked order will disappear from the filtered order list as it is no longer `completed`.
+
+    3. Test case: `unmarko 0`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
+
+3. Attempting to revert a order which currently pending.
+
+    1. Prerequisites:
+        - At least 1 order listed. <br>
+        - The first order's status is `Pending`.
+
+    2. Test case: `unmarko 1`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addressbook.json` file in the `data` folder.
 
-1. _{ more test cases …​ }_
+    2. Test case: Delete the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `addressbook.json` file with default data.
+
+    3. Test case: Delete the `data` folder together with the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `data` folder and a new `addressbook.json` file inside the folder with default data.
+
+    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty customer list.
+
+## **Appendix: Planned Enhancements**
+
+**Team size: 4**
+
+1. **Change the `CUSTOMER_INDEX` of `addorder` command to be optional when a customer's order list is open** <br>
+    - **Problem:** Currently, we made the customer's index needed to be specified for `addorder` when the customer's order list is open but related commands like `editorder` and `filterorder` do not require a customer's index to be supplied.
+    - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
+    - **Rationale:** Requiring the user to remember the customer's index may be unnecessary and would facilitate user convenience.
+
+2. **Allows detection of wrong prefix for commands**
+    - **Problem:** Currently, we only detect the relevant prefix for each command and treat all other irrelevant prefixes as part of a parameter input.
+    - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
+    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used, instead of treating it as part of the parameters. We also considered allowing users to key in prefixes such as `n/` or `a/` as string inputs via the use of special symbols, possibly using a symbol such as `\`.
+    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
+
+## **Appendix: Effort**
+
+This section documents the involved effort to evolve AB3 into SellSavvy.
+
+### Creating `Order` class and handling
+
+At this point, AB3 `Person` is refactored into `Customer`.
+
+Order handling involved:
+* Augmenting `Customer` into `Order` class and existing commands to handle `Order`.
+  * E.g. `AddCustomerCommand` into `AddOrderCommand`.
+* Augmenting `UniqueCustomerList` into `OrderList` class and existing methods to handle `OrderList`.
+  * Updating parameter handling for orders.
+* Enhance UI and Storage functionality to support `Order` and `OrderList`.
+
+This was time and effort intensive as:
+* Orders are handled differently from Person because identical orders should be allowed.
+* Orders requires additional levels of similarity checks.
+* Further enhancements for order management by parameters is stated below.
+
+### Implementing `Order` parameters for order management
+
+This involved:
+* Creating parameters necessary for managing orders, namely `Item`, `Date`, `Quantity` and `Status`.
+* Integrating parameters with order commands.
+
+This was challenging as:
+* `Date` involves additional checks to contextualise delivery dates to order management.
+* Updating the command parsers to correctly handle order parameters.
+* Deliberating `Status` limitations to manage order delivery completion.
+
+### Implementing `filterOrder` command
+
+This involved:
+* Creating predicate class to support filtering by order `Status`.
+* Enhancing model to support filtering for displayed order list.
+
+This was challenging as:
+* Interpreting expected filter of displayed list after commands such as `listOrder` and `addOrder`.
