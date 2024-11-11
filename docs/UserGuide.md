@@ -401,7 +401,7 @@ App data are saved in the hard disk automatically after any command that changes
 
 ### Editing the data file
 
-App data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+App data are saved automatically as a JSON file `[JAR file location]/data/InSUREance.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -412,6 +412,10 @@ Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
 Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+### Auto-Sorting of claims
+Claims will be automatically sorted to show the open claims first, followed by in alphanumeric order of claim ID.
+This occurs whenever a claim is modified using the app and there is no need to manually call this.
 
 --------------------------------------------------------------------------------------------------------------------
 
