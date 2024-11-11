@@ -255,15 +255,15 @@ _{more aspects and alternatives to be added}_
 
 The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
 Archiving can be used to manage inactive or unneeded contacts without losing historical information or
-requiring deletion, which may be irreversible and result in data loss.
+requiring deletion, which is irreversible after the app has been exited or closed.
 
 #### Implementation Details
 The archiving feature is implemented using the `ArchiveCommand` class, which uses a boolean flag `shouldArchive`
 to handle both archiving and unarchiving actions. Instead of directly modifying the `Person` object, which is immutable,
 a new `Person` instance is created with the updated archive status.
 
-<puml src="diagrams/ArchiveSequenceDiagram.puml" width="550" />
---------------------------------------------------------------------------------------------------------------------
+<puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
