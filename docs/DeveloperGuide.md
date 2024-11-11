@@ -74,7 +74,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -93,7 +93,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -183,9 +183,9 @@ On execution, `AddCommand` first queries the supplied model if it contains a stu
 
 Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-Below is an activity diagram when [Adding a new student](#add-a-new-student)
+The following diagram summarizes how a user may add a student into UGTeach.
 
-<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
+<puml src="diagrams/UserAddCommandActivityDiagram.puml" alt="UserAddCommandActivityDiagram" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -297,27 +297,26 @@ How an OweCommand operation goes through the `Model` component is shown below:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                         |
-|----------|--------------------------------------------|-------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions        | refer to instructions when I forget how to use the App                  |
-| `* * *`  | tutor                                      | add a new student             | keep track of my tutee's information                                    |
-| `* * *`  | user                                       | delete an entry               | remove entries that I no longer need                                    |
-| `* * *`  | private tutor                              | view all my students' details | have an overview of how many tutees I am managing                       |
-| `* * *`  | tutor with many students                   | find a student by name        | locate details of tutees without having to go through the entire list   |
-| `* *`    | busy undergraduate tutor                   | find students by date         | locate details of tutees that has tuition on a specific date            |
-| `* *`    | new user                                   | see sample entries            | understand how the interface will look like with entries added          |
-| `* *`    | user                                       | edit contact details                                       | keep my information up-to-date                 |
-| `* *`    | busy undergraduate tutor                   | check who owes me tuition fee                              | identify and remind them to pay                |
-| `* *`    | busy undergraduate tutor                   | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
-| `* *`    | busy undergraduate tutor                   | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
-| `* *`    | forgetful user                             | detect duplicates                                          | avoid manually finding and deleting the duplicates |
-| `* *`    | forgetful user                             | tag users with date and time of tuition                    | differentiate between different contacts    |
-| `*`      | user                                       | hide private contact details  | minimize chance of someone else seeing them by accident                 |
-| `*`      | user with many students in the address book | sort students by name          | locate a student easily                                                  |
-| `*`      | user that types fast                       | be able to undo my actions    | revert back if I have made a mistake                                    |
-| `*`      | user with many students in the address book | sort students by name                                       | locate a student easily                         |
-| `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
-| `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
+| Priority | As a …​                                            | I want to …​                  | So that I can…​                                                         |
+|----------|----------------------------------------------------|-------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                           | see usage instructions        | refer to instructions when I forget how to use the App                  |
+| `* * *`  | tutor                                              | add a new student             | keep track of my tutee's information                                    |
+| `* * *`  | user                                               | delete an entry               | remove entries that I no longer need                                    |
+| `* * *`  | private tutor                                      | view all my students' details | have an overview of how many tutees I am managing                       |
+| `* * *`  | tutor with many students                           | find a student by name        | locate details of tutees without having to go through the entire list   |
+| `* *`    | busy undergraduate tutor                           | find students by date         | locate details of tutees that has tuition on a specific date            |
+| `* *`    | new user                                           | see sample entries            | understand how the interface will look like with entries added          |
+| `* *`    | user                                               | edit contact details                                       | keep my information up-to-date                 |
+| `* *`    | busy undergraduate tutor                           | check who owes me tuition fee                              | identify and remind them to pay                |
+| `* *`    | busy undergraduate tutor                           | be reminded of my tuitions for today                       | remember to teach for today (if any)           |
+| `* *`    | busy undergraduate tutor                           | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive |
+| `* *`    | forgetful user                                     | detect duplicates                                          | avoid manually finding and deleting the duplicates |
+| `* *`    | forgetful user                                     | tag users with date and time of tuition                    | differentiate between different contacts    |
+| `*`      | user                                               | hide private contact details  | minimize chance of someone else seeing them by accident                 |
+| `*`      | user with many students in the UGTeach application | sort students by name          | locate a student easily                                                  |
+| `*`      | user that types fast                               | be able to undo my actions    | revert back if I have made a mistake                                    |
+| `*`      | busy undergraduate tutor                           | have information of both the children and his/her guardian | contact either of them                         |
+| `*`      | tutor with many students                           | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
 <div style="page-break-after: always;"></div>
 
@@ -536,13 +535,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together.
+* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another.
+* **CLI**: Command-line interface, where you interact with the system using your keyboard.
 * **DBMS**: Database Management System, a software providing tools for structural data storage.
-* **CLI**: Command-line interface where you interact with the system using your keyboard
-* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another
-* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together
-* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
-
+* **JAR**: Java ARchive, a file format based on the popular ZIP file format and is used for aggregating many files into one. Click [here](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html) to find out more.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
+* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc.
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -855,3 +855,32 @@ testers are expected to do more *exploratory* testing.
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancement**
+
+Given below are the planned enhancements for UGTeach (to be implemented in the future).
+
+**Team size: 5**
+
+1. **Make Add Command fields shorter:** The current `add command` has 7 compulsory parameters which might be tedious and long even for users who can type fast.
+We plan to make the `add command` shorter by making the `email` field **optional**. This is the **new format:**
+`add n/NAME p/PHONE_NUMBER a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [e/EMAIL] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`, where parameters in square brackets are optional.
+
+1. **Allow students to have multiple classes:** Currently, UGTeach only allow 1 student to have 1 subject and 1 schedule. UGTeach also forbid users from duplicating contacts.
+Hence, users are unable to record multiple classes for students who require tutoring for **more than one subject**. 
+Therefore, we plan to combine the `subject` and `schedule` parameters to form a `class` parameter that takes in 1 or more classes (comma-separated). For instance, the input
+`edit 1 class/Mathematics Monday-1500-1600, Science Wednesday-1200-1400` would mean the first student in UGTeach is receiving tutoring
+for Mathematics on Monday (1500-1600) and Science on Wednesday (1200-1400).
+
+1. **Allow phone numbers from other countries:** Currently, UGTeach only allows Singapore phone numbers as we assumed that students (local or international) should have a Singapore number. 
+However, the user might provide tuition to international students who do not have a Singapore number.
+Hence, we plan to **ease the restriction on phone numbers** to allow phone numbers **ranging from 3-digits to 17-digits** since the shortest and longest
+phone number in the world are 3 and 17 digits long respectively, according to the [World Population Review](https://worldpopulationreview.com/country-rankings/phone-number-length-by-country).
+
+1. **Improve UI to be horizontally scrollable**: Currently, UGTeach only allows vertical scrolling as it is unlikely for students to have an extremely long name or email.
+Hence 'extreme' inputs (e.g., name with 1000 characters) are **truncated** which might interfere with the normal usage of UGTeach.
+Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so that users can view 'extreme' inputs.

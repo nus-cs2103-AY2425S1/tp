@@ -20,12 +20,23 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   1. To check if you have Java installed, open a command terminal:
+      * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
+      * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
+      * Linux: Open the Terminal app or press the "Ctrl + Alt + T" keys simultaneously.
+   2. In the terminal, type `java -version`.
+   3. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
+   4. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+   5. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
+2. Download the latest `.jar` File:
+    * Download the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
+    * By default, the jar file would be saved in the Downloads folder.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your address book.
 
 4. Open a command terminal, `cd` into the folder that you put the jar file in.
+   * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
 
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -83,8 +94,7 @@ Action     | Format, Examples
 
 ##### Notes about the command format
 
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -93,12 +103,16 @@ Action     | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER** number.
+* There should be at least one space between any two parameters, or between the command word and its parameters.<br>
+  e.g. `edit 1 n/Sean` is acceptable, but `edit 1n/Sean` or `edit1 n/Sean` is not.
 
-> Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+
+* For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
+  e.g. if the command specifies `list help`, it will be interpreted as `list`, as the extra text `help` is ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -139,25 +153,33 @@ Adds a student to the address book.
 
 ##### Constraints
 
-* **NAME** must only contain alphanumeric characters and spaces.
-* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
-* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
-* **START_TIME** and **END_TIME** are represented as `HHmm`.
-* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **NAME** must only contain alphanumeric characters and spaces. 
+  * **NAME** is case-insensitive.
+* **ADDRESS** has no restrictions.
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME` (strictly no space in between).
+  * **DAY_OF_THE_WEEK** is one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+  * **DAY_OF_THE_WEEK** is case-insensitive.
+  * **START_TIME** and **END_TIME** are represented as `HHmm`.
+* **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
+  > Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
+  * It is a positive numeric value with at most 2 decimal places.
   * Minimum: $0.01 (must be a positive value)
   * Maximum: $1000.00 (two decimal places allowed)
+  > Reason for the maximum value: It is unlikely for an undergraduate tutor to have an hourly rate higher than $1000.00.
 * **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
+  * Special case: `-0`, `-0.0`, `-0.00` are not allowed! UGTeach will behave weirdly if you enter these values.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
+  * **SUBJECT** is case-insensitive.
 
 </box>
 
 <box type="tip" header="##### Tips">
 
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
@@ -193,7 +215,7 @@ Edits an existing student in the address book.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -229,9 +251,10 @@ Finds students whose names contain any of the given keywords *and* their tuition
 **Examples:**
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
 * `find n/Alex d/Friday` returns `Alex Tan`<br>
+* `find n/Alex Bernice d/Wednesday Friday` returns `Bernice Yu` and`Alex Tan`
 
-**Output:**
-![result for `find n/Alex d/Friday`](images/findResult.png)
+**Output for `find n/Alex Bernice d/Wednesday Friday`:** 
+![result for `find n/Alex Bernice d/Wednesday Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
 <markdown>
@@ -243,8 +266,10 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <box type="tip" header="##### Tips">
 <markdown>
+
 * The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
-<br> i.e. The `find` command will not be affected by the previous `find` command. 
+<br> i.e. The `find` command will not be affected by the previous `find` command.
+* The search result list will be ordered based on the students' index in the full list.
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
 * The order of the parameters does not matter. 
@@ -252,9 +277,9 @@ Finds students whose names contain any of the given keywords *and* their tuition
 * The search finds all the students whose 
     * names matches at least one of the keywords **AND** 
     * the tuition day matches the days.
-    * e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
-        * while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
-        * only `Alex Tan` has a tuition on `Friday`.
+    * e.g. `find n/Alex Bernice d/Wednesday Friday` returns `Bernice Yu` and`Alex Tan` because:
+        * while `Alex Yeoh`, `Alex Tan` and `Bernice Yu` matches one of keywords `Alex` or `Bernice`,
+        * only `Alex Tan` and `Bernice Yu` has a tuition on `Wednesady` or `Friday`.
 </markdown>
 </box>
 
@@ -262,7 +287,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -402,6 +427,11 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Glossary
+* **CLI**: Command-line interface, where you interact with the system using your keyboard.
+* **GUI**: allows you to interact with your computer through text-based commands. It provides a way to run programs, navigate through files and directories, manage processes, and perform various other tasks.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -412,6 +442,6 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
 --------------------------------------------------------------------------------------------------------------------
