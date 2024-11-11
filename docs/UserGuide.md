@@ -379,7 +379,7 @@ To search for a contact in WedLinker, type `find` followed by the label and sear
 * The search will return partial matches and full matches. 
 * Multiple search terms can be searched for the same field by placing each keyword after the appropriate label. For example: Searching for people whose phone number contains either 98 or 64, you can enter the command `find p/98 p/64`. 
 This will return all contacts that have either 98 or 64 in their phone number.
-* You can only specify one label to search at a time. For example, `find n/Alex a/` is not allowed as it searches for in more than one field.
+* You can only specify one label to search at a time. For example, `find n/Alex a/` is not allowed as it searches for keywords in more than one field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 Examples:
@@ -822,7 +822,7 @@ Examples:
 
 3. The commands `untag` and `unassign-wedding` are case-sensitive. So, if a person, person 2, is assigned to a wedding, Wedding 2, entering the command `unassign-wedding 2 w/wedding 2` will not remove Wedding 2 from person 2.
 
-4. When you use this function with both `p1/` and `p2/`, WedLinker will default to assigning the person as the first partner.
+4. When you use the `assign-wedding` function with both `p1/` and `p2/`, WedLinker will default to assigning the person as the first partner for the specified wedding.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
