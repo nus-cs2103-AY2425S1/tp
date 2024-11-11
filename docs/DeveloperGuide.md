@@ -1174,11 +1174,16 @@ When an excessively large number is passed as an index, the currently displayed 
 
 5. **Ability to remove optional fields for companies**: Currently, once an optional field is added to a company, it cannot be removed. We plan to enhance the `edit` command to allow users to clear optional fields, providing greater flexibility in managing company information.
 
-6. **Better handling of extreme inputs**:
+6. **Better handling of extreme inputs**: Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
+Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
+
+7. **Duplicate handling**: Currently, companies can have the same fields such as `PHONE_NUMBER`, `ADDRESS`, and `EMAIL`. We plan to detect this duplication and display warnings to the user when they are adding/editing these fields in a company.
+
+8. **Better handling of extreme inputs**:
 
    1. Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
 
    2. Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
 
-7. **New `close` command**: Currently, the only way to set the status of a company from `interested` to `closed` is when all applications are withdrawn or closed. 
-This can inconvenience users who decide not to consider a company under certain circumstances or after reopening it, and we will fix this by creating a `close` command to allow users to set company status to `closed` for greater control and flexibility.
+9. **New `close` command**: Currently, the only way to set the status of a company from "INTERESTED" to "CLOSED" is when all applications are withdrawn or closed.
+This can inconvenience users who decide not to consider a company under certain circumstances or after reopening it, and we will fix this by creating a `close` command to allow users to set company status to "CLOSED" for greater control and flexibility.
