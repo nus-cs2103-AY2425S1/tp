@@ -18,7 +18,15 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Nric
+Class BirthDate
+Class Sex
+Class AllergyList
+Class BloodType
+Class HealthRisk
+Class ExistingCondition
+Class Note
+Class ApptList
 
 Class I #FFFFFF
 }
@@ -37,11 +45,19 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 ClinicConnectSystem *--> "1" UniquePatientList
 UniquePatientList --> "~* all" Patient
+Patient *--> Nric
+Patient *--> BirthDate
+Patient *--> Sex
+Patient *--> ApptList
+Patient *--> AllergyList
+Patient *--> BloodType
+Patient *--> ExistingCondition
+Patient *--> HealthRisk
 Patient *--> Name
 Patient *--> Phone
 Patient *--> Email
 Patient *--> Address
-Patient *--> "*" Tag
+Patient *--> "*" Note
 
 Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
