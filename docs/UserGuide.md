@@ -38,8 +38,6 @@ potential.
 Finally, frequently asked questions as well as known issues will be displayed so you can clarify any queries you might 
 have.
 
-{{ newPage }}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## 3 Starting HR Helper
@@ -53,8 +51,10 @@ have.
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.5.jar` command to run the application.
 
 1. Login to HR Helper.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![image](images/Ui.png)
+   ![image](images/authentication.png){width=1200}
+
+1. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![image](images/Ui.png){width=1200}
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    
@@ -108,7 +108,7 @@ Login to HR Helper with your username and password.
 
 Format:
 
-![image](images/authentication.png)
+![image](images/authentication.png){width=1200}
 
 <box type="tip" seamless>
 
@@ -118,7 +118,7 @@ Format:
 Examples:
 * For this version, the username is `admin` and password is `12345678`.
 
-![image](images/HRHelperLoginOutput.png)
+![image](images/HRHelperLoginOutput.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -142,7 +142,7 @@ Format: `help`
 
 Examples:
 
-![image](images/helpMessage.png)
+![image](images/helpMessage.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -168,7 +168,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
-![image](images/add.png)
+![image](images/add.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -193,7 +193,7 @@ Format: `list`
 Example:
 * `list` shows all employees.
 
-![image](images/list.png)
+![image](images/list.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -222,7 +222,7 @@ Examples:
 * `count`
 * `count tag/Communications`
 
-![image](images/count.png)
+![image](images/count.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -255,7 +255,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
-![image](images/edit.png)
+![image](images/edit.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -289,7 +289,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
-![image](images/find.png)
+![image](images/find.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -319,7 +319,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in HR Helper.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-![image](images/delete.png)
+![image](images/delete.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -349,7 +349,7 @@ Examples:
 * `sort friend` Sorts and displays all employees tagged as friend.
 * `sort friend family` Sorts and displays employees tagged as either friend or family.
 
-![image](images/sort.png)
+![image](images/sort.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -379,7 +379,7 @@ Examples:
 * `list` followed by `favorite 2` favorites the 2nd employee in HR Helper.
 * `find Betsy` followed by `favorite 1` favorites the 1st employee in the results of the `find` command.
 
-![image](images/favorite.png)
+![image](images/favorite.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -404,7 +404,7 @@ Format: `clear`
 Examples:
 * `clear` resets the database in HR Helper.
 
-![image](images/clear.png)
+![image](images/clear.png){width=1200}
 
 <box type="warning" seamless>
 
@@ -443,7 +443,7 @@ The **Employee Details Window** allows HR personnel to view and edit detailed in
     - Select a employee from the **Employee List**.
     - Press the `Enter` key to open the **Employee Details Window**.
 
-![image](images/persondetailswindow.png)
+![image](images/persondetailswindow.png){width=1200}
 
 
 - **Name:** Editable text field displaying the employee's full name.
