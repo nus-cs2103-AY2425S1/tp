@@ -284,12 +284,12 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 #### UC04. Add a Free Day to a Volunteer
 
-**Description**: Add a free day to a volunteer's schedule.
+**Description**: Add free day(s) to a volunteer's schedule.
 
 **Preconditions**: Volunteer must exist in the system.
 
 **MSS**:
-1. User selects the volunteer to add a free day to.
+1. User selects the volunteer to add free day(s) to.
 2. User selects the date(s) to add as a free day.
 3. User submits the information to the system.
 4. System checks if the volunteer is already available on the selected date(s).
@@ -315,13 +315,13 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 #### UC05. Remove a Free Day from a Volunteer
 
-**Description**: Remove a free day from a volunteer's schedule.
+**Description**: Remove free day(s) from a volunteer's schedule.
 
 **Preconditions**: Volunteer must exist in the system.
 
 **MSS**:
 
-1. User selects the volunteer to remove a free day from.
+1. User selects the volunteer to remove free day(s) from.
 2. User selects the date(s) to remove as a free day.
 3. User submits the information to the system.
 4. System checks if the volunteer is available on the selected date(s).
@@ -381,7 +381,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Un-assign a volunteer from a specific event.
 
-**Preconditions**: Volunteer and Event must exist in the system.
+**Preconditions**: Event and Volunteer exists in the system.
 
 **MSS**:
 
