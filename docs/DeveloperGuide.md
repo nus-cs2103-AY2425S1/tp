@@ -245,10 +245,10 @@ The following shows the activity diagram when the user executes the `add_s` comm
 
 1. The user executes `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` to add the student with student number `A0123456K`, name `Bob Smith`, and email `bobsmith@u.nus.edu`.
    The command is parsed in the `AddressBookParser`.
-2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The Student object is 
-   then used to construct an `AddStudentCommand` object. 
+2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The Student object is
+   then used to construct an `AddStudentCommand` object.
 3. The `AddStudentCommand` object then calls `addPerson(student)` in the `ModelManager` with the specified student
-   to be added. This method adds the specified `Student` in the model. 
+   to be added. This method adds the specified `Student` in the model.
 4. Finally, the `AddStudentCommand` returns the `CommandResult`.
 
 ##### Note
