@@ -57,6 +57,7 @@ public class LogEntryTest {
     @Test
     public void convertToStorageString_singleNewline_convertsToEscapedNewline() {
         String testString = "This is a test log entry.\nThis is the second line.";
-        assertEquals("This is a test log entry.\\nThis is the second line.", LogEntry.convertToStorageString(testString));
+        assertEquals("This is a test log entry.\\nThis is the second line.",
+                LogEntry.convertToStorageString(testString));
     }
 }
