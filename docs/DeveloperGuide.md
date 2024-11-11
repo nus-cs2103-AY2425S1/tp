@@ -1034,8 +1034,8 @@ Team size: 5
    Currently, MediBase3 restricts patient names to alphanumerics and spaces only, preventing the inclusion of common symbols, hyphens, and accented characters that are often found in legal names (e.g., 'Nagaratnam s/o Suppiah', 'Anya Taylor-Joy', 'Sergio Pérez'). Additionally, the app allows leading, trailing, and multiple consecutive spaces, which can result in inconsistent formatting.
 
    This enhancement will:
-    - Loosen restrictions to allow all other special and accented characters, enabling the accurate entry of a wider range of legitimate names.
-    - Automatically trim any leading or trailing spaces and reduce multiple consecutive spaces to a single space, ensuring consistent formatting and reducing errors from accidental spacing during data entry.
+   - Loosen restrictions to allow all other special and accented characters, enabling the accurate entry of a wider range of legitimate names.
+   - Automatically trim any leading or trailing spaces and reduce multiple consecutive spaces to a single space, ensuring consistent formatting and reducing errors from accidental spacing during data entry.
 
    These changes will improve the inclusivity and data consistency of MediBase3's patient records.
 
