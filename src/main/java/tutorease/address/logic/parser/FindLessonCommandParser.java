@@ -39,7 +39,8 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
         logger.log(Level.INFO, "Validating empty arguments for FindLessonCommand");
         if (trimmedArgs.isEmpty()) {
             logger.log(Level.WARNING, "Empty arguments found for FindLessonCommand");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindLessonCommand.MESSAGE_USAGE));
         }
     }
 
@@ -47,7 +48,8 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
         logger.log(Level.INFO, "Validating null arguments for FindLessonCommand");
         if (args == null) {
             logger.log(Level.WARNING, "Null arguments found for FindLessonCommand");
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindLessonCommand.MESSAGE_USAGE));
         }
     }
 
