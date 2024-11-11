@@ -511,7 +511,7 @@ Use case ends.
     - **1a1.** Error message displayed in result display.
         - Use case ends.
 
-- Same as the Extensions from <u>UC10 - Assign a contact to a Wedding</u> excluding 1f.
+- Same as the Extensions from <u>UC10 - Assign a contact to a Wedding</u> excluding 1d.
 
 ---
 
