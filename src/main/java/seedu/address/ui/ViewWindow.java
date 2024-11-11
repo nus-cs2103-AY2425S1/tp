@@ -60,7 +60,11 @@ public class ViewWindow extends UiPart<Stage> {
         email.setText("Email: " + person.getEmail().value);
         remark.setText("Remarks: " + person.getRemark().value);
         triage.setText("Triage stage: " + person.getTriage().value);
-        appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
+        if (person.getAppointment() == null) {
+            appointment.setText("No appointment set.");
+        } else {
+            appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
