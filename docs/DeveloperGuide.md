@@ -1185,5 +1185,5 @@ Phone numbers will be capped at 15 digits as per the international limit, tags w
 
    2. Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
 
-9. **New `close` command**: Currently, the only way to set the status of a company from `interested` to `closed` is when all applications are withdrawn or closed.
-This can inconvenience users who decide not to consider a company under certain circumstances or after reopening it, and we will fix this by creating a `close` command to allow users to set company status to `closed` for greater control and flexibility.
+9. **New `close` command**: Currently, the only way to set the status of a company from "INTERESTED" to "CLOSED" is when all applications are withdrawn or closed.
+This can inconvenience users who decide not to consider a company under certain circumstances or after reopening it, and we will fix this by creating a `close` command to allow users to set company status to "CLOSED" for greater control and flexibility.
