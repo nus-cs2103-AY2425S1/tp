@@ -725,7 +725,6 @@ Use case ends.
     * 3a1. SellSavvy gives a warning that the customer already has an order with similar details.
 
   Use case resumes from step 4.
-<div style="page-break-after: always;"></div>
 
 **Use case 12: Filter order list by order status**
 
@@ -788,6 +787,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Launch and shutdown
 
