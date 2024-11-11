@@ -126,14 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 ### Storage component
@@ -268,9 +261,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
@@ -313,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
 |----------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
+| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact details of every applicants                                                       |
 | `* * *`  | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
 | `* * *`  | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
 | `* * *`  | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
