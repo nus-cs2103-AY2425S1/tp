@@ -18,7 +18,9 @@
 - **Libraries Utilized**:
     - [JavaFX](https://openjfx.io/): Used for building a responsive graphical user interface.
     - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
-    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.<br>
+    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
+
+<!-- Spacer for extra break -->
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
