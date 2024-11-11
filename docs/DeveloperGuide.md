@@ -389,6 +389,42 @@ PlantUML, the lifeline continues till the end of diagram.
 
 <div style="page-break-after: always;"></div>
 
+### Edit Task for Group feature
+
+The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the group's name and the task index in
+the specified group's task list.
+
+The following shows the activity diagram when the user executes the `edit_t_g` command:
+<puml src="diagrams/EditTaskCommandAD.puml" alt="EdiTaskAD" />
+
+#### Usage
+
+**Syntax:** `edit_t_g/etg gn/GROUP_NAME i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE]`
+
+**Example:** `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800`
+
+#### Implementation details
+
+1. User has the application launched with at least 1 group added and at least 1 task added to that group.
+2. User executes `lt gn/GROUP_NAME` to view the group's task list. For this example, the user wishes to edit the first task for `CS2103-F12-2`.
+3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800` to edit the task's deadline to `2024-12-12 1800`. The command is parsed in the `AddressBookParser`.
+4. `EditTaskCommandParser` is created and gets the group name and task index of the task to be edited. The group name and task index is used to
+   construct a `EditTaskCommand` object.
+5. The `EditTaskCommand` object then calls `model.setTask(taskToEdit, editedTask, group)` in the `ModelManager` with the specified group's name, task to be
+   edited, and the edited task. This method edits the specified `Task` in the model.
+6. Finally, the `EditTaskCommand` returns the `CommandResult`.
+
+#### Sequence diagram
+
+The following sequence diagram shows how the above steps for delete group works:
+<puml src="diagrams/EditTaskCommandSequence.puml" alt="EditTaskCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `EditTaskCommandParser`, `CommandResult`, and `EditTaskCommand` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
+
 ### Undo/redo feature
 
 The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
@@ -612,7 +648,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find students with specific keywords.
+1. User requests to find students with specific keywords.
 
 2. T_Assistant processes the input and searches for students matching the keywords.
 
@@ -837,7 +873,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find groups with specific keywords.
+1. User requests to find groups with specific keywords
 2. T_Assistant processes the input and searches for groups matching the keywords.
 3. T_Assistant displays a list of groups who match the search criteria.
 
@@ -895,7 +931,7 @@ Use case ends.
 
 **MSS**
 
-1. User adds a task to a specified group.
+1. User requests to a task to a specified group.
 2. T_Assistant displays all current tasks for the group.
 
 Use case ends.
@@ -918,7 +954,7 @@ Use case ends.
 
 **MSS**
 
-1. User removes a task from a specified group.
+1. User requests to remove a task from a specified group.
 2. T_Assistant displays all current tasks for the group.
 
 Use case ends.
@@ -1005,7 +1041,7 @@ Use case ends.
 
 **MSS**
 
-1. User marks task as complete.
+1. User requests to mark task as complete.
 2. T_Assistant marks the task accordingly.
 
 Use case ends.
@@ -1028,7 +1064,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find tasks with specific keywords.
+1. User requests to find tasks with specific keywords.
 2. T_Assistant processes the input and searches for tasks matching the keywords.
 3. T_Assistant displays a list of tasks who match the search criteria.
 

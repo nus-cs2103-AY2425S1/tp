@@ -1,0 +1,46 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 15
+
+start
+:User runs `EditTaskCommand`;
+
+:Parse command input;
+
+if () then ([Valid input])
+    :Construct EditTaskCommand object;
+    :Return EditTaskCommand object to LogicManager;
+    :LogicManager executes EditTaskCommand;
+
+    if () then ([Group exists])
+        :Retrieve group by group name;
+
+        if () then ([Index is within range])
+            :Retrieve task by index;
+
+            if () then ([Task with new details already exists in group])
+                :Display "task already exists in group" error message;
+            else ([else])
+                :Create edited task with new details;
+
+                :Update the task in group;
+                :Update model state;
+                :Update UI with new task details;
+                :Display edit success message;
+            endif
+
+        else ([else])
+            :Display "invalid index" error message;
+        endif
+
+    else ([else])
+        :Display "group not found" error message;
+    endif
+
+else ([else])
+    :Display "invalid input" error message;
+endif
+
+stop
+@enduml
