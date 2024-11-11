@@ -3,6 +3,7 @@ package tutorease.address.logic.parser;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,10 +24,11 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  */
 public class ContactCommandParser implements Parser<Command> {
     private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(TutorEaseParser.class);
+    private static final Logger logger = LogsCenter.getLogger(ContactCommandParser.class);
 
     @Override
     public Command parse(String args) throws ParseException {
+        logger.log(Level.INFO, "Parsing ContactCommand with args: " + args);
         final Matcher matcher = CONTACT_COMMAND_FORMAT.matcher(args.trim());
 
         if (!matcher.matches()) {
@@ -49,7 +51,7 @@ public class ContactCommandParser implements Parser<Command> {
             return new EditContactCommandParser().parse(subArguments);
         // Future sub-commands like add, edit can be handled here
         default:
-            logger.finer("This user input caused a ParseException: "
+            logger.log(Level.INFO, "This user input caused a ParseException: "
                     + ContactCommand.COMMAND_WORD + " " + args);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

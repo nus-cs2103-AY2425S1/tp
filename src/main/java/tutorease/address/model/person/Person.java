@@ -6,7 +6,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.model.tag.Tag;
 
@@ -15,7 +18,7 @@ import tutorease.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-
+    private static Logger logger = LogsCenter.getLogger(Person.class);
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -30,6 +33,9 @@ public abstract class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
+        logger.log(Level.INFO, "Creating Person object with name: " + name
+                + " phone: " + phone + " email: " + email + " address: " + address
+                + " role: " + role + " tags: " + tags);
         requireAllNonNull(name, phone, email, address, role, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +43,9 @@ public abstract class Person {
         this.address = address;
         this.role = role;
         this.tags.addAll(tags);
+        logger.log(Level.INFO, "Created Person object with name: " + name
+                + " phone: " + phone + " email: " + email + " address: " + address
+                + " role: " + role + " tags: " + tags);
     }
 
     public Name getName() {
@@ -121,16 +130,27 @@ public abstract class Person {
 
         // instanceof handles nulls
         if (!(other instanceof Person)) {
+            logger.log(Level.WARNING, "Person is not an instance of Person");
             return false;
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && role.equals(otherPerson.role);
+        boolean isNameEqual = name.equals(otherPerson.name);
+        boolean isPhoneEqual = phone.equals(otherPerson.phone);
+        boolean isEmailEqual = email.equals(otherPerson.email);
+        boolean isAddressEqual = address.equals(otherPerson.address);
+        boolean isTagsEqual = tags.equals(otherPerson.tags);
+        boolean isRoleEqual = role.equals(otherPerson.role);
+
+        logger.log(Level.INFO, "Comparing Person: " + this + " with " + otherPerson);
+        logger.log(Level.INFO, "Comparing name: " + isNameEqual
+                + " Comparing phone: " + isPhoneEqual
+                + " Comparing email: " + isEmailEqual
+                + " Comparing address: " + isAddressEqual
+                + " Comparing tags: " + isTagsEqual
+                + " Comparing role: " + isRoleEqual);
+
+        return isNameEqual && isPhoneEqual && isEmailEqual && isAddressEqual && isTagsEqual && isRoleEqual;
     }
 
     @Override

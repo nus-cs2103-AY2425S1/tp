@@ -143,6 +143,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getFilteredPersonListSize() {
+        return filteredPersons.size();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -192,11 +197,6 @@ public class ModelManager implements Model {
     @Override
     public boolean filteredLessonListIsEmpty() {
         return filteredLesson.isEmpty();
-    }
-
-    @Override
-    public int getFilteredPersonListSize() {
-        return filteredPersons.size();
     }
 
     @Override
