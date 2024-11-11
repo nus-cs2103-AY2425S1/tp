@@ -96,7 +96,7 @@ The table below provides a quick overview of each parameter associated with a te
 > :exclamation: **Warning:**
 >
 > * Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
-> 
+>
 > * A Person is considered as duplicate if they share the same phone number or email address regardless of whether they are a student or teacher and are considered as errors in EduConnect. For example, a student with the phone number `12345678` cannot be added if another student or teacher already has the same phone number. 
 
 | Parameter           | Definition                                                        | Constraints                                                                                                            | Examples                                                                   |
@@ -134,6 +134,8 @@ The table below provides a quick overview of each parameter associated with a te
 > * Any extra parameters entered for commands that don’t require them (like `help`, `list`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
+> * In the event where a non-repeating parameter is given multiple times, the last parameter supplied will be taken into account. For example, if the command specifies `/name NAME` but `/name John Doe /name Bob Doe` is given, `Bob Doe` will be registered as the name parameter.
+> 
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters around line-breaks may not transfer correctly when pasted into the application.
 
 
