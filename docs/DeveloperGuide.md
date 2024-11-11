@@ -17,6 +17,9 @@
 
 _This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)_.
 
+Generative AI tools such as ChatGPT and Copilot were used for the purposes of creating and ideating Junit 
+test cases and method names, writing detailed Javadocs and some code refactoring.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
