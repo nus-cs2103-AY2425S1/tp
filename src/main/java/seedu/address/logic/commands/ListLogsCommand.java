@@ -22,7 +22,7 @@ public class ListLogsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all logs of a person identified by the NRIC.\n"
-            + "Parameters: i/NRIC\n"
+            + "Parameters: NRIC\n"
             + "Example: " + COMMAND_WORD + " i/S1234567D";
 
     private final IdentityNumber identityNumber;

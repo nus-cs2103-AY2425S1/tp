@@ -22,7 +22,7 @@ public class AddLogCommand extends Command {
             + ": Adds a log to the person identified by the Identification Number in the person list.\n"
             + "Parameters: i/NRIC d/DATE l/LOG ENTRY\n"
             + "Format of Appointment Date: dd MMM yyyy\n"
-            + "Example: " + COMMAND_WORD + " i/S1234567D d/01 Nov 2024 l/Checked in at clinic\n";
+            + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Oct 2024 l/First visit to the clinic\n";
 
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
