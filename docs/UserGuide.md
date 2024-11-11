@@ -169,11 +169,23 @@ Shows a list of all persons in AdmiNUS.
 
 **Format**: `list`
 
+**Expected message**:
+
+```
+Listed all persons
+```
+
 #### Viewing a contact: `view`
 
 Shows the details of a contact.
 
 **Format**: `view INDEX`
+
+**Expected message**:
+
+```
+Displayed person: (Details of person)
+```
 
 **Example**:
 
@@ -186,6 +198,12 @@ Shows the details of a contact.
 Clears all entries from AdmiNUS.
 
 **Format**: `clear`
+
+**Expected message**:
+
+```
+Address book has been cleared!
+```
 
 #### Exiting the program: `exit`
 
@@ -222,7 +240,7 @@ New student added: (details of the student added)
 | `a/ADDRESS`      | Physical address          | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
 | `t/TAG`          | Tag to categorize contact | Must be alphanumeric characters and no spaces ([case sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
 
-<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
+<div markdown="block" class="alert alert-info"> 🔔 **Notes**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
 <div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
 While names and address can include `/` for valid formats, using parameter-like sequences (e.g., `n/`, `p/`) within the name and address fields will result in an error.
@@ -374,16 +392,16 @@ Deleted Contacts:
 
 </div>
 
+**Examples**:
+
+- `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS given that there are more than 3 contacts in the list.
+- `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
+
 <div markdown="span" class="alert alert-primary">💡 **Tip**:
 
 To delete all students with the `oneYearMembership` tag, simply use `filtertag oneYearMembership` followed by `delete all`
 
  </div>
-
-**Examples**:
-
-- `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS given that there are more than 3 contacts in the list.
-- `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
 
 <div markdown="block" class="alert alert-warning">
 
@@ -453,38 +471,29 @@ Finds contacts whose tags are the same as the specified keyword.
 | `KEYWORD`      | Keyword of the tag's name to filter through the list of contacts. | Compulsory |
 | `MORE_KEYWORD` | More keywords to filter                                           | Optional   |
 
-**Examples**:
-
-- `filtertag paid` finds contacts who have tags saved as `paid`.
-
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
 
-- The index refers to the index number shown in the displayed contact list.
-
-- `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
-- `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
-- For both formats 1 and 2,
-  - The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
-  - Only full words will be matched e.g. `partner` will not match `partners`.
-
+- The filter is case-insensitive. For example, `partner` will match `PartnEr`.
+- Only full words will be matched e.g. `partner` will not match `partners`.
+- Contacts matching at least one tag will be returned (i.e. `OR` search). <br>
+e.g. `filtertag paid year2` finds all contacts who have tags saved as `paid` or `year2`.
 </div>
+
+**Examples**:
+
+- `filtertag paid` finds contacts who have tags saved as `paid`.
 
 #### Tracking contacts by category: `track`
 
 Tracks and lists all contacts who are in the category of the specified keyword.
 
+**Format**: `track CATEGORY​`
+
 | Parameter Name | Description                         | Required   |
 | -------------- | ----------------------------------- | ---------- |
 | `CATEGORY`     | Either student or company to filter | Compulsory |
-
-**Examples**:
-
-- `track student` finds contacts with category `student`.
-- `track company` finds contacts with category `company`.
-
-![track UI](images/trackUI.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -497,6 +506,13 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 - Only full words will be matched e.g. `student` will not match `students`.
 
 </div>
+
+**Examples**:
+
+- `track student` finds contacts with category `student`.
+- `track company` finds contacts with category `company`.
+
+![track UI](images/trackUI.png)
 
 #### Adding tag(s) to contact: `tag`
 
@@ -595,17 +611,17 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 
 </div>
 
+**Examples**:
+
+- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
+- `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
+
 <div markdown="span" class="alert alert-primary">💡
  **Tip**:
 
 To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `deletetag all t/Y3`
 
  </div>
-
-**Examples**:
-
-- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
-- `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
 
 ---
 
@@ -627,15 +643,15 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 - Example: `data/File.csv` or `./data/hackers_2022.csv`
 - If the application runs in `/home/user/project`, `import data/File.csv` points to `/home/user/project/data/File.csv`.
 
-**Examples**:
-
-- Absolute: `import /home/user/data/hackers_2022.csv`
-- Relative: `import ./data/hackers_2022.csv`
-
 <div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
 - Windows paths use backslashes (e.g., `C:\\Users\\username\\data\\File.csv`).
 - Verify file format and read permissions.
 </div>
+
+**Examples**:
+
+- Absolute: `import /home/user/data/hackers_2022.csv`
+- Relative: `import ./data/hackers_2022.csv`
 
 **Troubleshooting**:
 
@@ -656,15 +672,15 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 - Refers to paths relative to the current directory.
 - Example: `./data/Output.csv` saves to `data` in the current directory.
 
-**Examples**:
-
-- Absolute: `export /home/user/data/output_data.csv`
-- Relative: `export ./data/Output.csv`
-
 <div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
 - Ensure directories exist before exporting. For Windows, use `\\` or `\\`.
 - Files may be overwritten without warning.
 </div>
+
+**Examples**:
+
+- Absolute: `export /home/user/data/output_data.csv`
+- Relative: `export ./data/Output.csv`
 
 **Troubleshooting**:
 
