@@ -6,27 +6,57 @@
 
 # Eventory User Guide
 
-Eventory is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Eventory is a **desktop app for managing contacts and events**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 Main Features:
-* Enhanced Contact Management
-    * Store All Your Contacts: Add phone numbers, emails, addresses, and tags
-    * Contact Linking: Add contacts to events
-    * Advanced Filters: Filter by name and tag
-* Comprehensive Event Management
-    * Track All Your Events: Add locations, start dates, and tags
-    * Timeline View: Countdown for upcoming events
-    * Advanced Filters: Filter by name, tag, or date
+#### Enhanced Contact Management
+<box type="success" seamless>
+  Store All Your Contacts: Add phone numbers, emails, addresses, and tags
+</box>
+<box type="success" seamless>
+  Contact Linking: Add contacts to events
+</box>
+<box type="success" seamless>
+  Advanced Filters: Filter by name and tag
+</box>
 
+#### Comprehensive Event Management
+<box type="success" seamless>
+  Track All Your Events: Add locations, start dates, and tags
+</box>
+<box type="success" seamless>
+  Timeline View: Countdown for upcoming events
+</box>
+<box type="success" seamless>
+  Advanced Filters: Filter by name, tag, or date
+</box>
 
-<!-- * Table of Contents -->
+#### Powered By Leading Technologies
+
+Eventory is built with reliable libraries and frameworks:
+<box type="definition" seamless>
+
+[JavaFX](https://openjfx.io/) for a rich graphical experience
+</box>
+<box type="definition" seamless>
+
+[Jackson](https://github.com/FasterXML/jackson) for seamless data processing
+</box>
+<box type="definition" seamless>
+
+[JUnit5](https://github.com/junit-team/junit5) to ensure quality and robustness
+</box>
+
+<div style="page-break-after: always;"></div>
+
+## Table Of Contents
+
 <page-nav-print />
 
 --- {.border-primary .thick}
 
 <div style="page-break-after: always;"></div>
 
-<!-- Quick start -->
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
@@ -35,7 +65,7 @@ Main Features:
 
 3. Copy the file to the folder you want to use as the _home folder_ for Eventory.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventory.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Eventory.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Launch](images/launch.png)
 
@@ -57,7 +87,6 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 
 --- {.border-primary .thick}
 
-<!-- Terminology -->
 ## Terminology
 In this guide, the following terms are used:
 - **Contact(s)** and **Person(s)**: These terms are used interchangeably and refer to the individuals stored in Eventory.
@@ -65,7 +94,6 @@ In this guide, the following terms are used:
 
 --- {.border-primary .thick}
 
-<!-- Features -->
 ## Features
 
 <box type="info" seamless>
@@ -513,7 +541,7 @@ cd "~/My Folder"
 
 <box type="important" seamless icon=":question:">
 
-"I get an error when I try to run the command java -jar eventory.jar."
+"I get an error when I try to run the command java -jar Eventory.jar."
 
 </box>
 
