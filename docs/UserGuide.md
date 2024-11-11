@@ -272,7 +272,7 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 Examples:
 * `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and display colour of the tag`CS2100` becomes `Gold`.
-* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
+* `cattag t/mahjong t/Floorball activity` categorizes both tags `mahjong` and `Floorball` under `Activities` with colour `Blue`. 
 
 ![cattag response image](images/cattagResponse.png)
 
