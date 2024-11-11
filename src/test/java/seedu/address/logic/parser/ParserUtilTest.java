@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -225,5 +226,27 @@ public class ParserUtilTest {
     @Test
     public void parseInteger_nullInput_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseInteger(null));
+    }
+
+    @Test
+    public void parseBirthday_validBirthdayWithoutWhitespace_returnsBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday("1990-01-01");
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday("1990-01-01"));
+    }
+
+    @Test
+    public void parseBirthday_validBirthdayWithWhitespace_returnsTrimmedBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday("1990-01-01");
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday("   1990-01-01   "));
+    }
+
+    @Test
+    public void parseBirthday_invalidBirthday_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday("01-01-1990"));
+    }
+
+    @Test
+    public void parseBirthday_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday(null));
     }
 }
