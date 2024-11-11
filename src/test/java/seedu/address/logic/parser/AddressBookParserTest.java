@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.SortCommand.ASCENDING;
-import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.commands.SortCommand.ASC;
+import static seedu.address.logic.commands.SortCommand.DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
@@ -125,17 +125,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         SortCommand ascCommandName = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + PREFIX_NAME + ASCENDING);
-        assertEquals(new SortCommand(ASCENDING, false), ascCommandName);
+                SortCommand.COMMAND_WORD + " " + PREFIX_NAME + ASC);
+        assertEquals(new SortCommand(ASC, false), ascCommandName);
         SortCommand descCommandName = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + PREFIX_NAME + DESCENDING);
-        assertEquals(new SortCommand(DESCENDING, false), descCommandName);
+                SortCommand.COMMAND_WORD + " " + PREFIX_NAME + DESC);
+        assertEquals(new SortCommand(DESC, false), descCommandName);
         SortCommand ascCommandSchedule = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + ASCENDING);
-        assertEquals(new SortCommand(ASCENDING, true), ascCommandSchedule);
+                SortCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + ASC);
+        assertEquals(new SortCommand(ASC, true), ascCommandSchedule);
         SortCommand descCommandSchedule = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + DESCENDING);
-        assertEquals(new SortCommand(DESCENDING, true), descCommandSchedule);
+                SortCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + DESC);
+        assertEquals(new SortCommand(DESC, true), descCommandSchedule);
     }
 
     @Test

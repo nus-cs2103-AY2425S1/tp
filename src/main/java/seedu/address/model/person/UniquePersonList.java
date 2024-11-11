@@ -2,8 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.SortCommand.ASCENDING;
-import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.commands.SortCommand.ASC;
+import static seedu.address.logic.commands.SortCommand.DESC;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -110,16 +110,14 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws AssertionError if <code>order</code> is not either <code>asc</code> or <code>desc</code>.
      */
     public void sortPersons(String order, Boolean toSortBySchedule) {
-        //the order string given will always be either "asc" or "desc"
-        assert order.equals("asc") || order.equals("desc");
-        requireNonNull(order);
+        assert order.equals(ASC) || order.equals(DESC);
         Comparator<Person> comparator;
         if (toSortBySchedule) {
             comparator = sortBySchedule(order);
         } else {
             comparator = Comparator.comparing(person -> person.getName().fullName,
                     String.CASE_INSENSITIVE_ORDER);
-            if (order.equals(DESCENDING)) {
+            if (order.equals(DESC)) {
                 comparator = comparator.reversed();
             }
         }
@@ -135,10 +133,9 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws AssertionError if <code>order</code> is not either <code>asc</code> or <code>desc</code>.
      */
     public Comparator<Person> sortBySchedule(String order) {
-        assert order.equals("asc") || order.equals("desc");
-        requireNonNull(order);
+        assert order.equals(ASC) || order.equals(DESC);
         Comparator<Person> comparator;
-        if (order.equals(ASCENDING)) {
+        if (order.equals(ASC)) {
             comparator = Comparator.comparing((Person person) -> {
                 Schedule schedule = person.getSchedule();
                 return schedule.getDateTime();

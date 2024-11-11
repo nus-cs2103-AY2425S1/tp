@@ -38,6 +38,7 @@ public class SearchCommand extends Command {
      * @param end The end of the time range to search.
      */
     public SearchCommand(LocalDateTime begin, LocalDateTime end) {
+        assert begin != null || end != null;
         this.begin = begin;
         this.end = end;
     }

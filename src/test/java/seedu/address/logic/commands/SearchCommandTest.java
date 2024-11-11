@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
@@ -28,7 +29,11 @@ public class SearchCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
-
+    @Test
+    public void constructor_nullBeginAndEnd_throwsAssertionError() {
+        // Both begin and end are null, should throw AssertionError
+        assertThrows(AssertionError.class, () -> new SearchCommand(null, null));
+    }
     @Test
     void execute_searchBeforeEndTime_updatesFilteredPersonList() {
         SearchCommand searchCommand = new SearchCommand(null, end);
@@ -76,6 +81,7 @@ public class SearchCommandTest {
         // different values -> returns false
         assertFalse(searchCommand.equals(searchBeginCommand));
         assertFalse(searchCommand.equals(searchEndCommand));
+        assertFalse(searchBeginCommand.equals(searchEndCommand));
         assertFalse(searchCommand.equals(searchSecondCommand));
         // different types -> returns false
         assertFalse(searchCommand.equals(1));
