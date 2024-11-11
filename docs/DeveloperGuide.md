@@ -314,6 +314,8 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 The name of the JSON file is the time of export.
 
 The following sequence diagram shows how a `export` command goes through the `Logic` component:
+<puml src="diagrams/ExportSequenceDiagram.puml"
+ alt="ExportSequenceDiagram" />
 
 ### Design considerations:
 
@@ -348,7 +350,9 @@ Step 1. The user executes `import fp/./data/SaveFile3.json`
 
 Step 2. The 
 
-The following sequence diagram shows how a `import` command goes through the `Logic` component:
+The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
+<puml src="diagrams/ImportSequenceDiagram.puml"
+alt="ImportSequenceDiagram" />
 
 ### Design considerations:
 
