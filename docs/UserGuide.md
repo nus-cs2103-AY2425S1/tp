@@ -10,11 +10,9 @@ TalentHub is optimized for use via a **Command Line Interface** (CLI) while stil
 <div markdown="block" class="alert alert-info">
 
 **:information_source: CLI and GUI:**<br>
-This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
+Having access to both a Command Line Interface (CLI) and a Graphical User Interface (GUI) means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
 
 </div>
-
-If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 * Table of Contents
 {:toc}
@@ -31,7 +29,7 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
 4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+<img src="images/Ui.png" alt="Ui" style="display: block; margin: 0 auto; border-radius: 10px;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -44,11 +42,11 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
-</div>
+    <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+    Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
+    </div>
 
-  - `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -67,7 +65,7 @@ Running this command will clear all your data in TalentHub. This action is irrev
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Celebrity` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Celebrity`, `t/Camera man t/` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Celebrity`, `t/Stylist t/Hairdresser` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -82,14 +80,24 @@ Running this command will clear all your data in TalentHub. This action is irrev
 
 ### Adding a person: `add person`
 
-Adds a person to TalentHub. 
+This command allows you to add a person to a list of persons on TalentHub!
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Optionals** <br>
+**:warning: Person constraints**<br>
 
+- A person's name must be unique (case-sensitive).
+
+- A person's name can only contain alphanumeric characters and spaces.
+
+- A person's phone number must be unique.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Optionals** <br>
 A person can have any number of tags or none at all!
 The address and email address fields are also optional! 
 Current implementation does not require the person to be added to have the celebrity tag attached to their name.
@@ -98,7 +106,7 @@ Current implementation does not require the person to be added to have the celeb
 Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">:pushpin:<br> 
 Note that John Doe does not have an address in this example.
 </div>
 
@@ -108,21 +116,27 @@ Note that John Doe does not have an address in this example.
 You can add the prefixes in any order you want!
 </div>
 
-![result for 'add person'](images/add_person.png)
+<figure style="text-align: center;">
+  <img src="images/add_person.png" alt="result for 'add person'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity</code></figcaption>
+</figure>
 
 ### Listing all persons : `list person`
 
-Shows a list of all persons in TalentHub.
+This command allows you to view a list of all persons on TalentHub!
 
 Format: `list person`
 
-Example: Calling `list person` would yield the following output
+Example:
 
-![result for 'list person'](images/list_person.png)
+<figure style="text-align: center;">
+  <img src="images/add_person.png" alt="list person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>list person</code></figcaption>
+</figure>
 
 ### Editing a person : `edit person`
 
-Edits an existing person in TalentHub.
+This command allows you to edit an existing person in TalentHub!
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -131,7 +145,18 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
+
+**:warning: Person constraints**<br>
+
+- A person's name must be unique (case-sensitive).
+
+- A person's name can only contain alphanumeric characters and spaces.
+
+- A person's phone number must be unique.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
@@ -140,11 +165,14 @@ Examples:
 - `edit person 7 p/91234567 e/ a/123 Clementi Rd` Edits the phone number and address of the 7th person to be `91234567` and `123 Clementi Rd` respectively and clears the email address.
 - `edit person 2 n/Bernice Yu a/ t/` Edits the name of the 2nd person to be `Bernice Yu` and clears the address and all existing tags.
 
-![result for 'edit person'](images/edit_person.png)
+<figure style="text-align: center;">
+  <img src="images/edit_person.png" alt="edit person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>edit person 7 p/91234567 e/ a/123 Clementi Rd</code></figcaption>
+</figure>
 
 ### Finding persons by name: `find person`
 
-Finds persons whose names contain any of the given keywords.
+This command allows you to find persons whose names contain any of the given keywords on TalentHub!
 
 Format: `find person KEYWORD [MORE_KEYWORDS]`
 
@@ -160,12 +188,15 @@ Examples:
 - `find person John` returns `john` and `John Doe`
 - `find person john bernice` returns `John Doe`, `Bernice Yu`
 
-![result for 'find person john bernice'](images/findJohnBerniceResult.png)
+<figure style="text-align: center;">
+  <img src="images/find_person.png" alt="find person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>find person john bernice</code></figcaption>
+</figure>
 
 ### Viewing person by name: `view person`
 
-Views the comprehensive details, which includes address and email address, of a specific person
-whose name exactly matches the given keywords.
+This command allows you to view the comprehensive details, which includes address and email address, of a specific person
+whose name exactly matches the given keywords on TalentHub!
 
 Format: `view person KEYWORD [MORE_KEYWORDS]`
 
@@ -180,11 +211,14 @@ Examples:
 - `view person Bernice Yu` returns the details for `Bernice Yu`
 - `view person John Doe` returns the details for `John Doe`
 
-![result for 'view person john doe'](images/viewJohnDoeResult.png)
+<figure style="text-align: center;">
+  <img src="images/view_person.png" alt="view person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>view person John Doe</code></figcaption>
+</figure>
 
 ### Filtering person by tag: `filter person`
 
-Filters persons based on the exact tag provided, ensuring only persons with that tag are displayed.
+This command allows you to filter persons based on the exact tag provided, ensuring only persons with that tag are displayed on TalentHub!
 
 Format: `filter person TAG`
 
@@ -197,11 +231,14 @@ Examples:
 - `filter person Hairdresser` returns the person with tag `HairDresser`.
 - `filter person Celebrity` returns the person with tag `Celebrity`.
 
-![result for 'filter celebrity'](images/filterCelebrityResult.png)
+<figure style="text-align: center;">
+  <img src="images/filter_person.png" alt="filter person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>filter person Celebrity</code></figcaption>
+</figure>
 
 ### Deleting a person : `delete person`
 
-Deletes the specified person from the address book.
+This command allows you to delete the specified person from the lists of persons on TalentHub!
 
 Format: `delete person INDEX`
 
@@ -219,30 +256,40 @@ Examples:
 - `list person` followed by `delete person 2` deletes the 2nd person in the address book.
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
-Users will be provided with the following prompt.
+<figure style="text-align: center;">
+  <img src="images/delete_person_confirmation.png" alt="delete person confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>delete person 7</code></figcaption>
+</figure>
 
-![result for 'delete person confirmation'](images/delete_person_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="delete person cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
-
-![result for 'delete person N'](images/delete_person_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'delete person Y'](images/delete_person.png)
+<figure style="text-align: center;">
+  <img src="images/delete_person_confirmation.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ## Managing Events
 
 ### Adding an event: `add event`
 
-Adds an event to TalentHub.
+This command allows you to add an event to a list of events on TalentHub!
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Optionals** <br>
+**:warning: Event constraints**<br>
 
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+- You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Optionals** <br>
 An event can have any number of points of contact or none at all!
 The venue field is also optional! 
 When adding a person to the point of contacts list, only the first tag will be listed in the point of contact list.
@@ -251,33 +298,45 @@ When adding a person to the point of contacts list, only the first tag will be l
 Examples:
 
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
-- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon for John c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon for John`, celebrity `Bernice Yu` and no points of contact.
+- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can add the prefixes in any order you want!
 </div>
 
-![result for 'add event'](images/add_event.png)
+<figure style="text-align: center;">
+  <img src="images/add_event.png" alt="result for 'add event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon  c/Bernice Yu</code></figcaption>
+</figure>
 
 ### Listing all events: `list event`
 
-Shows a list of all events in TalentHub.
+This command allows you to view a list of all events on TalentHub!
 
 Format: `list event`
 
-Example: Calling `list event` would yield the following output
+Example:
 
-![result for 'list event'](images/list_event.png)
+<figure style="text-align: center;">
+  <img src="images/list_event.png" alt="result for 'list event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>list event</code></figcaption>
+</figure>
 
 ### Editing an event : `edit event`
 
-Edits an existing event in TalentHub.
+This command allows you to edit an existing event on TalentHub!
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
 - Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+
+<div markdown="block" class="alert alert-info">
+**:warning: Event constraints**<br>
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+- You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
@@ -288,11 +347,14 @@ Examples:
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
 - `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact.
 
-![result for 'edit event'](images/edit_event.png)
+<figure style="text-align: center;">
+  <img src="images/edit_event.png" alt="result for 'edit event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>edit event 2 n/Movie Screening v/ p/</code></figcaption>
+</figure>
 
 ### Finding events by name: `find event`
 
-Finds events whose names contain any of the given keywords.
+This command allows you to find events whose names contain any of the given keywords on TalentHub!
 
 Format: `find event KEYWORD [MORE_KEYWORDS]`
 
@@ -307,12 +369,15 @@ Examples:
 - `find event Hiking` returns `Hiking` and `Park Hiking`
 - `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
-![result for 'find event hair oscars'](images/findHairOscarsResult.png)
+<figure style="text-align: center;">
+  <img src="images/find_event.png" alt="result for 'find event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>find event Hair Oscars</code></figcaption>
+</figure>
 
 ### Viewing event by name: `view event`
 
-Views the comprehensive details, which includes points of contact, of a specific event whose
-name exactly matches the given keywords.
+This command allows you to view the comprehensive details, which includes points of contact, of a specific event whose
+name exactly matches the given keywords on TalentHub!
 
 Format: `view event KEYWORD [MORE_KEYWORDS]`
 
@@ -328,12 +393,14 @@ Examples:
 - `view event Oscars` returns the details for `Oscars`
 - `view event Hair Cut` returns the details for `Hair Cut`
 
-![result for 'view event hair cut'](images/viewHairCutResult.png)
+<figure style="text-align: center;">
+  <img src="images/view_event.png" alt="result for 'view event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>view event Hair Cut</code></figcaption>
+</figure>
 
 ### Filtering events by celebrity name: `filter event`
 
-Filters events based on the exact celebrity name provided,
-ensuring that only events associated with that celebrity are displayed.
+This command allows you to filter events based on the exact celebrity name provided, ensuring that only events associated with that celebrity are displayed on TalentHub!
 
 Format: `filter event CELEBRITY_NAME`
 
@@ -349,11 +416,14 @@ Examples:
 - `filter event Alex Yeoh` returns the events for celebrity `Alex Yeoh`
 - `filter event Bernice Yu` returns the events for celebrity `Bernice Yu`
 
-![result for 'filter bernice yu'](images/filterBerniceYuResult.png)
+<figure style="text-align: center;">
+  <img src="images/filter_event.png" alt="result for 'filter event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>filter event Bernice Yu</code></figcaption>
+</figure>
 
 ### Deleting an event : `delete event`
 
-Deletes the specified event from the address book.
+This command allows you to delete the specified event from the list of events on TalentHub!
 
 Format: `delete event INDEX`
 - Deletes the event at the specified `INDEX`.
@@ -371,11 +441,14 @@ Examples:
 - `list event` followed by `delete event 2` deletes the 2nd event in the address book.
 - `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
-![result for 'delete event'](images/delete_event.png)
+<figure style="text-align: center;">
+  <img src="images/delete_event.png" alt="result for 'delete event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>delete event 4</code></figcaption>
+</figure>
 
 ### Clearing all events : `clear event`
 
-Clears all event entries from the address book after receiving confirmation from you.
+This command allows you to clear all event entries from the TalentHub after receiving confirmation from you!
 
 Format: `clear event`
 
@@ -383,23 +456,28 @@ Format: `clear event`
 Running this command will clear all events in TalentHub. This action is irreversible after confirmation.
 </div>
 
-Users will be provided with the following prompt.
+Example:
 
-![result for 'clear event confirmation'](images/clear_event_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/clear_event_confirmation.png" alt="clear person confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>clear event</code></figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="clear event cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-![result for 'clear event N'](images/clear_event_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'clear event Y'](images/clear_event.png)
+<figure style="text-align: center;">
+  <img src="images/clear_event.png" alt="clear person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ## Utility Commands
 
 ### Clearing all entries : `clear all`
 
-Clears all entries from TalentHub.
+This command allows you to clear all entries from TalentHub!
 
 <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
 Running this command will clear all persons and events in TalentHub. This action is irreversible after confirmation.
@@ -407,47 +485,54 @@ Running this command will clear all persons and events in TalentHub. This action
 
 Format: `clear all`
 
-Users will be provided with the following prompt.
+Example:
 
-![result for 'clear all confirmation'](images/clear_all_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/clear_all_confirmation.png" alt="clear all confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>clear all</code></figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="clear all cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-![result for 'clear all N'](images/clear_all_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'clear all Y'](images/clear_all.png)
+<figure style="text-align: center;">
+  <img src="images/clear_all.png" alt="clear person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ### Exiting the program : `exit`
 
-Exits TalentHub.
+This command allows you to exit TalentHub!
 
 Format: `exit`
 
 ### More information on Commands : `help`
 
-Provides users with a link to the application's user guide in a new window. This link can be copied using the copy URL button to access
-the user guide online.
+This command provides you with a link to the application's user guide in a new window. This link can be copied using the copy URL button to access
+the user guide online!
 
 Format: `help`
 
 Example:
 
-![result for 'help'](images/help.png)
-![result for 'help window'](images/help-window.png)
+<figure style="text-align: center;">
+  <img src="images/help_popup.png" alt="help" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>help</code></figcaption>
+</figure>
 
 ### Saving the data
 
-TalentHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data that you store into TalentHub is saved in the hard disk automatically after any command that changes the data. There is no need for you to save your data manually!
 
 ### Editing the data file
 
-TalentHub data are saved automatically as a JSON file `[JAR file location]/data/talenthub.json`. Advanced users are welcome to update data directly by editing that data file.
+Your data is saved automatically as a JSON file `[JAR file location]/data/talenthub.json`! If you are experienced with handling such files, you are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly!
 </div>
 
 ---
@@ -473,6 +558,8 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Contact or Event name.
 3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+4. **When using the `add person` and `add event` commands**, if you enter an empty prefix for tags and contacts to set as no tags or points of contacts (e.g., `t/` or `p/`), the application will not recognize the empty prefix. The remedy is to remove the prefix entirely if you are not adding any tags or points of contacts.
+5. **When inputting indexes for commands**, if you enter a large integer (greater than 2147483648), the application will not recognize the index as it is too large.
 
 ---
 
@@ -480,33 +567,34 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 
 ### Managing Contacts
 
-| Action     | Format                                                                            | Examples                                                                                             |
-| ---------- |-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| **Add**    | `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>            | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
-| **Delete** | `delete person INDEX`<br>                                                         | e.g., `delete person 3`                                                                              |
-| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                                              |
-| **Filter** | `filter person TAG`<br>                                                           | e.g., `filter person Celebrity`                                                                      |
-| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br>                                         | e.g., `find person James Jake`                                                                       |
-| **List**   | `list person`                                                                     |
-| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br>                                         | e.g., `view person Jake Doe`                                                                         |
+| Action     | Format                                                                                 | Examples                                                                                             |
+| ---------- |----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| **Add**    | `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>                 | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
+| **Delete** | `delete person INDEX`<br>                                                              | e.g., `delete person 3`                                                                              |
+| **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>      | e.g., `edit person 1 n/James Lee e/jameslee@example.com`                                             |
+| **Filter** | `filter person TAG`<br>                                                                | e.g., `filter person Celebrity`                                                                      |
+| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br>                                              | e.g., `find person James Jake`                                                                       |
+| **List**   | `list person`                                                                          |                                                                                                      |
+| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br>                                              | e.g., `view person Jake Doe`                                                                         |
 
 ### Managing Events
 
-| Action     | Format                                                                                  | Examples                                                                               |
-| ---------- |-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| **Add**    | `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINT OF CONTACT]…​`<br>              | e.g., `add event n/Oscars t/2024-03-01 13:10 to 2024-03-01 19:30 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
-| **Clear** | `clear event`                                                                           |
-| **Delete** | `delete event INDEX`<br>                                                                | e.g., `delete event 3`                                                                 |
-| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> | e.g.,`edit event 1 t/2024-03-01 13:10 to 2024-03-01 19:30 v/Jane's Salon`                                        |
-| **Filter** | `filter event CELEBRITY_NAME`<br>                                                       | e.g., `filter event Jim Bob`                                                           |
-| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br>                                                | e.g., `find event Hair Oscars`                                                         |
-| **List**   | `list event`                                                                            |
-| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br>                                                | e.g., `view event Oscars`                                                              |
+| Action      | Format                                                                                         | Examples                                                                                                         |
+|-------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`<br>                    | e.g., `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
+| **Clear**   | `clear event`                                                                                  |                                                                                                                  |
+| **Delete**  | `delete event INDEX`<br>                                                                       | e.g., `delete event 3`                                                                                           |
+| **Edit**    | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br>       | e.g., `edit event 1 t/2024-03-21 10:00 to 2024-03-21 12:30 v/Jane's Salon`                                       |
+| **Filter**  | `filter event CELEBRITY_NAME`<br>                                                              | e.g., `filter event Jim Bob`                                                                                     |
+| **Find**    | `find event KEYWORD [MORE_KEYWORDS]`<br>                                                       | e.g., `find event Hair Oscars`                                                                                   |
+| **List**    | `list event`                                                                                   |                                                                                                                  |
+| **View**    | `view event KEYWORD [MORE_KEYWORDS]`<br>                                                       | e.g., `view event Oscars`                                                                                        |
+
 
 ### Utility Commands
 
-| Action    | Format |
-| --------- |----------------|
-| **Clear** | `clear all`    |
-| **Exit**  | `exit`         |
-| **Help**  | `help`         |
+| Action    | Format      |
+| --------- |-------------|
+| **Clear** | `clear all` |
+| **Exit**  | `exit`      |
+| **Help**  | `help`      |
