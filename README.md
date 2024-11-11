@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T14-4/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/UiSplitViewWithChart.png)
 
 * This is a project done by Software Engineering (SE) students.<br>
 * The project is an adaptation of an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.

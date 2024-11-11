@@ -1,0 +1,32 @@
+@startuml
+title Edit Activity Diagram
+start
+:Edit command is given;
+if () then ([Index provided is positive])
+    if () then ([At least one flag is specified ])
+        if () then (['remark new' and 'remark append' flags
+        are not used simultaneously])
+            if () then ([Values for specified flags are all valid])
+                if () then ([Index provided is within range])
+                    :Edit client pertaining to given index;
+                else ([else])
+                    :Show error message that the specified index is out of range;
+                endif
+            else ([else])
+            :Show error message stating
+            which flags have wrong values;
+            endif
+        else ([else])
+        :Show error message that 'remark new' and 'remark append'
+        flags cannot be used together;
+        endif
+     else ([else])
+     :Show error message that at least
+     one flag must be specified ;
+ endif
+else ([else])
+    :Show error message that the command
+    is of an invalid format;
+endif
+stop
+@enduml
