@@ -15,6 +15,8 @@ With MindMap, therapists can quickly record and access detailed patient informat
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. **Check Your Java Version**  
@@ -61,6 +63,8 @@ With MindMap, therapists can quickly record and access detailed patient informat
    ```
    This will open the MindMap app. You’re now ready to use it! If you see an error, double-check that Java is installed using **Step 1**.
 
+<div style="page-break-after: always;"></div>
+
 8. **Get Started with the App**  
    In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
 
@@ -83,6 +87,8 @@ With MindMap, therapists can quickly record and access detailed patient informat
    
 10. **Learn More**  
     Refer to the [Features](#features) below for details of each command.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,6 +123,8 @@ Our application uses Singapore’s NRIC system extensively for the Identity Numb
 </box>
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -171,6 +179,8 @@ Creates a new log entry for a specific patient. This command is typically used t
 4) Adding an older log is allowed, considering you may want to move your logs from a physical notebook to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a log entry: `addentry`
 Creates a **separate pop up window** to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previously inputted.
 
@@ -200,6 +210,8 @@ Examples:
 5) Adding an older log is allowed, considering you may want to move your logs from a physical notebook to the application.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a patient : `edit`
 
@@ -239,6 +251,8 @@ Examples:
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a patient : `delete`
 
 Deletes the specified patient from the app.
@@ -277,6 +291,8 @@ Examples:
 * `clear` followed by `confirm` clears all entries in the MindMap.
   <br>
   <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Canceling a command : `cancel`
 
@@ -319,6 +335,8 @@ Exits the program.
 **Format:** `exit`
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -373,6 +391,8 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Known Issues
 
 1. **Application Opening Off-Screen on Single-Monitor Setup**  
@@ -401,7 +421,7 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 
 
 
-
+<div style="page-break-after: always;"></div>
 
 
 
@@ -424,6 +444,10 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 | **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                           | `addentry i/S1234567D d/01 Nov 2024`                                                                      |
 | **Help**      | Displays help message                | `help`                                                                             |                                                                                                           |
 
+---
+<br>
+
+<div style="page-break-after: always;"></div>
 
  ### Additional Notes
 
@@ -455,6 +479,8 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Sample NRICs**
 
 <box type="important">
@@ -481,9 +507,16 @@ This data is not to be used for any purposes beyond application testing. Unautho
 
 ---
 
+<br>
+
+---
+<div style="page-break-after: always;"></div>
+
 ## **Stay Tuned: Future enhancements coming!**
->New UI Arriving Soon!
+New UI Arriving Soon!
 ![Ui](images/Ui.png)
+
+<div style="page-break-after: always;"></div>
 
 1. **Search by Sub-Strings**  
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow you to search for sub-strings within names.
