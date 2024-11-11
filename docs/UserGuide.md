@@ -146,7 +146,7 @@ Adds a student to the address book.
 **Example:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`
 
-**Before:**
+**Before (using an empty UGTeach):**
 ![addBefore.png](images/addBefore.png)
 
 **After:**
