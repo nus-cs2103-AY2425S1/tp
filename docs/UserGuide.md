@@ -841,8 +841,35 @@ _Details coming soon ..._
 
 # 5. FAQ
 
+**Q**: What are the platforms that are compatible with VendorVault?<br>
+**A**: VendorVault can be used on macOS, Microsoft Windows and Linux systems.
+
+**Q**: How much space will VendorVault take up?<br>
+**A**: We recommend that you have at least 13MB of available storage space to use VendorVault.
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**:
+
+step 1: Download the vendorvault.jar file and place it into an empty folder on a computer of your choice.
+
+step 2: Open the jar file and run the `exit` command to create a data folder.
+
+step 3: On the previously used computer, open the folder that contains vendorvault.jar and then open the folder labeled "data".
+
+![VendorVault_Folder](images/VendorVaultFolder.png)
+
+step 4: Copy the vendorvault.json file and transfer it to the newly created data folder (refer to picture in step 3) in the new computer.
+
+![Data_Folder](images/DataFolder.png)
+
+**Q**: Will I be able to see my data the next time I use VendorVault after exiting?<br>
+**A**: Yes, all existing data that you have added will be loaded automatically and displayed.
+
+**Q**: Do I need to manually save my data before exiting VendorVault?<br>
+**A**: No, all data is saved automatically.
+
+**Q**: Do I need any prior technical knowledge to use VendorVault?<br>
+**A**: No, VendorVault is designed to be user-friendly and accessible, regardless of technical experience. However, being able to type fast can allow you to use the app more efficiently.
 
 [[Back to Table of Contents]](#table-of-contents)
 
