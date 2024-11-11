@@ -41,7 +41,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
             "Unmarked attendance of %1$s student for %2$s tutorial for %3$s";
 
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
-            "Student %1$s is not enrolled in %2$s tutorial";
+            "Student %1$s is not enrolled in %2$s tutorial, or %2$s tutorial does not exist";
 
     public static final String MESSAGE_ATTENDANCE_NOT_MARKED =
             "%1$s's attendance for date %2$s for %3$s tutorial has not been marked before.";
