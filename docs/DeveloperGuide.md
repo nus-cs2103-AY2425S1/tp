@@ -706,7 +706,7 @@ testers are expected to do more *exploratory* testing.
          Expected: The name of the client in index 1 will be changed to <NAME>.
     3. Test case: `edit 1 n/ <NAME> p/ <PHONE>`<br>
          Expected: The name and the phone of the client in index 1 will be changed to <NAME> and <PHONE> respectively.
-   4. Other correct edit commands to try: `edit 1 n/ <NAME> p/<PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+   4. Other correct edit commands to try: `edit 1 n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
    5. Test case: `edit 0 n/ <NAME>`<br>
         Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
