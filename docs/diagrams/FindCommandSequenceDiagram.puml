@@ -1,68 +1,89 @@
-@startuml
+@startuml FindCommandSequenceDiagram
 !include style.puml
+skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.1
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
-participant "r:SearchCommand" as SearchCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
+participant "p:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate MODEL_COLOR
+participant "q:PhoneContainsKeywordsPredicate" as PhoneContainsKeywordsPredicate MODEL_COLOR
+participant "t:PostalContainsKeywordsPredicate" as PostalContainsKeywordsPredicate MODEL_COLOR
 end box
-[-> LogicManager : execute("find ; 98765432")
+
+[-> LogicManager : execute("find alice S123456 9123")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find ; 98765432")
+LogicManager -> AddressBookParser : parseCommand("find alice S123456 9123")
 activate AddressBookParser
 
 create FindCommandParser
-AddressBookParser -> FindCommandParser
+AddressBookParser -> FindCommandParser : parse("find alice S123456 9123")
 activate FindCommandParser
 
-FindCommandParser --> AddressBookParser
-deactivate FindCommandParser
+create NameContainsKeywordsPredicate
 
-AddressBookParser -> FindCommandParser : parse(" ; 98765432")
-activate SearchCommandParser
+FindCommandParser -> NameContainsKeywordsPredicate : new NameContainsKeywordsPredicate(["alice"])
+activate NameContainsKeywordsPredicate
+NameContainsKeywordsPredicate --> FindCommandParser : p
+deactivate NameContainsKeywordsPredicate
 
-create FindCommandParser
-FindCommandParser -> FindCommand
-activate SearchCommand
+create PhoneContainsKeywordsPredicate
 
-FindCommand --> FindCommandParser : r
+FindCommandParser -> PhoneContainsKeywordsPredicate : new PhoneContainsKeywordsPredicate(["9123"])
+activate PhoneContainsKeywordsPredicate
+PhoneContainsKeywordsPredicate --> FindCommandParser : q
+deactivate PhoneContainsKeywordsPredicate
+
+create PostalContainsKeywordsPredicate
+
+FindCommandParser -> PostalContainsKeywordsPredicate : new PostalContainsKeywordsPredicate(["123456"])
+activate PostalContainsKeywordsPredicate
+PostalContainsKeywordsPredicate --> FindCommandParser : t
+deactivate PostalContainsKeywordsPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : new FindCommand(p, q, t)
+activate FindCommand
+FindCommand --> FindCommandParser
 deactivate FindCommand
 
-FindCommandParser --> AddressBookParser : r
+FindCommandParser --> AddressBookParser : f
 deactivate FindCommandParser
 
-FindCommandParser -[hidden]-> AddressBookParser
-destroy FindCommandParser
-
-AddressBookParser --> LogicManager : r
+AddressBookParser --> LogicManager : f
 deactivate AddressBookParser
 
-LogicManager -> FindCommand : execute(...)
+LogicManager -> FindCommand : execute(m)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(KeywordPredicate)
+FindCommand -> Model : updateFilteredPersonList(predicate)
 activate Model
+Model --> FindCommand : filtered list updated
+deactivate Model
 
-Model --> FindCommand
+FindCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> FindCommand : filteredList
 deactivate Model
 
 create CommandResult
-FindCommand -> CommandResult
+FindCommand -> CommandResult : new CommandResult("X persons listed")
 activate CommandResult
 
 CommandResult --> FindCommand
 deactivate CommandResult
 
-FindCommand --> LogicManager : result
+FindCommand --> LogicManager : r
 deactivate FindCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
