@@ -209,20 +209,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​           | I want to …​                           | So that I can…​                                                        |
-| -------- | ----------------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| -------- | ----------------- | -------------------------------------- |------------------------------------------------------------------------|
 | `* * *`  | new user          | see usage instructions                 | refer to instructions when I forget how to use the App                 |
 | `* * *`  | concert organiser | add a new person                       |                                                                        |
 | `* * *`  | concert organiser | delete a person                        | remove entries that I no longer need                                   |
 | `* * *`  | concert organiser | view a person by name                  | locate details of persons without having to go through the entire list |
 | `* * *`  | concert organiser | assign roles to people                 | categorise each contact by what they do                                |
-| `* * *`  | concert organiser | edit a contact                         | have the most updated contact details                                  |
+| `* * *`  | concert organiser | edit a contact                         | have the most updated contact details including roles                  |
 | `* * *`  | concert organiser | view people by their roles             | easily contact the personnel I need for a concert                      |
 | `* * *`  | concert organiser | create a new concert                   | manage the personnel involved in the concert                           |
 | `* * *`  | concert organiser | view a list of personnel for a concert | view everyone involved in a concert easily                             |
 | `* * *`  | concert organiser | view a list of bands for a concert     | view the concert lineup easily                                         |
 | `* * *`  | concert organiser | add a contact to a concert             | collate the list of personnel for the concert                          |
 | `* * *`  | concert organiser | remove a contact from a concert        | have the most updated list of personnel for the concert                |
-| `* *`    | concert organiser | edit a contact                         | have the most updated contact details                                  |
 | `* *`    | concert organiser | edit a concert                         | have the most updated concert details                                  |
 | `* `     | concert organiser | favourite a contact                    | quickly contact the people I favourite                                 |
 | `*`      | concert organiser | write a review for a contact           | describe past experiences with the contact                             |
