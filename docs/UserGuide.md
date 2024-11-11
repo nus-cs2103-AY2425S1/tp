@@ -532,16 +532,17 @@ Assuming there's at least one person that is archived.
 ---
 
 ### **Downloading Data: `download`**  
-Exports Address Book as a CSV file with optional tag-based filtering.
+Exports the currently displayed Address Book data as a CSV file with optional tag-based filtering.
 
 **Format:**  
 `download [t/TAG1] [t/TAG2] ...`
 
 **Details:**
+- The command will export only the currently displayed data in the Address Book (based on active filters or views) and not the absolute data stored in the Address Book.
 - Creates a CSV file containing the people that match the specified tags.
 - The exported file will be saved in the `./data` subdirectory.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
-- If no tags are specified, all data will be exported.
+- If no tags are specified, all currently displayed data will be exported.
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
