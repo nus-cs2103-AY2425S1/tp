@@ -1156,10 +1156,10 @@ We plan to implement scroll bars within the list displayed in the application, t
 
 5. **Improve the validator for `email`** 
    - Current behaviour: Although the current email validator accepts most valid email addresses, there are still certain valid email addresses (e.g. `faceb__k@fb.com.sg`) that it might incorrectly flag out as invalid addresses.
-   - Planned enhancement: A fix for the email validator to accept more combinations of special characters.
+   - Planned enhancement: A fix for the email validator to accept valid emails with more combinations of special characters.
    - Justification: Company emails with uncommon combinations of special characters in their email addresses will be considered invalid and hence, users will not be able to include such internship application in the HireMe tracking system.
 
-6. **Enforce double confirmation for `clear` command**
+6. **User confirmation for `clear` command**
    - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation.
    - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain.
    - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately.  
