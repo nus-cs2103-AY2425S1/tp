@@ -601,6 +601,7 @@ Given below are instructions to test the app manually.
 > **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -616,7 +617,289 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Viewing Help
+
+1. Accessing the help guide
+
+    1. Test case 1: `help`<br>
+        * Description: Getting a list of all commands.
+        * Expected:
+            * A pop-up window appears containing a message to copy the link to the user guide.
+            * The application remains responsive in the background.
+
+    2. Test case 2: `help me`<br>
+        * Description: Typing an invalid help command.
+        * Expected:
+            * No help window opens.
+            * An error message is displayed indicating an unknown command.
+
+
+
+
+### Autocomplete
+
+1. Using autocomplete for commands
+
+    1. Test case 1: Start typing `add_` and press the Tab key<br>
+        * Description: Attempting to automatically add a product or supplier.
+        * Expected:
+            * he command auto-completes to add_supplier or add_product.
+            * If multiple options are available, pressing Tab cycles through them.
+
+    2. Test case 2: Start typing `xyz` and press the Tab key<br>
+        * Description: Attempt to auto complete an invalid command
+        * Expected:
+            * No autocomplete suggestions are provided.
+            * The command remains as typed.
+
+    3. Test case 3: Type `assign pr/` and press the Tab key<br>
+        * Description: Using autocomplete for supplier or product names
+        * Expected:
+            * A list of existing product names is suggested.
+            * You can select a product name from the suggestions.
+            * Negative test case: Autocomplete with non-existent name
+
+
+
+### Adding a supplier
+1. Adding a supplier while all suppliers are being shown
+
+    1. Test case 1: `add_supplier n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street t/Reliable`<br>
+
+        * Description: Add a supplier with all valid fields.
+        * Expected:
+            * The supplier "John Doe" is added to the supplier list.
+            * A success message is displayed confirming the addition.
+            *The supplier appears at the end of the supplier list.
+    2. Test case 2: `add_supplier n/John Doe p/98765432 e/johndoe@example.com`<br>
+
+        * Description: Attempt to add a supplier with missing compulsory fields (address is missing).
+        * Expected:
+            *No supplier is added.
+            * An error message is displayed indicating that the address field is missing.
+
+    3. Test case 3: `add_supplier n/John Doe p/abcd1234 e/johndoe@example.com a/123 Baker Street` <br>
+
+        * Description: Attempt to add a supplier with invalid phone number format.
+        * Expected:
+            * No supplier is added.
+            * An error message is displayed indicating that the phone number format is invalid.
+2. Other incorrect add_supplier commands to try: `add_supplier`, `add_supplier n/`, `add_supplier p/12345678`, `add_supplier e/johndoe@example.com a/123 Baker Street`, ...<br> Expected: Similar to previous; no supplier is added, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
+
+### Adding a product
+1. Adding a product while all products are being shown
+
+    1. Test case 1: `add_product n/Chocolate Bar stk/100 su/John Doe t/Snack`<br>
+
+        * Description: Add a product with all valid fields.
+        * Expected:
+            * The product "Chocolate Bar" is added to the product list.
+            * The product is assigned to the supplier "John Doe".
+            * A success message is displayed confirming the addition.
+            * The product appears at the end of the product list with the correct details.
+
+    2. Test case 2: `add_product n/Chocolate Bar su/Nonexistent Supplier`<br>
+
+        * Description: Attempt to add a product with a non-existent supplier.
+        * Expected:
+            * No product is added.
+            * An error message is displayed indicating that the supplier does not exist.
+
+    3. Test case 3: `add_product n/Chocolate Bar stk/-10 su/John Doe`<br>
+
+        * Description: Attempt to add a product with an invalid stock level (negative number).
+        * Expected:
+            * No product is added.
+            * An error message is displayed indicating that the stock level must be zero or a positive integer.
+
+2. Other incorrect add_product commands to try: `add_product`, `add_product n/`, `add_product stk/100`, `add_product su/John Doe`, ...<br> Expected: Similar to previous; no product is added, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
+
+### Assigning a product to supplier
+
+1. Assigning a product to supplier
+
+    1. Prerequisites:
+        * Ensure both the product "Chocolate Bar" and supplier "John Doe" exist in the system.
+        * The product "Chocolate Bar" is not already assigned to any supplier.
+
+    2. Test case 1: Enter `assign pr/Chocolate Bar su/John Doe` and press Enter.<br>
+        * Description: Assign a product to a supplier.
+        * Expected:
+            * The product "Chocolate Bar" is assigned to the supplier "John Doe".
+            * The product details now show the assigned supplier.
+
+    3. Test case 2: Enter `assign pr/Chocolate Bar su/John Doe` again and press Enter.<br>
+        * Description: Assigning a product that is already assigned.
+        * Expected:
+            * No changes are made.
+            * An error message is displayed indicating that the product is already assigned to that supplier.
+
+    4. Test case 3: Enter `assign pr/Chocolate Bar su/Nonexistent Supplier` and press Enter.<br>
+        * Description: Assigning a product to a non-existent supplier.
+        * Expected:
+            * No changes are made.
+            * An error message is displayed indicating that the supplier does not exist.
+
+### Unassigning product from a supplier
+1. Unassigning a product from its supplier while all products are being shown
+
+    1. Prerequisites:
+
+        * Ensure that the product to be unassigned exists in the system and is currently assigned to a supplier.
+        * View all products using the view_product command to confirm the current assignment.
+    2. Test case 1: `unassign pr/Chocolate Bar`<br>
+
+        * Description: Unassign the product "Chocolate Bar" from its supplier.
+        * Expected:
+            * The product "Chocolate Bar" is unassigned from its supplier.
+            * A success message is displayed confirming the unassignment.
+            The product details no longer show an assigned supplier.
+    3. Test case 2: `unassign pr/Unassigned Product`<br>
+
+        * Description: Attempt to unassign a product that is not assigned to any supplier.
+        * Expected:
+            * No changes are made.
+            * An error message is displayed indicating that the product is not assigned to any supplier.
+    4. Test case 3: `unassign pr/Nonexistent Product`<br>
+
+        * Description: Attempt to unassign a product that does not exist in the system.
+        * Expected:
+            * No changes are made.
+            * An error message is displayed indicating that the product does not exist.
+2. Other incorrect unassign commands to try: `unassign`, `unassign pr/`, `unassign su/Supplier Name`, ...<br>
+
+Expected: Similar to previous; no changes are made, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
+
+
+### Setting thresholds for products
+
+1. Setting thresholds of a product while consecutively on the products view.
+    1. Prerequisites:
+        * View all products using the `view_product` command.
+
+    2. Test case 1: `set_threshold pr/Bubble tea min/10 max/100`<br>
+        * Description: Update a product's min stock as 10 and max stock as 100.
+        * Expected:
+            * The specified stock levels are updated for the product in list.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * Details/Results are shown in the success message.
+    3. Test case 2: `set_threshold pr/Milk packets min/20`
+        * Description: Only min stock is to be set.
+        * Expected:
+            * Minimum stock Level is set for the product
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * System displays success message with results.
+    4. Test case 3: `set_threshold pr/Yarn max/80`
+        * Description: Only max stock is to be set.
+        * Expected:
+            * Maximum stock Level is set for the product.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * System displays success message with results.
+    5. Test case 4: `set_threshold pr/Sunscreen lotion min/-5`
+       * Description: Invalid stock level in command.
+       * Expected:
+           * Minimum stock Level is not set for the product
+           * Displays failure message with error being that the stock level has to be greater than 0(zero).
+
+### Updating a stock Level
+
+1. Updating stock levels of a product while consecutively on the products view.
+    1. Prerequisites:
+        * View all products using the `view_product` command.
+
+    2. Test case 1: `update_stock pr/Eggs stk/100`<br>
+        * Description: Update a product's stock with value 100.
+        * Expected:
+            * The specified stock level is updated for the product in list.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * Details/Results are shown in the success message.
+    3. Test case 2: `update_stock pr/Pasteurised/Skimmed Milk packets stk/20`
+        * Description: Invalid product name in command.
+        * Expected:
+            * Stock Level is not updated for the product
+            * System displays error message as names cannot have "/" in them.
+            * Details are shown in the failure message.
+
+### Locating all suppliers
+1. Viewing suppliers using various filters
+    1. Prerequisites:
+
+        * Ensure that there are multiple suppliers in the system with varying names and tags.
+For example, suppliers named "John Doe", "Jane Smith", tagged with "Reliable", "Fast", etc.
+    2. Test case 1: `view_supplier`<br>
+
+        * Description: View all suppliers without any filters.
+        * Expected:
+            * All suppliers in the system are displayed.
+            * A message is displayed indicating the number of suppliers found.
+    3. Test case 2: `view_supplier n/John`<br>
+
+        * Description: View suppliers with names containing "John".
+        * Expected:
+            * Suppliers with names containing "John" are displayed.
+            * A message is displayed indicating the number of suppliers found.
+    4. Test case 3: `view_supplier t/Reliable`<br>
+
+        * Description: View suppliers tagged with "Reliable".
+        * Expected:
+            * Suppliers with the tag "Reliable" are displayed.
+            * A message is displayed indicating the number of suppliers found.
+    5. Test case 4: `view_supplier n/John t/Reliable`<br>
+
+        * Description: View suppliers with names containing "John" and tagged with "Reliable".
+        * Expected:
+            * Suppliers matching both criteria are displayed.
+            * A message is displayed indicating the number of suppliers found.
+
+2. Other incorrect view_supplier commands to try: `view_supplier x/`, `view_supplier n/`, `view_supplier t/`, ...<br>
+
+Expected: Appropriate error messages are displayed indicating missing or invalid prefixes.
+
+### Locating all products
+1. Viewing products using various filters
+
+    1. Prerequisites:
+
+        * Ensure that there are multiple products in the system with varying names, suppliers, and tags.
+        For example, products named "Chocolate Bar", "Candy Cane", tagged with "Snack", assigned to suppliers like "John Doe".
+    2. Test case 1: `view_product`<br>
+
+        * Description: View all products without any filters.
+        * Expected:
+            * All products in the system are displayed.
+            * A message is displayed indicating the number of products found.
+    3. Test case 2: `view_product n/Chocolate`<br>
+
+        * Description: View products with names containing "Chocolate".
+        * Expected:
+            * Products with names containing "Chocolate" are displayed.
+            * A message is displayed indicating the number of products found.
+    4. Test case 3: `view_product t/Snack`<br>
+
+        * Description: View products tagged with "Snack".
+        * Expected:
+            * Products with the tag "Snack" are displayed.
+            * A message is displayed indicating the number of products found.
+    5. Test case 4: `view_product su/John Doe`<br>
+
+        * Description: View products supplied by "John Doe".
+        * Expected:
+            * Products assigned to the supplier "John Doe" are displayed.
+            * A message is displayed indicating the number of products found.
+    6. Test case 5: `view_product t/Snack su/John Doe`<br>
+
+        * Description: View products tagged with "Snack" and supplied by "John Doe".
+        * Expected:
+            * Products matching both criteria are displayed.
+            * A message is displayed indicating the number of products found.
+    7. Test case 6: `view_product n/Chocolate t/Snack su/John Doe sort/d`<br>
+
+
+        * Description: View products with multiple filters and sort in decreasing order of stock proximity to minimum threshold.
+        * Expected:
+            * Products matching all criteria are displayed, sorted accordingly.
+            * A message is displayed indicating the number of products found.
+
 
 ### Deleting a supplier
 
@@ -649,59 +932,112 @@ testers are expected to do more *exploratory* testing.
 2. Other incorrect delete commands to try: `delete`, `delete_supplier x/`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Updating a stock Level
 
-1. Updating stock levels of a product while consecutively on the products view.
+### Deleting a product
+1. Deleting a product while all products are being shown
+
     1. Prerequisites:
-        * View all products using the `view_product` command.
 
-    2. Test case 1: `update_stock pr/Eggs stk/100`<br>
-        * Description: Update a product's stock with value 100.
+        * Ensure that the product to be deleted exists in the system.
+        * View all products using the view_product command.
+    2. Test case 1: `delete_product pr/Chocolate Bar`<br>
+
+        * Description: Delete an existing product "Chocolate Bar".
         * Expected:
-            * The specified stock level is updated for the product in list.
-            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
-            * Details/Results are shown in the success message.
-    3. Test case 2: `update_stock pr/Pasteurised/Skimmed Milk packets stk/20`
-        * Description: Invalid product name in command.
+            * The product "Chocolate Bar" is removed from the product list.
+            * A success message is displayed confirming the deletion.
+            * The product no longer appears in the product list.
+    3. Test case 2: `delete_product pr/Nonexistent Product`<br>
+
+        * Description: Attempt to delete a product that does not exist.
         * Expected:
-            * Stock Level is not updated for the product
-            * System displays error message as names cannot have "/" in them.
-            * Details are shown in the failure message.
+            * No changes are made.
+            * An error message is displayed indicating that the product does not exist. 
+    4. Test case 3: `delete_product pr/Invalid/ProductName`<br>
 
-### Setting thresholds for products
+        * Description: Attempt to delete a product using an invalid product name containing special characters.
+        * Expected:
+            * No product is deleted.
+            * An error message is displayed indicating the invalid product name format. 
+2. Other incorrect delete_product commands to try: delete_product, delete_product pr/, delete_product x/Chocolate Bar, ...<br>
 
-1. Setting thresholds of a product while consecutively on the products view.
+Expected: Similar to previous; no product is deleted, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
+
+
+
+
+### Clearing all entries
+1. Clearing all data from the application
+
     1. Prerequisites:
-        * View all products using the `view_product` command.
 
-    2. Test case 1: `set_threshold pr/Bubble tea min/10 max/100`<br>
-        * Description: Update a product's min stock as 10 and max stock as 100.
-        * Expected:
-            * The specified stock levels are updated for the product in list.
-            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
-            * Details/Results are shown in the success message.
-    3. Test case 2: `set_threshold pr/Milk packets min/20`
-        * Description: Only min stock is to be set.
-        * Expected:
-            * Minimum stock Level is set for the product
-            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
-            * System displays success message with results.
-    4. Test case 3: `set_threshold pr/Yarn max/80`
-        * Description: Only max stock is to be set.
-        * Expected:
-            * Maximum stock Level is set for the product.
-            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
-            * System displays success message with results.
-    5. Test case 4: `set_threshold pr/Sunscreen lotion min/-5`
-       * Description: Invalid stock level in command.
-       * Expected:
-           * Minimum stock Level is not set for the product
-           * Displays failure message with error being that the stock level has to be greater than 0(zero).
+        * Ensure you have backed up your data before testing this command, as it will permanently delete all entries.
+    2. Test case 1: `clear`<br>
 
+        * Description: Clear all suppliers and products from the system.
+        * Expected:
+            * All suppliers and products are removed from the system.
+            * A success message is displayed confirming that all entries have been cleared.
+            * The supplier and product lists are empty upon using view_supplier and view_product commands.
+    3. Test case 2: `clear extra`<br>
+
+        * Description: Attempt to clear entries using an invalid command.
+        * Expected:
+            * No data is cleared.
+            * An error message is displayed indicating an unknown command.
+
+### Exiting the app
+1. Exiting the application
+
+    1. Test case 1: `exit`<br>
+
+        * Description: Close the application using the correct command.
+        * Expected:
+            * The application closes gracefully.
+            * No error messages are displayed.
+    2. Test case 2: `quit` or `close`<br>
+
+        * Description: Attempt to exit the application using invalid commands.
+        * Expected:
+            * The application does not close.
+            * An error message is displayed indicating an unknown command.
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Verifying automatic data saving
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case 1:
+        * Tasks:
+            * Make changes to the data (e.g., add a supplier or product).
+            * Close the application using the exit command.
+            * Re-launch the application.
+        * Expected: 
 
-1. _{ more test cases …​ }_
+            * The changes made before exiting are retained.
+            * The new supplier or product appears in the respective list.
+
+2. Dealing with missing/corrupted data files
+
+    1. Test case 1: Simulate a missing data file
+
+        * Tasks:
+            * Navigate to the data file location specified at the bottom status bar (e.g., data/addressbook.json).
+            * Move or delete the addressbook.json file.
+            * Re-launch the application.
+        * Expected:
+
+            * The application starts with an empty data file.
+            * A message may be displayed indicating that the data file was not found and a new one has been created.
+    2. Test case 2: Simulate a corrupted data file
+        * Tasks:
+            * Open addressbook.json with a text editor.
+            * Introduce invalid JSON syntax (e.g., delete a comma or bracket).
+            * Save the file and re-launch the application.
+        * Expected:
+            * The application starts with an empty data file.
+            * A message may be displayed indicating that the data file is corrupted and a new one has been created.
+
+
+
+
+
+
