@@ -104,24 +104,20 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   - *Done*: Order that has been completed and delivered/received
 </div>
 
-## **Product Management**
-
-<div markdown="block" class="alert alert-info">
-- **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
-- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
-- **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
-</div>
-
 ## **UI Elements**
 
 <div markdown="block" class="alert alert-info">
 - **Index**: The number shown beside each item in a list, used for referencing items in commands
 </div>
 
-## **Cost Management**
+
+## **Product Management**
 
 <div markdown="block" class="alert alert-info">
-- **COST**:
+- **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
+- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
+- **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
+- **Cost**:
   - For ingredients: Purchase price from supplier
   - For pastries: Selling price to customer
 </div>
@@ -394,7 +390,7 @@ For the best experience:
 order with a phone number that is already in the address book, the person's name in the address book will be treated as 
 the entity who places the order.
 
-## **Q11: Can I place a customer order from a supplier or vice versa?**
+## **Q12: Can I place a customer order from a supplier or vice versa?**
 **A:** Yes, you can. You can feel free to add customer orders from a supplier (or less frequently, place supply orders 
 to a customer). They will be distinguished by the order type under the person's contact card. However, the additional 
 information of suppliers and customers will remain the same - ingredients supplied and information respectively. For 
