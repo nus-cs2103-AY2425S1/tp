@@ -898,7 +898,7 @@ Warning: If any of the fields in `courselist.json` are invalid, no courses will 
 
 | Field | Format                                                                                                                                          |
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` denote *uppercase* letter(s), `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
+| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                 |
 Note: The course code is unique and cannot be duplicated.
 
