@@ -683,4 +683,15 @@ testers are expected to do more *exploratory* testing.
 4. **Allow case-insensitive commands**: Currently, commands are case-sensitive. For example, typing creategroup will
    not work, because the app expects "createGroup" with the capitalized G. Making commands case-insensitive has no
    negative repercussions and can help users type slightly faster.
+5. **Improve handling of invalid prefixes in commands**: Currently, if users input invalid prefixes (e.g., `n/John 
+   nn/Jack`), the application treats the invalid prefix (`nn/`) as part of the value for a valid prefix (`n/`). This 
+   can lead to confusion and incorrect data parsing. We plan to enhance the system to detect invalid prefixes and 
+   provide clear feedback to users about their errors, ensuring proper parsing and validation of command inputs.
+6. **Implement email and phone number verification and update identification method**: Currently, the app uses 
+   names for identification, requiring them to be unique, while emails and phone numbers are allowed to be 
+   non-unique. However, since names often have natural duplicates in real-life scenarios, we plan to shift to using 
+   email and mobile phone numbers as unique identifiers. This change will include verification of email and phone 
+   numbers before binding them to a user and will allow duplicate names to better reflect real-world usage.
+
+
 
