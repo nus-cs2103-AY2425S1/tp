@@ -549,14 +549,14 @@ The `undo` and `redo` commands allow you to undo/redo the most recent changes ma
 
 <div style="page-break-after: always;"></div>
 
-**Output:** The UI updates to reflect the reversal of the most recent change.*
+**Output:** The UI updates to reflect the reversal of the most recent change.
 ![Ui](images/undo_output.png)
 
 <div style="page-break-after: always;"></div>
 
 
 **Input:** User then enters the `redo` command to reapply the change.
-The UI updates to reflect the reapplication of the previously undone change*
+The UI updates to reflect the reapplication of the previously undone change
 ![Ui](images/redo.png)
 
 **Tips:**
