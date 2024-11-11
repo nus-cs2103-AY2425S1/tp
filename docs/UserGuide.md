@@ -8,7 +8,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 ## Table of Contents
 <!-- TOC -->
   * [Table of Contents](#table-of-contents)
-  * [Quick start](#quick-start)
+  * [Quick Start](#quick-start)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a supplier: `add`](#adding-a-supplier-add)
@@ -27,7 +27,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
     * [Editing the Supplier data file](#editing-the-supplier-data-file)
     * [Editing the Goods data file](#editing-the-goods-data-file)
     * [Resizing UI elements](#resizing-ui-elements)
-    * [Delivery status](#delivery-status)
+    * [Delivery Status](#delivery-status)
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)

@@ -225,17 +225,30 @@ public class ModelManagerTest {
 
     @Test
     public void setGoods_nullGoods_throwsNullPointerException() {
-        // TODO: Implement this
+        assertThrows(NullPointerException.class, () -> modelManager.setGoods(null));
     }
 
     @Test
-    public void setGoods_validGoods_setsGoods() {
-        // TODO: Implement this
+    public void setGoods_validReceiptLog_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+        GoodsReceipt goodsReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .build();
+        ReceiptLog receiptLog = new ReceiptLog();
+        receiptLog.addReceipt(goodsReceipt);
+        modelManager = new ModelManager(addressBook, userPrefs, getTypicalGoodsReceipts());
+        List<GoodsReceipt> beforeSetGoodsList = modelManager.getGoods().getReceiptList();
+        assertTrue(beforeSetGoodsList.size() > 1);
+        modelManager.setGoods(receiptLog);
+        List<GoodsReceipt> goodsList = modelManager.getGoods().getReceiptList();
+        assertEquals(goodsList.size(), 1);
+        assertEquals(goodsList.get(0), goodsReceipt);
     }
 
     @Test
     public void getGoods_modifyList_throwsUnsupportedOperationException() {
-        // TODO: Implement this
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getGoods().getReceiptList().remove(0));
     }
 
     @Test
@@ -269,8 +282,30 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredGoods() {
-        // TODO: Implement this
+    public void getFilteredGoodsWithSupplierName() {
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        Goods banana = new GoodsBuilder()
+                .withName("Banana")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt bananaReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(BOB.getName())
+                .withGoods(banana)
+                .build();
+        modelManager.addGoods(appleReceipt);
+        modelManager.addGoods(bananaReceipt);
+        List<GoodsReceipt> goodsList = modelManager.getFilteredGoods(r -> r.isFromSupplier(ALICE.getName()));
+        assertEquals(goodsList.size(), 1);
+        assertEquals(goodsList.get(0), appleReceipt);
     }
 
     @Test
