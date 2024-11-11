@@ -1,0 +1,116 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportCommandParser" as ExportCommandParser LOGIC_COLOR
+participant "c:ExportCommand" as ExportCommand LOGIC_COLOR
+participant "r1:CommandResult" as CommandResult1 LOGIC_COLOR
+participant "r2:CommandResult" as CommandResult2 LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+end box
+
+[-> MainWindow : executeCommand("export")
+activate MainWindow
+
+MainWindow -> LogicManager : execute("export")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export")
+activate AddressBookParser
+
+create ExportCommandParser
+AddressBookParser -> ExportCommandParser
+activate ExportCommandParser
+
+ExportCommandParser --> AddressBookParser
+deactivate ExportCommandParser
+
+AddressBookParser -> ExportCommandParser : parse("")
+activate ExportCommandParser
+
+create ExportCommand
+ExportCommandParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> ExportCommandParser :
+deactivate ExportCommand
+
+ExportCommandParser --> AddressBookParser : c
+deactivate ExportCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExportCommandParser -[hidden]-> AddressBookParser
+destroy ExportCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> ExportCommand : execute(m)
+activate ExportCommand
+
+create CommandResult1
+ExportCommand -> CommandResult1
+activate CommandResult1
+
+CommandResult1 --> ExportCommand
+deactivate CommandResult1
+
+ExportCommand --> LogicManager : r1
+deactivate ExportCommand
+
+LogicManager --> MainWindow : r1
+deactivate LogicManager
+
+[<-- MainWindow : Show FileChooser window
+deactivate MainWindow
+
+[-> MainWindow : Chosen file (f)
+activate MainWindow
+
+MainWindow -> LogicManager : processFile(f)
+activate LogicManager
+
+LogicManager -> Model : getAddressBook()
+activate Model
+
+Model --> LogicManager : addressBook
+deactivate Model
+
+LogicManager -> StorageManager : saveAddressBook(addressBook, f)
+activate StorageManager
+
+StorageManager --> LogicManager
+deactivate StorageManager
+
+LogicManager -> CommandResult1 : apply()
+activate CommandResult1
+
+create CommandResult2
+CommandResult1 -> CommandResult2
+activate CommandResult2
+
+CommandResult2 --> CommandResult1
+deactivate CommandResult2
+
+CommandResult1 --> LogicManager : r2
+deactivate CommandResult1
+
+LogicManager --> MainWindow : r2
+deactivate LogicManager
+
+[<-- MainWindow
+deactivate MainWindow
+@enduml

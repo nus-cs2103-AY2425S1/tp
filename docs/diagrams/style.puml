@@ -67,6 +67,20 @@ skinparam Participant {
     Padding 20
 }
 
+skinparam SequenceGroup {
+    BorderColor maroon
+    BackgroundColor maroon
+    BodyBackgroundColor transparent
+    FontSize 15
+    FontColor maroon
+    BorderThickness 2
+
+    Header {
+        FontColor #FFFFFF
+        FontSize 15
+    }
+}
+
 skinparam ArrowFontStyle bold
 skinparam MinClassWidth 50
 skinparam ParticipantPadding 10
