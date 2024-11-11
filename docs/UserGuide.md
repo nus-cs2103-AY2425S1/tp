@@ -422,7 +422,7 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 **Expected message**:
 ```
-Added tag(s): [TAG], [MORE_TAG](if present)
+Added tag(s): [TAG], [MORE_TAG(if present)]
 to Person: (details of the person)
 ```
 | Parameter Name | Description                                                       | Required   |
@@ -437,7 +437,7 @@ to Person: (details of the person)
 
 **Expected message**:
 ```
-Added tag(s): [[TAG], [MORE_TAG](if present)] to all contacts.
+Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 ```
 | Parameter Name | Description                                                                                                              | Required   |
 |----------------|--------------------------------------------------------------------------------------------------------------------------|------------|
