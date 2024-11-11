@@ -1154,7 +1154,7 @@ command: `add`
 1. Adding a patient with valid fields
 
     * **Prerequisites:**
-        * Launch the app.
+      Launch the app.
 
     * **Test case:** `add n|Jane i|T0123456B p|90901282 s|F d|2002-10-10`
         * **Expected:** A patient with the following fields is added to the system:
@@ -1167,7 +1167,7 @@ command: `add`
 2. Adding a patient with invalid `Nric`
 
     * **Prerequisites:**
-        * Launch the app.
+      Launch the app.
 
     * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
       * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
@@ -1180,7 +1180,7 @@ command: `filter`
 1. Filtering appointments with all valid fields
 
     * **Prerequisites:**
-        * Launch the app.
+      Launch the app.
 
     * **Test case:** `filter ed|2002-10-10 sd|2002-11-10 h|Blood Test`
         * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed.
@@ -1188,7 +1188,7 @@ command: `filter`
 2. Filtering appointments with invalid end date
 
     * **Prerequisites:**
-        * Launch the app.
+      Launch the app.
 
     * **Test case (invalid end date):** `filter ed|2027/10-10`
         * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
