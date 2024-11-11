@@ -38,9 +38,9 @@ title: Developer Guide
 This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 
 ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
-as well as the JavaDocs for code written by BuffWuff1712
-
----
+as well as the JavaDocs for code written by BuffWuff1712.
+ChatGPT was also used by tayxuenye and cited in the code where appropriate.
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
 
@@ -274,17 +274,14 @@ and handling paperwork related to real estate transactions. They are often mobil
 access to information, and manage a large client and property database.
 
 **Value proposition**:
-Agents often have difficulty keeping track of the large client and property database.
-Our address book allows property agents to manage prospective and existing customers by sorting them into
-different categories including housing type and income level.
-Moreover, they can keep track of house visits via an events management system.
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
+simpler to use while being even more functional than alternatives on the market.
 
-* Allows property agents to manage prospective and existing customers easily by sorting them into different
-  categories such as by housing type, income level, rent/sell/buy
-* Agents can sort by customer status: unresponsive,
+* Allows property agents to manage prospective and existing clients easily by sorting them into different
+  categories such as by housing type or seller/buyer
 * Keep track of the various landlords who own the houses
 * Easy for agent to remember who to try to sell unit to
-* Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
 
 ### User stories
 
@@ -560,8 +557,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User selects to add, delete tags or both.
 
-3. PROperty performs the selected action(s).
-
 4. PROperty confirms that the tags have been updated.
    
    Use case ends.
@@ -581,18 +576,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2b. User chooses to add a valid tag.
   
-  - 3c1. User selects the tag to delete.
+  - 2b1. User keys in the tag to add.
   
-  - 3c2. PROperty adds the tag to the client.
+  - 2b2. PROperty adds the tag to the client.
     
     Use case resumes at step 4.
 
 - 2c. Any tag names provided are invalid for an add tag action (not in the list of allowed tags).
   
-  - 3d1. PROperty shows an error message.
-    
-    Use case ends.
+  - 2c1. PROperty shows an error message.
 
+    Use case ends.
 
 ---
 
@@ -647,6 +641,222 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. PROperty displays current tags associated with the client.
 
 3. User removes unwanted tags.
+
+4. PROperty provides real-time feedback to the user.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. The command has multiple errors.
+  
+  - 3a1. PROperty highlights all errors.
+    
+    Use case ends.
+
+---
+
+**Use case: View error messages with exact causes**
+
+**MSS**
+
+1. User executes a command.
+
+2. PROperty detects an error in the command.
+
+3. PROperty displays an error message clearly indicating the cause.
+
+4. User reviews the error message and corrects the command.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. Error message is too generic.
+  
+  - 3a1. User requests more details.
+  
+  - 3a2. PROperty provides additional information about the error.
+    
+    Use case resumes at step 4.
+
+---
+
+**Use case: Sort contacts in alphabetical order**
+
+**MSS**
+
+1. User requests to sort contacts.
+
+2. PROperty sorts the contact list in alphabetical order.
+
+3. PROperty displays the sorted list.
+   
+   Use case ends.
+
+---
+
+**Use case: View a guide on application features**
+
+**MSS**
+
+1. New user requests to view a guide on application features.
+
+2. PROperty displays a comprehensive guide detailing all features and how to use them.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. The guide fails to load or is unavailable.
+  
+  - 2a1. PROperty shows an error message.
+    
+    Use case ends.
+
+---
+
+**Use case: Press TAB to auto-suggest commands and attributes**
+
+**MSS**
+
+1. User begins typing a command or attribute.
+
+2. User presses the TAB key.
+
+3. PROperty auto-completes or suggests possible commands/attributes.
+
+4. User selects a suggestion or continues typing.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. Multiple suggestions are available.
+  
+  - 2a1. PROperty displays a list of suggestions.
+  
+  - 2a2. User selects from the list.
+    
+    Use case resumes at step 4.
+
+- 2b. No suggestions are available.
+  
+  - 2b1. PROperty does not auto-complete.
+    
+    Use case ends.
+
+---
+
+**Use case: See error messages clearly**
+
+**MSS**
+
+1. User executes a command.
+
+2. PROperty detects an error.
+
+3. PROperty displays the error message prominently and clearly.
+
+4. User reads the error message and takes corrective action.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. Error message overlaps with other interface elements.
+  
+  - 3a1. PROperty adjusts the layout to ensure visibility.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Manage multiple customer groups**
+
+**MSS**
+
+1. User creates tags for different customer groups.
+
+2. User assigns contacts to these tags.
+
+3. User filters or views contacts based on these tags.
+   
+   Use case ends.
+
+**Extensions**
+
+- 1a. User attempts to create a duplicate tag.
+  
+  - 1a1. PROperty informs the user and prevents duplication.
+    
+    Use case resumes at step 1.
+
+- 2a. User wants to assign a contact to multiple groups.
+  
+  - 2a1. PROperty allows multiple tags per contact.
+    
+    Use case resumes at step 3.
+
+---
+
+**Use case: Find commands by typing part of it**
+
+**MSS**
+
+1. User types a partial command.
+
+2. PROperty searches for commands matching the input.
+
+3. PROperty suggests possible commands.
+
+4. User selects a command from the suggestions.
+   
+   Use case ends.
+
+**Extensions**
+
+- 2a. No commands match the partial input.
+  
+  - 2a1. PROperty informs the user and suggests using the help guide.
+    
+    Use case ends.
+
+---
+
+**Use case: Press TAB to auto-suggest values**
+
+**MSS**
+
+1. User types a command requiring specific values (e.g., tag names).
+
+2. User presses TAB key.
+
+3. PROperty suggests existing values that match the input.
+
+4. User selects a value from the suggestions.
+   
+   Use case ends.
+
+**Extensions**
+
+- 3a. No values match the input.
+  
+  - 3a1. PROperty does not provide suggestions.
+    
+    Use case ends.
+
+---
+
+**Use case: Remove tags from contacts easily**
+
+**MSS**
+
+1. User selects a contact to modify tags.
+
+2. PROperty displays current tags associated with the contact.
+
+3. User deselects or removes unwanted tags.
 
 4. PROperty updates the client's tag list.
 
@@ -704,7 +914,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User types in invalid index for client.
 
-    - 1a1. PROperty informs user of invalid index and .
+    - 1a1. PROperty informs user of invalid index.
 
       Use case ends.
 
