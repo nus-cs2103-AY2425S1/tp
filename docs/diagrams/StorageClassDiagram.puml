@@ -34,6 +34,7 @@ Class "<<interface>>\nMeetUpListStorage" as MeetUpListStorage
 Class JsonMeetUpListStorage
 Class JsonSerializableMeetUpList
 Class JsonAdaptedMeetUp
+Class JsonAdaptedAddedBuyer
 }
 
 }
@@ -62,8 +63,8 @@ JsonPropertyListStorage ..> JsonSerializablePropertyList
 JsonSerializableBuyerList --> "*" JsonAdaptedBuyer
 JsonSerializableMeetUpList --> "*" JsonAdaptedMeetUp
 JsonSerializablePropertyList --> "*" JsonAdaptedProperty
-JsonSerializablePropertyList --> "*" JsonAdaptedBuyer
 JsonAdaptedBuyer --> "*" JsonAdaptedTag
+JsonAdaptedMeetUp --> "*" JsonAdaptedAddedBuyer
 
 'Force relative postions
 BuyerListStorage -right[hidden]- MeetUpListStorage
