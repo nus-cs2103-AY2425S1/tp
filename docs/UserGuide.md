@@ -24,26 +24,28 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
       * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
       * Linux: Open the Terminal app or press the "Ctrl + Alt + T" keys simultaneously.
-   2. In the terminal, type `java -version`.
-   3. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
-   4. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
-   5. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   1. In the terminal, type `java -version`.
+   1. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
+   1. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+   1. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` File:
+1. Download the latest `.jar` File:
     * Download the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
     * By default, the jar file would be saved in the Downloads folder.
 
-3. Copy the file to the folder you want to use as the _home folder_ for UGTeach.
+1. Copy the file to the folder you want to use as the _home folder_ for UGTeach.
 
-4. Open a command terminal, `cd` into the folder that you put the jar file in.
+1. Before you run the application for the **first time**, ensure that your _home folder_ **does not contain** a `config.json` and `preferences.json` file. If it does, delete them.
+
+1. Open a command terminal, `cd` into the folder that you put the jar file in.
    * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
 
-5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
+1. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -56,7 +58,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
    * `exit` : Exits the app. 
 
-7. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
