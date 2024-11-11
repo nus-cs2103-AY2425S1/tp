@@ -18,8 +18,8 @@ convenience and security.
 **DLTbook** offers a command-line first interface, allowing you to manage your contacts and their DLT
 addresses with ease.
 
-We’ll walk you through each feature, so you can discover with ease **DLTbooks** offerings. Let’s get started with *
-*DLTbook** and manage your contact's public addresses with greater ease.
+We’ll walk you through each feature, so you can discover with ease **DLTbook**'s offerings. Let’s get started with 
+**DLTbook** and manage your contact's public addresses with greater ease.
 
 ⚠️ **Security Note** : To protect your data from potential manipulation, we recommend using DLTbook on a device with no
 internet connectivity.
@@ -27,45 +27,75 @@ internet connectivity.
 # Contents
 
 - [Introduction](#introduction)
-    - [Beginner's Guide](#beginners-guide)
-    - [Expert's Guide](#experts-guide)
+
+    - [Beginner's Guide](#beginner-s-guide)
+
+    - [Expert's Guide](#expert-s-guide)
+
 - [Setup Guide](#setup-guide)
 - [GUI Summary](#gui-summary)
 - [Try it out!](#try-it-out)
-- [Features](#features)
-    - [Command Overview](#command-overview)
-    - [Basic Features](#basic-features)
-        - [Viewing help: `help`](#viewing-help--help)
-        - [Clearing all contacts from DLTbook: `clear`](#clearing-all-entries--clear)
-        - [Exiting the application: `exit`](#exiting-the-program--exit)
-    - [Contact Management Features](#contact-management-features)
-        - [Adding a contact: `add`](#adding-a-contact--add)
-        - [Deleting a contact: `delete`](#deleting-a-contact--delete)
-        - [Editing a contact: `edit`](#editing-a-contact--edit)
-        - [Finding contacts: `find`](#finding-contacts-by-name--find)
-        - [Listing all contacts: `list`](#listing-all-contacts--list)
-    - [Public Address Management Features](#public-address-management-features)
-        - [Adding a public address to a contact: `addpa`](#adding-a-public-address-to-a-contact--addpa)
-        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address-of-a-contact--deletepa)
-        - [Editing a public address of a contact: `editpa`](#editing-a-public-address-of-a-contact--editpa)
-        - [Retrieving public address given contact information:
-          `retrievepa`](#retrieving-public-addresses-of-a-contact--retrievepa)
-        - [Searching for currently displayed contacts for a public address:
-          `searchpa`](#searching-for-a-public-address--searchpa)
-        - [Filters contacts based on presence of network:
-          `filter`](#filtering-contacts-by-public-addresses-network--filter)
 
-- [Support](#Support)
+- [Features](#features)
+
+    - [Command Overview](#command-overview)
+
+    - [Basic Features](#basic-features)
+
+        - [Viewing help: `help`](#viewing-help-help)
+
+        - [Clearing all contacts from DLTbook: `clear`](#clearing-all-entries-clear)
+
+        - [Exiting the application: `exit`](#exiting-the-program-exit)
+
+    - [Contact Management Features](#contact-management-features)
+
+        - [Adding a contact: `add`](#adding-a-contact-add)
+
+        - [Deleting a contact: `delete`](#deleting-a-contact-delete)
+
+        - [Editing a contact: `edit`](#editing-a-contact-edit)
+
+        - [Finding contacts: `find`](#finding-contacts-by-name-find)
+
+        - [Listing all contacts: `list`](#listing-all-contacts-list)
+
+    - [Public Address Management Features](#public-address-management-features)
+
+        - [Adding a public address to a contact: `addpa`](#adding-a-public-address-to-a-contact-addpa)
+
+        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address-of-a-contact-deletepa)
+
+        - [Editing a public address of a contact: `editpa`](#editing-a-public-address-of-a-contact-editpa)
+
+        - [Retrieving public address given contact information:
+          `retrievepa`](#retrieving-public-addresses-of-a-contact-retrievepa)
+
+        - [Searching for currently displayed contacts for a public address:
+          `searchpa`](#searching-for-a-public-address-searchpa)
+
+        - [Filters contacts based on presence of network:
+          `filter`](#filtering-contacts-by-public-addresses-network-filter)
+
+- [Support](#support)
+
     - [Frequently Asked Questions](#frequently-asked-questions)
+
     - [Common Errors](#common-errors)
+
     - [Known Issues](#known-issues)
+
     - [Future Enhancements](#future-enhancements)
-    - [Data Storage](#sata-storage)
+
+    - [Data Storage](#data-storage)
 
 - [Feature Summary](#feature-summary)
-    - [Basic Features](#basic-commands)
-    - [Contact Management Features](#contact-management-commands)
-    - [Public Address Management Features](#public-address-management-features)
+
+    - [Basic Features](#basic-features-2)
+
+    - [Contact Management Features](#contact-management-features)
+
+    - [Public Address Management Features](#public-address-management-features-2)
 
 - [Glossary](#glossary)
 
@@ -135,7 +165,7 @@ Before diving in, let's clarify some essential terms:
   Source: [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet))
 
 - **Wallet Name**: A label that you use tag to the wallet to identify the wallets purpose
-- (for daily transactions, for decentralised fiannce transactions, for long term storage).
+  (for daily transactions, for decentralised finance transactions, for long term storage).
 
 - **Public Address**: A public address is a unique series of cryptographic codes that can be shared with others to
   receive messages, coins, or tokens. (similar to an
@@ -161,7 +191,7 @@ Here’s how you can start using DLTbook:
 
 4. Once you're comfortable with the basics, explore the full range of [features](#features) available in DLTbook.
 
-## Experts Guide
+## Expert's Guide
 
 If you have used DLTbook before, jump straight to [Setup Guide](#setup-guide) for a quick overview on basic
 commands.
@@ -816,14 +846,14 @@ exactly describe this error. This shall be fixed in the future.
 
 ## Public Address Management Features
 
-| Action                      | Format, Examples                                                                                                                              |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`     |
-| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` |
-| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                          |
-| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                   |
-| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                               |
-| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                   |
+| Action                      | Format, Examples                                                                                                                                 |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`        |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                             |
+| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                      |
+| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                  |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                      |
 
 --------------------------------------------------------------------------------------------------------------------
 
