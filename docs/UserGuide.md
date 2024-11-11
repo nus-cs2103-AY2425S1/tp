@@ -328,6 +328,8 @@ attendance
 This command does not take any additional parameters.
 
 #### Example
+`attendance`
+
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
 ### Marking attendance: `mark`
