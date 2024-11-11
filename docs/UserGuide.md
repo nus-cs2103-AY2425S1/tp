@@ -382,6 +382,8 @@ This command will help you add a new guest to the bottom of the existing overall
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
+**Example Usage:** `add_guest n/Alan Tan p/97462948 e/alantan@example.com a/123, Jurong Ave 12, #012-845 rsvp/d r/w`
+
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
 ![add_guest command](images/addGuestCommand.png)
@@ -408,6 +410,8 @@ This command will allow you to edit the details of the guest identified by the `
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
+
+**Example Usage:** `edit_guest 2 p/98274626 e/helloworld@example.com`
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
@@ -457,6 +461,8 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 **Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
+**Example Usage:** `add_vendor n/Alan Tan p/94838274 e/alantan@example.com a/842, Jurong Mall, #02-297 c/Alan's Jewellery b/100000.99`
+
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
 ![add_vendor command](images/addVendorCommand.png)
@@ -483,6 +489,8 @@ This command will allow you to edit the details of the vendor identified by the 
     * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 **Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
+
+**Example Usage:** `edit_vendor 2 p/82737573 e/hiworld@example.com`
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
