@@ -212,7 +212,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
+* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`).
 
 </box>
 
@@ -283,7 +283,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 * Multiple inputs of the same parameter can be added but only the last one will be accepted.
 * Examples:
   - `edit n/John p/111 p/222` will edit John's phone number to `222`
-  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited)
+  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited).
 
 </box>
 
@@ -319,7 +319,7 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`.
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
 
 ![add wedding message](images/addWeddingMsg.png)
 
@@ -345,7 +345,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 * If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
-* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding.
 
 </box>
 
@@ -462,7 +462,7 @@ Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]
 * At least one of the `NAME` or `JOB` fields must be present.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
-* `filter` returns the largest range of matches based on your input
+* `filter` returns the largest range of matches based on your input.
 
 <box type="tip" seamless>
 
@@ -496,8 +496,8 @@ You can view a list of all contacts tagged to the specified wedding.
 
 Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
-* `view-wed` / `vw` shows participants based on wedding names that match the keyword
-* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
+* `view-wed` / `vw` shows participants based on wedding names that match the keyword.
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
   e.g. `Alice` will not return `Alice & Bob`
@@ -513,8 +513,8 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 ![view-wed message](images/viewWeddingMsg.png)
 
 Examples:
-* `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
-* `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding
+* `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding.
+* `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding.
 
 ### Clearing All Entries in Address Book: `clear-ab` / `cab`
 
@@ -579,7 +579,7 @@ There is no need to save manually.
 
 ### Editing the Data File
 
-* KnottyPlanners data are saved automatically as a JSON file 
+* KnottyPlanners data are saved automatically as a JSON file.
   * `[JAR file location]/data/addressbook.json`.
   * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
