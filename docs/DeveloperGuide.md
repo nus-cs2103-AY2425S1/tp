@@ -394,7 +394,6 @@ Use case ends.
   
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -454,8 +453,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by running the jar file via terminal.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Adding a client
 
@@ -612,9 +609,14 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Future**
 
 ### Future Enhancements
-
-1. Ensure all panels such as command panel are shown even in minimum resolution window
-2. Automatically update the client's detailed view page whenever a change is made to their details
-3. Allow for more flexible policy start dates as we currently assume all policies start on the 1st of the respective months
-4. Allow users to input their own template messages and update template message labels accordingly
-5. Allow for more flexibility regarding policy frequency, as now it is fixed at 1, 3, 6 or 12 months
+_Team size: 5_
+1. Ensure all panels such as command panel are shown even in minimum resolution window.
+2. Automatically update the client's detailed view page whenever a change is made to their details.
+3. Allow for more flexible policy start dates as we currently assume all policies start on the 1st of the respective months.
+4. Allow users to input their own template messages and update template message labels accordingly.
+5. Allow for more flexibility regarding policy frequency, as now it is fixed at 1, 3, 6 or 12 months.
+6. Enhance specificity for finding by birthday (find by month, day, year) as current implementation will match against the whole string representation of birthday.
+7. Enhance clarity of error messages for phone numbers (define what is Singapore numbers in the application itself).
+8. Rewording of error messages to provide greater clarity on what is done wrongly, especially for parameters in `Add` and `Edit` commands.
+9. Resizing of help window for better visibility
+10. Inclusion of hotkeys to open `PersonDetailedView` window and toggling between list selection and command input
