@@ -868,7 +868,7 @@ Detailed information of a patient will be displayed if the patient exists in the
     * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1a1 is repeated until the input entered is valid containing the NRIC of an existing patient in the system.<br>
       Use case resumes from step 2.
-<br> 
+<br>
 <br>
 
 * 1b. User inputs an NRIC that does not exist in the system
@@ -906,7 +906,7 @@ At least one field of the patient will be edited.
       <br>
       <br>
 
-      
+
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format.<br>
@@ -991,8 +991,8 @@ Displays all appointments that falls between today's date and the specified end 
       Step 1b1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
       Use case resumes from step 2.
       <br>
-      
-     
+
+
 #### Use case: UC12 - Filter appointments with start date and end date
 **Guarantee:**<br>
 Displays all appointments that lies in the date range, if any.
@@ -1066,8 +1066,6 @@ Displays appointments that matches with the specified `HealthService`.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to perform all of its functions without depending on external APIs.
 5.  Should start up in less than 5 seconds on an average device running any _mainstream OS_ with Java `17` or above installed.
-6.  Should have automated backups of patient data every 6 hours. Daily full backups should be stored offsite.
-7.  In the event of data loss, the system must be able to recover from the latest backup with minimal data loss (less than 30 minutes of data).
 8.  A first-time user should be able to navigate and perform basic tasks (e.g. adding a patient, searching for records) within 10 minutes of using the platform without prior training.
 9.  The system should maintain comprehensive logs of all user actions, especially concerning patient record access, modifications, and deletions. These logs should be easily accessible for auditing purposes and stored for at least 5 years.
 
@@ -1212,6 +1210,7 @@ command: `addf`
         * Existing Condition: `High Blood Pressure`
         * Note: `Patient has anger management issues`
 
+
 2. Adding a patient with only the required fields
 
    * **Prerequisites:**
@@ -1265,3 +1264,27 @@ command: `filter`
 
     * **Test case (invalid end date):** `filter ed|2027/10-10`
         * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
+
+
+### Viewing detailed information on a patient
+
+1. Viewing detailed information on a patient with a valid NRIC found in the patient list.
+   * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
+   * **Test case:** `view T0123456A`<br>
+     **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message.
+
+
+2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
+   * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
+   * **Test case:** `view S0000001X`<br>
+     **Expected:** Detailed information is not shown. Patient not found error details shown in the status message.
+
+
+3. Keying in an invalid NRIC when viewing detailed information on a patient.
+   * **Test case:** `view T000001X`<br>
+     **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+
+
+4. No NRIC keyed in when viewing detailed information on a patient.
+   * **Test case:** `view`<br>
+     **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
