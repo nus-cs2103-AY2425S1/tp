@@ -509,7 +509,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+[//]: # (The non-functional requirement below inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
+
 1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
 1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
 1. The application should provide clear help sections for users, explaining how to use its features.
@@ -531,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The application must use a version control system to track changes and maintain multiple versions of the software.
 
 **Logging**
-1. Activity Logs: The system should log all user activity and critical events for security auditing and troubleshooting.
+1. Activity Logs: The system should log all user activities and critical events for security auditing and troubleshooting.
 
 
 ### Glossary
