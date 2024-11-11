@@ -1145,10 +1145,16 @@ we did not prevent the same characters from being used as keywords for the `find
 since these characters would never be found in company names. We plan to be more consistent, 
 and check whether the keywords provided to the `find` command are valid characters that are allowed in `Company Name`. <br>
 
-3. **Make error message for `add` command more specific:** Currently, the error message provided when the user inputs an invalid `add` command is too generic. 
-For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
-on why the command is invalid. It could be improved to state the email field is missing. 
-We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. <br>
+3. **Make error message for `add` command more specific:**
+   <br></br>
+   - Current behaviour: The error message provided when the user inputs an invalid `add` command is too generic.
+     For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
+on why the command is invalid. The error message could be more specific to state the email field is missing.
+   <br></br>
+   - Planned enhancement: We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. 
+   <br></br>
+   - Justification: In doing so, users will have a clearer idea on what they did wrong when they typed in the command and they will be able to easily fix the issue. This enables the users to have a more pleasant experience when using HireMe.
+   <br></br>
 
 4. **Improve UI to deal with long texts:** The current application does not allow the user to scroll the list displayed on the application. 
 If there is a very long text, the text will be cut off and the use would have to maximise the application's window in order to see the full text. 
