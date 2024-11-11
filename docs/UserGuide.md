@@ -377,5 +377,4 @@ You can check your Java version by running `java -version` in the command termin
 | `triage`      | `t`      | Change triage stage of a patient         |
 | `view`        | `v`      | Views detailed patient information       |
 
-
 > **Note:** Shortcuts for `log`and `schedule` are not included but will be available in a future update.
