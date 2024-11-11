@@ -103,10 +103,12 @@ public abstract class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.isTutee() == this.isTutee();
+        boolean res = otherPerson != null
+                && otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone());
+        return res;
     }
+
+
 
     @Override
     public int hashCode() {

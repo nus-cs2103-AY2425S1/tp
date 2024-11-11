@@ -16,7 +16,7 @@ public class Address {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(.*),\\s?(\\d{6})$";
+    public static final String VALIDATION_REGEX = "^(\\S+.*),\\s?(\\d{6})$";
 
 
     public final String value;
