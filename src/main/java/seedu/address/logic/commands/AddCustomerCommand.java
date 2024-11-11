@@ -40,6 +40,7 @@ public class AddCustomerCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PHONE = "A contact in the address book already has this phone number. "
             + "Please use a different phone number.";
+    public static final String MESSAGE_INVALID_TAG = "The tag 'Supplier' is not allowed for customers.";
 
     private final Customer toAdd;
 
@@ -60,6 +61,10 @@ public class AddCustomerCommand extends Command {
             if (person.getPhone().equals(toAdd.getPhone())) {
                 throw new CommandException(MESSAGE_DUPLICATE_PHONE);
             }
+        }
+        // Check for the "Supplier" tag and throw an exception if present
+        if (toAdd.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase("Supplier"))) {
+            throw new CommandException(MESSAGE_INVALID_TAG);
         }
 
         // Add the new customer if no duplicates are found

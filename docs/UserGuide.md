@@ -402,6 +402,9 @@ to a customer). They will be distinguished by the order type under the person's 
 information of suppliers and customers will remain the same - ingredients supplied and information respectively. For 
 additional remarks, please use the remark feature.
 
+## **Q13: What is the point of having an addCustomer and addSupplier command?**
+**A:** Customers and suppliers have unique tags. Customers have an information tag while suppliers have an ingredients supplied tag. A generic person does not.
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -469,6 +472,8 @@ addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]...
   - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
   - `o/PASTRYID`: One or more pastry IDs for the items being ordered.
   - `r/REMARK`: (Optional) Information about the customer order.
+  
+A resulting customer order will be added to Customer Order list, tagged to the date which the order enters our system.
 
 **Example:**
 ```bash
@@ -560,17 +565,13 @@ addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]...
     - `o/INGREDIENTID`: One or more product IDs for the items being supplied.
     - `r/REMARK`: (Optional) Information about the customer order.
 
+A resulting supply order will be added to Supply Order list, tagged to the date which the order enters our system.
+
 **Example:**
 ```bash
 addSupplyOrder n/John Doe p/98765432 o/1 2 3
 ```
 ![Add Supply Order.png](images%2FAdd%20Supply%20Order.png)
-
-For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a supply order for a supplier named
-"John Doe" with phone number "98765432," ordering products with IDs "1," "2," and "3" from the ingredient catalogue.
-This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
-the ordering process for necessary ingredients.
-
 <div style="page-break-after: always;"></div>
 
 ## **Clear All Command**
