@@ -34,10 +34,10 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
-      * [_Mac Users_](#mac-users)
-      * [_Windows Users_](#windows-users)
-      * [_Using the terminal_](#using-the-terminal)
-      * [_Using the HireMe application_](#using-the-hireme-application)
+      * [Mac Users](#mac-users)
+      * [Windows Users](#windows-users)
+      * [Using the terminal](#using-the-terminal)
+      * [Using the HireMe application](#using-the-hireme-application)
   * [Features](#features)
     * [Viewing help : `/help`](#viewing-help-help)
     * [Adding an internship application: `/add`](#adding-an-internship-application-add)
@@ -111,6 +111,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 
 4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3. <br>
+
     ![hiremejar](images/HireMeJar.png)
 
 <br></br>
@@ -121,7 +122,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 #### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
+    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/> <br>
    
     You will see a window like this. <br>
 
@@ -129,6 +130,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
     
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
+
    ![macfilepathinfo](images/Macfilepathinfo.png)
     <br></br>
     On the new open that pops up, left click on `Where` and copy the file path.
@@ -137,14 +139,17 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
    <br></br>
 
 #### _Windows users_
-5. Use windows search and type Terminal, click on open. 
+5. Use windows search and type Terminal, click on open.<br>
+
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
 You will see a window like this. <br>
+
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
 6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.<br>
+
    ![windowsfilepath](images/Windowsfilepath.png)
    <box type="info" seamless>
    <strong>Note:</strong> File path here is highlighted in blue
@@ -157,10 +162,12 @@ You will see a window like this. <br>
 
 8. Type `java -jar hireme.jar` and press `Enter` to run the HireMe application.
 <br></br>
-   - Windows Terminal:
+   - Windows Terminal: <br>
+   
       ![windowscd](images/Windowscd.png)
      <br></br>
-   - Mac Terminal:
+   - Mac Terminal: <br>
+   
       ![maccd](images/Maccd.png)
 <br></br>
 
@@ -289,7 +296,7 @@ Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
-* The search allows for **more than one `KEYWORD`**
+* The search allows for **more than one** `KEYWORD`
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
@@ -327,7 +334,7 @@ Examples:
 1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
 2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
 3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `PENDING` filter.
 5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
@@ -490,7 +497,7 @@ Action     | Format, Examples
 **Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **List**   | `/list`
 **Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
+**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g., `/find Google Facebook`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
 **Pending**| `/pending INDEX`<br> e.g., `/pending 3`
 **Reject** | `/reject INDEX`<br> e.g., `/reject 1`
@@ -508,6 +515,7 @@ Action     | Format, Examples
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.<br>
+
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
