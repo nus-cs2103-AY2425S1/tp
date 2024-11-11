@@ -1272,6 +1272,13 @@ testers are expected to do more *exploratory* testing.
    - **Problem:** Currently, the loaded sample data has customers who have tags such as `friends`, `neighbours`, etc.
    - **Solution:** Change the tags (and any relevant sample data) to fit more with the context of the target user.
    - **Rationale:** It is unlikely that a target user will label their customers as the current tags in the sample data. Making the sample data more relevant will allow users trying out the application to better simulate the experience of a target user using the application.
+<p><p/>
+
+7. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
+    - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
+    - **Example:** User tries to add a customer using `addc n/john s/o doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
+    - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
+    - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
 
 ## **Appendix: Effort**
 
