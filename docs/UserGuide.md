@@ -31,8 +31,10 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
    - As you type, notice that an invalid command word will be coloured in red.
        ![incomplete command](images/syntax_highlighting_1.png)
+   <div style="page-break-after: always"></div>
    - You can try autocompleting the command by pressing `TAB` on your keyboard too. In this case, the command `view` will be matched, and it will be displayed in grey to indicate that it's a valid command word that is waiting for an argument.
        ![valid_command](images/syntax_highlighting_2.png)
+   <div style="page-break-after: always"></div>
    - In this case, `view 1` indicates that we want to view the first contact in the list. Once a full valid command is entered, the command will be colored black.<br>
        ![complete command](images/syntax_highlighting_3.png)
    - Press Enter to execute command, and you should see the details for the first contact `Alex Yeoh` appear on the right pane!
@@ -40,6 +42,8 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 4. Let's delve a little deeper now, try adding a new contact using `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`. This adds a contact named `John Doe` to the application.
 ![add new person](images/quickStart_addNew.png)
+
+<div style="page-break-after: always"></div>
 
 5. You can use `shift+tab` to navigate between your command box and the contact list. You will see a brown box around the list when it is selected.
 Try using the arrow key to navigate around the list until you find `John Doe`
