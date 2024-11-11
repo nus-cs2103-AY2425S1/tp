@@ -11,6 +11,8 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project is based on the AddressBook Level 3 project created by the [SE-EDU initiative](https://se-education.org).
@@ -205,6 +207,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 ### Data archiving
 
 The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
@@ -217,7 +221,7 @@ to handle both archiving and unarchiving actions. Instead of directly modifying 
 a new `Person` instance is created with the updated archive status.
 
 <puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
-----------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -255,7 +259,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | social worker | view the information of different people I have added | retrieve their information more quickly.                          |
 | `* * *`  | social worker | delete the information of people                      | remove the data of people that I no longer need to keep track of. |
 | `* * *`  | social worker | edit a person's information                           | keep their information up-to-date for future use.                 |
-| `* *`    | social worker | tag a person                                          | manage and organize people according to their needs.              |
+| `* *`    | social worker | tag a person                                          | identify and manage people according to their needs.              |
 | `* *`    | social worker | filter through the list of people                     | navigate the persons list more efficiently.                       |
 | `* *`    | social worker | sort people                                           | view people in a more suitable order.                             |
 | `* *`    | social worker | compile important personal details                    | quickly disseminate information to these people.                  |
