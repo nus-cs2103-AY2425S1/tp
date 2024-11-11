@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
+import static seedu.address.logic.commands.HomeCommand.successMessageCreator;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPatients.AMY;
 
@@ -63,7 +64,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String homeCommand = HomeCommand.COMMAND_WORD;
-        String homeCommandSuccess = String.format(HomeCommand.MESSAGE_SUCCESS, model.getPatientSize());
+        String homeCommandSuccess = successMessageCreator(model);
         assertCommandSuccess(homeCommand, homeCommandSuccess, model);
     }
 

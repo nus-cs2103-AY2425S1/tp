@@ -22,6 +22,25 @@ public class HomeCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new DefaultCommandResult(String.format(MESSAGE_SUCCESS, model.getPatientSize()));
+        String msgSuccess = successMessageCreator(model);
+
+        return new DefaultCommandResult(msgSuccess);
+    }
+
+    /**
+     * creates the success message based on the size of the patient size in model
+     */
+    public static String successMessageCreator(Model model) {
+        int size = model.getFilteredPatientList().size();
+        String isOrAre;
+        String patientOrPatients;
+        if (size == 1) {
+            isOrAre = "is";
+            patientOrPatients = "patient";
+        } else {
+            isOrAre = "are";
+            patientOrPatients = "patients";
+        }
+        return String.format(MESSAGE_SUCCESS, isOrAre, size, patientOrPatients);
     }
 }
