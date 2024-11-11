@@ -508,7 +508,7 @@ Assuming the above entry in the address book, the following parameters passed in
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
-  - Domain does not have to include a `.`, e.g. `.com`, `.edu` etc
+  - Domain does not have to include a period `.`, e.g. `.com`, `.edu` etc
 
 ### Student Status
 - Must take one of the following values:
