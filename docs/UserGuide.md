@@ -94,8 +94,7 @@ Action     | Format, Examples
 
 ##### Notes about the command format
 
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -104,12 +103,16 @@ Action     | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* There should be at least one space between any two parameters, or between the command word and its parameters.<br>
+  e.g. `edit 1 n/Sean` is acceptable, but `edit 1n/Sean` or `edit1 n/Sean` is not.
+
 * No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-> Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
+  e.g. if the command specifies `list help`, it will be interpreted as `list`, as the extra text `help` is ignored.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -151,23 +154,26 @@ Adds a student to the address book.
 ##### Constraints
 
 * **NAME** must only contain alphanumeric characters and spaces. 
-* **NAME** is case-insensitive.
+  * **NAME** is case-insensitive.
 * **ADDRESS** has no restrictions.
-* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
+* **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME` (strictly no space in between).
   * **DAY_OF_THE_WEEK** is one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
   * **DAY_OF_THE_WEEK** is case-insensitive.
   * **START_TIME** and **END_TIME** are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
-> Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
+  > Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
+  * It is a positive numeric value with at most 2 decimal places.
   * Minimum: $0.01 (must be a positive value)
   * Maximum: $1000.00 (two decimal places allowed)
+  > Reason for the maximum value: It is unlikely for an undergraduate tutor to have an hourly rate higher than $1000.00.
 * **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
+  * Special case: `-0`, `-0.0`, `-0.00` are not allowed! UGTeach will behave weirdly if you enter these values.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
-* **SUBJECT** is case-insensitive.
+  * **SUBJECT** is case-insensitive.
 
 </box>
 
@@ -245,9 +251,10 @@ Finds students whose names contain any of the given keywords *and* their tuition
 **Examples:**
 * `find n/alex` returns `Alex Yeoh` and `Alex Tan`
 * `find n/Alex d/Friday` returns `Alex Tan`<br>
+* `find n/Alex Bernice d/Wednesday Friday` returns `Bernice Yu` and`Alex Tan`
 
-**Output:**
-![result for `find n/Alex d/Friday`](images/findResult.png)
+**Output for `find n/Alex Bernice d/Wednesday Friday`:** 
+![result for `find n/Alex Bernice d/Wednesday Friday`](images/findResult.png)
 
 <box type="important" header="##### Constraints">
 <markdown>
@@ -259,8 +266,10 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <box type="tip" header="##### Tips">
 <markdown>
+
 * The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
-<br> i.e. The `find` command will not be affected by the previous `find` command. 
+<br> i.e. The `find` command will not be affected by the previous `find` command.
+* The search result list will be ordered based on the students' index in the full list.
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
 * The order of the parameters does not matter. 
@@ -268,9 +277,9 @@ Finds students whose names contain any of the given keywords *and* their tuition
 * The search finds all the students whose 
     * names matches at least one of the keywords **AND** 
     * the tuition day matches the days.
-    * e.g. `find n/Alex d/Friday` returns `Alex Tan` because:
-        * while `Alex Yeoh` and `Alex Tan` matches keyword `Alex`,
-        * only `Alex Tan` has a tuition on `Friday`.
+    * e.g. `find n/Alex Bernice d/Wednesday Friday` returns `Bernice Yu` and`Alex Tan` because:
+        * while `Alex Yeoh`, `Alex Tan` and `Bernice Yu` matches one of keywords `Alex` or `Bernice`,
+        * only `Alex Tan` and `Bernice Yu` has a tuition on `Wednesady` or `Friday`.
 </markdown>
 </box>
 
@@ -433,6 +442,6 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
 --------------------------------------------------------------------------------------------------------------------
