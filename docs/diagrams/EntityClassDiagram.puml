@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class Student
+class Group
+class Task
+
+
+Class I #FFFFFF
+
+Group "*"-->"*" Task : contain
+Group "1"-->"0..5" Student : have
+
+I -[hidden]left--> Student
+I -[hidden]right--> Task
+@enduml

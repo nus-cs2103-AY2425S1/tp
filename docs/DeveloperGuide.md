@@ -202,6 +202,14 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+### Interaction between entities
+
+<puml src="diagrams/EntityClassDiagram.puml" width="300" />
+
+The interaction between our three entities - `Student`, `Group` and `Task` can be seen in the diagram above.
+
+The diagram has been simplified by omitting their attributes.
+
 ---
 
 <div style="page-break-after: always;"></div>
@@ -229,7 +237,7 @@ The following shows the activity diagram when the user executes the `del_s` comm
 
 #### Usage
 
-**Syntax:** `del_s/ds sno/STUDENT_NUMBER.`
+**Syntax:** `del_s/ds sno/STUDENT_NUMBER`
 
 **Example:** `ds sno/A0123456K`
 
@@ -239,12 +247,9 @@ The following shows the activity diagram when the user executes the `del_s` comm
 2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number
    `A0234567H`.
 3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed
-   in
-   the
-   `AddressBookParser`.
+   in the `AddressBookParser`.
 4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number
-   is used to
-   construct a `DeleteStudentCommand` object.
+   is used to construct a `DeleteStudentCommand` object.
 5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student
    to be
    deleted. This method deletes the specified `Student` in the model.
@@ -293,7 +298,7 @@ The following shows the activity diagram when the user executes the `del_g` comm
 
 #### Usage
 
-**Syntax:** `del_g/dg gn/GROUP_NAME [gn/GROUP_NAME]...`
+**Syntax:** `del_g/dg gn/GROUP_NAME`
 
 **Example:** `dg gn/CS2103-F12-2`
 
@@ -436,7 +441,7 @@ PlantUML, the lifeline continues till the end of diagram.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ...        | I want to...                                  | So that I can...                                    |
-| -------- | --------------- | --------------------------------------------- | --------------------------------------------------- |
+|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
 | `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
 | `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
 | `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
@@ -549,21 +554,21 @@ Use case ends.
 
 - 3a. The selected Student does not exist.
 
-  - 3a1. T_Assistant shows an error message.
-  
-    Use case resumes at step 2.
-  
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
 - 3b. The input Student parameters to edit are invalid.
-  
-  - 3b1. T_Assistant shows an error message.
-  
-    Use case resumes at step 2.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
 
 - 3c. No changes are made to the Student’s information.
-  
-  - 3c1.  T_Assistant shows an error message.
-  
-    Use case resumes at step 2.
+
+    - 3c1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
 
 **Use case: Find Student**
 
@@ -581,16 +586,15 @@ Use case ends.
 
 - 1a. The input format is incorrect or missing keywords.
 
-  - 1a1. T_Assistant shows an error message indicating the correct format.
-    
-    Use case ends.
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
 
 - 3a. No Student match the search criteria.
 
-  - 3a1. T_Assistant shows an error message.
-  
-    Use case ends.
+    - 3a1. T_Assistant shows an error message.
 
+      Use case ends.
 
 **Use case: Add a Group**
 
@@ -655,6 +659,7 @@ Use case ends.
 **Use case: Edit a Group**
 
 **MSS**
+
 1. Users requests to list groups.
 2. T_Assistant shows a list of groups.
 3. User requests to edit a Group's information from the list.
@@ -682,7 +687,7 @@ Use case ends.
 
 - 3c. No changes are made to the Group’s information.
 
-    - 3c1.  T_Assistant shows an error message.
+    - 3c1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -882,6 +887,7 @@ Use case ends.
 **Use case: Edit a Task for all Groups having the task**
 
 **MSS**
+
 1. Users requests to list tasks.
 2. T_Assistant shows a list of tasks.
 3. User requests to edit a Task's information from the list.
@@ -909,13 +915,14 @@ Use case ends.
 
 - 3c. No changes are made to the Task’s information.
 
-    - 3c1.  T_Assistant shows an error message.
+    - 3c1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
 **Use case: Edit a Task for a Group**
 
 **MSS**
+
 1. Users requests to list a group's tasks.
 2. T_Assistant shows a list of tasks.
 3. User requests to edit a Task's information from the list.
@@ -943,7 +950,7 @@ Use case ends.
 
 - 3c. No changes are made to the Task’s information.
 
-    - 3c1.  T_Assistant shows an error message.
+    - 3c1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -976,7 +983,8 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 500 students, 100 groups and 100 tasks without a noticeable sluggishness in performance
+   for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be for a single user only.
@@ -990,7 +998,7 @@ _{More to be added}_
 ### Glossary
 
 | Key Terms      | Definition                                                   |
-| -------------- | ------------------------------------------------------------ |
+|----------------|--------------------------------------------------------------|
 | Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
 | JAR            | Executable file containing Java classes and other resources. |
 | Prefix         | Keyword used in commands to specify the parameter type       |
@@ -1483,7 +1491,7 @@ testers are expected to do more _exploratory_ testing.
     2. Test case: `etg i/1 gn/CS2103-F12-1 tn/Add postmortem to team docs and report`<br>
        Expected: `Add postmortem to team docs` edited to `Add postmortem to team docs and report`
 
-## Marking a task
+### Marking a task
 
 1. Marking a group's task
 
@@ -1547,12 +1555,14 @@ testers are expected to do more _exploratory_ testing.
 
 ### 1. Update Email Constraints
 
-Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.`
+Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters
+`_`, `.`
 and does not start or end with special characters.
 
 ##### Enhancement
 
-We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID or friendly email.
+We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID
+or friendly email.
 
 ### 2. Improve UI
 
@@ -1571,7 +1581,8 @@ Currently, our system returns all results that match any of the queries.
 
 We plan to include other parameters such as `sno`, `sn`, `e` to allow users to search specific fields of a student.
 
-Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields contain the queries or if the fields start with the queries.
+Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields
+contain the queries or if the fields start with the queries.
 Additionally, we will also change the command to return only results that match ALL queries given.
 
 ### 4. Enhance Sort Group
@@ -1587,8 +1598,10 @@ Below is a simplified process of how the sort will work:
 A reminder that this is the format accepted for `Group Name`: `[Module]-[Tutorial Group]-[Group Number]`
 
 1. For `Module`, `CS2103` groups will come first, followed by `CS2103T` groups.
-2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the numerical part will be compared and sorted in descending order.
-3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical value.
+2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the
+   numerical part will be compared and sorted in descending order.
+3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical
+   value.
 
 ### 5. Enhance Sort Student
 
