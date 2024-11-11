@@ -48,4 +48,20 @@ public class FindCommandParserTest {
         // Test invalid argument (e.g., empty string)
         assertParseFailure(parser, "tag/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_nonAlphanumericArgs_throwsParseException() {
+        // Test non-alphanumeric characters in names
+        assertParseFailure(parser, "Alice@", "Names or tags cannot contain non-alphanumeric characters");
+        assertParseFailure(parser, "Bob#", "Names or tags cannot contain non-alphanumeric characters");
+
+        // Test non-alphanumeric characters in tags
+        assertParseFailure(parser, "tag/Diabetic$", "Names or tags cannot contain non-alphanumeric characters");
+        assertParseFailure(parser, "tag/G6PD!", "Names or tags cannot contain non-alphanumeric characters");
+
+        // Test a mix of valid and invalid characters
+        assertParseFailure(parser, "Alice Bob#", "Names or tags cannot contain non-alphanumeric characters");
+        assertParseFailure(parser, "tag/Diabetic G6PD!", "Names or tags cannot contain non-alphanumeric characters");
+    }
+
 }
