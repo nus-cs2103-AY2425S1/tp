@@ -14,7 +14,7 @@
 <?import javafx.stage.Stage?>
 <?import java.net.URL?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="VBook"
-         type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22">
+         type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17">
     <icons>
         <Image url="@/images/VBookLogo.png"/>
     </icons>
