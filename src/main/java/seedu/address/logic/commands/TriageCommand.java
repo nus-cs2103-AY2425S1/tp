@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRIAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.util.List;
-import java.util.Optional;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Triage;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Command to triage a person using a given NRIC and triage value.
@@ -33,6 +32,7 @@ public class TriageCommand extends Command {
 
     private final Nric nric;
     private final Triage triage;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Constructs a TriageCommand.
@@ -44,6 +44,7 @@ public class TriageCommand extends Command {
         requireAllNonNull(nric, triage);
         this.nric = nric;
         this.triage = triage;
+        this.predicate = new NricMatchesPredicate(nric.toString());
     }
 
     /**
@@ -55,14 +56,11 @@ public class TriageCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        requireNonNull(model);
 
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), triage, personToEdit.getRemark(), personToEdit.getTags(),

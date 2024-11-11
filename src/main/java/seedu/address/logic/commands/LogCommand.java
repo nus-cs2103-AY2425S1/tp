@@ -3,9 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Adds a log entry to a person's log list.
@@ -27,6 +25,7 @@ public class LogCommand extends Command {
 
     private final Nric nric;
     private final Log log;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Creates a LogCommand to add the specified {@code Log} to the person at the specified {@code Index}.
@@ -37,6 +36,7 @@ public class LogCommand extends Command {
     public LogCommand(Nric targetNric, Log log) {
         this.nric = targetNric;
         this.log = log;
+        this.predicate = new NricMatchesPredicate(targetNric.toString());
     }
 
     /**
@@ -50,14 +50,9 @@ public class LogCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
-
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),

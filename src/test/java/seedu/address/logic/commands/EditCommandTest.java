@@ -172,7 +172,7 @@ public class EditCommandTest {
         // Create an EditCommand to edit the first person to have the same details as the second person (duplicate)
         EditCommand editCommand = new EditCommand(targetNric,
                 new EditPersonDescriptorBuilder(personInList).build());
-
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         // Assert that the command fails with a duplicate person message
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }

@@ -9,14 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TRIAGE;
 
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Adds a person to the address book.
@@ -42,17 +40,14 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NRIC + "S1231231D "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TRIAGE + "1 "
-            + PREFIX_TAG + "Pacemaker";
+            + PREFIX_TRIAGE + "1"
+            + PREFIX_TAG + "Pacemaker "
+            + PREFIX_TAG + "Diabetic";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_DUPLICATE_NRIC = """
-            A patient with this specified NRIC already exists in the address book.
-            Please note that NRICs must be unique
-            """;
-
+    public static final String MESSAGE_DUPLICATE_NRIC = "A person with that NRIC already exists";
     private final Person toAdd;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -60,23 +55,22 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        this.predicate = new NricMatchesPredicate(person.getNric().toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        //check if specified NRIC already exists in database
-        List<Person> existingPersons = model.getAddressBook().getPersonList();
-        Optional<Person> existingPersonWithSameNric = existingPersons.stream()
-                        .filter(person -> person.getNric().equals(toAdd.getNric()))
-                        .findAny();
-        if (existingPersonWithSameNric.isPresent()) {
+        model.updateFilteredPersonList(predicate);
+        if (model.getFilteredPersonList().isEmpty()) {
+            model.addPerson(toAdd);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        } else {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_NRIC);
         }
-
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

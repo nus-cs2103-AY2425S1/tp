@@ -3,9 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -13,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Sets or updates an appointment for the person identified by the displayed index from the address book.
@@ -30,7 +28,7 @@ public class AppointmentCommand extends Command {
 
     private final Nric nric;
     private final String appointmentString; // Store appointment string to convert to LocalDateTime
-
+    private final NricMatchesPredicate predicate;
     /**
      * Constructor to create an AppointmentCommand.
      *
@@ -40,19 +38,16 @@ public class AppointmentCommand extends Command {
     public AppointmentCommand(Nric targetNric, String appointmentString) {
         this.nric = targetNric;
         this.appointmentString = appointmentString;
+        this.predicate = new NricMatchesPredicate(nric.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
 
-        Optional<Person> personWithMatchingNric = lastShownList.stream()
-                .filter(person -> nric.equals(person.getNric()))
-                .findFirst();
-
-        if (personWithMatchingNric.isPresent()) {
-            Person personToEdit = personWithMatchingNric.get();
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),
@@ -61,6 +56,7 @@ public class AppointmentCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult("Set appointment for " + personToEdit.getName() + " on " + this.appointmentString);
         } else {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
         }
     }
@@ -83,7 +79,6 @@ public class AppointmentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                //.add("targetIndex", index)
                 .add("targetNric", nric)
                 .add("appointmentString", appointmentString)
                 .toString();

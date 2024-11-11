@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -48,11 +48,10 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicateNric_throwsCommandException() {
+    public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        Person existingPersonWithDuplicateNric = new PersonBuilder(BOB).withNric(PersonBuilder.DEFAULT_NRIC).build();
         AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(existingPersonWithDuplicateNric);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_NRIC, () -> addCommand.execute(modelStub));
     }
@@ -178,10 +177,12 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            filteredPersonList.add(person);
         }
 
         @Override
@@ -191,10 +192,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(person);
-            return addressBook;
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersonList;
         }
     }
 
@@ -203,7 +206,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-
+        final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
@@ -219,6 +222,18 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            requireNonNull(predicate);
+
+            filteredPersonList.setAll(personsAdded.stream().filter(predicate).toList());
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersonList;
         }
     }
 
