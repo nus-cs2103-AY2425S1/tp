@@ -258,16 +258,18 @@ Input must contain at least one parameter for patient to be edited.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-
-* Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies of the patient.
-
-* Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed are current allergies of the patient.
+Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies of the patient.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed are current allergies of the patient.
+</div>
+
+
 Examples:
-* Edits the name and date-of-birth of the patient with NRIC S9758366N
+* Edits the name and date-of-birth of the patient with NRIC S9758366N.
   * `edit S9758366N n|Abraham Lee d|1997-10-28`
-* Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed
+* Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed.
   * `edit S9758366N al|wheat al|eggs rmal|fish`
 
 For more information on each individual parameter, click [here](#command-parameters-summary).
@@ -347,7 +349,7 @@ Examples:
   *  `filter ed|2024-12-12 h|vaccination`
 * Filters all appointments from Oct 01 2012 to Nov 01 2012.
   * `filter sd|2012-10-01 ed|2012-11-01`
-* Filters all appointments from today's date to Oct 01 2028
+* Filters all appointments from today's date to Oct 01 2028.
   *  `filter ed|2028-10-01` 
 
 For more information on each individual parameter, click [here](#command-parameters-summary).
@@ -490,13 +492,13 @@ Some commands include parameters which are identified by prefixes. Here is a tab
 **:information_source: Important:**<br>
 All Prefixes/Parameters should:
 <li>
-Not be blank
+Not be blank.
 </li>
 <li>
-Not start with a whitespace
+Not start with a whitespace.
 </li>
 <li>
-Follow the specifications given below
+Follow the specifications given below.
 </li>
 </div>
 
@@ -639,7 +641,7 @@ Follow the specifications given below
 
 Team size: 5
 
-1. Special characters in names should be accepted e.g. Yugan S/O Murali
+1. Special characters in names should be accepted e.g. Yugan S/O Murali.
 2. A more comprehensive NRIC validity check could be performed to ensure proper correspondence between birthdate and NRIC.
 3. Allowing NRIC to be parsed case-insensitively for all commands.
 4. More specific error messages based on users' input.
