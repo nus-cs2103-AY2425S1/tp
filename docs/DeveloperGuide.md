@@ -350,7 +350,7 @@ the same `Company` but with its `IsFavourite` set to `true` or `false` depending
 
 #### Example usage scenario:
 
-Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index. 
+Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index.
 
 Step 2. The `XXFavCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `IsFavourite` field and
 calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
@@ -371,7 +371,7 @@ methods of `UniqueCompanyList` that manipulates its `internalList`.
 
 * **Alternative 2:** Have a specific method in `AddressBook` that sorts the companies.
    * Pros: More flexible which allows different methods of sorting the future.
-   * Cons: More effort by developers to ensure that the list is sorted by favourites when it should be. 
+   * Cons: More effort by developers to ensure that the list is sorted by favourites when it should be.
 
 [back to top](#internbuddy-developer-guide)
 
@@ -577,7 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
- 
+
 * 2b. The company is already favourited.
     * 2b1. InternBuddy shows an error message.
 
@@ -636,7 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The status of the company is not `APPLIED`.
     * 2a1. InternBuddy sets the status of the company to `APPLIED`.
-  
+
       Use case ends.
 
 **<a id="uc09"></a>Use case: UC09 - Remove an application from a company**
@@ -665,7 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. InternBuddy sets the status of the company to `CLOSED`.
 
       Use case ends.
- 
+
 **<a id="uc10"></a>Use case: UC10 - Edit company application status**
 
 **MSS**
@@ -685,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. InternBuddy shows an error message.
 
       Use case resumes at step 2.
- 
+
 * 2b. User updated application status is invalid.
     * 2b1. InternBuddy shows an error message.
 
@@ -765,7 +765,7 @@ Given below are instructions to test the app manually.
 
 <box type="info" seamless>
 
-**Note:** 
+**Note:**
 * These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
@@ -827,9 +827,9 @@ Prerequisites: <prerequisites>
         <box type="info" seamless>
 
         **Note:** Favourites companies (that are not hidden) will always appear together at the top of the company list.
-   
+
         </box>
-    
+
    1. Try using invalid indexes: `fav 0`, `fav x` (where `x` is more than number of companies shown in the company list).
       Expected: No companies are favourited. An error message with details is displayed in the results box.
 
@@ -881,7 +881,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Test case: `add n/SAME_NAME e/EMAIL` (where `SAME_NAME` is the name of another exiting company) <br>
       Expected: No company is added. Error message indicating the company is already present is shown in the result box.
-   
+
 1. Add a company without some required fields
 
    1. Test case: `add n/NAME p/PHONE_NUMBER`, `add e/EMAIL p/PHONE_NUMBER` <br>
@@ -935,7 +935,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 1. Adding applications to a company with no existing applications
 
    1. Prerequisites: The company corresponding to `INDEX` has no applications.
-   
+
    1. Test case: `apply INDEX n/NAME d/DESCRIPTION` <br>
       Expected: An application with the `NAME` that has application status `APPLIED` is added to the corresponding company.
       The company's status changes to `APPLIED`. A message displaying the created application is shown in the results box.
@@ -984,12 +984,39 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
        Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed.
        The application status of the company is changed to `CLOSED`. A message containing the details of the removed application is displayed in the results box.
 
+### Viewing full application details of a company
+
+1. View the full application details of a company
+
+   1. Requisites: The company corresponding to `INDEX` has at least one application.
+
+   1. Test case: `view INDEX` <br>
+      Expected: Only the selected company is shown in the company list. The `DESCRIPTION` of all the applications for the
+      selected company are fully visible. A message displaying the name of the company to view is shown.
+   
+   1. Try invalid fields: `view`, `view 0`, `view x`, `...` (where `x` is larger than the list size) <br>
+      Expected: No application details of any companies are shown, company list remains unchanged. An error message with details should be displayed in the results box.
+
+### Reopening a company
+
+1. Reopen a company that has a status of `CLOSED`
+
+   1. Prerequisites: The company corresponding to `INDEX` has a status of `CLOSED`.
+
+   1. Test case: `reopen INDEX` <br>
+      Expected: The company corresponding to `INDEX` status changes from `CLOSED` to `INTERESTED`. A message displaying the
+      reopened company is displayed in the results box.
+
+   1. Try invalid fields: `reopen`, `reopen INVALID_INDEX`, `reopen x`, `reopen y`, `...` (where `x` is larger than the list size and `y` is an index corresponding to company that is not `CLOSED`) <br>
+      Expected: No company is reopened. An error message with details should be displayed in the results box.
+
+
 ### Saving data
 
 <box type="info" seamless>
 
-**Note:** 
-* Data is written to the file specified in `preferences.json` in the same directory that the JAR file for InternBuddy is located. 
+**Note:**
+* Data is written to the file specified in `preferences.json` in the same directory that the JAR file for InternBuddy is located.
   It is specified by the `addressBookFilePath` field. <br> By default, `preferences.json` has the following `addressBookFilePath`:
 ```json
 "addressBookFilePath": "data\\addressbook.json"
@@ -1015,7 +1042,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 1. Test handling of missing data file
 
    1. Delete `data/addressbook.json`.
-   
+
    1. Relaunch InternBuddy.
 
    1. Expected: A new `data/addressbook.json` file should be created, and it should be filled with sample data.
@@ -1029,7 +1056,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
       ```json
       "addressBookFilePath": "data\\corrupted.json"
       ```
-   
+
    1. Relaunch InternBuddy
 
    1. Expected: InternBuddy will launch with an empty company list. The app will overwite the corrupted data
@@ -1037,7 +1064,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
       ```json
       {
       "companies" : [ ]
-      } 
+      }
       ```
 
 [back to top](#internbuddy-developer-guide)

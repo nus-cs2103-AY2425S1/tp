@@ -39,7 +39,7 @@ Refer to the sidebar if you are on the website.
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
 
-**InternBuddy** is an offline desktop application for university students pursuing a STEM major to manage 
+**InternBuddy** is an offline desktop application for university students pursuing a STEM degree to manage 
 the contacts of companies that they are potentially applying for or have already applied for internships. 
 
 **InternBuddy** allows users to:
@@ -138,15 +138,15 @@ Before continuing, here are some important information you need to know about th
 
 The blurred image below shows an annotated overview of **InternBuddy's** GUI:
 
-![GUI overview](images/GUI%20Overview.png)
+![GUI overview](images/GUI Overview.png)
 
 The **GUI** is divided into five main sections:
 
 1. **Menu Bar**: Contains options like `Help` and `File` for easy access to essential commands.
-1. **Command Box**: The area where you can type and execute commands by pressing Enter.
-1. **Result Display Box**: Shows the results of your commands and any error messages.
-1. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
-1. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
+2. **Command Box**: The area where you can type and execute commands by pressing Enter.
+3. **Result Display Box**: Shows the results of your commands and any error messages.
+4. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
+5. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
 
 
 --------------------------------------------------------------------------------------------------------------------
