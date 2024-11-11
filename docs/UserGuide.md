@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-PawPatrol is a **desktop app to help veterinary clinics in Singapore to manage their patient data**. It allows the clinic to add and edit two types of
+PawPatrol is a **desktop app to help veterinary clinics in Singapore manage their patient data**. It allows the clinic to add and edit two types of
 entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
 to easily see at a glance which pets belong to which owner. It is optimised
 for use via a **Command Line Interface (CLI)** which improves speed of usage while still having the user-friendliness of a **Graphical User Interface (GUI)**.
@@ -16,7 +16,7 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-3/tp/releases).
 
@@ -70,7 +70,7 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page as shown below.
 
@@ -316,7 +316,7 @@ Examples:
   ![result for 'delete p1'](images/deletep1Result.jpeg)
   <div style="text-align: center;"><em>Result for 'delete p1' after 'find pet Fluffy'</em></div>
 
-### Sorting : `sort`
+### Sorting: `sort`
 
 View owners or pets in PawPatrol sorted by their names in alphabetical order.
 
@@ -336,7 +336,7 @@ Format: `clear`
 This action is irreversible! Please make a backup of the <a href="#for-advanced-users-updating-pawpatrol-data-directly">data file</a> should you wish to retain past data.
 </div>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits PawPatrol. This is equivalent to clicking the "X" icon to close the app.
 
