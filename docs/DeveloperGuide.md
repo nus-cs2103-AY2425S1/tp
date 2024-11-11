@@ -577,8 +577,6 @@ testers are expected to do more *exploratory* testing.
 
 Team Size: 4
 
-### Planned Enhancements
-
 1. **Enhance multi-screen support**: The GUI currently opens off-screen when switching from a secondary screen to the primary screen. We will fix this by ensuring that the GUI opens on the primary screen without requiring the user to delete the `preferences.json` file.
 2. **Improve Help Window behavior**: The Help Window remains minimized when the `help` command is run again. We will fix this by automatically restoring the minimized Help Window when the `help` command is run, or when the `Help` menu or `F1` keyboard shortcut is used.
 3. **Add horizontal scroll bar**: The fields UI is cut off for any contacts with lengthy fields. We will fix this issue by adding a horizontal scroll bar to cells, so everything can be seen even for contacts with lengthy fields.
