@@ -17,6 +17,9 @@
 
 _This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)_.
 
+Generative AI tools such as ChatGPT and Copilot were used for the purposes of creating and ideating Junit 
+test cases and method names, writing detailed Javadocs and some code refactoring.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -55,7 +58,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `contact delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -95,11 +98,11 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("contact delete 1")` API call as an example.
 
@@ -118,14 +121,14 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
 1. The `ContactCommandParser` will create the specific contact command parser corresponding to the execution. In this case, a `DeleteContactCommandParser` will be created to parse the command.
 1. This results in a `Command` object, specifically a `DeleteContactCommand` in this case, which is executed by the`LogicManager`.<br>
-   (Note that DeleteContactCommand` is a subclass of `ContactCommand` which is a subclass of `Command`)
+   (Note that `DeleteContactCommand` is a subclass of `ContactCommand` which is a subclass of `Command`)
 1. The command can communicate with the `Model` when it is executed, in this case, to delete a person.<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml"/>
 
 How the parsing works:
 
@@ -144,9 +147,9 @@ while `ArgumentTokenizer` is only used in parsers for add and edit commands. Not
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml"/>
 
 
 The `Model` component,
@@ -168,7 +171,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -214,7 +217,7 @@ Classes used by multiple components are in the `tutorease.address.commons` packa
 * Reducing scheduling conflicts
 * Providing a clear overview of classes and finances
 
-It enables seamless tutor coordination with primary to junior college level students and parents, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
+It enables seamless tutor coordination with primary to junior college level students and guardians, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
 
 ### User stories
 
@@ -274,11 +277,9 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Generate monthly or weekly reports of my hours worked/earnings           | Track my productivity and workload                                                           | 3        |
 | Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | Adequately prepare for each lesson <br/>and ensure my students <br/>have necessary materials | 3        |
 | Tutor | Tag various students under the same lesson slot for group lessons        | Cater to different lesson types <br/>and optimize time                                       | 3        |
-| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations <br/>for tuition                                  | 3        |
+| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations for tuition                                  | 3        |
 
 ### Use cases
-
-(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use Case: UC01 - Add contact**
 
@@ -328,11 +329,27 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
 
-**Use Case: UC04 - Find contacts with a specific name keyword**
+**Use Case: UC04 - Edit contacts**
 
 **MSS**:
 
-1. Tutor keys in a keyword in the required field to find contacts whose names contain this keyword.
+1. Tutor keys in required fields to edit a contact.
+1. TutorEase edits the contact.
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+**Use Case: UC05 - Find contacts with a specific name keyword**
+
+**MSS**:
+
+1. Tutor keys in a keyword in the required field to find contacts whose names contain any of the keywords.
 1. TutorEase lists the contacts with the given keyword.  
    Use case ends.
 
@@ -344,20 +361,27 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
 
-* **1b**. No contacts found matching the entered keyword.
-    * **1b1**. TutorEase displays a message: "No contacts found with the given keyword(s)."  
-    * **1b2**. Tutor enters a new keyword or cancels the search.  
-      Use case resumes from Step 2 or ends if cancelled.  
+* **1b**. No contacts were found with the entered keyword.
+    * **1b1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
+    * **1b2**. Tutor enters a new valid keyword.  
+      Use case resumes from Step 2.  
 
-**Use Case: UC05 - Add lesson for student**  
-Precondition: Student exists in the system.
+* **1c**. No contacts were found with the entered keyword.
+    * **1c1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
+    * **1c2**. Tutor cancels the search.  
+      Use case ends.
+
+**Use Case: UC06 - Add lesson for student**  
+
+Precondition: Student exists in the system.  
+
 **MSS:**
 
-1. Tutor keys in required fields to add student contact.
+1. Tutor keys in required fields to add a lesson for a student contact.
 1. TutorEase adds the lesson to the student.  
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
@@ -377,48 +401,12 @@ Precondition: Student exists in the system.
       Steps 1c1 to 1c2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC06 - Delete lesson for student**  
-**MSS:**
+**Use Case: UC07 - Delete lesson for student**  
+
+**MSS:**  
 
 1. Tutor keys in required fields to delete student contact.
 1. TutorEase deletes the lesson for the student.  
-   Use case ends.
-
-**Extensions:**
-
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
-* **1b.** TutorEase detects that the student does not exist.
-    * **1b1.** TutorEase prompts Tutor to key in data for a student that exists.
-    * **1b2.** Tutor enters new data.  
-      Steps 1b1 to 1b2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
-**Use Case: UC07 - List all lessons**  
-**MSS:**
-
-1. Tutor keys in required fields to list all lessons.
-1. TutorEase lists all lessons.    
-   Use case ends.
-
-**Extensions:**
-
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
-**Use Case: UC08 - Find lessons with a specific name keyword**
-
-**MSS**:
-
-1. Tutor keys in a keyword in the required field to find lessons with student names that contain this keyword.
-1. TutorEase lists the lessons with the given keyword.  
    Use case ends.
 
 **Extensions**:
@@ -426,13 +414,68 @@ Precondition: Student exists in the system.
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-* **1b**. No lessons found matching the entered keyword.
-    * **1b1**. TutorEase displays a message: "No lessons found with the given keyword(s)."
+* **1b**. TutorEase detects that the student does not exist.
+    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+    * **1b2**. Tutor enters new data.  
+      Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+**Use Case: UC08 - List all lessons**
+
+**MSS:**  
+
+1. Tutor keys in required fields to list all lessons.
+1. TutorEase lists all lessons.    
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+**Use Case: UC09 - Find lessons by student names**  
+
+**MSS:**
+
+1. Tutor keys in a keyword in the required field, to find lessons with students whose names contain any of the keywords.
+1. TutorEase lists lessons that match the requirement.    
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.  
+
+* **1b**. No lessons were found with the entered keyword.
+    * **1b1**.TutorEase displays an error message, showing no lessons have been found with the given keyword.
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.
+
+**Use Case: UC10 - Clear all entries**  
+
+**MSS:**
+
+1. Tutor keys in clear command.
+1. TutorEase clears all entries about contacts and lessons.    
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
 
 <div style="page-break-after: always;"></div>
 

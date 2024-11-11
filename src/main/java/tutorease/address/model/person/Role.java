@@ -2,6 +2,12 @@ package tutorease.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; its value is either "Guardian" or "Student".
@@ -11,7 +17,9 @@ public class Role {
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
             + "blank.";
+    private static Logger logger = LogsCenter.getLogger(Role.class);
     public final String value;
+
 
     /**
      * Constructs a {@code Role}.
@@ -30,6 +38,8 @@ public class Role {
      * @param role A valid name, either GUARDIAN or STUDENT.
      */
     public static String createRole(String role) {
+        logger.log(Level.INFO, "Creating Role object with value: " + role);
+
         requireNonNull(role);
         final String value;
         if (GUARDIAN.equalsIgnoreCase(role)) {
@@ -39,6 +49,7 @@ public class Role {
         } else {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
+        logger.log(Level.INFO, "Created role object with value: " + role);
         return value;
     }
 
