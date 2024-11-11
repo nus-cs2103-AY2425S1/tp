@@ -628,3 +628,9 @@ testers are expected to do more *exploratory* testing.
    3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
    4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Make list command with miscellaneous parameters error message more helpful. Currently, typing list with with miscellaneous parameters, ex. `list 123`, will result in a message that states "Please ensure your command is valid!". To improve specificity this will be changed to ask user to remove miscellaneous parameters.
