@@ -1009,6 +1009,9 @@ This test section's prerequisite is that you have gone through the create group 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
+Team size: 5
+
 1. **Allow contacts to have multiple phone numbers**: Currently, contacts are only allowed to have one phone number.
    Realistically, contacts may have multiple phone numbers (e.g. home number, office number), so we plan to allow for contacts to have multiple numbers attached to them.
 2. **Improve input validation for contact names**: Certain symbols are currently not allowed for contact names (e.g. '-', '@', 's/o'). All of these symbols
@@ -1027,6 +1030,13 @@ This test section's prerequisite is that you have gone through the create group 
    non-unique. However, since names often have natural duplicates in real-life scenarios, we plan to shift to using 
    email and mobile phone numbers as unique identifiers. This change will include verification of email and phone 
    numbers before binding them to a user and will allow duplicate names to better reflect real-world usage.
+7. **Improve notation for donations**: Currently, scientific notation will be used automatically for very large values. 
+   It may improve user experience to have the values be displayed in a more readable format instead.
+8. **Enable sorting in both directions**: Currently, sorting is restricted to a predefined order (e.g. ascending or descending). 
+   We plan to improve the sort functionality by allowing users to toggle between ascending and descending order.
+9. **Text wrapping for long names**: At present, when a contact name is too lengthy, it gets truncated with '...', making it 
+   difficult for users to view the full name. Implementing text wrapping in the name field will accommodate 
+   longer names and allow users to see the entire contact name.
 
 
 
