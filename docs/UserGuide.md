@@ -6,8 +6,7 @@
 
 # EduManage User Guide
 
-Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher.<br>
-Tailored for tuition teachers specialising in one-on-one classes for secondary school students, **EduManage** prioritises a seamless, typing-friendly experience over complex menu navigation.
+Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher. Tailored for tuition teachers specialising in one-on-one classes for secondary school students, **EduManage** prioritises a seamless, typing-friendly experience over complex menu navigation.
 
 This detailed guide will walk you through how to make the most of **EduManage** and unlock its full potential. We’re thrilled to help you streamline and organize your contact management process.
 ***
@@ -61,7 +60,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 3. Copy the file to the folder you want to use as the _home folder_ for EduManage.
 
 4. Open a [command terminal](#6-glossary-table), `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
-   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
    <br><br>
@@ -340,7 +339,7 @@ Views a specific student on the right side window.
 </box>
 
 **Examples:**
-* `view n/Alex Yeoh`<br><br>
+* `view n/Alex Yeoh`<br>
   ![view student](images/view_student.png)
 
 [(Back to Top)](#edumanage-user-guide)
@@ -470,7 +469,7 @@ Exits EduManage.
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
 
-**Q**: How do I recover data if I accidentally clear all students?<br>
+**Q**: How do I recover data if I accidentally `clear` all students?<br>
 **A**: Unfortunately, the clear command is irreversible. Ensure you regularly back up the data file stored at `[JAR file location]/data/addressbook.json` to prevent accidental data loss.
 
 **Q**: How do I back up my data?<br>
