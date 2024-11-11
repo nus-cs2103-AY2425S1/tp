@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.person.Name;
 
@@ -36,7 +37,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidName_throwsParseException() {
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "John @ Doe", expectedMessage);
     }
 
@@ -44,11 +45,11 @@ public class DeleteCommandParserTest {
     public void parse_invalidIndex_throwsParseException() {
         // Test with a negative index
         assertParseFailure(parser, "-1",
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // Test with zero index
         assertParseFailure(parser, "0",
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
     }
 

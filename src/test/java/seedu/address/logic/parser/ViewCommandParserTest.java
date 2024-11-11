@@ -3,11 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.model.person.Name;
 
@@ -41,7 +41,7 @@ public class ViewCommandParserTest {
     public void parse_invalidIndex_throwsParseException() {
         // index
         String userInput = "-1";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
