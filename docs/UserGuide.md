@@ -10,7 +10,7 @@
 
 <br>
 
-EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
+EduContacts is a **desktop app for educators in tertiary institutions in Singapore to manage contacts, optimized for use via a Command Line Interface<sup id="fn1">[1]</sup>** (CLI) while still having the benefits of a Graphical User Interface<sup id="fn2">[2]</sup> (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
 
 <br>
 <!-- * Table of Contents -->
@@ -34,6 +34,20 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 6. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<small>
+
+<p id="fn1"> 
+
+**1. Command Line Interface:** a software mechanism you use to interact with your operating system using your keyboard.</p>
+
+<p id="fn2"> 
+
+**2. Graphical User Interface:** a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.</p>
+
+</small>
+
+
 <div style="page-break-after: always;"></div>
 
 ## Guidance Icons Legend
@@ -110,6 +124,13 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
    ```
    Deletes all contacts.
 
+  <box type="warning" seamless>
+
+  **Warning:**
+  The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
+
+  </box>
+
    ```bash
    exit
    ```
@@ -180,9 +201,12 @@ help
 ```
 
 The help window will display the help message as shown in the screenshot below:
+
 <img src="images/helpMessage.png" alt="help message" width="500" height="auto">
 
 Alternatively, you can click the button on the top right hand corner as indicated here:
+
+
 ![alternative_help](images/alternativeHelp.png)
 
 <br>
@@ -195,6 +219,12 @@ Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
+
+<box type="info" seamless>
+
+**Note:**  The phone number must be at least 8 digits long, and is a valid Singapore phone number.
+
+</box>
 
 Examples:
 * `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/12345678 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
@@ -237,34 +267,41 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits a specified person in EduContacts. This command has 2 formats.
+Edits a specified person details or module in EduContacts.
+Usages:
 
-Format 1:
+**1. Edit person details:**
+
+   Format:
+
 ```bash
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
+  * Updates the details of the person identified by the studentId assigned to the corresponding student. 
+  * At least one of the optional fields must be provided: name, phone, email, address, course, role. Note that studentId cannot be edited as it is the person's identifier.
+  * Existing values will be overwritten by the input values.
 
-* Edits a person's details according to the fields specified.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* Editing of `MODULE` using this format is not supported.
+**2. Edit person's module:**
 
-Example:
+  Format:
+```bash
+edit ID m/ OLD_MODULE NEW_MODULE
+```
+  * Updates a module of the person identified by the studentId.
+  * Existing module (`OLD_MODULE`) will be overwritten by the input module (`NEW_MODULE`).
+  * Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
+
+Examples:
+
+*  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
 *  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
 
-Format 2:
-```bash
-edit ID m/OLD_MODULE m/NEW_MODULE
-```
 
-* Edits a person's module according to the fields specified.
-* Existing values will be updated to the input values.
-* Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
+<box type="tip" seamless>
 
-Example:
-*  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
+**Tip:**  Use the `find` command to view the full detail of the student first before proceeding with `edit`. This allows you to view the changes and verify the edit immediately.</box>
 
 <br>
 
@@ -276,43 +313,57 @@ Adds a grade to a person's module.
 grade ID m/MODULE g/GRADE
 ```
 
-* Adds a grade to a person according to the specified student ID and Module.
+* Adds a grade to a person according to the specified studentId and Module.
 * Module specified must exist prior to execution grade command.
 * Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`.
 * Existing grade will be updated to the input grade.
 
 Examples:
-* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with student ID of `23876767`.
-* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with student ID of `14141414`.
+* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with studentId of `23876767`.
+* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with studentId of `14141414`.
 
 <br>
 
 ### Listing persons by certain attributes : `filter`
 
-Filters person contacts based on their names, courses and modules.
+Filters person contacts by name, course, or module.
+Usages:
+
+**1. Filter by name:**
 
 Format:
 ```bash
-filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
+filter n/KEYWORD [MORE_KEYWORDS]
 ```
 
-* **For filtering by names:**
-  * Use prefix `n/`.
+  * `n/` prefix is used.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**2. Filter by Module:**
+
+Format:
+```bash
+filter m/KEYWORD
+```
 
 <!-- -->
 
-* **For filtering by Module:**
-  * Use prefix `m/`.
-  * Only full module codes will be matched, e.g. `m/CS2103T` will match the module "CS2103T", and not `m/CS21`.
+  * `m/` prefix is used.
+  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
+
+**3. Filter by course:**
+
+Format:
+```bash
+filter c/KEYWORD
+```
 
 <!-- -->
 
-* **For filtering by Course:**
-  * Use prefix `c/`
+  * `c/` prefix is used. 
   * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
@@ -322,7 +373,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 </box>
 
 Examples:
-* `filter n/John` will return a list of all persons with `John` in their name e.g. `john` and `John Doe`.
+* `filter n/John` will return a list of all persons with `John` in their name e.g. `John Smith` and `John Doe`.
 * `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
 * `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
 * `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li` (the result of this command is shown in the screenshot below).
@@ -347,11 +398,12 @@ Format 1:
 delete ID
 ```
 
-* Deletes person with the specified student ID.
+* Deletes person with the specified studentId.
 
 Examples:
-* `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
-* `delete 12345678` will delete a person with student ID of `12345678` from EduContacts (the response message of this command is shown in the screenshot below).
+
+* `delete 15151515` will delete a person with studentId of `15151515` from EduContacts.
+* `delete 71271222` will delete a person with studentId of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
@@ -360,10 +412,10 @@ Format 2:
 delete ID m/MODULE
 ```
 
-* Deletes a module from the person with the specified student ID.
+* Deletes a module from the person with the specified studentId.
 
 Examples: 
-* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
+* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with studentId of `13131313` (the result of this command is shown in the screenshot below).
 
   ![result for 'delete_13131313'](images/deleteModuleResult.png)
 <div style="page-break-after: always;"></div>
@@ -377,7 +429,7 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find a person with student ID of `12345678` and display their details.
+* `find 12345678` will find a person with studentId of `12345678` and display their details.
 
 <br>
 
