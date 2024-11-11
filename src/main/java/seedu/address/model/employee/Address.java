@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values (except for /),"
+            + " and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -39,7 +40,8 @@ public class Address {
         // the command parser or the storage's json converter.
         assert test != null;
 
-        return test.matches(VALIDATION_REGEX);
+        // Address should not contain forward-slash (/)
+        return (!test.contains("/")) && test.matches(VALIDATION_REGEX);
     }
 
     @Override
