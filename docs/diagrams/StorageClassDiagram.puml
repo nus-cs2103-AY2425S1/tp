@@ -1,4 +1,4 @@
-@startuml
+@startuml StorageClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
@@ -19,9 +19,13 @@ Class "<<interface>>\nClinicConnectSystemStorage" as ClinicConnectSystemStorage
 Class JsonClinicConnectSystemStorage
 Class JsonSerializableClinicConnectSystem
 Class JsonAdaptedPatient
-Class JsonAdaptedTag
+Class JsonAdaptedAppt
+Class JsonAdaptedAllergy
 }
 
+}
+
+package Model as ModelPackage {
 }
 
 Class HiddenOutside #FFFFFF
@@ -38,6 +42,11 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonClinicConnectSystemStorage .up.|> ClinicConnectSystemStorage
 JsonClinicConnectSystemStorage ..> JsonSerializableClinicConnectSystem
 JsonSerializableClinicConnectSystem --> "*" JsonAdaptedPatient
-JsonAdaptedPatient --> "*" JsonAdaptedTag
+JsonAdaptedPatient --> "*" JsonAdaptedAppt
+JsonAdaptedPatient --> "*" JsonAdaptedAllergy
+
+JsonAdaptedPatient ..> ModelPackage
+JsonAdaptedAppt ..> ModelPackage
+JsonAdaptedAllergy ..> ModelPackage
 
 @enduml
