@@ -719,7 +719,7 @@ Exiting the program can be done in two ways:
 <p>3. The program will close.</p>
 
 
-Method 2:
+### Method 2:
 1. Type the command [exit](#exit) in the command box and press Enter.
    ![Ui](images/exitcommandinput.png)
 
