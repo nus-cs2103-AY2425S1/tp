@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,11 +19,14 @@ public class StatsCommand extends Command {
             + "Matched Contacts: %d\nUnmatched Contacts: %d";
     @Override
     public CommandResult execute(Model model) {
-        int totalContacts = model.getFilteredPersonList().size();
-        int totalJobs = model.getFilteredJobList().size();
-        int totalCompanies = model.getFilteredCompanyList().size();
 
-        int matchedContacts = (int) model.getFilteredPersonList().stream()
+        ReadOnlyAddressBook fullAddressBook = model.getAddressBook();
+
+        int totalContacts = fullAddressBook.getPersonList().size();
+        int totalJobs = fullAddressBook.getJobList().size();
+        int totalCompanies = fullAddressBook.getCompanyList().size();
+
+        int matchedContacts = (int) fullAddressBook.getPersonList().stream()
                 .filter(Person::isMatchPresent)
                 .count();
         int unmatchedContacts = totalContacts - matchedContacts;
