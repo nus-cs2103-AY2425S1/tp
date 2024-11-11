@@ -61,6 +61,8 @@ If you type fast, you can complete your contact management tasks much faster wit
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -92,6 +94,8 @@ We recommend naming your home folder `key-contacts` and storing it on your Deskt
 
 &nbsp;
 
+<div style="page-break-after: always;"></div>
+
 4. Open a command terminal of your preference (e.g. Command Prompt on Windows, Terminal on Mac) from your home folder.
 
     * **On Windows**, right-click the folder and select `Open in Terminal`.
@@ -99,14 +103,17 @@ We recommend naming your home folder `key-contacts` and storing it on your Deskt
 &nbsp;
     ![WindowsOpenTerminal.png](images/WindowsOpenTerminal.png)
 
-   * **On MacBook**, right-click the folder and select `Services`, then `New Terminal at Folder`. 
+
+<div style="page-break-after: always;"></div>
+
+   * **On MacOS**, right-click the folder and select `Services`, then `New Terminal at Folder`. 
 
 &nbsp;
      ![MacBookOpenTerminal.png](images/MacBookOpenTerminal.png)
 
 &nbsp;
 
-6. Run the command: `java -jar keycontacts.jar`
+5. Run the command: `java -jar keycontacts.jar`.
 
    You will see the app appear, filled with sample data:
 
@@ -114,7 +121,7 @@ We recommend naming your home folder `key-contacts` and storing it on your Deskt
 
     ![UiAnnotated.png](images/UiAnnotated.png)
 
-7. Type a command in the command box and press _Enter_ to execute it. <br>
+6. Type a command in the command box and press _Enter_ to execute it. <br>
    **Example:** Typing **`help`** and pressing _Enter_ will open the help window.
     
    Some example commands you can try:
@@ -131,6 +138,8 @@ We recommend naming your home folder `key-contacts` and storing it on your Deskt
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Overview
 <box type="tip" light>
@@ -184,6 +193,8 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Student Commands
 
 A student has a **name**, **phone number**, **address**, **grade level** and optionally, a **group**. <br> Students with
@@ -232,6 +243,8 @@ Does the app keep telling you that you are trying to insert a duplicate student?
 </box>
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a student : `delete`
 
@@ -289,6 +302,9 @@ Examples:
 <br>
 <br>
 
+
+<div style="page-break-after: always;"></div>
+
 ### Unassigning piano pieces from a student : `unassign`
 
 Unassigns piano pieces from a student in the student directory.
@@ -307,10 +323,20 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Lesson Commands
 
 Each student can have **one regular lesson** in the same timeslot every week. You can also create make-up lessons and cancel
 lessons for each student. 
+
+<box type="info" light theme="primary">
+
+**Note:**
+
+We mentioned [earlier](#student-commands) that students in the same group have synced lessons. So, all commands in this section will apply to the entire group of the targeted student.
+
+</box>
 
 <box type="tip" light>
 
@@ -420,6 +446,8 @@ The `uncancel` command only supports uncancelling of regular lessons. To uncance
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## General Commands
 
 Listed below are the currently supported general commands.
@@ -450,6 +478,8 @@ Format: `help`
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all students : `list`
 
 Shows a list of all students in the student directory.
@@ -460,6 +490,8 @@ Format: `list`
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing the schedule : `view`
 
@@ -491,22 +523,24 @@ The schedule will exclude lessons that are cancelled for that week.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Finding students : `find`
 
 Finds students whose personal details match inputs.
 
 Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD] [g/GROUP_KEYWORD]`
 
-* The search is **case-insensitive**. e.g `hans` will match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`.
 * Only the name, phone number, address, grade level and group is searched.
-* Partial inclusion of a keyword will be considered a match. e.g `ng` will match `huang`
+* Partial inclusion of a keyword will be considered a match. e.g `ng` will match `huang`.
 * Students matching all fields will be returned (i.e. `AND` search).
-  e.g. `n/Hans p/98765432` will return `Hans Gruber; 98765432`, but not `Hans Goretzka; 12345678`
+  e.g. `n/Hans p/98765432` will return `Hans Gruber; 98765432`, but not `Hans Goretzka; 12345678`.
 * You must provide **at least one** of the optional fields.
 
 Examples:
-* `find n/John` returns all students with `John` in their name, such as `john` and `Johnny Doe`
-* `find n/will p/8765` returns all students with `will` in their name **and** phone number containing `8765`, such as <br>`william; 87654321` but **not** `will; 12341234`
+* `find n/John` returns all students with `John` in their name, such as `john` and `Johnny Doe`.
+* `find n/will p/8765` returns all students with `will` in their name **and** phone number containing `8765`, such as <br>`william; 87654321` but **not** `will; 12341234`.
 
 <box type="tip" light>
 
@@ -548,6 +582,8 @@ e.g "A" comes before "B", but "a" comes after "B".
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the student directory.
@@ -576,9 +612,9 @@ Undoes the last command that modified the student directory.
 
 Format: `undo`
 
-<box type="tip" light>
+<box type="info" light theme="primary">
 
-**Tip:**
+**Note:**
 
 1. Undo only affects commands that **modify student entries**. <br>
    For example, if you ran the command `delete 1` to delete student `Alex Yeo`, followed by the command `find Bernice`, running `undo` will restore student `Alex Yeo`.
@@ -589,15 +625,17 @@ Format: `undo`
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Redoing the last undone command : `redo`
 
 Restores any changes that were previously undone using the `undo` command.
 
 Format: `redo`
 
-<box type="tip" light>
+<box type="info" light theme="primary">
 
-**Tip:**
+**Note:**
 
 1. If you make another change to **student entries** after an `undo` command, you can no longer revert that `undo` command.<br>
 For example, if you ran `delete 2`, then `undo`, then `delete 1`, you can no longer `redo` the `delete 2` command.
@@ -617,6 +655,8 @@ Format: `exit`
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -665,6 +705,8 @@ You can do so by copying the data file over to the other computer as follows:
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
