@@ -852,6 +852,7 @@ Example: deleteapt 1
 > ![todayfailed](images/todayfailed.png)
 >
 > ---
+
 ---
 
 ### 3. Listing Management
