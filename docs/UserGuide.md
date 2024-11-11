@@ -394,8 +394,6 @@ If your changes to the data file makes its format invalid, ConcertPhonebook will
 Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
 ---
 
 ## FAQ
@@ -413,6 +411,8 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
+3. **Concert name constraints allow for s/o and d/o**, and the return message for invalid concert names states that s/o
+   and d/o are allowed. This behavior was unintended, and will be fixed in later versions.
 
 ---
 
