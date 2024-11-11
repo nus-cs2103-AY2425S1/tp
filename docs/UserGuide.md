@@ -398,7 +398,7 @@ Format: `fav INDEX`
 
 <box type="tip" seamless>
 
-**Tip 1:** Favourited companies have a filled star icon to the right of their name while unfavourited ones have a unfilled star instead.
+**Tip 1:** Favourited companies have a filled star icon to the right of their name while unfavourited ones have an unfilled star instead.
 **Tip 2:** Favourited companies will always be visible at the top of the list (provided it is not hidden by other commands such as `find`).
 </box>
 
@@ -658,7 +658,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
 
-**Q**: Can I add multiple identical applications to the same company?
+**Q**: Can I add multiple identical applications to the same company? <br>
 **A**: Yes, of course you can! This is not unlike a real-life scenario, where you could possibly apply for the same role multiple times, to the same company. However many times you apply to the same company, **InternBuddy** is here for you! 
 
 [back to top](#internbuddy-user-guide)
@@ -669,14 +669,14 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
+3. **If running `java -jar internbuddy.jar` gives errors**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
 4. **Indicating multiple `APPLICATION_STATUS` in `apply` command**, if you specify more than one `APPLICATION_STATUS` (eg: `apply n/SWE Intern d/Requires Java as/APPLIED as/OA`) will result in InternBuddy in applying the last `APPLICATION_STATUS` (`OA` in the given example); provided that the last `APPLICATION_STATUS` is valid.
 5. **Indicating multiple parameters in `update` command**, if you specify multiple parameters with the same prefix, only the right most parameter will be used by InternBuddy. <br>
    For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
 6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to **1000 companies**, each with **1000 applications**. Entering values beyond this range (e.g., greater than 1000) may lead to **undefined behavior**, so please ensure indexes stay within the specified bounds.
 7. **The error message** for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the `domain` between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the notes in [features](#features).
 8. `InternBuddy` **currently accepts invalid phone numbers**, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
-9. **Typo in error message for `withdraw`**, if you try to withdraw an application from a company with no applications, the message `NAME has no applications to update!`, when it should be `NAME has no applications to withdraw!`.
+9. **Typo in error message for `withdraw`**, if you try to withdraw an application from a company with no applications, the message displayed is: `NAME has no applications to update!`, when it should be `NAME has no applications to withdraw!`.
 10. `InternBuddy` **currently has no limit on the tag length.** However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
 
 [back to top](#internbuddy-user-guide)
