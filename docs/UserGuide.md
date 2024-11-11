@@ -313,7 +313,7 @@ Format: `list`
 >
 > Use this command after `find` to return to the full list of students and teachers.
 
-### Finding persons: `find`
+#### Finding persons: `find`
 
 Finds and displays person(s) who satisfies the provided parameters.
 
