@@ -57,6 +57,13 @@ public class TestUtil {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
 
+    /**
+     * checks if the content of two .json files are the same
+     * @param file1 the first .json file to be compared
+     * @param file2 the second .json file to be compared
+     * @return true if the files are the same
+     * @throws IOException
+     */
     public static boolean areJsonFilesEqual(File file1, File file2) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 

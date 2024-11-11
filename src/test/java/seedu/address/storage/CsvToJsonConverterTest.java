@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import seedu.address.storage.exceptions.ConverterException;
 import seedu.address.testutil.TestUtil;
@@ -21,18 +20,19 @@ import seedu.address.testutil.TestUtil;
 public class CsvToJsonConverterTest {
     private String testImportFilePath = "src/test/data/ConverterTestUtil/ImportTest";
     @Test
-    public void CsvToJsonConverter_emptyDirectory_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "The import file is missing. Restart the program.",
-                () -> new CsvToJsonConverter(new File("")));
+    public void csvToJsonConverter_emptyDirectory_throwsIllegalArgumentException() {
+        String expectedStr = "The import file is missing. Restart the program.";
+        assertThrows(IllegalArgumentException.class, expectedStr, () -> new CsvToJsonConverter(new File(""))
+        );
     }
 
     @Test
-    public void CsvToJsonConverter_correctFieldNames() {
+    public void csvToJsonConverter_correctFieldNames() {
         CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportFilePath));
         assertEquals(new File(testImportFilePath), testConverter.getDirectory());
 
-        String[] expectedFields = {"contactType", "name", "phone", "email", "telegramHandle", "moduleName", "remark",
-                "set"};
+        String[] expectedFields = {"contactType", "name", "phone", "email", "telegramHandle", "moduleName",
+            "remark", "set"};
         assertEquals(Arrays.toString(expectedFields), Arrays.toString(testConverter.getPersonFieldNames()));
     }
 
