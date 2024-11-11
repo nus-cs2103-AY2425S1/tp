@@ -15,7 +15,12 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+
+1. Ensure you have Java `17` or above installed in your Computer. <br>(If you are  a mac user, you will need to download 
+javaFX first via the following commands) <br>
+   `curl -s "https://get.sdkman.io" | bashsource "$HOME/.sdkman/bin/sdkman-init.sh"` <br>
+   `sdk install java 17.0.11.fx-zulu` <br>
+   `sdk default java 17.0.11.fx-zulu`
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
