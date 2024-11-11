@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/angpengxuan.png" width="200px">
 
-[[github](http://github.com/angpengxuan)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/angpengxuan)] [[portfolio](team/angpengxuan.md)]
 
 * Role: Developer
 * Responsibilities: Data
