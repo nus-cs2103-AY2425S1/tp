@@ -692,8 +692,8 @@ otherwise)
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
 * <a id="glossary-system"/>**System**: TrueRental desktop application
 * <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number
-  and email, not meant to be shared with others.
-* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing
+  , email and list of **rental information**, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Rental information**: A client's rental information containing
   address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not
   meant to be shared with others.
 * <a id="glossary-mss"/>**MSS**: Main Success Scenario.
