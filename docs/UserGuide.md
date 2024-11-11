@@ -368,9 +368,9 @@ This command will help you add a new guest to the bottom of the existing overall
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-> :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+> :warning: You can only enter 'P'/'p' for pending, 'A'/'a' for accepted or 'D'/'d' for declined for the optional `RSVP` field.
 
-> :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+> :warning: You can only enter 'H'/'h' for related to husband, 'W'/'w' for related to wife or 'U'/'u' for unknown for the optional `RELATION` field.
 
 > :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
