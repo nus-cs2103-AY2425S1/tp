@@ -756,3 +756,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+1. Being able to edit / edit order history of a customer
+2. Export customer order history data into a csv file 

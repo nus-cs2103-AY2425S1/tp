@@ -337,7 +337,7 @@ Shows a list of all orders in NomNomNotifier.
 
 Adds an order history to a customer.
 
-**Format:** `put ORDER [n/NAME]`
+**Format:** `put ORDER n/NAME`
 
 - `ORDER` must be in lowercase.
 - If `ORDER` contains uppercase characters, they will be converted to lowercase automatically.
@@ -485,12 +485,13 @@ Examples:
 Archive a customer so that it doesn't show when we run `list`
 
 **Format:**
-`archive [index]`
+`archive INDEX`
 
 **Warning**
 You must run `list` before running `archive`
 
 **How to run command**:
+- `archive INDEX`, `INDEX` must be a positive integer 
 
 Assuming there's at least one person that is unarchived.
 
@@ -517,12 +518,13 @@ Assuming there's at least one person that is archived.
 Unarchive a customer so that it shows when we run `list`
 
 **Format:**
-`unarchive [index]`
+`unarchive INDEX`
 
 **Warning**
 You must run `listarchive` before running `unarchive`
 
 **How to run command**:
+- `unarchive INDEX`, `INDEX` must be positive integer 
 
 Assuming there's at least one person that is archived.
 
