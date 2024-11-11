@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> allPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +34,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.allPersons = this.addressBook.getPersonList(); // Unfiltered list of all persons
+        this.filteredPersons = new FilteredList<>(allPersons); // Filtered view based on allPersons
         /*
         for (Person person : filteredPersons) {
             if (person.getRole().equals("PATIENT")) {
@@ -177,6 +179,10 @@ public class ModelManager implements Model {
             }
         }
         return doctor;
+    }
+
+    public ObservableList<Person> getAllPersons() {
+        return allPersons;
     }
 
     @Override

@@ -24,11 +24,11 @@ public class MarkAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks an appointment of a doctor "
-            + "with a patient as complete "
+            + "with a patient as complete. \n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_ID + "[DOCTOR_ID] "
-            + PREFIX_DATE + "[APPOINTMENT_TIME]\n"
+            + PREFIX_ID + "PATIENT_ID "
+            + PREFIX_ID + "DOCTOR_ID "
+            + PREFIX_DATE + "DATE_TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234 "
             + PREFIX_ID + "5678 "
@@ -54,7 +54,7 @@ public class MarkAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person patientToMarkAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToMarkAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 

@@ -20,11 +20,11 @@ public class ViewHistoryCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the medical history of a person (patient/doctor) "
-            + "based on ID provided "
+            + ": Views the medical history of a patient/doctor "
+            + "based on ID provided. \n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_DATE + "[LOCAL_DATE] \n"
+            + PREFIX_ID + "PATIENT_ID "
+            + "[" + PREFIX_DATE + "DATE_TIME] \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01 " + PREFIX_DATE + "2023-09-25 10:15";
     public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for the person";
 
@@ -44,7 +44,7 @@ public class ViewHistoryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person personToView = model.getFilteredPersonById(allPersons, personId);
         if (personToView == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_ID);

@@ -40,17 +40,17 @@ This section is for users who are experienced in installing and using Java execu
 
 4. Open a command terminal, `cd` into the folder you put the `.jar` file in, and use the `java -jar addressbook.jar` command to run the application.<br><br>
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
-   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br>
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 75%; display: block; margin: auto;" />
+   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 75%; display: block; margin: auto;" /><br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `createP n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ` : Adds a contact named `John Doe` to the Address Book with the specified information.
 
-   * `delete z/3` : Deletes the 3rd contact shown in the current list.
+   * `delete z/2` : Deletes the person with the specified ID of 2. (Won't work if you don't have a patient with an ID of 2!)
 
    * `clear` : Deletes all contacts.
 
@@ -154,19 +154,19 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
            ```
            ---
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
-   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br><br>
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 75%; display: block; margin: auto;" />
+   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 75%; display: block; margin: auto;" /><br><br>
 5. If you've reached this step, **🎉 CONGRATULATIONS!!! 🎉 MedDict has been installed successfully on your device!**<br>
-   What's next is to try out some of MedDict's commands. Type the command in the command box by clicking on the empty bar at the top, typing a command and pressing Enter on your keyboard to execute it. (e.g. typing `help` and pressing Enter will open the help window.) <br>
+   What's next is to try out some of MedDict's commands. Type the command in the command box by clicking on the empty bar at the top, typing a command and pressing Enter on your keyboard to execute it. (e.g. typing `help` and pressing Enter will open the help window.) <br><br>
    Some example commands you can try:
 
-    * `list` : Lists all persons.
+    * `list` : Lists all contacts.
 
-    * `createP n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Patient named John Doe to the Address Book.
+    * `createP n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ` : Adds a contact named `John Doe` to the Address Book with the specified information.
 
-    * `delete z/2` : Deletes the Patient with ID = 2.
+    * `delete z/2` : Deletes the person with the specified ID of 2. (Won't work if you don't have a person with an ID of 2!)
 
-    * `clear` : Deletes all persons.
+    * `clear` : Deletes all contacts.
 
     * `exit` : Exits the app.
 <br><br>
@@ -181,7 +181,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `delete z/PERSON_ID`, `PERSON_ID` is a parameter which can be used as `delete z/01`.
+  e.g. in `delete z/ID`, `ID` is a parameter which can be used as `delete z/01`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
@@ -192,12 +192,20 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* The output messages you may see in your own application when running the commands may differ slightly from the example output. This could be due to the different databases present in your own local application and of that present in the example outputs, or due to the example outputs being demonstrated on a different device than yours. Regardless, where relevant, you can refer to the error messages provided in the event that a command did not work as intended.
+
+* Some variations in terminology in the example outputs such as `id` and `ID` are interchangeable unless stated otherwise. In this case, `id` or `ID` or `Id` all refer to one's identification number (within the database).
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* If you are using a PDF version of this document, highlighting and copying commands or lines may lead to unintended special characters, symbols or whitespaces being added to the clipboard (the text that was copied). Hence, to avoid pasting unintended commands into the application, do double-check the commands when you are copy-pasting.
 </div>
 
 <div class="alert alert-block alert-success">
 
-For your convenience and easy reference, you can click on the header for the command to go to the command summary table!<br>
+For your convenience and easy reference, you can click on the header of the command to go to the command summary table!<br><br>
+
+Likewise, you can click on a command from the command summary table to read about its specific implementation.<br><br>
 
 For example, try clicking on "Viewing Help" in the "Viewing Help: `help`" section below!
 </div>
@@ -211,7 +219,7 @@ Format: `help`
 Examples:
 * `help` <br>
   **Output**: <br>
-![help message](images/helpMessage.png)
+![help message](images/helpMessageUpdated.png)
 
 ### [Creating and Adding a Doctor](#command-summary): `createD`
 
@@ -260,23 +268,31 @@ Examples:
   **Output**: <br> 
     Successfully created a new patient with ID: #0 : <br>
     John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street;
+
 * `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br>
 This patient already exists.
+
+<div markdown="block" class="alert alert-info">
+
+<strong>Tip!</strong> You may notice that patient contacts created have an even-numbered ID while doctor contacts have an odd-numbered ID. Where relevant, you can use this information to your advantage! For example, instead of checking the UI to see whether the person contact is a patient or a doctor, you can determine their role based on their ID!
+
+</div>
 
 ### [Deleting a Person](#command-summary): `delete`
 
 Deletes the person with the specified `ID` from the MedDict database.
 
-Format: `delete z/PERSON_ID`
+Format: `delete z/ID`
 
-* **PERSON_ID**: Must be valid, present in the MedDict database.
+* **ID**: Must be valid, present in the MedDict database.
 * A _notification message_ will be displayed if MedDict could not delete the person with the given ID.
 
 Examples:
 * `delete z/2` <br>
   **Output**: <br>
   Successfully deleted the person.
+
 * `delete z/2` <br>
   **Output**: <br>
   Unable to delete the person, check the ID entered!
@@ -294,9 +310,8 @@ Examples:
 *  `addR z/0 r/cancer` <br>
     **Output**: <br>
    Successfully added remarks: cancer to patient of ID: 0.
-*  `addR z/0 r/cancer` <br>
-   **Output**: <br>
-   Unable to add remarks! Check the ID entered!
+
+<div style="page-break-after: always;"></div>
 
 ### [Listing All Persons](#command-summary): `list`
 
@@ -308,6 +323,8 @@ Examples:
 *   `list` <br>
     **Output**: <br>
     ![list](images/list.png)
+
+<div style="page-break-after: always;"></div>
 
 ### [Editing a Person](#command-summary): `edit`
 
@@ -324,10 +341,12 @@ Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 Examples:
 *  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
-   Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street;
+   Edited Person: Dr Jane Smith; Phone: 91234567; Email: johndoe@example.com; Address: 456 Elm Street
+
 *  `edit z/2` <br>
    **Output**: <br>
    At least one field to edit must be provided.
+
 * `edit z/1 p/91234567 e/johndoe@example.com` <br>
   **Output**: <br>
   This person already exists in the address book.
@@ -350,9 +369,11 @@ Examples:
 * `get john` <br>
   **Output**: <br>
   The ID of the person that you are finding is: 0
+
 * `get johnny` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search ID for! Key in 'list' to view all patients
+
 * `get johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
@@ -376,14 +397,18 @@ Examples:
 * `find john` <br>
   **Output**: <br>
   One person listed! Key in [list] to view all patients
+
 * `find ` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search ID for! <br>
   Key in [list] to view all patients
+
 * `find johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
+
+<div style="page-break-after: always;"></div>
 
 ### [Adding an Appointment](#command-summary): `addA`
 
@@ -403,19 +428,21 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 * When adding appointment, the appointment detail will be added to both the patient's and doctor's appointment lists.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
 * A _notification message_ will be displayed if MedDict could not add the appointment successfully.
+
 Examples:
 *  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
+
 *  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
+
 *  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
-   The patient already has another appointment!
-*  `addA z/0 z/1  x/2024-12-31 15:23` <br>
-   **Output**: <br>
-   The doctor already has another appointment!
+   The patient or doctor already has another appointment!
+
+<div style="page-break-after: always;"></div>
 
 ### [View History of a Person](#command-summary): `view`
 
@@ -430,11 +457,13 @@ Format: `view z/ID [x/DATE_TIME]`
 Examples:
 *  `view z/0 x/2024-12-31 15:23` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session`.
+   \[Incomplete] Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`.
+
 *  `view z/0` <br>
    **Output**: <br>
-   Appointment: `2024-12-31 15:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session`. <br>
-   Appointment: `2024-12-31 16:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Fourth physiotherapy session`.
+   \[Completed] Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
+   \[Incomplete]Appointment: `2024-12-31 16:23` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
+
 *  `view z/1 x/2024-12-31 16:23` <br>
    **Output**: <br>
    No history found for the person.
@@ -451,11 +480,13 @@ Format: `checkA z/ID y/DATE`
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
-   Appointment: `2024-12-31` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session` <br>
-   Appointment: `2024-12-31` for `0` (patient ID) with `1` (doctor ID). Remarks: `Fourth physiotherapy session`
-*  `checkA z/1 y/2024-12-30` <br>
+   Appointments on 2024-12-31:<br>
+   \[Incomplete] Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session` <br>
+   \[Completed] Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`
+
+*  `checkA z/2 y/2024-12-30` <br>
    **Output**: <br>
-   No appointment found for Doctor: `Amy Bee`
+   No appointment found for the person: `Amy Bee`
 
 ### [Mark Appointment of a Doctor](#command-summary): `mark`
 
@@ -476,9 +507,16 @@ Examples:
 *  `mark z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully marked appointment as complete
+
+*  `mark z/0 z/1 x/2024-12-31 15:23` <br>
+   **Output**: <br>
+   The appointment is completed. Check the appointment that you want to mark!
+
 *  `mark z/2 z/3 x/2024-12-31 16:23` <br>
    **Output**: <br>
-   No appointments found on this date!
+   No appointments found on this date.
+
+<div style="page-break-after: always;"></div>
 
 ### [Delete Appointment](#command-summary): `deleteA`
 
@@ -499,13 +537,16 @@ Examples:
 *  `deleteA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully deleted appointment to a patient
+
 *  `deleteA z/1 z/3 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The appointment doesn't exist! Please check again the details you have entered!
 
+<div style="page-break-after: always;"></div>
+
 ### [Clearing All Entries](#command-summary): `clear`
 
-Clears all entries from the database.
+Clears all entries from the database, in other words, delete all contacts from the database.
 
 Format: `clear`
 
@@ -520,17 +561,19 @@ Exits the program.
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the Data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data is saved in the hard disk automatically after any command changes the data. There is no need to save manually.
 
 ### Editing the Data File
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+The data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, MedDict will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -539,14 +582,14 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## FAQ
 
-**Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
+**Q1**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
+**A1**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q2**: How do I transfer my data to another Computer?<br>
+**A2**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. If you are unsure what this means, you can refer to the answer to Q3 below.
 
-**Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
-**A**: No worries, you can easily transfer your data! Refer to the steps below.
+**Q3**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
+**A3**: No worries, you can easily transfer your data! Refer to the steps below.
 
 1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
@@ -568,22 +611,22 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action                                                         | Format, Examples                                                                                                                                        |
-|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help-help)**                                 | `help` <br> Shows help page                                                                                                                             |
-| **[Create Doctor](#creating-and-adding-a-doctor-created)**     | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
-| **[Create Patient](#creating-and-adding-a-patient-createp)**   | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                   |
-| **[Delete Person](#deleting-a-person-delete)**                 | `delete z/PERSON_ID` <br> e.g., `delete z/2`                                                                                                            |
-| **[Add Notes](#add-a-remark-to-a-patient-addr)**               | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                             |
-| **[List](#listing-all-persons-list)**                          | `list` <br> Shows all persons in address book                                                                                                           |
-| **[Edit](#editing-a-person-edit)**                             | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                            |
-| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**     | `get KEYWORD` <br> e.g., `get john`                                                                                                                     |
-| **[Add Appointment](#adding-an-appointment-adda)**             | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                         |
-| **[View History](#view-history-of-a-person-view)**             | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                               |
-| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                        |
-| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**     | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                         |
-| **[Delete Appointment](#delete-appointment-deletea)**          | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                        |
-| **[Clear](#clearing-all-entries-clear)**                       | `clear` <br> Clears all entries                                                                                                                         |
-| **[Exit](#exiting-the-program-exit)**                          | `exit` <br> Exits the program                                                                                                                           |
+| Action                                                          | Format, Examples                                                                                                                          |
+|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help-help)**                                  | `help` <br> Shows help page                                                                                                               |
+| **[Create Doctor](#creating-and-adding-a-doctor-created)**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` |
+| **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`     |
+| **[Delete Person](#deleting-a-person-delete)**                  | `delete z/ID` <br> e.g., `delete z/2`                                                                                                     |
+| **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                               |
+| **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                             |
+| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                        |
+| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                       |
+| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`           |
+| **[View History](#view-history-of-a-person-view)**              | `view z/ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                        |
+| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                 |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/0 z/1`                                                             |
+| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/0 z/1`                                            |
+| **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                           |
+| **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                             |
 
 

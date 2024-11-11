@@ -44,7 +44,6 @@ Person ---> Id
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
 Person *--> "*" Appointment
 
 Person -[hidden]up--> I

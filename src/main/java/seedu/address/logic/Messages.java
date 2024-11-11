@@ -23,7 +23,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person listed! "
             + "Key in [list] to view all patients";
     public static final String MESSAGE_INVALID_ID = "Invalid ID entered! Check the ID that you have entered! "
-            + "Make sure it is a number!";
+            + "Make sure the ID is valid!";
     public static final String MESSAGE_EMPTY_REMARK = "The remark you have entered is empty! "
             + "Please enter a valid input!";
     public static final String MESSAGE_INVALID_NAME = "Invalid name entered! "
@@ -67,7 +67,8 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
+                .append(person.getAddress())
+                .append(";");
         return builder.toString();
     }
 }

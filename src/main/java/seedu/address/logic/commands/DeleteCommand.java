@@ -18,16 +18,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a Person (Patient/Doctor) "
-            + "based on id provided. "
+            + "based on id provided.\n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
+            + PREFIX_ID + "PATIENT_ID \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Successfully "
             + "deleted a person";
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Unable to "
-            + "delete a person, check the ID entered!";
+            + "delete the person, check the ID entered!";
     private final int personId;
 
     public DeleteCommand(int personId) {
@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
 
         Person personToDelete = model.getFilteredPatientById(allPersons, personId);
         if (personToDelete == null) {

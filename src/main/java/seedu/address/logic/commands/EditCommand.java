@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -36,15 +35,14 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the ID of the person. "
+            + "by the ID of the person. \n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: "
-            + "[" + PREFIX_ID + "ID] "
+            + COMMAND_WORD + " "
+            + PREFIX_ID + "ID "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_PHONE + "PHONE_NUMBER] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_REMARK + "REMARKS]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1 "
             + PREFIX_PHONE + "91234567 "
@@ -73,7 +71,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person personToEdit = model.getFilteredPatientById(allPersons, idToEdit);
         if (personToEdit == null) {
             throw new CommandException(MESSAGE_EDIT_FAILURE);

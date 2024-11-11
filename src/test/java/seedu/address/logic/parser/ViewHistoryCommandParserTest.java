@@ -77,7 +77,7 @@ public class ViewHistoryCommandParserTest {
         String userInput = INVALID_ID_DESC + INVALID_APPOINTMENT_TIME_DESC;
 
         assertParseFailure(parser, userInput, "Invalid ID entered! Check the ID that you have entered! "
-                + "Make sure it is a number!");
+                + "Make sure the ID is valid!");
     }
 
 }

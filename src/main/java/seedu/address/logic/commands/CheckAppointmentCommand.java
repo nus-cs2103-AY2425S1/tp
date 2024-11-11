@@ -20,11 +20,11 @@ public class CheckAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "checkA";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks the appointments of the person identified (patient/doctor) "
-            + "based on id provided "
+            + ": Checks the appointments of the patient/doctor identified  "
+            + "based on id provided. \n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_DAY_DATE + "[LOCAL_DATE] \n"
+            + PREFIX_ID + "ID "
+            + PREFIX_DAY_DATE + "DATE \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01 " + PREFIX_DAY_DATE + "2023-09-25";
 
 
@@ -49,7 +49,7 @@ public class CheckAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
 
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 
         if (doctorToCheckAppointment == null) {
