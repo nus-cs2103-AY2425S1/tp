@@ -1300,6 +1300,8 @@ testers are expected to do more *exploratory* testing.
     - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
     - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 This section documents the involved effort to evolve AB3 into SellSavvy.
