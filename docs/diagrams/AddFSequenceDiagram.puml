@@ -95,7 +95,7 @@ deactivate AddFCommandParser
 destroy AddFCommandParser
 destroy ArgumentMultiMap
 
-ClinicConnectSystemParser --> LogicManager
+ClinicConnectSystemParser --> LogicManager : a
 deactivate ClinicConnectSystemParser
 
 destroy AddFCommand
