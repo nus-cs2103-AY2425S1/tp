@@ -705,7 +705,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a person
 1. Editing a person in the person list
     1. Assumption: We assume the index here is valid if it is a positive integer
-    2. Test case `edit 1 g/femal`<br>
+    2. Test case `edit 1 g/female`<br>
        Expected: The gender of the first person in the list is changed to female
     3. Test case `edit 0 g/female`<br>
        Expected: No person is edited, an error message will be displayed. 
