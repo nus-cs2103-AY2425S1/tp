@@ -8,6 +8,8 @@
 
 Medicontact is a desktop app to help **small GP Clinics in Singapore for manage patient contacts**. It is centered around typed commands and meant for healthcare administrative staff. If you can type fast, MediContact can get your contact management tasks done faster than traditional apps.
 
+This app is designed for GP clinics in Singapore, where all patients should have a valid Singapore phone number.
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -17,23 +19,26 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
-1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.<br>
+3. Copy the file to the folder you want to use as the _home folder_ for MediContact. 
 
    <img src="images/quickStart.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. Here are detailed instructions for how to change directory in [MacOS](https://youtu.be/VRFcEMPES7U) and in [Windows](https://www.youtube.com/watch?v=BfXh11ryBJg).
-
-1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.<br>
+4. Open a command terminal (`Terminal` on MacOS, `Command Prompt` on Windows). 
+5. Change directory into the folder you put the jar file in using the command `cd`. Here are detailed instructions for how to change directory in [MacOS](https://youtu.be/VRFcEMPES7U) and in [Windows](https://www.youtube.com/watch?v=BfXh11ryBJg).
+      
+6. Once you're in the same directory as `MediContact.jar`, run the application with `java -jar MediContact.jar`.
+Your terminal should look something like this right before entering the last command. The redacted portion should show your current directory.
 
    <img src="images/quickStart1.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   <img src="images/ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-1. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+    <img src="images/Ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+7. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * `list` : Lists all contacts.
@@ -808,7 +813,23 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## <i class="fa-solid fa-question"></i> FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
+
+**Q**: What should I do if I input an invalid command?<br>
+**A**: Check out [Features](#features) or simply run `help` to see the full list of commands, and try entering a valid command again.
+
+**Q**: Where should I start if I am a novice to CLI?<br>
+**A**: Run `help` to check the format. For more information on each command's usage, check out the [Features](#features) section.
+
+**Q**: Can I have duplicate contacts in my address book? <br>
+**A**: Duplicate names are not permitted. Contacts with the same name, even if capitalized differently, are considered duplicates.
+
+**Q**: Can I mark certain patients as 'important' or add them into favourite list?<br>
+**A**: Yes, you can use the `edit` command with tag prefix `t/` to tag patients as high-priority, or use `star` command to add them to a favourite list.
+
+**Q**: Is there a way to restore deleted or cleared contacts?<br>
+**A**: No, `delete` and `clear` actions are irreversible.
+
 
 [Return to Table of Contents](#medicontact)
 
@@ -824,6 +845,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fas fa-file-alt"></i> Command summary
+
 
 | Action     | Format, Examples                                             |
 | ---------- | ------------------------------------------------------------ |
@@ -842,6 +864,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` |
 | **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
 | **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
+
 
 [Return to Table of Contents](#medicontact)
 
