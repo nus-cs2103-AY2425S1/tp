@@ -94,7 +94,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
 * The `NAME` input is case-sensitive and allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs (non-exhaustive).
   * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), comma (`,`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
   * Invalid inputs may include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or other characters that are not English, such as Arabic, Chinese or Latin scripts like `Æ`.
+* The `PHONE_NUMBER` input should only contain numbers, and it should be at least 3 digits long.
+* The `ADDRESS` input can take any values, and it should not be blank.
 * The `REMARK` input should be a string of words with a limit of 120 characters.
+* The `TAG` input should be alphanumeric.
 
 <div markdown="span" class="alert alert-danger">
 :exclamation: Important: Duplicate entries for a person cannot be added to the address book. A person is considered a duplicate if both the `NAME` and `PHONE_NUMBER` fields match an existing entry. Together, these fields must create a unique identifier for each person in the address book.
@@ -114,6 +117,7 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Lim Yi Bo, Gavin p/98765433 e/lyb@u.nus.edu a/Blk 123, Jurong West Ave 6, #08-111 t/colleague t/classmate` 
 
 ### Adding a transaction: `addTxn`
 
@@ -127,14 +131,13 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
     e.g. `addTxn 1 amt/12.30 desc/John owes me for dinner` indicates that John owes the user S$12.30.
   * Negative Amount Transaction indicates the user owes someone an amount.<br>
     e.g. `addTxn 1 amt/-24.30 desc/I owe John for dinner` indicates that the user owes John S$24.30.
-  * Amount with value equivalent of 0 is not allowed and will be considered as invalid input as transaction with 0 
-    amount does not make sense and would be considered as spam.
+  * Amount with value equivalent of 0 is not allowed and will be considered as an invalid input.
 * The `DESCRIPTION` is case-sensitive and accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
   * The date is optional. If the date is not provided, the current date will be used.
 * The `STATUS` accepts case-sensitive string that is either `Done` or `Not Done`.
   * The status is optional. If the status is not provided, the default status is `Not Done`.
-* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
+* The `CATEGORY` input should be alphanumeric. Category will be capitalised automatically.
 
 <div markdown="block" class="alert alert-danger">
 :exclamation: Important: Transactions with identical values in specific fields are considered duplicates and cannot be added to the transaction book. A transaction is identified as a duplicate if the following fields match exactly: `INDEX` (if it represents the same person at this index), `AMOUNT`, `DESCRIPTION`, and `DATE`. Together, these fields must create a unique combination for each transaction.
@@ -262,17 +265,16 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * As more prefixes are provided, the filter becomes more specific.
 * The `INDEX` refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
-* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index. Results will display transactions with the exact amount if it exists.
-  * Amount with value equivalent of 0 is not allowed and will be considered as invalid input as transaction with 0
-    amount does not make sense and would be considered as spam.
+* The `AMOUNT` accepts a decimal number with up to 2 decimal places. A minus (`-`) symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index. Results will display transactions with the exact amount if it exists.
+  * Amount with value equivalent of 0 is not allowed and will be considered as invalid input.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `DESCRIPTION` accepts a string of words.
   * The description filter is case-insensitive and allows partial matching. e.g `hans` will match `Hansolo Danello`
-* The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
+* The `STATUS` accepts case-sensitive string that is either `Done` or `Not Done`. 
   * To indicate filtering for transactions that are done or not done.
 * The `AMOUNT_SIGN` accepts case-sensitive string of either `Pos` or `Neg`
   * To indicate filtering for transactions with amount that are positive or negative respectively.
-* The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
+* The `CATEGORY` input should be alphanumeric.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 The filtered condition remains active until another `filterTxn` command is issued or the transaction list is explicitly reset using `listTxn`.
@@ -282,8 +284,12 @@ Examples:<br>
 
 * Given the example transaction book:<br>
   ![Given the example transaction book](images/filterTxnExample.png)
+<div style="margin: 20px"></div>
+
 * `filterTxn 1` returns all transactions with the person `Alex Yeoh`. Given that `1` is the index of `Alex Yeoh` in the displayed person list.<br>
   ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
+<div style="margin: 20px"></div>
+
 * `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Given that `2` is the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
 
@@ -336,40 +342,31 @@ Marks a specified transaction from the transaction book as done.
 
 Format: `markDone INDEX`
 
-* Marks a transaction at the specified `INDEX` as done.
+* Marks a transaction at the specified `INDEX` as done. 
+  * If an undone transaction is marked as done, a done icon <img src="images/done_icon.png" width="16" height="16">, appears for the transaction in GUI (transactions that are not done should not have the icon).
+  * If a done transaction is marked as done again, the transaction remains done with no warning/alert.
 * The index refers to the index number shown in the displayed transaction list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If a transaction is marked as done, a done icon appears for the transaction in GUI. 
-</div>
 
 Examples:
 
 * `listTxn` followed by `markDone 2` marks the 2nd transaction in the transaction book as done.
-* If a done transaction is marked as done again, the transaction remains done.
 
 ### Marking a transaction as not done : `markUndone`
 
-Marks a specified transaction from the transaction book as not done. Here, the word 'undone' is equivalent to not done.
+Marks a specified transaction from the transaction book as not done. (The terms "undone" and "not done" may be used interchangeably in Spleetwaise and its documents.)
 
 Format: `markUndone INDEX`
 
 * Marks a transaction at the specified `INDEX` as not done.
+  * If a done transaction is marked as not done, the existing done icon for the transaction in GUI disappears.
+  * if an undone transaction is marked as not done again, the transaction remains not done with no warning/alert.
 * The index refers to the index number shown in the displayed transaction list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** By default, a new transaction is not done.
-</div>
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** If a done transaction is marked as not done, the existing done icon for the transaction in GUI disappears. 
-</div>
 
 Examples:
 
 * `listTxn` followed by `markUndone 2` marks the 2nd transaction in the transaction book as not done.
-* if a not done transaction is marked as not done again, the transaction remains not done.
 
 ### Exiting the program : `exit`
 
