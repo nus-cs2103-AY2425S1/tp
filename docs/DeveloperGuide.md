@@ -1403,9 +1403,10 @@ These instructions only provide a starting point for testers to work on; testers
 1. **Adding History Entries**
 
   1. Prerequisites: Contact list exists with entries.
-  2. Test case: `log 1 d/2024-08-08 l/meet up`  
-     **Expected:** Adds a history entry about a meet up on 2024-08-08 for the first person.
-
+  2. Test case: `log 1 d/2024-11-15 l/meet up`  
+     **Expected:** Adds a history entry about a meet up on 2024-11-15 for the first person.
+  3. Test case: `log 1 l/event`
+     **Expected:** Adds a history entry `event` on today (System time) for the first person.
 ### Closing Single Page Person View
 
 1. **Closing the Person View Window**
