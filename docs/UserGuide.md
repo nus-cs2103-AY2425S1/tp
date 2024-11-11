@@ -141,7 +141,7 @@ Shows a message explaining how to access the help page.
 
 Adds a customer to the contact list.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]…​`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]…`
 
 - Phone number (with `p/` prefix) should be an 8-digit mainstream Singaporean phone number starting with 9, 8, 7, or 6.
 - Postal code (with `pc/` prefix) should be a 6-digit number.
@@ -182,7 +182,7 @@ Shows a list of all customers in the contact list.
 
 Edits an existing customer in the contact list.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]…​`
+**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pc/POSTAL_CODE] [t/TAG]…`
 
 - Edits the person at the specified `INDEX`. The index refers to the number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 - At least one of the optional fields must be provided.
@@ -286,10 +286,10 @@ Deletes the specified customer from the contact list.
 
 * Delete all persons from the contact list with the given postal code.
 
-Format: `deletePC POSTALCODE`
+Format: `deletePC POSTAL_CODE`
 
-* Delete all persons with the specified `POSTALCODE`.
-* The postal code **must be a 6 digits** 
+* Delete all persons with the specified `POSTAL_CODE`.
+* The postal code **must be 6 digits** 
 
 Examples:
 * `list` followed by `deletePC 560102` deletes all persons with postal code `560102` in the contact list.
