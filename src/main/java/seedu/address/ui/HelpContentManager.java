@@ -57,76 +57,82 @@ public class HelpContentManager {
                  line-breaks may be omitted when copied over to the application.
                 """);
 
-        contentMap.put("Validation Rules: Name, Phone Number", """
-                Validation Rules: Name, Phone Number
-                 Please adhere to these validation rules when using the various commands below.
-                 Inputs that fail to comply will not be accepted by the F.A.R.T. address book,
-                 and the data will not be added to the client list. For all commands, note that
-                 spaces at the beginning of any input will be trimmed (e.g., inputting
-                 `n/       John Doe` will be interpreted as `n/John Doe`).\n
+        contentMap.put("Formatting: Name, Phone Number", """
+                Formatting: Name, Phone Number
+                 Do note these rules when attempting to interact with the various commands below.
+                 Inputs that do not follow the rules will not be accepted by the F.A.R.T. address
+                 book and the inputted data will not be added to the client list. Note that for all
+                 commands, spaces at the start of any input will be cut off e.g. inputting
+                 `n/        John Doe`will result in F.A.R.T. reading it as `n/John Doe`\n
                  Name
                  Valid Inputs: Alphanumeric characters, with or without spaces, e.g., `Martin`,
                  `Martin Luther King`, `John`, `J0hn`.
                  Common Invalid Inputs:
-                 * The slash character `/`, e.g., `S/O`.
-                 * The period character `.`, e.g., `Jr.`.\n
+                 * The slash character `/`, e.g. `S/O`
+                 * The period character `.`, e.g. `Jr.`\n
                  Phone Number
-                 Valid Inputs: 8-digit numbers starting with 3, 6, 8, or 9 (Singaporean numbers),
-                 e.g., `91234567`, `81234567`.
+                 Valid Inputs: 8-digit numbers starting with 3, 6, 8, or 9 (Singaporean numbers).
+                 The input must be exactly 8 characters long e.g., `91234567`, `81234567`.
                  Common Invalid Inputs:
-                 * Non-Singaporean phone numbers, e.g., `51234567`.
-                 * Numbers exceeding 8 digits, e.g., `6581234567`.
-                 * Country code prefixes, e.g., `+6581234567`.
-                 * Spaces within numbers, e.g., `8123 4567`.
+                 * A non-Singaporean phone number e.g., `51234567`
+                 * A phone number exceeding 8 digits in length e.g., `6581234567`
+                 * Adding the country code at the beginning e.g. `+6581234567`
+                 * Adding a space in between the numbers e.g. `8123 4567`
                 """);
 
-        contentMap.put("Validation Rules: Email, Birthday", """
-                Validation Rules: Email, Birthday
+        contentMap.put("Formatting: Email, Birthday", """
+                Formatting: Email, Birthday
                  Email
-                 For all parts of the input that allow special characters, they cannot appear
-                 at the start or end, and they can only be used consecutively at most once.\n
-                 Valid Inputs: In the format `local-part@domain`, e.g. `john.doe@example.com`,
-                 `j_ohn@example.edu.org`, `john123@e-mail.com`.
-                 * `local-part`: Alphanumeric characters, plus `+`, `_`, `.`, `-`.
-                 * `@`: Required character.
-                 * `domain`: Alphanumeric, plus `.`, `-`. The last two characters must be alphanumeric.
+                 For all parts of the input that accept special characters, they cannot be
+                 placed at the start or at the end. Special characters can only appear at
+                 most once consecutively.\n
+                 Valid Inputs: `local-part@domain`, e.g. `john.doe@example.com`,
+                 `j_ohn@example.edu.org`, `john123@e-mail.com`, where:
+                 * `local-part`: Alphanumeric characters, in addition to these special
+                 characters: `+`, `_`, `.`, `-`.
+                 * `@`: This character must be present.
+                 * `domain`: Alphanumeric, in addition to these special characters: `.`, `-`.
+                 The last two characters must be alphanumeric.
                  Common Invalid Inputs:
-                 * Special characters at the start or end, e.g., `.john@example.com`, `john@example.com.`.
-                 * More than one consecutive special character, e.g., `john..doe@example.com`.
-                 * Disallowed special characters, e.g., `john!@example.com`.
-                 * Missing `@` character, e.g., `johnexample.com`.
-                 * Last two characters not being alphanumeric, e.g., `john@example.c`.\n
+                 * Special characters at the start or at the end, e.g. `.john@example.com`,
+                 `john@example.com.`
+                 * More than one consecutive special character, e.g. `john..doe@example.com`
+                 * Disallowed special characters, e.g. `john!@example.com`
+                 * Missing `@` character, e.g. `johnexample.com`
+                 * Last two characters not being alphanumeric, e.g. `john@example.c`\n
                  Birthday
-                 Valid Inputs: Numerical characters in the format `DD MM YYYY`, using valid dates,
-                 e.g., `01 01 2000`, `02 03 2004`.
+                 Valid Inputs: Numerical characters in the format `DD MM YYYY`. Valid
+                 dates should be used e.g. `01 01 2000`, `02 03 2004`.
                  Common Invalid Inputs:
-                 * Incorrect format, e.g., `01/01/2000`, `01 31 2000`.
-                 * Invalid dates, e.g., `31 02 2000`, `32 01 2000`.
+                 * Incorrect format, e.g. `01/01/2000`, `01 31 2000`, `01 01 04`
+                 * Invalid dates, e.g. `31 02 2000`, `32 01 2000`
                 """);
 
-        contentMap.put("Validation Rules: Address, Tag(s)", """
-                Validation Rules: Address, Tag(s)
+        contentMap.put("Formatting: Address, Tag(s)", """
+                Formatting: Address, Tag(s)
                  Address
-                 Valid Inputs: Accepts any string of characters, e.g., `John Street, Block 123, #01-01`,
-                 `Pro+fessional Building, Level 3, Unit 30`, `東京都豊島区東池袋1-22-10 ヒューマックスパビリオン`.\n
+                 Valid Inputs: This field accepts a string of any characters as its input,e.g.
+                 `John Street, Block 123, #01-01`,
+                 `Pro+fessional Building, Level 3, Unit 30`,
+                 `東京都豊島区東池袋1-22-10 ヒューマックスパビリオン`.\n
                  Tag(s)
                  Aside from normal tags, F.A.R.T. also provides specialised tags. For more
                  information, refer to the Visual Features section.\n
                  Valid Inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label,
-                 e.g., `t/friend`, `t/colleague t/neighbour`.
+                 e.g. `t/friend`, `t/colleague t/neighbour`.
                  Invalid Inputs:
-                 * Dropping the `t/` label, e.g., `t/colleague neighbour`.
-                 * Non-alphanumeric characters, e.g., `t/#1friend`.
+                 * Dropping the `t/` label, e.g. `t/colleague neighbour`
+                 * Non-alphanumeric characters, e.g. `t/#1friend`
                 """);
 
         contentMap.put("Viewing a client's details", """
                 Viewing a Client’s Details
-                 When the app starts, a placeholder on the right panel will prompt you to
-                 select a client on the list. Double-click on a client in the client list
-                 to bring up a more detailed view of the client, including information like
-                 address and birthday.\n
+                 You may use your arrow keys to traverse the client list, then **double-click**
+                 or **press `Enter`** on a client in the client list to bring up a more
+                 detailed view of the client, including information like address and birthday.\n
                  The detailed view can be broken down into three main sections. From the above:
-                 1. The client's profile picture. This can be updated via the `upload` command.\n
+                 1. The client's profile picture. A default profile picture is given to
+                 all clients. This can be updated via the `upload` command.\n
                  2. The client's details. This can be updated by various commands, including
                  `edit`, `paid,` `unpaid`.\n
                  3. Three template messages. These are predetermined messages that have been
@@ -139,7 +145,8 @@ public class HelpContentManager {
                  Note:
                  The displayed client will persist, and edits will not be reflected until you select
                  another client or close the F.A.R.T book. If you made any changes to the current
-                 client on display, kindly double-click to refresh the detailed view.
+                 client on display, kindly double-click on the same client to refresh the
+                 detailed view.
                 """);
 
         contentMap.put("Adding a client", """
@@ -156,7 +163,7 @@ public class HelpContentManager {
                  `add n/Charlie Chen Cao Cong p/88888888 b/01 02 2003
                  e/charliechen88@huat.com t/mahjong`\n
                  Note:
-                 1. As mentioned in the Validation Rules, only Singapore phone numbers and
+                 1. As mentioned in the Formatting, only Singapore phone numbers and
                  valid email addresses (in the form `local-part@domain`) are accepted.\n
                  2. Birthdays should be added in DD MM YYYY format.\n
                  3. You may add duplicate clients (i.e., clients with the same name,
@@ -184,15 +191,19 @@ public class HelpContentManager {
                  At least one of the optional fields must be provided. Existing values will be updated
                  to what you have currently typed in. When editing tags, the existing tags of the
                  client will be removed (i.e., adding of tags is not cumulative).\n
-                 You can remove all the client’s tags by typing `t/` without specifying
-                 any tags after it. Similarly, a client's address can be removed by typing `a/`
-                 without specifying anything after it.\n
+                 You can remove all the client’s tags by typing `t/` without specifying any tags
+                 after it. Similarly, a client's address can be removed by typing `a/` without
+                 specifying anything after it.
+                 If you edit a client's name to be the same of that of another client in the F.A.R.T.
+                 book, a prompt will appear asking you to confirm the edit action. If you select `No`
+                 in the prompt window, the operation will be aborted and the name will not be
+                 changed. Else, select `Yes` to proceed with the edit.\n
                  Examples:
-                 `edit 1 p/91234567 e/johndoe@example.com`: Edits the phone
-                 number and email address of the 1st client to be `91234567`
-                 and `johndoe@example.com`, respectively.\n
-                 `edit 2 n/Betsy Crower t/`: Edits the name of the 2nd client
-                 to `Betsy Crower` and clears all existing tags.
+                 `edit 1 p/91234567 e/johndoe@example.com`: Edits the phone number and
+                 email address of the 1st client to be `91234567` and `johndoe@example.com`,
+                 respectively.\n
+                 `edit 2 n/Betsy Crower t/`: Edits the name of the 2nd client to
+                 `Betsy Crower` and clears all existing tags.
                 """);
 
         contentMap.put("Locating clients by attribute", """
@@ -207,9 +218,14 @@ public class HelpContentManager {
                  against the attribute that you specified (i.e., searching for names will
                  match against all names). Partial matches of a keyword will also be returned.
                  For example, `9123` will return clients with the phone number `91234567`.\n
+                 Note:
+                 When searching with more than one attribute, it will find clients who
+                 satisfy ALL keywords. e.g. `find n/Alice a/Clementi` will return clients
+                 named Alice AND has an address in Clementi.
                  Examples:
                  `find n/John`: returns clients with names `john` and `John Doe`.\n
                  `find a/serangoon`: returns `Bernice Yu`, `David Li`.
+                 `find n/bernice a/serangoon`: returns `Bernice Yu`
                 """);
 
         contentMap.put("Deleting a client", """
@@ -292,7 +308,7 @@ public class HelpContentManager {
                 """);
 
         contentMap.put("Uploading a client's profile picture", """
-                Uploading a client’s profile picture
+                Uploading a client’s profile picture: upload
                  Too many clients? Keep track of their faces by uploading a profile
                  picture of them.\n
                  Format: `upload INDEX`\n
@@ -331,7 +347,9 @@ public class HelpContentManager {
                  When a client’s birthday is approaching or has recently passed (within 7 days before
                  or after the current date), their name will appear in orange to remind you of the
                  special occasion. Additionally, hovering over their name will display a tooltip
-                 reminder. Take this chance to wish them a happy birthday!
+                 reminder. Take this chance to wish them a happy birthday!\n
+                 If you would like to disable these visual features, click on the
+                 `File` tab at the top and uncheck `Enable Visuals`.
                 """);
 
         contentMap.put("Saving and Editing Data", """
@@ -350,13 +368,15 @@ public class HelpContentManager {
                  Therefore, edit the data file only if you are confident you can update it correctly.
                 """);
 
-        contentMap.put("FAQ and Known Issues", """
-                FAQ and Known Issues
-                 FAQ
+        contentMap.put("FAQ", """
+                FAQ
                  Q: How do I transfer my data to another computer?\n
                  A: Install this app on the other computer and overwrite the empty data
                  file it creates with the data file from your previous F.A.R.T home folder.\n
-                 Known Issues
+                """);
+
+        contentMap.put("Known Issues", """
+                Known Issues
                  1. Screen positioning: When using multiple screens, if you move the application
                  to a secondary screen and later switch to only the primary screen, the GUI may
                  open off-screen. To fix this, delete the `preferences.json` file created by the
@@ -372,7 +392,9 @@ public class HelpContentManager {
                  4. As mentioned in the Viewing a client's details section, a client's detailed view
                  does not automatically update to reflect changes. Once changes are made,
                  double-click on the same client to refresh said changes. Else, the changes will be
-                 updated upon restarting the F.A.R.T. book.
+                 updated upon restarting the F.A.R.T. book.\n
+                 5. If you are using arrow keys to navigate the client list, then enter a command in
+                 the command box, you need to move your cursor back to the client list to select it again.
                 """);
 
         assert contentMap.get("Introduction") != null : "Introduction content should not be null";
@@ -394,13 +416,13 @@ public class HelpContentManager {
      */
     public ObservableList<String> getTableOfContents() {
         ObservableList<String> tocList = FXCollections.observableArrayList(
-                "Introduction", "Features", "Validation Rules: Name, Phone Number",
-                "Validation Rules: Email, Birthday", "Validation Rules: Address, Tag(s)",
+                "Introduction", "Features", "Formatting: Name, Phone Number",
+                "Formatting: Email, Birthday", "Formatting: Address, Tag(s)",
                 "Viewing a client's details", "Adding a client", "Listing all clients",
                 "Editing a client", "Locating clients by attribute", "Deleting a client",
                 "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
                 "Uploading a client's profile picture", "Exiting the program", "Visual Features",
-                "Saving and Editing Data", "FAQ and Known Issues", "Command Summary");
+                "Saving and Editing Data", "FAQ", "Known Issues", "Command Summary");
 
         assert !tocList.isEmpty() : "Table of Contents should not be empty";
         return tocList;
