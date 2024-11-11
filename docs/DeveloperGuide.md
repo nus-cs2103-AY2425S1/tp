@@ -63,43 +63,44 @@ Each of the four main components (also shown in the diagram above) has these pro
 - It defines its _API_ (Application Programming Interface) in an `interface` with the same name as the Component.
 - It implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned above).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (to prevent outside components being coupled to the concrete implementation of a component), as illustrated in the partial class diagram below.
 
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 While the `Storage` component provides an abstraction layer for persistent data, it also exposes access to specific data structures, such as `ReadOnlyHallPointer` and `UserPrefs`. This design balances abstraction with the need for practical access to certain data classes critical to the application’s functionality.
 
 Ideally, the `Storage` interface would fully abstract storage details by exposing methods like `getHallPointerData()` or `getUserPreferences()`, thus hiding specifics like `ReadOnlyHallPointer`. However, for simplicity and to meet the application’s needs, `Storage` directly returns these specific data structures.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
 
-The sections below give more details of each component.
+
+The sections below give more details about each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/ui/Ui.java)
+As mentioned above, the **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/ui/Ui.java), and a partial but representative class diagram thereof is shown below.
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of various parts like `CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` and so on. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/resources/view/MainWindow.fxml).
 
-The `UI` component,
+The `UI` component has the following responsibilities:
 
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
-- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Member` object residing in the `Model`.
+- Passing user commands to the `Logic` component using its reference thereof, so that the commands can be parsed and executed.
+- Keeping the display up to date with `Model` data, by listening for changes in `Model` data to update the display when appropriate.
+
+It also depends on some classes in the `Model` component like the `Member` or `Session` objects residing in the `Model`, the details of which inform what sort of visual layout is appropriate.
 
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a partial and representative class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_member 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking an API call `execute("delete_member 1")` as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -111,11 +112,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `Parser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a member).<br>
+1. When `Logic` is called upon to execute a command, the API call is passed to an `Parser` object, which in turn creates a parser that matches the command (e.g. `DeleteMemberCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being created, which is then executed by the `LogicManager`.
+3. The `Command` communicates with the `Model` when it is executed (e.g. to delete a member).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is then returned by `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -123,7 +124,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `Parser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
+- When called upon to parse a user command, the `HallPointerParser` class creates an `XYZCommandParser` (where `XYZ` is a placeholder for the specific command name that matches the API call e.g. `AddMemberCommand`). This  which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
