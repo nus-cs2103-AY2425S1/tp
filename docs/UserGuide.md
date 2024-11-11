@@ -35,22 +35,22 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds.
 
-   ![StartUpPage](images/StartUpPage.png)
+   <img alt="StartUpPage" src="images/StartUpPage.png" width="580"/>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     - `list`<br>
-    Lists all contacts.
+      Lists all contacts.
     - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
-    Adds a contact named `John Doe` to the TAHub.
+      Adds a contact named `John Doe` to the TAHub.
     - `delete 3`<br>
-    Deletes the 3rd contact shown in the current list.
+      Deletes the 3rd contact shown in the current list.
     - `clear`<br>
-    Deletes all contacts.
+      Deletes all contacts.
     - `exit`<br>
-    Exits the app.
-    <br></br>
+      Exits the app.
+      <br></br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -104,7 +104,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
         - Open your file manager and go to your `Downloads` directory.
         - Right-click on the `.jar` file, choose Copy.
         - Go to the destination folder, right-click and select Paste.
-        <br></br>
+          <br></br>
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
@@ -123,6 +123,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```bash
           java -jar TAHub.jar
           ```
+        <div style="page-break-after: always;"></div>
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
         - To get the full path of the folder where the `.jar` file is located:
@@ -139,8 +140,8 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
-   
-   ![StartUpPage](images/StartUpPage.png)
+
+   <img alt="StartUpPage" width="580" src="images/StartUpPage.png"/>
    <br></br>
 
 5. Type commands in the command box and press Enter to execute them.<br>
@@ -160,7 +161,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 
 6. Refer to the [Features](#features) section below for details of each command.
 
----
+--
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -209,6 +210,8 @@ Refer to the specific sections for a detailed guide on how to use each command.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
@@ -217,9 +220,7 @@ Format: `help`
 
 Expected output:
 
-![result for 'help'](images/helpMessage.png)
-
-<div style="page-break-after: always;"></div>
+<img alt="result for &#39;help&#39;" src="images/helpMessage.png" width="580"/>
 
 ### Adding a person: `add`
 
@@ -243,7 +244,7 @@ Examples:
 
 Expected output:
 
-![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
+<img alt="result for &#39;add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends&#39;" src="images/addPerson.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -255,7 +256,7 @@ Format: `list`
 
 Expected output:
 
-![result for 'list'](images/listPersons.png)
+<img alt="result for &#39;list&#39;" width="580" src="images/listPersons.png"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -280,7 +281,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'edit 1 p/91234567 e/johndoe@example.com'](images/editPerson.png)
+<img alt="result for &#39;find John&#39; followed by &#39;edit 1 p/91234567 e/johndoe@example.com&#39;" src="images/editPerson.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -303,7 +304,7 @@ Examples:
 
 Expected output:
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+<img alt="result for &#39;find alex david&#39;" src="images/findAlexDavidResult.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -326,7 +327,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'delete 1'](images/deletePerson.png)
+<img alt="result for &#39;find John&#39; followed by &#39;delete 1&#39;" src="images/deletePerson.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -351,7 +352,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'addGrade 1 n/Midterm s/85 w/30'](images/addGrade.png)
+<img alt="result for &#39;find John&#39; followed by &#39;addGrade 1 n/Midterm s/85 w/30&#39;" src="images/addGrade.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -374,7 +375,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
+<img alt="result for &#39;find John&#39; followed by &#39;deleteGrade 1 n/Midterm&#39;" width="580" src="images/deleteGrade.png"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -405,25 +406,26 @@ Example:
   Shows the mean of the overall grade of the current filtered list.<br>
   Expected output:
 
-  ![result for 'aggGrade mean'](images/aggGrade_mean_normal.png)
+  <img alt="result for &#39;aggGrade mean&#39;" src="images/aggGrade_mean_normal.png" width="580"/>
 
   In this example, `aggGrade mean` calculates the mean of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 87.00 respectively.
+
+<div style="page-break-after: always;"></div>
 
 - `aggGrade min`<br>
   Shows the minimum of the overall grade of the current filtered list (including persons with no grades).<br>
   Expected output:
 
-  ![result for 'aggGrade min'](images/aggGrade_min_normal.png)
+  <img alt="result for &#39;aggGrade min&#39;" src="images/aggGrade_min_normal.png" width="580"/>
 
-  In this example, `aggGrade min` calculates the minimum of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 0.00 respectively.
+  In this example, `aggGrade min` calculates the minimum of the overall grades of Alex Yeoh and Bernice Yu, which are 77.50 and 92.50 respectively.
 
-<div style="page-break-after: always;"></div>
 
 - `aggGrade mean n/final`<br>
   Shows the mean for final tests of the current filtered list.<br>
   Expected output:
 
-  ![result for 'aggGrade mean n/final'](images/aggGrade_mean_filtered.png)
+  <img alt="result for &#39;aggGrade mean n/final&#39;" src="images/aggGrade_mean_filtered.png" width="580"/>
 
   In this example, `aggGrade mean n/final` calculates the mean of the final grades of **persons who have their final tests recorded in their grade list**.
   Only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
@@ -451,7 +453,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'mark 1 d/31/01/2024 12:00 m/Absent'](images/markAttendance.png)
+<img alt="result for &#39;find John&#39; followed by &#39;mark 1 d/31/01/2024 12:00 m/Absent&#39;" src="images/markAttendance.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -473,7 +475,7 @@ Examples:
 
 Expected output:
 
-![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
+<img alt="result for &#39;find John&#39; followed by &#39;unmark 1 d/31/01/2024 12:00&#39;" src="images/unmarkAttendance.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -493,7 +495,7 @@ Examples:
 
 Expected output:
 
-![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
+<img alt="result for &#39;absentees d/31/01/2024 10:00&#39;" src="images/absentees.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -505,9 +507,7 @@ Format: `clear`
 
 Expected output:
 
-![result for 'clear'](images/clearMessage.png)
-
-<div style="page-break-after: always;"></div>
+<img alt="result for &#39;clear&#39;" src="images/clearMessage.png" width="580"/>
 
 ### Exiting the program: `exit`
 
@@ -615,5 +615,3 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 | **List** | `list` |
 | **Help** | `help` |
 | **Exit** | `exit` |
-
-
