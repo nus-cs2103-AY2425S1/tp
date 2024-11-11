@@ -1461,7 +1461,7 @@ applied to edited data, but specific expected results will differ. <br>
    Expected: No weddings are edited. Error details shown.
 
 ### Assigning Wedding
-##### ... if `John's Wedding` is in the list && if the first contact is not already in John's Wedding
+##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
 1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
 
@@ -1474,12 +1474,12 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `assign-wedding 1 w/John's Wedding p1/ p2/`<br>
    Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
 
-##### ... if `John's Wedding` is in the list && if the first contact is already in John's Wedding
-1. Test case: `assign-wedding 1 w/John's Wedding [p1/] [p2/]`<br>
+##### ... if `John's Wedding` is in the list and if the first contact is already in John's Wedding
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: No weddings are assigned to any contacts. Error details shown.
 
 ##### ... if `John's Wedding` is not in the list
-1. Test case: `assign-wedding 1 w/John's Wedding [p1/] [p2/]`<br>
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: No contact is assigned. Error details shown.
 
 1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
@@ -1506,6 +1506,9 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `create-task tk/Task1`<br>
    Expected: No tasks are added to list of tasks. Error details shown.
 
+1. Test case: `create-task tk/task1`<br>
+   Expected: No tasks are added to list of tasks. Error details shown.
+
 ### Deleting Task
 ##### ... if there is only 1 task in the list
 1. Test case: `delete-task 1`<br>
@@ -1515,7 +1518,7 @@ applied to edited data, but specific expected results will differ. <br>
    Expected: No tasks are removed from list of tasks. Error details shown.
 
 ### Assigning Task
-##### ... if there's only 1 task and 1 vendor without that task assigned to them
+##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
 1. Test case: `assign-task 1 1`<br>
    Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
 
@@ -1525,7 +1528,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `assign-task 2 2`<br>
    Expected: No tasks are assigned. Error details shown.
 
-##### ... if there's only 1 task and 1 vendor with that task already assigned to them
+##### ... if there's only 1 task and 1 vendor in WedLinker and vendor has that task already assigned to them
 1. Test case: `assign-task 1 1`<br>
    Expected: No tasks are assigned to any contacts. Error details shown.
 
@@ -1548,7 +1551,7 @@ applied to edited data, but specific expected results will differ. <br>
    Expected: First two task marked. Details of updated tasks shown.
 
 1. Test case: `mark-task 1 2 3 4`<br>
-   Expected: No tasks marked. Error details shown.
+   Expected: No tasks marked (besides those originally marked). Error details shown.
 
 ### Unmarking Task
 ##### ... if there's only 2 tasks
@@ -1557,7 +1560,7 @@ applied to edited data, but specific expected results will differ. <br>
 
 ##### ... if first contact does not have first task
 1. Test case: `unmark-task 1 2 3 4`<br>
-   Expected: No tasks are unmarked. Error details shown.
+   Expected: No tasks are unmarked (besides those originally unmarked). Error details shown.
 
 ---
 <h3 class="features">Tag Features</h3>
@@ -1571,6 +1574,9 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `create-tag w/Tag1`<br>
    Expected: No tags are added to list of tags. Error details shown.
 
+1. Test case: `create-tag w/tag1`<br>
+   Expected: No tags are added to list of tags. Error details shown.
+
 ### Deleting Tag
 ##### ... if `Tag1` is in the list of tags
 1. Test case: `delete-tag w/Tag1`<br>
@@ -1581,20 +1587,20 @@ applied to edited data, but specific expected results will differ. <br>
    Expected: No tags are removed from list of tags. Error details shown.
 
 ### Tagging contact
-##### ... if `Tag1` is in the list && if the first contact is not tagged with `Tag1`
+##### ... if `Tag1` is in the list and if the first contact is not tagged with `Tag1`
 1. Test case: `tag 1 t/Tag1`<br>
    Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
 
-##### ... if `Tag1` is in the list && if the first contact is already tagged with `Tag1`
-1. Test case: `assign-tag 1 t/Tag1`<br>
+##### ... if `Tag1` is in the list and if the first contact is already tagged with `Tag1`
+1. Test case: `tag 1 t/Tag1`<br>
    Expected: No contacts are tagged. Error details shown.
 
 ##### ... if `Tag1` is not in the list
-1. Test case: `assign-tag 1 t/Tag1`<br>
+1. Test case: `tag 1 t/Tag1`<br>
    Expected: No contact is tagged. Error details shown.
 
-1. Test case: `assign-tag 1 t/Tag1 f/`<br>
-   Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
+1. Test case: `tag 1 t/Tag1 f/`<br>
+   Expected: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
 
 ### Untagging contact
 ##### ... if first contact is tagged with `Tag1`
