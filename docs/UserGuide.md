@@ -103,7 +103,7 @@ This User Guide also includes highlighted sections to aid in your reading:
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as `NBSP` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -142,7 +142,7 @@ Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/E
 **Examples:**
 
 * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 edu/primary lt/wed:13:00 t/friend t/colleague` adds a student named `James Ho` to the address book
-* `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book. Note that the order of the parameters does not matter.
+* `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book.
 </box>
 
 ### Adding a parent: `addparent`
@@ -164,21 +164,21 @@ Format: `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 * `addparent n/Billie t/friend e/billie@example.com a/Newgate Prison p/1234567 t/criminal`
 </box>
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [edu/EDUCATION] [t/TAG]…`
 
 <box type="info">
 
 **Notes about `edit`:**
-Edits the person at the specified `INDEX`.
+Edits the contact at the specified `INDEX`.
 
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
+* The `INDEX` refers to the index number shown in the displayed list of contacts. The index **must be a positive integer** (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
   </box>
@@ -191,22 +191,26 @@ Assuming a list of 7 contacts in the main list,
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
   </box>
 
-### Assigning grade to students: `grade`
+### Assigning a grade to a student: `grade`
 
-Assigns grade to students in the address book.
+Assigns a grade to an existing student in the address book.
 
 Format: `grade INDEX g/GRADE_INDEX`
 
 <box type="info">
 
 **Notes about `grade`:**
-The grade index ranges from 0 to 4:
+Assigns `GRADE_INDEX` to the contact at the specified `INDEX`.
 
-* 0: `Unknown`
-* 1: `Failing`
-* 2: `Satisfactory`
-* 3: `Good`
-* 4: `Excellent`
+* The `INDEX` refers to the index number shown in the displayed list of contacts. The index **must be a positive integer** (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.
+
+* The `GRADE_INDEX` ranges from 0 to 4:
+
+  * 0: `Unknown`
+  * 1: `Failing`
+  * 2: `Satisfactory`
+  * 3: `Good`
+  * 4: `Excellent`
 </box>
 
 <box type="definition">
@@ -217,19 +221,19 @@ The grade index ranges from 0 to 4:
 * `grade 2 g/4` changes grade of second person on list to `Excellent`<br>
   </box>
 
-### Deleting a person : `delete`
+### Deleting contacts : `delete`
 
-Deletes the specified people from the address book.
+Deletes the specified contacts from the address book.
 
 Format: `delete INDEX [MORE_INDICES]…`
 
 <box type="info">
 
 **Notes about `delete`:**
-Deletes the person at the specified `INDEX` or `INDICES`:
+Deletes the contacts at the specified `INDEX` or `INDICES`:
 
-* The indices refer to the index numbers shown in the displayed person list.
-* The indices **must be positive integer** 1, 2, 3, …
+* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
+* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
 </box>
 
 <box type="definition">
@@ -237,17 +241,18 @@ Deletes the person at the specified `INDEX` or `INDICES`:
 **Examples:**
 Assuming a list of 7 contacts in the main list, inclusive of a contact named `Betsy`,
 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `list` followed by `delete 2 3 4 5` deletes the 2nd, 3rd, 4th and 5th people in the address book.
+* `list` followed by `delete 2` deletes the 2nd contact in the displayed list of contacts.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `list` followed by `delete 2 3 4 5` deletes the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
 <box type="warning">
 
-**Caution**:When deleting a person, people linked to that person will be unlinked.<br>
-We consider case where student `James` and `Betsy` are linked to parent `John`. If `John` is deleted, then both children
-will be unlinked from parent `John`. However, if `Betsy` is deleted, then only `Betsy` will be unlinked from `John`.
-The link between `John` and `James` remain intact.
+**Caution**: When deleting a contact, contacts [linked](#link-a-parent-to-a-student--link) to that contact will be unlinked.<br>
+
+For example, consider a scenario where a parent `John` has two linked students: `James` and `Betsy`.
+* If `John` is deleted, both students `James` and `Betsy` will be unlinked from parent `John`.
+* If `Betsy` is deleted, only `Betsy` will be unlinked from `John`. The link between `John` and `James` will remain intact.
 </box>
 
 ### Clearing all entries : `clear`
@@ -256,18 +261,18 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts with names containing one or more of the specified keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]…`
 
 <box type="info">
 
 **Notes about `find`:**
-Finds persons with names containing `KEYWORD`
+Finds contacts with names containing one or more of the specified `KEYWORDS`.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -278,23 +283,23 @@ Finds persons with names containing `KEYWORD`
 <box type="definition">
 
 **Examples:**
-Assuming a list with `John Doe`, `Alex Yeoh` and `David Li`
+Assuming a list with `john`, `John Doe`, `Alex Yeoh` and `David Li`
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 </box>
 
-### Locating persons by tag: `findtag`
+### Locating contacts by tag: `findtag`
 
-Finds persons whose tags contain any of the given keywords.
+Finds contacts whose tags match any of the given keywords.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]…`
 
 <box type="info">
 
 **Notes about `findtag`:**
-Finds persons with a tag matching`KEYWORD`
+Finds contacts with tags matching any of the specified `KEYWORDS`.
 
-* The search is case-insensitive. e.g `dyslexic` will match `Dyslexic`
+* The search is case-insensitive. e.g. `dyslexic` will match `Dyslexic`
 * The order of the keywords does not matter. e.g. `dyslexic vegetarian` will match `vegetarian dyslexic`
 * Only full words will be matched e.g. `veg` will not match `vegetarian`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -312,14 +317,14 @@ Assuming the list shown in the picture above,
 
 ### Locating students by lesson day: `findday`
 
-Finds students who have lessons on specific days.
+Finds students who have lessons on specific days of the week.
 
 Format: `findday DAY [MORE_DAYS]…`
 
 <box type="info">
 
 **Notes about `findday`:**
-Finds persons with `LESSON_TIME` days matching `DAY`
+Finds students who have lessons on any of the specified `DAYS`.
 
 * The search is case-insensitive. e.g `tuesday` will match `Tuesday`
 * The order of the keywords does not matter. e.g. `tuesday wednesday` will match `wednesday tuesday`
@@ -333,80 +338,79 @@ Finds persons with `LESSON_TIME` days matching `DAY`
 **Examples:**
 [UI.png](images/Ui.png)
 Assuming the list shown in the picture above,
-* `findday tuesday` returns `Alex Yeoh` and `Bernice Yu`
-* `findtag friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`<br>
+* `findday tuesday` returns `Charlotte Li`
+* `findtag monday tuesday sunday` returns `Alex Yeoh`, `Charlotte Li` and `Irfan Ibrahim`<br>
 </box>
-
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Displays a link to the User Guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-### Pinning a person: `pin`
+### Pinning contacts: `pin`
 
-Pins the specified people to the top of the list in the address book.
+Pins the specified contacts to the top of the list in the address book.
 
 Format: `pin INDEX [MORE_INDICES]…`
 
 <box type="info">
 
 **Notes about `pin`:**
-Pins the person at the specified `INDEX` or `INDICES`.
+Pins the contacts at the specified `INDEX` or `INDICES`.
 
-* The indices refer to the index numbers shown in the displayed person list.
-* The indices **must be positive integer** 1, 2, 3 …
+* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
+* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
   </box>
 
 <box type="definition">
 
 **Examples:**
 Assuming a list of 7 contacts in the main list, inclusive of a contact named `Betsy`,
-* `list` followed by `pin 2` pins the 2nd person in the address book.
-* `find Betsy` followed by `pin 1` pins the 1st person in the results of the `find` command.
-* `list` followed by `pin 2 3 4 5` pins the 2nd, 3rd, 4th and 5th people in the address book.
+* `list` followed by `pin 2` pins the 2nd contact in the displayed list of contacts.
+* `find Betsy` followed by `pin 1` pins the 1st contact in the results of the `find` command.
+* `list` followed by `pin 2 3 4 5` pins the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
-### Unpinning a person : `unpin`
+### Unpinning contacts : `unpin`
 
-Unpins the specified people in the address book.
+Unpins the specified contacts in the address book.
 
 Format: `unpin INDEX [MORE_INDICES]…`
 
 <box type="info">
 
 **Notes about `unpin`:**
-Unpins the person at the specified `INDEX` or`INDICES`.
+Unpins the contacts at the specified `INDEX` or`INDICES`.
 
-* The indices refer to the index numbers shown in the displayed person list.
-* The indices **must be positive integer** 1, 2, 3, …
+* The `INDICES` refer to the index numbers shown in the displayed person list.
+* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
   </box>
 
 <box type="definition">
 
 **Examples:**
 Assuming a list of 7 contacts in the main list, inclusive of a contact named `Betsy`,
-* `list` followed by `unpin 2` unpins the 2nd person in the address book.
-* `find Betsy` followed by `unpin 1` unpins the 1st person in the results of the `find` command.
-* `list` followed by `unpin 2 3 4 5` unpins the 2nd, 3rd, 4th and 5th people in the address book.
+* `list` followed by `unpin 2` unpins the 2nd contact in the displayed list of contacts.
+* `find Betsy` followed by `unpin 1` unpins the 1st contact in the results of the `find` command.
+* `list` followed by `unpin 2 3 4 5` unpins the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
-### Archive a person : `archive`
+### Archiving contacts : `archive`
 
-Archives the specified people in the address book, hiding them from the main list.
+Archives the specified contacts in the address book, hiding them from the main list.
 
 Format: `archive INDEX [MORE_INDICES]…`
 
 <box type="info">
 
 **Notes about `archive`:**
-Archives the person at the specified `index` or `INDICES`.
+Archives the contacts at the specified `INDEX` or `INDICES`.
 
-* The indices refer to the index numbers shown in the displayed person list.
-* The indices **must be positive integer** 1, 2, 3, …
+* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
+* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
   </box>
 
 <box type="definition">
@@ -414,24 +418,24 @@ Archives the person at the specified `index` or `INDICES`.
 **Examples:**
 Assuming a list of 7 contacts in the main list, inclusive of a contact named `Betsy`,
 
-* `list` followed by `archive 2` archives the 2nd person in the address book.
-* `find Betsy` followed by `archive 1` archives the 1st person in the results of the `find` command.
-* `list` followed by `archive 2 3 4 5` archives the 2nd, 3rd, 4th and 5th people in the address book.
+* `list` followed by `archive 2` archives the 2nd contact in the displayed list of contacts.
+* `find Betsy` followed by `archive 1` archives the 1st contact in the results of the `find` command.
+* `list` followed by `archive 2 3 4 5` archives the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
-### Unarchive a person : `unarchive`
+### Unarchiving contacts : `unarchive`
 
-Unarchives the specified people in the address book, unhiding and displaying the contact in the main list.
+Unarchives the specified contacts in the address book, so that they can be displayed in the main list of contacts.
 
 Format: `unarchive INDEX [MORE_INDICES]…`
 
 <box type="info">
 
 **Notes about `unarchive`:**
-Unarchives the person at the specified `index` or `INDICES`.
+Unarchives the contacts at the specified `INDEX` or `INDICES`.
 
-* The indices refer to the index numbers shown in the displayed person list.
-* The indices **must be positive integer** 1, 2, 3, …
+* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
+* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
 </box>
 
 <box type="definition">
@@ -439,36 +443,36 @@ Unarchives the person at the specified `index` or `INDICES`.
 **Examples:**
 Assuming a list of 7 contacts in the archive list, inclusive of a contact named `Betsy`,
 
-* `listarchive` followed by `unarchive 2` unarchives the 2nd person in the address book archives.
-* `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st person in the results of the `find` command.
-* `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th people in the address book.
+* `listarchive` followed by `unarchive 2` unarchives the 2nd contact in the displayed list of contacts.
+* `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st contact in the results of the `find` command.
+* `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons, except for archived persons, in the address book.
+Shows a list of all unarchived contacts in the address book.
 
 Format: `list`
 
-### Listing all archived persons : `listarchive`
+### Listing all archived contacts : `listarchive`
 
-Shows a list of all archived persons in the address book.
+Shows a list of all archived contacts in the address book.
 
 Format: `listarchive`
 
 ### Listing students : `liststudents`
 
-Lists all students, except for archived students, in the address book.
+Shows a list of all unarchived students in the address book.
 
 Format: `liststudents`
 
 ### Listing parents : `listparents`
 
-Lists all parents, except for archived parents, in the address book.
+Shows a list of all unarchived parents in the address book.
 
 Format: `listparents`
 
-### Link a parent to a student : `link`
+### Linking a parent to a student : `link`
 
 Links a parent to a student in a parent-child relationship.
 
@@ -490,7 +494,7 @@ Assuming the address book has a student `John Doe` and a parent `Jane Doe`,
 * `link ch/John Doe pa/Jane Doe` links the student `John Doe` with the parent `Jane Doe`
 </box>
 
-### Unlink a parent from a student : `unlink`
+### Unlinking a parent from a student : `unlink`
 
 Removes the parent-child relationship from the specified student.
 
@@ -512,9 +516,9 @@ Assuming the address book has a student `John Doe` linked to a parent `Jane Doe`
 * `unlink ch/John Doe` removes the parent-child relationship from `John Doe`
 </box>
 
-### Sorting all persons alphabetically: `sort`
+### Sorting all contacts alphabetically: `sort`
 
-Sorts all person in the address book, keeping pinned persons on top.
+Sorts all contacts in the address book, keeping pinned contacts at the top of the list.
 
 Format: `sort`
 
