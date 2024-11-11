@@ -37,7 +37,7 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
 
         `java -jar educonnect.jar`
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
-
+    <br/><br/>
     **macOS User Interface**: 
     ![Ui](images/Ui.png)
     **Windows User Interface**:
@@ -45,8 +45,8 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
     
     {: .alert .alert-info}
     > :information_source: **Note:**
-    > * EduConnect will look slightly different on macOS, and on Windows. Particularly, the emojis on macOS will be colourised, while those on Windows will be in monochrome.
-    > * The screenshots on this User Guide will be primarily on macOS.
+    > * EduConnect will look slightly different on macOS and Windows. Specifically, the emojis on macOS will be in color, while those on Windows will appear in monochrome.
+    > * The screenshots in this User Guide will primarily be from macOS.
 
 5. Enter a command:
 
@@ -74,7 +74,7 @@ The table below provides a quick overview of each parameter associated with a co
 >
 > * Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
 >
-> * A person is considered as a duplicate if they share the same phone number or email address regardless of whether they are a student or teacher. For example, adding a student with the phone number `12345678` will result in an error if another student or teacher already has the same phone number. 
+> * A person is considered a duplicate if they share the same phone number or email address, regardless of whether they are a student or teacher. For example, adding a student with the phone number `12345678` will result in an error if another student or teacher already has that phone number. 
 
 | Parameter           | Definition                                                        | Constraints                                                                                                                       | Examples                                                                   |
 |---------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -223,7 +223,7 @@ Format: `delete INDEX…​`
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 >
-> If any index provided is invalid, the command will not be executed.
+> The command will not be executed if any of the provided indexes are invalid.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EduConnect.
@@ -277,15 +277,20 @@ Format: `unmark INDEX…​`
 * The person corresponding to the index must be a student.
 * The student must have attended at least one day to be unmarked.
 
-Example:
-* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
-* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
-* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
-
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
 > Use the `find` command to filter the list of students before unmarking their attendance.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The command will not be executed if any of the provided indexes are invalid.
+
+Example:
+* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
+* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
+* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
 
 #### Reset attendance: `resetAttendance`
 
@@ -320,8 +325,8 @@ Finds and displays person(s) who satisfies the provided parameters.
 Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`
 
 * At least one of the optional fields must be provided.
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `/name Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `/name Hans Bo` will match `Bo Hans`.
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -333,11 +338,11 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 > 
-> Only full words will be matched e.g. `/name Han` will not match `Hans`
+> Only full words will be matched e.g. `/name Han` will not match `Hans`.
 
 Examples:
-* `find /name John` returns `John` and `John Doe`
-* `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
+* `find /name John` returns `John` and `John Doe`.
+* `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A).
 
 #### Sorting persons : `sort`
 
@@ -375,7 +380,7 @@ Examples:
 
 ### Command History
 
-EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. <br> For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2` in your command box, and pressing it again will display `delete 1`.
+EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. <br><br/> For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2` in your command box, and pressing it again will display `delete 1`.
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
@@ -418,7 +423,7 @@ Format: `redo`
 
 Examples:
 * `edit 1 /name Alex Koh` followed by `undo` and then `redo` restores the name of the 1st person back to `Alex Koh`.
-* `delete 3` followed by `undo` and then `redo` removes the person at position 3 from the list
+* `delete 3` followed by `undo` and then `redo` removes the person at position 3 from the list.
 
 [Back to Table of Contents](#table-of-contents)
 
