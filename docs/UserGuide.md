@@ -246,6 +246,25 @@ Examples:
 * `import students.csv` imports student data from students.csv
 * `import ~/documents/students.csv` imports from the home directory
 
+# Consultations
+
+The consultation list is shown in the middle of TAHub.<br>
+Currently, you can:
+- Add and delete consultations
+- Add and remove students from consultations
+
+In a consultation, students are represented by name tags.<br>
+
+![UgConsultation.png](images/UgConsultation.png)
+
+This is an example of a consultation. In this example, `Nakahara Chuuya` & `Osamu Dazai`
+are in the consultation on 2024-12-05, 09:00.
+
+Additionally, consultations that have passed (the time is before your computer's time)
+will be displayed in red, as follows:
+
+![UgRedConsultation.png](images/UgRedConsultation.png)
+
 ## Consultation Commands
 
 ### Adding a consultation : `addconsult`
