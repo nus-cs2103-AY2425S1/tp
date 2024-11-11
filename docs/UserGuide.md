@@ -508,7 +508,7 @@ Examples:
 </div>
 
 ---
-### **Archive customer: `archive`**
+### Archive customer: `archive`
 
 Archive a customer so that it doesn't show when we run `list`
 
@@ -527,7 +527,7 @@ Assuming there's at least one person that is unarchived.
 2. `archive 1`
 
 ---
-### **List archived customer: `listarchive`**
+### List archived customer: `listarchive`
 
 Shows all archived customers only in contact list
 
@@ -541,7 +541,7 @@ Assuming there's at least one person that is archived.
 1. `listarchive`
 
 ---
-### **Unarchive customer: `unarchive`**
+### Unarchive customer: `unarchive`
 
 Unarchive a customer so that it shows when we run `list`
 
@@ -561,7 +561,7 @@ Assuming there's at least one person that is archived.
 
 ---
 
-### **Downloading Customer Data: `download`**
+### Downloading Customer Data: `download`
 Exports the currently displayed contact list data as a CSV file with optional tag-based filtering.
 
 
