@@ -35,7 +35,6 @@ This guide will walk you through HallPointer’s main features and show you step
   - [Exiting the program : `exit`](#exiting-the-program--exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
-  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 
@@ -150,6 +149,7 @@ Adds a member to Hall Pointer. A member must have a name, room assignment, and T
 - If you have multiple members with the same name, consider adding a distinguishing initial or number (e.g. "Daniel L", "Daniel O", "Daniel 2").
 
 </box>
+
 **Examples:**
 
 - `add_member n/John Doe r/4-3-301 t/johndoe123` adds a member with name `John Doe` in room `4-3-301` and Telegram username `johndoe123`.
@@ -183,13 +183,13 @@ Updates an existing member in Hall Pointer.
 
 <box type="tip" seamless>
 
-**Tip:** At least one of the optional fields must be provided. Existing values will be updated to the input values.
-
-</box>
-
+**Tips:** 
+- At least one of the optional fields must be provided. Existing values will be updated to the input values.
 - Updates the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. The index **must be a positive integer** 1, 2, 3, …​.
 - When updating tags, the existing tags of the member will be removed; i.e., adding of tags is not cumulative.
 - You can remove all the member’s tags by typing `tag/` without specifying any tags after it.
+
+</box>
 
 **Examples:**
 
@@ -199,7 +199,7 @@ Updates an existing member in Hall Pointer.
 
 
 
-  ![result for 'update_member 1 t/johndoe123_updated n/Johnson Doe'](images/updateCommandResult.png)
+![result for 'update_member 1 t/johndoe123_updated n/Johnson Doe'](images/updateCommandResult.png)
 ---
 
 ### Locating members by name: `find_members`
@@ -256,21 +256,22 @@ Adds a session to Hall Pointer and associates it with specified members. A sessi
 
 **Format:** `add_session s/NAME d/DATE p/POINTS m/INDEX [m/INDEX]…`
 
+**Constraints:** 
+- **Points** should be an integer between 0 and 100. A maximum of 100 points can be awarded to any session.
+- **Duplicate Session** You cannot add a session to a member if the member already attended a session with the same name
+- **Unique Session Name**: Each session name must be unique within a member. This ensures that each session is distinct and prevents duplicate records.
+
 <box type="tip" seamless>
 
-**Tip:** 
-- **Points** should be an integer between 0 and 100. A maximum of 100 points can be awarded to any session.
+**Tips:** 
 - **Multiple members** If you have multiple members attending the session, you can add them sequentially by specifying their indexes.
-- **Duplicate Session** You cannot add a session to a member if the member already attended a session with the same name. 
-If you wish to add multiple sessions with the same name to a member, consider adding a unique identifier to the session name (e.g., "Rehearsal 1", "Rehearsal 2").
+- **Duplicate Session** If you wish to add multiple sessions with the same name to a member, consider adding a unique identifier to the session name (e.g., "Rehearsal 1", "Rehearsal 2").
 
 </box>
 
 <box type="warning" seamless>
 
-**Constraints:**<br>
 
-- **Unique Session Name**: Each session name must be unique within a member. This ensures that each session is distinct and prevents duplicate records. 
 
 </box>
 
@@ -287,7 +288,7 @@ This command finds members who have attended sessions with names that contain an
 
 **Format:** `find_sessions KEYWORD [MORE_KEYWORDS]…`
 
-**Tips:**
+**Constraints:**
 - **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
 - **Order of Keywords:** The order of keywords does not affect the search results. For example, `AGM meeting` will match sessions with names containing either `AGM` or `meeting`.
 - **Full Word Matching:** Only full words are matched; e.g., `team` will not match `tea`.
@@ -310,7 +311,7 @@ Deletes a session associated with one or more members in Hall Pointer.
 
 **Format:** `delete_session s/NAME m/INDEX [m/INDEX]…`
 
-**Tips:**
+**Constraints:**
 - **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
 
 **Examples:**
