@@ -109,9 +109,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("view Diddy")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `view Diddy` Command" />
 
 <box type="info" seamless>
 
@@ -455,10 +455,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The student `John` is in the list
+    1. Prerequisites: List all students using the `list` command. The student `John` is in the list, but not the student `Jane`.
 
     1. Test case: `deletes n/John`<br>
-       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. 
 
     1. Test case: `deletes n/Jane`<br>
        Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
