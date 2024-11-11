@@ -237,23 +237,34 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits a specified person in EduContacts.
+Edits a specified person in EduContacts. This command has 2 formats.
 
-Format:
+Format 1:
 ```bash
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
 
-
 * Edits a person's details according to the fields specified.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Editing of `MODULE` using this format is not supported.
 
-Examples:
-*  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
-*  `edit 12345678 c/Computer Science` will edit a person with student ID of `12345678` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
+Example:
+*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
+
+Format 2:
+```bash
+edit ID m/OLD_MODULE m/NEW_MODULE
+```
+
+* Edits a person's module according to the fields specified.
+* Existing values will be updated to the input values.
+* Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
+
+Example:
+*  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
 
 <br>
 
