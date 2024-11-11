@@ -924,7 +924,7 @@ Claims listed for policy type POLICY_TYPE of client: NAME
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Prudy home folder.
 
 **Q**: Why am I getting an error when executing commands?<br>
-**A**: Ensure that the command syntax (e.g. `list-claims INDEX pt/POLICY_TYPE`) is correct, and that the flags (e.g. `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure.
+**A**: Ensure that the command syntax (e.g., `list-claims INDEX pt/POLICY_TYPE`) is correct, and that the flags (e.g., `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure.
 
 **Q**: Does Prudy support special characters in client names or addresses?<br>
 **A**: Currently, Prudy does not support special characters in client names. However, addresses and descriptions can include alphanumeric characters and symbols.

@@ -598,7 +598,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 - 2f. The provided claim status is invalid.
-   - 2b1. Prudy shows an error message.
+   - 2f1. Prudy shows an error message.
 
       Use case ends.
 
