@@ -1,11 +1,22 @@
 
+<!--
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
+-->
 
-# EduLog User Guide
+<div style="display: flex; align-items: center;">
+  <div style="flex: 0 0 auto;">
+    <img src="images/EduLog.png" alt="EduLog Logo" style="width: 90px; height: auto;" />
+  </div>
+ <div style="margin-left: 15px;">
+    <h1 style="font-size: 40px; padding-top: 20px; margin-bottom: 0;">EduLog User Guide</h1> <!-- Remove bottom margin on h1 -->
+    <h2 style="font-size: 30px; color: black; margin-top: 0; font-weight: normal;">for Educators</h2> <!-- Subtitle style -->
+ </div>
+</div>
+
 
 EduLog is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLog can get your contact management tasks done faster than traditional GUI apps.
 
@@ -14,7 +25,18 @@ EduLog is a **desktop app for managing contacts, optimized for use via a  Line I
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+
+<box>
+    <h7 style="display: flex; align-items: center; color: black; font-weight: 600; margin-bottom: 10px">
+      <img src="images/IdeaIcon.png" alt="Navigation Icon" style="width: 20px; height: 20px; margin-right: 10px;">
+      Navigation Tip
+    </h7>
+    <p><code>Use Ctrl</code> + <code>F</code> (Windows) or <code>Cmd</code> + <code>F</code> (MacOS) to find specific content on the page.</p>
+</box>
+
+
+
+<h2 style="color: black"> Quick start </h2>
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -27,11 +49,10 @@ EduLog is a **desktop app for managing contacts, optimized for use via a  Line I
     * On Windows: `C:\Users\Your\Username\Desktop\MyApps`
     * On Mac/Linux: `/Users/YourUsername/Desktop/MyApps`
 
-
-
+   
 A screen (User Interface) similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-![Ui](images/Ui.png)
+<img src="images/UI.png" alt="UI" style="width: 780px;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
 
@@ -50,41 +71,40 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 
 
 6. Refer to the [Features](#features) below for details of each command.
- 
 
-# **Features**
 
-<box type="info" seamless> 
+<h2 style="color: black; padding-top: 30px"> Features </h2>
 
-- **Notes about the command format:** <br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
-
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional. <br>
-
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…` after them can be used multiple times including zero times.
-
-  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.
-
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
-
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
+<box>
+    <h5 style="display: flex; align-items: center; color: black; font-weight: 600; margin-bottom: 10px">
+      <img src="images/InfoIcon.png" alt="Info Icon" style="width: 20px; height: 20px; margin-right: 10px;">
+      Notes about the command format
+    </h5>
+    <ul>
+      <li style="margin-bottom: 15px;">Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
+        e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.
+      </li>
+      <li style="margin-bottom: 15px;">Items in square brackets are optional. <br>
+        e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.
+      </li>
+      <li style="margin-bottom: 15px;">Items with <code>…</code> after them can be used multiple times including zero times. <br>
+        e.g. <code>[t/TAG]...</code> can be used as <code> </code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.
+      </li>
+      <li style="margin-bottom: 15px;">Parameters can be in any order. <br>
+        e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.
+      </li>
+      <li style="margin-bottom: 15px;">Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.<br>
+        e.g. if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
+      </li>
+      <li style="margin-bottom: 15px;">If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+      </li>
+    </ul>
 </box>
 
-## **General commands**
 
-### **Viewing help : `help`**
+### 1. General commands
+
+#### 1.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -92,22 +112,22 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### **Exiting the program : `exit`**
+#### 1.2 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## Student Commands
+### 2. Student Commands
 
-### Adding a student: `add`
+#### 2.1 Adding a student: `add`
 
 Adds a student to the edulog.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]...`
 
 <box type="tip" seamless>
-**Tip:** A person can have any number of tags (including 0)
+Tip: A person can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -115,13 +135,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 * `add n/Ben Lim p/98765432 e/ben@example.com a/John street, block 123, #01-01 f/100`
-### Listing all students : `list`
+#### 2.2 Listing all students : `list`
 
 Shows a list of all students in the edulog.
 
 Format: `list`
 
-### Editing a student : `edit`
+#### 2.3 Editing a student : `edit`
 
 Edits an existing student in the edulog.
 
@@ -138,7 +158,8 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 * `edit 2 f/50` Edits the tuition fee of the 2nd student to $50
-### Locating students by name: `find`
+
+#### 2.4 Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -155,9 +176,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a student : `delete`
+#### 2.5 Deleting a student by index: `delete`
 
 Deletes the specified student from the edulog.
 
@@ -172,7 +191,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the edulog.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Deleting a student by Name: `delete`
+#### 2.6 Deleting a student by name: `delete`
 
 Deletes the specified student from the edulog.
 
@@ -187,57 +206,18 @@ Examples:
 * `list` followed by `delete Nikhil` deletes student named “Nikhil” in the edulog.
 * `find Betsy` followed by `delete Betsy` deletes the student in the results of the `find` command.
 
-### Clearing all entries : `clear`
+#### 2.7 Clearing all entries : `clear`
 
 Clears all entries from the edulog.
 
 Format: `clear`
 
-### Marking a student as paid: `mark'
+#### Summary of Student Commands
+<img src="images/demos/studentCommands/collatedCommands.png" alt="UI" style="width: 900px;">
 
-Denotes an existing student as paid. The student may either be identified by index number
-in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+### 3. Calendar Commands
 
-Format: `mark <INDEX - must be a positive integer>` OR `mark <STUDENT NAME>`
-
-Examples:
-* `mark 3`
-* `mark Alex Yeoh`
-
-### Marking all students' as paid: `markall'
-
-Denotes all existing students as paid.
-
-Format: `markall`
-
-Examples:
-* `markall`
-* `markall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
-
-### Unmarking a student as paid: `unmark'
-
-Denotes an existing student as unpaid. The student may either be identified by index number
-in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
-
-Format: `unmark <INDEX - must be a positive integer>` OR `unmark <STUDENT NAME>`
-
-Examples:
-* `unmark 3`
-* `unmark Alex Yeoh`
-
-### Unmarking all students' as paid: `unmarkall'
-
-Denotes all existing students as unpaid.
-
-Format: `unmarkall`
-
-Examples:
-* `unmarkall`
-* `unmarkall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
-
-## Calendar Commands
-
-### Adding a lesson: `addc`
+#### 3.1 Adding a lesson: `addc`
 
 Adds a lesson to the edulog.
 
@@ -262,13 +242,13 @@ Note:
 exactly 2 days, ending the day after the start day.
 - However, lessons are not allowed to have exactly the same start and end time.
 
-### Listing all lessons : `dc`
+#### 3.2 Listing all lessons : `dc`
 
 Shows a list of all lessons in the edulog.
 
 Format: `dc`
 
-### Deleting a lesson : `deletec`
+#### 3.3 Deleting a lesson : `deletec`
 
 Deletes the student identified by the description used in the displayed calendar.
 
@@ -281,19 +261,72 @@ Examples:
 
 * `deletec Secondary 4 Chemistry Class`
 
-## Gift Command
+#### Summary of Calendar Commands
+<img src="images/demos/calendarCommands/collatedCommands.png" alt="UI" style="width: 900px;">
 
-### Get a random gift idea: `gift`
+
+### 4. Gift Command
+
+#### 4.1 Get a random gift idea: `gift`
 
 Generates a random gift idea.
 
 Format: gift
 
-### Discount Links `[coming in v2.0]`
+#### 4.2 Discount Links `[coming in v2.0]`
 
 *Details coming soon ...*
 
-## Revenue
+#### Summary of Gift Commands
+<img src="images/demos/giftCommands/collatedCommands.png" alt="UI" style="width: 300px;">
+
+
+### 5. Revenue Commands
+
+
+#### 5.1 Marking a student as paid: `mark'
+
+Denotes an existing student as paid. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
+Format: `mark <INDEX - must be a positive integer>` OR `mark <STUDENT NAME>`
+
+Examples:
+* `mark 3`
+* `mark Alex Yeoh`
+
+#### 5.2 Marking all students' as paid: `markall'
+
+Denotes all existing students as paid.
+
+Format: `markall`
+
+Examples:
+* `markall`
+* `markall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
+#### 5.3 Unmarking a student as paid: `unmark'
+
+Denotes an existing student as unpaid. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
+Format: `unmark <INDEX - must be a positive integer>` OR `unmark <STUDENT NAME>`
+
+Examples:
+* `unmark 3`
+* `unmark Alex Yeoh`
+
+#### 5.4 Unmarking all students' as paid: `unmarkall'
+
+Denotes all existing students as unpaid.
+
+Format: `unmarkall`
+
+Examples:
+* `unmarkall`
+* `unmarkall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
+#### 5.5 Calculating Revenue
 
 * Calculates the total amount of money earned from student who has paid/not paid
 * Filters the list of students based on their payment status.
@@ -309,13 +342,17 @@ where S is `paid` or `unpaid` and X is the money earned.
 If `revenue paid` is used, only students who have paid will be shown in the list.
 If `revenue unpaid` is used, only students who have not paid will be shown in the list.
 
-## Data Files
+#### Summary of Revenue Commands
+<img src="images/demos/revenueCommands/collatedCommands.png" alt="UI" style="width: 900px;">
 
-### Saving the data
+
+### 6. Data Files
+
+#### 6.1 Saving the data
 
 EduLog data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### 6.2 Editing the data file
 
 EduLog data are saved automatically as a JSON file `[JAR file location]/data/edulog.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -325,26 +362,24 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+#### 6.3 Archiving data files `[coming in v2.0]`
 
 *Details coming soon ...*
 
 ## 
 
-## FAQ
+<h2 style="color: black; padding-top: 30px"> FAQ </h2>
 
 **Q**: How do I transfer my data to another Computer?
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLog home folder.
 
-## 
-
-## Known issues
+<h2 style="color: black; padding-top: 30px"> Known Issues </h2>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
-## Command summary
+<h2 style="color: black; padding-top: 30px"> Command Summary </h2>
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -357,4 +392,3 @@ Action     | Format, Examples
 **Help**   | `help`
 **Gift**   | `gift`
 **Revenue**| `revenue` <br> e.g. `revenue paid`, `revenue unpaid`
-
