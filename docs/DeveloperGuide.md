@@ -7,21 +7,21 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Ikonli](https://github.com/kordamp/ikonli)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -32,24 +32,24 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **Architecture Diagram** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+`Main` (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [`UI`](#ui-component): The UI of the App.
+* [`Logic`](#logic-component): The command executor.
+* [`Model`](#model-component): Holds the data of the App in memory.
+* [`Storage`](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[`Commons`](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -59,10 +59,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its **API** in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its **API** in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -70,13 +70,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -87,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -113,12 +113,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AgentAssistParser` returns back as a `Command` object.
-  * `FilterCommandParser` is explicitly shown as unlike other command parsers, `FilterCommandParser` performs an additional task: it creates multiple predicate classes, which are combined into a `CombinedPredicate`.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) and `FilterCommandParser` inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`).
+* `XYZCommandParser` is responsible for parsing the command details and constructing an `XYZCommand object` (e.g., `AddCommand`).This `XYZCommand` object is then returned to the `AgentAssistParser` as a `Command` object.
+    * Note: `FilterCommandParser` performs an additional step by creating multiple predicate classes (e.g., `NameContainsSubstringPredicate`). These individual predicates are then combined into a single `CombinedPredicate`.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `FilterCommandParser`, etc.) implement the `Parser` interface, allowing them to be handled consistently, such as in testing scenarios.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -132,7 +133,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -147,21 +148,102 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 1. Add Command
+### 1. Tier and status attributes
 
-### 2. Edit Command
+Given that this software is designed to support credit card sales to clients, having predefined credit card tiers aligned with the bank’s product offerings is essential. These tiers provide valuable insights into a customer’s spending habits and allow agents to tailor their sales strategies accordingly.
 
-### 3. Delete Command
+Additionally, the inclusion of a status attribute for clients, indicating whether follow-up action is required, enhances customer satisfaction. This feature helps agents keep track of promised actions, reducing the risk of missed commitments and ensuring a more reliable service experience.
+
+This section will describe in detail the current implementation and design considerations of these two attributes.
+
+#### Current implementation
+
+The tier and status fields are classes which contain an enum value. 
+
+![TierStatusAttributes](images/TierStatusAttributes.png)
+
+Using enums helps to limit the range of possible values for `Tier` and `Status`.
+
+For `Tier`, this approach models the real-world scenario of a bank offering a predefined list of credit card services. It also accounts for the possibility of clients who have applied for, but been denied, a credit card.
+
+We believe that this information can help Agents understand at a glance, their customer's needs better.
+
+The usage of an Enum in `Tier`, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services.
+
+When modifying the `Enum`, remember to also update the CSS files `ClientDetailPanel.css` and `ClientListCard.css`. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new `Enum` settings. Here is an example of the changes to a css file after renaming one enum value to `TEST`:
+![img_1.png](images/CssFileSetting.png)
+![img_2.png](images/UIChangeAfterCSSFileChange.png)
+
+The `Enum` used in `Status` follows a similar rationale as `Tier`, with the key constraint that each client status is limited to a set of predefined values. These statuses have been color-coded throughout the UI for clear visual cues:
+
+- `NA` – Indicates a client with no required follow-up from the agent. This status is represented by green to signify a positive state, requiring no immediate action.
+- `NON_URGENT` – Indicates a client for whom follow-up is needed, but not urgently. This is represented by orange, signifying that action is required but not immediately pressing (e.g., within a few days).
+- `URGENT` – Indicates a client requiring immediate follow-up. This status is highlighted in red to draw attention to the need for prompt action by the agent.
+
+By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
+
+### 2. Add Command
+The add command is used to add new clients into the existing list of clients. The `add` client will refuse to add any clients that are 'duplicates' of any existing clients. 
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+#### Current implementation
+This is a high-level view of what occurs when the `add` command is executing. 
+![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
+
+There are a total of 3 checks that occur:
+1. A check for invalid flags and missing mandatory flags.
+2. A check for invalid values provided to any of the flags specified.
+3. A check as to whether there already exists a client with the same details, that would make these two client the same people.
+![AddActivityDiagram-Add_Activity_Diagram.png](images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+
+Take note that the error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+### 3. Edit Command
+The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+Here is a high-level view of the logic flow when the `edit` command is run.
+![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
+
+There are a total of 5 checks that occur, and they occur in sequential order:
+1. Index specified is not negative.
+2. At least one flag is specified.
+3. Both the `remark new` and `remark append` flags are not used together.
+4. Index specified is within range of the current filtered list.
+5. All values passed are valid fort
+
+#### Current implementation
+When users enter in the `edit` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
+1. Positive
+2. Is an index inside the current viewed list of clients.
 
 
+### 4. Delete Command
+The `delete` command is used to remove client's contacts from the existing list of clients saved in AgentAssist.
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+#### Current implementation
+When users enter in the `delete` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
+1. Positive
+2. Is an index inside the current viewed list of clients. 
+
+Here is a high-level view of the methods involved when the `delete` command is run and the user approves of the deletion after a confirmation prompt is showed.
+![DeleteSequenceDiagram.png](images%2FDeleteSequenceDiagram.png)
+
+This follows the activity diagram shown below:
+
+![DeleteActivityDiagram.png](images%2FDeleteActivityDiagram.png)
+
+The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
 
 
-
-## **Planned enhancements**
+## Planned enhancements
 
 ### 1. Multi-Language Support
 **Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
@@ -169,7 +251,7 @@ This section describes some noteworthy details on how certain features are imple
 **Proposed Solution:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
 
 ### 2. Support for Forward Slash in Names
-**Current Issue:** Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
+**Current Issue:** Names containing forward slashes (e.g., `Ramesh s/o Ravichandran`) are incompatible with `add`, `edit`, and `filter` commands due to two problems:
 
 1. The parser misinterprets "s/o" as a Status flag command, resulting in an invalid status error
 2. The name validation regex explicitly blocks forward slashes to prevent parsing conflicts
@@ -177,12 +259,20 @@ This section describes some noteworthy details on how certain features are imple
 **Technical Impact:**
 - Allowing forward slashes would create ambiguous parsing scenarios
 - Example of resulting error message:
-  ![Confusing error message](images/PlannedEnhancementBug1.png)
+  ![Confusing error message](images/PlannedEnhancementForwardSlash.png)
 
-**Status:** Implementation deferred to a future release due to the complexity of potential solutions and risk of introducing new bugs.
+**Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
-### 3. Data Import/Export Functionality
-**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' agentassist data files, or share their data files with other users.
+### 3.  Support for Symbols such as `@` and Parentheses in Names
+**Current Issue:** ames containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
+
+**Technical Impact:**
+- There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
+
+**Status:** Scheduled for future release as an enhancement to improve flexibility in name handling, allowing a broader range of symbols in user inputs.
+
+### 4. Data Import/Export Functionality
+**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' AgentAssist data files, or share their data files with other users.
 
 **Proposed Enhancement:** Add UI buttons in the application menu for:
 - Importing data files
@@ -190,25 +280,45 @@ This section describes some noteworthy details on how certain features are imple
 
 **Status:** Scheduled for future release as current manual process provides a workable solution.
 
-### 4. Error Message Improvement
+### 5. Error Message Improvement
 **Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
-- ![img.png](images/incorrectPhoneEditError.png)
-- ![differentEditError.png](images/differentEditError.png)
-- ![editErrorWithHint.png](images/editErrorWithHint.png)
-These images illustrate varying error message formats for the `edit` command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
+- Using `edit` without index nor flags:
+![EditErrorNoIndex.png](images/EditErrorNoIndex.png)
+- Using `edit` with index only:
+![EditErrorWithIndex.png](images/EditErrorWithIndex.png)
+- Using `edit` with index and `p/` flag without an argument: 
+![editErrorWithIndexAndPhone.png](images/EditErrorWithIndexAndPhone.png)
+
+These images illustrate varying error message formats of the `edit` command. 
+
+While some messages provide the full command hint, others offer minimal guidance, leading to an inconsistent user experience. This inconsistency extends beyond the `edit` command, as other error messages of other commands also vary in its level of information. In certain cases, error messages merely identify the issue without offering additional guidance, while others incorporate helpful usage hints.
 
 Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
 
 **Proposed Enhancement:** Standardize error message types and improve command hints:
-- `Incorrect command format` type error messages - Triggered when required flags are missing..
-  - Message format: 'Incorrect command format' + command hint.
-- `Invalid flag values` type error messages - Triggered when all necessary flags are present, but one or more flag values are invalid.
-  - Message format: Flag-specific error messages + command hint.
-- Clarify edit command hint – Add information on the constraint preventing simultaneous use of rn/ and ra/ flags.
+- `Incorrect command format` Error Messages 
+  - Triggered when required flags are missing.
+  - Message format: "Incorrect command format” followed by a command usage hint.
+- `Invalid flag values` Error Messages
+  - Triggered when all necessary flags are present, but one or more flag values are invalid.
+  - Message format: Flag-specific error message followed by a command usage hint.
+- Enhanced Usage Hint for `edit` Command
+  - Include guidance indicating that the rn/ and ra/ flags cannot be used simultaneously.
 
-**Status:** Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
-1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency. 
-2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
+**Status:** Scheduled for future release, as:
+1. The current error messages are functional and provide sufficient guidance for users. However, standardizing them will improve usability by minimizing confusion and ensuring consistent messaging.
+2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
+
+### 5. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
+**Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+- `income` must be a full, valid 8-digit phone number.
+- `email` must be a valid email address.
+
+These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
+
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the filter command, allowing any input and matching based on substrings rather than strict validation.
+
+**Status:** Scheduled for future release due to current timeline priorities.
 
 ### 5. Warning for Edit Commands with Inputs Identical to Current Values
 **Current issue:** Users are not warned when the inputs for the `edit` command are the identical to the current values, resulting in no changes.
@@ -363,10 +473,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given edit option is invalid.
   * 3b1. AgentAssist shows an invalid parameter error message.
-  
+
     Use case resumes at step 3.
 * 3c. Provided values are invalid.
   * 3c1. AgentAssist shows the errors pertaining to the fields.
+
+    Use case resumes at step 3.
+
+* 3d. Provided values will cause edited client to become a duplicate of an existing client.
+  * 3d1. AgentAssist shows an error to inform the user that allowing this edit will result in a duplicate client.
+  * 3d2. No change occurs.
 
     Use case resumes at step 3.
 
@@ -392,8 +508,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to close detailed view. 
-2.  AgentAssist closes the detailed view.
+1. User requests to close detailed view. 
+2. AgentAssist closes the detailed view.
 
     Use case ends.
 
