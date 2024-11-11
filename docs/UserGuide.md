@@ -299,7 +299,7 @@ If everything went well, you'll be greeted by this view:
 
 ![edit_command](images/edit_command_tutorial.png)
 
-<div markdown="block" style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 </div>
@@ -509,7 +509,12 @@ You can efficiently manage your schedule by adding lesson(s) to a specific stude
 💡 **Tip**: You can also use the abbreviated command `addlsn` as a shortcut for `addlesson`.
 </div>
 <br>
-<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: When specifying lesson days, you can enter either the full day name (e.g., `Monday`) or a 3-letter abbreviation (e.g., `Mon`). This applies to all days of the week.
+</div>
+<br>
+<div style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ️❗️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
 </div>
@@ -637,7 +642,7 @@ This command allows you to shut down and exit the program.
 
 **Format**: `exit`
 
-<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
+<div style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ❗ **Warning**: This action will close the application. You will need to relaunch the application to use it again.
 </div>
@@ -682,6 +687,8 @@ As of `V1.5`, our app has a few limitations outlined below. Rest assured, we pla
 2. If you wish to edit a remark, first delete the incorrect one, then add the updated version.
 3. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
 4. Tags that are too long are cut off on the _Left Panel_.
+5. If you wish to edit a lesson, first delete the incorrect one, then add the updated version.
+6. After running edit, addremark, deleteremark, addlesson and deletelesson, the right panel will reset to the top, so you may need to scroll down to view your changes.
 
 We appreciate your understanding and patience!
 
@@ -699,7 +706,7 @@ Tuteez data are saved in your hard disk automatically after any command that cha
 
 Tuteez data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
+<div style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
 ❗ **Warning**: If your changes to the data file makes its format invalid, Tuteez will **discard all data and start with an empty data file** at the next run.  Hence, it is recommended to take a backup of the data file before editing it.<br>
 
