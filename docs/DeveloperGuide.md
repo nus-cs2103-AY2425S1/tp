@@ -212,6 +212,16 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+### Find feature
+
+#### Implementation
+
+The `find` command relies on the various `Predicate` classes, each of which encapsulates specific criteria to determine whether a contact matches the search conditions. These `Predicate` classes enable flexible and modular search logic, allowing the `find` command to filter contacts based on attributes such as `Name`, `Telegram`, `Role`, `FavouriteStatus`.
+
+The following sequence diagram shows how a `find f/` command goes through both `Logic` component and interacts with `Model`
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
 ### Switch Profile Feature
 
 The `switch` command allows users to manage separate profiles within the application, each storing independent data in an isolated session. This feature enables users to work on different datasets without interference, as if each profile represented a unique instance of the application.
