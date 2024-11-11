@@ -104,7 +104,7 @@ public abstract class Person {
         }
 
         boolean res = otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone());
         return res;
     }
 
