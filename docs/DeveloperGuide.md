@@ -268,7 +268,13 @@ Currently: KnottyPlanners support names in English language without special char
 
 Plan: To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
 
-10. 
+10. Improved Filtering
+
+Currently: The filter command in KnottyPlanners only allows for filtering to be done through the name or job fields.
+
+Plan: To allow users to filter with other fields such as phone number, address and email.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
