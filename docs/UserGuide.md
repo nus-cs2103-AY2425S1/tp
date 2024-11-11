@@ -629,8 +629,8 @@ Edits an existing public address of a contact.
   ![editpa](images/editpa-1.png)
 
 * `editpa 1 c/BTC l/MAIN WALLET pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br />
-  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be
-  updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+
   ![editpa](images/editpa-2.png)
 
 <br>
