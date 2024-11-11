@@ -110,10 +110,6 @@ Examples:
 
 - `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
-You can add the prefixes in any order you want!
-</div>
-
 <figure style="text-align: center;">
   <img src="images/add_person.png" alt="result for 'add person'" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>command: <code>add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity</code></figcaption>
@@ -154,7 +150,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - A person's phone number must be unique.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
@@ -187,7 +183,7 @@ Examples:
 
 <figure style="text-align: center;">
   <img src="images/find_person.png" alt="find person" style="display: block; margin: 0 auto; border-radius: 10px;">
-  <figcaption>command: <code>find person john bernice</code></figcaption>
+  <figcaption>command: <code>find person John Bernice</code></figcaption>
 </figure>
 
 ### Viewing person by name: `view person`
@@ -263,7 +259,7 @@ Examples:
 </figure>
 
 <figure style="text-align: center;">
-  <img src="images/delete_person_confirmation.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <img src="images/delete_person.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
 </figure>
 
@@ -296,10 +292,6 @@ Examples:
 
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
 - `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
-You can add the prefixes in any order you want!
-</div>
 
 <figure style="text-align: center;">
   <img src="images/add_event.png" alt="result for 'add event'" style="display: block; margin: 0 auto; border-radius: 10px;">
@@ -336,7 +328,7 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
@@ -402,7 +394,7 @@ This command allows you to filter events based on the exact celebrity name provi
 
 Format: `filter event CELEBRITY_NAME`
 
-- The search is case-insensitive. e.g. `bernice yu` will match `Bernice Yu`
+- The search is case-sensitive. e.g. `bernice yu` will not match `Bernice Yu`
 - The order of the keywords matters. e.g. `Bernice Yu` will not match `Yu Bernice`
 - Only the **full celebrity name** is searched.
 - Only full name will be matched. e.g. `Ber` will not match `Bernice`
@@ -430,7 +422,7 @@ Format: `delete event INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-  :bulb: **Tip: **
+  :bulb: **Tip:** 
   If you would like to delete all events at once, you can use the <a href="#clearing-all-events--clear-event">clear event</a> command.
 </div>
 
