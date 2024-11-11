@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentClass implements Comparable<StudentClass> {
 
     public static final String MESSAGE_GUI = "Student Class: %1$s";
-    public static final String MESSAGE_CONSTRAINTS = "Classes should a non-zero digit followed by a capital alphabet";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Classes should be a non-zero digit followed by a capital alphabet";
     /*
      * The first character of the class must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
