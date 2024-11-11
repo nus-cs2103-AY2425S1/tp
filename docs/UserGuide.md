@@ -6,7 +6,9 @@ pageNav: 3
 
 # Bridal Boss User Guide
 
-**Bridal Boss** is a desktop app designed for **wedding planners to managing contacts**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
+**Bridal Boss** is a desktop app designed for small to medium-scale **wedding planners to streamline contact management**. 
+It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, Bridal Boss will help you manage contacts faster than traditional GUI apps, combining speed with functionality to enhance your wedding planning experience. 
 
 <!-- * Table of Contents -->
 <page-nav-print />
