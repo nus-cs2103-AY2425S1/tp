@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to see the entire list of clients.
-2. AgentAssist shows a list of clients.
+2. AgentAssist shows a list of all clients.
 
     Use case ends.
 
