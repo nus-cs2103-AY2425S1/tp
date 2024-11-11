@@ -11,29 +11,29 @@ if () then ([valid command])
     if () then ([Exit Command])
         :Exit command is created;
         :Exit command is executed;
-        stop
+
     else ([not Exit Command])
         if () then ([Help Command])
             :Help command is created;
             :Help command is executed;
             :UI displays Help window;
-            stop
+
         else ([Other commands])
             :Respective parser parses arguments of specified command;
             if () then ([valid format])
                 :Command is created;
                 :Command is executed;
                 :UI displays executed message;
-                stop
+
             else ([invalid format])
                 :UI displays an error message;
-                stop
+
             endif
         endif
     endif
 else ([invalid command])
     :UI displays an error message;
-    stop
-endif
 
+endif
+stop
 @enduml

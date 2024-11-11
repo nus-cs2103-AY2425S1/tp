@@ -175,6 +175,7 @@ The following is an example JSON output for a person:
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## General Flow
 The activity diagram below illustrates the general flow of an interaction between the user and StoreClass.
 
@@ -184,8 +185,10 @@ The activity diagram below illustrates the general flow of an interaction betwee
 2. The AddressBookParser parses the command.
 3. If the command is a valid command and is of a valid format, the corresponding `Command` object is created.
 4. The `Command` object is executed by the `Logic` component.
-5. The `UI` component displays the result of the command execution to the user.
+5. The `UI` component displays the result of the command execution to the user. <br>
+
 ---
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -328,7 +331,7 @@ Here are the important aspects of the undo/redo implementation:
 
 The archive and load feature is achieved through `ArchiveCommand` and `LoadCommand` which both extend the `Command` class. When such command is executed, the LogicManager will update the Storage when necessary.
 
-#### The Following UML Object Diagrams will illustrate how archive and load are done
+The Following UML Object Diagrams will illustrate how archive and load are done
 
 Before the archiving or loading
 
