@@ -1219,11 +1219,44 @@ testers are expected to do more *exploratory* testing.
     - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
     - **Rationale:** Requiring the user to remember the customer's index may be unnecessary and would facilitate user convenience.
 
+
 2. **Allows detection of wrong prefix for commands**
     - **Problem:** Currently, we only detect the relevant prefix for each command and treat all other irrelevant prefixes as part of a parameter input.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
     - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used, instead of treating it as part of the parameters. We also considered allowing users to key in prefixes such as `n/` or `a/` as string inputs via the use of special symbols, possibly using a symbol such as `\`.
     - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
+
+
+3. **Improve error messages related to handling of index**
+    - **Problem:** Currently, having an invalid value (e.g. `0`, `1 2`) for `CUSTOMER_INDEX` and `ORDER_INDEX` will result in an error stating "Invalid command format!" along with the command format. While in the command format it states that said parameters must be a positive integer, the error message could be more concise.
+    - **Example:** User tries to delete a customer using `deletec 0`, the following error message is displayed:
+      ```
+      Invalid command format! 
+      deletecustomer: Deletes the customer identified by the index number used in the displayed customer list.
+      Parameters: CUSTOMER_INDEX (must be a positive integer)
+      Example: deletecustomer 1
+      ```
+    - **Solution:** Shorten the error message to state that the index should be a positive integer.
+    - **Rationale:** Stating that the command format is invalid in the first line of the error message may confuse the user in a case where they type an invalid index such as `1a` by mistake, as it is only the parameters which are incorrect in this case. Making the error message more concise also provides users with a better experience.
+
+
+4. **Improve display of longer messages or entries**
+   - **Problem:** Currently, longer messages or entries can be cut off, especially for users with smaller resolution/larger scale.
+   - **Example:** ![longMessages](images/longMessages.png)
+   - **Solution:** Improve text wrapping, allow customisable GUI and resizable UI parts.
+   - **Rationale:** Longer messages/entries being cut off may be inconvenient for certain users (e.g. being required to scroll left/right to read an error message). Hence, providing text wrapping, allowing users to customise the GUI (e.g. whether they prefer to display an ellipsis, wrap text, etc.) and resize the UI parts will give them more freedom to adjust based on their preferences and for convenience.
+
+
+5. **Include a warning if there is only one domain label provided for email**
+   - **Problem:** Currently, the `EMAIL` parameter accepts emails with only one domain label e.g. `johndoe@gmail`
+   - **Solution:** Allow emails with a single domain label, but provide a warning for it.
+   - **Rationale:** It is possible for some email address to have only one domain label, but we deem it unlikely to happen for the target users of this application. It is more likely that the user may forget to include a second domain label (e.g. missing `.com` in `johndoe@gmail.com`).
+
+
+6. **Make sample data more relevant/realistic to the context**
+   - **Problem:** Currently, the loaded sample data has customers who have tags such as `friends`, `neighbours`, etc.
+   - **Solution:** Change the tags (and any relevant sample data) to fit more with the context of the target user.
+   - **Rationale:** It is unlikely that a target user will label their customers as the current tags in the sample data. Making the sample data more relevant will allow users trying out the application to better simulate the experience of a target user using the application.
 
 ## **Appendix: Effort**
 
