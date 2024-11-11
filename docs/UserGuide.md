@@ -241,6 +241,8 @@ Deletes attendance of student for a particular date with the specified details.
 
 Format : `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
 Deletes attendance of all students in a tutorial group for a particular date
@@ -314,6 +316,8 @@ Format: `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GR
   this edits the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
 * Fields which are not specified will remain unchanged after the operation.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding Assignments by Tutorial Group : `addatg`
 
