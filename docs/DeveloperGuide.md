@@ -152,13 +152,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Proposed Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Undo/redo feature
+### Proposed Undo/redo feature
 
-#### Implementation
+#### Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
