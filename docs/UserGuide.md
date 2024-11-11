@@ -355,7 +355,7 @@ _Details coming soon ..._
 4. Some of the commands that edit contacts (such as `add` and `edit`) may have difficulty parsing input if some input fields match the prefixes for contact fields (such as `n/`, `p/`, `a/`, `e/`, `d/`, `ec/`, `t/`, and `r/`). 
 This is due to the way that parsing is handled: any text matching special prefixes will be identified as such.
 To work around this, please prepend a `_`, or any other accepted special character, in front of any input fields that contain a special prefix.
-6. another
+5. Entering an invalid emergency contact will produce the same error message as an invalid phone number. When receiving an error message about phone numbers, check both the `ec/` and `p/` field, if both are present.
 
 --------------------------------------------------------------------------------------------------------------------
 
