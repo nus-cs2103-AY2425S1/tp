@@ -175,8 +175,11 @@ Format: `rate INDEX r/[RATING]`
 * The rating can be empty
 
 Examples:
-*  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
-*  `rate 2 r/ ` Edits the rating of the 2nd restaurant to be `No Rating`.
+*  `rate 1 r/2` Sets the rating of the 1st restaurant to be `2`.
+*  `rate 2 r/ ` Sets the rating of the 2nd restaurant to be `No Rating`.
+
+Alternative:
+*  `edit 1 r/2` Edits the rating of the 2nd restaurant to be `2`.
 
 ### Searching for restaurants by price: `price`
 
