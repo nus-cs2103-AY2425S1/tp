@@ -33,6 +33,7 @@ HiredFiredPro is a desktop app to help hiring managers like you **streamline you
 <br><br>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## About This Document
 
