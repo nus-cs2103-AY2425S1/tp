@@ -523,12 +523,14 @@ In developing BridalBuddy, we've identified areas that can benefit from enhancem
 ### Support for managing multiple weddings
 
 **Feature Flaw in Current Implementation**
+
 Currently, BridalBuddy is designed to manage only a single wedding at a time. 
 This limits its functionality for users who may be planning multiple weddings simultaneously or managing various events, 
 such as wedding planners working with several clients. 
 Without support for multiple weddings, users may face challenges in organizing and accessing information for each event separately.
 
 **Proposed Enhancement**
+
 Introduce functionality to manage multiple weddings within the application. 
 This would include separate profiles or dashboards for each wedding, with individual guest and vendor lists. 
 Users could easily switch between weddings, ensuring all information remains organized and accessible. 
@@ -584,42 +586,50 @@ With this enhancement, a search query would return all results containing the sp
 ### Enhance `find` command to allow multiple types of prefixes to be used for each `find` command
 
 **Feature Flaw in Current Implementation**
+
 Currently, users can only use one type of prefix for each `find` command. As such, users are unable to use multiple types of prefixes within the same `find` command. 
 For example, `find n/John p/98765432` is an invalid command.
 
 **Proposed Enhancement**
+
 Enhance `find` command to allow multiple types of prefixes to be used for each `find` command so that users can search for multiple fields with a single `find` command.
 For example, with this enhancement, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
 
 ### Restrict special characters in the address field
 
 **Feature Flaw in Current Implementation**
+
 Currently, the address field accepts any character, including symbols like `$`, `%` or emojis, which are generally uncommon in typical addresses.
 This may result in inconsistent data entries and impact the professionalism and readability of the contact list.
 
 **Proposed Enhancement**
+
 Introduce validation for the address field to allow only common address characters (letters, numbers, spaces, commas, etc.) while restricting uncommon symbols and emojis.
 This will maintain consistent and realistic address entries.
 
 ### Expand current `stats` command to include additional metrics
 
 **Feature Flaw in Current Implementation**
+
 The existing `stats` command in BridalBuddy only provides statistics on guest attendance, such as counts of those attending, declining, or yet to respond.
 While this information is helpful, the feature could be improved by providing additional insights, such as the current budget—a crucial aspect of wedding planning. 
 Without budget metrics, planners may find it challenging to get a comprehensive view of the wedding's overall progress.
 
 **Proposed Enhancement**
+
 Enhance the `stats` command to display both attendance and budget metrics, providing a more comprehensive overview.  
 By combining attendance statistics with budget metrics, the enhanced `stats` command will give planners a fuller picture of the wedding’s status, making it easier to manage both attendance and finances in one place.
 
 ### Support for multiple currencies in budget tracking
 
 **Feature Flaw in Current Implementation**
+
 Currently, BridalBuddy's budget tracking feature only supports the dollar symbol (`$`), 
 which may not be suitable for users in countries where other currency symbols (such as `£`, `€`, `¥`, etc.) are standard. 
 This limitation can lead to confusion and reduce usability for international users who need their local currency symbol represented.
 
 **Proposed Enhancement**
+
 Update the budget tracking feature to allow users to input their preferred currency symbol. 
 This enhancement would enable planners to use a symbol that reflects their local currency, making the budget tracking experience more intuitive and globally accessible. 
 This change would improve clarity and provide a more personalized experience for users in various regions.
