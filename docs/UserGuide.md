@@ -268,7 +268,7 @@ Opens an attendance window for all students in a tutorial group for all dates th
 Format: `getattg tg/TUTORIAL_GROUP`
 
 ### Closing Attendance Window : `closeat`
-Closes all attendance windows if any is currently open.
+Closes all attendance windows if any are currently open.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +284,7 @@ Closes all attendance windows if any is currently open.
 | `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                      |
 | `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `A1234567N` </br> invalid: `B1234567C`, `A123B`     |
 | `d/`   | Dates should be in the format YYYY-MM-DD                                                                                                                                                                                                                   | valid: `2024-12-01` </br> invalid: `2023-5-1`, `5-1-2024`  |
-| `g/`   | Grade is an Decimal Number between 0 and 100 inclusive or `NULL` (Case Sensitive).                                                                                                                                                                         | valid: `NULL`, `5`, `98` </br> invalid: `101`, `null` |
+| `g/`   | Grade is an decimal number between 0 and 100 inclusive or `NULL` (Case Sensitive).                                                                                                                                                                         | valid: `NULL`, `5`, `98` </br> invalid: `101`, `null` |
 
 ### Adding Assignments : `adda`
 
