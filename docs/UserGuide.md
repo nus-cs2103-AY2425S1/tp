@@ -218,7 +218,7 @@ For more details on the `delete_guest` and `delete_vendor` commands, we encourag
 
 It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
 
-* :information_source: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time u open the app.
+* :information_source: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time you open the app.
 
 [_Back to Top_](#table-of-contents)
 
