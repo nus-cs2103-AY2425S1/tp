@@ -107,7 +107,7 @@ Events allow you to group contacts together in a sensible and seamless manner li
         <ul><li>e.g. in <code>list n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>list n/NAME</code>.</li></ul>
       </li>
       <li>
-        <code>[-TYPE_FLAG](#Glossary)</code> can be either <code>-c</code>, <code>-v</code> or <code>-e</code> for commands allowing specifying of type.<br>
+        <code><a href="#Glossary">[-TYPE_FLAG]</a></code> can be either <code>-c</code>, <code>-v</code> or <code>-e</code> for commands allowing specifying of type.<br>
         <ul><li>e.g. in <code>list -TYPE_FLAG</code>, <code>-TYPE_FLAG</code> can allow for filtering all clients with <code>-c</code> or vendor with <code>-v</code> or events with <code>-e</code>.</li></ul>
       </li>
       <li>
