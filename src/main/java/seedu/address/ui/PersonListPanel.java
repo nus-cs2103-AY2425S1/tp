@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -30,17 +29,6 @@ public class PersonListPanel extends UiPart<Region> {
         this.isVisualsEnabled = isVisualsEnabled;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell(mainWindow, isVisualsEnabled));
-
-        // Listen for ENTER key event on the list view
-        personListView.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-                if (selectedPerson != null) {
-                    new PersonCard(selectedPerson, personListView.getSelectionModel().getSelectedIndex() + 1,
-                            mainWindow, isVisualsEnabled).handleOnClick();
-                }
-            }
-        });
     }
 
     /**
