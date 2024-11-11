@@ -241,7 +241,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/strruggling`
+- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/struggling`
 
 Expected output:
 
