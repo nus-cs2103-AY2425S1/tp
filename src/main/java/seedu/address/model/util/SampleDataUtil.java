@@ -22,26 +22,57 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final Set<Product> EMPTY_PRODUCT_LIST = new HashSet<>();
+
     public static Supplier[] getSampleSuppliers() {
         return new Supplier[] {
-            new Supplier(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), EMPTY_PRODUCT_LIST),
-            new Supplier(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), EMPTY_PRODUCT_LIST),
-            new Supplier(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), EMPTY_PRODUCT_LIST),
-            new Supplier(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), EMPTY_PRODUCT_LIST),
-            new Supplier(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), EMPTY_PRODUCT_LIST),
-            new Supplier(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Fresh Foods Co."), new Phone("82430021"), new Email("contact@freshfoods.com"),
+                new Address("Blk 101 Geylang Street 11, #02-05"),
+                getTagSet("wholesaler", "foodsupplier"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Household Essentials Ltd."), new Phone("89273950"),
+                    new Email("info@householdessentials.com"),
+                new Address("Blk 88 Bedok North Avenue 3, #08-22"),
+                getTagSet("cleaningsupplies"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Beverages Unlimited"), new Phone("90234012"),
+                    new Email("sales@beveragesunlimited.com"),
+                new Address("Blk 52 Clementi Road, #10-02"),
+                getTagSet("drinkssupplier"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Snack Haven Pte Ltd"), new Phone("91827364"), new Email("orders@snackhaven.com"),
+                new Address("Blk 24 Tanjong Pagar Road, #03-14"),
+                getTagSet("snacks", "confectionery"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Dairy Delights"), new Phone("96543210"), new Email("service@dairydelights.com"),
+                new Address("Blk 55 Toa Payoh Lorong 5, #04-19"),
+                getTagSet("dairyproducts"), EMPTY_PRODUCT_LIST),
+            new Supplier(new Name("Eco Essentials"), new Phone("93428567"), new Email("contact@ecoessentials.com"),
+                new Address("Blk 77 Queenstown Way, #09-03"),
+                getTagSet("ecofriendly", "packaging"), EMPTY_PRODUCT_LIST),
+        };
+    }
+
+    public static Product[] getSampleProducts() {
+        return new Product[] {
+            new Product(new ProductName("Coca Cola Can 330ml"),
+                new StockLevel(10, 10, 20),
+                    getTagSet("beverages", "softdrinks")),
+
+            new Product(new ProductName("Instant Noodles - Chicken Flavor"),
+                new StockLevel(20, 10, 50),
+                getTagSet("snacks", "noodles")),
+
+            new Product(new ProductName("Toilet Paper Roll - 3 ply"),
+                new StockLevel(15, 10, 30),
+                getTagSet("householditems", "essentials")),
+
+            new Product(new ProductName("Chocolate Bar - Milk"),
+                new StockLevel(7, 10, 15),
+                getTagSet("snacks", "confectionery")),
+
+            new Product(new ProductName("Organic Whole Milk - 1L"),
+                new StockLevel(5, 5, 10),
+                getTagSet("dairyproducts", "organic")),
+
+            new Product(new ProductName("Biodegradable Food Packaging"),
+                new StockLevel(12, 5, 25),
+                getTagSet("packaging", "ecofriendly")),
         };
     }
 
@@ -49,6 +80,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Supplier sampleSupplier : getSampleSuppliers()) {
             sampleAb.addSupplier(sampleSupplier);
+        }
+        for (Product sampleProduct: getSampleProducts()) {
+            sampleAb.addProduct(sampleProduct);
         }
         return sampleAb;
     }

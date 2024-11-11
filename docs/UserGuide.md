@@ -1,5 +1,4 @@
 ---
-## Quick start
   layout: default.md
   title: "User Guide"
   pageNav: 3
@@ -24,7 +23,8 @@ With InvenTrack, you can:
 ## Table of Contents
 1. [Quick Start](#quick-start)
 2. [Notes about command format](#notes-about-the-command-format-and-other-information)
-3. [Features](#features)
+3. [Prefixes Glossary](#prefixes-glossary)
+4. [Features](#features)
    - [Viewing Help](#viewing-help--help-)
    - [Autocomplete](#autocomplete--)
    - [Adding a supplier](#adding-a-supplier-add_supplier-)
@@ -53,7 +53,7 @@ With InvenTrack, you can:
 ## Quick Start
 ### Step 1: Install Java
 Before you can use InvenTrack, ensure you have Java version `17` or above installed in your Computer. Java helps you to run our app in your desktop.
-- To check if Java is installed:
+To check if Java is installed:
   1. Open a command terminal using `cmd` in search (Command Prompt on Windows, Terminal on macOS/Linux). <br> Alternate way to open terminal: right-click on the opened folder or desktop, select `Open in terminal` option.
   2. Type the following command and press Enter:
     ```
@@ -81,7 +81,7 @@ To run InvenTrack, you need to open your command terminal and navigate to the fo
 
 ### Step 4: Run the Application
 To launch the application:
-1. In the terminal, type the following command and press Enter:
+1. After step 3, type the following command and press Enter:
     ```
     java -jar addressbook.jar
     ```
@@ -108,24 +108,53 @@ You can now start using the application by typing commands into the command box.
 Refer to the [Features](#features) below to know more about the commands you could use in this app.
 
 ## **Notes about the command format and other information:**
+> #### ⚠️ Placeholders in UPPER_CASE
+> Words like `PRODUCT_NAME` and `SUPPLIER_NAME` are placeholders for information you need to provide.
+> - **Example**: For `add_product n/PRODUCT_NAME`, replace the placeholder with actual values, such as `add_product n/Apples`.
+> #### 📘 Optional Items in Square Brackets
+> Items in square brackets are optional.
+> - **Example**: `add_product n/PRODUCT_NAME [stk/STOCK_LEVEL]` can be used as `add_product n/Apples` or as `add_product n/Apples stk/50`.
+> #### 🔁 Repeating Items with `…`
+> Items followed by **`…`** can be used multiple times or omitted.
+> - **Example**: `[t/TAG]…` can be used as ` ` (0 times), `t/beverage`, or `t/beverage t/important`, etc.
+> #### ❗ Extraneous Parameters Ignored
+> Commands that do not require parameters (such as `help`, `exit`, and `clear`) will ignore any extra inputs.
+> - **Example**: Typing `help 123` or `help -10` will be interpreted as `help`.
 
-> * **Words in UPPER_CASE**: Words like `PRODUCT_NAME` and `SUPPLIER_NAME` are placeholders for information you need to provide. <br>
- e.g For `add_product n/PRODUCT_NAME`, you would replace these placeholders with actual values, such as `add_product n/Apples`
-> * **Items in square brackets are optional.**<br>
- e.g `add_product n/PRODUCT_NAME [stk/STOCK_LEVEL]` can be used as `add_product n/Apples` or as `add_product n/Apples stk/50`.
-> * Items with **`…`** ​ after them can be **used multiple times including zero times.**<br>
- e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/beverage`, `t/beverage t/important` etc.
-> * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER e/SUPPLIER_EMAIL`, `p/PHONE_NUMBER e/SUPPLIER_EMAIL n/SUPPLIER_NAME` is also acceptable.
-> * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123` or `help -10`, it will be interpreted as `help`.
-> * If duplicate tags are found for product or supplier, the system takes only one copy of it, others are ignored. But it is case-sensitive, hence `reliable` and `RELIABLE` will be treated as DIFFERENT TAGS.
-> * Command words are case-insensitive. eg: `help` and `HELP` are the same.
-> * **Copying Commands from PDFs:** If you’re copying commands from a PDF, be careful that spaces at line breaks may be omitted when pasted, so double-check the spacing.
-> * Prefixes Glossary: <br>
-> `n/` is for the name of supplier/product <br> `pr/` is for product <br> `su/` is for supplier <br> `p/` is for phone number of supplier <br> `e/` is for email of supplier <br> `a/` is for address of supplier <br> `t/` is for tags added to suppliers/products <br> `stk/` is for stock level of product <br> `min/` is for minimum stock level of product <br> `max/` is for maximum stock level of product <br> 
-</box>
-<box type="info" seamless><box>
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> 
+    <ul>
+        <li><strong>Parameter Order:</strong> Parameters can be entered in any order.</li>
+        <li><strong>Commands are Case-Insensitive:</strong> Commands such as <code>help</code> and <code>HELP</code> are recognized as the same.</li>
+    </ul>
+</div>
+
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Caution:</strong>
+    <p><strong>🖨️ Copying Commands from PDFs:</strong> If you’re copying commands from a PDF, note that spaces at line breaks may be omitted when pasted, so double-check the spacing.</p>
+</div>
+
+### Prefixes Glossary:
+
+- **`n/`**: Represents the **name** of a supplier or product.
+
+- **`pr/`**: Refers to **product**.
+
+- **`su/`**: Represents a **supplier**.
+
+- **`p/`**: Used for the **phone number** of a supplier.
+
+- **`e/`**: Represents the **email address** of a supplier.
+
+- **`a/`**: Used for the **address** of a supplier.
+
+- **`t/`**: Stands for **tags** that can be added to either suppliers or products.
+
+- **`stk/`**: Indicates the **stock level** of a product.
+
+- **`min/`**: Represents the **minimum stock level** of a product.
+
+- **`max/`**: Represents the **maximum stock level** of a product.
 ---
 
 ## Features
@@ -150,9 +179,9 @@ Want the app to automatically complete the commands, supplier name or the produc
 
 - Just press tab button on your keyboard to see the information!
 
-> **NOTE:** 
-> It works only if you press tab button from your keyboard and only for the commands, supplier name or the product names currently.
-
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> It works only if you press tab button from your keyboard and only for the commands, after <code>pr/</code> or <code>su/</code> currently.
+</div>
 ![Autocomplete feature](images/autocomplete_feature.png)
 
 ---
@@ -164,18 +193,26 @@ First let us add your suppliers into the system.
 
 Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-> **NOTE:**
-> - A supplier can have any number of tags (including 0) <br>
-> - Currently, there is no restriction in phone number format, so you can have (+65) 97136544 or even +91-97664 23668, according to any country specific numbers you want to use.
-> - No value allows usage of "/", so if you want to use S/O in names, it is better to use alternatives like "son of" as there is no such limit for name length
-
 Here are a few examples to help you:
 * `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/23 Orchard Street, Suite 5`
 * `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/Organic`
 
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong>
+    <ul>
+        <li>A supplier can have any number of tags (including 0).</li>
+        <li>Currently, there is no restriction in phone number format, so you can use numbers like (+65) 97136544 or even +91-97664 23668, according to any country-specific format you prefer.</li>
+        <li>No value allows usage of "/", so if you want to use "S/O" in names, it's better to use alternatives like "son of," as there is no length restriction for names.</li>
+    </ul>
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
+    <strong>💡 Tip:</strong> If you made a mistake while entering a supplier's information, you can delete the supplier and add them again with the correct details.
+</div>
+
 ---
 
-### Adding a product : `add_product` 🧋🧶
+### Adding a product : `add_product` 🧶
 
 Now, let us add the products supplied in your store. 
 This command will help you add the product information into the system.
@@ -187,11 +224,13 @@ Here are a few examples to help you:
 - `add_product n/eggs stk/120` Adds product named eggs with current stock level as 120
 - `add_product n/hakka noodles stk/90 su/Rachel Geller` Adds product named hakka noodles with current stock level as 90 and is assigned to supplier Rachel Geller
 
-> **IMPORTANT**:
-> The product and supplier must already exist in the system before you can assign them.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong> If SUPPLIER_NAME is specified, supplier with that name must exist in system before product can be added.
+</div>
 
-> **NOTE:**
-> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+</div>
 
 ---
 
@@ -204,17 +243,25 @@ Format: `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`
 Here are a few examples to help you:
 - `assign pr/Tissue Paper su/Jacob Smith` assigns product named Tissue paper to supplier named Jacob Smith
 
-> **IMPORTANT**:
-> The product and supplier must already exist in the system before you can assign them.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong> The product and supplier must already exist in the system before you can assign them.
+</div>
 
-> **NOTE:**
-> If product has already been assigned to supplier, the system will notify you.
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> If product has already been assigned to a supplier, the system will notify you. If you want to assign this product to another supplier, unassign the product first.
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
+    <strong>💡 Tip: Want to speed up your typing?</strong>
+    <p>After typing the prefixes <code>pr/</code> or <code>su/</code>, press the Tab key on your keyboard. Typing some characters after <code>pr/</code> or <code>su/</code> will display matching supplier or product names, helping you complete entries quickly and accurately.</p>
+    <img src="images/assignautocomplete.png" alt="Autocomplete example" style="max-width:50%; margin-top:10px;">
+</div>
 
 - After executing the command you can scroll down to see the supplier for product has been assigned <br> <br>
 ![Assign feature](images/assign_feature.png)
 ---
 
-### Un-assigning a product to supplier: `unassign` 🧋 ❌ 🙋‍♀️
+### Un-assigning a product to supplier: `unassign` ❌ 🙋‍♀️
 
 This feature allows you to remove the assigned supplier from the previously connected product. Useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
 
@@ -223,12 +270,9 @@ Format: `unassign pr/PRODUCT_NAME`
 Here are a few examples to help you:
 - `unassign pr/Tissue Paper` Unassigns product named `Tissue paper`.
 
-> **IMPORTANT**:
-> The product and supplier which is to be unassigned from each other must exist in the system. <br>
-> The product must already be assigned before you can unassign them.
-
-> **NOTE:**
-> If product was not assigned to supplier, the system will notify you.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong> The product to be unassigned from each other must exist in the system.
+</div>
 
 ---
 
@@ -243,16 +287,20 @@ Here are a few examples to help you:
 * `set_threshold pr/chocolates max/230`
 * `set_threshold pr/sweater min/380 max/900`
 
-> **IMPORTANT:**
-> At least one of the prefixes is mandatory: min/ OR max/ <br>
-> (Prefixes min/ AND max/ can be used together also, see examples)
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong>
+    <ul>
+        <li>At least one of the prefixes is mandatory: <code>min/</code> OR <code>max/</code>.</li>
+        <li><code>min/</code> AND <code>max/</code> can be used together as well.</li>
+    </ul>
+</div>
 
-> **NOTE:**
-> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+</div>
 
 - Before executing the command
 ![Before set threshold](images/before_setthreshold.png)
-
 
 - After executing the command successfully
 ![Before set threshold](images/after_setthreshold.png)
@@ -268,12 +316,24 @@ Here are a few examples to help you:
 * `update_stock pr/sweater stk/1000`
 * `update_stock pr/chocolates stk/2623900`
 
-> **NOTE:**
-> Stock levels must be a number equal or above 0(zero).<br>
-> Products should already exist in the system, otherwise errors are displayed.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong>
+    <ul>
+        <li>Stock levels must be a number equal to or above 0 (zero).</li>
+        <li>Products should already exist in the system, otherwise errors will be displayed.</li>
+    </ul>
+</div>
 
-> **NOTE:**
-> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+</div>
+
+<div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
+    <strong>💡 Tip:</strong> If the stock level is below the minimum stock level, the system will highlight these products in red to alert you that they need restocking.
+    <br>
+    <img src="images/stocklevelbelowmin.png" alt="Highlighted stock level below minimum" style="max-width: 50%; height: auto; margin-top: 10px;">
+</div>
+
 ---
 
 ### Locating all suppliers: `view_supplier` 🔎🙋‍♀️
@@ -287,7 +347,7 @@ Format:
 
 ` view_supplier ` (For displaying details of all suppliers)
 
-`view_supplier n/KEYWORD` (For displaying specified suppliers matched with the keyword)
+` view_supplier n/KEYWORD ` (For displaying specified suppliers matched with the keyword)
 
 ` view_supplier t/TAG... ` (For displaying details about filtered suppliers)
 
@@ -339,8 +399,12 @@ Examples:
 * `delete_supplier su/Jack Molly`
 * `delete_supplier su/Kayla Beauty`
 
-> **NOTE:**
-> Suppliers should already exist in the system, otherwise errors are displayed.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong>
+    <ul>
+        <li>Suppliers should already exist in the system, otherwise errors are displayed.</li>
+    </ul>
+</div>
 
 ---
 
@@ -354,8 +418,12 @@ Here are a few examples to help you:
 * `delete_product pr/sweater`
 * `delete_product pr/ramen noodles`
 
-> **NOTE:**
-> Products should already exist in the system, otherwise errors are displayed.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Important:</strong>
+    <ul>
+        <li>Products should already exist in the system, otherwise errors are displayed.</li>
+    </ul>
+</div>
 
 ---
 
@@ -365,8 +433,12 @@ Clears all information about products and suppliers from the system permanently.
 
 Format: `clear`
 
-> **IMPORTANT:**
-> There is no way to restore the information once cleared, so kindly think twice before executing this action!
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Caution:</strong>
+    <ul>
+        <li>There is no way to restore the information once cleared, so kindly think twice before executing this action!</li>
+    </ul>
+</div>
 
 ---
 
@@ -382,8 +454,9 @@ Format: `exit`
 
 InvenTrack data are saved in the hard disk automatically after executing any command that changes the data. There is no need to save manually. <br>
 
-> **NOTE:**
-> The location of where the data is stored is specified at the bottom status bar of the app.
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> The location of where the data is stored is specified at the bottom status bar of the app.
+</div>
 
 ---
 
@@ -391,9 +464,13 @@ InvenTrack data are saved in the hard disk automatically after executing any com
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-> **Caution:**
-> If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-> Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<div style="background-color: #fff3e0; padding: 15px; border-left: 6px solid #FF9800; margin-bottom: 15px;">
+    <strong>⚠️ Caution:</strong>
+    <ul>
+        <li>If your changes to the data file make its format invalid, AddressBook will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.</li>
+        <li>Certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.</li>
+    </ul>
+</div>
 
 ---
 
