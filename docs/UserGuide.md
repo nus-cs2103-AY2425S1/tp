@@ -53,7 +53,7 @@ It is a desktop app optimized for fast user interactions through a Command Line 
 * All the commands in ClientGrid (e.g. `list`, `addbuyer`, `addproperty`, `addmeeting`, etc.) are case-sensitive and must be entered in lower case.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME`, `BUYER_PHONE_NUMBER`, `BUYER_EMAIL` are parameters which can be used is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
+  e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME`, `BUYER_PHONE_NUMBER` and `BUYER_EMAIL` are parameters which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
 
 * Parameters in square brackets are optional.<br>
   e.g. `t/TYPE [lte/MATCHING_PRICE]` can be used as `t/HDB lte/300` or `t/HDB`.
