@@ -21,7 +21,7 @@
     * [Create new internship application](#create-new-internship-application)
     * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
-    * [Update the status of an Internship Application](#update-the-status-of-an-internship-application)
+    * [Update the status of an internship application](#update-the-status-of-an-internship-application)
     * [Find internship applications](#find-internship-applications)
     * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
@@ -247,27 +247,21 @@ Upon execution, `DeleteCommand` gets the internship application to be deleted an
 
 <br></br>
 
-### Update the status of an Internship Application
-The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
+### Update the status of an internship application
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. The implementation of the status command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 
-<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
+In this case, `AddressBookParser` creates `StatusCommandParser` to parse user input string.
 
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
-For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
+![StatusSequenceDiagram](diagrams/StatusSequenceDiagram.puml)
 
-AddressBookParser:
-1. Parses the command (e.g., `/accept 1`) and creates a `StatusCommandParser`.
-2. `StatusCommandParser` extracts the index and maps the command to the appropriate `Status` enum value (`PENDING`, `ACCEPTED`, or `REJECTED`). If either the index or status is invalid, a `ParseException` is thrown.
-3. If parsing succeeds, a `StatusCommand` is created with `targetIndex` and the specified `Status`.
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
 
-Upon execution, `StatusCommand`:
-1. **Retrieves and Validates** the internship application by calling `model::getFilteredList`. If `targetIndex` is invalid, it throws a `CommandException`.
-2. **Updates the Status**: It creates a deep copy of the application, sets the new `Status`, and saves the updated application back with `model::setItem`.
-3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
+`AddressBookParser` first obtains the index from the user's input.  
+`AddressBookParser` ensures that there is only one keyword found, which is a number. If no valid keyword is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
 
-Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
-
+Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `model::setItem` to update the status within the list.
 <puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
+> **_NOTE:_** The sequence diagram shows a simplified execution of the StatusCommand.
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
 
