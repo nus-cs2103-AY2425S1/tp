@@ -182,6 +182,7 @@ Lists all persons in GamerBook. Use this after you are done searching for someon
 
 Format: `list`  
 Output: `Listed all persons`
+
 <br>
 
 #### **Adding a person :** `add`
@@ -239,6 +240,8 @@ Examples:
   and `Valorant`.
 * `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and
   preferred times.
+
+<br>
 
 #### **Deleting a person :** `delete`
 
