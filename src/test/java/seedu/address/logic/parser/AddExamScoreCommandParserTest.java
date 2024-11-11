@@ -37,7 +37,7 @@ public class AddExamScoreCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, EXAM_DESC_MIDTERM + EXAM_SCORE_DESC_AMY, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, EXAM_DESC_MIDTERM + EXAM_SCORE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // no exam specified
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + EXAM_SCORE_DESC_AMY,

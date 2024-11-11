@@ -30,6 +30,12 @@ public class AddEcNumberCommandParser implements Parser<AddEcNumberCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_ECNUMBER);
 
+        if (argMultiMap.getPreamble().isEmpty()) {
+            logger.log(Level.WARNING, "Index not present for AddEcNumberCommand.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddEcNumberCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultiMap.getValue(PREFIX_ECNUMBER).isPresent()) {
             logger.log(Level.WARNING, "Prefix 'ep/' not present.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

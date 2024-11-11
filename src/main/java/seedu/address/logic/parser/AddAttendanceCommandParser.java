@@ -36,6 +36,11 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ABSENT_DATE, PREFIX_ABSENT_REASON);
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            logger.log(Level.WARNING, "Index for AddAttendanceCommand is missing.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_ABSENT_DATE).isPresent()
                 || !argMultimap.getValue(PREFIX_ABSENT_REASON).isPresent()) {
             logger.log(Level.WARNING, "Prefix for absent date or absent reason is missing.");
