@@ -153,6 +153,14 @@ Example:
     * the next of kin whose name is Bob Doe
     * an emergency contact 8765 4321
 
+{: .alert .alert-secondary}
+> When a new student is added, with the example command above, he will be displayed as shown below, with the following example success message:
+> 
+> ![result for addAppt command example](images/addStudentCommand.png)
+> 
+> _New student added: John Doe; Gender: male; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags:_
+>
+
 ##### Adding a teacher: `teacher`
 
 Adds a teacher to EduConnect.
@@ -181,6 +189,14 @@ Example:
     * the address Blk 30 Lorong 3 Serangoon Gardens, #07-18
     * the subject she teaches as English
     * the classes she teaches 5A and 8C
+
+{: .alert .alert-secondary}
+> When a new teacher is added, with the example command above, she will be displayed as shown below, with the following example success message:
+> 
+> ![result for addTeacher command example](images/addTeacherCommand.png)
+>
+> _New teacher added: Elizabeth Chua; Gender: female; Phone: 95673211; Email: elizchua@yahoo.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subject: [English]; Classes: 8C, 5A; Tags:_
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -344,6 +360,14 @@ Examples:
 * `find /name John` returns `John` and `John Doe`.
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A).
 
+{: .alert .alert-secondary}
+> When the find command above is entered, the following results will be displayed, with the following success message:
+>
+> ![result for addTeacher command example](images/findCommand.png)
+>
+> _Found 1 matching entries!_
+
+
 #### Sorting persons : `sort`
 
 Sorts and displays the list of person(s) by name, subject, class, or attendance.
@@ -441,6 +465,16 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 > The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
 ![change themes](images/Changing-Themes.png)
+
+{: .alert .alert-secondary}
+> ![result for dark Theme example](images/Ui.png)
+>
+> The dark theme will be the default theme when you open EduConnect.
+
+{: .alert .alert-secondary}
+> ![result for light Theme example](images/LightMode.png)
+>
+> The light theme can be toggled by following the above instructions.
 
 #### Viewing help : `help`
 
