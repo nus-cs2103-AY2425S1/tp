@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.
+1.  User requests to add a new pet owner by providing the owner's IC number, name, phone, address, and email.
 2.  PawPatrol validates input.
 3.  PawPatrol successfully adds the new pet owner to the list.
 
@@ -304,27 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2c. Owner name exceeds 50 characters.
+- 2c. Duplicate IC Number.
 
   - 2c1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2d. Owner address exceeds 100 characters.
-
-  - 2d1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2e. Owner email exceeds 50 characters.
-
-  - 2e1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2f. Duplicate owner number or address.
-
-  - 2f1. PawPatrol shows an error message:
 
     Use case resumes at step 1.
 
