@@ -193,7 +193,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 2. View `Assignment` Details
 3. Modify `Grade` details to be case-insensitive
 4. Modify `View` Command's parameters to be case-insensitive 
-5. Prevent duplicate `phone number` from being assigned to more than 1 `Student`.
+5. Prevent duplicate `Phone` numbers from being assigned to more than 1 `Student`.
 6. Allow `Names` to include special characters
 7. Find `Students` who have yet to submit `Assignments`
 8. Limit the length of inputs to prevent truncation errors 
