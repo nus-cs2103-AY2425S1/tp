@@ -601,7 +601,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `rate 0`<br>
        Expected: No restaurant is rated. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `rate`<br>
+    1. Other incorrect rate commands to try: `rate`<br>
        Expected: Similar to previous.
 
 
