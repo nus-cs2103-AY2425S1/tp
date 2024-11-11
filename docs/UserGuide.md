@@ -108,6 +108,12 @@ Shows a message explaining the various commands available.
 
 **Format**: `help`
 
+**Expected message**:
+
+```
+Showing list of possible commands on the right.
+```
+
 ![Help Command UI](images/helpCommandUI.png)
 
 
@@ -116,6 +122,12 @@ Shows a message explaining the various commands available.
 Pops up a window, where there is a link to the user guide for the user to easily access.
 
 **Format**: `helpwindow`
+
+**Expected message**:
+
+```
+For more information, please head to the user guide.
+```
 
 ![](images/helpWindowUI.png)
 
@@ -439,6 +451,12 @@ Deletes the specified tag(s) from the specified contact.
 
 **Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]…​`
 
+**Expected message**:
+
+```
+Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
+```
+
 | Parameter Name | Description                                  | Required   |
 |----------------|----------------------------------------------|------------|
 | `INDEX`        | Index number of the contact to delete tag    | Compulsory |
@@ -455,6 +473,12 @@ Deletes the specified tag(s) from the specified contact.
 </div>
 
 **Format 2**: `deletetag all t/TAG [t/MORE_TAG]…​`
+
+**Expected message**:
+
+```
+Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
+```
 
 | Parameter Name | Description                                                               | Required   |
 |----------------|---------------------------------------------------------------------------|------------|
