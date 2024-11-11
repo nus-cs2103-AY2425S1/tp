@@ -77,10 +77,10 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/guest` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG_NAME]` can be used as `n/John Doe t/guest` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
+  e.g. `[t/TAG_NAME]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
 * Commands in WedLinker uses labels to specify the parameters, the labels are stated as such:
   * n/ Name
@@ -128,26 +128,6 @@ Shows a list of all [Tasks](#task-features) in the WedLinker
 
 Format: `list-tasks`
 
-### Locating contacts by any field, similar to a search function: `find`
-
-Finds all persons based on the specified keywords (case-insensitive) after the labels representing the field, and displays them as a list with index numbers.
-
-Format: `find LABEL KEYWORD [KEYWORD]…​`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The label that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
-* The search will return partial matches and full matches.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate label. 
-* Only the first label entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
-* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
-
-* `find p/973` returns all Contacts whose phone number contains 973
-* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-![result for 'find n/alex n/david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with 'guest' <br>
-![result for `find t/guest](images/findCommandTag.png)
-* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
-
 ### Clearing all entries : `clear`
 
 Clears all entries from WedLinker.
@@ -187,7 +167,7 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 Use the add command to add a new contact to WedLinker.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​`
 
 
 <box type="tip" seamless>
@@ -209,15 +189,17 @@ Use the edit command to edit details of an existing contact in WedLinker.
 
 Format: `edit PERSON_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-To edit the details of an existing contact in WedLinker, type `edit` followed by the person's position number in the contact list, and details you wish to update, such as the name, phone number, and email.
+To edit the details of an existing contact in WedLinker, type `edit` followed by the positional number of the person in the contact list, and details you wish to update, such as the name, phone number, and email.
 
+> [!IMPORTANT]
+> The `PERSON_NUMBER` referenced in any action will always correspond to the `PERSON_NUMBER` in the person list that is currently visible.
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing details will be updated to the input values.
 
 ![img_1.png](img_1.png)
 <p align="center">
-The PERSON_NUMBER corresponds to each person's positioon in the `Person` list <br>
+The PERSON_NUMBER corresponds to each person's position in the `Person` list. <br>
 </p>
 
 * In this example, the PERSON_NUMBER of 2 refers to the person named "Bernice Yu", and the command `edit 2 n/Bob Yu` will change the contact's name from "Bernice Yu" to "Bob Yu" 
@@ -226,7 +208,7 @@ Examples:
 * To change the phone number of the first contact to 91234567, enter the command:  
   * `edit 1 p/91234567`
 * To change the name and address of the second contact, enter the command:
-  * `edit 2 n/Betsy Crower`
+  * `edit 2 n/Betsy Crower a/XYZ Flower Shop`
   * This updates the contact's name to `Betsy Crower` and address to `XYZ Flower Shop`
 
 ### Deleting a person : `delete`
@@ -235,7 +217,7 @@ Use the delete command to remove a contact from WedLinker.
 
 Format: `delete PERSON_NUMBER`
 
-To remove a contact from WedLinker, type `delete` followed by the person's position number in the contact list
+To remove a contact from WedLinker, type `delete` followed by the positional number of the person in the contact list
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​
 
@@ -247,17 +229,37 @@ Examples:
   * First, enter the command: `find n/Betsy`
   * Then, enter the command: `delete 1` 
 
+### Locating contacts by any field, similar to a search function: `find`
+
+Finds all persons based on the specified keywords (case-insensitive) after the labels representing the field, and displays them as a list with respective numbers.
+
+Format: `find LABEL KEYWORD [KEYWORD]…​`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The label that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The search will return partial matches and full matches.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate label.
+* Only the first label entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
+
+* `find p/973` returns all Contacts whose phone number contains 973
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/alex n/david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with 'friends' <br>
+  ![result for `find t/guest](images/findCommandTag.png)
+* `find w/Casey's Wedding` returns all Contacts assigned to Casey's Wedding <br>
+
 ## Tag Features
 
-### Adding a tag : `create-tag`
+### Creating a tag : `create-tag`
 
 Use the create-tag command to create a `tag` within WedLinker, which you can assign to contacts.
 
-Format: `create-tag t/TAGNAME`
+Format: `create-tag t/TAG_NAME`
 
-To create a tag, type `tag` followed by the name of the tag.
+To create a tag, type `create-tag` followed by the name of the tag.
 
-* The `TAGNAME` is alphanumeric and can contain whitespaces.
+* The `TAG_NAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Multiple contacts can share the same tag.
 
@@ -269,9 +271,9 @@ Examples:
 
 Use the tag command when you want to assign a `tag` to a specific contact in WedLinker.
 
-Format: `tag PERSON_NUMBER t/TAGNAME [f/]`
+Format: `tag PERSON_NUMBER t/TAG_NAME [f/]`
 
-To assign a tag to a contact, type `tag` followed by the person's position number in the contact list
+To assign a tag to a contact, type `tag` followed by the positional number of the person in the contact list
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Tag` must exists in WedLinker before it can be assigned.
@@ -287,9 +289,9 @@ Examples:
 
 Use the untag command when you want to remove a `Tag` from a specific contact in WedLinker
 
-Format: `untag PERSON_NUMBER t/TAGNAME`
+Format: `untag PERSON_NUMBER t/TAG_NAME`
 
-To remove a tag from a contact, type `untag` followed by the person's position number in the contact list
+To remove a tag from a contact, type `untag` followed by the positional number of the person in the contact list
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 
@@ -301,11 +303,11 @@ Examples:
 
 Use the delete-tag command to delete a tag you no longer have a use for.
 
-Format: `delete-tag t/TAGNAME [f/]`
+Format: `delete-tag t/TAG_NAME [f/]`
 
 To delete a tag from WedLinker, type `delete-tag` followed by the name of the tag
 
-* The `Tag` must exists in WedLinker.
+* The `Tag` must exist in WedLinker.
 * The `Tag` cannot be assigned to any contacts.
 * If the `Tag` is currently being used, you can use `f/` to force its deletion and remove the tag from all contacts.
 
@@ -315,15 +317,15 @@ Examples:
 
 ## Wedding Features
 
-### Adding a Wedding : `create-wedding`
+### Creating a Wedding : `create-wedding`
 
 Use the create-wedding command to create a `Wedding` within WedLinker that can be linked to contacts.
 
-Format: `create-wedding w/WEDDINGNAME`
+Format: `create-wedding w/WEDDING_NAME`
 
 To create a `Wedding`, type `create-wedding` followed by the name of the wedding.
 
-* The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
+* The `WEDDING_NAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding--assign-wedding) command.
 
@@ -331,13 +333,13 @@ Examples:
 * To create a Wedding named `Wedding 1`, enter the command:
     * `create-wedding w/Wedding 1`
 
-### Assign contact to a Wedding : `assign-wedding`
+### Assign contact to one or more Weddings : `assign-wedding`
 
-Use the assign-wedding command to assign a contact to a `Wedding`.
+Use the assign-wedding command to assign a contact to one or more `Weddings`.
 
-Format: `assign-wedding PERSON_NUMBER w/WEDDINGNAME`
+Format: `assign-wedding PERSON_NUMBER w/WEDDING_NAME [w/ADDITIONAL_WEDDING_NAME]...`
 
-To assign a contact to a `Wedding`, type `assign-wedding`, followed by the person's position number in the contact list and the name of the wedding.
+To assign a contact to one or more `Weddings`, type `assign-wedding`, followed by the positional number of the person in the contact list and the name(s) of the wedding(s).
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Wedding` must exists in WedLinker before it can be assigned.
@@ -351,13 +353,13 @@ Examples:
 
 Use the edit-wedding command to edit details of a `Wedding`.
 
-Format: `edit-wedding WEDDING_NUMBER [w/WEDDINGNAME] [a/ADDRESS]`
+Format: `edit-wedding WEDDING_NUMBER [w/WEDDING_NAME] [a/ADDRESS]`
 
 To edit the details of a `Wedding`, enter the command [list-weddings](#listing-all-weddings-list-weddings) to identify the Wedding number in the `Wedding` list. <br>
 Following that, type "edit-wedding" followed by the Wedding number enter the details you wish to edit and the name of the wedding.
 
-* Edits the specific `Wedding` at the INDEX when in [list-wedding](#listing-all-weddings-list-weddings) view.
-* The index **must be a positive integer** 1, 2, 3, …​.
+* Edits the specific `Wedding` at the WEDDING_NUMBER when in [list-wedding](#listing-all-weddings-list-weddings) view.
+* The WEDDING_NUMBER **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
 ![img_4.png](img_4.png)
@@ -365,7 +367,7 @@ Following that, type "edit-wedding" followed by the Wedding number enter the det
 The WEDDING_NUMBER corresponds to each Wedding's position in the `Wedding` list
 </p>
 
-* In this example, the WEDDING_NUMBER 2 refers to the wedding named "Wedding 2", and the command `edit-wedding 2 w/Bob's wedding` will change the Wedding name from "Wedding 2" to "Bob's Wedding".
+* In this example, the WEDDING_NUMBER 2 refers to the wedding named "Wedding 2", and the command `edit-wedding 2 w/Bob's Wedding` will change the Wedding name from "Wedding 2" to "Bob's Wedding".
 
 
 Examples:
@@ -373,13 +375,13 @@ Examples:
     * First, identify the Wedding number by entering the command: `list-weddings`
     * If the wedding number is 1, enter the command: `edit-wedding 1 a/XYZ street`
 
-### Unassign contacts from a Wedding : `unassign-wedding`
+### Unassign contacts from one or more Weddings : `unassign-wedding`
 
-Use the unassign-wedding command to remove a contact from a specific `Wedding`.
+Use the unassign-wedding command to remove a contact from one or more `Weddings`.
 
-Format: `unassign-wedding PERSON_NUMBER w/WEDDINGNAME`
+Format: `unassign-wedding PERSON_NUMBER w/WEDDING_NAME`
 
-To remove the details of a `Wedding`, type "unassign-wedding", followed by the person's position number in the contact list and the name of the wedding.
+To remove a contact from one or more `Weddings`, type "unassign-wedding", followed by the positional number of the person in the contact list and the name(s) of the wedding(s).
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 
@@ -391,12 +393,12 @@ Examples:
 
 Use the delete-wedding command to delete a `Wedding` from WedLinker.
 
-Format: `delete-wedding w/WEDDINGNAME [f/]`
+Format: `delete-wedding w/WEDDING_NAME [f/]`
 
 To delete a `Wedding`, type "delete-wedding", followed by the name of the wedding.
 
 * There should be no contacts assigned to the `Wedding` before it is deleted.
-* If there are still contacts assigned to the `Wedding`, you can use `f/` to force its deletion and the removal of all contacts from the `Wedding`.
+* If there are still contacts assigned to the `Wedding`, you can use `f/` to force its deletion and the removal of all contacts from the `Wedding`. The `Wedding` will also be removed from all contacts who were previously assigned to it."
 
 Examples:
 * To delete the wedding named `Wedding 1`, enter the command:
@@ -406,7 +408,7 @@ Examples:
 
 ### Creating a Task : `create-task`
 
-Use the create-task command to creates one or more `Task`.
+Use the create-task command to create one or more `Tasks`.
 
 Format: `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]`
 
@@ -420,18 +422,18 @@ You can also include up to two dates if needed, with a single date indicating a 
 Examples:
 * To create a task with the description of `Buy cake`, enter the command:
     * `create-task tk/Buy cake`
-* To create a task with the description of `Finalise itinery` with a specified deadline of `2024-12-22`, enter the command:
-    * `create-task tk/Finalise itinery d/2024-12-22`
+* To create a task with the description of `Finalise itinerary` with a specified deadline of `2024-12-22`, enter the command:
+    * `create-task tk/Finalise itinerary d/2024-12-22`
 
 
 ### Assigning a Task to a contact : `assign-task` 
 
-Use the assign-task command to assign one or more `Task` to a contact.
+Use the assign-task command to assign one or more `Tasks` to a contact.
 
 Format: `assign-task PERSON_NUMBER TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...`
 
 To assign `task(s)` to a contact, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number in the `task` list. <br>
-Following that, type "assign-task" followed by assigned Person's positional number and Task number(s) of tasks you wish to assign.
+Following that, type "assign-task" followed by assigned person's positional number. and Task number(s) of tasks you wish to assign to the person.
 
 * The `PERSON_NUMBER` and `TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
@@ -444,40 +446,40 @@ The TASK_NUMBER corresponds to each Task's position in the `Task` list
 
 
 Examples:
-* To assign two tasks with the descriptions `Buy cake` and `Finalise itinery`:
+* To assign two tasks with the descriptions `Buy cake` and `Finalise itinerary`:
     * Firstly, enter the command `list-tasks` to see all contacts and tasks.
-    * Secondly, identify the Person's positional number of the person you wish to assign tasks to
+    * Secondly, identify the positional number of the person you wish to assign tasks to
     * Thirdly, identify the Task numbers of the two tasks you wish to assign.
     * Lastly, if the Person number is 1, and the task numbers are 2 and 3, enter the command: `assign-task 1 2 3`
   
 ### Un-assigning a Task from a contact : `unassign-task` 
 
-Use the unassign-task command to remove one or more `Task` from a contact.
+Use the unassign-task command to remove one or more `Tasks` from a contact.
 
 Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER [ADDITIONAL_PERSON_TASK_NUMBER]...`
 
-To remove a `task` from a contact, type `unassign-task` followed by the Person's positional number and the person's Task number(s) 
+To remove a `task` from a contact, type `unassign-task` followed by the positional number of the person and the person's Task number(s) 
 
 **Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.* 
 * The `PERSON_NUMBER` and `PERSON_TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
 ![img_7.png](img_7.png)
 <p align="center">
-The PERSON_TASK_NUMBER corresponds to each task's position within a contact's assigned tasks,
+The PERSON_TASK_NUMBER corresponds to each task's position within a contact's assigned tasks.
 </p>
 
 * In this example, the PERSON_TASK_NUMBER 3 for the first person refers to the task with the description "Send invitations", and the command `unassign-task 1 3` will remove the "Send invitations" task from the contact "Alex Yeoh".
 
 Examples:
-* To remove the tasks with the descriptions `Buy cake` and `Finalise itinery` from the first person in the contact list:
+* To remove the tasks with the descriptions `Buy cake` and `Finalise itinerary` from the first person in the contact list:
     * First, identify the assigned Task numbers of the two tasks assigned to the person
     * If the assigned task numbers are 2 and 3, enter the command: `unassign-task 1 2 3`
 
 ### Mark a task as completed : `mark-task` 
 
-Use the mark-task command to mark one or more `Task` as completed.
+Use the mark-task command to mark one or more `Tasks` as completed.
 
-Format: `mark-task TASK_NUMBER [ADDITIONAL_TASKINDEX...]`
+Format: `mark-task TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...`
 
 To mark a `task` to be completed, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number(s) of task(s) you wish to mark <br>
 Following that, type `mark-task` followed by the Task number(s).
@@ -485,23 +487,23 @@ Following that, type `mark-task` followed by the Task number(s).
 * The TASK_NUMBER **must be a positive integer** 1, 2, 3, …​.
 
 Examples:
-* To mark the task with the description `Finalise itinery` as complete:
-    * First, identify the Task number of the task.
+* To mark the task with the description `Finalise itinerary` as complete:
+    * First, identify the Task number of the task by entering the command: `list-tasks`.
     * If the Task number is 1, enter the command `mark-task 1`.
 
 ### Un-mark a task  : `unmark-task` 
 
-Use the unmark-task command to mark one or more `Task` as incomplete.
+Use the unmark-task command to mark one or more `Tasks` as incomplete.
 
 Format: `unmark-task TASK_NUMBER [ADDITIONAL_TASK_NUMBER]`
 
 To mark a `task` as incomplete, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number(s) of task(s) you wish to mark <br>
 Following that, type `unmark-task` followed by the Task number(s).
 
-* The `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​.
+* The `TASK_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 
 Examples:
-* To mark the completed task with the description `Finalise itinery` as incomplete:
+* To mark the completed task with the description `Finalise itinerary` as incomplete:
     * First, identify the Task number of the task.
     * If the Task number is 1, enter the command `unmark-task 1`.
 
@@ -529,7 +531,10 @@ Use the assign-vendor command to designate a contact as a vendor.
 
 Format: `assign-vendor PERSON_NUMBER`
 
-To designate a contact as a vendor, type "assign-vendor" followed by the Person's positional number.
+To designate a contact as a vendor, type "assign-vendor" followed by the positional number of the person.
+
+> [!NOTE]
+> Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, be assigned with tags etc.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Vendor` can have `Tasks` assigned to them.
@@ -543,12 +548,13 @@ Examples:
 
 Use the unassign-vendor command to remove a vendor designation from a contact, making them a regular contact in WedLinker.
 
-Format: `unassign-venor PERSON_NUMBER`
+Format: `unassign-vendor PERSON_NUMBER [f/]`
 
-To remove a vendor designation from a contact, type "unassign-vendor" followed by the Person's positional number.
+To remove a vendor designation from a contact, type "unassign-vendor" followed by the positional number of the person.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * A regular contact cannot have `Tasks` assigned them.
+* If the specified `Vendor` has tasks assigned to them, you can use the label `f/` to force the removal of the vendor designation and remove all tasks from the contact.
 
 Examples:
 * To remove a vendor designation from the first contact, enter the command:
@@ -574,26 +580,26 @@ Examples:
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
-**Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG_NAME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
+**Assign Wedding**    | `assign-wedding PERSON_NUMBER w/WEDDING_NAME…​` or `asw PERSON_NUMBER w/WEDDING_NAME…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
 **Clear**  | `clear`
-**Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
+**Create Tag**  | `create-tag t/TAG_NAME` or `ctag t/TAG_NAME` <br> e.g., `create-tag t/photographer`
 **Create Task**  | `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` <br> e.g., `create-task tk/Order Wedding Cake` <br> `create-task tk/Book Venue d/2025-02-01` <br> `create-task tk/Meet Caterer d/2024-11-19 d/2024-11-20`
-**Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
-**Delete Task** | `delete-task INDEX` or `dtask INDEX` <br> e.g., `dtask 6`
-**Delete Wedding** | `delete-wedding w/WEDDING` or `dw w/WEDDING` <br> e.g., `delete-wedding w/Lav's Wedding`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Wedding**   | `edit-wedding WEDDING_INDEX [p1/PERSON_INDEX] [p2/PERSON_INDEX] [a/ADDRESS] [d/DATE]…​`<br> or <br> `ew WEDDING_INDEX [p1/PERSON_INDEX] [p2/PERSON_INDEX] [a/ADDRESS] [d/DATE]…​` <br> e.g.,`edit-wedding 2 p1/3 a/Jurong Christian Church`
+**Create Wedding**  | `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME` <br> e.g., `cw w/JJ's Wedding`
+**Delete** | `delete PERSON_NUMBER`<br> e.g., `delete 3`
+**Delete Tag** | `delete-tag t/TAG_NAME` or `dtag t/TAG_NAME` <br> e.g., `delete-tag t/photographer`
+**Delete Task** | `delete-task TASK_NUMBER` or `dtask TASK_NUMEBR` <br> e.g., `dtask 6`
+**Delete Wedding** | `delete-wedding w/WEDDING_NAME` or `dw w/WEDDING_NAME` <br> e.g., `delete-wedding w/Lav's Wedding`
+**Edit**   | `edit PERSON_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Wedding**   | `edit-wedding WEDDING_NUMBER [p1/PERSON_NUMBER] [p2/PERSON_NUMBER] [a/ADDRESS] [d/DATE]…​`<br> or <br> `ew WEDDING_NUMBER [p1/PERSON_NUMBER] [p2/PERSON_NUMBER] [a/ADDRESS] [d/DATE]…​` <br> e.g.,`edit-wedding 2 p1/3 a/Jurong Christian Church`
 **Exit**   | `exit`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [w/WEDDING]`<br> e.g., `find n/James Jake`
+**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME] [w/WEDDING_NAME]`<br> e.g., `find n/James Jake`
 **Help**   | `help`
 **List**   | `list`
 **List Weddings**   | `list-weddings` or `lw`
 **List Tasks**   | `list-tasks` or `ltasks`
-**Mark Task**   | `mark-task TASKINDEX [ADDITIONAL_TASKINDEX...]` or `mtask TASKINDEX [ADDITIONAL_TASKINDEX...]` <br> e.g., `mark-task 1 ` <br>  `mark-task 1 2 3`
-**Tag**   | `tag INDEX [t/TAG]…​` <br> e.g., `tag 2 t/florist t/photographer`
-**Unassign Wedding**    | `unassign-wedding PERSON_INDEX w/WEDDING…​` or `uw PERSON_INDEX w/WEDDING…​` <br> e.g., `uw 2 w/John's Wedding`
-**Unmark Task**   | `unmark-task TASKINDEX [ADDITIONAL_TASKINDEX...]` or `untask TASKINDEX [ADDITIONAL_TASKINDEX...]` <br> e.g., `unmark-task 1 ` <br>  `unmark-task 1 2 3`
-**Untag**   | `untag INDEX [t/TAG]…​` <br> e.g., `untag 4 t/available t/chef`
+**Mark Task**   | `mark-task TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...` or `mtask TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...` <br> e.g., `mark-task 1 ` <br>  `mark-task 1 2 3`
+**Tag**   | `tag PERSON_NUMBER [t/TAG_NAME]…​` <br> e.g., `tag 2 t/florist t/photographer`
+**Unassign Wedding**    | `unassign-wedding PERSON_NUMBER w/WEDDING_NAME…​` or `uw PERSON_NUMBER w/WEDDING_NAME…​` <br> e.g., `uw 2 w/John's Wedding`
+**Unmark Task**   | `unmark-task TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...` or `untask TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...` <br> e.g., `unmark-task 1 ` <br>  `unmark-task 1 2 3`
+**Untag**   | `untag PERSON_NUMBER [t/TAG_NAME]…​` <br> e.g., `untag 4 t/available t/chef`
