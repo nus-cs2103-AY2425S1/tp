@@ -243,7 +243,8 @@ New student added: (details of the student added)
 | `a/ADDRESS`      | Physical address                  | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
 | `t/TAG`          | [Tag](#tag) to categorise contact | Must be alphanumeric characters and no spaces ([case sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                   | Optional                                                                                                                                                                                                                                                                                                                                                                         |
 
-<div markdown="block" class="alert alert-info"> 🔔 **Notes**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
+<div markdown="span" class="alert alert-info"> 🔔 **Notes**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. 
+</div>
 
 <div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
 While names and address can include `/` for valid formats, using parameter-like sequences (e.g., `n/`, `p/`) within the name and address fields will result in an error.
@@ -569,6 +570,7 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
+
 * For both formats 1 and 2, 
   * The tag is **case-insensitive**. For example, `partner` will match `PartnEr`.
   * Only full words will be matched e.g. `partner` will not match `partners`.
@@ -589,6 +591,7 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 <div markdown="block" class="alert alert-warning">
 
 ⚠️ **Important: Impact of tag duplicate detection when adding tags** <br>
+
 Specified `TAG` (and `MORE_TAG` if present) are only added to all contacts currently shown in the list, if
 no duplicate tag(s) are found in all contacts.
 
@@ -603,19 +606,19 @@ no duplicate tag(s) are found in all contacts.
 <div markdown="span" class="alert alert-primary">💡 **Tip:** <br>
   
 - To tag all students with the `paid` tag, simply use `track student` followed by `tag all t/paid`.
+
+- Tag labelled with "paid" will have green background:
+  - to indicate that a student has paid their membership fee, or
+  - to indicate that a company has paid the club sponsorship.
   
+</div>
+
 **Expected outcome for the above tip on `tag all`:**
 * `track student`
   ![Track student](images/trackStudentBeforeTagAll.png)
 * `tag all t/paid`
   ![Tag all paid tag](images/tagAll.png)
   *Note: in this case, only all students are tagged with the paid tag.*
-  
-- Tag labelled with "paid" will have green background:
-  - to indicate that a student has paid their membership fee, or
-  - to indicate that a company has paid the club sponsorship.
-</div>
-<img src="images/paidTag.png" alt="View Contact UI" width="350"/>
 
 
 #### Deleting tag(s) from contact: `deletetag`
