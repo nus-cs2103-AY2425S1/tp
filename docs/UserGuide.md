@@ -242,8 +242,13 @@ Format: `seed`
 
 - `seed` will add them to the contact list if they are not presently inside. 
 - `seed` does not clear or reset the list.
-- If your existing contact list has a person with the same name and phone number, it will **not** be overwritten.  
-- Disclaimer: Seed command does not inform you if a duplicate person was skipped, it will only state that it has "seeded sample data" regardless of outcome.
+- If your existing contact list has a person with the same name and phone number, it will **not** be overwritten.
+
+<box type="info" seamless>
+
+**Note:** Seed command does not inform you if a duplicate person was skipped, it will only state that it has "seeded sample data" regardless of outcome.
+
+</box>
 
 ### Exiting the program : `exit`
 
