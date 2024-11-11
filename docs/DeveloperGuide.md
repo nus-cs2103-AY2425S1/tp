@@ -877,9 +877,9 @@ We plan to make the `add command` shorter by making the `email` field **optional
 
 1. **Improve duplicate detection to meet real-world use cases**: The current version only considers students with **both** the same name and the same phone number as duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address could also serve as a unique identifier for students. <br>
    In the future version, we plan to include email address as another criterion for detecting duplicates. To be specific,
-   * two students with the same name and the same phone number are duplicates;
-   * two students with the same name and the same email address are duplicates;
-   * two students with different names, but the same phone number or the same email address, are acceptable. <br>
+   * Two students with the same name and the same phone number are duplicates;
+   * Two students with the same name and the same email address are duplicates;
+   * Two students with different names, but the same phone number or the same email address, are acceptable. <br>
     
     The following code snippet shows how 2 students are differentiated. Specifically, this will be the updated `isSameStudent` method of the `Student` class.
     ```java
@@ -992,9 +992,9 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
 
 
-1. **Integrate `pay` and `settle` command to reduce user confusion**: In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. This somehow confuses users, especially new users.
+1. **Integrate `pay` and `settle` command to reduce user confusion**: In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users. 
    * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
        * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
-       * `hr/HOURS_PAID` specifies the amount the student **pays**, will be added to the paid amount.
-       * `amount/AMOUNT` specifies the amount the student **repays**, will be subtracted from the owed amount then added to the paid amount.
+       * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
+       * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
    * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then find out that it is not what they want.
