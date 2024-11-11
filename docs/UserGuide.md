@@ -93,7 +93,7 @@
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
   Note: If an optional field is not required, **avoid** leaving the prefix empty, as this will result in an invalid command.
-  e.g. `edit 1 n/NAME t/` is not a valid command
+  e.g. `edit 1 n/NAME t/` is not a valid command.
 
 <br> 
 
@@ -110,9 +110,9 @@
      The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g. `999` when the list has only 10 people) will be deemed as invalid indices.
 
 * `INDICES` takes in multiple `INDEX`s<br>
-  * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
+  * In this case, each `INDEX` can be a single number (e.g. `2`) or a closed range (e.g. `5-9`).
   * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
-  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g. `5-9` is correct, 
     but `5 - 9` or `5 -9` or `5- 9` are incorrect).
   * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
 
@@ -185,7 +185,7 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
   - `d/DONATED_AMOUNT` - Represents total donation amount in thousands of USD.
       - The amount can include **up to two decimal places** for precision (e.g., `123.45` represents 123,450 USD).
       - The amount is always displayed in thousands of dollars. For very large numbers, **scientific notation** will 
-        be used automatically (e.g., `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD)
+        be used automatically (e.g. `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD).
   - **Partner**: 
     - `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date.
       - The date must be in the **YYYY-MM-DD** format.
