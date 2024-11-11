@@ -205,7 +205,6 @@ Created weddings will have the person automatically assigned to their guest list
 
 * A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
 
-* Phone numbers are designed for Singapore phone numbers, it should be 3-8 digit long.
 </box>
 
 <box type="warning" seamless>
