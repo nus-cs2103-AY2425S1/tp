@@ -220,7 +220,7 @@ Continue to [Try It Out!](#try-it-out) for a guide of the basic commands
 
 ### Experienced Users
 
-If you're have used DLTbook before, jump straight to [Quick Start](#quick-start) for a quick overview on basic
+If you have used DLTbook before, jump straight to [Quick Start](#quick-start) for a quick overview on basic
 commands.
 Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
 </panel>
