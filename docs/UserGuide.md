@@ -186,6 +186,8 @@ Let's go through the UI components in more detail.
 - **Event Role Count**: The count of each role in the event; note that the total may differ as some contacts can hold multiple roles.
 - **Event Name**: The name of the event being managed.
 
+<div style="page-break-after: always"></div>
+
 #### 3.3.3 Searchmode UI Overview
 
 ![UI_searchmode](images/AppImages/UI_searchmode.png)
@@ -213,8 +215,8 @@ If there are any commands that you do not understand, refer to the [Features](#5
 ### 4.1 Adding Contacts
 
 Contacts are the heart of PlanPal, so let's start by adding one.
-Imagine you’re organising a university festival, and Alex Yeoh is your first attendee. 
-Here's how you can add Alex to your contact list:
+Imagine you’re organising a university festival, and Jeff Tan is your first attendee. 
+Here's how you can add Jeff to your contact list:
 
 1. Open PlanPal.
 2. Type the `add` command in the command box and press Enter.
@@ -244,7 +246,7 @@ Find what her index number is and delete her from the contacts!
 Poof! Olivia is now removed from the list. 
 Don’t worry—you can always re-add them later.
 
-### 4.3 Step 3: Adding Events
+### 4.3 Adding Events
 
 Now that your contact list is taking shape, let’s organize them into events. 
 Picture this: You’re planning a “Summer Orientation,” and you want to track everyone involved.
@@ -306,9 +308,10 @@ using multiple criteria, helping you find exactly who you’re looking for.
 To activate Search Mode, follow these steps:
 
 1. Open PlanPal and type the following command to enter Search Mode:
-   **Command Format:** `search-mode`
+   
+**Command Format:** `search-mode`
 
-   **Example:** `search-mode`
+**Example:** `search-mode`
 
 Once activated, you’ll notice the interface changes to display all contacts in PlanPal.
 Let’s move on to filtering these contacts!
@@ -320,7 +323,8 @@ Search Mode makes this easy! Imagine you need to find all contacts named “Alex
 are attendees.
 
 1. In Search Mode, type the following command:
-   **Command Format:** `search <n/NAME r/ROLE e/EMAIL a/ADDRESS p/PHONE t/TELEGRAM_USERNAME>`
+   
+**Command Format:** `search <n/NAME r/ROLE e/EMAIL a/ADDRESS p/PHONE t/TELEGRAM_USERNAME>`
 
    **Example:** `search n/Alex r/attendee`
 
@@ -349,14 +353,16 @@ Excluded contacts won’t appear in future searches until you clear the excluded
 Now that you’ve excluded a contact, you might want to review or reset your excluded list.
 
 1. To view all excluded contacts, type:
-   **Command Format:** `check-excluded`
+   
+**Command Format:** `check-excluded`
 
-   **Example:** `check-excluded`
+**Example:** `check-excluded`
 
 2. To clear the excluded list and start fresh, use:
-   **Command Format:** `clear-excluded`
+   
+**Command Format:** `clear-excluded`
 
-   **Example:** `clear-excluded`
+**Example:** `clear-excluded`
 
 Once cleared, the excluded contacts will reappear in search results,
 ready to be filtered again. Go ahead and give it a try!
@@ -367,9 +373,10 @@ After refining your search, you might want to add all filtered contacts to an ev
 Let’s say you’ve filtered a group of attendees for the “Summer Orientation” event.
 
 1. Use the `add-all` command to add them to the event:
-   **Command Format:** `add-all EVENT_INDEX`
+   
+**Command Format:** `add-all EVENT_INDEX`
 
-   **Example:** `add-all 3`
+**Example:** `add-all 3`
 
 This command adds all currently displayed contacts in your search results to the
 event with index 3. It’s a huge time-saver for managing large groups of attendees,
@@ -381,9 +388,10 @@ Once you’ve completed your searches and added contacts to events, you can exit
 Search Mode and return to the normal interface.
 
 1. To exit Search Mode, type:
-   **Command Format:** `exit-search`
+   
+**Command Format:** `exit-search`
 
-   **Example:** `exit-search`
+**Example:** `exit-search`
 
 You’re back to the default view of your contact list, ready to tackle other tasks.
 Don’t forget—you can always re-enter Search Mode whenever you need it.
@@ -561,7 +569,7 @@ Displays the list of contacts in the event specified by its index.
 Format: `find-event EVENT_INDEX`
 
 * The `EVENT_INDEX` refers to the number shown in the displayed events list.
-* The `EVENT_INDEX` must be a positive integer (e.g., 1, 2, 3, …).
+* The `EVENT_INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
 
 <div markdown="span" class="alert alert-primary">:memo: **Note:**
 The list of contacts displayed by find-event will only have their event-specific roles.
@@ -577,8 +585,8 @@ Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CO
 
 * Contacts can only be added to an event based on their roles (e.g. If John is a sponsor, he can only be added to Event X as a sponsor, not a volunteer)
 * Contacts with no roles cannot be added to events
-* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
-* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and must be a positive integer.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and **must be a positive integer**.
+* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and **must be a positive integer**.
 
 <div markdown="span" class="alert alert-primary">:memo: **Note:**
 A contact can be added to the same event under multiple roles (e.g. If Alice is both an attendee and a volunteer, she can be added to Event Y as both an attendee and a volunteer)
@@ -604,8 +612,8 @@ Removes a contact from an event.
 
 Format: `remove ei/EVENT_INDEX ci/CONTACT_INDEX`
 
-* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
-* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and must be a positive integer.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and **must be a positive integer**.
+* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and **must be a positive integer**.
 * Only one `CONTACT_INDEX` can be provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -620,7 +628,7 @@ Deletes an event from the event list.
 
 Format: `erase EVENT_INDEX`
 
-* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and **must be a positive integer**.
 
 Example:
 * `erase 1`
@@ -743,7 +751,7 @@ Format: `add-all EVENT_INDEX`
 * Contacts will be added to the event for each of their roles. (e.g., if John is both a sponsor and a vendor, he will be added to Event X in both roles).
 * Contacts with no roles cannot be added to events
 * There needs to be at least one contact in the search results panel to add to the event.
-* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and **must be a positive integer**.
 
 Example: `add-all 2`
 
