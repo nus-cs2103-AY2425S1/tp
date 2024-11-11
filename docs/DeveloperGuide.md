@@ -301,18 +301,18 @@ mouse/GUI driven app.
 
 Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, Low (unlikely to have) - `Novel`
 
-| Priority  | As a …​        | I want to …​                                                            | So that I can…​                                                                       |
-|-----------|----------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| Essential | Interviewer    | add candidates                                                          | keep track of current candidates                                                      |
-| Essential | Interviewer    | delete candidates                                                       | keep track of current candidates                                                      |
-| Essential | Hiring Manager | view a list of candidates                                               | quickly assess who has applied for the position                                       |
-| Essential | Hiring Manager | mark candidates as "hired" or "rejected"                                | finalize the hiring process                                                           |
-| Essential | Hiring Manager | see the current status of a candidate (e.g. shortlisted, rejected)      | track their progress                                                                  |
-| Typical   | Interviewer    | see candidates’ programming languages                                   | ensure that they have sufficient programming knowledge based on company needs         |
-| Typical   | Interviewer    | assign an interview score to a specific candidate                       | objectively evaluate their performance across multiple criteria                       |
-| Typical   | Interviewer    | attach files (resumes, portfolios) to a candidate's profile             | have all relevant documents in one place                                              |
-| Typical   | Hiring Manager | sort candidates in ascending/descending order based on interview scores | easily pick out the potential candidates                                              |
-| Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)         | quickly find the right profiles                                                       |
+| Priority  | As a …​        | I want to …​                                                              | So that I can…​                                                                       |
+|-----------|----------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Essential | Interviewer    | add candidates                                                            | keep track of current candidates                                                      |
+| Essential | Interviewer    | delete candidates                                                         | keep track of current candidates                                                      |
+| Essential | Hiring Manager | view a list of candidates                                                 | quickly assess who has applied for the position                                       |
+| Essential | Hiring Manager | mark candidates as "hired" or "rejected"                                  | finalize the hiring process                                                           |
+| Essential | Hiring Manager | see the current status of a candidate (e.g. shortlisted, rejected)        | track their progress                                                                  |
+| Typical   | Interviewer    | see candidates’ programming languages                                     | ensure that they have sufficient programming knowledge based on company needs         |
+| Typical   | Interviewer    | assign an interview score to a specific candidate                         | objectively evaluate their performance across multiple criteria                       |
+| Typical   | Interviewer    | attach files (resumes, portfolios) to a candidate's profile               | have all relevant documents in one place                                              |
+| Typical   | Hiring Manager | sort candidates in ascending / descending order based on interview scores | easily pick out the potential candidates                                              |
+| Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)           | quickly find the right profiles                                                       |
                                                    
 
 ## Use cases
