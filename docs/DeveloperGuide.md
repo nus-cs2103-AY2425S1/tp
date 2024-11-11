@@ -818,7 +818,3 @@ re-list all patients first.
 real-life behavior, despite the freedom it provides the user. Therefore, we plan to restrict the input for the sex field 
 to predefined values such as "Male", "Female", and "Other".<br><br>
 An example of a command that will trigger an invalid sex error will be: `edit Javier s/Unknown`
-
-9. Otto
-
-10. Otto
