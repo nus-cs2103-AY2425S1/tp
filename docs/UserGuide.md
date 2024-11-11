@@ -32,7 +32,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
        ![incomplete command](images/incompleteCommand.png)
    - Valid command words would briefly show in colour grey to indicate the command word is correct.
        ![valid_command](images/validCommand.png)
-   - Once the completed, valid command is entered, the command will return to colour black.<br>
+   - Once the full valid command is entered, the command words will return to black color.<br>
        ![complete command](images/completedCommand.png)
    - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
      will open the help window.<br>
@@ -71,8 +71,8 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Invalid parameters will be ignored.
-  e.g. If the command only accepts `n/`, `a/`, and `t/` specifiers, then additional specifiers like `u/` or `e/` and their keywords will just be ignored.
+* Invalid specifiers might cause unexpected behavior.
+  e.g. If the command only accepts `n/`, `a/`, and `t/` specifiers, then additional specifiers like `u/` or `e/` might cause unexpected behavior (eg. error messages that do not make sense, or the specifier might be ignored).
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -104,12 +104,11 @@ A client can have any number of tags (including 0).
 <div id="input-format" markdown="block" class="alert alert-info">
 
 **:information_source: Notes about input formats:**<br>
-The following constraints apply to the `edit` command as well:
+The following constraints apply to both the `add` and `edit` commands:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-  * The name is recommended to be within 100 characters long to be displayed properly.
-  * name must be unique (case-sensitive). Clients with the same name cannot be added to
-    the system twice.
+  * Names are recommended to be within 100 characters long to be displayed properly.
+  * Names must be unique (case-sensitive)
       - entering the commands:
           * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
           * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
@@ -121,15 +120,15 @@ The following constraints apply to the `edit` command as well:
           * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
             different block, different unit` will successfully add both `John Doe` and `John 
             doe` to the case management system.
-  * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
-  * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
+  * Acceptable name formats: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
+  * Unacceptable name formats: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
 
-* Client's phone number should only contain numbers, without spaces and special characters.
+* Phone number should only contain numbers, without spaces and special characters.
   * The phone number is recommended to be within 20 characters long to be displayed properly.
   - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`.
   - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`.
 
-* Client's email address should be of the format local-part@domain and adhere to the following constraints:
+* Email address should be of the format local-part@domain and adhere to the following constraints:
     * The email address is recommended to be within 100 characters long to be displayed properly.
     1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
         - The local-part may not start or end with any special characters.
@@ -142,12 +141,12 @@ The following constraints apply to the `edit` command as well:
     * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`.
     * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`.
 
-* Client's addresses can take any values, and it should not be blank.
+* Addresses can take any values, and it should not be blank.
     * The address is recommended to be within 100 characters long to be displayed properly.
     - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`.
     - Unacceptable address format: ``.
 
-* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+* Tag names should be alphanumeric. They should not contain any spaces or special characters.
     * The tag name is recommended to be within 50 characters long to be displayed properly.
     - Acceptable tag format: `friend`, `colleague`, `newComer`.
     - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`.
@@ -163,6 +162,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+  * If you wish to add tag instead of replacing all existing tags, use the [`tag`](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#tagging-a-client-tag) command.
 * You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -183,7 +183,7 @@ section for more details.
 
 ### Listing all beneficiaries : `list`
 
-Shows a list of all beneficiaries in the case management system.
+Lists of all beneficiaries in the case management system.
 
 Format: `list`
 
@@ -223,6 +223,7 @@ Format: `untag INDEX t/TAG`
 
 * Removes the tag from the client at the specific `INDEX`.
 * Only one tag can be removed at once.
+  * If you would like to remove all tags on a client, use the [`edit`](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#editing-a-client--edit) command instead
 * If the tag is not found, a warning will be displayed.
 
 Example:
@@ -255,7 +256,6 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * At least one of name(`n/`), address(`a/`), or tag(`t/`) needs to be entered.
 * All other invalid parameters will be ignored (eg. `u/` or `e/`)
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The command searches from all clients, not just the one that are currently listed
 
 * The order of the keywords does not matter. 
   * e.g. `n/Hans Bo` will match name `Bo Hans`.
@@ -263,13 +263,13 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * Partial names and addresses will also be matched. 
   * e.g. `Han` will match `Hans`.
   * e.g. `Cle` will match `Clementi`.
-* Note that tags is a complete string match.
+* Tags will only match if they are exactly the same.
   * e.g. `elderly` will match `elderly`.
   * e.g. `urg` will not match `urgent`.
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
-  * This is to search as a filtering function.
+* For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search).
+  * This serves as a filtering function.
   * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags.
   * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`.
 
@@ -305,8 +305,7 @@ the entering the command, which will either confirm or cancel the command, respe
 execute another command until the `delete` command is either confirmed or cancelled.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the case management system.
-* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+* `delete 2` deletes the 2nd client in the displayed client list.
 
 
 ### Adding a log entry : `addlog`
@@ -325,8 +324,7 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
-* `find n/Alice` followed by `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the results of the `find` command.
-* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the case management system with the remark `Client is doing well` and the current date and time.
+* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the displayed client list, with the current date and time.
 
 ### Deleting a log entry : `deletelog`
 
@@ -337,8 +335,8 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `LOG_INDEX` refers to the index number shown in the displayed log list.
-* The log index **must be a positive integer** 1, 2, 3, …​
-* The log index is specific to the client at the specified `INDEX`.
+* The `LOG_INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `LOG_INDEX` is specific to the client at the specified `INDEX`.
 * Note that the `deletelog` command requires confirmation. You will be prompted to key in either `y` or `n` after 
   the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
   execute another command until the `deletelog` command is either confirmed or cancelled.
@@ -394,7 +392,7 @@ welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CareConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
