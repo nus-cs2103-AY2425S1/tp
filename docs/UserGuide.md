@@ -210,6 +210,10 @@ section below.
   e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a parameter which can be used as `person-add m/A1234567L`.
 
 - Items in square brackets are optional.<br>
+<<<<<<< HEAD
+<<<<<<< HEAD
+  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+=======
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -217,6 +221,10 @@ section below.
   ``
    (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
+>>>>>>> master
+=======
+  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+>>>>>>> 65b2133aca34831d2baea8f0c028e8a7e33e3dea
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
@@ -247,7 +255,7 @@ section below.
 | Field | Format                                                                                                                                                                  |
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `MATRICULATION_NUMBER` | must be a valid **NUS** matriculation number in the form `AxxxxxxxB`, where `A` is the fixed as 'A', `B` is any *uppercase* character, and `xxxxxxx` is any 7 integers. |
-| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. The name can have a maximum length of 50 characters.                                    |
 | `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
 | `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                     |
@@ -344,21 +352,17 @@ Reminder: follow the [:fa-solid-link: data formats](#data-formats)!
 <a name="person-add">
 <panel header="#### Adding a student : `person-add`" expanded no-close no-switch>
 
-Shows a list of all students saved in TAHub Contacts in the GUI.
+Adds a student into TAHub Contacts.
 
 <box type="definition" seamless><md>
 Format: **`person-add m/MATRICULATION_NUMBER /NAME p/PHONE_NUMBER e/EMAIL
-a/ADDRESS [t/TAG]…​`**
+a/ADDRESS`**
 </md></box>
 
-<box type="tip" seamless><md>
-**Tip:** A student can have any number of tags (including 0).
-</md></box>
-
-| **Examples** |
-| :--- |
+| **Examples**                                                                                        |
+|:----------------------------------------------------------------------------------------------------|
 | `person-add m/A0296210X n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-| `person-add m/A0315310L n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` |
+| `person-add m/A0315310L n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` |
 
 </panel></a>
 
@@ -369,22 +373,16 @@ Edits an existing student in TAHub Contacts.
 
 <box type="definition" seamless><md>
 Format: **`person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL]
-[a/ADDRESS] [t/TAG]…​​`**
+[a/ADDRESS]`**
 </md></box>
 
 - Edits the student with the specified `MATRICULATION_NUMBER`. The `MATRICULATION_NUMBER` must be the **matriculation number** of an **existing student**.
 - **At least one** of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-
-<box type="tip" seamless><md>
-**Tip:** You can remove all the student’s tags by typing `t/` without specifying any tags after it.
-</md></box>
 
 | **Examples** |
 | :--- |
 | `person-edit m/A0296210X p/91234567 e/johndoe@example.com` edits the phone number and email address of the student with `MATRICULATION_NUMBER` of `A0296210X` to be `91234567` and `johndoe@example.com` respectively. |
-| `person-edit m/A0123467X n/Betsy Crower t/` edits the name of the the student with `MATRICULATION_NUMBER` of `A0123467X` to be `Betsy Crower` and *clears* all existing tags. |
 
 </panel>
 </a>
@@ -754,11 +752,11 @@ data file only if you are confident that you can update it correctly.
 You have been duly warned.
 </box>
 
+### Coming Soon
+
 <br>
 
-### Future
-
-#### Adding Support for more Course Codes and Tutorial IDs
+#### Added Support for more Course Codes and Tutorial IDs
 
 - Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support **all** potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
 
@@ -819,9 +817,9 @@ So be careful especially when you're using desctructive (deletion) commands!
 | List Students             | `list`                                                                                                                                                                                                                 |
 | Clear                     | `clear`                                                                                                                                                                                                                |
 | Exit                      | `exit`                                                                                                                                                                                                                 |
-| Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
+| Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`      |
 | Find Students by Name     | `person-find KEYWORD [MORE_KEYWORDS]`<br>e.g.`person-find James Jake`                                                                                                                                                  |
-| Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                             |
+| Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                             |
 | Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                              |
 | Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                            |
 | Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                                 |
