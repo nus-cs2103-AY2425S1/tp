@@ -491,7 +491,7 @@ Action             | Format, Examples
 **Delete**         | `delete INDEX` or `delete CONTACT_NAME`<br> e.g., `delete 3`, `delete john doe`
 **Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
 **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
+**Search**         | `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`<br> e.g., `search n/ Jake`
 **Export**         | `export`
 **Import**         | `import FILENAME`<br> e.g., `import contacts.csv`
 **List Events**    | `list_events`
