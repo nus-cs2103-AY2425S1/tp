@@ -274,8 +274,6 @@ Currently: The filter command in KnottyPlanners only allows for filtering to be 
 
 Plan: To allow users to filter with other fields such as phone number, address and email.
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -343,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 * 5a. The user cancels the deletion.
 
