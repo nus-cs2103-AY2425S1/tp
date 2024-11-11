@@ -42,12 +42,12 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> "1" Name
 Person *--> "1" StudentID
-Person *--> "0...1" Major
-Person *--> "0...1" Email
-Person *--> "0...1" Year
+Person *--> "1" Major
+Person *--> "1" Email
+Person *--> "1" Year
 Person *--> "1" GroupList
 GroupList *--> "*" Group
-Person *--> "0...1" Comment
+Person *--> "1" Comment
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
