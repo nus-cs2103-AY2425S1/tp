@@ -121,7 +121,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 ### GUI Overview
 The EZSTATES GUI is organized into **five** key components:
 
-   ![ui](images/ui_overview_ug.png)
+   ![ui](images/img_10.png)
 
 * `Menu Bar`: Located at the top left, this includes options such as `File` and `Help` for managing settings and accessing support.
 * `Command Box`: The main area where users can enter commands to interact with the app.
