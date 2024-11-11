@@ -376,6 +376,8 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 
 </box>
 
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -393,6 +395,8 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 You can view a list of all persons in the patient book.
 
 **Format**: `list person` shows the list of all patients on the screen.
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -439,6 +443,8 @@ of the application.
 
 </box>
 
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -470,6 +476,8 @@ You can find person(s) whose **names** contain any of the given keywords.
 - `find person n/John` returns `john` and `John Doe` 
 - `find person n/alex david` returns `Alex Yeoh`, `David Li`<br><br>
   ![result for 'find person alex david'](images/findAlexDavidResult.png)
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -509,6 +517,8 @@ Note that deleting a person will also delete all related appointments.
 - `list person` followed by `delete person 2` deletes the second person in the list.
 - `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -533,6 +543,8 @@ You can delete all person entries from the patient book.
 Note that this will also clear the appointment data.
 
 </box>
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -634,6 +646,8 @@ You can view a list of all appointments in the appointment book.
 
 **Format**: `list appt`
 
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -660,8 +674,6 @@ You can an existing appointment in appointment book.
 **Examples**:
 
 - `edit appt 3 d/2024-12-05 13:00 m/Budesonide` edits the date and time and the medicine to be `2024-12-05 13:00` and `Budesonide` respectively.
-
-<br>
 
 <br>
 
@@ -746,6 +758,7 @@ You can delete a specified appointment from appointment book.
 **Tip:** Use the `list appt` to check the index of the appointment before deleting one.
 
 </box>
+
 <br>
 
 <box style="background: #eeeeee">
@@ -810,7 +823,7 @@ You will be able to view a help window that directs you to this user guide.
 
 **Format**: `help`
 
-<img src="images/helpMessage.png" alt="Help Message" width="500px">
+<img src="images/helpMessage.png" alt="Help Message" width="540px">
 
 <br><sbr>
 
