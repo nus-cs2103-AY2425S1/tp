@@ -30,8 +30,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+This project, ABCLI, builds on the Address Book Level 3 (AB3) project, originally developed by the [SE-EDU initiative](https://se-education.org). We extend our heartfelt thanks to the AB3 developers for their foundational work, which has greatly influenced the structure and functionality of ABCLI.
+
+We would also like to express our gratitude to the creators of the following resources, libraries, and tools that were pivotal in the development of ABCLI:
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
+
+The contributions of these resources and their developers were indispensable in bringing ABCLI to fruition, and we deeply value their impact on our work.
 
 --------------------------------------------------------------------------------------------------------------------
 
