@@ -162,27 +162,26 @@ Refer to the [Features](#features) below for details of each command.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about PROperty's command format:**<br>
 
 * PROperty currently only supports English.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the you.<br>
+  e.g. for `add n/NAME`, `NAME` is a parameter which you input, such as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/seller` or as `n/John Doe`.
+  e.g. for `n/NAME [t/TAG]`, you can either input the parameters as `n/John Doe t/seller` or `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/seller`, `t/seller t/landlord` etc.
+* Items proceeded by `…`​ can be input any number of times.<br>
+  e.g. `[t/TAG]…​` can be either have no input, or be input as `t/seller`, or `t/seller t/landlord` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be input in any order.<br>
+  e.g. you can either input `n/NAME p/PHONE_NUMBER` or `p/PHONE_NUMBER n/NAME`. Both are acceptable formats.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* For commands that do not require parameters (e.g. `help`, `list`, `exit` etc), any additional parameters that are input will be ignored.<br>
+  e.g. if you input `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  
+* If you are using a PDF version of this document, please exercise caution when copying and pasting commands that span multiple lines, as space characters adjacent to line breaks may be omitted when pasted into PROperty.  
 
 </div>
 
