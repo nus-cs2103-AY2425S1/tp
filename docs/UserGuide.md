@@ -409,9 +409,9 @@ Format: `assign-task PERSON_NUMBER TASK_NUMBER` or `atask PERSON_NUMBER TASK_NUM
 * The `TASK_NUMBER` refers to the index of the task shown under the **Tasks** column
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
-### Unassigning a Task from a contact : `unassign-task` 
+### Unassigning a Task from a contact : `unassign-task` or `unatask`
 
-Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER`
+Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER` or `unatask PERSON_NUMBER PERSON_TASK_NUMBER`
 
 * Un-assigns a `Task` from a contact.
 * The `PERSON_NUMBER` is the index of the person shown in the displayed person list. 
