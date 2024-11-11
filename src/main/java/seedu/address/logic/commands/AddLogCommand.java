@@ -39,21 +39,40 @@ public class AddLogCommand extends Command {
      * Creates an AddLogCommand to add the specified log to the person.
      */
     public AddLogCommand(IdentityNumber identityNumber, Log log) {
+        requireNonNull(identityNumber);
+        requireNonNull(log);
         this.identityNumber = identityNumber;
         this.log = log;
     }
 
+    /**
+     * Executes the AddLogCommand to add a log to the person identified by their Identity Number.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the success of the command.
+     * @throws CommandException if the person identified by the Identity Number is not found in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToUpdate = getPerson(model);
+        requireNonNull(personToUpdate);
         model.addLog(personToUpdate, log);
+
+        assert model.hasLog(personToUpdate, log) : "Log was added successfully";
 
         return new CommandResult(String.format(MESSAGE_ADD_LOG_SUCCESS, personToUpdate.getName()),
                 false, false, false, false, -1, false, identityNumber,
                 log.getAppointmentDate(), log.getEntry());
     }
 
+    /**
+     * Retrieves the person from the model based on the Identity Number.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code Person} that is identified by the Identity Number.
+     * @throws CommandException if the person identified by the Identity Number is not found in the address book.
+     */
     //@@author junyi73
     private Person getPerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
