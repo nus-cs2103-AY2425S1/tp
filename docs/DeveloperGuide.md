@@ -921,4 +921,3 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
     Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
     e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
-    
