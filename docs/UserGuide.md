@@ -51,7 +51,7 @@ Your terminal should look something like this right before entering the last com
 
 * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -85,7 +85,8 @@ Your terminal should look something like this right before entering the last com
 * **If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.**
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
+
 <br>
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -135,7 +136,7 @@ Adds a patient contact to the address book.
 <img src="images/addCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -168,10 +169,11 @@ You must select `OK` to clear the address book. If you select `Cancel`,
 the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/clearConfirmation.png" width="700">
+<img src="images/clearConfirmation.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -206,7 +208,8 @@ Deletes the specified patient contact from the address book.
   and the patient contact will not be deleted.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/deleteConfirmation.png" width="700">
+<img src="images/deleteConfirmation.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -225,7 +228,7 @@ Deletes the specified patient contact from the address book.
 <img src="images/deleteCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -278,7 +281,7 @@ Edits an existing patient contact in the address book.
 <img src="images/editCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -292,7 +295,7 @@ Exits the program.
 **Format**: `exit`
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -342,7 +345,7 @@ Filter patients whose age and/or appointment dates are within the specified rang
 <img src="images/filterCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -387,7 +390,7 @@ Finds patients whose names or phone numbers contain any of the given keywords.
 <img src="images/findCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -406,9 +409,10 @@ Shows you a help window with useful resources which includes:
 - You can copy the command format or example from the table and paste it into the command box.
 - You can click on the table headers to sort commands in ascending or descending order.
 <box type="warning" no-icon no-background light>
-<img src="images/helpWindow.png" width="700"></box>
+<img src="images/helpWindow.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+</box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -447,13 +451,14 @@ Furthermore, certain edits can cause the MediContact to behave in unexpected way
 
 1. Place the `json` file to be imported in the same folder as the application JAR file. In the image below `data1.json` is the desired `json` file to be imported. Note that it has the file extension `.json` and assume that it adheres to the expected format and input constraints. 
 
-   <img src="images/importStep1.png" width="700"/>
+   <img src="images/importStep1.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
 
 2. Run the application `jar` file as per usual (see [Quick start](#quick-start) for more details).
 
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
-   <img src="images/importStep3.png" width="700"/>
+   <img src="images/importStep3.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 </box>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -527,7 +532,7 @@ The following is an example of a valid JSON file content.
   
 - To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -558,7 +563,7 @@ Shows an alphabetically sorted list of all patients in the address book.
 <img src="images/listCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -588,7 +593,7 @@ Shows a list of all starred patient contacts in the address book.
 <img src="images/listStarCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -638,7 +643,7 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 <img src="images/noteCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -676,7 +681,7 @@ Sorts the patient contact list in the address book on the basis of their earlies
 <img src="images/sortCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -712,7 +717,7 @@ Stars the specified patient contact from the address book into favourites.
 <img src="images/starCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -748,7 +753,7 @@ Unstars the specified patient contact from the address book removing them from f
 <img src="images/unstarCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[<i class="fa-solid fa-angle-up"></i>](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -783,7 +788,7 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 <img src="images/viewCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -793,7 +798,7 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 
 MediContact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -807,7 +812,7 @@ MediContact data are saved in the hard disk automatically after any command that
 
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 
 <br>
 <br>
@@ -823,7 +828,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
 <br>
 
@@ -850,7 +855,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: No, `delete` and `clear` actions are irreversible.
 
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -859,7 +864,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -885,7 +890,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
 
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -908,4 +913,4 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Sex**                             | `s/`   | Should be alphanumeric. Should not be blank.<br>Valid example: `Female` |
 | **Tags**                            | `t/`   | Should be alphanumeric.<br>Valid example: `Patient`          |
 
-[Return to Table of Contents](#medicontact)
+[<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
