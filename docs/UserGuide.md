@@ -86,12 +86,14 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-- Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
-  will be **ignored**.<br>
+- The following commands (i.e. `help`, `exit` and `clear`) will **ignore** extraneous parameters.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Extraneous parameters for commands that **take in parameters** will be recognised as _invalid_ input parameters.<br>
-  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as an invalid command structure due to extra `gn/`.
+- The following commands (i.e. `list_s`, `list_g` and `sort` commands) will **throw an error** for extraneous parameters.
+
+- Using extraneous parameters/repeated parameters, unlike stated, in other commands might **result in an error**!
+  - Prefixes are detected if a space is in front of them, i.e. `gn/` will be detected as a prefix like this ` gn/`.
+  - If your input involves a parameter used in the command, consider using a backslash like this ` gn\`.
 
 **Important**
 
