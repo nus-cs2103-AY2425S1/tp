@@ -1,6 +1,12 @@
 package seedu.address.model.student;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+
 
 /**
  * Represents a Student's owed tuition fee in the address book.
@@ -53,8 +59,14 @@ public class OwedAmount extends Fee {
      * @param amount The amount to be subtracted from the current owed amount.
      * @return A new {@code OwedAmount} object with the updated owed amount.
      */
-    public OwedAmount decreaseValue(SettleAmount amount) {
-        return new OwedAmount(Double.toString(super.value - amount.value));
+    public OwedAmount decreaseValue(SettleAmount amount) throws CommandException {
+        double roundedDecimal =
+                BigDecimal.valueOf(super.value - amount.value).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        String newOwedAmount = Double.toString(roundedDecimal);
+        if (!isValidOwedAmount(newOwedAmount)) {
+            throw new CommandException(Messages.MESSAGE_LIMIT);
+        }
+        return new OwedAmount(newOwedAmount);
     }
 
     /**

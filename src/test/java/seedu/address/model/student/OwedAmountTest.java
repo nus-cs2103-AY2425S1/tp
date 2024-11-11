@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 public class OwedAmountTest {
 
     @Test
@@ -57,11 +59,29 @@ public class OwedAmountTest {
     }
 
     @Test
-    public void decreaseValue() {
+    // EP: boundary value 0.01 after decreasing owed amount
+    public void decreaseValue_boundary_value() throws CommandException {
+        OwedAmount owedAmount = new OwedAmount("500.00");
+
+        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(new SettleAmount("499.99"));
+        assertEquals("0.01", decreasedOwedAmount.toString());
+    }
+
+    @Test
+    public void decreaseValue_random_value() throws CommandException {
+        // EP: random value that could cause off by 0.01 inaccuracy
+        OwedAmount owedAmount = new OwedAmount("500.00");
+
+        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(new SettleAmount("499.13"));
+        assertEquals("0.87", decreasedOwedAmount.toString());
+    }
+
+    @Test
+    // EP: Invalid value after decreasing owe amount
+    public void decreaseValue_invalidAmount_throwCommandException() {
         OwedAmount owedAmount = new OwedAmount("10.00");
 
-        OwedAmount decreasedOwedAmount = owedAmount.decreaseValue(new SettleAmount("5.00"));
-        assertEquals("5.00", decreasedOwedAmount.toString());
+        assertThrows(CommandException.class, () -> owedAmount.decreaseValue(new SettleAmount("15.00")));
     }
 
     @Test
