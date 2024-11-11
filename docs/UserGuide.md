@@ -114,20 +114,20 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 ### 2.2 Parameter Table
 
-| Index |     Parameter     |                     Format                     | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|:-----:|:-----------------:|:----------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|   1   |      Address      |                  `a/ADDRESS`                   | Can take any values except prefixes already reserved, and should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|   2   | Emergency Contact |             `e/EMERGENCY_CONTACT`              | Should only contain numbers, and should be at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|   3   |       Index       |                    `INDEX`                     | Should be a positive integer equal to or less than the size of the current displayed student list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|   4   |    Lesson Time    |                `lt/LESSON_TIME`                | Should be in format `DAY-STARTTIME-ENDTIME`, where:<ul><li>`DAY` is in: [MON, TUE, WED, THU, FRI, SAT, SUN]</li><li>`STARTTIME` and `ENDTIME` are in the format `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive</li><li>`ENDTIME` must be later than `STARTTIME`</li></ul>                                                                                                                                                                                                                                                                                                                                      |
-|   5   |       Level       |                   `l/LEVEL`                    | Should be in the format `YEAR TRACK`, where:<ul><li>`YEAR` is one of: [S1, S2, S3, S4]</li><li>`TRACK` is one of: [EXPRESS, NA, NT, IP]</li><li>or S5 NA</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|   6   |       Name        | `n/NAME` or `update NAME` or `find n/KEYWORDS` | Should only contain alphanumeric characters and spaces, and should not be blank. For commands other than `add n/NAME`, `update [n/NAME]` and `find n/KEYWORDS`, the provided name must match an existing student's name in EduManage. Refer to [Section 5 - Known Issues](#5-known-issues) for guidance on handling valid names that contain special characters.                                                                                                                                                                                                                                                                                          |
-|   7   |       Note        |                   `nt/NOTE`                    | Can take any values except prefixes already reserved, and can be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|   8   |   Phone Number    |                `p/PHONE_NUMBER`                | Should only contain numbers, and should be at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|   9   |      Subject      |                  `s/SUBJECT`                   | Should be valid for the given level: <ul><li>**Lower Secondary** (Level year is `S1` or `S2`): `MATH`, `SCIENCE`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI`</li><li>**Upper Secondary** (Level year is `S3`, `S4` or `S5`): `MATH`, `A_MATH`, `E_MATH`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `COMBINED_SCIENCE`, `ACCOUNTING`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `MUSIC`, `ART`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI` |
-|  10   |   Task Deadline   |               `d/TASK_DEADLINE`                | Should be in the format `YYYY-MM-DD`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|  11   | Task Description  |              `t/TASK_DESCRIPTION`              | Can take any values except prefixes already reserved, and should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|  12   |    Task Index     |                `ti/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Index |     Parameter     |                     Format                     | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|:-----:|:-----------------:|:----------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|   1   |      Address      |                  `a/ADDRESS`                   | Can take any values except prefixes already reserved, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|   2   | Emergency Contact |             `e/EMERGENCY_CONTACT`              | Should only contain numbers, should be at least 3 digits long, and can be the same as phone number. International phone number formats (e.g., length greater than 8, different starting digits) are allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|   3   |       Index       |                    `INDEX`                     | Should be a positive integer equal to or less than the size of the current displayed student list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|   4   |    Lesson Time    |                `lt/LESSON_TIME`                | Should be in format `DAY-STARTTIME-ENDTIME`, where:<ul><li>`DAY` is in: [MON, TUE, WED, THU, FRI, SAT, SUN].</li><li>`STARTTIME` and `ENDTIME` are in the format `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive.</li><li>`ENDTIME` must be later than `STARTTIME`.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
+|   5   |       Level       |                   `l/LEVEL`                    | Should be in the format `YEAR TRACK`, where:<ul><li>either:<ul><li>`YEAR` is one of: [S1, S2, S3, S4] and</li><li>`TRACK` is one of: [EXPRESS, NA, NT, IP].</li></ul><li>or:<ul><li>`YEAR` is S5 and</li><li>`TRACK` is NA.</ul></ul>                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|   6   |       Name        | `n/NAME` or `update NAME` or `find n/KEYWORDS` | Should only contain alphanumeric characters and spaces, and should not be blank. For commands other than `add n/NAME`, `update [n/NAME]` and `find n/KEYWORDS`, the provided name must match an existing student's name in EduManage. Refer to [Section 5 - Known Issues](#5-known-issues) for guidance on handling valid names that contain special characters.                                                                                                                                                                                                                                                                                            |
+|   7   |       Note        |                   `nt/NOTE`                    | Can take any values except prefixes already reserved, and can be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|   8   |   Phone Number    |                `p/PHONE_NUMBER`                | Should only contain numbers, should be at least 3 digits long, and can be the same as emergency contact number. International phone number formats (e.g., length greater than 8, different starting digits) are allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|   9   |      Subject      |                  `s/SUBJECT`                   | Should be valid for the given level: <ul><li>**Lower Secondary** (Level year is `S1` or `S2`): `MATH`, `SCIENCE`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI`.</li><li>**Upper Secondary** (Level year is `S3`, `S4` or `S5`): `MATH`, `A_MATH`, `E_MATH`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `COMBINED_SCIENCE`, `ACCOUNTING`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `MUSIC`, `ART`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI`. |
+|  10   |   Task Deadline   |               `d/TASK_DEADLINE`                | Should be in the format `YYYY-MM-DD`, and should only start from today's date (according to your computer's local time).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|  11   | Task Description  |              `t/TASK_DESCRIPTION`              | Can take any values except prefixes already reserved, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|  12   |    Task Index     |                `ti/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 ***
 <div style="page-break-after: always;"></div>
@@ -155,8 +155,8 @@ This detailed guide will walk you through how to make the most of **EduManage** 
   e.g. `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/MATH` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/MATH`, `s/MATH s/PHYSICS` etc.<br>
-  e.g. `[lt/LESSON_TIME]…​` can be used as ` ` (i.e. 0 times), `lt/SUN-11:00-13:00`, `lt/SUN-11:00-13:00 lt/WED-17:00-19:00` etc.
+  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times) or `s/MATH` or `s/MATH s/PHYSICS` etc.<br>
+  e.g. `[lt/LESSON_TIME]…​` can be used as ` ` (i.e. 0 times) or `lt/SUN-11:00-13:00` or `lt/SUN-11:00-13:00 lt/WED-17:00-19:00` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -182,6 +182,7 @@ Adds a student to EduManage.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
 * A level must be assigned to a student either in the same command or in an earlier command before they can be assigned a subject.
+* Lesson times across all students and within each student's schedule are allowed to overlap to accommodate different schedules on alternate weeks.
 
 <box type="tip" seamless>
 
@@ -190,7 +191,7 @@ Adds a student to EduManage.
 
 **Examples:**
 * `add n/John Doe p/98765432 e/99999999 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 NA s/ENGLISH lt/SAT-11:00-13:00`
+* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 NA s/ENGLISH lt/SAT-11:00-13:00 lt/SAT-11:30-13:30`
 
 ***
 
@@ -220,11 +221,12 @@ Updates the details of an existing student in EduManage.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * A level must be assigned to a student either in the same command or in an earlier command before they can be assigned a subject.
+* Lesson times across all students and within each student's schedule are allowed to overlap to accommodate different schedules on alternate weeks.
 
 <box type="warning" seamless>
 
 **Caution:**
-When updating subjects or lesson times, the existing subjects or lesson times of the student will be replaced i.e. adding of subjects or lesson times is not cumulative.
+When updating a note, subjects or lesson times, the existing note, subjects or lesson times of the student will be replaced i.e. updating of note, subjects or lesson times is not cumulative.
 </box>
 
 <box type="tip" seamless>
@@ -292,7 +294,7 @@ the subject(s) tagged must be valid for the previously assigned level.
 
 **Tips:** 
 * To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`.
-* Use `l/NONE NONE` to clear all existing tags.
+* To clear all existing level and subject tags, use `l/NONE NONE`.
 </box>
 
 **Examples:**
@@ -308,6 +310,17 @@ Records a note for the specified student.
 
 **Format:** `note n/NAME nt/NOTE`
 
+<box type="warning" seamless>
+
+**Caution:**
+When updating a note, the existing note of the student will be replaced i.e. updating of note is not cumulative.
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** To remove a note for a student, simply type `nt/` without adding any text after it.
+  </box>
+
 **Examples:**
 * `note n/John Doe nt/Doing well in all subjects`
 * `note n/Jane Smith nt/Struggling with trigonometry`
@@ -319,6 +332,11 @@ Records a note for the specified student.
 Views a specific student on the right side window.
 
 **Format:** `view n/NAME`
+
+<box type="tip" seamless>
+
+**Tip:** If fields like note or address are too long and get cut off in the main student view, use this `view` command to see the fields in full.
+</box>
 
 **Examples:**
 * `view n/Alex Yeoh`
@@ -338,6 +356,7 @@ Adds a task to the task list of the specified student.
 **Format:** `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`
 
 * Deadline must be a valid date in the format of `YYYY-MM-DD`.
+* Deadline must be from today's date onwards, inclusive of today's date (based on computer's local time).
 
 **Examples:**
 * `addtask n/John Doe t/Mark assignment d/2024-12-25`
@@ -350,6 +369,10 @@ Adds a task to the task list of the specified student.
 Deletes a task from the specified student's task list.
 
 **Format:** `deletetask n/NAME ti/TASK_INDEX`
+* The task index refers to the index number shown in the student's task list, as circled in red in the picture below.
+* The task index **must be a positive integer** 1, 2, 3, …​ .
+
+  ![viewtasks](images/viewtasks.png)
 
 **Examples:**
 * `deletetask n/John Doe ti/1`
@@ -361,7 +384,7 @@ Deletes a task from the specified student's task list.
 Updates the details of an existing task in a student's task list.
 
 **Format:** `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`
-* The task index refers to the index number shown in the student's task list.
+* The task index refers to the index number shown in the student's task list, as specified for `deletetask`.
 * The task index **must be a positive integer** 1, 2, 3, …​ .
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
