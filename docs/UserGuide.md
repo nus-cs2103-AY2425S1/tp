@@ -49,13 +49,13 @@ SalesContactPro is a **CLI-first contact management system designed specifically
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/client` or as `n/John Doe`.
 
 * Items in angular brackets are options.<br>
-  e.g `i/<none/low/mid/high>` can be used as `i/low` or as `i/high`.
+  e.g `i/<none/low/mid/high>` can be used as `i/low` or as `i/high` or using other valid options.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/client`, `t/client t/colleague` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
+Adds a person to SalesContactPro. People with **both** exact same **Name** (case-sensitive) and **Phone** are not allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -137,7 +137,7 @@ Results:
 
 ### Editing a person: `edit`
 
-Edits an existing person in SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
+Edits an existing person in SalesContactPro. People with **both** exact same **Name** (case-sensitive) and **Phone** are not allowed.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -186,16 +186,16 @@ Parameters:
 * `p/PHONE`: The phone number criteria to filter by. For multiple phone numbers, it checks if any phone number is present.
 * `e/EMAIL`: The email criteria to filter by. For multiple emails, it checks if any email is present.
 * `a/ADDRESS`: The address criteria to filter by. For multiple addresses, it checks if any address is present.
-* `t/TAG…​`: The tags to filter by. For multiple tags, it checks if all tags are present.
+* `t/TAG…​`: The tags to filter by. For multiple tags, it checks if **all** tags are present.
 * `i/INCOME_GROUP…​`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high` (case sensitive). Multiple income values can be used in the same `i/`, and will check with an `OR` criteria.
-* `age/AGE_CRITERIA…​`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria used in the same `age/`, it checks if all age criteria are satisfied.
+* `age/AGE_CRITERIA…​`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria used in the same `age/`, it checks if all **age** criteria are satisfied.
 
 **Examples**:
 * `filter p/+65 e/example.com a/Clementi t/Inactive i/low age/>20 <60`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, have the tag `Inactive`, belong to the `low` income group, and are aged between 21 and 59.
 * `filter p/987 e/johndoe@example.com a/Street i/medium high age/30`: Filters the list to include all persons whose phone number contains `987`, email is `johndoe@example.com`, address contains `Street`, belong to either the `medium` or `high` income group, and are exactly 30 years old.
 
 **Notes**:
-* At least one of `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `i/INCOME_GROUP`, `age/AGE_CRITERIA` or `t/TAG...` must be provided.
+* At least one of `p/PHONE`, `e/EMAIL`, `a/ADDRESS`, `i/INCOME_GROUP`, `age/AGE_CRITERIA` or `t/TAG…` must be provided.
 * If a contact does not have a value for the criteria field, it is not displayed.
 * Multiple criteria for phone, email, address, tags, income group, and age can be specified, separated by spaces.
 * The criteria for phone, email, address, and tags are case-insensitive and can be partial matches.
@@ -214,7 +214,7 @@ Parameters:
 * Delete: `del/NAME` or `del/INDEX`
 
 <div markdown="span" class="alert alert-primary">:exclamation: **Tip:**
-The `notes add/` feature will replace the entire note, please use `notes edit/` to make modifications.
+The `notes add/` feature replaces the entire note, for modifications please use `notes edit/`.
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 While we allow any character for notes for flexibility, our primary language is English, and any formatting errors due to other languages is not part of our scope.
@@ -370,9 +370,9 @@ Action | Format, Examples
 **[Delete](#deleting-a-person-delete)** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
 **[Edit](#editing-a-person-edit)** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **[Find](#locating-persons-by-name-find)** | `find KEYWORD [KEYWORD]…` <br> e.g., `find James Jake`
-**[Filter](#filtering-persons-by-criteria-filter)** | `find KEYWORD [KEYWORD]...` <br> e.g., `find James Jake`
+**[Filter](#filtering-persons-by-criteria-filter)** | `find KEYWORD [KEYWORD]…` <br> e.g., `find James Jake`
 **[List](#listing-all-persons-list)** | `list [s/SORT_FIELD] [r/]` <br> • SORT_FIELD: `name`, `email`, `income`, or `age` <br> e.g., `list s/name`, `list s/email r/`, `list s/age`
 **[Notes](#managing-contact-notes-notes)** | `notes PARAMETER` <br> • View: `notes view/NAME` or `notes view/INDEX` <br> • Add: `notes add/NAME nt/NOTES` or `notes add/INDEX nt/NOTES` <br> • Edit: `notes edit/NAME` or `notes edit/INDEX` <br> • Delete: `notes del/NAME` or `notes del/INDEX` <br> e.g., `notes view/1`, `notes add/James Ho nt/Prefers email`
 **[Help](#viewing-help-help)** | `help`
 **[Clear](#clearing-all-entries-clear)** | `clear`
-**[Exit](#exiting-the-program-exit)** | `help`
+**[Exit](#exiting-the-program-exit)** | `exit`
