@@ -56,7 +56,7 @@ public class AddAllergyCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
-        
+
         // if the NRICs do not match, throw exception immediately.
         if (!person.getNric().equals(this.nric)) {
             throw new CommandException(PATIENT_DOES_NOT_EXIST);
