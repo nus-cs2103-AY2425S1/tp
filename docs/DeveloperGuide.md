@@ -557,4 +557,5 @@ screen by how well the contact's skill match up to the job's requirements or to 
 * **Enable support for `find company`**  
 * **Enable support for `edit job`**  
 * **Enable support for `edit company`**  
+* **Enable support for job quota for `Job`**  
 * **Enable support for more billing date formats (from end of month)**
