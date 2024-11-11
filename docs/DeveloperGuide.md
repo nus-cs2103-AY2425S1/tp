@@ -212,12 +212,12 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Export 
 
-1. The export command modifies ```UserPrefs#exportFilterGoods``` to true when called
-2. When the command is executed, ```LogicManager``` will check this variable
-3. If the variable is true, ```LogicManager``` will call ```Storage#saveFilteredGoods``` from the storage class
-4. Effectively creating/updating the ```filteredGoods.csv``` file
+1. The export command modifies ```UserPrefs#exportFilterGoods``` to true when called.
+2. When the command is executed, ```LogicManager``` will check this variable.
+3. If the variable is true, ```LogicManager``` will call ```Storage#saveFilteredGoods``` from the storage class.
+4. Effectively creating/updating the ```filteredGoods.csv``` file by writing the currently displayed goods list into it.
 5. ```LogicManager``` then calls ```Model#setExportFilterGoodsToFalse``` to set ```UserPrefs#exportFilterGoods``` to false.
-6. Thus, the filtered file is only created when the export command is used.
+6. The filtered file is thus created when the export command is used.
 
 ### Observable views of suppliers with supplier goods information.
 
@@ -229,7 +229,7 @@ One approach could be to update the supplier tags every time a new goods is adde
 
 How this is actually accomplished, is by creating a new observable list (that the suppliers listview of the UI will use) that observes the two observable lists of suppliers and goods. Any changes from either the suppliers or goods lists will be observed in this joint observable list which will allow the UI to update accordingly. Not only does this allow for dynamic updates of the supplier listview whenever the goods observable list is updated, but also mitigate the issue of having to constantly update the (original) suppliers list.
 
-The diagram below illustrates the implementation of the observer pattern. Note that this diagram is only for conceptual understanding and the names of the classes may be different from what is present in the code.
+The diagrams below illustrates the implementation of the observer pattern. Note that these diagrams are only for conceptual understanding and the names of the classes may be different from what is actually present in the code.
 
 Before:
 
@@ -266,9 +266,9 @@ After:
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* needs to associate goods with contacts
+* needs to associate many goods with many contacts
 
-**Value proposition**: To be able to manage contacts faster than a typical mouse/GUI driven app, and able to associate goods to contacts and suppliers for easier and more comprehensive business management.
+**Value proposition**: To be able to manage contacts faster than a typical mouse/GUI driven app, and able to associate goods to contacts and suppliers for an easier and more comprehensive business management experience.
 
 ### User stories
 
@@ -353,19 +353,19 @@ Use case ends.
   - 1ai. System displays an error message.  
   Use case ends.
 
-#### UC6: List suppliers
+#### UC6: List all suppliers
 
 **MSS**
 1. User requests to view all suppliers.
 2. System displays a view of all suppliers.  
-Use case ends.
+  Use case ends.
 
 #### UC7: Display help menu
 
 **MSS**
 1. User requests a help menu.
 2. System displays the help menu.  
-Use case ends.
+  Use case ends.
 
 #### UC8: Add a goods to a supplier
 
@@ -381,7 +381,7 @@ Use case ends.
 - 1b. The supplier does not exist.
   - 1bi. System displays an error message.  
   Use case ends.
-- 1c. The goods to add already exist with the supplier.
+- 1c. The exact goods to be added already exists with the supplier.
   - 1ci. System display an error message.  
   Use case ends.
 
@@ -413,7 +413,7 @@ Use case ends.
 **Extensions**
 - 1a. Details are not properly formatted or complete.
   - 1ai. System displays an error message.   
-    Use case ends.
+  Use case ends.
 - 1b. No goods are found.
   - 1bi. System displays an empty list of goods.
   - 1bii. System displays a feedback saying that no goods are found.  
@@ -423,7 +423,7 @@ Use case ends.
 
 **MSS**
 1. User requests to export goods data.
-2. System generates a csv based on goods displayed to the user.  
+2. System generates a csv based on the goods displayed to the user.  
 Use case ends.
 
 ### Non-Functional Requirements
@@ -439,12 +439,11 @@ Use case ends.
 9. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
 10. The application must be able to export data in _commonly used formats_.
 11. The application must not require any internet connection to function.
-12. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
-13. The project is not required to handle any messaging functions between users and contacts.
-14. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
-15. Price of goods should not be negative.
-16. Quantity of goods should not be negative.
-17. Arrival date of goods should not be earlier than the current date.
+12. The project is not required to handle any messaging functions between users and contacts.
+13. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
+14. Price of goods should not be negative.
+15. Quantity of goods should not be negative.
+16. Arrival date of goods should not be earlier than or equal to the current date.
 
 ### Glossary
 
@@ -501,7 +500,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: -
 
    1. Test case: `delete Amy`<br>
-      Expected: Contact `Amy` is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: Contact `Amy` is deleted from the list if `Amy` is an existing contact. Details of the deleted contact shown in the status message.
 
    1. Incorrect delete commands to try: `delete`, `delete x`, `...` (where x is a number or a name that is not registered)<br>
       Expected: System will provide an error message indicating correct usage.
@@ -510,7 +509,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding goods to SupplyCentral.
 
-   1. Prerequisites: At least one supplier (e.g. Alex Yeoh) must be registered.
+   1. Prerequisites: At least one supplier (e.g. Alex Yeoh) must be registered in SupplyCentral.
 
    1. Test case: `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
       Expected: Goods `Gardenia Milk Bread` is added under the supplier `Alex Yeoh`.
@@ -522,43 +521,36 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting goods from SupplyCentral.
 
-   1. Prerequisites: At least one supplier (e.g. Alex Yeoh) must be registered.
+   1. Prerequisites: At least one supplier (e.g. Alex Yeoh) must be registered in SupplyCentral.
 
    1. Test case: `deletegoods n/Alex Yeoh gn/Gardenia Milk Bread`
-      Expected: Goods `Gardenia Milk Bread` is deleted from the supplier `Alex Yeoh`.
+      Expected: Goods `Gardenia Milk Bread` is deleted from the supplier `Alex Yeoh` if the record exists.
 
    1. Incorrect delete goods commands to try: `deletegoods`, `deletegoods gn/Gardenia Bread`, `deletegoods n/Alex Yeoh`
       Expected: System will provide an error message indicating the correct usage.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 
 ### Effort Summary
-Difficulty level for the project was high as we increased the complexity of our use case by handling another entity `Goods` in addition to the suppliers. As we strived to tackle the pain points faced by our persona, we had to add goods tracking and other important features for our persona. We have been able to build a comprehensive application that we believe can help to alleviate the pain points of our persona. This app handles two different entities in two different data types, while ensuring smooth integration between both.
+Difficulty level for the project was high as we increased the complexity of our use case by handling another entity `Goods` in addition to the suppliers. As we strived to tackle the pain points faced by our persona, we had to add goods tracking and other important features for our persona. This app thus handles two different entities in two different data types, while ensuring smooth integration between both. We believe that we have been able to build a comprehensive application that we believe can help to alleviate the pain points of our persona. 
 
 ### Goods Storage
 OpenCSV was used to handle working with CSV files. Hence, we are handling another file type besides the JSON that AB3 uses. Integrating this library made it easier to implement CSV-related functions. However, we did have to learn to use this library effectively and in a way that could make the application bug-free even with unintended incorrect usage. This resulted in quite some time and effort being used to ensure the testability of the integration of the project with OpenCSV.
 
 ### Main Challenges Faced
 Besides ensuring that any bugs with OpenCSV are handled correctly, we also had to:
-* Ensure duplication checks are done according to real-life scenarios (*e.g.* where it is possible for two transactions for the same goods to be present with the same supplier)
-* Ensure that proper business rules are enforced throughout the application (*e.g.* quantites and prices of the goods cannot be negative)
-* Consider the needs of our persona, and develop features accordingly (*e.g.* addition of statistical data when viewing the desired list of goods)
+* Ensure duplication checks are done according to real-life scenarios (*e.g.* where it is possible for two transactions for the same goods to be present with the same supplier with just minor differences)
+* Ensure that proper business rules are enforced throughout the application (*e.g.* quantity of the goods cannot be negative)
+* Consider the needs of our persona, and develop features accordingly (*e.g.* addition of statistical data when viewing a desired list of goods)
 * Adding minor GUI fixes for better display formats
 
-### Empathising with our Persona: Non-Tech Savvy Business Owner
+### Empathising with our persona: A Non-Tech Savvy Business Owner
 In efforts to cater to our persona, we have added features that would be useful for a business owner who is not tech-savvy. We have added and modified features such as:
 * Deleting based on name instead of index.
-* Automatically updates the status of goods when Arrival Date is in the past.
+* Finding suppliers based on the category of goods they supply as well.
+* **Automatically** marks goods as delivered when the time has passed without the need for any user actions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -568,16 +560,15 @@ Team Size: 5
 
 1. Make the error message for adding of goods more detailed. The current error message is too general and can be improved upon by mentioning which field is failing the sanity check and reflecting that to the user.
 2. Add a feature to allow the user to sort the goods by price, quantity, and arrival date. This will allow the user to better manage their goods.
-3. Bound the unit level and unit number in the address field for the relevant commands. Currently, the commands allow an unrestricted unit level and number, resulting in inputs such as 421 Marina Bay Road 
-#123222222222-34444444444444 Tan Kim PTE Building Singapore 123456 to be accepted as valid.
-4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands does not automatically capitalize it appropriately.
+3. Bound the unit level and unit number in the address field for the relevant commands. Currently, the commands allow an unrestricted unit level and number, resulting in unrealistic inputs such as `421 Marina Bay Road #123222222222-34444444444444 Tan Kim PTE Building Singapore 123456` to be accepted as valid inputs.
+4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands (*e.g.* addgoods) does not automatically capitalize it appropriately.
 5. Add case insensitivity for tags. Currently, identical tags that differ only in letter casing are considered as unique tags.
 6. Enhance error handling for the address parameter by providing specific feedback on which part of the input is invalid. The error message should clearly inform the user about the exact issue, such as incorrect street name, invalid postal code, or missing building name information.
-7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Adjust the message to accurately reflect this requirement.
-8. Modify categories to be case-insensitive in the related commands for ease of use. Currently, the program only considers strictly fully upper-cased categories to be valid.
-9. Modify addgoods to accept special characters for real-world applicability. Current functionality does not allow a goods name with special characters.
-10. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows the user to fully maximize/minimize UI elements which may impact the user experience negatively.
+7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Error message should be adjusted to accurately reflect this business requirement.
+8. Modify categories to be case-insensitive in the related commands for ease of use. Currently, the program only considers strictly fully upper-cased categories to be valid inputs.
+9. Modify adding of good and suppliers to accept special characters for real-world applicability. Current functionality does not allow a goods name or supplier name with special characters even though this may be a realistic use case.
+10. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows users to fully maximize/minimize UI elements which may impact the user experience negatively.
 11. Adjust the colors of the supplier and category tags to be distinct, as using the same color for both may cause confusion for users.
-12. Modify addgoods to refresh the goods view to show all the goods. Current functionality does not refresh the goods view after adding a good.
-13. Optimize the address parameter to automatically include compulsory aspects (e.g. Singapore preceding the postal code and the hash symbol # prefixing the unit level).
-14. Allow the address parameter to unit level, unit number and block number as some buildings do not include them.
+12. Modify `addgoods` to refresh the goods view to show all the goods. Current functionality does not refresh the goods view after adding a good.
+13. Optimize the address parameter to automatically include compulsory aspects (e.g. a `Singapore` to precede the postal code and the hash symbol `#` to prefix the unit level).
+14. Allow the address parameter to omit the unit level, unit number and block number as some buildings/locations do not include them.

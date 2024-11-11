@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners (narrowed to the Singapore context) by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
+Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners (narrowed to the Singapore context) by helping them with information handling. As a **key** feature of SupplyCentral, deliveries with arrival dates that have passed are even automatically marked as delivered for you! This app is based on the Address Book 3 (AB3) project.
 
 ## Table of Contents
 <!-- TOC -->
@@ -50,7 +50,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all suppliers.
+   * `list` : Lists all suppliers registered in SupplyCentral.
 
    * `add n/John Doe p/98765432 a/125 Orchard Road #12-34 ABC Building Singapore 123456` : Adds a supplier named `John Doe` to SupplyCentral.
 
@@ -84,7 +84,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored. The exception to this would be the `viewgoods` command, where extraneous inputs will be raised as errors for clarity. <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -97,7 +97,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding a supplier: `add`
 
@@ -115,9 +114,9 @@ A person can have any number of tags (including 0). Tags are differentiated by c
 
 Examples:
 * `add n/John Doe p/98765432 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456`
-* `add n/Betsy Crowe p/99991111 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456 p/12345678 t/Vegetable`
+* `add n/Betsy Crowe p/99991111 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456 p/12345678 t/VegetableSeller`
 
-Note: The application is optimized for convenience store owners within the Singapore context, hence the address and phone numbers accepted are locked to Singapore's format. 
+Note: The application is optimized for convenience store owners within the Singapore context, hence the address and phone numbers accepted are standardized to Singapore's format. 
 
 ### Listing all suppliers : `list`
 
@@ -141,6 +140,8 @@ Format: `edit NAME [n/NEW_NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit Bety n/Betsy Crower t/` edits the name of `Bety` to be `Betsy Crower` and clears all existing tags.
 
+Note: This change will also be reflected in the goods that are tied to that supplier.
+
 ### Locating suppliers by name: `find`
 
 Finds suppliers whose names contain any of the given keywords.
@@ -156,7 +157,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Optionally, a selection of categories `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY` can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
 * When both keywords and category are provided in the search, they will be handled in an `OR` manner.
-  e.g. `find Alex c/CONSUMABLES` will return both suppliers who match `Alex` and all suppliers who can supply `CONSUMABLE` items.
+  e.g. `find Alex c/CONSUMABLES` will return both suppliers who match `Alex` and all suppliers who can supply `CONSUMABLES` items.
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -172,20 +173,20 @@ Deletes the specified supplier from SupplyCentral.
 
 Format: `delete NAME`
 
-* Deletes the person with the specified `NAME`.
+* Deletes the person with the exact specified `NAME`.
 
 Examples:
 * `delete Amy` deletes the supplier of name `Amy` in SupplyCentral.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from SupplyCentral, including all tracked goods.
+Clears all entries from SupplyCentral, including all tracked goods. This action is irreversible!
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting SupplyCentral : `exit`
 
-Exits the program.
+Exits SupplyCentral.
 
 Format: `exit`
 
@@ -197,11 +198,11 @@ Adds a specific goods item tied to a supplier. All fields are required for this 
 Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
 
 * Goods are uniquely identified by all fields. (e.g. Goods can be repeated if any of the fields are different)
-* Quantity should be a positive number `quantity > 0`.
-* Price cannot be a negative number `price >= 0.00`.
-* Procurement Date and Arrival Date should be in the format `YYYY-MM-DD HH:MM` (24-hour format).
-* The Arrival Date should be after the Procurement Date.
-* The Category has to be fully capitalized and one of `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY`.
+* Quantity should be a positive number where `quantity > 0`.
+* Price cannot be a negative number (`price >= 0.00`) and should be entered without currency symbols. (eg. 1.5)
+* Procurement date and arrival date should be in the format `YYYY-MM-DD HH:MM` (24-hour format).
+* The arrival date should strictly be after the Procurement Date.
+* The Goods Category has to be fully capitalized and one of `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY`.
 
 Examples:
 
@@ -217,11 +218,11 @@ Format: `deletegoods n/NAME gn/GOODS_NAME`
 
 Examples:
 
-* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes all goods record that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
+* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes all goods records that has name `Gardenia Milk Bread` which belongs to the supplier `John Doe`. 
 
 ### View statistics for Goods : `viewgoods`
 
-Displays a list of goods that fit the current applied filters. This will also provide the user with simple statistics like quantity/price totals based on the current list.
+Displays a list of goods that fit the currently applied filters. This will also provide the user with simple statistics like quantity/price totals based on the currently displayed list.
 
 Format: `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]`
 
@@ -229,14 +230,14 @@ Examples:
 
 * `viewgoods gn/Banana c/CONSUMABLES` will display goods that contain the keyword `banana` and are of the `CONSUMABLES` type.
 
-Note: All filters are optional, and all goods will be shown if no filters are provided for the command. Multiple filters are also accepted as shown by the case in the example above.
+Note: All filters are optional, and all goods will be shown if no filters are provided for the command. Multiple filters are also accepted as shown by the case in the example above. Any provided keywords that are not preceeded by a valid prefix will be treated as invalid input for clarity purposes.
 
 ### Export Goods Data to CSV: `export`
 
 Exports the currently displayed goods in a new CSV file. Should be used after filters have been applied to obtain a clean set of data for any external usage.
 - This command is entirely dependent on the `viewgoods` command.
 - As such, if the `viewgoods` function has not been used, the default export will be the list of goods with pending deliveries.
-- The new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`
+- This new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`.
 
 Format: `export`
 
@@ -267,13 +268,13 @@ SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
 </div>
 
-### Resizing UI elements
+### Resizing of UI elements
 
-SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown below.
+SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown in the image below.
 
 ![Draggable UI elements](images/DraggableUI.png)
 
-The elements will resize according to the position of the divider, allocating more space for the output to be displayed, or more space for the suppliers/goods to be displayed.
+The elements will resize according to the position of the divider, allocating more space for the output to be displayed or more space for the suppliers/goods to be displayed.
 
 ### Delivery Status
 
@@ -293,6 +294,9 @@ Examples:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Goods are not showing up when I start SupplyCentral!<br>
+**A**: You likely do not have any pending goods, as only goods pending deliveries will be shown on startup.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -301,7 +305,8 @@ Examples:
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **UI elements can be resized to be too small**: Each UI element can be resized to a point where it may not be visible at all. If this happens accidentally, the user may be confused about the missing UI element. There should be a minimum height/width for each UI element to prevent this issue.
 4. **Unit level and number in the address field are not bounded reasonably**: For commands like `add` and `edit`, the unit level and number in the address field are not reasonably bounded. This allows users to input excessively large unit numbers without any error message.
-5. **Inconsistent Capitalization of Supplier Name for adding Goods**: When adding goods, the supplier name follows the user's exact capitalisation of input and not the capitalisation of the supplier name in the supplier list. This may lead to confusion if the user is not aware of the exact capitalisation of the supplier name.
+5. **Inconsistent capitalization of supplier name for adding Goods**: When adding goods, the supplier name follows the user's exact capitalisation of input and not the capitalisation of the supplier name in the supplier list. This may lead to confusion if the user is not aware of the exact capitalisation of the supplier name.
+6. **Automatic marking of delivered goods**: In a real-life scenario where it is possible for goods to be delayed or not delivered at all, this feature may cause confusion among users. As we still do not have a method to unmark the delivery status of goods, the remedy would be to delete and re-create the goods with a new arrival date.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -309,14 +314,14 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add Supplier** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/friend t/colleague`
+**Add Supplier** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/VegetableSeller`
 **Clear** | `clear`
 **Delete Supplier** | `delete NAME`<br> e.g. `delete Amy`
 **Edit Supplier** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
-**Find** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g. `find James Jake c/CONSUMABLES`
-**List** | `list`
+**Find Suppliers** | `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`<br> e.g. `find James Jake c/CONSUMABLES`
+**List Suppliers** | `list`
 **Help** | `help`
-**Add Goods** | `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME` <br> e.g. `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
+**Add Goods** | `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME` <br> e.g. `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
 **Delete Goods** | `deletegoods n/NAME gn/GOODS_NAME` <br> e.g. `deletegoods n/John Doe gn/Gardenia Milk Bread`
 **View Goods List** | `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]` <br> e.g. `viewgoods gn/Banana c/CONSUMABLES`
 **Export Goods Data** | `export`
