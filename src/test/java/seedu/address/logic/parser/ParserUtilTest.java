@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -13,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
+
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
@@ -24,8 +27,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_ROLE_1 = "Student";
-    private static final String VALID_ROLE_2 = "Teacher";
+    private static final String VALID_ROLE = "Student";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -153,16 +155,30 @@ public class ParserUtilTest {
 
     @Test
     public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
-        Role expectedRole = new Role(VALID_ROLE_1);
-        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE_1));
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
     }
 
     @Test
     public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
-        String roleWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
-        Role expectedRole = new Role(VALID_ROLE_1);
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        Role expectedRole = new Role(VALID_ROLE);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
     }
 
+    @Test
+    public void hasWhitespace() {
+        // empty String -> returns false
+        assertFalse(ParserUtil.hasWhitespace(""));
+
+        // whitespace String -> returns true
+        assertTrue(ParserUtil.hasWhitespace(" "));
+
+        // String with no whitespace -> returns false
+        assertFalse(ParserUtil.hasWhitespace(VALID_ROLE)); // VALID_ROLE used as valid roles should have no whitespaces
+
+        // String with  whitespace -> returns true
+        assertTrue(ParserUtil.hasWhitespace(VALID_ROLE + WHITESPACE));
+    }
 
 }

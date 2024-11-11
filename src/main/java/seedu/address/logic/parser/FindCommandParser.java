@@ -18,7 +18,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArg = args.trim();
-        if (trimmedArg.isEmpty() || trimmedArg.contains(" ")) {
+        if (trimmedArg.isEmpty() || ParserUtil.hasWhitespace(trimmedArg)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
