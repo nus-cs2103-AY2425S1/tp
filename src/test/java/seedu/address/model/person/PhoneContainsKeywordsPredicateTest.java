@@ -45,34 +45,39 @@ public class PhoneContainsKeywordsPredicateTest {
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("61234567"));
         assertTrue(predicate.test(new PersonBuilder().withPhone("61234567").build()));
 
-        // Multiple exact matches, including number starting with 6
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("87654321", "61234567"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("61234567").build()));
+        // Exact match starting with 8
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("81234567"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("81234567").build()));
 
-        // Case insensitive
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("61234567"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("61234567").build()));
+        // Exact match starting with 9
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("91234567"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("91234567").build()));
+
+        // Multiple exact matches, including number starting with 8
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("87654321", "81234567"));
+        assertTrue(predicate.test(new PersonBuilder().withPhone("81234567").build()));
     }
 
     @Test
     public void test_phoneDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withPhone("61234567").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("91234567").build()));
 
         // Non-matching keyword
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("87654321"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("61234567").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("91234567").build()));
 
         // Partial match (using containsWordIgnoreCase)
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("6123"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("61234567").build()));
+        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("9123"));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("91234567").build()));
 
         // Keywords match email, name, and address, but do not match phone
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("alice", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withPhone("61234567").withEmail("alice@email.com")
+        assertFalse(predicate.test(new PersonBuilder().withPhone("91234567").withEmail("alice@email.com")
                 .withName("Alice").withAddress("Main Street").build()));
     }
+
 
     @Test
     public void test_invalidPhoneFormats_throwsIllegalArgumentException() {
