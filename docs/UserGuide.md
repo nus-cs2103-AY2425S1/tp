@@ -15,6 +15,8 @@ tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -44,6 +46,8 @@ tasks done faster than traditional GUI apps.
 
 1. Refer to the [Features](#features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 ## UI Layout
 <a id="ui-layout"></a>
 Here are the different components of the TutorEase UI:
@@ -55,6 +59,8 @@ Here are the different components of the TutorEase UI:
 4. **Lesson List**: The lesson list displays all the lessons that you have added to TutorEase.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -105,6 +111,7 @@ Format: `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…�
 Remarks:
 * Add a contact with the specified details.
 
+<div style="page-break-after: always;"></div>
 
 Field          | Optional/Compulsory | Prefix | Remarks
 ---------------|---------------------|--------|-----------------------------------------
@@ -124,6 +131,8 @@ Examples:
 * `contact add n/Norbeast p/987654322131 e/norbeast@example.com a/John street, block 123, #01-01 r/Student`
 
 ![contact-add-student](images/contact-add-Student.png)
+
+<div style="page-break-after: always;"></div>
 
 * `contact add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Guardian a/Newgate Prison p/1234567 t/criminal`
 
@@ -175,6 +184,8 @@ Remarks:
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `contact find John` returns `john` and `John Doe`.
@@ -205,6 +216,8 @@ Examples:
 Adds a lesson tied to a student with start date time, end date time, name, address and fee.
 
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
+
+<div style="page-break-after: always;"></div>
 
 Remarks:
 * Add a lesson with the specified details.
@@ -238,6 +251,8 @@ Adds a lesson with the student at index 1, price per hour of 10, starting on 23r
 Shows a list of all lessons in the schedule.
 
 Format: `lesson list`
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a lesson : `lesson delete`
 
@@ -315,9 +330,6 @@ Furthermore, certain edits can cause TutorEase to behave in unexpected ways (e.g
 the acceptable range, guardians having lessons). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Future Enhancements
@@ -325,36 +337,27 @@ _Details coming soon ..._
 #### 1. **Unique Attributes and Relationship Modeling for Students and Guardians**
 Recognizing the importance of capturing more details about different types of contacts, we plan to incorporate additional attributes for students, such as grade levels, subjects and exam dates. 
 To support clear organization, we’ll also implement a tagging system that links each student to their respective guardian, making it easier to manage relationships and access relevant information at a glance.
+In the event that a student does not have contact information, they will be required to be linked to a guardian, ensuring that there exist a way to contact the student.
 
-#### 2. **Exam Date Management**
-We understand the importance of staying prepared for exams, so we’re adding a feature to track upcoming exam dates for each student. 
-With this addition, guardians and you will receive timely reminders or notifications, ensuring students are ready and supported in their preparation.
-
-#### 3. **Fee and Payment Tracking**
-Keeping track of fees is essential in the business aspect, so we plan to implement a detailed payment tracking system. 
-This feature will log due dates, total payment amounts, and any outstanding fees for each student, while also linking this information to the responsible guardian.
-
-#### 4. **Recurring Lessons**
-Recognizing that most tuition lessons occur weekly at the same time, we plan to introduce a feature that allows you to set lessons as either one-time sessions or recurring events. 
-You will be able to stipulate the frequency of recurrence, whether weekly, bi-weekly, or custom intervals, to fit their specific scheduling needs.
-
-#### 5. **Overlapping Lesson Time Handling**
+#### 2. **Overlapping Lesson Time Handling**
 We recognize the need for clarity around overlapping lesson scheduling. Options for managing overlaps will include:
 
 * Allowing overlapping sessions for group lessons or pair lessons.
 * Enabling you to customize settings for overlap permissions based on the type of lesson.
 
-#### 6. **Enhanced Name Field Support**
-To accommodate a more diverse range of names, such as names with commas or accented characters, we plan to update the application to allow names with these characters.
+<div style="page-break-after: always;"></div>
+
+#### 3. **Enhanced Name Field Support**
+To accommodate a more diverse range of names, such as names with commas, accented characters, or etc, we plan to update the application to allow names with these characters.
 In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
 
 Additionally, if extra whitespace is accidentally added between names (e.g., double space between first and last name), the system will show a warning to alert you of potential duplicate entries due to spacing inconsistencies.
 
-#### 7. **Past Lesson Management**
+#### 4. **Past Lesson Management**
 To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
 You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
 
-#### 8. **Support for Decimal Places in Fees**
+#### 5. **Support for Decimal Places in Fees**
 We have acknowledged that it might be possible to charge an odd number (ie $25) per lesson for an even number of hours (ie 2 hours), resulting in the fee per hour not being an integer.
 To provide more flexibility in fee management, we plan to introduce support for decimal places in fee amounts.
 This will allow you to input and manage fees with greater precision, catering to scenarios where fees are calculated to fractional values (e.g., for hourly rates or partial payments).
