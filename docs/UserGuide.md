@@ -45,24 +45,22 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/MC` : Adds a person named `John Doe` to the local database, with these details:
+   * `add n/John Doe p/98765432 e/johnd@example.com r/volunteer-emcee` : Adds a person named `John Doe` to the local database, with these details:
       * 98765432 as a phone number
       * johnd@example.com as an email
-      * An emcee role
-      
-     Note that roles are added through a shortcut. Shortcuts can be found [here.](#using-shortcuts-coming-in-v20)
+      * A volunteer emcee role
+
 
    * `delete 3` : Deletes the 3rd person shown in the current list of people.
 
    * `listevent`: Lists all events.
 
-   * `addevent sp/CHE t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with these details:
+   * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with these details:
      * Involves faculties COM and BIZ
      * Held on 12 December 2024, at 6pm
      * Held at USC
      * John is the only participant
-   
-    Like with a person's roles, faculties and sports use shortcuts courtesy of [this section.](#using-shortcuts-coming-in-v20)
+
 
    * `deleteevent 2`: Deletes the second event shown in the current list of events.
 
@@ -119,10 +117,9 @@ A person can have zero or more roles.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/SD`
-* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/COM`
+* `add n/John Doe p/98765432 e/johnd@example.com r/Sports Director`
+* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/Computing`
 
-Again, roles are added through a shortcut, found [here.](#using-shortcuts-coming-in-v20)
 
 ### Listing all persons : `list`
 
@@ -212,8 +209,8 @@ Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENU
   specifying any participants after it.
 
 Examples:
-*  `editevent 1 sp/CHE` Edits the sport of the first currently-displayed event to be `Chess`.
-*  `editevent 2 sp/BBW pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
+*  `editevent 1 sp/Chess` Edits the sport of the first currently-displayed event to be `Chess`.
+*  `editevent 2 sp/Basketball Women pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
 
 ### Deleting an event : `deleteevent`
 
@@ -274,7 +271,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Using Shortcuts `[coming in v2.0]`
+### Using Shortcuts
 
 To use EventfulNUS faster, you may find these shortcuts useful.
 
