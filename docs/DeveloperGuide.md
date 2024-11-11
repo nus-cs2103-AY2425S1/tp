@@ -212,7 +212,7 @@ The following methods are involved:
 
 Below is an activity diagram that explains what happens when a user tries to find tasks:
 <puml src="diagrams/FindTaskActivityDiagram.puml" />
-<br></br>
+<br>
 
 #### Proposed Implementation
 
