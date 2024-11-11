@@ -30,7 +30,7 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE_TIME "
             + PREFIX_ATTENDANCE + "ATTENDANCE \n"
-            + "Example: \n"
+            + "Examples: \n"
             + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Attended \n"
             + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Absent \n";
 

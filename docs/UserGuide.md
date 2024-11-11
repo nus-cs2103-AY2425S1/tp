@@ -6,9 +6,9 @@ pageNav: 3
 
 # TAHub User Guide
 
-TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can get your contact management tasks done faster than traditional GUI apps.
+TAHub Level 3 (TAHub) is a **desktop app for Teaching Assistants (TAs) to efficiently manage student-related information**, optimized for use via a Command Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can handle your tasks faster than traditional GUI apps.
 
-This app is designed for Teaching Assistants (TAs) who are experienced with using the CLI and are comfortable with command-based interactions. However, if you're new to the CLI and still want to try TAHub, there’s a detailed **Quick Start** section to help you get started smoothly and become familiar with the commands.
+Designed to streamline the workflow of TAs, TAHub goes beyond basic contact management by including powerful features such as **calculating aggregate scores**, **marking attendance**, and **tracking grades**. These functionalities make it an essential tool for TAs looking to manage student records and assessments effectively. If you're new to CLI-based apps, a comprehensive **Quick Start** section is available to help you get up to speed quickly and confidently.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -20,6 +20,8 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 - **CLI**: Command Line Interface, where you type commands to interact with the application.
 - **GUI**: Graphical User Interface, where you interact with the application through visual elements like buttons and windows.
 - **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list. The value provided should be a positive integer smaller than 2147483648.
+- **JSON**: JavaScript Object Notation, a lightweight data format that is easy to read and write for humans and easy to parse and generate for machines. TAHub saves its data in a `TAHub.json` file, which contains structured information about contacts, grades, and attendance records.
+
 
 ## Quick start
 
@@ -206,6 +208,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 Expected output:
+
 ![result for 'help'](images/helpMessage.png)
 
 ### Adding a person: `add`
@@ -224,8 +227,8 @@ Expected output:
 
 Examples:
 
-- `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T, block 123, #01-01`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/criminal`
+- `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
+- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
 
 ### Listing all persons : `list`
 
@@ -301,9 +304,9 @@ Adds or updates a grade for a person in the TAHub. If a grade with the same test
 Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 - Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-- `TEST_NAME` refers to the name of the test (e.g. Midterm Exam).
-- `SCORE` refers to the score obtained by the person, which must be between 0 and 100.
-- `WEIGHTAGE` refers to the weightage of the test in percentage, which must be greater than 0 and less than or equal to 100.
+- `TEST_NAME` refers to the name of the test (e.g. Midterm Exam). The test name will be automatically converted to lowercase.
+- `SCORE` refers to the score obtained by the person, which must be between 0 and 100 inclusive.
+- `WEIGHTAGE` refers to the weightage of the test in percentage, which must be between 0 and 100 inclusive. Weightages of 0 are allowed for tests that are formative in nature.
 - If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
@@ -337,6 +340,7 @@ Expected output:
 Performs aggregation operation on the current filtered list of people.
 
 Format: `aggGrade OPERATION [n/TEST_NAME]`
+
 `OPERATION` can be:
 
 - `var`: Taking **variance**
@@ -370,7 +374,7 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 
 - Adds or updates attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `DATE_TIME` refers to the date and time of attendance that you want to add or edit. It must be written in the format `dd/MM/yyyy HH:mm`.
-- `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are case-sensitive.
+- `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are not case-sensitive.
 - If the attendance record for `DATE_TIME` already exists, it will be updated with the new `ATTENDANCE`.
 
 Examples:
