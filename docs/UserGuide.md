@@ -114,7 +114,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH
 |                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                    |
 |                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact.<br> Contacts are not favourite by default. |
 
-* Both `f/` and `nf/` cannot be present in the command at once. 
+* Both `f/` and `nf/` cannot be present in the command at once.
 * Both `f/` and `nf/` can be absent in the command, in which the contact is not favourited by default.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -273,9 +273,9 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                              |
-|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list. | 
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  | 
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
@@ -332,7 +332,7 @@ mark t/TELEGRAM…​ d/DATE
 
 * Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`.
 
-  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)  
+  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)
 
 * Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`.
 

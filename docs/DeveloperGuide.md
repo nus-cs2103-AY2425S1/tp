@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
 | `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
- 
+
 
 ### Use cases
 

@@ -78,10 +78,4 @@ deactivate FindCommand
 
 [<--LogicManager
 deactivate LogicManager
-
-
-
-
-
-
 @enduml
