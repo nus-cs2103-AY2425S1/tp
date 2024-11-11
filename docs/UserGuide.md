@@ -721,7 +721,9 @@ PlanPal data is saved automatically to your hard disk after any command that cha
 
 ### 5.8 Editing the Data File
 
-PlanPal data is stored as a JSON file in `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/eventmanager.json`. **Do not** edit these data files directly.
+PlanPal data is stored as 2 JSON files in `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/eventmanager.json`. 
+While it is possible to edit these files to manually insert data, Planpal has various processes to handle parsing the data and invalid data may lead to unexpected behaviour. 
+We **do not** recommend editing the storage `.json` files directly, unless you are familiar with the JSON format and PlanPal's data structure.
 
 ### 5.9 Navigating Through Command History
 
