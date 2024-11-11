@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -25,12 +26,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Name;
+import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
@@ -232,8 +235,8 @@ public class EditCommandTest {
         Name firstName = firstContactInFilteredList.getName();
 
         Contact editedContact = new ContactBuilder(secondContactInFilteredList)
-                        .withName(firstName.toString())
-                        .withNickname(VALID_NICKNAME_AMY).build();
+                .withName(firstName.toString())
+                .withNickname(VALID_NICKNAME_AMY).build();
 
         Model modelWithTwoNames = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         modelWithTwoNames.setContact(modelWithTwoNames.getFilteredContactList().get(1), editedContact);
@@ -245,8 +248,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(firstName, descriptor);
         assertCommandFailure(editCommand, modelWithTwoNames,
                 String.format(
-                    Messages.MESSAGE_DUPLICATE_NAME, firstName.fullName,
-                    EditCommand.COMMAND_WORD));
+                        Messages.MESSAGE_DUPLICATE_NAME, firstName.fullName,
+                        EditCommand.COMMAND_WORD));
     }
 
     /**
@@ -264,6 +267,66 @@ public class EditCommandTest {
                 new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_duplicateNameFilteredList_throwCommandException() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact secondContact = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(secondContact)
+                .withName(firstContact.getName().toString())
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model));
+    }
+
+    @Test
+    public void execute_duplicateEmailFilteredList_throwCommandException() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact secondContact = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact)
+                .withEmail(secondContact.getEmail().toString())
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
+    }
+
+    @Test
+    public void execute_duplicateTelegramHandleFilteredList_throwCommandException() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact secondContact = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(secondContact)
+                .withTelegramHandle(firstContact.getTelegramHandle().toString())
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
+
+        assertThrows(CommandException.class, () -> editCommand.execute(model));
+    }
+
+    @Test
+    public void execute_duplicateNicknameFilteredList_throwCommandException() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        model.setContact(firstContact, new ContactBuilder(firstContact).withNickname(VALID_NICKNAME_AMY).build());
+        Contact secondContact = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(secondContact)
+                .withNickname(VALID_NICKNAME_AMY)
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(editCommand, model, DuplicateFieldException.DEFAULT_MESSAGE);
+    }
+
+    @Test
+    public void execute_twoPresidentsFilteredList_throwCommandException() {
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact)
+                .withEmail(VALID_EMAIL_AMY)
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
     @Test
