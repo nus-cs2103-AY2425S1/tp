@@ -262,7 +262,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **3a1.** Eventory shows an error message.
       *Use case resumes at step 2.*<br>
 
-  *Use case ends.*
+*Use case ends.*
 
 ---
 
@@ -275,7 +275,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specific person or event in the list.
 4. Eventory deletes the person or event.
 
-   *Use case ends.*
+*Use case ends.*
 
 **Extensions**
 
@@ -737,5 +737,20 @@ This section lists 9 planned enhancements, adhering to the team size x 2 limit.
    1. **Feature Flaw:** The current find and search feature only supports exact word matching for names and tags.
    2. **Proposed Fix:** Extend the find and search functionality to allow partial matching within words (e.g., "sun" for "sundown race").
    3. **Expected Outcome:** This improvement will make find and search results more flexible and relevant, especially for users who may not remember the exact wording.
+
+### 8. **Keyboard short-cut or command to switch between Contacts and Events**
+1. **Feature Flaw:** There is no existing way to switch between Contacts and Events using the keyboard.
+2. **Proposed Fix:** Implementing a key-bind or command to switch between Contacts and Events.
+3. **Expected Outcome:** This improvement will improve usability and user experience.
+
+### 9. **Support for multiple phone numbers, emails and addresses for a Contact**
+1. **Feature Flaw:** Contacts are currently limited to 1 phone number, email and address each.
+2. **Proposed Fix:** Allow for the storage and use of multiple phone numbers, emails and addresses.
+3. **Expected Outcome:** This will accommodate real-world contact details where a person may have multiple phone numbers, emails and addresses.
+
+### 10. **Support for more languages**
+1. **Feature Flaw:** The application is developed and tested in English, the use of other languages may result in unintended behaviour or bugs.
+2. **Proposed Fix:** Add support for various languages for various commonly used languages in the region.
+3. **Expected Outcome:** This improvement will improve usability of Eventory for those who do not have English as a primary language.
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **Eventory**.
