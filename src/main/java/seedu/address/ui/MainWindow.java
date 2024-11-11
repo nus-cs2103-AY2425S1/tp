@@ -116,9 +116,7 @@ public class MainWindow extends UiPart<Stage> {
         double defaultHeight = guiSettings.getWindowHeight();
 
         primaryStage.setWidth(defaultWidth);
-        primaryStage.setMinWidth(1196.0);
         primaryStage.setHeight(defaultHeight);
-        primaryStage.setMinHeight(970.0);
 
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
