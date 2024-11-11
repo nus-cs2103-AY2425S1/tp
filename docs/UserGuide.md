@@ -27,7 +27,7 @@ Here's a quick tip! To navigate back to the top of this page, use the `Home` key
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
-If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMAND-F` for Mac to find exactly what you need!
+If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
 
 <page-nav-print />
 
@@ -88,7 +88,7 @@ If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMA
 | **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James` or `td n/John Doe t/June & James t/Jeremy & Maya`             |
 | **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                               |
 | **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                               |
-| **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab` followed by `y` or `n`                                                                                             |
+| **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab`  pr `cab` followed by `y` or `n`                                                                                             |
 | **[Clear Wedding Book](#clearing-all-entries-in-wedding-book-clear-wb--cwb)** | `clear-wb` or `cwb` followed by `y` or `n`                                                                                             |
 | **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
