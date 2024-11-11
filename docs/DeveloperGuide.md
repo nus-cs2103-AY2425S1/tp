@@ -325,7 +325,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. User selects the date(s) to remove as a free day.
 3. User submits the information to the system.
 4. System checks if the volunteer is available on the selected date(s).
-5. System removes the free day from the volunteer's schedule and confirms removal.<br/>
+5. System checks if the volunteer has any events assigned to them on the days that are no longer going to be free.
+6. System removes the free day from the volunteer's schedule and confirms removal.<br/>
    Use Case Ends.
 
 **Extensions**:
@@ -341,8 +342,12 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 4ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 5a. Free day removal fails.
-    - 5ai. System notifies user prompts the user to edit the provided details.<br>
+- 5a. Volunteer is assigned to events on the days that the user is trying to remove as free.
+  - 5ai. System notifies user, prompts the user to unassign the volunteer from the affected events first. <br>
+    Use Case Ends. <br><br>
+
+- 6a. Free day removal fails.
+    - 6ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC06. Assign Volunteer to Event
@@ -364,12 +369,12 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 4ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 4a. Volunteer is already assigned to the event.
+- 4b. Volunteer is already assigned to the event.
     - 4bi. System notifies user.
     - 4bii. Volunteer remains assigned to the event.<br>
       Use Case Ends.<br><br>
 
-- 4c. Volunteer is assigned to another event on the same day.
+- 4c. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
     - 4ci. System notifies user of the clash.
     - 4cii. Volunteer is not assigned to the event.<br>
       Use Case Ends.
@@ -803,7 +808,7 @@ This project was significantly more challenging than the Address Book 3 (AB3) re
 ### Effort Required
 The project involved **approximately 1.5x the effort required for AB3**, primarily due to the increased complexity of handling multiple entities and implementing advanced features such as:
 - Filtering of volunteers based on availability
-- Volunteer assignment with overlap checks.
+- Volunteer assignment with availability (ensuring event is on a free day and that they have no overlapping assignments) checks.
 - Listing information of volunteers involved in events and vice versa.
 - Restructuring of UI to handle dynamic updating of information and new commands.
 
@@ -831,30 +836,57 @@ The project demonstrated a high level of effort and collaboration, resulting in 
 
 The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement specifically describes the feature flaw and the proposed solution, providing details on how the feature will be improved. This section lists 3 planned enhancements, adhering to the team size x 2 limit.
 
-1. **Enhance Event List Sorting**
+1. **Allow Events To Span Multiple Days**
+   - **Feature Flaw**: Currently events cannot span multiple days (e.g overnight events).
+   - **Proposed Solution**: Events should be able to have multiple days with multiple start and end timings.
+   - **Expected Outcome**: Users should be able to assign volunteers to all or some days of a multi-date event instead of and creating multiple events on each day and separately assign volunteers.
+
+2. **Allow Volunteers To Only Be Free At Some Times Of Some Days**
+   - **Feature Flaw**: Currently volunteers are assumed to be free for the whole day on their free days.
+   - **Proposed Solution**: Volunteers should be able to have start and end timings for their free periods on free days. Event assignment should check for volunteer's free time as well as day.
+   - **Expected Outcome**: Users should not need to manually check if the volunteer is free on a given event timing before assigning them to an event.
+
+3. **Enhance Event List Sorting**
     - **Feature Flaw**: Events are currently displayed in the order they were added, making it difficult to find upcoming events.
     - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
     - **Expected Outcome**: Improved usability for managing events.
 
-2. **Enhance Search Functionality**
-    - **Feature Flaw**: The current search command does not support searching for email or phone number.
+4. **Allow Find Command To Work With Previous Commands**
+   - **Feature Flaw**: Currently the find command will reset the display list and search for volunteers or events containing the keyword.
+   - **Proposed Solution**: Find should use the current display list as the basis for its search.
+   - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
+
+5. **Enhance Find Command Input Flexibility**
+    - **Feature Flaw**: Currently the find command does not support searching for email or phone number.
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
     - **Expected Outcome**: More flexible search results.
 
-3. **Dynamic UI Updates**
+6. **Dynamic UI Updates**
     - **Feature Flaw**: Unassign Volunteers from Events while viewing said event would still show volunteer is involved
-    - **Proposed Fix**: UI would dynamically update the results it shows after every command is ran.
+    - **Proposed Fix**: UI would dynamically update the results it shows after every command is run.
     - **Expected Outcome**: UI would display accurate and the most updated information.
 
-4. **Multiple Date Tracking**
-    - **Feature Flaw**: The error message for validating if the volunteer is free only returns the first date which the volunteer is already free.
-    - **Proposed Fix**: The error message should show all dates which the volunteer is already free.
-    - **Expected Outcome**: Users would know all the dates that volunteer is already free for.
+7. **Multiple Error Tracking**
+    - **Feature Flaw**: Currently exceptions are thrown at the first error encountered from a user command. 
+    - **Proposed Fix**: The error message should show all detectable errors with the command (e.g volunteer is assigned to multiple events on day User is trying to unfree, Volunteer has multiple clashing events for an assign command, etc).
+    - **Expected Outcome**: Users would be able to as many issues as possible before re-entering the command without needing to check it one by one.
 
-5. **Add Support For Leap Years**
+8. **Add Support For Leap Years**
     - **Feature Flaw**: Currently the date does not parse leap days accordingly
     - **Proposed Fix**: The program should output the specific error that the leap day is not valid.
     - **Expected Outcome**: Users would know that the invalid error is due to leap day.
+
+9. **Enhance String Validation For Names**
+   - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
+   - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
+   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers with different number of spaces within names.
+
+10. **Enhance Output Message Alignment**
+    - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
+    - **Proposed Solution**: The output message should wrap in the output text box.
+    - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+
+   
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
 
