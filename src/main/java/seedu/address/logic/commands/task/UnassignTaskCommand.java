@@ -28,7 +28,7 @@ public class UnassignTaskCommand extends Command {
             + ": Removes one or multiple tasks from the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TASK_INDEX_IN_PERSON (must be a positive integer) \n"
+            + "TASK_INDEX_IN_PERSON... (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
     private final Index index;
@@ -63,13 +63,13 @@ public class UnassignTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    1, model.getFilteredPersonList().size()));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Task> currentPersonTasks = new LinkedHashSet<>(personToEdit.getTasks());
-        Set<Task> updatedTasks = currentPersonTasks;
 
         if (currentPersonTasks.isEmpty() || taskIndexes.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
@@ -77,13 +77,13 @@ public class UnassignTaskCommand extends Command {
 
         Set<Task> tasksToRemove = getTasksToRemove(currentPersonTasks);
 
-        if (!updatedTasks.containsAll(tasksToRemove)) {
+        if (!currentPersonTasks.containsAll(tasksToRemove)) {
             throw new CommandException(Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
         }
 
-        updatedTasks.removeAll(tasksToRemove);
+        currentPersonTasks.removeAll(tasksToRemove);
 
-        Person editedPerson = PersonTaskEditorUtil.createEditedPersonWithUpdatedTasks(personToEdit, updatedTasks);
+        Person editedPerson = PersonTaskEditorUtil.createEditedPersonWithUpdatedTasks(personToEdit, currentPersonTasks);
 
         model.setPerson(personToEdit, editedPerson);
 
@@ -100,7 +100,7 @@ public class UnassignTaskCommand extends Command {
                         1, currentPersonTasks.size()
                 ));
             }
-            Integer indexOfTask = specifiedTaskIndex.getZeroBased();
+            int indexOfTask = specifiedTaskIndex.getZeroBased();
             Task taskToRemove = currentPersonTaskList.get(indexOfTask);
             tasksToRemove.add(taskToRemove);
         }
@@ -113,11 +113,10 @@ public class UnassignTaskCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UnassignTaskCommand)) {
+        if (!(other instanceof UnassignTaskCommand otherCommand)) {
             return false;
         }
 
-        UnassignTaskCommand otherCommand = (UnassignTaskCommand) other;
         return index.equals(otherCommand.index)
                 && taskIndexes.equals(otherCommand.taskIndexes);
     }

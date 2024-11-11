@@ -10,13 +10,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
@@ -48,10 +46,10 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
 
         try {
             // Parse the index from the preamble
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+            index = Index.oneBasedNoConstraints(Integer.parseInt(argMultimap.getPreamble().trim()));
+        } catch (NumberFormatException e) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AssignWeddingCommand.MESSAGE_USAGE), ive);
+                    AssignWeddingCommand.MESSAGE_USAGE));
         }
 
         List<String> weddingValues = argMultimap.getAllValues(PREFIX_WEDDING);
