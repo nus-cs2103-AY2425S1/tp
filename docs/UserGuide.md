@@ -244,8 +244,7 @@ Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647
-  ) e.g. 1, 2, 3 …​
+- The index **must be a positive integer** and no greater than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3 …​
 
 <div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
 When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from **all** events' contact lists. This action is irreversible after confirmation.
