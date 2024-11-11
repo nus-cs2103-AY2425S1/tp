@@ -16,13 +16,13 @@ you complete these tasks more quickly than traditional applications, making it a
 1. [Installation](#1-installation)
 2. [Command Instructions](#2-command-instructions)
    - [2.1 Viewing Help](#21-viewing-help-help)
-   - [2.2 Adding a student](#22-adding-a-student-add)
-   - [2.3 Deleting a student](#23-deleting-a-student-delete)
+   - [2.2 Adding a Student](#22-adding-a-student-add)
+   - [2.3 Deleting a Student](#23-deleting-a-student-delete)
    - [2.4 Marking a Payment Date](#24-marking-a-payment-date-markpaid)
    - [2.5 Unmarking a Payment Date](#25-unmarking-a-payment-date-unmarkpaid)
-   - [2.6 Editing a student](#26-editing-a-student-edit)
-   - [2.7 Listing All students](#27-listing-all-students-list)
-   - [2.8 Finding a student](#28-finding-a-student-find)
+   - [2.6 Editing a Student](#26-editing-a-student-edit)
+   - [2.7 Listing All Students](#27-listing-all-students-list)
+   - [2.8 Finding a Student](#28-finding-a-student-find)
    - [2.9 Clearing All Entries](#29-clearing-all-entries-clear)
    - [2.10 Undo/Redo Commands](#210-undoredo-commands-undo-and-redo)
    - [2.11 Displaying Pie Chart of Class Distribution](#211-displaying-pie-chart-of-class-distribution-pie)
@@ -85,12 +85,15 @@ you complete these tasks more quickly than traditional applications, making it a
   <br> e.g. `MONTH_PAID` should be replaced with a value like `2024-10`.
 
 
-- **INDEX**: Refers to the index number of a student shown in the displayed student list.
+- `INDEX`: Refers to the index number of a student shown in the displayed student list.
   <br> e.g. `1` for the first student in the list.
 
 
-- **KEYWORD** and **MORE_KEYWORDS**: These are search terms used to find students.
-  <br> e.g. `John Doe`, `John Doe friend`.
+- **MARK_PAID_TARGET**: Refers to the target of a `markpaid` or `unmarkpaid` command. Can be either the index number of a student shown in the list, or the exact word `all`.
+
+
+- `FIELD_PATTERN`: These are search terms used to find students. They have no specific restrictions.
+  <br> e.g. `John Doe`, `John alice 123 s/o 10.20.30` are valid for `NAME_PATTERN`.
 
 
 - **Parameter Order**: Parameters can be in **any order**.
@@ -107,6 +110,7 @@ you complete these tasks more quickly than traditional applications, making it a
   <br> `m/` for **month paid**
   <br> `t/` for **tags**
 
+  
 
 - **Commands Without Parameters**: Provided parameters will be **ignored**.
   <br> e.g. `help 123` will be interpreted as `help`.
@@ -118,7 +122,7 @@ you complete these tasks more quickly than traditional applications, making it a
 
 ### Field Constraints
 
-- **Name**: Accepts **alphanumeric** characters and **spaces**.
+- **Name**: Accepts **alphanumeric** characters, **spaces**, certain special characters . '-() and certain patterns d/o, s/o.
   <br> e.g. `John Doe`
 
 
@@ -173,7 +177,7 @@ Opens a window explaining how to access the help page.
 
 ***
 
-### 2.2 Adding a student: `add`
+### 2.2 Adding a Student: `add`
 
 Adds a student.
 
@@ -221,7 +225,7 @@ Adds a student.
 
 ***
 
-### 2.3 Deleting a student: `delete`
+### 2.3 Deleting a Student: `delete`
 
 Deletes the specified student from the address book.
 
@@ -265,8 +269,7 @@ Deletes the specified student from the address book.
 
 Adds the month paid for specified months of a student, or all students.
 
-**[Command Format](#command-format):** `markpaid MARK_TARGET m/MONTH_PAID…`
-<br>`MARK_TARGET`: `INDEX`, or the word `all`
+**[Command Format](#command-format):** `markpaid MARK_PAID_TARGET m/MONTH_PAID…`
 
 **[Command Word Alias](#command-word-alias):** `mp`
 
@@ -316,8 +319,7 @@ Adds the month paid for specified months of a student, or all students.
 
 Removes the month paid for specified months of a student, or all students.
 
-**[Command Format](#command-format):** `unmarkpaid MARK_TARGET m/MONTH_PAID…`
-<br>`MARK_TARGET`: `INDEX`, or the word `all`
+**[Command Format](#command-format):** `unmarkpaid MARK_PAID_TARGET m/MONTH_PAID…`
 
 **[Command Word Alias](#command-word-alias):** `ump`
 
@@ -361,7 +363,7 @@ Removes the month paid for specified months of a student, or all students.
 
 ***
 
-### 2.6 Editing a student: `edit`
+### 2.6 Editing a Student: `edit`
 
 Edits an existing student in the address book.
 
@@ -411,7 +413,7 @@ Edits an existing student in the address book.
 
 ***
 
-### 2.7 Listing All students: `list`
+### 2.7 Listing All Students: `list`
 
 The `list` command displays a all students currently stored in [EduTuTu](#edututu).
 
@@ -875,22 +877,22 @@ Exiting the program can be done in two ways:
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                               |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`                                                         |
-| **Bar Chart**               | `bar`                                                                                                          |
-| **Clear**                   | `clear`                                                                                                        |
-| **Delete**                  | `delete INDEX`<br>                                                                                             |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> |
-| **Exit**                    | `exit`                                                                                                         |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                             |
-| **Help**                    | `help`                                                                                                         |
-| **List**                    | `list`                                                                                                         |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                |
-| **Pie Chart**               | `pie`                                                                                                          |
-| **Redo**                    | `redo`<br>                                                                                                     |
-| **Undo**                    | `undo`<br>                                                                                                     |
-| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                              |
-| **Viewing Student Details** | `info INDEX` <br>                                                                                              |
+| Action                      | Format                                                                                                                                            |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEES c/CLASS_ID [t/TAG]…`                                                                          |
+| **Bar Chart**               | `bar`                                                                                                                                             |
+| **Clear**                   | `clear`                                                                                                                                           |
+| **Delete**                  | `delete INDEX`                                                                                                                                    |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASS_ID] [m/MONTH_PAID]… [t/TAG]…`                                              |
+| **Exit**                    | `exit`                                                                                                                                            |
+| **Find**                    | `find [n/NAME_PATTERN] [p/PHONE_PATTERN] [e/EMAIL_PATTERN] [f/EXACT_FEES] [c/CLASSID_PATTERN] [m/MONTH_PAID_PATTERN] [!m/MONTH_NOT_PAID_PATTERN]` |
+| **Help**                    | `help`                                                                                                                                            |
+| **List**                    | `list`                                                                                                                                            |
+| **Mark Paid**               | `markpaid MARK_PAID_TARGET m/MONTH_PAID…`                                                                                                         |
+| **Pie Chart**               | `pie`                                                                                                                                             |
+| **Redo**                    | `redo`                                                                                                                                            |
+| **Undo**                    | `undo`                                                                                                                                            |
+| **Unmark Paid**             | `unmarkpaid MARK_PAID_TARGET m/MONTH_PAID…`                                                                                                       |
+| **Viewing Student Details** | `info INDEX`                                                                                                                                      |
 
 [Back to Table of Contents](#table-of-contents)
