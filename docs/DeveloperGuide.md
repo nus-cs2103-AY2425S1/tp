@@ -902,14 +902,13 @@ testers are expected to do more *exploratory* testing.
    5. Test case:  `find n/NAMETHATDOESNOTEXIST` (where NAMETHATDOESNOTEXIST is not part of the names of any `Person` in the system)
       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-   6. Test case:  `find n/` <br>
-      Expected: The currently shown `Person` list is unchanged. Error details shown in the status message.
-
-   7. Test case: `find n/X` (where X is a character unsupported in `Person` names)
+   6. Test case: `find n/X` (where X is a character unsupported in `Person` names)
       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-   8. Test case:  `find a/Blk p/` <br>
-      Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+   7. Other incorrect find name commands to try:
+      * `find`
+      * `find n/` (where name keyword is blank)
+      * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in Wedlinker)
 
 
 <br>
@@ -924,14 +923,13 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `find a/serangoon a/Aljunied`
        Expected: The contacts `Bernice Yu`, `David Li`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case:  `find a/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
-
-    5. Test case:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
+    4. Test case:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    6. Test case:  `find a/Blk p/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+    5. Other incorrect find address commands to try:
+        * `find`
+        * `find a/` (where name keyword is blank)
+        * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in Wedlinker)
 
 
 <br>
@@ -949,11 +947,11 @@ testers are expected to do more *exploratory* testing.
     4. Test case:  `find p/XXXXXXXXXX` (where XXXXXXXXXX is not part of the phone number of any phone numbers of any `Person` in the system) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find p/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+    5. Other incorrect find phone commands to try:
+        * `find`
+        * `find p/` (where name keyword is blank)
+        * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in Wedlinker)
 
-    6. Test case:  `find p/9 n/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
 
 <br>
@@ -971,11 +969,10 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `find e/XXXX@XXX.XXX` (where XXXX@XXX.XXX is not part of the email of any emails of any `Person` in the system) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find e/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched. 
-
-    6. Test case:  `find e/@example.com a/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+    5. Other incorrect find email commands to try:
+        * `find`
+        * `find e/` (where email keyword is blank)
+        * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in Wedlinker)
 
 
 <br>
@@ -997,12 +994,12 @@ testers are expected to do more *exploratory* testing.
     5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    6. Test case:  `find t/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+    6. Other incorrect find tag commands to try:
+        * `find`
+        * `find t/` (where tag keyword is blank)
+        * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in Wedlinker)
 
-    7. Test case:  `find t/photographer a/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
-
+<br>
 
 6. Finding a person by wedding
 
@@ -1027,8 +1024,14 @@ testers are expected to do more *exploratory* testing.
     7. Test case:  `find w/tom's wedding t/` <br>
        Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
+    8. Other incorrect find wedding commands to try:
+        * `find`
+        * `find w/` (where wedding keyword is blank)
+        * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in Wedlinker)
 
-6. Finding a person by task
+<br>
+
+7. Finding a person by task
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
         1. **Tip**: You can also enter the `list-tasks` or `ltasks` command to list all tasks in the system. <br>
@@ -1036,22 +1039,19 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `find tk/invitations` <br>
        Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find w/August w/Case` <br>
-       Expected: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. Test case: `find tk/send tk/hair` <br>
+       Expected: The contacts `David Li` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
+    4. Test case: `find tk/NONEXISTENTTASK` (where NONEXISTENTTASK is not a `Task` in the system) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
+    5. Test case:  `find tk/UNASSIGNEDTASK` (where UNASSIGNEDTASK is a `Task` in the system, but there are no `Persons` assigned to it) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    6. Test case:  `find tk/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
-
-    7. Test case:  `find w/tom's wedding t/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
-
-
+    6. Other incorrect find task commands to try:
+        * `find`
+        * `find tk/` (where task keyword is blank)
+        * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in Wedlinker)
 
 <br>
 
