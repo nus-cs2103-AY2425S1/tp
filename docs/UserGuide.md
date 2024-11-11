@@ -269,7 +269,7 @@ Examples:
 <div style="text-align: center;">
     <img src="images/delete_by_pc.png" alt="deletePC customers" width="350"/>
     <br>
-    <em>Figure 8: Shows multiple customers being deleted using deletePC command</em>
+    <em>Figure 8: Customer being deleted using deletePC command</em>
 </div>
 
 ---
