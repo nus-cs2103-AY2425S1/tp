@@ -31,7 +31,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-VersionedAddressBook -up-> "current 1" AddressBook
+VersionedAddressBook -up-> "1 current" AddressBook
 VersionedAddressBook -up-|> AddressBook
 VersionedAddressBook -up-> "1..* history" AddressBook
 
