@@ -665,8 +665,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
 * **NRIC (National Registration Identity Card)**: The identification document used in Singapore.
 * **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
-* **Storage**: Manages data persistence, handling read/write operations to the hard disk.
 * **Sequence Diagram**: A type of diagram showing interactions between components in a sequential order.
+* **Storage**: Manages data persistence, handling read/write operations to the hard disk.
+* **Student**: An individual who is enrolled in the tuition centre identified by attributes such as their name, contact details, and unique identifiers. 
+* **Subject**: An academic course or topic that students are enrolled in at the tuition center. Each subject is associated with students who are actively studying it.
 * **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
 * **UI (User Interface)**: The component of the app that manages user interaction.
 
