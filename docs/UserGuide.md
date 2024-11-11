@@ -492,10 +492,10 @@ Furthermore, certain edits can cause the StoreClass to behave in unexpected ways
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GENDER p/PHONE m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
+**Add** | `add n/NAME p/PHONE g/GENDER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`
 **Filter** | `filter [n/NAME] [p/PHONE] [g/GENDER] [t/TAG]… [m/MODULE]…`<br> e.g., `filter n/James`
 **Grade** | `grade INDEX m/MODULE s/GRADE`<br> e.g., `grade 1 m/History s/85`
