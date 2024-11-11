@@ -312,7 +312,8 @@ Additional Info
 ### Download Command
 
 #### Implementation
-The `download` command allows users to export customer data in CSV format. Users can also filter the exported data by specific tags to narrow down the content. The generated CSV file contains customer details such as name, phone, email, postal code, address, and tags.
+The `download` command allows users to export the currently displayed customer data in CSV format. Users can also 
+filter the exported data by specific tags to narrow down the content. The generated CSV file contains customer details such as name, phone, email, postal code, address, and tags.
 
 #### Usage
 ```plaintext
@@ -322,17 +323,17 @@ download [t/TAG_NAME...]
 - If no tags are provided, all customer data will be exported.
 
 #### Example
-1. Export all customer data:
+1. Export all the currently displayed customer data:
    ```plaintext
    download
    ```
-   **Expected Outcome:** A CSV file containing all customer data is created in the default output location.
+   **Expected Outcome:** A CSV file containing all customer data is created in the `./data` subdirectory.
 
 2. Export data for customers tagged with "VIP":
    ```plaintext
    download t/VIP
    ```
-   **Expected Outcome:** A CSV file containing only customers tagged with "VIP" is created in the default output location.
+   **Expected Outcome:** A CSV file containing only customers tagged with "VIP" is created in the `./data` subdirectory.
 
 3. Export data for customers with multiple tags:
    ```plaintext
@@ -363,7 +364,7 @@ download [t/TAG_NAME...]
               - Skip the CSV generation process.
           - If the list is not empty:
               - Converts the customer data to CSV format.
-              - Writes the CSV data to a file in the default output location.
+              - Writes the CSV data to a file in the `./data` subdirectory.
         
 
 #### Sequence Diagram
@@ -756,3 +757,11 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Instructions for manual testing**
+1. **Being able to edit/delete order history of a customer**
+- Add `editHistory` and `deleteHistory` command that allows order history of a customer to be modified
+
+2. Being able to export customer order history into csv file
+- Add `downloadOrderHistory` to export all customer data alongside the order history
+
