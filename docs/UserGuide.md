@@ -77,6 +77,10 @@ Adds a restaurant to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Names should only contain alphanumeric characters and spaces, and it should not be blank
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The rating is an integer value between 0 to 10. Rating can be empty.
 A restaurant can have any number of tags (including 0)
 </div>
@@ -174,9 +178,12 @@ Format: `rate INDEX r/[RATING]`
 * The rating **should be an integer between 0 to 10**
 * The rating can be empty
 
-Examples (Assuming the restaurant list has at least 2 restaurants):
-*  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
-*  `rate 2 r/ ` Edits the rating of the 2nd restaurant to be `No Rating`.
+Examples:
+*  `rate 1 r/2` Sets the rating of the 1st restaurant to be `2`.
+*  `rate 2 r/ ` Sets the rating of the 2nd restaurant to be `No Rating`.
+
+Alternative:
+*  `edit 1 r/2` Edits the rating of the 2nd restaurant to be `2`.
 
 ### Searching for restaurants by price: `price`
 
@@ -242,8 +249,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with the initial sample data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 </div>
 
 --------------------------------------------------------------------------------------------------------------------

@@ -68,7 +68,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +115,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +136,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
 | `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
-| `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Hungry foodie with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
 | `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
@@ -304,7 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### System: Grub Address Book (GAB)
 
 **Use Case:** UC1 - Search by Vendor Name
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -328,7 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use Case:** UC2 - Filter by Tag Names
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -352,7 +356,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use Case:** UC3 - Filter by Price Label
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -368,7 +374,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Use case resumes at step 5.
 
 **Use Case:** UC4 - Create new vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -389,7 +397,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC5 - Update vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -398,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
+* 3a. Wrong edit command format
     * 3a1. GAB responds with wrong command format error message
     * 3a2. User enters new data
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
@@ -411,7 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC6 - Adding tags
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -420,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
+* 3a. Wrong edit command format
     * 3a1. GAB responds with wrong command format error message
     * 3a2. User enters new data
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
@@ -433,7 +445,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC7 - Getting Help
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. User enters a command for help.

@@ -4,13 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
 
 <StackPane fx:id="placeHolder" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1">
-    <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" />
-    <VBox alignment="BOTTOM_CENTER">
-      <Button fx:id="resultVisitUG" text="Visit User Guide" />
-      <Region prefHeight="40"/>
+           xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER" spacing="10">
+        <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" VBox.vgrow="ALWAYS"/>
+        <Button fx:id="resultVisitUG" text="Visit User Guide"/>
     </VBox>
 </StackPane>
