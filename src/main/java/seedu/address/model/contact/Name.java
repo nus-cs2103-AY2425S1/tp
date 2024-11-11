@@ -22,8 +22,8 @@ public class Name {
                     + "contain numbers. But the following cases are still allowed: " + ALIAS + ", " + SON_OF
                     + ", " + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These cases can be used, but must only "
                     + "appear once. " + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle "
-                    + "of the name while " + BRACKET_PAIR + " must be after the given " +
-                    "name (at the end of the full name)";
+                    + "of the name while " + BRACKET_PAIR + " must be after the given "
+                    + "name (at the end of the full name)";
 
     // @@author cth06-Github-reused
     // Regex obtained mainly through chatGPT (see developer guide)
