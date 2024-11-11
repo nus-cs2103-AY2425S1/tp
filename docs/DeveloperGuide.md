@@ -394,11 +394,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System displays an error message to ask for a valid email.
       <br>Use case ends.
 
-* 3b. User enters a duplicate email.
-    * 3b1. System displays an error message notifying that the email already exists in the system.
-      <br>Use case ends.
-
-
 **System: StudentManagerPro**
 
 **Use case: UC03 Add Student's Register Number**
@@ -538,11 +533,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User leaves the contact number field empty.
     * 3a1. System displays an error message to ask for a valid contact number.
       <br>Use case ends.
-
-* 3b. User enters a duplicate contact number.
-    * 3b1. System displays an error message notifying that the contact number already exists in the system.
-      <br>Use case ends.
-
 
 **System: StudentManagerPro**
 

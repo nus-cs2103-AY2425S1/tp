@@ -65,6 +65,9 @@ StudentManagerPro (SMP) is a **desktop app for secondary school teachers in Sing
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* All command words are all case-sensitive.
+  e.g. if the command specifies `add`, inputting `Add` will be treated as an unknown command.
+
 * All command parameters are case-sensitive (with the exception of `filter` and `sort` commands).<br>
   e.g. addEcName command `addEcName 1 en/John` adds `John` as the emergency contact name of the first student in the list, following the case as provided by user input.<br>
   e.g. filter command `filter n/hans` will match all students that have `hans` or `Hans` in their names.<br>
@@ -116,7 +119,7 @@ Format: `list`
 
 Edits an existing student in the student list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -124,6 +127,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* The index has an upper bound for large numbers (beyond MAX_INT).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -192,7 +196,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the student list.
-* `filter n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `filter` command.
+* `filter n/Bernice` followed by `delete 1` deletes the 1st person in the results of the `filter` command.
 
 ### Adding an Emergency contact's name : `addEcName`
 
