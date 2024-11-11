@@ -461,7 +461,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 4. **Only one note may be added at a time**. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
    is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
    feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
-5. **Once selected, a person can't be unselected**, you are unable to unselect a person from the contact list panel or the pinned panel.
+5. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
 ---
 
 ## Command summary
