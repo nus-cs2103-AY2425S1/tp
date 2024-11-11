@@ -6,7 +6,7 @@
 
 # SocialBook User Guide
 
-SocialBook is a **desktop app for managing contacts, optimized for use via a  Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster than traditional GUI apps.
+SocialBook is a **desktop app designed for social workers in Singapore, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster than traditional GUI apps. It helps you manage your beneficiaries by storing contact information, important remarks and information on the last time you visited them.
 
 <!-- * Table of Contents -->
 <page-nav-print />
