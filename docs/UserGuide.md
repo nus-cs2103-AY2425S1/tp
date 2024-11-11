@@ -380,23 +380,23 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 
 ## Glossary
 
-### Graphical User Interface (GUI)
+**Graphical User Interface (GUI)**  
 A visual interface that allows users to interact with the application using graphical elements like buttons and icons instead of text commands.
 
-### Command Terminal
+**Command Terminal**  
 Where you enter commands to run the HallPointer application (e.g., Command Prompt on Windows, Terminal on macOS/Linux).
 
-### Tag
-A label to categorize members (e.g., "logistics," "friend").
+**Tag**  
+A label to categorize members (e.g., "logistics," "captain").
 
-### Session
+**Session**  
 An event or activity for members (e.g., "Rehearsal") with points awarded for attendance.
 
-### JSON File
+**JSON File**  
 The file where HallPointer saves your data automatically (`hallpointer.json`).
 
-### Points
+**Points**  
 Scores awarded to members for attending sessions.
 
-### Telegram Handle
+**Telegram Handle**  
 The unique Telegram username for each member.
