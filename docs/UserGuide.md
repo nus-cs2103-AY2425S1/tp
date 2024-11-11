@@ -56,7 +56,13 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `listevent`: Lists all events.
 
-   * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with the given details.
+   * `addevent sp/CHE t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with these details:
+     * Involves faculties COM and BIZ
+     * Held on 12 December 2024, at 6pm
+     * Held at USC
+     * John is the only participant
+   
+    Like with a person's roles, faculties and sports use shortcuts courtesy of [this section.](#using-shortcuts-coming-in-v20)
 
    * `deleteevent 2`: Deletes the second event shown in the current list of events.
 
@@ -113,10 +119,10 @@ A person can have zero or more roles.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/athlete`
-* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/volunteer`
+* `add n/John Doe p/98765432 e/johnd@example.com r/SD`
+* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/COM`
 
-
+Again, roles are added through a shortcut, found [here.](#using-shortcuts-coming-in-v20)
 
 ### Listing all persons : `list`
 
@@ -186,11 +192,13 @@ Format: `addevent sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/P
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have zero or more participants.
 Note that the participants must be valid persons in the database.
+
 </div>
 
 Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
-
+  
+Remember that faculties and sports use shortcuts found in [this section.](#using-shortcuts-coming-in-v20)
 ### Editing an event : `editevent`
 
 Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
@@ -204,8 +212,8 @@ Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENU
   specifying any participants after it.
 
 Examples:
-*  `editevent 1 sp/Chess` Edits the sport of the first currently-displayed event to be `Chess`.
-*  `editevent 2 sp/Basketball Women pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
+*  `editevent 1 sp/CHE` Edits the sport of the first currently-displayed event to be `Chess`.
+*  `editevent 2 sp/BBW pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
 
 ### Deleting an event : `deleteevent`
 
