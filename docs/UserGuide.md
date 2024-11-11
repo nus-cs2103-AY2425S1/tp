@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-Welcome to EduConnect – a tool designed to help teachers manage student and teacher details with speed and simplicity. EduConnect streamlines your everyday tasks, such as tracking attendance, organizing class schedules, and managing contact information, allowing you to organize important information in a fast, efficient way. By typing commands, you can quickly update, search, and handle details with minimal effort, making it a valuable companion for busy school environments.
+Welcome to EduConnect – a tool designed to help teachers manage student and teacher details with speed and simplicity. EduConnect streamlines your everyday tasks, such as tracking attendance and managing contact information, allowing you to organize important information in a fast, efficient way. By typing commands, you can quickly update, search, and handle details with minimal effort, making it a valuable companion for busy school environments.
 
-* Table of Contents
+## Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -58,13 +58,15 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
        - `clear`: Deletes all contacts.
        - `exit`: Exits the app.
 
-  For more detailed explanations of each command, see the [Features](#features) section below.
+For more detailed explanations of each command, see the [Features](#features) section below.
+If you have any questions or need help, please refer to the [FAQ](#faq) section
+
+[Back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-
-### Parameter Details
+## Parameter Details
 The table below provides a quick overview of each parameter associated with a teacher or student in EduConnect, along with the specific constraints to keep in mind when using these parameters in a command.
 
 {: .alert .alert-warning}
@@ -111,36 +113,9 @@ The table below provides a quick overview of each parameter associated with a te
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters around line-breaks may not transfer correctly when pasted into the application.
 
+--------------------------------------------------------------------------------------------------------------------
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-### Changing themes:
-
-Allows changing of a theme from Light Mode to Dark Mode and vice versa.
-
-Under the `File` menu, select `Change Theme` button to switch between the 2 different themes.
-
-{: .alert .alert-warning}
-> :exclamation: **Warning:**
->
-> The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
-
-![change themes](images/Changing-Themes.png)
-
-### Command History:
-
-Allows users to navigate through previously entered valid commands in the command box by pressing the `Up` and `Down` arrow keys. For example, if you have entered `delete 1` and then `delete 2`, pressing the `Up` arrow key will display `delete 2`, and pressing it again will display `delete 1`.
-
-{: .alert .alert-warning}
-> :exclamation: **Warning:**
->
-> The command history is only stored for the current session. When you close EduConnect, the history is cleared and cannot be retrieved in future sessions.
+## Features
 
 ### Adding a person
 
@@ -170,16 +145,16 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 
 Example:
 * The command `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` adds a student with the following details:
-  * the name John Doe
-  * the gender male
-  * the contact number 9876 5432
-  * the email address johnd@example.com
-  * the address 311, Clementi Ave 2, #02-25
-  * the subject taken as Physics
-  * the classes 7A and 7B
-  * a starting attendance of 0 days
-  * the next of kin whose name is Bob Doe
-  * an emergency contact 8765 4321
+    * the name John Doe
+    * the gender male
+    * the contact number 9876 5432
+    * the email address johnd@example.com
+    * the address 311, Clementi Ave 2, #02-25
+    * the subject taken as Physics
+    * the classes 7A and 7B
+    * a starting attendance of 0 days
+    * the next of kin whose name is Bob Doe
+    * an emergency contact 8765 4321
 
 #### Adding a teacher: `teacher`
 
@@ -192,7 +167,7 @@ Format: `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 >
 > The address and tag fields are optional when creating a teacher.
 > If not specified, the address field will be greyed out in the GUI.
-> 
+>
 > The subject field is required at least once and can be repeated if needed. (e.g. `/subject Math /subject Science`)
 
 {: .alert .alert-success}
@@ -215,11 +190,9 @@ Example:
     * the subject she teaches as English
     * the classes she teaches 5A and 8C
 
-### Listing all persons : `list`
+[Back to Table of Contents](#table-of-contents)
 
-Displays a list of all students and teachers in EduConnect.
-
-Format: `list`
+## Modifying a Person
 
 ### Editing a person : `edit`
 
@@ -239,7 +212,7 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> 
+>
 > The `edit` command will show an error if the edited field results in a duplicate entry. For example, if you try to edit a person's phone number which match another person's phone number, the command will not be executed. For more information, refer to the [Parameter Details](#parameter-details) section.
 
 {: .alert .alert-info}
@@ -247,9 +220,107 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` Edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /name Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
-    <br/><br/>
+   <br/><br/>
 
 ![edit command](images/edited_ui.png)
+
+### Deleting a person : `delete`
+
+Deletes the specified person or persons from EduConnect.
+
+Format: `delete INDEX…​`
+
+* You can delete one or more people by specifying their `INDEX`(es) in the list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The indexes entered must be unique.
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> If any index provided is invalid, the command will not be executed.
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in EduConnect.
+* `find /name Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 1 2 3` deletes the 1st, 2nd and 3rd persons in the list in one command.
+
+### Clearing entries : `clear`
+
+Clears all contacts from EduConnect or specific contacts based on the provided criteria.
+
+Format: `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`
+
+* If no fields are provided, all contacts will be cleared.
+* If one or more optional fields are provided, only contacts matching **at least one** of those fields will be cleared.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The `clear` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
+
+Examples:
+* `clear` clears all contacts in EduConnect.
+* `clear /classes 7A` clears all contacts related to class 7A (students or teachers).
+* `clear /name John /subject Physics` clears contacts for all persons named John or anyone associated with the subject Physics.
+
+[Back to Table of Contents](#table-of-contents)
+
+## Attendance Taking
+### Marking attendance : `mark`
+
+Increases the attendance of **all students** in EduConnect by 1.
+
+Format: `mark`
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The `mark` command works on the overall list of contacts and not on a filtered list produced by the `find` command. It affects the attendance of all student contacts.
+
+### Unmarking attendance : `unmark`
+
+Reduces the attendance of one or more students in EduConnect by 1.
+
+Format: `unmark INDEX…​`
+
+* You can unmark attendance for one or more students by specifying their INDEX(es) in the list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The person corresponding to the index must be a student.
+* The student must have attended at least one day to be unmarked.
+* the indexes entered must be unique.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> Use the `find` command to filter the list of students before unmarking their attendance.
+
+Example:
+* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
+* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
+* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
+
+### Reset attendance: `resetAttendance`
+
+Resets the attendance of all students in EduConnect to 0.
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> The `resetAttendance` command works on the overall list of contacts and not on a filtered list produced by the `find` command. It affects the attendance of all student contacts.
+
+Format: `resetAttendance`
+
+[Back to Table of Contents](#table-of-contents)
+
+## Organizing Data
+
+### Listing all persons : `list`
+
+Displays a list of all students and teachers in EduConnect.
+
+Format: `list`
 
 ### Locating persons by name: `find`
 
@@ -304,10 +375,21 @@ Format: `sort ATTRIBUTE`
 > The `sort` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
 
 Examples:
-* `list` followed by `sort attendance` sorts the list of students by attendance in descending order.
-   <br/><br/>
+* `sort attendance` sorts the list of students by attendance in descending order.
+  <br/><br/>
 
 ![sort attendance command](images/sort_attendance.png)
+
+[Back to Table of Contents](#table-of-contents)
+
+## Command History:
+
+EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2`, and pressing it again will display `delete 1`.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The command history is only stored for the current session. When you close EduConnect, the history is cleared and cannot be retrieved in future sessions.
 
 ### Undoing the last command : `undo`
 
@@ -347,96 +429,40 @@ Examples:
 * `edit 1 /name Alex Koh` followed by `undo` and then `redo` restores the name of the 1st person back to `Alex Koh`.
 * `delete 3` followed by `undo` and then `redo` removes the student at position 3 from the list
 
-### Deleting a person : `delete`
+[Back to Table of Contents](#table-of-contents)
 
-Deletes the specified person or persons from EduConnect.
+## Other Features
 
-Format: `delete INDEX…​`
+### Changing themes:
 
-* You can delete one or more people by specifying their `INDEX`(es) in the list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The indexes entered must be unique.
+Allows changing of a theme from Light Mode to Dark Mode and vice versa.
 
-{: .alert .alert-info}
-> :information_source: **Note:**
->
-> If any index provided is invalid, the command will not be executed.
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in EduConnect.
-* `find /name Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete 1 2 3` deletes the 1st, 2nd and 3rd persons in the list in one command.
-
-### Clearing entries : `clear`
-
-Clears all contacts from EduConnect or specific contacts based on the provided criteria.
-
-Format: `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`
-
-* If no fields are provided, all contacts will be cleared.
-* If one or more optional fields are provided, only contacts matching **at least one** of those fields will be cleared.
+Under the `File` menu, select `Change Theme` button to switch between the 2 different themes.
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 >
-> The `clear` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
+> The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
-Examples:
-* `clear` clears all contacts in EduConnect.
-* `clear /classes 7A` clears all contacts related to class 7A (students or teachers).
-* `clear /name John /subject Physics` clears contacts for all persons named John or anyone associated with the subject Physics.
+![change themes](images/Changing-Themes.png)
 
-### Marking attendance : `mark`
+### Viewing help : `help`
 
-Increases the attendance of **all students** in EduConnect by 1.
+Shows a message explaining how to access the help page.
 
-Format: `mark`
+![help message](images/helpMessage.png)
 
-{: .alert .alert-warning}
-> :exclamation: **Warning:**
->
-> The `mark` command works on the overall list of contacts and not on a filtered list produced by the `find` command. It affects the attendance of all student contacts.
-
-### Unmarking attendance : `unmark`
-
-Reduces the attendance of one or more students in EduConnect by 1.
-
-Format: `unmark INDEX…​`
-
-* You can unmark attendance for one or more students by specifying their INDEX(es) in the list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The person corresponding to the index must be a student.
-* The student must have attended at least one day to be unmarked.
-* the indexes entered must be unique.
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> Use the `find` command to filter the list of students before unmarking their attendance.
-
-Example:
-* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
-* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
-* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
-
-### Reset attendance: `resetAttendance`
-
-Resets the attendance of all students in EduConnect to 0.
-
-{: .alert .alert-info}
-> :information_source: **Note:**
->
-> The `resetAttendance` command works on the overall list of contacts and not on a filtered list produced by the `find` command. It affects the attendance of all student contacts.
-
-Format: `resetAttendance`
+Format: `help`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+[Back to Table of Contents](#table-of-contents)
+
+## For Advanced Users
 
 ### Saving the data
 
@@ -451,6 +477,7 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 > * If your changes to the data file makes its format invalid, EduConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 > * Furthermore, certain edits can cause the EduConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -463,15 +490,13 @@ This section defines key terms and concepts used throughout the user guide.
 - **Command**: A text instruction that you type into the command box to perform a specific action in EduConnect.
 - **Command box**: The text input field where you type commands to interact with EduConnect.
 - **Parameter**: A value that you provide to a command to specify details about the action to be performed.
-- **Index**: A number that refers to the position of an item in a list.
-- **Attribute**: A specific characteristic or property of a person, such as name, class, or attendance.
-- **Format**: The required structure for entering commands in EduConnect.
-- **Syntax**: The specific arrangement of characters and parameters required to execute a command correctly.
+- **Command Format**: The required structure for entering commands in EduConnect.
 - **Constraints**: The rules or conditions that a parameter must meet.
 - **Case-insensitive**: Refers to text matching that ignores uppercase and lowercase differences.
 - **Top-level domain**: The last part of an email address, such as `.com`, `.org`, or `.net`.
 - **JSON file**: A file format used to store data in a structured way that is easy for software to read and write.
 - **Person**: Refers to either a student or a teacher in EduConnect.
+- **GUI**: Graphical User Interface. An interface that allows users to interact with the EduConnect application.
 
 ### Annotated Box Conventions
 
@@ -491,6 +516,8 @@ This section explains the different types of annotated boxes used in the user gu
 > :exclamation: **Warning:**
 >
 > This box contains warnings about potential issues or important things to be aware of.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
