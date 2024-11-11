@@ -468,9 +468,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. The student `John` is in the list, but not the student `Jane`.
+    1. Prerequisites: List all students using the `list` command. The student uniquely named `John Doe` is in the list, but not the student `Jane`.
 
-    1. Test case: `deletes n/John`<br>
+    1. Test case: `deletes n/John Doe`<br>
        Expected: `John` is deleted from the list. The name and student number of the deleted contact are shown in the status message. 
 
     1. Test case: `deletes n/Jane`<br>
