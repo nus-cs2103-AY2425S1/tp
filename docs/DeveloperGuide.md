@@ -375,6 +375,10 @@ Preconditions:
 
     Use case ends.
 
+Additional notes:
+* After performing a delete supplier operation, the Inventory Manager must manually refresh the view to see the changes
+  to supplier-product relations. This can be done by <ins>viewing the products</ins>.
+
 **Extensions**
 
 * 1a. Product/Supplier name is in invalid format:
@@ -498,18 +502,32 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a supplier while all suppliers are being shown
 
-   1. Prerequisites: List all suppliers using the `list` command. Multiple suppliers in the list.
+    1. Prerequisites:
+        * View all suppliers using the `view_supplier` command.
+        * Ensure that there are multiple suppliers in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case 1: `delete_supplier n/Supplier Name`<br>
+        * Description: Delete a supplier using a valid unique name.
+        * Expected:
+            * The specified supplier is deleted from the supplier list.
+            * Any supplier-product relationships involving this supplier are removed.
+            * Use the `view_product` command to verify that products that were assigned the deleted supplier now have no assigned supplier
+            * Details of the deleted supplier are shown in the success message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No supplier is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case 2: `delete_supplier n/R@chel`<br>
+        * Description: Attempt to delete a supplier with an invalid name format containing special characters.
+        * Expected:
+            * No supplier is deleted.
+            * An error message is displayed indicating the invalid supplier name format.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Test case 3: `delete_supplier n/NonexistentSupplier`<br>
+        * Description: Attempt to delete a supplier that does not exist in the system.
+        * Expected:
+            * No supplier is deleted.
+            * An error message is displayed indicating that the supplier does not exist.
 
-1. _{ more test cases …​ }_
+1. Other incorrect delete commands to try: `delete`, `delete_supplier x/`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Saving data
 
