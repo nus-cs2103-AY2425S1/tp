@@ -293,11 +293,12 @@ _Details coming soon ..._
 
 ### Email
 * Emails are optional for contacts, and are denoted by the `e/` prefix.
-* Email addresses are confined to the limits of the traditional email format: **`localPart@domain.label`**. This includes a few restrictions:
-  * The `localPart` and `domain` components of the email must be alphanumeric, with no special characters.
-  * The `localPart` and `domain` components of the email must be separated by a `@`.
-  * The `label` component must be alphanumeric, and contain at least 2 characters.
-  * The `domain` and `label` component must be separated by a `.`.
+* Email addresses are confined to the limits of the traditional email format: **`localPart@domainName`**. This includes a few restrictions:
+  * The `localPart` component of the email can only contain alphanumeric characters and the following 4 special characters: **`+`, `-`, `.`, `_`**. But take note that it cannot start or end with these special characters. 
+  * The `domainName` component of the email will consist of one or more domain labels, separated by periods (`.`).
+  * Every domain label can only contain alphanumeric characters, or hyphens (`-`). They must also start and end with alphanumeric characters, so no starting or ending email addresses with hyphens!
+  * The last domain label in the `domainName` must be at least 2 characters long.
+  * The `localPart` and `domainName` components of the email must be separated by a `@`.
 * To indicate no email for a contact, you can `add` a contact without the `e/` prefix, or with a `e/` followed by whitespace.
 
 ### Date of Last Visit
