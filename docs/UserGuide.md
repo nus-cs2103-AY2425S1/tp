@@ -78,6 +78,12 @@ Note: Any restaurant filters will be reset upon running this command.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Names should only contain alphanumeric characters and spaces, and it should not be blank.
+Note: Characters outside the English alphabet are currently not supported.
+Please use an English transliteration.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The rating is an integer value between 0 to 10. Rating can be empty.
 A restaurant can have any number of tags (including 0)
 </div>
@@ -110,7 +116,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATIN
 * You can remove all the restaurant’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
+Examples (Assuming the restaurant list has at least 2 restaurants):
 *  `edit 1 p/98765432 e/swensens@plsreply.com` Edits the phone number and email address of the 1st restaurant to be `98765432` and `swensens@plsreply.com` respectively.
 *  `edit 2 n/Mala Hot Pot t/` Edits the name of the 2nd restaurant to be `Mala Hot Pot` and clears all existing tags.
 
@@ -128,7 +134,7 @@ Format: `tags KEYWORD [MORE_KEYWORDS]`
 * Restaurants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Chinese Western` will return `Swensens`, `Mala Hot Pot`
 
-Examples:
+Examples (Assuming there are restaurants with the following tags):
 * `tags Halal` returns `Swensens` and `Mala Hot Pot`
 * `tags Chinese` returns `Mala Hot Pot`
 * `tags Halal Chinese` returns `Swensens` and `Mala Hot Pot`<br>
@@ -146,7 +152,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Restaurants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Mala Swensens` will return `Swensens`, `Mala Hot Pot`
 
-Examples:
+Examples (Assuming there are restaurants with the following names):
 * `find Swensens Mala` returns `Swensens` and `Mala Hot Pot`
 * `find mala` returns `Mala Hot Pot`<br>
 
@@ -162,7 +168,7 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 2 restaurants):
 * `list` followed by `delete 2` deletes the 2nd restaurant in the address book.
 * `find Mala` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
@@ -210,7 +216,7 @@ Format: `fav INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 1 restaurant):
 *  `fav 1` Favourite the 1st restaurant.
 
 ### Un-favourite a restaurant : `unfav`
@@ -224,7 +230,7 @@ Format: `unfav INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 1 restaurant):
 *  `unfav 1` Un-favourites the 1st restaurant.
 
 ### Clearing all entries : `clear`
