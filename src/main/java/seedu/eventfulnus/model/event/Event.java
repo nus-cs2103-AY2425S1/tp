@@ -149,6 +149,7 @@ public class Event implements Comparable<Event> {
 
         return otherEvent != null
                 && otherEvent.getName().equals(getName())
+                && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getDateTime().equals(getDateTime());
     }
 

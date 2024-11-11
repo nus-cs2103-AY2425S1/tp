@@ -77,7 +77,7 @@ public class EditEventCommand extends Command {
         Event eventToEdit = lastShownList.get(index.getZeroBased());
         Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
-        if (!eventToEdit.equals(editedEvent) && model.hasEvent(editedEvent)) {
+        if (eventToEdit.isSameEvent(editedEvent) || model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 

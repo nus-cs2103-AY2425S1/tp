@@ -321,21 +321,6 @@ public class ParserUtil {
     }
 
     /**
-     * Retrieves all {@link Person}s in the {@link AddressBook} of the
-     * {@link ModelManager} that match the {@link Sport}and {@link Faculty}
-     * provided, and returns them in a defensive copy of a{@link Set}<{@link Person}>.
-     */
-    public static Set<Person> parseDefaultParticipants(Sport sport, Pair<Faculty, Faculty> teams) {
-        PersonContainsKeywordsPredicate isAthleteOfGivenTeams = new PersonContainsKeywordsPredicate(
-                List.of("athlete", teams.getKey().toString(), teams.getValue().toString()));
-        PersonContainsKeywordsPredicate isAthleteOfGivenSport = new PersonContainsKeywordsPredicate(
-                List.of("athlete", sport.toString()));
-        Set<Person> defaultParticipants = new HashSet<>(
-                filteredPersonList.filtered(isAthleteOfGivenTeams).filtered(isAthleteOfGivenSport));
-        return new HashSet<>(defaultParticipants);
-    }
-
-    /**
      * Parses a {@code String} {@code participantName} into a {@link Person}.
      * Leading and trailing whitespaces will be trimmed.
      *

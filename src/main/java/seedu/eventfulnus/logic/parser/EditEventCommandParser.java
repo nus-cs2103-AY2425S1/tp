@@ -84,8 +84,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
      * If {@code participants} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Person>} containing zero participants.
      */
-    private Optional<Set<Person>> parseParticipantsForEdit(Collection<String> participants)
-            throws ParseException {
+    private Optional<Set<Person>> parseParticipantsForEdit(Collection<String> participants) throws ParseException {
         assert participants != null;
 
         if (participants.isEmpty()) {
