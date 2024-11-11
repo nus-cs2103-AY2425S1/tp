@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -83,6 +84,26 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        assertTrue(addressBook.equals(addressBook));
+    }
+    @Test
+    public void equals_differentNumberOfPersons_returnsFalse() {
+        addressBook.addPerson(ALICE);
+
+        AddressBook addressBookWithOnePerson = new AddressBook();
+        addressBookWithOnePerson.addPerson(ALICE);
+        addressBookWithOnePerson.addPerson(BOB);
+
+        assertFalse(addressBook.equals(addressBookWithOnePerson));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        // AddressBook is not equal to null
+        assertFalse(addressBook.equals(null));
+    }
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";

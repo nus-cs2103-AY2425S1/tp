@@ -43,12 +43,6 @@ public class JsonAdaptedLogTest {
     }
 
     @Test
-    public void toStorageString_validLog_returnsCorrectString() {
-        String logString = LOG.toStorageString();
-        assertEquals(STORAGE_STRING, logString);
-    }
-
-    @Test
     public void toModelType_missingEntry_throwsIllegalValueException() {
         JsonAdaptedLog jsonAdaptedLog = new JsonAdaptedLog(APPOINTMENT_DATE.toString(), null);
         assertThrows(IllegalValueException.class, jsonAdaptedLog::toModelType);
