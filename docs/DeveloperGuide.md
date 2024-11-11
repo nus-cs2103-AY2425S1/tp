@@ -841,30 +841,30 @@ The following planned enhancements address known feature flaws identified during
    - **Proposed Solution**: Events should be able to have multiple days with multiple start and end timings.
    - **Expected Outcome**: Users should be able to assign volunteers to all or some days of a multi-date event instead of and creating multiple events on each day and separately assign volunteers.
 
-2. **Enhance Event List Sorting**
+2. **Allow Volunteers To Only Be Free At Some Times Of Some Days**
+   - **Feature Flaw**: Currently volunteers are assumed to be free for the whole day on their free days.
+   - **Proposed Solution**: Volunteers should be able to have start and end timings for their free periods on free days. Event assignment should check for volunteer's free time as well as day.
+   - **Expected Outcome**: Users should not need to manually check if the volunteer is free on a given event timing before assigning them to an event.
+
+3. **Enhance Event List Sorting**
     - **Feature Flaw**: Events are currently displayed in the order they were added, making it difficult to find upcoming events.
     - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
     - **Expected Outcome**: Improved usability for managing events.
 
-3. **Enhance Search Functionality**
+4. **Enhance Search Functionality**
     - **Feature Flaw**: The current search command does not support searching for email or phone number.
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
     - **Expected Outcome**: More flexible search results.
 
-4. **Dynamic UI Updates**
+5. **Dynamic UI Updates**
     - **Feature Flaw**: Unassign Volunteers from Events while viewing said event would still show volunteer is involved
     - **Proposed Fix**: UI would dynamically update the results it shows after every command is run.
     - **Expected Outcome**: UI would display accurate and the most updated information.
 
-5. **Multiple Date Tracking**
-    - **Feature Flaw**: The error message for validating if the volunteer is free/unfree only returns the first date which the volunteer is already free/unfree.
-    - **Proposed Fix**: The error message should show all dates which the volunteer is already free/unfree.
-    - **Expected Outcome**: Users would know all the dates that volunteer is already free/unfree for.
-
-6. **Multiple Event Tracking**
-   - **Feature Flaw**: The error message for validating if the volunteer can have a free date removed or if a volunteer can be assigned to an event on returns the first event the volunteer is assigned to.
-   - **Proposed Fix**: The error message should show all clashing events which could cause and error and prevent the completion of the command.
-   - **Expected Outcome**: Users would know all events the volunteer is assigned to, so they can unassign them from all clashing events and fix all errors simultaneously.
+6. **Multiple Error Tracking**
+    - **Feature Flaw**: Currently exceptions are thrown at the first error encountered from a user command. 
+    - **Proposed Fix**: The error message should show all detectable errors with the command (e.g volunteer is assigned to multiple events on day User is trying to unfree, Volunteer has multiple clashing events for an assign command, etc).
+    - **Expected Outcome**: Users would be able to as many issues as possible before re-entering the command without needing to check it one by one.
 
 7. **Add Support For Leap Years**
     - **Feature Flaw**: Currently the date does not parse leap days accordingly
@@ -886,15 +886,6 @@ The following planned enhancements address known feature flaws identified during
     - **Proposed Solution**: Find should use the current display list as the basis for its search.
     - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
 
-11. **Allow Volunteers To Only Be Free At Some Times Of Some Days**
-    - **Feature Flaw**: Currently volunteers are assumed to be free for the whole day on their free days.
-    - **Proposed Solution**: Volunteers should be able to have start and end timings for their free periods on free days. Event assignment should check for volunteer's free time as well as day.
-    - **Expected Outcome**: Users should not need to manually check if the volunteer is free on a given event timing before assigning them to an event.
-
-12. **Allow Users To Check Total Number Of Volunteers For Events**
-    - **Feature Flaw**: Currently the UI displays the names of the volunteers assigned to events and users are unable to easily see how many volunteers they have and check how many they need.
-    - **Proposed Solution**: Events should be able to store the required number of volunteers and UI should display both the number of volunteer currently assigned and the required amount.
-    - **Expected Outcome**: User should be able to set the required number of volunteers and know at a glance if they need to search for more volunteers for certain events.
    
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
