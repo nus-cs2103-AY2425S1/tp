@@ -11,7 +11,7 @@ public class BillingDate {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Billing date should only be a number between 1 and 28";
-    public static final String VALIDATION_REGEX = "^([1-9][0-9]?)$";
+    public static final String VALIDATION_REGEX = "^\\d{1,2}$";
     public final String date;
 
     /**
