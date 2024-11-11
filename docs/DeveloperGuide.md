@@ -1075,6 +1075,32 @@ This should be treated as an invalid format.
 Though not strictly wrong, the index parser currently already checks for `+` and treats it as invalid.
 For consistency, this should also apply to participation.
 
+**<u>Make year 0000 an illegal value for the date</u>**
+
+**Description**
+
+Currently, year 0000 is accepted as a valid year.
+This should be changed to no longer be valid.
+
+**Rationale**
+
+According to Wikipedia, a year 0 does not exist in the Anno Domini calendar year.
+Therefore, it should not be allowed.
+
+**<u>Standardise error messages involving index</u>**
+
+**Description**
+
+For some commands, entering specific indexes (like 0) will show an error message
+stating that the index is invalid (not an unsigned nonzero integer), while other times
+it will show the default error message for incorrect format.
+
+**Rationale**
+
+These error messages should be standardised to avoid confusion.
+Any errors when parsing the index specifically ideally should specify that the index
+specifically is invalid to help the user correct it.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson

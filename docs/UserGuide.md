@@ -481,7 +481,7 @@ Examples:
 
 ### Removing a student from a lesson : `removefromlesson`
 
-Removes student(s) from a lesson.Removing a student will also remove all data associated
+Removes student(s) from a lesson. Removing a student will also remove all data associated
 with them to that lesson, i.e. re-adding them defaults to no attendance and 0 participation.
 
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
@@ -584,6 +584,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. Occasionally, **the consults and lessons list** may not display properly, i.e. have wrong heights. Try using the relevant list command `listconsults` or `listlessons` to refresh the list. Alternatively, try scrolling the list with a mouse. This should update the display to remedy the bug.
+4. Certain characters cannot be used in student names, such as `/` or `-`, which prevent legitimate parts of names such as `S/O` from being input. This will be addressed in a future version.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -603,14 +605,14 @@ Action | Format, Examples
 **Import Students** | `import FILENAME`<br> e.g., `import students.csv` (relative) <br> e.g., `import ~/Documents/students.csv` (home)
 **Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv` (relative) <br>e.g., `importconsult ~/Documents/sessions.csv` (home)
 **Add Consultation** | `addconsult d/DATE t/TIME`<br> e.g., `addconsult d/2024-10-20 t/14:00`
-**Add to Consultation** | `addtoconsult INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtoconsult n/James Jake n/John Jill i/2 i/3`
+**Add to Consultation** | `addtoconsult INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtoconsult 1 n/James Jake n/John Jill i/2 i/3`
+**Remove from Consultation** | `removefromconsult INDEX n/NAME…​`<br> e.g., `removefromconsult 1 n/Jake John` <br> e.g., `removefromconsult 1 n/Jake n/John`
 **Delete Consultations** | `deleteconsult INDEX [;INDEX]…​`<br> e.g., `deleteconsult 3` <br> e.g., `deleteconsult 2;3;4`
 **List Consultations** | `listconsults`
-**Remove from Consultation** | `removefromconsult INDEX n/NAME…​`<br> e.g., `removefromconsult n/Jake John` <br> e.g., `removefromconsult n/Jake n/John`
 **Add Lesson** | `addlesson d/DATE t/TIME`<br> e.g., `addlesson d/2024-10-20 t/14:00`
-**Add to Lesson** | `addtolesson INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtolesson n/James Jake n/John Jill i/2 i/3`
+**Add to Lesson** | `addtolesson INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtolesson 1 n/James Jake n/John Jill i/2 i/3`
+**Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson 1 n/Jake John` <br> e.g., `removefromlesson 1 n/Jake n/John`
 **Delete Lesson** | `deletelesson INDEX [;INDEX]…​`<br> e.g., `deletelesson 3` <br> e.g., `deletelesson 2;3;4`
 **List Lessons** | `listlessons`
 **Mark Attendance for Lesson** | `marka INDEX n/NAME…​ a/ATTENDANCE`<br> e.g., `marka 3 n/Jack a/y` <br> e.g., `marka 3 n/Jack n/Jill a/1` <br> e.g., `marka 3 n/Jack a/n` <br> e.g., `marka 3 n/Jack a/0`
 **Mark Participation for Lesson** | `markp INDEX n/NAME…​ pt/POINTS`<br> e.g., `markp 3 n/Jack pt/75`
-**Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson n/Jake John` <br> e.g., `removefromlesson n/Jake n/John`
