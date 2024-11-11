@@ -371,7 +371,7 @@ You can check your Java version by running `java -version` in the command termin
 | `exit`        | `ex`     | Exits the application                    |
 | `find`        | `f`      | Finds patients by name or tags           |
 | `help`        | `h`      | Displays a list of accepted commands     |
-| `list`        | `ls`     | Shows a list of all patient profiles     |
+| `list`        | `l`      | Shows a list of all patient profiles     |
 | `remark`      | `r`      | Add a remark to a patient profile        |
 | `sort`        | `s`      | Sorts the list of patients               |
 | `triage`      | `t`      | Change triage stage of a patient         |
