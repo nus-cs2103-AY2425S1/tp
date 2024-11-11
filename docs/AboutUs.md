@@ -19,6 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/maoxiongkai.md)]
 
 * Role: Team Lead
+* Responsibilities: code quality, weekly meetings
+* In charge of the module role components
 
 ### Eline Ngu Xiang Ee
 
@@ -27,7 +29,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/elinengu)]
 [[portfolio](team/elinengu.md)]
 
-- Role: Project Member
+* Role: Developer
+* In charge of UI and storage
 
 ### Huang Jiaxi
 
@@ -37,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/huangjiaxi1111.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* In charge of module role search and user guide
 
 ### Zhu Tianyi
 
@@ -46,8 +49,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lithops-zty)]
 [[portfolio](team/lithops-zty.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deputy Team Lead, Developer
+* Responsibilities: deadlines, deliverables
+* In charge of data persistence and module role modification
 
 ### Tan Wei Seng
 
@@ -57,4 +61,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/weiseng18.md)]
 
 * Role: Developer, Git expert
-* Responsibilities: Model, Testing
+* Responsibilities: model, testing, code quality
+* In charge of code quality and progress tracking

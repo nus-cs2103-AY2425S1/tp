@@ -71,7 +71,7 @@ Alerts you to potential issues or problems that may arise.
        **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
        </box>
-     
+
      * For Mac users, type:
        ```
        cd /path/to/your/folder
@@ -232,7 +232,7 @@ Examples:
 <box type="warning" seamless>
 
 **Caution: Common Mistakes**
-- If you are adding multiple module-role pairs, only the first pair should have a `+` sign before the module-role pair. 
+- If you are adding multiple module-role pairs, only the first pair should have a `+` sign before the module-role pair.
 The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +MA1521-TA` is unnecessary and will cause an error.
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
@@ -241,7 +241,7 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
 * Deletes existing roles from the person at the specified `INDEX`. The index refers to the index number shown in the
-displayed person list. 
+displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one module-role pair must be provided.
 * Multiple module-role pairs can be deleted at once, separated by `" "`.
@@ -369,7 +369,7 @@ making it easier to locate specific entries that meet multiple criteria.<br>
 
 * Apply Additional Filters with find chained:
   * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
-  
+
 **Example**
 * Step 1: type `find n/John` and hit enter. You will see all entries with "John" in their names;
 * Step 2: type `find chained n/Doe` and hit enter. This time you will see only the entries that contain both "John" and "Doe" in their names.
@@ -518,15 +518,15 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                                                                                                                                                        
+ Action     | Format, Examples
 ------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME (p/PHONE_NUMBER \| e/EMAIL \| p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
- **Clear**  | `clear`                                                                                                                                                                                                                                                                 
- **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                                                
- **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                                     
- **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD \| t/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521 t/friends t/classmates`                                                                                                                                                                
- **Undo**   | `undo`                                                                                                                                                                                                                                                                  
- **Redo**   | `redo`                                                                                                                                                                                                                                                                  
- **List**   | `list`                                                                                                                                                                                                                                                                  
- **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                              
+ **Add**    | `add n/NAME (p/PHONE_NUMBER \| e/EMAIL \| p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy`
+ **Clear**  | `clear`
+ **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`
+ **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD \| t/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521 t/friends t/classmates`
+ **Undo**   | `undo`
+ **Redo**   | `redo`
+ **List**   | `list`
+ **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`
  **Exit**   | `exit`

@@ -160,8 +160,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo/redo
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. 
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. 
+The undo/redo mechanism is facilitated by `VersionedAddressBook`.
+It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commitAddressBook()` — Saves the current address book state in its history.
@@ -288,7 +288,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: \
-Allows NUS CS freshmen to easily locate the admin contact details when needed, 
+Allows NUS CS freshmen to easily locate the admin contact details when needed,
 which helps them better manage contact details of their professors, teaching assistants, classmates, CCA mates, offices, emergency helplines, etc.
 so that they can focus more on their study.
 
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Y1 CS student who is involved in any accident or emergency                                                   | find contact details of campus security                                                                                     | protect me and my friends' safety immediately                                        |
 | `* *`    | Y1 CS student who has financial concerns for school                                                          | find contact details of nus financial office                                                                                | settle any financial related issues                                                  |
 | `* *`    | Y1 CS student who needs to update contact info                                                               | update contact info for courses in this semester with that in the next semester                                             | keep info updated in more efficient ways                                             |
-| `* *`    | Y1 CS student who frequently access some of the contact details but lazy to repeat same commands everytime   | classify frequently accessed contacts and query them using shorter commands                                                 | access those frequent contact without wasting too much time                          |  
+| `* *`    | Y1 CS student who frequently access some of the contact details but lazy to repeat same commands everytime   | classify frequently accessed contacts and query them using shorter commands                                                 | access those frequent contact without wasting too much time                          |
 | `* *`    | New user                                                                                                     | see usage instructions                                                                                                      | refer to instructions when I forget how to use the App                               |
 | `* *`    | Y1 CS student who is a fresh man in a cca                                                                    | find contact details of my cca leader/friends                                                                               | settle any cca-related issues with them                                              |
 | `* *`    | Y1 CS student who are unsure about the procedure of making an appointment with a doctor                      | find contact details for UHC and NUH easily                                                                                 | make appointment with doctor as early as possible                                    |
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. ContactCS requests the user to provide the required information
   * 1a2. User enters new data
   * Steps 1a1 - 1a2 are repeated until the data entered are correct
-        
+
     Use case resumes from step 2.
 
 * 1b. The given format is invalid.
@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      * The name of the contact,
      * The module code (optionally including the role), or
      * A combination of both
-    
+
 2. ContactCS shows a list of matching contacts
 
     Use case ends.
@@ -730,14 +730,29 @@ The current find command automatically assumes that user wants to search student
 Sometimes, user cannot remember the full module code, or wants to search over a wider range of modules, but the current implementation does not support that either,
 hence reducing the usefulness of this command.
 
-![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_1.png)
+![point1 screenshot_1](images/Planned_Enhancements_Screenshots/Point1_1.png)
 (As shown in the screenshot, `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 CS1101S professors in the sample data.)
 
-![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_2.png)
-(As show in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
+![point1 screenshot_2](images/Planned_Enhancements_Screenshots/Point1_2.png)
+(As shown in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
 
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
+
+2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields of a contact can be deleted, by editing the contact description field with
+an empty string (For Example: `edit 9 d/` removes description of the ninth contact in the current list), and not any other optional fields such as phone, email and address.
+
+![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
+(As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
+
+![point2_screenshot_remove_email_example](images/Planned_Enhancements_Screenshots/Point2_RemoveEmailExample.png)
+(As shown in the screenshot, `edit 9 e/` as an attempt to remove email from ninth person in the current list fails, because empty email field for edit command is not allowed.
+Similar issues happen when removing phone using `edit 9 p/` and removing address using `edit 9 a/`.)
+
+This can be very troublesome to user if he/she accidentally adds these fields to a contact and realized that these wrong fields cannot be removed.
+If these fields are left unchanged over a long period of time, user may forget that these fields are wrong and hence use the wrong information in the program, which is definitely
+not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
+deleting them from the selected contact.
 
 3. **Allow the user to delimit special prefixes appearing in the contact details.**
 Currently, if any of the input fields contain the special prefixes, the string will be split into multiple fields, which may not be the user's intention.
