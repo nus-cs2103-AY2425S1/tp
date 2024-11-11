@@ -241,12 +241,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleAdvancedFilterByTags() {
-        fillCommandBox("advfilter t\\[TAG] [OPERATOR] [VALUE]");
+        fillCommandBox("advfilter t\\TAG OPERATOR VALUE");
     }
 
     @FXML
     private void handleSortByTags() {
-        fillCommandBox("sort t\\[TAG] asc/desc");
+        fillCommandBox("sort t\\TAG asc/desc");
     }
 
     /**

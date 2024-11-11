@@ -181,28 +181,28 @@ The filter feature implements the following operations:
 
 Given below is an example usage scenario and how the filter mechanism behaves at each step.
 
-Step 1. The user launches the application. The contact list shows all contacts without any filters applied.
+**Step 1.** The user launches the application. The contact list shows all contacts without any filters applied.
 
-Step 2. The user executes `filter n\John t\friend t\client` command to show only contacts named "John" who are tagged as both "friend" and "client". The filter mechanism works as follows:
+**Step 2.** The user executes `filter n\John t\friend t\client` command to show only contacts named "John" who are tagged as both "friend" and "client". The filter mechanism works as follows:
 
 1. `FilterCommandParser` tokenizes the input and extracts:
     * Names: ["John"]
-    * Tags: ["friend", "client"]
+    * Tags: ["friend", "client"]<br><br>
 
 2. A new `FilterCommand` is created with these criteria.
 
 3. The `execute()` method creates a predicate that:
     * Checks if the contact's name contains "John" (case-insensitive)
     * Verifies the contact has both the "friend" and "client" tags
-    * Only displays contacts meeting all criteria
+    * Only displays contacts meeting all criteria<br><br>
 
 4. The filtered list is updated through `Model#updateFilteredPersonList()`
 
-Step 3. The user executes `filter t\work` to show only work contacts. This creates a new filter that:
+**Step 3.** The user executes `filter t\work` to show only work contacts. This creates a new filter that:
 * Clears the previous name filter
 * Shows only contacts tagged as "work"
 
-Step 4. The user executes `list` to show all contacts again, removing any active filters.
+**Step 4.** The user executes `list` to show all contacts again, removing any active filters.
 
 The following sequence diagram shows how the filter operation works through the `Logic` component:
 
@@ -220,21 +220,21 @@ The following activity diagram summarizes what happens when a user executes a fi
 
 * **Alternative 1 (current choice)**: Matches name by containment and tags by exact match
     * Pros: More flexible name matching allows partial matches
-    * Cons: May return unintended matches for short name queries
+    * Cons: May return unintended matches for short name queries<br><br>
 
 * **Alternative 2**: Exact matching for both names and tags
     * Pros: More precise results
-    * Cons: Users need to type exact names, which is less convenient
+    * Cons: Users need to type exact names, which is less convenient<br><br>
 
 ##### Aspect: Handling multiple filter criteria
 
 * **Alternative 1 (current choice)**: AND operation between name and tags, AND between multiple tags
     * Pros: Returns more focused results
-    * Cons: May return empty results if criteria are too strict
+    * Cons: May return empty results if criteria are too strict<br><br>
 
 * **Alternative 2**: OR operation between all criteria
     * Pros: More likely to return results
-    * Cons: May return too many unrelated results
+    * Cons: May return too many unrelated results<br><br>
 
 ### Tagging Duplicate Phone Numbers
 
@@ -277,21 +277,21 @@ The following sequence diagrams show how the detection of duplicate phone number
 
 * **Alternative 1 (current choice):** Perform tagging after any command that could modify phone numbers
     * Pros: Ensures tags are always up-to-date
-    * Cons: May have slight performance impact for commands that modify multiple persons
+    * Cons: May have slight performance impact for commands that modify multiple persons<br><br>
 
 * **Alternative 2:** Only check for duplicates when explicitly requested
     * Pros: Better performance as checking is done on-demand
-    * Cons: Tags could become outdated if users forget to run the check
+    * Cons: Tags could become outdated if users forget to run the check<br><br>
 
 ##### Aspect: Storage of phone number frequencies
 
 * **Alternative 1 (current choice):** Use a HashMap to store phone frequencies
     * Pros: O(1) lookup time for checking duplicates
-    * Cons: Additional memory usage to maintain the HashMap
+    * Cons: Additional memory usage to maintain the HashMap<br><br>
 
 * **Alternative 2:** Check for duplicates by scanning the person list
     * Pros: No additional data structures needed
-    * Cons: O(n²) time complexity for checking duplicates
+    * Cons: O(n²) time complexity for checking duplicates<br><br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -356,10 +356,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AddressBook deletes the person.
 
     Use case ends.
 
@@ -379,12 +379,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add person
-2.  AddressBook shows a input form for person's details
-3.  User enters person details like name, phone number, email, tags etc
-4.  AddressBook validates user input
-5.  AddressBook saves the person
-
+1.  User requests to add person.
+2.  AddressBook shows a input form for person's details.
+3.  User enters person details like name, phone number, email, tags etc.
+4.  AddressBook validates user input.
+5.  AddressBook saves the person.
+    
     Use case ends.
 
 **Extensions**
@@ -395,16 +395,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 4a2. AddressBook requests for the correct data.
    * 4a3. User enters new data.
    * Steps 4a1-4a2 are repeated until the data entered are correct.
-   * Use case resumes at step 5.
+
+     Use case resumes at step 5.
 
 **Use case: Filter by tag**
 
 **MSS**
 
-1.  User requests to filter persons by tag
-2.  AddressBook shows a input search bar
-3.  User enters input related to key of a tag
-4.  AddressBook shows a list of persons with matching tag key
+1.  User requests to filter persons by tag.
+2.  AddressBook shows a input search bar.
+3.  User enters input related to key of a tag.
+4.  AddressBook shows a list of persons with matching tag key.
     
     Use case ends.
 
@@ -417,10 +418,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Advanced Filter by Tag**
 
 **MSS**
-1.  User requests to advanced filter persons by tag
-2.  AddressBook shows a input search bar
-3.  User enters input related to a key, an operator and a value of a tag
-4.  AddressBook shows a list of persons with tags matching the criterion
+1.  User requests to advanced filter persons by tag.
+2.  AddressBook shows a input search bar.
+3.  User enters input related to a key, an operator and a value of a tag.
+4.  AddressBook shows a list of persons with tags matching the criterion.
 
     Use case ends.
 
@@ -434,11 +435,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to export file to CSV
-2.  AddressBook opens file manager for user to choose destination directory
-3.  User enters destination directory and file name
-4.  AddressBook outputs list of persons to CSV file in corresponding destination
-5.  AddressBook opens destination directory containing CSV file
+1. User requests to export file to CSV.
+2. AddressBook outputs list of persons to CSV file in corresponding destination.
+3. AddressBook opens destination directory containing CSV file.
 
     Use case ends.
 
@@ -447,7 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. AddressBook is unable to open file manager.
 
    * 2a1. AddressBook shows an error message.
-     Use case ends.
+     
+        Use case ends.
 
 
 
@@ -493,16 +493,19 @@ testers are expected to do more *exploratory* testing.
 
 1. **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. 
+   
+   **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.<br><br>
 
 1. **Saving window preferences**
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file.
+   
+   **Expected:** The most recent window size and location is retained.<br><br>
 
 ### Deleting a person
 
@@ -511,13 +514,13 @@ testers are expected to do more *exploratory* testing.
    1. **Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
 
    1. **Test case:** `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      **Expected:** First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. **Test case:** `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      **Expected:** No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. **Other incorrect delete commands to try:** `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      **Expected:** Similar to previous.
 
 ### Clearing all entries
 
