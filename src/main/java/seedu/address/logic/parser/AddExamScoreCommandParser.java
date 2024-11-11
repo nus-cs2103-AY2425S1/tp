@@ -11,8 +11,6 @@ import seedu.address.logic.commands.AddExamScoreCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
 
-import java.util.logging.Level;
-
 /**
  * Parses input arguments and creates a new {@code AddExamScoreCommand} object.
  */
