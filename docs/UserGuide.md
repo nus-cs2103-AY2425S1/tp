@@ -56,7 +56,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app. 
+   * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -110,7 +110,7 @@ Action     | Format, Examples
 
 * No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**.
 
 * For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
@@ -456,4 +456,3 @@ Please note:
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
 --------------------------------------------------------------------------------------------------------------------
-

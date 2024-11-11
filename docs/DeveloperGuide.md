@@ -218,7 +218,7 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 
 * **Alternative 2:** Key in the details for students in multiple steps.
   * Pros: A step-by-step guide for adding details can be especially helpful for new users, as it offers clear and structured guidance.
-  * Cons: It is hard to implement, especially with a mix of optional and compulsory fields. 
+  * Cons: It is hard to implement, especially with a mix of optional and compulsory fields.
   Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
 <div style="page-break-after: always;"></div>
@@ -236,7 +236,7 @@ The owe command is part of UGTeach's payment tracking feature. It is used to tra
 If the constraints are not met, the `OweCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
 Otherwise, a new instance of `OweCommand` is then created with the values of `INDEX` and `HOURS_OWED` parsed by `OweCommandParser`.
 
-On execution, `OweCommand` first queries the supplied model for the student to be updated using the `INDEX`. 
+On execution, `OweCommand` first queries the supplied model for the student to be updated using the `INDEX`.
 
 Then, `OweCommand` calculates the amount of tuition fee owed and checks if the total amount owed by the student exceeds the limit of `9999999.99`. If it exceeds, `OweCommand` will throw a `CommandException` with an error message indicating that limit was violated.
 
@@ -261,7 +261,7 @@ How an OweCommand operation goes through the `Model` component is shown below:
 
 * **Alternative 2:** Calculations for amount owed done by the user.
     * Pros: Easy to implement.
-    * Cons: Might not be user-friendly as user would need to find out what is the 
+    * Cons: Might not be user-friendly as user would need to find out what is the
     tuition rate charged and calculate how much tuition fee did the student owe.
 
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
-  
+
 
 **Use case: UC02 - Read all entries**
 
@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 2.<br><br>
 
 * 1b. UGTeach detects the list is empty.
-    * 1b1. UGTeach shows an empty list.<br> 
+    * 1b1. UGTeach shows an empty list.<br>
   Use case ends.
 
 <div style="page-break-after: always;"></div>
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters command to read total earnings and total amount owed by the students. 
+1. User enters command to read total earnings and total amount owed by the students.
 1. UGTeach displays total earnings and total amount owed to the user.
 
    Use case ends.
@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. UGTeach detects error in entered command.
     * 1a1. UGTeach displays error message and does not clear command line.
     * 1a2. User enters new command.<br>
-  Steps 1a1-1a2 are repeated until all details entered are correct.<br> 
+  Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
 
 
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. UGTeach cannot find the specified student.<br>
     Use case ends.<br><br>
-  
+
 * 2a. UGTeach detects error in format of entered command.
     * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters command with new index.<br>
@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. UGTeach cannot find any student with the specified keyword.
     * 1a1. UGTeach displays an empty list.<br>
   Use case ends.<br><br>
-    
+
 * 1b. UGTeach detects error in entered command.
     * 1b1. UGTeach displays error message and does not clear command line.
     * 1b2. User enters new command.<br>
@@ -443,7 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. UGTeach detects error in entered command.
     * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters new command.<br>
-  Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
+  Steps 2a1-2a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 3.
 
 <div style="page-break-after: always;"></div>
@@ -505,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Data should be saved permanently and must not be affected by power outage.
 
 **Performance Requirements**
-1. Should be able to hold up to 1000 students without any noticeable sluggishness in performance for typical usage. 
+1. Should be able to hold up to 1000 students without any noticeable sluggishness in performance for typical usage.
 1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
@@ -515,10 +515,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The application should provide clear help sections for users, explaining how to use its features.
 
 **Concurrency Control**
-1. Should only be used by one user at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously. 
+1. Should only be used by one user at a time, meaning it is designed for a single user and cannot be accessed or shared by multiple users simultaneously.
 
 **Testability**
-1. The software should not depend on any remote server and should be able to run at any time. 
+1. The software should not depend on any remote server and should be able to run at any time.
 1. The application should be able to launch without an installer.
 1. Features should be testable without any external access e.g., remote APIs, audio players, user accounts, internet connection, after the initial download of the application's jar file.
 
@@ -565,11 +565,11 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   
+
    1. Open a command terminal, `cd` into the folder that you put the jar file in.
 
    1. Run the jar file with the command in the terminal `java -jar ugteach.jar`<br>
-      Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today. 
+      Expected: Shows the GUI with a set of sample contacts and a reminder for lessons scheduled today.
       The window size may not be optimum.
 
 1. Saving window preferences
@@ -588,10 +588,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `find n/Alex Bernice`<br>
        Expected: Only students whose name contains keyword `Alex` **OR** `Bernice` listed.
-   
+
     1. Test case: `find n/Alex!`<br>
        Expected: Search not performed. UGTeach shows an error message.
-    
+
     1. Other incorrect find commands to try: `find n/  `, `find n/Bernice!`<br>
    (where keyword supplied contains non-alphanumeric characters or only whitespace)<br>
        Expected: Similar to previous.
@@ -602,10 +602,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `find d/Wednesday Thursday`<br>
        Expected: Only students whose tuition day falls on `Wednesday` **OR** `Thursday` listed.
-   
+
     1. Test case: `find d/Thur`<br>
        Expected: Search not performed. UGTeach shows an error message.
-    
+
     1. Other incorrect find commands to try: `find d/`, `find d/foo`<br>
     (where days supplied does not match any day or contains only whitespace)<br>
        Expected: Similar to previous.
@@ -616,17 +616,17 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find n/Alex d/Thursday`<br>
       Expected: Only students whose name contains keyword `Alex`<br>
       **AND** their tuition day falls on `Thursday` listed.
-   
+
    1. Test case: `find d/Thursday n/Alex `<br>
       Expected: Similar to previous.
 
    1. Test case: `find d/Alex Bernice d/Wednesday Thursday`<br>
       Expected: Only students whose name contains keyword `Alex` **OR** `Bernice`<br>
       **AND** their tuition day falls on `Wednesday` **OR** `Thursday` listed.
-   
+
    1. Test case: `find n/Alex d/`<br>
       Expected: Search not performed. UGTeach shows an error message.
-   
+
    1. Other incorrect find commands to try: `find n/ d/Thursday`, `find n/Alex! d/Thursday`, `find n/Alex d/Thur`<br>
    (where keywords supplied contains non-alphanumeric characters or only whitespace) or<br>
    (where days supplied does not match any day or contains only whitespace)<br>
@@ -645,13 +645,13 @@ testers are expected to do more *exploratory* testing.
    1. In the error message, an example is provided. Copy the example.
 
    1. Test case: same as the example you copied.
-   
+
    1. Expected: A new student with the corresponding information will be added to the end of the current list.
 
 1. Adding a new student with only compulsory parameters specified, order changed and case-insensitive command words
 
    1. Test case: `aDD n/A Lucky Tester t/Sunday-1000-1200 s/Biology r/500 p/87903288 e/ilovecs2103t@nus.edu.sg a/COM2`.
-   
+
    1. Expected: The student is successfully added.
 
 1. Adding a duplicated student
@@ -659,7 +659,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/a lucky Tester p/87903288 e/suchANiceApp@meta.sg a/COM1 B1 r/10 paid/0 owed/0 t/Tuesday-1500-1600
    s/Physics`.
 
-   1. Expected: An error message shown: `A student with the same name and the same phone number already exists in the address book`. 
+   1. Expected: An error message shown: `A student with the same name and the same phone number already exists in the address book`.
 
 
 1. Adding a new student with a clashing schedule
@@ -681,9 +681,9 @@ testers are expected to do more *exploratory* testing.
 1. Editing a student while all students are being shown
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-   
+
    1. Test case: `eDit 3 owed/500 p/89873423`<br>Expected: Student number 3 will have the new values for their **OWED_AMOUNT** and **PHONE_NUMBER**.
-   
+
    1. Other incorrect edit commands to try: `edit`, `edit 0`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
@@ -692,14 +692,14 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Filter the students using `find` command.<br>Test case: `find n/irfan d/thursday`. (Given that at least 1 student with the mentioned **NAME** and **SCHEDULE** is available in the list)
 
    1. Test case: `edit 1 n/Jonathan e/jonjon4343@canadian.com`
-   
+
    1. Expected: The **NAME** and **EMAIL** of the first student in the filtered list will be updated. The list shows all students instead of the previous filtered list.
 
 1. Editing a student with invalid values
 
    1. Test case: `edit 1 r/0` <br/>
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
-   
+
    1. Test case: `edit 1 n/ p/654321234` <br/>
       Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE_NUMBER** are invalid; however, the error message is shown in the order that the attributes shown in the app.
 
@@ -873,13 +873,13 @@ We plan to make the `add command` shorter by making the `email` field **optional
 
 
 1. **Allow students to have multiple classes:** Currently, UGTeach only allow 1 student to have 1 subject and 1 schedule. UGTeach also forbid users from duplicating contacts.
-Hence, users are unable to record multiple classes for students who require tutoring for **more than one subject**. 
+Hence, users are unable to record multiple classes for students who require tutoring for **more than one subject**.
 Therefore, we plan to combine the `subject` and `schedule` parameters to form a `class` parameter that takes in 1 or more classes (comma-separated). For instance, the input
 `edit 1 class/Mathematics Monday-1500-1600, Science Wednesday-1200-1400` would mean the first student in UGTeach is receiving tutoring
 for Mathematics on Monday (1500-1600) and Science on Wednesday (1200-1400).
 
 
-1. **Allow phone numbers from other countries:** Currently, UGTeach only allows Singapore phone numbers as we assumed that students (local or international) should have a Singapore number. 
+1. **Allow phone numbers from other countries:** Currently, UGTeach only allows Singapore phone numbers as we assumed that students (local or international) should have a Singapore number.
 However, the user might provide tuition to international students who do not have a Singapore number.
 Hence, we plan to **ease the restriction on phone numbers** to allow phone numbers **ranging from 3-digits to 17-digits** since the shortest and longest
 phone number in the world are 3 and 17 digits long respectively, according to the [World Population Review](https://worldpopulationreview.com/country-rankings/phone-number-length-by-country).
@@ -915,7 +915,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
       The main purpose for allowing negative hours for `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid by the student.
       Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
 
- 
+
 1. **Allow Find command to search for partial word in name:** The current `find command` only allows exact full word matching for the KEYWORDS specified for the `n/` prefix.
     e.g. typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, but will **not** match the students named `Alexander Yeoh` or `Alexa Tan`, etc.
     This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
@@ -937,7 +937,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This will prevent accidental data loss due to the deletion or corruption of the `ugteach.json` file.<br>
     Example of the two files:<br>
     ![backupDataFile.png](images/backupData.png)
-    
+
     The following code snippet shows the planned enhancement for the storage component to save data in a backup file. Specifically, this will be the updated `saveAddressBook` method for `JsonAddressBookStorage` class.
     ```
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
@@ -961,4 +961,3 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
     The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
-
