@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -15,15 +16,28 @@ public class ViewCommandParserTest {
     private ViewCommandParser parser = new ViewCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-    }
-
-    @Test
     public void parse_validIndex_returnsViewCommand() {
         // index
         String userInput = "1";
         Index index = Index.fromOneBased(1);
+        ViewCommand expected = new ViewCommand(index);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_validIndexWithSpace_returnsViewCommand() {
+        // index
+        String userInput = "  1  ";
+        Index index = Index.fromOneBased(1);
+        ViewCommand expected = new ViewCommand(index);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_validIndexMaxInt_returnsViewCommand() {
+        // case - max int
+        String userInput = String.valueOf(Integer.MAX_VALUE);
+        Index index = Index.fromOneBased(Integer.MAX_VALUE);
         ViewCommand expected = new ViewCommand(index);
         assertParseSuccess(parser, userInput, expected);
     }
@@ -38,6 +52,57 @@ public class ViewCommandParserTest {
     }
 
     @Test
+    public void parse_validNumericName_returnsViewCommand() {
+        // name with numbers
+        String userInput = "Alice 123";
+        Name name = new Name("Alice 123");
+        ViewCommand expected = new ViewCommand(name);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_validSingleCharacterName_returnsViewCommand() {
+        // one char name
+        String userInput = "A";
+        Name name = new Name("A");
+        ViewCommand expected = new ViewCommand(name);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_validMixedCaseName_returnsViewCommand() {
+        // name with uppercase and lowercase letters
+        String userInput = "aLiCe pAuLiNe";
+        Name name = new Name("aLiCe pAuLiNe");
+        ViewCommand expected = new ViewCommand(name);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_validLongName_returnsViewCommand() {
+        // long name
+        String userInput = "A".repeat(100);
+        Name name = new Name(userInput);
+        ViewCommand expected = new ViewCommand(name);
+        assertParseSuccess(parser, userInput, expected);
+    }
+
+    @Test
+    public void parse_invalidEmptyArg_throwsParseException() {
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidWhiteSpaceArg_throwsParseException() {
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_WHITESPACE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    }
+
+
+    @Test
     public void parse_invalidIndex_throwsParseException() {
         // index
         String userInput = "-1";
@@ -45,16 +110,24 @@ public class ViewCommandParserTest {
     }
 
     @Test
+    public void parse_invalidZeroIndex_throwsParseException() {
+        // case 0 - boundary value
+        String userInput = "0";
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_invalidIndexMinInt_throwsParseException() {
+        // case - minimum integer
+        String userInput = String.valueOf(Integer.MIN_VALUE);
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
     public void parse_invalidName_throwsParseException() {
-        // index
+        // name
         String userInput = "Alice /";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_emptyArgs_throwsParseException() {
-        // index
-        String userInput = "    ";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-    }
 }
