@@ -5,7 +5,7 @@ title: User Guide
 
 MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**
 
-Our app is built for receptionists working in small clinics, who need to manage thousands of patients and doctors, and keep track of their appointments.
+Our app is built for receptionists working in small clinics, who need to manage thousands of patients and doctors, while keeping track of their appointments.
 
 It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
@@ -211,7 +211,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Find command does not check for the presence of non-alphabetical characters in the keywords. If non-alphabetical characters are present, the app will still attempt to find the person with the given keywords and return an empty list.
+Keywords provided must only consist of alphabets. Any other character provided will result in an empty list being returned.
 </div>
 
 **Examples:**
@@ -272,7 +272,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Before deleting a doctor or patient, ensure that there are no appointments associated with them. Deleting a doctor or patient will cause the app to throw an error, and the user will have to delete the appointments associated with the doctor or patient first.
+Before deleting a doctor or patient, ensure that there are no appointments associated with them. Otherwise, deleting that doctor or patient will give an error, prompting the user to delete all appointments associated with that doctor or patient first.
 </div>
 
 **Examples:**
@@ -302,7 +302,7 @@ Therefore, ensure that the data file is regularly archived to prevent data loss.
 
 ### Editing the data file
 
-MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the JAR file. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
