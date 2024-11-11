@@ -13,8 +13,7 @@ This app is designed for GP clinics in Singapore, where all patients should have
 <!-- * Table of Contents -->
 <page-nav-print />
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## Quick start
 
@@ -54,8 +53,7 @@ Your terminal should look something like this right before entering the last com
 
 7. Refer to the [Features](#features) below for details of each command.
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## <i class="fa-solid fa-address-book"></i> Features
 
@@ -84,15 +82,12 @@ Your terminal should look something like this right before entering the last com
 * Parameter `NAME` is <u>case insensitive</u>.
   e.g. the command `delete John Doe`, is equal to `delete john doe` or `delete JOHn DoE`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* **If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.**
 </box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
-
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-user-plus"></i> Adding a patient contact: `add`
 
@@ -113,7 +108,7 @@ Adds a patient contact to the address book.
 
 <box type="tip" no-background light>
 
-**Remarks**: 
+**Remarks**:
 
 - Duplicate **names** are not permitted. MediContact cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 - A patient can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
@@ -133,19 +128,18 @@ Adds a patient contact to the address book.
 
 **Input**<br>
 
-<img src="images/addCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/addCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/addCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/addCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
@@ -174,15 +168,14 @@ You must select `OK` to clear the address book. If you select `Cancel`,
 the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/clearConfirmation.png" width="800">
+<img src="images/clearConfirmation.png" width="700">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-user-slash"></i> Deleting a patient contact: `delete`
 
@@ -213,7 +206,7 @@ Deletes the specified patient contact from the address book.
   and the patient contact will not be deleted.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/deleteConfirmation.png" width="800">
+<img src="images/deleteConfirmation.png" width="700">
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -225,19 +218,18 @@ Deletes the specified patient contact from the address book.
 
 **Input**<br>
 
-<img src="images/deleteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/deleteCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/deleteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/deleteCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-pen"></i> Editing a patient contact : `edit`
 
@@ -279,19 +271,18 @@ Edits an existing patient contact in the address book.
 
 **Input**<br>
 
-<img src="images/editCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/editCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/editCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/editCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-right-from-bracket"></i> Exiting the program : `exit`
 
@@ -305,8 +296,7 @@ Exits the program.
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-filter"></i> Filtering patient contacts by age group or appointment dates: `filter`
 
@@ -345,19 +335,18 @@ Filter patients whose age and/or appointment dates are within the specified rang
 
 **Input**<br>
 
-<img src="images/filterCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/filterCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/filterCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/filterCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-magnifying-glass"></i> Locating patient contacts by name or phone number: `find`
 
@@ -380,33 +369,29 @@ Finds patients whose names or phone numbers contain any of the given keywords.
 **Remarks**:
 
 - Fields in square brackets (e.g. `[MORE_KEYWORDS]`) are optional.
-
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 
 * `find John` returns `john` and `Johnny Doe`
-
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
 **Input**<br>
 
-<img src="images/findCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/findCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/findCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/findCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-circle-question"></i> Viewing help : `help`
 
@@ -420,18 +405,13 @@ Shows you a help window with useful resources which includes:
 - A command summary table below the URL, displaying available commands, their formats, and examples.
 - You can copy the command format or example from the table and paste it into the command box.
 - You can click on the table headers to sort commands in ascending or descending order.
-
 <box type="warning" no-icon no-background light>
-
-<img src="images/helpWindow.png" width="800">
-</box>
+<img src="images/helpWindow.png" width="700"></box>
 
 [Return to Table of Contents](#medicontact)
 <br>
-<br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-file-import"></i> Importing patient contacts: `import`
 
@@ -467,17 +447,16 @@ Furthermore, certain edits can cause the MediContact to behave in unexpected way
 
 1. Place the `json` file to be imported in the same folder as the application JAR file. In the image below `data1.json` is the desired `json` file to be imported. Note that it has the file extension `.json` and assume that it adheres to the expected format and input constraints. 
 
-   <img src="images/importStep1.png" width="800"/>
+   <img src="images/importStep1.png" width="700"/>
 
 2. Run the application `jar` file as per usual (see [Quick start](#quick-start) for more details).
 
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
-   <img src="images/importStep3.png" width="800"/>
+   <img src="images/importStep3.png" width="700"/>
 </box>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ##### Expected format:
 
@@ -552,8 +531,7 @@ The following is an example of a valid JSON file content.
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-list"></i> Listing all patient contacts : `list`
 
@@ -573,19 +551,18 @@ Shows an alphabetically sorted list of all patients in the address book.
 
 **Input**<br>
 
-<img src="images/listCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/listCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/listCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/listCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fas fa-clipboard-list"></i> Listing starred patient contacts : `list *`
 
@@ -604,19 +581,18 @@ Shows a list of all starred patient contacts in the address book.
 
 **Input**<br>
 
-<img src="images/listStarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/listStarCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/listStarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/listStarCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-note-sticky"></i> Editing a patient's notes : `note`
 
@@ -655,19 +631,18 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 
 **Input**<br>
 
-<img src="images/noteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/noteCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/noteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/noteCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-arrow-up-wide-short"></i> Sorting patient contact list based on Appointment Dates : `sort`
 
@@ -694,19 +669,18 @@ Sorts the patient contact list in the address book on the basis of their earlies
 
 **Input**<br>
 
-<img src="images/sortCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/sortCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/sortCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/sortCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-star"></i> Adding a patient contact to favourites list : `star`
 
@@ -731,19 +705,18 @@ Stars the specified patient contact from the address book into favourites.
 
 **Input**<br>
 
-<img src="images/starCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/starCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/starCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/starCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-regular fa-star"></i> Removing a patient contact from favourites list : `unstar`
 
@@ -768,19 +741,18 @@ Unstars the specified patient contact from the address book removing them from f
 
 **Input**<br>
 
-<img src="images/unstarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/unstarCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/unstarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/unstarCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [<i class="fa-solid fa-angle-up"></i>](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-eye"></i> Viewing a patient's notes : `view`
 
@@ -804,19 +776,18 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 
 **Input**<br>
 
-<img src="images/viewCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/viewCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 **Output**<br>
 
-<img src="images/viewCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+<img src="images/viewCommand_output.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;">
 </box>
 
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-floppy-disk"></i> Saving the data
 
@@ -839,7 +810,6 @@ MediContact data are saved in the hard disk automatically after any command that
 [Return to Table of Contents](#medicontact)
 
 <br>
-
 <br>
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
@@ -857,8 +827,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 <br>
 <br>
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## <i class="fa-solid fa-question"></i> FAQ
 
@@ -883,8 +852,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## <i class="fa-solid fa-triangle-exclamation"></i> Known issues
 
@@ -893,8 +861,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## <i class="fas fa-file-alt"></i> Command summary
 
@@ -920,8 +887,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
-{{ newPage }}
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-before:always">&nbsp;</div>
 
 ## <i class="fas fa-file-alt"></i> Summary of parameter constraints
 
