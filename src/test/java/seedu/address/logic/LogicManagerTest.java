@@ -22,6 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.contact.commands.AddCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
@@ -104,6 +105,33 @@ public class LogicManagerTest {
     @Test
     public void getAllPersons() {
         assertEquals(model.getAddressBook().getPersonList(), logic.getAllPersons());
+    }
+
+    @Test
+    public void getAddressBook() {
+        assertEquals(model.getAddressBook(), logic.getAddressBook());
+    }
+
+    @Test
+    public void getFilteredEventList() {
+        assertEquals(model.getEventManager().getEventList(), logic.getFilteredEventList());
+    }
+
+    @Test
+    public void getAddressBookFilePath() {
+        assertEquals(model.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings() {
+        assertEquals(model.getGuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings guiSettings = new GuiSettings(100, 200, 250, 250);
+        logic.setGuiSettings(guiSettings);
+        assertEquals(model.getGuiSettings(), guiSettings);
     }
 
 

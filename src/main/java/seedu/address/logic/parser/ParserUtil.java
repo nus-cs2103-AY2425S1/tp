@@ -147,9 +147,6 @@ public class ParserUtil {
         requireNonNull(role);
         RoleHandler rh = new RoleHandler();
         String trimmedRole = role.trim();
-        if (!RoleHandler.isValidRoleName(trimmedRole)) {
-            throw new ParseException(RoleHandler.MESSAGE_CONSTRAINTS);
-        }
 
         try {
             return RoleHandler.getRole(role);
