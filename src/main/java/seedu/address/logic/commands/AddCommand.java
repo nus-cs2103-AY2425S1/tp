@@ -56,7 +56,7 @@ public class AddCommand extends Command {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_MISSING_DESCRIPTION_INPUT, "add")
                     + LINE_BREAK + MESSAGE_COMMAND_FORMAT_AND_HELP_PROMPT);
     public static final String MESSAGE_DUPLICATE_CONTACT =
-            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "Contact to add", "the contact to add");
+            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "Contact to add");
     public static final String MESSAGE_DUPLICATE_FIELD_CONTACT =
             String.format(MESSAGE_DUPLICATE_FIELDS_CONTACT,
                     "If the details of the contact for adding is correct, please rectify the existing "
