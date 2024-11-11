@@ -124,7 +124,6 @@ public class ModelManager implements Model {
     @Override
     public void setCourse(Course target, Course editedCourse) {
         requireAllNonNull(target, editedCourse);
-
         courseList.setCourse(target, editedCourse);
     }
 
@@ -170,8 +169,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -195,13 +194,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getScaListFilePath() {
-        return userPrefs.getCourseListFilePath();
+        return userPrefs.getScaListFilePath();
     }
 
     @Override
-    public void setScaListFilePath(Path courseListFilePath) {
-        requireNonNull(courseListFilePath);
-        userPrefs.setCourseListFilePath(courseListFilePath);
+    public void setScaListFilePath(Path scaListFilePath) {
+        requireNonNull(scaListFilePath);
+        userPrefs.setScaListFilePath(scaListFilePath);
     }
 
     @Override
