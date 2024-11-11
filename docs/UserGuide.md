@@ -77,6 +77,7 @@ Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -199,6 +200,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 <div style="page-break-after: always;"></div>
+
 ## Events
 
 ### Adding an event : `addevent`
@@ -263,6 +265,8 @@ Format: `findevent KEYWORD [MORE_KEYWORDS]…​`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Utown Usc` will return events containing `Utown Chess`, `Usc Table Tennis`, etc.
 
+<div style="page-break-after: always;"></div>
+
 ## Miscellaneous Features
 ### Clearing all entries : `clear`
 
@@ -290,6 +294,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 </div>
 
 <div style="page-break-after: always;"></div>
+
 ### Using Shortcuts
 
 To use EventfulNUS faster, you may find these shortcuts useful.
@@ -362,6 +367,7 @@ Volunteer Roles (Code - Role Name):
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -376,6 +382,7 @@ Volunteer Roles (Code - Role Name):
 3. Currently, only **standard English** names for people and events are accepted. We are planning to add support for more languages in the future.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
