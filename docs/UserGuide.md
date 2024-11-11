@@ -17,7 +17,7 @@ title: User Guide
       * [Technical Users](#technical-users)
    * [Getting Started](#getting-started)
 
-3. Command Summary
+3. [Command Summary](#command-summary)
    * [General Format](#general-format)
    * [Command Format and Examples](#command-format-and-examples)
    * [Command Parameters Reference](#command-parameters-reference)
@@ -614,7 +614,7 @@ the data of your previous AcademyAssist folder.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Planned Features
+# Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
 introduce the following features aimed at providing greater flexibility in subject management:
 
@@ -629,9 +629,10 @@ up-to-date records.
 3. **Drop Subject**: Allow users to modify the subjects taken by students by dropping a subject. Currently, the system
 only supports adding subjects, and if a user wants to remove a subject from a student’s record, they must use the edit
 feature and manually note the remaining subjects. This new feature will streamline the process and enhance usability.
-
-### Conclusion
+<br><br>
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
+
+--------------------------------------------------------------------------------------------------------------------
 # Glossary
 1. **Command**: An instruction given by a user to a computer program.
 2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
@@ -640,4 +641,4 @@ These planned features are designed to improve the administrative capabilities o
 5. **Java**: A high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.
 6. **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
 7. **StudentID**: A unique identifier assigned to each student in the system, starting from S00001 to S99999.
-8. **NRIC**: National Registration Identity Card, a unique identifier assigned to Singapore residents and citizens.
+8. **NRIC Number**: National Registration Identity Card, a unique identifier assigned to Singapore residents and citizens.
