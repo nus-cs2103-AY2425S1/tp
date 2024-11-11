@@ -381,9 +381,9 @@ Updates Operating Hours
 
 Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
 
-* **Opening** & **closing** hours have to be of the format `HH:mm`.
-* Default **opening** & **closing** hours are `00:00` & `23:59` respectively.
-* **Opening** hours must fall before **closing** hours.
+* Opening & closing hours have to be of the format `HH:mm`.
+* Default opening & closing hours are `00:00` & `23:59` respectively.
+* **Opening hours** must fall before **closing hours**.
 * If an argument is empty, it will set the hours to default.
 * All current appointments must fall within new operating hours for update to take effect.
 
