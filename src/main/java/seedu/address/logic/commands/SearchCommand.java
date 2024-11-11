@@ -50,7 +50,8 @@ public class SearchCommand extends Command {
                     eventName -> model.findEventsWithName(eventName).stream()).toList();
             List<Integer> eventIds = events.stream().map(Event::getEventId).toList();
             List<Integer> uniqueEventIds = new HashSet<Integer>(eventIds).stream().toList();
-            EventIdsContainsIdsPredicate eventIdsContainsIdsPredicate = new EventIdsContainsIdsPredicate(uniqueEventIds);
+            EventIdsContainsIdsPredicate eventIdsContainsIdsPredicate =
+                    new EventIdsContainsIdsPredicate(uniqueEventIds);
             model.updateFilteredPersonList(eventIdsContainsIdsPredicate);
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
