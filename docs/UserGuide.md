@@ -549,7 +549,7 @@ You can manage the appointments through different commands, which can be seen in
 
 **Notes:**
 
-1. The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed, e.g. `2025-02-29 12:00` will be parsed as `2024-02-28 12:00`. 
+1. The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed, e.g. `2025-02-29 12:00` will be parsed as `2025-02-28 12:00`. 
 
 <br>
 
