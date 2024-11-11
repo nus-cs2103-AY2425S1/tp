@@ -588,7 +588,8 @@ Team size : 5
   1. To accommodate candidates from various countries, we plan to enhance the phone number input field to include area codes (e.g., +6598765432). 
      This update will allow for different international formats and enable the field to accept alphanumeric characters in the future.
 
-  2. 
+  2. Name Field Validation: To ensure accuracy, the name field will be enhanced to prevent the entry of numerical characters, 
+     allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
 
   3. 
