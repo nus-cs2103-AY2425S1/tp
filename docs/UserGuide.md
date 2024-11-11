@@ -277,10 +277,10 @@ New company added: (details of the company added)
 ```
 
 | Parameter Name   | Description                               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
-| ---------------- |-------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| ---------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `n/NAME`         | Name of the company                       | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Compulsory |
 | `i/INDUSTRY`     | Industry type (e.g., Security, Education) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                 | Compulsory |
+| `p/PHONE_NUMBER` | Contact number                            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Compulsory |
 | `e/EMAIL`        | Email address                             | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory |
 | `a/ADDRESS`      | Physical address                          | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
 | `t/TAG`          | [Tag](#tag) to categorise contact         | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
@@ -556,7 +556,7 @@ to Person: (details of the person)
 ```
 
 | Parameter Name | Description                                                       | Constraint                                                            | Required   |
-|----------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|------------|
+| -------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------- | ---------- |
 | `INDEX`        | Index number of the contact to tag from the displayed person list | Positive integer only (e.g. 1, 2, 3)                                  | Compulsory |
 | `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Must be alphanumeric characters, non-empty, and cannot contain spaces | Compulsory |
 | `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
@@ -579,7 +579,8 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed contact list.
+- The index refers to the index number shown in the displayed contact list.
+
 
 * For both formats 1 and 2,
   * The tag is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
@@ -606,11 +607,12 @@ no duplicate tag(s) are found in all contacts.
   
 * To tag all students with the `paid` tag, simply use `track student` followed by `tag all t/paid`.
 
-* Tag labelled with `paid` will have green background:
-  * to indicate that a student has paid their membership fee, or
-  * to indicate that a company has paid the club sponsorship.
-  
+- `paid` tags are easily distinguishable! They will have a green background:
+  - to indicate that a student has paid their membership fee, or
+  - to indicate that a company has paid the club sponsorship.
+
 </div>
+
 
 **Expected outcome for the above tip on `tag all`:** <br>
 
@@ -718,6 +720,14 @@ The `import` command allows you to bring data from a CSV file into the applicati
 - Absolute: `import /home/user/data/hackers_2022.csv`
 - Relative: `import ./data/hackers_2022.csv`
 
+![](images/csv.png)
+
+- The contents of an example CSV file.
+
+![](images/import.png)
+
+- After executing the import command, the contents of the CSV file are being imported to AdmiNUS.
+
 **Troubleshooting**:
 
 - For errors such as "file not found," confirm the path type (absolute vs. relative) and the file’s existence.
@@ -777,8 +787,8 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Glossary
 
+<a name="absolute-path"></a>
 
-  <a name="absolute-path"></a>
 - **_Absolute Path_**: A full path that specifies the exact location of a file or directory from the root of the file system.
   <a name="case-insensitive"></a>
 - **_Case-Insensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as the same. For example, Apple, apple, and APPLE would be considered equivalent values.
@@ -805,7 +815,7 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
   <a name="tag"></a>
 - **_Tag_**: A keyword or label associated with a contact that allows for easy grouping and filtering.
 
-<div markdown="block" class="alert alert-info"> 
+<div markdown="block" class="alert alert-info">
 
 **Navigation Box** <br>
 [Back to Top](#why-choose-adminus) <br>
