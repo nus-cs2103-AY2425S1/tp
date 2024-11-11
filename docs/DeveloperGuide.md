@@ -742,7 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 6. **Portability**
     - **Category:** System Constraints
-    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **Requirement:** The product must support downloading JSON files that can be easily loaded and used on another system.
     - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
 
 7. **Readable Font Size**
@@ -780,6 +780,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
 
 - **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma.
+
+- **JSON**: A file format that represents data as key-value pairs, where data types can include strings, numbers, booleans, arrays, and nested objects.
 
 - **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
 
