@@ -534,6 +534,14 @@ NUStates will highlight any specific errors in the command entered by the user. 
 - **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
 - **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
+<box type="warning" seamless>
+**Caution:**
+
+  - The highlighted error might not be the only error in the command entered.
+  - The highlighted error might not be according to the order of the errors in the command entered.
+  - If the command entered contains tags with invalid characters, only the first tag (regardless of whether it is a valid tag) that appears in the command will be highlighted.
+</box>
+
 Examples:
 1. **Unknown Command**:
   - Command entered: `ad n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -598,6 +606,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you have a tag containing invalid characters**, only the first tag that appears in the command will be highlighted as error.
 
 --------------------------------------------------------------------------------------------------------------------
 
