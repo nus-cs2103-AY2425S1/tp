@@ -252,17 +252,32 @@ The class diagram of a filter command is given to demonstrate the interactions a
 Team Size: 5
 
 1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+
+
 2. [Validation for Address: Address should be able to have "/n" or other prefixes]
-3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
+
+
+3. **Allowing "d/o" in the name field:** Currently, the system does not permit the use of "d/o" in the name field as "d/" is reserved for the date command. 
+This enhancement would allow users to input "d/o" in names without triggering conflicts, offering more flexibility and ensuring that date-related commands are unaffected by name entries.
+
+
 4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
-5. Adding a customizable tags feature allows doctors to create, delete, and edit tags beyond the default “high,” “medium,” and “low risk” options. This flexibility enables personalized patient categorization, letting doctors define tags that better 
-reflect their specific needs and improve patient management.
-6. Adding an end time to the Date feature ensures that users can define precise appointment durations, which helps prevent overlapping or double-booked slots. 
-This feature enhances scheduling clarity, allowing users to manage their time efficiently and avoid conflicts, ensuring that each appointment has a clear start and end, 
-which is particularly beneficial for managing busy schedules.
+
+
+5. **Adding a customizable tags feature:** Currently, the app only supports the default tags `High Risk`, `Medium Risk` and `Low Risk`.
+   This enhancement allows doctors to create, delete, and edit tags, providing flexibility to personalize patient categorization.
+   It enables doctors to define tags that align with their specific needs, improving patient management and enhancing the overall efficiency of the system.
+
+6. **Adding an end time to the Date feature:** Currently, the app allows only the start time and date, preventing duplicate `dateAndTime` entries. Adding an end time enables users to 
+define precise appointment durations, helping to prevent overlapping and double-booked slots. It improves scheduling clarity, allowing for better time management and conflict prevention, especially 
+for managing busy schedules.
+
+
 7. **Warn user that date entered is in the past:** 
 Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
 However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
+
+
 8. **Specific error message about date format:**
    Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
