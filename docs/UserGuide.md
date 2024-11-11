@@ -6,8 +6,13 @@
 
 # CFG User Guide
 
-ContactsForGood (CFG) is a **desktop app for Non Government Organisations (NGOs) to manage contacts.**
-It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
+**Target user:**
+> Administrators of small scale NGOs
+
+**Value Proposition:**
+> ContactsForGood (CFG) helps NGO administrators efficiently manage donors, volunteers, and partners by organising
+> contacts and tracking engagement. With its typing-focused interface and offline, editable data, CFG hopes to streamline
+> contact management, allowing administrators to focus on outreach and mission-critical tasks.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -52,25 +57,33 @@ It is **optimized for use via a Command Line Interface** (CLI) while still havin
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+<br>
 
 * Each parameter is preceded by a **prefix**, which indicates the type of data the parameter represents.  
   For example:
     - `n/` is the prefix for `NAME`, as in `add n/John Doe`.
-    - `p/` is the prefix for `PHONE_NUMBER`, as in `add p/12345678`.
+    - `p/` is the prefix for `PHONE_NUMBER`, as in `add p/12345678`. 
+  
+  <br>
 
-* Any unrecognized parameter's prefix will be treated as part of the value for the preceding valid prefix. This means that care should be taken to use only the correct prefixes when entering commands to avoid unexpected behavior.
+* Any unrecognized parameter's prefix will be treated as part of the value for the preceding valid prefix. 
     For example:
-    - Correct: `add n/John Doe p/12345678`
-    - Incorrect: `add n/John Doe xyz/12345678` (Here, `xyz/12345678` will be treated as part of the name value, which
+    - Correct✅: `add n/John Doe p/12345678`
+    - Incorrect❌: `add n/John Doe xyz/12345678` (In this case, `xyz/12345678` will be treated as part of the name value, which
       will result in an error)
+    - To prevent unexpected behavior, ensure only **valid prefixes** are used when entering commands.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
-  Note: If a field is optional and you choose to not input anything into the field, **DO NOT**
-  leave an empty prefix, as this will not be a valid command.  
-  e.g `edit 1 n/NAME t/` is not a valid command
+    <br>
+  
+* Items in square brackets are optional.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
+  Note: If an optional field is not required, **avoid** leaving the prefix empty, as this will result in an invalid command.
+  e.g. `edit 1 n/NAME t/` is not a valid command
+
+<br> 
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -82,54 +95,60 @@ It is **optimized for use via a Command Line Interface** (CLI) while still havin
      The index **must be a positive integer** (e.g., 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g., `-1`, `abc`, `1.5`) will be deemed as incorrect format.
 
   2. **Valid Index**:  
-     The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g., `999` when the list has only 10 people) will be deemed as invalid indices.
+     The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g. `999` when the list has only 10 people) will be deemed as invalid indices.
 
 * `INDICES` takes in multiple `INDEX`s<br>
   * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
   * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
   * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
-    but `5 - 9` or `5 -9` or `5- 9` is incorrect).
+    but `5 - 9` or `5 -9` or `5- 9` are incorrect).
   * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
 
-* Parameters can be in any order.<br>
+<br>
+
+* Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+<br>
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+<br>
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 ### Person-Related Commands
 | **Action**                                       | **Format**                                                                                                                     | **Example**                                                                                    |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-contact-add)                 | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`       | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
-| [**Clear**](#clearing-all-entries--clear)        | `clear`                                                                                                                        | `clear`                                                                                        |
-| [**Delete**](#deleting-a-person--delete)         | `delete INDICES`                                                                                                               | `delete 1 2 3 5-7`                                                                             |
-| [**Edit**](#editing-a-person--edit)              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| [**Clear**](#clearing-all-entries-clear)         | `clear`                                                                                                                        | `clear`                                                                                        |
+| [**Delete**](#deleting-a-person-delete)          | `delete INDICES`                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| [**Edit**](#editing-a-person-edit)               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
 | [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                 | `search n/john`                                                                                |
-| [**List**](#listing-all-persons--list)           | `list`                                                                                                                         | `list`                                                                                         |
+| [**List**](#listing-all-persons-list)            | `list`                                                                                                                         | `list`                                                                                         |
 | [**Sort**](#sorting-the-displayed-list-sort)     | `sort [s/SORT_OPTION]`                                                                                                         | `sort s/name`                                                                                  |
 
-<div style="page-break-after: always;"></div>
-
 ### Group-Related Commands
-| **Action**                                                                                          | **Format**                                  | **Example**                                    |
-|-----------------------------------------------------------------------------------------------------|---------------------------------------------|------------------------------------------------|
-| [**Create Group**](#creating-a-group--creategroup)                                                  | `createGroup g/GROUP_NAME m/INDICES`        | `createGroup g/blood drive m/1 2 4-7`          |
-| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/INDICES`         | `addToGroup g/beach cleanup m/1 2 3-6`         |
-| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/INDICES`    | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
-| [**Edit Group Name**](#editing-a-groups-name--editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
-| [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                | `listGroups`                                   |
-| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                  | `deleteGroup g/blood donation`                 |
+| **Action**                                                                                         | **Format**                                        | **Example**                                    |
+|----------------------------------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------|
+| [**Create Group**](#creating-a-group-creategroup)                                                  | `createGroup g/GROUP_NAME m/INDICES`              | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group-addtogroup)                | `addToGroup g/GROUP_NAME m/INDICES`               | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group-removefromgroup) | `removeFromGroup g/GROUP_NAME m/INDICES`          | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| [**Edit Group Name**](#editing-a-groups-name-editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
+| [**List Groups**](#listing-groups-listgroups)                                                      | `listGroups`                                      | `listGroups`                                   |
+| [**Delete Group**](#deleting-a-group-deletegroup)                                                  | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
 
 ### General Commands
-| **Action**                                         | **Format** | **Example** |
-|----------------------------------------------------|------------|-------------|
-| [**Help**](#viewing-help--help)                    | `help`     | `help`      |
-| [**Get Emails**](#getting-emails-email)            | `email`    | `email`     |
-| [**Exit Application**](#exiting-the-program--exit) | `exit`     | `exit`      |
+| **Action**                                       | **Format** | **Example** |
+|--------------------------------------------------|------------|-------------|
+| [**Help**](#viewing-help-help)                   | `help`     | `help`      |
+| [**Get Emails**](#getting-emails-email)          | `email`    | `email`     |
+| [**Exit Application**](#exiting-the-program-exit) | `exit`     | `exit`      |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -167,27 +186,26 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
               - `2021-02-29` (February 29 does not exist in 2021 because it is not a leap year).
               - `2023-03-33` (March does not have 33 days).
 
-Note:
+<box type="info" seamless>
+
 1. **Role-specific fields must match the specified role:**
     * For `Volunteer`, `h/HOURS` is required.
     * For `Donor`, `d/DONATED_AMOUNT` is required.
     * For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
     * If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
 2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. 
-This means duplicate names are not allowed in the address book. 
-However, multiple contacts can share the same phone number or email address if their names are unique.
+    * This means that duplicate names are not allowed. 
+    * However, multiple contacts can share the same phone number or email address if their names are unique.
 
+</box>
 
 #### Notes on valid and invalid fields
-- The address book differentiates names by checking both the characters and the number of spaces. John Doe
+- CFG differentiates names by checking both the characters and the number of spaces. John Doe
 with a single space is NOT the same person as John&nbsp;&nbsp;&nbsp;Doe. If there exists a John Doe currently in 
 ContactsForGood, you may add another John &nbsp;Doe with 2 spaces between.
 - Note: Email addresses without periods (Single Label Domains) **are supported**. 
 e.g. johndoe@intranet is a valid email.
 
-<box type="info" seamless>
-
-</box>
 
 Examples:
 * `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -343,7 +361,7 @@ Format: `addToGroup g/GROUP_NAME m/INDICES`
 * There must already exist a group with the name `GROUP_NAME`. The indices
 must be valid indices.
 * If either of the above conditions are not met, the command will fail.
-* The address book differentiates group names by checking both the characters and the number of spaces. Blood Drive
+* CFG differentiates group names by checking both the characters and the number of spaces. Blood Drive
     with a single space is NOT the same group as Blood&nbsp;&nbsp;&nbsp;Drive.
 
 Example:
