@@ -777,7 +777,7 @@ A patient will be added to the system if the patient is not already in the syste
       Step 1f1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
 
-#### Use case: US04 - Delete an appointment for a patient
+#### Use case: UC04 - Delete an appointment for a patient
 **Preconditions:**<br>
 The patient with the corresponding NRIC is already registered in the system.<br>
 **Guarantees:**<br>Valid appointments will be deleted if they are already in the patient's list of appointments.
