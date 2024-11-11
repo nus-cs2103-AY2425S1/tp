@@ -211,7 +211,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 **IMPORTANT:**
 
-* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
+* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added.
 * We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`).
 
 </box>
