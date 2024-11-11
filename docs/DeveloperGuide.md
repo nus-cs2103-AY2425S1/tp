@@ -303,7 +303,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Real Estate Agent                                                        | easily update contact details                                      | keep my address book up to date and accurate                                                       |
 | `* *`    | Real Estate Agent                                                        | filter contacts based on names                                     | find contacts I am familiar with via name                                                          |
 | `* *`    | Real Estate Agent                                                        | store multiple contacts for each client                            | contact them via their most comfortable means                                                      |
-| `*`      | Forgetful Real Estate Agent                                              | keep track of the client birthdays                                 | send them well wishes to maintain relations                                                        |
 | `*`      | Forgetful Real Estate Agent                                              | remember what my clients preferences are                           | contact them when a new property matching their criteria is available                              |
 | `*`      | Busy Real Estate Agent                                                   | be able to mass delete clients                                     | avoid having to do it individually                                                                 |
 | `*`      | Forgetful Real Estate Agent who wish to deal with more important clients | categorize different clients/contacts under different priority     | remember which contacts are more important                                                         |
@@ -318,11 +317,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Real Estate Agent                                                        | hide/archive client details                                        | hide completed transactions and past client details, keeping my contact list updated and organized |
 | `*`      | Busy Real Estate Agent                                                   | be able to see a list of my most recently added client contacts    | quickly find and access them                                                                       |
 | `*`      | Real Estate Agent                                                        | sort the client list                                               | organize the client list based on my preference                                                    |
-| `*`      | Real Estate Agent                                                        | view the history of interactions with each contact                 | remember past conversations and follow-up                                                          |
 | `*`      | Real Estate Agent                                                        | filter contacts based on their preferred location or address       | find contacts which are in a specific area or region quickly                                       |
 | `*`      | Strategic Real Estate Agent                                              | add custom notes to each contact profile                           | record specific details or preferences that they have so that I can personalize my service         |
 | `*`      | Real Estate Agent                                                        | set priority levels for different contacts                         | focus more attention on the more urgent/important clients                                          |
-| `*`      | Real Estate Agent                                                        | categorize contacts by their preferred language                    | communicate with the client with their preferred language of choice                                |
 | `*`      | Real Estate Agent                                                        | tag contacts based on the type of property they are interested in  | quickly match properties to the right clients                                                      |
 | `*`      | Real Estate Agent                                                        | segment my contact list by geographic region                       | target my outreach based on specific property locations or markets                                 |
 
@@ -749,9 +746,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Client searches should provide results even with partial or incomplete input and return results instantly (within 1 second).
-5.  The system should be available 99.9% of the time to ensure real-estate agents can access it whenever they need to.
-6.  The system should gracefully handle failures, ensuring no data loss during system crashes or unexpected outages.
-7.  All code should be well-documented to ensure future developers can easily understand and modify the application.
+5.  The system should gracefully handle failures, ensuring no data loss during system crashes or unexpected outages.
 
 *{More to be added}*
 
@@ -766,6 +761,8 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Buying Price**: The price in which the buyer is willing to buy the property.
 * **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
+* **L Order**: A sorting method where elements are arranged in ascending order, from the lowest to the highest value.
+* **H Order**: A sorting method where elements are arranged in descending order, from the highest to the lowest value.
 * * **Command Terminal**: A window into which users can type commands that are then executed by the computer's operating system. The cursor point in the terminal where you type the commands is known as the CLI.
 * **UI (User Interface)**: The layout of the visual elements that enable a user to interact with a computer system.
 * **CLI (Command Line Interface)**: A text-based User Interface (UI) where commands are typed and used to run programs, manage computer files and interact with the computer. This provides a faster and efficient alternative to GUI interactions.
@@ -780,6 +777,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 4. Currently, the app displays the statistical graphs with no labelling of the units of the x-axes and y-axes. Future versions will include this labelling.
 5. Currently, the app displays pie charts labels for categories that have no recorded values. Future versions of will hide the labelling until there are recorded values for those categories.
 6. Currently, the app displays dynamic statistics for any new properties bought/sold and the associated revenue/expense in the current session. Future versions will update the total properties bought/sold and the associated revenue/expense if contacts are deleted as well.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

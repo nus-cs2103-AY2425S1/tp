@@ -6,8 +6,8 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore.
-Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for **real estate agents based in Singapore**.
+Built for **fast, efficient use** through a Command Line Interface (CLI) - a text based system that accepts typed commands, NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
 - **Manage and Tag Clients**: Easily add, tag, and retrieve client (buyer/seller) details.
@@ -101,7 +101,6 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
    * `addSell 1 ht/c sp/1750000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to sell of type `Condo` to the Address Book for the contact at index 1.
 
-
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
@@ -136,7 +135,14 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="info" seamless>
+  
+**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work** 
+For example, the command `sold 1 1 ap/1110000` will not work if a property to sell has not been added under the contact at index 1. <br>
+</box>
+
 <div style="page-break-after: always;"></div>
+
 
 ## General Commands
 
@@ -187,7 +193,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - `NAME` must be at least one character long, and should only contain alphanumeric characters and spaces.
-- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers.
+- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers. 
 - `EMAIL` must be a valid email address.
 - `ADDRESS` must be at least one character long.
 - `TAG` must be at least one character long, and should only contain alphanumeric characters and spaces.
@@ -198,8 +204,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
 
+- `NAME` can be entered in any format, as there is no standard format implemented. The way the name is entered is how it is displayed on the app.
+    For example, `JohN DoE` is a valid entry, and it will appear as `JohN DoE` in the UI as well.
+
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
 </box>
+
+- No parameters except name are currently checked for duplicates; for example, two contacts can have the same phone number, email ID, and address.
+
+- The phone number can have any number of digits, not just limited to 8 digits as in Singapore.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -270,7 +283,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Alexa Yeah t/` Edits the name of the 2nd person to be `Alexa Yeah` and clears all existing tags.
+*  `edit 2 n/Alex Yeoh t/` Edits the name of the 2nd person to be `Alex Yeoh` and clears all existing tags.
 
 ## Deleting Entries Commands
 
@@ -335,7 +348,7 @@ Format: `findn KEYWORD [MORE_KEYWORDS]`
 * Only the name is searched.
 * No need for full words to be matched; For example, `AL` will match `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Ro Alex` will return `Alex Yeah`, `Roy Balakrishnan`
+  e.g. `Ro Alex` will return `Alex Yeoh`, `Roy Balakrishnan`
 
 Examples:
 * `findn John` returns `John Doe`
@@ -354,11 +367,11 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 * No need for full phone numbers to be matched. e.g. `867966` will match `86796692`
 * Matching of phone numbers has to start from the first digit. eg. `96692` will not match `86796692`
 * The command returns names containing any of the keywords typed, meaning that names matching one or more keywords will be included in the results.
-  e.g. ` 87438807 99272758` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` 87438807 99272758` will return `Alex Yeoh`, `Bernice Yu`
 
 Examples:
-* `findp 87438807` returns `Alex Yeah`
-* `findp 874` returns `Alex Yeah`
+* `findp 87438807` returns `Alex Yeoh`
+* `findp 874` returns `Alex Yeoh`
 * `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
 
 ### Finding persons by tags assigned to them: `findtc`
@@ -372,10 +385,10 @@ Format: `findtc KEYWORD [MORE_KEYWORDS]`
 * Only the tag is searched.
 * No need for full words to be matched; For example, `friend` will match `friends`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `friends owes` will return `Alex Yeah`, `Bo Yang`
+  e.g. `friends owes` will return `Alex Yeoh`, `Bo Yang`
 
 Examples:
-* `findtc friend` returns `Alex Yeah` and `Bernice Yu`
+* `findtc friend` returns `Alex Yeoh` and `Bernice Yu`
 * `findtc friend owes` returns `Alex Yeoh`, `Bernice Yu`<br>
   ![result for 'findtc friend owes'](images/findTag.png)
 
@@ -388,15 +401,15 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
 * The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
-* All the criterias for a property are searched.
+* All the criteria for a property are searched.
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo 02-05` will return `Alex Yeah`.
+  e.g. ` condo 02-05` will return `Alex Yeoh` and `David Li`.
 
 Examples:
 * `findBuy condo` returns `Alex Yeoh`
-* `findBuy condo 02-05` returns `Alex Yeoh`<br>
+* `findBuy condo 02-05` will return `Alex Yeoh` and `David Li` <br>
   ![result for findBuy condo 02-05'](images/findProperty.png)
 
 
@@ -414,12 +427,11 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo 02-05` will return `Alex Yeah`.
+  e.g. ` condo 02-05` will return `Alex Yeoh`.
 
 Examples:
 * `findSell condo` returns `Alex Yeoh`
 * `findSell condo 02-05` returns `Alex Yeoh`<br>
-  ![result for findBuy condo 02-05'](images/findProperty.png)
 
 ## Listing Entries Commands
 
@@ -543,6 +555,7 @@ NUStates will highlight any specific errors in the command entered by the user. 
 - **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
 <box type="warning" seamless>
+  
 **Caution:**
 
   - The highlighted error might not be the only error in the command entered.
@@ -582,7 +595,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NUStates data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -603,15 +616,16 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: The app is running slowly; What should i do?<br>
-**A**: Try restarting the application. If the problem persists, ensure your computer meets the app’s performance requirements and consider clearing any unnecessary data.
+**A**: Try restarting the application. If the problem persists, ensure your computer meets the app’s minimum system requirements and consider clearing any unnecessary data. Refer to [Setting Up](SettingUp.md) for further information on this.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If you have a tag containing invalid characters**, only the first tag that appears in the command will be highlighted as error.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
+3. Two people are permitted to have the **same phone number, email address and address**.
+4. **If you have a tag containing invalid characters**, only the first tag that appears in the command will be highlighted as error.
 
 --------------------------------------------------------------------------------------------------------------------
 
