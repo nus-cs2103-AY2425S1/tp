@@ -941,18 +941,18 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
    e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours instead.
-   He can first type `pay 1 hr/-2` to 'undo' the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
+   He can first type `pay 1 hr/-2` to "undo" the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * `hr/0` will still not be accepted.
     * When the resulting paid amount of the student that user want to update is less than 0, the command will not be executed and an error message will be shown.
      
-    Similarly, we plan to also allow **negative number with at most 2 decimal places** as a valid AMOUNT when the user need to 'undo' the previous settlement of the owed amount.
+    Similarly, we plan to also allow a **negative number with at most 2 decimal places** as a valid AMOUNT when the user need to "undo" the previous settlement of the owed amount.
     Special cases that we handle:
     * `amount/0` will still not be accepted.
     *  When the resulting paid amount of the student that the user want to update is less than 0, the command will not be executed and an error message will be shown.
 
 
-    The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
+    The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to "undo" his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
     Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
 
 
