@@ -529,6 +529,23 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Sort Students**
+
+**MSS**
+
+1. User requests to list students.
+2. T_Assistant shows a list of students.
+3. User requests to sort students.
+4. T_Assistant sorts students in ASCII order.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
 **Use case: Add a Group**
 
 **MSS**
@@ -699,6 +716,23 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Sort Groups**
+
+**MSS**
+
+1. User lists all groups.
+2. T_Assistant displays all groups.
+3. User requests to sort groups.
+4. T_Assistant sorts groups by ASCII order.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There are currently no groups.
+
+Use case ends.
+
 **Use case: List all Tasks**
 
 **MSS**
@@ -755,6 +789,57 @@ Use case ends.
     - 1a1. T_Assistant shows an error message.
 
       Use case ends.
+
+**Use case: Sort Tasks**
+
+**MSS**
+
+1. User lists all tasks.
+2. T_Assistant displays all tasks.
+3. User requests to sort tasks.
+4. T_Assistant sorts tasks by order of the deadline, from earliest to latest.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There are currently no tasks.
+
+Use case ends.
+
+**Use case: Undo**
+
+**MSS**
+
+1. User requests to undo.
+2. T_Assistant undoes previously executed command.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There was no previously executed command.
+
+Use case ends.
+
+**Use case: Redo**
+
+**MSS**
+
+1. User requests to redo.
+2. T_Assistant redoes previously executed undo command.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. There was no previously executed undo command.
+
+    - 1a1. T_Assistant shows an error message.
+
+      Use case ends.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
