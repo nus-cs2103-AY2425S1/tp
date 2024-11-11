@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.PersonIsRolePredicate;
 import seedu.address.model.role.Attendee;
 import seedu.address.model.role.Role;
@@ -49,6 +50,14 @@ public class PersonIsRolePredicateTest {
     }
 
     @Test
+    public void test_noRoles_returnsFalse() {
+        PersonIsRolePredicate predicate = new PersonIsRolePredicate(Collections.singletonList(new Sponsor()));
+
+        Person person = new PersonBuilder().withName("Billy").build();
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
     public void test_containsRoles_returnsTrue() {
         // One keyword
         PersonIsRolePredicate predicate = new PersonIsRolePredicate(Collections.singletonList(new Sponsor()));
@@ -75,6 +84,26 @@ public class PersonIsRolePredicateTest {
     }
 
     @Test
+    public void getRolesAsString_oneRole() {
+        PersonIsRolePredicate predicate = new PersonIsRolePredicate(Arrays.asList(new Sponsor()));
+
+        String expectedValue = new Sponsor().toString();
+
+        assertEquals(predicate.getRolesAsString(), expectedValue);
+    }
+
+    @Test
+    public void getRolesAsString_multipleRoles() {
+        PersonIsRolePredicate predicate = new PersonIsRolePredicate(
+                Arrays.asList(new Sponsor(), new Vendor(), new Volunteer()));
+
+        String expectedValue = new Sponsor().toString() + " "
+                + new Vendor().toString() + " " + new Volunteer().toString();
+
+        assertEquals(predicate.getRolesAsString(), expectedValue);
+    }
+
+    @Test
     public void toStringMethod() {
         List<Role> roles = List.of(new Attendee(), new Vendor());
         PersonIsRolePredicate predicate = new PersonIsRolePredicate(roles);
@@ -82,4 +111,5 @@ public class PersonIsRolePredicateTest {
         String expected = PersonIsRolePredicate.class.getCanonicalName() + "{roles=" + roles + "}";
         assertEquals(expected, predicate.toString());
     }
+
 }
