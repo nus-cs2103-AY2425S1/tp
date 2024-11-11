@@ -6,7 +6,7 @@
 
 # Teletutors User Guide
 
-Teletutors is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having 
+Teletutors is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having 
 the benefits of a Graphical User Interface (GUI). If you can type fast, Teletutors can get your contact management tasks 
 done faster than traditional GUI apps.
 
@@ -29,9 +29,10 @@ done faster than traditional GUI apps.
    <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
+
 6. Pressing the **down arrow key (↓)** will recall the next valid command entered, allowing for retrieval of succeeding commands, similar to a command terminal
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
    Some example commands you can try:
 
@@ -45,7 +46,7 @@ done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +95,7 @@ Format: `exit`
 ### Undoing the previous command : `undo`
 
 Undoes the previous command. <br>
-The closeat command is currently not undoable (planned for future versions).
+The help and closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
 
@@ -324,7 +325,7 @@ _Details coming soon ..._
 | **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                    |
 | **List**                                        | `list`                                                                                                                                                                        |
 | **Help**                                        | `help`                                                                                                                                                                        |
-| **Undo**                                        | `undo`                                                                                                                                                                        
+| **Undo**                                        | `undo`                                                                                                                                                                        |
 | **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe dt/2021-10-10 pr/p sn/A1234567Z`                                                       |
 | **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 dt/2021-10-10`                                                                                    |
 | **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabsentall tg/G17 dt/2021-10-10`                                                                                      |
