@@ -137,11 +137,18 @@ Here is a partial and representative class diagram of the `Model` component:
 
 The `Model` component has the following responsibilites:
 
-- Storing the HallPointer data (i.e. any `Member` and `Session` objects) in memory for easy access.
-- Exposing the currently 'selected' `Member` objects (e.g. the results of a search query) as a separate and unmodifiable `ObservableList<Member>` that can be 'observed', allowing the UI to observe this list and automatically update the UI when the data in this list changes.
-- Store a `UserPref` object that represents the user’s preferences, and expose it to outside components as a `ReadOnlyUserPref` object. 
+- Storing the HallPointer data (i.e. any `Member` and `Session` objects, and application configuration files) in the hard disk.
+- stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-Since `Model` represents the data entities of this application and problem domain, it should make sense on its own without dependencies on other components. And thus this component does not depend on any of the other three components.
+<box type="info" seamless>
+
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Hall Pointer`, which `Member` references. This allows `Hall Pointer` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
+
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 ### Storage component
 
@@ -451,25 +458,25 @@ None.
 ### **HallPointer Developer Glossary**
 
 1. **Hall Points:**\
-    Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
+   Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 2. **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
+   A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
 3. **Session:**\
-    A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
+   A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
 4. **Tag:**\
-    Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+   Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
 5. **Command:**\
-    A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
+   A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
 6. **Model Component:**\
-    Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
+   Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
 
 7. **Storage Component:**\
-    Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
+   Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
 
 8. **Logic Component:**\
    Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
@@ -568,7 +575,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Open the hallpointer.json file located in the data directory (this file is created after the application is first launched). Modify it by deleting the name of the first entry.
 
-        **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
+       **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
 2. Confirming data persistence
 
@@ -609,7 +616,7 @@ Team Size: 5
 
 
 2. **Planned Enhancement: Partial Search for Session Names**
-   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`. 
+   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`.
 
    **Example Requirement**:
    > The `find_sessions_partial` command should allow partial name searches so users can input only the first part of the session name to retrieve all matching sessions.
@@ -657,7 +664,7 @@ Team Size: 5
    > - Example: `filter_members_by_tag Team A` would display only members tagged as "Team A," while `sort_members_by_tag` would group all members with similar tags together.
 
    By adding these features, users can better manage and view group associations at scale.
- 
+
 
 7. **Planned Enhancement: Allow Manual Point Adjustments**
    Currently, points can only be awarded or adjusted through sessions. This setup can be restrictive for users who need to manage points directly, without creating a session.
