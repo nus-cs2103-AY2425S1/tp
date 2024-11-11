@@ -469,7 +469,7 @@ testers are expected to do more *exploratory* testing.
       Expected: All clients whose name or company contain Alex are shown. Details of the search shown in the status message.
 
    3. Test case: `find`<br>
-      Expected: Error details informing of missing search parameter shown in the status message.
+      Expected: Error details informing of invalid command format shown in the status message.
 
    4. Test case: `find fhodolkg`<br>
       Expected: No client is shown due to no matching clients. Details of the search shown in the status message.
@@ -541,7 +541,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-    2. Test case: `findt buy`<br>
+    2. Test case: `findt invest`<br>
        Expected: Error details informing of environment discrepancy shown in the status message.
 
 2. Finding transactions in the transaction list view.
@@ -552,13 +552,34 @@ testers are expected to do more *exploratory* testing.
        Expected: All transactions whose description contain "invest" are shown. Details of the search shown in the status message.
 
     3. Test case: `findt`<br>
-       Expected: Error details informing of missing search parameter shown in the status message.
+       Expected: Error details informing of invalid command format shown in the status message. 
+   
+    4. Test case: `findt invest stocks`<br>
+        Expected: All transactions whose description contain "invest" or "stocks" are shown. Details of the search shown in the status message.
 
-    4. Test case: `findt fhodolkg`<br>
-       Expected: No transaction is shown due to no matching transactions. Details of the search shown in the status message.
+### Summarising transactions
 
-    5. Test case: `findt invest stocks`<br>
-       Expected: All transactions whose description contain "invest" or "stocks" are shown. Details of the search shown in the status message.
+1. Summarising transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `summary s/2024-11 e/2024-12`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+   
+
+2. Summarising transactions in the transaction list view.
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+   2. Test case: `summary s/2024-12 e/2024-12`<br>
+      Expected: The transactions from `2024-12-01` to `2024-12-31` are shown. The total amount of these transactions is shown in the status message.
+   3. Test case: `summary s/2024-11 e/2025-01`<br>
+      Expected: The transactions from `2024-11-01` to `2025-01-31` are shown. The total amount of these transactions is shown in the status message.
+   4. Test case: `summary s/2024-11 e/2024-10`<br>
+      Expected: Error details informing of invalid date range shown in the status message.
+   5. Test case: `summary s/2024-11 e/2024-13`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
+   6. Test case: `summary s/11-2024 e/12-2024`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
 
 ### Saving data
 
