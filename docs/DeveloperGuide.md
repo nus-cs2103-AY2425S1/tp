@@ -1128,6 +1128,7 @@ testers are expected to do more *exploratory* testing.
    7. Other incorrect inputs to try: `edit event 0` or any edit event command with inputs in the wrong format.
 
 ---
+
 ## **Appendix: Planned Enhancements**
 
 ### Team size: 5
