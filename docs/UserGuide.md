@@ -192,7 +192,7 @@ Format:
 OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
 * Edits the patient at the specified `INDEX` or `NRIC`.
-* The **index** and **NRIC** refers to the index number and NRIC shown in the displayed patient list respectively.
+* The **index** and **NRIC** refer to the index number and NRIC shown in the displayed patient list respectively.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing **tags**, the existing tags of the patient will be removed (i.e adding of tags is not cumulative).
@@ -360,13 +360,13 @@ Format: `deleteappt NRIC DATE HH:mm`
 * `NRIC` must start with 'S', 'T', 'F', 'G' or 'M', have 7 digits, and end with a letter.
 
 Example:
-* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC S1234567Z, assuming 12:12 falls within his appointment window.
 
 Format: `deleteappt INDEX DATE HH:mm` 
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
 * `INDEX` refers to the patient’s position in the displayed list.
-* `INDEX` **must be a positive whole number no larger than the size of the list.**
+* `INDEX` must be a positive whole number no larger than the size of the list.
 
 Example:
 * `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024 for the patient at index 1 of the displayed list, assuming 12:12 falls within his appointment window.
