@@ -70,11 +70,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyListings getSampleListings() {
-        Listings sampleLi = new Listings();
+        Listings sampleListings = new Listings();
         for (Listing sampleListing : sampleListings()) {
-            sampleLi.addListing(sampleListing);
+            sampleListings.addListing(sampleListing);
         }
-        return sampleLi;
+        return sampleListings;
     }
 
     /**

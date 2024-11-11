@@ -63,7 +63,9 @@ public class Date {
             if (date.matches("\\d{6}")) { // If in ddMMyy format, add dashes for parsing
                 date = date.substring(0, 2) + "-" + date.substring(2, 4) + "-" + date.substring(4);
             }
+
             return LocalDate.parse(date, formatter);
+
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
@@ -71,9 +73,17 @@ public class Date {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof Date
-                && value.equals(((Date) other).value));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Date)) {
+            return false;
+        }
+
+        Date otherDate = (Date) other;
+
+        return this.value.equals(otherDate.value);
     }
 
     @Override

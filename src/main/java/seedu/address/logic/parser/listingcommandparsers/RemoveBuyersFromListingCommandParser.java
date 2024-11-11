@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.listingcommands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -31,13 +29,17 @@ public class RemoveBuyersFromListingCommandParser implements Parser<RemoveBuyers
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BUYER);
 
         // Parse index
-        String indexOneBased = argMultimap.getPreamble().trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(indexOneBased)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
-        Index index = ParserUtil.parseIndex(indexOneBased);
+        Index index = ParserUtil.getListingIndex(argMultimap.getPreamble().trim());
 
         // Parse buyer indexes
+        Set<Index> buyerIndexes = getBuyerIndexes(argMultimap);
+
+        return new RemoveBuyersFromListingCommand(index, buyerIndexes);
+    }
+
+
+
+    private Set<Index> getBuyerIndexes(ArgumentMultimap argMultimap) throws ParseException {
         Set<Index> buyerIndexes = new HashSet<>();
         for (String buyerIndex : argMultimap.getAllValues(PREFIX_BUYER)) {
             buyerIndexes.add(ParserUtil.parseIndex(buyerIndex));
@@ -49,6 +51,6 @@ public class RemoveBuyersFromListingCommandParser implements Parser<RemoveBuyers
                     RemoveBuyersFromListingCommand.MESSAGE_USAGE));
         }
 
-        return new RemoveBuyersFromListingCommand(index, buyerIndexes);
+        return buyerIndexes;
     }
 }

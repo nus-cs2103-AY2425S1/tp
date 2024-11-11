@@ -1,7 +1,5 @@
 package seedu.address.logic.parser.clientcommandparsers.appointmentcommandparsers;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.clientcommands.appointmentcommands.DeleteAppointmentCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -25,13 +23,8 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
     public DeleteAppointmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args);
 
-        try {
-            // Parse the name and return the DeleteAppointmentCommand
-            Index index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
-            return new DeleteAppointmentCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteAppointmentCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndexWithInvalidCommandFormatMessage(argumentMultimap.getPreamble(),
+                DeleteAppointmentCommand.MESSAGE_USAGE);
+        return new DeleteAppointmentCommand(index);
     }
 }

@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the end time of an appointment in the address book.
@@ -14,8 +13,6 @@ import java.time.format.DateTimeParseException;
  */
 public class To {
     public static final To EMPTY_TO = new To(LocalTime.MIN);
-    public static final String MESSAGE_CONSTRAINTS =
-            "Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.";
     private static final String VALIDATION_REGEX = "\\d{4}|\\d{2}:\\d{2}";
 
     public final LocalTime value;
@@ -28,27 +25,12 @@ public class To {
      */
     public To(String value) {
         requireNonNull(value);
-        checkArgument(isValidTime(value), MESSAGE_CONSTRAINTS); // Validate using checkArgument
-        this.value = parseTime(value);
+        checkArgument(isValidTime(value), AppointmentUtil.TIME_MESSAGE_CONSTRAINTS); // Validate using checkArgument
+        this.value = AppointmentUtil.parseTime(value);
     }
 
     private To(LocalTime value) {
         this.value = value;
-    }
-
-    /**
-     * Parses the time string into a LocalTime.
-     */
-    private LocalTime parseTime(String time) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            if (time.matches("\\d{4}")) {
-                time = time.substring(0, 2) + ":" + time.substring(2);
-            }
-            return LocalTime.parse(time, formatter);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
     }
 
     /**
@@ -60,9 +42,17 @@ public class To {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof To
-                && value.equals(((To) other).value));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof To)) {
+            return false;
+        }
+
+        To otherTo = (To) other;
+
+        return this.value.equals(otherTo.value);
     }
 
     @Override

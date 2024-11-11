@@ -88,36 +88,6 @@ public class ChatWindow {
     }
 
     /**
-     * Checks if the user's message is a goodbye message.
-     *
-     * @param message The user's input message.
-     * @return True if the message indicates a goodbye; otherwise, false.
-     */
-    private boolean isGoodbyeMessage(String message) {
-        String lowerMessage = message.toLowerCase().trim();
-        return Pattern.compile("\\b(g+o+o+d+b+y+e+|b+y+e+|bai|bubye|see ya|see you"
-                        + "|take care|later|cya|catch you later|peace|adieu|ta"
-                        + "|farewell|good night|so long|cheerio|toodle-oo"
-                        + "|until next time|ttyl|g2g|gotta go|im off|exit"
-                        + "|im leaving|im out|im off now|im outta here|i'm out)\\b")
-                .matcher(lowerMessage).find();
-    }
-
-    /**
-     * Checks if the user's message is a hello message.
-     *
-     * @param message The user's input message.
-     * @return True if the message indicates a hello; otherwise, false.
-     */
-    private boolean isHelloMessage(String message) {
-        String lowerMessage = message.toLowerCase().trim();
-        return Pattern.compile("\\b(h+e+l+o+|h+i+|h+e+y+|howdy|greetings|salutations"
-                        + "|what's up|what's good|yo|sup|how's it going|how are you|howdy doo"
-                        + "aloha|bonjour|hola|holla|howdy+|hiya|wazzup|welcome)\\b")
-                .matcher(lowerMessage).find();
-    }
-
-    /**
      * Requests focus for the user input field in the chat window.
      * <p>
      * This method checks if the user input field is initialized and, if so,
@@ -151,43 +121,34 @@ public class ChatWindow {
 
         if (isHelloMessage(message)) {
             return "Hi there! How can I assist you today?";
-        } else if (Pattern.compile("(?=.*\\b(a+d+d+|adding)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
-                        + "(?" + "=.*\\bb+u+y+e+r+s*\\b)")
-                .matcher(message).find()) {
+        } else if (isAddingListingBuyersMessage(message)) {
             return "This is how to add buyers to a listing!\n"
                     + "addlistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
                     + "Example: addlistingbuyers 1 buy/ 2 buy/ 3\n"
                     + "Adds the specified buyers to the listing identified by its index.";
-        } else if (Pattern.compile("(?=.*\\b(r+e+m+o+v+e+|removing)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
-                        + "(?=.*\\bb+u+y+e+r+s*\\b)")
-                .matcher(message).find()) {
+        } else if (isRemovingListingBuyersMessage(message)) {
             return "This is how to remove buyers from a listing!\n"
                     + "removelistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
                     + "Example: removelistingbuyers 1 buy/ 2 buy/ 3\n"
                     + "Removes the specified buyers from the listing identified by their index.";
         } else if (isGoodbyeMessage(message)) {
             return "Goodbye! Have a great day!";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
-                .matcher(message).find()) {
+        } else if (isAddMessage(message)) {
             return "We categorise clients into buyers and sellers for clarity of our users!\n"
                     + "Maybe consider:\n"
                     + "• Adding a buyer\n"
                     + "• Adding a seller";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b")
-                .matcher(message).find()) {
+        } else if (isAddBuyersMessage(message)) {
             return "This is how to add a buyer!\n"
                     + "buyer n/{name} p/{phone number} e/{email}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*s+e+l+e+r+\\b")
-                .matcher(message).find()) {
+        } else if (isAddingSellerMessage(message)) {
             return "This is how to add a seller!\n"
                     + "seller n/{name} p/{phone number} e/{email}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*l+i+s+t+i+n+g+\\b")
-                .matcher(message).find()) {
+        } else if (isAddingListingMessage(message)) {
             return "This is how to add a listing!\n"
                     + "listing n/{name} pr/{price} ar/{area} add/{address} reg/{region} sel/{seller} "
                     + "(Optional: buy/{buyer1} buy/{buyer2} ...)";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
-                .matcher(message).find()) {
+        } else if (isAddingAppointmentMessage(message)) {
             return "This is how to add an appointment!\n"
                     + "apt {index} d/{date} fr/{start time} to/{end time}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*c+l+i+e+n+t+\\b")
@@ -286,5 +247,70 @@ public class ChatWindow {
             return "I'm sorry, I didn't understand that. Can you please \n"
                     + "rephrase?";
         }
+    }
+
+    /**
+     * Checks if the user's message is a goodbye message.
+     *
+     * @param message The user's input message.
+     * @return True if the message indicates a goodbye; otherwise, false.
+     */
+    private boolean isGoodbyeMessage(String message) {
+        return Pattern.compile("\\b(g+o+o+d+b+y+e+|b+y+e+|bai|bubye|see ya|see you"
+                        + "|take care|later|cya|catch you later|peace|adieu|ta"
+                        + "|farewell|good night|so long|cheerio|toodle-oo"
+                        + "|until next time|ttyl|g2g|gotta go|im off|exit"
+                        + "|im leaving|im out|im off now|im outta here|i'm out)\\b")
+                .matcher(message).find();
+    }
+
+    /**
+     * Checks if the user's message is a hello message.
+     *
+     * @param message The user's input message.
+     * @return True if the message indicates a hello; otherwise, false.
+     */
+    private boolean isHelloMessage(String message) {
+        return Pattern.compile("\\b(h+e+l+o+|h+i+|h+e+y+|howdy|greetings|salutations"
+                        + "|what's up|what's good|yo|sup|how's it going|how are you|howdy doo"
+                        + "aloha|bonjour|hola|holla|howdy+|hiya|wazzup|welcome)\\b")
+                .matcher(message).find();
+    }
+
+    private boolean isAddingListingBuyersMessage(String message) {
+        return Pattern.compile("(?=.*\\b(a+d+d+|adding)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
+                        + "(?" + "=.*\\bb+u+y+e+r+s*\\b)")
+                .matcher(message).find();
+    }
+
+    private boolean isRemovingListingBuyersMessage(String message) {
+        return Pattern.compile("(?=.*\\b(r+e+m+o+v+e+|removing)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
+                        + "(?=.*\\bb+u+y+e+r+s*\\b)")
+                .matcher(message).find();
+    }
+
+    private boolean isAddMessage(String message) {
+        return Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
+                .matcher(message).find();
+    }
+
+    private boolean isAddBuyersMessage(String message) {
+        return Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*b+u+y+e+r+\\b")
+                .matcher(message).find();
+    }
+
+    private boolean isAddingSellerMessage(String message) {
+        return Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*s+e+l+e+r+\\b")
+                .matcher(message).find();
+    }
+
+    private boolean isAddingListingMessage(String message) {
+        return Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*l+i+s+t+i+n+g+\\b")
+                .matcher(message).find();
+    }
+
+    private boolean isAddingAppointmentMessage(String message) {
+        return Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
+                .matcher(message).find();
     }
 }
