@@ -6,7 +6,7 @@
 
 # EduManage User Guide
 
-Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher. Tailored for tuition teachers specialising in one-on-one classes for secondary school students, **EduManage** prioritises a seamless, typing-friendly experience over complex menu navigation.
+Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher. Tailored for tuition teachers specializing in one-on-one classes for secondary school students, **EduManage** prioritizes a seamless, typing-friendly experience over complex menu navigation.
 
 This detailed guide will walk you through how to make the most of **EduManage** and unlock its full potential. We’re thrilled to help you streamline and organize your contact management process.
 ***
@@ -463,6 +463,7 @@ Exits EduManage.
 [(Back to Top)](#edumanage-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. FAQ
 
