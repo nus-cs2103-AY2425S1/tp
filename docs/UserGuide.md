@@ -396,7 +396,7 @@ Format: `statistics`
 
 ### Displaying eligible schemes: `scheme`
 
-Displays the schemes that specified person from SocialBook is eligible for.
+Displays the schemes of the specified person in the address book is eligible for.
 
 Format: `scheme INDEX`
 
