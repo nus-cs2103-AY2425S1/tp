@@ -219,7 +219,7 @@ Format: `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
 
 Examples:
 * If `Adam Lee` is a unique name, `markat n/Adam Lee dt/2024-12-12 pr/p` marks the student with the name `Adam Lee` present on `2024-12-12`.
-* If `Mary Tan` is a unique name, `markat n/Mary Tan dt/2024-09-11 pr/a` marks the student with the name `Mary Tan` present on `2024-09-11`.
+* If `Mary Tan` is a unique name, `markat n/Mary Tan dt/2024-09-11 pr/a` marks the student with the name `Mary Tan` absent on `2024-09-11`.
 * If there are multiple students with the name `Adam Lee`, `markat n/Adam Lee dt/2024-12-12 pr/p sn/A1234567Z` marks the student with the name `Adam Lee` and student number `A1234567Z` present on `2024-12-12`.
 * If there are multiple students with the name `Mary Tan`, `markat n/Mary Tan dt/2024-09-11 pr/a sn/A0123456X` marks the student with the name `Mary Tan` and student number `A0123456X` absent on `2024-09-11`.
 
