@@ -67,19 +67,19 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help`
-**List**   | `list`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
-**Owe**    | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
-**Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
-**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**Income**  | `income`
-**Remind**   | `remind`
-**Clear**  | `clear`
-**Exit**   | `exit`
+**Help** : opens up the Help window | `help`
+**List** : lists all students in UGTeach | `list`
+**Add**  : adds a student to UGTeach  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
+**Edit** : edits a student in UGTeach | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/SCHEDULE] [s/SUBJECT] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`<br> e.g.,`edit 2 paid/1200.00 owed/0`
+**Delete** : deletes a student in UGTeach | `delete INDEX`<br> e.g., `delete 3`
+**Find** : finds a student in UGTeach with part of name matching one of keywords, **and** their schedule falling on one of the days specified | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
+**Pay** : updates amount paid by a student | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
+**Owe** : updates amount owed by a student | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
+**Settle** : updates amount paid and owed by student (used when the student repays an amount owed to you) | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Income** : shows total amount paid and owed by all students in UGTeach | `income`
+**Remind** : reminds you of all your lessons scheduled for today  | `remind`
+**Clear** : clears all students from UGTeach | `clear`
+**Exit** : exits from UGTeach  | `exit`
 
 <box type="warning" header="##### Notes">
 
@@ -100,7 +100,7 @@ Action     | Format, Examples
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [owe/OWED_AMOUNT]` can be used as `n/John Doe owe/100.00` or as `n/John Doe`.
+  e.g `n/NAME [owed/OWED_AMOUNT]` can be used as `n/John Doe owed/100.00` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -184,11 +184,15 @@ Adds a student to UGTeach.
 </box>
 
 <box type="tip" header="##### Tips">
+<markdown>
 
+* If your student's **NAME** contains special character, you should exclude the special character.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
+</markdown>
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -226,6 +230,8 @@ Edits an existing student in UGTeach.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-a-student-settle)
 for convenient ways to update the paid amount and owed amount.
+* If your student's **NAME** contains special character, you should exclude the special character.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
@@ -514,4 +520,8 @@ Please note:
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
+1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to exclude the special characters. E.g. replace the `S/O` with `s o` or `son of`, likewise for `D/O`.
+1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
+e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
+The remedy is to avoid using prefixes in the address field. Rest assured that this issue is unlikely to affect daily use cases as it is unlikely for Singapore addresses to contain prefixes.
 --------------------------------------------------------------------------------------------------------------------
