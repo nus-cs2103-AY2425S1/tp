@@ -220,59 +220,59 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 ## **Appendix: Planned Enhancements**
 
-1. Prefix Enhancements
+**1. Prefix Enhancements**
 
-Currently: The view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
+**Currently:** The view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
 
-Plan: To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
+**Plan:** To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
 
-2. Forced Deletion and Clearing
+**2. Forced Deletion and Clearing**
 
-Currently: To prevent accidental deletions and clearing of data in KnottyPlanners, a confirmation will be required from the user to ensure that the deletion or clearing is intentional.
+**Currently:** To prevent accidental deletions and clearing of data in KnottyPlanners, a confirmation will be required from the user to ensure that the deletion or clearing is intentional.
 
-Plan: To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
+**Plan:** To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
 
-4. Allow Copying of Information
+**3. Improved Filtering**
 
-Currently: As KnottyPlanners is optimised for keyboard usage, interactions with the GUI through direct copying of information is not supported.
+**Currently:** The filter command in KnottyPlanners only allows for filtering to be done through the name or job fields.
 
-Plan: To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
+**Plan:** To allow users to filter with other fields such as phone number, address and email. To allow users to filter with other fields such as phone number, address and email.
 
-5. Support for Long Inputs
+**4. Allow Copying of Information**
 
-Currently: KnottyPlanners only support inputs up till XXX characters. As such, extreme inputs that exceed our limit can potentially hinder the viewing of information when the user does not resize the window.
+**Currently:** As KnottyPlanners is optimised for keyboard usage, interactions with the GUI through direct copying of information is not supported.
 
-Plan: To handle extreme inputs of all fields with a long character count, ensuring that the information can still remain visible.
+**Plan:** To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
 
-6. Index Referencing
+**5. Support for Long Inputs**
 
-Currently: KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in counteractive outcomes when handling names that are extremely long.
+**Currently:** KnottyPlanners only support inputs up till a reasonable amount of characters. As such, extreme inputs that exceed our limit can potentially hinder the viewing of information when the user does not resize the window.
 
-Plan: To allow suers to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
+**Plan:** To handle extreme inputs of all fields with a long character count, ensuring that the information can still remain visible.
 
-7. Further CLI Support
+**6. Index Referencing**
 
-Currently: Opening the help window creates an external popup that requires the user to use a mouse and close it.
+**Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in counteractive outcomes when handling names that are extremely long.
 
-Plan: Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
+**Plan:** To allow suers to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
 
-8. Contacts and Weddings Visibility
+**7. Further CLI Support**
 
-Currently: The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
+**Currently:** Opening the help window creates an external popup that requires the user to use a mouse and close it.
 
-Plan: To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
+**Plan:** Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
 
-9. Comprehensive Language Support
+**8. Contacts and Weddings Visibility**
 
-Currently: KnottyPlanners support names in English language without special characters such as "^" or non-English names.
+**Currently:** The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
 
-Plan: To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
+**Plan:** To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
 
-10. Improved Filtering
+**9. Comprehensive Language Support**
 
-Currently: The filter command in KnottyPlanners only allows for filtering to be done through the name or job fields.
+**Currently:** KnottyPlanners support names in English language without special characters such as "^" or non-English names.
 
-Plan: To allow users to filter with other fields such as phone number, address and email.
+**Plan:** To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
 
 --------------------------------------------------------------------------------------------------------------------
 
