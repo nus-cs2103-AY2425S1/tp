@@ -279,6 +279,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 * The index refers to the index number shown in the displayed Udders list.
 
 <box type="warning">
+
 **IMPORTANT:** This command will follow the indexing shown on the Udders list.
 </box>
 
