@@ -375,6 +375,7 @@ Priorities:
     * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
+<br>
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.<br>
@@ -395,6 +396,7 @@ Priorities:
     * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
+<br>
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
@@ -403,6 +405,7 @@ Priorities:
         Steps 1b1-1b3 are repeated until a unique person is found from details in input.<br>
         Use case resumes from step 2.
 
+<br>
 
 * 1c. HealthConnect detects non-existent client.
     * 1c1. HealthConnect shows an error message.<br>
@@ -423,7 +426,8 @@ Preconditions: HealthConnect has correct view, including client to edit
 * 1a. HealthConnect detects an error in the command format.
     * 1a1. HealthConnect shows an error message.<br>
     Use case ends.
-
+  
+<br>
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
@@ -446,16 +450,16 @@ Preconditions: HealthConnect has correct view, including client to edit
     * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
+<br>
 
 * 1b. HealthConnect detects an overlapping appointment date and time.
-
     * 1b1. HealthConnect shows an error message.
     * 1b2. HealthConnect displays information on existing person with overlapped date and time.<br>
         Use case ends.
 
+<br>
 
 * 1c. HealthConnect detects non-existent client.
-
     * 1c1. HealthConnect shows an error message.<br>
         Use case ends.
 
@@ -517,6 +521,7 @@ Preconditions: HealthConnect has correct view, including client to edit
     * 1a1. HealthConnect shows an error message.<br>
       Use case ends.
 
+<br>
 
 * 1b. HealthConnect detects a duplicate person entry.
     * 1b1. HealthConnect shows an error message.
@@ -525,6 +530,7 @@ Preconditions: HealthConnect has correct view, including client to edit
       Steps 1b1-1b3 are repeated until a unique person is found from details in input.<br>
       Use case resumes from step 2.
 
+<br>
 
 * 1c. HealthConnect detects non-existent client.
     * 1c1. HealthConnect shows an error message.<br>
