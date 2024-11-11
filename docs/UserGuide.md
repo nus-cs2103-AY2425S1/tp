@@ -545,7 +545,7 @@ Follow the specifications given below
       <td style="text-align:center;">6</td>
       <td style="text-align:center;">Date and Time</td>
       <td style="text-align:center;">dt|</td>
-      <td>Should be a valid calendar date followed by a valid time in the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
+      <td>Should be a valid calendar date followed by a valid time in the format YYYY-MM-DD HH:MM separated by a single whitespace. </td>
     </tr>
     <tr>
       <td style="text-align:center;">7</td>
