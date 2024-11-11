@@ -120,6 +120,7 @@ How command execution works:
    - The text field is cleared
 4. If a `CommandException` or `ParseException` occurs:
    - The error style class is added to the text field to indicate error.
+   - The command text will not be added to the `CommandHistory`.
 
 **Command History Navigation:**
 Below is the sequence diagram showing the command history navigation:
@@ -127,7 +128,7 @@ Below is the sequence diagram showing the command history navigation:
 
 - UP Arrow Key: Retrieves the previous command from the `CommandHistory` when pressed.
 - DOWN Arrow Key: Retrieves the next command from the `CommandHistory` when pressed.
-- After retrieving a command (previous or next), the `CommandBox` updates the `TextField` with this command and moves the caret (cursor) to the end of the text.
+- After retrieving a command (previous or next), the `CommandBox` updates the `TextField` with this command and moves the cursor to the end of the text.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -382,8 +383,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
@@ -399,7 +398,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. Tuteez detects similar/identical name
-
     - 2a1. Tuteez rejects the new addition and show error message
     Use case ends
 
@@ -413,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. Tuteez displays all students in alphabetical order
+2. Tuteez displays all students
 3. Use case ends
 
 **Use case: UC3 - Delete a student**
@@ -498,6 +496,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
 * **Remarks**: Longer texts that can be added to students
+* **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands
+* **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
@@ -546,7 +546,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -560,7 +560,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student by index
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
@@ -568,25 +568,138 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No student is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size), `delete something`<br>
+   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size) <br>
       Expected: Invalid student index error is shown in the status message.
 
-1. _Deleting a student by name
+1. Deleting a student by name
 
-    1. Prerequisites: The student list contains only a student with the name "John"
+    1. Prerequisites: The student list contains only a student with the name "John".
 
     1. Test case: `delete john`<br>
        Expected: John will be deleted from the list. Details of john will be shown in the status message.
    
     1. Test case: `delete Alice`<br>
-       Expected: No person is deleted. An error message appears in the status.
+       Expected: No student is deleted. An error will be displayed in the status message.
 
+### Adding a student
 
+1. Adding a student with just name and phone number
+
+   1. Prerequisites: List all students using the `list` command. No student with the name "John" in the list.
+
+   1. Test case: `add n/john p/82223238`<br>
+      Expected: A new student will be added to the list. The details of the student will be shown in the status message.
+
+1. Adding a student with a duplicate name
+    
+    1. Prerequisites: The student list contains only a student with the name "John".
+    
+    1. Test case: `add n/john p/82223238`<br>
+        Expected: No person is added. A duplicate student error will be displayed in the status message.
+
+1. Adding a student with a clashing lesson
+    
+    1. Prerequisites: The student list contains only a student with the name "John" with only a lesson on "MONDAY 0900-1000".
+    
+    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`<br>
+        Expected: No person is added. A clashing lesson error will be displayed in the status message.
+
+### Editing a student
+
+1. Editing a student with index
+   
+    1. Prerequisites: List all students using the `list` command. There are already students in the student list. No student with the name "Alice" in the list.
+
+    1. Test case: `edit 1 n/Alice`<br>
+        Expected: Name of the first student in the list will be updated to "Alice".
+   
+    1. Test case: `edit`<br>
+       Expected: No student is edited. Error details shown in the status message.
+   
+    1. Other incorrect edit commands to try: `edit 0`, `edit x` (where x is larger than the list size) <br>
+       Expected: Invalid student index error is shown in the status message.
+
+### Adding a lesson to a student
+
+1. Adding a lesson to a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
+    
+    1. Test case: `addlesson 1 l/monday 0900-1100` <br>
+        Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
+
+### Deleting a lesson from a student
+
+1. Deleting a lesson from a student using index
+    
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one lesson on "MONDAY 0900-1000".
+    
+    1. Test case: `deletelesson 1 li/1` <br>
+       Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
+
+### Adding a remark to a student
+
+1. Adding a remark to a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
+    
+    1. Test case: `addremark 1 r/Midterms coming up` <br>
+       Expected: The remark "Midterms coming up" will be added to the student. The student's details should be displayed on the right panel. Remark successfully added is shown in status message.
+
+### Deleting a remark from a student
+
+1. Deleting a remark from a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one remark "Midterms coming up".
+
+    1. Test case: `deleteremark 1 ri/1` <br>
+       Expected: The remark "Midterms coming up" will be deleted from the student. The student's details should be displayed on the right panel. Remark successfully deleted is shown in the status message.
+    
+### Displaying a student
+
+1. Displaying a student using index
+
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    1. Test case: `display 1`<br>
+       Expected: Details of first student is displayed on the right panel. A message confirming successful display of the student is shown in the status message.
+    
+    1. Test case: `display`<br>
+       Expected: No student is displayed. Error details shown in the status message.
+   
+    1. Test case: `display x` (where x is larger than the list size) <br>
+       Expected: No student is displayed. Invalid student index is shown in the status message.
+
+### Navigating through command history
+
+1. Navigating to your previous command
+
+    1. Prerequisite: You have just entered the command `list`.
+
+    1. Test case: Press the `UP` arrow key. <br>
+       Expected: The previous command `list` is shown in the command box.
+
+1. Navigating to your next command
+
+    1. Prerequisite: You have entered the `list` command followed by the `help` command. Close the help window.
+
+    1. Test case: Press the `UP` arrow key once. <br>
+       Expected: You would see the `help` command in the command box.
+   
+    1. Test case: Press the `UP` arrow key twice. <br>
+        Expected: You would see the `list` command in the command box.
+
+    1. Test case: Press the `UP` arrow key twice then press the `DOWN` arrow key once. <br>
+       Expected: You would see the `help` command in the command box.
+
+    1. Test case: Press the `UP` arrow key once then press the `DOWN` arrow key once. <br>
+       Expected: The command box should be cleared.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file.
+   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file. <br>
       Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.
