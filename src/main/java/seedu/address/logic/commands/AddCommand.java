@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "SessionB";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in EduVault";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in EduVault.";
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
 

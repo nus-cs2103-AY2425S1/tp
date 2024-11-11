@@ -194,7 +194,7 @@ Example usages
 
 Invalid usages
 * Student already exists in EduVault
-  * *Error message: This person already exists in the address book.*
+  * *Error message: This student already exists in EduVault.*
 * Format errors, check [here](#12-format-errors).
 
 </div>
@@ -265,7 +265,7 @@ Invalid usages
 
 * Enrolling student in a tutorial that they are already in
 
-    * *Error Message: This person is already in the tutorial*
+    * *Error Message: This student is already in the tutorial.*
 
 * Format errors, check [here](#12-format-errors)
 
@@ -429,8 +429,8 @@ Fields:
 
 Example Usage:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -439,7 +439,7 @@ Invalid usage:
 * None of the option fields are input
     * *Error message: At least one field to edit must be provided.*
 * Values to edit result in a copy of a student already in EduVault
-    * *Error message: This person already exists in the address book.*
+    * *Error message: This student already exists in EduVault.*
 * `ATTENDANCE` & `TUTORIAL` & `PAYMENT` prefix used
     * Error message: PREFIX cannot be used in this command
 * Format errors, check [here](#12-format-errors)
@@ -531,7 +531,7 @@ Usage: `mas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
 Fields
 
-* `INDEX`: Index number as shown in the displayed person list of the student to mark
+* `INDEX`: Index number of the student to mark, as shown in the displayed student list
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
@@ -623,7 +623,7 @@ Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
 Fields
 
-* `INDEX`: Index number as shown in the displayed person list of the student to unmark.
+* `INDEX`: Index number of the student to unmark, as shown in the displayed student list
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
