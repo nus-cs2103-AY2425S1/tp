@@ -341,6 +341,7 @@ Format: `view NAME` or `v NAME` or `view NAME$`
     * If more than 1 name is found, `view` will throw an error telling user to specify the name further.
     * For eg. if 2 contacts have names such as "David" and "David Lim", typing `view David` will throw an error.
 * The command is case-insensitive. eg. `alice` will match `Alice`
+* Any characters after the `view` keyword (and a whitespace) will be considered as the `NAME` of the client to be viewed.
 * Executing another `view` command will create a new popup view of the specified client.
 * Duplicate view pops are **allowed**.
 * `$` is used to indicate specific name to `view`
@@ -348,7 +349,8 @@ Format: `view NAME` or `v NAME` or `view NAME$`
 
 Examples:
 * `view John Doe` shows the contact named `John Doe`
-* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
+* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts
+* `view n/John` will throw an error if there is no one named `n/John` in the list of contacts
 
 Result for `view jeremy`:
 ![result for 'view jeremy`](images/result_for_view.png)
