@@ -463,7 +463,7 @@ Expected output:
 
 Deletes the attendance record for the specified date for a person in the TAHub. All the remaining attendance records for that person will be retained.
 
-Format: `unmark INDEX d/DATETIME`
+Format: `unmark INDEX d/DATE_TIME`
 
 - Deletes attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `DATE_TIME` refers to the date and time of attendance that you want to delete. It must be written in the format `dd/MM/yyyy HH:mm`.
