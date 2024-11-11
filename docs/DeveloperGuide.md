@@ -258,6 +258,32 @@ The following fields are optional as they are not essential in serving a patient
 #### Edit Command : `edit`
 
 #### Delete Command : `delete`
+The `delete` command is used to delete a patient entry from the patient list.
+
+The user has to specify the target patient's:
+* NRIC (`Nric`)
+
+##### Parsing User Input
+The `DeleteCommandParser` class parses the user input to extract the NRIC parameter that has been specified.
+
+##### Executing the Command
+The `DeleteCommand` class is initialized and the `Patient` object with a matching NRIC with the argument is retrieved. The `Patient` object is then deleted from the `UniquePatientList` through the `deletePatient` method in the `Model` component.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing and execution of the user input.
+In this example, it takes a `delete` command: `delete T0123456A`
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `delete` command since both commands are fundamentally similar.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to identify and delete a patient entry.
+* NRIC (`Nric`)
 
 #### View Command : `view`
 
