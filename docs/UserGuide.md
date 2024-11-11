@@ -17,7 +17,7 @@ Navigating the internship application process can be overwhelming &ndash; from m
 
 ![basic view](images/basicNoCommand.png)
 
-Introducing **InternBuddy** &ndash; your all-in-one solution for seamless internship application management. Whether you're just beginning your search or juggling multiple opportunities, **InternBuddy** offers an intuitive, user-friendly platform that makes it easy to keep track of the companies you're interested in, the stages of your applications, and essential information to help you stay organized and focused.
+Introducing **InternBuddy** &ndash; your all-in-one solution for seamless internship application management! Whether you're just beginning your search or juggling multiple opportunities, **InternBuddy** offers an intuitive, user-friendly platform that makes it easy to keep track of the companies you're interested in, the stages of your applications, and essential information to help you stay organized and focused.
 
 This guide provides step-by-step instructions to help you [start your journey](#how-to-use-our-user-guide) **with InternBuddy**. New users will find everything they need to get up and running quickly, while returning users can refresh their knowledge of InternBuddy's comprehensive features in our [command summary](#command-summary). **InternBuddy** is crafted with usability in mind – easy to learn and master, designed to support you in reaching your career goals.
 
@@ -108,7 +108,8 @@ Before continuing, here are some important information you need to know about th
 
 1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
-1. Open a command terminal, run the `cd` command to change your directory to the folder you put the `.jar` file in.
+1. Open a command terminal, run the `cd` command to [change your directory](#cd) to the folder you put the jar file in.
+=======
 
 1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -253,7 +254,10 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 <box type="info" seamless>
 
-**Note:** You cannot add two companies with the same name. (even if the letter casing is different)
+**Note:** 
+* You cannot add two companies with the same `NAME`. (even if the letter casing is different). <br>
+However, whitespaces between words of names will be treated as different names (eg: `face book` is not the same as `face     book`).
+* `TAG`s are **case-insensitive** (eg: `tech` and `Tech` will be seen as different tags).
 </box>
 
 <box type="warning" seamless>
@@ -305,13 +309,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the company will be removed i.e adding of tags is not cumulative.
-* You can remove all the company’s tags by typing `t/` without
-  specifying any tags after it.
 
 <box type="tip" seamless>
 
-**Tip:** InternBuddy will show the changes you have made to the selected company in the results box, so that you can verify that you
+**Tip 1:** InternBuddy will show the changes you have made to the selected company in the results box, so that you can verify that you
 have made the right edits!
+**Tip 2:** You can remove all the tags from a company by typing `t/` without specifying any `TAG`s after it.
 </box>
 
 <box type="info" seamless>
@@ -458,7 +461,7 @@ The index refers to the index number shown in the displayed company list. The in
 
 <box type="tip" seamless>
 
-**tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
+**Tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
 </box>
 
 <box type="info" seamless>
@@ -483,7 +486,7 @@ The index refers to the index number shown in the displayed company list. The in
 
 <box type="tip" seamless>
 
-**tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
+**Tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
 
 ![withdrawn application](images/withdrawCommand.png)
@@ -568,6 +571,9 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
 
+**Q**: Can I add multiple identical applications to the same company?
+**A**: Yes, of course you can! This is not unlike a real-life scenario, where you could possibly apply for the same role multiple times, to the same company. However many times you apply to the same company, **InternBuddy** is here for you! 
+
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -583,8 +589,8 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to **1000 companies**, each with **1000 applications**. Entering values beyond this range (e.g., greater than 1000) may lead to **undefined behavior**, so please ensure indexes stay within the specified bounds.
 7. **The error message** for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the `domain` between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the notes in [features](#features).
 8. `InternBuddy` **currently accepts invalid phone numbers**, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
-9. `InternBuddy` **currently has no limit on the tag length.** However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
-
+9. **Typo in error message for `withdraw`**, if you try to withdraw an application from a company with no applications, the message `NAME has no applications to update!`, when it should be `NAME has no applications to withdraw!`.
+10. `InternBuddy` **currently has no limit on the tag length.** However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
 
 [back to top](#internbuddy-user-guide)
 
@@ -594,6 +600,8 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 - <a id="stem"/>**STEM**: An acronym for the four related fields of study; **S**cience, **T**echnology, **E**ngineering, and **M**athematics.
 - <a id="cli"/>**CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
 - <a id="gui"/>**GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
+- <a id="cd"/>**`cd`**: Which stands for **c**hange **d**irectory, is a commonly used command in many command terminals (such as Windows Command Prompt or the MacOS Terminal). It allows users to navigate the terminal to a different directory or folder within their system. 
+Users can change their directory by typing `cd path/to/directory` into their terminal of choice.
 - <a id="address-book"/>**Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
 - **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
