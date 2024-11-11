@@ -258,14 +258,15 @@ The `LinkCommand` can be generalized for other entity-entity links. For example,
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​      | I want to …​                                     | So that I can…​                                        |
-| -------- | ------------ | ------------------------------------------------ | ------------------------------------------------------ |
+| -------- | ------------ |--------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | veterinarian | create and store profiles for pet owners         | quickly access their information                       |
 | `* * *`  | veterinarian | create and store profiles for pets               | quickly access their information                       |
 | `* * *`  | veterinarian | search for pet owners by key details             | quickly find the information I need                    |
 | `* * *`  | veterinarian | search for pets by key details                   | quickly find the information I need                    |
 | `* * *`  | veterinarian | list all pet owners and pets                     | quickly access and review my client base               |
 | `* * *`  | veterinarian | delete profiles for pet owners and pets          | keep my records up to date                             |
-| `* * *`  | veterinarian | exit PawPatrol                                   | save my data and close my session safely               |
+| `* * *`  | veterinarian | save PawPatrol                                   | save my data                                           |
+| `* * *`  | veterinarian | exit PawPatrol                                   | close my session safely                                |
 | `* *`    | veterinarian | link each pet owner to their pet(s)              | easily manage owners and their associated pet(s)       |
 | `* *`    | veterinarian | edit profiles for pet owners                     | update profile information and ensure accurate records |
 | `* *`    | veterinarian | edit profiles for pets                           | update profile information and ensure accurate records |
@@ -283,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.
+1.  User requests to add a new pet owner by providing the owner's IC number, name, phone, address, and email.
 2.  PawPatrol validates input.
 3.  PawPatrol successfully adds the new pet owner to the list.
 
@@ -303,27 +304,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2c. Owner name exceeds 50 characters.
+- 2c. Duplicate IC Number.
 
   - 2c1. PawPatrol shows an error message:
 
     Use case resumes at step 1.
 
-- 2d. Owner address exceeds 100 characters.
+- 2d Invalid email format.
 
   - 2d1. PawPatrol shows an error message:
 
     Use case resumes at step 1.
 
-- 2e. Owner email exceeds 50 characters.
+- 2e Invalid IC number format.
 
   - 2e1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2f. Duplicate owner number or address.
-
-  - 2f1. PawPatrol shows an error message:
 
     Use case resumes at step 1.
 
@@ -352,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to search for a pet with the relevant data type and search value.
+1. User requests to search for a pet with the relevant search parameter.
 2. PawPatrol validates the input.
 3. PawPatrol performs the search and retrieves matching records.
 4. PawPatrol displays the list of contacts matching the `dataType` and `searchValue`.
@@ -367,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2b. No matching contacts found.
+- 2b. No matching pet contacts found.
 
   - 2b1. PawPatrol shows an error message:
 

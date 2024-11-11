@@ -28,14 +28,15 @@ public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
 
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": Links a owner to a pet. "
-        + "Usage: " + COMMAND_WORD + " OWNER_INDEX "
-        + "[" + PREFIX_TO + "PET_INDEX]...\n"
-        + "Example: " + COMMAND_WORD + " o12 "
-        + PREFIX_TO + "p1, "
-        + COMMAND_WORD + " o13 "
-        + PREFIX_TO + "p3 "
-        + PREFIX_TO + "p2";
+        COMMAND_WORD + ": Links a owner to a pet.\n"
+                + "Note: If you want to link multiple pets, ensure they are all unlinked first.\n"
+                + "Usage: " + COMMAND_WORD + " OWNER_INDEX "
+                + "[" + PREFIX_TO + "PET_INDEX]...\n"
+                + "Example: " + COMMAND_WORD + " o12 "
+                + PREFIX_TO + "p1, "
+                + COMMAND_WORD + " o13 "
+                + PREFIX_TO + "p3 "
+                + PREFIX_TO + "p2";
 
     public static final String MESSAGE_SUCCESS = "Linked %1$s pet(s) to %2$s: %3$s\n%4$s";
     public static final String MESSAGE_DUPLICATE_LINK =
