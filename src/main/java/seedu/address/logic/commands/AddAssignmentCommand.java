@@ -49,7 +49,7 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT_FOUND = "There is already an existing assignment named "
             + "%1$s for student %2$s";
 
-    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name \n"
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There are more than 1 student of the same name \n"
             + "Their student numbers are as follows: %1$s \n"
             + MESSAGE_USAGE;
 
