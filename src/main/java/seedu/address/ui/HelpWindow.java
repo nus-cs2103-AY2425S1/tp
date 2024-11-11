@@ -18,8 +18,10 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f10-1.github.io/tp/UserGuide.html";
     public static final String USERGUIDE_REF = "For more info, refer to the user guide: \n" + USERGUIDE_URL;
     public static final String ADD_HELP_HEADER = "Add contacts: ";
-    public static final String ADD_HELP_1 = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE...";
-    public static final String ADD_HELP_2 = "a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE...";
+    public static final String ADD_HELP_1 = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION "
+            + "c/CLIENT_TYPE...";
+    public static final String ADD_HELP_2 = "a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION "
+            + "c/CLIENT_TYPE...";
     public static final String LIST_HELP_HEADER = "List all contacts in ClientHub: ";
     public static final String LIST_HELP = "list";
     public static final String EDIT_HELP_HEADER = "Edit contacts: ";
