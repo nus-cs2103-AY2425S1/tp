@@ -47,23 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
-
-        Year year = Year.makeYear("");
-        Major major = Major.makeMajor("");
-        Email email = Email.makeEmail("");
-
-        if (isPrefixPresent(argMultimap, PREFIX_YEAR)) {
-            year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-        }
-
-        if (isPrefixPresent(argMultimap, PREFIX_NETID)) {
-            email = ParserUtil.parseNetId(argMultimap.getValue(PREFIX_NETID).get());
-        }
-
-        if (isPrefixPresent(argMultimap, PREFIX_MAJOR)) {
-            major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-        }
-
+        Year year = parseOptionalYear(argMultimap);
+        Major major = parseOptionalMajor(argMultimap);
+        Email email = parseOptionalNetId(argMultimap);
         GroupList groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
 
         long inputGroups = argMultimap.countPrefixesOf(PREFIX_GROUP);
@@ -93,5 +79,41 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix prefix) {
         return argumentMultimap.getValue(prefix).isPresent();
+    }
+
+    private static Year parseOptionalYear(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
+        Year year = Year.makeYear("");
+
+        if (isPrefixPresent(argumentMultimap, PREFIX_YEAR)) {
+            year = ParserUtil.parseYear(argumentMultimap.getValue(PREFIX_YEAR).get());
+        }
+
+        return year;
+    }
+
+    private static Major parseOptionalMajor(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
+        Major major = Major.makeMajor("");
+
+        if (isPrefixPresent(argumentMultimap, PREFIX_MAJOR)) {
+            major = ParserUtil.parseMajor(argumentMultimap.getValue(PREFIX_MAJOR).get());
+        }
+
+        return major;
+    }
+
+    private static Email parseOptionalNetId(ArgumentMultimap argumentMultimap) throws ParseException {
+        assert argumentMultimap != null;
+
+        Email email = Email.makeEmail("");
+
+        if (isPrefixPresent(argumentMultimap, PREFIX_NETID)) {
+            email = ParserUtil.parseNetId(argumentMultimap.getValue(PREFIX_NETID).get());
+        }
+
+        return email;
     }
 }

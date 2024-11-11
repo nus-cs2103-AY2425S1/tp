@@ -69,17 +69,17 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(group -> group.groupName))
                 .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
 
-
-        removeOptionalLabels(fields);
+        removeEmptyLabels(fields);
 
         if (!fields.getChildren().contains(comment)) {
             fields.getChildren().remove(separator);
         }
+
         comment.setText("Comment: " + comment.getText());
         year.setText("Year " + year.getText());
     }
 
-    private static void removeOptionalLabels(Pane parentNode) {
+    private static void removeEmptyLabels(Pane parentNode) {
         parentNode.getChildren().removeIf(node -> {
             if (node instanceof Label) {
                 Label label = (Label) node;

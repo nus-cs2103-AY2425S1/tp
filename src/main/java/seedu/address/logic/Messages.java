@@ -91,6 +91,8 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String format(Person person) {
+        assert person != null;
+
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Student ID: ")
@@ -104,6 +106,8 @@ public class Messages {
      * Formats the optional fields for {@code person} for display to the user.
      */
     private static String formatOptionalFields(Person person) {
+        assert person != null;
+
         final StringBuilder builder = new StringBuilder();
         boolean emailIsEmpty = person.getEmail().value.isEmpty();
         boolean majorIsEmpty = person.getMajor().value.isEmpty();

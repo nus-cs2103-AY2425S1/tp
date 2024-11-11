@@ -51,6 +51,24 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_NETID,
                 PREFIX_MAJOR, PREFIX_YEAR);
 
+        EditPersonDescriptor editPersonDescriptor = createEditPersonDescriptor(argMultimap);
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        long inputGroups = argMultimap.countPrefixesOf(PREFIX_GROUP);
+
+        if (inputGroups > 1 && editPersonDescriptor.getGroups().isPresent()
+                && inputGroups > editPersonDescriptor.getGroups().get().size()) {
+            throw new ParseException(Messages.MESSAGE_DUPLICATE_GROUPS);
+        }
+
+        return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private EditPersonDescriptor createEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        assert argMultimap != null;
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -69,20 +87,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {
             editPersonDescriptor.setMajor(ParserUtil.parseOptionalMajor(argMultimap.getValue(PREFIX_MAJOR).get()));
         }
+
         parseGroupsForEdit(argMultimap.getAllValues(PREFIX_GROUP)).ifPresent(editPersonDescriptor::setGroups);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
-        long inputGroups = argMultimap.countPrefixesOf(PREFIX_GROUP);
-
-        if (inputGroups > 1 && editPersonDescriptor.getGroups().isPresent()
-                && inputGroups > editPersonDescriptor.getGroups().get().size()) {
-            throw new ParseException(Messages.MESSAGE_DUPLICATE_GROUPS);
-        }
-
-        return new EditCommand(index, editPersonDescriptor);
+        return editPersonDescriptor;
     }
 
     /**
