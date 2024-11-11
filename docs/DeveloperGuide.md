@@ -879,6 +879,8 @@ We detail some achievements accomplished by completing our iteration of the proj
 2. Testing was an expect that we found tedious and required a lot of effort. <br>
    Relying on the testing code infrastructure used in AB3 greatly helped to make the testing process more modular. <br>
    For example, when creating the tests for the `schedule` command, it was greatly inspired by the existing test infrastructure of the `edit` command.
+3. While our project still focuses on managing contacts like AB3, our project introduces more complexity by managing multiple more entity types like schedules and social media while also incorporating viewing, utility and data management features.
+   This required careful planning and integration to ensure compatibility between functions while ensuring ease of use for the users
 
 ## **Appendix: Planned Enhancements**
 
