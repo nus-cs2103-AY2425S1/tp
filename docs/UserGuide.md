@@ -65,9 +65,9 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
   e.g. the `add` command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Only leading and trailing spaces in tag and guest names will be ignored, for increased flexibility.
-  e.g. `bride's friend` and `bride's  friend` are considered different tags.
+  e.g. `bride's friend` and `bride's  side` are considered different tags.
   e.g. `John Doe` and `John  Doe` are considered different guests.
-  e.g. `  bride's friend` and `bride's friend` are considered the same tag.
+  e.g. `  bride's friend` and `bride's side` are considered the same tag.
   e.g. `john doe  ` and `john doe` are considered the same guest.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `undo`) will be ignored.<br>
