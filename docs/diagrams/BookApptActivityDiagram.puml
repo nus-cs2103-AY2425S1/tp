@@ -2,7 +2,6 @@
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
-start
 :Parse input arguments;
 :Validate input arguments;
 if () then ([is a valid input])

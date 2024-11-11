@@ -64,6 +64,7 @@ deactivate ArgumentMultiMap
 
 AddFCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(...)
 activate ArgumentMultiMap
+note right: Verify for all prefixes except "al|"
 
 ArgumentMultiMap --> AddFCommandParser
 deactivate ArgumentMultiMap

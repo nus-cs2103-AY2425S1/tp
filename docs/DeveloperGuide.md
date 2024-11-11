@@ -241,7 +241,7 @@ The activity diagram below illustrates the workflow behind the execution of the 
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
-#### Design Considerations
+##### Design Considerations
 **Using `Nric` as an unique identifier** <br>
 Patients may have the same names and other fields. Therefore, unique NRICs will be used to distinguish between patients to prevent administrative errors.
 
@@ -314,6 +314,66 @@ The following fields are optional as they are not essential in serving a patient
 * and Allergies (`Allergy`)
 
 #### Edit Command : `edit`
+The `edit` command allows a user to edit the details of an existing patient.
+
+The user has to specify the patient's:
+* NRIC (`NRIC`)
+
+and provide at least one of these fields to edit:
+* Name (`Name`)
+* NRIC (`Nric`)
+* Sex (`Sex`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Email (`Email`)
+* Address (`Address`)
+* Blood type (`BloodType`)
+* Next-of-Kin name (`Name`)
+* Next-of-Kin phone number (`Phone`)
+* Allergies to be added (`Allergy`)
+* Allergies to be removed (`Allergy`)
+* Risk level (`HealthRisk`)
+* Existing condition (`ExistingCondition`)
+* Note (`Note`)
+
+##### Parsing User Input
+The `EditCommandParser` class parses the user input to extract the NRIC of the patient to be edited and the new details of the patient.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. 
+This returns an `ArgumentMultiMap` object which has extracted the NRIC of the patient to be edited and all values associated with each prefix.
+After `EditCommandParser` ensures that the extracted NRIC is not empty and valid, 
+the `ArgumentMultiMap` object is then used to ensure that there are no duplicate prefixes (except for `al` and `rmal` which are used for adding and removing allergies).
+`EditCommandParser` then calls the `createEditPatientDescriptor()` method which checks the presence of values for each prefix and parse them accordingly to populate the fields to be updated.
+This returns an `EditPatientDescriptor` object which is used to create an `EditCommand` object.
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `edit` command: `execute(edit T0123456A n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rmal|wheat rl|HIGH ec|Diabetes no|Patient needs extra care)`
+
+![EditParserSequenceDiagram](images/EditParserSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+The sequence diagram below illustrates the process behind creating an `EditPatientDescriptor`:
+
+![CreateEditPatientDescriptor](images/CreateEditPatientDescriptor.png)
+
+##### Executing the Command
+The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system. 
+It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`. 
+The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate. 
+It is then used to replace the patient to edit through the `setPatient` method in the `Model` component.
+
+The activity diagram below illustrates the workflow behind the execution of the `edit` command:
+
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+##### Design Consideration
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `edit` command since both commands are fundamentally similar.
+
+**Adding prefixes to add and remove allergies**<br>
+We decided to use the `al|` prefix to add allergies and `rmal|` to remove allergies as this simplifies the process of updating a patient's allergies. 
+Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies. 
+This design reduces redundant data entry, minimises input errors, and aligns with the fact that allergies typically do not go away.
 
 #### Delete Command : `delete`
 The `delete` command is used to delete a patient entry from the patient list.
@@ -825,6 +885,32 @@ The patient with the corresponding NRIC is already registered in the system.<br>
       Step 1e1 is repeated until a valid appointment in the patient's list of appointments is inputted.<br>
       Use case resumes from step 2.
 
+#### Use case: UC05 - Open the help window with a command keyword
+**Guarantees:**<br> The help window corresponding to the specified command keyword will be displayed if the command keyword is valid.
+
+**MSS:**
+
+1. User types the command to open the help window, together with the command keyword.
+2. ClinicConnect displays the help window corresponding to the specified command keyword.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs an invalid command keyword or multiple command keywords.
+    * 1a1. ClinicConnect shows an invalid command format error.<br>
+      Step 1a1 is repeated until the help command is inputted with a valid command keyword.<br>
+      Use case resumes from step 2.
+
+#### Use case: UC05 - Open the help window without a command keyword
+
+**MSS:**
+
+1. User types the command to open the help window, without any command keywords.
+2. ClinicConnect displays the main help window.
+
+    Use case ends.
+
 #### Use case: UC06 - Delete a patient
 **Guarantees:**<br>
 A patient will be deleted from the system if the patient is already in the system.
@@ -838,7 +924,7 @@ A patient will be deleted from the system if the patient is already in the syste
 
 **Extensions**
 
-* 1a. User does not input the NRIC of a patient.
+* 1a. User does not input the NRIC of a patient or inputs the patient's NRIC in the wrong format.
     * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1a1 is repeated until the input entered is a valid NRIC of a patient in the system.<br>
       Use case resumes from step 2.
@@ -852,18 +938,35 @@ A patient will be deleted from the system if the patient is already in the syste
 <br>
 <br>
 
-* 1c. User inputs the patient's NRIC in the wrong format.
-    * 1c1. ClinicConnect prompts the user to fix the format of the NRIC and shows the correct format.<br>
-      Step 1c1 is repeated until the NRIC is in the correct format.<br>
-      Use case resumes from step 2.
-<br>
-<br>
-
 * 1d. User inputs an NRIC that does not exist in the system.
     * 1d1. ClinicConnect shows an error message saying the patient is not found in the system.<br>
       Step 1d1 is repeated until a valid NRIC that is in the system is inputted.<br>
       Use case resumes from step 2.
 
+### Use case: UC07 - View detailed information of a patient
+**Guarantees:**<br>
+Detailed information of a patient will be displayed if the patient exists in the system.
+
+**MSS:**
+
+1. User types command to view detailed information of a patient and inputs the patient's NRIC.
+2. ClinicConnect displays the detailed information of the patient.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. User inputs the patient's NRIC in the wrong format or a blank NRIC.
+    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1a1 is repeated until the input entered is valid containing the NRIC of an existing patient in the system.<br>
+      Use case resumes from step 2.
+<br> 
+<br>
+
+* 1b. User inputs an NRIC that does not exist in the system
+    * 1b1. ClinicConnect shows an error message saying the patient with the specified NRIC does not exist.<br>
+      Step 1b1 is repeated until a valid NRIC that exists in the system is inputted.<br>
+      Use case resumes from step 2.
 
 #### Use case: UC08 - Edit a patient
 **Preconditions:**<br>
@@ -956,6 +1059,96 @@ At least one field of the patient will be edited
 
     Use case ends.
 
+#### Use case: UC05 - Filters appointments with only end date.
+**Guarantees:**<br>
+Displays all appointments that lies from today's date and specified end date, if any.
+
+**MSS:**
+
+1.  User types command to filter appointments and inputs the end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+* 1a. User inputs invalid end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1a1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1b. User inputs an end date that is earlier than today's date.
+    * 1b1. ClinicConnect prompts the user to fix the end date by stating that end date should be after today's date.<br>
+      Step 1b1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+      
+     
+#### Use case: UC06 - Filters appointments with start date and end date
+**Guarantees:**<br>
+Displays all appointments that lies in the date range, if any.
+
+**MSS:**
+
+1.  User types command to filter appointments and inputs the start date and end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+      Use case ends.
+
+**Extensions**
+
+* 1a. User inputs invalid start or end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1d1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1b. User inputs an end date that is earlier than the start date.
+    * 1b1. ClinicConnect prompts the user to fix the start and end date by stating that end date should be after start date.<br>
+      Step 1g1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+#### Use case: UC07 - Filters appointments with an additional `HealthService` parameter
+**Guarantees:**<br>
+
+Displays appointments that matches with the specified `HealthService`.
+
+**MSS:**
+
+1.  User inputs the start and end date [UC06](#use-case-uc06---filters-appointments-with-start-date-and-end-date)
+2.  User adds the parameter `HealthService`.
+3.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User inputs an invalid `HealthService` that does not belong to the present enum.
+    * 2a1. ClinicConnect prompts the user to choose a `HealthService` that is provided by the clinic.<br>
+      Step 2a1 is repeated until the user inputs a valid `HealthService` that is offered by the clinic.<br>
+      Use case resumes from step 2.
+      <br>
+
+#### Use case: UC11 - Clear data in ClinicConnect
+
+**MSS:**
+
+1.  User types the command to clear all patient records in ClinicConnect.
+2.  ClinicConnect deletes all the patient records from the system successfully.
+
+    Use case ends.
+
+#### Use case: UC12 - Exit ClinicConnect
+
+**MSS:**
+
+1.  User types the command to exit ClinicConnect.
+2.  ClinicConnect GUI closes successfully.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
