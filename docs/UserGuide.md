@@ -51,7 +51,7 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
-   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
+   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to the client indexed 1 in the list.
 
    * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **transaction list view**.
 
