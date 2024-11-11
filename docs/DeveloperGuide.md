@@ -426,7 +426,7 @@ Use case ends.
 * 2a. The financial consultant enters invalid transaction details or an invalid client index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
-* 2c. The financial consultant inputs an amount that is too large to be handled.
+* 2c. The financial consultant inputs an amount that is beyond the range that can be handled by Clientell.
     * 2c1. Clientell shows an error message.
     * Use case ends.
 
