@@ -12,7 +12,7 @@ Clientell is structured as an address book (a database to store details of clien
 
 Our guiding principle is: a small app for you to do big things. As such, we allow great flexibility in storing your data. While some features are designed with a certain use in mind (e.g `NAME` should be actual names of your clients), you may use and interpret them in a way that better suits your workflow (e.g `NAME` as NRIC/FIN/IDs rather than name, or both!). Of course, do this at your own risk. With great power comes great responsibility.
 
-Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troubleshooting, see [Command Summary](#command-summary) for available commands, and [Parameter Summary](#parameter-summary) to know what values are accepted.
+Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troubleshooting, [Technical Help](#technical-help) for how to get things running, [Command Summary](#command-summary) for available commands, and [Parameter Summary](#parameter-summary) to know what values are accepted.
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -21,10 +21,11 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
   - [Client Management Commands](#client-management-commands)
   - [Transaction Management Commands](#transaction-management-commands)
   - [Data Management](#data-management)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 - [Parameter Summary](#parameter-summary)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Technical Help](#technical-help)
 
 
 
@@ -369,35 +370,6 @@ Lastly, never update the JSON file while the app is running. As the data saves a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Copy the `clientell.json` data file you want to transfer. On your other device and in the application directory (the folder containing the app), if there's already an existing data file, replace it with your version (preferably saving the replaced copy somewhere). Otherwise if there's no such file, safely paste the file inside the folder.
-
-**Q**: What should I do if the application won't start? <br>
-**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
-
-**Q**: Can I customize the data file location?<br>
-**A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
-
-**Q**: How do I backup my data?<br>
-**A**: Simply copy the `clientell.json` file to a backup location.
-
-**Q**: What should I do if I accidentally delete a client?<br>
-**A**: Use your latest backup of the `clientell.json` file. There's currently no undo feature, so regular backups are recommended.
-
-**Q**: Can I import data from other applications?<br>
-**A**: Currently, direct import is not supported. However, you can manually format your data as JSON matching Clientell's format. This is very much not recommended due to risk of corrupting the data file.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known Issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
 
 ## Command Summary
 
@@ -437,14 +409,122 @@ This table summarises the non-obvious parameters in natural language.
 
 Parameter | Restrictions | Extreme accepted example | Invalid example 
 ---------------|---------------|---------------|--------
-Index | Positive integer not exceeding list size | `5` (assuming at least 5 clients/transactions in list) | `0`
-Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe`
-Company | Anything, but not blank. | `💁 Inc.`| ` `
+Index | Positive integer not exceeding list size | `5` (assuming at least 5 clients/transactions in list) | `0` (not positive)
+Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe` (contains `/`)
+Company | Anything, but not blank. | `💁 Inc.`| ` ` (blank)
 Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 9 8 7 [short note]`| `(+1234) [this is too long]` 
-Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d`
-Address |Anything, but not blank. | `💁`| ` `
-Tag | Alphanumeric, but not blank. | `something`| `some thing`
-Transaction description | Anything, but not blank. | `💁`| ` `
-Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it. | `-1000000000.00`| `-.001`
-Transaction party | Anything, but not blank. | `💁`| ` `
-Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `9999-12-31` | `9999-12-31`| `2025-02-29`
+Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d` (too many special characters in between, ends with only 1 alphanumeral)
+Address |Anything, but not blank. | `💁`| ` ` (blank)
+Tag | Alphanumeric, but not blank. | `something`| `some thing` (space, not alphanumeric)
+Transaction description | Anything, but not blank. | `💁`| ` ` (blank)
+Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it. | `-1000000000.00`| `-.001` (no digit before `.`, and more than 2 decimal places)
+Transaction party | Anything, but not blank. | `💁`| ` ` (blank)
+Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `9999-12-31` | `9999-12-31`| `2025-02-29` (date doesn't exist)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## FAQ
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Copy the `clientell.json` data file you want to transfer. On your other device and in the application directory (the folder containing the app), if there's already an existing data file, replace it with your version (preferably saving the replaced copy somewhere). Otherwise if there's no such file, safely paste the file inside the folder.
+
+**Q**: What should I do if the application won't start? <br>
+**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
+
+**Q**: Can I customize the data file location?<br>
+**A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
+
+**Q**: How do I backup my data?<br>
+**A**: Simply copy the `clientell.json` file to a backup location.
+
+**Q**: What should I do if I accidentally delete a client?<br>
+**A**: Use your latest backup of the `clientell.json` file. There's currently no undo feature, so regular backups are recommended.
+
+**Q**: Can I import data from other applications?<br>
+**A**: Currently, direct import is not supported. However, you can manually format your data as JSON matching Clientell's format. This is very much not recommended due to risk of corrupting the data file.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Technical Help
+Here is a collection of helpful info regarding setting up the application.
+
+**Linux**
+- **x64**: **Debian Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.deb)
+- **ARM 64**: **RPM Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-aarch64_bin.rpm)
+
+**macOS**
+- **ARM 64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-aarch64_bin.dmg)
+- **x64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-x64_bin.dmg)
+
+**Windows**
+- **x64**: **Installer (.exe)** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_windows-x64_bin.exe)
+
+**Accessing Terminal**
+On Windows:
+   - **Method 1**: Press **Windows Key + R**, type `cmd`, and press **Enter** to open the Command Prompt.
+   - **Method 2**: For PowerShell, right-click on the **Start** button and select **Windows PowerShell** or **Terminal** (on Windows 11).
+   - **Method 3**: Search for **Command Prompt** or **PowerShell** directly in the Windows search bar.
+
+On macOS:
+   - **Method 1**: Press **Command + Space** to open **Spotlight Search**, type "Terminal," and press **Enter**.
+   - **Method 2**: Open **Finder** > **Applications** > **Utilities** > **Terminal**.
+
+On Linux:
+   - **Method 1**: Use the shortcut **Ctrl + Alt + T** to open the terminal directly in most distributions.
+   - **Method 2**: Search for "Terminal" in your applications menu.
+   - **Method 3**: Right-click on the desktop or within a folder and select **Open Terminal** (works on many distributions).
+
+Once open, you can enter commands like `java -version` or `java -jar path/to/yourfile.jar` directly in the terminal.
+
+**Check Java Version**
+To see if Java is installed and verify its version, use the following command:
+
+```bash
+java -version
+```
+
+You should see information about the Java version, like `java version "17.0.12"`. If Java is not installed, this command may return an error or say "command not found."
+
+**Run a JAR File**
+Once Java is installed, you can run a JAR file using:
+
+```bash
+java -jar path/to/yourfile.jar
+```
+
+- **Replace `path/to/yourfile.jar`** with the full path or relative path to your JAR file.
+- **Note**: Ensure you’re in the directory of the JAR file or provide its full path.
+
+To change directories in the terminal, you use the `cd` (change directory) command, followed by the path to the directory you want to access.
+
+**Changing Directory**
+To a specific directory:
+   ```bash
+   cd path/to/directory
+   ```
+   - Replace `path/to/directory` with the full path or relative path of your desired directory.
+   - **Example**: To go to a folder named `Documents`, use:
+     ```bash
+     cd ~/Documents
+     ```
+
+Go up one level:
+   ```bash
+   cd ..
+   ```
+   - `..` tells the terminal to move up one level in the directory structure.
+
+Go to home directory (usually the most "natural" or "default" directory that you'd start in):
+   ```bash
+   cd ~
+   ```
+   - The tilde (`~`) symbol represents your home directory.
