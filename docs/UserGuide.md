@@ -197,7 +197,7 @@ whose name exactly matches the given keywords on TalentHub!
 
 Format: `view person KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g. `john` will match `John`
+- The search is case-sensitive. e.g. `john` will not match `John`
 - The order of the keywords matters. e.g. `John Doe` will match `John Doe` but not `Doe John`
 - Only the **full name** is searched.
 - Only full words will be matched. e.g. `John` will not match `Johnny`
