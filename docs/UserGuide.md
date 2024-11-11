@@ -174,23 +174,25 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
+Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 > All possible orders and combinations of the 4 parameters `NAME`, `PHONE`, `ROOM_NUMBER` and `TAG` are accepted.
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`
-* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
-* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
-* When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * The search is case-insensitive. e.g. `hans` will match `Hans`
+> * The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`
+> * Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
+> * Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
+> * When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
+> * The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`
-* When searching by `TAG`, the contact must match every `TAG` in the input fields to appear in the listed results.
-* If the user inputs multiple fields for the `find`, then only contacts that match all the input fields will appear in the listed results.
+> * Tag search is case-sensitive. `Friends` will not match `friends`.
+> * In tag search, the contacts have to contain all the specified TAGs in order to match.
+> * If multiple parameters, namely `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
 
 Examples:
 * `find n/John` Finds contacts who have the word John in their name.
@@ -206,13 +208,15 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* There is a confirmation popout after the user enters the command but before the delete is actually done.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+>* Deletes the person at the specified `INDEX`.
+>* The index refers to the index number shown in the displayed person list.
+>* The index **must be a positive integer** 1, 2, 3, …​
+>* There is a confirmation popout after the user enters the command but before the delete is actually done.
   click `OK` to continue or `Cancel` to abort the deletion.
 
-![delete popout](images/deleteConfirmation.png)
+<img src="images/Delete popup.png" alt="Delete popup screenshot" height=auto width="850"/>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
