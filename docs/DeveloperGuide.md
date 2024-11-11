@@ -573,7 +573,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -586,7 +586,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Find people with names matching a particular keyword using the `find` command.
 
     1. Test case: `delete x`<br> (where x is less than or equal to the number of found persons)
-       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -599,13 +599,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1 2`<br>
-       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message. Timestamp in the status bar is updated.
+       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message.
 
     1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Test case: `delete 0 1`<br>
-       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message.
 
 ### Saving data
 
@@ -628,3 +628,25 @@ testers are expected to do more *exploratory* testing.
    3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
    4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+
+### Sorting the person list
+
+1. Sorting entries while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `sort n/asc`<br> 
+       Expected: Persons are sorted in ascending order according to ASCII. A message saying the list has been sorted by name in ascending order is displayed. 
+
+    1. Test case: `sort d/desc`<br>
+       Expected: Persons are sorted in descending order according to date of last visit. Where a person doesn't have a date of last visit they are at the end of the list. A message saying the list has been sorted by date of last visit in descending order is displayed.
+
+1. Editing a parameter being sorted while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Sort using `sort n/asc`
+
+    1. Test case: `edit 1 n/"name starting with a different letter"`
+       Expected: A message is displayed showing the information of the updated person. The person moves in the display list according to the position of their new name (given ascending name order).
+
+    1. Test case: `add n/hunter p/61234578`
+       Expected: A message is displayed showing the information of the added person. The person is added to the list according to the position of their name (given ascending name order).
