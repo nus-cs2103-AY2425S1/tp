@@ -35,4 +35,6 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+XYZCommandParser .left.> XYZPredicate : <<create>>
+XYZPredicate .up.|> "<<interface>>\nPredicate"
 @enduml

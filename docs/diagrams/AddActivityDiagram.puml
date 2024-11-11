@@ -16,7 +16,7 @@ if () then ([Compulsory fields present])
   else ([else])
     :Add Person to WardWatch;
   endif
-else ([Missing field or duplicate arguments])
+else ([Missing compulsory fields or has duplicated fields])
     :Throw ParseException;
   stop
 

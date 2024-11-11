@@ -58,7 +58,7 @@ Diagnosis -[hidden]right-> Medication
 Medication -[hidden]right-> Notes
 Notes -[hidden]right-> Appointment
 
-ModelManager --> "*" Person: filter and sort appointments
+ModelManager --> "*" Person: filters and sorts appointments of
 ModelManager --> "*" Person: filters
 @enduml
 

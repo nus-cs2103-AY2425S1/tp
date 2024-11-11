@@ -35,7 +35,7 @@ create FieldContainsKeywordsPredicate
 FindCommandParser -> FieldContainsKeywordsPredicate
 activate FieldContainsKeywordsPredicate
 
-FieldContainsKeywordsPredicate -> FindCommandParser
+FieldContainsKeywordsPredicate --> FindCommandParser
 deactivate FieldContainsKeywordsPredicate
 
 create FindCommand
