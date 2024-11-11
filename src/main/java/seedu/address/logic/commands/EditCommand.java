@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
@@ -61,7 +59,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_INCOME + "INCOME] "
             + "[" + PREFIX_FAMILY_SIZE + "FAMILY_SIZE] "
-            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -125,16 +122,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         DateOfBirth updatedDateOfBirth = editPersonDescriptor.getDateOfBirth().orElse(personToEdit.getDateOfBirth());
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         FamilySize updatedFamilySize = editPersonDescriptor.getFamilySize().orElse(personToEdit.getFamilySize());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         ArrayList<Scheme> schemes = personToEdit.getSchemes();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, schemes, UpdatedAt.now(),
-                personToEdit.isArchived());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedDateOfBirth,
+                updatedIncome, updatedFamilySize, updatedTags, schemes, UpdatedAt.now(), personToEdit.isArchived());
     }
 
     @Override
@@ -184,9 +179,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Priority priority;
-        private Remark remark;
         private DateOfBirth dateOfBirth;
+        private Priority priority;
         private Income income;
         private FamilySize familySize;
         private Set<Tag> tags;
@@ -202,9 +196,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setPriority(toCopy.priority);
-            setRemark(toCopy.remark);
             setDateOfBirth(toCopy.dateOfBirth);
+            setPriority(toCopy.priority);
             setIncome(toCopy.income);
             setFamilySize(toCopy.familySize);
             setTags(toCopy.tags);
@@ -215,7 +208,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, address, priority, remark, dateOfBirth, income, familySize, tags);
+                    name, phone, email, address, dateOfBirth, priority, income, familySize, tags);
         }
 
         public void setName(Name name) {
@@ -250,28 +243,20 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setPriority(Priority priority) {
-            this.priority = priority;
-        }
-
-        public Optional<Priority> getPriority() {
-            return Optional.ofNullable(priority);
-        }
-
-        public void setRemark(Remark remark) {
-            this.remark = remark;
-        }
-
-        public Optional<Remark> getRemark() {
-            return Optional.ofNullable(remark);
-        }
-
         public void setDateOfBirth(DateOfBirth dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
         }
 
         public Optional<DateOfBirth> getDateOfBirth() {
             return Optional.ofNullable(dateOfBirth);
+        }
+
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         public void setIncome(Income income) {
@@ -322,9 +307,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(priority, otherEditPersonDescriptor.priority)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
+                    && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(familySize, otherEditPersonDescriptor.familySize)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -341,7 +325,6 @@ public class EditCommand extends Command {
                     .add("priority", priority)
                     .add("income", income)
                     .add("familySize", familySize)
-                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }
