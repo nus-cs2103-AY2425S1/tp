@@ -97,6 +97,7 @@ public class DeleteCommand extends Command {
         for (int i = 0; i < personsToDelete.size(); i++) {
             personToIndexMap.put(personsToDelete.get(i), targetIndexes[i].getZeroBased());
         }
+        // Use of ChatGPT to assist in code for hashing
         List<Map.Entry<Person, Integer>> entryList = new ArrayList<>(personToIndexMap.entrySet());
         entryList.sort(Map.Entry.comparingByValue());
 

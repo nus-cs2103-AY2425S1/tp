@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -43,8 +42,6 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_PRIORITY_AMY = "HIGH";
     public static final String VALID_PRIORITY_BOB = "MEDIUM";
-    public static final String VALID_REMARK_AMY = "Loves Taylor Swift.";
-    public static final String VALID_REMARK_BOB = "Supports Manchester United.";
     public static final LocalDate VALID_DATE_OF_BIRTH_AMY = LocalDate.of(2000, 1, 1);
     public static final LocalDate VALID_DATE_OF_BIRTH_BOB = LocalDate.of(1989, 1, 3);
     public static final double VALID_INCOME_AMY = 1500.32;
@@ -64,8 +61,6 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
-    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
-    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String DATE_OF_BIRTH_DESC_AMY = " " + PREFIX_DATE_OF_BIRTH + VALID_DATE_OF_BIRTH_AMY;
     public static final String DATE_OF_BIRTH_DESC_BOB = " " + PREFIX_DATE_OF_BIRTH + VALID_DATE_OF_BIRTH_BOB;
     public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
@@ -127,20 +122,29 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - a {@code CommandException} is thrown <br>
-     * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * Executes the given {@code command} and verifies that:
+     * <ul>
+     *   <li>A {@code CommandException} is thrown.</li>
+     *   <li>The exception message matches the {@code expectedMessage}.</li>
+     *   <li>The address book, filtered person list, and filtered appointment list in {@code actualModel}
+     *       remain unchanged.</li>
+     * </ul>
+     *
+     * @param command The command to execute.
+     * @param actualModel The model on which the command is executed.
+     * @param expectedMessage The expected exception message.
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedFilteredPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Appointment> expectedFilteredAppointmentList = new ArrayList<>(actualModel.getFilteredAppointmentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredPersonList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredAppointmentList, actualModel.getFilteredAppointmentList());
     }
 
     /**

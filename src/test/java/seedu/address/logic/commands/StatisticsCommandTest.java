@@ -47,7 +47,7 @@ public class StatisticsCommandTest {
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
                 + lowPriorityPeople(personList) + "\n"
-                + appointmentsSoon(appointmentList) + "\n"
+                + appointmentsSoon(personList, appointmentList) + "\n"
                 + eligibleForScheme(personList));
 
         assertCommandSuccess(new StatisticsCommand(), model,
@@ -67,7 +67,7 @@ public class StatisticsCommandTest {
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
                 + lowPriorityPeople(personList) + "\n"
-                + appointmentsSoon(appointmentList) + "\n"
+                + appointmentsSoon(personList, appointmentList) + "\n"
                 + eligibleForScheme(personList));
 
         assertCommandSuccess(new StatisticsCommand(), model,
