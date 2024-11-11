@@ -53,9 +53,10 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
-   ![openinterminal](images/openinterminal.png)
+   <img src="images/openinterminal.png" alt="openinterminal" width="600">
+   
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -81,9 +82,9 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
-    ![main window](images/Ui.png)
+    <img src="images/ui.png" alt="ui" width="600">
   - **Inspect window**: the window you see when inspecting a contact.
-    ![inspect window](images/Ui2.png)
+    <img src="images/ui2.png" alt="ui2" width="600">
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
@@ -124,7 +125,7 @@ Does not show an exhaustive list of all available commands, only the most helpfu
 
 Format: `help`
 
-![help window](images/helpWindow.png)
+<img src="images/helpWindow.png" alt="helpWindow" width="600">
 
 ### Adding a contact or delivery: `add`
 **<ins>When in the main window**
@@ -224,7 +225,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+<img src="images/findAlexDavidResult.png" alt="find" width="600">
 
 **<ins>When in the inspect window**
 
@@ -265,7 +266,7 @@ Format: `archive INDEXES...`
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
-![after archiving contact](images/archivedcontact.png)
+<img src="images/archivedcontact.png" alt="archive_contact" width="600">
 
 <box type="info" seamless>
 
@@ -283,7 +284,7 @@ Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
-![after archiving delivery](images/archiveddelivery.png)
+<img src="images/archiveddelivery.png" alt="archive_delivery" width="600">
 
 <box type="info" seamless>
 
@@ -390,7 +391,7 @@ Format: `inspect INDEX`
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
-![inspect_window](images/Ui2.png)
+<img src="images/ui2.png" alt="ui2" width="600">
 
 **<ins>When in the inspect window**
 
