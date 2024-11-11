@@ -27,7 +27,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 1. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data
 
-1. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. 
+1. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in.
 
 <div markdown="span" class="alert alert-primary">**Example:**<br/>
 On **Mac/Linux**, if you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
@@ -288,9 +288,9 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                              |
-|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list. | 
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  |
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
 
@@ -347,7 +347,7 @@ mark t/TELEGRAM…​ d/DATE
 
 * Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`
 
-  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)  
+  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)
 
 * Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`
 

@@ -312,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
 | `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 
- 
+
 
 ### Use cases
 
@@ -645,12 +645,12 @@ Team Size: *5*<br/>
 
 1. Make `sort` success message more specific:<br/>
 The current success message for `sort` does not distinguish between cases where there are contacts in the list, and the case where there are no contacts in the list.
-E.g. If a user executes `sort` on an empty contact list, the standard `sort` success message is displayed. 
+E.g. If a user executes `sort` on an empty contact list, the standard `sort` success message is displayed.
 Even though this is vacuously true, we plan to make the displayed message when there are no contacts in the contact list more specific: `There are no contacts to be sorted`.
 
 
 2. Increase specificity of `Invalid Email` error message:<br/>
-The current error message for the `email` field in `add` and `edit` identifies the possible issues with the entered email, but does not specifically identify which part of the email input is violated. 
+The current error message for the `email` field in `add` and `edit` identifies the possible issues with the entered email, but does not specifically identify which part of the email input is violated.
 We plan to make the error message more specific to let the user know of which exact part (e.g. `local-part` or `domain`) the email input is invalid.
 
 
