@@ -839,6 +839,52 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
+### Use Case 14: Delete Link Between Patient and Caregiver
+
+- System: CareLink
+- Use Case: UC14 - Delete Link Between Patient and Caregiver
+- Actor: Geriatrician (Fred)
+
+#### Preconditions
+
+- Both the patient and caregiver exist in the system.
+- A link between the specified patient and caregiver exists.
+
+#### Guarantees
+
+- The link between the specified patient and caregiver is successfully deleted.
+- If the link does not exist or either party is not found, an error message is displayed.
+- The deletion action is confirmed and saved in the system.
+
+#### Main Success Scenario (MSS)
+
+1. Fred enters the deletelink command to remove the link between a specific patient and caregiver using their respective NRICs.
+2. CareLink validates that:
+   - The patient exists in the system.
+   - The caregiver exists in the system.
+   - A link between the specified patient and caregiver exists.
+3. CareLink deletes the link from the system.
+4. CareLink displays a confirmation message showing the successful deletion of the link.
+5. Use case ends.
+
+#### Extensions
+
+- 2a. Patient Not Found:
+
+  - CareLink displays an error message indicating that the patient cannot be found.
+  - Use case ends.
+
+- 2b. Caregiver Not Found:
+
+  - CareLink displays an error message indicating that the caregiver cannot be found.
+  - Use case ends.
+
+- 2c. Link Not Found:
+  - CareLink displays an error message indicating that no link exists between the specified patient and caregiver.
+  - Use case ends.
+
+---
+
 ### Non-Functional Requirements
 
 1. **Typing-Preferred**
