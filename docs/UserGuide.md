@@ -62,18 +62,17 @@ management tasks done faster than traditional GUI apps.
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
-Term           | Explanation
-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**CLI**   | A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.
-**GUI**  | A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.
-**Assignment**         | An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.
-**Index**| The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.
-**Score**  | The score represents the grade a student receives for a specific assignment.
-**Remark**          | A remark allows the tutor to record important notes or comments about a student for reference.
-**Unmark**          | An Unmark command will cause a previously submitted Assignment to be reset to "not submitted". If the assignment was previously graded, the score will be reset by default.
-**Mark**            | A Mark command will cause an unsubmitted Assignment to be marked as Submitted. The grade will remain as "not submitted yet", until a Grade Command is performed.
-**Grade**           | A Grade command will assign a score to an assignment. This score must be within the valid range of 0 to the maximum score of the assignment. When the grade command executes, the submission status of the assignment will also be marked as "submitted". 
-
+| Term           | Explanation                                                                                                                                                                                                                                               |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**        | A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.                                                                                                             |
+| **GUI**        | A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.                                                                                                        |
+| **Assignment** | An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.                                                                                                                                                    |
+| **Index**      | The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.                                                                                                                       |
+| **Score**      | The score represents the grade a student receives for a specific assignment.                                                                                                                                                                              |
+| **Remark**     | A remark allows the tutor to record important notes or comments about a student for reference.                                                                                                                                                            |
+| **Unmark**     | An Unmark command will cause a previously submitted Assignment to be reset to "not submitted". If the assignment was previously graded, the score will be reset by default.                                                                               |
+| **Mark**       | A Mark command will cause an unsubmitted Assignment to be marked as Submitted. The grade will remain as "not submitted yet", until a Grade Command is performed.                                                                                          |
+| **Grade**      | A Grade command will assign a score to an assignment. This score must be within the valid range of 0 to the maximum score of the assignment. When the grade command executes, the submission status of the assignment will also be marked as "submitted". |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -86,7 +85,7 @@ Term           | Explanation
   e.g. in `add_student n/NAME`, `NAME` is a parameter which can be used as `add_student n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
@@ -166,7 +165,7 @@ Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the student will be removed i.e. adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
 Constraints:
@@ -192,7 +191,7 @@ Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -253,7 +252,7 @@ Format: `delete_assignment si/INDEX ai/INDEX`
 
 * Deletes the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
   list and the assignment list on the student detail panel respectively.
-  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment1.png)
+  ![explanation of assignment and student indices](images/editAssignment1.png)
 
 Constraints:
 * The index **must be a positive integer** 1, 2, 3, …
@@ -267,7 +266,8 @@ Examples:
 ### Editing an assignment: `edit_assignment`
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
-If an assignment is edited, but the details remain identical, TAchy will not treat this as an error. Instead,TAchy has been designed to allow for the assignment to be overwritten with the exact details.
+If an assignment is edited, but the details remain identical, TAchy will not treat this as an error. Instead,TAchy has been designed to allow for the assignment to be overwritten with the exact details.<br>
+**Editing an assignment will reset the submission status to "not submitted", and reset any previously assigned grade as well.**
 
 Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
@@ -284,9 +284,10 @@ Constraints:
 * The max score must be a positive integer.
 
 Examples:
+**Note:**: In each example below, a successful edit assignment command will reset submission status to "not submitted", and clear any prior assigned grade. 
 * `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st
-  student to the new name and new max score specified.
-* `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.
+  student to the new name and new max score specified. 
+* `edit_assignment si/1 ai/1 an/Assignment 1` will only change the name of the selected assignment.  
 * `edit_assignment si/1 ai/1 ms/100` will only change the max score of the selected assignment.
 * `edit_assignment si/1 ai/2 an/Math Assignment ms/100` will change the 2nd assignment of the 1st student to be with
   a new name `Math Assignment` and a new max score `100`.
@@ -439,20 +440,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action            | Format, Examples
-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
-**View Student**  | `view_student INDEX`<br> e.g., `view_student 3`
-**Clear**         | `clear`
-**Delete Student**| `delete_student INDEX`<br> e.g., `delete_student 3`
-**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**          | `list`
-**Help**          | `help`
-**Add Assignment**| `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
-**Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
-**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
-**Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
-**Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
-**Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`
-**Add Remark** | `remark si/INDEX r/REMARK` <br> e.g., `remark si/1 r/Weak in Math`
+| Action                | Format, Examples                                                                                                                            |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`       |
+| **View Student**      | `view_student INDEX`<br> e.g., `view_student 3`                                                                                             |
+| **Clear**             | `clear`                                                                                                                                     |
+| **Delete Student**    | `delete_student INDEX`<br> e.g., `delete_student 3`                                                                                         |
+| **Edit Student**      | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                   |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                  |
+| **List**              | `list`                                                                                                                                      |
+| **Help**              | `help`                                                                                                                                      |
+| **Add Assignment**    | `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`                            |
+| **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`                                                               |
+| **Edit Assignment**   | `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80` |
+| **Mark Assignment**   | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`                                                                                         |
+| **Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`                                                                                     |
+| **Grade Assignment**  | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`                                                              |
+| **Add Remark**        | `remark si/INDEX r/REMARK` <br> e.g., `remark si/1 r/Weak in Math`                                                                          |
