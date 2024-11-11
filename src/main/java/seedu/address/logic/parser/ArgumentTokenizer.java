@@ -53,35 +53,6 @@ public class ArgumentTokenizer {
         while (matcher.find()) {
             String detectedPrefix = matcher.group();
 
-            if (detectedPrefix.equals(" a/")) {
-                // Look at the prefixes after " a/" (if any)
-                // Keep skipping them, until we hit a valid prefix
-                // So that prefixes bounded by " a/" and "<next valid prefix>" are skipped
-                while (matcher.find()) {
-                    detectedPrefix = matcher.group();
-                    if (validPrefixes.contains(detectedPrefix)) {
-                        break;
-                    }
-                }
-                // Else, ferry over to the next if block
-                if (!detectedPrefix.equals(" c/")) {
-                    continue;
-                }
-            }
-
-            if (detectedPrefix.equals(" c/")) {
-                // Look at the prefixes after " c/" (if any)
-                // Keep skipping them, until we hit a valid prefix
-                // So that prefixes bounded by " c/" and "<next valid prefix>" are skipped
-                while (matcher.find()) {
-                    detectedPrefix = matcher.group();
-                    if (validPrefixes.contains(detectedPrefix)) {
-                        break;
-                    }
-                }
-                continue;
-            }
-
             // If detected prefix doesn't match any valid prefix, throw a ParseException
             if (!validPrefixes.contains(detectedPrefix)) {
                 throw new ParseException("Invalid prefix detected:" + detectedPrefix);
