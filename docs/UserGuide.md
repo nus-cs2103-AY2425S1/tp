@@ -75,9 +75,11 @@ student contact details!
 ## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - How to check your Java version? Run `java -version` in your terminal.
+   - Don't have Java `17` or above, download [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases).
-3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-   - Make sure that this folder is **empty**.
+3. Copy the file to the folder you want to use as the *home folder* for the program.
+   - Make sure that this folder is **empty**. (Program files will be saved in it!)
 4. Open a command terminal
    ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) |
    [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
@@ -88,8 +90,8 @@ student contact details!
    contains some sample data.<br>
    ![img_1.png](img_1.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g.
-   typing **`help`** and pressing Enter will open the help window,
+5. Type the command in the command box and press **Enter** to execute it. e.g.
+   typing **`help`** and pressing **Enter** will open the help window,
    which links you back to [this page](https://ay2425s1-cs2103t-f14b-2.github.io/tp/UserGuide.html).<br>
    Some example commands you can try:
 
