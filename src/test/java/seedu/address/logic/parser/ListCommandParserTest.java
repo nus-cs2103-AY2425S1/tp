@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListCommand;
-
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class ListCommandParserTest {
     private static final ListCommandParser parser = new ListCommandParser();
@@ -33,11 +33,11 @@ public class ListCommandParserTest {
 
         // different combination and permutation with spacing
         assertParseSuccess(parser, contactsWord + " " + allWord, newListCommand);
-        assertParseSuccess(parser, contactsWord + allWord, newListCommand); // edge case
     }
 
     @Test
     public void parse_failure() {
+        assertParseFailure(parser, "contactsall", ListCommand.MESSAGE_WRONG_ARGUMENTS); // edge case
 
         // Some parameters are accepted, some not accepted
         assertParseFailure(parser, "add haha", ListCommand.MESSAGE_WRONG_ARGUMENTS);

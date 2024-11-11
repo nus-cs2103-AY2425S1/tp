@@ -83,6 +83,13 @@ public class LogicManagerTest {
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
+    // @@author somethingfishyfishy
+    @Test
+    public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getAllContactList().remove(0));
+    }
+    //@@author
+
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
@@ -93,10 +100,6 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getAddressBook().getContactList().remove(0));
     }
 
-    @Test
-    public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getAllContactList().remove(0));
-    }
 
     /**
      * Executes the command and confirms that
