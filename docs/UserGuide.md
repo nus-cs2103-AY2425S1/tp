@@ -6,13 +6,13 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop app that helps you manage your contacts efficiently, combining the speed of typing commands with the ease of a visual interface.**
+MindMap is a **desktop application that helps you manage your contacts efficiently, combining the speed of typing commands with the ease of a visual interface.**
 
-It’s designed for professionals like psychologists who work with many contacts and prefer a fast, straightforward tool.
+It’s designed for professionals like therapist who work with many patients and prefer a fast, straightforward tool.
 
-With MindMap, you can accomplish tasks quickly by typing simple commands, and you still get a clear, user-friendly screen to view and organize your contacts.
+With MindMap, you can accomplish tasks quickly by typing simple commands, and get a clear, user-friendly screen to view and organise your contacts.
 
-If you’re comfortable typing, MindMap can help you get contact management tasks done much faster than traditional apps that rely heavily on point-and-click with a mouse.
+If you’re comfortable typing, MindMap can help you get patient management tasks done much faster than traditional apps that rely heavily on point-and-click with a mouse.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -56,7 +56,7 @@ If you’re comfortable typing, MindMap can help you get contact management task
 7. **Start MindMap**  
    Now, type the following line in the terminal to launch the app:
    ```bash
-   java -jar mindmap.jar
+   java -jar MindMap.jar
    ```
    This will open the MindMap app. You’re now ready to use it! If you see an error, double-check that Java is installed using **Step 1**.
 
@@ -76,7 +76,7 @@ If you’re comfortable typing, MindMap can help you get contact management task
 
     * `list` : Lists all patients.
 
-    * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a patient named `John Doe` to the App.
+    * `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW` : Adds a patient named `Ben Tan` to the app.
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -96,13 +96,16 @@ If you’re comfortable typing, MindMap can help you get contact management task
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Ben Tan`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [s/STATUS]` can be used as `n/John Doe s/LOW` or as `n/John Doe`.
-
+  e.g `n/NAME [s/STATUS]` can be used as `n/Ben Tan s/LOW` or as `n/Ben Tan`.
+* 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* 
+* All commmand flags are in lower case.
+* e.g. l/ is the lower case of L and i/ is the lower case of I
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -135,8 +138,8 @@ Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS�
 * **IDENTITY_NUMBER** has to be a valid NRIC(It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a checksum letter (e.g., S1234567D).";))
 
 Examples:
-* `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
-* `add n/Betsy Crowe i/S2202473F e/betsycrowe@example.com a/Newgate Prison p/98765432 s/HIGH`
+* `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW`
+* `add n/Ally Lim i/S0022445F e/allylim@gmail.com a/12 Kent Ridge Drive p/92221100 s/NEW`
 
 ### Adding a log: `addlog`
 Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
@@ -145,7 +148,7 @@ Creates a new log entry for a specific patient. This command is typically used t
 * **DATE** should be in the format `DD MMM YYYY`.
 * **LOG_ENTRY** is a description of the session with the patient.
   Examples:
-* `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+* `addlog i/S1234567D d/20 May 2024 l/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 
 ### Adding a log entry: `addentry`
 Creates a separate pop up window to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previous inputted.
@@ -168,10 +171,10 @@ Note that this feature is intended to cater to power users who prefer a more det
 
 ### Editing a patient : `edit`
 
-Edits an existing patient in the app.
+Edits an existing patient in the app by patient's specified INDEX.
 * **After using `edit`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
+Format: `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -179,11 +182,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
+*  `edit S1234567D n/Benson Lim` Edits the name of the patient with the specified `NRIC` to be `Benson Lim`.
 
-### Locating patients by name and identity number: `find`
+### Locating patients by name or NRIC: `find`
 
-Finds patients whose names or identity number contain any of the given keywords.
+Finds patients whose names or NRIC contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -198,7 +201,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -333,20 +335,20 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| **Action**    | **Description**                      | **Format**                                                                | **Example**                                                                          |
-|---------------|--------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Add**       | Adds a patient to MindMap            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/999999999 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
-| **Clear**     | Clears all entries                   | `clear`                                                                   |                                                                                      |
-| **Delete**    | Deletes a patient                    | `delete INDEX`                                                            | `delete 3`                                                                           |
-| **Edit**      | Edits an existing patient            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                    |
-| **Find**      | Finds patients by keywords           | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                    |
-| **Confirm**   | Confirms a deletion or clear action  | `confirm`                                                                 |                                                                                      |
-| **Cancel**    | Cancels a delete or clear action     | `cancel`                                                                  |                                                                                      |
-| **List**      | Lists all patients in the MindMap    | `list`                                                                    |                                                                                      |
-| **List Logs** | Lists logs for a specific patient    | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                   |
-| **Add Log**   | Adds a log for a patient             | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                            |
-| **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                  | `addentry i/S8613282F d/01 Nov 2024`                                                 |
-| **Help**      | Displays help message                | `help`                                                                    |                                                                                      |
+| **Action**    | **Description**                      | **Format**                                                                         | **Example**                                                                                                     |
+|---------------|--------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **Add**       | Adds a patient to MindMap            | `add n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                    | `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com <br/> a/Block 322 Jurong East Street 31, #01-01 s/NEW` |
+| **Clear**     | Clears all entries                   | `clear`                                                                            |                                                                                                                 |
+| **Delete**    | Deletes a patient                    | `delete INDEX` or `delete i/NRIC`                                                  | `delete 3` <br/> `delete i/S1234567D`                                                                           |
+| **Edit**      | Edits an existing patient            | `edit INDEX [n/NAME] [i/NRIC] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                                               |
+| **Find**      | Finds patients by keywords           | `find KEYWORD [MORE_KEYWORDS]`                                                     | `find James Jake` <br/> `find S1234567D`                                                                        |
+| **Confirm**   | Confirms a deletion or clear action  | `confirm`                                                                          |                                                                                                                 |
+| **Cancel**    | Cancels a delete or clear action     | `cancel`                                                                           |                                                                                                                 |
+| **List**      | Lists all patients in the MindMap    | `list`                                                                             |                                                                                                                 |
+| **List Logs** | Lists logs for a specific patient    | `logs i/NRIC`                                                                      | `logs i/S1234567D`                                                                                              |
+| **Add Log**   | Adds a log for a patient             | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                                 | `addlog i/S1234567D d/01 Nov 2024 l/Checked in at clinic`                                                       |
+| **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                           | `addentry i/S1234567D d/01 Nov 2024`                                                                            |
+| **Help**      | Displays help message                | `help`                                                                             |                                                                                                                 |
 
 
  ### Additional Notes
@@ -358,7 +360,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
     - `a/ADDRESS` - Address details.
     - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
     - `l/LOG_ENTRY` - Description of the session with the patient.
-    - `i/IDENTITY_NUMBER` - Unique identifier (e.g., NRIC or FIN) of the patient.
+    - `i/NRIC` - Unique identifier (e.g., NRIC or FIN) of the patient.
     - `d/DATE` - Date of the log entry in the format `DD MMM YYYY`.
     - `INDEX` - Index number of the patient in the list.
     - `KEYWORD` - Search keyword(s) to find patients.
