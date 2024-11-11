@@ -341,7 +341,7 @@ The **`AddAppointmentCommandParser`** and **`AddAppointmentCommand`** classes en
 The `scheduledate` command allows users to filter the appointments occurring on a specified date. The command requires:
 - **Date** – Date regarding schedule of interest.
 
-<puml src="diagrams/ScheduleDateActivityDiagram.puml" alt="ScheduleDateActivityDiagram" />
+<puml src="diagrams/ScheduleDateSequenceDiagram.puml" alt="ScheduleDateSequenceDiagram" />
 
 #### 1. Parsing User Input
 The **`ScheduleDateCommandParser`** class is responsible for parsing user input. It uses ParserUtil extracting:
@@ -353,11 +353,11 @@ During this parsing process:
 #### 2. Executing the Command
 The **`ScheduleDateCommand`** class performs the following steps to filter the appointments:
 
-1. **Update filteredAppointmentList**:  
-   Uses the `AppointmentContainsDatePredicate` from the parser to update filteredAppointmentList in **Model**.
+1. **Update filteredAppointments**:  
+   Uses the `AppointmentContainsDatePredicate` from the parser to update filteredAppointments in **Model**.
 
 2. **Display sortedAppointments**:
-   `sortedAppointments` will be updated with the updated filteredAppointmentList in **Model**.
+   `sortedAppointments` will be updated with the updated filteredAppointments in **Model**.
    `sortedAppointments` is displayed.
 
 #### 3. Handling Invalid Date Inputs
