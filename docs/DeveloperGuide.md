@@ -117,8 +117,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
-  * As explained above, some `XYZCommandParser` classes require the `Model` for parsing 
-  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse) <br>
+  * As explained above, some `XYZCommandParser` classes require the `Model` for parsing. 
+  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse). <br>
 <br> 
 * All `XYZCommandParser` classes (e.g., `AddGuestCommandParser`, `DeleteGuestCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
@@ -133,7 +133,7 @@ The `Model` component,
 * stores the address book data i.e., all `Guest` and `Vendor` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Guest` / `Vendor` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -143,12 +143,12 @@ The `Model` component,
 
 The `Storage` component,
 * Can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-  * `Storage` saves `Guest` into JSON format and reads back into `Guest` object, using the `JsonAdapatedGuest` class
-  * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class <br>
+  * `Storage` saves `Guest` into JSON format and reads back into `Guest` object, using the `JsonAdapatedGuest` class.
+  * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class. <br>
 <br>
-* Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed)
+* Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 
-* Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -161,13 +161,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Guest feature
-The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
+The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values.
 
 The sequence diagrams below provide an overview for the execution flow of an `add_guest` command.
 <br>
 Note: In the diagrams below,
-- Let **C** represent the command: "add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus"
-- Let **args** represent the arguments provided in the command: "n/Joe p/98765432 e/joe@gmail.com a/Nexus"
+- Let **C** represent the command: "add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus".
+- Let **args** represent the arguments provided in the command: "n/Joe p/98765432 e/joe@gmail.com a/Nexus".
+- Let **m** represent an instance of the Model.
 
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
 <puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
@@ -177,19 +178,23 @@ Note: In the diagrams below,
 </box>
 
 Explanation:
-1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution.
 2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `add_guest` command, it creates and returns an `AddGuestCommandParser` for further parsing. 
-3. `AddGuestCommandParser` parses the arguments provided in the user input to extract the prefixes and their values, which are used to create a `Guest` object with the corresponding attributes
-   * Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory)
-   * Then, a `Guest` object with name, phone number, email and address attributes will be created <br> 
+3. `AddGuestCommandParser` parses the arguments provided in the user input to extract the prefixes and their values, which are used to create a `Guest` object with the corresponding attributes.
+   * Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory).
+   * Then, a `Guest` object with name, phone number, email and address attributes will be created. <br> 
 4. An `AddGuestCommand` is then created with the new `Guest` object and returned.
 5. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate (i.e. not same name and phone number as another guest), the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
-6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component).
 
 ### Edit Guest feature
-The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest. New guest details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
+The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest. New guest details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values.
 
 The sequence diagrams below provide an overview for the execution flow of an `edit_guest` command:
+
+Note: In the diagrams below,
+- Let **m** represent an instance of the Model.
+
 <puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
 <puml src="diagrams/EditGuestSequenceDiagramP3.puml" />
 <box type="info" seamless>
@@ -198,17 +203,21 @@ The sequence diagrams below provide an overview for the execution flow of an `ed
 </box>
 
 Explanation:
-1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution.
 2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `edit_guest` command, it creates and returns an `EditGuestCommandParser` for further parsing.
 3. `EditGuestCommandParser` parses the arguments provided by the user input to extract the prefixes and their values, which are used to create an `EditGuestDescriptor` object that captures the updated information <br>
-4. An `EditGuestCommand` is then created with the guest index provided, as well as the new `EditGuestDescriptor` object
+4. An `EditGuestCommand` is then created with the guest index provided, as well as the new `EditGuestDescriptor` object.
 5. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model`. The guest index is used to access the target guest to edit. An edited guest with the updated name (from the example above) is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
-6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component).
 
 ### Find feature
 The `find` command searches for all guests and vendors that match any of the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that exactly one type of prefix should be used for each find command.
 
 The sequence diagrams below provide an overview for the execution flow of a `find` command:
+
+Note: In the diagrams below,
+- Let **m** represent an instance of the Model.
+
 <puml src="diagrams/FindSequenceDiagramP1.puml" />
 <puml src="diagrams/FindSequenceDiagramP3.puml" />
 <box type="info" seamless>
@@ -222,7 +231,7 @@ Explanation:
 3. `FindCommandParser` parses the arguments provided in the user input to extract the prefix and its corresponding value. Then, it calls the corresponding parse predicate method to create the corresponding predicate to be used. In the above example, since the name prefix is specified, the `parseNamePredicate` method is called to create a `NameContainsKeywordsPredicate` object.
 4. A `FindCommand` is then created with the predicate and returned.
 5. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument. This method filters the list of guests and vendors based on the predicate. In this example, guests and vendors whose name matches the given keyword `John` will be kept in the filtered list. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of remaining guests and vendors. 
-6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -777,7 +786,7 @@ We also spent significant time adjusting current commands to recognize and proce
 **Achievements**: We successfully integrated both entity types while maintaining a clean architecture, enabling BridalBuddy to
 manage multiple types of contacts with specific fields and functionalities, all without compromising compatibility with existing commands.
 
-### Introducing Optional and Custom Fields
+### Introducing New Optional and Custom Fields
 
 **Difficulty Level**: Medium
 

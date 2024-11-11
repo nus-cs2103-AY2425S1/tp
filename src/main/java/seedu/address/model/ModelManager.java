@@ -148,15 +148,15 @@ public class ModelManager implements Model {
         ObservableList<Person> guestList = getFilteredGuestList();
         int guestCount = guestList.size();
         int guestsPending = (int) guestList.stream()
-                .filter(person -> rsvpPredicate(person, "P"))
+                .filter(person -> hasRsvpStatus(person, "P"))
                 .count();
 
         int guestsComing = (int) guestList.stream()
-                .filter(person -> rsvpPredicate(person, "A"))
+                .filter(person -> hasRsvpStatus(person, "A"))
                 .count();
 
         int guestsNotComing = (int) guestList.stream()
-                .filter(person -> rsvpPredicate(person, "D"))
+                .filter(person -> hasRsvpStatus(person, "D"))
                 .count();
         return new int[] { guestCount, guestsPending, guestsComing, guestsNotComing };
     }
@@ -166,7 +166,7 @@ public class ModelManager implements Model {
      * If each person matches the rsvp status, returns true.
      * Else, returns false.
      */
-    private boolean rsvpPredicate(Person p, String rsvpStatus) {
+    private boolean hasRsvpStatus(Person p, String rsvpStatus) {
         assert(p instanceof Guest);
         Guest g = (Guest) p;
         if (g.getRsvp().rsvp.equals(rsvpStatus)) {
