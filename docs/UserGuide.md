@@ -793,7 +793,13 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. Persons are able to have multiple weddings on the same day.
+4. Client of a wedding can be assigned another wedding job (for a different wedding) on the same day.
+5. Long fields (more than 50 characters) may not display fully in the GUI.
+6. Incorrect error message shown when the number entered is too large.
+7. User may not be able to "unclick" after clicking on a field on the GUI.
+8. User may be able to add weddings that are in the past.
+9. Adjusting the window size may cause the GUI to display to hide wedding details
 [↥ Back to Top](#bridal-boss-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
