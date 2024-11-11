@@ -116,7 +116,7 @@ Alerts you to potential issues or problems that may arise.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in sqaure brackets and with `+` after them can be used zero or more times.<br>
+* Items in square brackets and with `+` after them can be used zero or more times.<br>
   e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
@@ -139,7 +139,7 @@ Alerts you to potential issues or problems that may arise.
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
 
-**Shows a message explain the usage of the specified command keyword**
+**Shows a message explaining the usage of the specified command keyword**
 
 Format: `help [COMMAND_KEYWORD]`
 
@@ -251,7 +251,7 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-#### Editing All other fields
+#### Editing all other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
@@ -326,6 +326,7 @@ Format: `find (n/KEYWORD | r/KEYWORD)+`
 
 Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+
   ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 <box type="info" seamless>
@@ -378,7 +379,7 @@ Format: `undo`
 
 * Data-modifying commands refers to those who has direct manipulation over the contact data,
 such as add, edit, delete or clear.
-* Commands that does not modify contact data in the address book(list, help, find etc.)
+* Commands that do not modify contact data in the address book(list, help, find etc.)
 are not considered by the undo command.
 * If you input `undo` when there's nothing to undo, GUI will remind you about this
 and no effect would be applied to the address book.
@@ -397,7 +398,7 @@ Format: `redo`
 
 * Redo only helps to restore command results that can be handled by undo command,
 such as add, edit, delete and clear.
-* If you input `redo` when there's nothing to undo, GUI will remind you about this
+* If you input `redo` when there's nothing to redo, GUI will remind you about this
 and no effect would be applied to the address book.
 
 Examples:
@@ -468,7 +469,7 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
