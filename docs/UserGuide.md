@@ -120,7 +120,7 @@ Format: `help`
 
 Adds a contact to the contacts list.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
@@ -131,7 +131,7 @@ Note:
 
 * `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
 * `EMAIL` and `PHONE` can be duplicated to give you freedom, but there will be a warning.
-* `Phone`, `EMAIL`, `Address` are optional but they will be populated with dummy values if left blank.
+* `Address` needs to have the format: `[Address line], S[6-digit postal code]`
 
 
 **<ins>When in the inspect window**
