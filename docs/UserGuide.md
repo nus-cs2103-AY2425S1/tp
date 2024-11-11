@@ -415,7 +415,7 @@ Example:
 
 >**Warning:** This application is only catered to only one module.
 >
->**Warning** One student can only be added to one tutorial.
+>**Warning:** One student can only be added to one tutorial.
 
 #### 4.2.1 Adding a tutorial: `addTut`
 
