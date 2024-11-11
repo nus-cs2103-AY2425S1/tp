@@ -548,10 +548,10 @@ The first test case below assumes the user has not added any more restaurants wi
      Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
   1. Test case: `find !@#`<br>
-     Expected: Error message displays that names may only contain alphanumeric values and spaces.
+     Expected: Message displays no restaurants found.
 
   1. Other incorrect find commands to try: `find`<br>
-     Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+     Expected: Invalid command format!. Description, parameters and an example of the right use of the `find` command is shown.
 
 
 
@@ -566,10 +566,10 @@ The first test case below assumes the user has not added any more restaurants wi
    Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
 1. Test case: `tags $$$`<br>
-   Expected: Error message display stating tags are alphanumeric, requests user to use the price command for filtering price labels instead.
+   Expected: Message displays no restaurants found.
 
 1. Other incorrect find commands to try: `tags`<br>
-   Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+   Expected: Invalid command format!. Description, parameters and an example of the right use of the `tags` command is shown.
 
 
 ### Filtering by price
@@ -583,10 +583,10 @@ The first test case below assumes the user has not added any more restaurants wi
    Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
 1. Test case: `price expensive`<br>
-   Expected: Error message display stating prices searched should only be the approved price labels. 
+   Expected: Message displays no restaurants found. 
 
 1. Other incorrect find commands to try: `price`<br>
-   Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+   Expected: Invalid command format!. Description, parameters and an example of the right use of the `price` command is shown.
 
 
 
@@ -610,8 +610,13 @@ Team size: 4<br>
 
 1. **Make add command accept non-alphanumeric values:** The current implementation for the add command is such where names and tags can only be saved as alphanumeric values. We plan to allow adding non-alphanumeric
 values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/12345678 e/test@email.com a/Pasir Ris pr/$$$ t/Crème brûlée`.
-2. **Make tags command accept non-alphanumeric values:** Similar to the above-mentioned enhancement, we also plan on enhancing the tags command to allow searches for non-alphanumeric values. E.g. `tags Crème brûlée`.
-3. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
+2. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
 spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
-4. **Fix grammar for 1 restaurant listed:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
+3. **Fix grammar for 1 restaurant listed:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
 fixing this in the future to: `1 restaurant listed!`
+4. **Improve tags error message:** Currently tags are only allowed to be alphanumeric values, if the user were to search `tags $$$$`, the response of `0 restaurants listed!` is the output. However, a better implementation would have been 
+for the source code to first check if the keywords fits the current criteria for what is allowed as tags before finding. If the conditions were not met, a more appropriate response could have been displayed, one example 
+that would be a response to the above example, would be `tags should only be alphanumeric values, if you are trying to filter by price use to price command`.
+5. **Improve price error message:** Currently price are only allowed to be filtered by a given combination of the allowed price labels, if the user were to search `price $$$$$` or `price 4`, the response of `0 restaurants listed!` is the output. However, like the previous point, 
+a better implementation would have been for the source code to first check if the input were price labels before finding. If the conditions were not met, a more appropriate response could have been displayed, for example 
+`Price command only accepts a combination of the following: $ $$ $$$ $$$$`.
