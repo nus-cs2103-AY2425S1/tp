@@ -238,7 +238,12 @@ Currently: As KnottyPlanners is optimised for keyboard usage, interactions with 
 
 Plan: To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
 
-5.
+5. Support for long inputs
+
+Currently: KnottyPlanners only support inputs up till XXX characters. As such, extreme inputs that exceed our limit can potentially hinder the viewing of information when the user does not resize the window.
+
+Plan: To handle extreme inputs of all fields with a long character count, ensuring that the information can still remain visible.
+
 // Support for Multi-Languages
  
 --------------------------------------------------------------------------------------------------------------------
