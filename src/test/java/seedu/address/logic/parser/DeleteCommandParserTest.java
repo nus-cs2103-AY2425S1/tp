@@ -42,4 +42,11 @@ public class DeleteCommandParserTest {
                         + String.valueOf(INDEX_FIRST_PERSON.getOneBased()),
                 new DeleteCommand(INDEX_FIRST_PERSON, deleteCommandDescriptor));
     }
+
+    @Test
+    public void parse_invalidEmergencyContactIndex_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "abc",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
+    }
 }

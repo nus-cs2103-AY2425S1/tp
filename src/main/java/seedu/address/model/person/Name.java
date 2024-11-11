@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank and should only contain alphanumeric characters, spaces or the following "
-                    + "special characters: - . ( ) @ / '";
+            "Names should not be blank and should only contain alphanumeric characters, spaces, the words 'd/o' or "
+                + "'s/o' or the following special characters: - . ( ) @ '";
 
     /*
      * The first character of the address must not be a whitespace,

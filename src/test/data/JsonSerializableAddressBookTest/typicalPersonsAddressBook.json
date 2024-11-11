@@ -105,6 +105,10 @@
       "ecName" : "Anjali Devi",
       "ecPhone" : "98763124",
       "ecRelationship" : "Daughter"
+    }, {
+      "ecName" : "Buddy Hoagies",
+      "ecPhone" : "64815432",
+      "ecRelationship" : "Son"
     }],
     "doctor": {
       "doctorName": "Peh Boon Hao",
