@@ -2,7 +2,6 @@ package keycontacts.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DATE;
-import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.model.Model;
@@ -16,9 +15,9 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the schedule for the week of the given date."
-            + "If no date is provided, the current date will be used.\n"
+            + " If no date is provided, the current date will be used.\n"
             + "Parameters: [" + PREFIX_DATE + "DATE]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + " " + PREFIX_PHONE + "91234567";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DATE + "07-11-2024";
 
     public static final String MESSAGE_SUCCESS = "Calendar view updated.";
 

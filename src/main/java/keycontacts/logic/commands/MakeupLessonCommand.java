@@ -83,7 +83,8 @@ public class MakeupLessonCommand extends Command {
             throw new CommandException(String.format(MESSAGE_CLASHING_LESSON,
                     clashingLessons.stream()
                             .filter(lesson -> lesson != makeupLesson)
-                            .findFirst().get().toDisplay()));
+                            // can be empty since clashing lessons could be identical
+                            .findFirst().orElse(makeupLesson).toDisplay()));
         }
 
         model.commitStudentDirectory();

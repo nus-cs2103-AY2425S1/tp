@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `unassign 1 pn/Moonlight Sonata pn/Fur Elise` <br>
        **Expected**: "Moonlight Sonata" and "Fur Elise" are unassigned from the first student.
    
-    2. Test case: `unassign 2`
+    2. Test case: `unassign 2`<br>
        **Expected**: All pieces are unassigned from the second student
 
 ### Scheduling a Regular Lesson
@@ -726,17 +726,17 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `schedule 1 d/Monday st/12:00 et/14:00` <br>
        **Expected**: A regular lesson is scheduled for the first student on Monday from 12:00 to 14:00.
 
-    1. Test case: `schedule 2 d/Friday st/09:00 et/10:30`<br>
-       **Expected**: A regular lesson is scheduled for the second student on Friday from 09:00 to 10:30.
+    1. Test case: `schedule 2 d/Friday st/16:00 et/18:00`<br>
+       **Expected**: A regular lesson is scheduled for the second student on Friday from 16:00 to 18:00.
 
 ### Cancelling a Regular Lesson
 1. Cancel a scheduled lesson
 
-    1. Test case: `cancel 1 dt/15-10-2024 st/12:00` <br>
-       **Expected**: The first student's lesson on October 15, 2024, at 12:00 is canceled.
+    1. Test case: `cancel 1 dt/04-11-2024 st/12:00` <br>
+       **Expected**: The first student's lesson on November 04, 2024, at 12:00 is canceled.
 
-    1. Test case: `cancel 2 dt/20-10-2024 st/09:00`<br>
-       **Expected**: The second student's lesson on October 20, 2024, at 09:00 is canceled.
+    1. Test case: `cancel 2 dt/18-10-2024 st/16:00`<br>
+       **Expected**: The second student's lesson on October 18, 2024, at 16:00 is canceled.
 
 ### Scheduling a Makeup Lesson
 1. Schedule a makeup lesson
@@ -746,6 +746,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `makeup 2 dt/26-12-2024 st/10:00 et/11:30`<br>
        **Expected**: A makeup lesson is scheduled for the second student on December 26, 2024, from 10:00 to 11:30.
+
     1. Test case: `makeup 1 dt/31-02-2024 st/10:00 et/12:00` <br>
        **Expected**: An error is thrown as 31st Feb is not a valid date.
 
@@ -758,7 +759,7 @@ testers are expected to do more *exploratory* testing.
 2. View a specific week’s schedule
 
    1. Test case: `view dt/01-12-2024` <br>
-      **Expected**: The schedule for the week starting December 1, 2024, is displayed, showing all lessons for that period.
+      **Expected**: The schedule for the week containing December 1, 2024, is displayed, showing all lessons for that period.
 ### Finding Students
 1. Find by name
 
@@ -767,7 +768,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Find by multiple details
 
-    1. Test case: `find n/John gl/ABRS`M<br>
+    1. Test case: `find n/John gl/ABRSM`<br>
     **Expected**: Students with "John" in their name and "ABRSM" in their grade level are displayed.
 
 ### Sorting Students

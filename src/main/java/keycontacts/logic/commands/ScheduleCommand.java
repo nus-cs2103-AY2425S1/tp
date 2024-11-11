@@ -85,7 +85,8 @@ public class ScheduleCommand extends Command {
             throw new CommandException(String.format(MESSAGE_LESSON_CLASH,
                     clashingLessons.stream()
                             .filter(lesson -> lesson != regularLesson)
-                            .findFirst().get().toDisplay()));
+                            // can be empty since clashing regular lessons can be identical
+                            .findFirst().orElse(regularLesson).toDisplay()));
         }
 
         model.commitStudentDirectory();
