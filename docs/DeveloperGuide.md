@@ -658,8 +658,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `deleteremark 1 ri/1` <br>
        Expected: The remark "Midterms coming up." will be deleted from the student. The student's details should be displayed on the right panel. Remark successfully deleted is shown in the status message.
-
-### Displayig a student
+    
+### Displaying a student
 
 1. Displaying a student using index
 
@@ -668,6 +668,12 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `display 1`<br>
        Expected: Details of first student is displayed on the right panel. A message confirming successful display of the student is shown in the status message.
     
+    1. Test case: `display`<br>
+       Expected: No student is displayed. Error details shown in the status message.
+   
+    1. Test case: `display x` (where x is larger than the list size) <br>
+       Expected: No student is displayed. Invalid student error is shown in the status message.
+
 ### Navigating through command history
 
 1. Navigating to your previous command
