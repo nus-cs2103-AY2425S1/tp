@@ -44,7 +44,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidEmergencyContactIndex_Failure() {
+    public void parse_invalidEmergencyContactIndex_failure() {
         assertParseFailure(parser, "1 " + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteCommand.MESSAGE_USAGE));
