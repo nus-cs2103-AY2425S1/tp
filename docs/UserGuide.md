@@ -150,6 +150,7 @@ Format: `newtag t/TAG1…​`
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
 * Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
+* Additional leading entries will be ignored. e.g. `newtag 1 t/bride's side` is the same as `newtag t/bride's side`.
 * Duplicate tags (with the same name) are **not** allowed.
 * Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
 * Only 30 (or fewer) predefined tags can exist at any point.
@@ -174,6 +175,7 @@ Format: `deletetag [-force] t/TAG1…​`
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
 * Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
+* Additional leading entries will be ignored. e.g. `deletetag 1 t/bride's side` is the same as `deletetag t/bride's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
@@ -210,7 +212,8 @@ Tags a guest with the specified tag.
 
 Format: `tag INDEX…​ t/TAG…​`
 * Tag must have already been defined using `newtag` before tagging it to a guest.
-* The index(es) **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* There is a limit of 10 indexes that can be tagged in a single `tag` command.
+* The index(es) **must be within the index boundaries of the guest list**. ie. If there are 15 guests, INDEX accepts values from 1 to 15.
 * Attempting to tag guests with an invalid tag will not halt tagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `tag 1 t/friends t/bride's side` will still successfully tag `bride's side` on the guest indexed at 1. 
 * Attempting to tag guests with a tag already on some will not halt tagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `tag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 2.
 
@@ -231,7 +234,7 @@ Format: `untag INDEX…​ t/TAG…​`
 * A guest must already have the tag for it to be removed.
 * Index(es) of the guest(s) must be within valid range (i.e. greater than 0 and less than or equals to the current shown list length)
 * Attempting to untag guests with an invalid tag will not halt untagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `untag 1 t/friends t/bride's side` will still successfully untag `bride's side` on the guest indexed at 1.
-* Attempting to untag guests with a tag already on some will not halt untagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `untag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 1.
+* Attempting to untag guests with a tag already on some will not halt untagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `untag 1 2 t/friends` will still successfully untag `friends` on the guest indexed at 1.
 
 Examples:
 * `untag 1 t/bride's side`

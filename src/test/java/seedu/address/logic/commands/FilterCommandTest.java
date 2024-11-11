@@ -129,8 +129,8 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
 
-        expectedMessage = "Tag(s) must be created first using 'newtag' command: [family]\n"
-                + "The following tags are already being filtered: [friends]";
+        expectedMessage = FilterCommand.MESSAGE_TAG_NOT_CREATED + FAMILY + "\n"
+                + FilterCommand.MESSAGE_TAG_FILTER_ALREADY_EXISTS + FRIENDS;
         tagSet.add(FAMILY);
         FilterCommand newFilterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandSuccess(newFilterCommand, model, expectedMessage, expectedModel);
