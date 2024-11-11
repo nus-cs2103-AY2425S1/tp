@@ -704,6 +704,12 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `addlesson 1 l/monday 0900-1100` <br>
         Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
+    
+    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300` <br>
+        Expected: No lesson is added. A clashing lesson error will be displayed in the status message.
+
+    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200` <br>
+        Expected: Lessons on "TUESDAY 1000-1100" and "TUESDAY 1100-1200" will be added to the student. The student's details should be displayed on the right panel. Lessons successfully added are shown in the status message.
 
 ### Deleting a lesson from a student
 
@@ -713,6 +719,12 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `deletelesson 1 li/1` <br>
        Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
+
+    3. Test case: `deletelesson` <br>
+       Expected: No lesson is deleted. Error details shown in the status message.
+
+    4. Other incorrect deletelesson commands to try: `deletelesson 0`, `deletelesson x` (where x is larger than the list size) <br>
+       Expected: Invalid lesson index error is shown in the status message.
 
 ### Adding a remark to a student
 
