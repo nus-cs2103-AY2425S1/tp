@@ -736,3 +736,12 @@ feature in future iterations.
 expectation that lessons are created much less frequently than students and are important not to delete without backup.
 However, the team sees value in providing a Quality of Life change to delete these lessons by index once the deletion
 commands have been railguarded by the `undo` command in future iterations.
+
+4. **Markall/unmarkall based on current view**: Presently, marking / unmarking of every student's paid status works
+regardless of the current filtered student list. For future itreations, we shall work on developing a variant of
+the `markall` / `unmarkall` commands only marks / unmarks all students in the current view.
+
+5. **Keep student filter when editing**: Presently, after the student list has been filtered, the editing of a 
+student's details in that list will cause the filter to reset. To prevent annoyance for users who may wish to
+continue work on the filtered student list without resets, our team will be pursuing this quality of life change
+in future iterations.
