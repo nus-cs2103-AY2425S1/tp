@@ -1260,6 +1260,8 @@ testers are expected to do more *exploratory* testing.
     - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
 <p><p/>
 
+<div style="page-break-after: always;"></div>
+
 3. **Improve error messages related to handling of index**
     - **Problem:** Currently, having an invalid value (e.g. `0`, `1 2`) for `CUSTOMER_INDEX` and `ORDER_INDEX` will result in an error stating "Invalid command format!" along with the command format. While in the command format it states that said parameters must be a positive integer, the error message could be more concise.
     - **Example:** User tries to delete a customer using `deletec 0`, the following error message is displayed:
