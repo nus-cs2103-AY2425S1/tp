@@ -41,6 +41,7 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Appendix: Planned enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
 * [Tutorials](https://se-education.org/guides/tutorials/ab3.html) :expanded:
   * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
   * [Adding a command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
