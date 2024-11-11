@@ -19,18 +19,18 @@ public class EcNumberTest {
 
     @Test
     public void constructor_invalidEcNumber_throwsIllegalArgumentException() {
-        String invalidEcNumber = "123";
+        String invalidEcNumber = "12";
         // EP: invalid EcNumber
         assertThrows(IllegalArgumentException.class, () -> new EcNumber(invalidEcNumber));
     }
 
     @Test
     public void constructor_validEcNumber() {
-        String validEcNumber1 = "12345678";
+        String validEcNumber1 = "123";
         String validEcNumber2 = "";
 
         // EP: valid EcNumber
-        assertDoesNotThrow(() -> new EcNumber(validEcNumber1)); // Boundary Value: 8 digits
+        assertDoesNotThrow(() -> new EcNumber(validEcNumber1)); // Boundary Value: 3 digits
         assertDoesNotThrow(() -> new EcNumber(validEcNumber2)); // Boundary Value: Empty String
     }
 
@@ -41,14 +41,14 @@ public class EcNumberTest {
 
         // EP: invalid phone numbers
         assertFalse(EcNumber.isValidEcNumber(" ")); // spaces only
-        assertFalse(EcNumber.isValidEcNumber("91")); // less than 8 numbers
+        assertFalse(EcNumber.isValidEcNumber("91")); // less than 3 digits
         assertFalse(EcNumber.isValidEcNumber("phone")); // non-numeric
         assertFalse(EcNumber.isValidEcNumber("9011p041")); // alphabets within digits
         assertFalse(EcNumber.isValidEcNumber("9312 1534")); // spaces within digits
 
         // EP: valid phone numbers
         assertTrue(EcNumber.isValidEcNumber("")); // Boundary value: empty string
-        assertTrue(EcNumber.isValidEcNumber("93121534")); // Boundary value: exactly 8 numbers
+        assertTrue(EcNumber.isValidEcNumber("123")); // Boundary value: 3 digits
     }
 
     @Test
