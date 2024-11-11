@@ -1724,7 +1724,7 @@ Client index cannot be `0`. No _client_ is deleted, and error details are displa
 
 <box type="wrong">
 
-Client index cannot be larger than size of the displayed list. No _client_ is deleted, and error details are displayed in the result display box.
+Client index cannot be larger than the size of the displayed list. No _client_ is deleted, and error details are displayed in the result display box.
 
 </box>
 
@@ -1732,7 +1732,113 @@ Client index cannot be larger than size of the displayed list. No _client_ is de
 
 #### Deleting a client's [_rental information_](#glossary-rental-information)
 
-1. <!-- TODO!! @Nathan follow same foramt as above -->
+Deleting a _client's_ _rental information_.
+
+<box type="warning">
+
+**Prerequisites**: List all _clients_ using the `list` command. **At least one** _client_ is in the list, and the first 
+_client_ has **at least one** _rental information_.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `rdelete c/1 r/1`
+
+<box type="success">
+
+The app prompts for confirmation. Accepting the prompt with `y` causes the command to proceed, any other input cancels the command.
+The first rental information is deleted from the first _client_ displayed in the list.
+Details of the deleted _rental information_ will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `rdelete c/0 r/1`
+
+<box type="wrong">
+
+Client index cannot be `0`. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `rdelete c/x r/1`, where `x` is larger than the total number of clients.
+
+<box type="wrong">
+
+Client index cannot be larger than the size of the displayed list. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `rdelete c/1 r/0`
+
+<box type="wrong">
+
+Rental index cannot be `0`. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `rdelete c/1 r/x`, where `x` is larger than the number of rental information associated with the first client.
+
+<box type="wrong">
+
+Rental index cannot be larger than the number of _rental information_ in the client's list.
+No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `rdelete c/1`
+
+<box type="wrong">
+
+No rental index given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7**: `rdelete r/1`
+
+<box type="wrong">
+
+No client index given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8**: `rdelete`
+
+<box type="wrong">
+
+No parameter given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
 
 #### Command History Feature
 
