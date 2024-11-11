@@ -64,7 +64,7 @@ If Java is not installed or if the version is below `17`, download the latest Ja
     - In the command box within PlanPal, type a command and press Enter to execute it. For example:
         - **`help`**: Opens the help window with guidance on commands.
         - **`list`**: Displays a list of all contacts.
-        - **`add n/John Doe p/98765432 e/vjohnd@example.com a/John street, block 123, #01-01`**: Adds a contact named `John Doe` to the address book.
+        - **`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`**: Adds a contact named `John Doe` to the address book.
         - **`delete 3`**: Removes the 3rd contact in the current list.
         - **`clear`**: Deletes all contacts from the address book.
         - **`exit`**: Closes the application.
@@ -143,16 +143,16 @@ is why you can search for them by name! Let's look for Jeff Tan again using the
 **Example:** `find-name Jeff`
 
 Now you can add Jeff to your event! Let's add him to the "Summer Orientation" using the
-`add-event` command. In the event of multiple people with the name of Jeff, make sure you
+`event-add` command. In the event of multiple people with the name of Jeff, make sure you
 select the one you want carefully!
 
-To add contacts to an event, use the `add-event` command. 
+To add contacts to an event, use the `event-add` command. 
 You can specify the event index, contact index, and the role of the contact in the event.
 Because of our previous search of finding Jeff by name, he should be at the top!
 
-**Command Format:** `add-event ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX`
+**Command Format:** `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX`
 
-**Example:** `add-event ei/3 a/1`
+**Example:** `event-add ei/3 a/1`
 
 This command would add Jeff to the list of attendees of the Summer Orientation event.
 Do note that Jeff needs to have a role before he can be added to an event!
@@ -431,10 +431,10 @@ Format: `find-event EVENT_INDEX`
 Examples:
 * `find-event 1`
 
-#### Adding a Contact to an Event : `add-event` or `ae`
+#### Adding a Contact to an Event : `event-add` or `ea`
 Adds a contact to an event with a specified role.
 
-Format: `add-event ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
+Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
 
 * Contacts can only be added to an event based on their roles (e.g. If John is a sponsor, he can only be added to Event X as a sponsor, not a volunteer)
 * Contacts with no roles cannot be added to events
@@ -457,8 +457,8 @@ At least one of the following prefixes is required—`a/`, `s/`, `ve/`, or `vo/`
 </div>
 
 Examples:
-* `add-event ei/1 a/1,2,3` will add the first 3 contacts as attendees to the first event.
-* `find-role attendee` followed by `add-event ei/2 a/1,2,3 ve/2,4,5` will add the first 3 contacts from the search results as attendees and the 2nd, 4th and 5th contact as vendors to the 2nd event.
+* `event-add ei/1 a/1,2,3` will add the first 3 contacts as attendees to the first event.
+* `find-role attendee` followed by `event-add ei/2 a/1,2,3 ve/2,4,5` will add the first 3 contacts from the search results as attendees and the 2nd, 4th and 5th contact as vendors to the 2nd event.
 
 #### Removing a Contact from an Event : `remove`
 Removes a contact from an event.
@@ -684,7 +684,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 | **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                      |
 | **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                     |
 | **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                              |
-| **Add Contact to Event** | `add-event ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. add-event ei/1 a/1,2,3` |
+| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
 | **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                           |
 | **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                           |
 | **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                              

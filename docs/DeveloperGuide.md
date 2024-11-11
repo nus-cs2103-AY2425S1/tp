@@ -496,9 +496,9 @@ testers are expected to do more *exploratory* testing.
 
 2. **Adding a contact to an event**
     1. Prerequisite: An event and at least one contact exist.
-    2. Test case: `add-event ei/1 a/1`
+    2. Test case: `event-add ei/1 a/1`
         - Expected: Adds the first contact to the first event with the "attendee" role. Status message confirms the addition.
-    3. Test case: `add-event ei/1`
+    3. Test case: `event-add ei/1`
         - Expected: Error message indicating invalid command.
 
 3. **Removing a contact from an event**
