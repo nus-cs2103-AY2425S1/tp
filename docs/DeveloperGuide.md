@@ -639,7 +639,7 @@ You can use your own VRNs that follow the format in the User Guide.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
   - `XXX` represents 1 to 3 alphabet letters.
   - `1234` represents a number up to 4-digits.
-  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
+  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore). Find the correct checksum [here](https://carplatemart.sg/simple-checksum/).
 
  or use the list of VRNs provided below.
 
@@ -663,21 +663,23 @@ You can use your own VRNs that follow the format in the User Guide.
 
    1. Download the jar file and copy into an empty folder
 
-   - **Option 1: Open MATER by Double-Clicking**
-     - Go to the folder where you saved the `.jar` file.
-     - **On Windows or Linux**: Double-click the `.jar` file to open it.
-     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
-
-   - **Option 2: Open MATER from the Terminal**
-     - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
-     - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
-       ```shell
-       cd path/to/your/folder
-       ```
-     - Then, type the following command and press Enter:
-       ```shell
-       java -jar mater.jar
-       ```
+      - **Option 1: Open MATER by Double-Clicking**
+         - Go to the folder where you saved the `.jar` file.
+         - **On Windows or Linux**: Double-click the `.jar` file to open it.
+         - **On Mac**: It is recommended to open MATER from the terminal (see Option 2) due to system security settings and configurations.
+         - If MATER does not open, you may need to open it from the terminal (see Option 2).
+      <br><br>
+      - **Option 2: Open MATER from the Terminal**
+         - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
+         - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
+            ```shell
+            cd path/to/your/folder
+            ```
+            - If you require help with the `cd` command, you can refer to this [link](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands/) for a basic tutorial.
+         - Then, if the file name is MATER.jar, run the application with the following command:
+            ```shell
+            java -jar MATER.jar
+            ```
 
    1. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -782,25 +784,33 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` without a car.
 
-   1. **Test case:** `del-car 1`<br>
-         **Expected:** No car is deleted. Error details shown in the status message.
+   1. **Test case:** `del-car 1`
+
+
+      **Expected:** No car is deleted. Error details shown in the status message.
 
 2. **Deleting a car from a client with a car**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is not checked in.
 
-   1. **Test case:** `del-car 1`<br>
+   1. **Test case:** `del-car 1`
+
+
       **Expected:** `John Doe`'s car is deleted. Status message reflects which client the car was deleted from.
 
 3. **Attempting to delete a car that is checked-in**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is checked in.
 
-    1. **Test case:** `del-car 1`<br>
+    1. **Test case:** `del-car 1`
+
+
        **Expected:** No car is deleted. Status message states that car is currently checked in.
 
 4. **Attempting to delete a car from a non-existent client**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that the client to delete a car from does not exist.
 
-    1. **Test case:** `del-car 0`<br>
+    1. **Test case:** `del-car 0`
+
+
        **Expected:** No car is deleted. Error details shown in the status message.
 
 ### Checking in/ out a Client
@@ -809,13 +819,19 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to check exists and **has a car**.
 
-   1. **Test case:** `check 1`<br>
+   1. **Test case:** `check 1`
+
+
       **Expected:** First client is checked in/ out from the list. Details of the checked client are shown in the status message. If client is checked-in, display `Checked-In` icon in the list, else if client is checked-out, hide the `Checked-In` icon.
 
-   1. **Test case:** `check 0`<br>
+   1. **Test case:** `check 0`
+
+
       **Expected:** No client is checked. Error details shown in the status message.
 
-   1. Other incorrect check commands to try: `check`, `check x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect check commands to try: `check`, `check x`, `...` (where x is larger than the list size)
+
+
       **Expected:** Similar to previous.
 
 ### Editing a Client
@@ -824,23 +840,33 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** `edit 1 n/John Doe p/98765432`<br>
+   1. **Test case:** `edit 1 n/John Doe p/98765432`
+
+
       **Expected:** First client's name and phone number are edited. Details of the edited client are shown in the status message.
-   - **Subsequent Command:** `edit 2 n/John Doe p/98765432`<br>
+   - **Subsequent Command:** `edit 2 n/John Doe p/98765432`
+
+
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Editing a client's car details**
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists and **has a car**. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
+   1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`
+
+
       **Expected:** First client's car vrn and vin are edited. Details of the edited car are shown in the status message.
-   - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
+   - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`
+
+
       **Expected:** No car is edited. Error message displayed indicating that the car already exists.
 3. **Editing a non-existent client's details**
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit does not exist.
 
-   2. **Test case:** `edit 10 n/John Doe p/98765432`<br>
+   2. **Test case:** `edit 10 n/John Doe p/98765432`
+
+
       **Expected:** No client is edited. Error details shown in the status message.
 
 <box type="tip" seamless>
@@ -855,10 +881,14 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure that client to view exists.
 
-   1. **Test case:** `view 1`<br>
+   1. **Test case:** `view 1`
+
+
       **Expected:** Popup window of the clients details displayed. Details of client is showed in the window
 
-   1. **Test case:** `view -1`<br>
+   1. **Test case:** `view -1`
+
+
       **Expected:** No client is viewed. Error details shown in the status message.
 
 
@@ -868,20 +898,29 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that client to find exists.
 
-   1. **Test case:** `find John`<br>
+   1. **Test case:** `find John`
+
+
       **Expected:** All clients with the name John is listed.
 
-   2. **Test case:** `find Pablo`<br> (Pablo doesn't exist)
+   2. **Test case:** `find Pablo`
+   
+   
+   (Pablo doesn't exist)
       **Expected:** No clients are Listed. List will not be populated
 
 2. **Finding a specific client from the list using their car VRN**
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that the client with the specific car to find exists.
 
-   1. **Test case:** `find SJH9514P`<br>
+   1. **Test case:** `find SJH9514P`
+
+
       **Expected:** All clients with the car VRN SJH9514P is listed.
 
-   2. **Test case:** `find SJH9514L`<br> (SJH9514L car or 'SJH9514L' as client's name doesn't exist)
+   2. **Test case:** `find SJH9514L`
+   
+   (SJH9514L car or 'SJH9514L' as client's name doesn't exist)
       **Expected:** No clients are Listed. List will not be populated
 
 ## Appendix: Planned Enhancements
