@@ -166,6 +166,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add a new student
 
+[//]: # (First three paragraphs below inspired by https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details)
 
 The add command is used to add a new student to the address book. The `AddCommandParser` is responsible for parsing the user input and creating an `AddCommand` object. The `AddCommand` object is then executed by the `Logic` component.
 
