@@ -30,7 +30,7 @@ public class GenderTest {
         assertFalse(Gender.isValidGender("abc")); // alphabets
         assertFalse(Gender.isValidGender("1000")); // numbers
         assertFalse(Gender.isValidGender("1abc00")); // numbers
-        assertFalse(Gender.isValidGender("B"));
+        assertFalse(Gender.isValidGender("B")); // letter not allowed
 
 
         // valid age

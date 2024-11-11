@@ -41,8 +41,6 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
-<div style="page-break-after: always;"></div>
-
 **Main components of the architecture**
 
 **`Main`** (consisting of
@@ -52,6 +50,8 @@ in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+<div style="page-break-after: always;"></div>
 
 The bulk of the app's work is done by the following four components:
 
@@ -76,6 +76,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
   API `interface` mentioned in the previous point.
+
+<div style="page-break-after: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -109,8 +111,11 @@ in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/
 The `UI` component,
 
 * executes user commands using the `Logic` component.
+
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
+
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 <div style="page-break-after: always;"></div>
@@ -124,10 +129,10 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
+<div style="page-break-after: always;"></div>
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
-
-<div style="page-break-after: always;"></div>
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -138,16 +143,19 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
+
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
+
    several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <div style="page-break-after: always;"></div>
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
@@ -157,6 +165,7 @@ How the parsing works:
   placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
   the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
+
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
@@ -172,13 +181,13 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
+
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div style="page-break-after: always;"></div>
 
@@ -192,19 +201,17 @@ The `Model` component,
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -379,9 +386,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <div style="page-break-after: always;"></div>
 
 ### Use cases
-
-(For all use cases below, the **System** is `ClinicBuddy` and the **Actor** is the `user`, unless specified
-otherwise)
 
 (For all use cases below, the **System** is `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
 
@@ -748,6 +752,8 @@ Team size : 5
 4. **Set multiple appointments** : ClinicBuddy only supports one appointment per patient, which is not suitable for patients that have multiple appointments for their different conditions. We plan to change the Appointment class such that it can accommodate multiple appointments: `update 1 apt/10/10/2024 10:30 10/12/2024 10:30` sets two appointments at 10 October 2024 10:30 and 10 December 2024 10:30 respectively.
 
 5. **Allow multiple appointments in same timings** : ClinicBuddy disallows clash in appointment timings, which is not suitable for clinics with multiple doctors present. We plan to let users set the number of doctors in the clinic and allow up to the number of doctors present for appointments to overlap at any given time: `doctors 2` sets the number of doctors available to `2`and there can only be up to `2` appointments overlap at any given time.
+
+<div style="page-break-after: always;"></div>
 
 6. **Proper NRIC Checksum** : ClinicBuddy validates an NRIC by checking if it follows the basic format as shown in the User Guide. We plan to implement the [NRIC checksum validation algorithm](https://userapps.support.sap.com/sap/support/knowledge/en/2572734) to ensure that the NRIC provided is properly verified.
 
