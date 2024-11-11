@@ -16,7 +16,7 @@
 There are two ways to run tests.
 
 * **Method 1: Using IntelliJ JUnit test runner**
-  * To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+  * To run all tests, right-click on the `src/test/java` folder and choose `Run 'Tests' in 'tp.test'`
   * To run a subset of tests, you can right-click on a test package,
     test class, or a test and choose `Run 'ABC'`
 * **Method 2: Using Gradle**
