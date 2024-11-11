@@ -577,6 +577,7 @@ Guarantees: The new contact will be added to the GOATS Address Book, provided th
   * 1a1. GOATS shows an error message.
   
     Use case ends.
+
 * 1b. User enters a contact with a name that already exists in the GOATS Address Book.
   * 1b1. GOATS shows an error message.
     
@@ -599,6 +600,7 @@ Guarantees: The specified contact(s) will be removed from the GOATS Address Book
 **Extensions**
 
 * 1a. User enters an invalid command or invalid indices.
+
   * 1a1. GOATS shows an error message.
 
     Use case ends.
@@ -617,6 +619,7 @@ Guarantees: The displayed list be updated to show all unarchived contacts.
 **Extensions**
 
 * 1a. User enters an invalid command.
+
   * 1a1. GOATS shows an error message.
 
     Use case ends.
@@ -635,6 +638,7 @@ Guarantees: The displayed list will be sorted in alphabetical order.
 **Extensions**
 
 * 1a. User enters an invalid command.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -679,6 +683,7 @@ Guarantees: The displayed list will be updated to show all contacts whose names 
 **Extensions**
 
 * 1a. User enters an invalid command or does not provide any keywords.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -697,6 +702,7 @@ Guarantees: The displayed list will be updated to show all contacts who has one 
 **Extensions**
 
 * 1a. User enters an invalid command or does not provide any keywords.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -715,6 +721,7 @@ Guarantees: The displayed list will be updated to show all students who have a l
 **Extensions**
 
 * 1a. User enters an invalid command or does not provide any keywords.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -731,6 +738,7 @@ Guarantees: The displayed list will be updated to show all students who have a l
 **Extensions**
 
 * 1a. User enters an invalid command.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -751,6 +759,7 @@ Guarantees: All contacts in the list of contacts will be deleted from the GOATS 
 **Extensions**
 
 * 1a. User enters an invalid command.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -771,6 +780,7 @@ Guarantees: The specified contact(s) will be archived, provided the command form
 **Extensions**
 
 * 1a. User enters an invalid command or invalid indices.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -791,13 +801,14 @@ Guarantees: The specified contact(s) will be unarchived, provided the command fo
 **Extensions**
 
 * 1a. User enters an invalid command or invalid indices.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
 
 #### **Use case: UC13 - List archived contacts**
 
-Guarantees: The displayed list be updated to show all archived contacts.
+Guarantees: The displayed list will be updated to show all archived contacts.
 
 **MSS**
 
@@ -809,6 +820,7 @@ Guarantees: The displayed list be updated to show all archived contacts.
 **Extensions**
 
 * 1a. User enters an invalid command.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -830,6 +842,7 @@ Guarantees: The specified contact(s) will be pinned, and the displayed list will
 **Extensions**
 
 * 1a. User enters an invalid command or invalid indices.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -851,6 +864,7 @@ Guarantees: The specified contact(s) will be unpinned, and the displayed list wi
 **Extensions**
 
 * 1a. User enters an invalid command or invalid indices.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
@@ -956,6 +970,7 @@ Guarantees: The student and the parent will be linked in a parent-child relation
 **Extensions**
 
 * 1a. User enters an invalid command.
+
     * 1a1. GOATS shows an error message.
 
       Use case ends.
