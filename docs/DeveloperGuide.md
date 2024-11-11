@@ -565,6 +565,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
+**Use case: UC11 - Sort contacts**
+
+**MSS**
+1. User requests to list persons
+2. CFG shows a list of relevant persons
+3. User requests to sort the list by name
+4. CFG shows the list of persons sorted by name
+
+    Use case ends.
+
+**Extensions**
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
+* 2a. The list of persons is empty.
+
+    Use case ends
+* 3a. User could also request to sort by default order (insertion order), volunteer hours, donation amount, or partnership end date.
+  * 3a1. CFG would sort by the specified sort option instead.
+
+    Use case resumes at step 4.
+* 4a. User could continue to request for a different list of persons, by <ins>searching (UC01)</ins>,
+    <ins>viewing members in a group (UC07)</ins>, etc.
+  * 4a1. Sort option is maintained.
+
+    Use case ends.
 
 
 ### Non-Functional Requirements
