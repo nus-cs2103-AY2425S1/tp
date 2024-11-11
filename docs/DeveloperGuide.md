@@ -1131,8 +1131,6 @@ testers are expected to do more *exploratory* testing.
    * **Prerequisites:** There is an existing storage file in the default location.
 
 
-1. _{ more test cases …​ }_
-
 ### Deleting a patient
 
 1. Deleting a patient while all patients are being shown
@@ -1148,12 +1146,54 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
-### Saving data
+### Adding Patient: `add`
+command: `add`
 
-1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Adding a patient with valid fields
 
-1. _{ more test cases …​ }_
+    * **Prerequisites:**
+        * Launch the app.
+
+    * **Test case:** `add n|Jane i|T0123456B p|90901282 s|F d|2002-10-10`
+        * **Expected:** A patient with the following fields is added to the system:
+          * Name: `Jane`
+          * NRIC: `T0123456B`
+          * Phone: `90901282`
+          * Sex: `F`
+          * BirthDate: `2002-10-10`
+
+2. Adding a patient with invalid `Nric`
+
+    * **Prerequisites:**
+        * Launch the app.
+
+    * **Test case (invalid `Nric` field):** `add n|Jane i|T012345B p|90901282 s|F d|2002-10-10`
+      * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
+
+
+### Filtering Appointments: `Filter`
+command: `filter`
+
+
+1. Filtering appointments with all valid fields
+
+    * **Prerequisites:**
+        * Launch the app.
+
+    * **Test case:** `filter ed|2002-10-10 sd|2002-11-10 h|Blood Test`
+        * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed.
+
+2. Filtering appointments with invalid end date
+
+    * **Prerequisites:**
+        * Launch the app.
+
+    * **Test case (invalid end date):** `filter ed|2027/10-10`
+        * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
+
+
+
+
+
