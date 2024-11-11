@@ -49,6 +49,8 @@
   - [Additional Notes](#additional-notes)
 - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
   - [Advanced Error Messages](#advanced-error-messages)
+  - [Case Insensitivity for All Contact Fields](case-insensitivity-for-all-contact-fields)
+  - [Display Index of Newly Added Contact](display-index-of-newly-added-contact)
 
 
 --------------------------------------------------------------------------------------------------------------------
