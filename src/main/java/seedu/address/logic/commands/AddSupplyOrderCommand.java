@@ -10,7 +10,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,7 +20,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Product;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Remark;
 
 /**
@@ -41,7 +39,6 @@ public class AddSupplyOrderCommand extends Command {
             + PREFIX_ORDER + "1 1 2";
 
     public static final String MESSAGE_ADD_SUPPLY_ORDER_SUCCESS = "New supply order added: \n%1$s";
-    public static final String INVALID_SUPPLIER = "This is not a supplier. Add a supplier contact instead.";
 
     private final Name name;
     private final Phone phone;
@@ -98,12 +95,6 @@ public class AddSupplyOrderCommand extends Command {
         if (person == null) {
             person = Person.getSupplier(name, phone);
             model.addPerson(person);
-        }
-
-        Optional<Tag> firstTag = person.getTags().stream().findFirst();
-        String name = firstTag.get().tagName;
-        if (!name.equals("Supplier")) {
-            throw new CommandException(INVALID_SUPPLIER);
         }
 
         SupplyOrder supplyOrder = new SupplyOrder(person, productList, OrderStatus.PENDING, remark);
