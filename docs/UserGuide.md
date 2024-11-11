@@ -1009,7 +1009,8 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Export the data file in the current computer with the `export` command. Install the app in the other computer
+and use the `import` command to import the data file that you previously exported.
 
 --------------------------------------------------------------------------------------------------------------------
 
