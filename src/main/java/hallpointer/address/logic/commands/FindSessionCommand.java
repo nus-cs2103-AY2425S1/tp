@@ -3,7 +3,6 @@ package hallpointer.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
@@ -24,7 +23,7 @@ public class FindSessionCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " rehearsal match";
 
-    public static final String MESSAGE_SUCCESS = "Matching sessions displayed: \n%1$s";
+    public static final String MESSAGE_SUCCESS = "Matching sessions displayed: ";
     public static final String MESSAGE_NO_MATCHES = "Error: No sessions found matching the keywords.";
     private final SessionContainsKeywordsPredicate predicate;
 
@@ -46,11 +45,7 @@ public class FindSessionCommand extends Command {
         if (matchingSessions.isEmpty()) {
             return new CommandResult(MESSAGE_NO_MATCHES);
         }
-
-        String resultMessage = matchingSessions.stream().distinct()
-                .map(session -> session.getSessionName().toString())
-                .collect(Collectors.joining("\n"));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, resultMessage));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     @Override
