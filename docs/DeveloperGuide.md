@@ -39,7 +39,8 @@ title: Developer Guide
 This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 
 ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
-as well as the JavaDocs for code written by BuffWuff1712
+as well as the JavaDocs for code written by BuffWuff1712.
+ChatGPT was also used by tayxuenye and cited in the code where appropriate.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting Up, Getting Started**
