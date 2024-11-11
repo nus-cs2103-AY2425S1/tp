@@ -759,23 +759,11 @@ Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to
 Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
 >
 > ---
-> > ---
-> **User Error #1**: Client index out of bounds
->
-> **Input**: `deleteapt 100`
->
-> **Output**: The person index provided is invalid
->
-> --- 
 > **User Error #4**: The `From` time is later than `To`
 >
-> **Input #a**: `apt d/111124 fr/0900 to/0800`
+> **Input**: `apt d/111124 fr/0900 to/0800`
 >
-> **Output**: <br>
-Invalid command format! <br>
-apt: Adds an appointment to a client identified by the index number used in the displayed person list. Existing appointment will be overwritten with the new appointment. <br>
-Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to/ [TO] <br>
-Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
+> **Output**: Invalid from and to timings! From timing cannot be after to timing.
 >
 > ---
 
