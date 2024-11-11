@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +33,9 @@ public class FavouriteCommandTest {
         ArrayList<Index> contactIndexes = new ArrayList<>();
         contactIndexes.add(INDEX_FIRST_PERSON);
         FavouriteCommand favouriteCommand = new FavouriteCommand(contactIndexes);
+        personToFavourite = personToFavourite.setFavouritePerson();
         String expectedMessage = String.format(FavouriteCommand.MESSAGE_SUCCESS,
-            Messages.format(personToFavourite));
+            Messages.format(List.of(personToFavourite)));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.favouritePerson(personToFavourite);
         assertCommandSuccess(favouriteCommand, model, expectedMessage, expectedModel);
