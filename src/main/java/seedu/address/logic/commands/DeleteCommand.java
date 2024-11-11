@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -30,15 +31,17 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Nric targetNric;
+    private final NricMatchesPredicate predicate;
 
     public DeleteCommand(Nric targetNric) {
         this.targetNric = targetNric;
+        this.predicate = new NricMatchesPredicate(targetNric.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
+        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> targetNric.equals(person.getNric()))
@@ -47,6 +50,15 @@ public class DeleteCommand extends Command {
         if (personWithMatchingNric.isPresent()) {
             Person personToDelete = personWithMatchingNric.get();
             model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }*/
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToDelete = model.getFilteredPersonList().get(0);
+            model.deletePerson(personToDelete);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);

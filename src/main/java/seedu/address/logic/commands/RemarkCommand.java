@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -34,6 +35,7 @@ public class RemarkCommand extends Command {
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
     private final Nric nric;
     private final Remark remark;
+    private final NricMatchesPredicate predicate;
 
 
     /**
@@ -45,11 +47,12 @@ public class RemarkCommand extends Command {
 
         this.nric = nric;
         this.remark = remark;
+        this.predicate = new NricMatchesPredicate(nric.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
+        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
@@ -57,6 +60,22 @@ public class RemarkCommand extends Command {
 
         if (personWithMatchingNric.isPresent()) {
             Person personToEdit = personWithMatchingNric.get();
+            Person editedPerson = new Person(
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
+                    personToEdit.getAddress(), personToEdit.getTriage(), remark, personToEdit.getTags(),
+                    personToEdit.getAppointment(), personToEdit.getLogEntries());
+
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+            return new CommandResult(generateSuccessMessage(editedPerson));
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }*/
+
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), personToEdit.getTriage(), remark, personToEdit.getTags(),

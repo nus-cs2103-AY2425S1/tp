@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -33,6 +34,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Triage;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -70,6 +72,7 @@ public class EditCommand extends Command {
     //private final Index index;
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final NricMatchesPredicate predicate;
 
     /**
      * @param nric of the person in the filtered person list to edit
@@ -82,12 +85,13 @@ public class EditCommand extends Command {
         //this.index = index;
         this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.predicate = new NricMatchesPredicate(nric.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
+        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
@@ -99,6 +103,26 @@ public class EditCommand extends Command {
 
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }*/
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
+            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+            if (!personToEdit.isSamePerson(editedPerson)) {
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+                NricMatchesPredicate checkExistingNric = new NricMatchesPredicate(editedPerson.getNric().toString());
+                model.updateFilteredPersonList(checkExistingNric);
+                if (!model.getFilteredPersonList().isEmpty()) {
+                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                }
             }
 
             model.setPerson(personToEdit, editedPerson);

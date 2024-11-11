@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Triage;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Command to triage a person using a given NRIC and triage value.
@@ -33,6 +34,7 @@ public class TriageCommand extends Command {
 
     private final Nric nric;
     private final Triage triage;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Constructs a TriageCommand.
@@ -44,6 +46,7 @@ public class TriageCommand extends Command {
         requireAllNonNull(nric, triage);
         this.nric = nric;
         this.triage = triage;
+        this.predicate = new NricMatchesPredicate(nric.toString());
     }
 
     /**
@@ -55,7 +58,7 @@ public class TriageCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        /*List<Person> lastShownList = model.getFilteredPersonList();
 
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
@@ -63,6 +66,21 @@ public class TriageCommand extends Command {
 
         if (personWithMatchingNric.isPresent()) {
             Person personToEdit = personWithMatchingNric.get();
+            Person editedPerson = new Person(
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
+                    personToEdit.getAddress(), triage, personToEdit.getRemark(), personToEdit.getTags(),
+                    personToEdit.getAppointment(), personToEdit.getLogEntries());
+
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_ADD_TRIAGE_SUCCESS, Messages.format(editedPerson)));
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }*/
+
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), triage, personToEdit.getRemark(), personToEdit.getTags(),

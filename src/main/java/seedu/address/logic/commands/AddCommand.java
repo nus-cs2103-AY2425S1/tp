@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Adds a person to the address book.
@@ -50,6 +51,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -57,13 +59,20 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        this.predicate = new NricMatchesPredicate(person.getNric().toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        //check if person already exists in database
+        model.updateFilteredPersonList(predicate);
+        if (model.getFilteredPersonList().isEmpty()) {
+            model.addPerson(toAdd);
+        } else {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        /*//check if person already exists in database
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -77,7 +86,8 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(toAdd);*/
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

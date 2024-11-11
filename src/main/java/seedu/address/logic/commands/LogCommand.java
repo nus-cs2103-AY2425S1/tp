@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NricMatchesPredicate;
 
 /**
  * Adds a log entry to a person's log list.
@@ -27,6 +28,7 @@ public class LogCommand extends Command {
 
     private final Nric nric;
     private final Log log;
+    private final NricMatchesPredicate predicate;
 
     /**
      * Creates a LogCommand to add the specified {@code Log} to the person at the specified {@code Index}.
@@ -37,6 +39,7 @@ public class LogCommand extends Command {
     public LogCommand(Nric targetNric, Log log) {
         this.nric = targetNric;
         this.log = log;
+        this.predicate = new NricMatchesPredicate(targetNric.toString());
     }
 
     /**
@@ -50,7 +53,7 @@ public class LogCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getAddressBook().getPersonList();
+        /*List<Person> lastShownList = model.getAddressBook().getPersonList();
 
         Optional<Person> personWithMatchingNric = lastShownList.stream()
                 .filter(person -> nric.equals(person.getNric()))
@@ -58,6 +61,19 @@ public class LogCommand extends Command {
 
         if (personWithMatchingNric.isPresent()) {
             Person personToEdit = personWithMatchingNric.get();
+            Person editedPerson = new Person(
+                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
+                    personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
+            model.setPerson(personToEdit, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult("Log added to " + personToEdit.getName());
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
+        }*/
+        model.updateFilteredPersonList(predicate);
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
                     personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),
