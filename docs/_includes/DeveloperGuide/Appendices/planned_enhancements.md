@@ -31,7 +31,13 @@ Implement case-insensitive matching for fields like `names`, `emails`, and `tags
 
 ### 5. UI Enhancements for Improved User Experience
 
-5.1 **Transaction Status Differentiation and Spacing Improvements**  
-Add color indicators for transaction statuses (e.g., green for done, red for not done) and optimize spacing for readability. Group related fields and add labels to improve information layout, making it easier for users to navigate and review details.
+5.1 **Custom App Icon**
+Add custom app icon to enhance customizability.
+
+5.2 **"Track Only Not Done Balance" Checkbox** 
+Currently, users can calculate all balances that are "Not Done" via `filterTxn status\Not Done`. However, this does not allow users to display a filtered list that includes done transaction while showing only the "Not Done" balance. Adding a checkbox in balance section would give users the flexibility to track only "Not Done" balances.
+
+5.3 **Display Empty List Message**
+When the list is empty, the UI currently displays nothing. A message indicating that the list is empty would provide better clarity.
 
 These enhancements address search functionality, error handling, input validation, duplicate detection, and user interface improvements, collectively enhancing SpleetWaise’s usability and functionality.
