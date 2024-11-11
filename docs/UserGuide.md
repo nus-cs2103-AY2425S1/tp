@@ -449,22 +449,27 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **For `help` command:**
+   * If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
+   * On some platforms (especially MacOS), when using the application in full screen,
+   running the `help` command and closing the popup window repeatedly in quick succession may cause the application
+   to hang or crash. Users have to terminate the application by entering `CTRL` + `C` in the terminal used to run the application, and run the application again. **DATA MIGHT BE LOST**.
+   * The development team is working on a more permanent fix for this issue.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`
-**Clear**  | `clear`
-**Delete** | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`
-**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
-**Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
-**Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`
-**Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
-**Find**   | `find ID`<br> e.g., `find 12345678`
-**List**   | `list`
+| Action         | Format, Examples                                                                                                                                                                 |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` |
+| **Clear**      | `clear`                                                                                                                                                                          |
+| **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                    |
+| **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`                                        |
+| **Grade**      | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
+| **Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`                                                                                                                         |
+| **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                          |
+| **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                              |
+| **List**       | `list`                                                                                                                                                                           |
 
