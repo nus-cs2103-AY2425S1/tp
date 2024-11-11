@@ -30,14 +30,32 @@ public class TriageCommandParser implements Parser<TriageCommand> {
         Nric nric;
         Triage triage;
 
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE));
+        }
+        String[] argParts = trimmedArgs.split("\\s+");
+
+        if (argParts.length < 2) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE));
+        }
+
+        //Parse the nric
+        String nricString = argParts[0];
+
         try {
-            // Parse the NRIC from the preamble (the part before any option flags)
-            nric = ParserUtil.parseNric(argMultimap.getPreamble());
-            // Parse the triage level, defaulting to an empty string if not present
+            nric = new Nric(nricString);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("NRIC provided is invalid.");
+        }
+
+        try {
             triage = ParserUtil.parseTriage(argMultimap.getValue(PREFIX_TRIAGE).orElse(""));
         } catch (ParseException pe) {
             // If parsing fails, throw a ParseException with a detailed message
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TriageCommand.MESSAGE_USAGE), pe);
+            throw new ParseException("Invalid triage input. Triage should be between 1 to 5.", pe);
         }
 
         // Return a new TriageCommand with the parsed NRIC and triage level
