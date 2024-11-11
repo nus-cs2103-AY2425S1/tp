@@ -51,8 +51,8 @@ Person *--> "0..1" Schedule
 Person *--> "0..1" SocialMedia
 Person *--> "*" Tag
 
-Schedule *--> ScheduleDate
-Schedule *--> ScheduleName
+Schedule *--> "1" ScheduleDate
+Schedule *--> "1" ScheduleName
 Schedule *--> "0..1" ScheduleTime
 
 Person -[hidden]up--> I
