@@ -432,6 +432,14 @@ A client can have any number of tags (including 0).
 * Clients are considered duplicates if `NAME` and `PHONE` match with another existing client.
 </div>
 
+<box type="info" seamless>
+
+**Info:**
+Currently, Prudy treats client names as case-sensitive. This means that names entered with different cases, such as `John Tan` and `john Tan`, will be treated as separate clients in the system. 
+
+To maintain data consistency, we recommend agents verify name formats before adding clients to ensure the first letter is capitalized for each word in a name, e.g., `John Tan` instead of `john tan`.
+</box>
+
 **On success:**
 ```shell
 New client added: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
