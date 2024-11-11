@@ -232,7 +232,13 @@ Currently: To prevent accidental deletions and clearing of data in KnottyPlanner
 
 Plan: To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
 
-3. 
+4. Allow copying of information
+
+Currently: As KnottyPlanners is optimised for keyboard usage, interactions with the GUI through direct copying of information is not supported.
+
+Plan: To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
+
+5.
 // Support for Multi-Languages
  
 --------------------------------------------------------------------------------------------------------------------
