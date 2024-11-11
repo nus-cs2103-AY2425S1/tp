@@ -459,7 +459,31 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
+### Finding clients
 
+1. Finding a client in the client list view
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `find Alex`<br>
+      Expected: All clients whose name or company contain Alex are shown. Details of the search shown in the status message.
+
+   3. Test case: `find`<br>
+      Expected: Error details informing of missing search parameter shown in the status message.
+
+   4. Test case: `find fhodolkg`<br>
+      Expected: No client is shown due to no matching clients. Details of the search shown in the status message.
+   
+   5. Test case: `find Alex innovative`<br>
+      Expected: All clients whose name or company contain Alex or innovative are shown. Details of the search shown in the status message.
+
+
+2. Finding a client in the transaction list view
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+   2. Test case: `find Alex`<br>
+      Expected: Error details informing of environment discrepancy shown in the status message.
 
 ### Adding a transaction to a client 
 
