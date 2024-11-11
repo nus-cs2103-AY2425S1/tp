@@ -32,7 +32,6 @@ public class UnassignProductCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Unassigned Product: %1$s to Supplier: %2$s";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found: %1$s";
     public static final String MESSAGE_PRODUCT_NOT_ASSIGNED = "Product was not assigned to the supplier initially.";
-
     private final ProductName productName;
 
     /**
@@ -67,7 +66,6 @@ public class UnassignProductCommand extends Command {
 
     private Supplier findSupplierWithProduct(Model model, Product product) throws CommandException {
         Name supplierName = product.getSupplierName();
-
         // Assertions to ensure consistency between supplier name and assignment status
         if (supplierName == null) {
             assert !model.isProductAssignedToAnySupplier(product)
@@ -76,7 +74,6 @@ public class UnassignProductCommand extends Command {
             assert model.isProductAssignedToAnySupplier(product)
                     : "Product with non-null supplier name should be assigned to a supplier";
         }
-
         // Check if the product is assigned to any supplier
         if (supplierName == null || !model.isProductAssignedToAnySupplier(product)) {
             throw new CommandException(MESSAGE_PRODUCT_NOT_ASSIGNED);
