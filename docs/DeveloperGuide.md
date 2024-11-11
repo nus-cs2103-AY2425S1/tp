@@ -1071,6 +1071,20 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
+### Listing persons
+
+1. Listing persons when viewing all persons.
+
+   1. Test case: `list` <br>
+    Expected: `Person` list displayed will remain unchanged, and all persons in the `Person` list will be shown.
+
+2. Listing persons when viewing a filtered view of persons.
+
+   1. Test case: `list` <br>
+    Expected: `Person` list displayed will change to show all persons in the `Person` list.
+
+<br>
+
 ### Adding a person
 
 1. Adding a person
