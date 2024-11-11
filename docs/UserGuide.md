@@ -103,6 +103,9 @@ for the team of AddressBook-Level 3.
   will be ignored.<br>
   E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Some commands will prompt for confirmation. Inputting `y` or `yes` counts as **confirmation**, and **any other input** 
+  counts as **cancellation**.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -132,7 +135,7 @@ for the team of AddressBook-Level 3.
 
 <box type="tip" seamless>
 
-**Tip**: Refer to respective features within [Features](#features) for a better understanding of each commands.
+**Tip**: Refer to respective features within [Features](#features) for a better understanding of each command.
 
 </box>
 
@@ -583,8 +586,8 @@ Format: `find [k/KEYWORD...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG
 
 <box type="info" seamless>
 
-**Note:** Utilising the **keyword** will perform a search for all clients for the matching keyword throughout all
-information, including rental information.
+**Note:** Utilising `KEYWORD` will perform a search for clients whose details include the keyword. Clients are matched
+if any of their fields **contains** the keyword, including rental information details (E.g. name, email, address, etc.).
 
 </box>
 
@@ -596,10 +599,10 @@ information, including rental information.
 * For `[k/KEYWORD]`, `[n/NAME]`, `[p/PHONE_NUMBER]` and `[e/EMAIL]`, partial input will be matched with any of the
   fields, if any.
   <br>E.g. `Han` will match <code><b>Han</b>s</code>
-* For `[t/TAG]` only the full input will be matched with a tag, if any.
-  <br>E.g. `Friend` will only match with `Friend`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  <br>E.g. `k/Hans k/Bo` will return `Hans Gruber`, `Bo Yang`
+* Tags (`[t/TAG]`) will match **exactly**.
+  <br>E.g. `t/Friend` will **only** match with the tag `Friend`, **not** `Friends` or `MyBestFriend`.
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+  <br>E.g. `k/Hans k/Bo` will return <code><b>Han</b>s Gruber</code>, <code><b>Bo</b> Yang</code>`
 
 </box>
 
@@ -607,8 +610,8 @@ information, including rental information.
 
 **Example inputs**:
 
-1. `find n/Alex`, finds any client with the matching characters `Alex` in their names.
-2. `find k/12`, finds any client with the matching keyword `12` in any of their information.
+1. `find n/Alex`, finds any client whose name **contains** the word `Alex`.
+2. `find k/12`, finds any client whose details **contain** `12`.
 3. `find t/Rich`, finds any client with the matching tag `Rich`.
 
 </box>
@@ -617,8 +620,8 @@ information, including rental information.
 
 **Example outputs**:
 
-1. `1 persons listed!`. It will return every client with the name containing `Alex`.
-2. `2 persons listed!`. It will return every client with the keyword `12` within all its attributes.
+1. `1 persons listed!`. It will return every client whose name contains `Alex`.
+2. `2 persons listed!`. It will return every client whose details contain `12`.
 3. `3 persons listed!`. It will return every client with the tag `Rich`.
 
 </box>
@@ -641,7 +644,7 @@ Format: `cdelete CLIENT_INDEX`
 
 **Note**:
 
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -685,7 +688,7 @@ Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 
 **Note**:
 
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 * `RENTAL_INDEX` refers to the index number shown in the displayed rental information list when the `rview` command is
@@ -902,6 +905,7 @@ Format: `import`
 
 * Only `.json` files can be imported.
 * The chosen file must have the correct format.
+* The correct format is the same as the data file of the app. Visit our [Developer Guide](DeveloperGuide.md) for more details.
 
 </box>
 
@@ -911,7 +915,7 @@ Format: `import`
 
 * Importing data will delete all current data in the address book. It is recommended to back up the current data via
   the `export` command.
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
 
 </box>
@@ -930,7 +934,7 @@ Format: `export`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+**Note**: Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 
 </box>
 
@@ -957,7 +961,7 @@ Format: `clear`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+**Note**: Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 
 </box>
 
@@ -1004,7 +1008,8 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Export the data file in the current computer with the `export` command. Install the app in the other computer
+and use the `import` command to import the data file that you previously exported.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1015,6 +1020,12 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 3. **The commands are not case-insensitive**. The remedy is to ensure that all commands are either capitalised or not capitalised.
 4. Current **error message for invalid value** of `MONTHLY_RENT` and `DEPOSIT` is not precise enough (we use the term `numbers`). Please follow [Parameter Constraints Table](#parameter-constraints-table) for valid values.
 5. If a **parameter value is too long**, it will not display fully in the application. The excess characters will be cut off and replace by `...`. You should not provide a value that is too long to avoid this issue.
+6. The error message of `import` and `export` is displayed with a green color, which may be confusing for users.
+7. The error message displayed when `import` or `export` fails is quite vague ("The chosen file may be corrupted").
+   We will be refining this error message in the future to give more feedback about what went wrong 
+   (duplicate clients, missing field, etc.)
+8. The message for confirmation prompts state `y/n`, which implies you can only use `n` to cancel the command. However,
+   any input other than `y`/`yes` leads to cancellation.
 
 --------------------------------------------------------------------------------------------------------------------
 
