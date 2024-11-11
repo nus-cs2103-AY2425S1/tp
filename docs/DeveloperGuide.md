@@ -420,7 +420,7 @@ otherwise)
 3. The Salesperson issues the `delete` command with a valid contact index.
 4. AddressBook validates the contact index.
 5. AddressBook removes the specified contact from the contact list.
-6. AddressBook displays a success message: "Contact `<Name>` deleted."
+6. AddressBook displays a success message: "Contact `NAME` deleted."
 
    **Use case ends.**
 
@@ -430,14 +430,17 @@ otherwise)
 - **2a.** The list is empty.
   - **Use case ends.**
 
-- **3a.** The command format is incorrect (e.g., index not provided).
+- **3a.** The command format is incorrect (e.g., contact index not provided).
   - **3a1.** AddressBook displays an error message:
-    `
-    Invalid command format! 
-    delete: Deletes the person identified by the index number used in the displayed person list.
-    Parameters: INDEX (must be a positive integer)
-    Example: delete 1
-    `
+    
+    `Invalid command format!`
+    
+    `delete: Deletes the person identified by the index number used in the displayed person list.`
+    
+    `Parameters: INDEX (must be a positive integer)`
+    
+    `Example: delete 1`
+    
   - **Use case resumes at Step 2.**
 
 - **4a.** The contact index is invalid or out of bounds.
@@ -449,16 +452,7 @@ otherwise)
 
 #### Including Related Use Cases:
 - **UC06 - View Full Contact Details**: The Salesperson may use this use case to view the contact’s full details before confirming the deletion.
-- **UC09 - Display Help Information**: The `help` command will include instructions on how to use the `delete` command.
-
----
-
-#### Variations:
-- **1a.** The Salesperson deletes a contact by issuing the `delete` command with a valid index.
-  - **Use case proceeds normally from Step 4.**
-
-- **1b.** The Salesperson deletes a contact after viewing the contact details.
-  - **Use case proceeds normally from Step 4.**
+- **UC09 - Display Help Information**: The `help` command will include a link that includes instructions on how to use the `delete` command.
 
 ---
 
@@ -568,12 +562,12 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **2d.** The optional date is provided but is before the date of creation of the contact:
-  - **2d1.** AddressBook displays an error message: `<Date entered> is before the date of creation of this log <Date of creation>!`
+  - **2d1.** AddressBook displays an error message: `DATE_ENTERED is before the date of creation of this log DATE_OF_CREATION!`
   - **2d2.** The Salesperson corrects or removes the date and reissues the command.
   - **Use case resumes from Step 2.**
 
 - **2e.** The optional date is provided but is in the future:
-  - **2e1.** AddressBook displays an error message: `<Date entered> is in the future!`
+  - **2e1.** AddressBook displays an error message: `DATE_ENTERED is in the future!`
   - **2e2.** The Salesperson corrects or removes the date and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -590,7 +584,7 @@ otherwise)
 ---
 
 #### Variations:
-- **1a.** The Salesperson includes an optional date in the interaction log (e.g., `d/<Event date>`).
+- **1a.** The Salesperson includes an optional date in the interaction log (e.g., `d/EVENT_DATE`).
   - **Use case proceeds normally from Step 2.**
 
 - **1b.** The Salesperson omits the date, logging only the interaction details.
@@ -614,7 +608,7 @@ otherwise)
 2. The system performs a case-insensitive search of the contact list, matching contacts whose names contain any of the keywords provided (an OR search).
   * The search matches only full words in the name field and ignores the order of keywords.
 3. The system displays a list of contacts that match at least one of the keywords.
-4. The system shows a success message: `<Number of persons matching the search> persons listed!`
+4. The system shows a success message: `NUMBER_OF_PERSONS_MATCHING_THE_SEARCH persons listed!`
 
    **Use case ends.**
 
@@ -646,12 +640,12 @@ otherwise)
 **Guarantees**: The remark is added or updated for the specified contact and displayed in the contact's profile.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `remark` command with a valid contact index and an optional remark message in the format: `remark <index> r/<remark message>`.
+1. The Salesperson issues the `remark` command with a valid contact index and an optional remark message in the format: `remark INDEX r/REMARK_MESSAGE`.
 2. The system validates the contact index to ensure it:
   - References an existing contact in the current list.
   - Is a positive integer within the list's range.
 3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added. If `r/` is absent, or followed by an empty string, the existing remark is removed.
-4. The system displays a success message: `Added remark to Person: <Person details>`, when non empty remark is added or changed, and `Removed remark from Person: <Person details>` otherwise.
+4. The system displays a success message: `Added remark to Person: PERSON_DETAILS`, when non empty remark is added or changed, and `Removed remark from Person: PERSON_DETAILS` otherwise.
 5. The contact’s profile is updated, and the new remark appears in the contact list view.
 
    **Use case ends.**
@@ -677,6 +671,7 @@ otherwise)
   - **2b1.** The system displays an error message: `The person index provided is out of bound`
   - **2b2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
+
 ---
 
 ### Including Related Use Cases:
@@ -690,6 +685,7 @@ otherwise)
 
 - **1b.** The Salesperson edits an existing remark by issuing the `remark` command with a new remark message.
   - **Use case proceeds normally from Step 2.**
+
 ---
 
 ### Postconditions:
@@ -704,12 +700,13 @@ otherwise)
 **Guarantees**: The full details of the contact are displayed in a single page pop-out view for the Salesperson.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `view` command with a valid contact index in the format `view <index>`.
+1. The Salesperson issues the `view` command with a valid contact index in the format `view INDEX`.
 2. The system validates the index, ensuring:
   - It references an existing contact in the current list.
   - It is a positive integer within the list's range.
 3. Upon successful validation, the system retrieves and displays all available details of the contact in a pop-out GUI window, ensuring a single, focused view for all information related to the contact.
 4. The system displays a success message: `Person details displayed`.
+5. Upon viewing the page sufficiently, the Salesperson issues a `close` command which closes the pop-out GUI window.
 
    **Use case ends.**
 
@@ -735,29 +732,25 @@ otherwise)
   - **2b2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
-- **3a.** The contact is missing some optional information (e.g., birthday, social media handle).
-  - **3a1.** The system displays a message: `Some details are missing for this contact.`
-  - **Use case resumes from Step 4.**
-
 ---
 
 ### Including Related Use Cases:
-- **UC15 - Add a New Contact**: If the Salesperson finds incomplete information, they may choose to create a new contact with complete details.
+- **UC15 - Add a New Contact**: If the Salesperson finds incomplete information, they may choose to create a new contact with complete details after performing **UC01 Delete a Contact**.
 - **UC05 - Add or Edit Remarks for a Contact**: After viewing the contact’s full details, the Salesperson may choose to add or update remarks for additional context.
 
 ---
 
 ### Variations:
-- **1a.** The Salesperson views a contact with all fields filled in (name, phone, email, address, birthday, and social media handle).
+- **1a.** The Salesperson views a contact with all fields filled in (name, phone, email, address, birthday, history, property, remark).
   - **Use case proceeds normally from Step 2.**
 
-- **1b.** The Salesperson views a contact with only mandatory fields filled (name and phone).
+- **1b.** The Salesperson views a contact with only mandatory fields filled (name, phone, email, address).
   - **Use case proceeds normally from Step 2.**
 
 ---
 
 ### Postconditions:
-- The contact details are fully displayed in a single-page pop-out window, allowing the Salesperson to review or edit information as needed.
+- The contact details are fully displayed in a single-page pop-out window, allowing the Salesperson to review information as needed.
 
 ---
 
@@ -770,7 +763,7 @@ otherwise)
 1. The Salesperson issues the `favourite` command with a valid `index`.
 2. The system validates the `index`.
 3. The system marks the contact as a favourite.
-4. The system displays a success message: `Add <Name at index> to favourite.`
+4. The system displays a success message: `Add NAME_AT_INDEX to favourite.`
 
    **Use case ends.**
 
@@ -806,7 +799,7 @@ otherwise)
 
 - **3a.** The contact is already marked as a favourite.
   - **3a1.** The system removes the contact from favourite.
-  - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
+  - **3a2.** The system displays a message: `Remove NAME_AT_INDEX from favourite.`
   - **Use case ends.**
 
 ---
@@ -832,8 +825,8 @@ otherwise)
 
 ### Use Case: **UC08 - Add Birthday Reminder for a Contact**
 **Actor**: Salesperson  
-**Precondition**: The contact exists in the contact list and has a valid birthday.  
-**Guarantees**: The birthday is saved for the contact, and the Salesperson will receive a reminder notification before the birthday.
+**Precondition**: The contact exists in the contact list.  
+**Guarantees**: The birthday is saved for the contact, and the Salesperson will receive a reminder notification 1 week before the birthday until and including the date itself.
 
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `birthday` command with a valid `index` and birthday date.
@@ -895,7 +888,8 @@ otherwise)
 ---
 
 #### Postconditions:
-- The birthday is stored in the contact’s profile, and a reminder will be triggered for the Salesperson close to the date.
+- The birthday is stored in the contact’s profile.
+- A reminder will be triggered for the Salesperson when the system date is within a week to the birthday until and including the day of the birthday itself.
 
 ---
 
@@ -979,8 +973,8 @@ otherwise)
 ---
 
 #### Including Related Use Cases:
-- **UC13 - Saving Data Automatically**: This use case is directly referenced during Step 2 when the system attempts to automatically save data before closing the application.
-- **UC09 - Display Help Information**: The `help` command will include information on how to use the `exit` command.
+- **UC12 - Saving Data Automatically**: This use case is directly referenced during Step 2 when the system attempts to automatically save data before closing the application.
+- **UC09 - Display Help Information**: The `help` command will include a link with information on how to use the `exit` command.
 
 ---
 
@@ -1042,7 +1036,7 @@ otherwise)
 
 ### Use Case: **UC13 - Edit Data File Manually**
 **Actor**: Salesperson  
-**Precondition**: The Salesperson has access to the data file and is familiar with the required format for making changes.  
+**Precondition**: The Salesperson has access to the data file and is familiar with the required format for making changes. The app must have been used atleast once to generate the data file locally.  
 **Guarantees**: The Salesperson can manually edit the data file, and the system loads the updated data during the next session.
 
 #### Main Success Scenario (MSS):
@@ -1056,7 +1050,7 @@ otherwise)
 
 #### Extensions:
 - **3a.** The format of the data file is incorrect.
-  - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
+  - **3a1.** The storage file is considered corrupted and not loaded into the app, leaving an empty list on the main window.
   - **3a2.** The Salesperson corrects the format and restarts the application.
   - **Use case resumes from Step 2.**
 
@@ -1064,15 +1058,12 @@ otherwise)
 
 #### Including Related Use Cases:
 - **UC12 - Saving Data Automatically**: This use case is referenced if the Salesperson manually edits the data file after automatic saving fails.
-- **UC09 - Display Help Information**: The `help` command will provide guidance on how to ensure the data file is correctly formatted for manual edits.
+- **UC09 - Display Help Information**: The `help` command will have a link to provide guidance on how to ensure the data file is correctly formatted for manual edits.
 
 ---
 
 #### Variations:
-- **1a.** The Salesperson successfully edits the data file and restarts the application to load the changes.
-  - **Use case proceeds normally from Step 3.**
-
-- **1b.** The Salesperson makes an error in the format, and the system rejects the data file.
+- **1a.** The Salesperson makes an error in the format, and the system rejects the data file.
   - **Use case proceeds with Extension 3a.**
 
 ---
@@ -1082,17 +1073,6 @@ otherwise)
 
 ---
 
-### **Error Scenarios:**
-
-- **Invalid Index:**
-  Example: `remark abc r/Important client`
-  `Error: Invalid index. Please provide a valid contact index.`
-
-- **Missing Remark:**
-  Example: `remark 1`
-  `Error: Remark message is required.`
-
-
 ### Use Case: **UC14 - Add a New Contact**
 
 **Actor**: User  
@@ -1100,10 +1080,10 @@ otherwise)
 **Guarantees**: A new contact with valid information is added to the AddressBook.
 
 #### Main Success Scenario (MSS):
-1. The User issues the `add` command, specifying a full name and phone number as mandatory fields, with optional fields such as address, birthday, email, social media handle, remark, and tag.
+1. The User issues the `add` command, specifying a full name, phone number, email and address as mandatory fields, with optional fields such as birthday, remark, and tag.
 2. AddressBook validates the input parameters for correctness.
 3. AddressBook adds the new contact to the contact list.
-4. AddressBook displays a success message: `Contact successfully added: <Name>.`
+4. AddressBook displays a success message: `Contact successfully added: PERSON_DETAILS.`
 5. The newly added contact appears in the contact list.
 
    **Use case ends.**
@@ -1127,46 +1107,49 @@ otherwise)
     - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
     - **Use case ends.**
 
-    - **2b2.** Invalid `Phone Number` parameter.
-      - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
-      - **Use case ends.**
+  - **2b2.** Invalid `Phone Number` parameter.
+    - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+    - **Use case ends.**
 
-    - **2b4.** Invalid `Birthday` parameter.
-      - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
-      - **Use case ends.**
+  - **2b3.** Invalid `Birthday` parameter.
+    - **2b3.1** AddressBook displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
+    - **Use case ends.**
 
-    - **2b5.** Invalid `Email` parameter.
-      - **2b5.1** AddressBook displays an error message:
-        
-        `Emails should be of the format local-part@domain and adhere to the following constraints:`
-        
-        `1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.`
-        
-        `2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.`
-        
-        `The domain name must:`
+  - **2b4.** `Birthday` date is in the future
+    - **2b4.1** AddressBook displays an error message: `Birthday cannot be in the future.`
 
-        &nbsp;&nbsp;&nbsp;&nbsp;`- end with a domain label at least 2 characters long`
-
-        &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label start and end with alphanumeric characters`
-
-        &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.`
+  - **2b5.** Invalid `Email` parameter.
+    - **2b5.1** AddressBook displays an error message:
         
-      - **Use case ends.**
-
-    - **2b6.** Invalid command syntax.
-      - **2b7.1** AddressBook displays an error message:
+      `Emails should be of the format local-part@domain and adhere to the following constraints:`
         
-        `Invalid command format!`
+      `1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.`
+        
+      `2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.`
+        
+      `The domain name must:`
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`- end with a domain label at least 2 characters long`
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label start and end with alphanumeric characters`
+
+      &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.`
+        
+    - **Use case ends.**
+
+  - **2b6.** Invalid command syntax.
+    - **2b6.1** AddressBook displays an error message:
+        
+      `Invalid command format!`
       
-        `add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...`
+      `add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...`
         
-        `Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
-      - **Use case ends.**
+      `Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+    - **Use case ends.**
 
 - **2c.** The contact already exists in the AddressBook.
   - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
-  - **Use case resumes at Step 3.**
+  - **Use case ends.**
 
 ---
 
@@ -1200,22 +1183,22 @@ otherwise)
 
 #### Extensions:
 - **1a.** The command format is invalid.
-  - **1a1.** AddressBook displays an error message: `Invalid command format! <command format>.`
+  - **1a1.** AddressBook displays an error message: `Invalid command format! COMMAND_FORMAT.`
   - **Use case ends.**
 
 - **2a.** The provided index is out of range or does not correspond to any contact.
   - **2a1.** AddressBook displays an error message: `The person index provided is invalid.`
   - **Use case ends.**
 
-- **2b.** One or more property details are missing or invalid:
+- **2b.** One or more property details are invalid:
   - **2b1.** AddressBook displays specific error messages based on the missing or invalid parameter:
-    - **Missing Address**: `Address must be provided.`
-    - **Invalid Town**: `Town must be a valid non-empty string.`
-    - **Invalid Property Type**: `Property type must be one of the accepted types (e.g., Condo, HDB, Landed).`
-    - **Invalid Size**: `Size must be a positive number representing square meters.`
-    - **Invalid Bedrooms**: `Bedrooms must be a non-negative integer.`
-    - **Invalid Bathrooms**: `Bathrooms must be a non-negative integer.`
-    - **Invalid Price**: `Price must be a positive number.`
+    - **Invalid Bedrooms**: `Invalid integer value: INVALID_INPUT`
+    - **Invalid Bathrooms**: `Invalid integer value: INVALID_INPUT`
+    - **Invalid Price**: `Invalid double value: INVALID_INPUT`
+  - **Use case ends.**
+
+- **2c.** One or more property details are missing:
+  - **2c1.** AddressBook displays an error message: `Invalid command format! COMMAND_FORMAT.`
   - **Use case ends.**
 
 ---
@@ -1230,30 +1213,23 @@ otherwise)
 1. **Portability:**
 - The app should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
-2. **Performance:**
-- The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-- The search and sort functions should return results within 2 seconds for 50 contacts.
-
-3. **Efficiency**
+2. **Efficiency**
 - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
   able to accomplish most of the tasks faster using commands than using the mouse.
 
-4. **Usability:**
-- The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
+3. **Usability:**
 - The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
 
-5. **Reliability:**
+4. **Reliability:**
 - The app must have an uptime of at least 99.5% during business hours.
 - Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
 
-6. **Scalability:**
+5. **Scalability:**
 - While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
 
-7. **Maintainability:**
+6. **Maintainability:**
 - The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
 - The app should allow easy export and import of contact data for backup or migration purposes.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -1444,7 +1420,7 @@ These instructions only provide a starting point for testers to work on; testers
 1. **Viewing Reminder for a Person's Birthday**
  
   1. Prerequisites: Having contacts in the list whose birthday is stated and is within a week from today.
-  2. Test case: `birthday 1 b/<date witihin a week>`
+  2. Test case: `birthday 1 b/DATE_WITHIN_A_WEEK`
   3. **Expected:** When the app is closed and re-opened, a reminder showing the person's birthday shows on the result display.
 
 ### Deleting a Person
