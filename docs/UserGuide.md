@@ -261,12 +261,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/EMERGENCY_CONTA
 * Edits the patient at the specified `INDEX`. Existing values will be updated to the input values.
 * `INDEX` should come before any of the optional fields.
 * At least one of the optional fields must be provided.
-* To edit the patient's emergency contact, the index of the emergency contact to edit with `ec/EMERGENCY_CONTACT_INDEX` and provide at least one of the emergency contact fields.
+* To edit the patient's emergency contact, provide the index of the emergency contact to edit under `ec/EMERGENCY_CONTACT_INDEX` and at least one of the emergency contact fields.
 * When editing tags, all the existing tags of the person will be removed. You will have to re-enter pre-existing tags if you wish to preserve them.
-* You can remove all of a person’s existing tags by typing `t/` without specifying any tags after it.
-* An emergency contact is considered a duplicate if it has the same `EMERGENCY_CONTACT_PHONE` as another emergency contact.
-You should not edit an emergency contact to have the same phone number as another emergency contact of the same patient to prevent unexpected app behavior.
-* If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.
+
+[//]: # (* An emergency contact is considered a duplicate if it has the same `EMERGENCY_CONTACT_PHONE` as another emergency contact.)
+
+[//]: # (You should not edit an emergency contact to have the same phone number as another emergency contact of the same patient to prevent unexpected app behavior.)
+
+[//]: # (* If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can remove all of a person’s existing tags by typing `t/` without specifying any tags after it.
+</div>
 
 **Examples:**
 *  `edit 1 p/91234567 e/johndoe@example.com`<br>
