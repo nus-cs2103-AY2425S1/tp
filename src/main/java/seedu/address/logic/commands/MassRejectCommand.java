@@ -26,10 +26,12 @@ public class MassRejectCommand extends Command {
     public static final String COMMAND_WORD = "massreject";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Rejects persons with specified job code and/or tag.\n"
-            + "Parameters:\n"
-            + "JobCode + Tag: " + COMMAND_WORD + " j/SWE2024 t/bp\n"
-            + "Tag only: " + COMMAND_WORD + " t/bp\n"
-            + "JobCode only (excluding accepted): " + COMMAND_WORD + " j/SWE2024\n";
+            + "Parameters:\n{[j/JOB CODE] | [t/TAG]}1..*\n"
+            + "Note: massReject using only JobCode will exclude applicants with accepted tag\n"
+            + "Example:\n"
+            + COMMAND_WORD + " j/SWE2024 t/bp\n"
+            + COMMAND_WORD + " t/bp\n"
+            + COMMAND_WORD + " j/SWE2024\n";
 
     public static final String MESSAGE_SUCCESS = "Mass rejection complete. %d persons updated.";
 

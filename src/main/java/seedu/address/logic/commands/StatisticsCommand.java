@@ -43,7 +43,7 @@ public class StatisticsCommand extends Command {
         return new CommandResult(statisticsMessage);
     }
 
-    private void calculateJobCodeStatistics(FilteredList<Person> fullContactList,
+    protected void calculateJobCodeStatistics(FilteredList<Person> fullContactList,
                                             HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
         for (Person person : fullContactList) {
             JobCode jobCode = person.getJobCode(); // get person job code
@@ -59,7 +59,7 @@ public class StatisticsCommand extends Command {
         }
     }
 
-    private String buildStatisticsMessage(HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
+    protected String buildStatisticsMessage(HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
         StringBuilder statisticsMessage = new StringBuilder();
 
         int totalApplicantsInSystem = 0;
@@ -145,4 +145,5 @@ public class StatisticsCommand extends Command {
         // Insert the tag percentages at the beginning of the builder
         builder.insert(0, stringToInsert.toString().trim() + "\n--------\n");
     }
+
 }
