@@ -914,7 +914,7 @@ As a result, the difficulty of developing WedLinker came not only from the
 myriad of features we had to implement (and alter from the original AB3), but to also ensure the minimal number of
 bugs created.
 
-#### Challenges faced:
+#### Challenges Faced:
 Undoubtedly with any projects, there will be challenges faced. 
 With the number of features that we wanted to implement, we had used to [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
 that enabled us to work on numerous features, debugs, or minor adjustments concurrently. However, with the Forking Workflow came some drawbacks that we personally experienced, such as
