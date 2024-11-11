@@ -464,7 +464,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No student is deleted. Error details shown in the status message. State of command box remains the same, i.e. the command that was typed in remains in the command box.
 
     1. Other incorrect delete commands to try: `deletes`, `deletes x/`, `...` (where x is any invalid prefix)<br>
-       Expected: Similar to previous.
+       Expected: Similar to previous case.
 
 1. _{ more test cases …​ }_
 
