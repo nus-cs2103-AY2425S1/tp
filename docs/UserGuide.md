@@ -163,7 +163,7 @@ Adds a member to HallPointer. A member must have a name, room assignment, and Te
 - `add_member n/John Doe r/4-3-301 t/johndoe123` adds a member with name `John Doe` in room `4-3-301` and Telegram username `johndoe123`.
 - `add_member n/Betsy Crowe d/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe d/o Alice Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
  
-![result for 'add_member n/John Doe r/4-3-301 t/johndoe123'](images/addCommandResult.png)
+<img src="images/addCommandResult.png" alt="result for 'add_member n/John Doe r/4-3-301 t/johndoe123'" style="width: 80%; height: 80%;">
 ---
 
 ### Listing all members:
