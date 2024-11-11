@@ -546,18 +546,19 @@ Currently, names do not accept `.` and `/` and other special characters that mig
 
 We should remove strict alphanumeric checks for names to support special characters, allowing for more accurate entries.
 
-### Make Guest/Vendor phone, email and address fields optional
+### Restriction on prefix usage in Guest/Vendor commands
 
 **Feature Flaw in Current Implementation**
 
-Currently, the phone, email and address are mandatory inputs for `add_guest` and `add_vendor` commands. However, not all contacts require full details.
-
-A planner might only have a name without contact information for certain guests, especially in cases like plus-ones or placeholder names.
-Similarly, a planner might not have complete contact information for a vendor.
+Currently, the commands in BridalBuddy could mistakenly flag invalid prefixes that appear within fields such as address or company name.
+For example, in an input like `a/123 Main St W/T Building`, the system mistakenly interprets `W/` as a new prefix, even though `W/` does not represent a valid prefix but a part of the address. 
+This leads to unnecessary parsing errors, as the input is incorrectly split due to an unrecognized prefix.
 
 **Proposed Enhancement**
 
-The phone, email and address fields should be updated to optional parameters in the `add_guest` and `add_vendor` commands.
+Enhance command parsing to distinguish between valid prefixes and text within fields like addresses or company names.
+clear error messages only when truly invalid prefixes are used outside recognized fields. 
+This will improve input accuracy and reduce user frustration.
 
 ### Enhance flexibility in phone number parameter input
 
