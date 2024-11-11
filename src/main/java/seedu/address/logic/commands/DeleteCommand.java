@@ -24,7 +24,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified person or policy from their respective lists.\n"
             + "Use the index number shown in the displayed persons and policy list or the person's exact name\n"
-            + "Parameters: INDEX(positive integers) + <Optional> po/policyIndex or NAME\n"
+            + "Parameters: INDEX(positive integers) + <Optional> po/policyIndex\n"
+            + "Alternative: NAME\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1 or " + COMMAND_WORD + " Alex Yeoh";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
@@ -85,6 +86,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        //Used Copilot to help split execute method into two methods to improve code quality
         if (targetIndex != null) {
             return executeByIndex(model, lastShownList);
         } else {
@@ -169,7 +171,7 @@ public class DeleteCommand extends Command {
         }
         model.deletePerson(personToDelete);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     /**
@@ -198,6 +200,7 @@ public class DeleteCommand extends Command {
             return false;
         }
         DeleteCommand otherCommand = (DeleteCommand) other;
+        //ChatGPT used to help with equals method
         return (targetIndex != null ? targetIndex.equals(otherCommand.targetIndex) : otherCommand.targetIndex == null)
                 && (policyIndex != null ? policyIndex.equals(otherCommand.policyIndex)
                 : otherCommand.policyIndex == null)

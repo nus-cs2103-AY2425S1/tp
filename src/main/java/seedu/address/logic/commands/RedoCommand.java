@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+//Code adapted from AB4 undo/redo feature with modifications
+//With reference to AB3 proposed implementation of undo/redo feature in the DG
 /**
  * Redoes the previously undone command.
  */
