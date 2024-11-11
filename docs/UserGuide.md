@@ -314,6 +314,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​`
 * You can remove all the buyer’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The `index` you use in the edit command is the one you see on your screen! E.g if `1. Alex Yeoh` is shown in the current filtered view, but `2. Alex Yeoh` was shown after any previous commands, use the one that you can see right now! 
+</div>
+
 Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
@@ -353,6 +357,10 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the **displayed buyer list**.
 * The index must be a positive integer: 1, 2, 3, …​​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * The index cannot exceed the displayed list's range.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The error message shown for a non-positive integer is different than the error message shown for an integer out of range! Check your input carefully!
+</div>
 
 Examples:
 * `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
