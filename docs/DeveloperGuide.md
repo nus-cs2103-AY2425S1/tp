@@ -899,15 +899,24 @@ feature freeze. The plans to improve our features are as such.
 
 1. There is a small GUI bug that causes the overflow of names for Tags and Weddings which causes cosmetic flaws.
 Planned enhancements would be to truncate the name with `...`.
-2. There is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Tag, Task, Tags.
+2. There is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Task and Tags.
 For example, John Doe and John  Doe, would not be considered duplicates in WedLinker although in the real world, the user likely refers to the same person.
 Planned enhancements would be to ensure parser strips all whitespace except one between the keywords before creating the
 respective command objects.
-3. There is a missing validation in unassign-task command that negates the check of whether a Person is a vendor, resulting 
+3. There is a missing validation in `unassign-task` command that negates the check of whether a Person is a vendor, resulting 
 in an incorrect error message to be shown.
 The error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaws and application runs as intended.
 Planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
 message.
-4. Unassign task and unassign wedding are case sensitive, but 
-5. To allow addition of vendors directly. 
+4. The `unassign-wedding PERSON_INDEX w/WEDDING_NAME` command is case-sensitive for the `WEDDING_NAME`. So, only exactly matching the case of the
+wedding as stored in WedLinker will unassign it from the Person. This limits the speed with which users can use the application and does not
+follow the case sensitivity defined for Weddings in the `Wedding::isSameWedding(Wedding)` function or the intended real-world case-sensitivity.
+Planned enhancements would be to ensure that, when unassigning weddings, case is ignored and the `Wedding::isSameWedding(Wedding)` function is used
+to check for same-ness.
+5. The `untag PERSON_INDEX t/TAG_NAME` command is case-sensitive for the `TAG_NAME`. So, only exactly matching the case of the
+tag as stored in WedLinker will untag it from the Person. This limits the speed with which users can use the application and does not
+follow the case sensitivity defined for Tag in the `Tag::isSameTag(Tag)` function or the intended real-world case-sensitivity.
+Planned enhancements would be to ensure that, when untagging Person objects, case is ignored and the `Tag::isSameTag(Tag)` function is used
+to check for same-ness.
+6. In order to have vendors in the WedLinker, 
