@@ -14,7 +14,7 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : execute("deletes n/John Doe")
 activate logic LOGIC_COLOR
 
-logic -[LOGIC_COLOR]> model : deleteStudent(s)
+logic -[LOGIC_COLOR]> model : deleteStudent(student)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> logic
