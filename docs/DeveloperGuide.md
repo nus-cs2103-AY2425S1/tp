@@ -63,7 +63,7 @@ Another *Sequence Diagram* below shows how the components interact with each oth
 The four main components (also shown in the diagram above, staticContext is not a main component),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -614,7 +614,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing using the User Guide.
 
 </box>
 
@@ -633,16 +633,100 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+
+1. Adding a person
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
+       Expected: Success message with John Doe's details shown. Ui displays person list.
+    2. Incorrect add command to try: `add n/John Doe p/98765432 e/johnd@example.com`<br>
+       Expected: Error message due to invalid command shown.
+
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
-
+1. Deleting a person that exists in AddressBook
    1. Test case: `del n/Alex` followed by `y`<br>
-      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted.
+      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted. Ui displays person list.
    2. Test case: `del n/Jonus` followed by `n`<br>
-      Expected: No person is deleted.
-   3. Other incorrect delete commands to try: `del`, `del 123123`<br>
-      Expected: Similar to previous.
+      Expected: Delete operation cancelled and no person is deleted. Ui displays person list.
+   3. Incorrect delete command to try: `del`, `del 123123`<br>
+      Expected: Error message due to invalid command shown.
+
+### Editing a person
+
+1. Editing a person that exists in AddressBook
+
+    1. Test case: `edit n/Alex new/John Doe` <br>
+       Expected: Success message with edited details shown. Ui displays person list.
+    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
+       Expected: Error message stating tags cannot be edited shown. 
+
+### Filtering a person
+
+1. Filtering a person based on name and job
+
+    1. Test case: `filter n/John j/Photographer` <br>
+       Expected: Success message with number of persons filtered. Ui displays filtered person list with name `John` and job `Photographer`.
+    2. Incorrect edit command to try: `filter John`<br>
+       Expected: Error message due to invalid command shown
+
+### Adding a wedding
+
+1. Adding a wedding
+
+    1. Test case: `add-wed w/James Hauw & Rachel Loh v/Pan Pacific Hotel d/11/03/2025` <br>
+       Expected: Success message with wedding details shown. Ui displays wedding list.
+    2. Incorrect add wedding command to try: `add-wed v/Pan Pacific Hotel d/11/03/2025`<br>
+       Expected: Error message due to invalid command shown.
+    3. Other incorrect add wedding to try: `add-wed w/James Hauw and Rachel Loh v/Pan Pacific Hotel d/11/03/2025`<br>
+       Expected: Error message stating the correct wedding name format.
+
+### Deleting a wedding
+
+1. Deleting a wedding that exists in WeddingBook
+
+    1. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `y`<br>
+       Expected: Confirmation Prompt with wedding details shown. Wedding is then deleted. Ui displays wedding list.
+    2. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `n`<br>
+       Expected: Delete operation cancelled and no wedding is deleted. Ui displays wedding list.
+    3. Incorrect delete command to try: `del-wed`, `del-wed Jonus & Izzat`<br>
+       Expected: Error message due to invalid command shown.
+
+### Adding a Tag
+
+1. Adding a tag of an existing wedding in WeddingBook to a person
+
+    1. Test case: `tag-add n/Jonus t/James Hauw & Rachel Loh` <br>
+       Expected: Success message stating that person is added to a wedding. Ui displays person list.
+    2. Incorrect add wedding command to try: `tag-add n/Jonus w/James Hauw & Rachel Loh`<br>
+       Expected: Error message due to invalid command shown.
+   
+### Deleting a tag
+
+1. Deleting a tag of an existing wedding in WeddingBook of a person
+
+    1. Test case: `tag-del n/Jonus t/James Hauw & Rachel Loh` <br>
+       Expected: Success message stating that person is removed from a wedding. Ui displays person list.
+    2. Incorrect add wedding command to try: `tag-del n/Jonus w/James Hauw & Rachel Loh`<br>
+       Expected: Error message due to invalid command shown.
+
+### GUI
+
+1. Showing person list
+
+    1. Test case: `list` <br>
+       Expected: Success message with total number of persons. Ui displays person list.
+   
+2. Showing wedding list
+
+   1. Test case: `list-wed` <br>
+      Expected: Success message with total number of weddings. Ui displays wedding list.
+
+3. Showing help window
+
+   1. Test case: `help` <br>
+      Expected: Ui displays help window.
+
 
 ### Saving data
 
