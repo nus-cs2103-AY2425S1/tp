@@ -597,7 +597,6 @@ Team Size: 5
 6. Enhance error handling for the address parameter by providing specific feedback on which part of the input is invalid. The error message should clearly inform the user about the exact issue, such as incorrect street name, invalid postal code, or missing building name information.
 7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Adjust the message to accurately reflect this requirement.
 8. Modify categories to be case-insensitive in the related commands for ease of use. Currently, the program only considers strictly fully upper-cased categories to be valid.
-9. Modify the deletegoods function to either delete all items with the same name when multiple identical goods are present or allow the user to select which specific items to delete. Currently, deletegoods only removes one item when multiple items with the same name exist, without prompting the user to specify which one.
-10. Modify addgoods to accept special characters for real-world applicability. Current functionality does not allow a goods name with special characters.
-11. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows the user to fully maximize/minimize UI elements which may impact the user experience negatively.
-12. Adjust the colors of the supplier and category tags to be distinct, as using the same color for both may cause confusion for users.
+9. Modify addgoods to accept special characters for real-world applicability. Current functionality does not allow a goods name with special characters.
+10. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows the user to fully maximize/minimize UI elements which may impact the user experience negatively.
+11. Adjust the colors of the supplier and category tags to be distinct, as using the same color for both may cause confusion for users.
