@@ -624,7 +624,7 @@ Phone number: 97774444 and Email: bobby321@gmail.com!
 >
 > ---
 > 
-> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #2**: Client index out of bounds (larger than number of clients)
 > 
 > **Input**: `editclient 100 n/Bobby`
 > 
@@ -668,7 +668,7 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 <br>Example: deleteclient 1
 >
 > ---
-> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #2**: Client index out of bounds (larger than number of clients)
 > 
 > **Input**: `deleteclient 100`
 > 
