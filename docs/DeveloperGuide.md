@@ -613,3 +613,5 @@ values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/123456
 2. **Make tags command accept non-alphanumeric values:** Similar to the above-mentioned enhancement, we also plan on enhancing the tags command to allow searches for non-alphanumeric values. E.g. `tags Crème brûlée`.
 3. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
 spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
+4. **Fix grammar for 1 restaurant listed:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
+fixing this in the future to: `1 restaurant listed!`
