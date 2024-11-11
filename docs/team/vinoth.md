@@ -4,7 +4,7 @@ title: Vinoth's Project Portfolio Page
 
 ### Project: NomNom Notifier
 
-NomNom Notifier is a desktop address book application for restuarant employees to better store and retrieve customer details to ensure efficiency.
+NomNomNotifier is a desktop address book application for restaurant employees to better store and retrieve customer details to ensure efficiency.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -36,7 +36,7 @@ Given below are my contributions to the project.
 * **Community**:
 1. Reviewed Pull Requests
 2. Conducted alpha testing and reported bugs for the majority of developers, contributing to the overall stability of the application.
-1. Collaborated with another developer to resolve `https://github.com/AY2425S1-CS2103T-T13-2/tp/pull/42`, facilitating a quick and effective solution
+3. Collaborated with another developer to resolve `https://github.com/AY2425S1-CS2103T-T13-2/tp/pull/42`, facilitating a quick and effective solution
     
 * **Tools**:
 1. Development: Java, JavaFX 
