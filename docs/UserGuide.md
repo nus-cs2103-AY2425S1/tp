@@ -243,12 +243,14 @@ Edits an existing student in the address book.
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS] [t/TAG]…​`
 
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+
 - `INDEX` refers to the index number shown in the displayed person list.
 - `NAME` is case-insensitive. It must be alphanumeric and allows whitespace.
 - `CLASS` must be alphanumeric.
 - `PHONE_NUMBER` must be at least 3 digits long and only contain numbers.
 - `PHONE_NUMBER` has support for `+` for the extension code.
 - `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
+
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -554,6 +556,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: Is there support for importing and exporting groups?<br>
+**A**: It is a planned enhacement. Do check out our Developer Guide for more information.
+**Q**: I don't understand what caused the error in my command what can I do?<br>
+**A**: Take note of the command you tried using and look at the command format and examples in the user guide.
 
 ---
 
@@ -561,6 +567,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you require use of special characters**, unfortunately we currently support alphanumeric representations hence, special characters cannot be used in our application. However we will be adding support for this in future implementations as we understand some students or classes may require use of special characters.
+4. **If you are trying to identify a specific student using find** but cannot explicity just return that single student due to them having a space in their name, we understand this can be a problem. Our team will be adding support for more specific searches to more accurately and preciesly locate students.
+5. **Index isn't referencing the correct number**, index for our commands reference the currently displayed list of students and not the entire student list. Thus, it will be the index or number you see on you screen.
+
+## Before submitting issues
+Do read up on our known issues and planned enhacements to see if we have already planned and covered potentially submitted issues!
 
 ---
 
