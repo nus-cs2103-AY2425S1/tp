@@ -64,10 +64,6 @@ public class HelpCommand extends Command {
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;;
     public static final String HELP_LIST = ListCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT + LINE_BREAK
-            + "No other fields is required for the command but alternatives are allowed as follows:" + LINE_BREAK
-            + "Alternative One:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_ONE + LINE_BREAK
-            + "Alternative Two:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_TWO + LINE_BREAK
-            + "Alternative Three:" + WHITESPACE + ListCommand.MESSAGE_COMMAND_FORMAT_ALT_VERSION_THREE + LINE_BREAK
             + MESSAGE_REFER_USERGUIDE_DETAIL_HELP;
     public static final String HELP_CLEAR = ClearCommand.MESSAGE_FUNCTION + LINE_BREAK
             + COMMAND_FORMAT_PREAMBLE + WHITESPACE + ClearCommand.MESSAGE_COMMAND_FORMAT;
