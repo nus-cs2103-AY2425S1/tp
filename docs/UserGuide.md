@@ -33,13 +33,13 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [Arguments](#54-arguments)
    - 5.5 [Using Commands](#55-using-commands)
 6. [Commands](#6-commands)
-   - 5.1 [How to Read Commands](#61-how-to-read-commands)
-   - 5.2 [Data Modification Commands](#62-data-modification-commands)
-   - 5.3 [Data Filtering Commands](#63-data-filtering-commands)
-   - 5.4 [General Commands](#64-general-commands)
-   - 5.5 [Saving Data](#65-saving-data)
-   - 5.6 [Modifying the Data File](#66-modifying-the-data-file)
-   - 5.7 [Modifying the Preferences File](#67-modifying-the-preferences-file)
+   - 6.1 [How to Read Commands](#61-how-to-read-commands)
+   - 6.2 [Data Modification Commands](#62-data-modification-commands)
+   - 6.3 [Data Filtering Commands](#63-data-filtering-commands)
+   - 6.4 [General Commands](#64-general-commands)
+   - 6.5 [Saving Data](#65-saving-data)
+   - 6.6 [Modifying the Data File](#66-modifying-the-data-file)
+   - 6.7 [Modifying the Preferences File](#67-modifying-the-preferences-file)
 7. [FAQ](#7-faq)
 8. [Known Issues](#8-known-issues)
 9. [Command Summary](#9-command-summary)
@@ -157,8 +157,6 @@ Find or create a folder on your computer where you want to store the AgentAssist
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
 
-
-
 <div style="page-break-after: always;"></div>
 
 ## 3.2 Graphical User Interface (GUI) Layout
@@ -210,8 +208,9 @@ Case statuses are also color-coded and appear next to a client’s name in the l
 
 Clients with **NA** status (no follow-up required) have no status label on the UI but are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) on the status pie chart to indicate that their cases are resolved or need no attention.
 
-To learn more about how to use commands in AgentAssist, proceed to the next section.
+[↑ Return to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 # 4. Glossary
@@ -273,6 +272,7 @@ add n/ John Doe e/ john@example.com
 * **Flags:** `n/` and `e/` specify the information type (name and email).
 * **Arguments:** `John Doe` and `john@example.com` are the actual values being input for the respective flags.
 
+<div style="page-break-after: always;"></div>
 
 ## 5.2 Commands
 A command is the action that AgentAssist will perform, such as adding, deleting, or editing a client's contact.
@@ -748,6 +748,8 @@ For detailed explanations for the matching criteria of each flag and the accepta
   ```
   filter n/ Gordon Moore j/ doctor r/ award winner
   ```
+  
+
 **Matching Criteria & Filter Behavior:**
 
 - **Name/Address/Job/Remarks (Substring Matching)**:
