@@ -256,7 +256,6 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * At least one of name(`n/`), address(`a/`), or tag(`t/`) needs to be entered.
 * All other invalid parameters will be ignored (eg. `u/` or `e/`)
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The command searches from all clients, not just the one that are currently listed
 
 * The order of the keywords does not matter. 
   * e.g. `n/Hans Bo` will match name `Bo Hans`.
