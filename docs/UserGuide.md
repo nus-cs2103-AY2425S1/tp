@@ -369,7 +369,7 @@ a unique name (case-insensitive).
 strength, flexibility, or overall physical function.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
 * **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
-* **Tag**: A label to indicate the treatment type of the client.
+* **Tag**: A label to indicate the client's condition.
 
 
 --------------------------------------------------------------------------------------------------------------------
