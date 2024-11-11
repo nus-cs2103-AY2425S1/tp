@@ -24,6 +24,8 @@ Main Features:
 
 --- {.border-primary .thick}
 
+<div style="page-break-after: always;"></div>
+
 <!-- Quick start -->
 ## Quick start
 
@@ -158,6 +160,8 @@ Examples:
 
 --- {.border-secondary}
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person : `edit p`
 
 Edits an existing person in the address book.
@@ -195,6 +199,8 @@ Examples:
 *  `edit e 2 n/Summer Time Convention t/` Edits the name of the 2nd event to be `Summer Time Convention` and clears all existing tags.
 
 --- {.border-secondary}
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete p`
 
@@ -240,6 +246,8 @@ Before and After:
 
 --- {.border-secondary}
 
+<div style="page-break-after: always;"></div>
+
 ### Locating persons by name: `find p`
 
 Finds persons whose names contain any of the given keywords.
@@ -256,7 +264,8 @@ Format: `find p KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find p John` returns `john` and `John Doe`
 * `find p alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavidResult.png){ width=65% }
+
 
 ### Locating event by name: `find e`
 
@@ -274,7 +283,7 @@ Format: `find e KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find e Sentosa` returns `sentosa` and `Sentosa Party`
 * `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
-  ![result for 'find sentosa party'](images/findSentosaParty.png)
+  ![result for 'find sentosa party'](images/findSentosaParty.png){ width=65% }
 
 --- {.border-secondary}
 
@@ -284,22 +293,17 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `search p KEYWORD [MORE_KEYWORDS]`
 
-<box type="info" seamless>
-
-**Note:** Persons without tags cannot be located using `search p`.
-</box>
-
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * The order of the keywords does not matter. e.g. `Work Friends` will match `Friends Work`
 * Only the tag name is searched.
 * Only full words will be matched. e.g. `Friend` will not match `Friends`
-* Persons with tags matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Work Friends` will return persons with tags `Friends` or `Work`
+* Persons with tags matching at least one keyword will be returned (`OR` search).
+* Persons without tags cannot be located using `search p`.
 
 Examples:
 * `search p Friends` returns persons with tags named `Friends`
 * `search p Work Friends` returns persons with tags named `Friends` or `Work`<br>
-  ![result for 'search Work Friends'](images/searchWorkFriendsResult.png)
+  ![result for 'search Work Friends'](images/searchWorkFriendsResult.png){ width=60% }
 
 ### Locating events by tag: `search e`
 
@@ -307,22 +311,17 @@ Finds events whose tags contain any of the given keywords.
 
 Format: `search e KEYWORD [MORE_KEYWORDS]`
 
-<box type="info" seamless>
-
-**Note:** Events without tags cannot be located using `search e`.
-</box>
-
-* The search is case-insensitive. e.g `friends` will match `Friends`
+* The search is case-insensitive. e.g `dinner` will match `Dinner`
 * The order of the keywords does not matter. e.g. `Summer Fashion` will match `Fashion Summer`
 * Only the tag name is searched.
-* Only full words will be matched. e.g. `Friend` will not match `Friends`
-* Events with tags matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Summer Fashion` will return events with tags `Summer` or `Fashion`
+* Only full words will be matched. e.g. `Dinner` will not match `Dinners`
+* Events with tags matching at least one keyword will be returned (`OR` search).
+* Events without tags cannot be located using `search e`.
 
 Examples:
 * `search e Friends` returns events with tags named `Friends`
 * `search e Summer Fashion` returns events with tags named `Summer` or `Fashion`<br>
-  ![result for 'search Summer Fashion'](images/searchSummerFashionResult.png)
+  ![result for 'search Summer Fashion'](images/searchSummerFashionResult.png){ width=60% }
 
 --- {.border-secondary}
 
@@ -339,7 +338,7 @@ Format: `link INDEX_OF_PERSON ev/EVENT_NAME`
 Examples:
 * `list` followed by `link 2 ev/Winter Time Convention` links the 2nd person in the address book to the event.
 * `find p John` followed by `link 1 ev/Summer Time Convention` links the 1st person in the results of the `find` command to the event.
-  ![result for 'link 1 ev/Summer Time Convention'](images/link2Summer.png)
+  ![result for 'link 1 ev/Summer Time Convention'](images/link2Summer.png){ width=65% }
 
 ### Unlinking a person from an event : `unlink`
 
@@ -354,10 +353,12 @@ Format: `unlink INDEX_OF_PERSON ev/EVENT_NAME`
 Examples:
 
 * `list` followed by `unlink 2 ev/Winter Time Convention` removes the link between the 3rd person in the address book and the event.
-* `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event.
-  ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png)
+* `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event. <br>
+  ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png){ width=65% }
 
 --- {.border-secondary}
+
+<div style="page-break-after: always;"></div>
 
 ### Display events in schedule : `schedule`
 
@@ -536,8 +537,11 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **The UI components move around slightly** when clicking "Contacts", "Events", and pressing the `tab` key. This does not affect the function of the app, it is caused by JavaFX, the rendering software.
+4. **Linking a person who is off-screen** will not update the UI of said person. Enter `link` to refresh the UI for the person card.
 
 --- {.border-primary .thick}
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
