@@ -120,8 +120,8 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 <br></br>
 ### Part 2: Using the HireMe application
-For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows Users](#_windows-users_) section that matches your computer system.
-Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6.
+For steps 5 and 6, refer to **either** [Mac Users](#mac-users) **or** [Windows Users](#windows-users) section that matches your computer system.
+Continue to [Using the terminal](#using-the-terminal) after completing steps 5 and 6.
 <br></br>
 #### _Mac Users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
