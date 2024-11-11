@@ -194,11 +194,25 @@ Example usages
 
 Invalid usages
 * Student already exists in EduVault
-  * *Error message: This person already exists in EduVault.*
+  * *Error message: This student already exists in EduVault.*
 * Format errors, check [here](#12-format-errors).
 
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+The student to be added cannot have the same name and phone number as an existing student.
+
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
+
+</div>
 
 #### **3.2 Creating a new tutorial**
 
@@ -265,7 +279,7 @@ Invalid usages
 
 * Enrolling student in a tutorial that they are already in
 
-    * *Error Message: This person is already in the tutorial*
+    * *Error Message: This student is already in the tutorial.*
 
 * Format errors, check [here](#12-format-errors)
 
@@ -380,7 +394,7 @@ Invalid usages
 
 ### **5. Editing and updating data**
 
-The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
+The commands in this section are used to edit records on the system, such as student information, tutorial information, payment, and attendance status
 
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
@@ -429,8 +443,8 @@ Fields:
 
 Example Usage:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -439,12 +453,26 @@ Invalid usage:
 * None of the option fields are input
     * *Error message: At least one field to edit must be provided.*
 * Values to edit result in a copy of a student already in EduVault
-    * *Error message: This person already exists in EduVault.*
+    * *Error message: This student already exists in EduVault.*
 * `ATTENDANCE` & `TUTORIAL` & `PAYMENT` prefix used
     * Error message: PREFIX cannot be used in this command
 * Format errors, check [here](#12-format-errors)
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+The student cannot be edited to have the same name and phone number as an existing student.
+
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
+
+</div>
 
 #### **5.2 Logging fees for tutorial**
 
@@ -465,7 +493,12 @@ Fields
 {% endraw %}
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+
+Fees can only be added if the student is enrolled in **at least one** tutorial. To enroll students into tutorial, check [here](#33-enrolling-student-into-a-tutorial).
+</div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first.
 </div>
 
 Example usages
@@ -526,14 +559,20 @@ Usage: `mas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
 Fields
 
-* `INDEX`: Index number as shown in the displayed person list of the student to mark
+* `INDEX`: Index number of the student to mark, as shown in the displayed student list
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
     * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+    * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+If the student has attendance marked for the corresponding week, the attendance of the student will not be marked.
+</div>
 
 <div markdown="span" class="alert alert-success">:bulb: **Tip:**
 If you want to mark the attendance of all students in a tutorial, 
@@ -577,6 +616,8 @@ Fields
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
     * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+    * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+      For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
@@ -599,8 +640,8 @@ Invalid usages
     * *Error message: No tutorial class with the name TUTORIAL is found*
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-* Marking attendance of a tutorial where **all students** already has attendance marked for the corresponding week
-    * *Error message: All students in TUTORIAL tutorial has attendance marked 
+* Marking attendance of a tutorial where **all students** already have attendance marked for the corresponding week
+    * *Error message: All students in TUTORIAL tutorial have attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
 
@@ -618,11 +659,13 @@ Usage: `umas INDEX tut/TUTORIAL attend/ATTENDANCE`
 
 Fields
 
-* `INDEX`: Index number as shown in the displayed person list of the student to unmark.
+* `INDEX`: Index number of the student to unmark, as shown in the displayed student list
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
   * Must be a valid date in the format dd/MM/yyyy and cannot be a future date
+  * If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.
 
 </div>
 {% endraw %}
@@ -777,6 +820,14 @@ Shows a message explaining how to access the help page.
 
 Command: `help`
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Extraneous parameters for commands that do not take in parameters (such as help, list, exit and clear) will be ignored.
+
+- e.g. if the command specifies help 123, it will be interpreted as help.
+
+</div>
+
 ---
 
 ### **8. Exiting the program**
@@ -897,10 +948,11 @@ dd/MM/yyyy</code>
   </td>
 </tr>
 <tr>
-  <td><u>Format</u><br>The keyword provided should be a valid date of the format <code>dd/MM/yyyy</code>.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
+  <td><u>Format</u><br>The keyword provided should be a valid date of the format <code>dd/MM/yyyy</code>.<br><br>Note: If the month specified has fewer than 31 days, entering a day up to and including 31 will result in the date being adjusted to the final day of that month.
+    For e.g. 31/04/2024 will be adjusted to 30/04/2024, 30/02/2024 will be adjusted to 29/02/2024 and 31/02/2023 will be adjusted to 28/02/2023.<br><br><i>Multiple keywords are not allowed.<br>Duplicate prefixes are not allowed.</i></td>
 </tr>
 <tr>
-  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be in date format...</i></td>
+  <td><u>Invalid Usage</u><br>Keyword does not have the format specified above.<br><br><i>Error Message: Attendance must be a valid date in the format...</i></td>
 </tr>
 
  <!-- t/ prefix row -->

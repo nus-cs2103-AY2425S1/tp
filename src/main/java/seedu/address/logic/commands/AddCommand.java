@@ -17,13 +17,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to EduVault. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to EduVault. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -40,8 +40,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Scholar "
             + PREFIX_TAG + "SessionB";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EduVault";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in EduVault.";
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
     private final Person toAdd;
 
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        logger.info(" - Successfully added person to model");
+        logger.info(" - Successfully added student to model");
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

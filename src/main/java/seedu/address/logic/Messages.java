@@ -19,7 +19,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The student's index provided is invalid, "
             + "please check the index against the list below";
     public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_SUBJECT = "The tutorial name provided is invalid\n";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_INPUT =

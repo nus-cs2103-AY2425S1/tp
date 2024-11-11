@@ -165,7 +165,7 @@ public class FindCommandTest {
                 new FieldContainsKeywordsPredicate<>(Collections.singletonList("keyword"), Person::getFullName,
                         true, FieldContainsKeywordsPredicate.NAME_IDENTIFIER);
         FindCommand findCommand = new FindCommand(List.of(predicate), new ArrayList<>());
-        String expected = FindCommand.class.getCanonicalName() + "{person predicates=" + "[" + predicate + "]" + ", "
+        String expected = FindCommand.class.getCanonicalName() + "{student predicates=" + "[" + predicate + "]" + ", "
                 + "participation predicates=" + "[" + "]" + "}";
         assertEquals(expected, findCommand.toString());
     }
