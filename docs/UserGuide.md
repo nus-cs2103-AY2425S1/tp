@@ -69,7 +69,14 @@ This section explains the different types of annotated boxes used in the user gu
 
         `java -jar educonnect.jar`
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
-   ![Ui](images/Ui.png)
+     - Take note, EduConnect will look slightly different on macOS, and on Windows. Particularly, the contact cards on macOS will be colourised, while those on Windows will be in monochrome. 
+     - The screenshots on this User Guide will be primarily on macOS.
+
+
+**macOS User Interface**: 
+![Ui](images/Ui.png)
+**Windows User Interface**:
+![Windows Ui](images/windows_ui.jpg)
 
 5. Enter a command:
 
@@ -247,7 +254,8 @@ Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` Edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /name Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
     <br/><br/>
-    ![edit command](images/EditCommand.png)
+
+![edit command](images/edited_ui.png)
 
 ### Locating persons by name: `find`
 
@@ -264,6 +272,12 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 > :information_source: **Note:**
 >
 > The find command performs an OR search, meaning that if multiple fields are specified, any match in any of the fields will return a result. Example: `/name Hans Bo` will return Hans Gruber, Bo Yang.
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> If none of the contacts match the search criteria, EduConnect will return the full list of all contacts, with the message `No possible entries in EduConnect to find!`.
+
 
 Examples:
 * `find /name John` returns `John` and `John Doe`
@@ -298,7 +312,8 @@ Format: `sort [ATTRIBUTE]`
 Examples:
 * `list` followed by `sort attendance` sorts the list of students by attendance in descending order.
    <br/><br/>
-   ![sort attendance command](images/SortAttendanceCommand.png)
+
+![sort attendance command](images/sort_attendance.png)
 
 ### Undoing the last command : `undo`
 
