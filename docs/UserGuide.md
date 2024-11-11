@@ -471,6 +471,6 @@ Action     | Format, Examples
 Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
-**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
 **Client**    |A contact that has the role `client`
 **Employee**    |A contact that has the role `employee`
+**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
