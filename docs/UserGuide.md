@@ -10,8 +10,8 @@ pageNav: 3
     <img src="images/EduLog.png" alt="EduLog Logo" style="width: 60px; height: auto;" />
   </div>
  <div style="margin-left: 15px;">
-    <h1 style="font-size: 40px; padding-top: 20px; margin-bottom: 0;">EduLog User Guide</h1> <!-- Remove bottom margin on h1 -->
-    <h2 style="font-size: 30px; color: black; margin-top: 0; font-weight: normal;">for Educators</h2> <!-- Subtitle style -->
+    <h4 style="font-size: 40px; padding-top: 20px; margin-bottom: 0;">EduLog User Guide</h4> <!-- Remove bottom margin on h1 -->
+    <h4 style="font-size: 30px; color: black; margin-top: 0; font-weight: normal;">for Educators</h4> <!-- Subtitle style -->
  </div>
 </div>
 
@@ -383,14 +383,14 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 
 ## Command Summary 
 
-### General Commands
+#### General Commands
 
 | Action | Format, Examples |
 |---|---|
 | `help` | `help` |
 | `exit` | `exit` |
 
-### Student Commands
+#### Student Commands
 
 | Action | Format, Examples |
 |---|---|
@@ -401,7 +401,7 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 | `delete` | `delete INDEX` or `delete NAME`<br> e.g., `delete 3`, `delete Nikhil` |
 | `clear` | `clear` |
 
-### Calendar Commands
+#### Calendar Commands
 
 | Action | Format, Examples |
 |---|---|
@@ -410,13 +410,13 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 | `deletec` | `deletec DESCRIPTION` <br> e.g. `deletec Secondary 4 Chemistry Class` |
 
 
-### Gift Commands
+#### Gift Commands
 
 | Action | Format |
 |---|---|
 | `gift` | `gift` |
 
-### Revenue Commands
+#### Revenue Commands
 
 | Action | Format, Examples |
 |---|---|
