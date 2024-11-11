@@ -10,13 +10,14 @@ import static seedu.eventfulnus.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters, slashes and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters, slashes, spaces, hyphens, "
+            + "end with an alphanumeric character, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}/ ]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9\\s/-]*[a-zA-Z0-9]$";
 
     private final String fullName;
 
