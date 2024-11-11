@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook Level 3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [CalendarFX](https://github.com/dlsc-software-consulting-gmbh/CalendarFX)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -48,6 +49,8 @@ The bulk of the app's work is done by the following four components:
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -66,15 +69,17 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -83,9 +88,17 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+The `CalendarViewPanel` component,
+
+* displays appointments in a calendar view using the [`CalendarFX`](https://github.com/dlsc-software-consulting-gmbh/CalendarFX) library.
+* listens for changes in the `ObservableList<Appointment>` in the `Model` component, automatically updating the calendar display when appointments are added, removed, or modified.
+* includes a background thread that updates the current time pointer in the `CalendarView` every 10 seconds.
+
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,11 +129,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 The `Model` component,
 
@@ -129,31 +144,26 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14b-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+* can save address book data, appointment data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `AppointmentStorage`, and `UserPrefStorage`, allowing it to be treated as any of these types when only specific functionality is needed.
+* depends on some classes in the `Model` component, as its role is to save and retrieve objects that belong to the model.
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -189,7 +199,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" width="725" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -513,16 +523,84 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in this list.
+    1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in this list.
 
-   1. Test case: `delete 1,2`<br>
-      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
-   2. Test case: `delete 1,1,1,2`<br>
-      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message. 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details about invalid format shown in the display message.
-   4. Test case: `delete 1,10000`<br>
-      Expected: No person is deleted. Error details about invalid index shown in the display message.
+    1. Test case: `delete 1,2`<br>
+       Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
+    2. Test case: `delete 1,1,1,2`<br>
+       Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
+    3. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details about invalid format shown in the display message.
+    4. Test case: `delete 1,10000`<br>
+       Expected: No person is deleted. Error details about invalid index shown in the display message.
+    5. Test case: `delete`<br>
+       Expected: No person is deleted. Error details about invalid format shown in the display message.
+
+### Adding a scheme to a person
+
+1. Adding a scheme to the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Specified person must be eligible for at least one scheme. Schemes that the person is eligible for can be checked using `scheme INDEX` where index is the person's index.
+
+    2. Test case: `addscheme 1 i/1`<br>
+       Expected: The first scheme in the list of schemes the first person is eligible for will be added to that person. Name of the person and added scheme shown in the display message.
+    3. Test case: `addscheme 0 i/0`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+    4. Test case: `addscheme 1`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+    5. Test case: `addscheme`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+
+### Deleting schemes from a person
+
+1. Deleting schemes from the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Specified person must have at least two schemes added to them. Schemes that the person is eligible for can be checked using `scheme INDEX` where index is the person's index.
+
+    2. Test case: `deletescheme 1 i/1`<br>
+       Expected: The first scheme in the list of schemes the first person has added to them will be deleted. Name of the person and deleted scheme shown in the display message.
+    3. Test case: `deletescheme 1 i/1,2`<br>
+       Expected: The first and second scheme in the list of schemes the first person has added to them will be deleted. Name of the person and deleted schemes shown in the display message.
+    4. Test case: `deletescheme 0 i/0`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+    5. Test case: `deletescheme 1`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+    6. Test case: `deletescheme`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+
+### Adding an appointment to a person
+
+1. Adding appointment to the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Ensure date and time of appointment you are adding does not conflict with any existing appointments.
+
+    2. Test case: `addappt 1 date/2024-11-15 from/16:00 to/18:00`<br>
+       Expected: An appointment with the first person at that date and time period is added to the appointment list. Name of the person and appointment's date and time period shown in the display message.
+    3. Test case: `addappt 0 date/2024-11-15 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid index shown in the display message.
+    4. Test case: `addappt 1 date/15 Nov 2024 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid date format shown in the display message.
+    5. Test case: `addappt 1 date/2024-11-15 from/16:00 to/10:00`<br>
+       Expected: No appointment added to person. Error details about invalid time period shown in the display message.
+    6. Test case: `addappt 1 date/2024-11-15`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+    7. Test case: `addappt 1 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+    8. Test case: `addappt`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+
+### Deleting an appointment
+
+1. Deleting an appointment in the appointment list
+
+    1. Prerequisites: List appointment list using the `listappt` command. Ensure there are multiple appointments in this list.
+
+    2. Test case: `deleteappt 1`<br>
+       Expected: The first appointment in the appointment list is deleted. Name of the person the deleted appointment belonged to and that appointment's date and time period are shown in the display message.
+    3. Test case: `deleteappt 0`<br>
+       Expected: No appointment deleted. Error details about invalid format shown in the display message.
+    4. Test case: `deleteappt`<br>
+       Expected: No appointment deleted. Error details about invalid format shown in the display message.
 
 ### Archiving a person
 
@@ -537,7 +615,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `archive john`<br>
        Expected: No person is archived. Error details about invalid format shown in the display message.
     5. Test case: `archive`<br>
-         Expected: No person is archived. Error details about invalid format shown in the display message.
+       Expected: No person is archived. Error details about invalid format shown in the display message.
 
 2. Archiving an already archived person
 
@@ -550,16 +628,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Unarchiving a person while all archived persons are being shown
 
-   1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
+    1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
 
-   2. Test case: `unarchive 1`<br>
-     Expected: First person is unarchived from the list. Name of the archived person shown in the display message.
-   3. Test case: `unarchive 0`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
-   4. Test case: `unarchive john`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
-   5. Test case: `unarchive`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    2. Test case: `unarchive 1`<br>
+       Expected: First person is unarchived from the list. Name of the archived person shown in the display message.
+    3. Test case: `unarchive 0`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    4. Test case: `unarchive john`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    5. Test case: `unarchive`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
 
 2. Unarchiving a current person
 
@@ -570,44 +648,59 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. **All data is saved in two files**: `socialbook.json` for person data and `appointments.json` for appointment data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. By default, these files are located in the `data` folder.
+   2. Whenever a command is executed (e.g., `add`, `list`, `editappt`), the data is saved automatically to the respective files.
 
-1. _{ more test cases …​ }_
+2. **Dealing with missing data files**
+
+   1. To simulate a missing file, navigate to the `data` folder (in the same location as `socialbook.jar`) and delete either `socialbook.json` or `appointments.json` (or both).
+   2. Re-launch the application:<br>
+      * If `socialbook.json` is missing, the app will repopulate with sample data for persons only. Appointments will not be repopulated, and the app will continue with an empty appointment list.
+      * If only `appointments.json` is missing, the app will continue to run with an empty appointment list.
+      * If both `socialbook.json` and `appointments.json` are missing, the app will repopulate with sample data for persons only, while appointments will remain empty.
+
+3. **Dealing with corrupted data entries**
+
+   1. To simulate a corrupted data entry, open either `socialbook.json` or `appointments.json` in the `data` folder and change a compulsory field to an invalid value (e.g., set a phone number to `-1`).
+   2. Re-launch SocialBook.
+      * **Expected**: If either file contains corrupted data, the application will erase affected data:
+        * Corrupting `socialbook.json` will clear both person and appointment data.
+        * Corrupting `appointments.json` will clear only the appointment data.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Appendix: Planned Enhancements
 **Team Size: 5**
 
-### 1. **Adding appointments that span multiple days:** 
-- **Currently:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming. 
+### 1. **Adding appointments that span multiple days:**
+- **Currently:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming.
 - **Plan:** To support multi-day appointments, allowing users to add them in one step.
-### 2. **Imposing constraints on archived people:** 
-- **Currently:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar. 
-- **Plan:** To restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can do `list archive/`. 
-### 3. **Enhancing duplicate detection:** 
-- **Currently:** Duplicates are taken as persons with the exact same full name. 
-- **Plan:** To enhance duplicate detection, we will disallow other details such as phone numbers or emails to be duplicated instead as these are always unique and should not be allowed to be repeated. 
-### 4. **Enhancing validation checks:** 
-- **Currently:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace. 
-- **Plan:** To improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace and ensure standardization of the representation of these fields. 
-### 5. **Viewing the details of the different schemes:** 
-- **Currently:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits. 
-- **Plan:** To allow the user to view these details about available schemes in SocialBook using the `scheme` command, so that the details are easily retrievable while checking which schemes a person is eligible for. 
-### 6. **Adding images to a person:** 
-- **Currently:** SocialBook only shows text based information about the persons added. 
-- **Plan:** To allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier. 
-### 7. **Make the command result box in UI bigger:** 
-- **Currently:** The result of commands is displayed in a box that may be too small for some results. For instance, executing the statistics command results in all statistics being displayed but to view all the results, the user has to scroll through, which causes some minor inconvenience. 
-- **Plan:** To allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results. 
+### 2. **Imposing constraints on archived people:**
+- **Currently:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar.
+- **Plan:** To restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can do `list archive/`.
+### 3. **Enhancing duplicate detection:**
+- **Currently:** Duplicates are taken as persons with the exact same full name.
+- **Plan:** To enhance duplicate detection, we will disallow other details such as phone numbers or emails to be duplicated instead as these are always unique and should not be allowed to be repeated.
+### 4. **Enhancing validation checks:**
+- **Currently:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace.
+- **Plan:** To improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace and ensure standardization of the representation of these fields.
+### 5. **Viewing the details of the different schemes:**
+- **Currently:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits.
+- **Plan:** To allow the user to view these details about available schemes in SocialBook using the `scheme` command, so that the details are easily retrievable while checking which schemes a person is eligible for.
+### 6. **Adding images to a person:**
+- **Currently:** SocialBook only shows text based information about the persons added.
+- **Plan:** To allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier.
+### 7. **Make the command result box in UI bigger:**
+- **Currently:** The result of commands is displayed in a box that may be too small for some results. For instance, executing the statistics command results in all statistics being displayed but to view all the results, the user has to scroll through, which causes some minor inconvenience.
+- **Plan:** To allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results.
 ### 8. **Imposing constraints on extreme inputs:**
 - **Currently:** When a user is adding/editing the details of a person, they are free to make the text inputs as long as possible or the numerical inputs as large as possible. For instance, a name of 1000 characters or an income of more than 1,000,000 can be added, which is unrealistic.
-- **Plan:** To restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more expected upper limit like 10,000. 
+- **Plan:** To restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more expected upper limit like 10,000.
 ### 9. **Representing entire families:**
 - **Currently:** A person represents a family that requires assistance and that person is regarded as the point of contact with the family.
-- **Plan:** To allow the user to add all people that are part of a family together, so that everyone in a family is represented together. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on. 
+- **Plan:** To allow the user to add all people that are part of a family together, so that everyone in a family is represented together. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on.
 ### 10. **Modifying available schemes:**
 - **Currently:** We have added two schemes that are available within SocialBook, which a person may be eligible for.
 - **Plan:** To extend this feature by allowing the user to add or delete schemes into SocialBook, so that they can add new schemes that are introduced in future or delete outdated schemes.
