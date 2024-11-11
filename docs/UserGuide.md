@@ -265,7 +265,7 @@ Format: `/delete INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed internship application list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications).
+* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications in the displayed list).
 
 Examples:
 * `/list` followed by `/delete 2` deletes the second application in the list.
@@ -317,7 +317,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 * `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
 * `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
 * `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
-*  The `INDEX` refers to the position of an application in the displayed list, relative to the current filtered or listed view.
+*  The `INDEX` refers to the position of an application in the displayed list.
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
 * `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than five applications in the displayed list).
 
