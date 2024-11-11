@@ -584,7 +584,7 @@ this is quite restrictive and may cause some inconveniences for users. Thus, we 
 they have reminders. This will allow the user to make changes to the client's name without having to delete all the reminders first.
 
 
-6. **Disallow Duplicate View popups:** Currently, the app allows the user to open multiple view popups for the same client, this is unnecessary and may cause confusion for the user. Thus, we plan to make the app disallow the user from opening multiple view popups for the same client.
+6. **Improved display message for duplicate reminders:** Currently, the app displays a successful message when the user add a reminder that already exists, but it doesn't actually add the reminder to the reminder list. This may cause some inconveniences for the user as they may not be aware that they have added a duplicate reminder. Thus, we plan to make the app provide a specific display message when the user tries to add a reminder that already exists.
 
 
 7. **Optimised Exit:** Currently, the app does not hide all `view` popups when user exits the app. This may cause some confusion for the user when the user exits the app as they would expect all modals and popups to close as well when they exit the app. Thus, we plan to make the app hide all `view` popups when the user exits the app.
