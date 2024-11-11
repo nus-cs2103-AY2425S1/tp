@@ -159,7 +159,7 @@ Format:
 addi in/INDEX i/INTEREST...
 ```
 
-- `in/INDEX`: Contact's position in the list.
+- `in/INDEX`: Index of contact user wishes to add interests to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
 - `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters at most.
 - **Note:** 
   - Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
