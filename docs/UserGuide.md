@@ -174,7 +174,6 @@ Format: `list`
 
 **Note:** `list` displays the **client list view**, and can be used in both client and transaction list views.
 </box>
-![result for `list`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
 
