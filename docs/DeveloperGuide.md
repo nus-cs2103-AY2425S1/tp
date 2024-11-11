@@ -152,88 +152,80 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 1. Tier and status attributes
+### 1. Tier and Status Attributes
 
-Given that this software is designed to support credit card sales to clients, having predefined credit card tiers aligned with the bank’s product offerings is essential. These tiers provide valuable insights into a customer’s spending habits and allow agents to tailor their sales strategies accordingly.
+AgentAssist is designed to support credit card sales, making it essential to have predefined credit card tiers that align with the bank’s product offerings. These tiers provide agents with insights into a client’s financial profile, allowing them to tailor their sales approach to meet each client’s unique needs.
 
-Additionally, the inclusion of a status attribute for clients, indicating whether follow-up action is required, enhances customer satisfaction. This feature helps agents keep track of promised actions, reducing the risk of missed commitments and ensuring a more reliable service experience.
-
-This section will describe in detail the current implementation and design considerations of these two attributes.
+Additionally, the inclusion of a status attribute for clients enhances customer service by indicating whether follow-up action is required. This feature helps agents keep track of promised actions, reducing missed commitments and ensuring a reliable client experience.
 
 #### Current implementation
 
-The tier and status fields are classes which contain an enum value. 
+The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
 ![TierStatusAttributes](images/TierStatusAttributes.png)
 
-Using enums helps to limit the range of possible values for `Tier` and `Status`.
+Using `enum` values for `Tier` aligns with a real-world banking scenario where a predefined set of credit card tiers is available. This structure also accommodates clients who may have applied but been declined for a credit card, providing agents with an at-a-glance view of a client’s status and relevant product options.
 
-For `Tier`, this approach models the real-world scenario of a bank offering a predefined list of credit card services. It also accounts for the possibility of clients who have applied for, but been denied, a credit card.
+Moreover, using enums for `Tier` simplifies updates to the list of predefined services,allowing banks to customize offerings based on their unique product catalog.
 
-We believe that this information can help Agents understand at a glance, their customer's needs better.
+When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
+- Below is an example of a CSS update after renaming an enum value to `TEST`:
+    ![img_1.png](images/CssFileSetting.png)  
+- This is the result in the UI after update the CSS:  
+    ![img_2.png](images/UIChangeAfterCSSFileChange.png)
 
-The usage of an Enum in `Tier`, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services.
+Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
 
-When modifying the `Enum`, remember to also update the CSS files `ClientDetailPanel.css` and `ClientListCard.css`. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new `Enum` settings. Here is an example of the changes to a css file after renaming one enum value to `TEST`:
-![img_1.png](images/CssFileSetting.png)
-![img_2.png](images/UIChangeAfterCSSFileChange.png)
-
-The `Enum` used in `Status` follows a similar rationale as `Tier`, with the key constraint that each client status is limited to a set of predefined values. These statuses have been color-coded throughout the UI for clear visual cues:
-
-- `NA` – Indicates a client with no required follow-up from the agent. This status is represented by green to signify a positive state, requiring no immediate action.
-- `NON_URGENT` – Indicates a client for whom follow-up is needed, but not urgently. This is represented by orange, signifying that action is required but not immediately pressing (e.g., within a few days).
-- `URGENT` – Indicates a client requiring immediate follow-up. This status is highlighted in red to draw attention to the need for prompt action by the agent.
+- `NA` – Indicates clients with **no follow-up/action needed**. This status is displayed in green, representing a positive state with no immediate action.
+- `NON_URGENT` – Indicates clients who **need a follow-up, though not urgently**. This status is displayed in orange, suggesting action is required soon but not immediately.
+- `URGENT` – Indicates clients who need an **urgent follow-up**, displayed in red to ensure prompt action.
 
 By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
 
 ### 2. Add Command
-The add command is used to add new clients into the existing list of clients. The `add` client will refuse to add any clients that are 'duplicates' of any existing clients. 
-
-The next section will describe in detail the current implementation and design considerations of the command.
+The `add` command is used to add new clients into the existing list of clients. However, the command will prevent adding any clients who are considered 'duplicates' of existing clients.
 
 #### Current implementation
-This is a high-level view of what occurs when the `add` command is executing. 
+This is a high-level view of what occurs when the `add` command is executed: 
 ![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
 
 There are a total of 3 checks that occur:
-1. A check for invalid flags and missing mandatory flags.
-2. A check for invalid values provided to any of the flags specified.
-3. A check as to whether there already exists a client with the same details, that would make these two client the same people.
-![AddActivityDiagram-Add_Activity_Diagram.png](images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+- **Flag Validation:** Checks that all required flags are present and that there are no invalid flags.
+- **Value Validation:** Checks that the values provided for each specified flag are valid.
+- **Duplicate Check:** Checks that there is no existing client with the same details (same `name`, `phone` and `email`) to prevent duplicate entries.
+![AddActivityDiagram-Add_Activity_Diagram.png]
 
-Take note that the error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+(images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+
+Note: The error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+
+    
 ### 3. Edit Command
 The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
 
-The next section will describe in detail the current implementation and design considerations of the command.
-
-Here is a high-level view of the logic flow when the `edit` command is run.
+#### Current implementation
+Here is a high-level view of the logic flow when the `edit` command is executed:
 ![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
 
-There are a total of 5 checks that occur, and they occur in sequential order:
-1. Index specified is not negative.
-2. At least one flag is specified.
-3. Both the `remark new` and `remark append` flags are not used together.
-4. Index specified is within range of the current filtered list.
-5. All values passed are valid fort
+The `edit` command performs five sequential checks:
+- **Index Validation:** Checks that the specified index is not negative.
+- **Flag Presence:** Checks  that at least one flag has been specified.
+- **Remark Flag Validation:** Checks that the `remark new` and `remark append` flags are not used together.
+- **Range Check:** Checks that the specified index is within the range of the current viewed client list.
+- **Value Validation:** Checks that all values provided are valid.
 
-#### Current implementation
-When users enter in the `edit` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
-1. Positive
-2. Is an index inside the current viewed list of clients.
+Note: Users must specify a valid client index from the currently viewed list, ensuring it is a positive number and within list bounds.
 
 
 ### 4. Delete Command
 The `delete` command is used to remove client's contacts from the existing list of clients saved in AgentAssist.
 
-The next section will describe in detail the current implementation and design considerations of the command.
-
 #### Current implementation
-When users enter in the `delete` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
-1. Positive
-2. Is an index inside the current viewed list of clients. 
+To execute the delete command, users must specify a valid client index from the currently viewed client list, ensuring the following:
+1. The index is a **positive number**.
+2. The index is **within the bounds** of the currently viewed client list.
 
-Here is a high-level view of the methods involved when the `delete` command is run and the user approves of the deletion after a confirmation prompt is showed.
+Here is a high-level view of the methods involved when the `delete` command is executed, and the user approves of the deletion after a confirmation prompt is showed.
 ![DeleteSequenceDiagram.png](images%2FDeleteSequenceDiagram.png)
 
 This follows the activity diagram shown below:
@@ -311,8 +303,8 @@ Additionally, certain command hints could benefit from more clarity on constrain
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
 **Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
-- `income` must be a full, valid 8-digit phone number.
-- `email` must be a valid email address.
+- `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
+- `email` must be in a valid email format (e.g., `username@domain`).
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
