@@ -227,7 +227,7 @@ Step 3. When an appointment is removed through the `deleteapp` command:
 4. The central appointment list is updated
 
 
-<img src="images/AddAppointmentSequenceDiagram.png" height = "150" width="450" />
+<img src="images/AddAppointmentSequenceDiagram.png" height = "350" width="700" />
 
 
 The following classes play important roles in the appointment system:
@@ -325,20 +325,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Patient details are saved only if the input data is valid.
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 #### Main Success Scenario (MSS)
-1. Fred enters command to `add` a new person.
+1. Fred enters command to `add` a new person along with their details.
 2. CareLink requests person details.
-3. Fred enters the person details along with their role as patient, caregiver, or both.
-4. CareLink validates the input data.
-5. CareLink saves the person details to the system.
-6. CareLink displays a success message and shows the newly added patient in the system.
-7. Use case ends.
+3. CareLink validates the input data.
+4. CareLink saves the person details to the system.
+5. CareLink displays a success message and shows the newly added patient in the system.
+6. Use case ends.
 
 #### Extensions
 - **4a. Invalid patient data entered**:
@@ -355,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The person's details are successfully retrieved and displayed.
@@ -382,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The caregiver is correctly linked to the specified patient, and vice versa.
@@ -412,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The patient’s details are successfully updated in the system.
@@ -441,7 +440,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The patient exists in the system.
 
 #### Guarantees
@@ -467,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified condition and displayed.
@@ -498,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified patient(s) and displayed.
@@ -529,7 +527,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -575,7 +572,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment for that person exists in the system.
 
@@ -623,7 +619,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment exists in the system.
 
@@ -665,7 +660,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -699,7 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+
 - The address book contains patient data.
 
 #### Guarantees
@@ -748,7 +742,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 6. **Portability**
     - **Category:** System Constraints
-    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **Requirement:** The product must support downloading JSON files that can be easily loaded and used on another system.
     - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
 
 7. **Readable Font Size**
@@ -762,34 +756,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
 
 ### Glossary
-
-- **Patient Record**: The complete set of data related to a patient, including their contact information, medical notes, medication history, appointment schedules, and caregiver details.
-
-- **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
-
-- **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
-
-- **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
-- **API (Application Programming Interface)**: A set of functions and procedures allowing applications to access the features or data of another service, application, or system.
-- **Sequence Diagram**: A type of diagram that shows how objects interact with each other over time, specifically highlighting the sequence of messages exchanged.
-- **Model**: In software design, the component responsible for representing the application's data, including logic for accessing and modifying that data.
-- **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
-
-- **Batch Update**: A feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
+- **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
 
 - **Active Patient**: A patient who is currently being treated by the geriatrician and appears in the default view of CareLink.
 
-- **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
+- **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
+
+- **API (Application Programming Interface)**: A set of functions and procedures allowing applications to access the features or data of another service, application, or system.
+
+
+- **Batch Delete**: An upcoming feature in CareLink that allows the user to delete multiple patient records at once, such as deleting a group of inactive patients.
+
+- **Batch Update**: An upcoming feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
+
+
+- **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
+
+- **CLI (Command-Line Interface)**: A method of interacting with CareLink by typing commands, designed to optimize efficiency for users who prefer typing over using graphical interfaces.
+
+- **Command Box**: A text input field in the application's UI where users type commands.
+
+- **Command Syntax**: The structured format or pattern that users must follow when entering commands in the Command-Line Interface (CLI)
+
+- **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma. This file format would be used to transfer data between 2 different computers.
+
+
+- **Default View**: The initial view of CareLink, which displays a list of active patients and their basic information.
+
+
+- **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
 
 - **Fuzzy Search**: A search feature that allows users to find patient records using partial or approximate information, such as a part of the patient’s name or NRIC.
 
-- **Alias**: A shortcut or simplified command that users can define to speed up repetitive tasks within the CLI, making CareLink more efficient to use for experienced users.
-
-- **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma.
-
-- **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
 
 - **Geriatricians**: Doctors specializing in the healthcare of elderly patients, focusing on the prevention, diagnosis, and treatment of diseases and conditions that commonly affect older adults, often playing a key role in managing chronic illnesses and improving quality of life.
+
+- **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements
+
+
+- **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
+
+
+- **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. The application uses JSON to save and read user data files, enabling structured data storage and retrieval.
+
+
+- **Main Window**: The primary window of the application that houses all the major UI components, including the Command Box, Result Display, Person List Panel, and others.
+
+- **Model**: In software design, the component responsible for representing the application's data, including logic for accessing and modifying that data.
+
+
+- **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
+
+
+- **ObservableList**: A type of data structure that allows the application to monitor and respond to changes in its contents. When used in the Model component, an ObservableList enables automatic updates to the UI when data changes, providing real-time synchronization between the app's data and its visual display.
+
+
+- **Parsing**: The process of analyzing and converting user-entered commands or input into a format that the application can understand and process. This involves breaking down the command into its components and mapping them to execute the desired operation.
+
+- **Patient Record**: The complete set of data related to a patient, including their contact information, medical notes, medication history, appointment schedules, and caregiver details.
+
+- **Person List Panel**: A visual component in the application's UI that displays a list of individuals (patients and/or caregivers). This panel updates dynamically based on user actions, such as adding, editing, or removing persons.
+
+
+- **Result Display**: A section in the UI that shows feedback messages and the outcomes of commands entered by the user. This display helps confirm whether a command was executed successfully or if there were any errors.
+
+
+- **Sequence Diagram**: A type of diagram that shows how objects interact with each other over time, specifically highlighting the sequence of messages exchanged.
 
 --------------------------------------------------------------------------------------------------------------------
 
