@@ -199,7 +199,7 @@ Users can update patient information by specifying an index and the fields to be
 
 The sequence diagram below illustrates the interactions within the `Logic` component, when executing the edit command in Heath Connect. Take `execute("edit 1 p/88991123")` API call as an example.
 
-<img src="images/EditSequenceDiagram.png" width="600"/>
+<img src="images/EditSequenceDiagram.png" width="1300"/>
 <div markdown="span" class="alert alert-info">
 <strong>Note:</strong> The lifeline for <code>EditCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
 </div>

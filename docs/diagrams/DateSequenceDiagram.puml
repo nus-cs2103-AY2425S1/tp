@@ -7,7 +7,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DateCommandParser" as DateCommandParser LOGIC_COLOR
 participant "d:DateCommand" as DateCommand LOGIC_COLOR
-participant "e:Person" as Person LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -49,13 +48,6 @@ deactivate AddressBookParser
 
 LogicManager -> DateCommand : execute(m)
 activate DateCommand
-
-create Person
-DateCommand -> Person
-activate Person
-
-Person --> DateCommand
-deactivate Person
 
 DateCommand -> Model : setPerson(p, e)
 activate Model
