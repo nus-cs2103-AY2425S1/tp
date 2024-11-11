@@ -475,14 +475,14 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ## Contact Fields Constraints
 
-| Field                                   | Prefix* | Valid examples                                                                                                      | Invalid examples     |
-|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|----------------------|
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`             |
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                    | `@ginatan123`        |
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`                                                                                   | `gina_tan@`          |
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                    | `u 1`<br/> `under 5` |
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |    `Events(Internal)` |
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |            |
+| Field                                   | Prefix* | Valid examples                                                                                                                       | Invalid examples                                                                                                |
+|-----------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Jane Smith@Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`<br/> spaces must come before and after `D/O` or `S/O` &rarr; <br/> `RaviS/ORamasamy`<br/>`DeviD/ORajaratnam` |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                                     | `@ginatan123`                                                                                                   |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-web.com`                                                                                                           | `gina_tan@`                                                                                                     |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                                     | `u 1`<br/> `under 5`                                                                                            |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                 | `Events(Internal)`                                                                                              |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                         |                                                                                                                 |
 
 *_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
 
