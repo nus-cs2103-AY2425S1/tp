@@ -64,7 +64,7 @@ Before continuing, here are some important information you need to know about th
     * *Notice boxes* provide important information that you should take note of.
 
       <box type="info" seamless>
-
+      
       **Notice:** This is a notice box.
       </box>
 
@@ -106,7 +106,7 @@ Before continuing, here are some important information you need to know about th
 
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
 
-    * `/delete 1` : Deletes the 1st internship application shown in the current list.
+    * `/delete 1` : Deletes the 1st internship application shown in the displayed list.
 
     * `/clear` : Deletes all your internship applications.
 
@@ -228,28 +228,34 @@ Examples:
 
 <br>
 
-### Updating the status of an internship application : `/accept`, `/pending`, `/reject`
+### Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`
 
-Updates the status of the specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
+Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
-Formats:
-- `/accept INDEX`: Changes the status to `ACCEPTED`.
-- `/pending INDEX`: Changes the status to `PENDING`.
-- `/reject INDEX`: Changes the status to `REJECTED`.
+**Commands:**
+- `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
+- `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
+- `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
 
-* The `INDEX` refers to the index number shown in the displayed internship application list.
-* The `INDEX` **must be a positive integer** (e.g. 1, 2, 3, …​)
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications)
+**Details:**
+- The `INDEX` refers to the position of the application in the current displayed list. The index is relative to the list shown on the screen after filtering or listing commands.
+- `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
+- `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than 5 applications in the displayed list).
 
-Examples:
-* `/list` followed by `/accept 2` marks the status of the 2nd application in the list as accepted.
-* `/pending 3` changes the status of the 3rd application in the current list to pending.
-* `/reject 1` changes the status of the 1st application in the current list to rejected.
-* `/filter pending` followed by `/accept 1` changes the status of the 1st application to accepted. The application will hence no longer be on the list shown on the application since it no longer has a `pending` status.
-* `/list` followed by `/accept 4` when you only have 3 internship applications returns an error message.
+**Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have 10 total applications, but after using `/filter ACCEPTED` only 5 applications are shown, then `/reject 5` will target the last item on this filtered list.
 
-Note:
-*  It’s possible to update the application at index `INDEX` to its current status. For instance, you may use `/accept INDEX` to accept an application at index `INDEX` that is already accepted, `/pending INDEX` to mark an application at index `INDEX` as pending if it’s already pending, or `/reject INDEX` to reject an application at index `INDEX` that is already rejected.
+**Examples:**
+1. `/list` followed by `/accept 2`: Changes the status of the 2nd application in the full list to `ACCEPTED`.
+2. `/pending 3`: Changes the status of the 3rd application in the currently displayed list to `PENDING`.
+3. `/reject 1`: Changes the status of the 1st application in the currently displayed list to `REJECTED`.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the 1st application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+5. `/list` followed by `/accept 4` when there are only 3 internship applications returns an error message.
+
+---
+
+<box type="info" seamless>
+**Notes about the status commands:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep it as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+</box>
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
