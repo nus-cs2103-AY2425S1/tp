@@ -207,6 +207,8 @@ When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` g
 :information_source: **Note:** The lifeline for `AddApptCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 [Back to Table of Contents](#table-of-contents)
+### [Proposed Feature] Undo/Redo Command
+
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -1155,4 +1157,12 @@ Team size: 5
   Currently, all fields are mandatory when adding a patient. However, there could be cases where the patient does not have an email address or phone number.
   It would be ideal to make certain fields optional as it allows for more flexibility when adding patient details. However, the NRIC field should remain mandatory since it is the unique identifier for each patient which ensures that duplicate patients cannot be added.
 
+8\. **Include Command Overview in Help Pop-Up**
 
+  Currently, the pop-up that appears after using the `help` command only provides a link to the detailed user guide. Users are also required to copy the URL given, open a new browser and navigate away from the application to view the commands available.
+  We plan to include a Command Overview in the pop-up that will display a list of all available commands and their respective constraints. This will allow users to quickly view the commands available without having to navigate away from the application.
+
+9\. **Improve NRIC validation**
+
+  The current NRIC validation used in MediBase3 does not align with Singapore's checksum algorithm for NRICs. As such, MediBase3 does not check if the starting letter and starting 2 digits of the NRIC aligns with the given date of birth.
+  This allows users to enter either incorrect date of births or NRICs that do not align with each other. We plan to enhance the NRIC validation to check for such discrepancies, specifically for patients born on or after 1 January 1968 where [this](https://en.wikipedia.org/wiki/National_Registration_Identity_Card#Structure_of_the_NRIC_number/FIN) rule applies.
