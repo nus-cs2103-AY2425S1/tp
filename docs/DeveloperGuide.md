@@ -1094,7 +1094,9 @@ testers are expected to do more *exploratory* testing.
 
    6. Other incorrect add commands to try:
       * `add`
-      * `add n/NAME e/EMAIL@email.com tk/TASK` (where tk/ is the task prefix, and the email field only accepts alphanumeric characters and @ . and -)
+      * `add n/NAME e/EMAIL@email.com tk/TASK` (where tk/ is the task prefix, and the email field restricts input values according to the User Guide)
+      * `add n/` (with a blank name keyword)
+      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
