@@ -383,8 +383,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
@@ -413,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. Tuteez displays all students in alphabetical order
+2. Tuteez displays all students
 3. Use case ends
 
 **Use case: UC3 - Delete a student**
@@ -647,17 +645,17 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
     
-    1. Test case: `addremark 1 r/Midterms coming up.` <br>
-       Expected: The remark "Midterms coming up." will be added to the student. The student's details should be displayed on the right panel. Remark successfully added is shown in status message.
+    1. Test case: `addremark 1 r/Midterms coming up` <br>
+       Expected: The remark "Midterms coming up" will be added to the student. The student's details should be displayed on the right panel. Remark successfully added is shown in status message.
 
 ### Deleting a remark from a student
 
 1. Deleting a remark from a student using index
 
-    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one remark "Midterms is coming up.".
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one remark "Midterms coming up".
 
     1. Test case: `deleteremark 1 ri/1` <br>
-       Expected: The remark "Midterms coming up." will be deleted from the student. The student's details should be displayed on the right panel. Remark successfully deleted is shown in the status message.
+       Expected: The remark "Midterms coming up" will be deleted from the student. The student's details should be displayed on the right panel. Remark successfully deleted is shown in the status message.
     
 ### Displaying a student
 
@@ -672,7 +670,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No student is displayed. Error details shown in the status message.
    
     1. Test case: `display x` (where x is larger than the list size) <br>
-       Expected: No student is displayed. Invalid student error is shown in the status message.
+       Expected: No student is displayed. Invalid student index is shown in the status message.
 
 ### Navigating through command history
 
@@ -703,5 +701,5 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file <br>
+   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file. <br>
       Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.
