@@ -432,12 +432,12 @@ otherwise)
 
 - **3a.** The command format is incorrect (e.g., index not provided).
   - **3a1.** AddressBook displays an error message:
-    ```
+    `
     Invalid command format! 
     delete: Deletes the person identified by the index number used in the displayed person list.
     Parameters: INDEX (must be a positive integer)
     Example: delete 1
-    ```
+    `
   - **Use case resumes at Step 2.**
 
 - **4a.** The contact index is invalid or out of bounds.
@@ -519,15 +519,21 @@ otherwise)
 - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
 3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
 4. AddressBook displays a success message confirming the operation:
-   ```
-   Added history to Person: William Go; Phone: 96341234; Email: william.go@example.com; Address: Blk 34 Bishan St 23, #07-45; Remark: Looking to purchase condo; Birthday: 1975-12-30; Remark: Looking to purchase condo; Tags: [buyer]; DateOfCreation: 2024-01-22; History: Date of Creation: 2024-01-22
-   [2024-02-05]:
-     [2024-02-05] Negotiated condo deal
-   [2024-03-03]:
-     [2024-03-03] Follow-up on condo purchase
-   ; PropertyList: Property List:
-   Property at 246 Sentosa Cove, Sentosa (Condo): 180.00 sqm, 3 bed, 3 bath - $3000000.00
-   ```
+   
+   `Added history to Person: William Go; Phone: 96341234; Email: william.go@example.com; Address: Blk 34 Bishan St 23, #07-45; Remark: Looking to purchase condo; Birthday: 1975-12-30; Remark: Looking to purchase condo; Tags: [buyer]; DateOfCreation: 2024-01-22; History: Date of Creation: 2024-01-22`
+   
+   `[2024-02-05]:`
+   
+   &nbsp;&nbsp;`Negotiated condo deal`
+   
+   `[2024-03-03]:`
+   
+   &nbsp;&nbsp;`Follow-up on condo purchase`
+   
+   `PropertyList: Property List:`
+   
+   `Property at 246 Sentosa Cove, Sentosa (Condo): 180.00 sqm, 3 bed, 3 bath - $3000000.00`
+   
 5. The contact’s interaction history is updated to include the new log entry, making it accessible for future reference and review.
 
    **Use case ends.**
@@ -537,16 +543,17 @@ otherwise)
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
-    ```
+    
+    `Invalid command format!`
+    
+    `log: Add activity log of the person identified by the index number used in the last person listing. If the date field is left empty the date on the entry will be on today by default (System date).`
+    
+    `Parameters: INDEX (must be a positive integer) d/[date] l/non-empty log message`
+    
+    `Example: log 1 l/Met for price negotiation.`
+    
+    `Example: log 2 d/2024-11-11 l/ Offered discount`
+
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -654,16 +661,15 @@ otherwise)
 ### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
-    ```
+    
+    `Invalid command format!`
+    
+    `remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.`
+    
+    `Parameters: INDEX (must be a positive integer) r/[REMARK]`
+    
+    `Example: remark 1 r/Likes to swim.`
+    
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -712,16 +718,15 @@ otherwise)
 ### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
-    ```
+    
+    `Invalid command format!`
+    
+    `view: Displays the full information of the person identified by the index number used in the last person listing. View window can be closed by the "close" command.`
+    
+    `Parameters: INDEX (must be a positive integer)`
+    
+    `Example: view 1`
+    
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -774,16 +779,23 @@ otherwise)
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
-    ```
+    
+    `Invalid command format!`
+    
+    `favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.`
+    
+    `Two usage formats are supported:`
+  
+    `1. To mark a person as favourite: Specify the index of the person in the displayed list.`
+    
+    &nbsp;&nbsp;&nbsp;`Parameters: INDEX (must be a positive integer)`
+    
+    &nbsp;&nbsp;&nbsp;`Example: favourite 1`
+    
+    `3. To sort all favourite persons to the top: Use the command without any parameters.`
+    
+    &nbsp;&nbsp;&nbsp;`Example: favourite`
+    
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -828,14 +840,22 @@ otherwise)
 2. The system validates the `index` and birthday format.
 3. The system stores the birthday for the contact.
 4. The system displays a success message:
-      ```
-      Added birthday to Person: John Doe; Phone: 87431234; Email: john.doe@example.com; Address: Blk 123 Clementi Ave 3, #12-34; Remark: Looking for a 3-bedroom condo; Birthday: 1986-02-24; Remark: Looking for a 3-bedroom condo; Tags: [longTerm][buyer]; DateOfCreation: 2024-01-05; History: Date of Creation: 2024-01-05
-      [2024-02-15]:
-        [2024-02-15] Meeting about 3-bedroom condo
-      ; PropertyList: Property List:
-      Property at 123 Maple Street, Woodlands (Condo): 120.50 sqm, 3 bed, 2 bath - $850000.00
-      Property at 456 Elm Street, Bukit Timah (Landed): 250.00 sqm, 5 bed, 4 bath - $2200000.00
-      ```
+      
+      `Added birthday to Person: Jane Smith; Phone: 91234567; Email: jane.smith@example.com; Address: Blk 45 Queenstown Road, #08-19; Remark: Looking for a family home; Birthday: 1986-02-24; Remark: Looking for a family home; Tags: [potentialBuyer]; DateOfCreation: 2024-01-03;`
+
+      `History: Date of Creation: 2024-01-03`
+      
+      `[2024-02-20]:`
+
+      &nbsp;&nbsp;`Viewed house at Clementi`
+      
+      `[2024-03-10]:`
+
+      &nbsp;&nbsp;`Follow-up discussion about financing`
+      
+      `PropertyList: Property List:`
+      
+      `Property at 789 Clementi Road, Clementi (HDB): 90.00 sqm, 4 bed, 2 bath - $600000.00`
 
    **Use case ends.**
 
@@ -844,12 +864,15 @@ otherwise)
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-    Invalid command format! 
-    birthday: Edits the birthday of the person identified by the index number used in the last person listing. Existing birthday will be overwritten by the input.
-    Parameters: INDEX (must be a positive integer) b/[BIRTHDAY]
-    Example: birthday 1 b/2001-12-12
-    ```
+    
+    `Invalid command format!`
+    
+    `birthday: Edits the birthday of the person identified by the index number used in the last person listing. Existing birthday will be overwritten by the input.`
+    
+    `Parameters: INDEX (must be a positive integer) b/[BIRTHDAY]`
+    
+    `Example: birthday 1 b/2001-12-12`
+    
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
@@ -1090,11 +1113,13 @@ otherwise)
 #### Extensions:
 - **2a.** One or more required fields are missing.
   - **2a1.** AddressBook displays an error message:
-    ```
-    Invalid command format!
-    add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-    Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
-    ```
+    
+    `Invalid command format!`
+    
+    `add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...`
+    
+    `Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+    
   - **Use case ends.**
 
 - **2b.** Input parameters are invalid (e.g., incorrect phone number format).
@@ -1112,21 +1137,31 @@ otherwise)
 
     - **2b5.** Invalid `Email` parameter.
       - **2b5.1** AddressBook displays an error message:
-        ```
-        Emails should be of the format local-part@domain and adhere to the following constraints:
-        1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-        2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-        The domain name must:
-            - end with a domain label at least 2 characters long
-            - have each domain label start and end with alphanumeric characters
-            - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-        ```
+        
+        `Emails should be of the format local-part@domain and adhere to the following constraints:`
+        
+        `1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.`
+        
+        `2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.`
+        
+        `The domain name must:`
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`- end with a domain label at least 2 characters long`
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label start and end with alphanumeric characters`
+
+        &nbsp;&nbsp;&nbsp;&nbsp;`- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.`
+        
       - **Use case ends.**
 
     - **2b6.** Invalid command syntax.
-      - **2b7.1** AddressBook displays an error message: `Invalid command format!
-        add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+      - **2b7.1** AddressBook displays an error message:
+        
+        `Invalid command format!`
+      
+        `add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...`
+        
+        `Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
       - **Use case ends.**
 
 - **2c.** The contact already exists in the AddressBook.
@@ -1368,9 +1403,10 @@ These instructions only provide a starting point for testers to work on; testers
 1. **Adding History Entries**
 
   1. Prerequisites: Contact list exists with entries.
-  2. Test case: `log 1 d/2024-08-08 l/meet up`  
-     **Expected:** Adds a history entry about a meet up on 2024-08-08 for the first person.
-
+  2. Test case: `log 1 d/2024-11-15 l/meet up`  
+     **Expected:** Adds a history entry about a meet up on 2024-11-15 for the first person.
+  3. Test case: `log 1 l/event`
+     **Expected:** Adds a history entry `event` on today (System time) for the first person.
 ### Closing Single Page Person View
 
 1. **Closing the Person View Window**
@@ -1395,6 +1431,21 @@ These instructions only provide a starting point for testers to work on; testers
 
   3. Test Case: `favourite`  
      **Expected:** Lists all contacts marked as favourites at the front of the contact list.
+
+### Adding Birthday
+
+1. **Adding a Person's Birthday**
+
+  1. Prerequisites: Having contacts in the list
+  2. Test case: `birthday 1 b/1986-08-23`
+  3. **Expected:** Adds birthday for the person at index 1.
+
+### Reminder for Birthday
+1. **Viewing Reminder for a Person's Birthday**
+ 
+  1. Prerequisites: Having contacts in the list whose birthday is stated and is within a week from today.
+  2. Test case: `birthday 1 b/<date witihin a week>`
+  3. **Expected:** When the app is closed and re-opened, a reminder showing the person's birthday shows on the result display.
 
 ### Deleting a Person
 

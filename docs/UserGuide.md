@@ -67,7 +67,7 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
 
 
 ## Command Structure
-Real Connect uses the following intuitive structure for the most of its functions:
+Real Connect uses the following intuitive command structure:
 ##### Commands on existing users
 E.g. `add`: `<Command> <X/parameter...>`
 
@@ -80,6 +80,13 @@ E.g. `help`: `<Command>`
 > `X/` is a placeholder for prefixes
 
 ![Command Format](images/CommandFormat.png)
+
+> ###### 💡 **Tip**
+> All Commands are case-insensitive.
+
+> ###### 💡 **Tip**
+> Note that for some commands, although multiple of the same field may be entered,
+only the last one will be recorded.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -122,28 +129,29 @@ E.g. `help`: `<Command>`
 
 ### Adding a person : `add`
 
-Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
+Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks. Note that
+although multiple birthdays and remarks may be entered, only the last one will be recorded.
 
 **Command Format:**  
-`add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
+`add n/FULL NAME p/PHONE NUMBER a/ADDRESS e/EMAIL [b/BIRTHDAY] [r/REMARK]…​ [t/<TAG>]…​`
 
-- `n/` Full name (mandatory) (exact duplicate not allowed, case-sensitive)
+- `n/` Full name (mandatory) (Alpha-numeric only, space allowed) (exact duplicate not allowed, case-sensitive)
 - `p/` Phone number (mandatory) (duplicate allowed as shared organization contact number may be used)
 - `a/` Address (mandatory) (duplicate allowed as shared organization address may be used)
 - `b/` Birthday (optional) (duplicate allowed)
 - `e/` Email (mandatory) (duplicate allowed as shared organization email may be used)
 - `r/` Remark (optional) (multiple allowed but only the last one will be recorded) (duplicate allowed)
-- `t/` Tag (optional) (multiple allowed and all will be added) (duplicate allowed)
+- `t/` Tag (optional) (Alpha-numeric only, no space allowed) (multiple allowed and all will be added) (duplicate allowed)
 
-<div markdown="span" class="alert alert-primary">💡 <strong>Tip:</strong> 
+<div markdown="span" class="    alert alert-primary">💡 <strong>Tip:</strong> 
 A person can have any number of tags (including 0)
 </div>
 
 **Examples:**
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-- `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`
-- `add n/Ben Johnson p/87654321 a/456 Clementi Avenue, #02-15 t/client r/Prefers suburban areas b/1985-05-23`
+- `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/followUp`
+- `add n/Ben Johnson p/87654321 e/benben@gmail.com a/456 Clementi Avenue, #02-15 t/client r/Prefers suburban areas b/1985-05-23`
 - `add n/Clara Lim p/99887766 a/789 Punggol Way, #07-05 e/clara.lim@example.com t/lead t/premium`
 
 ---
@@ -164,7 +172,7 @@ Displays all persons stored in the address book.
 Sorts the contact list by name, either in ascending (A-Z) or descending (Z-A) order.
 
 **Command Format:**  
-`sort <asc/desc>`
+`sort ORDER`
 
 - `ORDER` must be either `asc` for ascending (A-Z) or `desc` for descending (Z-A).
 - If an invalid or no order is provided, an error message will be shown.
@@ -173,11 +181,17 @@ Examples:
 * `sort asc` – Sorts contacts in alphabetical order (A-Z).
 * `sort desc` – Sorts contacts in reverse alphabetical order (Z-A).
 
+
+> ###### ⚠️ **Warning**
+> The sort function will only sort the current list of contacts, newly added contacts after sorting will not be in sorted order.
+
+
 ---
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. Note that although multiple birthdays and remarks may be entered,
+only the last one will be recorded.
 
 **Command Format:**  
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
@@ -192,7 +206,7 @@ Edits an existing person in the address book.
 - You can remove the person’s birthday by typing `b/` without birthday date.
 - Note that edit tag will overwrite exist list of tags to the new list of tags entered. Make sure to copy the existing tags you want to keep when editing.
 - Note that history and property **cannot be edited**
-
+- Edit the name of a contact to a name of another existing contact is not allowed
 
 **Examples:**
 -  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -208,13 +222,15 @@ Edits an existing person in the address book.
 Format: `log INDEX [d/DATE] l/LOG`
 
 * Adds a new history entry to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
-* Date is optional, and must be no earlier than the date of creation of the person, and not in the future, if to be included.
+* Date is optional, and **must be no earlier than the date of creation of the person, and not in the future, if to be included**.
 * If date is not included the date of the history entry to be added will be today, system time, by default.
 * Date format **must** be in `yyyy-mm-dd`.
 * Log message **cannot be empty**.
+* Newly added contact will be initialized a default log entry `Created` on the date of creation.
+* Logs are visible in detail view of each person, use `view` command to check out.
 
 Examples:
-* `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
+* `log 1 d/2024-11-16 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-11-16.
   ![result for 'log 1 d/2024-08-08 l/meet up'](images/Log.png)
   ![result for 'view 1'](images/LogView.png)
 
@@ -225,13 +241,15 @@ Examples:
 ### Remarking a person : `remark`
 
 Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered,
-only the last (most up to date one) will be recorded.
+only the last one will be recorded.
 
-Format: `remark INDEX r/REMARK]…​`
+Format: `remark INDEX r/[REMARK]…​`
 
 * Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 
 Examples:
+* `remark 1` removes remark of person at index 1. 
+* `remark 1 r/` also removes remark of person at index 1.
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
   ![result for 'remark 1 r/remark message'](images/Remark.png)
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
@@ -249,7 +267,7 @@ Format: `view INDEX`
 
 Examples:
 *   `view 1` Shows the person located as index position 1 in the address book.
-    ![result for 'ViewWindow'](images/ViewWindow.png)
+    ![result for 'ViewWindow'](images/viewWindow.png)
 
 > ###### ⚠️ **Warning**
 > The view window is optimized as a pop-up, hence while there is no limit to word entries, multiple long entries (i.e., above 50 characters) may be truncated.
@@ -263,7 +281,8 @@ Examples:
 
 ### Adding a Property : `addProperty`
 
-Add a property listing to an existing person in the address book.
+Add a property listing to an existing person in the address book.  Note that
+although multiple of the same field may be entered, only the last one will be recorded.
 
 Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
 
@@ -369,7 +388,7 @@ Clears all entries from the address book.
 Exits the program.
 
 > ###### ⚠️ **Warning**
-> Users are strongly encouraged to use `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
+> Users are strongly encouraged to use `close` command to close view windows and `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
 
 
 **Command Format:**  
@@ -391,7 +410,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Store Birthday of a Contact: `birthday`
 
-Stores a contact’s birthday
+Stores a contact’s birthday. Note that although multiple birthdays may be entered,
+only the last one will be recorded.
 
 **Command Format:**  
 `birthday INDEX b/<Birthday Date>`
@@ -406,8 +426,6 @@ Stores a contact’s birthday
 ### Birthday Reminder
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
-Note that the reminder is only shown when the application is launched,
-any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 > ###### 💡 **Tip**
 > Note that the reminder is only shown when the application is launched,
@@ -435,13 +453,14 @@ None, as it is an automatic feature.
 --------------------------------------------------------------------------------------------------------------------
 ## Parameter Requirements
 
-| Parameter  | Requirement                                                                                                                                                                                                                      | Example                                                                                       |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **Name**   | Only Alpha-numeric                                                                                                                                                                                                               | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan <br> ✅ Chris Paul 3       |
-| **Birthday** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
-| **Log Date** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
-| **Email**   | local-part@domain <br> The local-part should only contain alphanumeric characters and these special characters (+_.-). The local-part may not start or end with special characters. <br> The domain name must: <br> - End with a domain label at least 2 characters long. <br> - Have each domain label start and end with alphanumeric characters. <br> - Consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c <br> ✅ 1@a.com <br> ✅ ho@gmail.com                                |
-| **Address** | No constraint (right-to-left scripts will be displayed left-to-right)                                                                                                                      | ✅ 123 Orchard <br> ✅ 乌节路 123 号 <br> ✅ 123 بستان                                        |
+| Parameter    | Requirement                                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                               |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **Name**     | Only Alpha-numeric                                                                                                                                                                                                                                                                                                                                                                                                                | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan <br> ✅ Chris Paul 3 |
+| **Birthday** | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                           |
+| **Log Date** | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                           |
+| **Email**    | local-part@domain <br> The local-part should only contain alphanumeric characters and these special characters (+_.-). The local-part may not start or end with special characters. <br> The domain name must: <br> - End with a domain label at least 2 characters long. <br> - Have each domain label start and end with alphanumeric characters. <br> - Consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c <br> ✅ 1@a.com <br> ✅ ho@gmail.com                          |
+| **Address**  | No constraint (right-to-left scripts will be displayed left-to-right)                                                                                                                                                                                                                                                                                                                                                             | ✅ 123 Orchard <br> ✅ 乌节路 123 号 <br> ✅ 123 بستان                                       |
+| **Tag**      | Only Alpha-numeric, no space                                                                                                                                                                                                                                                                                                                                                                                                      | ❌ follow-up ✅ followUp <br> ✅ 123                                                     |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary

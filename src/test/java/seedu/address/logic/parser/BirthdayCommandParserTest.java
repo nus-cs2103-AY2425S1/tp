@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_LATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
@@ -51,10 +50,8 @@ public class BirthdayCommandParserTest {
     public void parse_invalidValue_failure() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput1 = targetIndex.getOneBased() + INVALID_DATE_DESC;
-        String userInput2 = targetIndex.getOneBased() + INVALID_BIRTHDAY_EARLY_DESC;
         String userInput3 = targetIndex.getOneBased() + INVALID_BIRTHDAY_LATE_DESC;
 
-        String expectedMessage = MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT;
 
         // Invalid date
         assertParseFailure(parser, userInput1, MESSAGE_INVALID_DATE_FORMAT);

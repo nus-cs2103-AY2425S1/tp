@@ -39,6 +39,7 @@ public class AddPropertyCommand extends Command {
             + PREFIX_PRICE + "PRICE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROPERTY_ADDRESS + "123 Main St "
+            + PREFIX_TOWN + "New York "
             + PREFIX_TYPE + "Condo "
             + PREFIX_SIZE + "85 "
             + PREFIX_BEDROOMS + "2 "
@@ -130,6 +131,7 @@ public class AddPropertyCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        ViewCommand.updateDisplay(personToEdit, editedPerson);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
@@ -180,5 +182,3 @@ public class AddPropertyCommand extends Command {
                 price);
     }
 }
-
-
