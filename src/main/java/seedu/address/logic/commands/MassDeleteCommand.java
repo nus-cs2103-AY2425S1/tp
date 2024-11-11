@@ -24,9 +24,9 @@ public class MassDeleteCommand extends Command {
             + "Parameters: INDEX1 INDEX2 ... INDEXN (must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 3 5";
 
-    public static final String MESSAGE_DELETE_PERSONS_SUCCESS = "Contacts with IDs %1$s "
+    public static final String MESSAGE_DELETE_PERSONS_SUCCESS = "Contacts with indexes %1$s "
             + "have been successfully deleted.";
-    public static final String MESSAGE_NO_VALID_IDS = "No valid contact IDs provided for deletion.";
+    public static final String MESSAGE_NO_VALID_IDS = "No valid contact indexes provided for deletion.";
 
     private final List<Index> targetIndices;
     private final List<String> invalidInputs;
