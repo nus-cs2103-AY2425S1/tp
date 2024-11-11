@@ -519,12 +519,15 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details informing of invalid command shown in the status message.
+  
+  1. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
+      Expected: No client is deleted. Error detail informing out of range index shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `delete`<br>
+      Expected: No client is deleted. Error details informing of missing index parameter shown in the status message.
 
-2. Deleting a client in the transaction list view
+1. Deleting a client in the transaction list view
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
     1. Test case: `delete 0`<br>
@@ -533,8 +536,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
-    3. Test case: `delete x`, where `x` is exactly 1 more than transaction list size<br>
-      Expected: No client is deleted. Error detail informing out of range index shown in the status message.
+
 
 ### Adding a transaction to a client 
 
