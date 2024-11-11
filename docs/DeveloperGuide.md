@@ -321,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | familiar user | sort the contacts by product deadlines                                      | easily know which products I have to send out                               |
 | `* * `   | familiar user | filter contacts by criteria                                                 | search for specific types of people with certain characteristics            |
 | `* *`    | familiar user | sort my contacts alphabetically                                             | find my contacts by their name                                              |
-| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if i have not seen them for awhile |
+| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if I have not seen them for awhile |
 | `* * `   | familiar user | export and share a contact with others                                      | share a contact with others potentially to discuss about                    |
 | `* *`    | familiar user | pin contacts                                                                | quickly find those that are important to my business                        |
 | `* * `   | familiar user | see alerts on duplicate contacts                                            | delete it and keep my address book clean                                    |
@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
 | `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
 | `* `     | expert user   | perform mass edits                                                          | change in the information of groups of contacts at one shot                 |
-| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
+| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what I remember them by               |
 | `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
 | `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
 
@@ -752,3 +752,13 @@ We detail some achievements accomplished by completing our iteration of the proj
 
 ## **Appendix: Planned Enhancements**
 
+1.	Removing of social media handles
+2.	Duplicate detection for `name` field
+      1. Add the contact into the contact list, but
+      2. Notify the user that there is another contact with an existing name
+      3. Near-matches will be considered (i.e. same spelling, but different cases)
+3.	Enhance `name` field to accept more special characters such as dashes, slashes, apostrophes
+4.	Phone number validation to allow more different lengths and country code
+5.	More specific error messages so that the messages are not too long to improve readability
+6.	Allow a contact to have multiple phone numbers, emails, addresses and social media handles
+7.	If `edit` command does not actually edit the contact, raise an error message to the user
