@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 
 /**
- * Stores the history of commands executed. (Solution inspired from addressbook-level-4)
+ * Stores the history of commands executed. (Solution adapted from addressbook-level-4)
  */
 public class CommandHistory {
     private final ObservableList<String> userInputHistory = FXCollections.observableArrayList();
