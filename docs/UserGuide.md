@@ -495,7 +495,7 @@ Deletes the specified tag(s) from the specified contact.
 | Parameter Name | Description                                  | Required   |
 |----------------|----------------------------------------------|------------|
 | `INDEX`        | Index number of the contact to delete tag    | Compulsory |
-| `t/TAG`        | [Tag](#tag) to be deleted from the specified contact | Compulsory |
+| `t/TAG`        | Tag to be deleted from the specified contact | Compulsory |
 | `t/MORE_TAG` | More tags to be deleted                      | Optional|
 
 <div markdown="block" class="alert alert-info">
@@ -512,7 +512,7 @@ Deletes the specified tag(s) from the specified contact.
 | Parameter Name | Description                                                               | Required   |
 |----------------|---------------------------------------------------------------------------|------------|
 | `ALL`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
-| `t/TAG`        | [Tag](#tag) to be deleted from every contact in the list associated with the tag  | Compulsory |
+| `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag    | Compulsory |
 | `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
 
 
