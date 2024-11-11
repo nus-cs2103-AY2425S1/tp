@@ -16,6 +16,7 @@ elseif () then ([duplicate parameters])
     :Displays contact already exists error message;
 else ([else])
     :Updates specified person with specified parameters;
+    :Push to undo stack;
 
 endif
 stop
