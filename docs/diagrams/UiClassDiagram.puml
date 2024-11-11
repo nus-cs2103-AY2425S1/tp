@@ -3,62 +3,70 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam linetype ortho
 
 package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class ClientListPanel
-Class ClientCard
-Class ClientDetailPanel
-Class StatusBarFooter
-Class CommandBox
+  Class "<<interface>>\nUi" as Ui
+  Class "{abstract}\nUiPart" as UiPart
+  Class UiManager
+  Class MainWindow
+  Class HelpWindow
+  Class ResultDisplay
+  Class ClientListPanel
+  Class ClientCard
+  Class ClientCardField
+  Class ClientDetailPanel
+  Class StatusBarFooter
+  Class CommandBox
+  Class StatusPieChart
 }
 
 package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+  Class HiddenModel #FFFFFF
 }
 
 package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+  Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
 
-UiManager .left.|> Ui
+HiddenOutside -right-> Ui
+UiManager -up-|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
+
+MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" StatusPieChart
 MainWindow *-down-> "1" ClientListPanel
 MainWindow *-down-> "1" ClientDetailPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow -right-> "0..1" HelpWindow
 
-ClientListPanel -down-> "*" ClientCard
+ClientListPanel *-right-> "*" ClientCard
+ClientCard *-down-> "6" ClientCardField
+note bottom of ClientCardField : Depends on the Ikonli package for icons
 
-MainWindow -left-|> UiPart
+MainWindow -up-|> UiPart
+ResultDisplay -up-|> UiPart
+CommandBox -up-|> UiPart
+ClientListPanel -up-|> UiPart
+ClientCard -up-|> UiPart
+ClientDetailPanel -up-|> UiPart
+StatusBarFooter -up-|> UiPart
+HelpWindow -up-|> UiPart
+StatusPieChart -up-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-ClientListPanel --|> UiPart
-ClientCard --|> UiPart
-ClientDetailPanel --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ClientCard -right-> Model
+ClientDetailPanel -right-> Model
+UiManager -down-> Logic
+MainWindow -down-> Logic
 
-ClientCard ..> Model
-ClientDetailPanel ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+CommandBox -[hidden]down- ResultDisplay
+ResultDisplay -[hidden]down- StatusBarFooter
+StatusBarFooter -[hidden]down- StatusPieChart
+StatusPieChart -[hidden]down- ClientListPanel
+ClientListPanel -[hidden]down- ClientDetailPanel
+ClientDetailPanel -[hidden]down- HelpWindow
 
-ClientListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
 @enduml

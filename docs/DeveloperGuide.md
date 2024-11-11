@@ -74,16 +74,21 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `ClientDetailPanel`, `StatusBarFooter`, `StatusPieChart` etc. All these UI components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `ClientListPanel` contains multiple `ClientCard` components, each representing a client's information with six `ClientCardField` elements that utilize the Ikonli package for icons. The `MainWindow` also includes a `ClientDetailPanel` that acts as a split view within the main window, and a `HelpWindow` that can be launched as a separate window.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Client` object residing in the `Model`.
+* Executes user commands using the `Logic` component through both the `UiManager` and `MainWindow`.
+* Updates the display based on changes to `Model` data, particularly through the `ClientCard` and `ClientDetailPanel` components which directly observe the `Model`.
+* Maintains a hierarchical structure where `UiManager` manages the `MainWindow`, which in turn contains and manages all other UI components.
+* Features several dynamic elements:
+    * A `ClientDetailPanel` that functions as an integrated split view within the main window
+    * A separate `HelpWindow` that can be opened as a popup window
+    * A `StatusPieChart` for visual data representation of status
 
 ### Logic component
 
