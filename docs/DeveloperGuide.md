@@ -185,7 +185,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 <box type="info" seamless>
 
-**Note:** There are no destroy markers (X) for `AddCommand` as they are preserved in the `undo` command stack.
+**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
 
 </box>
 
@@ -215,17 +215,17 @@ Step 2. The `edit` command updates the details of the contact with index 1 to ha
 
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
-<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** There are no destroy markers (X) for `AddCommand` as they are preserved in the `undo` command stack.
+**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
 
 </box>
 
-The following activity diagram summarizes what happens when a user executes a `add` command:
+The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="600" width="600" />
+<puml src="diagrams/EditActivityDiagram.puml" height="600" width="600" />
 
 ### Undo feature
 
