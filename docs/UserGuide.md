@@ -375,7 +375,7 @@ Finds patients whose name contains any of the given keywords.
 </box>
 
 Example:
-* `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name, for instance, `Alex Yeoh` or `David Li`<br>
+* `find John Tim` returns any patient with names containing either "John" or "Tim". This means it will return any patient whose name includes either "John" or "Tim" as part of their name, for instance, `John Doe` or `Tim Cook`<br>
 
 Expected output:
 ```
@@ -427,6 +427,13 @@ Adds an emergency contact and details to a patient in NovaCare.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
+
+<box type="tip" seamless>
+
+**Tip:**
+* A patient can only have 1 registered emergency contact.
+* Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!
+  </box>
 
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
@@ -494,7 +501,7 @@ Delete a priority level to a patient in NovaCare, resetting it to the default va
 <box type="info" seamless>
 
 **Note:**
-* Delete the current priority level at the specified `INDEX`.
+* Delete the current priority level at the specified `INDEX`, resetting it to level 3.
 * The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​.
