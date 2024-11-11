@@ -319,8 +319,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1a2. User reenters new command.
 
         Steps 1a1-1a2 are repeated until the command entered is correct.
-
-    Use case resumes at step 1.
+        
+        Use case resumes from step 1.
 
 * 1b. Input fields are incorrectly formatted.
 
@@ -328,14 +328,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b2. User reenters command.
 
       Steps 1b1-1b2 are repeated until the command entered is correct.
+      
+      Use case resumes from step 1.
 
-  Use case resumes at step 1.
-
-* *a. At any time, User decides to stop adding the client, or exits the application.
+* *a. At any time, user decides to stop adding the client, or exits the application.
 
     * *a1. Nothing is added to the client list.
+       
+      Use case ends.
 
-  Use case ends.
+<br>
 
 **Use case: Delete a client**
 
@@ -353,27 +355,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   * 2a1. Clientele+ shows an error message.
-
-  Use case ends.
+        
+    Use case ends.
 
 * 3a. The given index or name is invalid.
 
     * 3a1. Clientele+ shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 * 3b. Multiple names matching the given name exist.
 
     * 3b1. Clientele+ shows list of clients with matching names.
     * 3b2. Clientele+ prompts user to delete by index.
 
-      Use case resumes at step 3.
+      Use case resumes from step 3.
 
-* *a. At any time, User decides to stop deleting the client, or exits the application.
+* *a. At any time, user decides to stop deleting the client, or exits the application.
 
-    * *a1. Nothing is deleted from client list.
+    * *a1. Nothing is deleted from client list.  
+        
+        Use case ends.
 
-  Use case ends.
+<br>
 
 **Use case: Modify a client's details**
 
@@ -390,21 +394,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  * 2a1. Clientele+ shows an error message.
+  * 2a1. Clientele+ shows an error message. 
+    
+    Use case ends.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
+* 3a. The selected index is invalid.
 
     * 3a1. Clientele+ shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 * 3b. The given details are invalid.
 
     * 3b1. Clientele+ shows an error message.
 
-    Use case resumes at step 2.
+       Use case resumes from step 2.
+
+<br>
 
 **Use case: Find a client**
 
@@ -424,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
-  Use case resumes at step 1.
+      Use case resumes from step 1.
 
 
 ### Planned Enhancements
