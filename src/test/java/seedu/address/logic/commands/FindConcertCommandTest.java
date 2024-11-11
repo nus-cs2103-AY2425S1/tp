@@ -18,7 +18,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
-import seedu.address.model.commons.RoleContainsKeywordPredicate;
 import seedu.address.model.concert.Concert;
 
 /**
@@ -93,11 +92,5 @@ public class FindConcertCommandTest {
         return new NameContainsKeywordsPredicate<>(Arrays.asList(userInput.split("\\s+")));
     }
 
-    /**
-     * Parses {@code userInput} into a {@code RoleContainsKeywordPredicate}.
-     */
-    private RoleContainsKeywordPredicate prepareRolePredicate(String userInput) {
-        return new RoleContainsKeywordPredicate(userInput);
-    }
 }
 
