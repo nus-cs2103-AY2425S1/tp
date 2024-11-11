@@ -3,12 +3,20 @@
   title: ""
 ---
 
-# WedLinker
+<body>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <span class="parisienne-regular" style="font-size: 3em; font-weight: bold;">
+      WedLinker
+    </span>
+  </div>
+</body>
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-F15-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-F15-4/tp)
 
-![Ui](images/Ui.png)
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img alt="WedLinker UI" src="images/Ui.png" width="500" onclick="openModal(this)" />
+</div>
 
 **WedLinker is a desktop application designed for professional wedding planners to seamlessly manage a variety of 
 vendors and clients across different locations for a wedding.** 

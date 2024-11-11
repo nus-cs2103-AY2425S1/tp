@@ -31,7 +31,7 @@ public class AssignTaskCommand extends Command {
             + ": Adds one or multiple tasks to the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: PERSON_INDEX (must be a positive integer) "
-            + "TASK_INDEX (must be a positive integer)\n"
+            + "TASK_INDEX... (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "1";
 
     private final Index personIndex;
