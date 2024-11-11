@@ -423,6 +423,7 @@ Use this format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
   - Start time must be before end time
   - Appointment must be in the future
   - Must not overlap with existing appointments
+- The default status of an appointment when added is PENDING. See the [`updatestatus` command](#updating-status-of-an-appointment-updatestatus) to know more.
 
 **Examples:**
 
