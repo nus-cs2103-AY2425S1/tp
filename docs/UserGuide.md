@@ -197,7 +197,7 @@ Format: `help`
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to the GoonBook.
 
 Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
@@ -231,7 +231,7 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in the GoonBook.
 
 Format: `list`
 
@@ -241,7 +241,7 @@ Format: `list`
 
 ### Editing a student : `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in the GoonBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS] [t/TAG]…​`
 
@@ -276,7 +276,7 @@ Examples:
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from the GoonBook.
 
 Format: `delete INDEX`
 
@@ -352,7 +352,7 @@ Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
 
 Examples:
 
-If the addressgroup contains `Alice Pauline` and `Benson Meier`,
+If the group contains `Alice Pauline` and `Benson Meier`,
 
 - `group g/Study Group 1 s/alice pauline s/benson meier`
   - Successfully groups `Alice Pauline` and `Benson Meier` into `StudyGroup1`.
@@ -394,7 +394,7 @@ Examples:
 
 ### Deleting a group : `deleteGroup`
 
-Deletes the specified Group from the address book.
+Deletes the specified Group from the GoonBook.
 
 Format: `deleteGroup GROUPNAME`
 
@@ -514,7 +514,7 @@ GoonBook csv data files are saved automatically as a .csv file at `[JAR file loc
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the GoonBook.
 
 Format: `clear`
 
@@ -545,8 +545,8 @@ GoonBook data are saved automatically as a JSON file `[JAR file location]/data/a
 **Warning:** Manually editing the data file may lead to data loss if the JSON format is not strictly followed. Always back up your data before making direct edits.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, GoonBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the GoonBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -558,7 +558,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GoonBook home folder.
 **Q**: Is there support for importing and exporting groups?<br>
 **A**: It is a planned enhacement. Do check out our Developer Guide for more information.
 **Q**: I don't understand what caused the error in my command what can I do?<br>
