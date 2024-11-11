@@ -202,7 +202,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-#### Module-role
+#### Editing module-role
 
 The module-role pairs can be edited by adding and deleting.
 
