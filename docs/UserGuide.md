@@ -182,7 +182,7 @@ Examples:
 
 Adds an emergency contact's name to the specified person in the student list.
 
-Format: `addEcName INDEX [en/ECNAME]`
+Format: `addEcName INDEX en/[ECNAME]`
 
 <box type="tip" seamless>
 
