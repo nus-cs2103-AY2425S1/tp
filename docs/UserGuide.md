@@ -464,6 +464,7 @@ Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
 * The ACTUAL_PRICE must be a valid numerical value.
 
 Examples:
+Assuming you have executed the command `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10` before executing the following:
 * `bought 1 1 ap/1110000` marks property to buy 1 for contact 1 as bought at the actual price of $1110000 and removes from list.
 
 ### To mark property already sold: `sold`
@@ -475,6 +476,7 @@ Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
 * The ACTUAL_PRICE must be a valid numerical value.
 
 Examples:
+Assuming you have executed the command `addSell 1 ht/c sp/1650000 pc/189651 un/5-10` before executing the following:
 * `sold 1 1 ap/1110000` marks property to sell 1 for contact 1 as sold at the actual price of $1110000 and removes from list.
 
 ### Pin Contact `pin`
