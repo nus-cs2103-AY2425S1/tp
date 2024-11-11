@@ -52,8 +52,9 @@
   - [Case Insensitivity for All Contact Fields](#case-insensitivity-for-all-contact-fields)
   - [Display Index of Newly Added Contact](#display-index-of-newly-added-contact)
 
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## **Acknowledgements**
 
@@ -75,7 +76,7 @@ Input:
 A snippet of the Output:
 > To implement a listener that adjusts the width of a `Label` to match the width of its container ( `CardPane` or any parent `Pane` ) when the `Label` exceeds the current width of the container, you can follow these steps: 
 > 1. **Add a listener to the parent container's width.** When the width of the parent changes, check if the `Label` exceeds it, and if so, set the `Label`'s width to match the parent's width. 
-> 2. Use `widthProperty()` to monitor changes in the width of the parent container (e.g., `CardPane` or `Pane`) 
+> 2. Use `widthProperty()` to monitor changes in the width of the parent container (e.g., `CardPane` or `Pane`)
 
 ```
 public class LabelResizeExamp1e extends Application { 
@@ -93,19 +94,14 @@ public void start(Stage primaryStage) {
     // Add a Listener to monitor the width of the cardPane (parent container) 
     cardPane.widthProperty().addListener ((new ChangeListener<Number>() { 
         @Override
-        public void changed(
-                ObservableValue<? extends Number> observable, 
-                Number oldValue, 
-                Number newValue) {
-            // Get the new width of the card pane
-            // Get the current width of the card pane
-            double parentWidth = newValue.doubleValue(); 
-            double labelWidth = label.getWidth();
+        public void changed(ObservableValue<? extends Number> observable, 
+                Number oldValue, Number newValue) {
+            double parentWidth = newValue.doubleValue(); // Get the new width of the card pane
+            double labelWidth = label.getWidth(); // Get the current width of the card pane
             
                 // Check if the label's with exceeds the parent width, and adjust if necessary
                 if (labelWidth > parentWidth) {
-                    // Set the label width to match the parent width
-                    label.setPrefWidth(parentWidth); 
+                    label.setPrefWidth(parentWidth); // Set the label width to match the parent width
                     }
                 });
             }
@@ -182,6 +178,8 @@ class defines a class, and you can use modifiers like `-` for private and `+` fo
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -192,14 +190,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="360" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
-g
+
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -212,6 +210,8 @@ The bulk of the app's work is done by the following four components:
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -230,6 +230,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -247,13 +249,15 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="450"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -263,6 +267,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -274,16 +280,18 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="750"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="750" />
 
 
 The `Model` component,
@@ -293,12 +301,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="720" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -310,6 +319,9 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## **Implementation**
 
@@ -351,10 +363,12 @@ triggering `ArrayIndexOutOfBoundException`.
 ### Status Bar Footer: how to reflect the total number of contacts 
 The `ModelManager` class now also stores `allContacts` attribute, on top of the `filteredList` attribute present initially. It represents the full list of contacts which the model can keep track on. 
 This `allContacts` can be obtained subsequently by the `LogicManager` with a method provided by the ModelManager. A listener is added so that the statusbarFooter will listen for any changes made to the `allContacts` and if so update the number accordingly.
-![img_2.png](img_2.png)
 
+<img src="img_2.png" alt="Description of image" style="max-width: 25rem; height: auto;">
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
@@ -418,6 +432,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Use Cases
 
 (For all use cases below, the **application** is the `data_coNdUctorS` and the **User** is the `user`, unless specified otherwise)
@@ -453,6 +469,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      Use case ends.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Deleting a Contact
 
@@ -492,6 +510,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Editing a Contact
 
@@ -538,6 +558,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Finding a Contact by Details
 
@@ -593,6 +615,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
+
 ### Non-Functional Requirements
 
    - The application should function on any mainstream operating system (Windows, macOS, and Linux) that supports Java 17 or above.
@@ -623,6 +648,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 * **Application Programming Interface (API)**: A collection of protocols and rules that enables different software applications to communicate and work together.
@@ -650,6 +677,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Component**: A component is a collection of functions that provide a single responsibility to the application. 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for Manual Testing**
 
@@ -715,6 +744,9 @@ Saving window preferences
 
 ---
 
+<div style="page-break-after: always;"></div>
+
+
 ### Deleting a Contact
 
 - Deleting a contact while **ALL** contacts are being shown
@@ -768,6 +800,8 @@ Saving window preferences
       Expected: Similar to above.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a Contact
 
@@ -823,6 +857,8 @@ Saving window preferences
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Finding a Contact
 
 - Finding a contact by details
@@ -857,6 +893,8 @@ Saving window preferences
       Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### GUI Components
 
@@ -904,6 +942,7 @@ Saving window preferences
 This appendix provides a comprehensive approach to testing the data_coNdUctorS app, ensuring each core feature and edge case is addressed. Error messages will appear on the screen if incorrect inputs are entered, helping users to correct their input efficiently.
 
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Planned Enhancements
 
