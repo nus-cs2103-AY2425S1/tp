@@ -258,7 +258,7 @@ Format: `find n/NAME...` or `find p/PHONE...` or `find e/EMAIL...` or `find a/AD
 * `find p/973` returns all Contacts whose phone number contains 973
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find n/alex n/david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with 'guest' <br>
+* `find t/guest` returns all Contacts tagged with 'guest' <br>
   ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
 
