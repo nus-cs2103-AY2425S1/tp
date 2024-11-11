@@ -163,7 +163,6 @@ Examples:
 * `filter p/99999999` returns `Alex Yeoh`
 * `filter n/John Alex` returns `John Doe` and `Alex Yeoh` 
 * This image shows how students can be filtered using their phone number (99999999 - Alex Yeoh)
-![filter_by_phone.png](images%2Ffilter_by_phone.png)
 
 ### Deleting a person : `delete`
 
@@ -192,7 +191,8 @@ Format: `addEcName INDEX en/[ECNAME]`
 
 * Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
 * Deletes the emergency contact's name at the specified `INDEX`
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ 
+* Names should contain only alphabets. Names with numbers are also allowed. For names with legal operators (e.g. `Jack s/o Jason`), please write the full phrase instead (e.g. `Jack son of Jason`).
 
 Examples:
 * `addEcName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
@@ -388,7 +388,7 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentManagerPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
