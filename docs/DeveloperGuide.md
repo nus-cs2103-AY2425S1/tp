@@ -171,8 +171,11 @@ This section of the developer Guide covers how the features are implemented and 
 ### Features Overview
 Listed below are the implemented features, and a brief description of what they do.
 * **Adding a new Assignment**: Adds a new Assignment for a particular student
-* **Grading an existing Assignment**: Grades an existing assignment belonging to an existing student
+* **Grading an existing Assignment**: Grades an existing assignment belonging to an existing student, while simultaneously marking the assignment as "submitted".
 * **Deleting an existing Assignment**: Deletes an existing assignment belonging to an existing student
+* **Marking an existing Assignment**: Marks an existing assignment belonging to an existing student as "Submitted", without assigning a grade.
+* **Unmarking an existing Assignment**: Unmarks an existing assignment belonging to an existing student, resetting its submission status to "not submitted", and resetting grade (if any).
+* **Editing an existing Assignment**: Edits details of an existing assignment belonging to an existing student.
 * **Viewing a student's details**: Displays students details along with the assignments associated with the student
 * **Adding a remark to a student**: Adds a remark to an existing student
 
@@ -180,7 +183,7 @@ Listed below are the implemented features, and a brief description of what they 
 This `add_assignment` command is a feature that  allows the user to create a new assignment, based on the student's index. The assignment must have an alphanumeric `Name`, and a valid `Max Score`.
 
 #### Design Considerations:
-Previously, AB3 had a single command word for the `add` commands. As TAchy is a brownfield project, additional objects are now allowed to be instantiated via the `add` commmand.
+Previously, AB3 had a single command word for the `add` commands. As TAchy is a brownfield project, additional objects are now allowed to be instantiated via the `add` command.
 In particular, TAchy has 2 features that "add" items to the app. Firstly, there is an `add_student` feature, and also an `add_assignment` feature.
 
 **Aspect: How to distinguish between the different 'add' commands:**
@@ -210,6 +213,182 @@ In particular, TAchy has 2 features that "add" items to the app. Firstly, there 
 
 #### Example activity diagram for AddAssignmentCommand
 <puml src="diagrams/add-assignment/AddAssignmentActivityDiagram.puml" alt="Activities inside the Logic Component for the `add_assignment` Command" />
+
+### Grading an Existing Assignment
+
+#### Design Considerations
+In TAchy, grading assignments involves updating an existing assignment associated with a specific student. To ensure accuracy and reduce potential user error, the grading command is designed to use index-based references for both students and assignments.
+
+**Aspect: How to identify the target assignment and student for grading:**
+* Alternative 1 (current choice): Use indexes for both student and assignment identification.
+    * Pros: Ensures precise identification of students and assignments, reducing the risk of errors caused by duplicate or similar names.
+    * Cons: Users must know the exact index values, which may require additional steps to locate.
+
+* Alternative 2: Allow grading by student and assignment names.
+    * Pros: Could be more intuitive for users familiar with the student and assignment names.
+    * Cons: Prone to errors due to possible duplicates or misspellings, making it less reliable for precise grading actions.
+
+#### Implementation
+
+1. **GradeAssignmentCommandParser**
+    - This parser is responsible for interpreting the command input for grading an assignment. It ensures that the required prefixes (`PREFIX_STUDENT_INDEX`, `PREFIX_ASSIGNMENT_INDEX`, and `PREFIX_ASSIGNMENT_SCORE`) are present in the command.
+    - After tokenizing and verifying the presence of necessary prefixes, it extracts the values for `studentIndex`, `assignmentIndex`, and `score` using helper methods in `ParserUtil`. If any of these values cannot be parsed correctly, an exception is thrown.
+    - Finally, it returns a new `GradeAssignmentCommand`, initialized with these parsed values.
+
+2. **GradeAssignmentCommand**
+    - **Execution Steps**:
+        - The command retrieves the current list of students and verifies the validity of `studentIndex`. If the index is out of bounds, an error is thrown.
+        - Using `assignmentIndex`, it retrieves the assignment from the selected student’s assignment list. If the index is invalid, an error is thrown.
+        - It then checks if the `score` is within acceptable parameters, ensuring it does not exceed the assignment’s maximum score and is non-negative.
+        - The command updates the assignment with the provided `score`, sets flags to indicate the assignment has been graded, and marks it as submitted.
+        - A `CommandResult` object is created with a success message. If the assignment was previously graded, a message noting that the grade has been overwritten is shown.
+
+    - **Error Handling**:
+        - If the `studentIndex` is invalid, a `CommandException` is thrown with `MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX`.
+        - If the `assignmentIndex` is invalid, a `CommandException` is thrown with `MESSAGE_INVALID_ASSIGNMENT_INDEX`.
+        - If the `score` exceeds the maximum allowed for the assignment, a `CommandException` is thrown with `MESSAGE_SCORE_EXCEEDS_MAX_SCORE`.
+        - If the `score` is negative, a `CommandException` is thrown with `MESSAGE_NEGATIVE_SCORE`.
+
+This process ensures that grading an assignment is a straightforward, index-based operation that minimizes user error and provides clear feedback for invalid inputs.
+
+### Deleting an Existing Assignment
+
+#### Design Considerations
+To delete assignments effectively, the design uses an index-based approach (similar to `GradeAssignmentCommand`) to identify both the student and the specific assignment to be deleted. This approach avoids issues with name duplication and user errors that may arise from typos or ambiguous assignment names.
+
+#### Implementation
+
+1. **DeleteAssignmentCommandParser**
+    - This parser is responsible for interpreting the command input for deleting an assignment. It ensures that the necessary prefixes (`PREFIX_STUDENT_INDEX` and `PREFIX_ASSIGNMENT_INDEX`) are present in the command.
+    - After tokenizing and validating the input, it extracts values for `studentIndex` and `assignmentIndex` using helper methods from `ParserUtil`. If parsing fails, an exception is thrown.
+    - It then returns a new `DeleteAssignmentCommand`, initialized with these parsed values.
+
+2. **DeleteAssignmentCommand**
+    - **Execution Steps**:
+        - Retrieves the current list of students and verifies the `studentIndex` to ensure it is within bounds. If the index is invalid, an exception is thrown.
+        - Using `assignmentIndex`, retrieves the assignment from the specified student's assignment list. If the index is out of bounds, an exception is thrown.
+        - Removes the specified assignment from the list, updates the model’s filtered student list, and returns a `CommandResult` object confirming the deletion.
+
+    - **Error Handling**:
+        - If `studentIndex` is invalid, a `CommandException` is thrown with `MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX`.
+        - If `assignmentIndex` is invalid, a `CommandException` is thrown with `MESSAGE_INVALID_ASSIGNMENT_INDEX`.
+
+This approach provides a straightforward way to delete assignments, minimizing user error through precise index-based identification.
+
+
+### Marking an Assignment as Submitted
+
+#### Design Considerations
+For marking assignments as submitted, the team discussed whether a "default" grade should be assigned to newly submitted assignments. Ultimately, the decision was made to avoid assigning any default grade. Instead, the user experience (UX) was designed to clearly indicate that an assignment is marked as submitted but has not yet been graded. This approach ensures transparency and encourages users to assign a meaningful grade once the assignment is evaluated.
+
+**Aspect: Handling grades for newly submitted assignments:**
+* Alternative 1 (current choice): Do not assign a default grade upon submission.
+    * Pros: Avoids arbitrary grading, encourages meaningful grading by users, and clearly indicates that the assignment has not been evaluated.
+    * Cons: Requires users to remember to grade the assignment later.
+
+* Alternative 2: Automatically assign a default grade (e.g., 0) upon submission.
+    * Pros: Ensures a consistent "graded" status for all submitted assignments.
+    * Cons: Could mislead users into thinking the assignment has been graded, even if no evaluation has occurred.
+
+#### Implementation
+
+1. **MarkAssignmentCommandParser**
+    - This parser is responsible for interpreting the command input for marking an assignment as submitted. It verifies the presence of necessary prefixes (`PREFIX_STUDENT_INDEX` and `PREFIX_ASSIGNMENT_INDEX`).
+    - After tokenizing and validating the input, it retrieves the values for `studentIndex` and `assignmentIndex` using helper methods in `ParserUtil`. If parsing fails, a `ParseException` is thrown.
+    - Returns a new `MarkAssignmentCommand` initialized with the parsed values.
+
+2. **MarkAssignmentCommand**
+    - **Execution Steps**:
+        - Retrieves the list of students and validates `studentIndex` to confirm it is within bounds. If invalid, an exception is thrown.
+        - Using `assignmentIndex`, it retrieves the assignment from the targeted student’s assignment list and confirms the index is valid.
+        - Checks if the assignment is already marked as submitted; if so, an exception is thrown.
+        - Updates the assignment’s status to submitted and refreshes the filtered student list in the model.
+        - Returns a `CommandResult` object with a message confirming the assignment was successfully marked as submitted.
+
+    - **Error Handling**:
+        - Throws a `CommandException` with `MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX` if `studentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_INVALID_ASSIGNMENT_INDEX` if `assignmentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_ALREADY_MARKED` if the assignment is already marked as submitted.
+
+### Unmarking an Assignment as 'Not Submitted'
+
+#### Design Considerations
+When an assignment is unmarked, the team considered whether the assignment's score should be retained or reset. Ultimately, it was determined that retaining the score would be misleading, as unmarking indicates that the assignment is "not submitted" and any previous grading was likely erroneous. Therefore, the score is reset to zero, and the assignment is marked as "not graded."
+
+**Aspect: Handling scores for unmarked assignments:**
+* Alternative 1 (current choice): Reset the score to zero when unmarking.
+    * Pros: Ensures consistency by indicating the assignment is both "not submitted" and "not graded."
+    * Cons: Users may need to re-enter scores if the unmark was accidental.
+
+* Alternative 2: Retain the existing score when unmarking.
+    * Pros: Allows re-marking without re-entering the score.
+    * Cons: Could mislead users into thinking the assignment has been graded, even though it is marked as "not submitted."
+
+#### Implementation
+
+1. **UnmarkAssignmentCommandParser**
+    - Parses the command input for unmarking an assignment, ensuring that `PREFIX_STUDENT_INDEX` and `PREFIX_ASSIGNMENT_INDEX` are present.
+    - After tokenizing and validating the input, retrieves the values for `studentIndex` and `assignmentIndex` using `ParserUtil`. If parsing fails, a `ParseException` is thrown.
+    - Returns a new `UnmarkAssignmentCommand` initialized with the parsed values.
+
+2. **UnmarkAssignmentCommand**
+    - **Execution Steps**:
+        - Retrieves the list of students and validates `studentIndex` to confirm it is within bounds. If invalid, an exception is thrown.
+        - Using `assignmentIndex`, retrieves the assignment from the selected student’s assignment list and verifies the index is valid.
+        - Checks if the assignment is already unmarked; if so, an exception is thrown.
+        - Updates the assignment’s status to "not submitted," resets the score to zero, and marks it as "not graded."
+        - Returns a `CommandResult` object confirming the assignment was successfully unmarked.
+
+    - **Error Handling**:
+        - Throws a `CommandException` with `MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX` if `studentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_INVALID_ASSIGNMENT_INDEX` if `assignmentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_ALREADY_UNMARKED` if the assignment is already marked as "not submitted."
+
+This approach provides clarity by resetting all grading-related information, reinforcing that the assignment is no longer in a submitted state.
+
+### Editing an Assignment
+
+#### Design Considerations
+For the edit command, the team discussed whether the assignment's previous details—such as submission status and grading—should be retained or reset. Ultimately, it was decided that executing an edit likely indicates the user made a mistake in the original assignment details. Therefore, to avoid potential inconsistencies, the edit command resets all fields, including submission status and grading, ensuring the assignment reflects the updated information accurately.
+
+**Aspect: Handling previous submission and grading details during editing:**
+* Alternative 1 (current choice): Reset all fields of the assignment, including submission status and grading.
+    * Pros: Safer, as it provides a clean slate for the assignment details, eliminating potential conflicts with prior states.
+    * Cons: Users must re-enter grading and submission details if the edit was only intended to change other fields.
+
+* Alternative 2: Retain submission and grading status.
+    * Pros: Allows users to update only specific details without affecting submission or grading status.
+    * Cons: Risk of creating inconsistencies if the user intended to fully reset the assignment information.
+
+This approach ensures that edited assignments start fresh, with any previous grading or submission statuses removed.
+
+#### Implementation
+
+1. **EditAssignmentCommandParser**
+    - This parser is responsible for interpreting the command input for editing an assignment. It ensures that the required prefixes for identifying the student (`PREFIX_STUDENT_INDEX`) and the assignment (`PREFIX_ASSIGNMENT_INDEX`) are present.
+    - After tokenizing and validating the input, it retrieves the optional fields (e.g., `PREFIX_ASSIGNMENT_NAME` and `PREFIX_ASSIGNMENT_MAX_SCORE`) for editing and creates an `EditAssignmentDescriptor` object to encapsulate the new values.
+    - If no fields for editing are provided, it throws a `ParseException` with `MESSAGE_NOT_EDITED`.
+    - Returns a new `EditAssignmentCommand` initialized with `studentIndex`, `assignmentIndex`, and `editAssignmentDescriptor`.
+
+2. **EditAssignmentCommand**
+    - **Execution Steps**:
+        - Retrieves the current list of students and validates `studentIndex` to ensure it is within bounds. If invalid, an exception is thrown.
+        - Using `assignmentIndex`, retrieves the specified assignment from the student’s assignment list and confirms the index is valid.
+        - Creates a new `Assignment` object with the edited values, ensuring that any fields not specified retain their original values from the current assignment.
+        - Checks for duplicate assignments to prevent editing if the new assignment matches another existing assignment.
+        - Updates the student’s assignment list with the edited assignment and refreshes the filtered student list in the model.
+        - Returns a `CommandResult` object with a success message detailing the updated assignment.
+
+    - **Error Handling**:
+        - Throws a `CommandException` with `MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX` if `studentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_INVALID_ASSIGNMENT_INDEX` if `assignmentIndex` is invalid.
+        - Throws a `CommandException` with `MESSAGE_DUPLICATE_ASSIGNMENT` if the edited assignment would duplicate another existing assignment in the student’s list.
+
+3. **EditAssignmentDescriptor**
+    - Stores the details of the edited fields (name and max score) and provides methods to check if any field is edited.
+    - Used by `EditAssignmentCommand` to create a new assignment with the updated values, ensuring that only specified fields are changed.
+
+This approach enables flexible and targeted edits, while error handling ensures valid input and avoids duplicate assignments.
 
 
 ## Viewing a student's details
@@ -341,7 +520,7 @@ unless specified otherwise)
       Use case ends.
 
 * 1b. The student information already exists.
-    * 1b1. TAchy an error message of duplicate student.
+    * 1b1. TAchy an error message of duplicate student. TAchy considers the entry as a duplicate if the student's name, phone number and email are identical to an existing student.
     * 1b2. Teacher adds the student again by providing a different name, phone number, or email.
 
       Use case resumes at step 2.
@@ -383,7 +562,7 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. There is no students in the app.
+* 1a. There are no students in the app.
     * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
@@ -430,7 +609,7 @@ unless specified otherwise)
       Use case ends.
 
 * 1c. The assignment already exists under the student.
-    * 1c1. TAchy shows a warning message.
+    * 1c1. TAchy shows an error message.
 
       Use case ends.
 
@@ -464,7 +643,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to edit an assignment for a student by index.
-2. TAchy modifies the assignment detail in the student's assignment list.
+2. TAchy modifies the assignment detail in the student's assignment list. Any previously assigned grade (if any) and submission status are reset. 
 
    Use case ends.
 
@@ -515,7 +694,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to mark an assignment as not submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list and resets the score to 0.
+2. TAchy modifies the assignment submission status in the student's assignment list and resets the score.
 
    Use case ends.
 
@@ -590,7 +769,7 @@ unless specified otherwise)
 ### Planned Enhancements:
 Team size: 5
 1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box and will be able to see the full result if the result is too long to fit in the box.
-3. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
+2. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
 3. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
 4. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
 5. **Enable Edit Assignment Command to edit graded assignment without losing its submission status and score:** The current implementation of the Edit Assignment command will reset the assignment's submission status and score to default values if the assignment is already graded. This should be fixed to allow the user to edit the assignment without losing its submission status and score.
@@ -599,6 +778,7 @@ Team size: 5
    This should be standardized to ensure that users receive feedback in consistent formats.
 7. **Allow for "s/" in student names:** The current implementation does not allow for student names to contain "/", which isolates them. This should be fixed to allow for a wider range of valid names.
 8. **Reject new students with the same Student Identifiers, but different capitalisation of email:** The current implementation allows for students with the same Student Identifiers but a different capitalisation of email to be added. This does not make sense as email are traditionally not case-sensitive. It should be fixed to allow better identification of users.
+9. **Reject duplicate phone numbers and/or duplicate emails**: The current implementation only checks that new students added have a unique combination of student identifiers (name, email and phone number). This means that the current implementation allows for the addition of students with different names, but the same phone number/email. A more thorough implementation can instead prevent adding of students that have the exact same number or email.  
 
 ### Non-Functional Requirements
 
@@ -606,7 +786,7 @@ Team size: 5
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Students cannot have the same Student Identifiers. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
+- Business/domain rules: Students cannot have the same Student Identifiers. If a tutor has 2 or more students with the same name, then different emails or phone fields must be used to distinguish students.
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
@@ -628,10 +808,7 @@ Team size: 5
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-</box>
+<box type="info" seamless>**Note:** These instructions only provide a starting point for testers to work on. Testers are expected to do more *exploratory* testing. <box/>
 
 ### Launch and shutdown
 
@@ -751,6 +928,28 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `grade si/1 ai/1 s/300` (assuming max score is 100)<br>
        Expected: No changes made. Error message displayed indicating the score is out of bounds.
 
+### Editing an assignment
+
+1. **Editing an assignment with valid details**
+    1. Prerequisites: The student list includes at least one student with at least one assignment.
+    2. Test case: `edit_assignment si/1 ai/1 an/Math Homework ms/100`<br>
+       Expected: The first assignment for the first student is updated to have the name "Math Homework" and a max score of 100. Success message displayed.
+    3. Test case: `edit_assignment si/1 ai/1 ms/85`<br>
+       Expected: The max score of the first assignment is updated to 85. The assignment’s submission status is reset to "not submitted," and any previous grade is cleared.
+
+2. **Editing an assignment with identical details**
+    1. Test case: `edit_assignment si/1 ai/1 an/Math Homework ms/100` (assuming these are the current details)<br>
+       Expected: The command executes without error, overwriting the details with the exact same values. Success message displayed.
+
+3. **Editing an assignment with invalid details**
+    1. Test case: `edit_assignment si/1 ai/1 ms/-5`<br>
+       Expected: No changes made. Error message shown, indicating max score must be a positive integer.
+    2. Test case: `edit_assignment si/1 ai/1 an/Invalid@Name`<br>
+       Expected: No changes made. Error message shown, indicating the assignment name must be alphanumeric and valid.
+    3. Test case: `edit_assignment si/1 ai/2 an/Math Homework ms/100` (if another assignment for the same student already has this name and score)<br>
+       Expected: No changes made. Error message shown, indicating assignments for the same student cannot have identical name and max score.
+
+
 ### Clearing all data
 
 1. **Clearing all entries**
@@ -767,3 +966,4 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The app is open and a student list is displayed.
     2. Test case: Execute `help` while in the main screen or after performing other commands like `list` or `find`.<br>
        Expected: Help window is shown, and the app remains in the current state without affecting the student list.
+
