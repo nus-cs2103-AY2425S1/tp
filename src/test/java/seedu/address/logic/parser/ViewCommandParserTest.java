@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ViewCommand;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ViewCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -48,7 +48,8 @@ public class ViewCommandParserTest {
     // EP [-MAX_INT..0], BV test (-INT_MAX)
     @Test
     public void parse_invalidArgsNegativeIntMax_throwsParseException() {
-        assertParseFailure(parser, "-2147483647", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-2147483647",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     // EP [-MAX_INT..0], BV test (0)
@@ -60,13 +61,15 @@ public class ViewCommandParserTest {
     // EP [<MAX_INT]
     @Test
     public void parse_invalidArgsLessThanMaxInt_throwsParseException() {
-        assertParseFailure(parser, "-2147483648", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-2147483648",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     // EP [>MAX_INT]
     @Test
     public void parse_invalidArgsZeroMoreThanMaxInt_throwsParseException() {
-        assertParseFailure(parser, "2147483648", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2147483648",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     // EP non-integers parsed

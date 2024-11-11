@@ -17,7 +17,7 @@ import seedu.address.logic.commands.DeleteAppointmentCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteAppointmentParserTest {
+public class DeleteAppointmentCommandParserTest {
 
     private DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
 
@@ -42,36 +42,42 @@ public class DeleteAppointmentParserTest {
     // EP [-MAX_INT..0]
     @Test
     public void parse_invalidArgsSpecificIndex_throwsParseException() {
-        assertParseFailure(parser, "-74214", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-74214",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     // EP [-MAX_INT..0], BV test (-INT_MAX)
     @Test
     public void parse_invalidArgsNegativeIntMax_throwsParseException() {
-        assertParseFailure(parser, "-2147483647", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-2147483647",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     // EP [-MAX_INT..0], BV test (0)
     @Test
     public void parse_invalidArgsZero_throwsParseException() {
-        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     // EP [<MAX_INT]
     @Test
     public void parse_invalidArgsLessThanMaxInt_throwsParseException() {
-        assertParseFailure(parser, "-2147483648", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-2147483648",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     // EP [>MAX_INT]
     @Test
     public void parse_invalidArgsZeroMoreThanMaxInt_throwsParseException() {
-        assertParseFailure(parser, "2147483648", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "2147483648",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 
     // EP non-integers parsed
     @Test
     public void parse_invalidArgsNonInteger_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAppointmentCommand.MESSAGE_USAGE));
     }
 }
