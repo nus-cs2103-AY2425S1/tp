@@ -15,7 +15,12 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+
+1. Ensure you have Java `17` or above installed in your Computer. <br>(If you are  a mac user, you will need to download 
+javaFX first via the following commands) <br>
+   `curl -s "https://get.sdkman.io" | bashsource "$HOME/.sdkman/bin/sdkman-init.sh"` <br>
+   `sdk install java 17.0.11.fx-zulu` <br>
+   `sdk default java 17.0.11.fx-zulu`
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -60,7 +65,7 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for some commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -71,9 +76,9 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]…​`
 
-* Name should consist of alphanumeric characters and spaces, and should not be blank
+* Name should consist of alphanumeric characters and spaces, and should not be blank or contain ONLY numeric characters.
 * Phone numbers should only contain digits, and should have at least 3 digits.
 * Emails should be of the format local-part@domain and adhere to the following constraints:<br>
   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (``). The local-part may not start or end with any special characters.
@@ -82,7 +87,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [
       - end with a domain label at least 2 characters long,
       - have each domain label start and end with alphanumeric characters,
       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* Tags are case-insensitive (e.g. `FRIEND` and `friend` are not the same tag)
 * (if supplied) `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
+* If multiple `vip/` commands are supplied, the later one will be registered.<br>(e.g. `add n/kelvin p/98765432 e/kelv@example.com a/klev street, block 123, #01-01, vip/true, vip/false` will register kelvin as non-VIP.)
 * Person added is by default a non-VIP if the `vip/` command is omitted.
 <box type="tip" seamless>
 
@@ -93,6 +100,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence vip/false`
 
+![img.png](images/AddCommandDemo.png)
 
 ### Clearing all entries : `clear`
 
@@ -249,9 +257,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
