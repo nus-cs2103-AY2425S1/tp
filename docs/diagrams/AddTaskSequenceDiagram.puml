@@ -36,13 +36,13 @@ activate AddTaskCommand
 AddTaskCommand --> AddTaskCommandParser :
 deactivate AddTaskCommand
 
-AddTaskCommandParser --> AddressBookParser : a
+AddTaskCommandParser --> AddressBookParser :
 deactivate AddTaskCommandParser
 
 AddTaskCommandParser -[hidden]-> AddressBookParser
 destroy AddTaskCommandParser
 
-AddressBookParser --> LogicManager : a
+AddressBookParser --> LogicManager :
 deactivate AddressBookParser
 
 LogicManager -> AddTaskCommand : execute(m)
@@ -63,7 +63,7 @@ activate Model
 Model --> AddTaskCommand
 deactivate Model
 
-AddTaskCommand --> LogicManager : r
+AddTaskCommand --> LogicManager :
 deactivate AddTaskCommand
 
 AddTaskCommand -[hidden]-> LogicManager

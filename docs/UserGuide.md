@@ -17,7 +17,7 @@ In this guide, users will be able to learn the following details:
 
 1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
 2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
-3) Quickly learn and master various [commands]((#10-glossary)) and actions available in NovaCare.
+3) Quickly learn and master various [commands](#10-glossary) and actions available in NovaCare.
 4) General [FAQs](#7-faq) (Frequently asked questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
