@@ -110,8 +110,7 @@ Due to [PDPA regulations](https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/A
 The first 4 numbers of the IC number will be replaced with a `X` to protect the privacy of the owner.
 </div>
 
-
-> 2 owners may not share the same IC_NUMBER and will be deemed as duplicate
+> 2 owners may not share the same IC_NUMBER and will be deemed as duplicates
 
 Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
@@ -131,7 +130,7 @@ Adds a pet to PawPatrol.
 <li><code>NAME</code>: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
 <li><code>SPECIES</code>: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
 <li><code>BREED</code>: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
-<li><code>AGE</code>: Must only contain non-negative numbers, and it should be 1 or 2 digits long.</li>
+<li><code>AGE</code>: Must only contain non-negative numbers, and it should be 1 or 2 digits long. Age can be zero to cater for pets who are between 0 and 12 months old.</li>
 <li><code>SEX</code>: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
 <li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
 <ul>
@@ -387,7 +386,10 @@ _Details coming soon ..._
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 2. **Accidental clearing of data** using the `clear` command may lead to data being lost. [Backups of the data file](#saving-a-backup-data-file) should be made frequently by copying out the JSON file to another location on your computer.
 3. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. This file can be found in `[JAR file location]/data/preferences.json` similar to [other data files](#saving-the-data).
-4. **Multiple pets with similar characteristics** (name, age, sex, breed and species) are currently not allowed and would be flagged as a duplicate. Future versions are to allow this behavior with a recommendation to always link a pet to an owner.
+4. **Multiple pets with similar characteristics** (exactly the same name, species, breed, age and sex) are currently not allowed and would be flagged as duplicates. Future versions are to allow this behavior with a recommendation to always link a pet to an owner.
+5. **Starting a pet's age with a zero** for single-digit pet ages (01, 02, 03 years) could lead to duplicate entries if another pet exits in the database with all characteristics the same and their age keyed in without a zero at the start (1, 2 or 3 years). Future versions will rectify this behaviour by ignoring the zero if the pet's age is between 0 and 9 years.
+6. **A gap appears between the message box and the list** when using the `list owners` or `list pets` command. This gap will be removed in future versions.
+7. **Irregular white lines** appear sometimes, in the section displaying all the links, after entering a valid `link` command. This issue will be remedied in future versions.
 
 --------------------------------------------------------------------------------------------------------------------
 
