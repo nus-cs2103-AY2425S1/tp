@@ -558,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  The system should respond to user commands within 15 seconds.
 5.  The application should launch within 2 seconds.
 6.  The application should not store sensitive information (e.g., NRIC numbers) without explicit user consent.
-7.  The application should demonstrate stability during long-term usage without crashing or freezing.
+7.  The application should demonstrate stability during long-term usage like after a few hours without crashing or freezing.
 8.  The application should be usable by novice users without extensive training.
 9.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
 10. Comprehensive user and technical documentation should be provided
@@ -585,11 +585,11 @@ Group size: 5 memebers
 
 1. Student identification: 
    - Our app uniquely identifies students by name. In future updates, we plan to use a combination of name **and** phone number for unique identification.
-      - Two students cannot share the same name and the same phone number
+      - Two students cannot share the same name and the same phone number.
       - Allowing different names with the same phone number accommodates cases where tutors of younger students may store siblings under different names but with a shared contact number, typically a parent’s.
 1. Optimise add command:
    - Our app does not support adding remarks while adding new student. 
-   - In future updates, we can add this feature to grant our users more flexibility
+   - In future updates, we can add this feature to grant our users more flexibility.
 1. Optimise edit command:
    - Our app does not support direct editing of lessons or remarks. 
    - In future updates, we plan to enable users to edit existing lessons and remarks without needing to delete and re-add them.
@@ -602,14 +602,14 @@ Group size: 5 memebers
    - We do not allow remarks to contain `r/`. 
    - In future updates, allow `r/`.
 1. Find behavior:
-   - The find command uses the `or` constraint, while this can provide more flexibility there are cases where users want to search for long sequence of `Strings` such as "Serangoon Gardens Rd". ]
+   - The find command uses the `or` constraint, while this can provide more flexibility there are cases where users want to search for long sequence of `Strings` such as "Serangoon Gardens Rd".
    - In future updates, we can provide users some way to indicate certain target words as a group and apply `and` constraint.
 1. Remarks added one at a time:
-   - `addrmk` only allows users to add one remark at a time
-   - In future updates, allow users to add multiple
+   - `addrmk` only allows users to add one remark at a time.
+   - In future updates, allow users to add multiple.
 1. Remarks deleted one at a time:
-   - `delrmk` only allows users to delete one remark at a time
-   - In future updates, allow users to delete multiple
+   - `delrmk` only allows users to delete one remark at a time.
+   - In future updates, allow users to delete multiple.
 
 ## **Appendix: Instructions for manual testing**
 
@@ -644,10 +644,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete 1`.<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete`<br>
+   1. Test case: `delete`.<br>
       Expected: No student is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size) <br>
@@ -657,7 +657,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: The student list contains only a student with the name "John".
 
-    1. Test case: `delete john`<br>
+    1. Test case: `delete john`.<br>
        Expected: John will be deleted from the list. Details of john will be shown in the status message.
    
     1. Test case: `delete Alice`<br>
@@ -669,21 +669,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. No student with the name "John" in the list.
 
-   1. Test case: `add n/john p/82223238`<br>
+   1. Test case: `add n/john p/82223238`.<br>
       Expected: A new student will be added to the list. The details of the student will be shown in the status message.
 
 1. Adding a student with a duplicate name
     
     1. Prerequisites: The student list contains only a student with the name "John".
     
-    1. Test case: `add n/john p/82223238`<br>
+    1. Test case: `add n/john p/82223238`.<br>
         Expected: No person is added. A duplicate student error will be displayed in the status message.
 
 1. Adding a student with a clashing lesson
     
     1. Prerequisites: The student list contains only a student with the name "John" with only a lesson on "MONDAY 0900-1000".
     
-    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`<br>
+    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`.<br>
         Expected: No person is added. A clashing lesson error will be displayed in the status message.
 
 ### Editing a student
@@ -692,13 +692,13 @@ testers are expected to do more *exploratory* testing.
    
     1. Prerequisites: List all students using the `list` command. There are already students in the student list. No student with the name "Alice" in the list.
 
-    1. Test case: `edit 1 n/Alice`<br>
+    1. Test case: `edit 1 n/Alice`.<br>
         Expected: Name of the first student in the list will be updated to "Alice".
    
-    1. Test case: `edit`<br>
+    1. Test case: `edit`.<br>
        Expected: No student is edited. Error details shown in the status message.
    
-    1. Other incorrect edit commands to try: `edit 0`, `edit x` (where x is larger than the list size) <br>
+    1. Other incorrect edit commands to try: `edit 0 n/Alice`, `edit x n/Alice` (where x is larger than the list size) <br>
        Expected: Invalid student index error is shown in the status message.
 
 ### Adding a lesson to a student
@@ -707,13 +707,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
     
-    1. Test case: `addlesson 1 l/monday 0900-1100` <br>
+    1. Test case: `addlesson 1 l/monday 0900-1100`. <br>
         Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
     
-    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300` <br>
+    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300`. <br>
         Expected: No lesson is added. A clashing lesson error will be displayed in the status message.
 
-    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200` <br>
+    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200`. <br>
         Expected: Lessons on "TUESDAY 1000-1100" and "TUESDAY 1100-1200" will be added to the student. The student's details should be displayed on the right panel. Lessons successfully added are shown in the status message.
 
 ### Deleting a lesson from a student
@@ -722,13 +722,13 @@ testers are expected to do more *exploratory* testing.
     
     1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one lesson on "MONDAY 0900-1000".
     
-    1. Test case: `deletelesson 1 li/1` <br>
+    1. Test case: `deletelesson 1 li/1`.<br>
        Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
 
-    3. Test case: `deletelesson` <br>
+    3. Test case: `deletelesson`. <br>
        Expected: No lesson is deleted. Error details shown in the status message.
 
-    4. Other incorrect deletelesson commands to try: `deletelesson 0`, `deletelesson x` (where x is larger than the list size) <br>
+    4. Other incorrect deletelesson commands to try: `deletelesson 0 li/1`, `deletelesson x li/1` (where x is larger than the list size) <br>
        Expected: Invalid lesson index error is shown in the status message.
 
 ### Adding a remark to a student
