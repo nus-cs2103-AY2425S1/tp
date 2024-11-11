@@ -443,7 +443,7 @@ Use case ends.
 **Main Success Scenario (MSS)**:
 1. Private tutor types the command `pie` to view the distribution of students across classes.
 2. EduTuTu generates and displays a pie chart, representing the number of students per class, with each class labeled clearly.
-3. Administrator reviews the chart for insights into class sizes.
+3. Private tutor reviews the chart for insights into class sizes.
 
 Use case ends.
 
