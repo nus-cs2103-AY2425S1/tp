@@ -39,7 +39,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_BUDGET + "BUDGET] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Note: Only 1 type of prefix can be specified per command use!\n"
+            + "Note: Exactly 1 type of prefix can be specified per command use!\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Amy";
     public static final String MESSAGE_FIND_SUCCESS = "Here are the people found: \n";
 
