@@ -53,7 +53,6 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 8. [**Glossary**](#glossary)
 
 <div style="page-break-after: always"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Helpful Guidelines for the User Guide**
 
@@ -117,7 +116,6 @@ Alternatively, if you’d like to explore the application independently, refer t
 [_Back to Top_](#table-of-contents)
 
 <div style="page-break-after: always"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Tutorial for Beginners**
 
@@ -150,6 +148,7 @@ Finally, below the *Outcome Box* is the *Display Panel*, which will contain the 
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Starting a fresh template**
 
@@ -163,6 +162,7 @@ Once successful, you should see the following on your screen:
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Adding guests**
 
@@ -181,6 +181,7 @@ For more details on the `add_guest` command, such as the additional optional fie
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Adding vendors**
 
@@ -198,6 +199,7 @@ For more details on the `add_vendor` command, such as the additional optional fi
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Deleting persons**
 
@@ -216,6 +218,7 @@ For more details on the `delete_guest` and `delete_vendor` commands, we encourag
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Exiting the program**
 
