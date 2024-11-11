@@ -997,4 +997,5 @@ Expected: Attendance cleared. Success message shown.
       **Expected**: TAHub Contacts loads with empty data.
 
 ## **Appendix: Planned Enhancements**
-1. Add a `course-list` command to list all courses so that user can view courses in the system. 
+1. Add a `course-list` command to list all courses so that user can view courses in the system.  
+2. Modify all commands that takes in `m/MATRICULATION_NUMBER` to allow option of accepting index of the person in the list.
