@@ -3,11 +3,40 @@ layout: page
 title: Developer Guide
 ---
 
+# Table of Contents
+
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)<br>
+   3.1. [Architecture](#architecture)<br>
+   3.2. [UI component](#ui-component)<br>
+   3.3. [Logic component](#logic-component)<br>
+   3.4. [Model component](#model-component)<br>
+   3.5. [Storage component](#storage-component)<br>
+   3.6. [Common classes](#common-classes)<br>
+4. [Implementation](#implementation)<br>
+   4.1. [Undo/redo feature](#undoredo-feature)<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation-1)<br>
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+7. [Appendix: Requirements](#appendix-requirements)<br>
+   7.1. [Product scope](#product-scope)<br>
+   7.2. [User stories](#user-stories)<br>
+   7.3. [Use cases](#use-cases)<br>
+   7.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+   7.5. [Product scope](#product-scope)<br>
+   7.6. [Glossary](#glossary)<br>
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
+   8.1. [Launch and shutdown](#launch-and-shutdown)<br>
+   8.2. [Deleting a person](#deleting-a-person)<br>
+   8.3. [Saving data](#saving-data)<br>
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 - [ez-vcard](https://github.com/mangstadt/ez-vcard) by [mangstadt](https://github.com/mangstadt/)
 - [mockito](https://github.com/mockito/mockito)
 
@@ -18,6 +47,8 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -68,11 +99,13 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="1960"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -84,6 +117,8 @@ The `UI` component,
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -120,6 +155,8 @@ How the parsing works:
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/model/Model.java)
@@ -133,6 +170,8 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -140,6 +179,8 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -159,6 +200,8 @@ Classes used by multiple components are in the `bizbook.commons` package.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -167,7 +210,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `undoStateList` for the undo history and `redoStateList` for the redo history. Additionally, it implements the following operations:
 
 - `VersionedAddressBook#canRedo()` — Checks if there is a version to redo to.
 - `VersionedAddressBook#canUndo()` — Checks if there is a version to undo to.
@@ -177,19 +220,19 @@ The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `Ad
 
 These operations are exposed in the `Model` interface as `Model#canRedo()`, `Model#canUndo()`, `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` and `Model#redoAddressBookVersion()` respectively.
 
-The `addressBookOlderVersionList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
+The `undoStateList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `addressBookOlderVersionList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `addressBookNewerVersionList` will be empty.
+Step 1. The user launches the application for the first time. The `undoStateList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `redoStateList` will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookOlderVersionList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `undoStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `addressBookOlderVersionList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `undoStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -197,7 +240,9 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `addressBookNewerVersionList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
+<div style="page-break-after: always;"></div>
+
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `redoStateList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -210,6 +255,8 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
@@ -218,17 +265,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `addressBookOlderVersionList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `undoStateList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `addressBookNewerVersionList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `redoStateList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `addressBookOlderVersionList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `undoStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `addressBookNewerVersionList`, all address book states in `addressBookNewerVersionList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `redoStateList`, all address book states in `redoStateList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -236,6 +283,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -246,6 +294,45 @@ The following activity diagram summarizes what happens when a user executes a ne
 - [DevOps guide](DevOps.md)
 
 ---
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. **Detailed errors for importing**<br/>
+   When the user imports a file with the wrong extension and the importer fails to import the contents of the file, add
+   a check to see whether the file has the right file extension.
+   <br/><br/>
+2. **Warn the user when exporting will cause a file to be overwritten**<br/>
+   When the export file location already has a file, warn and ask for permission from the user before overwriting the
+   file.
+   <br/><br/>
+3. **Maintaining focus on currently selected person after any command execution**<br/>
+   The currently focused person should remain even after commands like `addnotes` or even `delete` as much as possible.
+   <br/><br/>
+4. **Limit number of tags that can be displayed**<br/>
+   The person list panel and the pinned person list panel should only show a summary of tags. If there are too many
+   tags or the tag names are too long, they should be hidden and only shown in the contact details panel when focused.
+   <br/><br/>
+5. **Dynamic message box sizing**<br/>
+   The message box should increase in height and wrap the text within it as needed so that the user can view the error
+   message or other command messages easily.
+   <br/><br/>
+6. **International phone numbers**<br/>
+   Allow the application to accept international phone numbers on top of Singapore phone numbers.
+   <br/><br/>
+7. **Email validation**<br/>
+   Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
+   the validation permits `abc@aa`.
+   <br/><br/>
+8. **Long note content support**<br/>
+   Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
+   hidden content in the next line.
+   <br/><br/>
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -264,12 +351,14 @@ particular, this representative works with B2B sales.
 
 **Value proposition**: This product aims to streamline and simplify sales management for Food and Beverage outlets. By providing an organized, easy-to-use platform for managing business contacts, it helps sales representatives save time and improve efficiency.
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -307,6 +396,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
 | `*`      | user             | use my previous command quickly                                             | avoid retyping a command                                               |
 | `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -350,6 +441,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC3 - Delete a person**
 
 **MSS**
@@ -368,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC4 - Delete a person**
+**Use case: UC4 - Delete a tag from a person contact**
 
 **MSS**
 
@@ -391,6 +484,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC5 - View person contact**
 
@@ -424,6 +519,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC7 - Add note to a person contact**
 
 **MSS**
@@ -447,6 +544,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC8 - Edit a note of a person contact**
 
@@ -477,6 +576,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2c1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC9 - Delete note from a person contact**
 
@@ -524,6 +625,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC11 - Unpin a person**
 
 _Similar to UC10 except without extension 2b._
@@ -543,30 +646,29 @@ _Similar to UC10 except without extension 2b._
 
 - 3a. There is no version to revert to.
 
-    - 3a1. System shows an error message.
+  - 3a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC13 - Redo a command**
 
 **MSS**
 
-1.  Actor performs a command that updates the System.
-2.  System executes the command.
-3.  Actor requests to undo the recently executed command.
-4.  System reverts changes made by the actor.
-5.  Actor requests to redo the recently executed undo command.
-6.  System reverts changes made by the actor.
+1.  Actor <u>undos a command (UC12)</u>.
+2.  Actor requests to redo the recently executed undo command.
+3.  System reverts changes made by the actor.
 
     Use case ends.
 
 **Extensions**
 
-- 5a. There is no version to revert to.
+- 2a. There is no version to revert to.
 
-    - 5a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC14 - Export contact list**
 
@@ -604,17 +706,19 @@ _Similar to UC10 except without extension 2b._
 
 - 1a. System detects that the file does not exist.
 
-    - 1a1. System shows an error message
+  - 1a1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
 - 1b. System detects that the file is not supported by the program
 
-    - 1b1. System shows an error message
+  - 1b1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC16 - Toggle application's theme** 
+<div style="page-break-after: always;"></div>
+
+**Use case: UC16 - Toggle application's theme**
 
 **MSS**
 
@@ -631,22 +735,50 @@ _Similar to UC10 except without extension 2b._
 2. System processes the command and confirms its success.
 3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 - 2a. Command fails.
 
-    - 2a1. System displays an error message indicating the failure reason.
+  - 2a1. System displays an error message indicating the failure reason.
 
-      Use case resumes from step 1.
-  
+    Use case resumes from step 1.
+
 - 3a. Multiple previous commands available.
 
-    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
-    - 3a2. System displays each previous command in sequence.
+  - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+  - 3a2. System displays each previous command in sequence.
 
-      Use case ends.
+    Use case ends.
+
+<div style="page-break-after: always;"></div>
+
+**Use case: UC18 - Edit a person's information**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit the details of a specific person.
+3.  System shows details of the newly edited person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The details entered are invalid or are in the wrong format.
+
+  - 2b1. System shows an error message.
+
+    Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -668,6 +800,8 @@ _{More to be added}_
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -683,16 +817,22 @@ testers are expected to do more *exploratory* testing.
 
    1a. Download the jar file and copy into an empty folder
 
-   2b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2b. Execute the jar file by running `java -jar bizbook.jar` in command prompt.<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2b. Re-launch the app by double-clicking the jar file.<br>
+   2b. Re-launch the app by running `java -jar bizbook.jar` in command prompt.<br>
    Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Automatic help page launch
+
+   3a. Open the help window, and click the "Open URL" button.<br>
+   Expected: The user guide page should automatically open in the browser.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person
 
@@ -709,12 +849,13 @@ testers are expected to do more *exploratory* testing.
    1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1a. Prerequisites: Prepare a valid `bizbook.json` data file with at least 3-4 persons.
 
-2. _{ more test cases …​ }_
+   1b. Manually edit the data file so have 2 persons with the same name.
+
+   1c. Re-launch the app by running `java -jar bizbook.jar` in command prompt.<br>
+   Expected: App starts with an empty database.

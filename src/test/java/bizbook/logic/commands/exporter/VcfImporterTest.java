@@ -1,5 +1,6 @@
 package bizbook.logic.commands.exporter;
 
+import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_DUPLICATE_PERSON;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_EMPTY_FILE;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_INVALID_FORMAT;
 import static bizbook.logic.commands.exporter.VcfImporter.MESSAGE_INVALID_INFORMATION;
@@ -29,6 +30,7 @@ public class VcfImporterTest {
     private static final String WRONG_FORMAT_FILE_PATH = "VcfImporterTest/wrong_format.vcf";
     private static final String MISSING_INFO_FILE_PATH = "VcfImporterTest/missing_info.vcf";
     private static final String INVALID_INFO_FILE_PATH = "VcfImporterTest/invalid_info.vcf";
+    private static final String DUPLICATE_FILE_PATH = "VcfImporterTest/duplicate.vcf";
 
     private VcfImporter vcfImporter;
 
@@ -104,6 +106,14 @@ public class VcfImporterTest {
         Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, INVALID_INFO_FILE_PATH);
 
         assertThrows(InvalidFileException.class, MESSAGE_INVALID_INFORMATION, () ->
+                vcfImporter.importAddressBook(path));
+    }
+
+    @Test
+    public void import_duplicate_throwsInvalidFileException() {
+        Path path = TestUtil.getResourceFilePath(VcfImporterTest.class, DUPLICATE_FILE_PATH);
+
+        assertThrows(InvalidFileException.class, MESSAGE_DUPLICATE_PERSON, () ->
                 vcfImporter.importAddressBook(path));
     }
 }

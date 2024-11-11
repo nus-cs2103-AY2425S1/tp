@@ -22,7 +22,7 @@ public class PinCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
-    public static final String MESSAGE_ALREADY_PINNED = "This person already pinned";
+    public static final String MESSAGE_ALREADY_PINNED = "This person is already pinned";
 
     private final Index targetIndex;
 
