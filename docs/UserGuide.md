@@ -135,7 +135,11 @@ Adds a patient to the app.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-* **IDENTITY_NUMBER** has to be a valid NRIC (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g., S1234567D).";))
+* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).";))
+
+* **PHONE_NUMBER** must be a valid Singapore mobile number. Our application only accepts mobile numbers, which should be 8 digits long and start with either '8' or '9' (e.g., 81234567 or 91234567).
+
+
 
 Examples:
 * `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW`
@@ -453,7 +457,4 @@ This data is not to be used for any purposes beyond application testing. Unautho
 
 **Search by Sub-Strings**  
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
-
-**Support for M Fin Series**                                        
-Currently, our NRIC validation support the F and G FIN series, and the S and T NRIC series. We plan to include the new M FIN series in the future.
 
