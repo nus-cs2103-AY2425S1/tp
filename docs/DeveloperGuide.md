@@ -388,8 +388,9 @@ Use case ends.
 **Use Case ID:** UC03 \- Record Grade  
 **Main Success Scenario (MSS):**
 
-1. TA records a grade for a student.
-2. TAHub confirms the successful recording of the grade.
+1. TA finds a student in the system.
+2. TA records a grade for the student.
+3. TAHub confirms the successful recording of the grade.
 
 Use case ends.
 
@@ -411,8 +412,9 @@ Use case ends.
 **Use Case ID:** UC04 \- View Grades  
 **Main Success Scenario (MSS):**
 
-1. TA views a student’s grades.
-2. TAHub displays the student's grades for all tests.
+1. TA finds a student in the system.
+2. TA views the student’s grades.
+3. TAHub displays the student's grades for all tests.
 
 Use case ends.
 
@@ -431,8 +433,9 @@ Use case ends.
 **Use Case ID:** UC05 \- Mark Attendance  
 **Main Success Scenario (MSS):**
 
-1. TA records attendance for a student.
-2. TAHub outputs the successful recording of attendance.
+1. TA finds a student in the system.
+2. TA records attendance for the student.
+3. TAHub outputs the successful recording of attendance.
 
 Use case ends.
 
