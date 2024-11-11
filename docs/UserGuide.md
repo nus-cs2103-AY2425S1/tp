@@ -243,8 +243,8 @@ job specified.
 Format: `screen job INDEX`
 
 * Uses the name of the job at the specified `INDEX` to filter the 
-list of contacts to contacts with role matching the name.
-* Contacts that are already matched will not be shown. 
+list of contacts to contacts with role matching the name. This allows the user to narrow down a list of contacts that are currently applying for that job. 
+* Contacts that are already matched will not be shown.
 * The index refers to the index number shown in the displayed job list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The filter is case-insensitive i.e. `Cleaner` will match `cleaner`.
