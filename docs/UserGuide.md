@@ -151,7 +151,7 @@ Examples:
 
 Finds persons by names and organisation.
 
-Format: `find [n/NAME...] [o/ORGANIZATION...]`
+Format: `find [n/NAME] [o/ORGANIZATION]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -208,7 +208,7 @@ Format: `delete INDEX` or `del INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in NetBook.
-* `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
 ### Adding a remark to a person : `remark`
 
@@ -310,7 +310,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAME…] [o/ORGANIZATION…]`<br> e.g., `find n/James Jake o/TikTok`
+**Find** | `find [n/NAME] [o/ORGANIZATION]`<br> e.g., `find n/James Jake o/TikTok`
 **Remark** | `remark INDEX [r/REMARK]`<br> e.g., `remark 2 r/handsome`
 **Sort** | `sort PREFERENCE` <br> e.g., `sort high`
 **Save Sort** | `save_sort PREFERENCE` <br> e.g., `save_sort distant`
