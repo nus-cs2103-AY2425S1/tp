@@ -50,6 +50,7 @@ title: User Guide
 
 8. [Glossary](#glossary)
 
+---
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
@@ -127,7 +128,7 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
 
 ### User Interface Overview
 
-<img src="images/UiOverview.png" alt="UI overview" width="1000"/>
+![User Interface Overview](images/UiOverview.png)
 
 1. **Top Bar**: Contains the following buttons
     * **Help**: Click on this to view the help window.
