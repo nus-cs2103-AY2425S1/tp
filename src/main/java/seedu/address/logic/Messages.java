@@ -17,9 +17,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_GUEST_DISPLAYED_INDEX =
-            "The guest index provided exceeds the number of guests!";
+            "The guest index provided exceeds the number of displayed guests!";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX =
-            "The vendor index provided exceeds the number of vendors!";
+            "The vendor index provided exceeds the number of displayed vendors!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_TOTAL_GUEST = "Number of guests: %d (%d pending, %d coming, %d not coming)\n";

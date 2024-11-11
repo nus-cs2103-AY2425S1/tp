@@ -6,8 +6,8 @@
 
 # BridalBuddy User Guide
 
-BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary).
-It is an app targeted at Wedding Planners to help them streamline guest and vendor management for their clients.
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](#glossary).
+It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
 
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
@@ -49,10 +49,11 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 5. [**FAQ**](#faq)
 6. [**Known Issues**](#known-issues)
 7. [**Command summary**](#command-summary)
+8. [**Glossary**](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Helpful Guidelines for the User Guide
+## **Helpful Guidelines for the User Guide**
 
 ### Interpreting symbols
 
@@ -79,7 +80,7 @@ This section tells you what information you will find in each of the sections of
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17` if you do not already have it installed.
     > :information_source: To check if you have Java `17` installed, simply run `java -version` on a command terminal to find out.
@@ -89,7 +90,7 @@ This section tells you what information you will find in each of the sections of
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-   A [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [(GUI)](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
     > If you need any help opening a command terminal, you may find the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
 
@@ -111,9 +112,10 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tutorial for Beginners
+## **Tutorial for Beginners**
 
 If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+For this tutorial section, you are highly encouraged to use exactly the sample commands provided for each tutorial, and only start trying out the commands on your own after going through the [Features](#features) section.
 
 
 ### Tutorial Contents
@@ -131,17 +133,18 @@ When you open up the application for the first time, you will see the interface 
 
 At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy.
 
-To confirm your instructions, simply the <kbd>Enter</kbd> key on your keyboard.
+To confirm your instructions, simply press the <kbd>Enter</kbd> key on your keyboard.
 
 Below the *Command Line* is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
 
 Finally, below the *Outcome Box* is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
 
+> :bulb: After entering the commands, if the cursor disappears from the *Command Line*, you can always press the <kbd>Tab</kbd> key on your keyboard a few times to bring the cursor back to the *Command Line* and continue typing instead of having to click on the *Command Line* with the mouse.
 
 [_Back to Top_](#table-of-contents)
 
 
-### Starting a fresh template
+### **Starting a fresh template**
 
 In order to get ready to use BridalBuddy, let's first remove the existing sample guests and vendors on our guest list and vendor list.
 All we have to do is to enter the command `clear` in the Command Line, and both the guest list and the vendor list will be emptied and ready for you to plan a new wedding.
@@ -154,7 +157,7 @@ Once successful, you should see the following on your screen:
 [_Back to Top_](#table-of-contents)
 
 
-### Adding guests
+### **Adding guests**
 
 Now let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
 Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
@@ -172,7 +175,7 @@ For more details on the `add_guest` command, such as the additional optional fie
 [_Back to Top_](#table-of-contents)
 
 
-### Adding vendors
+### **Adding vendors**
 
 Let us now add a vendor to the list of vendors you are intending to collaborate with, and familiarise ourselves with the `add_vendor` command, which you will need in order to add vendors to the vendor list.
 
@@ -189,7 +192,7 @@ For more details on the `add_vendor` command, such as the additional optional fi
 [_Back to Top_](#table-of-contents)
 
 
-### Deleting persons
+### **Deleting persons**
 
 Suppose the bride tells us that she has a preferred florist in mind, and so you need to delete the florist you previously added to the vendor list.
 
@@ -207,7 +210,7 @@ For more details on the `delete_guest` and `delete_vendor` commands, we encourag
 [_Back to Top_](#table-of-contents)
 
 
-### Exiting the program
+### **Exiting the program**
 
 It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
 
@@ -223,7 +226,7 @@ After trying out the tutorial, we strongly recommend you to explore our [feature
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <box type="info" seamless>
 
@@ -294,7 +297,7 @@ This command will help you find guests and vendors that match any of the given k
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of [prefix](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary) should be used for each find command.
+> :warning: **Exactly** one type of [prefix](#glossary) should be used for each `find` command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -368,13 +371,19 @@ This command will help you add a new guest to the bottom of the existing overall
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-> :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+> :warning: You can only enter 'P'/'p' for pending, 'A'/'a' for accepted or 'D'/'d' for declined for the optional `RSVP` field.
 
-> :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+> :warning: You can only enter 'H'/'h' for related to husband, 'W'/'w' for related to wife or 'U'/'u' for unknown for the optional `RELATION` field.
 
 > :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
+
+**Example Usage:** `add_guest n/Alan Tan p/97462948 e/alantan@example.com a/123, Jurong Ave 12, #012-845 rsvp/d r/w`
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
@@ -391,11 +400,19 @@ This command will allow you to edit the details of the guest identified by the `
 
 > :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
+> :warning: At least one field of a `Guest` has to be changed to properly utilise the `edit_guest` command without error.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
+
+**Example Usage:** `edit_guest 2 p/98274626 e/helloworld@example.com`
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
@@ -439,7 +456,13 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 > :warning: If you attempt to add a new vendor with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
 **Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
+
+**Example Usage:** `add_vendor n/Alan Tan p/94838274 e/alantan@example.com a/842, Jurong Mall, #02-297 c/Alan's Jewellery b/100000.99`
 
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
@@ -456,11 +479,19 @@ This command will allow you to edit the details of the vendor identified by the 
 
 > :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
+> :warning: At least one field of a `Vendor` has to be changed to properly utilise the `edit_vendor` command without error.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
     * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 **Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
+
+**Example Usage:** `edit_vendor 2 p/82737573 e/hiworld@example.com`
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
@@ -490,10 +521,6 @@ Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing vendor
 
 ### **Other Useful Features**
 
-Other additional features of BridalBuddy that are good to know.
-
-[_Back to Top_](#table-of-contents)
-
 
 ### Saving the data
 
@@ -504,7 +531,7 @@ You do not need to save manually as BridalBuddy data are saved in the hard disk 
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
+BridalBuddy data are saved automatically as a JSON file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
 
 :warning: **Caution:**
 If your changes to the data file makes its format invalid, BridalBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -515,24 +542,26 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BridalBuddy home folder. This file will be known as `[JAR file location]/data/bridalbuddy.json`.
 
 [_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
+
 [_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Command summary**
 
 | Action            | Format, Examples                                                                                                                                                                                                             |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -548,6 +577,18 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 | **Clear**         | `clear`                                                                                                                                                                                                                      |
 | **Stats**         | `stats`                                                                                                                                                                                                                      |
 | **Exit**          | `exit`                                                                                                                                                                                                                       |
+
+
+[_Back to Top_](#table-of-contents)
+
+
+## **Glossary**
+
+| Term/Keyword                       | Definition                                                                                                 |
+|------------------------------------|------------------------------------------------------------------------------------------------------------|
+| **Command Line Interface (CLI)**   | An interface that allows you to interact with our program by inputting lines of text called command-lines. |
+| **Graphical User Interface (GUI)** | An interface that displays information to you and allows you to interact with visual elements.             |
+| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
 
 
 [_Back to Top_](#table-of-contents)
