@@ -143,9 +143,10 @@ TalentSG provides a variety of features to help you manage candidates and job ro
     - E.g., `[t/TAG]...` can be `t/friend`, `t/friend t/family`, or omitted entirely.
 - **Parameters Order**: Parameters can be in any order.
     - E.g., `n/NAME p/PHONE_NUMBER` is the same as `p/PHONE_NUMBER n/NAME`.
-- **Extraneous Parameters**: Ignored for commands that do not take parameters.
+- **Extraneous Parameters**: Ignored for commands that do not take parameters such as `Summary`, `List`, `Help`, `Clear` & `Exit`.
     - E.g., `help 123` is interpreted as `help`.
 - **Copying Commands**: Be cautious when copying multi-line commands from PDFs; line breaks may affect the command execution.
+
 <br> <br>
 #### Constraints of fields
 
@@ -565,6 +566,7 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 - **Privacy**: Your feedback will be used solely for improving TalentSG. Any personal information provided will be handled according to our privacy policy.
 
 <strong>[Tip]</strong>: Reporting bugs with detailed steps and screenshots (if applicable) can help speed up the troubleshooting process.
+
 <strong>[Note]</strong>: "Report Bug" is accessed through the **Help** menu and is not a command that can be entered in the application’s command line interface.
 
 
@@ -644,7 +646,18 @@ To Update the Overview
 2. Type [`summary`](#summary-summary) under the CLI terminal.
 3. Restart the app.
 
+### 3.  No panel is displayed when commands that results in an empty Applicants List are used
 
+**Issue**: When using commands such as `delete`, `filter`, or any other command that results in an empty **Applicants List**, no panel is displayed.
+
+**Expected Behavior**: Ideally, the **Applicants Panel** should display a placeholder message when there are no applicants in the list after executing commands like `delete` or `filter`.
+
+**Reason**: This behavior is due to the default nature of `ListView`, which hides the display area when the list is empty. Additionally, adding a blank item to `ListView` is restricted by the regex validation requirements.
+
+**Potential Solution**:
+- Set a placeholder message in the `ListView` to display when the list is empty. This would give users feedback indicating that no items are currently available in the **Applicants List**.
+
+  > **Suggested Implementation**: Configure the `ListView`’s `setPlaceholder` method to show a message, such as "No applicants to display," whenever the **Applicants List** is empty. This would ensure a consistent user experience across commands like `delete`, `filter`, and other list-modifying operations.
 
 
 ---
