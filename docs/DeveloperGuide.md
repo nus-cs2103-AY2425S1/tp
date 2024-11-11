@@ -480,3 +480,9 @@ testers are expected to do more *exploratory* testing.
    2. Delete any line. An empty address book will be loaded.
    3. IF any command is used the `LogiLink.json` would be wiped clean. Save the data in another file if necessary.
    4. Delete the corrupted `LogiLink.json` file. The program will create a new file.
+
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. **Make `failed contact deletion` message more specific**: The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it is referenced by another contact Ben Chua.
