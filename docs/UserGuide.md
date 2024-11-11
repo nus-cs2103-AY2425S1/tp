@@ -5,13 +5,13 @@ title: User Guide
 
 Welcome to EduConnect – a tool designed to help teachers manage student and teacher details with speed and simplicity. EduConnect streamlines your everyday tasks, such as tracking attendance and managing contact information, allowing you to organize important information in a fast, efficient way. By typing commands, you can quickly update, search, and handle details with minimal effort, making it a valuable companion for busy school environments.
 
-# Table of Contents
+## Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Quick Start
+## Quick Start
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -38,15 +38,15 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
         `java -jar educonnect.jar`
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
 
-**macOS User Interface**: 
-![Ui](images/Ui.png)
-**Windows User Interface**:
-![Windows Ui](images/windows_ui.jpg)
-
-{: .alert .alert-info}
-> :information_source: **Note:**
-> * EduConnect will look slightly different on macOS, and on Windows. Particularly, the graphic symbols on macOS will be colourised, while those on Windows will be in monochrome.
-> * The screenshots on this User Guide will be primarily on macOS.
+    **macOS User Interface**: 
+    ![Ui](images/Ui.png)
+    **Windows User Interface**:
+    ![Windows Ui](images/windows_ui.jpg)
+    
+    {: .alert .alert-info}
+    > :information_source: **Note:**
+    > * EduConnect will look slightly different on macOS, and on Windows. Particularly, the graphic symbols on macOS will be colourised, while those on Windows will be in monochrome.
+    > * The screenshots on this User Guide will be primarily on macOS.
 
 5. Enter a command:
 
@@ -64,10 +64,9 @@ If you have any questions or need help, please refer to the [FAQ](#faq) section.
 
 [Back to Table of Contents](#table-of-contents)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
-# Parameter Details
+## Parameter Details
 The table below provides a quick overview of each parameter associated with a command in EduConnect, along with the specific constraints to keep in mind when using them.
 
 {: .alert .alert-warning}
@@ -115,13 +114,14 @@ The table below provides a quick overview of each parameter associated with a co
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters around line-breaks may not transfer correctly when pasted into the application.
 
 [Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+## Features
 
-## Adding a Person
+### Adding a Person
 
-#### Adding a student: `student`
+##### Adding a student: `student`
 
 Adds a student to EduConnect.
 
@@ -153,7 +153,7 @@ Example:
     * the next of kin whose name is Bob Doe
     * an emergency contact 8765 4321
 
-#### Adding a teacher: `teacher`
+##### Adding a teacher: `teacher`
 
 Adds a teacher to EduConnect.
 
@@ -184,9 +184,9 @@ Example:
 
 [Back to Table of Contents](#table-of-contents)
 
-## Managing Entries
+### Managing Entries
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing student or teacher in EduConnect.
 
@@ -209,7 +209,7 @@ Examples:
 
 ![edit command](images/edited_ui.png)
 
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person(s) from EduConnect.
 
@@ -230,7 +230,7 @@ Examples:
 * `find /name Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete 1 2 3` deletes the 1st, 2nd and 3rd persons in the list in one command.
 
-### Clearing entries : `clear`
+#### Clearing entries : `clear`
 
 Clears all entries from EduConnect or specific entries based on the provided parameters.
 
@@ -251,9 +251,9 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-## Attendance Taking
+### Attendance Taking
 
-### Marking attendance : `mark`
+#### Marking attendance : `mark`
 
 Increases the attendance of **all** students in EduConnect by 1.
 
@@ -264,7 +264,7 @@ Format: `mark`
 >
 > The `mark` command works on the overall list of entries and not on a filtered list produced by the `find` command. It affects the attendance of **all** student entries.
 
-### Unmarking attendance : `unmark`
+#### Unmarking attendance : `unmark`
 
 Decreases the attendance of the specified student(s) in EduConnect by 1.
 
@@ -287,7 +287,7 @@ Example:
 >
 > Use the `find` command to filter the list of students before unmarking their attendance.
 
-### Reset attendance: `resetAttendance`
+#### Reset attendance: `resetAttendance`
 
 Resets the attendance of all students in EduConnect to 0.
 
@@ -300,9 +300,9 @@ Format: `resetAttendance`
 
 [Back to Table of Contents](#table-of-contents)
 
-## Organizing Entries
+### Organizing Entries
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Displays a list of all person(s) in EduConnect.
 
@@ -339,7 +339,7 @@ Examples:
 * `find /name John` returns `John` and `John Doe`
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
 
-### Sorting persons : `sort`
+#### Sorting persons : `sort`
 
 Sorts and displays the list of person(s) by name, subject, class, or attendance.
 
@@ -373,7 +373,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-## Command History
+### Command History
 
 EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. <br> For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2` in your command box, and pressing it again will display `delete 1`.
 
@@ -382,7 +382,7 @@ EduConnect has a built-in command history which allows users to navigate through
 >
 > The command history is only stored for the current session. When you close EduConnect, the history is cleared and cannot be retrieved in future sessions.
 
-### Undoing the last command : `undo`
+#### Undoing the last command : `undo`
 
 Reverts the most recent change made to EduConnect.
 
@@ -401,7 +401,7 @@ Examples:
 * `edit 1 /name Alex Koh` followed by `undo` restores the name of the 1st person back to its original state.
 * `delete 3` followed by `undo` restores the deleted person back to the list.
 
-### Redoing the last command : `redo`
+#### Redoing the last command : `redo`
 
 Restores the most recently undone change in EduConnect.
 
@@ -422,9 +422,9 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-## Other Features
+### Other Features
 
-### Changing themes
+#### Changing themes
 
 EduConnect allow you to change between 2 different themes: Dark Mode and Light Mode.
 
@@ -437,14 +437,14 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 
 ![change themes](images/Changing-Themes.png)
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a message with a URL link to access the user guide.
 
 Format: `help`
 ![help message](images/helpMessage.png)
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
@@ -452,13 +452,13 @@ Format: `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
-## For Advanced Users
+### For Advanced Users
 
-### Saving the data
+#### Saving the data
 
 EduConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 EduConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -471,9 +471,9 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 
 --------------------------------------------------------------------------------------------------------------------
 
-# How to Use This User Guide
+## How to Use This User Guide
 This section provides tips on how to effectively navigate through the user guide to find and understand the information you need quickly.
-## Glossary
+### Glossary
 
 This section defines key terms and concepts used throughout the user guide.
 
@@ -490,7 +490,7 @@ This section defines key terms and concepts used throughout the user guide.
 - **Person**: Refers to either a student or a teacher in EduConnect.
 - **Top-level domain**: The last part of an email address, such as `.com`, `.org`, or `.net`.
 
-## Annotated Box Conventions
+### Annotated Box Conventions
 
 This section explains the different types of annotated boxes used in the user guide to highlight important information.
 
@@ -513,7 +513,7 @@ This section explains the different types of annotated boxes used in the user gu
 
 --------------------------------------------------------------------------------------------------------------------
 
-# FAQ
+## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: First, install EduConnect on the new computer. Then, copy the data file from your old computer and replace the empty data file in the new installation folder with your existing one. This will transfer all your previous data to the new computer.
@@ -526,32 +526,32 @@ This section explains the different types of annotated boxes used in the user gu
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Known issues
+## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Command summary
+## Command summary
 Below is a summary of the commands available in EduConnect. For more details, please navigate to the corresponding header by clicking on the table below.
 
-| Action                                                    | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|-----------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add Student**](#adding-a-student-student)              | `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ /subject SUBJECT [/subject SUBJECT]…​ /classes CLASSES [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0 /nok Bob Doe /emergency 87654321`             |
-| [**Add Teacher**](#adding-a-teacher-teacher)              | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ /subject SUBJECT [/subject SUBJECT]…​ /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`                                                                                                     |
-| [**Edit**](#editing-a-person--edit)                       | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                                                                                            |
-| [**Delete**](#deleting-a-person--delete)                  | `delete INDEX`<br> e.g., `delete 3`, `delete 1 2 4`                                                                                                                                                                                                                                                                                                                                                                                                         |
-| [**Clear**](#clearing-entries--clear)                     | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                                                                                         |
-| [**Mark Attendance**](#marking-attendance--mark)          | `mark`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [**Unmark Attendance**](#unmarking-attendance--unmark)    | `unmark INDEX…​` <br/> e.g., `unmark 1`, `unmark 1 2 3`                                                                                                                                                                                                                                                                                                                                                                                                     |
-| [**Reset Attendance**](#reset-attendance-resetattendance) | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [**List**](#listing-all-persons--list)                    | `list`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [**Find**](#finding-persons-find)                         | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                                                                                         |
-| [**Sort**](#sorting-persons--sort)                        | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                                                                                                                                                        |
-| [**Undo**](#undoing-the-last-command--undo)               | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [**Redo**](#redoing-the-last-command--redo)               | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [**Help**](#viewing-help--help)                           | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [**Exit**](#exiting-the-program--exit)                    | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Action                                                        | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|---------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add Student**](#adding-a-student-student)                  | `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] /subject SUBJECT [/subject SUBJECT]…​ /classes CLASSES [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT [/tag TAG]…​` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0 /nok Bob Doe /emergency 87654321`            |
+| [**Add Teacher**](#adding-a-teacher-teacher)                  | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] /subject SUBJECT [/subject SUBJECT]…​ /classes CLASSES [/tag TAG]…​` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`                                                                                                    |
+| [**Edit**](#editing-a-person--edit)                           | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                                                                                           |
+| [**Delete**](#deleting-a-person--delete)                      | `delete INDEX`<br> e.g., `delete 3`, `delete 1 2 4`                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [**Clear**](#clearing-entries--clear)                         | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                                                                                        |
+| [**Mark Attendance**](#marking-attendance--mark)              | `mark`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [**Unmark Attendance**](#unmarking-attendance--unmark)        | `unmark INDEX…​` <br/> e.g., `unmark 1`, `unmark 1 2 3`                                                                                                                                                                                                                                                                                                                                                                                                    |
+| [**Reset Attendance**](#reset-attendance-resetattendance)     | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [**List**](#listing-all-persons--list)                        | `list`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [**Find**](#finding-persons-find)                             | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                                                                                        |
+| [**Sort**](#sorting-persons--sort)                            | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [**Undo**](#undoing-the-last-command--undo)                   | `undo`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [**Redo**](#redoing-the-last-command--redo)                   | `redo`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [**Help**](#viewing-help--help)                               | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [**Exit**](#exiting-the-program--exit)                        | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 [Back to Table of Contents](#table-of-contents)
