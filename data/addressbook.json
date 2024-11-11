@@ -6,6 +6,12 @@
     "availableDate" : "2023-10-27",
     "involvedIn" : [ "Tree Planting" ]
   }, {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johndoe@example.com",
+    "availableDate" : "2023-10-20",
+    "involvedIn" : [ ]
+  }, {
     "name" : "Alice Wong",
     "phone" : "99117846",
     "email" : "Alice@gmail.com",
