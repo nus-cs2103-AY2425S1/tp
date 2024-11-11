@@ -234,7 +234,7 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
 
-Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
+Below displays an activity diagram that explains roughly what happens when a user tries to update an application:
 <puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
 
 #### Design considerations:
@@ -303,7 +303,7 @@ The following methods and operations are involved:
 
 Step 1: The user selects a company and executes the `view` command with the corresponding company list index.
 
-Step 2: The `ViewCommand` selected company `companyToView` and creates a predicate `p` to only show this company.
+Step 2: The `ViewCommand` selects a company `companyToView` and creates a predicate `p` to only show this company.
 
 Step 3: The `ViewCommand` then calls `Model#viewAppDetails(companyToView)` and `Model#updateFilteredCompanyList(p)` which
 causes the UI to display only the specified company and its full application details.
@@ -321,8 +321,8 @@ to ensure that full application details are only shown for the `view` command.
 **Aspect: How to display the results of `view`:**
 
 * **Alternative 1:** Display results in the results box.
-  * Pros: Easier and simpler to implement
-  * Cons: Users edit the viewed company after using the view command (ie: they have to manually search for it again)
+  * Pros: Easier and simpler to implement.
+  * Cons: Users edit the viewed company after using the view command. (ie: they have to manually search for it again)
 
 * **Alternative 2 (current choice):** Show the singular company with full details in the company list.
   * Pros: Users can use other commands after using `view` to manipulate the company.
@@ -405,28 +405,34 @@ methods of `UniqueCompanyList` that manipulates its `internalList`.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                     | I want to …​                                                | So that I can…​                                                       |
-|----------|-------------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | new user                                                    | see usage instructions                                      | refer to instructions when I forget how to use the App                |
-| `* * *`  | user that types fast                                        | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
-| `*`      | user who prefers less screen clutter                        | toggle list view to be less detailed / more general         |                                                                       |
-| `* *`    | user                                                        | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
-| `* * *`  | STEM major planning to apply for internships                | find a specific company by name                             | retrieve info without having to go through the entire list            |
-| `* *`    | STEM major planning to apply for internships                | add additional info about the company                       |                                                                       |
-| `* *`    | STEM major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
-| `*`      | STEM major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
-| `*`      | STEM major planning to apply for internships                | sort companies by hiring status                             | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships                | sort companies by location distance                         | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships                | sort companies by remote work availability                  | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships                | sort companies by working hour flexibility                  | better prioritize certain companies                                   |
-| `*`      | STEM major planning to apply for internships                | sort companies by internship role                           | better prioritize certain companies                                   |
-| `* * *`  | STEM major currently applying for internships               | update internship application status for a specific company | maintain an updated list of the companies I'm applying for            |
-| `* *`    | STEM major currently applying for internships               | sort companies applications by status                       | focus on companies that need immediate attention                      |
-| `*`      | STEM major currently applying for internships               | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
-| `*`      | STEM major currently applying for internships               | organize interview timings                                  | ensure that they do not overlap                                       |
-| `* * *`  | STEM major planning to apply or is applying for internships | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
+| Priority | As a …​                                                     | I want to …​                                                  | So that I can…​                                                                                          |
+|----------|-------------------------------------------------------------|---------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                                    | see usage instructions                                        | refer to instructions when I forget how to use the App                                                   |
+| `* * *`  | user that types fast                                        | utilize an easy to use CLI interface                          | be more efficient while using the app                                                                    |
+| `* *`    | user who prefers less screen clutter                        | toggle list view to be less detailed / more general           |                                                                                                          |
+| `* *`    | user                                                        | export my data out of InternBuddy                             | have a data backup and/or share company information with fellow peers                                    |
+| `* * *`  | STEM major planning to apply for internships                | add a company to the list                                     | keep track of companies I am interested in                                                               |
+| `* *`    | STEM major planning to apply for internships                | find a specific company by name                               | retrieve information about a company without having to go through the entire list                        |
+| `* *`    | STEM major planning to apply for internships                | find specific companies based on tags                         | retrieve information on companies attached to a certain tag without having to go through the entire list |
+| `* *`    | STEM major planning to apply for internships                | find specific companies based on application names or details | retrieve information about companies without having to go through the entire list                        |
+| `* *`    | STEM major planning to apply for internships                | add additional info about the company                         | track the relevant information pertaining to the company                                                 |
+| `* * *`  | STEM major planning to apply for internships                | update the information for a specific company                 | ensure my information is up-to-date                                                                      |
+| `*`      | STEM major planning to apply for internships                | add referral contacts to companies                            | remember to include them when applying                                                                   |
+| `* *`    | STEM major planning to apply for internships                | favourite a company                                           | mark that company as a priority                                                                          |
+| `* *`    | STEM major planning to apply for internships                | unfavourite a company                                         | unmark that company as a priority if no longer relevant                                                  |
+| `*`      | STEM major planning to apply for internships                | sort companies by hiring status                               | better prioritize certain companies                                                                      |
+| `*`      | STEM major planning to apply for internships                | sort companies by location distance                           | better prioritize certain companies                                                                      |
+| `*`      | STEM major planning to apply for internships                | sort companies by remote work availability                    | better prioritize certain companies                                                                      |
+| `*`      | STEM major planning to apply for internships                | sort companies by working hour flexibility                    | better prioritize certain companies                                                                      |
+| `*`      | STEM major planning to apply for internships                | sort companies by internship role                             | better prioritize certain companies                                                                      |
+| `* * *`  | STEM major currently applying for internships               | add an application to a specific company                      | keep a log of my applications to the company                                                             |
+| `* * *`  | STEM major currently applying for internships               | remove an application from a specific company                 | remove applications that are no longer relevant to the company                                           |
+| `* * *`  | STEM major currently applying for internships               | update internship application status for a specific company   | maintain an updated list of the companies I'm applying for                                               |
+| `* *`    | STEM major currently applying for internships               | sort companies applications by status                         | focus on companies that need immediate attention                                                         |
+| `*`      | STEM major currently applying for internships               | add notes for upcoming / completed interviews                 | find a specific piece of info for that interview in the future                                           |
+| `*`      | STEM major currently applying for internships               | organize interview timings                                    | ensure that they do not overlap                                                                          |
+| `* * *`  | STEM major planning to apply or is applying for internships | remove companies which are no longer relevant to me           | reduce clutter in my list of potential companies                                                         |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -785,20 +791,20 @@ Prerequisites: <prerequisites>
 
    1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal application (for macOS it's called `Terminal`, and for Windows: `Command Prompt`), followed by executing `java -version`.
 
-   1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
+   2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
 
-   1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
+   3. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
-   1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+   4. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
 
-   1. Use the `java -jar internbuddy.jar` command to run the application.<br>
+   5. Use the `java -jar internbuddy.jar` command to run the application.<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Display help
@@ -814,7 +820,7 @@ Prerequisites: <prerequisites>
 
    1. Prerequisites: The company to test is not favourited (ie: The "star" in the top-right corner of the company panel is not yellow).
 
-   1. Test case: `fav INDEX` <br>
+   2. Test case: `fav INDEX` <br>
       Expected: The company corresponding to `INDEX` is now favourited (The "star" in the top-right corner of the company panel is yellow).
       A message showing the favourite company is displayed in the results box.
 
@@ -824,7 +830,7 @@ Prerequisites: <prerequisites>
 
         </box>
 
-   1. Try using invalid indexes: `fav 0`, `fav x` (where `x` is more than number of companies shown in the company list).
+   3. Try using invalid indexes: `fav 0`, `fav x` (where `x` is more than number of companies shown in the company list).
       Expected: No companies are favourited. An error message with details is displayed in the results box.
 
 ### Removing a company from favourites
@@ -839,7 +845,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
       Expected: Companies with matching KEYWORD in either their name, tags or in the position name of one of its applications are shown.
       Number of matching companies is displayed in the result box.
 
-1. Finding companies using multiple keywords.
+2. Finding companies using multiple keywords.
 
     1. Test case: `find KEYWORD ANOTHER_KEYWORD...` <br>
        Expected: Companies that match ANY KEYWORD in either their name, tags or in the position name of one of its applications are shown.
@@ -851,7 +857,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: Perform a `find` command that does not return all companies.
 
-   1. Test case: `list` <br>
+   2. Test case: `list` <br>
       Expected: All companies are shown in the company list. A message indicated that all companies are listed is displayed in the results box.
 
 ### Adding a company
@@ -860,23 +866,23 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: The company to add is not already present in the company list (ie: using `list` command does not show a company with the same name).
 
-   1. Test case: `add n/NAME e/EMAIL` <br>
+   2. Test case: `add n/NAME e/EMAIL` <br>
       Expected: The company with the `NAME` and `EMAIL` is added to the end of the company list. Details of the company are shown in the results box. The added company also should have the status `INTERESTED` and is not favourited.
 
-   1. Try adding using optional fields: `add n/NAME e/EMAIL p/PHONE_NUMBER`, `add n/NAME e/EMAIL t/TAG t/OTHER_TAG`, `...` <br>
+   3. Try adding using optional fields: `add n/NAME e/EMAIL p/PHONE_NUMBER`, `add n/NAME e/EMAIL t/TAG t/OTHER_TAG`, `...` <br>
       Expected: Similar to previous test, except now it shows the other optional fields added.
 
-   1. Try invalid command formats: `add`, `add n/NAME e/INVALID_EMAIL`, `...` <br>
+   4. Try invalid command formats: `add`, `add n/NAME e/INVALID_EMAIL`, `...` <br>
       Expected: No company is added. Error message indicating invalid format is shown in the result box.
 
-1. Add an already existing company to InternBuddy
+2. Add an already existing company to InternBuddy
 
    1. Prerequisites: The added company to test already exists in the company list (ie: you can find the company with the same name from the company list after using `list`).
 
-   1. Test case: `add n/SAME_NAME e/EMAIL` (where `SAME_NAME` is the name of another exiting company) <br>
+   2. Test case: `add n/SAME_NAME e/EMAIL` (where `SAME_NAME` is the name of another exiting company) <br>
       Expected: No company is added. Error message indicating the company is already present is shown in the result box.
 
-1. Add a company without some required fields
+3. Add a company without some required fields
 
    1. Test case: `add n/NAME p/PHONE_NUMBER`, `add e/EMAIL p/PHONE_NUMBER` <br>
       Expected: No company is added. Error message with details is shown in the result box.
@@ -887,19 +893,19 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: List all companies using the `list` command. Multiple companies in the list.<br>
 
-   1. Test case: `edit INDEX n/NAME` (where `NAME` is not the name of an existing company) <br>
+   2. Test case: `edit INDEX n/NAME` (where `NAME` is not the name of an existing company) <br>
       Expected: The company at the corresponding INDEX has its name changed to `NAME`. A message containing edit details is displayed in the result box.
 
-   1. Test case: `edit INDEX n/SAME_NAME` (where `SAME_NAME` is the name of another exiting company) <br>
+   3. Test case: `edit INDEX n/SAME_NAME` (where `SAME_NAME` is the name of another exiting company) <br>
       Expected: The company is not edited. Error message indicating the edited name already exists is shown in the results box.
 
-   1. Test case: `edit INDEX p/PHONE_NUMER e/EMAIL` <br>
+   4. Test case: `edit INDEX p/PHONE_NUMER e/EMAIL` <br>
       Expected: Similar to above test case, except that phone number and email are changed to `PHONE_NUMBER` and `EMAIL` respectively.
 
-   1. Test case: `edit INDEX t/` <br>
+   5. Test case: `edit INDEX t/` <br>
       Expected: The company at the corresponding INDEX has its tags removed. A messaged containing edit details is displayed in the result box.
 
-   1. Try invalid command formats: `edit`, `edit 0 n/NAME`, `edit x e/EMAIL`, `edit INDEX p/INVALID_PHONE_NUM`, `...` (where `x` is larger than the list size) <br>
+   6. Try invalid command formats: `edit`, `edit 0 n/NAME`, `edit x e/EMAIL`, `edit INDEX p/INVALID_PHONE_NUM`, `...` (where `x` is larger than the list size) <br>
       Expected: No edits are done. Error message with details is shown in the result box.
 
 ### Deleting a company
@@ -908,20 +914,20 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: List all companies using the `list` command. Multiple companies in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First company is deleted from the company list. Details of the deleted contact shown in the results box.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No company is deleted. Error message indicating invalid format is shown in the results box.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where `x` is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where `x` is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a company while some companies are hidden
+2. Deleting a company while some companies are hidden
 
    1. Prerequisites: Some companies must be hidden (ie: after using `find` command), but not all.
 
-   1. Test case: `delete 1` <br>
+   2. Test case: `delete 1` <br>
       Expected: First contact is deleted from the currently shown list. After running the `list` command again this company should no longer be present.
 
 ### Adding applications to a company
@@ -930,21 +936,21 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: The company corresponding to `INDEX` has no applications.
 
-   1. Test case: `apply INDEX n/NAME d/DESCRIPTION` <br>
+   2. Test case: `apply INDEX n/NAME d/DESCRIPTION` <br>
       Expected: An application with the `NAME` that has application status `APPLIED` is added to the corresponding company.
       The company's status changes to `APPLIED`. A message displaying the created application is shown in the results box.
 
-   1. Try adding an application with different application status: `apply INDEX n/NAME d/DESCRIPTION as/APP_STATUS` <br>
+   3. Try adding an application with different application status: `apply INDEX n/NAME d/DESCRIPTION as/APP_STATUS` <br>
       Expected: Similar to above except the application of the status of the added application should be `APP_STATUS`.
 
-   1. Try invalid command formats: `apply`, `apply 0 n/NAME d/DESCRIPTION`, `apply INDEX n/NAME d/DESCRIPTION as/INVALID_APP_STATUS`, `...` <br>
+   4. Try invalid command formats: `apply`, `apply 0 n/NAME d/DESCRIPTION`, `apply INDEX n/NAME d/DESCRIPTION as/INVALID_APP_STATUS`, `...` <br>
       Expected: No application is added. Error message with details is shown in the result box.
 
-1. Adding applications to a company with existing applications
+2. Adding applications to a company with existing applications
 
     1. Prerequisites: The company corresponding to `INDEX` has existing applications.
 
-    1. Test case: `apply INDEX n/NAME d/DESCRIPTION` <br>
+    2. Test case: `apply INDEX n/NAME d/DESCRIPTION` <br>
        Expected: A new application is added to the corresponding company after all its existing applications. A message
        displaying the created application is shown in the results box.
 
@@ -955,7 +961,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
    1. Test case: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS` <br>
       Expected: The application corresponding to `APPLICATION_INDEX` for the company at `COMPANY_INDEX` of the list has its application status changed to `APP_STATUS`.
 
-   1. Try invalid command formats: `update`, `update COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS`, `update c/COMPANY_INDEX app/APPLICATION_INDEX as/INVALID_APP_STATUS` <br>
+   2. Try invalid command formats: `update`, `update COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS`, `update c/COMPANY_INDEX app/APPLICATION_INDEX as/INVALID_APP_STATUS` <br>
       Expected: No application is updated. An error message with details is displayed in the results box.
 
 ### Removing application from a company
@@ -964,17 +970,17 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: The company corresponding to `COMPANY_INDEX` has multiple applications.
 
-   1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
+   2. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
       Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed. A message containing the details of the removed application is displayed in the results box.
 
-   1. Try invalid fields: `withdraw`, `withdraw COMPANY_INDEX app/APP_INDEX`, `withdraw c/INVALID_INDEX app/APP_INDEX`, `...` <br>
+   3. Try invalid fields: `withdraw`, `withdraw COMPANY_INDEX app/APP_INDEX`, `withdraw c/INVALID_INDEX app/APP_INDEX`, `...` <br>
       Expected: No application is removed. An error message with details should be displayed in the results box.
 
-1. Remove an application from a company with only one application
+2. Remove an application from a company with only one application
 
     1. Prerequisites: The company corresponding to `COMPANY_INDEX` has only one application.
 
-    1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
+    2. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
        Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed.
        The application status of the company is changed to `CLOSED`. A message containing the details of the removed application is displayed in the results box.
 
@@ -984,11 +990,11 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Requisites: The company corresponding to `INDEX` has at least one application.
 
-   1. Test case: `view INDEX` <br>
+   2. Test case: `view INDEX` <br>
       Expected: Only the selected company is shown in the company list. The `DESCRIPTION` of all the applications for the
       selected company are fully visible. A message displaying the name of the company to view is shown.
    
-   1. Try invalid fields: `view`, `view 0`, `view x`, `...` (where `x` is larger than the list size) <br>
+   3. Try invalid fields: `view`, `view 0`, `view x`, `...` (where `x` is larger than the list size) <br>
       Expected: No application details of any companies are shown, company list remains unchanged. An error message with details should be displayed in the results box.
 
 ### Reopening a company
@@ -997,11 +1003,11 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
    1. Prerequisites: The company corresponding to `INDEX` has a status of `CLOSED`.
 
-   1. Test case: `reopen INDEX` <br>
+   2. Test case: `reopen INDEX` <br>
       Expected: The company corresponding to `INDEX` status changes from `CLOSED` to `INTERESTED`. A message displaying the
       reopened company is displayed in the results box.
 
-   1. Try invalid fields: `reopen`, `reopen INVALID_INDEX`, `reopen x`, `reopen y`, `...` (where `x` is larger than the list size and `y` is an index corresponding to company that is not `CLOSED`) <br>
+   3. Try invalid fields: `reopen`, `reopen INVALID_INDEX`, `reopen x`, `reopen y`, `...` (where `x` is larger than the list size and `y` is an index corresponding to company that is not `CLOSED`) <br>
       Expected: No company is reopened. An error message with details should be displayed in the results box.
 
 
@@ -1023,37 +1029,37 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Move the JAR file to a fresh directory. Run and close InternBuddy to reset `preferences.json` to its default state.
 
-1. Run a few commands that manipulates the stored companies (`add`, `delete`, `edit`, `apply`, etc.)
+2. Run a few commands that manipulates the stored companies (`add`, `delete`, `edit`, `apply`, etc.)
 
-1. Exit InternBuddy using `exit`
+3. Exit InternBuddy using `exit`
 
-1. Verify that the data is correctly saved in `data/addressbook.json` in the same directory as the JAR file.
+4. Verify that the data is correctly saved in `data/addressbook.json` in the same directory as the JAR file.
 
 #### Handling erroneous data files
 
 1. Move the JAR file to a fresh directory. Run and close InternBuddy to reset `preferences.json` to its default state.
 
-1. Test handling of missing data file
+2. Test handling of missing data file
 
    1. Delete `data/addressbook.json`.
 
-   1. Relaunch InternBuddy.
+   2. Relaunch InternBuddy.
 
-   1. Expected: A new `data/addressbook.json` file should be created, and it should be filled with sample data.
+   3. Expected: A new `data/addressbook.json` file should be created, and it should be filled with sample data.
 
-2. Test handling of corrupted data file
+3. Test handling of corrupted data file
 
    1. Create a new file `data/corrupted.json` that has the same data as `data/addressbook.json` but edited by removing or adding lines
       such that it does not match the valid JSON format required for the data file.
 
-   1. Update `preferences.json` to contain:
+   2. Update `preferences.json` to contain:
       ```json
       "addressBookFilePath": "data\\corrupted.json"
       ```
 
-   1. Relaunch InternBuddy
+   3. Relaunch InternBuddy
 
-   1. Expected: InternBuddy will launch with an empty company list. The app will overwite the corrupted data
+   4. Expected: InternBuddy will launch with an empty company list. The app will overwite the corrupted data
       and replace it with an empty data file:
       ```json
       {
