@@ -228,19 +228,19 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **2. Forced Deletion and Clearing**
 
-**Currently:** To prevent accidental deletions and clearing of data in KnottyPlanners, a confirmation will be required from the user to ensure that the deletion or clearing is intentional.
+**Currently:** To prevent accidental deletions and clearing of data in KnottyPlanners, a user confirmation is currently required to ensure that the action is intentional.
 
-**Plan:** To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
+**Plan:** To include a force deletion or clearing command that enables the user to remove the data without KnottyPlanners requiring a confirmation from them.
 
 **3. Improved Filtering**
 
-**Currently:** The filter command in KnottyPlanners only allows for filtering to be done through the name or job fields.
+**Currently:** The filter command in KnottyPlanners supports filtering by the name or job fields only.
 
 **Plan:** To allow users to filter with other fields such as phone number, address and email. To allow users to filter with other fields such as phone number, address and email.
 
 **4. Allow Copying of Information**
 
-**Currently:** As KnottyPlanners is optimised for keyboard usage, interactions with the GUI through direct copying of information is not supported.
+**Currently:** KnottyPlanners is optimised for keyboard usage, and direct copying of information from the GUI is not supported.
 
 **Plan:** To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
 
@@ -252,15 +252,15 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **6. Index Referencing**
 
-**Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in counteractive outcomes when handling names that are extremely long.
+**Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in inefficiency when handling extremely long names.
 
-**Plan:** To allow suers to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
+**Plan:** To allow users to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
 
 **7. Further CLI Support**
 
-**Currently:** Opening the help window creates an external popup that requires the user to use a mouse and close it.
+**Currently:** Opening the help window creates an external popup that requires the user to close with a mouse or trackpad.
 
-**Plan:** Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
+**Plan:** Enhance CLI optimisation by allowing the user to close the popup without using a mouse or trackpad.
 
 **8. Contacts and Weddings Visibility**
 
@@ -696,7 +696,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Using the relevant `add` or `add-wed` commands, create dummy data that is to be stored in the storage.
 
-   2. To simulate a corrupted file, locate the addressbok.json or weddingbook.json file in the data folder.
+   2. To simulate a corrupted file, locate the addressbook.json or weddingbook.json file in the data folder.
 
    3. Delete a random line in the .json file, and relaunch KnottyPlanners.
         Expected: KnottyPlanners will launch with all previous data wiped and cleared.
