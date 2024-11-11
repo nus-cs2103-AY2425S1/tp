@@ -113,8 +113,6 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_inputSeller_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, SELLER_INDEX);
-        System.out.println(INDEX_FIRST_LISTING.getOneBased());
-        System.out.println(SELLER_NAME);
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER,
                         INDEX_FIRST_LISTING.getOneBased(), SELLER_NAME));

@@ -21,6 +21,7 @@ public class FindListingsCommandParser implements Parser<FindListingCommand> {
      */
     public FindListingCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindListingCommand.MESSAGE_USAGE));

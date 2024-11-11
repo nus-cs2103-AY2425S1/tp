@@ -26,15 +26,16 @@ public class AddBuyersToListingCommandParser implements Parser<AddBuyersToListin
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_BUYER);
 
         // Parse index
-        String indexOneBased = argMultimap.getPreamble().trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(indexOneBased)) {
-            throw new ParseException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
-        Index index = ParserUtil.parseIndex(indexOneBased);
+        Index index = ParserUtil.getListingIndex(argMultimap.getPreamble().trim());
 
         // Parse buyer indexes with the "buyer/" prefix
-        Set<Index> buyerIndexes = new HashSet<>();
+        Set<Index> buyerIndexes = getBuyerIndexes(argMultimap);
 
+        return new AddBuyersToListingCommand(index, buyerIndexes);
+    }
+
+    private Set<Index> getBuyerIndexes(ArgumentMultimap argMultimap) throws ParseException {
+        Set<Index> buyerIndexes = new HashSet<>();
         for (String buyerIndexStr : argMultimap.getAllValues(PREFIX_BUYER)) {
             if (!StringUtil.isNonZeroUnsignedInteger(buyerIndexStr.trim())) {
                 throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -48,6 +49,6 @@ public class AddBuyersToListingCommandParser implements Parser<AddBuyersToListin
                     AddBuyersToListingCommand.MESSAGE_USAGE));
         }
 
-        return new AddBuyersToListingCommand(index, buyerIndexes);
+        return buyerIndexes;
     }
 }

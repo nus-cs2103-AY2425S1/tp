@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 
 
@@ -16,8 +15,6 @@ import java.time.format.DateTimeParseException;
  */
 public class From {
     public static final From EMPTY_FROM = new From(LocalTime.MIN);
-    public static final String MESSAGE_CONSTRAINTS =
-            "Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.";
     private static final String VALIDATION_REGEX = "\\d{4}|\\d{2}:\\d{2}";
 
     public final LocalTime value;
@@ -30,8 +27,8 @@ public class From {
      */
     public From(String value) {
         requireNonNull(value);
-        checkArgument(isValidTime(value), MESSAGE_CONSTRAINTS);
-        this.value = parseTime(value);
+        checkArgument(isValidTime(value), AppointmentUtil.TIME_MESSAGE_CONSTRAINTS);
+        this.value = AppointmentUtil.parseTime(value);
     }
 
     private From(LocalTime value) {
@@ -45,26 +42,19 @@ public class From {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Parses the time string into a LocalTime.
-     */
-    private LocalTime parseTime(String time) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            if (time.matches("\\d{4}")) {
-                time = time.substring(0, 2) + ":" + time.substring(2);
-            }
-            return LocalTime.parse(time, formatter);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
-    }
-
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof From
-                && value.equals(((From) other).value));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof From)) {
+            return false;
+        }
+
+        From otherFrom = (From) other;
+
+        return this.value.equals(otherFrom.value);
     }
 
     @Override

@@ -54,7 +54,6 @@ public class EditListingDescriptorBuilder {
         descriptor.setAddress(listing.getAddress());
         descriptor.setArea(listing.getArea());
         descriptor.setRegion(listing.getRegion());
-        System.out.println(findSellerIndexByName(listing.getSeller().getName()));
         descriptor.setSellerIndex(Index.fromZeroBased(findSellerIndexByName(listing.getSeller().getName())));
     }
 

@@ -176,12 +176,6 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
-        public boolean hasPersonOfName(Name name) {
-            return this.persons.stream()
-                    .anyMatch(person -> person.getName().equals(name));
-        }
-
-        @Override
         public Person getPersonByName(Name name) {
             return this.persons.stream()
                     .filter(person -> person.getName().equals(name))

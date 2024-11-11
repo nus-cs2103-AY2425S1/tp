@@ -41,9 +41,11 @@ public class JsonAdaptedDate {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
+
         if (value.equals(EMPTY_DATE_PLACEHOLDER)) {
             return Date.EMPTY_DATE;
         }
+
         return new Date(value);
     }
 }

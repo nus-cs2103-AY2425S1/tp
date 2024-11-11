@@ -19,10 +19,13 @@ public class ShowClientsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         if (model.getFilteredPersonList().isEmpty()) {
             throw new CommandException(MESSAGE_NO_CLIENT_IN_LIST);
         }
+
         return new CommandResult(MESSAGE_SUCCESS, false, false,
                 false, true);
     }

@@ -38,6 +38,7 @@ public enum Region {
         if (regionString == null || regionString.trim().isEmpty()) {
             throw new IllegalArgumentException("Region string cannot be null or empty.");
         }
+
         try {
             return Region.valueOf(regionString.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -66,6 +67,7 @@ public enum Region {
         if (region == null || region.trim().isEmpty()) {
             return false;
         }
+
         for (Region r : Region.values()) {
             if (r.name().equals(region.trim().toUpperCase())) {
                 return true;
