@@ -263,6 +263,8 @@ If you are having trouble entering the `vrn` field or unsure about the correct c
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 <box type="tip" seamless>
 
 **Tip:**
