@@ -163,9 +163,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Sort feature
-The sort command is reliant on the `SortOrder` enumeration. Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
+
+#### Implementation
+The sort command is reliant on the `SortOrder` enumeration.
+
+Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
+
 The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method.
+
 On execution, the `SortCommand#execute()` method calls the `updateSortedPersonListComparator` method of the `model`, and passes in the relevant comparator, depending on which order the user selects.
+
+The following sequence diagram illustrates the `sort` mechanism:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
 ### Mark/Unmark feature
 
