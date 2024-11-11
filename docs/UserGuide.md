@@ -156,7 +156,7 @@ Example:
     * an emergency contact 8765 4321
 
 {: .alert .alert-secondary}
-> When a new student is added, with the example command above, they will be displayed as shown below, with the following example success message:
+> When a new student is added using the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addAppt command example](images/addStudentCommand.png)
 > 
@@ -193,12 +193,11 @@ Example:
     * the classes she teaches 5A and 8C
 
 {: .alert .alert-secondary}
-> When a new teacher is added, with the example command above, they will be displayed as shown below, with the following example success message:
+> When a new teacher is added using the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addTeacher command example](images/addTeacherCommand.png)
 >
 > _New teacher added: Elizabeth Chua; Gender: female; Phone: 95673211; Email: elizchua@yahoo.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subject: [English]; Classes: 8C, 5A; Tags:_
-
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -223,14 +222,13 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /name Betsy Crower` edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
-   <br/><br/>
 
 {: .alert .alert-secondary}
-> When an entry is edited, such as with the example command above, their details will be updated as shown below, with the following example success message:
+> When a person is edited using the example command above, they will be displayed as shown below, with the following example success message:
 >
 > ![edit command](images/edited_ui.png)
 >
-> _Edited Person: Miles Morales; Gender: male; Phone 91919291; Email: johnsc@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of kin: John Morales; Emergency Contact: 87654321; Tags:_
+> [to be added]
 
 #### Deleting a person : `delete`
 
@@ -404,14 +402,13 @@ Format: `sort ATTRIBUTE`
 
 Examples:
 * `sort attendance` sorts the list of students by attendance in descending order.
-  <br><br/>
 
 {: .alert .alert-secondary}
-> When the example sort command above is entered, the list of entries in EduConnect will be updated as shown below, with the following example success message:
+> When the list of persons is sorted by attendance using the example command above, they will be displayed as shown below, with the following example success message:
 >
 > ![sort attendance command](images/sort_attendance.png)
 >
-> _List sorted successfully._
+> List sorted successfully.
 
 [Back to Table of Contents](#table-of-contents)
 
