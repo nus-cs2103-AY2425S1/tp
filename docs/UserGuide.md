@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
+EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app:
 <br>
 <br>
 **Client management**
@@ -18,10 +18,10 @@ EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for
 
 **You could be part of the ideal target audience of EZSTATES if you meet the following criteria**:
 
-* `Job` : Real Estate Agent focused on managing buyer and seller relationships 
-* `Typing ability` : Comfortable typing at speeds of ~80 WPM or higher 
-* `Workflow Preference` : Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons 
-* `Tech Savviness` : Confident using command-based applications and prefers minimal mouse use 
+* `Job` : Real Estate Agent focused on managing buyer and seller relationships
+* `Typing ability` : Comfortable typing at speeds of ~80 WPM or higher
+* `Workflow Preference` : Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
+* `Tech Savviness` : Confident using command-based applications and prefers minimal mouse use
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
@@ -69,12 +69,12 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
     right click on any space inside the folder and click `Open in Terminal`.
     </div>
     <br>
-   
+
    Then inside terminal, run the app with:
     ```bash
     java -jar EZSTATES.jar
     ```
-   
+
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
 6. Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
@@ -101,7 +101,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 5. Open Terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-    ``` 
+    ```
     <div class="note" markdown="span">
     Alternatively, you can open the folder where the `.jar` file  is located,
     right click on any space inside the folder and click `New Terminal at Folder`.
@@ -148,9 +148,9 @@ Once you've tried out these basic commands, it's helpful to understand [how they
 
 ### Command Structure
 
-Understanding the command structure in EZSTATES is essential for efficient navigation and use of the app’s features. 
-Each command in EZSTATES is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed. 
-By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
+Understanding the command structure in EZSTATES is essential for efficient navigation and use of the app’s features.
+Each command in EZSTATES is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed.
+By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively.
 
 This section breaks down the **structure, reference, and prefixes** used across all commands, so you can quickly become proficient with EZSTATES.
 
@@ -1397,11 +1397,11 @@ For clarity, the first `Output` demonstration will utilise a screenshot. Subsequ
 > **Use Case #1**: Valid Greeting
 >
 > **Input**: `hello`
-> 
+>
 > **Output**:
-> 
+>
 > ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
-> 
+>
 > ---
 >
 > **Use Case #2**: Valid Query
@@ -1458,14 +1458,14 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 ## FAQ
 
 **Q**: Can I use EZSTATES without any prior programming knowledge?<br>
-**A**: Of course! EZSTATES is designed to be user-friendly and does not require the user to have programming knowledge to use. 
+**A**: Of course! EZSTATES is designed to be user-friendly and does not require the user to have programming knowledge to use.
 By reading through our User Guide, you will be able to learn how to use EZSTATES effectively.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
 
 **Q**: Can I look at all my clients and listings at the same time?<br>
-**A**: Although you are allowed to open EZSTATES using two terminals, this is not recommended as the data saved on one window is not saved on 
+**A**: Although you are allowed to open EZSTATES using two terminals, this is not recommended as the data saved on one window is not saved on
 the separate window. Please utilise the [`showclients`](#show-clients) or [`showlistings`](#show-listings) to navigate between your clients and listings.
 
 **Q**: Where can I find more help or report bugs?<br>
@@ -1477,7 +1477,7 @@ the separate window. Please utilise the [`showclients`](#show-clients) or [`show
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **For the [n/ prefix](#n)**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
+3. **For the [n/ prefix](#n)**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified.
 4. **For the [add/ prefix](#add)**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
 5. **For the [Edit Listing command](#edit-listing)**, users can modify listings to assign a buyer as the seller of a listing.
 6. **For the [Add Buyers to Listing command](#add-buyers-to-listing)**, the Result Display displays an incorrect error message.
