@@ -15,36 +15,43 @@ width: 50%;"/>
 # **User Guide**
 
 <box type="info" light theme="primary">
-<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
-details, appointments, and treatment records.
+<b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient 
+contact details, appointments, and treatment records.
 
 <br><sbr>
 
-DocTrack aims to be the bridge for medical practitioners in smaller clinics 
-towards digitalisation of their administrative efforts, with focus on contact management and visit history tracking.
+**DocTrack** aims to be the bridge for general practitioners in smaller clinics towards the digitalisation of their administrative efforts, with a focus on contact management and visit history tracking.
 
 <br>
-We plan on helping you simplify and speed-up the administrative burden of patient management 
-through an intuitive and efficient application.
+We plan to help you simplify and speed-up the administrative burden of patient management through an 
+intuitive and efficient application.
 
 </box>
 
-With **DocTrack**, you can take the first step towards digitalisation of your practice!
-**DocTrack** aims to simplify your patient and appointment tracking process, by allowing you to
-- easily add and update patient and appointment records.
-- delete records for regulation purposes.
-- search for records based on important criteria such as dates and names
-with an intuitive and user-friendly interface!
+<br>
 
-To get started, you can read the introduction below, which shows all the different sections
-in this user guide.
+With **DocTrack**, you can take the first step towards digitalisation of your practice!
+**DocTrack** can assist you in streamlining your patient and appointment tracking process, by allowing you to ...
+- easily add and update patient and appointment records,
+- delete records for regulation purposes, and
+- search for records based on important criteria such as dates and names
+
+... all with an intuitive and user-friendly interface!
+
+<br>
+
+To get started, you can read the introduction below, which shows all the different sections in this user guide.
 
 <!-- * Table of Contents -->
 <page-nav-print></page-nav-print>
 
+<br>
+
 ---
 
 <div style="page-break-after: always;"></div>
+
+<br>
 
 ## **Introduction**
 
@@ -203,17 +210,14 @@ This would be a good time to run the `clear person` command, to start afresh wit
 
 All interactions with the DocTrack platform are done through a series of **commands** 
 (explained in <a href="#command-overview" class="badge bg-primary">Command Overview</a>) entered by you. 
-- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
-and clearing persons/appointments. 
-- The commands are designed to be flexible and user-friendly. 
-  - You can add fields in any order.
-  - You can add multiple entries for specific fields.
+- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding, and clearing persons/appointments. 
+- The commands are designed to be flexible and user-friendly.
 
 <box type="tip" light>
 
 Here are some **key points** to keep in mind when you are using the commands:
 
-- Appointments are sorted by date and Patients are sorted in chronological order.
+- **Appointments** are sorted by **date**. **Patients** are sorted in **chronological** order.
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
 
@@ -265,8 +269,7 @@ The following sections describe the various commands you can use in the DocTrack
 ---
 
 <a href="#person-commands" class="badge bg-dark">Person commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information 
-specific to those commands.
+⬅ Click on this section to know more about the commands you can use to manage the list of persons. You can also click on the individual commands below for information specific to these commands.
 
 | Action                                                      | Format                                                                                    | Examples                                                                                                       |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
@@ -282,8 +285,7 @@ specific to those commands.
 ---
 
 <a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information
-specific to those commands.
+⬅ Click on this section to know more about the commands you can use to manage the appointments. You can also click on the individual commands below for information specific to these commands.
 
 | Action                                                                   | Format                                                                                                                   | Examples                                                              |
 |--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
@@ -299,8 +301,8 @@ specific to those commands.
 ---
 
 <a href="#general-commands" class="badge bg-dark">General commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information
-specific to those commands.
+⬅ Click on this section to know more about the general commands. You can
+also click on the individual commands below for information specific to these commands.
 
 | Action                                | Format | Examples |
 |---------------------------------------|--------|----------|
@@ -321,24 +323,28 @@ A **person** is a patient with several fields. The fields and their correspondin
 |------------------|--------|----------|----------|--------------------------------------------------------|
 | **Name**         | `n/`   | No       | No       | Only alphanumeric characters (Cannot start with space) |
 | **Phone number** | `p/`   | No       | No       | Positive integer of length 3-15 (Inclusive)            |
-| **Email**        | `e/`   | No       | No       | Refer to 1. below                                      |
+| **Email**        | `e/`   | No       | No       | Refer to **1.** below                                  |
 | **Address**      | `a/`   | No       | No       | Any value                                              |
 | **Status**       | `st/`  | No       | No       | Only alphanumeric characters                           |
 | **Tag(s)**       | `t/`   | Yes      | Yes      | Only alphanumeric characters                           |
 
-You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
-The PID can be seen at the top of their information card.
+<box type="info" light seamless>
 
+**Notes:**
+
+**1.** The **email** must have
+*  a local part containing alphanumeric characters and specific symbols (such as `+` 
+  `_` `.` `-`) (not at the start or end), 
+* followed by `@`, and a domain part with labels separated by periods, 
+* ending in a label with at least two alphanumeric characters, 
+* and no labels starting or ending with hyphens.
+
+</box>
+
+You can identify these patients uniquely by their **patient ID (PID)** for easy reference.
+The **PID** can be seen in the top right corner of their information card, as shown below:<br><br>
+<img src="images/personexample.png" width="480" style="display: block; margin-left: auto; margin-right:auto;">
 <br><sbr>
-
-<img src="images/personexample.png" width="500">
-
-<br><sbr>
-
----
-**Notes**
-
-1. Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
 
 <br>
 
@@ -375,6 +381,14 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 - `add person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 st/recovered t/criminal` adds a person named `Betsy Crowe` with email `betsycrowe@example.com`, address `Newgate 
   Prison`, phone number `1234567`, status `recovered`, and the tags `friend` and `criminal`.
 
+<box type="warning" light>
+
+**Note:** Ensure that you enter a **unique name (case-insensitive) and phone number** for the person you are adding. Else, it will be detected as a duplicate, and an error message will be shown. 
+
+</box>
+
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -392,6 +406,8 @@ _**Example:** `t/friend t/likes coding` has 2 tags and it is valid._
 You can view a list of all persons in the patient book.
 
 **Format**: `list person` shows the list of all patients on the screen.
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -418,6 +434,12 @@ Edits an existing patient in DocTrack.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
+<box type="tip" light>
+
+**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
+
+</box>
+
 **Examples**:
 
 - `list person` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
@@ -425,18 +447,14 @@ Edits an existing patient in DocTrack.
 - `list person` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
   be `Betsy Crower` and clears all existing tags.
 
-<box type="tip" light>
-
-**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
-
-</box>
-
 <box type="info" light>
 
 **Note:** When editing the name of a person, the person's appointments will not reflect the name change until a reload
 of the application.
 
 </box>
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -470,6 +488,8 @@ You can find person(s) whose **names** contain any of the given keywords.
 - `find person n/alex david` returns `Alex Yeoh`, `David Li`<br><br>
   ![result for 'find person alex david'](images/findAlexDavidResult.png)
 
+<br>
+
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -490,13 +510,6 @@ You can delete a specified person from the patient book.
 
 - Deletes the person at the specified `INDEX`.
 
-<box type="warning" light>
-
-**Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
-Note that deleting a person will also delete all related appointments.
-
-</box>
-
 <box type="tip" light>
 
 **Tip:** Make sure you have the correct index of the patient before deleting. Use `list person` to check.
@@ -507,6 +520,15 @@ Note that deleting a person will also delete all related appointments.
 
 - `list person` followed by `delete person 2` deletes the second person in the list.
 - `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
+
+<box type="warning" light>
+
+**Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
+Note that deleting a person will also delete all related appointments.
+
+</box>
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -532,6 +554,8 @@ You can delete all person entries from the patient book.
 Note that this will also clear the appointment data.
 
 </box>
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -563,16 +587,13 @@ An **appointment** is defined by several fields. The fields and their correspond
 | **Sickness**        | `s/`   | Yes      | No       | At least one alphabetic character     |
 | **Medicine**        | `m/`   | Yes      | No       | At least one alphabetic character     |
 
+<br>
+
 You can identify these appointments uniquely by their **Appointment ID (AID)** for easy reference.
-The AID can be seen at the top of their information card.
-
-<br><sbr>
-
-<img src="images/appointmentexample.png" width="500">
-
-<br><sbr>
-
-The number indicated beside the appointment name is the PID of the person who has the appointment.
+The **AID** can be seen in the top right corner of their information card, as shown below:<br><br>
+<img src="images/appointmentexample.png" width="480" style="display: block; margin-left: auto; 
+margin-right: auto;">
+* The number indicated beside the appointment name is the **PID** of the person who has the appointment.
 
 
 You can manage the appointments through different commands, which can be seen in the table below:
@@ -601,6 +622,11 @@ You can add an appointment to DocTrack.
 **Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
 - The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
+<box type="tip" light>
+
+**Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
+</box>
+
 **Examples**:
 
 - `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
@@ -613,9 +639,11 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 
 </box>
 
-<box type="tip" light>
+<box type="warning" light>
 
-**Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
+**Note:** Ensure that you enter a **unique person, date and time,
+and appointment type** for the appointment you are adding. Else, it will be detected as a duplicate, and an error message will be shown.
+
 </box>
 
 <br>
@@ -637,6 +665,8 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 You can view a list of all appointments in the appointment book.
 
 **Format**: `list appt`
+
+<br>
 
 <box style="background: #eeeeee">
 
@@ -667,8 +697,6 @@ You can an existing appointment in appointment book.
 
 <br>
 
-<br>
-
 <box style="background: #eeeeee">
 
 **Navigate back to the subsections here:**
@@ -691,22 +719,17 @@ You can find appointments whose person names and / or dates contain any of the g
 - At least one keyword must be provided.
 - The format of `DATE` is `YYYY-MM-DD`. For example, `2024-10-16`.
 
-**Examples**:
-- `find appt n/John` returns appointments with patients named `John`.
-- `find appt d/2024-12-05` returns appointments on `2024-12-05`.
-- `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
-
-<br>
-
-![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
-
-<br>
-
 <box type="tip" light>
 
 **Tip:** Use the `find appt` command to filter out appointments for a certain day or patient.
 
 </box>
+
+**Examples**:
+- `find appt n/John` returns appointments with patients named `John`.
+- `find appt d/2024-12-05` returns appointments on `2024-12-05`.
+- `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
+  <br><br>![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
 
 <br>
 
@@ -730,9 +753,9 @@ You can delete a specified appointment from appointment book.
 
 - Deletes the appointment at the specified `INDEX`.
 
-<box type="warning" light>
+<box type="tip" light>
 
-**Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
+**Tip:** Use the `list appt` to check the index of the appointment before deleting one.
 
 </box>
 
@@ -742,14 +765,12 @@ You can delete a specified appointment from appointment book.
 - `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
   `find` command.
 
+<box type="warning" light>
 
-<br>
-
-<box type="tip" light>
-
-**Tip:** Use the `list appt` to check the index of the appointment before deleting one.
+**Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
 
 </box>
+
 <br>
 
 <box style="background: #eeeeee">
@@ -814,7 +835,7 @@ You will be able to view a help window that directs you to this user guide.
 
 **Format**: `help`
 
-<img src="images/helpMessage.png" alt="Help Message" width="500px">
+<img src="images/helpMessage.png" alt="Help Message" width="540px">
 
 <br><sbr>
 
