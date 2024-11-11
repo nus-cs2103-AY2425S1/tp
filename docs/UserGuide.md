@@ -492,7 +492,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** To view the archived person, run `list archive/` or `list all/`
+**Tip:** To view archived persons, run `list archive/` or `list all/`
 </box>
 
 ### Unarchiving a person: `unarchive`
@@ -511,7 +511,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** To view the unarchived person, run `list` or `list all/`
+**Tip:** To view unarchived persons, run `list` or `list all/`
 </box>
 
 ### Undo the previous command: `undo`
