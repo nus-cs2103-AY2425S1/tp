@@ -777,14 +777,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User enters invalid characters in the exam name.
     * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.<br>
       Use case ends.
+
 * 2b. User enters invalid characters in the exam score.
     * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.<br>
       Use case ends.
+
 * 3a. User tries to add a score to an exam that does not exist.
     * 3a1. System displays an error message notifying that the exam does not exist in the system.<br>
       Use case ends.
-* 3b. User tries to add a score to a student that does not exist.
+
+* 3b. User tries to add a score to an exam for a student that does not exist.
     * 3b1. System displays an error message notifying that the student does not exist in the system.<br>
+      Use case ends.
+
+* 3c. User tries to add a score to an exam for a student that is the same as is already recorded in the system for the same exam of the same student.
+    * 3b1. System displays an error message notifying that the exam score is not changed.<br>
       Use case ends.
 
 **System: StudentManagerPro**
@@ -811,6 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
       Use case ends.
+
 * 3a. User tries to add a submission that already exists in the system.
     * 3a1. System displays an error message telling the user that the submission already exists.<br>
       Use case ends.
@@ -839,14 +847,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
       Use case ends.
+
 * 2b. User enters invalid characters in the submission status.
     * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".<br>
       Use case ends.
+
 * 3a. User tries to add a status to a submission that does not exist.
     * 3a1. System displays an error message notifying that the submission does not exist in the system.<br>
       Use case ends.
-* 3b. User tries to add a status to a student that does not exist.
+
+* 3b. User tries to add a status to a submission for a student that does not exist.
     * 3b1. System displays an error message notifying that the student does not exist in the system.<br>
+      Use case ends.
+
+* 3c. User tries to add a status to a submission for a student that is the same as is already recorded in the system for the same submission of the same student.
+    * 3b1. System displays an error message notifying that the submission status is not changed.<br>
       Use case ends.
 
 **System: StudentManagerPro**
@@ -873,6 +888,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.<br>
       Use case ends.
+
 * 3a. User tries to delete a submission that does not exist in the system.
     * 3a1. System displays an error message telling the user that the submission does not exist.<br>
       Use case ends.
@@ -926,9 +942,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User inputs a filter command that is incomplete with no prefixes mentioned. 
     * 1a1. System displays an error message showing the correct format of the filter command.<br>
       Use case ends.
+
 * 1b. User tries to filter by a predicate that is not supported by the filter functionality. 
     * 1b1. System displays an error message that shows the attributes supported by the filter command and corresponding prefixes.<br>
       Use case ends.
+
 * 2a. System detects an empty predicate value after the attribute prefix.
     * 2a1. System displays an error message stating that predicates cannot be empty.<br>
       Use case ends.
