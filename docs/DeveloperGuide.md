@@ -476,6 +476,155 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+
+1. Adding a new person into an empty address book.
+
+    1. Prerequisites: No person currently in the list. Remove default list using the `clear` command.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/active`<br>
+       Expected: New person is added to the list. Details of the new person shown in the status message.
+
+    1. Test case: `add n/Alex Yeoh p/81234567 e/invalid c/CS2103/T`<br>
+       Expected: New person is not added. Error details shown in the status message for invalid email.
+
+    1. Test case: `add n/Alex Yeoh p/81234567 p/98765432 e/alex@example.com c/CS2103/T`<br>
+       Expected: New person is not added. Error details shown in the status message for duplicate prefix.
+
+    1. Test case: `add n/Jane Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+       Expected: New person is not added as the phone number and email are already used by John Doe. Error details shown in the status message for person already exists.
+
+    1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add x/XXX` where `x/` is an unknown prefix.
+       Expected: Similar to previous.
+
+### Editing a person
+
+1. Editing a person's details while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following `add` commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       add n/Betsy Crowe e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `edit 1 n/Jane Doe`
+       Expected: Name of the first person is changed to Jane Doe. Details of the edited person shown in the status message.
+
+    1. Test case: `edit 2 p/87654321`
+       Expected: Phone number of the second person is changed to 87654321. Details of the edited person shown in the status message.
+
+    1. Test case: `edit 1 e/invalid`
+       Expected: Email of the second person is not changed. Error details shown in the status message for invalid email.
+
+    1. Test case: `edit 0 n/John Doe`
+       Expected: No person is edited. Error details shown in the status message for invalid index.
+
+    1. Other incorrect edit commands to try: `edit`, `edit 1 x/XXX` where `x/` is an unknown prefix.
+       Expected: Similar to previous.
+
+### Adding a grade to a person
+
+1. Adding a grade to a person while all persons are being shown
+
+    1. Prerequisites: One person in the list obtained from using the following `add` command:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `addGrade 1 n/midterm s/90 w/40`
+       Expected: New grade is added to the first person. Details of the new grade shown in the status message.
+
+    1. Test case: `addGrade 1 n/midterm s/85 w/30`
+       Expected: Old grade is overwritten with the new grade. Details of the edited grade shown in the status message.
+
+    1. Test case: `addGrade 1 n/final s/150 w/50`
+       Expected: No grade is added. Error details shown in the status message for invalid score.
+
+    1. Test case: `addGrade 1 n/final s/80 w/90`
+       Expected: No grade is added. Error details shown in the status message for total weightage exceeding 100%.
+
+    1. Other incorrect edit commands to try: `addGrade`, `addGrade 1 x/XXX` where `x/` is an unknown prefix.
+       Expected: Similar to previous.
+
+### Marking a person's attendance
+
+1. Marking a person's attendance while all persons are being shown
+
+    1. Prerequisites: One person in the list obtained from using the following `add` command:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/attended`
+       Expected: Attendance is marked for the first person. Details of the attendance shown in the status message.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/absent`
+       Expected: Old attendance is overwritten with the new attendance. Details of the edited attendance shown in the status message.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/invalid`
+       Expected: No attendance is marked. Error details shown in the status message for invalid attendance status.
+
+    1. Test case: `mark 1 d/31/01/2024 m/attended`
+       Expected: No attendance is marked. Error details shown in the status message for invalid date or time.
+
+    1. Other incorrect edit commands to try: `mark`, `mark 1 x/XXX` where `x/` is an unknown prefix.
+       Expected: Similar to previous.
+
+### Performing grade aggregation operations
+
+1. Aggregating grades while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following commands:
+       ```
+       add n/Alex Yeoh p/87438807 e/alexyeoh@example.com c/CS2103/T
+       add n/Bernice Yu p/99272758 e/berniceyu@example.com c/CS2103/T
+
+       addGrade 1 n/midterm s/85 w/30
+       addGrade 1 n/final s/87 w/70
+       
+       addGrade 2 n/midterm n/midterm s/80 w/30
+       addGrade 2 n/final s/90 w/70
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `aggGrade mean`<br>
+       Expected: Mean of all overall grades is calculated and shown in the status message.
+
+    1. Test case: `aggGrade mean n/midterm`<br>
+       Expected: Mean of all overall midterm scores is calculated and shown in the status message.
+
+    1. Test case: `aggGrade total`<br>
+       Expected: Error is thrown and shown in status message for invalid operation.
+
+    1. Other incorrect edit commands to try: `aggGrade`, `aggGrade x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Listing all persons absent on a certain date and time
+
+1. Listing all persons absent on a certain date and time while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following commands:
+       ```
+       add n/Alex Yeoh p/87438807 e/alexyeoh@example.com c/CS2103/T
+       add n/Bernice Yu p/99272758 e/berniceyu@example.com c/CS2103/T
+
+       mark 1 d/31/01/2024 12:00 m/attended
+       mark 2 d/31/01/2024 12:00 m/absent
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `absentees d/31/01/2024 12:00`<br>
+       Expected: List of all persons absent on the specified date and time is shown. Number of persons listed is shown in the status message.
+
+    1. Test case: `absentees d/31/01/2024`<br>
+       Expected: No persons are listed. Error details shown in the status message for invalid date or time.
+
+    1. Other incorrect edit commands to try: `absentees`, `absentees x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -483,12 +632,52 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message for invalid index.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Deleting a person's grade
+
+1. Deleting a person's grade while all persons are being shown
+
+    1. Prerequisites: One person with midterm grades in the list obtained from using the following commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       addGrade 1 n/midterm s/90 w/40
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `deleteGrade 1 n/midterm`<br>
+       Expected: Midterm grade is deleted from the first person. Details of the deleted grade shown in the status message.
+
+    1. Test case: `deleteGrade 1 n/midterm`<br>
+       Expected: No grade is deleted. Error details shown in the status message for grade not found.
+
+    1. Other incorrect delete commands to try: `deleteGrade`, `deleteGrade 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Deleting a person's attendance
+
+1. Deleting a person's attendance while all persons are being shown
+
+    1. Prerequisites: One person with attendance records in the list obtained from using the following commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       mark 1 d/31/01/2024 12:00 m/attended
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `unmark 1 d/31/01/2024 12:00`<br>
+       Expected: Attendance is deleted from the first person. Details of the deleted attendance shown in the status message.
+
+    1. Test case: `unmark 1 d/31/01/2024 12:00`<br>
+       Expected: No attendance is deleted. Error details shown in the status message for attendance not found.
+
+    1. Other incorrect delete commands to try: `unmark`, `unmark 1 x/XXX` where `x/` is an unknown prefix.<br>
        Expected: Similar to previous.
 
 ### Saving data
@@ -496,9 +685,14 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
     1. Back up the existing `TAHub.json` file under the data directory.
+
     2. Since the data file is corrupted, the application will show a blank list of contacts.
+
     3. Adding any new contacts now, will override the old file.
+
     4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
+
     5. Make sure to follow the constraints laid out in the user guide for each attribute of a `Person`.
+
     6. If the data file is successfully repaired, running `TAHub.jar` should result in the old data being displayed back in the application.
 
