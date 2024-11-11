@@ -28,6 +28,7 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
 6. [Command Parameters Summary](#command-parameters-summary)
+7. [Appendix : Planned Enhancements](#appendix--planned-enhancements)
 
 ---
 
@@ -640,3 +641,15 @@ Follow the specifications given below
     </tr>
   </tbody>
 </table>
+
+--------------------------------------------------------------------------------------------------------------------
+## Appendix : Planned Enhancements
+
+Team size: 5
+
+1. Special characters in names should be accepted e.g. Yugan S/O Murali
+2. A more comprehensive NRIC validity check could be performed to ensure proper correspondence between birthdate and NRIC.
+3. Allowing NRIC to be parsed case insensitively for all commands.
+4. More specific error messages based on users' input.
+5. For `edit`, `ec` and `no` prefixes can allow empty existing conditions and notes respectively to delete those fields.
+6. 
