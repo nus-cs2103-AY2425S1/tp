@@ -1119,11 +1119,11 @@ Example: moreinfo 1
 
 - **Special Comments:**
 1. Refer to the remarks and constraints for the following prefix: [n/](#n)
-2. The `Output` for User Error #2 has a missing parameter line where the CLIENT_INDEX should be. The intended look is:
-   Invalid command format!
-   moreinfo: Open a window to more information about the client.
-   Parameters: CLIENT_INDEX
-   Example: moreinfo 1
+2. The `Output` for User Error #2 has a missing parameters line where the CLIENT_INDEX should be. The intended look is:
+   <br>Invalid command format!
+   <br>moreinfo: Open a window to more information about the client.
+   <br>Parameters: CLIENT_INDEX
+   <br>Example: moreinfo 1
 
 #### Chat Window
 - **Command:** `chatbot`
