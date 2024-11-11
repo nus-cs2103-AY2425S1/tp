@@ -333,9 +333,9 @@ and provide at least one of these fields to edit:
 
 ##### Parsing User Input
 The `EditCommandParser` class parses the user input to extract the NRIC of the patient to be edited and the new details of the patient.
-It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. 
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments.
 This returns an `ArgumentMultiMap` object which has extracted the NRIC of the patient to be edited and all values associated with each prefix.
-After `EditCommandParser` ensures that the extracted NRIC is not empty and valid, 
+After `EditCommandParser` ensures that the extracted NRIC is not empty and valid,
 the `ArgumentMultiMap` object is then used to ensure that there are no duplicate prefixes (except for `al` and `rmal` which are used for adding and removing allergies).
 `EditCommandParser` then calls the `createEditPatientDescriptor()` method which checks the presence of values for each prefix and parse them accordingly to populate the fields to be updated.
 This returns an `EditPatientDescriptor` object which is used to create an `EditCommand` object.
@@ -352,9 +352,9 @@ The sequence diagram below illustrates the process behind creating an `EditPatie
 ![CreateEditPatientDescriptor](images/CreateEditPatientDescriptor.png)
 
 ##### Executing the Command
-The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system. 
-It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`. 
-The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate. 
+The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system.
+It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`.
+The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate.
 It is then used to replace the patient to edit through the `setPatient` method in the `Model` component.
 
 The activity diagram below illustrates the workflow behind the execution of the `edit` command:
@@ -366,8 +366,8 @@ The activity diagram below illustrates the workflow behind the execution of the 
 Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `edit` command since both commands are fundamentally similar.
 
 **Adding prefixes to add and remove allergies**<br>
-We decided to use the `al` prefix to add allergies and `rmal` to remove allergies as this simplifies the process of updating a patient's allergies. 
-Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies. 
+We decided to use the `al` prefix to add allergies and `rmal` to remove allergies as this simplifies the process of updating a patient's allergies.
+Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies.
 This design reduces redundant data entry, minimises input errors, and aligns with the fact that allergies typically do not go away.
 
 #### Delete Command : `delete`
@@ -868,7 +868,7 @@ Detailed information of a patient will be displayed if the patient exists in the
     * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1a1 is repeated until the input entered is valid containing the NRIC of an existing patient in the system.<br>
       Use case resumes from step 2.
-<br> 
+<br>
 <br>
 
 * 1b. User inputs an NRIC that does not exist in the system
@@ -906,7 +906,7 @@ At least one field of the patient will be edited.
       <br>
       <br>
 
-      
+
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format.<br>
@@ -991,8 +991,8 @@ Displays all appointments that falls between today's date and the specified end 
       Step 1b1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
       Use case resumes from step 2.
       <br>
-      
-     
+
+
 #### Use case: UC12 - Filter appointments with start date and end date
 **Guarantee:**<br>
 Displays all appointments that lies in the date range, if any.
@@ -1118,7 +1118,6 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** `exit`
    * **Expected:** All ClinicConnect windows closes and the application exits.
 
-
 ### Saving Data
 
 1. Saving of data.
@@ -1157,3 +1156,52 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Booking an upcoming appointment: `bookappt`
+
+1. Booking an upcoming appointment for a patient successfully.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. Appointment date and time entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Success message is generated and the valid appointment is added to the patient with NRIC T0123456A.
+
+2. Booking an appointment with an invalid NRIC.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Test case:** `bookappt T01234567A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid NRIC format.
+
+3. Booking an appointment with an invalid date and time.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The health service entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-32 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid date and time format.
+
+4. Booking an appointment with an invalid health service.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment date and time entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Con`
+    * **Expected:** Error message is generated to show invalid health service.
+
+6. Booking an appointment with no parameters.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
+    * **Test case:** `bookappt `
+    * **Expected:** Error message is generated to show no valid parameters.
+
+### Deleting an appointment: `deleteappt`
+
+1. Deleting an appointment for a patient successfully.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment to be deleted must be an existing appointment of the patient.
+    * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00`
+    * **Expected:** Success message is generated and the valid appointment is deleted for the patient with NRIC T0123456A.
+
+2. Deleting an appointment with an invalid NRIC.
+    * **Prerequisite:** The appointment to be deleted must be an existing appointment of the patient. 
+    * **Test case:** `deleteappt T01234567A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid NRIC format.
+
+3. Deleting an appointment with an invalid date and time.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Test case:** `deleteappt T0123456A dt|2024-12-32 13:00`
+    * **Expected:** Error message is generated to show invalid date and time format.
+
+4. Deleting an appointment with an invalid prefix.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. 
+    * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
+    * **Expected:** Error message is generated to show invalid prefix entered.

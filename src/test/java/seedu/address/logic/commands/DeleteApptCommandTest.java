@@ -28,6 +28,7 @@ public class DeleteApptCommandTest {
 
     private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
 
+    // Source adapted from ChatGPT
     @Test
     public void execute_validDeleteAppt_success() {
         Patient patientToDeleteAppt = DANIEL;
