@@ -142,7 +142,7 @@ The `Model` component,
 
 * stores EventTory data i.e., all `Vendor`, `Model`, and `Association` objects
 * contains observables that can be 'observed' by outsiders e.g. the UI can be bound to a `UiState` state so that the UI automatically changes the screen when the data in `UiState` changes, such as:
-    * the current displayed `UiState` as a `ObjectProperty<UiState>` object
+    * the current displayed `UiState` as an `ObjectProperty<UiState>` object
     * the current selected (if any) `Event`, `Vendor` objects for viewing as separate `ObjectProperty<Event>`, `ObjectProperty<Vendor>` objects
     * the current selected `Event`, `Vendor` objects (e.g., results of a search query) as a separate _filtered_ list
     * the current trailing index offset for assigned vendors/events in view mode as an `ObservableIntegerValue` object
@@ -650,13 +650,13 @@ testers are expected to do more *exploratory* testing.
 
    2. Open a command window.
 
-   3. Launch the jar file using the java -jar command. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   3. Launch the jar file using the `java -jar` command. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences:
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the application by using the java -jar command.<br>
+   2. Re-launch the application by using the `java -jar` command.<br>
       Expected: The most recent window size and location is retained.
 
 ### Create Command
