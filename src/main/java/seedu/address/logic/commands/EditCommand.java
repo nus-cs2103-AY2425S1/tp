@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddEmergencyContactCommand.MESSAGE_DUPLICATE_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
@@ -117,6 +118,9 @@ public class EditCommand extends Command {
             EmergencyContact updatedEmergencyContact =
                     createEditedEmergencyContact(emergencyContactToUpdate, editPersonDescriptor);
 
+            if (personToEdit.hasEmergencyContact(updatedEmergencyContact)) {
+                throw new CommandException(MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
+            }
             updatedEmergencyContacts =
                     updateEmergencyContacts(personEmergencyContacts, updatedEmergencyContact, index);
         } else {
