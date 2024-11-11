@@ -107,19 +107,20 @@ Adds a pet owner to PawPatrol.
 </ul>
 </div>
 
+<div markdown="block" class="alert alert-primary">
+
+**:exclamation: Duplicate owners & NRIC fields:**<br>
+<ul>
+<li>Each owner must have a unique IC number, <strong>duplicate IC numbers are not allowed</strong>.
+<li>Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.
+<ul><li>The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.</li></ul>
+</ul>
+</div>
+
 Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
-
-<div markdown="span" class="alert alert-info">
-
-**:exclamation: About Owner's NRIC in list**<br>
-
-Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.<br>
-The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.
-
-</div>
 
 #### <u>Adding a pet</u>
 
@@ -137,14 +138,15 @@ Adds a pet to PawPatrol.
 <li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
 <ul>
 <li>Ensure that tags are short in length. Avoid long tags</li>
+<li>A pet can have any number of tags (including 0).</li>
 </ul>
 </ul>
 </div>
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
-A pet can have any number of tags (including 0)
+:exclamation: **Duplicate pets:**<br>
+Duplicate pets are not allowed in the system. Pets with identical name, breed, species, age, and sex will be considered duplicates.
 </div>
 
 Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
