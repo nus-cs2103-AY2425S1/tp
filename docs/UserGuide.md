@@ -522,7 +522,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BridalBuddy home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BridalBuddy home folder. This file will be known as `[JAR file location]/data/bridalbuddy.json`.
 
 [_Back to Top_](#table-of-contents)
 
