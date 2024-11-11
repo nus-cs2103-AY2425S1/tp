@@ -589,3 +589,16 @@ such as Name, Phone Number and Client Type.
 5. **All for more flexible Reminder Editing:** Currently, the app only allows the user to edit the name of a person if they have no reminders,
 this is quite restrictive and may cause some inconveniences for users. Thus, we plan to make the app allow the user to edit the name of a person even if
 they have reminders. This will allow the user to make changes to the client's name without having to delete all the reminders first.
+
+
+6. **Disallow Duplicate View popups:** Currently, the app allows the user to open multiple view popups for the same client, this is unnecessary and may cause confusion for the user. Thus, we plan to make the app disallow the user from opening multiple view popups for the same client.
+
+
+7. **Optimised Exit:** Currently, the app does not hide all `view` popups when user exits the app. This may cause some confusion for the user when the user exits the app as they would expect all modals and popups to close as well when they exit the app. Thus, we plan to make the app hide all `view` popups when the user exits the app.
+
+
+8. **More restrictive Clear:** Currently, the app allows the user to clear all clients and reminders without any confirmation, this may cause some inconveniences for the user if they accidentally clear all clients and reminders. Thus, we plan to make the app require the user to confirm before clearing all clients and reminders.
+
+
+9. **Add visual warnings to past dates for reminders:** Currently, the app does not provide any visual warnings for reminders that are added with dates past the current date. This may cause some inconveniences for the user as they may not be aware that they have added reminders with past dates. Thus, we plan to make the app provide visual warnings for reminders that are added with dates past the current date.
+
