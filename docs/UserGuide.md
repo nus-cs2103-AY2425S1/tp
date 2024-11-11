@@ -36,13 +36,15 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
    - Then type this command to start the app:
 
         `java -jar educonnect.jar`
-   - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
-    <br/><br/>
+   - After a few seconds, the EduConnect window will appear with some sample data to help you get started. Here are some screenshots of how it might look:
+    
+    <br><br/>
+
     **macOS User Interface**: 
     ![Ui](images/Ui.png)
     **Windows User Interface**:
     ![Windows Ui](images/windows_ui.jpg)
-    <br/><br/>
+    
     {: .alert .alert-info}
     > :information_source: **Note:**
     > * EduConnect will look slightly different on macOS and Windows. Specifically, the emojis on macOS will be in color, while those on Windows will appear in monochrome.
@@ -154,7 +156,7 @@ Example:
     * an emergency contact 8765 4321
 
 {: .alert .alert-secondary}
-> When a new student is added using the example command above, he will be displayed as shown below, with the following example success message:
+> When a new student is added using the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addAppt command example](images/addStudentCommand.png)
 > 
@@ -191,7 +193,7 @@ Example:
     * the classes she teaches 5A and 8C
 
 {: .alert .alert-secondary}
-> When a new teacher is added using the example command above, she will be displayed as shown below, with the following example success message:
+> When a new teacher is added using the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addTeacher command example](images/addTeacherCommand.png)
 >
@@ -362,6 +364,7 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 Examples:
 * `find /name John` returns `John` and `John Doe`.
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A).
+* `find /subject English` returns `Elizabeth` who has the subject English
 
 {: .alert .alert-secondary}
 > When the find command above is entered, the following results will be displayed, with the following success message:
@@ -471,24 +474,31 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 >
 > The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
-![change themes](images/Changing-Themes.png)
+{: .alert .alert-secondary}
+> ![change themes](images/Changing-Themes.png)
+>
+> _Here is an example of how the menu looks._
 
 {: .alert .alert-secondary}
 > ![result for dark Theme example](images/Ui.png)
 >
-> The dark theme will be the default theme when you open EduConnect.
+> _The dark theme will be the default theme when you open EduConnect._
 
 {: .alert .alert-secondary}
 > ![result for light Theme example](images/LightMode.png)
 >
-> The light theme can be toggled by following the above instructions.
+> _The light theme can be toggled by following the above instructions._
 
 #### Viewing help : `help`
 
 Shows a message with a URL link to access the user guide.
 
 Format: `help`
-![help message](images/helpMessage.png)
+
+{: .alert .alert-secondary}
+> ![help message](images/helpMessage.png)
+>
+> _Here is an example of how the help window looks._
 
 #### Exiting the program : `exit`
 
