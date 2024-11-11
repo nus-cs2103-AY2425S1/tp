@@ -27,7 +27,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
         * [Create Shortcut for Tags: `addShortCut`](#creating-shortcuts-for-tags-addshortcut)
         * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcuts-for-tags-delshortcut)
         * [List All Shortcuts: `listShortCut`](#listing-existing-shortcuts-listshortcut)
-        * [Tag with Shortcuts](#using-shortcuts-for-tagging)
+        * [Using Shortcuts for Tagging](#using-shortcuts-for-tagging)
         * [Filter Customers by Tags: `filter`](#filtering-by-tags-filter)
         * [Archive Customer: `archive`](#archive-customer-archive)
         * [View Archived Customers: `listarchive`](#list-archived-customers-listarchive)
@@ -488,8 +488,8 @@ Examples:
 
 Example:
 - Assuming the shortcut "v" maps to "Vegan":
-    - `add ... t/v` — Tags with "Vegan".
-    - `add ... t/V` — Tags with "V".
+    - `add ... t/v` — Tags Person with "Vegan".
+    - `add ... t/V` — Tags Person with "V".
 
 ---
 
@@ -497,12 +497,10 @@ Example:
 You can filter the customer list by tags or shortcuts to view only the relevant contacts. The filter command supports prefix searches, is case-insensitive, and allows multiple keywords.
 
 Format: `filter [TAG1] [TAG2] ...`
-* Filters the list by the specified tags. 
-* Shortcuts can also be used to filter, allowing quick access to commonly used tags.
+* Filters the list by the specified tags.
 
 Examples:
-* Assuming "v" (Vegan) and "vg" (Vegetarian) shortcuts are set:
-    - `filter Vegan Vegetarian` — Shows all customers with tags containing keywords listed, "Vegan" or "Vegetarian" (e.g., "VeganPlus").
+* `filter Vegan Vegetarian` — Shows all customers with tags containing keywords listed, "Vegan" or "Vegetarian" (e.g., "VeganPlus").
 
 <div style="text-align: center;">
     <img src="images/filter.png" alt="filter" width="350"/>
