@@ -135,6 +135,7 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * AgentConnect automatically checks and corrects dates to ensure that they are valid, helping to prevent scheduling errors.
   * If a date is entered with an invalid day (eg. `2028-02-30`), Agent Connect will adjust it to the nearest valid date within the month, such as `2028-02-29`. This intelligent replacement only applies to dates up to the 31st day of any month.
+  * This applies to only adding, assigning and editing function only.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 

@@ -80,7 +80,6 @@ public class Appointment {
     @Override
     public boolean equals(Object other) {
         // This method made use of ChatGPT to ensure its correctness when comparing the appointment object
-
         return other == this || (other instanceof Appointment && date.equals(((Appointment) other).date));
     }
 
