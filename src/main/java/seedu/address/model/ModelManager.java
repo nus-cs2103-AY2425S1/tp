@@ -4,14 +4,23 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.rentalinformation.RentalInformation;
+import seedu.address.storage.CommandHistoryStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +30,11 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Client> filteredClients;
+    private final SortedList<Client> clients;
+    private final ObservableList<RentalInformation> visibleRentalInformationList;
+    private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
+    private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +46,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredClients = new FilteredList<>(this.addressBook.getPersonList());
+        clients = new SortedList<>(filteredClients);
+        visibleRentalInformationList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -88,46 +103,100 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPerson(Client client) {
+        requireNonNull(client);
+        return addressBook.hasPerson(client);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Client target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addPerson(Client client) {
+        addressBook.addPerson(client);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setPerson(Client target, Client editedClient) {
+        requireAllNonNull(target, editedClient);
+        addressBook.setPerson(target, editedClient);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public boolean hasRentalInformation(Client client, RentalInformation rentalInformation) {
+        requireNonNull(client);
+        requireNonNull(rentalInformation);
+
+        return addressBook.hasRentalInformation(client, rentalInformation);
+    }
+
+    //=========== Filtered and Sorted Client List Accessors ==========================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Client> getFilteredPersonList() {
+        return clients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Client> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredClients.setPredicate(predicate);
+
+        if (filteredClients.isEmpty()) {
+            setLastViewedClient(null);
+        }
+        updateVisibleRentalInformationList(List.of());
     }
 
+    @Override
+    public void updateSortedPersonList(Comparator<Client> comparator) {
+        requireNonNull(comparator);
+        clients.setComparator(comparator);
+    }
+
+    //=========== Visible Rental Information =================================================================
+    @Override
+    public ObservableList<RentalInformation> getVisibleRentalInformationList() {
+        return visibleRentalInformationList;
+    }
+
+    @Override
+    public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+        requireNonNull(rentalInformationList);
+        visibleRentalInformationList.setAll(rentalInformationList);
+    }
+
+    @Override
+    public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+        return lastViewedClient;
+    }
+
+    @Override
+    public Client getLastViewedClient() {
+        return lastViewedClient.get();
+    }
+
+    @Override
+    public void setLastViewedClient(Client client) {
+        this.lastViewedClient.set(client);
+    }
+
+    //=========== Command History =================================================================
+    @Override
+    public String getPreviousCommand() {
+        return commandHistoryStorage.getPreviousCommand();
+    }
+    @Override
+    public String getNextCommand() {
+        return commandHistoryStorage.getNextCommand();
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +211,11 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredClients.equals(otherModelManager.filteredClients)
+                && clients.equals(otherModelManager.clients)
+                && visibleRentalInformationList.equals(otherModelManager.visibleRentalInformationList)
+                && Objects.equals(lastViewedClient.get(), otherModelManager.lastViewedClient.get())
+                && commandHistoryStorage.equals(otherModelManager.commandHistoryStorage);
     }
 
 }

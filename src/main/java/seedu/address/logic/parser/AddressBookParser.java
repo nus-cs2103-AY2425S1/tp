@@ -8,16 +8,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.AddRentalCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.DeleteClientCommand;
+import seedu.address.logic.commands.DeleteRentalCommand;
+import seedu.address.logic.commands.EditClientCommand;
+import seedu.address.logic.commands.EditRentalCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextCommandHistoryCommand;
+import seedu.address.logic.commands.PreviousCommandHistoryCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.ViewRentalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.CommandHistoryStorage;
 
 /**
  * Parses user input.
@@ -53,29 +63,70 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddClientCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new AddClientCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case AddRentalCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new AddRentalCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case EditClientCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new EditClientCommandParser().parse(arguments);
+
+        case EditRentalCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new EditRentalCommandParser().parse(arguments);
+
+        case DeleteClientCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new DeleteClientCommandParser().parse(arguments);
+
+        case DeleteRentalCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new DeleteRentalCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
             return new ListCommand();
 
+        case ViewRentalCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new ViewRentalCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
             return new HelpCommand();
+
+        case ImportCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new ImportCommand();
+
+        case ExportCommand.COMMAND_WORD:
+            CommandHistoryStorage.writeToFile(userInput);
+            return new ExportCommand();
+
+        case PreviousCommandHistoryCommand.COMMAND_WORD:
+            return new PreviousCommandHistoryCommand();
+
+        case NextCommandHistoryCommand.COMMAND_WORD:
+            return new NextCommandHistoryCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
