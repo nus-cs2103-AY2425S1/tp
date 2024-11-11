@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
+It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-reliant apps.
 
 ---
 
@@ -302,7 +302,10 @@ Expected output:
 ### Clearing all employee entries : `clear`
 
 **Clears all employee entries** from the address book.
-**<span style="color:red">This deletes all employee data!</span>**
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This deletes all employee data!
+</div>
 
 Format: `clear`
 
@@ -439,7 +442,10 @@ Expected output:
 ### Clear all project entries : `clearproject`
 
 **Clears all project entries** from HRConnect.<br>
-<span style="color:red">This will delete all project records AND their assignments\!</span>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This will delete all project records AND their assignments!
+</div>
 
 Format: `clearproject`
 
@@ -532,7 +538,8 @@ Advanced users are welcome to update data directly by editing this data file.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 
-Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
+
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
@@ -549,7 +556,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 **A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see the data files anywhere.<br>
