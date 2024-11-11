@@ -85,8 +85,8 @@ public class PersonEditCommand extends Command {
 
 
         // Get all SCAs associated with the person before editing
-        StudentCourseAssociationList scaList = model.getStudentScaList ();
-        List<StudentCourseAssociation> personScas = scaList.get (personToEdit);
+        StudentCourseAssociationList scaList = model.getStudentScaList();
+        List<StudentCourseAssociation> personScas = scaList.get(personToEdit);
 
         // Update the person
         model.setPerson(personToEdit, editedPerson);
