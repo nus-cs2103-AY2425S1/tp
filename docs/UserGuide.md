@@ -17,17 +17,16 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * _Easy to use_
   - **Type simple commands:** If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
 * _User friendly interface_
-  - **Simple design:** view all your internship applications and statuses at a glance.
+  - **Simple design:** View all your internship applications and statuses at a glance.
 * _Streamlining management_
   - **Core features:** Add, delete and find entries.
   - **Advanced features:** Update status, sort, filter by status and view chart. 
-* _Detailed Insights_
-  - **Tailored summary**: gain hidden insights from your list of internship applications.
+* _Detailed insights_
+  - **Tailored summary**: Gain hidden insights from your list of internship applications.
 
 <br></br>
 ### Table of Contents
 <!-- TOC -->
-* [![icon](images/hireme_logo.png) HireMe User Guide](#-hireme-user-guide)
   * [Welcome to HireMe!](#welcome-to-hireme)
   * [Overview of User Guide](#overview-of-user-guide)
   * [Overview of target users](#overview-of-target-users)
@@ -35,17 +34,17 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
-      * [_Mac Users_](#mac-users)
-      * [_Windows Users_](#windows-users)
-      * [_Using the terminal_](#using-the-terminal)
-      * [_Using the HireMe application_](#using-the-hireme-application)
+      * [Mac Users](#mac-users)
+      * [Windows Users](#windows-users)
+      * [Using the terminal](#using-the-terminal)
+      * [Using the HireMe application](#using-the-hireme-application)
   * [Features](#features)
     * [Viewing help : `/help`](#viewing-help-help)
     * [Adding an internship application: `/add`](#adding-an-internship-application-add)
     * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
     * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
+    * [Updating the status of an internship application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
     * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
@@ -59,6 +58,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
       * [Unable to see the full text on the screen](#unable-to-see-the-full-text-on-the-screen)
   * [Command summary](#command-summary)
   * [Glossary](#glossary)
+  * [Acknowledgements](#acknowledgements)
 <!-- TOC -->
 
 
@@ -66,7 +66,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 ## Overview of target users
 
-If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing you may be busy with coursework. Let’s get you started with HireMe
+If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing that you may be busy with coursework. Let’s get you started with HireMe.
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use our User Guide
@@ -78,11 +78,11 @@ First time using **HireMe**? Don't worry! We've got you covered! This tutorial w
 
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are two different kinds of boxes that provide extra information.
-    * *Notice boxes* provide important information that you should take note of.
+    * *Note boxes* provide important information that you should take note of.
 
       <box type="info" seamless>
       
-      **Notice:** This is a notice box.
+      **Note:** This is a Note box.
       </box>
 
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
@@ -103,7 +103,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their [website](https://www.oracle.com/sg/java/technologies/downloads/).
 
 
-2. Download `hireme.jar` file from our [github](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download `hireme.jar` file from our [GitHub](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.6).
 
     ![downloadhireme](images/DownloadHireMe.png)
 
@@ -111,42 +111,46 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 3. Create a new folder and name it any name you want (e.g. HireMe).
 
 
-4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3.
+4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3. <br>
+
     ![hiremejar](images/HireMeJar.png)
 
 <br></br>
 ### Part 2: Using the HireMe application
-
 For steps 5 and 6, refer to **either** [Mac Users](#mac-users) **or** [Windows Users](#windows-users) section that matches your computer system.
 Continue to [Using the terminal](#using-the-terminal) after completing steps 5 and 6.
 <br></br>
 #### _Mac users_
-5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
+5. Use Mac's spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="750"/>
-    <br></br>
-    You will see a window like this.
+    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/> <br>
+   
+    You will see a window like this. <br>
 
     ![openmacterminal](images/OpenMacTerminal.png)
     
 
-6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
+6. Click into the folder created in step 3. Right click on the `hireme.jar` file and select `Get Info`. <br>
+
    ![macfilepathinfo](images/Macfilepathinfo.png)
     <br></br>
-    On the new open that pops up, left click on `Where` and copy the file path.
+    On the new window that pops up, right click on `Where` and copy the file path.
 
-   <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
+   <img src="images/Macfilepath.png" alt="macfilepath" width="810"/>
    <br></br>
 
 #### _Windows users_
-5. Use windows search and type Terminal, click on open. 
+5. Use Windows' search and type Terminal, click on `Open`.<br>
+
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
-You will see a window like this.
+You will see a window like this. <br>
+
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
-6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
+6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.<br>
+
    ![windowsfilepath](images/Windowsfilepath.png)
    <box type="info" seamless>
    <strong>Note:</strong> File path here is highlighted in blue
@@ -154,25 +158,27 @@ You will see a window like this.
    <br></br>
 
 #### _Using the terminal_
-7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press enter.
+7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press `Enter`.
 
 
-8. Type `java -jar hireme.jar` and press enter to run the HireMe application.
+8. Type `java -jar hireme.jar` and press `Enter` to run the HireMe application.
 <br></br>
-   - Windows Terminal:
+   - Windows Terminal: <br>
+   
       ![windowscd](images/Windowscd.png)
      <br></br>
-   - Mac Terminal:
+   - Mac Terminal: <br>
+   
       ![maccd](images/Maccd.png)
 <br></br>
 
 
 #### _Using the HireMe application_
-A GUI similar to the below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
+A GUI similar to the one below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
 
    ![Ui](images/LabelledUi.png)
 
-9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br></br>
+9. Type the command in the command box and press `Enter` to execute it. (e.g. typing **`/help`** and pressing `Enter` will open the help window.)<br></br>
    Some example commands you can try:
 
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`: Adds an internship application at Google to the list of added entries.
@@ -206,13 +212,13 @@ Refer to [Troubleshooting](#troubleshooting) if you are facing problems for sett
 * Extraneous parameters for commands that do not take in parameters (such as `/help`, `/list`, `/exit`, `/clear` and `/chart`) are not permitted.<br>
   e.g. if the command specifies `/help 123` instead of `/help`, an "Invalid command format!" error message will be shown.
 
-* Command names must be in **lower case only**.<br>
+* Command names must be in **lowercase only**.<br>
   e.g. `/list` is acceptable but `/List` and `/LIST` are not.
 
 </box>
 
 <br></br>
-### Viewing help : `/help`
+### Viewing help: `/help`
 
 Shows a message explaining how you can access the help page.
 
@@ -245,12 +251,12 @@ Examples:
 </div>
 
 <box type="info" seamless>
-<strong>Note:</strong>  HireMe considers an entry to be a duplicate of all of its fields match <strong>(case-insensitive)</strong>  an existing internship application entry. An attempt to add duplicates will result in an error.
+<strong>Note:</strong> HireMe identifies an entry as a duplicate if its <em>NAME</em>, <em>ROLE</em>, <em>EMAIL</em> and <em>DATE</em> match <strong>(case-insensitive)</strong> with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
 </box>
 
 <br></br>
 
-### Listing all internship applications : `/list`
+### Listing all internship applications: `/list`
 
 Shows a list of all of your internship applications in HireMe.
 
@@ -258,7 +264,7 @@ Format: `/list`
 
 <br></br>
 
-### Deleting an internship application : `/delete`
+### Deleting an internship application: `/delete`
 
 Deletes the specified internship application from HireMe.
 
@@ -267,12 +273,12 @@ Format: `/delete INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed internship application list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications).
+* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications in the displayed list).
 
 Examples:
-* `/list` followed by `/delete 2` deletes the 2nd application in the list.
-* `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
-* `/list` followed by `/delete 4` when you only have 3 internship applications returns an error message.
+* `/list` followed by `/delete 2` deletes the second application in the list.
+* `/find Google` followed by `/delete 1` deletes the first application in the results of the `/find` command.
+* `/list` followed by `/delete 4` when you only have three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
 <div style="display: flex;">
@@ -291,7 +297,7 @@ Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
-* The search allows for **more than 1 `KEYWORD`**
+* The search allows for **more than one** `KEYWORD`
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
@@ -310,7 +316,7 @@ Examples:
 
 <br></br>
 
-### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
+### Updating the status of an internship application: `/accept`, `/pending`, `/reject`
 
 Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
@@ -319,17 +325,17 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 * `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
 * `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
 * `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
-*  The `INDEX` refers to the position of an application in the displayed list, relative to the current filtered or listed view.
+*  The `INDEX` refers to the position of an application in the displayed list.
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
 * `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than five applications in the displayed list).
 
 **Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have ten total applications, but after using `/filter ACCEPTED` only five applications are shown, then `/reject 5` will target the last item on this filtered list.
 
-**Examples:**
+Examples:
 1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
 2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
 3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `PENDING` filter.
 5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
@@ -338,7 +344,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
   <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
 <box type="info" seamless>
-<strong>Note:</strong> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong> You can update an application’s status to its current state. For example, using <em>/accept INDEX</em> on an already accepted application will keep its status as <em>ACCEPTED</em>, <em>/pending INDEX</em> on a pending application will keep it as <em>PENDING</em>, and <em>/reject INDEX</em> on a rejected application will maintain its <em>REJECTED</em> status.
 </box>
 
 
@@ -351,7 +357,7 @@ Filters all of your existing internship applications with specified status.
 Format: `/filter STATUS`
 
 * Valid statuses are `pending`, `accepted` or `rejected` only.
-* The status is case-insensitive. (e.g. `"pending"`, `"PenDiNg"` and `"PENDING"` are all allowed.)
+* The status is **case-insensitive**. (e.g. `"pending"`, `"PenDiNg"` and `"PENDING"` are all allowed.)
 
 Examples:
 * `/filter pending` displays all the internship applications that have a status of pending.
@@ -372,8 +378,8 @@ Sorts your internship applications in **ascending / descending** order based on 
 
 Format: `/sort ORDER`
 
-* There are only 2 orders that are valid: `earliest` or `latest` only.
-* The order is case-insensitive. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
+* There are only two orders that are valid: `earliest` or `latest` only.
+* The order is **case-insensitive**. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
 * Once you sort the list, even if you exit the application and reopen it, the list remains sorted unless you add more internship applications.
 * Even if you find or filter the list, sorting it afterwards will also sort the entire main list.
 
@@ -389,13 +395,13 @@ Examples:
 
 <br></br>
 
-### Clearing all entries : `/clear`
+### Clearing all entries: `/clear`
 
 Clears all of your internship application entries from the HireMe application.
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 This removes all the internship applications that you have been tracking. You will not be able to revert and get back your saved data once this command is executed.
 </box>
 
@@ -413,7 +419,7 @@ Format: `/chart`
 
 <br></br>
 
-### Exiting the program : `/exit`
+### Exiting the program: `/exit`
 
 Exits the HireMe application.
 
@@ -431,13 +437,13 @@ HireMe data are saved in the hard disk automatically after any command that chan
 Get your questions or doubts about HireMe's functionality and details answered here. If you have further questions, you can contact us through our email `hireme@gmail.com`.
 
 #### Q1: Where is the data for the application stored?
-Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
+Ans: HireMe's data is saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 <br></br>
 
 #### Q2: Can I edit the data file directly?
 Ans: You are strongly encouraged to **not** edit the JSON data file directly. You can use the commands as mentioned above to augment any data.
-Should the changes made to the data file causes the format to be invalid, HireMe will discard all data and start with an empty data file.
-It is highly recommended to make a copy of the date file before editing it. <br>
+Should the changes made to the data file cause the format to be invalid, HireMe will discard all data and start with an empty data file.
+It is highly recommended to make a copy of the data file before editing it. <br>
 
 Users should only edit the data file only if they are confident in updating it correctly.
 <br></br>
@@ -472,7 +478,7 @@ If you are facing problems while setting up or using HireMe, we want to help you
 <br></br>
 
 #### HireMe application setup failed
-Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
+Check that you have the `hireme.jar` in the correct folder and copied the correct file path into the terminal. Check that you have Java `17` or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
 <br></br>
 
 #### Getting errors when using the commands
@@ -489,15 +495,15 @@ Try opening the window to full screen or scroll to view the full text. Avoid inp
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `/help`
-**Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
+**Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g. `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **List**   | `/list`
-**Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
-**Accept** | `/accept INDEX`<br> e.g., `/accept 2`
-**Pending**| `/pending INDEX`<br> e.g., `/pending 3`
-**Reject** | `/reject INDEX`<br> e.g., `/reject 1`
-**Filter** | `/filter STATUS`<br> e.g., `/filter pending`
-**Sort**   | `/sort ORDER`<br> e.g., `/sort earliest`
+**Delete** | `/delete INDEX`<br> e.g. `/delete 3`
+**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g. `/find Google Facebook`
+**Accept** | `/accept INDEX`<br> e.g. `/accept 2`
+**Pending**| `/pending INDEX`<br> e.g. `/pending 3`
+**Reject** | `/reject INDEX`<br> e.g. `/reject 1`
+**Filter** | `/filter STATUS`<br> e.g. `/filter pending`
+**Sort**   | `/sort ORDER`<br> e.g. `/sort earliest`
 **Clear**  | `/clear`
 **Chart**  | `/chart`
 **Exit**   | `/exit`
@@ -506,25 +512,33 @@ Action     | Format, Examples
 
 ## Glossary
 
-- **Application Status**:
-    - **PENDING**: The internship application is currently in progress.
-    - **REJECTED**: The user has rejected or been rejected from this internship application.
-    - **ACCEPTED**: The user has accepted the offer for this internship.
+Term     | Definition
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Action**    | The task carried out by the HireMe application such as Add, Delete, Update entries. 
+**Alphanumeric**    | Consisting of both letters and numbers. 
+**Application Status**   | - **PENDING**: The internship application is currently in progress. <br> - **REJECTED**: The user has rejected or been rejected from this internship application. <br>- **ACCEPTED**: The user has accepted the offer for this internship.
+**Command** | The input the user types into the HireMe application’s command bar to carry out a particular action.
+**Command Bar** | The input bar at the top of the HireMe application which allows users to type in a string command.
+**Company Email** | The email of the company that the user is applying for an internship role at.
+**Company Name** | The name of the company that the user is applying for an internship role at.
+**Command Line Interface (CLI)** | An interface that the user interacts with by typing text commands instead of using a mouse to click on buttons or icons. 
+**Filepath** | The location through which a file can be accessed in a file system.
+**Graphical User Interface (GUI)** | An interface that the user interacts with using visual elements like buttons, icons and windows.
+**Index** | The application number of the internship application displayed in the list.
+**Java** | A programming language for coding applications, websites and other software.
+**Java Archive (Jar)** | A file format used to package multiple files into one file for distribution. 
+**JavaScript Object Notation (JSON)** | A readable format to represent structured data, which is commonly used for web applications.
+**Order** | The order that the user would like the list to be in, based on the date of application.
+**Parameter** | The details needed to perform specific commands. (e.g. Add command has a parameter for company name) 
+**Role** | The role of the internship the user applied for.
+**Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
 
-- **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
+--------------------------------------------------------------------------------------------------------------------
 
-- **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
+## Acknowledgements
 
-- **Command**: The string the user types into the HireMe application’s command bar to carry out a particular action.
+We would like to acknowledge the following contributions:
 
-- **Command Bar**: The input bar at the top of the HireMe application which allows users to type in a string command.
+We started with a general [AB3 user guide](https://se-education.org/addressbook-level3/UserGuide.html) template and adapted it to the functional requirements of HireMe. We also used [MarkBind](https://markbind.org/) which is a third party library to generate a dynamic user guide website from Markdown text.
 
-- **Company Email**: The email of the company that the user is applying for an internship role at.
-
-- **Company Name**: The name of the company that the user is applying for an internship role at.
-
-- **Graphical User Interface (GUI)**: The user interacts with the computer using visual elements like buttons, icons and windows.
-
-- **Role**: The role of the internship the user applied for.
-
-- **Index**: The index of the internship application displayed in the list.
+AI tools such as ChatGPT were also used to check for grammatical errors.
