@@ -64,7 +64,7 @@ public class LogEntry {
 
     }
 
-   /**
+    /**
      * Converts the storage entry to a formatted string.
      */
     public static String convertToFormattedString(String storageEntry) {
