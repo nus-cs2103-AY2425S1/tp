@@ -193,8 +193,9 @@ Examples:
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'findc alex david'](images/findAlexDavidResult.png)
 
-<box type="important">
 <div style="page-break-after: always;"></div>
+
+<box type="important">
 
 ##### Constraints
 
@@ -304,6 +305,7 @@ Examples:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Editing an order : `editorder`
 
@@ -374,6 +376,7 @@ Examples:
 * The status of the target order **must be `Completed`**.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Filter orders by order status : `filterorder`
 
@@ -405,6 +408,7 @@ Examples:
   e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 

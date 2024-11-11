@@ -116,6 +116,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCustomerCommandParser`) and uses it to parse the command.
@@ -448,6 +450,7 @@ Use case ends.
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
   * The specified customer's details will be overwritten if the input parameters are valid.
+<div style="page-break-after: always;"></div>
 
 **MSS**
 
@@ -516,6 +519,7 @@ Use case ends.
 4. SellSavvy confirms the addition is successful by displaying the newly added order's details and customer's list of orders.
 
 Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Extensions**
 
@@ -575,6 +579,7 @@ Use case ends.
   * SellSavvy displays that the customer does not have any orders currently.
 
   Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Use case 8: Mark Order as Completed**
 
@@ -643,6 +648,7 @@ Use case ends.
     * 2c1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Use case 10: Delete an order**
 
@@ -781,6 +787,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Launch and shutdown
 
@@ -841,6 +848,8 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `addcustomer n/Betsy crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` <br>
        Expected: The customer is successfully added. A warning and details of the added customer shown in the status message.
+
+<div style="page-break-after: always;"></div>
 
 5. Adding a customer with duplicate tags.
 
