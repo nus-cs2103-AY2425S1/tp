@@ -141,9 +141,9 @@ When you launch GoonBook, GoonBook appears on your screen as a Graphical User In
 
 GoonBook’s GUI consists of a single main window, as well as the Help Window. The main window consists of three components:
 
-1. Command Input Box
-2. Item List Box
-3. Command Output Box
+1. Student List Box
+2. Group List Box
+3. Command Input and Output Boxes
 
 The following picture of the main window shows the three components, numbered accordingly:
 ![Layout](images/Layout.png)
