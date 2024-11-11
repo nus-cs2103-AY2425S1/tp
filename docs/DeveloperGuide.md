@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
@@ -32,59 +33,62 @@ title: Developer Guide
   - [Finding Entries](#finding-entries)
   - [Saving Data](#saving-data)
 
+---
 
---------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
 This project is based on the AddressBook-Level 3 (AB-3) project created by the [SE-EDU initiative](https://se-education.org) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html), [GitHub Page](https://github.com/se-edu/addressbook-level3)).
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- [**`UI`**](#ui-component): The UI of the App.
+- [**`Logic`**](#logic-component): The command executor.
+- [**`Model`**](#model-component): Holds the data of the App in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- defines its _API_ in an `interface` with the same name as the Component.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -104,14 +108,14 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
-* Depending on the command executed, a different layout is displayed.
-  * For `find` command, `FindPersonList` is rendered.
-  * For `findapp`command, `FindAppointmentList` is rendered.
-  * For all other commands, `PersonListPanel` is rendered.
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- Depending on the command executed, a different layout is displayed.
+  - For `find` command, `FindPersonList` is rendered.
+  - For `findapp`command, `FindAppointmentList` is rendered.
+  - For all other commands, `PersonListPanel` is rendered.
 
 ### Logic component
 
@@ -137,7 +141,6 @@ The sequence diagram below shows how the `clear confirm` command is processed by
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This diagram illustrates the additional step where the command checks for explicit confirmation before clearing all data.
 </div>
 
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -151,31 +154,30 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/UpdatedModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
-* stores the address book data i.e., all Person objects in a UniquePersonList object. Each Person can have multiple roles (patient and/or caregiver) and contains their personal details, appointments, and relationships.
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-* manages relationships between patients and caregivers through a system of NRIC references. A Person can be both a patient and a caregiver, with each role stored in a Set<Role>. Patient-caregiver relationships are tracked using Set<Nric> fields for both caregivers and patients.
-* manages all appointments through an `AppointmentManager` object that prevents conflicting appointments and maintains appointment-person relationships
-* stores appointments for each `Person` in a `Set<Appointment>` that can be filtered and retrieved by time
-
+- stores the address book data i.e., all Person objects in a UniquePersonList object. Each Person can have multiple roles (patient and/or caregiver) and contains their personal details, appointments, and relationships.
+- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+- manages relationships between patients and caregivers through a system of NRIC references. A Person can be both a patient and a caregiver, with each role stored in a Set<Role>. Patient-caregiver relationships are tracked using Set<Nric> fields for both caregivers and patients.
+- manages all appointments through an `AppointmentManager` object that prevents conflicting appointments and maintains appointment-person relationships
+- stores appointments for each `Person` in a `Set<Appointment>` that can be filtered and retrieved by time
 
 The `Model` does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The updated model introduces a `Caregiver` class linked to a `Patient` object through a unique `patientID`. The system maintains this relationship and ensures that caregivers can only be associated with valid patients.<br>
 
-
 </div>
-
 
 ### Storage component
 
@@ -184,15 +186,16 @@ The `Model` does not depend on any of the other three components (as the `Model`
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
@@ -209,64 +212,65 @@ Given below is a detailed explanation of how the appointment system works.
 Step 1. When the app starts up, `ModelManager` creates an `AppointmentManager` that maintains a central list of all appointments across all persons.
 
 Step 2. When a user adds an appointment through the `addapp` command, the following sequence of operations happen:
+
 1. The `ModelManager` retrieves the person using their NRIC.
 2. The appointment is validated for:
-  * Start time being before end time
-  * Start time being in the future
-  * The person existing in the system
+
+- Start time being before end time
+- Start time being in the future
+- The person existing in the system
+
 3. The `AppointmentManager` checks for conflicts with existing appointments.
 4. If all validations pass:
-  * The appointment is added to both the person's appointment list
-  * The central appointment list is updated
+
+- The appointment is added to both the person's appointment list
+- The central appointment list is updated
+
 5. The success/failure result is returned to the user.
 
 Step 3. When an appointment is removed through the `deleteapp` command:
+
 1. The person is retrieved using their NRIC
 2. The appointment is found based on the provided date and time
 3. The appointment is removed from the person's list
 4. The central appointment list is updated
 
-
 <img src="images/AddAppointmentSequenceDiagram.png" height = "350" width="700" />
-
 
 The following classes play important roles in the appointment system:
 
-* `ModelManager`: Implements the `Model` interface and serves as the facade for appointment operations
-* `AppointmentManager`: Manages the central list of appointments and handles conflict checking
-* `Person`: Stores a list of appointments specific to that person
-* `Appointment`: Represents a single appointment with start time, end time, and description
+- `ModelManager`: Implements the `Model` interface and serves as the facade for appointment operations
+- `AppointmentManager`: Manages the central list of appointments and handles conflict checking
+- `Person`: Stores a list of appointments specific to that person
+- `Appointment`: Represents a single appointment with start time, end time, and description
 
 Here is how some key operations are implemented:
 
-* **Conflict checking**: A conflict occurs when a new appointment overlaps in time with any existing appointment. An overlap happens when:
+- **Conflict checking**: A conflict occurs when a new appointment overlaps in time with any existing appointment. An overlap happens when:
 
 The new appointment starts before another appointment ends, AND The new appointment ends after another appointment starts
 
-
-* **Adding an appointment**: The `addAppointment` method in `AppointmentManager` first checks for conflicts, then adds the appointment to both the person's list and updates the central list. A boolean is returned to indicate success or failure.
-* **Updating central list**: The `update` method in `AppointmentManager` retrieves all appointments from all persons, sorts them by start time, and checks for any conflicts that might have been introduced.
+- **Adding an appointment**: The `addAppointment` method in `AppointmentManager` first checks for conflicts, then adds the appointment to both the person's list and updates the central list. A boolean is returned to indicate success or failure.
+- **Updating central list**: The `update` method in `AppointmentManager` retrieves all appointments from all persons, sorts them by start time, and checks for any conflicts that might have been introduced.
 
 The centralized appointment management through `AppointmentManager` ensures that:
 
-* No conflicting appointments can be created
-* A single source of truth exists for all appointments
-* Appointments can be efficiently retrieved for any person
-* All appointment operations maintain data consistency
+- No conflicting appointments can be created
+- A single source of truth exists for all appointments
+- Appointments can be efficiently retrieved for any person
+- All appointment operations maintain data consistency
 
-
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -274,12 +278,12 @@ The centralized appointment management through `AppointmentManager` ensures that
 
 **Target user profile**:
 
-* Independent Geriatricians managing elderly patients
-* Those patients have chronic conditions
-* Geriatrician can type fast
-* Prefers CLI over GUI
-* Needs to manage several patients
-**Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
+- Independent Geriatricians managing elderly patients
+- Those patients have chronic conditions
+- Geriatrician can type fast
+- Prefers CLI over GUI
+- Needs to manage several patients
+  **Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
 
 ### User Stories
 
@@ -311,8 +315,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced user | export patient data to a CSV file            | backup data and use it in other applications                      |
 | `*`      | experienced user | import patient data from a CSV file          | restore backups or transfer data from other systems               |
 
-*User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
-*User stories for the final version:* Stories 1 - 13 are for the final version.
+_User stories for the MVP:_ Stories 4, 6 and 9 are for the MVP
+_User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ### Use Cases
 
@@ -325,13 +329,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - Patient details are saved only if the input data is valid.
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `add` a new person along with their details.
 2. CareLink requests person details.
 3. CareLink validates the input data.
@@ -340,6 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Use case ends.
 
 #### Extensions
+
 - **4a. Invalid patient data entered**:
   - CareLink displays an error message indicating which data is invalid.
   - Fred corrects the input, and the use case resumes from step 4.
@@ -354,19 +362,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - The person's details are successfully retrieved and displayed.
 - The correct person's information is displayed without errors.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `find` a person's details.
 2. CareLink retrieves the person's details.
 3. CareLink displays the person's details to Fred.
 4. Use case ends.
 
 #### Extensions
+
 - **1a. Invalid or nonexistent person NRIC entered**:
   - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
   - Fred corrects the NRIC, and the use case resumes from step 1.
@@ -381,12 +393,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - The caregiver is correctly linked to the specified patient, and vice versa.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `link` a caregiver to a patient and enters the necessary details, including the caregiver's and patient's NRIC.
 2. CareLink validates all input details against criteria.
 3. CareLink links the caregiver to the specified patient NRIC.
@@ -394,7 +409,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Specified Caregiver NRIC Does Not Exist**:
+
   - CareLink displays an error message, and link not formed.
   - Use case ends.
 
@@ -411,19 +428,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - The patient’s details are successfully updated in the system.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `edit` and provides the NRIC of patient and new details.
 2. CareLink validates the new input.
 3. CareLink updates the records and confirms the update with a success message.
 4. Use case ends.
 
 #### Extensions
+
 - **2a. Record Does Not Exist**:
+
   - CareLink informs Fred that the patient record does not exist.
   - Use case ends.
 
@@ -440,18 +462,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The patient exists in the system.
 
 #### Guarantees
+
 - The patient's details are successfully removed from the system.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `delete` a person's details by using the NRIC.
 2. CareLink retrieves the person's information.
 3. CareLink deletes the person's record.
 4. Use case ends.
 
 #### Extensions
+
 - **1a. Person Does Not Exist**:
   - CareLink displays an error message.
   - Use case ends.
@@ -465,12 +491,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - Data is successfully found by the specified condition and displayed.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters command to `find` patient data by medical condition.
 2. CareLink prompts Fred to input the medical condition.
 3. Fred enters the medical condition.
@@ -479,7 +508,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Use case ends.
 
 #### Extensions
+
 - **3a. Invalid Condition**:
+
   - CareLink displays an error message and prompts Fred to re-enter the condition.
   - Use case resumes from step 3.
 
@@ -496,12 +527,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - None
 
 #### Guarantees
+
 - Data is successfully found by the specified patient(s) and displayed.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the command to `find` patient data by specific patients.
 2. CareLink prompts Fred to input patient identifiers.
 3. Fred enters the patient identifiers.
@@ -510,7 +544,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Use case ends.
 
 #### Extensions
+
 - **3a. Invalid Patient Identifier**:
+
   - CareLink displays an error message and prompts Fred to re-enter the identifier.
   - Use case resumes from step 3.
 
@@ -527,35 +563,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The person exists in the system.
 
 #### Guarantees
+
 - A follow-up appointment is successfully scheduled and confirmed.
 - The appointment time is valid (start time before end time).
 - The appointment is in the future.
 - No duplicate appointments are created for the person.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the `addapp` command to schedule a follow-up appointment with the required details (person's NRIC, start date/time, end date/time, description).
 2. CareLink validates that:
-  - The start date/time is before the end date/time.
-  - The appointment is in the future.
-  - The person exists in the system.
-  - The appointment does not conflict with existing appointments.
+
+- The start date/time is before the end date/time.
+- The appointment is in the future.
+- The person exists in the system.
+- The appointment does not conflict with existing appointments.
+
 3. CareLink confirms the follow-up appointment and saves it in the system.
 4. CareLink displays a confirmation message with the appointment details.
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Person Does Not Exist**:
+
   - CareLink displays an error message that the person cannot be found.
   - Use case ends.
 
 - **2b. Invalid Appointment Time**:
+
   - CareLink displays an error message that the appointment times are invalid.
   - Use case ends.
 
 - **2c. Past Appointment Time**:
+
   - CareLink displays an error message that appointments must be in the future.
   - Use case ends.
 
@@ -572,37 +617,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The person exists in the system.
 - The appointment for that person exists in the system.
 
 #### Guarantees
+
 - The edited appointment is successfully scheduled and confirmed.
 - The edited appointment time is valid (start time before end time).
 - The edited appointment is in the future.
 - No duplicate appointments are created for the person after editing.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the `editapp` command to schedule an edited appointment with the required details (person's NRIC, date, start time, new date, new start time, new end time).
 2. CareLink validates that:
-  - The new start date/time is before the new end date/time.
-  - The appointment is in the future.
-  - The person exists in the system.
-  - The appointment to be edited exists in the system.
-  - The appointment does not conflict with existing appointments.
+
+- The new start date/time is before the new end date/time.
+- The appointment is in the future.
+- The person exists in the system.
+- The appointment to be edited exists in the system.
+- The appointment does not conflict with existing appointments.
+
 3. CareLink confirms the edited appointment and saves it in the system.
 4. CareLink displays a confirmation message with the appointment details.
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Person Does Not Exist**:
+
   - CareLink displays an error message that the person cannot be found.
   - Use case ends.
 
 - **2b. Invalid Appointment Time**:
+
   - CareLink displays an error message that the appointment times are invalid.
   - Use case ends.
 
 - **2c. Past Appointment Time**:
+
   - CareLink displays an error message that appointments must be in the future.
   - Use case ends.
 
@@ -619,31 +673,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The person exists in the system.
 - The appointment exists in the system.
 
 #### Guarantees
+
 - The specified appointment is successfully deleted from the system.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the `deleteapp` command with the required details (person's NRIC, date, start time).
 2. CareLink validates that:
-  - The person exists in the system.
-  - The specified appointment exists for that person at the given date and time.
+
+- The person exists in the system.
+- The specified appointment exists for that person at the given date and time.
+
 3. CareLink deletes the appointment from the system.
 4. CareLink displays a confirmation message with the deleted appointment's details.
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Person Does Not Exist**:
+
   - CareLink displays an error message that the person cannot be found.
   - Use case ends.
 
 - **2b. Invalid Date Format**:
+
   - CareLink displays an error message that the date format should be DD/MM/YYYY.
   - Use case ends.
 
 - **2c. Invalid Time Format**:
+
   - CareLink displays an error message that the time format should be HH:MM.
   - Use case ends.
 
@@ -660,23 +723,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The person exists in the system.
 
 #### Guarantees
+
 - The note is successfully added to the person's records.
 - The note text is not empty.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the `addnote` command with the required details (person's NRIC, note text).
 2. CareLink validates that:
-  - The person exists in the system.
-  - The note text is not empty.
+
+- The person exists in the system.
+- The note text is not empty.
+
 3. CareLink adds the note to the person's records.
 4. CareLink displays a confirmation message showing the NRIC and the added note text.
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Person Does Not Exist**:
+
   - CareLink displays an error message that the person cannot be found.
   - Use case ends.
 
@@ -697,10 +767,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The address book contains patient data.
 
 #### Guarantees
+
 - All patient data is removed only after explicit confirmation.
 - CareLink prompts Fred to use the correct command to avoid accidental data loss.
 
 #### Main Success Scenario (MSS)
+
 1. Fred enters the `clear confirm` command.
 2. CareLink validates the command.
 3. CareLink clears all entries from the address book.
@@ -708,54 +780,110 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 #### Extensions
+
 - **2a. Fred entered `clear` without `confirm`**:
   - CareLink displays a message prompting Fred to use `clear confirm`.
   - Use case ends.
+
+---
+
+### Use Case 13: Update Appointment Status
+
+- System: CareLink
+- Use Case: UC13 - Update Appointment Status
+- Actor: Geriatrician (Fred)
+
+#### Preconditions
+
+- The patient exists in the system.
+- An appointment with the specified start date and time exists for the patient.
+
+#### Guarantees
+
+- The status of the specified appointment is successfully updated.
+- Only valid statuses (e.g., "COMPLETED", "CANCELLED") are accepted.
+- The status update is confirmed and saved in the system.
+
+#### Main Success Scenario (MSS)
+
+1. Fred enters the updatestatus command to modify the status of a specific appointment using the patient’s NRIC, appointment date, start time, and new status.
+2. CareLink validates that:
+   - The patient exists in the system.
+   - An appointment matching the specified date and start time exists for this patient.
+   - The provided status is valid.
+3. CareLink updates the appointment status in the system.
+4. CareLink displays a confirmation message showing the updated appointment status.
+5. Use case ends.
+
+#### Extensions
+
+- 2a. Patient Does Not Exist:
+
+  - CareLink displays an error message that the patient cannot be found.
+  - Use case ends.
+
+- 2b. Appointment Not Found:
+
+  - CareLink displays an error message indicating that no appointment matches the specified details.
+  - Use case ends.
+
+- 2c. Invalid Status:
+  - CareLink displays an error message about the invalid status value.
+  - Use case ends.
+
 ---
 
 ### Non-Functional Requirements
 
 1. **Typing-Preferred**
-    - **Category:** User Efficiency
-    - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
-    - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
+
+   - **Category:** User Efficiency
+   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
+   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
 
 2. **Platform-Independent**
-    - **Category:** Environment Requirements
-    - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
-    - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+
+   - **Category:** Environment Requirements
+   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
+   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
 
 3. **No-DBMS**
-    - **Category:** Technical Requirements
-    - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
-    - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
+
+   - **Category:** Technical Requirements
+   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
+   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
 
 4. **Human-Editable File**
-    - **Category:** Data Requirements
-    - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
-    - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
+
+   - **Category:** Data Requirements
+   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
+   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
 
 5. **Single-User**
-    - **Category:** User Constraints
-    - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
-    - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
+
+   - **Category:** User Constraints
+   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
+   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
 
 6. **Portability**
-    - **Category:** System Constraints
-    - **Requirement:** The product must support downloading JSON files that can be easily loaded and used on another system.
-    - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
+
+   - **Category:** System Constraints
+   - **Requirement:** The product must support downloading JSON files that can be easily loaded and used on another system.
+   - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
 
 7. **Readable Font Size**
-    - **Category:** Usability
-    - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
-    - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
+
+   - **Category:** Usability
+   - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
+   - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
 
 8. **Simplicity**
-    - **Category:** Usability
-    - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
-    - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
+   - **Category:** Usability
+   - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
+   - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
 
 ### Glossary
+
 - **AB3 (Address Book 3)**: A contact management application that allows users to store, manage, and search contact details. It is designed for maintaining a digital address book, often used as a foundation for developing further CLI-based applications.
 
 - **Active Patient**: A patient who is currently being treated by the geriatrician and appears in the default view of CareLink.
@@ -764,11 +892,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **API (Application Programming Interface)**: A set of functions and procedures allowing applications to access the features or data of another service, application, or system.
 
-
 - **Batch Delete**: An upcoming feature in CareLink that allows the user to delete multiple patient records at once, such as deleting a group of inactive patients.
 
 - **Batch Update**: An upcoming feature in CareLink that allows the user to make changes to multiple patient records at once, such as updating contact information for a group of patients.
-
 
 - **Caregiver**: A person associated with a patient who helps in managing the patient’s healthcare needs, often involved in emergency contacts or follow-ups.
 
@@ -780,36 +906,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **CSV (Comma-Separated Values)**: A simple file format used to store tabular data where each field is separated by a comma. This file format would be used to transfer data between 2 different computers.
 
-
 - **Default View**: The initial view of CareLink, which displays a list of active patients and their basic information.
-
 
 - **Follow-up Appointment**: An appointment scheduled after an initial consultation or visit to monitor the patient's ongoing condition or treatment progress.
 
 - **Fuzzy Search**: A search feature that allows users to find patient records using partial or approximate information, such as a part of the patient’s name or NRIC.
 
-
 - **Geriatricians**: Doctors specializing in the healthcare of elderly patients, focusing on the prevention, diagnosis, and treatment of diseases and conditions that commonly affect older adults, often playing a key role in managing chronic illnesses and improving quality of life.
 
 - **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements
 
-
 - **Inactive Patient**: A patient who is no longer actively being treated but whose records are kept in the system for historical reference; they do not appear in the default view.
 
-
 - **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. The application uses JSON to save and read user data files, enabling structured data storage and retrieval.
-
 
 - **Main Window**: The primary window of the application that houses all the major UI components, including the Command Box, Result Display, Person List Panel, and others.
 
 - **Model**: In software design, the component responsible for representing the application's data, including logic for accessing and modifying that data.
 
-
 - **NRIC**: National Registration Identity Card, a unique identification number used in Singapore to identify individuals, and used in CareLink to uniquely identify patient records.
 
-
 - **ObservableList**: A type of data structure that allows the application to monitor and respond to changes in its contents. When used in the Model component, an ObservableList enables automatic updates to the UI when data changes, providing real-time synchronization between the app's data and its visual display.
-
 
 - **Parsing**: The process of analyzing and converting user-entered commands or input into a format that the application can understand and process. This involves breaking down the command into its components and mapping them to execute the desired operation.
 
@@ -817,13 +934,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Person List Panel**: A visual component in the application's UI that displays a list of individuals (patients and/or caregivers). This panel updates dynamically based on user actions, such as adding, editing, or removing persons.
 
-
 - **Result Display**: A section in the UI that shows feedback messages and the outcomes of commands entered by the user. This display helps confirm whether a command was executed successfully or if there were any errors.
-
 
 - **Sequence Diagram**: A type of diagram that shows how objects interact with each other over time, specifically highlighting the sequence of messages exchanged.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -837,112 +952,125 @@ testers are expected to do more *exploratory* testing.
 ### Launch and Shutdown
 
 1. **Initial Launch**
-  - **Steps**:
-    1. Download the `.jar` file and copy it into an empty folder.
-    2. Double-click the `.jar` file to launch the application.
-  - **Expected**:
-    - GUI opens with a set of sample contacts.
-    - Sample contacts include example patients and caregivers.
-    - Window size may not be optimal, but sample data should be visible.
+
+- **Steps**:
+  1. Download the `.jar` file and copy it into an empty folder.
+  2. Double-click the `.jar` file to launch the application.
+- **Expected**:
+  - GUI opens with a set of sample contacts.
+  - Sample contacts include example patients and caregivers.
+  - Window size may not be optimal, but sample data should be visible.
 
 2. **Saving Window Preferences**
-  - **Steps**:
-    1. Resize the window to an optimal size.
-    2. Move the window to a different location on the screen.
-    3. Close the window.
-    4. Re-launch the app by double-clicking the `.jar` file.
-  - **Expected**:
-    - The most recent window size and location are retained upon re-launch.
-    - Application opens in the same position with the same dimensions.
+
+- **Steps**:
+  1. Resize the window to an optimal size.
+  2. Move the window to a different location on the screen.
+  3. Close the window.
+  4. Re-launch the app by double-clicking the `.jar` file.
+- **Expected**:
+  - The most recent window size and location are retained upon re-launch.
+  - Application opens in the same position with the same dimensions.
 
 ---
 
 ### Adding a Person
 
 1. **Adding a New Patient**
-  - **Prerequisites**: Ensure the app is running.
-  - **Test case**: `add n/John Doe nric/S1234567D p/91234567 e/johndoe@example.com a/123 Clementi Rd #01-01 role/patient t/diabetes`
-  - **Expected**:
-    - New patient with name "John Doe" is added to the list.
-    - Patient details, including NRIC, contact, role, and tags, are displayed.
-    - Success message confirms the addition.
+
+- **Prerequisites**: Ensure the app is running.
+- **Test case**: `add n/John Doe nric/S1234567D p/91234567 e/johndoe@example.com a/123 Clementi Rd #01-01 role/patient t/diabetes`
+- **Expected**:
+  - New patient with name "John Doe" is added to the list.
+  - Patient details, including NRIC, contact, role, and tags, are displayed.
+  - Success message confirms the addition.
 
 2. **Adding a New Caregiver**
-  - **Test case**: `add n/Jane Smith nric/S2345678H p/98765432 e/janesmith@example.com a/456 Bukit Timah Rd #02-02 role/caregiver t/primary`
-  - **Expected**:
-    - New caregiver is added with the specified details.
-    - The list reflects the addition, showing Jane Smith as a caregiver.
-    - Success message confirms the addition.
+
+- **Test case**: `add n/Jane Smith nric/S2345678H p/98765432 e/janesmith@example.com a/456 Bukit Timah Rd #02-02 role/caregiver t/primary`
+- **Expected**:
+  - New caregiver is added with the specified details.
+  - The list reflects the addition, showing Jane Smith as a caregiver.
+  - Success message confirms the addition.
 
 3. **Adding a Person with Missing Required Fields**
-  - **Test case**: `add n/John Doe p/91234567`
-  - **Expected**:
-    - Error message indicating missing required fields (e.g., NRIC or role).
-    - Person is not added to the list.
+
+- **Test case**: `add n/John Doe p/91234567`
+- **Expected**:
+  - Error message indicating missing required fields (e.g., NRIC or role).
+  - Person is not added to the list.
 
 ---
 
 ### Deleting a Person
 
 1. **Deleting a Person by NRIC**
-  - **Prerequisites**: Ensure a person with NRIC `S1234567D` is in the list.
-  - **Test case**: `delete S1234567D`
-  - **Expected**:
-    - Person with NRIC `S1234567D` is removed from the list.
-    - Success message confirms the deletion.
-    - Timestamp in the status bar updates.
+
+- **Prerequisites**: Ensure a person with NRIC `S1234567D` is in the list.
+- **Test case**: `delete S1234567D`
+- **Expected**:
+  - Person with NRIC `S1234567D` is removed from the list.
+  - Success message confirms the deletion.
+  - Timestamp in the status bar updates.
 
 2. **Attempting to Delete Nonexistent Person**
-  - **Test case**: `delete S0000000J`
-  - **Expected**:
-    - Error message stating that no person with the specified NRIC exists.
-    - No change to the list.
+
+- **Test case**: `delete S0000000J`
+- **Expected**:
+  - Error message stating that no person with the specified NRIC exists.
+  - No change to the list.
 
 3. **Invalid Delete Command**
-  - **Test case**: `delete`
-  - **Expected**:
-    - Error message indicating invalid input.
-    - No change to the list.
+
+- **Test case**: `delete`
+- **Expected**:
+  - Error message indicating invalid input.
+  - No change to the list.
 
 ---
 
 ### Editing a Person
 
 1. **Editing a Person’s Contact Details**
-  - **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
-  - **Test case**: `edit S1234567D p/91234567 e/johndoe_new@example.com`
-  - **Expected**:
-    - Updates the phone and email of the specified person.
-    - Success message confirms changes.
-    - List reflects updated details.
+
+- **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
+- **Test case**: `edit S1234567D p/91234567 e/johndoe_new@example.com`
+- **Expected**:
+  - Updates the phone and email of the specified person.
+  - Success message confirms changes.
+  - List reflects updated details.
 
 2. **Editing a Person’s Tags**
-  - **Test case**: `edit S1234567D t/updated_tag`
-  - **Expected**:
-    - Replaces existing tags with the new tag `updated_tag`.
-    - Success message confirms tag update.
+
+- **Test case**: `edit S1234567D t/updated_tag`
+- **Expected**:
+  - Replaces existing tags with the new tag `updated_tag`.
+  - Success message confirms tag update.
 
 ---
 
 ### Linking and Deleting Links
 
 1. **Linking a Patient and Caregiver**
-  - **Prerequisites**: Ensure two persons, one with NRIC `S1234567D` (patient) and `S2345678H` (caregiver), exist in the list.
-  - **Test case**: `link patient/S1234567D caregiver/S2345678H`
-  - **Expected**:
-    - Link is created between the patient and caregiver.
-    - Success message confirms the link.
+
+- **Prerequisites**: Ensure two persons, one with NRIC `S1234567D` (patient) and `S2345678H` (caregiver), exist in the list.
+- **Test case**: `link patient/S1234567D caregiver/S2345678H`
+- **Expected**:
+  - Link is created between the patient and caregiver.
+  - Success message confirms the link.
 
 2. **Deleting a Link**
-  - **Test case**: `deletelink patient/S1234567D caregiver/S2345678H`
-  - **Expected**:
-    - Link between the specified patient and caregiver is removed.
-    - Success message confirms the deletion.
+
+- **Test case**: `deletelink patient/S1234567D caregiver/S2345678H`
+- **Expected**:
+  - Link between the specified patient and caregiver is removed.
+  - Success message confirms the deletion.
 
 3. **Invalid Link Command**
-  - **Test case**: `link patient/S0000000J caregiver/S2345678H`
-  - **Expected**:
-    - Error message indicating that the patient does not exist.
+
+- **Test case**: `link patient/S0000000J caregiver/S2345678H`
+- **Expected**:
+  - Error message indicating that the patient does not exist.
 
 ---
 
@@ -951,66 +1079,74 @@ testers are expected to do more *exploratory* testing.
 #### Adding an Appointment
 
 1. **Adding a Valid Appointment**
-  - **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
-  - **Test case**: `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`
-  - **Expected**:
-    - Appointment is added to the person's schedule.
-    - Success message confirms the addition.
+
+- **Prerequisites**: Ensure person with NRIC `S1234567D` exists in the list.
+- **Test case**: `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`
+- **Expected**:
+  - Appointment is added to the person's schedule.
+  - Success message confirms the addition.
 
 2. **Adding an Appointment with Past Date**
-  - **Test case**: `addapp nric/S1234567D d/01/01/2020 start/10:00 end/11:00`
-  - **Expected**:
-    - Error message stating appointment cannot be scheduled in the past.
-    - No appointment is added.
+
+- **Test case**: `addapp nric/S1234567D d/01/01/2020 start/10:00 end/11:00`
+- **Expected**:
+  - Error message stating appointment cannot be scheduled in the past.
+  - No appointment is added.
 
 #### Editing an Appointment
 
 1. **Editing Appointment Date and Time**
-  - **Prerequisites**: Ensure an existing appointment on `01/01/2025` at `10:00`.
-  - **Test case**: `editapp nric/S1234567D d/01/01/2025 start/10:00 newd/02/01/2025 newstart/11:00 newend/12:00`
-  - **Expected**:
-    - Appointment is updated to the new date and time.
-    - Success message confirms the update.
+
+- **Prerequisites**: Ensure an existing appointment on `01/01/2025` at `10:00`.
+- **Test case**: `editapp nric/S1234567D d/01/01/2025 start/10:00 newd/02/01/2025 newstart/11:00 newend/12:00`
+- **Expected**:
+  - Appointment is updated to the new date and time.
+  - Success message confirms the update.
 
 #### Deleting an Appointment
 
 1. **Deleting an Existing Appointment**
-  - **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
-  - **Test case**: `deleteapp nric/S1234567D d/01/01/2025 start/10:00`
-  - **Expected**:
-    - Appointment is removed from the person's schedule.
-    - Success message confirms deletion.
+
+- **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
+- **Test case**: `deleteapp nric/S1234567D d/01/01/2025 start/10:00`
+- **Expected**:
+  - Appointment is removed from the person's schedule.
+  - Success message confirms deletion.
 
 ---
 
 ### Finding Entries
 
 1. **Finding a Person by Name**
-  - **Test case**: `find n/John`
-  - **Expected**:
-    - Lists all persons whose name contains "John".
-    - Results include detailed information on each match.
+
+- **Test case**: `find n/John`
+- **Expected**:
+  - Lists all persons whose name contains "John".
+  - Results include detailed information on each match.
 
 2. **Finding by Multiple Criteria**
-  - **Test case**: `find nric/S1234567D t/diabetes`
-  - **Expected**:
-    - Lists all persons who match any of the specified criteria (OR search).
-    - Results include persons with the specified NRIC or the specified tag.
+
+- **Test case**: `find nric/S1234567D t/diabetes`
+- **Expected**:
+  - Lists all persons who match any of the specified criteria (OR search).
+  - Results include persons with the specified NRIC or the specified tag.
 
 ---
 
 ### Saving Data
 
 1. **Automatic Data Saving**
-  - **Prerequisites**: Make changes to the list (e.g., add, edit, or delete a person).
-  - **Expected**:
-    - Data is saved automatically without requiring a manual save command.
-    - Upon restarting the app, data reflects the latest changes.
+
+- **Prerequisites**: Make changes to the list (e.g., add, edit, or delete a person).
+- **Expected**:
+  - Data is saved automatically without requiring a manual save command.
+  - Upon restarting the app, data reflects the latest changes.
 
 2. **Dealing with Missing/Corrupted Data Files**
-  - **Steps**:
-    1. Manually delete or corrupt the data file (`addressbook.json`) in the application's data directory.
-    2. Restart the application.
-  - **Expected**:
-    - Application initializes with an empty list or sample data if the file is missing.
-    - If the file is corrupted, application should display an error message and create a new, clean data file.
+
+- **Steps**:
+  1. Manually delete or corrupt the data file (`addressbook.json`) in the application's data directory.
+  2. Restart the application.
+- **Expected**:
+  - Application initializes with an empty list or sample data if the file is missing.
+  - If the file is corrupted, application should display an error message and create a new, clean data file.
