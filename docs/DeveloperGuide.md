@@ -1063,6 +1063,33 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
+### Adding a person
+
+1. Adding a person
+
+   1. Prerequisites: List all persons using the `list` command. At least one person in the list.
+
+   2. Test case: `add n/Nancy Drew p/9911882 e/nancy.drew@hotmail.com` <br>
+      Expected: A new contact with name `Nancy Drew`, phone `9911882`, and email `nancy.drew@hotmail.com` is added to the `Person` list.
+
+   3. Test case: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in Wedlinker) <br>
+      Expected: A new contact with name `Tatiana Komarova` is added to the `Person` list. A new tag with name `NEW TAG` is added to the `Tag` list.
+      A new wedding with name `NEW WEDDING` is added to the `Wedding` list. The new contact, `Tatiana Komarova`, will be tagged with `NEW TAG` and
+      will be assigned to the wedding `NEW WEDDING`.
+
+   4. Test case (following Test Case 4): `add n/Tatiana Komarova` <br>
+      Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in Wedlinker.
+
+   5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in Wedlinker) <br>
+      Expected: A new contact with name `Felicia D'Alimaty` is added to the `Person` list. No new tags or weddings will be created. The new contact, `Felicia D'Alimaty`, will be tagged with `EXISTING TAG` and
+      will be assigned to the wedding `EXISTING WEDDING`.
+
+   6. Other incorrect add commands to try:
+      * `add`
+      * `add n/NAME e/EMAIL@email.com tk/TASK` (where tk/ is the task prefix, and the email field only accepts alphanumeric characters and @ . and -)
+
+<br>
+
 ### Editing a person
 
 1. Editing a person while all persons are being shown
