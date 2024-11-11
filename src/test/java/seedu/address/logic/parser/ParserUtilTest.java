@@ -209,6 +209,26 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseInteger_validIntegerWithoutWhitespace_returnsInteger() throws Exception {
+        assertEquals(123, ParserUtil.parseInteger("123"));
+    }
+
+    @Test
+    public void parseInteger_validIntegerWithWhitespace_returnsTrimmedInteger() throws Exception {
+        assertEquals(123, ParserUtil.parseInteger("   123   "));
+    }
+
+    @Test
+    public void parseInteger_invalidInteger_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInteger("123abc"));
+    }
+
+    @Test
+    public void parseInteger_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInteger(null));
+    }
+
+    @Test
     public void parseBirthday_invalidDateFormat_throwsDateTimeException() throws ParseException {
         assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_DATE_STRING));
         assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(ANOTHER_INVALID_DATE_STRING));
