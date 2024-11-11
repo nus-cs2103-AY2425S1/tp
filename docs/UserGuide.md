@@ -104,9 +104,8 @@ Note:
 * Does not show an exhaustive list of all available commands, only the most helpful. 
 
 <box type="tip" seamless>
-
 **Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
-<br>
+</box>
 
 Format: `help`
 
