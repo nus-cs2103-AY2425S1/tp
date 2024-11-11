@@ -23,7 +23,7 @@ With InvenTrack, you can:
 
 ## Table of Contents
 1. [Quick Start](#quick-start)
-2. [Notes about command format](#notes-about-the-command-format)
+2. [Notes about command format](#notes-about-the-command-format-and-other-information)
 3. [Features](#features)
    - [Viewing Help](#viewing-help--help-)
    - [Autocomplete](#autocomplete--)
@@ -107,19 +107,19 @@ You can now start using the application by typing commands into the command box.
 
 Refer to the [Features](#features) below to know more about the commands you could use in this app.
 
-## **Notes about the command format:**
+## **Notes about the command format and other information:**
 
 > * **Words in UPPER_CASE**: Words like `PRODUCT_NAME` and `SUPPLIER_NAME` are placeholders for information you need to provide. <br>
  e.g For `add_product n/PRODUCT_NAME`, you would replace these placeholders with actual values, such as `add_product n/Apples`
 > * **Items in square brackets are optional.**<br>
- e.g `add_product n/PRODUCT_NAME [st/STOCK_LEVEL]` can be used as `add_product n/Apples` or as `add_product n/Apples st/50`.
+ e.g `add_product n/PRODUCT_NAME [stk/STOCK_LEVEL]` can be used as `add_product n/Apples` or as `add_product n/Apples stk/50`.
 > * Items with **`…`** ​ after them can be **used multiple times including zero times.**<br>
  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/beverage`, `t/beverage t/important` etc.
 > * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/SUPPLIER_NAME` is also acceptable.
+  e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER e/SUPPLIER_EMAIL`, `p/PHONE_NUMBER e/SUPPLIER_EMAIL n/SUPPLIER_NAME` is also acceptable.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123` or `help -10`, it will be interpreted as `help`.
-> * If duplicate tags are found for product or supplier, the system takes only one copy of it, others are ignored, but it is case-sensitive.
+> * If duplicate tags are found for product or supplier, the system takes only one copy of it, others are ignored. But it is case-sensitive, hence `reliable` and `RELIABLE` will be treated as DIFFERENT TAGS.
 > * Command words are case-insensitive. eg: `help` and `HELP` are the same.
 > * **Copying Commands from PDFs:** If you’re copying commands from a PDF, be careful that spaces at line breaks may be omitted when pasted, so double-check the spacing.
 > * Prefixes Glossary: <br>
