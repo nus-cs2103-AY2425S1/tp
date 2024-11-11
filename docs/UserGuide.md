@@ -253,7 +253,7 @@ Examples:
   <figcaption>command: <code>delete person 7</code></figcaption>
 </figure>
 
-<figure style="text-align: center;">f
+<figure style="text-align: center;">
   <img src="images/pending_cancelled.png" alt="delete person cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
 </figure>
