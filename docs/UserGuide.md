@@ -109,16 +109,22 @@ For detailed instructions on all commands, proceed to the [Features](#features) 
 
 > **Tip:** Type `help` at any time to view the command guide.
 
+## Common Commands Our Users Love
+
+- [**Add a New Record**](#adding-a-person-add): Quickly add a patient or caregiver to the system.
+
+- [**Schedule an Appointment**](#adding-an-appointment-addapp): Set up an appointment with ease.
+
+- [**Link Patient and Caregiver**](#linking-a-patient-and-a-caregiver-link): Connect a patient with a caregiver for streamlined management.
+
+- [**Find a Record**](#locating-persons-by-name-nric-phone-email-role-or-tags-find): Quickly locate a person or record.
+
+- [**Delete a Record**](#deleting-a-person-delete): Remove a person from the system.
+
+- [**Update Appointment Status**](#updating-status-of-an-appointment-updatestatus): Mark an appointment as completed or pending.
+
+
 ---
-### Valid NRIC rules
-AMake sure each NRIC adheres to the following format and constraints:
-1. The NRIC must be 9 characters long.
-2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
-  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
-  - 'F' and 'G' are for Foreigners.
-3. The next 7 characters must be digits.
-4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
-5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 ## Features
 
@@ -152,7 +158,9 @@ Shows a message explaining how to access the help page.
 
 Use this format: `help`
 
-### Adding a person: `add`
+### Managing Patients and Caregivers
+
+#### Adding a person: `add`
 
 Use this command to add a person to the address book.
 
@@ -183,7 +191,7 @@ You can multiple people to share the same email address, making it easier for ca
 A person can have any number of tags (including 0)
 </div>
 
-<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors. </div>
+<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors or replacing them with an acceptable alternative such as a space should you wish to do so</div>
 
 Examples:
 
@@ -209,7 +217,7 @@ Possible Errors:
 
 
 
-### Linking a patient and a caregiver: `link`
+#### Linking a patient and a caregiver: `link`
 
 Use this command to link a patient to a caregiver in CareLink
 
@@ -238,7 +246,7 @@ Possible Errors:
 - `Incorrect roles. The patient NRIC must correspond to a patient, and the caregiver NRIC must correspond to a caregiver.` - When the roles don't match the specified NRICs
 
 
-### Deleting a link between patient and a caregiver: `deletelink`
+#### Deleting a link between patient and a caregiver: `deletelink`
 
 Use this command to remove a link between a patient and caregiver in CareLink
 
@@ -259,7 +267,7 @@ When the command succeeds, you see a message confirming the link was removed
 _Figure 7: Success message displayed after deleting a link between a patient and a caregiver_
 
 
-### Adding Notes to a Person: `addnote`
+#### Adding Notes to a Person: `addnote`
 
 Use this command to add notes to an existing person in CareLink.
 
@@ -294,13 +302,13 @@ Possible Errors:
 - `This link does not exist in CareLink` - When trying to delete a link that doesn't exist
 - `Incorrect NRIC. Person not found` - When either the patient's or caregiver's NRIC cannot be found
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Use this command to display a list of all persons in Care Link App.
 
 Use this format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Use this command to edit an existing person in the address book.
 
@@ -323,7 +331,7 @@ Possible Errors:
 - `At least one field to edit must be provided.` - When no fields to edit are specified
 - `This person already exists in the address book.` - When editing would result in a duplicate person
 
-### Locating persons by name, NRIC, phone, email, role, or tags: `find`
+#### Locating persons by name, NRIC, phone, email, role, or tags: `find`
 
 Use this command to find persons based on specified criteria and prefixes.
 
@@ -336,6 +344,36 @@ Use this command to find persons based on specified criteria and prefixes.
 
 </div>
 
+#### Deleting a person : `delete`
+
+**Use this command to delete the specified person from CareLink.**
+
+Use this format: `delete NRIC`
+
+- Deletes the person with the specified `NRIC`.
+- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
+
+Examples:
+
+- `find n/David` returns `David LI` with NRIC `S6483749D`
+- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
+
+The example below of using the delete command in CareLink appears below.
+Notice the NRIC used in the example belongs to `David LI`.
+![delete command example](images/deleteDavid.png)
+_Figure 13: Example of using the `delete` command to remove a person from CareLink_
+
+
+When the command succeeds, notice that David is removed and hence no longer displayed.
+![result for 'delete S6483749D'](images/deleteDavidResult.png)
+_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
+
+
+**Possible Errors:**
+- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
+
+
+
 
 **Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
 
@@ -343,7 +381,7 @@ Use this command to find persons based on specified criteria and prefixes.
 - The order of the prefixes and keywords does not matter. e.g `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
 - Persons matching any of the provided criteria will be returned (i.e., `OR` search). For example, `n/Alex t/friend` will return persons whose name contains "Alex" or have the tag "friend".
 
-### Prefixes:
+##### Prefixes:
 
 - `n/NAME`: Searches by name.
 - `nric/NRIC`: Searches by Singapore National ID.
@@ -353,7 +391,7 @@ Use this command to find persons based on specified criteria and prefixes.
 - `e/EMAIL`: Searches by email address.
 - `role/ROLE`: Searches by role (e.g `role/patient` or `role/caregiver`).
 
-### Examples:
+##### Examples:
 
 - `find n/John` returns `John`, `John Doe`.
 - `find n/Alex nric/S1234567D` returns persons whose name contains `Alex` or with NRIC `S1234567D`.
@@ -527,7 +565,7 @@ To delete an appointment, you only need the start time. The end time is not requ
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 12:00 PM and ends after 12:00 PM on 30/10/2024.
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 10:00 AM and ends after 10:00 PM on 01/01/2024.
 
-#### Examples:
+##### Examples:
 
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
@@ -545,36 +583,9 @@ _Figure 12: Example of using the `findapp` command to locate appointments within
 - `Invalid time. Please use the HH:MM format` - When the time format is incorrect
 
 
-### Deleting a person : `delete`
+### Other important commands
 
-**Use this command to delete the specified person from CareLink.**
-
-Use this format: `delete NRIC`
-
-- Deletes the person with the specified `NRIC`.
-- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
-
-Examples:
-
-- `find n/David` returns `David LI` with NRIC `S6483749D`
-- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
-
-The example below of using the delete command in CareLink appears below.
-Notice the NRIC used in the example belongs to `David LI`.
-![delete command example](images/deleteDavid.png)
-_Figure 13: Example of using the `delete` command to remove a person from CareLink_
-
-
-When the command succeeds, notice that David is removed and hence no longer displayed.
-![result for 'delete S6483749D'](images/deleteDavidResult.png)
-_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
-
-
-**Possible Errors:**
-- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
-
-
-### Clearing all entries: `clear`  `confirm`
+#### Clearing all entries: `clear`  `confirm`
 
 **Clears all entries from the address book after receiving confirmation.**
 
@@ -595,17 +606,20 @@ _Figure 14: Display after a successful delete command, showing the removed perso
   _Figure 16: Display prompt for using `clear` command without `confirm`, reminding user to include confirmation_
 
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 **Exits the program.**
 
 Use this format: `exit`
 
-### Saving the data
+
+### About your data
+
+#### Saving the data
 
  CareLink automatically saves data to the hard disk after every command that changes it, so you don’t need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 CareLink saves data automatically as a JSON file located at `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -617,10 +631,20 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-## FAQ
+## FAQ and other important information
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+### Valid NRIC rules
+AMake sure each NRIC adheres to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+  - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 ---
 
@@ -649,7 +673,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-## Command summary
+## Complete Command summary
 
 | Action                 | Format, Examples                                                                                                                                                                                                |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
