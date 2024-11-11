@@ -16,30 +16,30 @@ Class PropertyList
 Class ModelManager
 Class UserPrefs
 
+Package "Buyer" {
 Class UniqueBuyerList
-Class Buyer
-Class Budget
-Class Email
-Class Name
-Class Phone
-Class Tag
 
+BuyerList *--> "1" UniqueBuyerList
+UniqueBuyerList --> "~* all" Buyer
+ModelManager --> "~* filtered" Buyer
+}
+
+Package "Meet-Up" {
 Class UniqueMeetUpList
 Class MeetUp
-Class Subject
-Class Info
-Class "{abstract}\nDateTime" as DateTime
-Class From
-Class To
-Class AddedBuyer
 
+MeetUpList *--> "1" UniqueMeetUpList
+UniqueMeetUpList --> "~* all" MeetUp
+}
+
+Package "Property" {
 Class UniquePropertyList
 Class Property
-Class LandlordName
-Class "Phone" as LandlordPhone
-Class Address
-Class AskingPrice
-Class PropertyType
+
+PropertyList *--> "1" UniquePropertyList
+UniquePropertyList --> "~* all" Property
+ModelManager --> "~* filtered" Property
+}
 
 Class I #FFFFFF
 }
@@ -62,58 +62,8 @@ ModelManager -right-> "1" MeetUpList
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-BuyerList *--> "1" UniqueBuyerList
-UniqueBuyerList --> "~* all" Buyer
-Buyer *--> Name
-Buyer *--> Phone
-Buyer *--> Email
-Buyer *--> Budget
-Buyer *--> "*" Tag
-
-PropertyList *--> "1" UniquePropertyList
-UniquePropertyList --> "~* all" Property
-Property *--> LandlordName
-Property *--> LandlordPhone
-Property *--> AskingPrice
-Property *--> Address
-Property *--> PropertyType
-
-MeetUpList *--> "1" UniqueMeetUpList
-UniqueMeetUpList --> "~* all" MeetUp
-MeetUp *--> Subject
-MeetUp *--> Info
-MeetUp *--> From
-MeetUp *--> To
-MeetUp *--> "*" AddedBuyer
-AddedBuyer -up-|> Name
-From --|> DateTime
-To --|> DateTime
-
-Buyer -[hidden]up--> I
 UniqueBuyerList -[hidden]right-> I
-
-Property -[hidden]up--> I
 UniquePropertyList -[hidden]right-> I
-
-MeetUp -[hidden]up--> I
 UniqueMeetUpList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Budget
-Budget -[hidden]right-> Email
-
-LandlordName -[hidden]right-> LandlordPhone
-LandlordPhone -[hidden]right-> Address
-Address -[hidden]right-> AskingPrice
-AskingPrice -[hidden]right-> PropertyType
-
-Buyer -[hidden]left-> MeetUp
-AddedBuyer -[hidden]right-> Subject
-Subject -[hidden]right-> Info
-Info -[hidden]right-> From
-From -[hidden]right-> To
-
-ModelManager --> "~* filtered" Buyer
-ModelManager --> "~* filtered" Property
-ModelManager --> "~* filtered" MeetUp
 @enduml
