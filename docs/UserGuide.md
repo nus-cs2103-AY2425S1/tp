@@ -15,23 +15,24 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Listing all persons](#listing-all-persons--list)
     - [Sorting contacts](#sorting-contacts--sort)
     - [Editing a person](#editing-a-person--edit)
+    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
+    - [Birthday Reminder](#birthday-reminder)
     - [Adding history to a person](#adding-history-to-a-person--log)
     - [Remarking a person](#remarking-a-person--remark)
-    - [Single page person view](#single-page-person-view-view)
-    - [Adding a Property](#adding-a-property-addproperty)
-    - [Closing single page person view](#closing-single-page-person-view-close)
+    - [Single page person view](#single-page-person-view--view)
+    - [Adding a Property](#adding-a-property--addproperty)
+    - [Closing single page person view](#closing-single-page-person-view--close)
     - [Locating persons by name](#locating-persons-by-name-find)
     - [Marking a person as favourite](#marking-a-person-as-favourite-favourite)
     - [Deleting a person](#deleting-a-person--delete)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
-    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
-    - [Birthday Reminder](#birthday-reminder)
+    
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
-4. [Parameter Requirements](#parameter-requirements)
-5. [Command Summary](#command-summary)
-6. [Coming Soon](#coming-soon)
+6. [Parameter Requirements](#parameter-requirements)
+7. [Command Summary](#command-summary)
+8. [Coming Soon](#coming-soon)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -125,8 +126,6 @@ only the last one will be recorded.
 
 ---
 
-
-
 ### Adding a person : `add`
 
 Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks. Note that
@@ -185,7 +184,6 @@ Examples:
 > ###### ⚠️ **Warning**
 > The sort function will only sort the current list of contacts, newly added contacts after sorting will not be in sorted order.
 
-
 ---
 
 ### Editing a person : `edit`
@@ -215,6 +213,39 @@ only the last one will be recorded.
 -  `edit 4 n/James Lee b/1989-07-20 t/friend t/premium` Edits the name of the 4th person to `James Lee`, sets their birthday to `1989-07-20`, and updates their tags to `friend` and `premium`.
 -  `edit 5 p/98765432 t/` Edits the phone number of the 5th person to `98765432` and removes all existing tags.
 
+---
+
+### Store Birthday of a Contact: `birthday`
+
+Stores a contact’s birthday. Note that although multiple birthdays may be entered,
+only the last one will be recorded.
+
+**Command Format:**  
+`birthday INDEX b/BIRTHDAY`
+
+- `b/` The contact’s birthday `yyyy-mm-dd` format.
+
+**Examples:**
+- `birthday 1 b/1990-05-15` adds birthday `1990-05-15` to the person at index 1.
+- `birthday 1 b/` and `birthday 1` both removes the existing birthday of the person at index 1.
+
+---
+
+### Birthday Reminder
+
+Displays a contacts' birthday if they are happening within a week from the system's current date.
+
+> ###### ⚠️ **Warning**
+> Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
+
+**Command Format:**
+None, as it is an automatic feature.
+
+![Birthday Reminder Example](images/Birthday.png)
+
+---
+
 ### Adding history to a person : `log`
 
 Edits an existing person in the address book.
@@ -238,6 +269,8 @@ Examples:
   ![result for 'log 2 l/had lunch together'](images/Log2.png)
   ![result for 'view 2'](images/Log2View2.png)
 
+---
+
 ### Remarking a person : `remark`
 
 Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered,
@@ -254,6 +287,8 @@ Examples:
   ![result for 'remark 1 r/remark message'](images/Remark.png)
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
   ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
+
+---
 
 ### Single page person view : `view`
 
@@ -289,6 +324,13 @@ Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUM
 * Add a property to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 * The property details include the address, town, property type, size, number of bedrooms, number of bathrooms, and price. All fields are required.
 * Size is in square meters.
+
+Success output when a property is added:
+![Add Property Success Message](images/PropertySuccessMessage.png)
+
+Existing properties in a view window:
+![Properties in View Window](images/PropertyInView.png)
+
 
 Examples:
 * `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
@@ -327,7 +369,7 @@ Finds persons whose names contain any of the given keywords. <br>
   For example, `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples:**
-- `find John` returns `john` and `John Doe`
+- `find John` returns `John Doe`
   ![result for 'find John'](images/FindJohn.png)
 - `find Amy go` returns `Amy Wee`, `William Go`<br>
   ![result for 'find Amy go'](images/FindAmyGo.png)
@@ -335,7 +377,7 @@ Finds persons whose names contain any of the given keywords. <br>
 ### Marking a person as favourite: `favourite`
 
 Mark a specific person from the address book as favourite by assigning a special favourite tag.
-Using this command on an already favourited person will remove the person from favourite
+**Using this command on an already favourited person will remove the person from favourite**
 by removing the special favourite tag.
 
 Format: `favourite INDEX`
@@ -351,7 +393,7 @@ Examples:
 
 Format: `favourite`
 
-* Bring all persons marked as favourite to the front. Note that when the list is modified, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
+* Bring all persons marked as favourite to the front. **Note that when the list is modified**, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
@@ -375,6 +417,11 @@ Deletes the specified person from the address book.
 **Examples:**
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+> ###### ⚠️ **Warning**
+> Deleting a contact while its view window is up will not close the view window. Users are strongly encouraged to close the view window using `close` command before deleting.
+
+---
 
 ### Clearing all entries : `clear`
 
@@ -408,33 +455,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-### Store Birthday of a Contact: `birthday`
-
-Stores a contact’s birthday. Note that although multiple birthdays may be entered,
-only the last one will be recorded.
-
-**Command Format:**  
-`birthday INDEX b/<Birthday Date>`
-
-- `b/` The contact’s birthday `yyyy-mm-dd` format.
-
-**Examples:**
-- `birthday 123 b/1990-05-15`
-
----
-
-### Birthday Reminder
-
-Displays a contacts' birthday if they are happening within a week from the system's current date.
-
-> ###### 💡 **Tip**
-> Note that the reminder is only shown when the application is launched,
-any command feedback shown will clear the reminder. To view the reminder again restart the application.
-
-**Command Format:**
-None, as it is an automatic feature.
-
-![Birthday Reminder Example](images/Birthday.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -487,7 +507,9 @@ None, as it is an automatic feature.
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
 ### Editing and deleting of properties
+* Currently, users can only add properties to contacts, but they cannot edit existing properties or delete any contact's properties. As RealConnect is primarily a tool for real estate agents, this limitation is recognized as a feature gap, as properties often need updates or corrections due to market changes or evolving client requirements. To address this, RealConnect will implement property editing and deletion functions, allowing agents to maintain more accurate and current property records. These updates aim to improve flexibility and support efficient management of listings in an agent's portfolio.
 ### More flexible date input formatting
+* Currently, RealConnect only supports the date format `yyyy-mm-dd`, which may be restrictive for some users. To improve usability, the platform will expand its accepted date formats to include more common variations, such as `dd-mm-yyyy`, `dd Month yyyy` (e.g., `22 May 2001`), and potentially region-specific formats. This enhancement will provide users with greater flexibility and make the platform more accessible to diverse user groups, reducing the chance of input errors due to date formatting.
 ### Confirmation upon unusual input when adding properties
 * Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
 ### Allow closing App by clicking close button
