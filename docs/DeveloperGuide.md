@@ -682,15 +682,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  **Cross-Platform Compatibility**: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
-2.  **Performance**: Should be able to hold up to 100 students without a noticeable sluggishness in performance for typical usage.
-3.  **Optimised for CLI Users**: A user with above average typing speed (50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  **CLI Responsiveness**: Commands executed through the CLI should respond within 1 second under normal load (e.g. with 100 contacts).
-5.  **UI Responsiveness**: The UI must remain responsive when updating large datasets, such as when displaying a list of contacts, without causing delays of more than 1 second in interactions.
-6.  **Data Persistence**: Data must persist between sessions, even during unexpected shutdowns and crashes.
-7.  **Error Recovery**: In cases of missing or corrupted data files, the app should gracefully handle errors, offering the user the option to restore defaults or attempt recovery without crashing.
-8.  **Data Security**: The application should ensure that private contact details are not accidentally exposed or shared without the user’s consent.
-9.  **Minimal Learning Curve**: The system should be easy to learn for users familiar with basic command-line applications, providing clear error messages and help documentation for new users.
-10. **Scalability**: The system design should allow for future fields or features without major architectural changes.
+2.  **Optimised for CLI Users**: A user with above average typing speed (50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  **CLI Responsiveness**: Commands executed through the CLI should respond within 1 second under normal load (e.g. with 100 contacts).
+4.  **UI Responsiveness**: The UI must remain responsive when updating large datasets, such as when displaying a list of contacts, without causing delays of more than 1 second in interactions.
+5.  **Data Persistence**: Data must persist between sessions, even during unexpected shutdowns and crashes.
+6.  **Error Recovery**: In cases of missing or corrupted data files, the app should seamlessly handle errors without crashing.
+7.  **Data Security**: The application should ensure that private contact details are not accidentally exposed or shared without the user’s consent.
+8.  **Minimal Learning Curve**: The system should be easy to learn for users familiar with basic command-line applications, providing clear error messages and help documentation for new users.
+9.  **Scalability**: The system design should allow for future fields or features without major architectural changes.
 
 <br>
 <br>
