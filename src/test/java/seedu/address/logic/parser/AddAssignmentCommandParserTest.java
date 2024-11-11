@@ -28,6 +28,13 @@ public class AddAssignmentCommandParserTest {
     }
 
     @Test
+    public void parse_emptyTitle_throwsParseException() throws Exception {
+        String userInput = " " + PREFIX_NAME + " " + PREFIX_DUEDATE + "2024-09-09 1200";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
     public void parse_missingParts_throwsParseException() {
         // No name provided
         assertThrows(ParseException.class, () -> parser.parse(PREFIX_DUEDATE + "2024-09-09 1200"));
