@@ -568,7 +568,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `tags $$$`<br>
       Expected: Message displays no restaurants found.
 
-   1. Other incorrect find commands to try: `tags`<br>
+   1. Other incorrect Filter-by-Tag commands to try: `tags`<br>
       Expected: Error details shown in the status message. Status bar remains the same.
 
 
