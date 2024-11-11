@@ -15,6 +15,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
  */
@@ -78,5 +79,7 @@ public class SortCommandTest {
         assertFalse(sortFirstCommand.equals(sortSecondCommand));
         assertFalse(sortFirstCommand.equals(sortThirdCommand));
     }
+
+
 }
 
