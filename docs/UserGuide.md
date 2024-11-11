@@ -104,6 +104,8 @@ Let's get you started with VolunSync! Just follow these simple steps:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command Format Guidelines
 
 <div markdown="block" class="alert alert-info">
