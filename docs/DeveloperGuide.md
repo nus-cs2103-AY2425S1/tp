@@ -1166,8 +1166,13 @@ Displays appointments that matches with the specified `HealthService`.
 * **API (Application Programming Interface)**: A set of rules and tools that allows one piece of software to communicate with another.
 * **Component**: A modular part of a software system that has a well-defined purpose.
 * **Command**: A specific instruction given to the system to perform an action.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Health Service**: Health screening services provided by health screening clinics.
+* **Next-of-Kin**: A contact person to be contacted in the event of an accident, illness, or decline in a patient's condition.
+* **Appointment**: A scheduled time for a patient to undergo a specified health service.
+* **Note**: Helpful information about the patient that does not fit into any of the other information categories.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
