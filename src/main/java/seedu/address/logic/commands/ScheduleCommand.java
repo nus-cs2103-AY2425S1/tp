@@ -79,13 +79,13 @@ public class ScheduleCommand extends Command {
         try {
             toAdd = new Meeting(personToScheduleMeetingWith.getName(), startTime, endTime, location);
         } catch (CommandException e) {
-            return new CommandResult(String.format(MESSAGE_INVALID_ARGUMENT, e.getMessage()));
+            throw new CommandException(String.format(MESSAGE_INVALID_ARGUMENT, e.getMessage()));
         }
 
         try {
             model.addMeeting(personToScheduleMeetingWith, toAdd);
         } catch (TimeClashException e) {
-            return new CommandResult(MESSAGE_TIME_CLASH);
+            throw new CommandException(MESSAGE_TIME_CLASH);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToScheduleMeetingWith.getName(),
