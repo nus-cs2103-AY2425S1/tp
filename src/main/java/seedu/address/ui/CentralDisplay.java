@@ -84,7 +84,7 @@ public class CentralDisplay extends UiPart<Region> {
         requireNonNull(personIndex);
         assert personIndex > -1 : "Person index retrieved is less than 0";
 
-        System.out.println(personIndex);
+        // System.out.println(personIndex);
         sessionLogPanel = new SessionLogPanel(logic.getSessionLog(personIndex));
 
 

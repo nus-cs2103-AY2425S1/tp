@@ -26,6 +26,8 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IDENTITY_NUMBER);
+
         try {
             // Parse the identity number
             IdentityNumber id = ParserUtil.parseIdentityNumber(
