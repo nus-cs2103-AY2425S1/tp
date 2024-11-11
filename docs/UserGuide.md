@@ -135,7 +135,7 @@ Format: `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\M
 #### Parameters Constraints:
 * `NAME` should not be blank and should between 2 and 255 characters long. Names should only contain alphabets, spaces,
 and the special characters (-/') excluding parentheses. Names should start and end with an alphabet,
-and there should not be more than one consecutive special character.
+and there should not be more than one consecutive special character or space.
 * `NRIC` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of
   `S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A). 
 <div markdown="span" class="alert alert-note">:memo: **Note:**
