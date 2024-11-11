@@ -38,8 +38,8 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
     - [Editing a person: `edit`](#editing-a-person--edit)
   - [Deleting Entries Commands](#deleting-entries-commands)
     - [Deleting a person: `delete`](#deleting-a-person--delete)
-    - [Deleting a property to be sold: `delSell`](#deleting-a-property-to-be-sold--delsell)
-    - [Deleting a property to be bought: `delBuy`](#deleting-a-property-to-be-bought--delbuy)
+    - [Deleting a property-to-sell: `delSell`](#deleting-a-property-to-be-sold--delsell)
+    - [Deleting a property-to-buy: `delBuy`](#deleting-a-property-to-be-bought--delbuy)
   - [Finding Entries Commands](#finding-entries-commands)
     - [Finding persons by name: `findn`](#finding-persons-by-name-findn)
     - [Finding persons by phone number: `findp`](#finding-persons-by-phone-number-findp)
@@ -302,7 +302,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `findn Alex` followed by `delete 1` deletes the 1st person in the results of the `findn` command.
 
-### Deleting a property to be bought : `delBuy`
+### Deleting a property-to-buy : `delBuy`
 
 Deletes the specified property which the specified person wants to buy from the address book.
 
@@ -311,7 +311,7 @@ Deletes the specified property which the specified person wants to buy from the 
 
 Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 
-* Deletes the property to be bought at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* Deletes the property-to-buy at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
 * The index refers to the index number displayed in the buying properties list and person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -321,10 +321,10 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 </box>
 
 Examples:
-* `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
-* `list` followed by `delBuy 4 2` deletes the 2nd buying property under 4th person in the address book.
+* `list` followed by `delBuy 2 1` deletes the 1st property-to-buy under 2nd person in the address book.
+* `list` followed by `delBuy 4 2` deletes the 2nd property-to-buy under 4th person in the address book.
 
-### Deleting a property to be sold : `delSell`
+### Deleting a property-to-sell : `delSell`
 
 Deletes the specified property which the specified person wants to sell from the address book.
 
@@ -333,7 +333,7 @@ Deletes the specified property which the specified person wants to sell from the
 
 Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 
-* Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* Deletes the property-to-sell at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
 * The index refers to the index number displayed in the selling properties list and person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -343,8 +343,8 @@ Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 </box>
 
 Examples:
-* `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
-* `list` followed by `delSell 4 2` deletes the 2nd selling property under 4th person in the address book.
+* `list` followed by `delSell 2 1` deletes the 1st property-to-sell under 2nd person in the address book.
+* `list` followed by `delSell 4 2` deletes the 2nd property-to-sell under 4th person in the address book.
 
 ## Finding Entries Command
 
@@ -464,7 +464,7 @@ Format: `sort f/FIELD o/ORDER`
 
 <box type="note" seamless>
 
-**Note:** Note: The error message for `sort` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `sort` encloses the parameters in square brackets, however these parameters are compulsory.
 </box>
 
 Examples:
@@ -486,7 +486,7 @@ Format: `sorti INDEX f/FIELD o/ORDER`
 
 <box type="note" seamless>
 
-**Note:** Note: The error message for `sorti` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `sorti` encloses the parameters in square brackets, however these parameters are compulsory.
 </box>
 
 Examples:
@@ -505,7 +505,8 @@ Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
 
 <box type="note" seamless>
 
-**Note:** Note: The error message for `bought` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `bought` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `bought` includes `...` after the actual price field, but there should only be 1 actual price input.
 </box>
 
 Examples:
@@ -522,7 +523,8 @@ Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
 
 <box type="note" seamless>
 
-**Note:** Note: The error message for `sold` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `sold` encloses the parameters in square brackets, however these parameters are compulsory.
+**Note:** The error message for `sold` includes `...` after the actual price field, but there should only be 1 actual price input.
 </box>
 
 Examples:
