@@ -152,12 +152,37 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 #### Help Command : `help`
+The `help` command opens a separate help window detailing a summary of the commands available and their functions. <br>
+
+The user can optionally provide a `COMMAND_KEYWORD` which opens a separate help window showing more information about the specified command. <br>
+
+##### Parsing User Input
+The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display. 
+It uses the `trim` method to remove any leading and trailing white-space characters from the user input.
+If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid. 
+The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches one of the command keywords supported by the application.
+
+##### Executing the Command
+The `HelpCommand` creates a `KeywordCommandResult` object which is handled in `MainWindow.java` to display the appropriate help window.
+
+##### Activity Diagram
+The following activity diagram illustrates the workflow of the execution of the `help` command:
+![HelpCommandActivityDiagram](images/HelpCommandActivityDiagram.png)
+
+##### Design Considerations
+The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
+Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
+For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.  
 
 #### Home Command : `home`
+The `home` command returns the user to the home UI where all the patients are displayed.
+
+##### Executing the Command
+
 
 #### Clear Command : `clear`
 
-#### Exit Command : `Exit`
+#### Exit Command : `exit`
 
 ### Patient Management Features
 
@@ -189,19 +214,23 @@ The `AddFCommandParser` class parses the user input to extract the various param
 It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted all the prefixes and their corresponding values.
 The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes (except for `al` which is used for allergy)
 
-##### Executing the Command
-The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
-
-##### Sequence Diagram
 The sequence diagram below illustrates the process behind the parsing of the user input.
 In this example, it takes an `addf` command: `execute(addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care)`
 
 ![AddFSequenceDiagram](images/AddFSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
 The parsing of the fields is as follows:
+
 ![AddFParseFieldsSequenceDiagram](images/AddFParseFieldsSequenceDiagram.png)
+
+
+##### Executing the Command
+The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
+
+The activity diagram below illustrates the worflow behind the execution of the `addf` command.
+
+![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
 ##### Design Considerations
 **Using `Nric` Field as a Unique Identifier**<br>
