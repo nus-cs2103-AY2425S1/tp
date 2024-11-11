@@ -38,7 +38,7 @@ title: Developer Guide
 This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 
 ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
-as well as the JavaDocs for code written by BuffWuff1712
+as well as the JavaDocs for code written by BuffWuff1712. ChatGPT was also used by tayxuenye and cited in the code where applicable.
 
 ---
 
@@ -274,14 +274,12 @@ and handling paperwork related to real estate transactions. They are often mobil
 access to information, and manage a large client and property database.
 
 **Value proposition**:
-Agents often have difficulty keeping track of the large client and property database.
-Our address book allows property agents to manage prospective and existing customers by sorting them into
-different categories including housing type and income level.
-Moreover, they can keep track of house visits via an events management system.
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
+simpler to use while being even more functional than alternatives on the market.
 
-* Allows property agents to manage prospective and existing customers easily by sorting them into different
-  categories such as by housing type, income level, rent/sell/buy
-* Agents can sort by customer status: unresponsive,
+* Allows property agents to manage prospective and existing clients easily by sorting them into different
+  categories such as by housing type or seller/buyer
 * Keep track of the various landlords who own the houses
 * Easy for agent to remember who to try to sell unit to
 * Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
@@ -560,9 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. User selects to add, delete tags or both.
 
-3. PROperty performs the selected action(s).
-
-4. PROperty confirms that the tags have been updated.
+3. PROperty confirms that the tags have been updated.
    
    Use case ends.
 
@@ -581,15 +577,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2b. User chooses to add a valid tag.
   
-  - 3c1. User selects the tag to delete.
+  - 2b1. User keys in the tag to delete.
   
-  - 3c2. PROperty adds the tag to the client.
+  - 2b2. PROperty adds the tag to the client.
     
-    Use case resumes at step 4.
+    Use case resumes at step 3.
 
 - 2c. Any tag names provided are invalid for an add tag action (not in the list of allowed tags).
   
-  - 3d1. PROperty shows an error message.
+  - 2c1. PROperty shows an error message.
     
     Use case ends.
 
@@ -704,7 +700,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User types in invalid index for client.
 
-    - 1a1. PROperty informs user of invalid index and .
+    - 1a1. PROperty informs user of invalid index.
 
       Use case ends.
 
