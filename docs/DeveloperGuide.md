@@ -694,8 +694,9 @@ otherwise)
 * <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number
   , email and list of **rental information**, not meant to be shared with others.
 * <a id="glossary-rental-information"/>**Rental information**: A client's rental information containing
-  address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not
-  meant to be shared with others.
+  address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, **customer list**,
+  not meant to be shared with others.
+* <a id="glossary-customer-list"/>**Customer List**: The list of tenant(s) who are renting a property.
 * <a id="glossary-mss"/>**MSS**: Main Success Scenario.
 
 [Back to top](#table-of-contents)
