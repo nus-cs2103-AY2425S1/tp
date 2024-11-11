@@ -42,7 +42,7 @@ public class CommandHistory {
     public String getPreviousCommand() {
         if (currentIndex > 0) {
             currentIndex--;
-            logger.fine("Successfully retrieved previous command");
+            logger.info("Successfully retrieved previous command");
             return history.get(currentIndex);
         }
         return "";
@@ -55,7 +55,7 @@ public class CommandHistory {
      */
     public String getNextCommand() {
         if (currentIndex >= 0 && currentIndex < history.size()) {
-            logger.fine("Successfully retrieved next command");
+            logger.info("Successfully retrieved next command");
             return history.get(currentIndex++);
         }
         return "";
