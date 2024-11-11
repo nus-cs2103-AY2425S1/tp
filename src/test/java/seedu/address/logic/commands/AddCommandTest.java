@@ -234,6 +234,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<GoodsReceipt> findGoodsReceipts(Predicate<GoodsReceipt> predicate) {
+            return null;
+        }
+
+        @Override
         public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
             throw new AssertionError("This method should not be called.");
         }

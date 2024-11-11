@@ -82,4 +82,31 @@ public class DeleteGoodsCommandTest {
         expectedModel.addPerson(ALICE);
         assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_existingSupplierNameAndMultipleExistingGoodsName_success() {
+        ModelManager model = new ModelManager();
+        model.addPerson(ALICE);
+        Goods apple = new GoodsBuilder()
+                .withName("Apple")
+                .withGoodsCategory(GoodsCategories.CONSUMABLES)
+                .build();
+        GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withGoods(apple)
+                .build();
+        GoodsReceipt appleReceipt2 = new GoodsReceiptBuilder()
+                .withSupplierName(ALICE.getName())
+                .withQuantity(5)
+                .withGoods(apple)
+                .build();
+        model.addGoods(appleReceipt);
+        model.addGoods(appleReceipt2);
+
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), apple.goodsName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS, apple.goodsName());
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addPerson(ALICE);
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
 }
