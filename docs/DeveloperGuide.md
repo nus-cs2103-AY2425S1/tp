@@ -256,6 +256,41 @@ The following fields are optional as they are not essential in serving a patient
 * and Allergies (`Allergy`)
 
 #### Edit Command : `edit`
+The `edit` command allows a user to edit the details of an existing patient.
+
+The user has to specify the patient's:
+* NRIC (`NRIC`)
+
+and provide at least one of these fields to edit:
+* Name (`Name`)
+* NRIC (`Nric`)
+* Sex (`Sex`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Email (`Email`)
+* Address (`Address`)
+* Blood type (`BloodType`)
+* Next-of-Kin name (`Name`)
+* Next-of-Kin phone number (`Phone`)
+* Allergies to be added (`Allergy`)
+* Allergies to be removed (`Allergy`)
+* Risk level (`HealthRisk`)
+* Existing condition (`ExistingCondition`)
+* Note (`Note`)
+
+##### Parsing User Input
+The `EditCommandParser` class parses the user input to extract the NRIC of the patient to be edited and the new details of the patient.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. 
+This returns an `ArgumentMultiMap` object which has extracted the NRIC of the patient to be edited and all values associated with each prefix.
+After `EditCommandParser` ensures that the extracted NRIC is not empty and valid, 
+the `ArgumentMultiMap` object is then used to ensure that there are no duplicate prefixes (except for `al` and `rmal` which are used for adding and removing allergies).
+`EditCommandParser` then calls the `createEditPatientDescriptor()` method which checks the presence of values for each prefix and parse them accordingly to populate the fields to be updated.
+This returns an `EditPatientDescriptor` object which is used to create an `EditCommand` object.
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `edit` command: `execute(edit T0123456A n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rmal|wheat rl|HIGH ec|Diabetes no|Patient needs extra care)`
+
+
 
 #### Delete Command : `delete`
 

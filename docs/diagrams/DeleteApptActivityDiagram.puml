@@ -1,4 +1,5 @@
 @startuml DeleteApptActivityDiagram
+skin rose
 start
 :Parse input arguments;
 :Validate input arguments;

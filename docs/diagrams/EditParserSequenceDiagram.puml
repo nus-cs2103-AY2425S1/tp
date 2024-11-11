@@ -1,0 +1,118 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClinicConnectSystemParser" as ClinicConnectSystemParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "argMultimap:ArgumentMultiMap" as ArgumentMultiMap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "a:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "p:Patient" as Patient MODEL_COLOR
+end box
+[-> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ClinicConnectSystemParser : parseCommand(...)
+activate ClinicConnectSystemParser
+
+create EditCommandParser
+ClinicConnectSystemParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> ClinicConnectSystemParser
+deactivate EditCommandParser
+
+ClinicConnectSystemParser -> EditCommandParser : parse(...)
+activate EditCommandParser
+
+EditCommandParser -> ArgumentTokenizer : checkPrefixPresentAndValidPrefix(...)
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> EditCommandParser
+deactivate ArgumentTokenizer
+
+EditCommandParser -> ArgumentTokenizer : tokenize(...)
+activate ArgumentTokenizer
+
+create ArgumentMultiMap
+ArgumentTokenizer -> ArgumentMultiMap
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> ArgumentTokenizer
+deactivate ArgumentMultiMap
+
+ArgumentTokenizer --> EditCommandParser
+deactivate ArgumentTokenizer
+
+EditCommandParser -> ArgumentMultiMap : getPreamble()
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> EditCommandParser : nric
+deactivate ArgumentMultiMap
+
+alt nric.isEmpty()
+else
+    EditCommandParser -> ParserUtil : parserNric(nric)
+    activate ParserUtil
+    ParserUtil --> EditCommandParser
+    deactivate ParserUtil
+end
+note left:If NRIC is empty, throws ParseException: No NRIC provided in input
+
+AddFCommandParser -> AddFCommandParser : arePrefixesPresent(...)
+activate AddFCommandParser
+
+AddFCommandParser --> AddFCommandParser
+deactivate AddFCommandParser
+
+AddFCommandParser -> ArgumentMultiMap : getPreamble()
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> AddFCommandParser
+deactivate ArgumentMultiMap
+
+AddFCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(...)
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> AddFCommandParser
+deactivate ArgumentMultiMap
+
+<style>
+Reference {
+  BackgroundColor White
+}
+</style>
+ref over AddFCommandParser, ParserUtil : parse fields
+
+create Patient
+AddFCommandParser -> Patient
+activate Patient
+
+Patient --> AddFCommandParser
+deactivate Patient
+
+create AddFCommand
+AddFCommandParser -> AddFCommand
+activate AddFCommand
+
+AddFCommand --> AddFCommandParser
+deactivate AddFCommand
+
+AddFCommandParser --> ClinicConnectSystemParser : a
+deactivate AddFCommandParser
+destroy AddFCommandParser
+destroy ArgumentMultiMap
+
+ClinicConnectSystemParser --> LogicManager
+deactivate ClinicConnectSystemParser
+
+destroy AddFCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml
