@@ -167,7 +167,7 @@ You must select `OK` to clear the address book. If you select `Cancel`,
 the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/clearConfirmation.png" width="800">
+<img src="images/clearConfirmation.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 </box>
 
 [Return to Table of Contents](#medicontact)
@@ -204,7 +204,7 @@ Deletes the specified patient contact from the address book.
   and the patient contact will not be deleted.
 * Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
-<img src="images/deleteConfirmation.png" width="800">
+<img src="images/deleteConfirmation.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -400,7 +400,7 @@ Shows you a help window with useful resources which includes:
 
 <box type="warning" no-icon no-background light>
 
-<img src="images/helpWindow.png" width="800">
+<img src="images/helpWindow.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 </box>
 
 [Return to Table of Contents](#medicontact)
@@ -441,13 +441,13 @@ Furthermore, certain edits can cause the MediContact to behave in unexpected way
 
 1. Place the `json` file to be imported in the same folder as the application JAR file. In the image below `data1.json` is the desired `json` file to be imported. Note that it has the file extension `.json` and assume that it adheres to the expected format and input constraints. 
 
-   <img src="images/importStep1.png" width="800"/>
+   <img src="images/importStep1.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 2. Run the application `jar` file as per usual (see [Quick start](#quick-start) for more details).
 
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
-   <img src="images/importStep3.png" width="800"/>
+   <img src="images/importStep3.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 </box>
 
 ##### Expected format:
