@@ -120,7 +120,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder(clientInList).build());
 
-        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, "edit");
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, EditCommand.COMMAND_WORD);
 
         assertCommandFailure(editCommand, model, expectedMessage);
 

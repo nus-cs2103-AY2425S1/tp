@@ -26,12 +26,12 @@ import seedu.address.model.client.Transaction;
  */
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {
 
-    private final Logger logger = LogsCenter.getLogger(AddTransactionCommandParser.class);
+    private static final Logger logger = LogsCenter.getLogger(AddTransactionCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddTransactionCommand
      * and returns an AddCommandTransaction object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException If the user input does not conform to the expected format and validity checks.
      */
     public AddTransactionCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -78,7 +78,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
     }
 
     /**
-     * Throws a {@code ParseException} if any of the description, amount, other party and date values are blank.
+     * Throws a {@code ParseException} If any of the description, amount, other party and date values are blank.
      */
     private static void verifyNoBlankValues(ArgumentMultimap argumentMultimap) throws ParseException {
 
@@ -88,18 +88,22 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         String date = argumentMultimap.getValue(PREFIX_DATE).get().trim();
 
         if (description.isBlank()) {
+            logger.fine("ParseException caused by blank description.");
             throw new ParseException(MESSAGE_EMPTY_DESCRIPTION);
         }
 
         if (amount.isBlank()) {
+            logger.fine("ParseException caused by blank amount.");
             throw new ParseException(MESSAGE_EMPTY_AMOUNT);
         }
 
         if (otherParty.isBlank()) {
+            logger.fine("ParseException caused by blank other party.");
             throw new ParseException(MESSAGE_EMPTY_OTHER_PARTY);
         }
 
         if (date.isBlank()) {
+            logger.fine("ParseException caused by blank date.");
             throw new ParseException(MESSAGE_EMPTY_DATE);
         }
     }
