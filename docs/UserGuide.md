@@ -1,46 +1,59 @@
-# HireMe User Guide
+# ![icon](images/hireme_logo.png) HireMe User Guide
 
-## Welcome to HireMe!
+## Welcome to HireMe! 
 
 Thank you for choosing **HireMe** to simplify your internship journey.
 With so many positions to apply for, managing applications becomes a real challenge, on top of classes, projects, and exams.
 **HireMe** is here to keep you organised and focused on landing your dream internship.
-In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. Let's dive in and make your internship search a little easier!
+In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. If you have some questions or doubts, refer to the [FAQ](#faq) section. Let's dive in and make your internship search a little easier!
 
-*Use HireMe to get hired now!*
+<span style="color: #ff6978;">*Use HireMe to get hired now!*</span>
+
 <br></br>
 
 ## Overview of User Guide
 
-HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
+HireMe is a **free desktop application that helps you manage your extensive list of internship applications.** 
 
-* **Easy to use**
-  - Type simple commands: If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
-* **High quality**
-  - User friendly interface: sleek list design to view all of your of internship applications.
-* **Streamlined management**
-  - Add, delete and update your internship applications: everything you need to manage your list of internship applications.
-* **Detailed Insights**
-  - Tailored summary of your list of internship applications so that you can gain hidden insights.
+* _Easy to use_
+  - **Type simple commands:** If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
+* _User friendly interface_
+  - **Simple design:** view all your internship applications and statuses at a glance.
+* _Streamlining management_
+  - **Core features:** Add, delete and find entries.
+  - **Advanced features:** Update status, sort, filter by status and view chart. 
+* _Detailed Insights_
+  - **Tailored summary**: gain hidden insights from your list of internship applications.
 
+### Table of Contents
 <!-- TOC -->
-* [HireMe User Guide](#hireme-user-guide)
-  * [Overview of target users](#overview-of-target-users)
+* [HireMe User Guide](#-hireme-user-guide)
+  * [Welcome to HireMe!](#welcome-to-hireme-)
+  * [Overview](#overview)
+    * [Table of Contents](#table-of-contents)
+    * [Overview of target users](#overview-of-target-users)
   * [Quick start](#quick-start)
+    * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
+    * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
+      * [_Mac Users_](#_mac-users_)
+      * [_Windows Users_](#_windows-users_)
+      * [_Using the terminal_](#_using-the-terminal_)
+      * [_Using the HireMe application_](#_using-the-hireme-application_)
   * [Features](#features)
-    * [Viewing help : `/help`](#viewing-help-help)
+    * [Viewing help : `/help`](#viewing-help--help)
     * [Adding an internship application: `/add`](#adding-an-internship-application-add)
-    * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
-    * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
+    * [Listing all internship applications : `/list`](#listing-all-internship-applications--list)
+    * [Deleting an internship application : `/delete`](#deleting-an-internship-application--delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the status of an internship application : `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
+    * [Updating the status of an internship application : `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application--accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
-    * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
+    * [Clearing all entries : `/clear`](#clearing-all-entries--clear)
     * [Viewing status chart: `/chart`](#viewing-status-chart-chart)
-    * [Exiting the program : `/exit`](#exiting-the-program-exit)
+    * [Exiting the program : `/exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
   * [FAQ](#faq)
+  * [Troubleshooting](#troubleshooting)
   * [Command summary](#command-summary)
 <!-- TOC -->
 
@@ -84,26 +97,58 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading-hireme) **once**, and **repeat** [Part 2](#part-2-using-the-hireme-application) **each time** you wish to use HireMe.
 
-1. Ensure you have Java `17` or above installed on your computer.
+### Part 1: Setting up and downloading HireMe
+1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their website [here](https://www.oracle.com/sg/java/technologies/downloads/).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download `hireme.jar` file from our github [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
+    ![downloadhireme](images/DownloadHireMe.png)
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
+3. Create a new folder and name it any name you want (e.g. HireMe).
+4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3.
+    ![hiremejar](images/HireMeJar.png)
 
-    <br>A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+### Part 2: Using the HireMe application
+For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows Users](#_windows-users_) section that matches your computer system.
+Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6. 
 
-5. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
+#### _Mac Users_
+5. Use mac search and type Terminal, click on open. 
+    You will see a window like this.
+6. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
+
+#### _Windows Users_
+5. Use windows search and type Terminal, click on open. 
+   ![windowsterminal](images/WindowsTerminal.png)
+You will see a window like this.
+   ![openwindows](images/OpenWindowsTerminal.png)
+6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
+   ![windowsfilepath](images/Windowsfilepath.png)
+    _file path here is highlighted in blue_
+
+#### _Using the terminal_
+7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press enter. 
+8. Type `java -jar hireme.jar` and press enter to run the HireMe application.
+   - Windows Terminal:
+      ![windowscd](images/Windowscd.png)
+   - Mac Terminal:
+   <br>
+
+#### _Using the HireMe application_
+A GUI similar to the below should appear in a few seconds. It is encouraged to expand the window to full screen for better viewability. Note how the app contains some sample data.<br>
+
+   ![Ui](images/LabelledUi.png)
+
+9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
    Some example commands you can try:
-
-    * `/list` : Lists all your internship applications.
 
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
 
     * `/delete 1` : Deletes the 1st internship application shown in the displayed list.
+
+    * `/list` : Lists all your internship applications.
 
     * `/clear` : Deletes all your internship applications.
 
@@ -111,15 +156,17 @@ Before continuing, here are some important information you need to know about th
 
     * `/exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
 
+Refer to the [Features](#features) below for more details of each command. 
+Check [troubleshooting](#troubleshooting) if you are facing problems for setting up.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+
+#### Notes about the command format:
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME r/ROLE`, `r/ROLE n/NAME` is also acceptable.
@@ -352,6 +399,8 @@ HireMe data are saved in the hard disk automatically after any command that chan
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+Get your questions or doubts about HireMe's functionality and details answered here. If you have further questions, you can contact us through our email `hireme@gmail.com`.
+
 #### Q1: Where is the data for the application stored?
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 
@@ -379,8 +428,21 @@ Ans: New entries will not be inserted in the right order. They are inserted to t
 #### Q6: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
 
-#### Q6: What is considered a valid email address format?
+#### Q7: What is considered a valid email address format?
 Ans: If you have an existing email address account, it will be allowed by HireMe. You can check [here](https://verifalia.com/validate-email).
+
+--------------------------------------------------------------------------------------------------------------------
+## Troubleshooting
+If you are facing problems while setting up or using HireMe, we want to help you. This section covers some of the common problems and ways to solve them. If you need futher help, you can reach out to us through our email `hireme@gmail.com`.
+
+#### HireMe application setup failed
+Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up. 
+
+#### I got errors using the commands
+Check that you have the typed the correct [command format](#notes-about-the-command-format). Check that you have included all necessary parameters. Check that you have used valid inputs (refer to each command for valid inputs).
+
+#### I can't see the full text on the screen
+Try opening the window to full screen or scroll to view the full text. Avoid inputing too texts.
 
 --------------------------------------------------------------------------------------------------------------------
 
