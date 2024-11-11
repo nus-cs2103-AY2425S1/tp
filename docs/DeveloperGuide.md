@@ -528,10 +528,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
     1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error detail informing environment discrepancy shown in the status message.
+      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
     2. Test case: `delete 1`<br>
-      Expected: No client is deleted. Error detail informing environment discrepancy shown in the status message.
+      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
     3. Test case: `delete x`, where `x` is exactly 1 more than transaction list size<br>
       Expected: No client is deleted. Error detail informing out of range index shown in the status message.
