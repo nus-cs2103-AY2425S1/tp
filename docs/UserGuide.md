@@ -142,6 +142,8 @@ Health Connect is an application designed to **streamline client management** fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* If multiple tags `t/... t/...` are provided as an input only the last tag will be taken.
+    - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient John Doe will be assigned the tag `High Risk`.
 * The following are considered duplicate patients:
   * Same name AND same phone number
   * Same name AND same email
@@ -154,20 +156,26 @@ Health Connect is an application designed to **streamline client management** fo
 
 * **NAME**
     - The string must be alphanumeric and contain at least one alphabetic character (i.e., it cannot consist entirely of numbers). Special characters allowed are space (' '), slash ('/'), and hyphen ('-').
-  
+    - However, since `d/` is a recognized parameter, names containing `d/o` are not accepted in this version of Health Connect (though `s/o` is allowed). 
+    - If a patient's name includes `d/o`, format it instead as such `d o`, for example, `Siti d o Raja`.
 * **PHONE**
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-  
+    - Only numeric characters are allowed.
 * **EMAIL**
     - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-
+* **ADDRESS**
+    - Address cannot be blank
+    - Since an address can consist of any combination of characters (including `/`), there are no restrictions on the input format for this field. 
+    - Be aware that adding unrecognized parameters (e.g., /g) after the address tag `a/` will not trigger an error. 
+      - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/[unrecognized parameter] t/low risk m/None` 
+      will still be accepted as valid input without any errors.
 * **TAG**
     - A patient must have one of the following priority tags:
         1. `High Risk`
         2. `Medium Risk`
         3. `Low Risk`
+    - Note: tags are case-insensitive.
       
 * **ALLERGY**
     - Only include alphanumeric characters, spaces, and commas.
@@ -184,8 +192,10 @@ Health Connect is an application designed to **streamline client management** fo
     - Can only contain numbers, '/', and spaces.
 
 * **DATE**
-    - Follows the format of d/M/yyyy
+    - Follows the format of `d/M/yyyy`
+    - `02/02/2024` and `2/2/2024` are both valid and accepted date formats.
     - Can only contain numbers and '/'
+    - No spaces are allowed within the date format. For example, `2/ 0 2/ 20 24` will result in an invalid date format error.
 
 ### Viewing help: `help`
 
@@ -231,8 +241,8 @@ Additional Details:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * **At least one of the optional fields must be provided**.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing tags, the inputted tag will completely replace the current tag.
+* You cannot remove a person's tag using the edit feature, as the tag is a required field.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
