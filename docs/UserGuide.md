@@ -387,6 +387,7 @@ Format: `pin INDEX [MORE_INDICES]…`
 
 * It is possible to pin a pinned contact, however, the contact will not be affected or change by this.  
 * Pinning contacts may disrupt the initial ordering of the contacts.
+* Pinned contacts are indicated by the pin icon.
 </box>
 
 <box type="definition">
