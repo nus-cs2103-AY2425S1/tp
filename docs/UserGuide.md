@@ -115,7 +115,7 @@ Format: `help`
 
 A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" alt="Help Message" height=auto width="850"/>
 
 ### Adding a person: `add`
 
@@ -309,7 +309,6 @@ Format: `export`
 Example:
 
 The following screenshots shows the results of executing `export`.
-
 ![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 ![ExportToFolderExample.png](images/ExportToFolderExample.png)
 
@@ -320,7 +319,7 @@ Format: `import fp/FILE_PATH`
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * `FILE_PATH` must correspond to an actual json file in the device.
+> * `FILE_PATH` must correspond to a json file in the device that has at least one valid entry .
 > * `import` will not work if the json file to be imported would result in any invalid data in DorManagerPro!
 > * Use `.` in the FILE_PATH to refer to the home folder of the application.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
 > * The home folder of the application is the folder that contains the jar file!
@@ -421,6 +420,7 @@ Duplicate handling:
 * Two resident student contacts with the same phone numbers are not allowed.
 > <span style="color:Gray"> NOTE! </span> <br>
 >
+> * This section corresponds to the PHONE parameter.
 > * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
 > * Duplicate handling rationale: Phone numbers are unique to each individual.
 
@@ -522,6 +522,7 @@ Duplicate handling:
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
+> * This section corresponds to the EMERGENCY_PHONE parameter.
 > * Constraint rationale: Same as [Phone number](#phone-number).
 > * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
 
