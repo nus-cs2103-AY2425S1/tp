@@ -121,6 +121,8 @@ For all parts of the input that accept special characters, they cannot be placed
 
 * Valid inputs: This field accepts a string of any characters as its input e.g. `John Street, Block 123, #01-01`, `Pro+fessional Building, Level 3, Unit 30`, `東京都豊島区東池袋1-22-10　ヒューマックスパビリオン`
 
+<div style="page-break-after: always;"></div>
+
 ### Tag(s)
 
 Aside from normal tags, F.A.R.T. also provides specialised tags. For more information, refer to the [Visual Features](#visual-features) below.
