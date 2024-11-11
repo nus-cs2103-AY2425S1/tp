@@ -46,7 +46,8 @@ public class GroupList implements Iterable<Group> {
         if (!isModifiable) {
             throw new UnsupportedOperationException("GroupList is not modifiable");
         }
-        // AI was used in the generation of some of the lines in this method
+        // AI was used in the generation of some of the lines below within this method
+        // Trim and replace multiple spaces with a single space
         String normalizedGroupName = group.getGroupName().trim().replaceAll("\\s+", " ");
 
         boolean isAdded = groups.stream().noneMatch(existing -> {
