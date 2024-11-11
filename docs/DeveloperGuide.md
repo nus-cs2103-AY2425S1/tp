@@ -508,6 +508,9 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
        Expected: Similar to previous.
 
+    1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1 t/hired t/reJecteD t/Pending` (adding additional status tags)
+        Expected: The additional status tags are omitted and a default "pending" status tag still remains.
+
 ### Deleting a candidate
 
 1. Deleting a candidate while all candidates are being shown
