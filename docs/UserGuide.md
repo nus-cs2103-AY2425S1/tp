@@ -122,6 +122,12 @@ Notes on Command Formats:
 
 <p>
 
+* `INDEX` refers to the index number shown in the current displayed event/vendor list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+  * The index for each vendor/event is relative and can change depending on previous operations.
+
+<p>
+
 * Items with `…` after them can be used multiple times, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as:
   * ` ` (i.e. 0 times);
@@ -178,8 +184,6 @@ Format:
 
 Note:
 * Edits the vendor/event at the specified `INDEX`.
-    * The index refers to the index number shown in the vendor or event list.
-    * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
     * Editing an item but providing no new values is invalid.
 * The existing values will be updated to the input values.
@@ -202,9 +206,6 @@ Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 
 Note:
 * Deletes the event or vendor at the specified `INDEX`.
-    * The index refers to the index number shown in the displayed event/vendor list respectively.
-    * The index **must be a positive integer** 1, 2, 3, ...
-    * The index for each vendor/event is relative and can change depending on previous operations.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
     * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
@@ -239,8 +240,6 @@ Format: `view v/INDEX` or `view e/INDEX`
 
 Note:
 * Views the details of the vendor/event at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed vendor/event list.
-  * The index **must be a positive integer** 1, 2, 3, ...
 * The details page includes assigned events/vendors as well as a list of assignable events/vendors.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
   * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
@@ -258,7 +257,6 @@ Format: `assign INDEX`
 Note:
 * Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assignable** vendor/event list.
-  * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
 
@@ -275,7 +273,6 @@ Format: `unassign INDEX`
 Note:
 * Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assigned** vendor/event list.
-  * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are not already associated (not assigned to each other), the operation will fail.
 
