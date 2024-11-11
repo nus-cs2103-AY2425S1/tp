@@ -11,7 +11,7 @@ Are you a Singaporean private tutor who has trouble keeping track of your studen
 <br><br>
 The Greatest Offline Addressbook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of students information such as phone number, grades and education level, it also helps you access the students' parents information as well. GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
 <br><br>
-The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the terminal emulator. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
+The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files). In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
 <br><br>
 This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use.
 Please first ensure that you meet the [Minimum System Requirements](#minimum-system-requirements) in order to run GOATS.
@@ -48,38 +48,42 @@ This User Guide also includes highlighted sections to aid in your reading:
 
 ## Minimum System Requirements
 
-Please ensure that you have the following:
-* A computer running on Windows, macOS or Linux.
-* Ensure you have **Java 17** or above installed on your computer.
-  * To check if you have Java 17 installed on your computer, follow the following steps:
-    1. Open a Terminal Emulator.
-       * On Windows: Open up `Windows Powershell` from the list of applications.
-       * On Linux: Click on the `Activities` item at the top left of the screen, then type in `terminal` and open the displayed application.
-       * On macOS: Type in `terminal` in the search field in the list of applications and open the displayed application.
-    2. Type in the following command: `java -version`.
-    3. If the response contains `java version "17.x.x"` or higher, you’re all set!
-    4. Otherwise, please refer to [this guide](https://www3.cs.stonybrook.edu/~amione/CSE114_Course/materials/resources/InstallingJava17.pdf) to download Java 17.
+Please ensure that you have the following:<br>
+* A computer running on **Windows, macOS** or **Linux**.<br><br>
+* Ensure you have **Java 17** or above installed on your computer.<br><br>
+  * To check if you have Java 17 installed on your computer, follow the following steps:<br><br>
+    1. Open a Terminal Emulator.<br><br>
+       * On Windows: Open up `Windows Powershell` from the list of applications.<br><br>
+       * On Linux: Click on the `Activities` item at the top left of the screen, then type in `terminal` and open the displayed application.<br><br>
+       * On macOS: Type in `terminal` in the search field in the list of applications and open the displayed application.<br><br>
+    2. Type in the following command: `java -version`.<br><br>
+    3. If the response contains `java version "17.x.x"` or higher, you’re all set!<br><br>
+    4. Otherwise, please refer to [this guide](https://www3.cs.stonybrook.edu/~amione/CSE114_Course/materials/resources/InstallingJava17.pdf) to download Java 17.<br><br>
+<br><br>
+---
 
 ## Quick Start
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-4/tp/releases).
-2. Copy the file to the folder you want to use as the **home folder** for GOATS.
-3. Open a Terminal Emulator. For those unfamiliar with opening a terminal emulator, follow the instructions in the [Minimum System Requirements](#minimum-system-requirements).
-4. Type in the following command to navigate to the GOATS home folder: `cd`, followed by the location of your home folder.<br>
-   e.g. `cd Documents/GOATS_Home_Folder`
-5. Type in the following command to launch the GOATS application: `java -jar GOATS.jar`<br>
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-4/tp/releases).<br><br>
+2. Copy the file to the folder you want to use as the **home folder** for GOATS.<br><br>
+3. Open a Terminal Emulator. For those unfamiliar with opening a terminal emulator, follow the instructions in the [Minimum System Requirements](#minimum-system-requirements).<br><br>
+4. Type in the following command to navigate to the GOATS home folder: `cd`, followed by the location of your home folder.
+   e.g. `cd Documents/GOATS_Home_Folder`<br><br>
+5. Type in the following command to launch the GOATS application: `java -jar GOATS.jar`
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+
+![Ui](images/Ui.png)
+<br><br>
 6. You are ready to start using GOATS! Try out some example commands in the command box and press Enter to execute them.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-   * `addstudent n/James Ho p/91715131 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend` : Adds a student named James Ho in GOATS.
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `clear` : Deletes all contacts.
+   Some example commands you can try:<br>
+   * `list` : Lists all contacts.<br><br>
+   * `addstudent n/James Ho p/91715131 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend` : Adds a student named `James Ho` in GOATS.<br><br>
+   * `delete 3` : Deletes the 3rd contact shown in the current list.<br><br>
+   * `clear` : Deletes all contacts.<br><br>
    * `exit` : Exits the app.
+<br><br>
 7. Refer to the [Features](#features) below for details of each command.
-
+<br><br>
 ---
 
 ## Command summary
@@ -110,6 +114,8 @@ Please ensure that you have the following:
 | **[Unlink Student from Parent](#unlinking-a-parent-from-a-student-unlink)** | `unlink ch/STUDENT_NAME` (`unlink ch/James Ho`)                                                                                                                                                                                      |
 | **[Unpin](#unpinning-contacts-unpin)**                                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                      |
 
+---
+
 ## Features
 <br>
 
@@ -130,19 +136,19 @@ If you are using a PDF version of this document, be careful when copying and pas
 </box>                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
 ### Command Parameters
-| Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Examples                                                               |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `NAME`         | The contact's name. <br><br> It should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | - `James Ho` <br> - `Jane Doe`                                         |
-| `PHONE_NUMBER` | The contact's phone number. <br><br> It should only contain numbers, and it should be 3 to 17 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | - `99228833` <br> - `6598986767`                                       |
+| Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Examples                                                               |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `NAME`         | The contact's name. <br><br> It should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | - `James Ho` <br> - `Jane Doe`                                         |
+| `PHONE_NUMBER` | The contact's phone number. <br><br> It should only contain numbers, and it should be 3 to 17 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | - `99228833` <br> - `6598986767`                                       |
 | `EMAIL`        | The contact's email address. <br> <br> It should be of the format local-part@domain and adhere to the following constraints: <br> - The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br><br> The domain name must:<br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | - `web@dev` <br> -`jamesho@gmail.com`                                  |
-| `ADDRESS`      | The contact's residential address. <br><br> It can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | - `123, Clementi Rd, 123465` <br> - `Blk 417, Tampines St 71, S510666` |
-| `TAG`          | A single word description to categorise contacts <br><br> It should be alphanumeric and should not contain spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | - `owesMoney` <br> - `friend`                                          |
-| `LESSON_TIME`  | The day and time of the student's lesson. <br><br> It should be in format 'day:HH:mm' (e.g. mon:16:00),  where 'day' is a three-letter abbreviation (mon, tue, wed, thu, fri, sat, sun) and time is in 24-hour format (HH:mm) between 00:00 and 23:59.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | - `wed:13:00` <br> - `tue:00:03`                                       |
-| `EDUCATION`    | The student's education level. <br><br> It should be alphanumeric and length must be within 1 to 25.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | - `Primary 2` <br> - `Secondary 5`                                     |
-| `INDEX`        | The index number shown in the displayed list of contacts. <br><br> It should be a positive integer (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | - `2` <br> - `10`                                                      |
-| `GRADE_INDEX`  | The grade of the student. <br><br> The grade index ranges from 0 to 4: <br> - 0: `Unknown` <br> - 1: `Failing` <br> - 2: `Satisfactory` <br> - 3: `Good` <br> - 4: `Excellent`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | - `0` <br> - `3`                                                       |
-| `KEYWORD`      | The keyword specified for find-related commands. <br><br> Please refer to the section detailing the specific command on how to use `KEYWORD` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
-| `DAY`          | The day specified for finding students in `findday`. <br><br> Please refer to the section detailing the specific command on how to use `DAY` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
+| `ADDRESS`      | The contact's residential address. <br><br><br> It can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | - `123, Clementi Rd, 123465` <br> - `Blk 417, Tampines St 71, S510666` |
+| `TAG`          | A single word description to categorise contacts <br><br> It should be alphanumeric and should not contain spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | - `owesMoney` <br> - `friend`                                          |
+| `LESSON_TIME`  | The day and time of the student's lesson. <br><br> It should be in format 'day:HH:mm' (e.g. mon:16:00),  where 'day' is a three-letter abbreviation (mon, tue, wed, thu, fri, sat, sun) and time is in 24-hour format (HH:mm) between 00:00 and 23:59.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | - `wed:13:00` <br> - `tue:00:03`                                       |
+| `EDUCATION`    | The student's education level. <br><br> It should be alphanumeric and length must be within 1 to 25.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | - `Primary 2` <br> - `Secondary 5`                                     |
+| `INDEX`        | The index number shown in the displayed list of contacts. <br><br> It should be a positive integer (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - `2` <br> - `10`                                                      |
+| `GRADE_INDEX`  | The grade of the student. <br><br> The grade index ranges from 0 to 4: <br> - 0: `Unknown` <br> - 1: `Failing` <br> - 2: `Satisfactory` <br> - 3: `Good` <br> - 4: `Excellent`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | - `0` <br> - `3`                                                       |
+| `KEYWORD`      | The keyword specified for find-related commands. <br><br> Please refer to the section detailing the specific command on how to use `KEYWORD` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | N.A.                                                                   |
+| `DAY`          | The day specified for finding students in `findday`. <br><br> Please refer to the section detailing the specific command on how to use `DAY` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | N.A.                                                                   |
 
 ### Adding a student: `addstudent`
 
@@ -190,10 +196,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [lt/LESSON_TIME] [e
 
 <box type="info">
 
-**Notes about `edit`:**
-Edits the contact at the specified `INDEX`.
+**Notes about `edit`:** Edits the contact at the specified `INDEX`.
 
-* The `INDEX` refers to the index number shown in the displayed list of contacts. The index **must be a positive integer** (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed.
@@ -220,8 +224,6 @@ Format: `grade INDEX g/GRADE_INDEX`
 **Notes about `grade`:**
 Assigns `GRADE_INDEX` to the contact at the specified `INDEX`.
 
-* The `INDEX` refers to the index number shown in the displayed list of contacts. The index **must be a positive integer** (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.
-
 * The `GRADE_INDEX` ranges from 0 to 4:
 
   * 0: `Unknown`
@@ -247,11 +249,7 @@ Format: `delete INDEX [MORE_INDICES]…`
 
 <box type="info">
 
-**Notes about `delete`:**
-Deletes the contacts at the specified `INDEX` or `INDICES`:
-
-* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
-* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
+**Notes about `delete`:** Deletes the contacts at the specified `INDEX` or `INDICES`.
 </box>
 
 <box type="definition">
@@ -327,7 +325,11 @@ Finds contacts with tags matching any of the specified `KEYWORDS`.
 <box type="definition">
 
 **Examples:**
-[Ui.png](images/Ui.png)
+
+
+![Ui.png](images/Ui.png)
+
+
 Assuming the list shown in the picture above,
 * `findtag hyperactive` returns `Alex Yeoh`
 * `findtag hyperactive ambitious fierce` returns `Alex Yeoh`, `David Li` and `Charlotte Li`<br>
@@ -354,19 +356,23 @@ Finds students who have lessons on any of the specified `DAYS`.
 <box type="definition">
 
 **Examples:**
-[UI.png](images/Ui.png)
+
+
+![UI.png](images/Ui.png)
+
+
 Assuming the list shown in the picture above,
 * `findday tuesday` returns `Charlotte Li`
-* `findtag monday tuesday sunday` returns `Alex Yeoh`, `Charlotte Li` and `Irfan Ibrahim`<br>
+* `findday monday tuesday sunday` returns `Alex Yeoh`, `Charlotte Li` and `Irfan Ibrahim`<br>
 </box>
 
 ### Viewing help : `help`
 
 Displays a link to the User Guide.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 ### Pinning contacts: `pin`
 
@@ -376,12 +382,11 @@ Format: `pin INDEX [MORE_INDICES]…`
 
 <box type="info">
 
-**Notes about `pin`:**
-Pins the contacts at the specified `INDEX` or `INDICES`.
+**Notes about `pin`:** Pins the contacts at the specified `INDEX` or `INDICES`.
 
-* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
-* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
-  </box>
+* It is possible to pin a pinned contact, however, the contact will not be affected or change by this.  
+* Pinning contacts may disrupt the initial ordering of the contacts.
+</box>
 
 <box type="definition">
 
@@ -400,12 +405,11 @@ Format: `unpin INDEX [MORE_INDICES]…`
 
 <box type="info">
 
-**Notes about `unpin`:**
-Unpins the contacts at the specified `INDEX` or`INDICES`.
+**Notes about `unpin`:** Unpins the contacts at the specified `INDEX` or`INDICES`.
 
-* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
-* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
-  </box>
+* It is possible to unpin an unpinned contact, however, the contact will not be affected or change by this.
+* Unpinning contacts may disrupt the initial ordering of the contacts.
+</box>
 
 <box type="definition">
 
@@ -424,12 +428,10 @@ Format: `archive INDEX [MORE_INDICES]…`
 
 <box type="info">
 
-**Notes about `archive`:**
-Archives the contacts at the specified `INDEX` or `INDICES`.
+**Notes about `archive`:** Archives the contacts at the specified `INDEX` or `INDICES`.
 
-* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
-* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
-  </box>
+* It is possible to archive an archived contact, however, the contact will not be affected or change by this.   
+</box>
 
 <box type="definition">
 
@@ -449,11 +451,9 @@ Format: `unarchive INDEX [MORE_INDICES]…`
 
 <box type="info">
 
-**Notes about `unarchive`:**
-Unarchives the contacts at the specified `INDEX` or `INDICES`.
+**Notes about `unarchive`:** Unarchives the contacts at the specified `INDEX` or `INDICES`.
 
-* The `INDICES` refer to the index numbers shown in the displayed list of contacts.
-* The `INDICES` **must be positive integers** (1, 2, 3, …), and cannot exceed the number of contacts in the displayed list of contacts.
+* It is possible to unarchive an unarchived contact, however, the contact will not be affected or change by this.
 </box>
 
 <box type="definition">
@@ -536,9 +536,23 @@ Assuming the address book has a student `John Doe` linked to a parent `Jane Doe`
 
 ### Sorting all contacts alphabetically: `sort`
 
-Sorts all contacts in the address book, keeping pinned contacts at the top of the list.
+Sorts all contacts in the address book alphabetically, keeping pinned contacts at the top of the list.
 
 Format: `sort`
+
+<box type="tip">
+
+**Tip!** `Sort` can be used to rectify the disarranged list, especially after using the commands `pin` and `unpin`.
+</box>
+
+
+<box type="info">
+
+**Notes about `sort`:**
+* Pinned contacts will be sorted amongst themselves.
+* Unpinned contacts will also be sorted amongst themselves.
+* The sorted pinned contacts will be displayed at the top of the list before the sorted unpinned contacts.
+</box>
 
 ### Exiting the program : `exit`
 
