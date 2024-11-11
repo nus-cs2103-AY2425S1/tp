@@ -104,6 +104,9 @@ for the team of AddressBook-Level 3.
   will be ignored.<br>
   E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Some commands will prompt for confirmation. Inputting `y` or `yes` counts as **confirmation**, and **any other input** 
+  counts as **cancellation**.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -642,7 +645,7 @@ Format: `cdelete CLIENT_INDEX`
 
 **Note**:
 
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -686,7 +689,7 @@ Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 
 **Note**:
 
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 * `RENTAL_INDEX` refers to the index number shown in the displayed rental information list when the `rview` command is
@@ -903,6 +906,7 @@ Format: `import`
 
 * Only `.json` files can be imported.
 * The chosen file must have the correct format.
+* The correct format is the same as the data file of the app. Visit our [Developer Guide](DeveloperGuide.md) for more details.
 
 </box>
 
@@ -912,7 +916,7 @@ Format: `import`
 
 * Importing data will delete all current data in the address book. It is recommended to back up the current data via
   the `export` command.
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 * A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
 
 </box>
@@ -931,7 +935,7 @@ Format: `export`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+**Note**: Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 
 </box>
 
@@ -958,7 +962,7 @@ Format: `clear`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+**Note**: Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
 
 </box>
 
