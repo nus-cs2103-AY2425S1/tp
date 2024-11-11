@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
  * Searches for clients who have appointments on the specified date and time.
  */
 public class SearchAppointmentCommand extends Command {
+    // ChatGPT used to generate javadocs
     public static final String COMMAND_WORD = "search " + PREFIX_SEARCH_APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
