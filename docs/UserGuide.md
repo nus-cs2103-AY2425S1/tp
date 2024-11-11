@@ -40,8 +40,8 @@ Alerts you to potential issues or problems that may arise.
 
 ## Quick start
 
-1. Ensure that Java 17 is installed on your computer. 
-   * Open a command terminal. 
+1. Ensure that Java 17 is installed on your computer.
+   * Open a command terminal.
      * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
      * For Mac users, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
    * Type the following command to check the Java version:<br>
@@ -55,9 +55,9 @@ Alerts you to potential issues or problems that may arise.
    * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
 <br>
 3. Set up the home folder
-   * Choose a folder where you want to store your AddressBook data.
+   * Choose a folder where you want to store your ContactCS data.
    * Copy the downloaded `.jar` file to this folder.
-   * This folder will serve as the "home folder" for your AddressBook.
+   * This folder will serve as the "home folder" for your ContactCS.
 <br>
 4. Run the application
    * Open a command terminal.
@@ -69,9 +69,9 @@ Alerts you to potential issues or problems that may arise.
        <box type="warning" seamless>
 
        **Caution:**
-       Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
+       Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
        </box>
-       
+     
      * For Mac users, type:
        ```
        cd /path/to/your/folder
@@ -79,7 +79,7 @@ Alerts you to potential issues or problems that may arise.
        <box type="warning" seamless>
 
        **Caution:**
-       Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/AddressBook`
+       Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/ContactCS`
        </box>
    * Run the application with the following command:
      ```
@@ -139,20 +139,21 @@ Alerts you to potential issues or problems that may arise.
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
 
-**Shows a message explaining the usage of the specified command keyword**
-
 Format: `help [COMMAND_KEYWORD]`
 
-Example: 
+**Shows a message explaining the usage of the specified command keyword**
+
+Example:
 - `help add` shows the help message for `add` command in the following format
 ![help_example](images/helpExample.png)
+
+Format: `help`
 
 **Shows a message and a pop-up window showing the full list of help messages,
 and an external link to the full user guide.**
 
-![help message](images/helpMessage.png)
-
-Format: `help`
+Example:
+- ![help message](images/helpMessage.png)
 
 
 ### Adding a person: `add`
@@ -172,6 +173,8 @@ The command accepts either one phone number, one email, or both.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
+* Note: A professor is not considered a teaching assistant (TA).
+* Email addresses are considered valid even if they do not contain a period(``.``). For example, ``example@domain`` is considered valid.
 * `ADDRESS` can take any values and can not be blank.
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
@@ -179,7 +182,7 @@ The command accepts either one phone number, one email, or both.
 <box type="info" seamless>
 
 **Info: Duplicate Handling**
-- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers.
 - For the same reason, the app will prevent the user from changing the email address or phone number of a contact to one that is already in use by another contact.
 
 </box>
@@ -199,7 +202,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-#### Module-role
+#### Editing module-role
 
 The module-role pairs can be edited by adding and deleting.
 
@@ -207,8 +210,7 @@ The module-role pairs can be edited by adding and deleting.
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
-* Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed 
-person list. 
+* Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one module-role pair must be provided.
 * Multiple module-role pairs can be added at once, separated by `" "`.
@@ -278,7 +280,7 @@ If you input multiple indices separated by spaces, e.g.`edit 1 2 n/...`, the app
 
 ### Locating persons: `find`
 
-The find command allows you to locate persons by their names, module-role pairs, or a combination of both.
+The find command allows you to locate persons by their names, module-role pairs, tags or any combinations of them.
 
 #### By name
 
@@ -291,7 +293,7 @@ Format: `find (n/KEYWORD)+`
 * The keyword must exist contiguously in the name. e.g. `John Doe` will not match `John David Doe`
 * Only the name is searched.
 * Partial words will be matched as well. e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons whose names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `find n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -308,7 +310,7 @@ Format: `find (r/KEYWORD)+`
 * Search by module code and optionally specify the role type (separated by a dash). For example, `CS2103T-Prof` will search for the module `CS2103T` with the role `Professor`.
 * The search is case-insensitive. e.g. `cs2103t-student` will match `CS2103T-Student`.
 * If the role type is not specified, role `STUDENT` will be assumed. For example, `find r/CS2103T` will return all students taking `CS2103T`.
-* Persons matching at least one module-role keyword will be returned (i.e. OR search).
+* Persons whose module-role pairs matching at least one module-role keyword will be returned (i.e. OR search).
 
 Examples:
 * `find r/CS2103T` returns all students taking the module `CS2103T`
@@ -316,18 +318,34 @@ Examples:
 
   ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
 
-#### By name and module-role
+#### By tag
 
-Finds persons whose names and module-role pairs contain any combination of the given keywords.
+Finds persons whose tags contain any of the given keywords.
 
-Format: `find (n/KEYWORD | r/KEYWORD)+`
+Format: `find (t/KEYWORD)+`
 
-* Person matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) will be returned (i.e. AND search).
+* The search is case-insensitive. e.g `Friends` will match `friends`
+* Partial words will be matched as well. e.g. `class` will match `classmates`
+* Persons whose tags matching at least one tag keyword will be returned (i.e. OR search)
+
+Examples:
+* `find t/office` returns all contacts whose tags contain word `office`
+* `find t/classmates t/friends` returns all contacts whose tags contain either `classmates` or `friends`
+
+    ![result for 'find t/classmates t/friends'](images/findTagExample.png)
+
+#### By combinations of names, module-roles and tags
+
+Finds persons whose names, module-role pairs and tags contain any combination of the given keywords.
+
+Format: `find (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
+
+* Persons matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) AND at least one tag keyword (if provided) will be returned (i.e. AND search).
 
 Example:
-* `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either (`Martin` **or** `Boyd`) **and** (`CS1101S Professor` **or** `CS1231S Professor`) **and** (having tag name `favorite`).
 
-  ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
+  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
 
 <box type="info" seamless>
 
@@ -387,23 +405,31 @@ and no effect would be applied to the address book.
 Examples:
 * If you accidentally delete a contact using the `delete` command,
 you can revert this change by input `undo` command.
+![result for 'delete 1'](images/accidentallydelete.png)
+![result for 'undo'](images/undoing.png)
 * Similarly, if you accidentally clear the whole address book using the `clear` command,
 you can restore the whole address book using `undo` command as well.
 * Wrong adding/editing of contact info can be reverted by inputting `undo` as well.
 
 ### Redoing latest undone change to contact data: `redo`
 Redoes the latest undone modification on contact data, if any.
-
 Format: `redo`
 
 * Redo only helps to restore command results that can be handled by undo command,
 such as add, edit, delete and clear.
 * If you input `redo` when there's nothing to redo, GUI will remind you about this
 and no effect would be applied to the address book.
+![result for 'no more redo'](images/nomoreredo.png)
 
 Examples:
 * If you undo a change to the contact data, but end up thinking that it may be
 better to keep it, you can input `redo` after undo the change to restore it back.
+* Taking the same example from the undo session:
+  ![result for 'redo'](images/redoing.png)
+
+<box type="warning" seamless>
+The undo and redo functions do not persist between sessions. Any changes you undo or redo will only be remembered during the current session. Once you close the application or end the session, the history of your actions (undo and redo steps) is lost and cannot be accessed in future sessions.
+</box>
 
 ### Exiting the program: `exit`
 
@@ -413,17 +439,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ContactCS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/contactcs.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactCS data are saved automatically as a JSON file `[JAR file location]/data/contactcs.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ContactCS will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ContactCS to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -470,7 +496,7 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactCS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -489,8 +515,9 @@ To allow more flexibility in the input format, we have to sacrifice some validat
  **Clear**  | `clear`                                                                                                                                                                                                                                                                 
  **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                                                
  **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                                     
- **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521`                                                                                                                                                                   
+ **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD \| t/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521 t/friends t/classmates`                                                                                                                                                                
  **Undo**   | `undo`                                                                                                                                                                                                                                                                  
  **Redo**   | `redo`                                                                                                                                                                                                                                                                  
  **List**   | `list`                                                                                                                                                                                                                                                                  
- **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                                 
+ **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                              
+ **Exit**   | `exit`
