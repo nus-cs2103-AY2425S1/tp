@@ -9,7 +9,7 @@ pageNav: 3
 
 # HallPointer User Guide
 
-Welcome to HallPointer, your one-stop go-to tool as a leader for managing CCA (Co-Curricular Activity) members in a hall setting. This guide will help you get started with using HallPointer, so you can **easily keep track of member details, attendance, assigned points and more**—all without the hassle of traditional spreadsheets.
+Welcome to HallPointer, your one-stop go-to tool as a leader for managing Co-Curricular Activity (CCA) members in a hall setting. This guide will help you get started with using HallPointer, so you can **easily keep track of member details, attendance, assigned points and more**—all without the hassle of traditional spreadsheets.
 
 HallPointer is **crafted to prioritize simplicity and efficiency**. Whether you’re tracking member attendance, organizing contact details, or updating points, HallPointer’s mix of easy-to-use commands and real-time visual feedback makes usage simple and straightforward, even if you’re not a tech expert. Plus, built-in checks ensure accuracy, preventing you from wasting your precious time on hunting down data entry errors.
 
@@ -37,6 +37,7 @@ This guide will walk you through HallPointer’s main features and show you step
   - [Editing the Data File](#editing-the-data-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
+- [Glossary](#glossary)
 
 
 ---
@@ -72,6 +73,13 @@ Here are some example commands you can try:
 
 6. **Learn more about the commands:**\
 Refer to the [Command Summary](#command-summary) section below for a quick overview of each command, and to the [Features](#features) section below for further details for each command.
+
+<box type="tip" seamless>
+
+**TIP:**
+* If you’re unfamiliar with using the command terminal, fret not! [Here](https://www.git-tower.com/blog/command-line-cheat-sheet/) is a condensed cheat sheet for your reference.
+
+</box>
 
 ---
 
@@ -270,12 +278,6 @@ Adds a session to Hall Pointer and associates it with specified members. A sessi
 
 </box>
 
-<box type="warning" seamless>
-
-
-
-</box>
-
 **Examples:**
 
 - `list` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
@@ -371,3 +373,28 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 2. **Multiple Screens Issue**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 3. **Help Window Minimization**: If you minimize the Help Window and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+---
+
+## Glossary
+
+### Graphical User Interface (GUI)
+A visual interface that allows users to interact with the application using graphical elements like buttons and icons instead of text commands.
+
+### Command Terminal
+Where you enter commands to run the HallPointer application (e.g., Command Prompt on Windows, Terminal on macOS/Linux).
+
+### Tag
+A label to categorize members (e.g., "logistics," "friend").
+
+### Session
+An event or activity for members (e.g., "Rehearsal") with points awarded for attendance.
+
+### JSON File
+The file where HallPointer saves your data automatically (`hallpointer.json`).
+
+### Points
+Scores awarded to members for attending sessions.
+
+### Telegram Handle
+The unique Telegram username for each member.
