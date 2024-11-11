@@ -433,13 +433,27 @@ This data is not to be used for any purposes beyond application testing. Unautho
 | 8         | G7191281M       |
 | 9         | S4998948B       |
 | 10        | T3692411F       |
+| 11        | G3715173X       |
+| 12        | G2396162N       |
+| 13        | S4145708B       |
+| 14        | S7918626J       |
+| 15        | T3347267B       |
+| 16        | T9148887B       |
+| 17        | F3573604L       |
+| 18        | F1095991T       |
+| 19        | T9463574D       |
+| 20        | F7844260M       |
+
+
+---
 
 ## **Stay Tuned: Future enhancements coming!**
 >New UI Arriving Soon!
 ![Ui](images/Ui.png)
 
-1. **Search by sub-strings**  
-   Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
-2. 
+**Search by Sub-Strings**  
+Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
 
+**Support for M Fin Series**                                        
+Currently, our NRIC validation support the F and G FIN series, and the S and T NRIC series. We plan to include the new M FIN series in the future.
 
