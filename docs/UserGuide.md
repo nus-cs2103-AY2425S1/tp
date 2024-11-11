@@ -412,7 +412,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
@@ -435,7 +435,7 @@ This command will help you delete a guest from your existing guest list, identif
 
 > :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete_guest 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
@@ -495,7 +495,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
     * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
@@ -518,7 +518,7 @@ This command will help you delete a vendor from your existing vendor list, ident
 
 > :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
 
    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete_vendor 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
