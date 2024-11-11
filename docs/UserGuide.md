@@ -380,6 +380,10 @@ Format: `help`
 Pins the specified contacts to the top of the list in the address book.
 
 Format: `pin INDEX [MORE_INDICES]…`
+<br><br>
+![Pin.png](images/Pin.png)
+<br><br>
+
 
 <box type="info">
 
