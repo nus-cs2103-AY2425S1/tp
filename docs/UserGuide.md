@@ -74,7 +74,7 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/paid_tuition`, `t/paid_tuition t/smart` etc.
 
 * Parameters can be in any order unless specified.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -341,7 +341,7 @@ You can hover over each individual module for a while to view the grades for tha
 - `grade 1 m/Math m/Chinese s/100 s/90` will grade the first person's Math to 100 and his Chinese to 90.
 
 
-### Archiving data files `archive`
+### Archiving data files: `archive`
 
 You can archive the current address book to a specific file name.
 
@@ -361,7 +361,7 @@ When you execute the archive command, all entries in the current StoreClass will
 If you choose an existing archive file as the file name when archiving, the old archive file will be overwritten.
 </div>
 
-### Load data files `load`
+### Load data files: `load`
 
 You can load data from an archived file into StoreClass.
 

@@ -25,6 +25,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    //@@author isaactodo-reused
+    // Reused from https://github.com/isaactodo/ip/blob/master/src/main/java/sentinel/DialogBox.java
+    // with minor modifications
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -88,4 +91,5 @@ public class DialogBox extends HBox {
 
         return db;
     }
+    //@@author
 }

@@ -12,7 +12,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Our team member isaactodo's iP chatbot code. https://github.com/isaactodo/ip
+* Code for sidebar of UG and DG inspired by ChatGPT.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -1,3 +1,8 @@
+/*
+//@@author isaactodo-reused
+// Reused from https://github.com/isaactodo/ip/blob/master/src/main/resources/css/dialog-box.css
+// with minor modifications
+*/
 .label {
     -fx-background-color: #1E293B;
     -fx-border-color: #0F172A;
@@ -39,3 +44,6 @@
     -fx-border-radius: 100%;
     -fx-background-radius: 50px;
 }
+/*
+//@@author
+*/
