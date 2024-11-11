@@ -17,9 +17,9 @@ public class ViewClientCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View a client's information, including name "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View a client's information, including name, "
             + "phone number, email, address, condition, appointments, reminder and payment history\n"
-            + "Parameters: [NAME]\n"
+            + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " John Doe\n";
     private final Name clientName;
 
