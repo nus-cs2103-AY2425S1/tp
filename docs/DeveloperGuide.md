@@ -259,9 +259,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **3a.** The given index is invalid.
     - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*<br><br>
-
-*Use case ends.*
+      *Use case resumes at step 2.* <br><br>
+  
+  *Use case ends.*
 
 ---
 
@@ -301,7 +301,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-  *Use case ends.*
+
+    *Use case ends.*
 
 ---
 
@@ -317,7 +318,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-  *Use case ends.*
+
+    *Use case ends.*
 
 ---
 
@@ -333,7 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-  *Use case ends.*
+
+    *Use case ends.*
 
 ---
 
@@ -404,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - If the user confirms, Eventory executes the clear command and removes the selected data (contacts, events, or both) from memory.
     - If the user declines, Eventory aborts the clear command without removing any data.
 
-    *Use case ends.*
+*Use case ends.*
 
 ---
 
@@ -420,7 +423,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - **2a.** The list is empty.
-    *Use case ends.*
+
+*Use case ends.*
 
 ---
 
