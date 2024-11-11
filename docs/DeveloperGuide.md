@@ -168,18 +168,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Transaction `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
+### Add Transaction 
 
 #### Implementation
 
-The add transaction mechanism is facilitated by the creation of a new `Client` with the updated transaction list, 
-followed by replacing the target `Client` in the Model with the newly created client by calling `Model#setClient(Client, Client))`.
+The execution of the add transaction command creates a new `Client` with an updated transaction list consisting of the newly added transaction, 
+followed by replacing the target `Client` in the Model with the newly created client by calling `Model#setClient(Client, Client)`.
 
-The following sequence diagram shows an example execution of command `addt 1 ...`.
+The following sequence diagram shows an example execution of command `addt 1 ...` focusing on interactions within the`Logic` component.
 
 <puml src="diagrams/AddTransactionSequenceDiagram.puml" width="550" />
 
-### List Transactions `listt INDEX`
+**Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+### List Transactions 
 
 #### Implementation
 
@@ -200,7 +203,7 @@ The following activity diagram shows how the user should use some of our transac
 
 <puml src="diagrams/ListTransactionsActivityDiagram.puml" width="550" />
 
-### Find Transactions `findt KEYWORD [KEYWORDS]`
+### Find Transactions
 
 #### Implementation
 
@@ -493,6 +496,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
+
 ### Finding clients
 
 1. Finding a client in the client list view
@@ -516,6 +520,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `find Alex`<br>
       Expected: Error details informing of environment discrepancy shown in the status message.
 
+
 ### Adding a transaction to a client 
 
 1. Adding a transaction in the client list view.
@@ -526,15 +531,10 @@ testers are expected to do more *exploratory* testing.
        Expected: Transaction is added to first client. Details of transaction and the client transaction was added to shown in status message.
 
     3. Test case: `addt 0 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
-       Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid command format shown in the status message. 
+       Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid command format shown in the status message.
 
-    4. Test case: `addt 1 amt/-1000 o/ABC Motor Group dt/2024-11-17 ` (where description prefix is missing)<br>
-       Expected: Similar to previous.
-
-    5. Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
+   4Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
        Expected: Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid index shown in the status message.
-       
-
 
 2. Adding a transaction in transaction list view.
 
@@ -634,13 +634,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisite: The app is active
    1. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
-      Expected: The legal edit is overwritten by the new data from the app's recentmost session.
+      Expected: The legal edit is overwritten by the new data from the app's most recent session.
 
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
+Team size: 5
+
 1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client.
 2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
 3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
