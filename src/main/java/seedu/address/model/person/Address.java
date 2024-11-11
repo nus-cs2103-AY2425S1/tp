@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Address {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, "
-            + "but should not be blank, and should be less than 120 characters.";
+            + "but should not be blank, and should be 120 characters or less.";
 
     /*
      * The first character of the address must not be a whitespace,
