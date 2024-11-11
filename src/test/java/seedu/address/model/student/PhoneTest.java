@@ -39,6 +39,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("63121534"));
         assertTrue(Phone.isValidPhone("83121534"));
+        assertTrue(Phone.isValidPhone("33121534"));
 
     }
 
