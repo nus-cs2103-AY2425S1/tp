@@ -474,24 +474,31 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 >
 > The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
-![change themes](images/Changing-Themes.png)
+{: .alert .alert-secondary}
+> ![change themes](images/Changing-Themes.png)
+>
+> _Here is an example of how the menu looks._
 
 {: .alert .alert-secondary}
 > ![result for dark Theme example](images/Ui.png)
 >
-> The dark theme will be the default theme when you open EduConnect.
+> _The dark theme will be the default theme when you open EduConnect._
 
 {: .alert .alert-secondary}
 > ![result for light Theme example](images/LightMode.png)
 >
-> The light theme can be toggled by following the above instructions.
+> _The light theme can be toggled by following the above instructions._
 
 #### Viewing help : `help`
 
 Shows a message with a URL link to access the user guide.
 
 Format: `help`
-![help message](images/helpMessage.png)
+
+{: .alert .alert-secondary}
+> ![help message](images/helpMessage.png)
+>
+> _Here is an example of how the help window looks._
 
 #### Exiting the program : `exit`
 
