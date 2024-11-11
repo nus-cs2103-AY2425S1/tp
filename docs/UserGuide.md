@@ -375,7 +375,7 @@ Finds patients whose name contains any of the given keywords.
 </box>
 
 Example:
-* `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name, for instance, `Alex Yeoh` or `David Li`<br>
+* `find John Tim` returns any patient with names containing either "John" or "Tim". This means it will return any patient whose name includes either "John" or "Tim" as part of their name, for instance, `John Doe` or `Tim Cook`<br>
 
 Expected output:
 ```
