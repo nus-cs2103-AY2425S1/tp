@@ -48,8 +48,6 @@ public class ViewCommandTest {
         assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    // Removed execute_validIndexFilteredList_success() test.
-
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);

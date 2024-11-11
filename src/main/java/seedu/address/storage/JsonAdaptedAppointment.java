@@ -18,7 +18,7 @@ public class JsonAdaptedAppointment {
     private final LocalDateTime end;
 
     /**
-     * Constructor to convert an Appointment object into JsonAdaptedAppointment
+     * Converts a given {@code Appointment} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
         if (source == null) {
@@ -33,7 +33,7 @@ public class JsonAdaptedAppointment {
     }
 
     /**
-     * Constructor for Jackson to use during deserialization
+     * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
      */
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("description") String description,
@@ -45,7 +45,7 @@ public class JsonAdaptedAppointment {
     }
 
     /**
-     * Converts this JsonAdaptedAppointment back to an Appointment model object
+     * Converts this JsonAdaptedAppointment back to an Appointment model object.
      */
     @JsonValue
     public Appointment toModelType() throws IllegalValueException {

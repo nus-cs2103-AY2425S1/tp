@@ -120,8 +120,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        // Use of chatGPT to learn how to set the widths of the panels to be fixed by proportion.
-        // Prompt: Given a HBox of 2 stackpanes how to make both widths resize accordingly.
         horizontalContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
             double totalWidth = newVal.doubleValue(); // Get the new width
             leftPartition.setPrefWidth(totalWidth * 0.8); // Set to 80%

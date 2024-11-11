@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -25,6 +27,7 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Patient: \n\n%1$s";
     public static final String MESSAGE_NO_APPOINTMENT = "The Patient indicated does not have an appointment";
+    private static final Logger logger = LogsCenter.getLogger(DeleteAppointmentCommand.class);
 
     private final Index targetIndex;
 
@@ -34,10 +37,12 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing Delete Appointment Command!");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Patient index is out of bounds!");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
@@ -57,7 +62,10 @@ public class DeleteAppointmentCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, Messages.format(editedPerson)));
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                Messages.format(editedPerson)));
+        logger.info("Delete Appointment Command executed successfully!");
+        return commandResult;
     }
 
     @Override

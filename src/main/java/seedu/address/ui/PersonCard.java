@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -50,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
     private Label appointmentEnd;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -64,15 +64,21 @@ public class PersonCard extends UiPart<Region> {
 
     private void setAppointmentFields(Person person) {
         if (person.getAppointment() != null) {
-            appointmentDescription.setText(person.getAppointmentDescription());
-            appointmentStart.setText(getDisplayableDateTime(person.getAppointmentStart()));
-            appointmentEnd.setText(getDisplayableDateTime(person.getAppointmentEnd()));
+            showAppointmentFields(person);
         } else {
-            // Use of ChatGPT to see how to hide unwanted label
-            // Prompt: How to remove label if appointment is null
-            appointmentDescription.setVisible(false); // Hide the label
-            appointmentStart.setVisible(false);
-            appointmentEnd.setVisible(false);
+            hideAppointmentFields();
         }
+    }
+
+    private void showAppointmentFields(Person person) {
+        appointmentDescription.setText(person.getAppointmentDescription());
+        appointmentStart.setText(getDisplayableDateTime(person.getAppointmentStart()));
+        appointmentEnd.setText(getDisplayableDateTime(person.getAppointmentEnd()));
+    }
+
+    private void hideAppointmentFields() {
+        appointmentDescription.setVisible(false); // Hide the label
+        appointmentStart.setVisible(false);
+        appointmentEnd.setVisible(false);
     }
 }
