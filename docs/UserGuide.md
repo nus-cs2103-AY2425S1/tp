@@ -42,7 +42,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Viewing help : `help`](#viewing-help--help)
   - [Employee commands](#employee-commands)
     - [Adding an employee : `add`](#adding-an-employee--add)
-  - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
+    - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
     - [Editing an employee : `edit`](#editing-an-employee--edit)
     - [Filtering employees by skills : `filter`](#filtering-employees-by-skills--filter)
     - [Locating employees by name : `find`](#locating-employees-by-name--find)
@@ -672,7 +672,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 [Return to Top](#table-of-contents)
 
-### Other Commands
+### Summary of assignment commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
