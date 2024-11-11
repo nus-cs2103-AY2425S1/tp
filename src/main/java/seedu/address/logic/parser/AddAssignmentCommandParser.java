@@ -36,8 +36,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
         argMultimap.verifyNoInvalidPrefixesFor(args);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS,
-                PREFIX_GRADE, PREFIX_STUDENT_NUMBER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
