@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class LogEntry {
     public static final String MESSAGE_CONSTRAINTS = "Log description should not be blank.";
-    public static final String VALIDATION_REGEX = ".+";
+    public static final String VALIDATION_REGEX = "^(\\\\n|\\s)*$";
     private final String entry;
     private final String formattedEntry;
 
@@ -67,7 +67,7 @@ public class LogEntry {
      * Returns true if a given string is a valid entry.
      */
     public static boolean isValidEntry(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return !test.matches(VALIDATION_REGEX);
     }
 
     @Override
