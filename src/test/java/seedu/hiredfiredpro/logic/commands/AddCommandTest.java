@@ -238,6 +238,11 @@ public class AddCommandTest {
         public void setPersons(List<Person> persons) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Person> getSortedFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
