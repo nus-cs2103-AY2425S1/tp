@@ -332,13 +332,13 @@ Format: `statistics`
 
 ### Displaying eligible schemes: `scheme`
 
-Displays the schemes that specified people from SocialBook are eligible for.
+Displays the schemes that specified person from SocialBook is eligible for.
 
 Format: `scheme INDEX`
 
 * Displays the schemes that the people at the specified `INDEX` are eligible for.
-* The indexes refer to the index numbers shown in the displayed person list.
-* The indexes **must be a positive integer** 1, 2, 3, …​
+* The index refer to the index numbers shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …​
 * Only 1 index can be inputted at a time.
 
 <box type="info">
@@ -357,7 +357,7 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 * Adds the scheme at the specified `SCHEME_INDEX` to the person at the specified `PERSON_INDEX`.
 * The person index refers to the index number shown in the displayed person list.
 * The scheme index refers to the index number shown in the displayed scheme list with scheme command.
-* The indexes **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …​
 * Only 1 scheme index and 1 person index can be inputted at a time.
 
 <box type="tip" seamless>
@@ -375,7 +375,7 @@ Displays the schemes that the specified person in the address book is attached t
 Format: `viewscheme INDEX`
 * Displays the schemes that the person at the specified `INDEX` is attached to.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …​
 * Only 1 index can be inputted at a time.
 * The index must be within the size of the current list.
 
@@ -391,7 +391,7 @@ Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
 * Deletes the schemes at the specified `SCHEME_INDEXES` from the person at the specified `PERSON_INDEX`.
 * The person index refers to the index number shown in the displayed person list.
 * The scheme index refers to the index number shown in the displayed scheme list with viewscheme command.
-* The indexes **must be a positive integer** 1, 2, 3, …​
+* The indexes **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …​
 * Multiple scheme indexes can be inputted at a time but only 1 person index can be inputted at a time.
 * The scheme indexes can be in **any order** so long as all the indexes fall within the size of the current list.
 * Duplicated valid scheme index inputs would be treated as unique scheme index inputs.
