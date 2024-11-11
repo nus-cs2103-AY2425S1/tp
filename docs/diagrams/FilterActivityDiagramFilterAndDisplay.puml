@@ -10,14 +10,14 @@ if () then ([arguments meets parsing requirements])
     :Combine all the Predicate objects to
     create CombinedPredicate;
 
-    if () then ([some clients have not been evaluated])
+    repeat
         :Evaluate CombinedPredicate for each client;
         if () then ([CombinedPredicate evaluates to True])
             :Add Client to Filtered List;
         else ([else])
         endif
-    else([else])
-    endif
+    repeat while () is ([else])
+    -> [All clients have been evaluated];
 
     :Display filtered list of clients;
 else ([else])
