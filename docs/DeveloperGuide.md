@@ -616,6 +616,12 @@ This is sensible as names are non-unique, and we have other unique fields such a
 8. We plan to add an option that TAs can enable/disable to choose whether they would like the currently visible contact list to refresh after each list-altering command. For example,
 the filtered list displayed after using the `find` command will not reset after using `add`, depending on user preference.
 
+
+9. We plan to improve the `find` command such that it displays the matching contacts in a more useful manner. 
+Current implementation displays matching contacts by index (i.e: chronologically when they were added to ConTActs), resulting in exact matches potentially being shown at the bottom rather than at the top because they were added later. 
+This is makes the `find` command meaningless for large data sets.
+Possible improvement is to implement a "match score" to rank the contacts by, and display them in that order instead.
+
 ---
 ## **Appendix: Effort**
 
