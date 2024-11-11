@@ -182,8 +182,7 @@ The view command works just like any other `Command` object and how a `Command` 
 
 The activity diagram below shows how a view command toggles the card status of a contact:
 
-insert activity diagram for view command
-
+<puml src="diagrams/ViewActivityDiagram.puml" alt="ViewActivityDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
