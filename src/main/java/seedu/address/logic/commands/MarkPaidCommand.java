@@ -74,11 +74,6 @@ public class MarkPaidCommand extends Command {
         List<Participation> participationsToUpdate = model.getParticipationList()
                 .filtered(participation -> participation.getStudent().isSamePerson(originalStudent));
 
-        if (participationsToUpdate.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
-                    updatedStudent.getName()));
-        }
-
         for (Participation participation : participationsToUpdate) {
             Participation updatedParticipation = new Participation(updatedStudent,
                     participation.getTutorial(), participation.getAttendanceList());
