@@ -21,10 +21,10 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> EventToryParser
 
-EventToryParser .down.> XYZCommandParser: creates
+EventToryParser .down.> XYZCommandParser: creates >
 
-XYZCommandParser ..> XYZCommand : creates
-EventToryParser ..> Command : uses
+XYZCommandParser ..> XYZCommand : creates >
+EventToryParser ..> Command : uses >
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
