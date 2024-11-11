@@ -14,12 +14,13 @@ to their events, helping you to stay organized through the entire planning proce
 
 _This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)._
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
+
+### Table of Contents
 
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
 ## 1. Introduction
@@ -66,7 +67,7 @@ challenges.
 
 Let’s get started and see how PlanPal can transform your event planning journey!
 
----
+<div style="page-break-after: always"></div>
 
 ## 2. How to use this User Guide
 
@@ -95,9 +96,7 @@ Below is a summary of the main sections in this User Guide and what you can expe
 First-time users are strongly encouraged to read the <a href="#3-quick-start">Quick-Start</a> section before diving into PlanPal’s features.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
-
 
 ## 3. Quick Start
 
@@ -121,8 +120,6 @@ Ensure that you have Java `17` or above installed on your computer. If you are u
 3. If Java is installed, the version will be displayed. Ensure it is version `17` or above.
 
 If Java is not installed or if the version is below `17`, download the latest Java Development Kit (JDK) from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or use a package manager like `Homebrew` on Mac or `apt-get` on Linux to install Java.
-
----
 
 ### 3.2 Steps to Start PlanPal
 
@@ -151,8 +148,7 @@ If Java is not installed or if the version is below `17`, download the latest Ja
         - **`exit`**: Closes the application.
    - Follow the tutorial in the next section to familiarise yourself with the commands in context!
 
-5. **Explore Additional Features**: For detailed explanations of each command and additional features, refer to the [Features](#features) section below.
-
+5. **Explore Additional Features**: For detailed explanations of each command and additional features, refer to the [Features](#5-features) section below.
 
 ### 3.3 Graphical User Interface Layout
 
@@ -160,7 +156,7 @@ This section gives a quick overview of the different User Interface layouts you 
 
 #### 3.3.1 User Interface (UI) Overview
 
-![UI_Overview image](images/AppImages/UI_Overview.png)
+![UI_Overview image](images/AppImages/UI_overview.png)
 
 This image shows the default User Interface you'll see when you first launch PlanPal. Let’s go through each part of the 
 interface, moving clockwise from the top left:
@@ -205,16 +201,14 @@ from the top right:
 - **Event List Panel**: Remains unchanged, displaying a list of event cards.
 
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
 ## 4. Tutorial: Getting Started with PlanPal
 
 
 This tutorial guides you step-by-step to use the key features of PlanPal effectively. 
-If there are any commands that you do not understand, refer to the [Features](#features) section below for more details.
+If there are any commands that you do not understand, refer to the [Features](#5-features) section below for more details.
 
----
 
 ### 4.1 Adding Contacts
 
@@ -299,7 +293,7 @@ Do note that Jeff needs to have a role before he can be added to an event!
 
 
 _While not required to complete to tutorial, 
-if you are curious about the strange bracket notations click [Features](#features) to read more about the command formats!_
+if you are curious about the strange bracket notations click [Features](#5-features) to read more about the command formats!_
 
 
 ### 4.5 Using Search Mode
@@ -399,7 +393,6 @@ If you want to erase all the default contacts, simply type `clear`.
 Now that you’ve mastered Search Mode, you’re equipped to handle even the
 largest contact lists with ease. Onward to managing events like a pro!
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
 ## 5. Features
@@ -789,8 +782,6 @@ We **do not** recommend editing the storage `.json` files directly, unless you a
 
 Use the `up` and `down` arrow keys to navigate through your command history. Pressing the up arrow displays previously executed commands, allowing you to re-run or edit past commands without retyping them. The down arrow moves forward through the command history, returning to more recent commands.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always"></div>
 
 ## 6. FAQ
@@ -825,22 +816,22 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 ### 8.1 Basic Commands
 
-| Action               | Format, Examples                                                                                                                                                                                                               |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                             |
-| **Clear All Contacts** | `clear`                                                                                                                                                                                                                        |
-| **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
-| **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                       |
-| **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                    |
-| **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                   |
-| **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                            |
-| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
-| **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                         |
+| Action                        | Format, Examples                                                                                                                                                                                                               |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                             |
+| **Clear All Contacts**        | `clear`                                                                                                                                                                                                                        |
+| **Delete Contact**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **Edit Contact**              | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                       |
+| **Find by Name**              | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                    |
+| **Find by Role**              | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                   |
+| **Add Event**                 | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                            |
+| **Add Contact to Event**      | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
+| **Find Contacts in Event**    | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                         |
 | **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                         |
-| **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                            
-| **Clear-Event**      | `clear-event`                                                                                                                                                                                                                  |
-| **List Contacts**    | `list`                                                                                                                                                                                                                         |
-| **Help**             | `help`                                                                                                                                                                                                                         |
+| **Delete Event**              | `erase EVENT_INDEX`                                                                                                                                                                                                            |
+| **Clear-Event**               | `clear-event`                                                                                                                                                                                                                  |
+| **List Contacts**             | `list`                                                                                                                                                                                                                         |
+| **Help**                      | `help`                                                                                                                                                                                                                         |
 
 ### 8.2 Search Mode Summary
 
