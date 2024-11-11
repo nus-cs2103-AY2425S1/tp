@@ -37,7 +37,7 @@ than traditional GUI apps.
    
 If done correctly, a GUI similar to the image below should appear in a few seconds. Note that the app will contain some sample data for you to get started and familiarise with.<br><br>![Ui](images/Ui.png)
 
-5. Type the command where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open the help window.<br><br>
+5. Type the commands where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open a help window.<br><br>
    Some example commands you can try:
 
    * `list`: Lists all current (i.e. not archived) contacts.
@@ -49,8 +49,12 @@ If done correctly, a GUI similar to the image below should appear in a few secon
    * `clear`: Deletes all contacts.
 
    * `exit`: Exits the app.
+<box type="info" seamless>
 
-<br>6. Refer to the [Features](#features) below for details of each command.
+**Relaunching App:** For relaunching of app, simply run step 4 again.
+</box>
+
+<br>6. Refer to the [Features](#features) below for the details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,18 +90,18 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 
 ### Optional Fields:
 
-1. PRIORITY: Priority should be HIGH, MEDIUM, or LOW. Default: LOW <br> Prefix: `pri/` 
+1. PRIORITY: Priority can be HIGH, MEDIUM, or LOW. Default value: LOW <br> Prefix: `pri/` 
 
-2. INCOME: Income should be a non-negative decimal number. Default: 0 <br> Prefix: `income/`
+2. INCOME: Income should be a non-negative decimal number. Default value: 0 <br> Prefix: `income/`
 
-3. FAMILY SIZE: Family size should be a positive integer. Default: 1 <br> Prefix: `famsize/`
+3. FAMILY SIZE: Family size should be a positive integer. Default value: 1 <br> Prefix: `famsize/`
 
 4. TAGS: Tag names should be alphanumeric. <br> Prefix: `t/`
 
 <box type="info" seamless>
 
-**Duplicate Handling:** Since two persons are not allowed to have the same name, in rare cases where you have more than one contact with the exact same name, it is up to your discretion how you want to differentiate them. <br>
-- For instance, if two contacts with the name "John Doe" need to be added, a possibility is adding the first person as "John Doe 1" and the second as "John Doe 2".
+**Duplicate Handling:** Since two persons are not allowed to have the same name, in rare cases where you have more than one contact with the exact same full name, it is up to your discretion how you want to differentiate them. <br>
+- For instance, if two contacts with the name "John Doe" needs to be added, a possibility is adding the first person as "John Doe 1" and the second as "John Doe 2".
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -109,10 +113,10 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter to be determined by user e.g. `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items in square brackets are optional parameters for the user to fill in.<br>
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -120,17 +124,21 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `listappt`, `statistics`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `statistics 123`, it will be interpreted as `statistics`.
+* Extraneous parameters for commands that do not take in parameters (such as `listappt`, `statistics`, `undo`, `clear` and `exit`) will be ignored.<br>
+  e.g. if the input specifies `statistics 123`, it will be interpreted as `statistics`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
-  e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
+<box type="warning" seamless>
+**Caution**
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
+e.g. if you copy `add n/John Doe p/98765432` and `p/98765432` is on a new line in the PDF, when copied over into the command box, it may be copied as `add n/John Doep/98765432` instead which is an invalid command format.
+</box>
+
 </box>
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page as well as all the available commands. If the `[COMMAND]` is specified, the help message for that command
-will be displayed.
+Shows a display message with all the available commands as well as the link to the User Guide.<br>
+If `[COMMAND]` is specified, the help message for that command will be displayed.
 
 ![help message](images/helpMessage.png)
 
@@ -143,13 +151,13 @@ Examples:
 
 ### Adding a person: `add`
 
-Adds a person to SocialBook.
+Adds a person and their details to SocialBook.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...`
 
 * Names are case-insensitive. E.g., `JOHN DOE` is the same as `john doe`.
 * Extra whitespaces between names are trimmed. E.g., <code>John&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doe</code> is the same as `John Doe`.
-* Adding duplicate persons with the same name is not allowed.
+* Adding persons with the same name is not allowed as it is considered a duplicate person.
 * For full information on the input parameters, refer to [User Input](#user-input) above.
 
 <box type="info" seamless>
@@ -164,18 +172,20 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = 
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
+* `add n/John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@outlook.com a/Newgate Prison p/12345678 dob/2002-12-25 pri/MEDIUM t/criminal`
 
 ### Listing all persons: `list`
 
-Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
+Shows the list of persons in SocialBook, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
+
+<box type="tip" seamless>
 
 Format: `list [archive/] [all/]`
 
-- `list`: Shows a list of people who are current contacts (i.e. not archived)
-- `list archive/`: Shows a list of people who are archived
-- `list all/`: Shows a list of all people
+- `list`: Shows the list of people who are unarchived
+- `list archive/`: Shows the list of people who are archived
+- `list all/`: Shows the list of all people (i.e. both archived and unarchived)
 
 <box type="warning" seamless>
 
@@ -192,12 +202,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH]
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** not exceeding the largest index number e.g. 1, 2, 3,…​
 * At least one of the fields must be provided. Refer to [User Input](#user-input) above for more information on the fields.
-* Existing values will be updated to the input values.
-* When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to current tags.
+* Existing values will be updated based on the provided input values.
+* When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to existing tags.
 * You can remove all the person's tags by typing `edit INDEX t/` where `INDEX` is the person's index.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@gmail.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Finding persons: `find`
@@ -213,7 +223,7 @@ Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [inc
 * For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
 * For income, those with income less than or equal to the specified value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
 * To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
-* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but also have high priority. 
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but also have high priority. 
 
 Examples:
 * `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
@@ -234,10 +244,11 @@ Format: `sort [name] [address] [priority] [income] [updated]`
 
 * The only valid parameters are exactly as above: `name`, `address`, `priority`, `income`, `updated`.
 * Only one parameter can be specified at any time.
+* At least one parameter must be specified (i.e. no empty `sort` command).
 * The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
 * For name, the sorting is in alphabetical order.
 * For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
-  * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` followed by `sort address` will sort the contact list of those staying in Clementi in order of their address. 
+* Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` followed by `sort address` will sort the contact list of those staying in Clementi in order of their address. 
 * For priority, the sorting is in order from HIGH to LOW.
 * For income, the sorting order is in increasing order from the lowest to highest.
 * For updated, the sorting order is from the person updated least recently to the one updated most recently.
@@ -251,7 +262,8 @@ Examples:
 
 **Auto-sorting:**
 - Whenever SocialBook is launched, persons are automatically sorted in order of their priority from HIGH to LOW.
-- Therefore, if the sorting order is changed, SocialBook should be kept open for as long as the new sorting order is required, as closing it and relaunching will mean that the persons are sorted once again in the above stated priority order.
+- If the sorting order is changed, as long as SocialBook is not closed, the persons will remain sorted according to the latest specified sorting order.
+- Closing and relaunching SocialBook will default the persons to be sorted by the above stated priority order once again.
 </box>
 
 ### Deleting people: `delete`
