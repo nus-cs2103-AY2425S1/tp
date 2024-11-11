@@ -42,8 +42,6 @@ done faster than traditional GUI apps.
 
    * `deletes n/John Doe` : Deletes the contact with the name John Doe.
 
-   * `deleteall` : Deletes all contacts.
-
    * `exit` : Exits the app.
 
 8. Refer to the [Features](#features) below for details of each command.
@@ -75,7 +73,7 @@ done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 * Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
-  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+  e.g. `n/John Doe` will be treated as `n/John Doe`.
 
 * Tutorial group and student number arguments are not case-sensitive.  
   * Tutorial Groups must be in the format of a letter followed by two numbers i.e `G17`, `Z19`, `T15`, etc.
