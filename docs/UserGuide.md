@@ -465,7 +465,12 @@ Fields
 {% endraw %}
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first
+
+Fees can only be added if the student is enrolled in **at least one** tutorial. To enroll students into tutorial, check [here](#33-enrolling-student-into-a-tutorial).
+</div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+Fees added will be shown as an increase in overdue amount. If a student has advance payment, logged fees will decrease the advance payment first.
 </div>
 
 Example usages
