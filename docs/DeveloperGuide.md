@@ -334,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 2b. Wrong format in input.
-    * 2b1.MediContact shows an error message specifying the incorrect format.
+    * 2b1. MediContact shows an error message specifying the incorrect format.
   
       Use case ends.
 
@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index or name is invalid.
-  - 3a1. AddressBook shows an error message.
+  - 3a1. MediContact shows an error message.
   
     Use case resumes at step 2.
   
@@ -366,14 +366,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Clear address book**
+**Use case: Clear all contacts**
 
 **MSS**
 
 1.  User requests to clear address book. 
 2.  MediContact requests for confirmation. 
 3.  User confirms to clear. 
-4.  MediContact clears the address book.
+4.  MediContact clears all contacts in MediContact.
 
     Use case ends.
 
@@ -450,15 +450,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
   
 - 2b. Wrong format in input
-  - 2b1.MediContact shows an error message specifying the incorrect format.
+  - 2b1. MediContact shows an error message specifying the incorrect format.
   
     Use case ends.
   
-**Use case: Import address book**
+**Use case: Import data**
 
 **MSS**
 
-1. User requests to import address book.
+1. User requests to import data.
 2. User inputs the import command with new address book file name.
 3. MediContact imports the data.
 4. MediContact replaces original data with new data.
@@ -473,12 +473,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 - 2b. File is not in JSON format.
-    - 2b1.MediContact shows an error message indicating wrong file format.
+    - 2b1. MediContact shows an error message indicating wrong file format.
 
       Use case ends.
   
 - 2c. File is not in expected format of MediContact data.
-    - 2c1.MediContact shows an error message indicating invalid JSON format.
+    - 2c1. MediContact shows an error message indicating invalid JSON format.
 
       Use case ends.
 
