@@ -589,7 +589,7 @@ For example, `find n/John p/98765432` is an invalid command.
 
 **Proposed Enhancement**
 Enhance `find` command to allow multiple types of prefixes to be used for each `find` command so that users can search for multiple fields with a single `find` command.
-For example, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
+For example, with this enhancement, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
 
 ### Restrict special characters in the address field
 
