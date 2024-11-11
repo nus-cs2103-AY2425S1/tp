@@ -325,13 +325,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Specified tutorial group does not exist.
     * 1a1. Teletutors App informs tutor that the tutorial group cannot be found.
-    * 1a2. Tutor enters the correct tutorial group if he misspelled it originally or adds students in that tutorial group if it was empty previously and reenters the request.
+    * 1a2. Tutor enters the correct tutorial group if he misspelled it originally, or adds students to that tutorial group if it was empty previously, and reenters the request.
 
     Use case resumes from step 2.
 
 * 3a. Specified student does not exist.
     * 3a1. Teletutors App informs the tutor that the student cannot be found.
-    * 3a2. Tutor adds the student if the student has not been added yet or enters the student name again if he misspelled it before.
+    * 3a2. Tutor adds the student if the student has not been added yet, or enters the student name again if he misspelled it previously.
 
     Use case resumes from step 4.
 
