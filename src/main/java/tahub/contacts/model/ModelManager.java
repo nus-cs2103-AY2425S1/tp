@@ -213,12 +213,14 @@ public class ModelManager implements Model {
     public void deleteSca(StudentCourseAssociation target) {
         scaList.remove(target);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        notifyEnrollmentChanged();
     }
 
     @Override
     public void addSca(StudentCourseAssociation sca) {
         scaList.add(sca);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        notifyEnrollmentChanged();
     }
 
     @Override
@@ -239,6 +241,11 @@ public class ModelManager implements Model {
     @Override
     public List<Tutorial> getStudentTutorials(Person student) {
         return scaList.filterTutorialsByStudent(student);
+    }
+
+    @Override
+    public void notifyEnrollmentChanged() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

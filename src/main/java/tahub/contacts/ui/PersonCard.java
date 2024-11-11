@@ -12,6 +12,8 @@ import tahub.contacts.logic.Logic;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
+import java.util.Comparator;
+
 /**
  * A UI component that displays information of a {@code Person}.
  */
@@ -74,6 +76,18 @@ public class PersonCard extends UiPart<Region> {
             courseLabel.getStyleClass().add("course-tag"); // Add this style class for course tags
             tags.getChildren().add(courseLabel);
         }
+    }
+
+    /**
+     * Creates the person tags by getting updated course information from the model
+     */
+    private void updateTags(Person person) {
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Force a layout pass to ensure immediate visual update
+        tags.requestLayout();
     }
 
     @FXML

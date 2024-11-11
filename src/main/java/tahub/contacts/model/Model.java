@@ -157,4 +157,9 @@ public interface Model {
      * The SCA must exist in the list.
      */
     void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca);
+
+    /**
+     * Notifies listeners that a student's enrollment has changed
+     */
+    void notifyEnrollmentChanged();
 }

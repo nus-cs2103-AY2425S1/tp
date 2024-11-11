@@ -50,4 +50,11 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Refreshes the person view to reflect any changes in tags
+     */
+    public void refreshPersonView() {
+        personListView.refresh();
+    }
+
 }

@@ -178,6 +178,11 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            // Immediately refresh the person list panel after enrollment/unenrollment commands
+            if (commandText.startsWith("enroll") || commandText.startsWith("unenroll")) {
+                personListPanel.refreshPersonView();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
