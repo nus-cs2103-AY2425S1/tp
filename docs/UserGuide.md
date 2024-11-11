@@ -661,6 +661,8 @@ Opens a window with detailed information of a specified student.
 
 Displaying the detailed information window can be done in two ways:
 
+<div style="page-break-after: always;"></div>
+
 #### Method 1:
 **Example Usage:**
 <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
