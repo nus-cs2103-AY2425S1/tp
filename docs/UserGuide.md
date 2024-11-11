@@ -170,9 +170,12 @@ Examples:
 * `add n/Alex Yeoh th/alexyeoh123 e/alexyeoh@example.com ss/masters r/President r/Admin`
 ![result for 'add'](images/addAlexYeohResult.png)
 
+<box type="tip" seamless>
+
 Note:
 * `add` command will fail if you try to add a person who is already in the address book. You may refer to [invalid contacts](#what-is-considered-as-invalid-contacts) to see what is considered as having the same identity.
 * `add` command will fail if you attempt to add a person with a duplicate field as an existing contact, please refer to [invalid contacts](#what-is-considered-as-invalid-contacts) for more information.
+</box>
 
 <div style="page-break-after: always;"></div>
 
@@ -502,11 +505,10 @@ Assuming the above entry in the address book, you must enter an add / edit comma
   - Must only contain alphabets, numbers, and special characters `+_.-`.
   - Must not start or end with any special characters.
 - DOMAIN //& EDIT TO ADDRESS ISSUE 247 and 278
-  - Domains must be made up of domain labels separated by periods.
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
-
+g
 ### Student Status
 - Must take one of the following values:
   1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
