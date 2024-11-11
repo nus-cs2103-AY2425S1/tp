@@ -34,18 +34,18 @@ ParserUtil --> DeleteCommandParser : List<Index> (indices)
 deactivate ParserUtil
 
 alt Single index in list
-    DeleteCommandParser -> DeleteCommand : new DeleteCommand(indices)
+    DeleteCommandParser -> DeleteCommand : new DeleteCommand()
     activate DeleteCommand
     DeleteCommand --> DeleteCommandParser : d
     deactivate DeleteCommand
 else Multiple indices
     loop For each index starting from second
         alt Indices are duplicate
-            DeleteCommandParser -> ParseException : throw ParseException("Indices must be unique")
+            DeleteCommandParser -> ParseException : throw ParseException()
             deactivate DeleteCommandParser
         end
     end
-    DeleteCommandParser -> DeleteCommand : new DeleteCommand(indices)
+    DeleteCommandParser -> DeleteCommand : new DeleteCommand()
     activate DeleteCommand
     DeleteCommand --> DeleteCommandParser : d
     deactivate DeleteCommand
