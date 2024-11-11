@@ -276,9 +276,9 @@ Team Size: 5
 3. Save theme preference on exit
 4. Prevent teacher command from accepting "/nok", "/attendance" and "/emergency" prefix
 5. Relax restrictions on phone number to allow international phone numbers
-6. Make gender keyword case-insensitive
-7. Allow editing of attendance for students
-8. Update find to be able to find with partial info (e.g. /find name han can find "Hans")
+6. Make gender keyword case-insensitive 
+7. **Ability to edit attendance for students**: The current `edit` command does not support editing the attendance parameter. We plan to enhance the `edit` command to include the ability to directly modify the student's attendance field to a specified value, provided it adheres to the required constraints of the attendance parameter. The command format will be `edit INDEX [/attendance ATTENDANCE]`.
+8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility. We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete information. For instance, entering `find /name han` would return results such as "Hans Gruber" and "Johanna Smith.".
 9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact. We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
 10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names. We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
 
