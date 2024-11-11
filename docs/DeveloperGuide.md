@@ -211,13 +211,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a contact**
+**Use case: Add a patient's contact**
 
 **MSS**
 
-1. User requests to add contact
-2. User inputs the contact details
-3. Medicontact adds the contact
+1. User requests to add patient's contact
+2. User inputs the patient's contact details
+3. Medicontact adds the patient's contact
 
     Use case ends.
 
@@ -233,26 +233,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: Delete a patient**
+**Use case: Delete a patient's contact**
 
 **MSS**
 
-1.  User requests to list patients. 
-2.  MediContact shows a list of patients. 
-3.  User requests to delete a specific patient in the list. 
+1.  User requests to list patient contacts. 
+2.  MediContact shows a list of patient contacts. 
+3.  User requests to delete a specific patient's contact in the list. 
 4.  MediContact requests for confirmation. 
 5.  User confirms to delete. 
-6.  MediContact deletes the patient.
+6.  MediContact deletes the patient's contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The patient contact list is empty.
 
   Use case ends.
 
-* 3a. The given index or name is invalid.
+* 3a. The given patient's index or patient's name is invalid.
   - 3a1. MediContact shows an error message.
   
     Use case resumes at step 2.
@@ -261,7 +261,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Clear all contacts**
+**Use case: Clear all patient contacts**
 
 **MSS**
 
@@ -282,20 +282,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list patients.
-2. MediContact shows a list of patients.
-3. User requests to edit a patient and specifies edited fields. 
-4. MediContact updates the patient. 
+1. User requests to list patient contacts.
+2. MediContact shows a list of patient contacts.
+3. User requests to edit a specific patient's contact and specifies edited fields. 
+4. MediContact updates the patient's contact. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The patient contact list is empty.
 
   Use case ends.
 
-* 3a. The given name is invalid. 
+* 3a. The given patient name is invalid. 
   - 3a1. MediContact shows an error message.
 
     Use case ends.
@@ -306,11 +306,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Filter a patient**
+**Use case: Filter a patient's contact**
 
 **MSS**
 
-1. User requests to filter contacts and specifies the criteria.
+1. User requests to filter patient contacts and specifies the criteria.
 2. Medication shows a list of patients matching details.
 
    Use case ends.
@@ -327,12 +327,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: Find a patient**
+**Use case: Find a patient's contact**
 
 **MSS**
 
-1. User requests to find contact
-2. User inputs the find command with contact details
+1. User requests to find patient's contact
+2. User inputs the find command with patient's contact details
 3. MediContact shows a list of patients matching details
 
    Use case ends.
@@ -349,14 +349,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends.
   
-**Use case: Import data**
+**Use case: Import patient contacts**
 
 **MSS**
 
-1. User requests to import data.
+1. User requests to import patient contacts.
 2. User inputs the import command with new address book file name.
-3. MediContact imports the data.
-4. MediContact replaces original data with new data.
+3. MediContact imports the patient contacts.
+4. MediContact replaces original patient contacts data with new patient contacts data.
 
    Use case ends.
 
@@ -378,41 +378,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: List contacts**
+**Use case: List patient contacts**
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to list patient contacts.
 2. User inputs the list command.
-3. MediContact shows a list of contacts.
+3. MediContact shows a list of patient contacts.
 
    Use case ends.
 
-**Use case: List starred contacts**
+**Use case: List starred patient contacts**
 
 **MSS**
 
-1. User requests to list starred contacts.
+1. User requests to list starred patient contacts.
 2. User inputs the list star command.
-3. MediContact shows a list of starred contacts.
+3. MediContact shows a list of starred patient contacts.
 
    Use case ends.
 
-**Use case: Star a patient**
+**Use case: Star a patient's contact**
 
 **MSS**
 
-1. User requests to list patients.
-2. MediContact shows a list of patients.
-3. User requests to add a patient into starred list.
+1. User requests to list patient contacts.
+2. MediContact shows a list of patient contacts.
+3. User requests to add a patient's contact into starred list.
 4. User inputs the star command with index or full name of the patient.
-5. MediContact adds the patient into starred list.
+5. MediContact adds the patient's contact into starred list.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+- 2a. The patient contact list is empty.
 
   Use case ends.
 
@@ -421,30 +421,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Sort contacts**
+**Use case: Sort patient contacts**
 
 **MSS**
 
-1. User requests to sort contacts.
+1. User requests to sort patient contacts.
 2. User inputs the sort command.
-3. MediContact sorts the displayed list of contacts by appointments.
+3. MediContact sorts the displayed list of patient contacts by appointments.
 
 **Extensions**
 
-- 2a. No contact with appointment dates found.
+- 2a. No patient contact with appointment dates found.
 
     - 2a1. MediContact shows an error message.
-    - 2a2. MediContact sorts the contacts alphabetically.
+    - 2a2. MediContact sorts the patient contacts alphabetically.
   
       Use case ends.
 
+- 2b. More than one patient contact have the same appointment dates.
+    
+    - 2b1. MediContact sorts the patient contacts having same appointment dates alphabetically.
+    
+    Use case ends.
 
 **Use case: View note**
 
 **MSS**
 
-1. User requests to list patients.
-2. MediContact shows a list of patients.
+1. User requests to list patient contacts.
+2. MediContact shows a list of patient contacts.
 3. User requests to view a patient's note.
 4. User inputs the view command with index or full name of the patient.
 5. MediContact shows the patient's contact with the note.
@@ -453,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. The list is empty.
+- 2a. The patient contacts list is empty.
 
   Use case ends.
 
