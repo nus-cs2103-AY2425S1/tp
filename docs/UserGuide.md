@@ -263,7 +263,7 @@ Format: `export FILENAME`
 
 * Exports the current listed persons' emails to a .txt file with the specified filename.
 * Filepath can be specified by the user. 
-* However, to avoid I/O errors, the filepath should only contain pre-existing directories.
+* However, to avoid I/O errors, the filepath should **only contain pre-existing directories.**
 * `FILENAME` should only have alphanumeric characters, `_` and `/`.
 * If the specified file already exists, a copy will be created for the new export.
 
