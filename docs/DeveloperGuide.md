@@ -506,15 +506,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   a. Download the jar file and copy into an empty folder
 
-   1. Open your command interface and run the jar file with the command `java -jar Grub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   b. Open your command interface and run the jar file with the command `java -jar Grub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -523,15 +523,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
+   a. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
 
-   1. Test case: `delete 1`<br>
+   b. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   c. Test case: `delete 0`<br>
       Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   d. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
@@ -539,85 +539,85 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a restaurant by name
 
-1. Find a restaurant by its saved name
+2. Find a restaurant by its saved name
 
-   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
    The first test case below assumes the user has not added any more restaurants with the name Swenswen.
 
-   1. Test case: `find swenswen`<br>
+   b. Test case: `find swenswen`<br>
       Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
-   1. Test case: `find !@#`<br>
+   c. Test case: `find !@#`<br>
       Expected: Message displays no restaurants found.
 
-   1. Other incorrect find commands to try: `find`<br>
+   d. Other incorrect find commands to try: `find`<br>
       Expected: Error details shown in the status message. Status bar remains the same.
 
 
 
 ### Filtering by tags
 
-1. Find a restaurant by its tag names
+3. Find a restaurant by its tag names
 
-   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
    The first test case below assumes the user has not added any more restaurants with the tag halal.
 
-   1. Test case: `tags halal`<br>
+   b. Test case: `tags halal`<br>
       Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
-   1. Test case: `tags $$$`<br>
+   c. Test case: `tags $$$`<br>
       Expected: Message displays no restaurants found.
 
-   1. Other incorrect filter-by-tag commands to try: `tags`<br>
+   d. Other incorrect filter-by-tag commands to try: `tags`<br>
       Expected: Error details shown in the status message. Status bar remains the same.
 
 
 ### Filtering by price
 
-1. Find a restaurant by its price labels
+4. Find a restaurant by its price labels
 
-   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
       The first test case below assumes the user has not added any more restaurants with the price label of `$`.
 
-   1. Test case: `price $`<br>
+   b. Test case: `price $`<br>
       Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
-   1. Test case: `price expensive`<br>
+   c. Test case: `price expensive`<br>
       Expected: Message displays no restaurants found. 
 
-   1. Other incorrect filter-by-price commands to try: `price`<br>
+   d. Other incorrect filter-by-price commands to try: `price`<br>
       Expected: Error details shown in the status message. Status bar remains the same.
 
 
 ### Rating a restaurant
 
-1. Rating a restaurant while all restaurants are being shown
+5. Rating a restaurant while all restaurants are being shown
 
-1. Prerequisites: The requested restaurant has to be currently saved.<br>
+    a. Prerequisites: The requested restaurant has to be currently saved.<br>
 
-    1. Test case: `rate 1 r/2`<br>
+    b. Test case: `rate 1 r/2`<br>
        Expected: First contact is given a rating of `2` from the list. Left hand side displays updated rating for the restaurant.
 
-    1. Test case: `rate 0`<br>
+    c. Test case: `rate 0`<br>
        Expected: No restaurant is rated. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect rate commands to try: `rate`<br>
+    d. Other incorrect rate commands to try: `rate`<br>
        Expected: Similar to previous.
 
 
 ### Favourite a restaurant
 
-1. Favourite a restaurant while all restaurants are being shown
+6. Favourite a restaurant while all restaurants are being shown
 
-1. Prerequisites: The requested restaurant has to be currently saved.<br>
+    a. Prerequisites: The requested restaurant has to be currently saved.<br>
 
-    1. Test case: `fav 2`<br>
+    b. Test case: `fav 2`<br>
        Expected: Second contact has its border highlighted orange and brought to the top of the list as the first index.
 
-    1. Test case: `fav 0`<br>
+    c. Test case: `fav 0`<br>
        Expected: No restaurant is turned to favourite. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect Favourite commands to try: `fav`<br>
+    d. Other incorrect favourite commands to try: `fav`<br>
        Expected: Similar to previous.
 
 
