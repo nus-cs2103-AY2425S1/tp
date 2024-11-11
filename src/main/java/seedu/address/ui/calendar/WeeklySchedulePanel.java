@@ -42,7 +42,10 @@ public class WeeklySchedulePanel extends UiPart<Region> {
         weekHeader.textProperty().bind(dateToDisplay);
         weeklyCalendarView.setItems(dailyScheduleOfWeek);
         weeklyCalendarView.setCellFactory(listView -> new WeeklySchedulePanel.CalendarListViewCell());
+    }
 
+    public void updateSchedulePanel() {
+        weeklyCalendarView.refresh();
     }
 
     /**
@@ -50,14 +53,14 @@ public class WeeklySchedulePanel extends UiPart<Region> {
      */
     class CalendarListViewCell extends ListCell<ObservableList<Meeting>> {
         @Override
-        protected void updateItem(ObservableList<Meeting> meeting, boolean empty) {
-            super.updateItem(meeting, empty);
+        protected void updateItem(ObservableList<Meeting> schedule, boolean empty) {
+            super.updateItem(schedule, empty);
             int i = getIndex() + 1;
-            if (empty || meeting == null) {
+            if (empty || schedule == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                FilteredList<Meeting> dailySchedule = new FilteredList<>(meeting);
+                FilteredList<Meeting> dailySchedule = new FilteredList<>(schedule);
                 dailySchedule.setPredicate(m -> m.getMeetingDate().getDayOfWeek().getValue() == i);
                 setGraphic(new DailySchedulePanel(dailySchedule, personList, getIndex() + 1).getRoot());
             }
