@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant "a:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addtask 1 d/Checkup")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addtask 1 d/Checkup")
+activate AddressBookParser
+
+create AddTaskCommandParser
+AddressBookParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+
+AddTaskCommandParser --> AddressBookParser
+deactivate AddTaskCommandParser
+
+AddressBookParser -> AddTaskCommandParser : parse("1 d/Checkup")
+activate AddTaskCommandParser
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser :
+deactivate AddTaskCommand
+
+AddTaskCommandParser --> AddressBookParser : a
+deactivate AddTaskCommandParser
+
+AddTaskCommandParser -[hidden]-> AddressBookParser
+destroy AddTaskCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddTaskCommand : execute(m)
+activate AddTaskCommand
+
+AddTaskCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> Model : hasTask(t)
+activate Model
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> Model : addTask(t)
+activate Model
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand --> LogicManager : r
+deactivate AddTaskCommand
+
+AddTaskCommand -[hidden]-> LogicManager
+destroy AddTaskCommand
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml
