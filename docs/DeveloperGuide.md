@@ -1,3 +1,12 @@
+<style>
+    img {
+        width: 450px;
+        display: block;
+        margin: auto;
+    }
+</style>
+
+
 ---
 layout: page
 title: Developer Guide
@@ -325,20 +334,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Patient details are saved only if the input data is valid.
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 #### Main Success Scenario (MSS)
-1. Fred enters command to `add` a new person.
+1. Fred enters command to `add` a new person along with their details.
 2. CareLink requests person details.
-3. Fred enters the person details along with their role as patient, caregiver, or both.
-4. CareLink validates the input data.
-5. CareLink saves the person details to the system.
-6. CareLink displays a success message and shows the newly added patient in the system.
-7. Use case ends.
+3. CareLink validates the input data.
+4. CareLink saves the person details to the system.
+5. CareLink displays a success message and shows the newly added patient in the system.
+6. Use case ends.
 
 #### Extensions
 - **4a. Invalid patient data entered**:
@@ -355,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The person's details are successfully retrieved and displayed.
@@ -382,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The caregiver is correctly linked to the specified patient, and vice versa.
@@ -412,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The patient’s details are successfully updated in the system.
@@ -441,7 +449,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The patient exists in the system.
 
 #### Guarantees
@@ -467,7 +474,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified condition and displayed.
@@ -498,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified patient(s) and displayed.
@@ -529,7 +536,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -575,7 +581,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment for that person exists in the system.
 
@@ -623,7 +628,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment exists in the system.
 
@@ -665,7 +669,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -699,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+
 - The address book contains patient data.
 
 #### Guarantees
@@ -748,7 +751,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 6. **Portability**
     - **Category:** System Constraints
-    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
+    - **Requirement:** The product must support downloading JSON files that can be easily loaded and used on another system.
     - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
 
 7. **Readable Font Size**

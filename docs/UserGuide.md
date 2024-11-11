@@ -1,4 +1,12 @@
----
+<style>
+    img {
+        width: 450px;
+        display: block;
+        margin: auto;
+    }
+</style>
+
+--
 layout: page
 title: User Guide
 ---
