@@ -23,7 +23,7 @@
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
 
-2. Copy the file to the folder you want to use as the _home folder_ for CFG.
+2. Copy the file to the folder you want to use as the _home folder_ for CFG (e.g. create the folder "contactsforgood" in "Documents").
 
 3. Open a command terminal. Run the `java -version` command to ensure you are using Java 17.
 
@@ -266,11 +266,16 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in CFG**.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* Role-specific fields must correspond to the resulting role after editing.
-    * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.
-    * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,
-    * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.
-* If the resulting role does not have the specified field, the edit will be invalid.
+
+<box type="info" seamless>
+
+**Role-specific fields must correspond to the resulting role after editing:**
+* For `Volunteer`, `h/HOURS` is required.
+* For `Donor`, `d/DONATED_AMOUNT` is required.
+* For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
+* If the resulting role does not have the specified field, the `edit` command will be invalid.
+
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
