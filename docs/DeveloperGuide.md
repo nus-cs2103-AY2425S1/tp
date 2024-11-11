@@ -15,8 +15,8 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).\
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ---
 
@@ -32,36 +32,36 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the application.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components of the application and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the application launch and shut down.
 
-- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At application launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
-
-The bulk of the app's work is done by the following four components:
-
-- [**`UI`**](#ui-component): The UI of the App.
-- [**`Logic`**](#logic-component): The command executor.
-- [**`Model`**](#model-component): Holds the data of the App in memory.
-- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+The bulk of the application's work is done by the following four components:
+
+- [**`UI`**](#ui-component): The user interface of the app.
+- [**`Logic`**](#logic-component): Handles parsing and executing the commands received through user input.
+- [**`Model`**](#model-component): Holds the data of the application in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to the hard disk.
+
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete_member 1`.
+The _Sequence Diagram_ below shows how the components interact with each other when the user issues the command `delete_member 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components (also shown in the diagram above) has these properties:
 
-- defines its _API_ in an `interface` with the same name as the Component.
-- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- It defines its _API_ (Application Programming Interface) in an `interface` with the same name as the Component.
+- It implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned above).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -291,13 +291,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​         | I want to …​                                                     | So that I can …​                                                        | Remarks/Notes                                                                         |
 |----------|-----------------|------------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `* * *`  | First-time user | Explore the app using sample data                                | I can understand its features without manually entering data            |                                                                                       |
-| `* * *`  | First-time user | See a guide on how to use the app                                | I can better understand its functionalities                             |                                                                                       |
-| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the app                    |                                                                                       |
+| `* * *`  | First-time user | Explore the application using sample data                        | I can understand its features without manually entering data            |                                                                                       |
+| `* * *`  | First-time user | See a guide on how to use the application                                | I can better understand its functionalities                             |                                                                                       |
+| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the application                    |                                                                                       |
 | `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                    |                                                                                       |
-| `* * *`  | First-time user | Delete all data in the app                                       | I can start over when I make a mistake and remove sample data           |                                                                                       |
-| `* * *`  | User            | Add new Hall members to the app                                  | I can track points for new Hall members                                 |                                                                                       |
-| `* * *`  | User            | Delete ex-Hall members from the app                              | I can stop tracking points for ex-Hall members                          |                                                                                       |
+| `* * *`  | First-time user | Delete all data in the application                                       | I can start over when I make a mistake and remove sample data           |                                                                                       |
+| `* * *`  | User            | Add new Hall members to the application                                  | I can track points for new Hall members                                 |                                                                                       |
+| `* * *`  | User            | Delete ex-Hall members from the application                              | I can stop tracking points for ex-Hall members                          |                                                                                       |
 | `* * *`  | User            | Customize point allocation criteria                              | I can reward members based on different participation criteria          | E.g., different point weights for different activities                                |
 | `* * *`  | Frequent user   | Add or delete points for each Hall member                        | I can track the overall participation status in the CCA                 |                                                                                       |
 | `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                        |                                                                                       |
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                      | Charts or graphs to visualize data                                                    |
 | `*`      | User            | Sort members by name                                             | I can locate a member easily                                            |                                                                                       |
 | `*`      | Frequent user   | Automatically save changes without manual intervention           | I don’t lose progress if I forget to click save                         | Auto-save feature                                                                     |
-| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the app more efficiently without relying on the GUI |                                                                                       |
+| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the application more efficiently without relying on the GUI |                                                                                       |
 | `*`      | Expert user     | Automate repetitive tasks, such as attendance updates            | I can save time by reducing manual input                                |                                                                                       |
 | `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                  |                                                                                       |
 | `*`      | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                       |                                                                                       |
@@ -496,7 +496,7 @@ None.
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <box type="info" seamless>
 
@@ -517,7 +517,7 @@ testers are expected to do more _exploratory_ testing.
 2. Saving Window Preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-    2. Re-launch the app by double-clicking the `.jar` file.<br>
+    2. Re-launch the application by double-clicking the `.jar` file.<br>
        **Expected:** The most recent window size and location is retained.
 
 
@@ -570,14 +570,14 @@ testers are expected to do more _exploratory_ testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Open the hallpointer.json file located in the data directory (this file is created after the app is first launched). Modify it by deleting the name of the first entry.
+    1. Open the hallpointer.json file located in the data directory (this file is created after the application is first launched). Modify it by deleting the name of the first entry.
 
         **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
 2. Confirming data persistence
 
     1. Add or modify member/session data.
-    2. Exit the app and re-launch it.<br>
+    2. Exit the application and re-launch it.<br>
        **Expected:** All previous data should be saved and displayed upon restart.
 
 ### Other Features
