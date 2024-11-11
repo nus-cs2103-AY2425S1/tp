@@ -22,8 +22,8 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LIST_ALL, PREFIX_LIST_ARCHIVE);
 
-        if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()
-                && argMultimap.getValue(PREFIX_LIST_ARCHIVE).isPresent()) {
+        if (!argMultimap.getPreamble().isEmpty() || (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()
+                && argMultimap.getValue(PREFIX_LIST_ARCHIVE).isPresent())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 

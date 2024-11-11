@@ -61,12 +61,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Predicate<? super Person> currentPredicate = model.getFilteredPersonListPredicate();
-        assert currentPredicate != null;
-
         // default starting predicate
-        // cannot directly assign finalPredicate with model.getFilteredPersonListPredicate() due to generic bound
-        Predicate<Person> finalPredicate = currentPredicate::test;
+        Predicate<Person> finalPredicate = model.getFilteredPersonListPredicate();
+        assert finalPredicate != null;
 
         if (!names.isEmpty()) {
             finalPredicate = finalPredicate.and(new NameContainsKeywordsPredicate(names));
