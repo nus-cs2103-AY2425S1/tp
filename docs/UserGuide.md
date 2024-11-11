@@ -432,7 +432,7 @@ Examples:
 
 ### Displaying eligible schemes: `scheme`
 
-Displays the schemes that person from SocialBook is eligible for.
+Displays the schemes that a person in SocialBook is eligible for.
 
 Format: `scheme INDEX`
 
@@ -468,7 +468,7 @@ Examples:
 
 ### Viewing schemes attached to a person: `viewscheme`
 
-Displays the schemes attatched to the specified person in SocialBook.
+Displays the schemes attached to the specified person in SocialBook.
 
 Format: `viewscheme INDEX`
 * Displays the schemes that the person at the specified `INDEX` is attached to.
