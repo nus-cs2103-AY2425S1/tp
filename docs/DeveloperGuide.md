@@ -349,6 +349,8 @@ For example, the sequence diagram below illustrates the interactions within the 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product Scope
@@ -379,16 +381,17 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 #### Beginner User Stories
 
-
 | Priority | As a …​                  | I want to …​                                    | So that I can…​                                                                |
 |----------|--------------------------|-------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data             |
+| `* * *`  | new user                 | have sample data to work with                   | understand how to use the application                                          |
 | `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                           |
 | `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                         |
 | `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                                 |
@@ -415,6 +418,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | healthcare administrator | undo the last operation               | recover from accidental deletions or modifications                           |
 | `* *`    | healthcare administrator | redo the last undone operation        | reverse an undo operation if it was done in error                            |
 
+<div style="page-break-after: always;"></div>
+
 #### Advanced User Stories
 
 | Priority | As a …                   | I want to …                                   | So that I can…                                                       |
@@ -427,18 +432,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
----
-### Use Case: Add a New Contact
+#### Use Case: Add a New Contact
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to add a new patient contact.
 2. MedConnect prompts the user to enter patient details:
     - Name
@@ -458,7 +464,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+<div style="page-break-after: always;"></div>
+
+**Extensions:**
 
 **3a.** The entered details are invalid (e.g., phone number contains letters).
 - **3a1.** MedConnect informs the user of the invalid details.
@@ -485,14 +493,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
 
-### Use Case: Edit a Contact
+#### Use Case: Edit a Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
 3. User requests to edit a patient's details.
@@ -505,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The patient list is empty.
 
@@ -524,14 +534,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Delete a Contact
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Delete a Contact
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
 3. User requests to delete a specific contact by index.
@@ -540,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    **Use case ends.**
 
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The contact list is empty.
 
@@ -555,13 +567,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Add Emergency Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Add Emergency Contacts
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrives and shows a list of all contacts.
 3. User requests to add a new emergency contact to a patient.
@@ -575,7 +589,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The contact list is empty.
 
@@ -599,12 +613,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Find Contacts
+#### Use Case: Find Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to find a patient by their name.
 2. MedConnect prompts the user to provide a name to search for.
 3. User provides a name.
@@ -612,7 +627,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** User provides a blank name.
 - **3a1.** MedConnect notifies the user to provide a name.
@@ -626,18 +641,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Archive Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Archive Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to archive the address book with a description.
 2. MedConnect confirms that the contact data has been successfully archived.
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **1a.** The given description is invalid.
 - **1a1.** MedConnect informs the user of the invalid description.
@@ -647,12 +664,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Load Archived Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Load Archived Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to load an archive file.
 2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
 3. User enters a file name.
@@ -661,7 +680,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** The given file name is invalid.
 - **3a1.** MedConnect notifies the user that the file name contains invalid characters.
@@ -677,12 +696,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Delete Archive File
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Delete Archive File
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to delete an archive file.
 2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
 3. User enters a file name.
@@ -691,7 +712,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** The given file name is invalid.
 - **3a1.** MedConnect notifies the user that the file name contains invalid characters.
@@ -706,6 +727,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   **Use case resumes from step 4.**
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements (NFRs)
 
@@ -760,6 +783,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   MedConnect must be **easily testable**, with automated tests that can cover at least **80% of the codebase**. Each core feature (e.g., adding a contact, deleting outdated contacts) should have dedicated test cases.
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -799,6 +824,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -837,42 +864,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the keyboard shortcut `Alt + F4`.
 
-### Deleting a patient
-
-1. Deleting a patient while all patients are being shown<br>
-
-    <div markdown="span" class="alert alert-primary">
-        **Prerequisites:**<br>
-        1. List all patients using the `list` command. <br>
-        2. Multiple persons in the list.
-    </div>
-
-    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
-    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
-    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
-    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
-    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
-    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
-
-
-2. Deleting a patient while a filtered list is being shown
-
-    <div markdown="span" class="alert alert-primary">
-        **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
-    </div>
-
-    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
-    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
-    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
-    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
-    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
-    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient
 
@@ -894,6 +886,8 @@ testers are expected to do more *exploratory* testing.
    | `add p/98@1532 xx/PARAMETER`                     | Error message is shown                                             | Phone numbers should only contain numbers, and it should be at least 3 digits long                             |
    | `add ecrs/knight xx/PARAMETER`                   | Error message is shown                                             | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient
 
 1. Editing a patient while any number of patients are being shown.
@@ -913,6 +907,49 @@ testers are expected to do more *exploratory* testing.
    | `edit 1 ec/x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of emergency contacts) | Error message is shown                                                                                       | The emergency contact index provided is invalid                                          |
    | `edit x n/Heather` <br> (x > number of contacts)                                                 | Error message is shown                                                                                       | The person index provided is invalid                                                     |
 
+<div style="page-break-after: always;"></div>
+
+### Deleting a patient
+
+1. Deleting a patient while all patients are being shown<br>
+
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:**<br>
+        1. List all patients using the `list` command. <br>
+        2. Multiple persons in the list.
+    </div>
+
+   | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+       |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+   | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+   | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+   | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+
+
+<div style="page-break-after: always;"></div>
+
+2. Deleting a patient while a filtered list is being shown
+
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
+    </div>
+
+   | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+       |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+   | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+   | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+   | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+
+<div style="page-break-after: always;"></div>
+
 ### Adding an emergency contact to a patient
 1. Editing a patient while any number of patients are being shown.
      <div markdown="span" class="alert alert-primary">
@@ -929,7 +966,7 @@ testers are expected to do more *exploratory* testing.
     | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
     | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | The person index provided is invalid                                                                           |
 
- ### Saving data
+### Saving data
 
   1. Dealing with missing/corrupted data files
 
@@ -937,7 +974,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Appendix: Effort
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Effort**
 
 Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project. For some of our team members, the only prior software engineering experience we had was our Orbital project.
 
