@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -16,11 +17,11 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
 
 
     public ModuleRoleContainsKeywordsPredicate(Set<ModuleRolePair> moduleRoleKeywords) {
-        this.moduleRoleKeywords = moduleRoleKeywords;
+        this.moduleRoleKeywords = new LinkedHashSet<>(moduleRoleKeywords);
     }
 
     public ModuleRoleContainsKeywordsPredicate(List<ModuleRolePair> moduleRoleKeywords) {
-        this.moduleRoleKeywords = new HashSet<>(moduleRoleKeywords);
+        this.moduleRoleKeywords = new LinkedHashSet<>(moduleRoleKeywords);
     }
 
 
