@@ -334,6 +334,72 @@ None.
 2. Hall Pointer retrieves and displays all members in the GUI.
    - Use case ends.
 
+---
+
+#### Use Case: UC05 - Delete Member from CCA
+
+**System**: Hall Pointer Application
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to remove a member from the CCA, ceasing attendance tracking and point allocation for the deleted member.
+
+**Preconditions**:
+
+1. The member to be deleted must exist in the system.
+
+**Main Success Scenario (MSS)**:
+
+1. CCA Leader inputs the `delete_member` command with the member index.
+   - Example: `delete_member 2`
+2. Hall Pointer verifies the existence of the member at the specified index.
+3. Hall Pointer removes the member from the system and displays a success message.
+4. The updated member list is displayed in the GUI.
+   - Use case ends.
+
+**Extensions**:
+
+- **2a. Invalid member index**.
+  - 2a1. Hall Pointer displays an error message:
+    - `Error: Invalid index specified.`
+    - Use case ends.
+
+---
+
+#### Use Case: UC06 - Delete Session from Hall Pointer
+
+**System**: Hall Pointer Application
+
+**Actor**: CCA Leader
+
+**Description**: This use case allows a CCA leader to delete a CCA session from the system, removing any attendance records and points associated with that session.
+
+**Preconditions**:
+
+1. The session to be deleted must exist in the system.
+
+**Main Success Scenario (MSS)**:
+
+1. CCA Leader inputs the `delete_session` command with the session name and associated member indexes.
+   - Example: `delete_session s/Rehearsal m/1 m/3`
+2. Hall Pointer verifies the existence of the session in the records of the specified members.
+3. Hall Pointer deletes the session from the system and displays a success message.
+4. The updated session list is displayed in the GUI.
+   - Use case ends.
+
+**Extensions**:
+
+- **2a. Session does not exist for specified members**.
+
+  - 2a1. Hall Pointer displays an error message:
+    - `Error: Session [session_name] does not exist in member [member_name].`
+  - Use case ends.
+
+- **2b. Incorrect session or member index provided**.
+  - 2b1. Hall Pointer displays an error message:
+    - `Error: Invalid index specified.`
+  - Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
