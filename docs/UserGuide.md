@@ -208,7 +208,11 @@ A compact reference guide is also provided for quick reference.
 <box type="info" icon=":fa-solid-circle-info:" light>
 <md>**The help window is launched in a separate window.**</md><br><br>
 
-![help message](images/helpMessage.png)<br><br>
+<center>
+<pic src="images/helpMessage.png" width="650" alt="help message" lazy>
+</pic>
+</center>
+
 </box>
 
 {{ newPage }}
@@ -394,7 +398,11 @@ Find all persons whose names contains any of the given keywords.
 <md>**Examples:**</md>
 * `fd John` returns `john` and `John Doe` using the shortcut command.
 * `find alex charlotte` returns `Alex Yeoh`, `Charlotte`.<br>
-  ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
+<center>
+<pic src="images/findAlexCharlotte.png" width="650" alt="result for find alex charlotte" lazy>
+</pic>
+</center>
+
 </box>
 
 {{ newPage }}
@@ -431,7 +439,7 @@ Finds persons whose names contain any of the given tag keywords.
 * `f t/homies` returns any contact tagged with `homies`. It uses the shortcut command and parameter.<br>
 * `filter tag/friends` returns any contact tagged with `friends`.<br>
 <center>
-  <pic src="images/filterFriendsTagByFilter.png" width="630" alt="result for filter t/friend t/family">
+  <pic src="images/filterFriendsTagByFilter.png" width="630" alt="result for filter t/friend t/family" lazy>
   </pic>
 </center>
 </box>
@@ -507,7 +515,12 @@ KonTActs will attempt to open GitHub in your default browser. Please note that s
 `James`. It uses the shortcut command.
 * `github name/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned
 to `Harry`.
-  ![github use case for launching Harry's repository](images/githubUsage.png)
+
+<center>
+<pic src="images/githubUsage.png" width="650" alt="github use case for launching Harry's repository" lazy>
+</pic>
+</center>
+
 </box>
 
 {{ newPage }}
@@ -541,7 +554,11 @@ Opens a window at the side with the full details of the specified person from Ko
 <md>**Examples:**</md>
 
 * `view name/Alex Yeoh` opens a window at the side showing the full details of the person named `Alex Yeoh`.
-![viewing Alex Yeoh's contact detail in the view window](images/quickStartLaunchScreenshot.png)
+<center>
+<pic src="images/quickStartLaunchScreenshot.png" width="650" alt="viewing Alex Yeoh's contact detail in the view window" lazy>
+</pic>
+</center>
+
 * Calling `v n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`. It uses
 the shortcut command and parameter.
   </box>
@@ -575,7 +592,12 @@ Marks a student as present for a particular week.
 
 <md>**Examples:**</md>
 * `mark name/Alex Yeoh week/0` marks the student named `Alex Yeoh` as present for week 0.
-  ![result for mark](images/markAlexPresent.png)
+
+<center>
+<pic src="images/markAlexPresent.png" width="650" alt="result for mark" lazy>
+</pic>
+</center>
+
 * `m n/Harry w/3` marks the student named `Harry` as present for week 3. It uses the shortcut command and parameter.
 </box>
   {{ newPage }}
@@ -607,7 +629,12 @@ Unmarks a student as present for a particular week.
 
 <md>**Examples:**</md>
 * `unmark name/Alex Yeoh week/0` marks the student named `Alex Yeoh` as absent for week 0.
-  ![result for unmark](images/markAlexAbsent.png)
+
+<center>
+<pic src="images/markAlexAbsent.png" width="650" alt="result for unmark" lazy>
+</pic>
+</center>
+
 * `um n/Harry w/3` marks the student named `Harry` as absent for week 3. It uses the shortcut command and parameter.
   </box>
 
@@ -645,12 +672,21 @@ Order of contact details can be reset to default by calling `sort reset`.
 <md>**Examples:**</md>
 
 * `sort name order/desc` will sort the displayed list based on their name in ascending order.
-  ![result_for_sorting](images/sortByNameDesc.png)
+* 
+<center>
+<pic src="images/sortByNameDesc.png" width="650" alt="result for sorting" lazy>
+</pic>
+</center>
+
 
 {{ newPage}}
 
 * `sort reset` will reset the displayed list to its default order.
-  ![result_for_sorting](images/sortReset.png)
+
+<center>
+<pic src="images/sortReset.png" width="650" alt="result for sorting reset" lazy>
+</pic>
+</center>
 
   </box>
 
@@ -753,7 +789,11 @@ assignments are present for a person, separate them within the same entry using 
 "Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
 "Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
 ```
-![Valid CSV(excel)](images/validCSV1.png)
+
+<center>
+<pic src="images/validCSV1.png" width="650" alt="Valid CSV(excel)" lazy>
+</pic>
+</center>
 
 </box>
 
@@ -1053,7 +1093,12 @@ to manually restore the minimized Help Window.
 3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a 
 "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the
 command function. For example: typing `'@james`.
-![excel known issue](images/excelKnownIssue.png)
+
+<center>
+<pic src="images/excelKnownIssue.png" width="650" alt="excel known issue" lazy>
+</pic>
+</center>
+
 4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
 5. **Names that contains the `/` characters will cause konTActs to show an error message** although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
 6. **When closing the View Window**, you will not be able to scroll if the mouse hovers over the area previously occupied by the View Window. To fix this, move the mouse to the left side of the window before scrolling.
