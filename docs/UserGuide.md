@@ -305,6 +305,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​`
 * You can remove all the buyer’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The error message shown for a non-positive integer is different than the error message shown for an integer out of range! Check your input carefully!
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The `index` you use in the edit command is the one you see on your screen! E.g if `1. Alex Yeoh` is shown in the current filtered view, but `2. Alex Yeoh` was shown after any previous commands, use the one that you can see right now! 
+</div>
+
 Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
@@ -321,7 +329,7 @@ Format: `find n/KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Buyers matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang
 
 <div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
 Planned update will allow searches using other attributes, such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG`.
@@ -587,6 +595,10 @@ Examples:
 Clears all entries from the property list.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use this command for fast clearing of the initial populated data! Remember to use the command in each different mode!
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Using the clear command will delete all the properties from the list of properties, and there is no way to undo this, you may lose your data permanently.

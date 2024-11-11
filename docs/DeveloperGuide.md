@@ -842,13 +842,16 @@ Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling
 Our team size is 5.
 
 ### Support for special characters in names
-* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc.
+* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc. This can be done by updating the regex of our commands to accept certain special characters.
 
 ### Restriction of property types
-* Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will limit types to common ones such as `HDB`, `Landed Property`, `Condominium` etc.
+* Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will create an `enum` with common types such as `HDB`, `Landed Property`, `Condominium` etc.
 
 ### Improved duplication detection
 * Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
+
+### `Find` using more parameters
+* `Find` will be updated to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `Find` command to accept more types of parameters. 
 
 ## **Appendix: Glossary**
 ### Glossary
