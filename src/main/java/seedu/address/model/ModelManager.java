@@ -174,6 +174,12 @@ public class ModelManager implements Model {
         return addressBook.findSupplier(supplierName);
     }
 
+    @Override
+    public boolean isProductAssignedToAnySupplier(Product product) {
+        return filteredSuppliers.stream()
+                .anyMatch(supplier -> supplier.getProducts().contains(product));
+    }
+
     //=========== Filtered/Sorted Supplier/Product List Accessors ===========
 
     @Override
