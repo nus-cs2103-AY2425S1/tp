@@ -27,53 +27,65 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 
 ### Table of Contents
 
+
 <!-- TOC start -->
-1. [Welcome Aboard Tuteez](#welcome-aboard-tuteez)<br>
-    1.1 [Table of Contents](#table-of-contents)<br>
-    1.2 [User Guide Overview](#user-guide-overview)<br>
-2. [How to Use this Guide](#how-to-use-this-guide)<br>
-    2.1 [Notations Used](#notations-used)<br>
-    2.2 [Recommended Sections Based on User Experience](#recommended-sections-based-on-user-experience)<br>
-2. [Quick start](#quick-start)<br>
-    2.1 [Prerequisites](#prerequisites)<br>
-    2.2 [Setting up](#setting-up)<br>
-3. [GUI Overview](#gui-overview)<br>
-4. [Beginner's Tutorial](#beginner-s-tutorial)<br>
-    4.1 [Before You Begin](#before-you-begin)<br>
-    4.2 [Exploring the Application](#exploring-the-application)<br>
-    4.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)<br>
-    4.4 [Adding Your First Student](#adding-your-first-student)<br>
-    4.5 [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-student-s-details)<br>
-    4.6 [Editing Student Details](#editing-student-details)<br>
-    4.7 [Deleting a Student](#deleting-a-student)<br>
-    4.8 [Wrapping Up](#wrapping-up)<br>
-5. [Features](#features)<br>
-    5.1 [Viewing Help : `help`](#viewing-help-help)<br>
-    5.2 [Adding a Student: `add`](#adding-a-student-add)<br>
-    5.3 [Deleting a student : `delete`](#deleting-a-student-delete-or-del)<br>
-    5.4 [Editing a Student : `edit`](#editing-a-student-edit)<br>
-    5.5 [Listing All Students : `list`](#listing-all-students-list)<br>
-    5.6 [Adding a Remark: `addremark`](#adding-a-remark-addremark-or-addrmk)<br>
-    5.7 [Deleting a Remark: `deleteremark` ](#deleting-a-remark-deleteremark-or-delrmk)<br>
-    5.8 [Adding Lessons: `addlesson`](#adding-lessons-addlesson-or-addlsn)<br>
-    5.9 [Deleting Lessons: `deletelesson`](#deleting-lessons-deletelesson-or-dellsn)<br>
-    5.10 [Searching for Students: `find`](#searching-for-students-find)<br>
-    5.11 [Displaying Student Information: `display`](#displaying-student-information-display)<br>
-    5.12 [Navigating command history: `↑` or `↓`](#navigating-command-history-or)<br>
-    5.13 [Clearing all entries : `clear`](#clearing-all-entries-clear)<br>
-    5.14 [Exiting the program : `exit`](#exiting-the-program-exit)<br>
-6. [Things You Should Definitely Know](#things-you-should-definitely-know)<br>
-    6.1 [Constraints on Adding a Lesson](#constraints-on-adding-a-lesson)<br>
-    6.2 [Current Limitations](#current-limitations)<br>
-    6.3 [Saving the Data](#saving-the-data)<br>
-    6.4 [Editing the Data File](#editing-the-data-file)<br>
-7. [Exciting Features in the Future](#exciting-features-in-the-future)
-8. [FAQ](#frequently-asked-questions)
-9. [Known Issues](#known-issues)
-10. [Glossary](#glossary)
-11. [Command Summary](#command-summary)
-12. [Command Parameters](#command-parameters)
+1. [User Guide Overview](#user-guide-overview)  
+<br>
+2. [How to Use this Guide](#how-to-use-this-guide)  
+   2.1 [Notations Used](#notations-used)  
+   2.2 [Recommended Sections Based on User Experience](#recommended-sections-based-on-user-experience)  
+<br>
+3. [Quick Start](#quick-start)  
+   3.1 [Prerequisites](#prerequisites)  
+   3.2 [Setting up](#setting-up)  
+<br>
+4. [GUI Overview](#gui-overview)  
+<br>
+5. [Beginner's Tutorial](#beginners-tutorial)  
+   5.1 [Before You Begin](#before-you-begin)  
+   5.2 [Exploring the Application](#exploring-the-application)  
+   5.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)  
+   5.4 [Adding Your First Student](#adding-your-first-student)  
+   5.5 [Adding a Lesson to Your Student's Details](#adding-a-lesson-to-your-students-details)  
+   5.6 [Editing Student Details](#editing-student-details)  
+   5.7 [Deleting a Student](#deleting-a-student)  
+   5.8 [Wrapping Up](#wrapping-up)  
+<br>
+6. [Features](#features)  
+   6.1 [Viewing Help: `help`](#viewing-help-help)  
+   6.2 [Adding a Student: `add`](#adding-a-student-add)  
+   6.3 [Deleting a Student: `delete`](#deleting-a-student-delete)  
+   6.4 [Editing a Student: `edit`](#editing-a-student-edit)  
+   6.5 [Listing All Students: `list`](#listing-all-students-list)  
+   6.6 [Adding a Remark: `addremark`](#adding-a-remark-addremark)  
+   6.7 [Deleting a Remark: `deleteremark`](#deleting-a-remark-deleteremark)  
+   6.8 [Adding Lessons: `addlesson`](#adding-lessons-addlesson)  
+   6.9 [Deleting Lessons: `deletelesson`](#deleting-lessons-deletelesson)  
+   6.10 [Searching for Students: `find`](#searching-for-students-find)  
+   6.11 [Displaying Student Information: `display`](#displaying-student-information-display)  
+   6.12 [Navigating Command History: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>](#navigating-command-history)  
+   6.13 [Clearing All Entries: `clear`](#clearing-all-entries-clear)  
+   6.14 [Exiting the Program: `exit`](#exiting-the-program-exit)  
+<br>
+7. [Things You Should Definitely Know](#things-you-should-definitely-know)  
+   7.1 [Constraints on Adding a Lesson](#constraints-on-adding-a-lesson)  
+   7.2 [Current Limitations](#current-limitations)  
+   7.3 [Saving the Data](#saving-the-data)  
+   7.4 [Editing the Data File](#editing-the-data-file)  
+<br>
+8. [Exciting Features in the Future](#exciting-features-in-the-future)  
+<br>
+9. [Frequently Asked Questions](#frequently-asked-questions)  
+<br>
+10. [Known Issues](#known-issues)  
+<br>
+11. [Glossary](#glossary)  
+<br>
+12. [Command Summary](#command-summary)  
+<br>
+13. [Command Parameters](#command-parameters)  
 <!-- TOC end -->
+
 
 <br>
 <div style="page-break-after: always;"></div>
@@ -585,7 +597,7 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Navigating Command History: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>
+### Navigating Command History: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> <a id="navigating-command-history"></a>
 
 These keyboard shortcuts will allow you to navigate through your command history in the command box, making it easy to access and reuse previously executed commands.
 
@@ -708,21 +720,32 @@ Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., 
 With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates.
 
 1. **Group Lessons**: Tuteez will soon support overlapping lessons and student grouping for group tuition! And as always, it will alert you in advance if there are any scheduling conflicts. 😉
+1. **Enhanced Student Identification**: We understand that it’s possible for students to share the same first and last names. In the future, Tuteez will support unique identification based on multiple fields, such as name and phone number, offering you greater flexibility in managing student profiles accurately!
 1. **Document Management**: Upload and associate PDFs or other documents directly with specific students for easy access and organization.
 1. **Quick Messaging**: Instantly open WhatsApp or Telegram chats with students directly from Tuteez with a single click, making it easy to reach out right away.
 1. **Data Export**: Enable seamless exporting of student information and lesson data into files for easy sharing, backup, or analysis outside of Tuteez.
 1. Of course, addressing all the limitations stated [above](#current-limitations).
 
 [Take me back to Table of Contents](#table-of-contents)
-<br>
---------------------------------------------------------------------------------------------------------------------
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 <br>
 
 ## Frequently Asked Questions
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another Computer?
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuteez home folder.
+
+**Q**: Can I add students with the same name?
+**A**: As of `V1.6` Tuteez uniquely identifies entries by name. Hence we recommend using a student's full name if there is an existing student with the same first name and surname. We hope to address this in the future, for more info checkout [future features](#exciting-features-in-the-future).
+
+**Q**: How can I view a student’s full details if their name or other fields are cut off in the left panel?
+**A**:If a field is truncated in the left panel, use the display command with the student’s index or full name to see all their details in the right panel.
+
+**Q**: I can’t see the left or right panel content after moving the app to a new screen. What’s wrong?
+**A**: This is a known issue when switching screens. Try deleting the preferences.json file created by Tuteez, which will reset the display settings upon the next launch.
 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
