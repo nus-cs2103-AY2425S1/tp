@@ -8,7 +8,7 @@ if () then ([is a valid input])
     if () then ([patient exists])
         :Check if appointment exists;
         if () then ([appointment exists])
-            :Delete appointment of patient 
+            :Delete appointment of patient
             successfully;
         else ([appointment does not exist])
             :Throw CommandException:

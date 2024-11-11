@@ -10,12 +10,12 @@ if () then ([is a valid input])
         if () then ([is a duplicate appointment])
             :Throw CommandException: Duplicate appointment;
         else ([not a duplicate appointment])
-            :Check if appointment date and time 
+            :Check if appointment date and time
             are in the past;
             if () then ([are past date and time])
                 :Throw CommandException: Past date;
             else ([not past date and time])
-                :Add appointment for patient 
+                :Add appointment for patient
                 successfully;
             endif
         endif
