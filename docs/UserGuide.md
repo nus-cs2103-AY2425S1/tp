@@ -304,6 +304,7 @@ Examples:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Editing an order : `editorder`
 
