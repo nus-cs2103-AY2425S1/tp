@@ -6,13 +6,9 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop application that helps you manage your patients' contacts and session logs efficiently, combining the speed of typing commands with the ease of a visual interface.**
+**MindMap is a specialized desktop application designed to streamline patient management for therapists.** It enables therapists to manage patient contact information and track session logs, and organize therapy notes efficiently, combining the speed of typing commands with a clear, visual interface tailored for therapy-focused task.
 
-It’s designed for professionals like therapists who conduct counselling sessions with multiple patients and prefer a fast and optimised tool.
-
-With MindMap, you can accomplish tasks quickly by typing simple commands, and get a clear user-friendly screen to view and organise your patient details.
-
-If you’re comfortable typing, MindMap can help you accelerate patient management tasks compared to those traditional apps that rely heavily on point-and-click gestures for the same actions.
+With MindMap, therapists can quickly record and access detailed patient information and session history simple text commands, allowing for a faster, more optimized experience than traditional, point-and-click-heavy applications. **Designed specifically for therapeutic practices**, MindMap is ideal for professionals managing multiple patients who require a structured yet flexible tool for session tracking and patient organization.
 
 <!-- * Table of Contents -->
 <page-nav-print />
