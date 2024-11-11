@@ -1451,36 +1451,44 @@ Based on the current implementation of WedLinker, there are known bugs and limit
 feature freeze. The plans to improve our features are as follows: 
 
 1. **Resolve name overflow for Tags and Weddings**: Currently, there is a small GUI bug that occurs when the names of Tags and Weddings are excessively long, causing them to overflow, which causes cosmetic flaws.
-The planned enhancement would be to truncate the name with an ellipses `...`.
+The **planned enhancement** would be to truncate the name with an ellipses `...`, particularly by limiting the children of the list panels (e.g., the left pane that shows the list of People is a list panel) to adhere
+to the width restrictions of the parent.
 
 2. **Duplicate validation for Person, Wedding, Task and Tag entities**: Currently, there is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Task and Tag objects.
 For example, "John Doe" and "John  Doe" (the same name but with an extra space), are not recognised as duplicates in WedLinker although they are likely to refer to the same entity in the real world.
-The planned enhancement would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
+The **planned enhancement** would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
 
 3. **Vendor validation for when unassiging Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
 in an incorrect error message to be shown. When a user tries to execute the `unassign-task` command on a Person who is not a Vendor and thus cannot even have tasks assigned to it, 
 the error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaw and the application runs as intended.
-The planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
+The **planned enhancements** would be to add validation to ensure the target person is a Vendor and show a more indicative error
 message.
 
 4. **Make `unassign-wedding` case-insensitive**: The `unassign-wedding PERSON_INDEX w/WEDDING_NAME` command is case-sensitive for the `WEDDING_NAME`. This means that the command will only unassign a Wedding if the case of the `WEDDING_NAME` exactly matches case of the word as stored in WedLinker.
 This limits the speed with which users can use the application, and does not 
 align with the case sensitivity defined for Weddings in the `Wedding::isSameWedding(Wedding)` function, nor does it reflect real-world case-sensitivity of wedding names.
-The planned enhancement would be to ensure that when unassigning weddings, case is ignored and the `Wedding::isSameWedding(Wedding)` function is used
+The **planned enhancement** would be to ensure that when unassigning weddings, case is ignored and the `Wedding::isSameWedding(Wedding)` function is used
 to check for ensure proper matching of Wedding regardless of case.
 
 5. **Make `untag` case-insensitive**: The `untag PERSON_INDEX t/TAG_NAME` command is case-sensitive for the `TAG_NAME`.
 This means that the command will only untag a Tag if the case of the `TAG_NAME` exactly matches case of the word as stored in WedLinker.
 This limits the speed with which users can use the application and does not
 align with the case sensitivity defined for Tag in the `Tag::isSameTag(Tag)` function, nor does it reflect real-world case-sensitivity of tag names.
-The planned enhancement would be to ensure that when untagging Person objects, case is ignored and the `Tag::isSameTag(Tag)` function is used
+The **planned enhancement** would be to ensure that when untagging Person objects, case is ignored and the `Tag::isSameTag(Tag)` function is used
 to check for ensure proper matching of Tag regardless of case.
 
 6. **Allow searching contacts with blank fields**: Currently, the `find` command does not support searching for contacts with blank field values.
 For example, using the command `find a/`, where the address field is empty, will display an error on the GUI telling the user that the field to be searched cannot be empty. 
 However, contacts can currently be added with all fields, other from name, blank. Thus, there may be valid cases where users want to search for contacts with certain blank fields. 
-The planned enhancement would be to modify the `find` command to allow users to search for contacts with blank fields.
+The **planned enhancement** would be to modify the `find` command to allow users to search for contacts with blank fields.
 When no keywords are provided after a prefix (e.g., `find a/`), the application should return a list of contacts where the corresponding field is blank.
+
+7. **Allow processing of multiple partner tags for `assign-wedding`**: The `assign-wedding` command accepts the parameters `w/WEDDING_NAME [p1/] [p2/]`, where the partner tags
+optionally assign the person being assigned as a partner for the wedding specified by `WEDDING_NAME`. Currently, if multiple partner tags are entered, regardless of their order,
+the person is assigned as the first partner in the given wedding. However, users might want to be notified of a mistake they are making in assigning a partner for a wedding
+if they accidentally include both tags, especially as this might overwrite an existing partner for the wedding.
+The **planned enhancement** would be to add processing that checks for two partner tags and either considers the orders of the tag (and assigns the person as whichever partner tag is specified
+first), or that signals an error to the user in the command they enter.
 
