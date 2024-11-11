@@ -55,8 +55,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TRIAGE + "TRIAGE] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -234,12 +234,15 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
         public void setTriage(Triage triage) {
             this.triage = triage;
         }
+
         public Optional<Triage> getTriage() {
             return Optional.ofNullable(triage);
         }
+
         public void setAppointment(Appointment appointment) {
             this.appointment = appointment;
         }

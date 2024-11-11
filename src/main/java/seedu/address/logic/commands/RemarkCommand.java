@@ -28,8 +28,8 @@ public class RemarkCommand extends Command {
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: NRIC "
             + PREFIX_REMARK + "[REMARK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMARK + "Likes to swim.";
+            + "Example: " + COMMAND_WORD + " S1234567A "
+            + PREFIX_REMARK + "Wheelchair-bound";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
     private final Nric nric;
