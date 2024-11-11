@@ -42,8 +42,6 @@ done faster than traditional GUI apps.
 
    * `deletes n/John Doe` : Deletes the contact with the name John Doe.
 
-   * `deleteall` : Deletes all contacts.
-
    * `exit` : Exits the app.
 
 8. Refer to the [Features](#features) below for details of each command.
