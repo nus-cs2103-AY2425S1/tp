@@ -11,7 +11,7 @@ public enum Role {
     PERSON(Person.class);
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid role. Valid roles are: Volunteer, Donor, Partner, Person..";
+            "Invalid role. Valid roles are: Volunteer, Donor, Partner, Person.";
 
     private final Class<? extends Person> relatedClass;
 
