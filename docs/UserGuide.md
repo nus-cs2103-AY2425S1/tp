@@ -723,6 +723,7 @@ Displaying the detailed information window can be done in two ways:
 
 
 
+<div style="page-break-after: always;"></div>
 
 
 **Tips:**
