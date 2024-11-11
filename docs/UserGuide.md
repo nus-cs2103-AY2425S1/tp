@@ -23,7 +23,7 @@ and make planning a breeze — so you can focus more on what matters and spend l
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-1/tp/releases).
 
@@ -38,7 +38,7 @@ and make planning a breeze — so you can focus more on what matters and spend l
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John Street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
 
     * `delete 3` : Deletes the 3rd contact shown in the current contact list.
 
@@ -82,19 +82,26 @@ All commands that use the indices shown in the displayed contact list can also b
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Person Commands
+## Person Commands
 
-#### Listing all persons : `list`
+### Listing all persons : `list`
 
 Shows a list of all persons stored in ClubConnect's contact list.
 
 Format: `list`
+![result for 'list'](images/list.png)
 
-#### Adding a person: `add`
+
+### Adding a person: `add`
 
 Adds a person to ClubConnect's contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+* `NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
+* `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
 
 <box type="tip" seamless>
 
@@ -103,9 +110,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`<br>
+  ![result for 'adding john doe'](images/addJohnDoeResult.png)
 
-#### Editing a person : `edit`
+
+### Editing a person : `edit`
 
 Edits an existing person in ClubConnect's contact list.
 
@@ -114,6 +123,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the person at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed contact list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
+* `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -132,9 +145,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.<br>
+   ![result for 'edit alex yeoh email'](images/editAlexYeohResult.png)
 
-#### Deleting a person : `delete`
+
+### Deleting a person : `delete`
 
 Deletes the specified person from ClubConnect's contact list.
 
@@ -153,9 +168,11 @@ Format: `delete INDEX` / `delete CONTACT_NAME`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ClubConnect's contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete john doe` will delete the contact with name `john doe` (case-insensitive).
+* `delete john doe` will delete the contact with name `john doe` (case-insensitive).<br>
+  ![result for 'delete john doe'](images/deleteJohnDoeResult.png)
 
-#### Deleting multiple people : `mass_delete`
+
+### Deleting multiple people : `mass_delete`
 Deletes multiple specified contacts from ClubConnect's contact list using their displayed indices.
 
 Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
@@ -172,9 +189,11 @@ Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
 
 Examples:
 * `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in ClubConnect's contact list.
-* `find Betsy` followed by `mass_delete 1 3 a` deletes the 1st and 3rd persons in the results of the find command.
+* `find Betsy` followed by `mass_delete 1 3 a` deletes the 1st and 3rd persons in the results of the find command.<br>
+  ![result for 'mass delete 1 and 2'](images/massDeleteResult.png)
 
-#### Locating persons by name: `find`
+
+### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -192,7 +211,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+
 ### Searching by a specified field : `search`
+
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
 Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
@@ -214,6 +235,7 @@ Examples:
 * `search e/gmail exampleEmail`
 * `search n/alice bob charlie`
 * `search p/98765432 12345678`
+
 * `search t/friend colleague`<br>  
   ![result for search t/friends](images/searchTagsFriendsResult.png)
 
@@ -229,41 +251,62 @@ Examples:
 * `search ev/Orbital Workshop`<br>  
   ![result for search ev/Orbital Workshop](images/searchEventOrbitalWorkshop.png)
 
-#### Exporting persons: `export`
 
-Exports all persons in ClubConnect into a csv file named `ExportedContacts.csv` located in the data folder.
+### Exporting persons: `export`
+
+Exports all persons in ClubConnect into a csv file `[JAR file location]/data/ExportedContacts.csv`.
+![result for 'export contacts'](images/exportContactsResult.png)
 
 Format: `export`
 
-#### Importing persons: `import`
+
+### Importing persons: `import`
 
 Reads the specified file to import from and adds the persons to ClubConnect.
 
 Format: `import FILENAME`
 
-Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to the ClubConnect.
-* The file has to be located in the data folder.
-* The specified file name has to exactly match the name of the file to import from.
-* Name of file to import contacts from must end with `.csv`.
+* The file must be located in the data folder of the application directory.
+* The specified file name must exactly match the name of the file to import from.
+* The file name must end with `.csv`.
 
+<box type="tip" seamless>
+
+**Tip:** The import command is designed to work specifically with files exported by ClubConnect. If you export data using the export command, you can re-import it as needed using the same file.
+</box>
+
+<box type="warning" seamless>
+
+**Caution:**
+Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as ClubConnect expects the file to retain the exact format of the exported data.
+</box>
+
+Examples:
+* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.<br>
+  ![result for 'import contacts'](images/importContactsResult.png)
+
+  
 --------------------------------------------------------------------------------------------------------------------
 
-### Event Commands
+## Event Commands
 
-#### Listing all events : `list_events`
+### Listing all events : `list_events`
 
 Shows a list of all events stored in ClubConnect's event list.
 
 Format: `list_events`
+![result for 'list events'](images/listEventsResult.png)
 
-#### Adding an event: `add_event`
+
+### Adding an event: `add_event`
 
 Adds an event to ClubConnect's event list.
 
 Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
 
 * The date inputs must be in the format `YYYY-MM-DD`.
+* `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 
 <box type="info" seamless>
 
@@ -273,9 +316,11 @@ Look out for future updates where we will fix this issue! More information can b
 
 Examples:
 * `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
-* `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
+* `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`<br>
+  ![result for 'add event orbital workshop'](images/addEventResult.png)
 
-#### Editing an event: `edit_event`
+
+### Editing an event: `edit_event`
 
 Edits the details of an existing event in the address book.
 
@@ -283,6 +328,8 @@ Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/
 
 * `INDEX` refers to the index number shown in the displayed event list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 * The date inputs must be in the format `YYYY-MM-DD`.
 * At least one of the optional fields (`EVENT_NAME`, `EVENT_DESCRIPTION`, `EVENT_START_DATE`, `EVENT_END_DATE`) must be provided to make changes.
 
@@ -294,9 +341,11 @@ Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/
 Examples:
 * `edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11`
 * `edit_event 2 d/Changed description`
-* `edit_event 3 f/2024-11-01 t/2024-11-05`
+* `edit_event 3 f/2024-11-01 t/2024-11-05`<br>
+  ![result for 'edit event 1'](images/editEventResult.png)
 
-#### Deleting an event: `delete_event`
+
+### Deleting an event: `delete_event`
 
 Deletes the specified event from ClubConnect's event list.
 
@@ -314,9 +363,11 @@ Format: `delete_event INDEX` / `delete_event EVENT_NAME`
 
 Examples:
 * `list_events` followed by `delete_event 2` deletes the 2nd event in ClubConnect's event list.
-* `delete_event meeting` will delete the event with event name `meeting` (case-insensitive).
+* `delete_event meeting` will delete the event with event name `meeting` (case-insensitive).<br>
+  ![result for 'delete event 2'](images/deleteEventResult.png)
 
-#### Assigning an event: `assign_event`
+
+### Assigning an event: `assign_event`
 
 Assigns a specified event to a specified person stored in ClubConnect's contact list.
 
@@ -336,10 +387,11 @@ Examples:
 * `assign_event p/1 ev/2` will assign the 2nd event in ClubConnect's event list to the 1st person in ClubConnect's contact list.
 * `assign_event p/Alice ev/2` will assign the 2nd event in ClubConnect's event list to a person named `Alice` (case-insensitive) in ClubConnect's contact list.
 * `assign_event p/1 ev/Meeting` will assign an event named `Meeting` (case-insensitive) in ClubConnect's event list to the 1st person in ClubConnect's contact list.
-* `assign_event p/Alice ev/Meeting` will assign an event named `Meeting` (case-insensitive) in ClubConnect's event list to a person named `Alice` (case-insensitive) in ClubConnect's contact list.
+* `assign_event p/Alice ev/Meeting` will assign an event named `Meeting` (case-insensitive) in ClubConnect's event list to a person named `Alice` (case-insensitive) in ClubConnect's contact list.<br>
+  ![result for 'assign event 2 to person 1'](images/assignEventResult.png)
 
 
-#### Unassigning an event: `unassign_event`
+### Unassigning an event: `unassign_event`
 
 Unassigns a specified event from a specified person stored in ClubConnect's contact list.
 
@@ -359,41 +411,47 @@ Examples:
 * `unassign_event p/1 ev/2` will unassign the 2nd event in ClubConnect's event list from the 1st person in ClubConnect's contact list.
 * `unassign_event p/Alice ev/2` will unassign the 2nd event in ClubConnect's event list from a person named `Alice` (case-insensitive) in ClubConnect's contact list.
 * `unassign_event p/1 ev/Meeting` will unassign an event named `Meeting` (case-insensitive) in ClubConnect's event list from the 1st person in ClubConnect's contact list.
-* `unassign_event p/Alice ev/Meeting` will unassign an event named `Meeting` (case-insensitive) in ClubConnect's event list from a person named `Alice` (case-insensitive) in ClubConnect's contact list.
+* `unassign_event p/Alice ev/Meeting` will unassign an event named `Meeting` (case-insensitive) in ClubConnect's event list from a person named `Alice` (case-insensitive) in ClubConnect's contact list.<br>
+  ![result for 'unassign event 2 from person 1'](images/unassignEventResult.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-### General Commands
+## General Commands
 
-#### Viewing help : `help`
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-#### Clearing all entries : `clear`
+
+### Clearing all entries : `clear`
 
 Clears all entries from ClubConnect.
 
 Format: `clear`
+![clear message](images/clearMessage.png)
 
-#### Exiting the program : `exit`
+
+### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
-ClubConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClubConnect data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
-ClubConnect data are saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
+ClubConnect data is saved automatically as a JSON file `[JAR file location]/data/clubconnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -410,8 +468,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubConnect home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on another computer and overwrite the empty data file it creates with the file that contains the data of your previous ClubConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
