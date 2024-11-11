@@ -842,7 +842,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a person to TalentHub.
 
    1. Test case: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`.
-      1. **Expected**:
+      1. **Expected**
          1. A contact with the name 'Alex Yeoh' with the tag 'Celebrity' and phone number '98765432' is added to the persons list. 
          2. If you are on the Events tab, TalentHub will switch to the Persons tab.
    
@@ -853,7 +853,7 @@ testers are expected to do more *exploratory* testing.
       1. **Expected**: This phone number is already used by another person in TalentHub.
 
    4. Test case: `add person n/Alex Yeoh e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`.<br>
-      1. **Expected**: 
+      1. **Expected**
          1. Invalid command format!<br>
             add person: Adds a person to the address book.<br>
             Parameters: n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
