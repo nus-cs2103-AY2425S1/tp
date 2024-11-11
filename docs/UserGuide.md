@@ -160,8 +160,8 @@ addi in/INDEX i/INTEREST...
 ```
 
 - `in/INDEX`: Contact's position in the list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
-- **Note:** Only interests that were not part of the contact's interest list will be shown on the display message.
+- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters at most.
+- **Note:** Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
 
 Example:
 
@@ -551,9 +551,9 @@ _Details coming soon ..._
     - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
     - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
     - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
-4. **When adding a new user**, the birthday field is compulsory.
+4. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
 5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
-6. **When adding a new user**, the birthday field can be a date in the future. 
+6. **Multiple Indexes in addi Command**: When running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
 ---
 
 ## Glossary
