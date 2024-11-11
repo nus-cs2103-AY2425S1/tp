@@ -182,6 +182,18 @@ Step 2. The user executes `delete` command, with the index of the patient/doctor
 See below sequence diagram for the `delete` command:
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
+### List Patients and List Doctors Features
+This feature allows users to list all patients and doctors stored in MediContacts.
+
+Given below is an example usage scenario and how the `list-patient` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `list-patient` command. The `list-patient` command will indirectly call `Model#getFilteredPersonList()` to get the list of patients/doctors to be displayed.
+
+See below sequence diagram for the `list` command:
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
