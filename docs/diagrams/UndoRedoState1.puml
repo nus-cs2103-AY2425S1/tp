@@ -3,8 +3,9 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
+skinparam ranksep 1
 
-title After command "c2"
+title After "c2"
 
 package Commands <<rectangle>> {
     class State1 as "<u>c0:Command</u>"
@@ -12,6 +13,6 @@ package Commands <<rectangle>> {
     class State3 as "<u>c2:Command</u>"
 }
 
-State1 -[hidden]right-> State2
-State2 -[hidden]right-> State3
+State1 -[hidden]up-> State2
+State2 -[hidden]up-> State3
 @end

@@ -3,6 +3,7 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
+skinparam ranksep 1
 
 title Command Stack
 
@@ -10,5 +11,5 @@ package Commands {
     class State1 as "<u>c0:Command</u>"
     class State2 as "<u>c1:Command</u>"
 }
-State1 -[hidden]right-> State2
+State1 -[hidden]up-> State2
 @end
