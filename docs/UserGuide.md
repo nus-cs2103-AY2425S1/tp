@@ -40,11 +40,15 @@ This User Guide also includes highlighted sections to aid in your reading:
 **Caution:** This section will contain warnings for certain commands and information that are vital for GOATS to run smoothly. Do ensure that you take special note of the contents here.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 <!-- * Table of Contents -->
 
 <page-nav-print />
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Minimum System Requirements
 
@@ -61,6 +65,8 @@ Please ensure that you have the following:<br>
     4. Otherwise, please refer to [this guide](https://www3.cs.stonybrook.edu/~amione/CSE114_Course/materials/resources/InstallingJava17.pdf) to download Java 17.<br><br>
 <br><br>
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -85,6 +91,7 @@ Please ensure that you have the following:<br>
 7. Refer to the [Features](#features) below for details of each command.
 <br><br>
 ---
+
 
 ## Command summary
 
@@ -116,6 +123,8 @@ Please ensure that you have the following:<br>
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 <br>
 
@@ -133,12 +142,12 @@ Separate commands cannot be strung together into one input<br>
 e.g. Entering the input `archive 1 pin 2 list` instead of entering commands separately, `archive 1`, `pin 2`, `list`
 <br><br>
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+</box>
 
 ### Command Parameters
 | Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Examples                                                               |
 |----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `NAME`         | The contact's name. <br><br> It should only contain alphanumeric characters and spaces, and it should not be blank. Names should be unique to each contact. For names with non-alphanumeric characters, we recommend replacing the non-alphanumeric portion with an alphanumeric alternative. e.g. 's/o' can be replaced with 'son of'                                                                                                                                                                                                                                                                                                                                                                                           | - `James Ho` <br> - `Jane Doe`                                         |
+| `NAME`         | The contact's name. <br><br> It should only contain alphanumeric characters and spaces, and it should not be blank. Names should be unique  For names with non-alphanumeric characters, we recommend replacing the non-alphanumeric portion with an alphanumeric alternative. e.g. 's/o' can be replaced with 'son of'                                                                                                                                                                                                                                                                                                                                                                                                           | - `James Ho` <br> - `Jane Doe`                                         |
 | `PHONE_NUMBER` | The contact's phone number. <br><br> It should only contain numbers, and it should be 3 to 17 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | - `99228833` <br> - `6598986767`                                       |
 | `EMAIL`        | The contact's email address. <br> <br> It should be of the format local-part@domain and adhere to the following constraints: <br> - The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br><br> The domain name must:<br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | - `web@dev` <br> -`jamesho@gmail.com`                                  |
 | `ADDRESS`      | The contact's residential address. <br><br><br> It can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | - `123, Clementi Rd, 123465` <br> - `Blk 417, Tampines St 71, S510666` |
@@ -149,6 +158,8 @@ If you are using a PDF version of this document, be careful when copying and pas
 | `GRADE_INDEX`  | The grade of the student. <br><br> The grade index ranges from 0 to 4: <br> - 0: `Unknown` <br> - 1: `Failing` <br> - 2: `Satisfactory` <br> - 3: `Good` <br> - 4: `Excellent`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | - `0` <br> - `3`                                                       |
 | `KEYWORD`      | The keyword specified for find-related commands. <br><br> Please refer to the section detailing the specific command on how to use `KEYWORD` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
 | `DAY`          | The day specified for finding students in `findday`. <br><br> Please refer to the section detailing the specific command on how to use `DAY` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student: `addstudent`
 
@@ -168,6 +179,7 @@ Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/E
 * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague` adds a student named `James Ho` to the address book
 * `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/123 Hougang Ave 3 p/1234567 t/dyslexic edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book.
 </box>
+
 
 ### Adding a parent: `addparent`
 
@@ -212,6 +224,8 @@ Assuming a list of 7 contacts in the main list,
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
   </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Assigning a grade to a student: `grade`
 
@@ -540,6 +554,8 @@ Assuming the address book has a student `John Doe` linked to a parent `Jane Doe`
 * `unlink ch/John Doe` removes the parent-child relationship from `John Doe`
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting all contacts alphabetically: `sort`
 
 Sorts all contacts in the address book alphabetically, keeping pinned contacts at the top of the list.
@@ -584,6 +600,7 @@ range). Therefore, edit the data file only if you are confident that you can upd
 </box>
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
