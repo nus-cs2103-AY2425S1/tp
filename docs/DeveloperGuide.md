@@ -189,16 +189,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## Planned Enhancements
 
-1. View Students by their associative tags (e.g Tutorial Group, Assignments)
-2. View Assignment Details
-3. Modify Grade details to be case insensitive
+1. View `Students` by their associative tags (e.g `Tutorial Group`, `Assignments`)
+2. View `Assignment` Details
+3. Modify `Grade` details to be case-insensitive
 4. Modify `View` Command's parameters to be case-insensitive 
-5. Prevent duplicate phone number from being assigned to more than 1 Student.
-6. Allow Names to include special characters
-7. Find Students who have yet to submit assignments
+5. Prevent duplicate `phone number` from being assigned to more than 1 `Student`.
+6. Allow `Names` to include special characters
+7. Find `Students` who have yet to submit `Assignments`
 8. Limit the length of inputs to prevent truncation errors 
-9. Add timestamp to deadline for assignments
-10. Add Start Date and End Date to `Assignments`
+9. Add timestamp to `Deadline` for `Assignment`
+10. Add Start Date and End Date to `Assignment`
 
 
 
