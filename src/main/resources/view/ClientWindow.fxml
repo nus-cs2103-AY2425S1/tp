@@ -139,9 +139,9 @@
                       </Label>
                       <TableView fx:id="clientScheduleTable" prefHeight="161.0" prefWidth="Infinity" stylesheets="@ViewWindow.css" VBox.vgrow="ALWAYS">
                           <columns>
-                              <TableColumn fx:id="clientScheduleDate" prefWidth="120.0" text="Date" maxWidth="Infinity"/>
-                              <TableColumn fx:id="clientScheduleDetails" prefWidth="265.0" text="Details" maxWidth="Infinity"/>
-                              <TableColumn fx:id="clientSchedulePaymentStatus" prefWidth="120.0" text="Paid" maxWidth="Infinity"/>
+                              <TableColumn fx:id="clientScheduleDate" prefWidth="120.0" text="Date"/>
+                              <TableColumn fx:id="clientScheduleDetails" prefWidth="265.0" text="Details"/>
+                              <TableColumn fx:id="clientSchedulePaymentStatus" prefWidth="120.0" text="Paid"/>
                           </columns>
                           <VBox.margin>
                               <Insets top="5.0" />
