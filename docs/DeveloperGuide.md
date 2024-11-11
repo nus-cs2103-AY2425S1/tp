@@ -15,9 +15,11 @@ This project is based on the [AddressBook-Level3 Project](https://github.com/se-
 We also extend our gratitude to the creators of the following resources and libraries that were essential in developing Health Connect:
 
 * [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [Java 17 Installation Guide for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html)
 * [JavaFX](https://openjfx.io/)
 * [JUnit](https://junit.org/junit5/)
 * [Jackson Library](https://github.com/FasterXML/jackson)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,8 +257,8 @@ Team Size: 5
    Making sure the system checks if the user enters any unexpected or incorrect symbols. If the user does, the system will let them know what the correct options are, helping avoid confusion and mistakes.
 
 
-2. **Allow address to have `n/` or other prefixes:**
-   Currently, address validation does not allow certain characters, preventing users from adding addresses with newline characters ("/n") or special prefixes. Enhancing this to allow specific characters, like "/n" for multi-line addresses, would give users more flexibility to enter detailed or complex addresses.
+2. **Allow address to have characters that are equal to prefixes:**
+   Currently, address validation does not allow certain characters, preventing users from adding addresses with special prefixes (e.g. `n/`, `p/`). Enhancing this to allow specific characters would give users more flexibility to enter detailed or complex addresses.
 
 
 3. **Allowing `d/o` in the name field:** Currently, the system does not permit the use of `d/o` in the name field as `d/` is reserved for the date command. 
@@ -293,7 +295,7 @@ Currently, the app only accepts phone numbers that are 8 digits long and start w
 
 
 10. **Add more date formats:**
-Currently, we found that our priority was to ensure that the date command functionality was working seamlessly before we added more date formats. However, in the future, we plan to accept more date and time formats so that the user can conveniently use the one that is most familiar.
+Currently, we found that our priority was to ensure that the date command functionality was working seamlessly before we added more date formats. However, in the future, we plan to accept more date and time formats (e.g. `MM-dd-yyyy HH:mm`) so that the user can conveniently use the one that is most familiar.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -353,27 +355,27 @@ Priorities:
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `HealthConnect` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a client**
 
 **MSS**
 
-1.  User requests to add a client and provides the required client details.
-2.  AddressBook adds the client data.
-3.  AddressBook confirms the successful addition of the client.
+1.  User requests to add a client.
+2.  HealthConnect adds client data and displays confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a.  AddressBook detects an error in the command format.
-    * 1a1. AddressBook shows an error message.
+* 1a.  HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
         Use case ends.
 
-* 1b. AddressBook detects a duplicate person entry.
-    * 1b1. AddressBook shows an error message.
+
+* 1b. HealthConnect detects a duplicate person entry.
+    * 1b1. HealthConnect shows an error message.
   
         Use case ends.
 
@@ -382,86 +384,90 @@ Priorities:
 
 **MSS**
 
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to delete a client’s data and inputs the client's attributes (name, phone number, and/or email).
-4.  AddressBook deletes the person
+1.  User requests to delete a client’s data.
+2.  HealthConnect deletes the person and displays confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. AddressBook detects an error in the command format.
-    * 3a1. AddressBook shows an error message.
+* 1a. HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
   
         Use case ends.
 
-* 3b. AddressBook detects a duplicate person entry.
-    * 3b1. AddressBook shows an error message indicating that multiple clients match the input.
-    * 3b2. User requests to delete the client's data with more of the client's attributes.
 
-        Steps 3b1-3b2 are repeated until a unique person is found from details in input.
+* 1b. HealthConnect detects a duplicate person entry.
+    * 1b1. HealthConnect shows an error message.
+    * 1b2. HealthConnect requests for correct data.
+    * 1b3. User enters new data.
+
+        Steps 1b1-1b3 are repeated until a unique person is found from details in input.
   
-        Use case resumes from step 4.
+        Use case resumes from step 2.
 
-* 3c. AddressBook detects non-existent client.
-    * 3c1. AddressBook shows an error message.
+
+* 1c. HealthConnect detects non-existent client.
+    * 1c1. HealthConnect shows an error message.
 
         Use case ends.
 
 **Use case: Edit client data** <br>
-Preconditions: AddressBook has correct view, including client to edit
+Preconditions: HealthConnect has correct view, including client to edit
 
 **MSS**
 
-1.  User requests to edit details and inputs index and updated client's information
-2.  AddressBook validates the input
-3.  AddressBook confirms the successful edit of client's details
+1.  User requests to edit details.
+2.  HealthConnect edits clients' information and displays client's updated details.
 
     Use case ends.
+
 
 **Extensions**
 
-* 2a. Invalid Input Format
-  * 2a1. AddressBook shows an error message.
+* 1a. HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
     Use case ends.
 
-* 2b. AddressBook detects duplicate client
-    * 2b1. AddressBook shows an error message indicating that multiple clients match the input.
-    * 2b2. User requests to delete the client's data with more of the client's attributes.
 
-        Steps 2b1-2b2 are repeated until a unique person is found from details in input.
+* 1b. HealthConnect detects a duplicate person entry.
+    * 1b1. HealthConnect shows an error message.
+    * 1b2. HealthConnect requests for correct data.
+    * 1b3. User enters new data.
 
-        Use case resumes from step 3.
+        Steps 1b1-1b3 are repeated until the details inputted renders a unique person.
+
+        Use case resumes from step 2.
 
 **Use case: Add appointment date and time for client**
 
 **MSS**
 
-1. User inputs the client's attributes and appointment date and time.
-2. AddressBook validates the input.
-3. AddressBook confirms the successful addition of appointment date and time to client. 
+1. User requests to add appointment date and time. 
+2. HealthConnect adds appointment date and time and displays confirmation message. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
+* 1a.  HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
         Use case ends.
 
-* 2b. Appointment Date and Time Overlaps
 
-    * 2b1. AddressBook shows an error message.
-    * 2b2. AddressBook displays information on existing person with overlapped date and time.
+* 1b. HealthConnect detects an overlapping appointment date and time.
+
+    * 1b1. HealthConnect shows an error message.
+    * 1b2. HealthConnect displays information on existing person with overlapped date and time.
 
         Use case ends.
 
-* 2c. Client Does Not Exist
 
-    * 2c1. AddressBook shows an error message.
+* 1c. HealthConnect detects non-existent client.
+
+    * 1c1. HealthConnect shows an error message.
 
         Use case ends.
 
@@ -469,16 +475,15 @@ Preconditions: AddressBook has correct view, including client to edit
 
 **MSS**
 
-1.  User requests to see the schedule for the day and inputs the date.
-2.  AddressBook validates the input.
-3.  AddressBook shows the schedule for the day.
+1.  User requests to see the schedule for the day.
+2.  HealthConnect displays list of persons with matching date.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
+* 1a.  HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
         Use case ends.
 
@@ -486,16 +491,15 @@ Preconditions: AddressBook has correct view, including client to edit
 
 **MSS**
 
-1. User requests to find client and inputs keywords to find name.
-2. AddressBook shows the list of persons whose name matches the keywords.
+1. User requests to find clients by keywords.
+2. HealthConnect displays the list of persons that matches keywords.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. No Matches
-  * 1a1. AddressBook shows message.
-  * 1a2. AddressBook displays nothing in the list.
+* 1a. HealthConnect detects non-existent clients.
+  * 1a1. HealthConnect displays execution message.
 
     Use case ends.
 
@@ -503,16 +507,15 @@ Preconditions: AddressBook has correct view, including client to edit
 
 **MSS**
 
-1. User requests to filter client and inputs parameters to filter by.
-2. AddressBook validates the input.
-3. AddressBook shows list of persons that matches parameters provided.
+1. User requests to filter client.
+2. HealthConnect displays list of persons that matches parameters provided.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
+* 1a.  HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
         Use case ends.
 
@@ -522,27 +525,33 @@ Preconditions: AddressBook has correct view, including client to edit
 
 **MSS**
 
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to record a payment by providing the client’s name, phone number, and amount paid.
-4.  AddressBook validates the input.
-5.  AddressBook records the payment.
+1.  User requests to record a payment and inputs client's details.
+2.  HealthConnect displays the payment due.
 
     Use case ends.
 
 **Extensions**
 
-* 4a.  Invalid Input Format
-    * 4a1. AddressBook shows an error message.
+* 1a. HealthConnect detects an error in the command format.
+    * 1a1. HealthConnect shows an error message.
 
-        Use case ends.
+      Use case ends.
 
-* 4b.  Name and Phone Number mismatch
-    * 4b1. AddressBook shows an error message.
- 
-        Use case ends.
 
-*{More to be added}*
+* 1b. HealthConnect detects a duplicate person entry.
+    * 1b1. HealthConnect shows an error message.
+    * 1b2. HealthConnect requests for correct data.
+    * 1b3. User enters new data.
+
+      Steps 1b1-1b3 are repeated until a unique person is found from details in input.
+
+      Use case resumes from step 2.
+
+
+* 1c. HealthConnect detects non-existent client.
+    * 1c1. HealthConnect shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -567,7 +576,7 @@ Preconditions: AddressBook has correct view, including client to edit
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Patient Record**: A collection of patient's personal and medical information. This includes, but is not limited to, name, contact number, email, address, allergies, injuries sustained.
-* **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, date and patient.
+* **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in Health Connect by the time, date and patient.
 * **Schedule**: A list of all patients' whose appointments is on a specific date.
 * **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as priority.
 * **Medical History**: Documentation of patient's past illnesses, treatments, surgeries and other medical related information.
