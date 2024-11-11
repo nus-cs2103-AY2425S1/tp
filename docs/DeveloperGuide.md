@@ -179,6 +179,31 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Filter Appointment : `filter`
 
+The `filter` command lets users search for a list of patients' appointments based on a date range and health service.
+
+The user can specify the
+* end date of the date range 
+
+and optionally provide the
+* start date of the date range 
+* `HealthService` that matches the purpose of the appointment
+
+If the start date is not provided, the start date is set to today's date. Furthermore, if health service is not provided, all appointments in
+the date range will be shown.
+
+##### Parsing User Input
+
+The `FilterCommandParser` class is responsible for parsing user input to extract the details of the date range and
+health service to be added. It uses the `ArgumentTokenizer` to tokenize the input string, extracting prefixes and their associated values.
+It returns an `ArgumentMultiMap` object which is used to create a `AppointmentDateFilter` object with the start and end date
+and `HealthService`.
+
+##### Executing the Command
+
+The `FilterCommand` class then filters through all the appointments in the `Model` component and selects those which lie within the date range and matches the healthservice.
+This is done though the `filterAppts` method in the `Model` component. 
+
+
 
 ### \[Proposed\] Undo/redo feature
 
