@@ -23,7 +23,7 @@
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
 
-2. Copy the file to the folder you want to use as the _home folder_ for CFG.
+2. Copy the file to the folder you want to use as the _home folder_ for CFG (e.g. create the folder "contactsforgood" in "Documents").
 
 3. Open a command terminal. Run the `java -version` command to ensure you are using Java 17.
 
@@ -93,7 +93,7 @@
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
   Note: If an optional field is not required, **avoid** leaving the prefix empty, as this will result in an invalid command.
-  e.g. `edit 1 n/` is not a valid command
+  e.g. `edit 1 n/` is not a valid command.
 
 <br> 
 
@@ -104,15 +104,15 @@
   The index must meet the following conditions:
 
   1. **Correct Format**:  
-     The index **must be a positive integer** (e.g., 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g., `-1`, `abc`, `1.5`) will be deemed as incorrect format.
+     The index **must be a positive integer** (e.g. 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g. `-1`, `abc`, `1.5`) will be deemed as incorrect format.
 
   2. **Valid Index**:  
      The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g. `999` when the list has only 10 people) will be deemed as invalid indices.
 
 * `INDICES` takes in multiple `INDEX`s<br>
-  * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
+  * In this case, each `INDEX` can be a single number (e.g. `2`) or a closed range (e.g. `5-9`).
   * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
-  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g. `5-9` is correct, 
     but `5 - 9` or `5 -9` or `5- 9` are incorrect).
   * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
 
@@ -178,25 +178,10 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - `EMAIL`: The contact's email address (Only **english** emails are currently supported).
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact (A contact can have any number of tags, including none).
-- Role-specific fields(not required for `Person`)
-  - **Volunteer**: 
-    -  `h/HOURS` - Represents contributed hours.
-  - **Donor**:
-  - `d/DONATED_AMOUNT` - Represents total donation amount in thousands of USD.
-      - The amount can include **up to two decimal places** for precision (e.g., `123.45` represents 123,450 USD).
-      - The amount is always displayed in thousands of dollars. For very large numbers, **scientific notation** will 
-        be used automatically (e.g., `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD)
-  - **Partner**: 
-    - `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date.
-      - The date must be in the **YYYY-MM-DD** format.
-      - The date **must be a valid date**:
-          - A valid date is one that has existed in the past or will exist in the future. Both past and future dates are accepted as long as they are actual calendar dates.
-          - Examples of **valid dates**:
-              - `2023-03-15` (Past date).
-              - `2025-10-20` (Future date).
-          - Examples of **invalid dates**:
-              - `2021-02-29` (February 29 does not exist in 2021 because it is not a leap year).
-              - `2023-03-33` (March does not have 33 days).
+- Role-specific fields (not required for `Person`):
+    - **Volunteer**: `h/HOURS`- Represents contributed hours.
+    - **Donor**: `d/DONATED_AMOUNT`- Represents total donation amount in thousands of USD.
+    - **Partner**: `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date. Must be in the **YYYY-MM-DD** format and be a valid date (e.g. 2024-11-07).
 
 <box type="info" seamless>
 
@@ -266,11 +251,16 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in CFG**.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* Role-specific fields must correspond to the resulting role after editing.
-    * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.
-    * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,
-    * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.
-* If the resulting role does not have the specified field, the edit will be invalid.
+
+<box type="info" seamless>
+
+**Role-specific fields must correspond to the resulting role after editing:**
+* For `Volunteer`, `h/HOURS` is required.
+* For `Donor`, `d/DONATED_AMOUNT` is required.
+* For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
+* If the resulting role does not have the specified field, the `edit` command will be invalid.
+
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -286,7 +276,7 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 * Search is restricted to the fields indicated by the provided prefixes.
 * The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
-* For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
+* For name searches, the order of keywords does not matter (e.g. Hans Bo will match Bo Hans).
 * For name searches, persons matching any of the keywords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
@@ -473,7 +463,7 @@ ContactsForGood data are saved automatically as a JSON file `[JAR file location]
 
 **Caution:**
 If your changes to the data file makes its format invalid, ContactsForGood will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -502,7 +492,7 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 **Q**: How can I improve search accuracy in CFG?<br>  
 **A**: For more precise search results:
-- Use multiple prefixes (e.g., `search n/John t/friend`) to filter by multiple criteria.
+- Use multiple prefixes (e.g. `search n/John t/friend`) to filter by multiple criteria.
 - Remember that searches are case-insensitive but require exact word matches.
 - If your search results are too broad, refine them with additional criteria.
 
