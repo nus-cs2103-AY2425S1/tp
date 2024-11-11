@@ -69,8 +69,8 @@ public class CommandBoxTest extends GuiUnitTest {
         guiRobot.push(KeyCode.ESCAPE);
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());
 
-        // guiRobot.push(KeyCode.A);
-        // assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
+        guiRobot.push(KeyCode.A);
+        assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
 
     @Test
@@ -127,6 +127,16 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    @Test
+    public void commandBox_checkSuggestionPopUp() {
+        guiRobot.push(KeyCode.E);
+        guiRobot.push(KeyCode.SHIFT, KeyCode.UP);
+        guiRobot.push(KeyCode.SHIFT, KeyCode.DOWN);
+        guiRobot.push(KeyCode.TAB);
+        assertEquals("edit", commandBoxHandle.getInput());
+        guiRobot.push(KeyCode.SPACE);
+    }
+
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
@@ -156,4 +166,5 @@ public class CommandBoxTest extends GuiUnitTest {
         guiRobot.push(keycode);
         assertEquals(expectedCommand, commandBoxHandle.getInput());
     }
+
 }
