@@ -105,8 +105,8 @@ public class Student {
         }
 
         return otherStudent != null
-            && otherStudent.getStudentNumber().equals(getStudentNumber())
-            && otherStudent.getEmail().equals(getEmail());
+            && (otherStudent.getStudentNumber().equals(getStudentNumber())
+            || otherStudent.getEmail().equals(getEmail()));
 
     }
 
