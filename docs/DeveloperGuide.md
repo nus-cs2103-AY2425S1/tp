@@ -1078,6 +1078,7 @@ When an excessively large number is passed as an index, the currently displayed 
 which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly. In addition, after
 each edit operation is executed successfully, the application view returns to the full list of companies view (regardless of any existing filtered view by `find` command).
 This inconveniences users who are aiming to execute consecutive updates to the same company that has been filtered using the `find` command. We plan to fix this by <ins>1) preventing users from doing redundant edits</ins> and <ins>2) keeping the existing filtered list view instead of automatically returning to the full list of companies view after each successful edit operation</ins>.
+Currently, the only way to set the status of a company from `closed` to `interested` is to add a new application. This 
 
 4. **Support for country codes in the `PHONE_NUMBER` field**: Currently, only numeric phone numbers without country codes are accepted, making it difficult to record numbers for international companies. We plan to enhance the AddressBook to accommodate country codes, enabling support for a broader range of company phone numbers.
 
@@ -1085,3 +1086,5 @@ This inconveniences users who are aiming to execute consecutive updates to the s
 
 6. **Better handling of extreme inputs**: Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
 Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
+
+7. **
