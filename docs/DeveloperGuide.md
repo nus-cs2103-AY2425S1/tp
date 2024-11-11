@@ -601,6 +601,35 @@ Example: add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 t/frie
 is used as the error message. This can be lengthy and too general. Instead, a more specific message that pinpoints the
 exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
 because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
-2. **Automate deletion of reminders for planned events that are over**: Currently, events that are over will show negative
-date for the time remaining field. Users will have to delete unwanted reminders themselves which can be troublesome. 
-This process can be automated such that reminders that have expired can be archived or deleted according to the user's preference.
+2. **Adding confirmation after clear command is used**: Currently NetBook allows users to clear all persons and reminders using either the
+command `clear` or `c`. However, as the command is relatively simple, it may lead to unintended deletion of all data in NetBook. 
+In future iterations, we plan to add a confirmation step after the `clear` command is executed to prevent accidental data loss. This
+extra step allow users to reconsider and avoid unintended deletion.
+3. **Include cascading delete of reminders that are tagged to a person**: Reminders are specific to a certain person in the contacts. 
+Currently, deleting a person does not remove all the reminders associated to the person, and NetBook users will have to use the `dr` 
+command to delete reminders 1 by 1. We plan to make NetBook automatically remove all reminders associated with that person when the person is 
+deleted.
+4. **Distinguish remark command to add additional remarks without overwriting**: Currently, both the 
+`edit` and `remark` commands perform the same function. To add unique functionality, we plan to modify the `remark` command so that it 
+appends a new note without overwriting the existing remark. This enhancement aims to allow user to keep multiple remarks for a person, while
+the `edit` command will enable replacing a specified remark of a person.
+5. **Add edit reminder feature**: Currently, users of NetBook will have to delete a reminder and add a new reminder if they found
+a mistake in the original reminder they created. We plan to introduce an `edit reminder` feature, allowing users to modify the 
+fields of the reminder directly. This helps to make managing reminders more efficient.
+6. **Enable partial matching in find command**: Currently, when using the `find` command, the search keyword must exactly match the 
+full name or organisation field to locate a person. We plan to enhance this by enabling partial matching, allowing users to find contacts even if they
+enter only part of the name or organisation. This helps make searching more flexible and user-friendly.
+7. **Make `date error` message more specific**: Currently, the error message for an invalid date input is `Date input is incorrect. 
+Please check if the date is valid and follows the DD-MM-YYYY format`. For example `remind 2 d/1-02-2025 des/interview at ABC corp` will result in an error because the day should be a 2-digit number, while
+`remind 2 d/30-02-2025 des/interview at ABC corp` triggers an error because 30th February 2025 does not exist. We plan to make the error more specific to pinpoint the exact error in the
+date, helping users identify and correct errors more easily.
+8. **Clearer sort success message**: Currently, regardless of the `sort` command, if the list of persons is successfully sorted,
+the message `Persons list has been sorted` will be shown. We plan to make the success message more specific by including sorting criterion, 
+such as `Persons list has been sorted by [criterion]`. This will provide users with clearer feedback on how their data has been sorted.
+9. **Improve UI colour contrast**: Currently, the user interface may have areas where the contrast between text and background colours is
+insufficient, making it difficult for some users to read or interact with the application. We plan to improve the colour contrast of 
+the UI of NetBook in future iterations.
+10. **Limit character length for fields except remark and reminder**: Currently, only the remark and reminder fields have text wrapping 
+capabilities. Hence, if NetBook users were to enter long texts for fields like `organisation`, `tags`, `phone`, or `email`, do not handle
+long input errors. We plan to implement a character length limit for these fields to ensure they remain manageable and visually consistent.
+This will help prevent users from entering excessively long text that could disrupt the layout.
