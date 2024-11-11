@@ -1,10 +1,5 @@
 package seedu.address.ui;
 
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -110,25 +105,16 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Loads the user guide URL in the WebView.
-     */
-    @FXML
-    private void openUrlInBrowser() {
-        try {
-            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
-            logger.fine("Opened URL: " + USERGUIDE_URL);
-        } catch (IOException | URISyntaxException e) {
-            logger.warning("Failed to open URL: " + USERGUIDE_URL);
-        }
-    }
-
     @FXML
     private void copyUrl() {
         Clipboard clipboard = Clipboard.getSystemClipboard();
-        ClipboardContent content = new ClipboardContent();
-        content.putString(USERGUIDE_URL);
-        clipboard.setContent(content);
-        System.out.println("URL copied to clipboard: " + USERGUIDE_URL);
+        if (clipboard != null) {
+            ClipboardContent content = new ClipboardContent();
+            content.putString(USERGUIDE_URL);
+            clipboard.setContent(content);
+            logger.info("URL copied to clipboard: " + USERGUIDE_URL);
+        } else {
+            logger.warning("Failed to access system clipboard. URL not copied.");
+        }
     }
 }

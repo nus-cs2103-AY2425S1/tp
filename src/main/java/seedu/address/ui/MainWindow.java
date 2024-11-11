@@ -23,7 +23,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String LOG_COMMAND_RESULT = "Result: %s";
+    public static final String LOG_INITIALIZING_MAIN_WINDOW = "Initializing MainWindow";
+    public static final String LOG_GUI_SETTING_NULL = "GuiSettings is null.";
+    public static final String LOG_GUI_EXECUTING_COMMAND = "GUI Executing command...";
     private static final String FXML = "MainWindow.fxml";
+
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -59,6 +64,8 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        logger.info(LOG_INITIALIZING_MAIN_WINDOW);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -127,6 +134,10 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
+        if (guiSettings != null) {
+            logger.warning(LOG_GUI_SETTING_NULL);
+        }
+
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
@@ -173,9 +184,10 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        logger.info(LOG_GUI_EXECUTING_COMMAND);
         try {
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
+            logger.info(String.format(LOG_COMMAND_RESULT, commandResult.getFeedbackToUser()));
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
