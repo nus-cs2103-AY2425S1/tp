@@ -796,24 +796,26 @@ can lead to invalid or nonsensical ranges. We plan to set boundaries for the age
 ranges are accepted. The valid age range will be from 0 to 150.<br><br>
 An example of a command that will throw an invalid age range error will be: `filter b/151-200`
 
-5. **Introduce verification of fields such as phone number and email**: Currently, the application does not properly 
+5. **Introduce verification of phone numbers**: Currently, the application does not properly 
 verify the format of phone numbers and email addresses. We plan to introduce validation checks to ensure that phone 
-numbers and email addresses are in the correct format.<br><br>
-Examples of invalid inputs that will trigger an error:<br>
-Phone number: `00000000` (phone number should exist)<br>
-Email: `example@example` (should follow the format `local-part@domain.tld`)<br>
+numbers exists.<br><br>
+An examples of an invalid input that will trigger an error: `edit Javier p/00000000` (phone number should exist)<br>
 
-6. **View any patient’s note without needing to return to the patient list view**: Currently, to view the details or 
+6. **Introduce verification of emails**: Currently, the application does not properly verify the format email addresses 
+as invalid emails such as `example@example` are still accepted, which is missing the TLD portion of the email. We plan 
+to improve validation checks to ensure that email addresses are in the correct format.<br><br>
+An examples of an invalid input that will trigger an error: `edit Javier e/example@example` (should follow the format `local-part@domain.tld`)<br>
+
+7. **View any patient’s note without needing to return to the patient list view**: Currently, to view the details or 
 notes of a different patient after viewing a specific patient, users must first input the list command to return to the 
-full patient list before specifying another patient, e.g., `view SECONDPATIENT`.<br><br>
+full patient list before specifying another patient (e.g. `view SECONDPATIENT`).<br><br>
 The enhanced view command will allow the user to switch directly to another patient’s information without the need to 
 re-list all patients first.
 
-7. **Restrict a patient's sex**: Currently, we accept any alphanumerical input. However, this may not be reflective of 
+8. **Introduce stricter constraints for `sex`**: Currently, we accept any alphanumerical input. However, this may not be reflective of 
 real-life behavior, despite the freedom it provides the user. Therefore, we plan to restrict the input for the sex field 
 to predefined values such as "Male", "Female", and "Other".<br><br>
 An example of a command that will throw an invalid sex error will be: `edit Javier s/Unknown`
 
-8. Kelly
 9. Otto
 10. Otto
