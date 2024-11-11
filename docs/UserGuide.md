@@ -114,7 +114,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 3. Create a new folder and name it any name you want (e.g. HireMe).
 
 
-4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3.
+4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3. <br>
     ![hiremejar](images/HireMeJar.png)
 
 <br></br>
@@ -127,12 +127,12 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 
     <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
    
-    You will see a window like this.
+    You will see a window like this. <br>
 
     ![openmacterminal](images/OpenMacTerminal.png)
     
 
-6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
+6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
    ![macfilepathinfo](images/Macfilepathinfo.png)
 
     On the new open that pops up, left click on `Where` and copy the file path.
@@ -140,14 +140,14 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
    <br></br>
 
 #### _Windows Users_
-7. Use windows search and type Terminal, click on open. 
+7. Use windows search and type Terminal, click on open. <br>
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
-You will see a window like this.
+You will see a window like this. <br>
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
-8. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
+8. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path. <br>
    ![windowsfilepath](images/Windowsfilepath.png)
     _file path here is highlighted in blue_
    <br></br>
@@ -266,12 +266,12 @@ Format: `/delete INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed internship application list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than 5 applications).
+* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications).
 
 Examples:
-* `/list` followed by `/delete 2` deletes the 2nd application in the list.
-* `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
-* `/list` followed by `/delete 4` when you only have 3 internship applications returns an error message.
+* `/list` followed by `/delete 2` deletes the second application in the list.
+* `/find Google` followed by `/delete 1` deletes the first application in the results of the `/find` command.
+* `/list` followed by `/delete 4` when you only have three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
 <div style="display: flex;">
@@ -290,7 +290,7 @@ Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
-* The search allows for **more than 1 `KEYWORD`**
+* The search allows for **more than one `KEYWORD`**
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
@@ -378,7 +378,7 @@ Sorts your internship applications in **ascending / descending** order based on 
 
 Format: `/sort ORDER`
 
-* There are only 2 orders that are valid: `earliest` or `latest` only.
+* There are only two orders that are valid: `earliest` or `latest` only.
 * The order is case-insensitive. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
 * Once you sort the list, even if you exit the application and reopen it, the list remains sorted unless you add more internship applications.
 * Even if you find or filter the list, sorting it afterwards will also sort the entire main list.
@@ -515,7 +515,7 @@ Action     | Format, Examples
 - **Application Status**:
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
-    - **ACCEPTED**: The user has accepted the offer for this internship.
+    - **ACCEPTED**: The user has accepted the offer for this internship.<br>
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
@@ -534,3 +534,5 @@ Action     | Format, Examples
 - **Role**: The role of the internship the user applied for.
 
 - **Index**: The index of the internship application displayed in the list.
+
+- **Order**: The order that the user would like the list to be in, based on the date of application.
