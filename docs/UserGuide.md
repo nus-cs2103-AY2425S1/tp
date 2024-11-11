@@ -474,6 +474,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. The `preferences.json` file can be found in the same folder that you put the `clubconnect.jar` file in.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When displaying the contact list**, there appears to be an empty box at the bottom of the app. **When displaying the event list**, there appears to be an empty box directly below the status message box. We plan to fix this issue in future releases.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -487,7 +488,7 @@ Action             | Format, Examples
 **Delete**         | `delete INDEX` or `delete CONTACT_NAME`<br> e.g., `delete 3`, `delete john doe`
 **Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2`
 **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Search**         | `search by/FIELD KEYWORD [MORE_KEYWORDS]`<br> e.g., `search by/Name Jake`
+**Search**         | `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`<br> e.g., `search n/ Jake`
 **Export**         | `export`
 **Import**         | `import FILENAME`<br> e.g., `import contacts.csv`
 **List Events**    | `list_events`
