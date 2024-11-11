@@ -357,7 +357,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -439,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC02 - Find a student**
+**Use case: UC02 - Search for a student**
 
 **Preconditions: The list of contacts is not empty**
 
@@ -458,14 +457,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. EduContacts is unable to find the student.
+* 2a. EduContacts is unable to locate the student.
 
   Use case ends.
 
 **Use case: UC03 - Add a grade for a student**
 
 **MSS**
-1. User <u>finds the student</u> (UC02) they wish to add a grade for.
+1. User <u>searches for the student</u> (UC02) they wish to add a grade for.
 2. User adds a grade for the student.
 3. EduContacts updates the list of contacts.
 
@@ -473,7 +472,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 
@@ -487,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student</u> (UC02) they wish to delete from the list.
+1. User <u>searches for the student</u> (UC02) they wish to delete from the list.
 2. User deletes the student in the list.
 3. EduContacts updates the list of contacts.
 
@@ -495,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 
@@ -509,7 +508,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student</u> (UC02) they wish to edit.
+1. User <u>searches for the student</u> (UC02) they wish to edit.
 2. User edits the details of the student in the list.
 3. EduContacts updates the list of contacts.
 
@@ -517,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 
@@ -531,7 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student</u> (UC02) they wish to add a module for.
+1. User <u>searches for the student</u> (UC02) they wish to add a module for.
 2. User adds a module to the student in the list.
 3. EduContacts updates the list of contacts.
 
@@ -539,7 +538,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 
@@ -559,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student</u> (UC02) they wish to grade.
+1. User <u>searches for the student</u> (UC02) they wish to grade.
 2. User grades a module the student is taking.
 3. EduContacts updates the list of contacts.
 
@@ -567,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 
@@ -587,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>finds the student</u> (UC02) they wish to add contacts of next-of-kins for.
+1. User <u>searches for the student</u> (UC02) they wish to add contacts of next-of-kins for.
 2. User adds contacts of next-of-kins of the student in the list.
 3. EduContacts updates the list of contacts.
 
@@ -595,7 +594,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to find the student.
+* 1a. User is unable to locate the student.
 
   Use case ends.
 

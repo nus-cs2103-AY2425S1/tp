@@ -70,7 +70,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         Person toDelete = null;
-        boolean personDetailsDeleted = false;
+        boolean isPersonDetailsDeleted = false;
 
         for (Person person : lastShownList) {
             if (person.getStudentId().equals(studentId)) {
@@ -112,11 +112,10 @@ public class DeleteCommand extends Command {
 
         if (toDelete.isSamePerson(model.getPersonToDisplay())) {
             model.setPersonToDisplay(null);
-            personDetailsDeleted = true;
+            isPersonDetailsDeleted = true;
         }
-
         model.deletePerson(toDelete);
-        if (personDetailsDeleted) {
+        if (isPersonDetailsDeleted) {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(toDelete)), true);
         }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(toDelete)));

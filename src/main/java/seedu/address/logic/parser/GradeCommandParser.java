@@ -28,7 +28,8 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         String preamble = argMultimap.getPreamble();
         argMultimap.verifyNoDuplicateStudentId(args);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_GRADE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE, PREFIX_GRADE) || preamble.isEmpty()
+                || ParserUtil.hasWhitespace(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
         }
 

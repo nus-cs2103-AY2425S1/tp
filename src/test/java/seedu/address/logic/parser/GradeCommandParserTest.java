@@ -46,16 +46,15 @@ public class GradeCommandParserTest {
         String validExpectedGradeString = STUDENTID_DESC_AMY + MODULE_DESC_AMY + GRADE_DESC_AMY;
 
         // multiple studentIds
-        System.out.println(STUDENTID_DESC_AMY + validExpectedGradeString);
         assertParseFailure(parser, STUDENTID_DESC_AMY + validExpectedGradeString,
                 Messages.getErrorMessageForDuplicateID());
 
         // multiple modules
-        assertParseFailure(parser, MODULE_DESC_AMY + validExpectedGradeString,
+        assertParseFailure(parser, validExpectedGradeString + MODULE_DESC_AMY,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
 
         // multiple grades
-        assertParseFailure(parser, GRADE_DESC_AMY + validExpectedGradeString,
+        assertParseFailure(parser, validExpectedGradeString + GRADE_DESC_AMY,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
 
         // multiple fields repeated
@@ -63,20 +62,6 @@ public class GradeCommandParserTest {
                 STUDENTID_DESC_AMY + validExpectedGradeString + MODULE_DESC_AMY + GRADE_DESC_AMY
                         + validExpectedGradeString,
                 Messages.getErrorMessageForDuplicateID());
-
-        // invalid value followed by valid value
-
-        // invalid studentId
-        assertParseFailure(parser, INVALID_STUDENTID_DESC + validExpectedGradeString,
-                Messages.getErrorMessageForDuplicateID());
-
-        // invalid module
-        assertParseFailure(parser, INVALID_MODULE_DESC + validExpectedGradeString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
-
-        // invalid grade
-        assertParseFailure(parser, INVALID_GRADE_DESC + validExpectedGradeString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE));
 
         // valid value followed by invalid value
 
@@ -97,13 +82,13 @@ public class GradeCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE);
 
-        //        // missing studentId prefix
-        //        assertParseFailure(parser, VALID_STUDENTID_BOB + MODULE_DESC_BOB + GRADE_DESC_BOB, expectedMessage);
+        // missing studentId
+        assertParseFailure(parser, MODULE_DESC_BOB + GRADE_DESC_BOB, expectedMessage);
 
         // missing module prefix
         assertParseFailure(parser, STUDENTID_DESC_BOB + VALID_MODULE_BOB + GRADE_DESC_BOB, expectedMessage);
 
-        // missing module prefix
+        // missing grade prefix
         assertParseFailure(parser, STUDENTID_DESC_BOB + MODULE_DESC_BOB + VALID_GRADE_BOB, expectedMessage);
 
         // all prefixes missing
@@ -127,9 +112,11 @@ public class GradeCommandParserTest {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_STUDENTID_DESC + INVALID_MODULE_DESC + GRADE_DESC_BOB,
                 StudentId.MESSAGE_CONSTRAINTS);
+    }
 
-        //        // non-empty preamble
-        //        assertParseFailure(parser, PREAMBLE_NON_EMPTY + STUDENTID_DESC_BOB + MODULE_DESC_BOB + GRADE_DESC_BOB,
-        //                String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
+    @Test
+    public void parse_extraneousInput_throwsParseException() {
+        String input = GradeCommand.COMMAND_WORD + STUDENTID_DESC_BOB + MODULE_DESC_BOB + GRADE_DESC_BOB;
+        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
     }
 }
