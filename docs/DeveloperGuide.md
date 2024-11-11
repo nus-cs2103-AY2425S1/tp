@@ -914,3 +914,24 @@ it at the very top of the helpWindow screen.
 as right now, the inclusion of ph or e parameter is not as relevant.
 
 3. We plan to add colours to the help and command output text to improve readability.
+
+4. We will allow users to enter any characters for name in the future. For example, "d/o Jr. ඞඞ" can be inputted in the future.
+
+5. We will allow users to put parameters in address, department and role. For example, "employee n/John Doe p/98765432 
+e/johnd@example.com a/311, r/hill Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09" will work where the address is "311, 
+r/hill Clementi Ave 2, #02-25"
+
+6. We will allow phone numbers to have symbols such as -#()+ in the future.
+
+7. We will do stricter validation for email to ensure it is a valid domain. For example, "e/alice@gmail" is currently
+valid, but it should not be.
+
+8. We will use a better duplicate detection method such as NRIC to detect duplicates. Currently, if there are 2 people 
+named "John Doe", it will be impossible to insert them. The duplicate detection is also flawed as "John Doe" and
+"john doe" are seen as different people
+
+9. We will cater to different types of contract in the future. For example, contracts with no contract end date.
+
+10. We will improve find command to search for users based on similarity score like Google's search engine. For example,
+ "find n/John Doe" will return all the names with "John Doe" first before returning the names with "John" and the names 
+with "Doe"
