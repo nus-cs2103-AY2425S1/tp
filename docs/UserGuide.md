@@ -106,6 +106,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+Notes:
+- We allow Users to create person of the same Name, Email Address and Phone Number, as long as not all details are the same.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -203,6 +206,9 @@ Format: `see d/dd-MM-YYYY`
 Examples:
 - `see d/17-10-2024` shows all meetings within the week range of `13-10-2024` to `19-10-2024`
 
+Notes:
+- If the user inputs an invalid date like `31-02-2024` the error titled 'Invalid command format!' is displayed to users.
+
 ### Add meetings to schedule : `add-schedule`
 
 Add meetings to user's schedule.
@@ -218,9 +224,14 @@ Example:
 
 ![add schedule example](images/add-schedule_example.png)
 
-- `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`
+- `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`add
 - **Before**: no Dinner event at 10-10-2024 1800.
 - **After**: Dinner event at 10-10-2024 1800 is added.
+
+Notes:
+- If the user inputs an invalid date like `31-02-2024` the error titled 'Date must be in the format DD-MM-YYYY.' is displayed to users.
+- The user is allowed to schedule a meeting for past dates. This feature is in place as we expect Users to use this application to record their past meetings as well.
+
 
 ### Delete meeting from schedule : `delete-schedule`
 
@@ -256,6 +267,7 @@ Notes:
 - You must always specify the `INDEX` of the schedule to be edited.
 - At least one other field (`n/NAME`, `d/DATE`, `t/TIME`, or `c/INDEX`) must be provided; otherwise, the command will not execute.
 - If a field (name, date, time, or contacts) is not specified, the existing value for that field remains unchanged.
+- If the user inputs an invalid date like `31-02-2024` the error titled 'Date must be in the format DD-MM-YYYY.
 
 This ensures flexibility by allowing you to only modify the fields you need while keeping the others intact.
 

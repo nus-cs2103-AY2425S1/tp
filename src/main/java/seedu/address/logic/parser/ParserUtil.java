@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -139,7 +140,8 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu")
+                .withResolverStyle(ResolverStyle.STRICT);
             return LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE, e);
