@@ -4,53 +4,94 @@
   pageNav: 3
 ---
 
-# WedLinker User Guide
+<button id="toggleButton" onclick="toggleAllDetails()">Expand All</button>
 
-WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
-**With a powerful Command Line Interface (CLI)**, WedLinker streamlines contact management through quick, intuitive commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
 
-While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to manage your contacts, weddings, and tasks at a glance.
-This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
+<div style="display: flex; justify-content: center; align-items: center;">
+<span class="parisienne-regular" style="font-size: 3em; font-weight: bold;">
+  WedLinker User Guide
+</span>
+</div>
+
+
+
+
+<details open>
+  <summary><strong>What is WedLinker?</strong></summary>
+  <p>WedLinker is your <strong>essential desktop app for managing wedding-related contacts</strong>, designed specifically for professional wedding planners.</p>
+  <p>With a powerful <strong>Command Line Interface (CLI)</strong>, WedLinker streamlines contact management through quick, intuitive commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.</p>
+</details>
+
+<details open>
+  <summary><strong>Why Choose WedLinker?</strong></summary>
+  <p>While WedLinker excels with its fast Command-Line Interface (CLI), it also offers a clear and intuitive <strong>Graphical User Interface (GUI)</strong>. The GUI presents your contacts, weddings, and tasks in an organised layout, making it easy to view and manage them at a glance.</p>
+  <p>This combination of speed and clarity allows you to manage your wedding planning tasks efficiently and with precision.</p>
+</details>
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have `Java 17` or above installed on your computer by performing the following:
-   1. Open your system terminal
-      1. Windows: <br>
-         1. Hold down Windows button and R (⊞ Win + R ) 
-         2. Type `cmd` and press enter
-         
-      1. MacOS -- do one of the following: <br>
-          - Click the Launchpad icon in the Dock, type `Terminal` in the search field, then click Terminal, OR
-          - In the Finder, open the `/Applications/Utilities` folder, then double-click Terminal.
-   1. Type `java -version` and press enter
-   1. If you have `Java 17 installed, the terminal should look something like:
-   ```
-         C:\Users\UserName>java -version
-         java version "17.0.12" 2024-07-16 LTS
-         Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
-         Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
-    ```
-2. If you do not have Java 17 installed, or you are unsure, refer to the guide below.
-   1. Download `Java 17` from the official website: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-   2. Select the installation package based on your Operating System. For Apple users select macOS, for Windows users select Windows.
-   3. Follow the instruction guide to install Java on your device. For more information use this guide: https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html
 
-2. Download the latest version of WedLinker from [here](https://github.com/AY2425S1-CS2103T-F15-4/tp/releases/). Select `WedLinker.jar` to begin the download.
-![release.png](images/release.png)
+   1.1. Open your operating system's terminal. <br>Follow instructions for your operating system if you are unsure how to:
+      <details>
+        <summary><strong>Windows:</strong></summary>
+        <ol>
+          <li>Hold down Windows button and R (⊞ Win + R)</li>
+          <li>Type <code>cmd</code> and press enter</li>
+        </ol>
+      </details>
+      <details>
+        <summary><strong>MacOS:</strong></summary>
+        <ul>
+          <li>Click the Launchpad icon in the Dock, type <code>Terminal</code> in the search field, then click Terminal, OR</li>
+          <li>In the Finder, open the <code>/Applications/Utilities</code> folder, then double-click Terminal.</li>
+        </ul>
+      </details>
+    <br>
 
-3. Copy the file to the folder you want to use as the _home folder_ for your WedLinker.
+   1.2. Type <code>java -version</code> and press enter.
 
-4. Open WedLinker by double clicking the program file, `WedLinker.jar`.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   1.3. If you have `Java 17` installed, the terminal should look like:
+      ```
+        C:\Users\UserName>java -version
+        java version "17.0.12" 2024-07-16 LTS
+        Java(TM) SE Runtime Environment (build 17.0.12+8-LTS-286)
+        Java HotSpot(TM) 64-Bit Server VM (build 17.0.12+8-LTS-286, mixed mode, sharing)
+      ```
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+<br>
+
+2. If you have `Java 17` installed, proceed to Step 3. If not, follow these instructions:
+
+   2.1. Download `Java 17` from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+   
+    2.2. Select the installation package based on your Operating System.
+   
+    2.3. Follow the instruction guide to install Java on your device. For more information, click [here](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html)
+
+<br>
+
+3. Download the latest version of WedLinker from [here](https://github.com/AY2425S1-CS2103T-F15-4/tp/releases/). Select `WedLinker.jar` to begin the download.
+   <img alt="release.png" src="images/release.png" width="700" onclick="openModal(this)"/>
+
+<br>
+
+4. Copy the file to the folder you want to use as the _home folder_ for your WedLinker.
+
+<br>
+
+5. Open WedLinker by double-clicking the program file, `WedLinker.jar`.<br>
+   A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
+   <img alt="Ui" src="images/Ui.png" width="600" onclick="openModal(this)"/>
+
+<br>
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -63,15 +104,15 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Features
+## Features
 
 <box type="info" seamless>
-
-**Notes about the command format:**<br>
+  <details>
+    <summary><strong>Notes about the command format:</strong></summary>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -95,6 +136,15 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 * Parameters can be in any order.<br>
   * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+  </details>
+</box>
+
+
+<box type="warning" seamless>
+  <details open>
+
+<summary><strong>Caution:</strong></summary>
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -103,47 +153,51 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+  </details>
+</box>
 
 * Some commands have shorter keywords that speed up entering commands - these keywords are specified in the format of each command.
 
 * For example, instead of typing in `assign-vendor 1`, you can type in `asv 1`
 
 ## General Features
+<h3 class="features">General Features</h3>
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img alt="help message" src="images/helpMessage.png" width="500" onclick="openModal(this)"/>
 
 Format: `help`
 
-### Listing all Persons : `list`
+<br>
+
+#### Listing all Persons : `list`
 
 Shows a list of all saved [Persons](#person-features) in the WedLinker.
 
 Format: `list`
 
-### Listing all Weddings : `list-weddings` or `lw`
+#### Listing all Weddings : `list-weddings` or `lw`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
 Format: `list-weddings` or `lw`
 
-### Listing all Tasks : `list-tasks` or `ltasks`
+#### Listing all Tasks : `list-tasks` or `ltasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
 
 Format: `list-tasks` or `ltasks`
 
-### Listing all Tags : `list-tags` or `ltags`
+#### Listing all Tags : `list-tags` or `ltags`
 
 Shows a list of all [Tags](#tag-features) in the WedLinker
 
-Format: `list-tags` or `ltags`
+<br>
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Clears all entries from WedLinker.
 
@@ -151,34 +205,49 @@ Format: `clear`
 
 <box type="warning" seamless>
 
-**Caution:**
+<details open>
+<summary><strong>Caution:</strong></summary>
 This action is irreversible and cannot be undone. Please ensure you have backed up any important information before proceeding.
+</details>
 </box>
 
-### Exiting the program : `exit`
+<br>
+
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+<br>
+
+#### Saving the data
 
 WedLinker data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+<br>
+
+#### Editing the data file
 
 WedLinker data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
-**Caution:**
+<details open>
+<summary><strong>Caution:</strong></summary>
 If your changes to the data file makes its format invalid, WedLinker will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+<br>
 Furthermore, certain edits can cause the WedLinker to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</details>
 </box>
 
-## Person Features
+---
 
-### Adding a person: `add`
+<br>
+
+<h3 class="features">Person Features</h3>
+
+#### Adding a person: `add`
 
 Use the `add` command to add a new contact to WedLinker.
 
@@ -200,6 +269,7 @@ To add a contact to WedLinker, type `add` followed by details such as the name, 
 * A person's phone number should be at least 3 digits long.
 * If the tags or weddings specified in the add command do not exist yet, they will be created
 
+
 Examples:
 * To add a contact named John Doe with a phone number of 98765432, email johnd@example.com, and address XYZ Floral Services, enter the command:
   * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
@@ -208,25 +278,40 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** 
-* Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
-Created weddings will have the person automatically assigned to their guest lists.
+<details>
+<summary><strong>Tip:</strong></summary>
 
-* A person can have any number of tags or weddings (including 0)
-* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
-
+- Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings.
+Created weddings will have the person automatically assigned to their guest lists. <br><br>
+- A person can have any number of tags or weddings  (including 0) <br><br>
+- A person's name must contain only alphanumeric characters and certain special characters, which can be used to represent different naming conventions:
+    - **Hyphen (-)**: Used for double-barrelled names, such as "Mary Doe-Smith".
+    - **Slash (/)**: Used to store nicknames or alternative names, like "John/Jonny Doe".
+    - **Period (.)**: Used to shorten names, such as "John D. Doe" or "Jane S.".
+    - **Apostrophe (')**: Used in names like "O'Hare" or "O'Conner".
+</details>
 </box>
+
 
 <box type="warning" seamless>
 
-**Warning:** Extraneous prefixes in the add command will be processed as part of other inputs.<br>
-* e.g. when adding a person, you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
-`add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
+
+- People with single or multiple spaces in their names are considered distinct and treated as separate people. For example:
+    - <span class="preserve-whitespace">John Doe vs. John  Doe</span>
+    - <span class="preserve-whitespace">TK/Tyler Kennedy vs. TK / Tyler - Kennedy</span><br><br>
+- Extraneous prefixes in the add command will be processed as part of other inputs.<br>
+  - e.g. when adding a person, you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+    `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+
+</details>
 </box>
 
+<br>
 
-
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Use the `edit` command to edit details of an existing contact in WedLinker.
 
@@ -257,7 +342,9 @@ Examples:
   * `edit 2 n/Betsy Crower a/XYZ Flower Shop`
   * This updates the contact's name to `Betsy Crower` and address to `XYZ Flower Shop`
 
-### Deleting a person : `delete`
+<br>
+
+#### Deleting a person : `delete`
 
 Use the `delete` command to remove a contact from WedLinker.
 
@@ -275,7 +362,10 @@ Examples:
   * First, search for contacts with the name `Betsy` by entering the command: `find n/Betsy`
   * Then, enter the command: `delete 1` 
 
-### Searching people by any field: `find`
+---
+<br>
+
+#### Searching people by any field: `find`
 
 Finds all persons based on the specified keywords after the label representing the field, and displays them as a list with index numbers.
 
@@ -297,9 +387,9 @@ This will return all contacts that have either 98 ot 64 in their phone number.
   ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts assigned to Casey's Wedding <br>
 
-## Tag Features
+<h3 class="features">Tag Features</h3>
 
-### Creating a tag : `create-tag` or `ctag`
+#### Creating a tag : `create-tag` or `ctag`
 
 Use the `create-tag` command to create a tag within WedLinker, which you can assign to contacts.
 
@@ -322,7 +412,16 @@ Examples:
 > [!TIP]
 > To display a list of all the tags that have been created, you can use the [list-tags](#listing-all-tags--list-tags-or-ltags) command.
 
-### Assigning tag to contact : `tag`
+<box type="warning" seamless>
+<details open>
+<summary><strong>Caution:</strong></summary>
+
+- Tags with single or multiple spaces in their names are considered distinct and treated as separate tags. For example:
+    - <span class="preserve-whitespace">Venue IC vs. Venue  IC</span>
+</details>
+</box>
+
+#### Assigning tag to contact : `tag`
 
 Use the `tag` command when you want to assign a tag to a specific contact in WedLinker.
 
@@ -340,14 +439,23 @@ Examples:
 * To assign a new tag named `Musician` (that doesn't currently exist) to the second person in the list, enter the command:
     * `tag 2 t/Musician f/`
 
+
 <box type="tip" seamless>
 
 **Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags-or-ltags) command
 </box>
 
-### Unassigning tag from contacts : `untag`
+<box type="warning" seamless>
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
 
-### Unassigning tag from contacts : `untag`
+- Force-tagging a person with extraneous input will cause those extraneous inputs to be ignored. For example:
+    - `tag 1 f/ RandomWord t/Tag1` will cause `RandomWord` to be ignored.
+</details>
+</box>
+
+#### Unassigning tag from contacts : `untag`
 
 Use the `untag command` when you want to remove a tag from a specific contact in WedLinker.
 
@@ -379,9 +487,12 @@ Examples:
 * To delete the tag named `Florist` from WedLinker, enter the command:
     * `delete-tag t/Florist`
 
-## Wedding Features
+---
+<br>
 
-### Adding a Wedding : `create-wedding` or `cw`
+<h3 class="features">Wedding Features</h3>
+
+#### Adding a Wedding : `create-wedding` or `cw`
 
 Use the `create-wedding` command to create a Wedding within WedLinker that can be linked to contacts.
 
@@ -400,8 +511,20 @@ To create a `Wedding`, type `create-wedding` followed by the name of the wedding
 Examples:
 * To create a Wedding named `Wedding 1`, enter the command:
     * `create-wedding w/Wedding 1`
+* Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding-assign-wedding) command.
 
-### Assigning contact to one or more Weddings : `assign-wedding` or `asw`
+<box type="warning" seamless>
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
+
+
+- Weddings with single or multiple spaces in their names are considered distinct and treated as separate weddings. For example:
+    - <span class="preserve-whitespace">O'Hare's Wedding vs. O'Hare's  Wedding</span>
+</details>
+</box>
+
+#### Assigning contact to one or more Weddings : `assign-wedding` or `asw`
 
 Use the `assign-wedding` command to assign a contact to one or more Weddings.
 
@@ -413,12 +536,13 @@ To assign a contact to one or more `Weddings`, type `assign-wedding`, followed b
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Wedding` must exists in WedLinker before it can be assigned.
 * If the `Wedding` does not exist, you can use `f/` to force its creation and assignment to the contact.
+* Assigning with the optional `p1/` or `p2/` keywords will set that contact as Partner 1 or Partner 2 of the wedding respectively.
 
 Examples:
 * To assign the Wedding named `Wedding 1` to the third person in the contact list, enter the command:
     * `assign-wedding 3 w/Wedding 1`
 
-### Editing Wedding details : `edit-wedding` or `ew`
+#### Editing Wedding details : `edit-wedding` or `ew`
 
 Use the `edit-wedding` command to edit details of a Wedding, such as the Wedding name and Address.
 
@@ -429,6 +553,7 @@ Following that, type "edit-wedding" followed by the Wedding number enter the det
 
 * The WEDDING_NUMBER **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
+* Date must be in "YYYY-MM-DD" format.
 
 <div align="center">
   <img src="img_4.png" width="600">
@@ -445,7 +570,7 @@ Examples:
     * First, identify the Wedding number by entering the command: `list-weddings`
     * Should wedding number be 1, enter the command: `edit-wedding 1 a/XYZ street`
 
-### Unassigning contacts from a Wedding : `unassign-wedding` or `uw`
+#### Unassigning contacts from a Wedding : `unassign-wedding` or `uw`
 
 Use the `unassign-wedding` command to remove a contact from one or more Weddings.
 
@@ -474,10 +599,13 @@ To delete a `Wedding`, type "delete-wedding", followed by the name of the weddin
 Examples:
 * To delete the wedding named `Wedding 1`, enter the command:
     * `delete-wedding w/Wedding 1`
-  
-## Task Features
 
-### Creating one or more Tasks : `create-task` or `ctask`
+---
+<br>
+
+<h3 class="features">Task Features</h3>
+
+#### Creating one or more Tasks : `create-task` or `ctask`
 
 Use the `create-task` command to create one or more Tasks.
 
@@ -497,7 +625,18 @@ Examples:
 * To create a task with the description of `Finalise itinerary` with a specified deadline of `2024-12-22`, enter the command:
     * `create-task tk/Finalise itinerary d/2024-12-22`
 
-### Assigning a Task to a contact : `assign-task` or `atask`
+<box type="warning" seamless>
+
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
+
+- Tasks with single or multiple spaces in their names are considered distinct and treated as separate tasks. For example:
+    - <span class="preserve-whitespace">Send invitations vs. Send  invitations</span>
+</details>
+</box>
+
+#### Assigning a Task to a contact : `assign-task` or `atask`
 
 Use the `assign-task` command to assign one or more Tasks to a contact.
 
@@ -517,21 +656,47 @@ The TASK_NUMBER corresponds to each Task's position in the `Task` list
 
 * In this example, the `TASK_NUMBER` 2 refers to the task with the description "Send invitations", and the command `assign-task 1 2` will assign the "Send invitations" task to the contact with `PERSON_NUMBER` 1, which is "Alex Yeoh".
 
+#### Assigning a Task to a contact : `assign-task` 
 
-Examples:
+* Assigns a `Task` to a contact.
+* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The `PERSONINDEX` refers to the index of the person shown under the **People** column.
+* The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
+* The indexes **must be positive integers** 1, 2, 3, …​.
+
+<div align="center">
+  <img src="img_7.png" width="600">
+</div>
+<p align="center">
+The PERSON_TASK_NUMBER corresponds to each task's position within a contact's assigned tasks.
+</p>
+
+* In this example, the PERSON_TASK_NUMBER 3 for the first person refers to the task with the description "Send invitations", and the command `unassign-task 1 3` will remove the "Send invitations" task from the contact with `PERSON_NUMBER` 1, which is "Alex Yeoh".
+
+* Examples:
 * To assign two tasks with the descriptions `Buy cake` and `Finalise itinerary`:
     * Firstly, enter the command `list-tasks` to see all contacts and tasks.
     * Secondly, identify the positional number of the person you wish to assign tasks to
     * Thirdly, identify the Task numbers of the two tasks you wish to assign.
     * Lastly, should the Person number be 1, and the Task numbers are 2 and 3, enter the command: `assign-task 1 2 3`
 
-### Unassigning a Task from a contact : `unassign-task` or `unatask`
+<box type="warning" seamless>
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
+
+- Trying to assign multiple tasks to a person in a singular command will cause only 1 of those tasks (at random) to be assigned. For example:
+    - `assign-task 1 1 2 3` will assign either task 1, 2, or 3 to be assigned at random (assuming there are at least 3 tasks).
+</details>
+</box>
+
+#### Unassigning a Task from a contact : `unassign-task` or `unatask`
 
 Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER` or `unatask PERSON_NUMBER PERSON_TASK_NUMBER`
 
-To remove a `task` from a contact, type `unassign-task` followed by the positional number of the person and the person's Task number(s) 
+To remove a `task` from a contact, type `unassign-task` followed by the positional number of the person and the person's Task number(s)
 
-**Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.* 
+**Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.*
 * The `PERSON_NUMBER` and `PERSON_TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
 <div align="center">
@@ -556,6 +721,10 @@ Format: `mark-task TASK_NUMBER...` or `mtask TASK_NUMBER...`
 
 To mark a `task` to be completed, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number(s) of task(s) you wish to mark. <br>
 Following that, type `mark-task` followed by the Task number(s).
+
+* Marks a `Task` as completed.
+* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The index **must be a positive integers** 1, 2, 3, …​.
 
 * The TASK_NUMBER **must be a positive integer** 1, 2, 3, …​.
 
@@ -596,7 +765,10 @@ Examples:
     * First, identify the Task number by entering the command: `list-tasks`
     * Should the Task number be 1, enter the command: `delete-task 1`
 
-## Vendor Features
+---
+<br>
+
+<h3 class="features">Vendor Features</h3>
 
 ### Assigning a Vendor : `assign-vendor` or `asv`
 
@@ -634,19 +806,18 @@ Examples:
 * To remove a vendor designation from the first contact, enter the command:
     * `unassign-vendor 1`.
 
---------------------------------------------------------------------------------------------------------------------
+-------
 
-## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WedLinker home folder.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -682,3 +853,22 @@ Action     | Format, Examples
 **Unassign Wedding**    | `unassign-wedding PERSON_NUMBER w/WEDDING_NAME…​` or `uw PERSON_NUMBER w/WEDDING_NAME…​` <br> e.g., `uw 2 w/John's Wedding`
 **Unmark Task** | `unmark-task TASK_NUMBER…​` or `untask TASK_NUMBER…​` <br> e.g., `untask 1 ` <br> `unmark-task 1 2 3`
 **Untag**   | `untag TASK_NUMBER t/TAG_NAME…​` <br> e.g., `untag 4 t/available t/chef`
+
+--------------
+
+<br>
+
+<h2 style="text-align: center; color: #E83E8C; font-family: 'Parisienne', cursive;">Frequently Asked Questions</h2>
+
+<details style="background-color: #f9f9f9; border-radius: 5px; padding: 10px; margin: 10px 0;">
+
+  <summary style="font-size: 1.2em; font-weight: bold; color: #333; cursor: pointer;">How do I transfer my data to another computer?</summary>
+  <p style="font-size: 1em; color: #555;">To transfer your data to another computer, follow these steps:</p>
+  <ol style="color: #555;">
+    <li>Install the WedLinker app on the new computer.</li>
+    <li>Navigate to the new installation's home folder and locate the empty data file.</li>
+    <li>Overwrite this file by replacing it with the data file from your previous computer's WedLinker home folder.</li>
+  </ol>
+  <p style="font-size: 1em; color: #555;">Once this is done, you should have all your data transferred successfully to the new computer.</p>
+
+</details>
