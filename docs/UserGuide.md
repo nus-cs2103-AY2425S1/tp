@@ -61,7 +61,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
     * `exit` : Exits the app.
 
-Refer to the [Features](#features) below for more details.
+Refer to the [Commands](#commands) below for more details.
 <br>
 <div style="page-break-after: always;"></div>
 
@@ -569,7 +569,7 @@ Output: `Address book has been saved!`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.  
 
-Format: `load`
+Format: `load`  
 Output: `The saved address book has been loaded!`
 
 <br>
@@ -601,16 +601,16 @@ GamerBook home folder to the new installation’s data folder, typically located
 **Q**: What should I do if I accidentally delete someone from GamerBook?<br>
 **A**: You can use the `undo` command right after the delete command to restore the deleted person’s data, or use `load` if you have been saving frequently.
 
-**Q**: Should I ever use the `clear` command?
+**Q**: Should I ever use the `clear` command?<br>
 **A**: The `clear` command deletes all entries in GamerBook. You should use it mainly to clear the sample data that GamerBook starts with.
 
-**Q**: Why do my searches sometimes return unexpected results?  
+**Q**: Why do my searches sometimes return unexpected results?<br>
 **A**: GamerBook's search functions like `find` are case-insensitive, but they only match full words. If your search is not returning results, try again with full keywords like `John` instead of `J`.
 
-**Q**: Can I undo more than one command?  
+**Q**: Can I undo more than one command?<br>
 **A**: Yes! The `undo` command remembers your command history from when GamerBook was opened, and you can `undo` consecutive times.
 
-**Q**: Why did my GamerBook open blank when I had data saved previously?
+**Q**: Why did my GamerBook open blank when I had data saved previously?<br>
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
 
  <br>
