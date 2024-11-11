@@ -785,3 +785,17 @@ testers are expected to do more *exploratory* testing.
    
     1. Test Cases: Similar to Scenario 1
     1. Expected: Similar to Scenario 1
+
+## Appendix: Planned Enhancements
+
+Team size: 5
+
+1. **Modify flow of [loading schedule storage](#load-schedule-storage) to check for if address book sample data generated first.**
+   Currently when the programs loads with missing `addressbook.json` and valid `schedule.json`, the program will generate sample contacts data while retaining old schedule list.
+   Ideal in this situation we want to backup `schedule.json` and create new schedule list from sample data too to match sample data from addressbook.
+1. **Provide GUI warning that data files was not read properly ontop of logging.**
+   Currently only logging is provided when data files is read incorrectly.
+   Can include some visual error message or the likes from the GUI end to indicate that data files was read incorrectly.
+1. **Modify meeting sample data to generate whole number timings.**
+   Currently time fields for meetings sample data is generated using `LocalTime#now` which provides very precise timing up to the milliseconds.
+   While it is not wrong, some user complained that it looks wrong or invalid to display timings as such, and it would be much appropriate to display time fields as available to the users through other commands, i.e. if user cannot add time field up to milliseconds of precision, do not display time fields up to milliseconds of precision.
