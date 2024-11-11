@@ -41,11 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/seanlim.png" width="200px">
 
-[[github](http://github.com/seanlim)] [[bsky](https://seanlkx.bsky.social/)]
+[[github](http://github.com/seanlim)]
+[[bsky](https://seanlkx.bsky.social/)]
+[[portfolio](team/seanlim.md)]
 
 - Role: In charge of `Model`, Code Quality
 - Responsibilities:
-    - Manage the models we will use for SpleetWaise.
+    - Manage model-related components of SpleetWaise.
     - Code Reviews to uphold coding standards.
 
 ### Dong Qianbo
