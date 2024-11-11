@@ -7,17 +7,17 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
-participant ":ConcreteCommand" as ConcreteCommand LOGIC_COLOR
+participant ":Undoable" as Undoable LOGIC_COLOR
 end box
 
 [-> Model : undoAddressBook()
 activate Model
 
-Model -> ConcreteCommand : undo()
-activate ConcreteCommand
+Model -> Undoable : undo()
+activate Undoable
 
-ConcreteCommand --> Model
-deactivate ConcreteCommand
+Undoable --> Model
+deactivate Undoable
 
 [<-- Model
 deactivate Model

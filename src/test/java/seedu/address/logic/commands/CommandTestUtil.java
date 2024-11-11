@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_OWES_MONEY = "owes money";
+    public static final Path VALID_FILE_PATH = Paths.get("src", "test", "data", "ExportImportTest",
+            "validFile.json");
+    public static final Path INVALID_FILE_TYPE_PATH = Path.of("src", "test", "data", "ExportImportTest",
+            "invalidFile.csv");
+    public static final Path INVALID_JSON_FORMAT_PATH = Path.of("src", "test", "data", "ExportImportTest",
+            "invalidFileJsonFormat.json");
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -165,6 +173,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.

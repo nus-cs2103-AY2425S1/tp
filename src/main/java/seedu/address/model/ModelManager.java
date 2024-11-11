@@ -14,7 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ConcreteCommand;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final Stack<ConcreteCommand> undoStack;
+    private final Stack<Undoable> undoStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -106,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return addressBook.hasEmail(person);
+    }
+
+    @Override
     public boolean hasGraduatedBefore(String year) {
         return addressBook.hasGraduatedPeople(year);
     }
@@ -176,7 +182,7 @@ public class ModelManager implements Model {
     //=========== Undo ================================================================================
 
     @Override
-    public void pushToUndoStack(ConcreteCommand command) {
+    public void pushToUndoStack(Undoable command) {
         assert command != null;
         undoStack.push(command);
     }
@@ -186,7 +192,13 @@ public class ModelManager implements Model {
         if (undoStack.isEmpty()) {
             return null;
         }
-        ConcreteCommand command = undoStack.pop();
+        Undoable command = undoStack.pop();
         return command.undo(this);
+    }
+
+    @Override
+    public void clearUndoStack() {
+        assert undoStack != null;
+        undoStack.clear();
     }
 }

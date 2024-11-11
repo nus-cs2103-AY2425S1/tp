@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,7 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* stores a history of concrete commands (commands that can be undone) executed successfully by the user, which allows the user to undo commands.
+* stores a history of undoable commands executed successfully by the user, which allows the user to undo commands.
 * only depends on the Logic component due to the undo feature.
 
 <box type="info" seamless>
@@ -163,12 +163,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo mechanism is facilitated by the abstract class `ConcreteCommand`. 
-It extends `Command` and has the `undo()` method. The `undo()` method is called when the user executes the `undo` command. 
+The undo mechanism is facilitated by the interface `Undoable`.
+It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command. 
 The `undo()` method reverses the effects of the command that was previously executed.
-The `undo()` method is implemented in the concrete command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
+The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
 
-The `Model` component stores a history of executed concrete commands in a stack.
+The `Model` component stores a history of executed undoable commands in a stack.
 When a command is executed successfully, the command is pushed onto the stack.
 When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
 
@@ -236,7 +236,7 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The `clean` command extends `ConcreteCommand`. The `clean` command deletes the contacts whose `GradYear` field is earlier
+The `clean` command extends `Command` and implements `Undoable`. The `clean` command deletes the contacts whose `GradYear` field is earlier
 than the current year, deleting contacts who have graduated from the address book.
 The `clean` command is undoable.
 
@@ -437,7 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to add a specific profile, specifying name and contact number.
+1. User requests to add a specific profile, specifying name, contact number and email address.
 2. DorManagerPro adds the profile.
 
    Use case ends.
@@ -466,60 +466,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop adding a profile.
+
   Use case ends.
 
-**Use Case: UC02 - Add room number to profile**
+**Use Case: UC02 - Edit profile**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one profile added into DorManagerPro.**
 
 **MSS:**
 
-1. User requests to add room number information to a specific profile.
-2. DorManagerPro updates the profile to include the room number.
-
-   Use case ends.
-
-**Extensions:**
-
-* 1a. DorManagerPro detects an error in the command format.
-    * 1a1. DorManagerPro requests for the correct command format.
-    * 1a2. User enters command again.
-
-  Steps 1a1-1a2 are repeated until the command is correct.
-  Use case resumes from step 2.
-
-* 1b. DorManagerPro cannot find the specified profile to update.
-    * 1b1. DorManagerPro requests for a profile that exists to update.
-    * 1b2. User specifies profile again.
-
-  Steps 1b1-1b2 are repeated until the command is correct.
-  Use case resumes from step 2.
-
-* 1c. DorManagerPro detects that the room capacity is already full.
-    * 1c1. DorManagerPro requests for a room number that is not already occupied.
-    * 1c2. User specifies room number again.
-
-  Steps 1c1-1c2 are repeated until a valid room number is provided.
-  Use case resumes from step 2.
-
-* 1d. DorManagerPro detects invalid parameters specified by user.
-    * 1d1. DorManagerPro requests for valid parameters.
-    * 1d2. User re-supplies parameters.
-
-  Steps 1d1-1d2 are repeated until the parameters are valid.
-  Use case resumes from step 2.
-
-* *a. At any time, User chooses to stop adding a room number.
-  Use case ends.
-
-**Use Case: UC03 - Add emergency contact to profile**
-
-**Precondition: There is at least one profile added into DorManagerPro**
-
-**MSS:**
-
-1. User requests to add emergency contact information to a specific profile.
-2. DorManagerPro updates the profile to include the emergency contact.
+1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags. 
+2. DorManagerPro updates the profile with the new or updated information.
 
    Use case ends.
 
@@ -546,18 +503,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1c1-1c2 are repeated until the parameters are valid.
   Use case resumes from step 2.
 
-* *a. At any time, User chooses to stop adding an emergency contact.
+* *a. At any time, User chooses to stop editing.
+
   Use case ends.
 
-**Use Case: UC04 - View profiles**
+**Use Case: UC03 - Delete all graduated students**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one graduated student profile added into DorManagerPro.**
 
 **MSS:**
 
-1. User requests to view profiles.
-2. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name)
-3. DorManagerPro displays all profiles with all attached information.
+1. User requests to delete all graduated students from the DorManagerPro address book.
+2. DorManagerPro deletes all students with graduation years earlier than the current year.
 
    Use case ends.
 
@@ -570,12 +527,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1a1-1a2 are repeated until the command is correct.
   Use case resumes from step 2.
 
+* 1b. DorManagerPro cannot find any students who have graduated.
+    * 1b1. DorManagerPro displays an error message informing the user all students in the address book have yet to graduate.
+    
+  Use case ends.
+
+* *a. At any time, User chooses to stop deleting all graduated students.
+
+  Use case ends.
+
+**Use Case: UC04 - View profiles**
+
+**Precondition: There is at least one profile added into DorManagerPro.**
+
+**MSS:**
+
+1. User requests to view all profiles.
+2. DorManagerPro displays all profiles.
+3. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name).
+4. DorManagerPro displays all profiles with all attached information.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 3a. DorManagerPro detects an error in the command format.
+  * 3a1. DorManagerPro requests for the correct command format.
+  * 3a2. User enters command again.
+
+  Steps 3a1-3a2 are repeated until the command is correct.
+  Use case resumes from step 4.
+
 * *a. At any time, User chooses to stop viewing a profile.
+
   Use case ends.
 
 **Use Case: UC05 - Delete a profile**
 
-**Precondition: There is at least one profile added into DorManagerPro**
+**Precondition: There is at least one profile added into DorManagerPro.**
 
 **MSS:**
 
@@ -609,20 +605,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1c1-1c2 are repeated until the parameters are valid.
   Use case resumes from step 2.
 
-* 3a. DorManagerPro detects an error in the confirmation message sent by the User
-    * 3a1. DorManagerPro asks the user for confirmation to delete the profile again.
-    * 3a2. User confirms again.
-
-  Steps 3a1-3a2 are repeated until the confirmation is correct.
-  Use case resumes from step 4.
-
-* 3b. User expresses they do not want to delete the profile after all.
-    * 3b1. DorManagerPro acknowledges the rejection.
+* 2a. User expresses they do not want to delete the profile after all.
+    * 2a1. DorManagerPro acknowledges the rejection.
 
   Use case ends.
 
 * *a. At any time, User chooses to stop deleting a profile.
+
   Use case ends.
+
+
+**Use Case: UC06 - Undoing an action**
+
+**Precondition: There is at least one undoable action in the current session of DorManagerPro that has yet to be undone.**
+
+**MSS:**
+
+1. User requests to undo the latest undoable action.
+2. DorManagerPro restores the app to the state it was before the latest undoable action was carried out.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+  * 1a1. DorManagerPro requests for the correct command format.
+  * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 1b. DorManagerPro detects that there are no undoable actions in the current session of DorManagerPro that has yet to be undone.
+  * 1b1. DorManagerPro displays an error message informing the user that there are no undoable actions.
+
+  Use case ends.
+
+* *a. At any time, User chooses to stop undoing an action.
+
+  Use case ends.
+
+**Use Case: UC07 - Exporting the current data**
+
+**MSS:**
+
+1. User requests to export the current data.
+2. DorManagerPro exports the current data to a json file.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+  * 1a1. DorManagerPro requests for the correct command format.
+  * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop exporting the current data.
+
+  Use case ends.
+
+**Use Case: UC08 - Importing data from a json file**
+
+**Precondition: There is a json file in the valid format required to load to the address book.**
+
+**MSS:**
+
+1. User requests to import data from a json file, specifying a file path to the json file.
+2. DorManagerPro displays all profiles loaded from the imported json file.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 1b. DorManagerPro detects an invalid file path or file format specified by user.
+    * 1b1. DorManagerPro requests for valid file path.
+    * 1b2. User re-supplies file path.
+
+  Steps 1b1-1b2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop importing.
+
+  Use case ends.
+
+
 
 ### Non-Functional Requirements
 
@@ -644,10 +719,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Dorm**: A university or college hall of residence / hotel for students and teachers
 * **Dorm resident**: Student and / or teacher currently staying in a dorm
-* **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
-* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
+* **Dorm manager**: User of DorManagerPro that has to keep track of the residents in their dorm
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in DorManagerPro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
-* **Dorm room**: Rooms of the dorm where residents stay in. Has a room number and upper limit of
+* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
+* **Graduation Year**: The year during which the student will graduate.
+* **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
+* **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
+* **Parameter**: A value / characteristic used by a feature that is often defined by the feature, or otherwise by the real world.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -661,6 +740,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
 
 ### Launch and shutdown
 
@@ -703,3 +783,114 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Adding a person
+
+1. Adding a person with only compulsory parameters specified.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com` <br>
+      Expected: John Doe is added to the address book with a success message, as shown below.
+      ![add success](images/AddCommandTestSuccessMessage.png)
+
+2. Adding a person with all possible parameters specified.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 t/Floor10 t/Table Tennis t/Floor 5` <br>
+      Expected: John Doe is added to the address books with all the other details and a success message.
+
+3. Adding a person with some compulsory parameters missing.
+   1. Test case: `add n/John Doe` <br>
+      Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
+   2. Test case: `add n/John Doe e/johnd@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 t/Floor10 t/Table Tennis t/Floor 5` <br>
+      Expected: Similar to (i).
+
+4. Adding a person with data that does not conform to data validation.
+   1. Test case: `add n/John Doe p/abcd e/johnd@example.com` <br>
+      Expected: An error message is shown informing the user about the correct data format for PHONE.
+   2. Test case: `add n/John Doe p/1234567 e/HAI` <br>
+      Expected: An error message is shown informing the user about the correct data format for EMAIL.
+
+5. Adding a person with duplicate phone.
+   1. Prerequisites: There is at least one person in the address book.
+   2. Test case: 
+      1. Step 1: `add n/John Doe p/12345678 e/johnd@example.com` <br>
+      2. Step 2: `add n/Alex Yeoh p/12345678 e/heyhey@example.com` <br>
+         Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
+
+### Undo a command
+
+1. Undoing a `delete` command
+
+   1. Prerequisites: The previous successfully executed command is a `delete` command.
+   2. Test case: `undo`<br>
+      Expected: The previous deletion is reverted. Details of the restored contact shown in the status message.
+
+1. Undoing a `clear` command
+
+   1. Prerequisites: The previous successfully executed command is a `clear` command.
+   2. Test case: `undo`<br>
+      Expected: All contacts that were cleared are restored. Result "Address book has been restored" shown in the status message.
+
+1. No command to undo
+
+   1. Prerequisites: No undoable commands have been executed since the starting of the app.
+   2. Test case: `undo`<br>
+      Expected: No command is undone. Error message "No commands to undo" displayed in the status message.
+
+### Deleting all graduated students
+
+1. Deleting all graduated students when all persons are being shown.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+      Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted, and deleted persons visibly disappear from the list of all students.
+   3. Test case: `clean dasd`, executed in YEAR, where YEAR is the current year. <br>
+      Expected: Similar to (ii). All trailing characters in a valid command is ignored.
+2. Deleting all graduated students when only some persons are being shown, or when no people are shown.
+   1. Prerequisites: Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year. Find a specific student with the `find` command, typing `find n/NAME`, replacing NAME with the name of any person in the address book.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
+      Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted. However, if none of the graduated students have name NAME, the view does not change, as we continue to see the view of the address book after applying `find n\NAME`. Use `list` to see the effects of the deletion. An example is shown below with screenshots.
+      1. It is currently 2024. Alex is the only student with GRADUATION_YEAR 2023 or earlier. ![step 1](images/CleanManualTestingAfterFindStep1.png)
+      2. We execute `find n/Bernice`, such that only Bernice is in the view. ![step 2](images/CleanManualTestingAfterFindStep2.png)
+      3. We execute `clean`. The view remains the same. ![step 3](images/CleanManualTestingAfterFindStep2.png)
+      4. We execute `list` and see that Alex is deleted. ![step 4](images/CleanManualTestingAfterFindStep4.png)
+3. Attempting to delete all graduated students when there are none.
+   1. Prerequisites: No persons present in the address book with GRADUATION_YEAR field earlier than the current year.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+      Expected: An error message displayed informing the user that there are no graduated students to be deleted.
+
+
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
+students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
+add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
+
+1. **Add support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
+The `add` command currently does not allow setting emergency contact details and graduation year of students.
+The only way to set these fields is through the `edit` command, which can be inconvenient for users.
+We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
+
+## **Appendix: Effort**
+
+### Overview
+
+As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
+This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app. 
+
+Here are some of the achievements of DorManagerPro:
+* Fields
+  * Added fields for room number, emergency contacts, and graduation year.
+  * Implemented relevant duplicate handling and field constraints for room number, emergency contacts, and graduation years.
+  * More specific and relevant field constraints and duplication handling for name, phone number, email address and tags.
+* Features
+  * All commands that change the state of the address book are now undoable!
+  * It is now possible to export the state of the address book to a json file.
+  * It is now possible to import a json file into the address book.
+  * It is now possible to delete all students who have graduated at once in one command.
+
+Lines of Code: 24608
+
+[comment]: Should we also estimate difficulty level and effort required??
+
+### Challenges faced
+

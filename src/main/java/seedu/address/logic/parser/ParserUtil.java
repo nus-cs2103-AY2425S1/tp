@@ -176,6 +176,10 @@ public class ParserUtil {
         String trimmedFilePath = filePath.trim();
         Path filePathObject;
 
+        if (filePath.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
         // Get the Path object, if the input is invalid throw an exception
         try {
             filePathObject = Paths.get(trimmedFilePath);

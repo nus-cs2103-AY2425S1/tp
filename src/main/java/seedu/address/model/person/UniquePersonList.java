@@ -47,6 +47,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the same email as the one in the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
+    }
+
+    /**
      * Returns true if the list contains a person with GradYear earlier than {@code year}.
      */
     public boolean containsGraduatedBefore(String year) {

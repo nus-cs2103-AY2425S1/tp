@@ -10,8 +10,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.storage.Storage;
@@ -26,6 +29,7 @@ public class ExportCommand extends FileAccessCommand {
         + ": Exports the current contacts to a json file with its "
         + "name being the current time and date. ";
     private static final DateTimeFormatter EXPORT_FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy-hhmmssa");
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     @Override
     public CommandResult execute(Model model, Storage storage) throws CommandException {
@@ -44,6 +48,8 @@ public class ExportCommand extends FileAccessCommand {
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
+
+        logger.info("Successful export to ./data/" + now.format(EXPORT_FORMATTER) + ".json");
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
