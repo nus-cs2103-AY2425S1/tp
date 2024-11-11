@@ -239,22 +239,23 @@ Displays detailed information about a specified person.
 - **Formats**:
   - By Index: `view INDEX`
   - By Name: `view NAME`
+    - `NAME` will be divided into separate keywords, using spaces to distinguish each keyword
 - **Notes**:
     - Case-insensitive matching.
-    - Matches names containing the entire keyword.
-    - Wedding list is only updated when one unique person is found.
-    - When multiple matches are found, only the person list is updated
+    - Matches contacts containing ALL the keyword(s) (logical `AND` search).
+    - Wedding list is only updated when one unique person is found. 
+    - When multiple matches are found, only the person list is updated.
 - **Information Displayed**:
     - Personal details (name, phone, email, address).
     - Current role (if any).
     - Own wedding (if the person is a client).
     - Weddings where the person is assigned as a vendor (if any).
-    - Wedding person owns (if any) will have a ```Own Wedding``` label.
+    - Wedding person owns (if any) will have an ```Own Wedding``` label.
 - **Examples**:
     - `view Mike` displays details for `Mike`.
     - `view Alex Yeo` displays details for `Alex Yeo`.
 ![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)<br>
-*Viewing a contact with mulitple matches shows their details and weddings remain unfiltered*
+*Viewing a contact with multiple matches: contact details are shown and weddings remain unfiltered*
 
 ---
 
@@ -373,11 +374,13 @@ Adds a new wedding to the address book.
 Edits the details of an existing wedding.
 
 - **Format**: `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`
+  - At least one optional field (`NAME`, `DATE`, `VENUE`) must be provided.
+
 - **Notes**:
-    - At least one optional field must be provided.
     - Client cannot be changed after creation.
     - Existing values will be updated to the new values.
-    - Date and venue must adhere to validation rules.
+    - Date and venue must adhere to validation rules specified in the [Validation Rules for Wedding Fields](#wedding-fields).
+    - Make use of `list` command to refresh the list with the updated information.
 - **Examples**:
     - `editw w/1 n/Sunset Wedding`
         - Changes the name of the wedding at index 1 to "Sunset Wedding".
@@ -517,7 +520,7 @@ Advanced users can edit the data file directly to modify the address book data.
 ### General Command Format
 
 - **Command Structure**:
-    - Commands are case-insensitive.
+    - Commands are case-sensitive, i.e. must be in **lower-case only**. <br> e.g. `clear` will be accepted but `Clear` will not.
     - Parameters are case-insensitive unless specified.
 - **Parameters in `UPPER_CASE`** are to be supplied by the user.
     - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
