@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+## <a id="top"></a>
 
 **ConTActs** is a desktop application designed specifically for Teaching Assistants (TAs) to **manage student contact information efficiently**. 
 Optimised for TAs **comfortable with Command Line Interface** (CLI) commands, ConTActs exploits the speed of CLI commands while retaining the benefits of a Graphical User Interface (GUI).
@@ -274,6 +275,11 @@ Clears all entries from the contact list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command will delete **ALL student contact data** in the contact list, and it **cannot be undone**. 
+Please ensure that you really want to remove all contact records before proceeding.
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -342,4 +348,4 @@ Click on each command to jump to their subsection.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
-[Back to Top](#installation-guide)
+[Back to Top](#top)
