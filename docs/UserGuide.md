@@ -80,7 +80,7 @@ Example:
   * This is useful when a client's name is a prefix of another client's name.
   * Order of name inputs matter when using `$`
   * Name written before `$` must be **EXACT** name of the contact to be deleted.
-  * 
+  
 
   e.g. `delete John Doe$` will delete the contact with the name `John Doe`.<br>
   e.g. If there are two client named `David Li` and `David Lim`, typing `delete David Li$` will delete the client with the name `David Li`.
@@ -177,10 +177,11 @@ result for `edit 1 p/91234567`:
 
 Deletes the specified person from ClientHub.
 
-Format: `delete NAME$` or `d NAME$`
+Format: `delete NAME` or `d NAME` or `delete NAME$`
 
-* `$` is used to indicate specific name to delete
 * Deletes the client with specified `NAME`
+* `$` is used to indicate specific name to delete
+
 
 Examples:
 * `delete John Doe` deletes the person named `John Doe`
@@ -196,7 +197,7 @@ Result for `delete John Doe`:
 Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`.
 
 #### Locating by `NAME`
-Format: `find n/NAME$` or `fn NAME$`
+Format: `find n/NAME` or `fn NAME` or `find NAME$`
 
 * `$` is used to indicate exact name to find
 * Only the name is searched.
@@ -275,8 +276,9 @@ deleted, and edited.
 Adds a reminder to the reminder list.
 
 Format:
-`radd n/NAME$ dt/DATETIME r/REMINDER_DESCRIPTION` or
-`ra n/NAME$ dt/DATETIME r/REMINDER_DESCRIPTION`
+`radd n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
+`ra n/NAME dt/DATETIME r/REMINDER_DESCRIPTION` or
+`radd n/NAME$ dt/DATETIME r/REMINDER_DESCRIPTION`
 
 * `$` is used to indicate exact name to add a reminder for
 * If specified datetime is invalid, the reminder will be update to the **NEAREST VALID** datetime
@@ -329,20 +331,26 @@ Result for `rdelete 1`:
 
 ### Viewing a client: `view`
 
-Creates a single popup view of the specified client from ClientHub.
+Creates a popup view of the specified client from ClientHub containing all the information about the specified client.
+* The `NAME`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `DESCRIPTION`, and `CLIENT_TYPE`s of the client will be displayed.
+* The `REMINDER` tagged to the client will **not** be displayed in the popup view
 
-Format: `view NAME$` or `v NAME$`
+Format: `view NAME` or `v NAME` or `view NAME$`
 
-* `$` is used to indicate exact name to view
-* The command is case-insensitive. eg. `alice` will match `Alice`
 * The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
-* If duplicates are found, `view` will throw an error telling user to specify the name further.
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
-* Executing another `view` command will change the contents of the popup view to the new specified client.
+    * If more than 1 name is found, `view` will throw an error telling user to specify the name further.
+    * For eg. if 2 contacts have names such as "David" and "David Lim", typing `view David` will throw an error.
+* The command is case-insensitive. eg. `alice` will match `Alice`
+* Any characters after the `view` keyword (and a whitespace) will be considered as the `NAME` of the client to be viewed.
+* Executing another `view` command will create a new popup view of the specified client.
+* Duplicate view pops are **allowed**.
+* `$` is used to indicate specific name to `view`
+
 
 Examples:
 * `view John Doe` shows the contact named `John Doe`
-* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts.
+* `view John` will throw an error if there is `John Doe` and `John Doey` in the list of contacts
+* `view n/John` will throw an error if there is no one named `n/John` in the list of contacts
 
 Result for `view jeremy`:
 ![result for 'view jeremy`](images/result_for_view.png)
@@ -422,21 +430,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                | Format, Examples                                                                                                                                                                                        |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                  | `help`                                                                                                                                                                                                  |
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` |   
-| **Delete**            | `delete NAME$` or `d NAME$` <br> e.g `delete James` or `d James`                                                                                                                                        |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE] [d/DESCRIPTION]`<br> e.g `edit 2 n/James Lee e/jameslee@example.com`                                                        |
-| **Find Name**         | `find n/NAME$` or `fn NAME$` <br> e.g `find n/John` or `fn John`                                                                                                                                        |
-| **Find Phone Number** | `find p/PHONE_NUMBER` or `fp PHONE_NUMBER` <br> e.g `find p/98765432` or `fp 987654432`                                                                                                                 |
-| **Find Address**      | `find a/ADDRESS` or `fa ADDRESS` <br> e.g `find a/Blk 30` or `fa Blk 30`                                                                                                                                |
-| **Find Client Type**  | `find c/CLIENT_TYPE` or `fc CLIENT_TYPE`<br/> e.g `find c/Investment` or `fc Investment`                                                                                                                |
-| **Add Reminder**      | `radd n/NAME$ dt/DATETIME d/DESCRIPTION` or `ra /NAME$ dt/DATETIME d/DESCRIPTION` <br> e.g `radd n/John dt/2024-01-01 12:00 d/Appointment` or `ra n/John dt/2024-01-01 12:00 d/Appointment`             |
-| **Delete Reminder**   | `rdelete INDEX` or `rd INDEX` <br> e.g `rdelete 1` or `rd 2`                                                                                                                                            |
-| **Edit Reminder**     | `redit INDEX [dt/DATETIME] [d/DESCRIPTION]` or `re INDEX [dt/DATETIME] [d/DESCRIPTION]` <br> e.g `redit 1 [dt/2024-02-02 13:00] [d/Review]` or `re 1 [dt/2024-02-02 13:00] [d/Review]`                  |
-| **View**              | `view NAME$` or `v NAME$` <br> e.g., `view James` or `v James`                                                                                                                                          |
-| **Sort**              | `sort` or `s`                                                                                                                                                                                           |
-| **List**              | `list` or `li`                                                                                                                                                                                          |
-| **CLear**             | `clear`                                                                                                                                                                                                 |
-| **Exit**              | `exit`                                                                                                                                                                                                  |
+| Action                | Format, Examples                                                                                                                                                                                     |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                  | `help`                                                                                                                                                                                               |
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` |
+| **Delete**            | `delete NAME`<br> e.g `delete JAMES`                                                                                                                                                                 |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE] [d/DESCRIPTION]`<br> e.g `edit 2 n/James Lee e/jameslee@example.com`                                                     |
+| **Find Name**         | `find n/NAME` or `fn NAME` <br> e.g `find n/John` or `fn John`                                                                                                                                       |
+| **Find Phone Number** | `find p/PHONE_NUMBER` or `fp PHONE_NUMBER` <br> e.g `find p/98765432` or `fp 987654432`                                                                                                              |
+| **Find Address**      | `find a/ADDRESS` or `fa ADDRESS` <br> e.g `find a/Blk 30` or `fa Blk 30`                                                                                                                             |
+| **Find Client Type**  | `find c/CLIENT_TYPE` or `fc CLIENT_TYPE`<br/> e.g `find c/Investment` or `fc Investment`                                                                                                             |
+| **Add Reminder**      | `radd n/NAME dt/DATETIME d/DESCRIPTION` or `ra /NAME dt/DATETIME d/DESCRIPTION` <br> e.g `radd n/John dt/2024-01-01 12:00 d/Appointment` or `ra n/John dt/2024-01-01 12:00 d/Appointment`            |
+| **Delete Reminder**   | `rdelete INDEX` or `rd INDEX` <br> e.g `rdelete 1` or `rd 2`                                                                                                                                         |
+| **Edit Reminder**     | `redit INDEX [dt/DATETIME] [d/DESCRIPTION]` or `re INDEX [dt/DATETIME] [d/DESCRIPTION]` <br> e.g `redit 1 [dt/2024-02-02 13:00] [d/Review]` or `re 1 [dt/2024-02-02 13:00] [d/Review]`               |
+| **View**              | `view NAME`<br> e.g., `view James`                                                                                                                                                                   |
+| **Sort**              | `sort`                                                                                                                                                                                               |
+| **List**              | `list`                                                                                                                                                                                               |
+| **CLear**             | `clear`                                                                                                                                                                                              |
+| **Exit**              | `exit`                                                                                                                                                                                               |
