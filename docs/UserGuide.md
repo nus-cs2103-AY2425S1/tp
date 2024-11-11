@@ -151,6 +151,8 @@ Examples:
 *  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person in the displayed list to be `91234567` and `Z19` respectively.
 *  `edits 2 n/Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
 
+<div style="page-break-after: always;"></div>
+
 ### Locating student by name: `view`
 
 View student(s) whose name matches the specified name exactly.
