@@ -25,17 +25,28 @@ public class PointTest {
 
         // invalid points
         assertFalse(Point.isValidPoints("-1")); // Negative value
+        assertFalse(Point.isValidPoints("+1")); // A weird int parsing artifact
         assertFalse(Point.isValidPoints("1.0")); // Decimal value
+        assertFalse(Point.isValidPoints("1.")); // Decimal point
         assertFalse(Point.isValidPoints("1 1")); // Not one integer
+        assertFalse(Point.isValidPoints("1 #")); // Symbols
+        assertFalse(Point.isValidPoints("1 e")); // Letters
+        assertFalse(Point.isValidPoints("F1")); // Letters and numbers
         assertFalse(Point.isValidPoints("" + Integer.MAX_VALUE + 1)); // Overflow
     }
 
     @Test
     public void equals() {
-        Point point = new Point("10");
+        Point point = new Point("3");
 
         // same values -> returns true
-        assertTrue(point.equals(new Point("10")));
+        assertTrue(point.equals(new Point("3")));
+
+        // same values after parsing -> returns true
+        // not currently implemented, as it fails and might be an enhancement
+        // assertTrue(point.equals(new Point("03")));
+        // assertTrue(point.equals(new Point("0000000000000000003")));
+        // assertTrue(point.equals(new Point("    3    ")));
 
         // same object -> returns true
         assertTrue(point.equals(point));
@@ -48,6 +59,7 @@ public class PointTest {
 
         // different points -> returns false
         assertFalse(point.equals(new Point("5")));
+        assertFalse(point.equals(new Point("30")));
     }
 
     @Test
@@ -59,12 +71,17 @@ public class PointTest {
         assertTrue(initialHashCode == point.hashCode());
     }
 
+    //@@author {keithxun}
     @Test
     public void toStringTest() {
         Point point = new Point("10");
+        // Point point2 = new Point("003"); // zero-padding
+        // Point point3 = new Point("       99      "); // extra spaces
 
-        // Check if the toString returns the expected value
-        assertTrue(point.toString().equals("10 points")); // Ensure toString returns correct value
+        // Check if toString returns the expected value
+        assertTrue(point.toString().equals("10 points"));
+        // assertTrue(point2.toString().equals("3 points"));
+        // assertTrue(point3.toString().equals("99 points"));
     }
 
     @Test
