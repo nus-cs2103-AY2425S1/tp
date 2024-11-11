@@ -1,16 +1,11 @@
 package seedu.address.logic.parser.editcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
-import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -37,15 +32,10 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
      */
     public EditGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_INDEX, PREFIX_GROUP_NAME));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditGroupCommand.MESSAGE_USAGE);
-        }
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_GROUP_NAME);
+
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupCommand.MESSAGE_USAGE));
@@ -75,8 +65,5 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
-        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
-    }
 }
 
