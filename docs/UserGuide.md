@@ -186,7 +186,7 @@ You can multiple people to share the same email address, making it easier for ca
 A person can have any number of tags (including 0)
 </div>
 
-<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors. </div>
+<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors or replacing them with an acceptable alternative such as a space should you wish to do so</div>
 
 Examples:
 
