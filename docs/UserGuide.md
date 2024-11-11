@@ -268,9 +268,7 @@ at the specified `JOB_INDEX` together.
 * Both indices **must be positive integers** 1, 2, 3, …​
 * The contact **must not already be matched**.
 * Each contact is only allowed to match with one job.
-* Each job is allowed to be matched by multiple contacts, as some jobs has multiple openings.
-
-**Future Enhancement:** Planned update will allow job quota attributes to track if a job is still open for hiring. 
+* A job is allowed to be matched by multiple contacts, as some jobs have multiple openings.
 
 Examples:
 * `match 1 2` will match the contact at index 1 and job at index 2 together.
