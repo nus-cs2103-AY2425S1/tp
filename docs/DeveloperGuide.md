@@ -193,12 +193,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
-|----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| Priority             | As a …​     | I want to …​                                                       | So that I can…​                                               |
+|----------------------|------------|-------------------------------------------------------------------|--------------------------------------------------------------|
 | `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
 | `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
 | `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
-| `* * *`              | HR Manager | insert email address of my employees/potential hire.               | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | insert email address of my employees/potential hire.              | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | delete data through the CLI.                                      | delete users who are incorrectly added.                      |
 | `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
 | `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
 | `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
@@ -240,7 +241,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use Case: Add an employee**
+**Use Case: Add an contact**
 
 **MSS**
 
@@ -267,8 +268,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a person using the keywords.
-2. System displays a list of persons whose fields matches the keywords.
+1. User requests to find a person.
+2. System requests for the parameters to find by.
+3. User gives the paramters to find by.
+4. System displays a list of persons whose fields matches the keywords.
 
    Use case ends.
 
@@ -280,45 +283,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. At least one field does not match any keywords.
+* 1b. User request the find to be of an employee.
 
-    * 1b1. System shows an empty list.
-
-      Use case ends.
-
-* 1c. User request the find to be of an employee.
-
-    * 1c1. System displays a list of employees whose fields matches the keywords.
+    * 1b1. System displays a list of employees whose fields matches the keywords.
 
       Use case ends.
 
 * 1d. User request the find to be of a potential hire.
 
-    * 1d1. System displays a list of potential hires whose fields matches the keywords.
+    * 1c1. System displays a list of potential hires whose fields matches the keywords.
 
       Use case ends.
 
-* 1e. User requests to find based on phone number.
+* 3a. User gives an empty paramter.
 
-   * 1e1. System displays a list of person who have the phone number.
+   * 3a1. System shows an error message.
 
-      Use case ends.
+      Use case resumes at step 3.
 
-* 1f. User requests to find based on email.
+* 4a. No contacts match any keywords.
 
-   * 1f1. System displays a list of person who have the email.
-
-      Use case ends.
-
-* 1g. User requests to find based on department.
-
-   * 1g1. System displays a list of person who have the department.
-
-      Use case ends.
-
-* 1h. User requests to find based on role.
-
-   * 1h1. System displays a list of person who have the role.
+    * 4a1. System shows an empty list.
 
       Use case ends.
 
@@ -401,8 +386,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list person.
 2. System shows a list of person.
-3. User requests to sort the list of persons by name.
-4. System shows the list of person sorted by name in ascending order.
+3. User requests to sort the list.
+4. System asks for the field to sort by as well as the order to sort by.
+5. User gives the field and order to sort the list by.
+6. System shows the sorted list.
 
    Use case ends.
 
@@ -412,37 +399,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    * 1a1. System shows a filtered list.
 
-      use case resumes at step 3, but only the shown person are sorted.
+      Use case resumes at step 3, but only the shown person are sorted.
 
-* 3a. User requests to sort the list of person by name in ascending order.
+* 2a. The list is empty.
 
-   * 3a1. System shows the list of person sorted by name in ascending order.
-
-      Use case ends.
-
-* 3b. User requests to sort the list of person by name in descending order.
-
-   * 3b1. System shows the list of person sorted by name in descending order.
-
-      Use case ends.
-   
-* 3c. User requests to sort the list of person by date.
-
-   * 3c1. System shows the list of person sorted by date in ascending order.
-
-      Use case ends.
-
-* 3d. User requests to sort the list of person by role.
-
-   * 3d1. System shows the list of person sorted by role in ascending order.
-
-      Use case ends.
-
-* 3e. User requests to sort the list of person by department.
-
-   * 3e1. System shows the list of person sorted by department in ascending order.
-
-      Use case ends.
+   Use case ends.
 
 **Use case: Clear the addressbook**
 
