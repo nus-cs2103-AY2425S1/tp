@@ -81,6 +81,9 @@ E.g. `help`: `<Command>`
 
 ![Command Format](images/CommandFormat.png)
 
+> ###### 💡 **Tip**
+> Note that for some commands, although multiple of the same field may be entered,
+only the last (most up to date one) will be recorded.
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
@@ -122,7 +125,8 @@ E.g. `help`: `<Command>`
 
 ### Adding a person : `add`
 
-Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
+Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks. Note that
+although multiple birthdays and remarks may be entered, only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
@@ -177,7 +181,8 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. Note that although multiple birthdays and remarks may be entered,
+only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
@@ -263,7 +268,8 @@ Examples:
 
 ### Adding a Property : `addProperty`
 
-Add a property listing to an existing person in the address book.
+Add a property listing to an existing person in the address book.  Note that
+although multiple of the same field may be entered, only the last (most up to date one) will be recorded.
 
 Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`
 
@@ -391,7 +397,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Store Birthday of a Contact: `birthday`
 
-Stores a contact’s birthday
+Stores a contact’s birthday. Note that although multiple birthdays may be entered,
+only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `birthday INDEX b/<Birthday Date>`
@@ -406,8 +413,6 @@ Stores a contact’s birthday
 ### Birthday Reminder
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
-Note that the reminder is only shown when the application is launched,
-any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 > ###### 💡 **Tip**
 > Note that the reminder is only shown when the application is launched,
