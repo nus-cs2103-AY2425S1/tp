@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -56,10 +55,12 @@ public class MassDeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         List<Person> personsToDelete = new ArrayList<>();
+        List<Integer> validDeletedIndices = new ArrayList<>();
 
         for (Index index : targetIndices) {
             if (index.getZeroBased() < lastShownList.size()) {
                 personsToDelete.add(lastShownList.get(index.getZeroBased()));
+                validDeletedIndices.add(index.getOneBased());
             }
         }
 
@@ -71,12 +72,8 @@ public class MassDeleteCommand extends Command {
             model.deletePerson(person);
         }
 
-        List<Integer> deletedIndices = targetIndices.stream()
-                .map(Index::getOneBased)
-                .collect(Collectors.toList());
-
         StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append(String.format(MESSAGE_DELETE_PERSONS_SUCCESS, deletedIndices));
+        resultMessage.append(String.format(MESSAGE_DELETE_PERSONS_SUCCESS, validDeletedIndices));
 
         if (!invalidInputs.isEmpty()) {
             resultMessage.append("\nInvalid inputs: ").append(invalidInputs);
