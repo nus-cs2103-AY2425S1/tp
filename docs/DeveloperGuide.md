@@ -355,7 +355,7 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
 
-### **Add Student and Create Tutorial feature**
+### Add Student and Create Tutorial feature
 
 The implementation of the Add Student and Create Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for **Add Student** feature when the user inputs `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  will be shown below.   
 
@@ -373,7 +373,7 @@ The main steps for execution are similar to the Enroll and Unenroll feature docu
 Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
 </div>
 
-### **Delete Student and Close Tutorial feature**
+### Delete Student and Close Tutorial feature
 
 The implementation of the Delete Student and Close Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Delete Student feature when the user inputs `delete 1` will be shown below. 
 

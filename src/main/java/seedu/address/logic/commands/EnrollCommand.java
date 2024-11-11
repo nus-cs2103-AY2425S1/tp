@@ -31,7 +31,7 @@ public class EnrollCommand extends Command {
             + "2 "
             + PREFIX_TUTORIAL + "physics";
     public static final String MESSAGE_SUCCESS = "%1$s(student) enrolled in %2$s(tutorial)";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already in the tutorial";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student is already in the tutorial.";
 
     private static final Logger logger = LogsCenter.getLogger(EnrollCommand.class);
     private final Index index;

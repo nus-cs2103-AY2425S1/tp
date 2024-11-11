@@ -95,7 +95,7 @@ public class FindCommand extends Command {
         Predicate<Person> combinedPredicate = this.personPredicates.stream().reduce(x -> true, Predicate::and);
 
         model.updateFilteredPersonList(combinedPredicate);
-        logger.info(" - Successfully updated filtered person list");
+        logger.info(" - Successfully updated filtered student list");
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -119,7 +119,7 @@ public class FindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("person predicates", personPredicates)
+                .add("student predicates", personPredicates)
                 .add("participation predicates", participationPredicates)
                 .toString();
     }

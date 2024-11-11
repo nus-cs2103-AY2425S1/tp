@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a person identified using it's displayed index from the address book.
+ * Marks the attendance of a student identified using it's displayed index from the address book.
  */
 public class MarkAttendanceByStudentCommand extends Command {
 
@@ -30,7 +30,7 @@ public class MarkAttendanceByStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the student identified "
-            + "by the index number used in the displayed person list.\n"
+            + "by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
@@ -52,8 +52,8 @@ public class MarkAttendanceByStudentCommand extends Command {
     private final Tutorial tutorial;
 
     /**
-     * @param targetIndex Index of the person in the filtered person list to mark.
-     * @param attendance Attendance of the person specified by index.
+     * @param targetIndex Index of the student in the filtered student list to mark.
+     * @param attendance Attendance of the student specified by index.
      * @param tutorial Tutorial the student attended.
      */
     public MarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, Tutorial tutorial) {
