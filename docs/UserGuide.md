@@ -51,6 +51,8 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -187,7 +189,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-If a client's project deadline has passed and the client status is still `active` the GUI labels the client card as `OVERDUE`. So if the client has paid, and your business with them is finished, you can set their client status to `old` so the deadline field doesn't show `OVERDUE`.
+If a client's project deadline has passed, the client status is still `active` and the client's project status is `in progress`, the GUI labels the client card as `OVERDUE`. So if the client has paid, and your business with them is finished, you can set their client status to `old` (or set their project status to `completed`) so the deadline field doesn't show `OVERDUE`.
 
 </div>
 
@@ -360,8 +362,8 @@ The Deadline Reminder feature automatically tracks the latest upcoming and overd
 
 ![reminder](images/reminder.png)
 
-* Reminders are only shown for clients with an `active` status.
-* The feature does not track `completed` projects.
+* Reminders are only shown for clients with an `active` client status and `in progress` project status.
+* The feature does not track `completed` projects or `old`/`unresponsive`/`blacklisted`/`potential` clients.
 * If there are `overdue` deadlines, only overdue projects are shown; upcoming deadlines will not be displayed
 
 Examples:
@@ -374,6 +376,7 @@ More Than Three Clients Due Today:
 
 No Active Clients With Upcoming Or Overdue Deadlines:
 * `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
+
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 
 <br>
@@ -424,6 +427,8 @@ _Details coming soon ..._
 3. **Sorting for clients with same Name/Deadline:** When a sort is applied, if multiple people share the same name or deadline, modifying other fields (e.g. project status) may shuffle their order, though sorting among different names or deadlines remains correct. This bug is due to a JavaFX SortedList issue and will be fixed in an upcoming update. More details in the [Developer's Guide](DeveloperGuide.md#appendix-planned-enhancements).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
