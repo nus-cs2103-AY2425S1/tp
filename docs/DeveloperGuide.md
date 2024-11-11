@@ -261,7 +261,7 @@ Extensions:
 
       Use case ends.
 
-* 2a. ClientGrid detects that the buyer/seller already exists in the client book
+* 2a. ClientGrid detects that the buyer/seller already exists in the client book.
 
     * 2a1. ClientGrid informs the real estate agent that the buyer/seller already exists in the client book and does not add the duplicate buyer/seller.
 
@@ -319,7 +319,7 @@ Use case ends.
 
       Use case ends.
 
-* 2a. ClientGrid detects that the property already exists in the property book
+* 2a. ClientGrid detects that the property already exists in the property book.
 
     * 2a1. ClientGrid informs the real estate agent that the property already exists in the property book and does not add the duplicate property.
 
