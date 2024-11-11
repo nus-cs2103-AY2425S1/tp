@@ -793,6 +793,52 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
+### Use Case 13: Update Appointment Status
+
+- System: CareLink
+- Use Case: UC13 - Update Appointment Status
+- Actor: Geriatrician (Fred)
+
+#### Preconditions
+
+- The patient exists in the system.
+- An appointment with the specified start date and time exists for the patient.
+
+#### Guarantees
+
+- The status of the specified appointment is successfully updated.
+- Only valid statuses (e.g., "COMPLETED", "CANCELLED") are accepted.
+- The status update is confirmed and saved in the system.
+
+#### Main Success Scenario (MSS)
+
+1. Fred enters the updatestatus command to modify the status of a specific appointment using the patient’s NRIC, appointment date, start time, and new status.
+2. CareLink validates that:
+   - The patient exists in the system.
+   - An appointment matching the specified date and start time exists for this patient.
+   - The provided status is valid.
+3. CareLink updates the appointment status in the system.
+4. CareLink displays a confirmation message showing the updated appointment status.
+5. Use case ends.
+
+#### Extensions
+
+- 2a. Patient Does Not Exist:
+
+  - CareLink displays an error message that the patient cannot be found.
+  - Use case ends.
+
+- 2b. Appointment Not Found:
+
+  - CareLink displays an error message indicating that no appointment matches the specified details.
+  - Use case ends.
+
+- 2c. Invalid Status:
+  - CareLink displays an error message about the invalid status value.
+  - Use case ends.
+
+---
+
 ### Non-Functional Requirements
 
 1. **Typing-Preferred**
