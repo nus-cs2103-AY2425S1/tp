@@ -6,16 +6,16 @@ pageNav: 3
 
 # KnottyPlanners 💍🎀
 
-KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, KnottyPlanners can make organising multiple weddings at once a walk in the park! 🌳 
+KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Especially if you are a wedding planner who can type fast, KnottyPlanners can make organising multiple weddings at once a walk in the park! 🌳 
 
-If you are a technical user experienced with CLI feel free to jump right into [quick start for technical users!](#quick-start-technical-users). If it's your first time, don't panic we will walk you through in this User Guide! 😊
+If you are a technical user experienced with CLI feel free to jump right into [quick start for technical users!](#quick-start-technical-users). If it's your first time, don't panic; we will walk you through it in this User Guide! 😊
 
 ### What is Command Line Interface? 🤔
-Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. For example, type `list` in the interface and press enter, the user interface will show you all the contacts you have, simple right! Don't worry if you are still unsure about CLI, it's very easy to pick it up! 😁
+Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. For example, type `list` in the interface and press enter; the user interface will show you all the contacts you have! Simple, right? Don't worry if you are still unsure about CLI, it's very easy to pick it up! 😁
 
 ### Why use Command Line Interface? 
 * **Efficiency:** Perform tasks faster by replacing multiple mouse clicks into a single line of text ✅
-* **Precision:** Avoid mis-clicking and mistakes as CLI will execute the exact command you type 💯
+* **Precision:** Avoid mis-clicking and mistakes as the CLI will execute the exact command you type 💯
 * **Offline:** CLI does not require internet and allows you to use it anywhere 👩‍💻
 
 <!-- * Table of Contents -->
@@ -84,7 +84,7 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 
 ## Command Summary
-Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words. 😁
+Feel free to use this command summary table and navigate to the features that interest you by clicking on the action words. 😁
 
 | Action                                                                       | Format, Examples                                                                                                                                                                                     |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -110,9 +110,9 @@ Feel free to use this command summary table and navigate to the features that in
 
 **Delete and clear operations in KnottyPlanners:**
 
-All delete and clear operations (except `tag-del`) in KnottyPlanners will be followed by a confirmation prompt to avoid accidental deletion. Therefore, delete and clear operations must be followed by either `y` command (confirm delete operation) or `n` command (remove pending operation). Otherwise, the previous operation will remain pending and following delete and clear commands may be affected. Hence, if you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊.
+All delete and clear operations (except `tag-del`) in KnottyPlanners will be followed by a confirmation prompt to avoid accidental deletion. Therefore, delete and clear operations must be followed by either the `y` command (confirm delete operation) or the `n` command (remove pending operation). Otherwise, the previous operation will remain pending and following delete and clear commands may be affected. Hence, if you accidentally mistype or enter an unintended command before confirming, we suggest that you use `n` to cancel any pending delete operations to ensure everything runs smoothly. 😊
 
-**TAKE NOTE:** `Y` and `N` will be considered as invalid commands as they are NOT same as `y` and `n` respectively.
+**TAKE NOTE:** `Y` and `N` will be considered as invalid commands as they are NOT the same as `y` and `n` respectively.
 
 
 </box>
@@ -124,7 +124,7 @@ The table below provides a brief explanation of each parameter encountered in th
 
 **IMPORTANT:** 
 * Please ensure that all parameters adhere to the constraints mentioned below. If you choose not to do so, the command will not be executed and error messages will be shown.
-* KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
+* KnottyPlanners does not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input with (e.g. `p/000` or `a/nil`).
 
 </box>
 
@@ -142,8 +142,8 @@ The table below provides a brief explanation of each parameter encountered in th
 
 * Examples:
     - `li sirui` is formatted to `Li Sirui` to ensure consistency in the name format.
-    - `  Wedding Photographer ` is formatted to `Wedding Photographer` to ensure consistency in the job names.
-    - `Adam &    Harry` is formatted to `Adam & Harry` to ensure consistency in the wedding names.
+    - `Wedding   Photographer  ` is formatted to `Wedding Photographer` to ensure consistency in the job names.
+    - `Adam   & Harry ` is formatted to `Adam & Harry` to ensure consistency in the wedding names.
 
 
 **Duplication Detection in KnottyPlanners:**
@@ -153,15 +153,15 @@ KnottyPlanners uses names to distinguish contacts from one another. However, due
 Each parameter is followed by examples that explains if the input is considered a duplicate in KnottyPlanners.
 
 `NAME`
-* `Jeremy Ng` is equivalent to `JEREMY NG`, `Jeremy    Ng`, `jeremy ng` and `    jeremy ng    `.
+* `Jeremy Ng` is equivalent to `JEREMY NG`, `Jeremy    Ng` and `jeremy ng`.
 * `Jeremy Ng` is NOT the same as `Jeremy Lin`.
 
 `JOB`
-* `Head Chef` is equivalent to `HEAD CHEF`, `Head   Chef`, `head chef` and `    head chef    `.
+* `Head Chef` is equivalent to `HEAD CHEF`, `Head    Chef`</pre> and `head chef`.
 * `Head Chef` is NOT the same as `Head Waiter`.
 
 `TAG` and `WEDDING NAME`
-* `John Stones & Mary Jane` is equivalent to `JOHN STONES & MARY JANE`, `John   Stones &   Mary Jane`, `john stones & mary jane` and `     John Stones & Mary Jane      `.
+* `John Stones & Mary Jane` is equivalent to `JOHN STONES & MARY JANE`, `John    Stones &    Mary Jane`</pre> and `john stones & mary jane`.
 * `John Stones & Mary Jane` is NOT the same as `Mary Jane & John Stones`.
 </box>
 
@@ -192,13 +192,13 @@ Each parameter is followed by examples that explains if the input is considered 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Ensure that an empty space ` ` comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
+* Ensure that an empty space ` `&nbsp;comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
   e.g. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
+  e.g. `[t/TAG]…​` can be used as ` `&nbsp;(i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `list-wed`, `exit`, `clear-ab` and `clear-wb`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -206,12 +206,12 @@ Each parameter is followed by examples that explains if the input is considered 
 * Prefixes refer to the identifier before the parameter e.g. `n/` before `NAME`. Invalid prefixes (i.e. prefixes that do not exist) will be ignored.<br>
 e.g. if the command specifies `tag-add n/John Doe b/juice t/John Loh & Jean Tan`, it will be interpreted as `tag-add n/John Doe t/John Loh & Jean Tan`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as whitespace characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
 ### Viewing Help: `help`
 
-You can view a popup with an overview of all commands, and also a link to this user guide if you need more details.
+You can view a popup with an overview of all the commands, and a link to this user guide if you need more details.
 
 Format: `help`
 
@@ -224,15 +224,15 @@ You can add a person to the list of contacts.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 * A person can have any number of tags (including 0). Tags are associated to the weddings this person is
-  involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
+  involved in. The wedding must already exist in the wedding book to successfully tag a person to it.
 
 <box type="important" seamless>
 
 **IMPORTANT:**
 
-* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* If you add tags of a weddings that does not exist, KnottyPlanners will still add the person and ignore invalid tags
-* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
+* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added.
+* If you add tags of a weddings that does not exist, KnottyPlanners will still add the person and ignore invalid tags.
+* We will also alert you when you add a different person with the same name and you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`).    
 
 </box>
 
@@ -258,7 +258,7 @@ Format: `del n/NAME` followed by `y` or `n`
 <box type="important" seamless>
 
 **IMPORTANT:** 
-* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to the [Command Summary](#command-summary) for more information. 😊
 
 </box>
 
@@ -306,12 +306,12 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 * Multiple inputs of the same parameter can be added but only the last one will be accepted.
 * Examples:
   - `edit n/John p/111 p/222` will edit John's phone number to `222` (the first phone number will be ignored).
-  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited)
+  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited).
 * Order of parameters does not matter and the person to edit will depend on the `n/NAME`.
 * Examples:
   - `edit p/222 n/John` will edit John's phone number to `222`.
   - `edit a/Tampines Heights p/123 n/John` will edit John's address to `Tampines Heights` and John's phone number to `123` respectively.
-* Editing a field with the original value will be considered as a valid command
+* Editing a field with the original value will be considered a valid command.
   - `edit n/John new/John` is a valid command and no changes will be made, same applies to other fields.
   - `edit n/John new/john` or `edit n/John new/   john` is a valid command and no changes will be made as names are auto-formatted to 'John' in KnottyPlanners.
 
@@ -338,7 +338,7 @@ Examples:
 
 ### Listing All Contacts: `list`
 
-You can now view all contacts in the order they were added in!
+You can now view all contacts in the order they were added.
 
 Format: `list`
 
@@ -353,13 +353,13 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them. 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
 
 <box type="important" seamless>
 
 **IMPORTANT:**
 
-* Please take note that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
+* Please take note that the order of the names matters. `John & Jane` is NOT the same as `Jane & John` and will not be treated as a duplicate.
 
 </box>
 
@@ -386,9 +386,9 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 **IMPORTANT:** 
 
-* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information. ☺️
+* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to the [Command Summary](#command-summary) for more information. 😊
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
-* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed-dw) and ['add-wed'](#adding-a-wedding-add-wed-aw) to change details of a wedding.
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed-dw) and ['add-wed'](#adding-a-wedding-add-wed-aw) to change the details of a wedding.
 
 </box>
 
@@ -422,7 +422,7 @@ Examples:
 
 ### Listing All Weddings: `list-wed` / `lw`
 
-You can now view all weddings in the order they were added in!
+You can now view all weddings in the order they were added.
 
 Format: `list-wed` / `lw`
 
@@ -433,7 +433,7 @@ Format: `list-wed` / `lw`
 ### Tagging a Contact
 
 ### Adding Tag(s) to a Contact: `tag-add` / `ta`
-Add your contacts to a particular wedding!
+You can add your contacts to a particular wedding.
 
 Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 
@@ -462,13 +462,13 @@ Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 </div>
 
 Examples:
-*  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
-*  `ta n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
+*  `tag-add n/John Doe t/Adam and Steve` adds the tag `Adam and Steve` to John Doe.
+*  `ta n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
 <div style="page-break-after: always;"></div>
 
 ### Deleting Tag(s) from a Contact: `tag-del` / `td`
-Remove your contacts from a particular wedding!
+You can remove your contacts from a particular wedding.
 
 Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 
@@ -497,14 +497,14 @@ Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 </div>
 
 Examples:
-*  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
-*  `td n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
+*  `tag-del n/John Doe t/Adam and Steve` removes the tag `Adam and Steve` from John Doe.
+*  `td n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
 
 <div style="page-break-after: always;"></div>
 
 ### Filtering Contacts by Name and Job: `filter` / `fil`
 
-Conveniently search for contacts in your address book by name and/or job.
+You can conveniently search for contacts in your address book by name and/or job.
 
 Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]...`
 
@@ -578,7 +578,7 @@ Format:
 * `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
 * `clear-ab` / `cab` followed by `n` will not clear all contacts in the address book.
 
-1. `clear-ab` / `cab` clears all contacts in address book.
+1. `clear-ab` / `cab` clears all contacts in the address book.
 2. The command will prompt for confirmation before deleting all entries.
 3. If you confirm with `y`, all entries will be deleted.
 4. If you cancel with `n`, no entries will be deleted.
@@ -587,7 +587,7 @@ Format:
 
 **IMPORTANT:** 
 
-* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information ☺️.
+* The clear command must be followed by either `y` or `n` command. Refer to the [Command Summary](#command-summary) for more information️. 😊
 
 </box>
 
@@ -601,7 +601,7 @@ Format:
 * `clear-wb` / `cwb` followed by `y` clears all weddings in the wedding book.
 * `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
 
-1. `clear-wb` / `cwb` clears all weddings in wedding book.
+1. `clear-wb` / `cwb` clears all weddings in the wedding book.
 2. The command will prompt for confirmation before deleting all entries.
 3. If you confirm with `y`, all entries will be deleted.
 4. If you cancel with `n`, no entries will be deleted.
@@ -610,7 +610,7 @@ Format:
 
 **IMPORTANT:** 
 
-* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information. ☺️
+* The clear command must be followed by either `y` or `n` command. Refer to the [Command Summary](#command-summary) for more information. 😊
 
 </box>
 
@@ -629,7 +629,7 @@ There is no need to save manually.
 
 ### Editing the Data File
 
-* KnottyPlanners data are saved automatically as a JSON file.
+* KnottyPlanners data is saved automatically as a JSON file.
   * `[JAR file location]/data/addressbook.json`.
   * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
@@ -638,9 +638,9 @@ There is no need to save manually.
 
 **<span style="color: red;">CAUTION:</span>**
   
-* If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+* If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.<br>
 
-* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+* Furthermore, certain edits can cause KnottyPlanners to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -655,10 +655,10 @@ There is no need to save manually.
 **A**: If you are using a Mac, you may need to right-click the jar file and select `Open` to run the application. If you are using Windows, you may need to run the jar file as an administrator.
 
 **Q**: How do I update the application?<br>
-**A**: Download the latest jar file from the [[releases page]](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases)
+**A**: Download the latest jar file from the [releases page](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
 
 **Q**: How do all the commands work?<br>
-**A**: Refer to the [Command summary](#command-summary) section for details of each command. Additionally, some tips and important details are provided in the [Features](#features) section.
+**A**: Refer to the [Command Summary](#command-summary) section for details of each command. Additionally, some tips and important details are provided in the [Features](#features) section.
 
 --------------------------------------------------------------------------------------------------------------------
 
