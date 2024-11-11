@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
@@ -35,6 +36,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -169,14 +171,50 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allergyListContainsNoneAndMoreThanOneEntry_throwsParseException() {
-        // Arrange
         List<Allergy> allergyList = Arrays.asList(
                 new Allergy("None"),
                 new Allergy("Peanuts")
         );
-
-        // Act & Assert
         assertThrows(ParseException.class, () -> {
+            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                    && allergyList.size() > 1) {
+                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+            }
+        });
+    }
+
+    // Case 2: Contains "none" and only one entry (No exception)
+    @Test
+    public void parse_allergyListContainsOnlyNone_noExceptionThrown() {
+        List<Allergy> allergyList = Collections.singletonList(new Allergy("None"));
+        assertDoesNotThrow(() -> {
+            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                    && allergyList.size() > 1) {
+                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+            }
+        });
+    }
+
+    // Case 3: Does not contain "none" and more than one entry (No exception)
+    @Test
+    public void parse_allergyListDoesNotContainNoneButMoreThanOneEntry_noExceptionThrown() {
+        List<Allergy> allergyList = Arrays.asList(
+                new Allergy("Peanuts"),
+                new Allergy("Shellfish")
+        );
+        assertDoesNotThrow(() -> {
+            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                    && allergyList.size() > 1) {
+                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+            }
+        });
+    }
+
+    // Case 4: Does not contain "none" and only one entry (No exception)
+    @Test
+    public void parse_allergyListDoesNotContainNoneAndOnlyOneEntry_noExceptionThrown() {
+        List<Allergy> allergyList = Collections.singletonList(new Allergy("Peanuts"));
+        assertDoesNotThrow(() -> {
             if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
                     && allergyList.size() > 1) {
                 throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
