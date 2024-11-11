@@ -54,6 +54,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 ## Table of Contents
 
 - [Quick Start :rocket:](#QUICKSTART)
+  - [Example TA Workflow](#example-ta-workflow)
 - [Features :computer:](#FEATURES)
   - [Data Formats](#data-formats)
   - [MAIN Commands](#main-commands)
