@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+Class BuyerList
+Class MeetUpList
+
+Package Buyer <<Rectangle>>{
+BuyerList *-right-> "1" UniqueBuyerList
+UniqueBuyerList -right-> Buyer
+
+Buyer *--> Name
+Buyer *--> Phone
+Buyer *--> Email
+Buyer *--> Budget
+Buyer *--> "*" Tag
+}
+
+Package "Meet-Up" {
+MeetUpList *--> "1" UniqueMeetUpList
+UniqueMeetUpList --> "~* all" MeetUp
+MeetUp *--> Subject
+MeetUp *--> Info
+MeetUp *--> From
+MeetUp *--> To
+MeetUp *--> "*" AddedBuyer
+AddedBuyer -up-|> Name
+From --|> DateTime
+To --|> DateTime
+}
+@enduml

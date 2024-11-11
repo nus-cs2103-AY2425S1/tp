@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+Class PropertyList
+Package Property {
+PropertyList *--> "1" UniquePropertyList
+UniquePropertyList --> "~* all" Property
+Property *--> LandlordName
+Property *--> LandlordPhone
+Property *--> AskingPrice
+Property *--> Address
+Property *--> PropertyType
+}
+@enduml
