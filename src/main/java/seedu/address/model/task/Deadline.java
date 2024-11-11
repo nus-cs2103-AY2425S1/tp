@@ -3,6 +3,9 @@ package seedu.address.model.task;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+//@@author {DanzaSeah}-reused
+//Reused from https://github.com/DanzaSeah/ip/blob/master/src/main/java/babblebot/task/Deadline.java
+//With minor modifications
 /**
  * The Deadline class represents a task with a deadline.
  * It extends the Task class and adds a LocalDate field to store the deadline date.
@@ -78,3 +81,4 @@ public class Deadline extends Task {
         return super.toString() + " (by: " + this.by.format(formatter) + ")";
     }
 }
+//@@author

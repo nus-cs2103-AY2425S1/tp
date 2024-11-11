@@ -2,6 +2,9 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+//@@author {DanzaSeah}-reused
+//Reused from https://github.com/DanzaSeah/ip/blob/master/src/main/java/babblebot/task/Todo.java
+//With minor modifications
 /**
  * The Todo class represents a simple task with no specific date attached.
  * It extends the Task class and does not add any additional fields.
@@ -77,3 +80,4 @@ public class Todo extends Task {
         return super.toString();
     }
 }
+//@@author

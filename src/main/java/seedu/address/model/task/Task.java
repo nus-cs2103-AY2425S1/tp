@@ -2,6 +2,9 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+//@@author {DanzaSeah}-reused
+//Reused from https://github.com/DanzaSeah/ip/blob/master/src/main/java/babblebot/task/Task.java
+//With minor modifications
 /**
  * The Task class represents a general task with a description and a completion status.
  * It serves as the base class for more specific types of tasks such as Todo, Deadline, and Event.
@@ -141,5 +144,5 @@ public class Task {
         return Objects.hash(description, isDone);
     }
 }
-
+//@@author
 
