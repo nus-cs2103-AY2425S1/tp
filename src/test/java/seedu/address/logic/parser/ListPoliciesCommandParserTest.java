@@ -8,41 +8,38 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListPoliciesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 public class ListPoliciesCommandParserTest {
 
     private final ListPoliciesCommandParser parser = new ListPoliciesCommandParser();
 
+    private void assertParseSuccess(String userInput, Index expectedIndex) throws Exception {
+        ListPoliciesCommand expectedCommand = new ListPoliciesCommand(expectedIndex);
+        ListPoliciesCommand command = parser.parse(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    private void assertParseFailure(String userInput, String expectedMessage) {
+        assertThrows(ParseException.class, () -> parser.parse(userInput), expectedMessage);
+    }
+
     @Test
     public void parse_validArgs_returnsListPoliciesCommand() throws Exception {
-        ListPoliciesCommand expectedCommand = new ListPoliciesCommand(INDEX_FIRST_CLIENT);
-        ListPoliciesCommand command = parser.parse("1");
-        assertEquals(expectedCommand, command);
-
-        expectedCommand = new ListPoliciesCommand(INDEX_SECOND_CLIENT);
-        command = parser.parse("2");
-        assertEquals(expectedCommand, command);
+        assertParseSuccess("1", INDEX_FIRST_CLIENT);
+        assertParseSuccess("2", INDEX_SECOND_CLIENT);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // empty input
-        assertThrows(ParseException.class, () -> parser.parse(""),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPoliciesCommand.MESSAGE_USAGE));
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPoliciesCommand.MESSAGE_USAGE);
 
-        // non-numeric input
-        assertThrows(ParseException.class, () -> parser.parse("abc"),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPoliciesCommand.MESSAGE_USAGE));
-
-        // non-int input
-        assertThrows(ParseException.class, () -> parser.parse("1.5"),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPoliciesCommand.MESSAGE_USAGE));
-
-        // negative input
-        assertThrows(ParseException.class, () -> parser.parse("-1"),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPoliciesCommand.MESSAGE_USAGE));
+        assertParseFailure("", expectedMessage); // empty input
+        assertParseFailure("abc", expectedMessage); // non-numeric input
+        assertParseFailure("1.5", expectedMessage); // non-int input
+        assertParseFailure("-1", expectedMessage); // negative input
     }
-
 }
