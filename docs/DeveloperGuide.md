@@ -31,7 +31,6 @@ title: Developer Guide
     * [Deleting a client](#deleting-a-client)
 
 
------------------------------------------------------------------------------------------------------------------
 ---
 
 ## **Acknowledgements**
@@ -40,7 +39,8 @@ This project was developed from [AddressBook-Level3](https://github.com/se-edu/a
 
 ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
 as well as the JavaDocs for code written by BuffWuff1712
---------------------------------------------------------------------------------------------------------------------
+
+---
 
 ## **Setting Up, Getting Started**
 
@@ -229,12 +229,12 @@ Upon execution, `ListingAddCommand` first attempts to add a listing in a `Unique
 ### Sort Feature
 
 
-The sort feature in `PROperty` is implemented by adding sorting methods to the `UniquePersonList` class, which is responsible for managing the list of `Person` objects. Sorting is performed directly on the `internalList` by specific attributes such as `name` or `ID`, allowing users to organise contacts in a meaningful order.
+The sort feature in `PROperty` is implemented by adding sorting methods to the `UniquePersonList` class, which is responsible for managing the list of `Person` objects. Sorting is performed directly on the `internalList` by specific attributes such as `name` or `ID`, allowing users to organise clients in a meaningful order.
 
 The feature includes the following operations:
 
 - **`UniquePersonList#sortByName()`** — Sorts the `internalList` of `Person` objects alphabetically by name, using a `Comparator` that performs a case-insensitive comparison.
-- **`UniquePersonList#sortByID()`** — Sorts the `internalList` by ID in ascending order, allowing users to organise contacts based on their unique identifiers.
+- **`UniquePersonList#sortByID()`** — Sorts the `internalList` by ID in ascending order, allowing users to organise clients based on their unique identifiers.
 
 These operations are exposed in the `Model` interface as `Model#sortByName()` and `Model#sortByID()` respectively.
 
@@ -290,52 +290,52 @@ Moreover, they can keep track of house visits via an events management system.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                                                | So that I can…​                                               |
-| -------- | --------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
-| `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the App        |
-| `* * *`  | user                                    | add a contact with their information                        | view them later                                               |
-| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                          |
-| `* * *`  | user                                    | use a search bar to find my contact                         | locate details without going through the entire list          |
-| `* * *`  | user                                    | edit current contact details                                | keep the details updated                                      |
-| `* * *`  | user                                    | search via tags                                             | filter by different groups of people                          |
-| `* * *`  | user                                    | partially fill contacts                                     | add people who do not want to give full information           |
-| `* * *`  | user                                    | find contacts using their names                             | view their contact details easily                             |
-| `* * *`  | user with many things to remember       | add remarks/notes to some users                             | remember things when I look up their contacts                 |
-| `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions             |
-| `* *`    | user                                    | set reminders linked to contacts                            | follow up with clients on time                                |
-| `* *`    | user                                    | have an undo feature when editing or deleting a contact     | prevent accidental loss of information                        |
-| `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                          |
-| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                        |
-| `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                           |
-| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                            |
-| `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide       |
-| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                          |
-| `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                  |
-| `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                              |
-| `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                            |
-| `* *`    | user                                    | see the exact reason an error is caused                     | input the correct command without wasting time                |
-| `* *`    | user with many contacts                 | tag certain contacts to show at the top                     | find them easily with minimal steps                           |
-| `* *`    | user with a busy schedule               | set reminders and see upcoming events                       | remind myself and stay on track                               |
-| `* *`    | forgetful user                          | quickly reuse my last searches and view search history      | quickly trace back my activity                                |
-| `* *`    | new user                                | explore all features and follow a guide                     | be oriented to the functionalities                            |
-| `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my contacts                                   |
-| `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                  |
-| `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                        |
-| `* *`    | user                                    | sort my contacts in different ways                          | view contacts in different ways                               |
-| `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                   |
-| `* *`    | user                                    | link property listings to specific contacts                 | know who to market units to quickly                           |
-| `*`      | user                                    | merge duplicate contacts                                    | keep my address book clean and organised                      |
-| `*`      | user                                    | export my contacts to a CSV file                            | back up or share my contact list                              |
-| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                      |
-| `*`      | user                                    | put my deleted contacts in a recycle bin                    | keep my contacts clean and restore them if it was an accident |
-| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                 |
-| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                          |
-| `*`      | user with many social accounts          | save and link to contact social pages and media handles     | connect with clients on social media easily                   |
-| `*`      | user who changes devices often          | export and import contacts on different devices easily      | not save everything manually again when I change devices      |
-| `*`      | user with many groups of friends        | know who the contacts I have put a particular tag on        | organise events                                               |
-| `*`      | user with many hobbies                  | remove the tag for contacts easily                          | remove their tags if not useful anymore                       |
-| `*`      | user                                    | search up other contact information other than name         | find contacts based on other information                      |
-| `*`      | user with many contacts                 | find and search contact besides the name                    | find contacts more easily with different kinds of input       |
+| Priority | As a …​                                 | I want to …​                                                | So that I can…​                                              |
+| -------- |-----------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the app       |
+| `* * *`  | user                                    | add a client with their information                         | view them later                                              |
+| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                         |
+| `* * *`  | user                                    | use a search bar to find my client                          | locate details without going through the entire list         |
+| `* * *`  | user                                    | edit current client details                                 | keep the details updated                                     |
+| `* * *`  | user                                    | search via tags                                             | filter by different groups of people                         |
+| `* * *`  | user                                    | partially fill client details                               | add people who do not want to give full information          |
+| `* * *`  | user                                    | find clients using their names                              | view their client details easily                             |
+| `* * *`  | user with many things to remember       | add remarks/notes to some clients                           | remember things when I look up clients                       |
+| `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions            |
+| `* *`    | user                                    | set reminders linked to clients                             | follow up with clients on time                               |
+| `* *`    | user                                    | have an undo feature when editing or deleting a client     | prevent accidental loss of information                       |
+| `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                         |
+| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                       |
+| `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                          |
+| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                           |
+| `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide      |
+| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                         |
+| `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                 |
+| `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                             |
+| `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                           |
+| `* *`    | user                                    | see the exact reason an error is caused                     | input the correct command without wasting time               |
+| `* *`    | user with many clients                  | tag certain clients to show at the top                      | find them easily with minimal steps                          |
+| `* *`    | user with a busy schedule               | set reminders and see upcoming events                       | remind myself and stay on track                              |
+| `* *`    | forgetful user                          | quickly reuse my last searches and view search history      | quickly trace back my activity                               |
+| `* *`    | new user                                | explore all features and follow a guide                     | be oriented to the functionalities                           |
+| `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my clients                                   |
+| `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                 |
+| `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                       |
+| `* *`    | user                                    | sort my clients in different ways                          | view clients in different ways                               |
+| `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                  |
+| `* *`    | user                                    | link property listings to specific clients                 | know who to market units to quickly                          |
+| `*`      | user                                    | merge duplicate clients                                    | keep my address book clean and organised                     |
+| `*`      | user                                    | export my clients to a CSV file                            | back up or share my client list                             |
+| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                     |
+| `*`      | user                                    | put my deleted clients in a recycle bin                    | keep my clients clean and restore them if it was an accident |
+| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                |
+| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                         |
+| `*`      | user with many social accounts          | save and link to client social pages and media handles     | connect with clients on social media easily                  |
+| `*`      | user who changes devices often          | export and import clients on different devices easily      | not save everything manually again when I change devices     |
+| `*`      | user with many groups of friends        | know who the clients I have put a particular tag on        | organise events                                              |
+| `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
+| `*`      | user                                    | search up other client information other than name         | find clients based on other information                      |
+| `*`      | user with many clients                 | find and search client besides the name                    | find clients more easily with different kinds of input       |
 
 ### Use cases
 
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. PROperty validates the input details.
 
-3. PROperty adds the client to the contact list.
+3. PROperty adds the client to the client list.
 
 4. PROperty displays a confirmation that the client has been added.
    
@@ -404,6 +404,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3a2. PROperty prompts the user to re-enter the details.
     
     Use case resumes at step 2.
+
+---
+
+
+**Use case: Delete a client**
+
+**MSS**
+
+1. User requests to delete a specified client
+
+2. PROperty deletes the specified client
+
+3. PROperty saves the updated client list.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The specified client does not exist.
+
+    - 1a1. PROperty shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: Sort clients in alphabetical order**
+
+**MSS**
+
+1. User requests to sort clients.
+
+2. PROperty sorts the client list in alphabetical order.
+
+3. PROperty displays the sorted list.
+
+   Use case ends.
 
 ---
 
@@ -465,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to search for clients using one or more tags.
 
-2. PROperty filters the contact list based on the specified tags.
+2. PROperty filters the client list based on the specified tags.
 
 3. PROperty displays a list of clients matching the tags.
    
@@ -479,11 +516,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-- 2a. No clients match the specified tags.
+- 3a. No clients match the specified tags.
   
-  - 2a1. PROperty informs the user that no matches were found.
+  - 3a1. PROperty informs the user that there are 0 matches.
     
     Use case ends.
+
+---
+
+**Use case: Search for clients by client details**
+
+**MSS**
+
+1. User requests to search for clients using various client details.
+
+2. PROperty filters the client list based on the search query.
+
+3. PROperty displays a list of matching clients.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. No search queries are specified.
+
+    - 1a1. PROperty shows an invalid command format error message.
+
+      Use case ends.
+
+- 3a. No clients match the specified tags.
+
+    - 3a1. PROperty informs the user that 0 clients were found.
+
+      Use case ends.
 
 ---
 
@@ -491,73 +556,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view all existing tags.
+1. User sees the tags assigned to a client in PROperty.
 
-2. PROperty displays a list of all tags.
+2. User selects to add, delete tags or both.
 
-3. User selects an option to add, edit, or delete tags.
+3. PROperty performs the selected action(s).
 
-4. PROperty performs the selected action.
-
-5. PROperty confirms that the tags have been updated.
+4. PROperty confirms that the tags have been updated.
    
    Use case ends.
 
 **Extensions**
 
-- 3a. User chooses to add a new tag.
-  
-  - 3a1. User provides the tag name and optional color.
-  
-  - 3a2. PROperty adds the new tag.
-    
-    Use case resumes at step 5.
 
-- 3b. User chooses to edit an existing tag.
+- 2a. User chooses to delete a tag.
   
-  - 3b1. User selects the tag to edit.
+  - 2a1. Tha tag is deleted off the client if it exists.
   
-  - 3b2. User updates the tag's name or color.
+  - 2a2. Else, PROperty ignores the command silently.
   
-  - 3b3. PROperty saves the changes.
+  - 2a3. PROperty saves the changes.
     
-    Use case resumes at step 5.
+    Use case resumes at step 4.
 
-- 3c. User chooses to delete a tag.
+- 2b. User chooses to add a valid tag.
   
   - 3c1. User selects the tag to delete.
   
-  - 3c2. PROperty removes the tag from all associated contacts.
+  - 3c2. PROperty adds the tag to the client.
     
-    Use case resumes at step 5.
+    Use case resumes at step 4.
 
-- 3d. The tag name provided already exists (for add/edit).
+- 2c. Any tag names provided are invalid for an add tag action (not in the list of allowed tags).
   
   - 3d1. PROperty shows an error message.
     
-    Use case resumes at step 3.
-
----
-
-**Use case: View upcoming reminders/events**
-
-**MSS**
-
-1. User requests to view upcoming reminders/events.
-
-2. PROperty retrieves reminders/events sorted by date and time.
-
-3. PROperty displays the list of upcoming reminders/events.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. There are no upcoming reminders/events.
-  
-  - 2a1. PROperty informs the user that there are no upcoming reminders/events.
-    
     Use case ends.
+
 
 ---
 
@@ -571,14 +606,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
    Use case ends.
 
-**Extensions**
-
-- 2a. The help guide fails to load.
-  
-  - 2a1. PROperty shows an error message.
-    
-    Use case ends.
-
 ---
 
 **Use case: Auto-complete commands**
@@ -587,11 +614,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User begins typing a command.
 
-2. PROperty suggests possible commands based on the input.
+2. PROperty suggests the closest possible command based on the input.
 
-3. User selects a suggested command or continues typing.
+3. User selects the suggestion by pressing [TAB] or continues typing.
 
-4. PROperty auto-completes the command.
+4. PROperty auto-completes the command if user selects the suggestion.
    
    Use case ends.
 
@@ -603,7 +630,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-- 3a. User does not select a suggestion and enters an invalid command.
+- 3a. User does not select the suggestion and enters an invalid command.
   
   - 3a1. PROperty shows an error message.
     
@@ -611,261 +638,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Highlight syntax and errors**
+**Use case: Remove tags from clients easily**
 
 **MSS**
 
-1. User types a command with attributes.
+1. User selects a client to modify tags.
 
-2. PROperty highlights different parts of the command (e.g., commands, attributes, values) in different colors.
+2. PROperty displays current tags associated with the client.
 
-3. If there's a syntax error, PROperty underlines or marks the error.
+3. User removes unwanted tags.
 
-4. PROperty provides real-time feedback to the user.
-   
-   Use case ends.
-
-**Extensions**
-
-- 3a. The command has multiple errors.
-  
-  - 3a1. PROperty highlights all errors.
-    
-    Use case ends.
-
----
-
-**Use case: View error messages with exact causes**
-
-**MSS**
-
-1. User executes a command.
-
-2. PROperty detects an error in the command.
-
-3. PROperty displays an error message clearly indicating the cause.
-
-4. User reviews the error message and corrects the command.
-   
-   Use case ends.
-
-**Extensions**
-
-- 3a. Error message is too generic.
-  
-  - 3a1. User requests more details.
-  
-  - 3a2. PROperty provides additional information about the error.
-    
-    Use case resumes at step 4.
-
----
-
-**Use case: Sort contacts in alphabetical order**
-
-**MSS**
-
-1. User requests to sort contacts.
-
-2. PROperty sorts the contact list in alphabetical order.
-
-3. PROperty displays the sorted list.
-   
-   Use case ends.
-
----
-
-**Use case: Customize tags with colors**
-
-**MSS**
-
-1. User selects a tag to customize.
-
-2. PROperty prompts the user to choose a color.
-
-3. User selects a color for the tag.
-
-4. PROperty updates the tag with the chosen color.
-
-5. PROperty confirms that the tag has been updated.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. The color selected is already in use by another tag.
-  
-  - 2a1. PROperty warns the user about the duplicate color.
-  
-  - 2a2. User chooses to proceed or select a different color.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: View a guide on application features**
-
-**MSS**
-
-1. New user requests to view a guide on application features.
-
-2. PROperty displays a comprehensive guide detailing all features and how to use them.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. The guide fails to load or is unavailable.
-  
-  - 2a1. PROperty shows an error message.
-    
-    Use case ends.
-
----
-
-**Use case: Press TAB to auto-suggest commands and attributes**
-
-**MSS**
-
-1. User begins typing a command or attribute.
-
-2. User presses the TAB key.
-
-3. PROperty auto-completes or suggests possible commands/attributes.
-
-4. User selects a suggestion or continues typing.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. Multiple suggestions are available.
-  
-  - 2a1. PROperty displays a list of suggestions.
-  
-  - 2a2. User selects from the list.
-    
-    Use case resumes at step 4.
-
-- 2b. No suggestions are available.
-  
-  - 2b1. PROperty does not auto-complete.
-    
-    Use case ends.
-
----
-
-**Use case: See error messages clearly**
-
-**MSS**
-
-1. User executes a command.
-
-2. PROperty detects an error.
-
-3. PROperty displays the error message prominently and clearly.
-
-4. User reads the error message and takes corrective action.
-   
-   Use case ends.
-
-**Extensions**
-
-- 3a. Error message overlaps with other interface elements.
-  
-  - 3a1. PROperty adjusts the layout to ensure visibility.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: Manage multiple customer groups**
-
-**MSS**
-
-1. User creates tags for different customer groups.
-
-2. User assigns contacts to these tags.
-
-3. User filters or views contacts based on these tags.
-   
-   Use case ends.
-
-**Extensions**
-
-- 1a. User attempts to create a duplicate tag.
-  
-  - 1a1. PROperty informs the user and prevents duplication.
-    
-    Use case resumes at step 1.
-
-- 2a. User wants to assign a contact to multiple groups.
-  
-  - 2a1. PROperty allows multiple tags per contact.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: Find commands by typing part of it**
-
-**MSS**
-
-1. User types a partial command.
-
-2. PROperty searches for commands matching the input.
-
-3. PROperty suggests possible commands.
-
-4. User selects a command from the suggestions.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. No commands match the partial input.
-  
-  - 2a1. PROperty informs the user and suggests using the help guide.
-    
-    Use case ends.
-
----
-
-**Use case: Press TAB to auto-suggest values**
-
-**MSS**
-
-1. User types a command requiring specific values (e.g., tag names).
-
-2. User presses TAB key.
-
-3. PROperty suggests existing values that match the input.
-
-4. User selects a value from the suggestions.
-   
-   Use case ends.
-
-**Extensions**
-
-- 3a. No values match the input.
-  
-  - 3a1. PROperty does not provide suggestions.
-    
-    Use case ends.
-
----
-
-**Use case: Remove tags from contacts easily**
-
-**MSS**
-
-1. User selects a contact to modify tags.
-
-2. PROperty displays current tags associated with the contact.
-
-3. User deselects or removes unwanted tags.
-
-4. PROperty updates the contact's tag list.
+4. PROperty updates the client's tag list.
 
 5. PROperty confirms that the tags have been updated.
    
@@ -873,11 +656,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 2a. Contact has no tags.
+- 2a. User selects an invalid tag or non-existent tag to delete.
   
-  - 2a1. PROperty informs the user.
+  - 2a1. PROperty continues silently and does not modify the invalid commands.
     
-    Use case ends.
+    Use case resumes at step 2.
 
 ---
 
@@ -885,23 +668,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types command to show property listings of a contact.
+1. User types command to show property listings of a client.
 
-2. PROperty displays property listings of contact.
+2. PROperty displays property listings of client.
 
    Use case ends.
 
 **Extensions**
 
-- 1a. User types in invalid index for contact
+- 1a. User types in invalid index for client.
 
   - 1a1. PROperty informs user of invalid index.
    
     Use case ends.
 
-- 1b. User types in invalid command format
+- 1b. User types in invalid command format.
 
     - 1b1. PROperty informs user of invalid command format.
+
+      Use case ends.
+
+---
+
+**Use case: Add property listings to a specific user**
+
+**MSS**
+
+1. User types command to add a property listing to a specified user.
+
+2. PROperty updates the property listings of the user.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User types in invalid index for client.
+
+    - 1a1. PROperty informs user of invalid index and .
+
+      Use case ends.
+
+- 1b. User types in invalid command format.
+
+    - 1b1. PROperty informs user of invalid command format.
+
+      Use case ends.
+
+- 1c. User types in a listing with a duplicate address.
+
+    - 1c1. PROperty informs user of duplicate listing entry due to there being the same address.
+
+      Use case ends.
+
+---
+
+**Use case: Delete property listings from a specific user**
+
+**MSS**
+
+1. User types command to delete a property listing from a specific user.
+
+2. PROperty updates the property listings of the user.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User types in invalid index for client.
+
+    - 1a1. PROperty informs user of invalid index.
+
+      Use case ends.
+
+- 1b. User types in invalid command format.
+
+    - 1b1. PROperty informs user of invalid command format.
+
+      Use case ends.
+
+- 1c. User types in invalid property listing index for that client.
+
+    - 1c1. PROperty informs user of invalid listing index.
+
+      Use case ends.
+
+---
+
+**Use case: Export all client details from PROperty**
+
+**MSS**
+
+1. User types command to export all details stored.
+
+2. PROperty creates a `.csv` with all the client details.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The export location or file is unavailable for any reason.
+
+    - 1a1. PROperty fails silently.
 
       Use case ends.
 
@@ -911,7 +778,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work on any screen size from (`13'` laptop screens to `32'` widescreen monitors)
-5. Should reliably store contact information across different sessions with minimal chance of corruption
+5. Should reliably store client information across different sessions with minimal chance of corruption
 6. Should not contain any vulnerabilities, protect user data and ensure system integrity
 7. Should be easy to maintain for developers to add new features and exensions in the future
 8. Should have good contrast between colours to allow people to read text and information more easily
@@ -922,19 +789,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Fuzzy Searching**: A search technique that finds approximate matches to the search terms, allowing users to find results without needing exact matches.
 
-- **Recycle Bin**: A temporary storage area for deleted contacts, allowing users to restore them if they were deleted accidentally.
+- **Recycle Bin**: A temporary storage area for deleted clients, allowing users to restore them if they were deleted accidentally.
 
-- **Reminder/Event**: A scheduled notification linked to a contact, alerting the user of upcoming tasks, appointments, or follow-ups.
+- **Reminder/Event**: A scheduled notification linked to a client, alerting the user of upcoming tasks, appointments, or follow-ups.
 
 - **Social Media Handles**: Usernames or profile links associated with a client's social media accounts.
 
 - **Syntax Highlighting**: A feature that displays commands in different colors to differentiate between commands, attributes, and values for easier readability.
 
-- **Tag**: A label assigned to a contact to categorize or group contacts for better organization.
+- **Tag**: A label assigned to a client to categorize or group clients for better organization.
 
 - **Undo Feature**: A function that allows the user to reverse the last action taken, preventing accidental loss or changes to information.
 
-- **Contact**: An entry in the PROperty representing a client, including their personal and professional information.
+- **Client**: An entry in the PROperty representing a client, including their personal and professional information.
 
 - **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
 
@@ -942,7 +809,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Highlighting Errors**: Visual cues provided by the application (such as underlines or color changes) to indicate mistakes in command input.
 
-- **Priority Tagging**: The act of marking certain contacts to appear at the top of the contact list for quick access.
+- **Priority Tagging**: The act of marking certain clients to appear at the top of the client list for quick access.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -980,7 +847,7 @@ Users may not find their intended client if they do not explicitly state the exa
 **Proposed Enhancement**
 
 We plan to enhance the search feature to allow partial matches on numeric values regardless of punctuation or spacing. 
-This enhancement will improve the user experience by showing relevant contact details even if the input includes numbers adjacent to punctuation marks.
+This enhancement will improve the user experience by showing relevant client details even if the input includes numbers adjacent to punctuation marks.
 
 ### 3. Enhance Export Feature to Handle Export Errors.
 
@@ -1015,7 +882,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Download the jar file and copy into an empty folder
    
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample clients. The window size may not be optimum.
 
 2. Saving window preferences
    
@@ -1027,12 +894,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a client
 
-1. Adding a new client to the contact list
+1. Adding a new client to the client list
 
-    1. Prerequisites: The contact list is displayed, and the user has relevant details to add a new client.
+    1. Prerequisites: The client list is displayed, and the user has relevant details to add a new client.
 
     2. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Road`<br>
-       Expected: A new contact with the name "John Doe" and provided details is added to the list. The status message in the outcome box confirms the addition.
+       Expected: A new client with the name "John Doe" and provided details is added to the list. The status message in the outcome box confirms the addition.
 
     3. Test case: `add n/ p/ e/ a/`<br>
        Expected: No client is added. An error message appears, indicating that names should only contain alphanumeric characters and spaces, and it should not be blank.
@@ -1048,7 +915,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
    
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
    
    3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details shown in the status message.
