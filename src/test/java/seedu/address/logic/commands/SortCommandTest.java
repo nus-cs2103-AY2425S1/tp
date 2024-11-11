@@ -32,12 +32,12 @@ public class SortCommandTest {
     }
     @Test
     public void constructor_invalidOrder_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new SortCommand("invalid_order", true));
+        assertThrows(AssertionError.class, () -> new SortCommand("Invalid", true));
     }
 
     @Test
     public void constructor_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SortCommand(null, true));
+        assertThrows(NullPointerException.class, () -> new SortCommand(ASC, null));
     }
     @Test
     public void execute_sortAscendingNameSuccess() {
