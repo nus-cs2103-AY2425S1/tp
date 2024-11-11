@@ -126,20 +126,20 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
 4. Open the command terminal:  
     * For Windows users, in the folder containing `ABCLI.jar`, right-click the empty space and select “Open in Terminal”.<br>
-      ![WindowsGuide](images/WindowsGuide.png)
+      ![WindowsGuide](images/WindowsGuide.png)<br>
     * For MacOS users, right-click the home folder, hover over “Services,” and select “New Terminal at Folder”.<br>
-      ![MacGuide](images/MacGuide.png)
+      ![MacGuide](images/MacGuide.png)<br>
 
 5. Run the application: Enter the command `java -jar ABCLI.jar` to start ABCLI.  
 
 6. Verify the GUI: If you are successful in opening the application, a GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png)<br>
     <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
     **Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
     </div>
 
 7. Here is a quick guide to the GUI.<br>
-   ![GuiGuide](images/GuiGuide.png)
+   ![GuiGuide](images/GuiGuide.png)<br>
 
 8. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -191,7 +191,7 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpMessage.png)<br>
 
 Format: `help`
 
@@ -238,7 +238,7 @@ Examples:
 * Upon entering the application, the parser mode is set to `b`.
 * `switch` followed by `m` switches the parser mode to meet-ups.
 
-![SwitchBuyerToMeetUp](images/SwitchBuyerToMeetUpSequence.png)
+![SwitchBuyerToMeetUp](images/SwitchBuyerToMeetUpSequence.png)<br>
 
 <div markdown="block" class="alert alert-info">
 
@@ -256,7 +256,7 @@ Examples:
 
 Buyers represent your clients interested in purchasing properties. The buyer list allows you to keep track of each buyer's essential details such as name, phone number, email, and property budget. Additionally, you can organize and personalize each buyer’s profile by assigning multiple tags. For instance, if a client, `Bernice Yu`, expresses interest in relocating, you could add the tag `relocating` to her contact.
 
-![BuyerModeInitialList](images/BuyerModeInitialList.png)
+![BuyerModeInitialList](images/BuyerModeInitialList.png)<br>
 
 <div markdown="block" class="alert alert-info">
 
@@ -338,7 +338,7 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![FindBuyerSequence](images/FindBuyerSequence.png)
+![FindBuyerSequence](images/FindBuyerSequence.png)<br>
 
 <a id="delete-buyer"></a>
 <span style="font-size: 20px; font-weight: bold; color: #43839c">Deleting a buyer : `delete`</span>
@@ -372,7 +372,7 @@ Using the clear command will delete all the buyers from the list of buyers, and 
 
 Meet-up represents any scheduled appointment with your clients, allowing you to record essential details, including the subject of the meeting, additional info, its start and end date-times (`From` and `To`), and the buyers involved. Additionally, ABCLI will highlight any overlapping meet-ups to help you avoid scheduling conflicts.
 
-![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
+![MeetUpModeInitialList](images/MeetUpModeInitialList.png)<br>
 
 <div markdown="block" class="alert alert-info">
 
@@ -422,7 +422,7 @@ Examples:
 <div markdown="block" class="alert alert-info">
 **:information_source: Clashing Timings:**
  Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
-![MeetUpClash](images/MeetUpClash.png)
+![MeetUpClash](images/MeetUpClash.png)<br>
 </div>
 
 <a id="edit-meetup"></a>
@@ -464,7 +464,7 @@ Examples:
 * `find s/Meet` returns `Meet up with Jack to discuss property prices` and `Go to MBS for Jane's meet`
 * `find s/Sales` returns `Sales Meeting`
 
-![FindMeetUpSequence](images/FindMeetUpSequence.png)
+![FindMeetUpSequence](images/FindMeetUpSequence.png)<br>
 
 <a id="delete-meetup"></a>
 <span style="font-size: 20px; font-weight: bold; color: #b44cc7">Deleting a meet-up : `delete`</span>
@@ -498,7 +498,7 @@ Using the clear command will delete all the meet-ups from the list of meet-ups, 
 
 Properties represent each property in your portfolio. The property list helps you keep track of each property's details such as the landlord's name and phone number, as well as the property's address, type (e.g. apartment, landed house, etc) and asking price.
 
-![PropertyModeInitialList](images/PropertyModeInitialList.png)
+![PropertyModeInitialList](images/PropertyModeInitialList.png)<br>
 
 <div markdown="block" class="alert alert-info">
 
@@ -572,7 +572,7 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find a/Pasir Ris` returns `pasir ris east` and `Pasir Ris West`
 
-![FindPropertySequence](images/FindPropertySequence.png)
+![FindPropertySequence](images/FindPropertySequence.png)<br>
 
 <a id="delete-property"></a>
 <span style="font-size: 20px; font-weight: bold; color: #2fba54">Deleting a property: `delete`</span>
@@ -849,7 +849,7 @@ Using the clear command will delete all the properties from the list of properti
         <th rowspan="2">Edit</th>
         <td>Index</td><td>Refer to General > Delete > Index</td>
     </tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</td></tr>
     <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
     <tr><th colspan="3">Meet-Up</th></tr>
     <tr>
@@ -861,7 +861,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr><td>To</td></tr>
     <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
     <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</td></tr>
     <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
     <tr><th colspan="3">Property</th></tr>
     <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
@@ -875,7 +875,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
     <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
     <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</td></tr>
     <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
     <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
 </table>
