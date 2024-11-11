@@ -32,7 +32,6 @@ Here are some symbols you may encounter in this user guide:
  This contains additional useful information
 </div>
 
-
 <div markdown="span" class="alert alert-info">:information_source: **Information:**  
 This contains some additional information
 </div>
@@ -123,7 +122,11 @@ Back to [Quick Start](#quick-start)
 
 ---
 
-### Viewing help : `help`
+### General Commands
+
+---
+
+#### Viewing help : `help`
 
 Shows you a message containing a link to a more in depth user guide to help you!
 
@@ -138,7 +141,7 @@ unknown command word and press enter.
 
 ---
 
-### Adding a student: `add`
+#### Adding a student: `add`
 
 You can add a student easily to Teacher's Pet!
 
@@ -156,7 +159,7 @@ Here are some examples for you to try!
 
 ---
 
-### Editing a student : `edit`
+#### Editing a student : `edit`
 
 Need to change a student's details? You can edit an existing student in Teacher's Pet.
 
@@ -186,7 +189,7 @@ Continuing from the previous example in `add`, you could try this:
 
 ---
 
-### Commenting on a student: `comment`
+#### Commenting on a student: `comment`
 
 Comments on one of your students in Teacher's Pet.
 
@@ -206,7 +209,7 @@ Examples:
 
 ---
 
-### Listing all students : `list`
+#### Listing all students : `list`
 
 You can view a list of all students stored in Teachers' Pet.
 
@@ -220,7 +223,7 @@ Here is an example of what you might see, our lists would be different, of cours
 
 ---
 
-### Displaying students in a group : `show`
+#### Displaying students in a group : `show`
 
 You can view a list of students in the same group(s)
 
@@ -241,7 +244,7 @@ Here is an example you could try:
 
 ---
 
-### Finding students by name or student ID: `find`
+#### Finding students by name or student ID: `find`
 
 Finds students matching the specified criteria.
 
@@ -264,7 +267,7 @@ Examples:
 
 ---
 
-### Selecting a student randomly: `random`
+#### Selecting a student randomly: `random`
 
 You can randomly select a student from the current list! For example, you may want to randomly select a student to answer your question.
 
@@ -278,7 +281,7 @@ Format: `random`
 
 ---
 
-### Deleting a student : `delete`
+#### Deleting a student : `delete`
 
 Deletes one of your specified students from your list.
 
@@ -297,7 +300,7 @@ Expected Results:
 
 ---
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Lets you clears all your students entries from Teacher's Pet.
 
@@ -311,7 +314,7 @@ Format: `clear`
 
 ---
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Lets you close the Teacher's Pet application.
 
@@ -319,11 +322,11 @@ Format: `exit`
 
 ---
 
-## Managing Attendance
+### Managing Attendance
 
 Teacher's Pet allows you to create and manage attendance events, such as lectures, tutorials, or lab sessions. You can mark or unmark students' attendance for these events.
 
-### General Constraints
+#### General Constraints
 
 - **Event Names:**
   - Event names cannot be empty.
@@ -495,8 +498,6 @@ Displays the list of students who are either present or absent for a specific at
 
 ---
 
-
-## Tips
 
 ### Common Errors and Solutions
 
