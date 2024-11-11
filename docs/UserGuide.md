@@ -6,21 +6,30 @@ title: User Guide
 * Table of Contents
 {:toc}
 
-EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
-at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
+--------------------------------------------------------------------------------------------------------------------
+
+EventfulNUS is a **single-user desktop app for managing contacts and events specifically for event organisers of the Inter-Faculty Games (IFG)**, hosted annually
+by the National University of Singapore Students' Sport Club. Specifically, one may **add, edit, and delete details about people or events
+involved in IFG events.** Learn more about IFG [here](https://www.instagram.com/official_ifg/?hl=en).
+
+**While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Learn more about checking and changing
+   your system's version of Java ![here](https://www.java.com/en/download/help/update_runtime_settings.html).
 
-2. Download the latest `.jar` file that will execute the app from [here](https://github.com/AY2425S1-CS2103T-W14-4/tp/releases).
+2. Download the latest `.jar` file that will execute the app from ![here](https://github.com/AY2425S1-CS2103T-W14-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS, where both the app and your data will be stored.
 
-4. Open the command terminal on your computer (Search `terminal` and open the first app in your search results)
+4. Open the command terminal on your computer (Search `terminal` and open the first app in your search results).
+
 5. See where your terminal's current working folder, or directory, is by typing `pwd` and pressing 'Enter'.
+   
 6. Locate the path you need to take to change the terminal's directory into the one you put the jar file in.
+
    For example, if your `eventfulnus.jar` file is in `Users/{your_computer_username/Downloads/eventfulnus`, and your
    terminal's current wokring directory is `Users/{your_computer_username}`, you must relocate your working directory by
    entering `cd Downloads/eventfulnus` into the terminal.
@@ -34,20 +43,24 @@ at the National University of Singapore. While optimised for use via a Command L
    Once you have reached the folder containing the `.jar` file, when you type `ls` and press 'Enter', the `.jar` file should show up in the list
    of files in the terminal's current working directory.
    
-8. Enter the `java -jar eventfulnus.jar` command to run the application.<br>
+7. Enter the `java -jar eventfulnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-9. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
+     
    * `add n/John Doe p/98765432 e/johnd@example.com r/volunteer-emcee` : Adds a person named `John Doe` to the local database, with these details:
       * 98765432 as a phone number
       * johnd@example.com as an email
       * A volunteer emcee role
+        
    * `delete 3` : Deletes the 3rd person shown in the current list of people.
+     
    * `listevent`: Lists all events.
+     
    * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with these details:
      * Involves faculties COM and BIZ
      * Held on 12 December 2024, at 6pm
@@ -123,7 +136,7 @@ To add specific roles to a person, you can use the following commands:
 Example:
 * `add n/John Doe p/98765432 e/john@mail.com r/athlete - COM - Soccer Men`
 
-You may check a summary of the list of roles, including all IFG Sports, via [this link.](#more-features)
+You may check a summary of the list of roles, faculties, sports, positions, and more via [this link.](#more-features)
 
 ### Listing all persons : `list`
 
@@ -200,6 +213,7 @@ Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
   
 Remember that faculties and sports use shortcuts found in [this section.](#using-shortcuts-coming-in-v20)
+
 ### Editing an event : `editevent`
 
 Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
@@ -358,6 +372,7 @@ Volunteer Roles (Code - Role Name):
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. Currently, only **standard English** names for people and events are accepted. We are planning to add support for more languages in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
