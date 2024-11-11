@@ -810,6 +810,7 @@ Use case ends.
 * **Talents**: Well-known or up-and-coming individuals who partake in the entertainment industry in one way or another.
 * **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application.
 * **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the TalentHub
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -1126,4 +1127,18 @@ testers are expected to do more *exploratory* testing.
    
    7. Other incorrect inputs to try: `edit event 0` or any edit event command with inputs in the wrong format.
 
+---
+## **Appendix: Planned Enhancements**
+
+### Team size: 5
+
+1. **Undo/Redo Feature**: Implement an undo/redo feature for the TalentHub application. This feature will allow users to undo or redo their last action, providing a safety net for accidental deletions or modifications.
+2. **Add check for overlapping dates and valid times when deserializing**: Implement a check for overlapping dates and valid times (start time before end time) when deserializing the data from the storage file. This will ensure that the data is consistent and accurate when loaded into the application.
+3. **Add support for accepting empty prefix for tags and contacts during `add person` and `add event` commands**: Modify the application to recognize an empty prefix for tags and contacts when using the `add person` and `add event` commands. This will allow users to specify no tags or points of contacts when adding a person or event.
+4. **Add support for choosing or viewing multiple tags for contacts in events**: Enhance the application to allow users to choose or view multiple tags for contacts in events in the GUI. This will provide more flexibility in managing contacts and events with different categories or groups.
+5. **Add case-sensitive duplication check for names**: Implement case-sensitive validation for names when adding or editing persons and events. This will ensure that names are stored and displayed consistently in the application.
+6. **Add feature which programmatically discerns if a person is a celebrity or industry professional**: Implement a feature that programmatically discerns if a person is a contact or a celebrity. Only celebrities would be allowed to be added as the celebrity in an event.
+7. **Add stricter validation for names**: Only allow names to contain alphabets, spaces, and special characters like hyphens and apostrophes. Names should not contain numbers or other special characters.
+
+---
 
