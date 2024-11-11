@@ -48,10 +48,6 @@ public class AddSupplierCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
     public static final String MESSAGE_DUPLICATE_PHONE = "A contact in the address book already has this phone number. "
             + "Please use a different phone number.";
-    public static final String MESSAGE_DUPLICATE_EMAIL = "A contact in the address book already has this email address. "
-            + "Please use a different email address.";
-    public static final String MESSAGE_DUPLICATE_ADDRESS = "A contact in the address book already has this home address. "
-            + "Please use a different home address.";
     public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. "
             + "Please add it using the addIngredient command.";
 
@@ -94,12 +90,6 @@ public class AddSupplierCommand extends Command {
         for (Person person : model.getFilteredPersonList()) {
             if (person.getPhone().equals(toAdd.getPhone())) {
                 throw new CommandException(MESSAGE_DUPLICATE_PHONE);
-            }
-            if (person.getEmail().equals(toAdd.getEmail())) {
-                throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
-            }
-            if (person.getAddress().equals(toAdd.getAddress())) {
-                throw new CommandException(MESSAGE_DUPLICATE_ADDRESS);
             }
         }
 

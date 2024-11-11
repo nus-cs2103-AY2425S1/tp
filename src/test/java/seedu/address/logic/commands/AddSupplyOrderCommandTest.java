@@ -64,7 +64,7 @@ public class AddSupplyOrderCommandTest {
 
         CommandResult commandResult = addOrderCommand.execute(modelStub);
 
-        assertEquals(String.format(AddSupplyOrderCommand.MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS,
+        assertEquals(String.format(AddSupplyOrderCommand.MESSAGE_ADD_SUPPLY_ORDER_SUCCESS,
                 modelStub.ordersAdded.get(0).viewOrder()), commandResult.getFeedbackToUser());
         assertEquals(1, modelStub.ordersAdded.size());
     }

@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,13 +33,14 @@ public class AddCustomerOrderCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_ORDER + "PASTRYID] "
+            + PREFIX_ORDER + "PASTRYID "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ORDER + "1 1 2";
 
     public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
+    public static final String INVALID_CUSTOMER = "This is not a customer. Add a customer contact instead.";
 
     private final Name name;
     private final Phone phone;
@@ -94,6 +96,10 @@ public class AddCustomerOrderCommand extends Command {
         if (person == null) {
             person = Person.getGuest(name, phone);
             model.addPerson(person);
+        }
+
+        if (!(person instanceof Customer)) {
+            throw new CommandException(INVALID_CUSTOMER);
         }
 
         CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING, remark);
