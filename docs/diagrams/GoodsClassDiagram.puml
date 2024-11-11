@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor GOODS_COLOR
 skinparam classBackgroundColor GOODS_COLOR
 skinparam ClassAttributeFontColor #FFFFFF
+skinparam classAttributeIconSize 0
 
 Package "Goods Class Diagram" as GoodsPackage <<Rectangle>> {
 Class Person
