@@ -266,7 +266,11 @@ It is optional to include a remark when adding a visit to the visit history. Giv
 
 The emergency contact was designed to only be a phone number in the current implementation. It is intended to extend this so that the emergency contact includes a name and phone number.
 
+A current contact can be assigned as another person's emergency contact. It is also possible to create a person who is only an emergency contact. To generalize we create a class called contactable person which has all the necessary methods and values for an emergency contact:
 
+<puml src="diagrams/EmergencyContact.puml" />
+
+A person will then store an EmergencyContactablePerson as their emergency contact.
 
 --------------------------------------------------------------------------------------------------------------------
 

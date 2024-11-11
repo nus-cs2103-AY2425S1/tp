@@ -9,8 +9,8 @@ class Visit
 Person *-right-> "1" VisitHistory
 VisitHistory *-right-> "*" Visit
 
-Visit : LocalDate date
-Visit : Optional<String> remark
+Visit : date: LocalDate
+Visit : remark: Optional<String>
 
 VisitHistory : getDateOfLastVisit()
 @enduml

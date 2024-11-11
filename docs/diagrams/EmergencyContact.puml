@@ -5,6 +5,10 @@ class ContactablePerson
 class Person
 class EmergencyOnlyContact
 
+ContactablePerson <|--- Person
+ContactablePerson <|--- EmergencyOnlyContact
 
 
+ContactablePerson : phone
+ContactablePerson : name
 @enduml
