@@ -283,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new pet owner by providing the owner's NRIC, name, phone, address, and email.
+1.  User requests to add a new pet owner by providing the owner's IC number, name, phone, address, and email.
 2.  PawPatrol validates input.
 3.  PawPatrol successfully adds the new pet owner to the list.
 
