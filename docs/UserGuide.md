@@ -51,20 +51,21 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                     |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**           | `clear`                                                                                                                                                              |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
-| **Download**       | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
-| **List**            | `list`                                                                                                                                                               |
-| **Help**            | `help`                                                                                                                                                               |
-| **Add Shortcut**    | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
-| **Delete Shortcut** | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
-| **List Shortcuts**  | `listShortCut`                                                                                                                                                       |
-| **Filter**          | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
+| Action                    | Format, Examples                                                                                                                                                     |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                 | `clear`                                                                                                                                                              |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Delete by Postal Code** | `deletePC POSTALCODE`<br> e.g., `deletePC 560123`                                                                                                                    |
+| **Download**              | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**                  | `list`                                                                                                                                                               |
+| **Help**                  | `help`                                                                                                                                                               |
+| **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
+| **Delete Shortcut**       | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
+| **List Shortcuts**        | `listShortCut`                                                                                                                                                       |
+| **Filter**                | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
 
 > **Note**: NomNomNotifier only accepts inputs in english without any emojis
 
