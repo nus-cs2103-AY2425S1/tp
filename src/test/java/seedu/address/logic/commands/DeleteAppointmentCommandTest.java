@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -218,6 +219,10 @@ public class DeleteAppointmentCommandTest {
                 }
             }
             return doctor;
+        }
+        @Override
+        public ObservableList<Person> getAllPersons() {
+            return FXCollections.observableArrayList(personList);
         }
         @Override
         public ObservableList<Person> getFilteredPersonList() {
