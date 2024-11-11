@@ -400,10 +400,6 @@ If your changes to the data file makes its format invalid, StudentManagerPro wil
 Furthermore, certain edits can cause the StudentManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -417,6 +413,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Certain times, the application may lag**, and the student list must be scrolled to update the page.
+4. **User will need to remove the attendances by the end of the year** as students will graduate from the class by the end of the year. Failure to do so will cause the app to crash.
 
 --------------------------------------------------------------------------------------------------------------------
 

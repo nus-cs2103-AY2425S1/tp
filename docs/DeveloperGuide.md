@@ -1003,8 +1003,6 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Adding a student
 
 1. Adding a student into the list
@@ -1027,8 +1025,6 @@ testers are expected to do more *exploratory* testing.
        `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/`<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -1046,8 +1042,6 @@ testers are expected to do more *exploratory* testing.
       `delete x`<br>
       `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Editing a student
 
@@ -1068,8 +1062,6 @@ testers are expected to do more *exploratory* testing.
        `edit x c/1A` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Adding EcName for a student
 
 1. Adding EcName for a student in the list
@@ -1088,9 +1080,7 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect addEcName commands to try:<br>
        `addEcName`<br>
        `addEcName hhhh en/Jack`<br>
-       Expected: An error message is shown which includes the correct format of the addEcName command to follow. 
-   
-2. _{ more test cases …​ }_
+       Expected: An error message is shown which includes the correct format of the addEcName command to follow.
 
 ### Adding EcNumber for a student
 
@@ -1113,8 +1103,6 @@ testers are expected to do more *exploratory* testing.
        `addEcNumber x ep/91234567` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Adding attendance for a student
 
 1. Adding attendance for a student in the list
@@ -1132,8 +1120,6 @@ testers are expected to do more *exploratory* testing.
        `addAttendance 1 ad/24-09-24 ar/MC`<br>
        `addAttendance 1 ad/24-09-2024 ar/!@#`<br>
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Deleting attendance for a student
 
@@ -1153,8 +1139,6 @@ testers are expected to do more *exploratory* testing.
        `addAttendance x ad/24-09-2024 ar/` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Adding exam for students
 
 1. Adding exam for all students currently in the list
@@ -1170,8 +1154,6 @@ testers are expected to do more *exploratory* testing.
        `addExam ex/`<br>
        `addExam ex/#@*`<br>
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Adding exam score for a student
 
@@ -1191,8 +1173,6 @@ testers are expected to do more *exploratory* testing.
        `addExamScore x ex/Midterm sc/70.0` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Deleting exam for students
 
 1. Deleting exam for all students currently in the list
@@ -1211,8 +1191,6 @@ testers are expected to do more *exploratory* testing.
        `deleteExam ex/#@*`<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Adding submission for students
 
 1. Adding submission for all students currently in the list
@@ -1228,8 +1206,6 @@ testers are expected to do more *exploratory* testing.
        `addSubmission sm/`<br>
        `addSubmission sm/#@*`<br>
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Adding submission status for a student
 
@@ -1249,8 +1225,6 @@ testers are expected to do more *exploratory* testing.
        `addSubmissionStatus x sm/Assignment 1 ss/Y` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Deleting submission for students
 
 1. Deleting submission for all students currently in the list
@@ -1268,8 +1242,6 @@ testers are expected to do more *exploratory* testing.
        `deleteSubmission sm/`<br>
        `deleteSubmission sm/#@*`<br>
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Filtering students
 
@@ -1297,8 +1269,6 @@ testers are expected to do more *exploratory* testing.
        `filter n/ p/`<br>
        Expected: Similar to previous
 
-2. _{ more test cases …​ }_
-
 ### Sorting students
 
 1. Sorts all students currently in the list based on the specified attribute
@@ -1316,16 +1286,6 @@ testers are expected to do more *exploratory* testing.
       `sort 1`<br>
       Expected: Similar to previous
 
-2. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
@@ -1335,3 +1295,47 @@ testers are expected to do more *exploratory* testing.
 * It was also quite challenging to add new attributes and represent them as tables in the GUI, such as exams, submissions, and attendance.
 * While AB3 deals with simple attributes of a person, we had to include attributes that were more complex and tailored for our application use and needs, thus requiring us to store more non-trivial data for every student.
 * Some achievements of the project include learning the workflows of having multiple developers work on the same product and managing each other's changes.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### Ui
+* Ui can be adjusted such that long names and phone numbers will not be truncated when added into StudentManagerPro.
+* For commands with index, a specific error message can be added for missing index instead of the generic invalid command format error message so that users can easily find the error in their command.
+* Instead of just showing an empty data file when a user adds an invalid format to the data file, an error message can be shown when the app is opened.
+* Update help command to show a command summary instead of a link to the UG.
+
+### Sex
+* Sex attribute can be adjusted to be case insensitive in the future to make it more convenient for users.
+
+### Class
+* Class attribute can be made more flexible by allowing different formats for identifying and distinguishing between classes.
+
+### EcName / EcNumber
+* Combine `addEcName` and `addEcNumber` into one command.
+
+### Edit
+* Edit command can be changed such that the student list is not unfiltered after the command is called.
+
+### Filter
+* Allow filtering by phone numbers using predicates less than 3 digits long.
+
+### Sort
+* Sort in descending order.
+* Sort by more than one attribute at a time (sort by student class, and within each class sort by register number)
+* Edit sort command to use simpler command for faster typing.
+
+### Exam / Submission
+* Exam Score can accept whole numbers and automatically convert them to one decimal point in the future to make it more intuitive for users.
+* Exam Name can accept special characters that may be valid exam names to give users more input flexibility.
+* Submission Status can be adjusted to be case-insensitive in the future to make it more convenient for users.
+* Exam Score and Submission Status can be removed with a blank user input in their respective fields instead of “NIL” for consistency with other features.
+* Include the ability to assign specific exams and submissions to selected groups and not automatically to all students, allowing for customized tests and assignments for different sets of students.
+* Exams and Submissions can be automatically added for new students being added to the list, instead of having the user add them manually.
+
+### Attendance
+* Adding attendance can be adjusted such that it does not show the entire unfiltered contact list every time it is added.
+* “addAttendance” command can be changed to “trackAbsenteeism” to reduce confusion since the command can delete the records as well.
+* As only dates in the current year are allowed when adding attendance, the command can be adjusted such that it only requires users to enter the date in the form of DD-MM.
+
