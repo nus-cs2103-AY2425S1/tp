@@ -212,7 +212,7 @@ Upon execution, `AddCommand` first queries the supplied model if it contains a c
 
 ### Add Listing Feature
 
-the ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
+The ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
 When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
 In this case, `AddressBookParser` creates `ListingCommandsParser` to parse user input string.
 
