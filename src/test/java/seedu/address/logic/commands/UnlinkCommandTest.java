@@ -1,9 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UnlinkCommand.MESSAGE_UNLINK_CONTACT_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICE_NAME;
+import static seedu.address.testutil.TypicalPersons.BENSON_NAME;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -36,5 +39,26 @@ public class UnlinkCommandTest {
                 changedStudent.getName(), changedParent.getName());
 
         assertCommandSuccess(unlinkCommand, model, expectedMessage, changedModel);
+    }
+
+    @Test
+    public void equals() {
+        UnlinkCommand unlinkFirstCommand = new UnlinkCommand(ALICE_NAME);
+        UnlinkCommand unlinkSecondCommand = new UnlinkCommand(BENSON_NAME);
+        // same object -> returns true
+        assertTrue(unlinkFirstCommand.equals(unlinkFirstCommand));
+
+        // same values -> returns true
+        UnlinkCommand unlinkFirstCommandCopy = new UnlinkCommand(ALICE_NAME);
+        assertTrue(unlinkFirstCommand.equals(unlinkFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(unlinkFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(unlinkFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(unlinkFirstCommand.equals(unlinkSecondCommand));
     }
 }

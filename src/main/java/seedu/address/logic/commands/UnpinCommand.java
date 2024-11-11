@@ -23,8 +23,8 @@ public class UnpinCommand extends Command {
             + "Parameters: INDEX (one or more, all must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_PIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
-    public static final String MESSAGE_PIN_PEOPLE_SUCCESS = "Unpinned People: \n%1$s";
+    public static final String MESSAGE_UNPIN_PERSON_SUCCESS = "Unpinned Person: %1$s";
+    public static final String MESSAGE_UNPIN_PEOPLE_SUCCESS = "Unpinned People: \n%1$s";
 
     private final List<Index> targetIndices;
 
@@ -59,9 +59,9 @@ public class UnpinCommand extends Command {
         model.sortByPin();
 
         if (resultMessages.size() == 1) {
-            return new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS, resultMessages.get(0)));
+            return new CommandResult(String.format(MESSAGE_UNPIN_PERSON_SUCCESS, resultMessages.get(0)));
         } else {
-            return new CommandResult(String.format(MESSAGE_PIN_PEOPLE_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_UNPIN_PEOPLE_SUCCESS,
                     String.join("\n", resultMessages)));
         }
     }

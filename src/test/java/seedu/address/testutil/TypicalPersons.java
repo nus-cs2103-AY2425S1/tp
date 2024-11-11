@@ -102,4 +102,52 @@ public class TypicalPersons {
         // Alice, Benson, Carl and Daniel are Students; Elle, Fiona and George are Parents
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static AddressBook getUnlinkedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Student unlinkedStudent = new StudentBuilder(student).withParentName(null).build();
+                ab.addPerson(unlinkedStudent);
+            } else if (person instanceof Parent parent) {
+                Parent unlinkedParent = new ParentBuilder(parent).withChildren().build();
+                ab.addPerson(unlinkedParent);
+            }
+        }
+        return ab;
+    }
+
+    public static AddressBook getArchivedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toArchive = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withArchived(toArchive).build();
+                ab.addPerson(newStudent);
+                toArchive = !toArchive;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withArchived(toArchive).build();
+                ab.addPerson(newParent);
+                toArchive = !toArchive;
+            }
+        }
+        return ab;
+    }
+
+    public static AddressBook getPinnedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toPin = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withPinned(toPin).build();
+                ab.addPerson(newStudent);
+                toPin = !toPin;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withPinned(toPin).build();
+                ab.addPerson(newParent);
+                toPin = !toPin;
+            }
+        }
+        return ab;
+    }
 }
