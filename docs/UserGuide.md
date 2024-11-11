@@ -64,6 +64,10 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
 * Parameters can be in any order.<br>
   e.g. the `add` command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Extra spaces in any tag or guest name will **not** be ignored, for increased flexibility.
+  e.g. `bride's friend` and `bride's  friend` are considered different tags.
+  e.g. `John Doe` and `John  Doe` are considered different guests.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -363,7 +367,7 @@ AB3 My Guest data is saved in the hard disk automatically after any command that
 AB3 My Guest data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AB3 My Guest will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, AB3 My Guest will discard all data and start with an empty data file on the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AB3 My Guest application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
