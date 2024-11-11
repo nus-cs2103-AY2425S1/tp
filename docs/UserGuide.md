@@ -380,7 +380,6 @@ Action | Format, Examples
 **Export** | `export FILENAME`<br> e.g., `export exported_email`
 **Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`
 
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Misc. - Valid email field format:**<br>
