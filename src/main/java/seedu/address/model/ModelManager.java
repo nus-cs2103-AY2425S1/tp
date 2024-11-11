@@ -204,5 +204,9 @@ public class ModelManager implements Model {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
+    public ObservableList<Student> getAllStudents() {
+        return getAddressBook().getStudentList();
+    }
+
 
 }
