@@ -281,7 +281,7 @@ The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whe
 **Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
 ### 3.  Support for Symbols such as `@` and Parentheses in Names
-**Current Issue:** ames containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
+**Current Issue:** Names containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
 
 **Technical Impact:**
 - There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
@@ -327,7 +327,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
-**Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+**Current issue:** The parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
 - `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
 - `email` must be in a valid email format (e.g., `username@domain`).
 
@@ -641,6 +641,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Banking Agent**: A user of the system responsible for selling credit cards to clients.
 * **Contact**: A record in the AgentAssist system that contains cliental and financial details of a client.
 * **Client**: An individual whose information is managed within the AgentAssist system. This client may be a prospective or existing customer of the banking agent, expressing interest in or currently using credit card services.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -708,6 +709,29 @@ testers are expected to do more *exploratory* testing.
 2. Deleting a client after having filtered based on a criteria
    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
    2. Functions similar to above example except that the indexes to be used are based on the new list shown.
+
+### Editing a client
+
+1. Editing a client while all clients are being shown
+
+    1. Prerequisites: List all clients using the `list` command. At least one client in the list.
+    2. Test case: `edit 1 n/ <NAME>`<br>
+         Expected: The name of the client in index 1 will be changed to <NAME>.
+    3. Test case: `edit 1 n/ <NAME> p/ <PHONE>`<br>
+         Expected: The name and the phone of the client in index 1 will be changed to <NAME> and <PHONE> respectively.
+   4. Other correct edit commands to try: `edit 1 n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+      Expected: Similar to previous.
+   5. Test case: `edit 0 n/ <NAME>`<br>
+        Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
+   6. Other incorrect edit commands to try:<br>
+      `edit 1 f/<INVALID_VALUE>` (where f is a valid flag),<br>
+      `edit x n/<NAME>` (where x is larger than list size),<br>
+      `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
+       Expected: Similar to previous.
+
+2. Editing a client after having filtered based on a criteria
+    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+    2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Saving data
 
