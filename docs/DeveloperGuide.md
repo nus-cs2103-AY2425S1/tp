@@ -610,6 +610,7 @@ testers are expected to do more *exploratory* testing.
 6. Favourite a restaurant while all restaurants are being shown
 
     a. Prerequisites: The requested restaurant has to be currently saved.<br>
+      In the test case below, we assume that none of the restaurants in the list were previously marked as favourite. 
 
     b. Test case: `fav 2`<br>
        Expected: Second contact has its border highlighted orange and brought to the top of the list as the first index.
