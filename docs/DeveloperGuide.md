@@ -1115,10 +1115,15 @@ Deleting an existing appointment from a patient
 
 Team size: 5
 
-1\. **Allow names to include symbols and special characters**
+1\. **Enhance Name Validation**
 
-  As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
-  However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
+   Currently, MediBase3 restricts patient names to alphanumerics and spaces only, preventing the inclusion of common symbols, hyphens, and accented characters that are often found in legal names (e.g., 'Nagaratnam s/o Suppiah', 'Anya Taylor-Joy', 'Sergio Pérez'). Additionally, the app allows leading, trailing, and multiple consecutive spaces, which can result in inconsistent formatting.
+
+   This enhancement will:
+    - Loosen restrictions to allow all other special and accented characters, enabling the accurate entry of a wider range of legitimate names.
+    - Automatically trim any leading or trailing spaces and reduce multiple consecutive spaces to a single space, ensuring consistent formatting and reducing errors from accidental spacing during data entry.
+
+   These changes will improve the inclusivity and data consistency of MediBase3's patient records.
 
 2\. **Improve `addAppt` command to allow users to add multiple appointments at once**
 
