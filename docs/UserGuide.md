@@ -314,6 +314,11 @@ Examples:
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
+<box type="tip" seamless>
+
+**Note:** Searching by Name does not include Nicknames (and vice versa). `find n/Alex` does not include Contacts with the field `nn/alex`
+* If you do not find the contact via searching by Name, you may want to search via Nickname instead.
+</box>
 
 <box type="tip" seamless>
 
