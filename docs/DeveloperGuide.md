@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 - 1b. User enters a name that is not unique in the address book.
   - 1b1. Application prompts the user to delete by index instead.
-  - 1b2. User enters index of contact to delete
+  - 1b2. User enters index of contact to delete.
       Use case resumes at step 2.
 
 ---
@@ -356,18 +356,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
-2. User enters the `delete` command with an index from the filtered list.
+2. User enters the `delete` command with the contact’s index or unique full name from the filtered list.
 3. Application deletes the specified contact from the filtered list.
-4. Application displays a confirmation message.
+4. Application displays a confirmation message with the deleted contact's details.
      Use case ends.
 
 **Extensions**
-- 2a. User provides an invalid index or namenot in the filterest list.
+- 2a. User provides an invalid index or name not in the filtered list.
   - 2a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
 - 2b. User enters a name that is not unique in the address book.
   - 2b1. Application prompts the user to delete by index instead.
-  - 2b2. User enters index of contact to delete
+  - 2b2. User enters index of contact to delete.
       Use case resumes at step 2.
 
 ---
@@ -384,14 +384,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 - 1a. User provides incomplete, invalid, or duplicate data.
   - 1a1. Application displays an error message indicating the issue.
-      Use case ends
+      Use case ends.
 - 1b. User specifies a non-unique full name for editing.
   - 1b1. Application prompts the user to edit by index.
-  - 1b2. User enters index of contact to delete
+  - 1b2. User enters index of contact to delete.
       Use case resumes at step 2.
 - 1c. Contact not found (e.g., incorrect index or name not in list).
   - 1c1. Application displays an error message: "Error: Contact not found."
-      Use case ends
+      Use case ends.
 
 ---
 
@@ -399,22 +399,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
-2. User enters the `edit` command with an index from the filtered list.
+2. User enters the `edit` command with the contact’s index or unique full name, specifying the fields to update from the filtered list.
 3. Application updates the specified contact’s details in the filtered list.
-4. Application displays a confirmation message.
-     Use case ends
+4. Application displays a confirmation message: "Contact edited successfully."
+     Use case ends.
 
 **Extensions**
 - 2a. User provides incomplete, invalid, or duplicate data.
   - 2a1. Application displays an error message indicating the issue.
-      Use case ends
+      Use case ends.
 - 2b. User specifies a non-unique full name for editing.
   - 2b1. Application prompts the user to edit by index.
   - 2b2. User enters index of contact to delete
       Use case resumes at step 2.
 - 2c. Contact not found (e.g., incorrect index or name not in filtered list).
   - 2c1. Application displays an error message: "Error: Contact not found."
-      Use case ends
+      Use case ends.
 
 ---
 
@@ -428,13 +428,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 1a. Search input does not match any contact in the AddressBook.
-  - 1a1. Application shows an error message and prompts user to try searching under another field
+  - 1a1. Application shows an error message and prompts user to try searching under another field.
       Use case ends.
 - 1b. User specifies an invalid role or student status.
-  - 1b1. Application displays an error message of invalid role/student status inputted
+  - 1b1. Application displays an error message of invalid role/student status inputted.
       Use case ends.
 - 1c. User did not provide the search input
-  - 1c1. Application displays error message to input search criteria
+  - 1c1. Application displays error message to input search criteria.
       Use case ends.
 
 ---
