@@ -1,7 +1,6 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.logic.Messages.format;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
