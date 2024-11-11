@@ -24,6 +24,7 @@ Class Appointment
 Class Log
 Class LogList
 Class Remark
+Class Triage
 
 Class I #FFFFFF
 }
@@ -50,6 +51,7 @@ Person *--> "1"Nric
 Person *--> "*" Appointment
 Person *--> "*" Remark
 Person *--> "1" LogList
+Person *--> "1" Triage
 Person *--> "*" Tag
 
 LogList *--> "*" Log

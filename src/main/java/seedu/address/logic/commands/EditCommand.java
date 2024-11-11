@@ -55,8 +55,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TRIAGE + "TRIAGE] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -67,7 +67,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    //private final Index index;
     private final Nric nric;
     private final EditPersonDescriptor editPersonDescriptor;
     private final NricMatchesPredicate predicate;
@@ -214,7 +213,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, tags, appointment);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nric, address, triage, tags, appointment);
         }
 
         public void setName(Name name) {
@@ -256,12 +255,15 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
         public void setTriage(Triage triage) {
             this.triage = triage;
         }
+
         public Optional<Triage> getTriage() {
             return Optional.ofNullable(triage);
         }
+
         public void setAppointment(Appointment appointment) {
             this.appointment = appointment;
         }

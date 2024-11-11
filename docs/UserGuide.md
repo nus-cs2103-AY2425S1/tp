@@ -24,9 +24,11 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
     13. [Deleting patient profile](#deleting-a-patient-profile--delete)
     14. [Clear all entries](#clearing-all-entries--clear)
     15. [Exiting the program](#exiting-the-program--exit)
+    16. [Appointment Popup](#appointment-popup-on-start-up)
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
+6. [Command Shortcuts](#command-shortcuts-table)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +73,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [tag/TAG]` can be used as `n/John Doe tag/Parkinsons` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times, including zero times.  
+* Items with `…` after them can be used multiple times, including zero times.
   For example, `[tag/TAG]…` can be used as follows:
 
   - Not at all (i.e., ` ` )
@@ -84,7 +86,12 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
     e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.<br>
+Murphy's List also does not automatically check for invalid email formats, so please take caution when adding/editing patient information. *(Email validation will be included in a future release.)*
 </div>
+
 
 ### Viewing help : `help`
 
@@ -106,12 +113,14 @@ A patient profile can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/S1234123A a/John Street, Block 123, #01-01 t/2`
-* `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/1 tag/Diabetic tag/G6PD`
+* `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Clementi Ave 1, Block 230 t/1 tag/Diabetic tag/G6PD`
+
+> **Note:** `add` **does not support** the addition of appointments. Use the [appointment](#adding-an-appointment--appointment) command to do so.
 
 ### Adding a remark to a patient profile : `remark`
 
 Adds a remark to a specified patient profile.
-> 💡 **Note:** You can only specify **one** remark to add
+> **Note:** You can only specify **one** remark to add, and patients can only have one remark.
 
 Format: `remark NRIC r/REMARK`
 
@@ -125,11 +134,16 @@ Adds the appointment date (in format DD-MM-YYYY HH:MM) of a patient to the patie
 
 Format: `appointment NRIC app/DD-MM-YYYY HH:MM`
 
+* If the patient already has an appointment, the new appointment will overwrite the existing one.
+* Invalid dates and times (eg. 30th February, 24:59) will not be accepted.
+
+> **Note:** Patients can only have one appointment at any one time.
+
 ### Changing Triage Stage : `triage`
 
-Changes the existing triage stage of a patient to another stage. Stages are categorised from 1 to 5.
+Changes the existing triage stage of a patient to another stage. Triage stage refers to the severity of patient's condition.
 
-Triaging stages follows the Phase of Illness Model:
+Stages are categorised from 1 to 5. Triaging stages follows the Phase of Illness Model:
 
 1 - Stable
 
@@ -149,9 +163,9 @@ Example:
 
 ### Editing a patient profile : `edit`
 
-Edits the details of the patient identified by the index number used in the displayed patient profile list. **Existing information will be overwritten by the input values.**
+Edits the details of the patient identified by their NRIC. **Existing information will be overwritten by the input values.**
 
-Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`
+Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [app/APPOINTMENT] [tag/TAG]…​`
 
 * Edits the patient profile with the specified `NRIC`.
 * At least one of the optional fields must be provided.
@@ -182,14 +196,12 @@ Sorts the list of patients based on the specified criteria.
 
 Format: `sort [name | appointment]`
 
+* If the list is already sorted by the specified criteria, the command will maintain the current order.
+* Sorting by `appointment` will only consider patients with scheduled appointments. Patients without appointments will appear at the end of the list.
+
 Examples:
 * `sort name` sorts the list of patients in alphabetical order by their names.
 * `sort appointment` sorts the list of patients by their upcoming appointment dates in chronological order.
-
-#### Notes
-- If the list is already sorted by the specified criteria, the command will maintain the current order.
-- Sorting by `appointment` will only consider patients with scheduled appointments. Patients without appointments will appear at the end of the list.
-
 
 ### Locating patients by name: `find`
 
@@ -209,6 +221,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/searchResult.png)
 
 #### To search by **tags**:
@@ -224,6 +238,7 @@ Examples:
 - `find tag/diabetic` finds all people with the "diabetic" tag.
 - `find tag/diabetic hypertensive` finds all people with either the "diabetic" or "hypertensive" tags.
 
+> **Note**: `find` will only search for either names or tags but not both at the same time.
 
 ### Logging patient information : `log`
 
@@ -233,6 +248,7 @@ Format: `log NRIC DD-MM-YYYY HH:MM INFO`
 
 * Logs the information to the patient with the specified `NRIC`.
 * Date and time inputs refer to log date and time.
+* Invalid dates and times (eg. 30th February, 24:59) will not be accepted.
 * Logged information must be non-empty.
 * Note that when the View Window is opened when adding log entries, the window will not display the new log entries until the view command is executed by the user again.
 
@@ -241,11 +257,13 @@ Examples:
 
 ### Viewing patient information : `view`
 
-* Views full information of the patient with the specified `NRIC` not displayed on the Main Window (eg. Patient logs).
+* Views full information of the patient with the specified `NRIC` not displayed on the Main Window (e.g., Patient logs).
 
-Format: `view NRIC`
+**Format:** `view NRIC`
 
 ![view page](images/ViewWindow.png)
+
+> **Note:** The view window will not automatically update after editing the patient's information unless you close the window and call the `view` command again. Additionally, it will not close automatically if you delete the patient.
 
 ### Deleting a patient profile : `delete`
 
@@ -269,6 +287,19 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Command Shortcuts
+
+For quick access, here is a [table of command shortcuts](#command-shortcuts-table) summarizing the command formats.
+
+### Appointment Popup on Start-Up
+
+On application start-up, if a patient has an appointment scheduled for the current day, a popup window will appear to notify you of the upcoming appointment(s).
+
+![appointment popup](images/AppointmentPopup.png)
+
+This popup will only display once at start-up and will not reappear unless the application is restarted with a patient having an appointment on the current day.
+
 
 ### Saving the data
 
@@ -298,6 +329,7 @@ _Details coming soon ..._
 You can check your Java version by running `java -version` in the command terminal.
 **Q**: How do I recover data if I accidentally delete a patient profile?
 **A**: Unfortunately, there is no built-in undo feature for deleted data. It is recommended to back up your data by making a copy of the data file periodically.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -309,20 +341,40 @@ You can check your Java version by running `java -version` in the command termin
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                            |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/Diabetic t/G6PD` |
-| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                             |
-| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                  |
-| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                    |
-| **Clear**           | `clear`                                                                                                                                                                                     |
-| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                  |
-| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`<br> e.g.,`edit S1234567A n/James Lee e/jameslee@example.com`                                           |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br/> `find tag/TAG [MORE_TAGS]` <br> e.g., `find tag/diabetic`                                                                   |
-| **List**            | `list`                                                                                                                                                                                      |
-| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                         |                                             |
-| **Sort**            | `sort name`, `sort appointment`                                                                                                                                                             |
-| **Schedule**        | `schedule`                                                                                                                                                                                  |
-| **View**            | `view NRIC`<br> e.g `view S1234567A`                                                                                                                                                        |
-| **Help**            | `help`                                                                                                                                                                                      |
-| **Exit**            | `exit`                                                                                                                                                                                      |
+| Action              | Format, Examples                                                                                                                                                                                               |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Clementi Ave 1, Block 230 t/1 tag/Diabetic tag/G6PD` |
+| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                                                |
+| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                                     |
+| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                                       |
+| **Clear**           | `clear`                                                                                                                                                                                                        |
+| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                                     |
+| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [app/APPOINTMENT] [tag/TAG]…​`<br> e.g.,`edit S1234567A n/James Lee e/jameslee@example.com`                                            |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`<br/> `find tag/TAG [MORE_TAGS]` <br> e.g., `find tag/diabetic`                                                                                      |
+| **List**            | `list`                                                                                                                                                                                                         |
+| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                                            |                                             |
+| **Sort**            | `sort name`, `sort appointment`                                                                                                                                                                                |
+| **Schedule**        | `schedule`                                                                                                                                                                                                     |
+| **View**            | `view NRIC`<br> e.g `view S1234567A`                                                                                                                                                                           |
+| **Help**            | `help`                                                                                                                                                                                                         |
+| **Exit**            | `exit`                                                                                                                                                                                                         |
+
+## Command Shortcuts Table
+
+| Command       | Shortcut | Description                              |
+|---------------|----------|------------------------------------------|
+| `add`         | `a`      | Adds a patient profile to the database   |
+| `appointment` | `appt`   | Adds an appointment to a patient profile |
+| `clear`       | `c`      | Clears all entries from the database     |
+| `delete`      | `d`      | Deletes a specified patient profile      |
+| `edit`        | `ed`     | Edits details of a patient profile       |
+| `exit`        | `ex`     | Exits the application                    |
+| `find`        | `f`      | Finds patients by name or tags           |
+| `help`        | `h`      | Displays a list of accepted commands     |
+| `list`        | `ls`     | Shows a list of all patient profiles     |
+| `remark`      | `r`      | Add a remark to a patient profile        |
+| `sort`        | `s`      | Sorts the list of patients               |
+| `triage`      | `t`      | Change triage stage of a patient         |
+| `view`        | `v`      | Views detailed patient information       |
+
+> **Note:** Shortcuts for `log`and `schedule` are not included but will be available in a future update.

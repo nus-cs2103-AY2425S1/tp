@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -177,27 +176,16 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
-        private final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
-            filteredPersonList.add(person);
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return filteredPersonList;
         }
     }
 
@@ -206,7 +194,6 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-        private final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -223,18 +210,6 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            requireNonNull(predicate);
-            // Update filteredPersonList with all persons matching the predicate
-            filteredPersonList.setAll(personsAdded.stream().filter(predicate).toList());
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return FXCollections.unmodifiableObservableList(filteredPersonList);
         }
     }
 

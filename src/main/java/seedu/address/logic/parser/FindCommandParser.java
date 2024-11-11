@@ -24,6 +24,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
+        // Throw exception if the string is non alphanumeric except spaces or slashes
+        if (!trimmedArgs.matches("^[a-zA-Z0-9\\s/]*$")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         // If the user provides a tag search prefix (e.g., "tag/diabetic"), search by tags
         if (trimmedArgs.startsWith("tag/")) {
             String tagKeywords = trimmedArgs.replace("tag/", "").trim();
@@ -31,8 +36,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (tagKeywords.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
+
+            // Throw exception if string is non alphanumeric except spaces
+            if (!tagKeywords.matches("^[a-zA-Z0-9\\s]*$")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+
             List<String> tagKeywordList = Arrays.asList(tagKeywords.split("\\s+"));
             return new FindCommand(new TagContainsKeywordsPredicate(tagKeywordList));
+        }
+
+        // Throw an error if the user tries to search by BOTH name and tag
+        if (trimmedArgs.contains("/")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // Otherwise, search by name

@@ -21,9 +21,9 @@ public class TriageCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "t";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Triage patient using numbers 1 to 5. "
-            + "Based on Phase of Illness Model -> 1 indicating stable while 5 indicating bereaved.\n"
+            + "Based on Phase of Illness Model -> 1: Stable, 2: Unstable, 3: Deteriorating, 4: Terminal, 5: Bereaved.\n"
             + "Parameters: NRIC "
-            + PREFIX_TRIAGE + "[TRIAGE]\n"
+            + PREFIX_TRIAGE + "TRIAGE\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_TRIAGE + "3";
 
