@@ -124,7 +124,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the ClinicConnect system data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
-* stores all `FilteredAppointment` objects 
+* stores all `FilteredAppointment` objects
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -157,9 +157,9 @@ The `help` command opens a separate help window detailing a summary of the comma
 The user can optionally provide a `COMMAND_KEYWORD` which opens a separate help window showing more information about the specified command. <br>
 
 ##### Parsing User Input
-The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display. 
+The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display.
 It uses the `trim` method to remove any leading and trailing white-space characters from the user input.
-If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid. 
+If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid.
 The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches one of the command keywords supported by the application.
 
 ##### Executing the Command
@@ -171,18 +171,41 @@ The following activity diagram illustrates the workflow of the execution of the 
 
 ##### Design Considerations
 The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
-Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
-For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.  
+Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application.
+For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.
 
 #### Home Command : `home`
 The `home` command returns the user to the home UI where all the patients are displayed.
 
 ##### Executing the Command
+The `HomeCommand` sets the `filteredPatientList` to include all patients in the `Model` component and returns a `DefaultCommandResult`.
+When the `MainWindow` is refreshed it then sets the view to be the default view which is the home UI where all the patients are displayed.
 
+##### Design Considerations
+We designed the `home` command to display all the patients as we wanted the user to have easy access to an overview of all the patients. This is useful because the UI changes often with the various commands used.
+
+We also display the total number of patients in the system, providing users with a clearer overview of the clinic's customers.
 
 #### Clear Command : `clear`
+The `clear` command allows the user to delete all the patients and appointments from the ClinicConnect system.
+
+##### Executing the Command
+The `ClearCommand` sets the `ClinicConnectSystem` of the `Model` to be a new `ClinicConnectSystem` object. By doing so, there is no longer any reference to the previous `ClinicConnectSystem` object, effectively deleting all the patient and appointment records.
+
+##### Design Considerations
+The `clear` command was implemented so that users can easily remove the sample data and start afresh.
 
 #### Exit Command : `exit`
+The `exit` command allows the user to close all the tabs of the ClinicConnect system.
+
+##### Executing the Command
+The `ExitCommand` returns a `ExitCommandResult` which will eventually invoke the `handleExit` method in the `MainWindow` class causing all the windows (including help windows) to close.
+
+##### Design Considerations
+To stay true to the nature of a CLI-based application, we implemented the `exit` command so that the user can simply just type `exit` and close the application.
+
+Furthermore, the `help` command opens a new window for each `COMMAND_KEYWORD`. Therefore, after a using the application, if the user wants to close the application, he/she will have to close each help window one by one.
+To make this more convenient for the user, we made the `exit` command close all the help windows as well.
 
 ### Patient Management Features
 
@@ -228,7 +251,7 @@ The parsing of the fields is as follows:
 ##### Executing the Command
 The `AddFCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
 
-The activity diagram below illustrates the worflow behind the execution of the `addf` command.
+The activity diagram below illustrates the workflow behind the execution of the `addf` command:
 
 ![AddFActivityDiagram](images/AddFActivityDiagram.png)
 
@@ -258,14 +281,83 @@ The following fields are optional as they are not essential in serving a patient
 #### Edit Command : `edit`
 
 #### Delete Command : `delete`
+The `delete` command is used to delete a patient entry from the patient list.
+
+The user has to specify the target patient's:
+* NRIC (`Nric`)
+
+##### Parsing User Input
+The `DeleteCommandParser` class parses the user input to extract the NRIC parameter that has been specified.
+
+##### Executing the Command
+The `DeleteCommand` class is initialized and the `Patient` object with a matching NRIC with the argument is retrieved. The `Patient` object is then deleted from the `UniquePatientList` through the `deletePatient` method in the `Model` component.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing and execution of the user input.
+In this example, it takes a `delete` command: `delete T0123456A`
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `delete` command since both commands are fundamentally similar.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to identify and delete a patient entry.
+* NRIC (`Nric`)
 
 #### View Command : `view`
 
 ### Appointment Management Features
 
 #### Book Appointment : `bookappt`
+The `bookappt` command is used to book an upcoming appointment for the patient with the corresponding NRIC.
+
+The user has to specify:
+* Patient's NRIC (`Nric`)
+* Upcoming appointment date and time to be booked (`LocalDateTime`)
+* Health service the patient is receiving (`Healthservice`)
+
+##### Parsing User Input
+The `BookApptCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted the NRIC before any prefixes, all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+##### Executing the Command
+The `BookApptCommand` class is initialized with a new `Appt` object, which represents appointment, created from the parsed input. With the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. After checking for duplicates in appointment and whether the date and time inputs are past today's date, the `Appt` object is then added to the `Patient` identified.
+
+##### Activity Diagram
+The activity diagram below illustrates the workflow behind the execution of the `bookappt` command:
+
+![BookApptActivityDiagram](images/BookApptActivityDiagram.png)
+
+##### Design Considerations
+The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each upcoming appointment added for the `Patient` is unique.
 
 #### Delete Appointment : `deleteappt`
+The `deleteappt` command is used to delete an appointment for the patient with the corresponding NRIC.
+
+The user has to specify:
+* Patient's NRIC (`Nric`)
+* Appointment date and time to be deleted (`LocalDateTime`)
+
+##### Parsing User Input
+The `DeleteApptCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted the NRIC before any prefixes, the `dt|` prefix and its corresponding value.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+##### Executing the Command
+In `DeleteApptCommand`, with the NRIC input, a validity check is conducted, after which the `Patient` with the corresponding NRIC is then identified. The `Appt` object, which represents appointment, with the corresponding date and time is then identified. After checking for the validity of the appointment, the `Appt` object is then deleted from the `Patient` identified.
+
+##### Activity Diagram
+The activity diagram below illustrates the workflow behind the execution of the `deleteappt` command:
+
+![DeleteApptActivityDiagram](images/DeleteApptActivityDiagram.png)
+
+##### Design Considerations
+The `deleteappt` command uses `Nric` as a unique identifier to delete an appointment for the patient identified. `LocalDateTime` is the required field to ensure that a unique appointment is deleted from the `Patient`.
 
 #### Filter Appointment : `filter`
 
@@ -546,6 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClinicConnect shows an error message
 
       Use case ends.
+
 
 
 ### Non-Functional Requirements
