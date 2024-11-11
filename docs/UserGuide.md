@@ -77,6 +77,12 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 Shows a message explaining how to access the help page as shown below.
 
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Returning to list view:**<br>
+After opening the help window, if you wish to return to the list view, close the help window and use the command `list`.
+</div>
+
 ![help message](images/helpMessage.jpeg)
 
 Format: `help`
