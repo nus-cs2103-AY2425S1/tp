@@ -275,17 +275,14 @@ and handling paperwork related to real estate transactions. They are often mobil
 access to information, and manage a large client and property database.
 
 **Value proposition**:
-Agents often have difficulty keeping track of the large client and property database.
-Our address book allows property agents to manage prospective and existing customers by sorting them into
-different categories including housing type and income level.
-Moreover, they can keep track of house visits via an events management system.
+PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
+simpler to use while being even more functional than alternatives on the market.
 
-* Allows property agents to manage prospective and existing customers easily by sorting them into different
-  categories such as by housing type, income level, rent/sell/buy
-* Agents can sort by customer status: unresponsive,
+* Allows property agents to manage prospective and existing clients easily by sorting them into different
+  categories such as by housing type or seller/buyer
 * Keep track of the various landlords who own the houses
 * Easy for agent to remember who to try to sell unit to
-* Events for scheduling visits to houses - reminders for agents when they open the app on any upcoming visits
 
 ### User stories
 
@@ -540,28 +537,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: View upcoming reminders/events**
-
-**MSS**
-
-1. User requests to view upcoming reminders/events.
-
-2. PROperty retrieves reminders/events sorted by date and time.
-
-3. PROperty displays the list of upcoming reminders/events.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. There are no upcoming reminders/events.
-  
-  - 2a1. PROperty informs the user that there are no upcoming reminders/events.
-    
-    Use case ends.
-
----
-
 **Use case: View usage instructions**
 
 **MSS**
@@ -673,34 +648,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. PROperty displays the sorted list.
    
    Use case ends.
-
----
-
-**Use case: Customize tags with colors**
-
-**MSS**
-
-1. User selects a tag to customize.
-
-2. PROperty prompts the user to choose a color.
-
-3. User selects a color for the tag.
-
-4. PROperty updates the tag with the chosen color.
-
-5. PROperty confirms that the tag has been updated.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. The color selected is already in use by another tag.
-  
-  - 2a1. PROperty warns the user about the duplicate color.
-  
-  - 2a2. User chooses to proceed or select a different color.
-    
-    Use case resumes at step 3.
 
 ---
 
