@@ -25,12 +25,14 @@ done faster than traditional GUI apps.
 3. Copy the file to the folder you want to use as the _home folder_ for your Teletutors.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. <br>
    <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
 
-5. Pressing the **up arrow key (↑)** and **down arrow key (↓)** will recall the valid commands entered, allowing for modification of previous commands, similar to a command terminal
+5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Pressing the **down arrow key (↓)** will recall the next valid command entered, allowing for retrieval of succeeding commands, similar to a command terminal
+
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
    Some example commands you can try:
 
@@ -44,7 +46,7 @@ done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -332,7 +334,7 @@ _Details coming soon ..._
 | **List**                                        | `list`                                                                                                                                                                        |
 | **Help**                                        | `help`                                                                                                                                                                        |
 | **Undo**                                        | `undo`                                                                                                                                                                        |
-| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`                                                        |
+| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe dt/2021-10-10 pr/p sn/A1234567Z`                                                       |
 | **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 dt/2021-10-10`                                                                                    |
 | **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabsentall tg/G17 dt/2021-10-10`                                                                                      |
 | **Delete Student's Attendance**                 | `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe dt/2021-10-10 sn/A1234567Z`                                                                      |
