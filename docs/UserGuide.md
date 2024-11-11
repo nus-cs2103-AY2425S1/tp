@@ -44,23 +44,17 @@ at the National University of Singapore. While optimised for use via a Command L
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-
    * `add n/John Doe p/98765432 e/johnd@example.com r/volunteer-emcee` : Adds a person named `John Doe` to the local database, with these details:
       * 98765432 as a phone number
       * johnd@example.com as an email
       * A volunteer emcee role
-
-
    * `delete 3` : Deletes the 3rd person shown in the current list of people.
-
    * `listevent`: Lists all events.
-
    * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with these details:
      * Involves faculties COM and BIZ
      * Held on 12 December 2024, at 6pm
      * Held at USC
      * John is the only participant
-
 
    * `deleteevent 2`: Deletes the second event shown in the current list of events.
 
@@ -117,9 +111,21 @@ A person can have zero or more roles.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/Sports Director`
-* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/Computing`
+* `add n/John Doe p/98765432 e/johnd@example.com`
+* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com`
 
+To add specific roles to a person, you can use the following commands: 
+1. add ... r/athlete - <faculty> - <sport1>, {sport2}, {sport3}...
+2. add ... r/referee - <faculty> - <sport1>, {sport2}, {sport3}...
+3. add ... r/committee - <branch> - <position>
+4. add ... r/committee - Sports - <position> - <faculty>
+5. add ... r/sponsor - <company name>
+6. add ... r/volunteer - <volunteerRole>
+  
+Example:
+* `add n/John Doe p/98765432 e/john@mail.com r/athlete - COM - Soccer Men`
+
+You may check a summary of the list of roles, including all IFG Sports, via [this link.](#more-features)
 
 ### Listing all persons : `list`
 
@@ -373,3 +379,4 @@ Volunteer Roles (Code - Role Name):
 | **List People**       | `list`                                                                                                   |
 | **List Events**       | `listevent`                                                                                              |
 | **Help**              | `help`                                                                                                   |
+
