@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEHANDLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODNAME_DESC_AMY;
@@ -33,8 +34,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -51,6 +54,7 @@ import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -102,6 +106,14 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CONTACTTYPE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CONTACTTYPE));
 
+        // multiple module names
+        assertParseFailure(parser, MODNAME_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MOD));
+
+        // multiple remarks
+        assertParseFailure(parser, REMARK_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
+
         // multiple fields repeated
         assertParseFailure(parser, PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
                         + validExpectedPersonString,
@@ -129,6 +141,14 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_CONTACTTYPE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CONTACTTYPE));
 
+        // invalid module name
+        assertParseFailure(parser, INVALID_MODNAME_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MOD));
+
+        // invalid remark
+        assertParseFailure(parser, INVALID_REMARK_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
+
 
         // valid value followed by invalid value
 
@@ -152,14 +172,35 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + INVALID_CONTACTTYPE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_CONTACTTYPE));
 
+        // invalid module name
+        assertParseFailure(parser, validExpectedPersonString + INVALID_MODNAME_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MOD));
+
+        // invalid remark
+        assertParseFailure(parser, validExpectedPersonString + INVALID_REMARK_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
+
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags, no phone number and no email
-        Person expectedPerson = new PersonBuilder(AMY).withPhone(null).withEmail(null).withTags().build();
-        assertParseSuccess(parser, CONTACTTYPE_DESC_AMY + NAME_DESC_AMY
-                + TELEHANDLE_DESC_AMY + MODNAME_DESC_AMY + REMARK_DESC_AMY, new AddCommand(expectedPerson));
+        // zero tags, no phone number, email, module name or remark
+        Person expectedPersonWithTelegramHandle = new PersonBuilder(AMY).withPhone(null).withEmail(null)
+                .withModuleName(null).withRemark(null).withTags().build();
+        assertParseSuccess(parser, CONTACTTYPE_DESC_AMY + NAME_DESC_AMY + TELEHANDLE_DESC_AMY,
+                new AddCommand(expectedPersonWithTelegramHandle));
+
+        // zero tags, no telegram handle, email, module name or remark
+        Person expectedPersonWithPhone = new PersonBuilder(AMY).withTelegramHandle(null).withEmail(null)
+                .withModuleName(null).withRemark(null).withTags().build();
+        assertParseSuccess(parser, CONTACTTYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY,
+                new AddCommand(expectedPersonWithPhone));
+
+        // zero tags, no telegram handle, phone number, module name or remark
+        Person expectedPersonWithEmail = new PersonBuilder(AMY).withTelegramHandle(null).withPhone(null)
+                .withModuleName(null).withRemark(null).withTags().build();
+        assertParseSuccess(parser, CONTACTTYPE_DESC_AMY + NAME_DESC_AMY + EMAIL_DESC_AMY,
+                new AddCommand(expectedPersonWithEmail));
     }
 
     @Test
@@ -215,14 +256,19 @@ public class AddCommandParserTest {
                 + TELEHANDLE_DESC_BOB + MODNAME_DESC_BOB + REMARK_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND,
                 Tag.MESSAGE_CONSTRAINTS);
 
-        //invalid modname
+        // invalid module name
         assertParseFailure(parser, CONTACTTYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + TELEHANDLE_DESC_BOB + INVALID_MODNAME_DESC + REMARK_DESC_BOB + TAG_DESC_HUSBAND
                         + VALID_TAG_FRIEND, ModuleName.MESSAGE_CONSTRAINTS);
 
+        // invalid remark
+        assertParseFailure(parser, CONTACTTYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + TELEHANDLE_DESC_BOB + MODNAME_DESC_BOB + INVALID_REMARK_DESC
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Remark.MESSAGE_CONSTRAINTS);
+
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, CONTACTTYPE_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + TELEHANDLE_DESC_BOB + MODNAME_DESC_BOB + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, CONTACTTYPE_DESC_BOB + INVALID_NAME_DESC + INVALID_PHONE_DESC
+                + EMAIL_DESC_BOB + TELEHANDLE_DESC_BOB + MODNAME_DESC_BOB + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CONTACTTYPE_DESC_BOB + NAME_DESC_BOB

@@ -9,26 +9,6 @@
 UniLink is a desktop app that allows NUS students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
-## Table of Contents
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing help](#viewing-help--help)
-  - [Adding a person](#adding-a-person--add)
-  - [Editing a person](#editing-a-person--edit)
-  - [Finding persons by name](#finding-persons-by-name--find)
-  - [Finding persons by telegram handle](#finding-persons-by-telegram-handle--findtele)
-  - [Finding persons by tags](#finding-persons-by-tags--findtag)
-  - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
-  - [Deleting a person](#deleting-a-person--delete)
-  - [Switching display theme](#switching-display-theme--switch)
-  - [Importing data](#importing-data--import)
-  - [Exiting the program](#exiting-the-program--exit)
-- [Preparing a .csv file](#preparing-a-csv-file-)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
-- [Field Constraints](#field-constraints)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
