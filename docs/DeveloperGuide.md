@@ -656,6 +656,7 @@ Team Size: 5
        3. `add-patient` should display "Invalid date of birth provided" when the date of birth is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        4. `add-appt` should display "Invalid date provided" when the date is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        5. `add-appt` should display "Invalid time provided" when the time is outside of the range 0000 - 2359, instead of the current generic message "Times must be in the format of HHmm".
+       6. Giving invalid tags error messaage needs to be updated to let user know that tags should not only contain alphanumeric characters, but also not contain any spaces.
 
 4. **Update `add-doctor` command to take in a wider range of specialties**
    1. Currently, the `add-doctor` command only allows for specialties with no spaces and only alphabets.
