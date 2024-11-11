@@ -357,7 +357,7 @@ Furthermore, certain edits can cause the SalesContactPro to behave in unexpected
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **No horizontal scrolling for lengthy fields**, which may cause UI display issues.
 4. **Tag names only accept alphanumeric characters**, special characters like hyphens are not allowed.
-5. **Phone numbers only accept the "+" symbol** at the beginning.
+5. **Phone number error message**: The error message only states that "+" is allowed, but does not mention that it should be at the beginning.
 6. **Cannot filter for empty fields**.
 7. **The edit command processes multiple INCOME or AGE parameters** in a single command, using only the last value.
 8. **Contact names are case-sensitive**, potentially allowing duplicate entries with different capitalization.
