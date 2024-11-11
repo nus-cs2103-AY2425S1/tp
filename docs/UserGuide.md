@@ -257,7 +257,7 @@ Adds a session to Hall Pointer and associates it with specified members. A sessi
 **Format:** `add_session s/NAME d/DATE p/POINTS m/INDEX [m/INDEX]…`
 
 **Constraints:** 
-- **Points** should be an integer between 0 and 100. A maximum of 100 points can be awarded to any session.
+- **Points** should be an integer between 0 and 100 inclusive. A maximum of 100 points can be awarded to any session.
 - **Duplicate Session** You cannot add a session to a member if the member already attended a session with the same name
 - **Unique Session Name**: Each session name must be unique within a member. This ensures that each session is distinct and prevents duplicate records.
 
