@@ -104,7 +104,7 @@ A client can have any number of tags (including 0).
 <div id="input-format" markdown="block" class="alert alert-info">
 
 **:information_source: Notes about input formats:**<br>
-The following constraints apply to the `edit` command as well:
+The following constraints apply to both the `add` and `edit` commands:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
   * The name is recommended to be within 100 characters long to be displayed properly.
