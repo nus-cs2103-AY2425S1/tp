@@ -531,7 +531,7 @@ Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e
 
 #### Setting your own tag colors
 
-User preferences are saved in the JSON file `[JAR file location]/preferences.json`. Advanced users are welcome to edit the 'TagColours' field in the JSON with custom hexadecimal values (colour codes) in order to customise the appearance of your [tags](#glossary).<br>
+User preferences are saved in the JSON file `[JAR file location]/preferences.json`. Advanced users are welcome to edit the 'TagColours' field in the JSON with custom hexadecimal values (colour codes) in order to customise the appearance of your [tags](#glossary). Incorrect data format may result in colors not being rendered correctly.
 
 <br><br/>
 
