@@ -19,7 +19,7 @@ This guide will walk you through HallPointer’s main features and show you step
 
 ## Table of Contents
 
-- [Getting Started Quickly](#quick-start)
+- [Getting Started Quickly](#Getting-Started-Quickly)
 - [Command Summary](#command-summary)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
