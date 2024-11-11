@@ -1,11 +1,9 @@
 
-<!--
 ---
 layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
--->
 
 <div style="display: flex; align-items: center;">
   <div style="flex: 0 0 auto;">
