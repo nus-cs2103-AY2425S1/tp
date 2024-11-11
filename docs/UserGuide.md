@@ -12,6 +12,8 @@ Clientell is structured as an address book (a database to store details of clien
 
 Our guiding principle is: a small app for you to do big things. As such, we allow great flexibility in storing your data. While some features are designed with a certain use in mind (e.g `NAME` should be actual names of your clients), you may use and interpret them in a way that better suits your workflow (e.g `NAME` as NRIC/FIN/IDs rather than name, or both!). Of course, do this at your own risk. With great power comes great responsibility.
 
+Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troubleshooting, see [Command Summary](#command-summary) for available commands, and [Parameter Summary](#parameter-summary) to know what values are accepted.
+
 ## Table of Contents
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -38,21 +40,21 @@ Our guiding principle is: a small app for you to do big things. As such, we allo
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in by typing  `cd [folder directory]` (where the folder is at), followed by `java -jar clientell.jar` in the same directory to run the application.<br>
-   You should see the GUI below with some sample clients to start with. By default, the app displays the Client List View upon launch, which is the view that lists your clients.<br>
+   You should see the GUI below with some sample clients to start with. By default, the app displays the client list view upon launch, which is the view that lists your clients.<br>
    ![Ui](images/Ui.png)
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    We suggest this sequence of commands to get a feeling for the app first:
 
-   * `list` : Lists all clients. This takes you to the **Client List View**.
+   * `list` : Lists all clients. This takes you to the **client list view**.
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
    * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
 
-   * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **Transaction List View**.
+   * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **transaction list view**.
 
-   * `list` : Lists all clients, again. This returns you to the **Client List View**.
+   * `list` : Lists all clients, again. This returns you to the **client list view**.
    
    * `exit` : Exits the app.
    
@@ -95,7 +97,7 @@ Our guiding principle is: a small app for you to do big things. As such, we allo
 **Handling Errors In User Input:**
 * First checks for valid command. Did you type a real command word?
 * Then checks for presence of fields for that command. Did you give enough/correct info?
-* Next checks if the command is run in the correct view (Client VS Transaction List View). Are you using it in the right view?
+* Next checks if the command is run in the correct view (Client VS transaction list view). Are you using it in the right view?
 * Lastly checks if the command alters the balance beyond the supported range.
 
 *Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
@@ -159,8 +161,12 @@ Format: `list`
 <box type="tip" seamless>
 
 **Tips:** Negative balances are red. Positive and zero balances are green.
-</box>
 
+</box>
+<box type="warning" seamless>
+
+**Note:** `list` displays the **client list view**, and can be used in both client and transaction list views.
+</box>
 ![result for `list`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
@@ -268,7 +274,7 @@ Format: `listt INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `listt` can only be used in client list view.
+**Note:** `listt` can only be used in client list view, and will take you to the **transaction list view**.
 </box>
 
 Examples:
@@ -319,7 +325,7 @@ In a transaction list, summarises the transactions' amount within the specified 
 
 Format: `summary s/START_MONTH e/END_MONTH`
 * `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
-* Month should be in the range `1-12` and year should be an integer.
+* Month should be in the range `01-12` and year should be an integer.
 * The `START_MONTH` should be before or equal to the `END_MONTH`
 * The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
 
@@ -349,6 +355,8 @@ If your changes to the data file makes its format invalid, Clientell will discar
 For some cases, the app can autocorrect some mistakes:<br>
 * Extraneous key-value pairs (i.e irrelevant fields/info) are ignored<br>
 * Copies of relevant key-value pairs (e.g multiple names/companies) only admit the last copy<br>
+
+
 As a rule of thumb: if the edits you make could've been achieved by using the commands normally and legally, then the edits are valid. Most common mistakes include updating the file to include illegal values. Therefore, edit the data file only if you are confident that you can update it correctly.<br>
 Lastly, never update the JSON file while the app is running. As the data saves at the end of a session (e.g when you `exit`), it will override the JSON file (i.e you will lose all manual changes to the JSON)
 </box>
@@ -384,55 +392,53 @@ Lastly, never update the JSON file while the app is running. As the data saves a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Future Enhancements
-
-1. **Matching partial words for `find` and `findt` commands.**<br>
-Currently, only full words are matched. E.g. `Han` doesn't match `Hans`. 
-In the future, we plan to allow partial word matches.
-2. **Finding clients and transactions by other fields.**<br>
-Currently, only names and companies are searchable for clients, and only descriptions are searchable for transactions.
-In the future, we plan to allow searching by other fields e.g. phone number, address.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
-Client Commands | Format |
----------------|--------
-Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
-List | `list`
-Find | `find KEYWORD [MORE_KEYWORDS]`
-Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-Delete | `delete INDEX`
+Switching between... | Command | Format
+---------------|---------------|------------
+Client to transaction list view | List Transactions | `listt INDEX`
+Transaction to client list view | List Clients | `list`
 
-**Transaction Commands**
+Client Commands | Format | Usable in what view?
+---------------|--------------|--------
+Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`|Client list view
+List | `list`|Client and transaction list views  
+Find | `find KEYWORD [MORE_KEYWORDS]`|Client list view
+Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`|Client list view
+Delete | `delete INDEX`|Client list view
 
-For Client List View | Format
---------------------|--------
-Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
-List Transactions | `listt INDEX`
 
-For Transaction List View | Format
---------------------|--------
-Delete Transaction | `deletet INDEX`
-Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
-Summarise Transactions | `summary s/START_MONTH e/END_MONTH`
+Transaction Commands | Format | Usable in what view?
+---------------|--------------|--------
+Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`|Client list view
+List Transactions | `listt INDEX`|Client list view
+Delete Transaction | `deletet INDEX`|Transaction list view
+Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`|Transaction list view
+Summarise Transactions | `summary s/START_MONTH e/END_MONTH`|Transaction list view
 
-General Commands | Format
-----------------|--------
-Help | `help`
-Clear | `clear`
-Exit | `exit`
+General Commands | Format| Usable in what view?
+----------------|--------------|--------
+Help | `help`|Client and transaction list views  
+Clear | `clear`|Client and transaction list views  
+Exit | `exit`|Client and transaction list views  
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Parameter Summary
 
-Parameter | Restrictions | Extreme example | Banned example 
+This table summarises the non-obvious parameters in natural language.
+
+Parameter | Restrictions | Extreme accepted example | Invalid example 
 ---------------|---------------|---------------|--------
+Index | Positive integer not exceeding list size | `5` (assuming at least 5 clients/transactions in list) | `0`
 Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe`
 Company | Anything, but not blank. | `💁 Inc.`| ` `
-Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 3 [short note]`| `(+1234) [this is too long]` 
+Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 9 8 7 [short note]`| `(+1234) [this is too long]` 
 Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d`
 Address |Anything, but not blank. | `💁`| ` `
 Tag | Alphanumeric, but not blank. | `something`| `some thing`
+Transaction description | Anything, but not blank. | `💁`| ` `
+Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it. | `-1000000000.00`| `-.001`
+Transaction party | Anything, but not blank. | `💁`| ` `
+Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `9999-12-31` | `9999-12-31`| `2025-02-29`
