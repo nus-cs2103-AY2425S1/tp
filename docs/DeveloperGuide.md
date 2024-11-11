@@ -24,6 +24,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -78,6 +80,8 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
+<div style="page-break-after: always;"></div>
+
 The `UI` component,
 
 * executes user commands using the `Logic` component.
@@ -115,7 +119,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of the diagram.
+**Note:** The lifeline for `ViewStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
@@ -218,8 +222,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 **Target user profile**: NUS SOC Teaching Assistants managing students
 
 **Value proposition**:
-* Easier management of administrative tasks
-* Easier for users who are more proficient with _CLI - interface_
+* Easier management of administrative tasks (e.g. tracking student attendance, assignments, and grades)
+* Increases productivity of users who are more proficient with _CLI - interface_
+* Provides a more organised way to manage student data
 * Separate work and personal tasks / messages
 
 
