@@ -228,7 +228,7 @@ Examples:
 >
 > ![edit command](images/edited_ui.png)
 >
-> [to be added]
+> _Edited Person: Miles Morales; Gender: male; Phone 91919291; Email: johnsc@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of Kin: John Morales; Emergency Contact: 87654321; Tags:_
 
 #### Deleting a person : `delete`
 
