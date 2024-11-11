@@ -515,7 +515,6 @@ Expected output:
 - Delivery details are shown and paired to supplier at index 2, assuming there is a supplier at index 2 with an `ACTIVE` status. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
-TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add delivery command](images/addDeliveryCommand.png)
 
 [[Back to Table of Contents]](#table-of-contents)
@@ -853,7 +852,7 @@ _Details coming soon ..._
 
 - Step 2: Open the folder named "data" to access the data file "vendorvault.json". This vendorvault.json file contains the stored data.
 
-![Data_Folder](images/DataFile.png)
+![Data_Folder](images/DataJsonFile.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**:
@@ -862,13 +861,13 @@ _Details coming soon ..._
 
 - Step 2: Run the app and execute the `exit` command to create a data folder.
 
-- Step 3: Delete the vendorvault.json file in the data folder (underlined in red) of the new computer.
+- Step 3: Delete the vendorvault.json file in the data folder (underlined in green) of the new computer.
 
 - Step 4: On the previously used computer, copy the vendorvault.jar file which can be accessed by following the "How do I access my data?" FAQ above.
 
-- Step 5: Transfer the copied file to the data folder (underlined in red) in the new computer.
+- Step 5: Transfer the copied file to the data folder (underlined in green) in the new computer.
 
-![VendorVault_Folder](images/UnderlinedData.png)
+![VendorVault_Folder](images/DataFolder.png)
 
 **Q**: Will I be able to see my data the next time I use VendorVault after exiting?<br>
 **A**: Yes, all existing data that you have added will be loaded automatically and displayed.
@@ -947,7 +946,7 @@ Action     | Format, Examples
 * **Java**: Java is the main programming language used to build and manage the app’s features, ensuring it runs smoothly and securely.
 * **Parameter**: Contains words in `UPPER_CASE` that needs to be supplied by user. Some parameters also contain a prefix that should be followed by the user.
 * **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
-* **Tag**: An one-word descriptive label users can add to a supplier to provide extra information.
+* **Tag**: A one-word descriptive label users can add to a supplier to provide extra information.
 
 
 [Back to Top](#vendorvault-user-guide)
