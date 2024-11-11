@@ -826,7 +826,7 @@ You can use the `list-claims` command to find the appropriate claim index for th
 
 **Examples:**
 * `delete-claim 1 pt/health c/1` deletes the claim at index 1 in the `health` policy of the 1st client.
-* `delete-claim 2 pt/life c/2` deletes the claim at index 2 in the `life` policy of the 2nd client.
+* `delete-claim 3 pt/life c/2` deletes the claim at index 2 in the `life` policy of the 3rd client.
 
 **On success:**
 ```shell
@@ -871,8 +871,8 @@ You can use the `list-claims` command to find the appropriate claim index for th
 </div>
 
 **Examples:**
-* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
-* `edit-claim 2 pt/life c/2 s/pending` updates the status of the second claim in the life policy of the 2nd client to "pending."
+* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details".
+* `edit-claim 2 pt/life c/2 s/pending` updates the status of the second claim in the life policy of the 2nd client to "pending".
 
 **On success:**
 ```shell
