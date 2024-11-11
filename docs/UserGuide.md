@@ -139,8 +139,8 @@ You can add a student easily to Teacher's Pet!
 
 Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
-* The `NUS_STUDENTID` here refers to the NUS Matriculation Number of the student (Starts with 'A')
-* The `NUS_NETID` here refers to the id that is associated with the student's NUS Outlook account ("NUS_NETID@u.nus.edu")
+* The `NUS_STUDENTID` here refers to the NUS Matriculation Number of the student (Has the format 'AXXXXXXXC', where X is a number and C is a letter)
+* The `NUS_NETID` here refers to the ID that is associated with the student's NUS Outlook account (Found in "NUS_NETID@u.nus.edu" and must be in the format 'eXXXXXXX', where X is a number)
 * The `NUS_STUDENTID` must be unique (ie. Two students cannot have the same `NUS_STUDENTID`)
 
 Here are some examples for you to try!
