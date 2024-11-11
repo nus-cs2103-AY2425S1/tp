@@ -269,8 +269,7 @@ Format: `create-tag t/TAGNAME`
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 * Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
-
-
+* If you want to use a Tag with a long name, it might not be shown clearly in the list. You can use Task instead for better visuals.
 
 ### Assign tag to contact : `tag`
 
