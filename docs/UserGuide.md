@@ -15,6 +15,7 @@ That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have
 With BridalBuddy, you can easily:
 * Add a guest to the wedding that you are planning.
 * Separately, add a vendor you are collaborating with for that wedding.
+* Then view the comprehensive statistics on guest attendance and the vendors involved in the wedding
 
 To discover more about what BridalBuddy has to offer, continue reading the rest of this comprehensive user guide.
 
@@ -51,6 +52,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 7. [**Command summary**](#command-summary)
 8. [**Glossary**](#glossary)
 
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Helpful Guidelines for the User Guide**
@@ -91,9 +93,9 @@ This section tells you what information you will find in each of the sections of
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
 4. Open a command terminal, navigate to the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-    > If you need any help opening a command terminal, you may refer to the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
+    > :bulb: If you need any help opening a command terminal, you may refer to the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
     
-    > If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
+    > :bulb: If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
 
     An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -114,6 +116,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Tutorial for Beginners**
@@ -218,7 +221,7 @@ For more details on the `delete_guest` and `delete_vendor` commands, we encourag
 
 It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
 
-* :information_source: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time you open the app.
+* :bulb: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time you open the app.
 
 [_Back to Top_](#table-of-contents)
 
@@ -412,7 +415,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
@@ -435,7 +438,7 @@ This command will help you delete a guest from your existing guest list, identif
 
 > :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete_guest 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
@@ -495,7 +498,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
     * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
@@ -518,7 +521,7 @@ This command will help you delete a vendor from your existing vendor list, ident
 
 > :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
 
-* :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
 
    * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete_vendor 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
@@ -581,7 +584,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Guest**     | `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`             |
 | **Add Vendor**    | `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...` <br> e.g., `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` |
-| **Edit Guest**    | `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]......` <br> e.g., `edit_guest 1 p/91234567 e/johndoe@example.com`                                                                |
+| **Edit Guest**    | `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `edit_guest 1 p/91234567 e/johndoe@example.com`                                                                   |
 | **Edit Vendor**   | `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...` <br> e.g., `edit_vendor 1 p/91234567 e/johndoe@example.com`                                                                   |
 | **Delete Guest**  | `delete_guest INDEX` <br> e.g., `delete_guest 1`                                                                                                                                                                             |
 | **Delete Vendor** | `delete_vendor INDEX` <br> e.g., `delete_vendor 1`                                                                                                                                                                           |
