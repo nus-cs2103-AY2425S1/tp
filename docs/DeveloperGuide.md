@@ -325,7 +325,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. User selects the date(s) to remove as a free day.
 3. User submits the information to the system.
 4. System checks if the volunteer is available on the selected date(s).
-5. System removes the free day from the volunteer's schedule and confirms removal.<br/>
+5. System checks if the volunteer has any events assigned to them on the days that are no longer going to be free.
+6. System removes the free day from the volunteer's schedule and confirms removal.<br/>
    Use Case Ends.
 
 **Extensions**:
@@ -341,7 +342,11 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 4ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 5a. Free day removal fails.
+- 5a. Volunteer is assigned to events on the days that the user is trying to remove as free.
+  - 5ai. System notifies user, prompts the user to unassign the volunteer from the affected events first. <br>
+    Use Case Ends. <br><br>
+
+- 6a. Free day removal fails.
     - 5ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
@@ -364,12 +369,12 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 4ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 4a. Volunteer is already assigned to the event.
+- 4b. Volunteer is already assigned to the event.
     - 4bi. System notifies user.
     - 4bii. Volunteer remains assigned to the event.<br>
       Use Case Ends.<br><br>
 
-- 4c. Volunteer is assigned to another event on the same day.
+- 4c. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
     - 4ci. System notifies user of the clash.
     - 4cii. Volunteer is not assigned to the event.<br>
       Use Case Ends.
@@ -847,14 +852,34 @@ The following planned enhancements address known feature flaws identified during
     - **Expected Outcome**: UI would display accurate and the most updated information.
 
 4. **Multiple Date Tracking**
-    - **Feature Flaw**: The error message for validating if the volunteer is free only returns the first date which the volunteer is already free.
-    - **Proposed Fix**: The error message should show all dates which the volunteer is already free.
-    - **Expected Outcome**: Users would know all the dates that volunteer is already free for.
+    - **Feature Flaw**: The error message for validating if the volunteer is free/unfree only returns the first date which the volunteer is already free/unfree.
+    - **Proposed Fix**: The error message should show all dates which the volunteer is already free/unfree.
+    - **Expected Outcome**: Users would know all the dates that volunteer is already free/unfree for.
 
-5. **Add Support For Leap Years**
+5. **Multiple Event Tracking**
+   - **Feature Flaw**: The error message for validating if the volunteer can have a free date removed or if a volunteer can be assigned to an event on returns the first event the volunteer is assigned to.
+   - **Proposed Fix**: The error message should show all clashing events which could cause and error and prevent the completion of the command.
+   - **Expected Outcome**: Users would know all events the volunteer is assigned to, so they can unassign them from all clashing events and fix all errors simultaneously.
+
+6. **Add Support For Leap Years**
     - **Feature Flaw**: Currently the date does not parse leap days accordingly
     - **Proposed Fix**: The program should output the specific error that the leap day is not valid.
     - **Expected Outcome**: Users would know that the invalid error is due to leap day.
+
+7. **Enhance String Validation For Names**
+   - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
+   - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
+   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers due to having a typo in the number of spaces within names.
+
+8. **Enhance Output Message Alignment**
+   - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
+   - **Proposed Solution**: The output message should wrap in the output text box.
+   - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+
+9. **Allow Find To Work With Previous Commands**
+   - **Feature Flaw**: Currently the find command will reset the display list and search for volunteers or events containing the keyword. 
+   - **Proposed Solution**: Find should use the current display list as the basis for its search.
+   - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
 
 These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **VolunSync**.
 
