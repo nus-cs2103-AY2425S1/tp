@@ -6,33 +6,35 @@ title: User Guide
 BizBook (BB) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BB can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
+
 1. [Quick start](#Quick-start)
 2. [Features](#Features)<br>
-  2.1 [Viewing help : `help`](#viewing-help--help)<br>
-  2.2 [Adding a person: `add`](#adding-a-person-add)<br>
-  2.3 [Listing all persons : `list`](#listing-all-persons--list)<br>
-  2.4 [Editing a person : `edit`](#editing-a-person--edit)<br>
-  2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)<br>
-  2.6 [Deleting a person : `delete`](#deleting-a-person--delete)<br>
-  2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)<br>
-  2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)<br>
-  2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)<br>
-  2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)<br>
-  2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)<br>
-  2.12 [Pin a contact: `pin`](#pin-a-contact-pin)<br>
-  2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)<br>
-  2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)<br>
-  2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)<br>
-  2.16 [Import a contact list : `import`](#import-a-contact-list--import)<br>
-  2.17 [Export the contact list : `export`](#export-the-contact-list--export)<br>
-  2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)<br>
-  2.20 [Clear all entries : `clear`](#clear-all-entries--clear)<br>
-  2.21 [Exit the program : `exit`](#exit-the-program--exit)<br>
-  2.22 [Saving the data](#saving-the-data)<br>
-  2.23 [Editing the data file](#editing-the-data-file)<br>
+   2.1 [Viewing help : `help`](#viewing-help--help)<br>
+   2.2 [Adding a person: `add`](#adding-a-person-add)<br>
+   2.3 [Listing all persons : `list`](#listing-all-persons--list)<br>
+   2.4 [Editing a person : `edit`](#editing-a-person--edit)<br>
+   2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)<br>
+   2.6 [Deleting a person : `delete`](#deleting-a-person--delete)<br>
+   2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)<br>
+   2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)<br>
+   2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)<br>
+   2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)<br>
+   2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)<br>
+   2.12 [Pin a contact: `pin`](#pin-a-contact-pin)<br>
+   2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)<br>
+   2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)<br>
+   2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)<br>
+   2.16 [Import a contact list : `import`](#import-a-contact-list--import)<br>
+   2.17 [Export the contact list : `export`](#export-the-contact-list--export)<br>
+   2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)<br>
+   2.20 [Clear all entries : `clear`](#clear-all-entries--clear)<br>
+   2.21 [Exit the program : `exit`](#exit-the-program--exit)<br>
+   2.22 [Saving the data](#saving-the-data)<br>
+   2.23 [Editing the data file](#editing-the-data-file)<br>
 3. [FAQ](#faq)
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
+
 ---
 
 ## Quick start
@@ -123,6 +125,7 @@ The application will throw an error if you attempt to create two users with the 
 
 **Phone Numbers:**
 Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and are exactly 8 digits in total is allowed.
+
 </div>
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
@@ -131,7 +134,7 @@ A person can have any number of tags (including 0)
 
 - Note that Name, Phone Number, Email and Address are compulsory fields.
 - We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not
-particularly sensitive as compared to Identification Number etc.
+  particularly sensitive as compared to Identification Number etc.
 - The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
 Examples:
@@ -191,7 +194,7 @@ Examples:
 
 **Result from `find alex david`:**
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -243,8 +246,8 @@ A person can have any number of notes (including 0)
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 - Only one note may be added at a time. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
-is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
-feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
+  is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
+  feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
 
 Examples:
 
@@ -308,7 +311,7 @@ Examples:
 
 **Result from `view 3`:**
 
-  ![result for 'view 3'](images/ViewCommandResult.png)
+![result for 'view 3'](images/ViewCommandResult.png)
 
 ### Pin a contact: `pin`
 
@@ -327,7 +330,7 @@ Examples:
 
 **Result from `pin 1`:**
 
-  ![result for 'pin 1'](images/PinCommandResult.png)
+![result for 'pin 1'](images/PinCommandResult.png)
 
 ### Unpin a contact: `unpin`
 
@@ -346,11 +349,11 @@ Examples:
 
 **State before`unpin 1`:**
 
-  ![state before `unpin`](images/BeforeUnpin.png)
+![state before `unpin`](images/BeforeUnpin.png)
 
 **State after `unpin 1`:**
 
-  ![state after `unpin 1`](images/UnpinCommandResult.png)
+![state after `unpin 1`](images/UnpinCommandResult.png)
 
 ### Undo a previously executed command: `undo`
 
@@ -363,6 +366,7 @@ Format: `undo`
 - The undo feature will clear the focus person panel upon execution.
 
 Examples of commands tracked by undo:
+
 - `add`
 - `delete`
 - `clear`
@@ -472,6 +476,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: There are 2 ways to transfer data.
+
 1. If you want to use the `.json` file generated by BizBook, install the app in another computer and overwrite the data folder located at `[JAR file location]/data` with the file that contains the data from your previous BizBook home folder.
 2. If you want to import using a `.vcf` file, export the data using the `export` command in BizBook, i.e. `export f/vcf`. The `.vcf` file will be located in a folder at `[JAR file location]/export/bizbook.vcf`. You can rename and transfer this file to other devices using BizBook and to import the data use the `import` command, i.e. `import f/vcf p/[Path to the VCF file]/<file name>.vcf`. Also do note that **user preferences will not be transferred over**.
 
@@ -496,10 +501,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                      |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**            | `list`                                                                                                                                                                |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Deletetag**       | `deletetag INDEX t/TAG` <br> e.g. `deletetag 1 t/Client`                                                                                                              |
@@ -514,6 +519,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Toggle**          | `toggle`                                                                                                                                                              |
 | **Export**          | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
 | **Import**          | `import f/FILETYPE p/PATH` <br> e.g. `import f/vcf p/myVcf.vcf`                                                                                                       |
-| **Command History** | `up arrow` (only for successfully executed commands)                                                                                                                  |
+| **Command History** | `up & down arrow keys` (only for successfully executed commands)                                                                                                      |
 | **Clear**           | `clear`                                                                                                                                                               |
 | **Help**            | `help`                                                                                                                                                                |
