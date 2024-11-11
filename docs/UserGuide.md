@@ -444,12 +444,13 @@ The `find` command allows you find specific people by any fields or a combinatio
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; vertical-align: top;">
+  <div style="width: 45%; vertical-align: top; margin-top: 20px;">
     <p><b>Output:</b> The UI updates to show persons matching the search keyword.</p>
     <img src="images/find_output.png" alt="Find output example" style="width: 100%;" />
   </div>
 
 </div>
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -579,10 +580,11 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
   <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> A bar chart displays.</p>
-    <img src="images/barcommand.png" alt="Bar chart output" style="width: 100%;" />
+    <img src="images/barcommand.png" alt="Bar chart output" style="width: 100%; margin-top: -10px;" />
   </div>
 
 </div>
+
 
 **Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
@@ -656,7 +658,7 @@ Displaying the detailed command window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 30px; margin-top: 10px;">
+  <div style="width: 45%; margin-bottom: 30px; margin-top: 15px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
