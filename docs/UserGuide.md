@@ -77,7 +77,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 | Action                    | Format, Examples                                                                                                                                                     |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTALCODE [t/TAG]…​`<br> e.g., `add n/James Ho p/88737204 e/jamesho@example.com a/Blk 310, Clementi Rd pc/1234665 t/friend t/colleague` |
-| **Add Order to app**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
+| **Add Order to Application**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
 | **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                       |
 | **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
 | **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                      |
