@@ -22,7 +22,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
 4. To open the application,
 
     * Open a command terminal in your computer.
-    * `cd` into the folder you put the jar file in (e.g If the jar file is stored in `/Desktop/TestFile`, then the command should be `cd /Desktop/TestFile`)
+    * `cd` into the folder you put the jar file in (e.g If the jar file is stored in `/Desktop/TestFile`, then the command should be `cd /Desktop/TestFile`).
     * Use the `java -jar ab3myguest.jar` command to run the application.<br>
     * A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
