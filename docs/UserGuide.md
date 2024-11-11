@@ -89,6 +89,7 @@ Adds a guest to the guest list.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
 * Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'.
+* Names can only consist of alphanumeric characters and spaces.
 * Guests with the exact same name cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
@@ -130,6 +131,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * At least one of the optional fields must be provided.
 * Fields which are not provided will not be edited.
+* Editing the guest without changing the fields is allowed. e.g. The guest at index 1 of the displayed list is Alex Yeoh. Running `edit 1 n/Alex Yeoh` will be successful though none of the fields are changed. 
 * All optional fields must adhere to the restrictions specified in the `add` command.
 * If the input values are valid, existing values will be updated to the input values.
 * When editing tags, the existing tags of the guest will be removed i.e. adding of tags is not cumulative.
@@ -215,6 +217,7 @@ Format: `tag INDEX…​ t/TAG…​`
 * Tag must have already been defined using `newtag` before tagging it to a guest.
 * There is a limit of 10 indexes that can be tagged in a single `tag` command.
 * The index(es) **must be within the index boundaries of the guest list**. ie. If there are 15 guests, INDEX accepts values from 1 to 15.
+* Duplicate tags in the input will be ignored. e.g. `tag 1 t/friends t/friends` will successfully execute assuming the guest at index 1 does not already have the tag `friends`.
 * Attempting to tag guests with an invalid tag will not halt tagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `tag 1 t/friends t/bride's side` will still successfully tag `bride's side` on the guest indexed at 1. 
 * Attempting to tag guests with a tag already on some will not halt tagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `tag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 2.
 
@@ -234,6 +237,7 @@ Removes a tag from a guest.
 Format: `untag INDEX…​ t/TAG…​`
 * A guest must already have the tag for it to be removed.
 * Index(es) of the guest(s) must be within valid range (i.e. greater than 0 and less than or equals to the current shown list length)
+* Duplicate tags in the input will be ignored. e.g. `untag 1 t/friends t/friends` will successfully execute assuming the guest at index 1 has the tag `friends`.
 * Attempting to untag guests with an invalid tag will not halt untagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `untag 1 t/friends t/bride's side` will still successfully untag `bride's side` on the guest indexed at 1.
 * Attempting to untag guests with a tag already on some will not halt untagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `untag 1 2 t/friends` will still successfully untag `friends` on the guest indexed at 1.
 
@@ -282,6 +286,10 @@ Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
 * Only one RSVP status can be used for filtering in each command, but multiple tags can be used. i.e `filter s/1 s/2` is not a valid command.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can clear all filters by running the `list` command.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Known Issue:**
+Currently, running an `add` command while being in a filtered list returns the list displaying all the guests, though the filters are not cleared from the filter panel. The developers are working on this fix in future iterations, for now you may clear the filters using the `list` command.
 </div>
 
 Example:
