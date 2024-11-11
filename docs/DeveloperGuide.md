@@ -8,6 +8,8 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 MediBase3 is designed based on the AddressBook-Level3 project created by [SE-EDU](https://se-education.org).
 
@@ -217,6 +219,9 @@ When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` g
 * [DevOps guide](DevOps.md)
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -709,6 +714,8 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -1025,6 +1032,7 @@ Deleting an existing appointment from a patient
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
