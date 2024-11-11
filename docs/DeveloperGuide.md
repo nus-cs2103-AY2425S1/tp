@@ -189,29 +189,31 @@ maintain accurate records and enhance their operational capabilities.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                  | I want to …​                           | So that I can…​                                                                      |
-|----------|------------------------------------------|----------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | HR department employee                   | Remove volunteers                      | Keep volunteer records up to date                                                    |
-| `* * *`  | HR department employee                   | View volunteers                        | Quickly access and review the list of all volunteers                                 |
-| `* * *`  | HR department employee                   | Export volunteer information           | Generate reports for internal use                                                    |
-| `* * *`  | Events director                          | Create events                          | Organize new events to engage volunteers                                             |
-| `* * *`  | Events director                          | Remove events                          | Keep the events list clean and up to date                                            |
-| `* * *`  | Events director                          | View events                            | Get an overview of upcoming and past events                                          |
-| `* * *`  | Events director                          | Add volunteer to event                 | Assign volunteers to specific events                                                 |
-| `* * *`  | HR department employee                   | Add event to volunteer                 | Track the events a volunteer has participated in                                     |
-| `* * *`  | Events director                          | Remove volunteer from event            | Keep the list of volunteers attending the event updated                              |
-| `* * *`  | HR department employee                   | Remove event from volunteer            | Keep the events list for the volunteer clean and up to date                          |
-| `* *`    | HR department employee                   | Edit volunteer information             | Update volunteer details such as availability, hours, etc.                           |
-| `* *`    | Events director                          | Filter volunteers by availability      | Find available volunteers for a particular event                                     |
-| `* *`    | Events director, HR department employee  | Search/filter event by name            | Locate specific events quickly                                                       |
-| `* *`    | Events director                          | View volunteers for a particular event | Find out how many volunteers have signed up for the event                            |
-| `* *`    | Events director, HR department employee  | Search volunteers by name              | Find a specific volunteer by their name                                              |
-| `* *`    | HR department employee                   | Track volunteer hours                  | Monitor and log the hours each volunteer has worked                                  |
-| `*`      | General user                             | View event details per volunteer       | See which events a volunteer participated in                                         |
-| `*`      | HR department employee                   | View volunteer participation history   | Track volunteer engagement with past events                                          |
-| `*`      | General user                             | Toggle view options for events         | Customize how events are displayed in the app                                        |
-| `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            |
-| `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
+| Priority | As a …​                                 | I want to …​                                    | So that I can…​                                                                      |
+|----------|-----------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | General user                            | View help                                       | Access a quick guide to efficiently use the program                                  |
+| `* * *`  | General user                            | Exit the program                                | Complete tasks and leave the program smoothly                                        |
+| `* * *`  | Events director                         | Create events                                   | Store details of the events                                                          |
+| `* * *`  | Events director                         | Remove events                                   | Keep the events list clean and up to date                                            |
+| `* * *`  | HR department employee                  | Create volunteers                               | Store new volunteers information                                                     |
+| `* * *`  | HR department employee                  | Remove volunteers                               | Keep volunteer records clean and up to date                                          |
+| `* * *`  | HR department employee                  | List all volunteers and events                  | Quickly access and review records of all volunteers and events                       |
+| `* * *`  | HR department employee                  | Export volunteers information                   | Generate reports from volunteer data for internal use                                |
+| `* * *`  | HR department employee                  | Export events information                       | Generate reports from event data for internal use                                    |
+| `* * *`  | Events director                         | Assign volunteer to event                       | Add specific volunteers to events as needed                                          |
+| `* * *`  | Events director                         | Unassign volunteer from event                   | Keep the list of participating volunteers in an event up to date                     |
+| `* * *`  | Events director                         | View involved events for a particular volunteer | See what events the volunteer is involved in                                         |
+| `* * *`  | Events director                         | View volunteers for a particular event          | See who is participating in specific events                                          |
+| `* *`    | Events director                         | Filter volunteers by availability               | Find available volunteers for a particular event                                     |
+| `* *`    | HR department employee                  | Add available dates to volunteers               | Know when the volunteer is free and can be assigned to a specific event              |
+| `* *`    | HR department employee                  | Remove available dates from volunteers          | Keep the list of available dates up to date                                          |
+| `* *`    | Events director, HR department employee | Search/filter event by name                     | Locate specific events quickly                                                       |
+| `* *`    | Events director, HR department employee | Search/filter volunteer by name                 | Locate specific volunteers quickly                                                   |
+| `*`      | General user                            | View event details per volunteer                | See which events a volunteer participated in                                         |
+| `*`      | HR department employee                  | View volunteer participation history            | Track volunteer engagement with past events                                          |
+| `*`      | General user                            | Toggle view options for events                  | Customize how events are displayed in the app                                        |
+| `*`      | General user                            | Dark mode                                       | Enhance the app's user experience for those who prefer a darker interface            |
+| `*`      | General user                            | Accessibility features                          | Improve usability for visually impaired users through larger fonts and color changes |
 
 <div style="page-break-after: always;"></div>
 
@@ -356,7 +358,7 @@ This diagram shows the main actor (Management Staff) and their interactions with
 ### Non-Functional Requirements
 
 1. The system should work on any mainstream OS with Java 17 or above.
-2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+2. The system should be able to handle up to 1000 volunteers and events without noticeable performance degradation.
 3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
@@ -372,7 +374,6 @@ This diagram shows the main actor (Management Staff) and their interactions with
 
 * **Volunteer**: An individual who participates in a community event without monetary compensation.
 * **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
-* **Donor**: An individual or organization that contributes funds or resources to support community events.
 * **Recurring Events**: Events that occur repeatedly on a set schedule.
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
