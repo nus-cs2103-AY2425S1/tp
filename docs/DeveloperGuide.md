@@ -347,7 +347,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     Use Case Ends. <br><br>
 
 - 6a. Free day removal fails.
-    - 5ai. System notifies user prompts the user to edit the provided details.<br>
+    - 6ai. System notifies user prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC06. Assign Volunteer to Event
