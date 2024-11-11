@@ -72,29 +72,40 @@ public class PersonTest {
                 .withCallFrequency(VALID_CALL_FREQUENCY_BOB).build();
         assertTrue(ALICE.isSimilarPerson(editedAlice));
 
-        // same name -> returns true
+        // same name, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertTrue(BOB.isSimilarPerson(editedAlice));
 
-        // same name lowercase -> returns true
+        // same name lowercase, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSimilarPerson(editedAlice));
 
-        // same phone -> returns true
+        // same phone, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
         assertTrue(BOB.isSimilarPerson(editedAlice));
 
-        // same email -> returns true
+        // same email, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(BOB.isSimilarPerson(editedAlice));
 
-        // same email lowercase -> returns true
+        // same email lowercase, all other attributes different -> returns true
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSimilarPerson(editedAlice));
+
+        // same name, phone, email, all other attributes different -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertTrue(BOB.isSimilarPerson(editedAlice));
 
         // different nric, name, phone, email, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSimilarPerson(editedAlice));
+
+        // all different attributes -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withCallFrequency(VALID_CALL_FREQUENCY_BOB).build();
         assertFalse(ALICE.isSimilarPerson(editedAlice));
     }
 
