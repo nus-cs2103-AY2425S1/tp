@@ -585,7 +585,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `price expensive`<br>
       Expected: Message displays no restaurants found. 
 
-   1. Other incorrect find commands to try: `price`<br>
+   1. Other incorrect Filter-by-Price commands to try: `price`<br>
       Expected: Error details shown in the status message. Status bar remains the same.
 
 
