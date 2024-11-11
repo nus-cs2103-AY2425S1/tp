@@ -610,7 +610,7 @@ if any of their fields **contains** the keyword, including rental information de
 
 **Example inputs**:
 
-1. `find n/Alex`, finds any client whose name **contain** the word `Alex`.
+1. `find n/Alex`, finds any client whose name **contains** the word `Alex`.
 2. `find k/12`, finds any client whose details **contain** `12`.
 3. `find t/Rich`, finds any client with the matching tag `Rich`.
 
@@ -1024,6 +1024,8 @@ and use the `import` command to import the data file that you previously exporte
 7. The error message displayed when `import` or `export` fails is quite vague ("The chosen file may be corrupted").
    We will be refining this error message in the future to give more feedback about what went wrong 
    (duplicate clients, missing field, etc.)
+8. The message for confirmation prompts state `y/n`, which implies you can only use `n` to cancel the command. However,
+   any input other than `y`/`yes` leads to cancellation.
 
 --------------------------------------------------------------------------------------------------------------------
 
