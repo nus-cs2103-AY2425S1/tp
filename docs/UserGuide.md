@@ -107,11 +107,14 @@ This section contains information about the command formats used in this applica
 
 ### Parameters
 
+<p>
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 (Commands are incomplete and are for illustrative purposes only)<br>
   e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
   * `create v/ n/Kimberly's Flowers`.
 
+</p>
 <p>
 
 * Items in square brackets are **optional**.<br>
@@ -120,12 +123,14 @@ This section contains information about the command formats used in this applica
   * `create e/ n/Stagecraft Solutions t/backstage-crew` or as;
   * `create e/ n/Stagecraft Solutions`.
 
+</p>
 <p>
 
 * `INDEX` refers to the index number shown in the displayed event/vendor list.
   * The index **must be a positive integer** 1, 2, 3, …
   * The index for each vendor/event is relative and can change depending on previous operations.
 
+</p>
 <p>
 
 * Items with `…` after them can be used multiple times, including zero times.<br>
@@ -134,15 +139,19 @@ This section contains information about the command formats used in this applica
   * `t/big-event`;
   * `t/big-event t/coastal`, etc.
 
+</p>
 <p>
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+</p>
 <p>
 
 * Extraneous parameters for commands that do not take in parameters (`help`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</p>
 
 ### Off-Screen Operations
 
