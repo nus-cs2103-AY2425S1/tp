@@ -35,7 +35,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_SEX = "H";
     private static final String INVALID_STUDENT_CLASS = "A1";
     private static final String INVALID_ECNAME = "---";
-    private static final String INVALID_ECNUMBER = "123";
+    private static final String INVALID_ECNUMBER = "+123";
     private static final String INVALID_SUBMISSION_NAME = "Assignment #";
     private static final String INVALID_SUBMISSION_STATUS = "T";
     private static final String INVALID_EXAM_NAME = "Midterm%";

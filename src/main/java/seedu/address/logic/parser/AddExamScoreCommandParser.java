@@ -25,6 +25,10 @@ public class AddExamScoreCommandParser implements Parser<AddExamScoreCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EXAM, PREFIX_EXAM_SCORE);
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_EXAM).isPresent() || !argMultimap.getValue(PREFIX_EXAM_SCORE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamScoreCommand.MESSAGE_USAGE));
         }

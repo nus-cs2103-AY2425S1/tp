@@ -116,7 +116,7 @@ public class CommandTestUtil {
     public static final String INVALID_STUDENT_CLASS_DESC = " " + PREFIX_STUDENT_CLASS
             + "A1"; // wrong format used for student class
     public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
-    public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
+    public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "+1234"; // "+" not allowed in ecnumber
     public static final String INVALID_SUBMISSION_DESC = " " + PREFIX_SUBMISSION + "Assignment #"; // "#" not allowed
     public static final String INVALID_SUBMISSION_STATUS_DESC = " " + PREFIX_SUBMISSION_STATUS
             + "T"; // only "Y", "N" and "NIL" allowed

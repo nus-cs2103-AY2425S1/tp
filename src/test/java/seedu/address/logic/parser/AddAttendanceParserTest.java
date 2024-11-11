@@ -26,7 +26,7 @@ public class AddAttendanceParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, ATTENDANCE_DESC_AMY, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, ATTENDANCE_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);

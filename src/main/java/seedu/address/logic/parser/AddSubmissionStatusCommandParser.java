@@ -31,6 +31,12 @@ public class AddSubmissionStatusCommandParser implements Parser<AddSubmissionSta
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SUBMISSION, PREFIX_SUBMISSION_STATUS);
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            logger.log(Level.WARNING, "Missing index for AddSubmissionStatusCommand.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddSubmissionStatusCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_SUBMISSION).isPresent()
                 || !argMultimap.getValue(PREFIX_SUBMISSION_STATUS).isPresent()) {
             logger.log(Level.WARNING, "Missing prefix for AddSubmissionCommand or AddSubmissionStatusCommand.");

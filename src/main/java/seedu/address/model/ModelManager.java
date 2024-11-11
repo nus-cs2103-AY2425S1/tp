@@ -118,7 +118,7 @@ public class ModelManager implements Model {
     //=========== Unsorted and Unfiltered Person List Accessors ==============================================
     /**
      * Returns an unmodifiable view of the unsorted and unfiltered list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAddressBook}. Removes any filter and sorting from the sortedAndFilteredPersons.
      */
     public ObservableList<Person> getUnsortedAndUnfilteredPersonList() {
         // remove filters
