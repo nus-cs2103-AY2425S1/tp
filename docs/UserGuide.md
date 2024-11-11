@@ -36,8 +36,10 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
    - Then type this command to start the app:
 
         `java -jar educonnect.jar`
-   - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
-    <br/><br/>
+   - After a few seconds, the EduConnect window will appear with some sample data to help you get started. Here are some screenshots of how it might look:
+    
+    <br><br/>
+
     **macOS User Interface**: 
     ![Ui](images/Ui.png)
     **Windows User Interface**:
@@ -154,7 +156,7 @@ Example:
     * an emergency contact 8765 4321
 
 {: .alert .alert-secondary}
-> When a new student is added, with the example command above, he will be displayed as shown below, with the following example success message:
+> When a new student is added, with the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addAppt command example](images/addStudentCommand.png)
 > 
@@ -191,7 +193,7 @@ Example:
     * the classes she teaches 5A and 8C
 
 {: .alert .alert-secondary}
-> When a new teacher is added, with the example command above, she will be displayed as shown below, with the following example success message:
+> When a new teacher is added, with the example command above, they will be displayed as shown below, with the following example success message:
 > 
 > ![result for addTeacher command example](images/addTeacherCommand.png)
 >
@@ -223,7 +225,12 @@ Examples:
 *  `edit 2 /name Betsy Crower` edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
    <br/><br/>
 
-![edit command](images/edited_ui.png)
+{: .alert .alert-secondary}
+> When an entry is edited, such as with the example command above, their details will be updated as shown below, with the following example success message:
+>
+> ![edit command](images/edited_ui.png)
+>
+> _Edited Person: Miles Morales; Gender: male; Phone 91919291; Email: johnsc@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of kin: John Morales; Emergency Contact: 87654321; Tags:_
 
 #### Deleting a person : `delete`
 
@@ -359,6 +366,7 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 Examples:
 * `find /name John` returns `John` and `John Doe`.
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A).
+* `find /subject English` returns `Elizabeth` who has the subject English
 
 {: .alert .alert-secondary}
 > When the find command above is entered, the following results will be displayed, with the following success message:
@@ -396,9 +404,14 @@ Format: `sort ATTRIBUTE`
 
 Examples:
 * `sort attendance` sorts the list of students by attendance in descending order.
-  <br/><br/>
+  <br><br/>
 
-![sort attendance command](images/sort_attendance.png)
+{: .alert .alert-secondary}
+> When the example sort command above is entered, the list of entries in EduConnect will be updated as shown below, with the following example success message:
+>
+> ![sort attendance command](images/sort_attendance.png)
+>
+> _List sorted successfully._
 
 [Back to Table of Contents](#table-of-contents)
 
