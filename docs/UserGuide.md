@@ -351,13 +351,17 @@ Additional Details:
 * If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match a person.
 * To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for their appointment.
-* If no date and time are set, none are displayed.
-* In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in order and selection, but at least one must be provided for unique identification.
-* This feature supports the year `0001` onwards. Any years before that is not supported. 
-* Invalid date or time values (e.g., months outside 1-12 or days outside 1-31) will show an error, considering month-specific days and leap years.
-* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. For example, if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
+* When no date and time is set, no date and time are displayed.
+* In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in their order and selection.
+  This does not mean that all three fields can be left out, at least one must be provided.
+* This feature supports the year `0001` onwards. Any years before that is not supported.
+* If the day, month, hour, or minute values are not in the range of valid possible values (e.g. month is between 1 and 12 or day is between 1 and 31), an error will be shown to the user for them to ensure their inputs are in range.
+* The day must match the number of days in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. For example, if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
 * The time is in the 24-hour format. (e.g. `1800` for 6:00 PM)
-* Day and month can be with or without leading zeroes (e.g., `1/1/2024 1400` and `01/01/2024 1400` are accepted). 
+* The format of the date and time, as well as the values, must be valid or there will be an error. To avoid unnecessary inconvenience, leading zeroes for days and months are allowed.
+  (e.g. `01/01/2024 1400` is parsed the same as `1/1/2024 1400`)
+* For uniformity and ease of validation, spaces between slashes in the date or in the time (e.g., `1 / 1 / 2024 15 00`) are not allowed. Use `1/1/2024 1500` instead.
+* The app allows users to enter past dates and times to provide flexibility in managing and storing patient information, preventing unnecessary limitations.
 
 
 Examples:
