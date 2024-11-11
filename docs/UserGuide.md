@@ -25,7 +25,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all suppliers.
 
    * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to SupplyCentral.
 
@@ -33,9 +33,9 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
    * `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/John Doe` : Adds an order for "Gardenia Milk Bread" from supplier "John Doe" for tracking.
 
-   * `clear` : Deletes all contacts and goods registered in the application.
+   * `clear` : Deletes all suppliers and goods registered in the application.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits SupplyCentral.
 
 1. Refer to the [Features](#features) below for details of each command.
 
