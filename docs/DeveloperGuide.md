@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User initiates a search for a student
-2. System displays the matching student(s)
+2. System displays the matching student(s) 
 
     Use case ends
 
@@ -427,6 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. No matching student found in the system
   * 1b1. System informs user that there are no such students found
+  * 1b2. System gives an empty list
 
     Use case ends
 
@@ -437,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User clears the app of all contact data
-2. System displays a success message
+2. System informs user that the app has been cleared of all data
 
     Use case ends
 
@@ -489,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 2.
 
 * 1b. There are no students added
-  * 1b1. System shows a blank screen
+  * 1b1. System gives a blank screen
 
     Use case ends
 
@@ -499,28 +500,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User wants to view all details of a student
-2. 
-3. System displays all information of the student
+1. User chooses a student to view their complete details
+2. System displays all information pertaining to that student
 
    Use case ends
 
    **Extensions**
 
-* 1a. User tries to sort by an invalid field
-    * 1a1. System informs user to sort using only name/subject/studentId/yearGroup
-    * 1a2. User re-enters the command with a valid field.
+* 1a. The student chosen does not exist
+    * 1a1. System alerts user that there is no such student found
+    * 1a2. User re-enters the correct information
 
-      Steps 1a1-1a2 are repeated until only name/subject/studentId/yearGroup is entered as the field
-      Use case resumes from step 2.
+      Steps 1a1-1a2 are repeated until student chosen exists
 
-* 1b. There are no students added
-    * 1b1. System shows a blank screen
+      Use case resumes at step 2
+
+* 1b. The details of the student to be viewed is in the wrong format
+    * 1b1. System gives error message and requests for details in correct format
+    * 1b2. User re-enters the correct information
+
+      Steps 1b1-1b2 are repeated until the details in the specified format are provided
+
+      Use case resumes at step 2
+
+---
+
+**Use case: UC10 - Filter**
+
+**MSS**
+
+1. User wants to filter students by subjects or yearGroup
+2. System gives a list of students who are in that yearGroup/taking that subject
+
+   Use case ends
+
+   **Extensions**
+
+* 1a. User tries to filter by an invalid category
+    * 1a1. System informs user to filter using only subject/yearGroup
+    * 1a2. User re-enters the command with a valid category
+
+      Steps 1a1-1a2 are repeated until only subject/yearGroup is entered as the field
+
+      Use case resumes from step 2
+
+* 1b. User gives invalid inputs to yearGroup or subject
+    * 1b1. System informs user of the correct formats for yearGroup or subject
+    * 1b2. User re-enters the command with valid inputs 
+    
+      Steps 1b1-1b2 are repeated until the user enters the information in the correct format
+  
+      Use case resumes from step 2
+
+* 1c. There are no students added
+    * 1c1. System gives a blank screen
 
       Use case ends
 
-*{More to be added}*
+---
 
+**Use case: UC11 - Tracking students' subjects**
+
+**MSS**
+
+1. User uses the tracksubject command
+2. System shows user all subjects and how many students are currently taking them
+
+   Use case ends
+
+---
+
+**Use case: UC12 - Adding subjects to existing students**
+
+**MSS**
+
+1. User chooses a student to add subject(s) to
+2. User decides what are the additional subjects to add to the student  
+3. System informs the user that the subjects taken have been updated 
+
+    Use case ends 
+
+   **Extensions**
+
+* 1a. User tries to add subjects to a student that does not exist
+    * 1a1. System alerts user that there is no such student found
+    * 1a2. User re-enters the correct information
+
+      Steps 1a1-1a2 are repeated until student to add subjects to exists
+
+      Use case resumes at step 2
+
+* 1b. Student details are not provided/invalid format
+    * 1b1. System gives error message and requests for details in correct format
+    * 1b2. User re-enters the correct/missing information
+
+      Steps 1b1-1b2 are repeated until the information in the specified format is provided
+
+      Use case resumes at step 2
+
+* 2b. User gives an invalid/missing subject
+    * 2b1. System informs user of the valid subject inputs 
+    * 2b2. User re-enters the command with valid subjects
+
+      Steps 2b1-2b2 are repeated until the user enters the correct subjects
+
+      Use case resumes from step 3
+
+---
 ### Non-Functional Requirements
 
 #### Data Requirements
