@@ -1169,7 +1169,7 @@ command: `add`
     * **Prerequisites:**
         * Launch the app.
 
-    * **Test case (invalid `Nric` field):** `add n|Jane i|T012345B p|90901282 s|F d|2002-10-10`
+    * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
       * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
 
 
