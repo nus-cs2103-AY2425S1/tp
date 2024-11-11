@@ -350,17 +350,15 @@ Additional Details:
 * 2 patients cannot have the same date and time for their appointment.
 * When no date and time is set, no date and time is displayed.
 * In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in their order and selection. 
-This does not mean that all three fields can be left out. 
-Instead, it allows the user to include any one or more of these fields, but at least one must be provided. 
-This flexibility helps in cases where only one of these details is available or relevant, but still ensures there is enough information to uniquely identify a contact.
+This does not mean that all three fields can be left out, at least one must be provided. 
 * This feature supports the year 0001 onwards. Any years before that is not supported.
 * If the day, month, hour, or minute values are not in range of valid possible values (e.g. month is between 1 and 12 or day is between 1 and 31), an error will be shown to the user for them to ensure their inputs are in range. 
 * The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. e.g. if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
 * The time is in the 24-hour format. (e.g. 1800 for 6:00 PM)
 * The format of the date and time, as well the values, must be valid or there will be an error. Note that, to allow fast typing and avoid unnecessary inconvenience, leading zeroes for day and month is allowed in the format and will be parsed. 
 (e.g. 01/01/2024 1400 will be parsed the same way as 1/1/2024 1400)
-* For consistency and ease of validation, spaces between slashes in the date (e.g., 1 / 1 / 2024) are not allowed. This ensures that all dates are uniformly formatted, which helps prevent errors and speeds up processing. Please enter dates without spaces, such as 1/1/2024.
-* The app allows users to enter dates and times that are in the past to provide flexibility in managing and storing patient information. This feature prevents unnecessary limitations, enabling healthcare professionals to record historical data, update past appointments, and maintain a comprehensive record of all patient interactions, even those that have already occurred.
+* For consistency and ease of validation, spaces between slashes in the date (e.g., 1 / 1 / 2024) are not allowed for uniform formatting. Please enter dates without spaces, such as 1/1/2024.
+* The app allows users to enter dates and times that are in the past to provide flexibility in managing and storing patient information, preventing unnecessary limitations.
 
 
 Examples:
