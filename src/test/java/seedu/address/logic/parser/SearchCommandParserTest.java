@@ -30,19 +30,19 @@ class SearchCommandParserTest {
         expectedEnd = LocalDateTime.of(2024, 10, 12, 0, 0);
     }
     @Test
-    void parse_validInputBothBeginAndEnd_returnsSearchCommand() throws ParseException {
+    void parse_validInputBothBeginAndEnd_returnsSearchCommand() {
         SearchCommand expectedSearchCommand = new SearchCommand(expectedBegin, expectedEnd);
         assertParseSuccess(parser, BEGIN_DATETIME_INPUT + END_DATETIME_INPUT, expectedSearchCommand);
     }
 
     @Test
-    void parse_validInputOnlyBegin_returnsSearchCommand() throws ParseException {
+    void parse_validInputOnlyBegin_returnsSearchCommand() {
         SearchCommand expectedSearchCommand = new SearchCommand(expectedBegin, null);
         assertParseSuccess(parser, BEGIN_DATETIME_INPUT, expectedSearchCommand);
     }
 
     @Test
-    void parse_validInputOnlyEnd_returnsSearchCommand() throws ParseException {
+    void parse_validInputOnlyEnd_returnsSearchCommand() {
         SearchCommand expectedSearchCommand = new SearchCommand(null, expectedEnd);
         assertParseSuccess(parser, END_DATETIME_INPUT, expectedSearchCommand);
     }
