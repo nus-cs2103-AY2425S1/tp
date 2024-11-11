@@ -130,14 +130,15 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` e.g. both `filter n/Alex Yeoh` and `filter n/Yeoh Alex` will return the student, Alex Yeoh
-* Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`
+* Only full words will be matched e.g. `Han` will not match `Hans`, `example.com` will not match `alexyeoh@example.com`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Similar for emergency contact names and addresses
-* As for phone numbers and emergency phone numbers, the entire number does not have to be provided to filter. 
-  e.g. `99` will return `99999999`, `99278888`
+* As for phone numbers and emergency phone numbers, the entire number does not have to be provided to filter, however must follow the phone number constraints of minimum 3 digits. 
+  e.g. `999` will return `99999999`, `27899988`
 * As for register numbers and class, the entire number or class name must be provided in the command to filter
-* For emergency contact names and numbers, if a student does not have existing values in these fields, filtering for those with no emergency contact names or numbers using `filter en/` or `filter ep/` will not return results.
+* Note on Emergency Contact Filtering
+  * If a student does not have an emergency contact name or number saved, using filter en/ (for emergency contact names) or filter ep/ (for emergency contact numbers) will not return any results. To find these students, please use other attributes in your search criteria.
 * Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
   e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice.
   e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.
