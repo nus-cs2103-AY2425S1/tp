@@ -137,7 +137,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
 <box type="info" seamless>
   
-**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work** 
+**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work.** 
 For example, the command `sold 1 1 ap/1110000` will not work if a property to sell has not been added under the contact at index 1. <br>
 </box>
 
@@ -574,24 +574,24 @@ Examples:
   - Cause: The required person index is missing.
   - Highlight: No specific part is highlighted.
 
-2. **Invalid Index Value**:
+3. **Invalid Index Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
   - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.
 
-3. **Invalid Parameter Values**:
+4. **Invalid Parameter Values**:
   - Command entered: `add n/John Doe p/abc e/johnd@example.com a/John street, block 123, #01-01`
   - Cause: The phone number `abc` is invalid.
   - Highlight: The `p/abc` part is highlighted.
 
-4. **Invalid Command Format and Other Errors**:
+5. **Invalid Command Format and Other Errors**:
   - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000`
   - Cause: The housing type parameter `ht/` is missing.
   - Highlight: No specific part is highlighted.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
