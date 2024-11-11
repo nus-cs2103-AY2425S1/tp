@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -22,7 +20,6 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private static final String ASSERT_WEB_VIEW_MUST_BE_INITIALIZED = "WebView must be initialized";
     private static final String ASSERT_HELP_MESSAGE_MUST_BE_INITIALIZED = "Help message label must be initialized";
 
     private static final String LOG_URL_COPIED_TO_CLIPBOARD = "URL copied to clipboard: ";
@@ -35,8 +32,6 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
-    @FXML
-    private WebView webView;
     /**
      * Creates a new HelpWindow.
      *
@@ -44,10 +39,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        assert webView != null : ASSERT_WEB_VIEW_MUST_BE_INITIALIZED;
         assert helpMessage != null : ASSERT_HELP_MESSAGE_MUST_BE_INITIALIZED;
         helpMessage.setText(HELP_MESSAGE);
-        loadUserGuide();
     }
 
 
@@ -56,14 +49,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
-    }
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     * Loads the user guide URL in the WebView.
-     */
-    public void loadUserGuide() {
-        WebEngine webEngine = webView.getEngine();
-        webEngine.load(USERGUIDE_URL);
     }
 
     /**
