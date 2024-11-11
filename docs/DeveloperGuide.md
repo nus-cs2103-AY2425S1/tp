@@ -199,7 +199,7 @@ When executed, this command parses user input and creates an internal representa
 
 #### Sequence Diagram
 
-When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmentName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
 
 ![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
@@ -810,14 +810,18 @@ Given below are instructions to test the app manually.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a terminal or command prompt, depending on your OS, and navigate to the folder where the jar file is located.
+
+   1. Run the command `java -jar medibase3.jar`
+        
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.
-   
+   1. Re-launch the app by running the command `java -jar medibase3.jar`
+ 
        Expected: The most recent window size and location is retained.
 
 [Back to Table of Contents](#table-of-contents)
@@ -1135,5 +1139,15 @@ Team size: 5
 
   Currently, commands that modify the Patient List panel do not update the Appointment List panel to show only the appointments of the currently listed patients. 
   Adding this feature would allow doctors to view the appointments of the visible patients in chronological order, rather than grouped under each patient's details.
+
+6\. **Allow for foreign patients to be added to Medibase3**
+
+  Currently, MediBase3 uses the patient's NRIC or FIN number as their unique identifier. However, this prevents doctors from adding foreign patients, who do not have a NRIC or FIN number, into Medibase3.
+  As such, we plan on improving MediBase3 to allow doctors to add foreign patients by using other forms of identification, such as their passport number.
+
+7\. **Make certain fields optional**
+
+  Currently, all fields are mandatory when adding a patient. However, there could be cases where the patient does not have an email address or phone number.
+  It would be ideal to make certain fields optional as it allows for more flexibility when adding patient details. However, the NRIC field should remain mandatory since it is the unique identifier for each patient which ensures that duplicate patients cannot be added.
 
 
