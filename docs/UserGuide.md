@@ -29,11 +29,11 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TalentHub.
 
-4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
+4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 <img src="images/Ui.png" alt="Ui" style="display: block; margin: 0 auto; border-radius: 10px;">
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list person` : Lists all persons.
@@ -44,7 +44,7 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-    <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+    <div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
     </div>
 
@@ -86,7 +86,7 @@ Adds a person to TalentHub.
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Person constraints**<br>
 
@@ -109,13 +109,10 @@ The address and email fields are also optional!
 Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
-<div markdown="block" class="alert alert-info">:pushpin:<br> 
-Note that John Doe does not have an address in this example.
-</div>
 
 - `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
 You can add the prefixes in any order you want!
 </div>
 
@@ -148,7 +145,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Person constraints**<br>
 
@@ -159,7 +156,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - A person's phone number must be unique.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
@@ -248,8 +245,8 @@ Format: `delete person INDEX`
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from **all** events' contact lists. This action is irreversible after confirmation.
 </div>
 
 Examples:
@@ -280,7 +277,7 @@ Adds an event to TalentHub.
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Event constraints**<br>
 
@@ -302,7 +299,7 @@ Examples:
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
 - `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
 You can add the prefixes in any order you want!
 </div>
 
@@ -334,14 +331,14 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-warning">
 **:warning: Event constraints**<br>
 
 - The celebrity and all points of contacts must be existing persons in TalentHub.
 - You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip: **
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
@@ -436,7 +433,7 @@ Format: `delete event INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-  :bulb: **Tip:**
+  :bulb: **Tip: **
   If you would like to delete all events at once, you can use the <a href="#clearing-all-events--clear-event">clear event</a> command.
 </div>
 
@@ -456,8 +453,8 @@ Clears all event entries from the address book after receiving confirmation from
 
 Format: `clear event`
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all events in TalentHub. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+Running this command will clear **all** events in TalentHub. This action is irreversible after confirmation.
 </div>
 
 Example:
@@ -483,8 +480,8 @@ Example:
 
 Clears all entries from TalentHub.
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all persons and events in TalentHub. This action is irreversible after confirmation.
+<div markdown="span" class="alert alert-warning">:warning: **Caution!** <br>
+Running this command will clear **all** persons and events in TalentHub. This action is irreversible after confirmation.
 </div>
 
 Format: `clear all`
@@ -534,8 +531,8 @@ TalentHub data are saved in the hard disk automatically after any command that c
 
 TalentHub data are saved automatically as a JSON file `[JAR file location]/data/talenthub.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning!**<br>
+If your changes to the data file makes its format invalid, TalentHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
