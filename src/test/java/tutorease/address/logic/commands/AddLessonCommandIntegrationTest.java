@@ -58,7 +58,9 @@ public class AddLessonCommandIntegrationTest {
                 .withStartDateTime(startDateTime)
                 .withEndDateTime(endDateTime)
                 .build();
+
         model.addLesson(overlap);
+
         assertCommandFailure(new AddLessonCommand(studentId, overlap.getFee(), sdt, edt), model,
                 AddLessonCommand.MESSAGE_OVERLAP_LESSON);
     }

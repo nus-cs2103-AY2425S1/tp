@@ -25,6 +25,7 @@ public class FeeTest {
         String value = "1";
         Fee fee = new Fee(value);
         assertEquals(value, fee.getValueString());
+
         value = "0";
         fee = new Fee(value);
         assertEquals(value, fee.getValueString());
