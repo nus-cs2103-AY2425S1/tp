@@ -106,6 +106,7 @@ Note:
 <box type="tip" seamless>
 
 **Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
+<br>
 
 Format: `help`
 
