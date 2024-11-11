@@ -195,11 +195,11 @@ to the relevant commands!
 
 ### Miscellaneous commands
 
-| Action                                | Format, Examples                                                                                                                                                                 |
-|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Help**](#clearing-all-data-clear)  | `help`                                                                                                                                                                           |
-| [**Clear**](#viewing-help-help)       | `clear`                                                                                                                                                                          |
-| [**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                                                           |
+| Action                                | Format, Examples |
+|---------------------------------------|------------------|
+| [**Help**](#viewing-help-help)        | `help`           |
+| [**Clear**](#clearing-all-data-clear) | `clear`          |
+| [**Exit**](#exiting-the-program-exit) | `exit`           |
 
 [back to top](#internbuddy-user-guide)
 
