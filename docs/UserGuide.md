@@ -14,7 +14,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features)
+- [Features](#feature-details)
   - [General Notes about Command Format](#general-notes-about-command-format)
   - [Adding a Contact: add](#adding-a-contact-add)
   - [Editing a Contact: edit](#editing-a-contact-edit)
@@ -63,7 +63,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
    Note how the app:
    * contains some sample data 
    * displays contacts in [alphabetical order]
-   * utilises [Pagination] where 10 contacts are displayed per page at any one time 
+   * utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
    * shows both the total number of contacts stored in the app and the number of contacts listed in the displayed pages in the status bar footer</br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -86,7 +86,6 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 <div style="page-break-after: always;"></div>
 
 ## Command Summary
-//& TO CHOOSE WHICH TABLE (PLEASE SEE VIA THE WEBSITE NOT BY .md). personally perfers that there should be a short descp.
 
 | Action                                                                                | Format, Examples                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,11 +102,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Features
+## Feature Details
 //& Found why the clicking of Features didnt work, issue I forgot, but the fix is in _markbind/layouts/default.md
-
-//& CHECK IF REPLACING PARAMETERS WITH FIELDS MAKE SENSE <br>
-//& MIGHT WANT TO KEEP PARAMETERS, esp. on the part on any order. IF SO, TO UPDATE PICTURE
 
 <box type="info" seamless>
 
@@ -133,7 +129,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 //& ARE HELP AND LIST CONSIDERED "COMMANDS THAT DO NOT TAKE IN PARAMETERS?"
 // no
 
-* The COMMAND_WORD is **case-insensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
+* The COMMAND_WORD is **not case-sensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
 * A limit of 1000 characters //& REPHRASE IF NEEDED
 
@@ -148,20 +144,16 @@ Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ 
 
 <box type="definition" seamless>
 
-**Action:** Adds a contact to the address book. (parameters do not need to be in order, nn/NICKNAME is optional)
+**Action:** Adds a contact to the address book. 
+Parameters do not need to be in order. <br/>
+`r/ROLE` can be used 1 to any number of times. <br/>
+`nn/NICKNAME` is optional. <br/>
 </box>
 
 <box type="tip" seamless>
 
-**Tip:** A contact must have at least one role. Roles should match\* the following:
-1. President
-2. Vice President
-3. Admin
-4. Marketing
-5. Events (Internal)
-6. Events (External)
-7. External Relations<br><br>
-\* The entered role must match exactly (but is not case-sensitive).
+**Tip:** Refer to [Contact Fields](#contact-fields-constraints) for constraints on each of the contact fields. 
+
 </box>
 
 Examples:
@@ -170,9 +162,12 @@ Examples:
 * `add n/Alex Yeoh th/alexyeoh123 e/alexyeoh@example.com ss/masters r/President r/Admin`
 ![result for 'add'](images/addAlexYeohResult.png)
 
+<box type="tip" seamless>
+
 Note:
 * `add` command will fail if you try to add a person who is already in the address book. You may refer to [invalid contacts](#what-is-considered-as-invalid-contacts) to see what is considered as having the same identity.
 * `add` command will fail if you attempt to add a person with a duplicate field as an existing contact, please refer to [invalid contacts](#what-is-considered-as-invalid-contacts) for more information.
+</box>
 
 <div style="page-break-after: always;"></div>
 
@@ -238,12 +233,11 @@ Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it is a non-zero unsigned integer**)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-  ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 #### Delete by name
 Format `delete NAME` or `delete n/NAME`
@@ -292,13 +286,12 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
 
 * Role field `[r/ROLE]`:
     * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
-    * Have to take a valid role value (Refer to **Tip** section above in [adding a contact](#adding-a-contact-add))<br>
+    * Have to take a valid role value (Refer to [role constraints](#role)) <br>
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
-    * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
-    * Only perfect matches returned
-    * Specifying multiple roles returns contacts who own all specified roles
-      e.g. `find r/Vice President r/Admin` will only return contacts which holds **both** Roles.
+    * Not case-sensitive e.g. `find r/pResiDent` &rarr; valid
+    * Specifying multiple roles returns contacts holding all specified roles
+      e.g. `find r/Vice President r/Admin` will only return contacts holding **both** Roles.
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
     * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
@@ -312,6 +305,11 @@ Examples:
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
+<box type="tip" seamless>
+
+**Note:** Searching by Name does not include Nicknames (and vice versa). `find n/Alex` does not include Contacts with the field `nn/alex`
+* If you do not find the contact via searching by Name, you may want to search via Nickname instead.
+</box>
 
 <box type="tip" seamless>
 
@@ -437,10 +435,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <div style="page-break-after: always;"></div>
 
-//& TO REVIEW IF EDITS IS OKAY
 ## What is considered as Invalid Contacts
 
-There must not be duplicate fields. For example, if there are contacts with the following data:
+**Identity conflict:** <br/>
+- No two contacts are allowed to share the *same identity* in the address book. <br/>
+- Two contacts are considered to have the same identity if they share the same `Name` and `Nickname`. <br/>
+- Note that `Nickname` is case-sensitive, e.g. `nn/alice` and `nn/Alice` are considered different nicknames.
+
+**Duplicate fields** <br/>
+- No two contacts are allowed to share the *same fields* for `Telegram Handle`, `Email`, and `Nickname`.
+- Note that `Telegram Handle`, `Email`, and `Nickname` are all case-sensitive, and will only be considered duplicate entries if the case matches exactly.
+- In the entire address book, there can only be 1 President.
+
+For example, if there are contacts with the following data:
 
 `n/Alice Tan th/alicetan123 e/alicetan123@example.com ss/phd r/Marketing`<br>
 `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny` <br>
@@ -473,23 +480,32 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ## Contact Fields Constraints
 
-| Field                                   | Prefix* | Valid examples                                                                                                      | Invalid examples     |
-|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|----------------------|
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`             |
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                    | `@ginatan123`        |
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`                                                                                   | `gina_tan@`          |
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                    | `u 1`<br/> `under 5` |
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |    `Events(Internal)` |
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |            |
+| Field                                   | Prefix* | Valid examples                                                                                                                       | Invalid examples                                                                                                |
+|-----------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Jane Smith@Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`<br/> spaces must come before and after `D/O` or `S/O` &rarr; <br/> `RaviS/ORamasamy`<br/>`DeviD/ORajaratnam` |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                                     | `@ginatan123`                                                                                                   |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-web.com`                                                                                                           | `gina_tan@`                                                                                                     |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                                     | `u 1`<br/> `under 5`                                                                                            |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                 | `Events(Internal)`                                                                                              |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                         |                                                                                                                 |
 
-*_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
+*_By default, all fields must be non-empty when prefix is specified_
+
+<box type="tip" seamless>
+
+**Tip:** Case sensitivity
+- `Telegram Handle`, `Email`, and `Nickname` are case-sensitive, and will retain the exact format as provided by the user.
+- `Name`, `Student Status`, and `Role` are not case-sensitive, and will be automatically converted into their official format.
+
+</box>
 
 ### Name
-- Must contain alphabets and spaces only, with the following exceptions:
+- Must contain english alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
-//& white space thingy issue
+      - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
-- Must not be blank
+- Must not be blank.
+- Will be automatically converted to Start Case (i.e. Only the first letter of every word is in upper-case). 
 
 ### Telegram Handle
 - Must contain alphabets, numbers and underscores only.
@@ -502,7 +518,6 @@ Assuming the above entry in the address book, you must enter an add / edit comma
   - Must only contain alphabets, numbers, and special characters `+_.-`.
   - Must not start or end with any special characters.
 - DOMAIN //& EDIT TO ADDRESS ISSUE 247 and 278
-  - Domains must be made up of domain labels separated by periods.
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
@@ -532,12 +547,6 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ### Nickname
 - Is an optional field.
-
-<box type="tip" seamless>
-
-**Tip:** Case sensitivity issues? (it's not just about name by further extention)
-&// ISSUE 285
-</box>
 
 <div style="page-break-after: always;"></div>
 
