@@ -29,7 +29,8 @@ If you can type fast, GamerBook Pro Max can get your contact management tasks do
 ## Installation and Quick Start
 
 1. **Check your Java version**: Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or
-   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.
+   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.<br>
+   Ensure that the version returned is 17 or above, or install it if you have not done so.
 
 2. **Download GamerBook Pro Max**: Download the latest `gamerbook.jar` file
    from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).  
@@ -38,8 +39,9 @@ If you can type fast, GamerBook Pro Max can get your contact management tasks do
 3. **Set Up Your GamerBook Folder**: Copy the file to the folder you want to use as the _home folder_ for your
    GamerBook.
 
-4. **Run the App**: Open a command terminal, use `cd` to navigate into the folder you put the jar file in, and use
+4. **Run the App**: Open a command terminal, use [`cd`](https://owlcation.com/stem/how-to-open-files-in-terminal) to navigate into the folder you put the jar file in, and use
    the `java -jar gamerbook.jar` command to run the application.<br>
+   **Alternative**: Click on the gamerbook.jar application icon as you would any normal app.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/Ui.png)
@@ -61,7 +63,7 @@ If you can type fast, GamerBook Pro Max can get your contact management tasks do
 
     * `exit` : Exits the app.
 
-Refer to the [Features](#features) below for more details.
+Refer to the [Commands](#commands) below for more details.
 <br>
 <div style="page-break-after: always;"></div>
 
@@ -569,8 +571,15 @@ Output: `Address book has been saved!`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.  
 
-Format: `load`
+Format: `load`  
 Output: `The saved address book has been loaded!`
+
+<box type="warning" seamless>
+
+**Caution:**
+`load` is irreversible and cannot be undone by `undo`<br>
+All the data you have in `[JAR file location]/data/addressbook.json` prior to using `load` will be lost!
+</box>
 
 <br>
 
