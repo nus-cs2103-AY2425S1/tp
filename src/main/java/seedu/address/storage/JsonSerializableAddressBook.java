@@ -10,11 +10,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
@@ -28,6 +30,9 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
+
+    public static final String MESSAGE_PERSON_LESSON_MISMATCH = "Lessons list contains some lessons with "
+            + "invalid subjects.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -72,6 +77,23 @@ class JsonSerializableAddressBook {
         );
     }
 
+    public boolean validateLessonSubject(AddressBook addressBook) {
+        ObservableList<Lesson> lessonList = addressBook.getLessonList();
+        for (Lesson lesson : lessonList) {
+            Subject subject = lesson.getSubject();
+            Tutor tutor = lesson.getTutor();
+            Tutee tutee = lesson.getTutee();
+            if (tutor == null || tutee == null) {
+                return false;
+            }
+
+            if (!tutor.getSubjects().contains(subject) || !tutee.getSubjects().contains(subject)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Converts this address book into the model's {@code AddressBook} object.
      *
@@ -95,6 +117,9 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
             addressBook.addLesson(lesson);
+        }
+        if (!validateLessonSubject(addressBook)) {
+            throw new IllegalValueException(MESSAGE_PERSON_LESSON_MISMATCH);
         }
         return addressBook;
     }
