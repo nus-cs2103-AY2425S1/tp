@@ -166,9 +166,9 @@ The `add_guest` command creates and adds a new `Guest` object into the address b
 The sequence diagrams below provide an overview for the execution flow of an `add_guest` command.
 <br>
 Note: In the diagrams below,
-- Let **C** represent the command: "add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus".
-- Let **args** represent the arguments provided in the command: "n/Joe p/98765432 e/joe@gmail.com a/Nexus".
-- Let **m** represent an instance of the Model.
+- Let **C** represent the command: "add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus"
+- Let **args** represent the arguments provided in the command: "n/Joe p/98765432 e/joe@gmail.com a/Nexus"
+- Let **m** represent an instance of the Model
 
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
 <puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
@@ -184,7 +184,7 @@ Explanation:
    * Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory).
    * Then, a `Guest` object with name, phone number, email and address attributes will be created. <br> 
 4. An `AddGuestCommand` is then created with the new `Guest` object and returned.
-5. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of the `Model` to add the guest into the address book.
+5. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of `Model` to add the guest into the address book.
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component).
 
 ### Edit Guest feature
