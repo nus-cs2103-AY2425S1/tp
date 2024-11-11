@@ -583,18 +583,6 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. System closes the application.<br>
    Use Case Ends.
 
-#### UML Use Case Diagram
-
-```mermaid
-graph TD
-    A[Management Staff] -->|Creates| B(Create Volunteer Event)
-    A -->|Assigns| C(Add Volunteer to Event)
-    B -->|Enables| C
-    B -->|Enables| D
-```
-
-This diagram shows the main actor (Management Staff) and their interactions with the three primary use cases we've defined. The arrows indicate the relationships between the actor and the use cases, as well as dependencies between use cases.
-
 <div style="page-break-after: always;"></div>
 
 
