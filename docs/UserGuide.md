@@ -6,13 +6,9 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop application that helps you manage your patients' contacts and session logs efficiently, combining the speed of typing commands with the ease of a visual interface.**
+**MindMap is a specialized desktop application designed to streamline patient management for therapists.** It enables therapists to manage patient contact information and track session logs, and organize therapy notes efficiently, combining the speed of typing commands with a clear, visual interface tailored for therapy-focused task.
 
-It’s designed for professionals like therapists who conduct counselling sessions with multiple patients and prefer a fast and optimised tool.
-
-With MindMap, you can accomplish tasks quickly by typing simple commands, and get a clear user-friendly screen to view and organise your patient details.
-
-If you’re comfortable typing, MindMap can help you accelerate patient management tasks compared to those traditional apps that rely heavily on point-and-click gestures for the same actions.
+With MindMap, therapists can quickly record and access detailed patient information and session history simple text commands, allowing for a faster, more optimized experience than traditional, point-and-click-heavy applications. **Designed specifically for therapeutic practices**, MindMap is ideal for professionals managing multiple patients who require a structured yet flexible tool for session tracking and patient organization.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -115,7 +111,7 @@ If you’re comfortable typing, MindMap can help you accelerate patient manageme
 
 <box type="warning" seamless>
 
-Our application uses Singapore’s NRIC system extensively for the Identity Number field `i/`. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
+Our application uses Singapore’s NRIC system extensively for the Identity Number field `i/`. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nrics). 
 
 </box>
 <br>
@@ -139,7 +135,11 @@ Adds a patient to the app.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-* **IDENTITY_NUMBER** has to be a valid NRIC (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g., S1234567D).";))
+* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).";))
+
+* **PHONE_NUMBER** must be a valid Singapore mobile number. Our application only accepts mobile numbers, which should be 8 digits long and start with either '8' or '9' (e.g., 81234567 or 91234567).
+
+
 
 Examples:
 * `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW`
@@ -437,13 +437,24 @@ This data is not to be used for any purposes beyond application testing. Unautho
 | 8         | G7191281M       |
 | 9         | S4998948B       |
 | 10        | T3692411F       |
+| 11        | G3715173X       |
+| 12        | G2396162N       |
+| 13        | S4145708B       |
+| 14        | S7918626J       |
+| 15        | T3347267B       |
+| 16        | T9148887B       |
+| 17        | F3573604L       |
+| 18        | F1095991T       |
+| 19        | T9463574D       |
+| 20        | F7844260M       |
+
+
+---
 
 ## **Stay Tuned: Future enhancements coming!**
 >New UI Arriving Soon!
 ![Ui](images/Ui.png)
 
-1. **Search by sub-strings**  
-   Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
-2. 
-
+**Search by Sub-Strings**  
+Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
 
