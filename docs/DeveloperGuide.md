@@ -43,7 +43,7 @@ Given below is a quick overview of the main components of the application and ho
 - At application launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components, and the corresponding classes are in the `hallpointer.address.commons` package.
 
 The bulk of the application's work is done by the following four components:
 
@@ -151,10 +151,9 @@ Here is a partial and representative class diagram of the `Storage` component:
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
+The `Storage` component has the responsibility of saving HallPointer data and user preferences data to disk in JSON format, and then parsing them back into the corresponding objects when the application is re-opened.
 
-- can save both hall pointer data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+It inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -162,101 +161,6 @@ The `Storage` component,
 Classes used by multiple components are in the `hallpointer.address.commons` package.
 
 ---
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-
-### [Proposed] Undo Command
-The proposed undo/redo mechanism is facilitated by `Versioned`. It extends `HallPointer` with an undo/redo history, stored internally as an `hallPointerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-- `VersionedHallPointer#commit()` — Saves the current hall pointer state in its history.
-- `VersionedHallPointer#undo()` — Restores the previous hall pointer state from its history.
-- `VersionedHallPointer#redo()` — Restores a previously undone hall pointer state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitHallPointer()`, `Model#undoHallPointer()` and `Model#redoHallPointer()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedHallPointer` will be initialized with the initial hall pointer state, and the `currentStatePointer` pointing to that single hall pointer state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer system. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer system after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-S
-Step 3. The user executes `add n/David …​` to add a new member. The `add` command also calls `Model#commitHallPointer()`, causing another modified hall pointer state to be saved into the `hallPointerStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitHallPointer()`, so the hall pointer state will not be saved into the `hallPointerStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer system to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial HallPointer state, then there are no previous HallPointer states to restore. The `undo` command uses `Model#canUndoHallPointer()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer system to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `hallPointerStateList.size() - 1`, pointing to the latest hall pointer state, then there are no undone HallPointer states to restore. The `redo` command uses `Model#canRedoHallPointer()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer system, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitHallPointer()`. Since the `currentStatePointer` is not pointing at the end of the `hallPointerStateList`, all hall pointer states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-- **Alternative 1 (current choice):** Saves the entire hall pointer.
-
-    - Pros: Easy to implement.
-    - Cons: May have performance issues in terms of memory usage.
-
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    - Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
-    - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 
 ## **Documentation, logging, testing, configuration, dev-ops**
