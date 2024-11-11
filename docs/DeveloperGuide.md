@@ -38,7 +38,9 @@ title: Developer Guide
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
----
+- **Third-party libraries**
+- opencsv Library
+- org json Library
 
 ## **Setting up, getting started**
 
