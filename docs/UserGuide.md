@@ -288,6 +288,7 @@ Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
 * The filter accepts multiple predicates. For example, `filter t/bride's side t/neighbours` and `filter s/3 t/neighbours` are both valid commands.
 * Note that `filter s/3 t/neighbours` is equivalent to typing `filter s/3` then `filter t/neighbours` or `filter t/neighbours s/3`.
 * Only one RSVP status can be used for filtering in each command, but multiple tags can be used. i.e. `filter s/1 s/2` is not a valid command.
+* The command will not be executed if one or more parameters are invalid.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can clear all filters by running the `list` command.
 </div>
@@ -296,6 +297,7 @@ Example:
 * `filter s/1`
 * `filter t/bride's side t/neighbours`
 * `filter s/3 t/neighbours`
+* `filter s/1`, `filter s/2` (will always return an empty list)
 
 ![filterCommand](images/filterCommand.png)
 
@@ -353,7 +355,7 @@ Clears all entries from the address book. i.e. deleting all guests.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-primary">:bulb: **WARNING:**
+<div markdown="span" class="alert alert-warning">:bulb: **WARNING:**
 This command will permanently delete all guests in your address book. <br> Ensure that you have saved a copy of the address book somewhere else.
 </div>
 
