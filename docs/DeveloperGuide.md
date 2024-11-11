@@ -1215,6 +1215,12 @@ testers are expected to do more *exploratory* testing.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
     - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used, instead of treating it as part of the parameters. We also considered allowing users to key in prefixes such as `n/` or `a/` as string inputs via the use of special symbols, possibly using a symbol such as `\`.
     - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
+   
+3. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
+    - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
+    - **Example:** User tries to add a customer using `addc n/John s/o Doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
+    - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
+    - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
 
 ## **Appendix: Effort**
 
