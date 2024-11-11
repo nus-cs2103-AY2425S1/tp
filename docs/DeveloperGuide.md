@@ -159,8 +159,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 **Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and many other class names
-which may differ from the terminologies used in other parts of our Developer Guide. These names are used strictly within 
+which may differ from the terminologies used in other parts of our Developer Guide, such as Udders or FindingbrUdders. These names are used strictly within 
 the context of code implementation and may not directly correspond to the broader terms discussed elsewhere in the documentation.
+
+As a reference, for clarity in the discussions that follow, we have included a screenshot of the user interface labeled with component names below:
+<br>
+
+![Ui_parts](images/Ui_parts.png)
 
 ### Add an Udder Feature
 
@@ -198,7 +203,7 @@ We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-- For step 2, if the user does not have any arguments, an error will be shown on the screen and the `AddCommand` object will NOT be created!
+- At step 2, if the user does not have any arguments, an error will be shown on the screen and the `AddCommand` object will NOT be created!
 </div>
 
 ---
@@ -237,11 +242,11 @@ We will be using the user input `delete 1` as an example.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-- At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+- At step 2, if input is detected as invalid, an error will be shown on the screen and the `DeleteCommand` object will NOT be created!
 </div>
 
 ---
-### Edit Person Feature
+### Edit an Udder Feature
 
 #### **Feature**
 
@@ -276,8 +281,137 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-- At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), an error will be shown on the screen and the sequence of action is terminated.
+- At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), an error will be shown on the screen and the `EditCommand` object will NOT be created!.
 </div>
+
+---
+
+### Schedule Meeting with an Udder Feature
+
+#### **Feature**
+
+`schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
+
+#### **Feature Purpose**
+
+The `schedule` command adds a `Meeting` to the `AddressBook` and the `Person` we scheduled a meeting with.
+
+#### Key Components
+- `ScheduleCommand`: Executes the creation of a `Meeting` and adds it to both the `AddressBook` and the `Person`'s `Meetings`. It takes user input as parameters to construct a `Meeting` object linked to a specified `Person`.
+- `ScheduleCommandParser`: Parses user input to create a `ScheduleCommand` object.
+- `LogicManager`: Invokes the `ScheduleCommand` to execute the scheduling operations.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons and meetings.
+- `Person`: Represents an Udder in FindingbrUdders and all information attached to it.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates a `ScheduleCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `schedule` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `schedule 1 l/The Terrace st/09-10-2024 09:00 et/09-10-2024 10:00` as an example.
+
+1. The user inputs the command `schedule 1 l/The Terrace st/09-10-2024 09:00 et/09-10-2024 10:00`, intending to create a meeting with the `Person` at index 1 with the given details.
+2. The `ScheduleCommandParser` interprets the input.
+3. A `ScheduleCommand` object is created.
+4. The `LogicManager` invokes the execute method of `ScheduleCommand`.
+5. The execute method of `ScheduleCommand` identifies the `Person` associated with the given `Index`.
+6. The execute method of `ScheduleCommand` creates a new `Meeting` object with the information provided.
+7. The execute method of `ScheduleCommand` invokes the `addMeeting` method in `Model` to add the `Meeting` object to the `Meetings` in the `AddressBook` and the `Person` found earlier.
+8. The execute method of `ScheduleCommand` returns a `CommandResult` object which stores the data regarding the completion of the `ScheduleCommand`.
+9. The UI updates to reflect this newly scheduled `Meeting`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `ScheduleCommand` object will NOT be created!
+
+</div>
+
+---
+
+
+### Delete Meeting with an Udder Feature
+
+#### Feature
+`deletem INDEX` where `INDEX` is the index of the meeting to be deleted.
+
+#### Feature Purpose
+The `deletem` command allows users to delete an existing `Meeting` from the `AddressBook`, impacting the schedule of the `Person` associated with the meeting.
+
+#### Key Components
+- `DeleteMeetingCommand`: Executes the deletion of a `Meeting` from both the `AddressBook` and the `Person`'s `Meetings` based on the user's input.
+- `DeleteMeetingCommandParser`: Parses user input to create a `DeleteMeetingCommand` object.
+- `LogicManager`: Invokes the `DeleteMeetingCommand` to execute the deletion operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons and meetings.
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information including scheduled meetings.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates a `DeleteMeetingCommand` object based on the user input.
+
+### Sequence of Action
+To understand how the `deletem` command works, here is a list of steps illustrating what occurs when `LogicManager#execute()` is invoked:
+
+We will be using the user input `deletem 1` as an example.
+
+1. The user inputs the command `deletem 1`, intending to delete the meeting at index `1`.
+2. The `DeleteMeetingCommandParser` interprets the input.
+3. A `DeleteMeetingCommand` object is created.
+4. The `LogicManager` invokes the `execute` method of `DeleteMeetingCommand`.
+5. The `execute` method of `DeleteMeetingCommand` retrieves the existing `Meeting` object to be deleted from the `AddressBook` by `Index`.
+6. The `execute` method of `DeleteMeetingCommand` finds the `Person` object associated with the meeting being deleted.
+7. The `execute` method of `DeleteMeetingCommand` removes the `Meeting` from the `Meetings` in the `AddressBook` and the `Person` object found earlier.
+8. The `execute` method of `DeleteMeetingCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteMeetingCommand`.
+9. The UI updates to reflect this updated list of meetings in the DetailPanel of the Udder if the affected `Person` is being displayed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `DeleteMeetingCommand` object will NOT be created!
+
+</div>
+
+---
+
+### Edit Meeting with an Udder Feature
+
+#### Command Feature
+`editm INDEX [n/NAME] [l/LOCATION] [st/START_TIME] [et/END_TIME]` where at least one optional field should be present.
+
+#### Command Feature Purpose
+The `editm` command allows users to edit the details of an existing `Meeting` in the `AddressBook`. The existing values will be overwritten by any given input values.
+
+#### Key Components
+- `EditMeetingCommand`: Executes the operation of editing a meeting based on the user's input. It updates the details of a Meeting object within the `AddressBook` and the `Person`'s `Meetings`.
+- `EditMeetingCommandParser`: Parses user input to create an `EditMeetingCommand` object.
+- `LogicManager`: Invokes the `EditMeetingCommand` to execute the editing operation.
+- `ModelManager`: Implements the `Model` interface and manages the internal list of persons and meetings.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates an `EditMeetingCommand` object based on the user input.
+
+### Sequence of Action
+To understand how the `editm` command works, here is a list of steps illustrating what occurs when `LogicManager#execute()` is invoked:
+
+We will be using the user input `editm 1 l/Discussion Room 3 st/09-10-2024 13:00 et/09-10-2024 14:00` as an example.
+
+1. The user inputs the command `editm 1 l/Discussion Room 3 st/09-10-2024 13:00 et/09-10-2024 14:00`, aiming to edit the details of the meeting at index `1` with the specified details.
+2. The `EditMeetingCommandParser` interprets the input.
+3. An `EditMeetingCommand` object is created.
+4. The `LogicManager` invokes the `execute` method of `EditMeetingCommand`.
+5. The `execute` method of `EditMeetingCommand` retrieves the existing `Meeting` object to be edited from the `AddressBook` by `Index`.
+6. If the edited meeting has a new name, the `execute` method of `EditMeetingCommand` deletes the meeting being edited and creates a new `Meeting` object with the updated details.
+7. If the edited meeting has the same name, the `execute` method of `EditMeetingCommand` updates the existing `Meeting` object which already exists in the `Meetings` of the `AddressBook`.
+8. The `execute` method of `EditMeetingCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditMeetingCommand`.
+9. The UI updates to display the revised list of meetings in the DetailPanel of the Udder if the associated `Person` is currently displayed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**: 
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `EditMeetingCommand` object will NOT be created!
+
+</div>``
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -574,4 +708,27 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-
+1. **Command Consistency Improvements:**
+    * Standardize the behavior of the `delete` command to reset the person list post-execution, aligning with the current behavior of `add` and `edit` commands. This change will improve user experience by providing consistent feedback and list visibility.
+2. **Email Validation Enhancement:**
+    * Refine the email validity checks to include verification of the domain, ensuring that the email not only contains an '@' symbol followed by any alphanumeric characters, but also follows a valid format with a recognized domain. This enhancement aims to reduce incorrect/invalid email entries and improve data integrity.
+3. **Email Search Logic Enhancement:**
+    * Revamp the find functionality for the email field to accommodate searches without the typical formatting of a valid email address, thus broadening the search capabilities.
+4. **Duplicate Handling Improvements:**
+    * Revamp the duplicate detection logic to identify duplicates based on phone numbers and email addresses, ignoring whitespace variations. 
+    * Names will no longer be considered for duplicate checks due to the possibility of multiple individuals sharing the same name, thus mimicking real-world scenarios more accurately.
+5. **Cross-Platform UI Consistency:**
+6. **Detail Panel Behavior Correction:**
+    * Adjust the behavior of the Detail Panel to clear its contents when the last person in the person list is deleted, ensuring that no outdated information remains visible, thereby preventing user confusion.
+    * Implement font packaging within the software to ensure UI consistency across different operating systems, particularly addressing layout issues on MacOS caused by missing font styles.
+7. **UI Layout Improvements:**
+    * Allow the meeting list to be displayed in the Detail Panel instead of the Result Display Panel for enhanced readability.
+    * Provide options for users to choose which panel (Detail or Person List) to expand, instead of defaulting to expanding only the Person List Panel.
+    * Increase the size of the Result Display Panel for improved user interaction and readability.
+8. **Enhanced Tag Management:**
+    * Improve the management and display of role tags in the Person List Panel to ensure they are not truncated or hidden, regardless of the length of the person's name. This will enhance visibility and accessibility of important categorizations within the user interface.
+9. **Meeting Deletion Streamlining:**
+    * Streamline the meeting deletion process (`deletem`) by allowing the Detail Panel to display the meetings list, facilitating easier and faster batch deletions without needing to repeatedly execute the meetings command to refresh the index.
+10. **Meeting Date Validation:**
+    * Change the validation logic for meeting dates to prevent the system from auto-correcting invalid dates to the nearest valid ones, which is the cause for our current app version's inconsistent behavior in its meeting date validation. 
+    * After the enhancement, if an entered date is invalid, the system will prompt an error, requiring the user to correct the input. 
