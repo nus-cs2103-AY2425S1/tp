@@ -26,7 +26,7 @@ Parts of the codebase were developed with the assistance of ChatGPT. The contrib
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2425s1-cs2103t-f08-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,103 +158,126 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and many other class names
+which may differ from the terminologies used in other parts of our Developer Guide. These names are used strictly within 
+the context of code implementation and may not directly correspond to the broader terms discussed elsewhere in the documentation.
 
-#### Proposed Implementation
+### Add an Udder Feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### **Feature**
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+`add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE m/MAJOR [t/TAG]`,
+where tag is an optional field.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### **Feature Purpose**
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The `add` command allows users to add a `Person` to the `AddressBook`.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+#### Key Components
+- `AddCommand`: Executes the action of adding of a new Udder. It takes user input as parameters construct a `Person` object and add it to FindingbrUdders. 
+- `AddCommandParser`: Parses user input to create an `AddCommand` object.
+- `LogicManager`: Invokes the `AddCommand` to execute the adding of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates an `AddCommand` object based on the user input.
 
 
-<box type="info" seamless>
+### **Sequence of action**
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-</box>
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza` as an example.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`, intending to add a person with the specified details.
+2. The `AddCommandParser` interprets the input.
+3. An `AddCommand` object is created.
+4. The `LogicManager` invokes the execute method of AddCommand.
+5. The execute method of `AddCommand` invokes the `addPerson` method in `Model` property to create new contact with the new `Person` object.
+6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
+7. The UI reflects this new list with added `Person`.
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-<box type="info" seamless>
+- For step 2, if the user does not have any arguments, an error will be shown on the screen and the `AddCommand` object will NOT be created!
+</div>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+---
 
-</box>
+### Delete an Udder Feature
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### **Feature**
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+`delete INDEX`
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### **Feature Purpose**
 
-<box type="info" seamless>
+The `delete` command allows users to delete a `Person` from the `AddressBook`.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Key Components
+- `DeleteCommand`: Executes the action of deleting an existing Udder based on user input. This command processes the input parameters to identify the Person object to be removed from FindingbrUdders.
+- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
+- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates a `DeleteCommand` object based on the user input.
 
-</box>
+### **Sequence of action**
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+We will be using the user input `delete 1` as an example.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+1. The user inputs the command `delete 1`, intending to delete a person with index 1 in the contact list.
+2. The `DeleteCommandParser` interprets the input.
+3. A `DeleteCommand` object is created.
+4. The `LogicManager` invokes the execute method of DeleteCommand.
+5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the specified `Person` object.
+6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
+7. The UI reflects this new list without the deleted `Person`.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-The following activity diagram summarizes what happens when a user executes a new command:
+- At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+---
+### Edit Person Feature
 
-#### Design considerations:
+#### **Feature**
 
-**Aspect: How undo & redo executes:**
+`edit INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL ADDRESS] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]`,
+where all the fields are optional.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+#### **Feature Purpose**
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The `edit` command allows users to edit the details of an existing `Person` in the `AddressBook`. 
 
-_{more aspects and alternatives to be added}_
+#### Key Components
+- `EditCommand`: Executes the action of editing an existing Udder based on user input. This command processes the input parameters to update the Person object's details within FindingbrUdders.
+- `EditCommandParser`: Parses user input to create an `EditCommand` object.
+- `LogicManager`: Invokes the `EditCommand` to execute the editing of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
 
-### \[Proposed\] Data archiving
+### **Sequence of action**
 
-_{Explain here how the data archiving feature will be implemented}_
+To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza` as an example, whereby the original `Person` object has an address of `John street, block 123, #01-01`.
+
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza`, intending to edit the details of the person at index 1.
+2. The `EditCommandParser` interprets the input.
+3. An `EditCommand` object is created.
+4. The `LogicManager` invokes the execute method of `EditCommand`.
+5. The execute method of `EditCommand` invokes the `setPerson` method in the `Model` to update the details of the existing `Person` object with the new values.
+6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
+7. The UI reflects this updated list with the edited `Person`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -308,7 +331,7 @@ Whether you're adding new Udders you meet, updating contact details, or organizi
 | `*`      | Udder                         | favourite some of my contacts    | find my favourite contacts in an instant                               |
 | `*`      | Udder                         | unfavourite some of my contacts  | remove them from my favourites list                                    |
 
-**Note:** Features with priority label `*` are **not** implemented as of version 1.6 of FindingbrUdders.
+**Update Note:** As of `v1.6` of FindingbrUdders, features with priority label `*` are **not** implemented.
 
 <br>
 
@@ -385,7 +408,12 @@ For all use cases below,
     * 2b1. FindingbrUdders shows a error message.
 
       Use case resumes at step 2.
-* 2c. The meeting start date
+  
+* 2c. The meeting end date/time is earlier than the meeting start date/time.
+
+    * 2c1. FindingbrUdders shows a error message.
+  
+      Use case resumes at step 2.
 
 <br>
 
@@ -490,15 +518,15 @@ For all use cases below,
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Commonly used Operating Systems which include Windows, Linux, Unix, MacOS
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Favorites list:** A curated list within the application where users can store their favorite contacts for quicker and easier access.
 <br>
 
 * **Users**:
-  - Udder (refers to any type of user described below)
-  - brUdders (refers to mentee users and/or those who wish to mentor as peers)
-  - mUdders (refers to mentor users)
+  - **Udder:** Refers to any type of user described below, which is either a mUdder or a brUdder.
+  - **mUdder:** Mentor users or connections who are more experienced in a relevant field.
+  - **brUdder:** Peers or connections who are experiencing similar things as you.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -541,3 +569,9 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+---
+
+## **Appendix: Planned Enhancements**
+
+
