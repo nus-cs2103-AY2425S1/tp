@@ -32,7 +32,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: Ensure each method is unit tested well
 
 ### Chen Zi Yi
-
 <img src="images/zi-yii.png" width="200px">
 
 [[github](http://github.com/zi-yii)]
