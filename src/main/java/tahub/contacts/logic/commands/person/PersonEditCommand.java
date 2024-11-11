@@ -29,6 +29,8 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tag.Tag;
 
 /**
@@ -81,7 +83,25 @@ public class PersonEditCommand extends Command {
         Person personToEdit = getStudentFromPersonList(lastShownList, matriculationNumber);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+
+        // Get all SCAs associated with the person before editing
+        StudentCourseAssociationList scaList = model.getStudentScaList ();
+        List<StudentCourseAssociation> personScas = scaList.get (personToEdit);
+
+        // Update the person
         model.setPerson(personToEdit, editedPerson);
+
+        // Update all SCAs with the edited person
+        for (StudentCourseAssociation oldSca : personScas) {
+            StudentCourseAssociation newSca = new StudentCourseAssociation(
+                    editedPerson,
+                    oldSca.getCourse(),
+                    oldSca.getTutorial(),
+                    oldSca.getAttendance()
+            );
+            model.setStudentCourseAssociation(oldSca, newSca);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
