@@ -85,9 +85,9 @@ tasks done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/photographer` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/photographer` or as `n/John Doe`. 
 
-  * All indexes (`CONTACT_INDEX` or `WEDDING_INDEX`) **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of contacts or weddings currently listed. `CONTACT_INDEX` is written as `INDEX` for commands that only involve contacts.
+* The index refers to the index number shown next to the name of a contact or wedding in the displayed contact or wedding list. All indexes (`CONTACT_INDEX` or `WEDDING_INDEX`) **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of contacts or weddings currently listed. `CONTACT_INDEX` is written as `INDEX` for commands that only involve contacts. 
 
 * Parameter descriptions containing a `...` indicate that the parameter can take one or more inputs (compulsory parameters) or no inputs at all (only for optional parameters).<br>
   e.g. `[t/TAG1 TAG2 ...]` can be ignored (0 tags), replaced with `t/photographer` (1 tag), or replaced with `t/photographer videographer` (2 tags) and so on. Suppose the square brackets were not present for this example, a command input with 0 provided tags would not be accepted.
@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 Edits an existing [contact](#glossary) in the contact list.
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. 
+* Edits the contact at the specified `INDEX`. 
 * At least one of the optional fields must be provided.
 * Inputs to the parameters must adhere to the constraints detailed in [Adding a contact](#adding-a-contact-add).
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
