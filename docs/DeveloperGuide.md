@@ -14,7 +14,7 @@ title: Developer Guide
   3.6. [Common classes](#common-classes)<br>
 4. [Implementation](#implementation)<br>
   4.1. [Undo/redo feature](#undoredo-feature)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation-1)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Planned Enhancements](#planned-enhancements)
 7. [Appendix: Requirements](#appendix-requirements)<br>
