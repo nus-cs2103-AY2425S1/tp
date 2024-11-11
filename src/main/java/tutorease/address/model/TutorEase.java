@@ -116,7 +116,10 @@ public class TutorEase implements ReadOnlyTutorEase {
     }
 
     /**
-     * Returns the person with the given name.
+     * Returns the person with the specified name.
+     *
+     * @param name The name of the person to retrieve.
+     * @return The person with the specified name.
      */
     public Person getPerson(String name) {
         return persons.getPerson(name);

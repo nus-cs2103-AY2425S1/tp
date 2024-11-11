@@ -5,9 +5,12 @@ import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.lesson.exceptions.LessonIndexOutOfRange;
 import tutorease.address.model.lesson.exceptions.LessonNotInList;
 import tutorease.address.model.lesson.exceptions.OverlappingLessonException;
@@ -21,13 +24,14 @@ import tutorease.address.model.person.Student;
  * A lesson is considered unique by comparing using {@code Lesson#isOverlapping(Lesson)}. As such, adding and updating
  * of lessons uses Lesson#isOverlapping(Lesson) for equality so as to ensure that the lesson being added or updated is
  * unique in terms of overlapping with other lessons in the UniqueLessonList.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Lesson#isOverlapping(Lesson)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
     // adapted from UniquePersonList
+    private static Logger logger = LogsCenter.getLogger(UniqueLessonList.class);
     private final ObservableList<Lesson> internalList = FXCollections.observableArrayList();
     private final ObservableList<Lesson> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -39,8 +43,12 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @return True if a lesson in the list overlaps with the given lesson, false otherwise.
      */
     public boolean contains(Lesson toCheck) {
+        logger.log(Level.INFO, "Checking if lesson is in list: " + toCheck);
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isOverlapping);
+
+        boolean contains = internalList.stream().anyMatch(toCheck::isOverlapping);
+        logger.log(Level.INFO, "Lesson is in list: " + contains);
+        return contains;
     }
 
     /**
@@ -52,12 +60,18 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @throws OverlappingLessonException If the lesson overlaps with an existing lesson in the list.
      */
     public void add(Lesson toAdd) {
+        logger.log(Level.INFO, "Adding lesson to list: " + toAdd);
         requireNonNull(toAdd);
+
+        // check if lesson overlaps with any other lesson in the list
         if (contains(toAdd)) {
+            logger.log(Level.WARNING, "Lesson is overlapping with another lesson in the list: " + toAdd);
             throw new OverlappingLessonException();
         }
+
         internalList.add(toAdd);
         internalList.sort(Lesson::compareTo);
+        logger.log(Level.INFO, "Added lesson to list: " + toAdd);
     }
 
     /**
@@ -67,11 +81,15 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @throws LessonNotInList If the lesson is not in the list.
      */
     public void remove(Lesson lesson) {
+        logger.log(Level.INFO, "Removing lesson from list: " + lesson);
         requireNonNull(lesson);
-        if (!contains(lesson)) {
-            throw new LessonNotInList();
-        } else {
+
+        boolean isLessonInList = contains(lesson);
+        if (isLessonInList) {
             internalList.remove(lesson);
+            logger.log(Level.INFO, "Removed lesson from list: " + lesson);
+        } else {
+            throw new LessonNotInList();
         }
     }
 
@@ -84,10 +102,14 @@ public class UniqueLessonList implements Iterable<Lesson> {
      *                               size of the list).
      */
     public Lesson get(int index) {
-        if (!isValidIndex(index)) {
-            throw new LessonIndexOutOfRange();
+        logger.log(Level.INFO, "Getting lesson at index: " + index);
+        if (isValidIndex(index)) {
+            Lesson lesson = internalList.get(index);
+            logger.log(Level.INFO, "Got lesson at index: " + index + " " + lesson);
+            return lesson;
         } else {
-            return internalList.get(index);
+            logger.log(Level.WARNING, "Index is out of range or invalid: " + index);
+            throw new LessonIndexOutOfRange();
         }
     }
 
@@ -109,28 +131,36 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @throws OverlappingLessonException If any lessons in the list overlap with each other.
      */
     public void setLessons(UniqueLessonList lessons) {
+        logger.log(Level.INFO, "Setting lessons in list: " + lessons);
         requireNonNull(lessons);
+
         internalList.setAll(lessons.internalList);
+        logger.log(Level.INFO, "Set lessons in list: " + lessons);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the lesson list with the specified {@code lessons}.
+     * @param lessons The list of lessons to replace the current list.
      */
     public void setLessons(List<Lesson> lessons) {
+        logger.log(Level.INFO, "Setting lessons in list: " + lessons);
         requireAllNonNull(lessons);
+
         if (!lessonsAreUnique(lessons)) {
+            logger.log(Level.WARNING, "Lessons are overlapping with each other: " + lessons);
             throw new OverlappingLessonException();
         }
 
         internalList.setAll(lessons);
+        logger.log(Level.INFO, "Set lessons in list: " + lessons);
     }
+
     /**
      * Checks if the index is valid.
      *
      * @param index The index to check.
      * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
-     *         list), false otherwise.
+     *      list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
@@ -153,13 +183,20 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @return True if all lessons in the list do not overlap with any other, false if any two lessons overlap.
      */
     public boolean lessonsAreUnique(List<Lesson> lessons) {
+        logger.log(Level.INFO, "Checking if lessons are unique: " + lessons);
+
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isOverlapping(lessons.get(j))) {
+                Lesson lessonOne = lessons.get(i);
+                Lesson lessonTwo = lessons.get(j);
+                if (lessonOne.isOverlapping(lessonTwo)) {
+                    logger.log(Level.WARNING, "Lessons are overlapping: " + lessonOne + " " + lessonTwo);
                     return false;
                 }
             }
         }
+
+        logger.log(Level.INFO, "Lessons are unique: " + lessons);
         return true;
     }
 
@@ -190,20 +227,25 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * @param editedPerson The updated person.
      */
     public void updatePersonInLessons(Person target, Person editedPerson) {
+        logger.log(Level.INFO, "Updating person in lessons: " + target + " " + editedPerson);
         if (target.isStudent() && editedPerson.isStudent()) {
             assert target instanceof Student && editedPerson instanceof Student;
             for (int i = 0; i < internalList.size(); i++) {
+                logger.log(Level.INFO, "Updating person in lesson: " + i);
                 updatePersonInLesson(target, editedPerson, i);
             }
         }
     }
 
     private void updatePersonInLesson(Person target, Person editedPerson, int i) {
+        logger.log(Level.INFO, "Updating person in lesson: " + target + " " + editedPerson + " " + i);
         assert target.isStudent() && editedPerson.isStudent();
         Lesson lesson = internalList.get(i);
+
         if (lesson.getStudent().equals(target)) {
             Lesson updatedLesson = new Lesson(editedPerson, lesson.getFee(),
                     lesson.getStartDateTime(), lesson.getEndDateTime());
+            logger.log(Level.INFO, "Updated lesson: " + updatedLesson);
             internalList.set(i, updatedLesson);
         }
     }

@@ -1,5 +1,6 @@
 package tutorease.address.ui;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -22,11 +23,16 @@ public class LessonListPanel extends UiPart<Region> {
 
     /**
      * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
+     *
+     * @param lessonList The list of lessons.
      */
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
+
+        logger.log(Level.INFO, "Creating LessonListPanel with lessonList: " + lessonList);
         lessonListView.setItems(lessonList);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
+        logger.log(Level.INFO, "Created LessonListPanel with lessonList");
     }
 
     /**
@@ -37,6 +43,7 @@ public class LessonListPanel extends UiPart<Region> {
         protected void updateItem(Lesson lesson, boolean empty) {
             super.updateItem(lesson, empty);
 
+            logger.log(Level.INFO, "Updating LessonListViewCell with lesson: " + lesson);
             if (empty || lesson == null) {
                 setGraphic(null);
                 setText(null);

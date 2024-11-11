@@ -297,5 +297,14 @@ public class DeleteLessonCommandTest {
         public void deleteStudentLesson(Person student) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean filteredLessonListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredPersonListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 }

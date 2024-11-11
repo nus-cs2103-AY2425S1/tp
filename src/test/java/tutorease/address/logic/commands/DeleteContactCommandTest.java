@@ -259,6 +259,15 @@ class DeleteContactCommandTest {
                 }
             }
         }
+        @Override
+        public boolean filteredLessonListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredPersonListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

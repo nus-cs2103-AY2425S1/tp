@@ -2,6 +2,10 @@ package tutorease.address.model.lesson;
 
 import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.person.Person;
 
 /**
@@ -9,13 +13,14 @@ import tutorease.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Lesson implements Comparable<Lesson> {
+    private static Logger logger = LogsCenter.getLogger(Lesson.class);
     private Person student;
     private final Fee fee;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
 
     /**
-     * Every field must be present and not null.
+     * Creates a lesson object.
      *
      * @param student       The student of the lesson.
      * @param fee           The fee of the lesson.
@@ -23,11 +28,15 @@ public class Lesson implements Comparable<Lesson> {
      * @param endDateTime   The end date time of the lesson.
      */
     public Lesson(Person student, Fee fee, StartDateTime startDateTime, EndDateTime endDateTime) {
+        logger.log(Level.INFO, "Creating Lesson object with student: " + student
+                + " fee: " + fee + " start date time: " + startDateTime + " end date time: " + endDateTime);
         requireAllNonNull(student, fee, startDateTime, endDateTime);
+
         this.student = student;
         this.fee = fee;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+        logger.log(Level.INFO, "Created Lesson object: " + this);
     }
 
     /**
@@ -104,6 +113,7 @@ public class Lesson implements Comparable<Lesson> {
     public String getAddress() {
         return student.getAddressString();
     }
+
     /**
      * Returns the fee of the lesson.
      *
@@ -112,6 +122,7 @@ public class Lesson implements Comparable<Lesson> {
     public Fee getFee() {
         return fee;
     }
+
     /**
      * Returns the fee per hour of the lesson.
      *
@@ -120,6 +131,7 @@ public class Lesson implements Comparable<Lesson> {
     public String getFeeString() {
         return fee.getValueString();
     }
+
     /**
      * Returns the amount per hour for the lesson.
      *
@@ -159,6 +171,7 @@ public class Lesson implements Comparable<Lesson> {
                 && startDateTime.equals(otherLesson.startDateTime)
                 && endDateTime.equals(otherLesson.endDateTime);
     }
+
     /**
      * Compares this lesson with another lesson.
      *
