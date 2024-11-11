@@ -10,7 +10,6 @@ import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
 import static hallpointer.address.testutil.TypicalMembers.BOB;
 import static hallpointer.address.testutil.TypicalMembers.CARL;
-import static hallpointer.address.testutil.TypicalMembers.DANIEL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -1,11 +1,9 @@
 package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_SESSION_NAME_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
@@ -21,8 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionDate;
-import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.SessionBuilder;
 
@@ -167,7 +163,13 @@ public class MemberTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_nullOrDifferentType_false() {
+        assertFalse(ALICE.equals(null));
+        assertFalse(ALICE.equals(5));
+    }
+
+    @Test
+    public void equals_true() {
         // same values -> returns true
         Member aliceCopy = new MemberBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
@@ -175,12 +177,17 @@ public class MemberTest {
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
 
-        // null -> returns false
-        assertFalse(ALICE.equals(null));
+        // same name up to case -> returns true
+        Member bobDifferentName = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toUpperCase()).build();
+        assertTrue(BOB.equals(bobDifferentName));
 
-        // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        // same telegram up to case -> returns true
+        Member bobDifferentTelegram = new MemberBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toUpperCase()).build();
+        assertTrue(BOB.equals(bobDifferentTelegram));
+    }
 
+    @Test
+    public void equals_differentDetails_false() {
         // different member -> returns false
         assertFalse(ALICE.equals(BOB));
 
