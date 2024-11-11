@@ -1,0 +1,39 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "gradeLevel": "ABRSM 1",
+    "group": "Alice's Group",
+    "pianoPieces": [],
+    "regularLesson": {
+      "lessonDay": "MONDAY",
+      "startTime": "16:00",
+      "endTime": "18:00"
+    },
+    "cancelledLessons": [ ],
+    "makeupLessons": [{
+      "lessonDate": "14-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
+    }]
+  }, {
+    "name": "Alice Pauline II",
+    "phone": "94351253",
+    "address": "4th street",
+    "gradeLevel": "ABRSM 2",
+    "group": "Alice's Group",
+    "pianoPieces": [],
+    "regularLesson": {
+      "lessonDay": "MONDAY",
+      "startTime": "16:00",
+      "endTime": "18:00"
+    },
+    "cancelledLessons": [ ],
+    "makeupLessons": [{
+      "lessonDate": "21-10-2024",
+      "startTime": "10:00",
+      "endTime": "12:00"
+    }]
+  } ]
+}
