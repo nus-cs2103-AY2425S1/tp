@@ -244,12 +244,15 @@ Example:
 
 ### Searching and filtering clients: `find`
 
-Finds and filters clients using a combination of name, address, and tags.
+Finds and filters all clients using a combination of name, address, and tags.
 
 Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TAGS]`
 
-* At least one of name, address, or tag needs to be entered. 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* At least one of name(`n/`), address(`a/`), or tag(`t/`) needs to be entered.
+* All other invalid parameters will be ignored (eg. `u/` or `e/`)
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The command searches from all clients, not just the one that are currently listed
+
 * The order of the keywords does not matter. 
   * e.g. `n/Hans Bo` will match name `Bo Hans`.
   * `a/Ave Clementi` will match the address`Clementi Ave`.
@@ -408,7 +411,7 @@ Action | Format, Examples
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
 **Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find n/NAME [MORE_NAME_KEYWORDS] a/ADDRESS [MORE_ADDRESS_KEYWORDS] t/TAG [MORE_TAGS]`<br>At least one of the parameters is required<br> e.g., `find n/James Jake a/Clementi t/elderly urgent`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Log** | `addlog INDEX r/REMARK [d/DATE]`<br> e.g., `addlog 2 r/Client is doing well d/2022-12-12 14:00`
 **Delete Log** | `deletelog INDEX l/LOG_INDEX`<br> e.g., `deletelog 2 l/3`
