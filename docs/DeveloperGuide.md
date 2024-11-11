@@ -860,7 +860,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Integrate `pay` and `settle` command to reduce user confusion**: 
 
-* In the current version, the `pay` command adds student's payment to the paid amount, while the `settle` command subtracts the amount repaid from owed amount and adds to the paid amount. This somehow confuses users, especially new users.
+* In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. This somehow confuses users, especially new users.
 * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
   * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
   * `hr/HOURS_PAID` specifies the amount the student **pays**, will be added to the paid amount.
