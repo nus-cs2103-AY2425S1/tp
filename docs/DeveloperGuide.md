@@ -162,12 +162,15 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The add transaction mechanism is facilitated by the creation of a new `Client` with the updated transaction list, 
-followed by replacing the target `Client` in the Model with the newly created client by calling `Model#setClient(Client, Client))`.
+The execution of the add transaction command creates a new `Client` with an updated transaction list consisting of the newly added transaction, 
+followed by replacing the target `Client` in the Model with the newly created client by calling `Model#setClient(Client, Client)`.
 
-The following sequence diagram shows an example execution of command `addt 1 ...`.
+The following sequence diagram shows an example execution of command `addt 1 ...` focusing on interactions within the`Logic` component.
 
 <puml src="diagrams/AddTransactionSequenceDiagram.puml" width="550" />
+
+**Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 ### List Transactions 
 
@@ -634,4 +637,3 @@ Team size: 5
 4. Improve `find` to take in additional logic info to specify what fields to search for. Existing implementation searches for name OR company. Future enhancement will allow user to specify the search with greater granularity e.g company OR address, (name AND email AND company) OR tags, etc.
 5. Improve data saving/loading of corrupted files. Currently, corruption in data file causes app to launch with empty book, and any updates in this session, upon the session's termination, will override the existing corrupted data file. Future enhancement will launch the app with a specified error to inform that the data file is corrupted, and disables usage until the corrupted data file is corrected/recovered. This is to ensure the corrupted data file (which may be important and only suffering from a minor typo) is not permanently lost.
 6. Improve implementation of `tags` to support more complex tag relationships. Currently, tags are simply in a list. Future enhancement allows more intricate relationship between tags to better model real world relationships via hierachial structure, likely implemented with nested lists and some global info. For example, it can be specified that the tags `bakery` `hawker` inherent from tag `FnB`, so any tag with `bakery` would also be auto-tagged with `FnB` for other purposes like searching.
-
