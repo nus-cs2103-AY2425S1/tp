@@ -32,7 +32,7 @@ AddressBookParser -> LinkCommandParser : parse("patient/S1234567D caregiver/S234
 activate LinkCommandParser
 
 create LinkCommand
-LinkCommandParser -> LinkCommand
+LinkCommandParser -> LinkCommand : LinkCommand(S1234567D, S2345678H)
 activate LinkCommand
 
 LinkCommand --> LinkCommandParser
