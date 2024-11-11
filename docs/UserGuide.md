@@ -119,7 +119,6 @@ Before continuing, here are some important information you need to know about th
 1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
 1. Open a command terminal, run the `cd` command to [change your directory](#cd) to the folder you put the jar file in.
-=======
 
 1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -309,8 +308,8 @@ Examples:
 ![add a company](images/addCommand.png)
 > Result after executing `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -330,8 +329,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd company in the address book (provided that there are at least 2 companies in your list).
 * `find Apple` followed by `delete 1` deletes the 1st company in the results of the `find` command.
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -343,8 +342,8 @@ Shows a list of all companies in the address book.
 
 Format: `list`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -385,8 +384,8 @@ Examples:
 ![edit company details](images/editCommand.png)
 > Result after executing `edit 1 p/91234567 e/company@example.com`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -411,8 +410,8 @@ Format: `fav INDEX`
 ![FavouriteACompany](images/favCommand.png)
 > Result after executing `fav 1`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -426,8 +425,8 @@ Format: `unfav INDEX`
 
 * Sets the favourite field of company at the specified `INDEX` as `false`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -453,8 +452,8 @@ Examples:
 * `find hardware SWE` returns `Google`, `Apple` (matched from the applications!) <br>
   ![result for 'find hardware SWE'](images/findhardwareSWEResult.png)
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -477,8 +476,8 @@ a given company.
 ![view application descriptions](images/viewCommand.png)
 > Result after executing `view 1`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to company commands](#company-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -511,8 +510,8 @@ Examples:
 ![create application](images/applyCommand.png)
 > Result after executing `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to application commands](#application-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -537,8 +536,8 @@ check that you have put the correct `APPLICATION_STATUS` to ensure that you corr
 ![updated application](images/updateCommand.png)
 > Result after executing `update c/1 app/1 as/OFFERED`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to application commands](#application-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -561,8 +560,8 @@ The index refers to the index number shown in the displayed company list. The in
 ![withdrawn application](images/withdrawCommand.png)
 > Result after executing `withdraw c/2 app/1`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to application commands](#application-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -577,8 +576,8 @@ Format: `reopen INDEX`
 * The company at the provided index **must have status** `CLOSED`.
 * To use the `reopen` command, the company at the `INDEX` provided must have status `CLOSED`, which will subsequently become `INTERESTED`.
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to application commands](#application-commands)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -597,8 +596,8 @@ Format: `clear`
 **Warning:** Using clear will permanently remove all data saved in the AddressBook
 </box>
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to miscellaneous](#miscellaneous)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -611,10 +610,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-[back to features](#features)
-
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to miscellaneous](#miscellaneous)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -625,8 +622,8 @@ Exits the program.
 
 Format: `exit`
 
-[back to command summary](#command-summary)
-[back to features](#features)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
 [back to miscellaneous](#miscellaneous)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -697,22 +694,22 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-- <a id="stem"/>**STEM**: An acronym for the four related fields of study; **S**cience, **T**echnology, **E**ngineering, and **M**athematics.
-- <a id="cli"/>**CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
-- <a id="gui"/>**GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
-- <a id="cd"/>**`cd`**: Which stands for **c**hange **d**irectory, is a commonly used command in many command terminals (such as Windows Command Prompt or the MacOS Terminal). It allows users to navigate the terminal to a different directory or folder within their system. 
-Users can change their directory by typing `cd path/to/directory` into their terminal of choice.
 - <a id="address-book"/>**Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
-- **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
-- **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., `n/NAME`).
-- **Tag**: A label that can be added to a company to classify or organize it (e.g., `t/tech`, `t/software`).
-- **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
-- **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
-- **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
 - **APPLIED / OA (Online Assessment) / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
 - **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
-- **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
+- <a id="cd"/>**`cd`**: Which stands for **c**hange **d**irectory, is a commonly used command in many command terminals (such as Windows Command Prompt or the MacOS Terminal). It allows users to navigate the terminal to a different directory or folder within their system.
+- <a id="cli"/>**CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
+- **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
 - **Company**: Refers to an entity in the AddressBook. We refer to any contact in our AddressBook as Company.
+- <a id="gui"/>**GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
+Users can change their directory by typing `cd path/to/directory` into their terminal of choice.
+- **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
+- **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
+- **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
+- **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
+- **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., `n/NAME`).
+- <a id="stem"/>**STEM**: An acronym for the four related fields of study; **S**cience, **T**echnology, **E**ngineering, and **M**athematics.
+- **Tag**: A label that can be added to a company to classify or organize it (e.g., `t/tech`, `t/software`).
 
 [back to top](#internbuddy-user-guide)
