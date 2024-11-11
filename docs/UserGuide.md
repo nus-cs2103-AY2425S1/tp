@@ -142,12 +142,14 @@ Example: `MA1100`, `GEA1000N`, `GESS1000T` etc.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T;CS2101`
-
+* `add n/Nakahara Chuuya p/91199119 e/chuuya@gmail.com c/LAJ2201;CS2103T;CS2101`
+![addExample.png](images/addExample.png)
 ### Listing all students : `liststudents`
 
 Shows a list of all students in TAHub.
 
 Format: `liststudents`
+![liststudentsExample.png](images/liststudentsExample.png)
 
 ### Editing a student : `edit`
 
@@ -166,6 +168,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing courses.
 *  `edit 3 c/CS2103T;CS2101` Edits the courses of the 3rd student to be CS2103T & CS2101.
+*  `edit 4 p/91918181`
+![editExample.png](images/editExample.png)
 
 ### Locating students by name and/or course: `find`
 
@@ -185,12 +189,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex;david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/peter;john'](images/findPeterJohnResult.png)
 * `find n/alex n/david` returns `Alex David`, if a student with that name exists
 * `find c/CS2103T c/CS2100` will return students who are taking both `CS2103T` and `CS2100`
 * `find n/alex c/cs2103t;cs2100` will return all students whose names contain `alex` and are taking at least one of `CS2103T` or `CS2101`.
 * `find n/` will return all students.
 * `find c/` will return no students.
+* `find n/Osamu;Chuuya`
+![findNameExample.png](images/findNameExample.png)
+* `find c/CS2103T`
+![findCourseExample.png](images/findCourseExample.png)
 
 ### Deleting a student : `delete`
 
@@ -208,6 +215,8 @@ Examples:
 * `liststudents` followed by `delete 2` deletes the 2nd student in TAHub.
 * `liststudents` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `liststudents` followed by `delete 4` deletes the 4th student in TAHub.
+![deleteExample.png](images/deleteExample.png)
 
 ### Exporting student data : `export`
 
@@ -250,9 +259,10 @@ Adds a new consultation to TAHub.
 * Time format: `HH:mm`
 
 **Examples**:
-* `addconsult d/2024-10-20 t/14:00`
-* `addconsult d/2024-11-05 t/09:00`
-
+* `addconsult d/2024-11-05 t/09:00` adds a Consultation Timing that has passed.
+![addconsultExamplePast.png](images/addconsultExamplePast.png)
+* `addconsult d/3345-01-11 t/01:00` adds a Consultation Timing.
+![addconsultExample.png](images/addconsultExample.png)
 
 ### Refreshing the consultation list : `listconsults`
 
@@ -278,7 +288,9 @@ index must be provided.
 
 **Examples**:
 * `addtoconsult 1 n/John Doe n/Harry Ng`
-* `addtoconsult 2 i/3 i/5` (adds students at indices 3 and 5 in the student list to the 2nd consultation)
+* `addtoconsult 2 i/3 i/5` adds students at indices 3 and 5 in the student list to the 2nd consultation.
+* `addtoconsult 3 n/Nakahara Chuuya i/3` adds students Nakahara Chuuya & Student at Index 3 to the 3rd consultation.
+![addtoconsultExample.png](images/addtoconsultExample.png)
 
 ### Removing students from a consultation : `removefromconsult`
 
@@ -291,7 +303,9 @@ Removes specified students from a consultation, identified by its index.
 * Student names are **case-sensitive**.
 
 **Examples**:
-* `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
+* `removefromconsult 1 n/John Doe n/Harry Ng` removes students named John Doe and Harry Ng from the 1st consultation.
+* `removefromconsult 3 n/Osamu Dazai` removes student named Osamu Dazai from the 3rd consultation.
+![removefromconsultExample.png](images/removefromconsultExample.png)
 
 ### Deleting consultations : `deleteconsult`
 
@@ -303,6 +317,7 @@ Deletes one or more consultations from TAHub by their indices.
 
 **Examples**:
 * `deleteconsult 2`
+![deleteconsultExample.png](images/deleteconsultExample.png)
 * `deleteconsult 1;3;5` (deletes the 1st, 3rd, and 5th consultations)
 
 ### Exporting consultation data : `exportconsult`
@@ -370,6 +385,12 @@ Format: `addlesson d/DATE t/TIME`
 * `DATE` must be in the format `YYYY-MM-DD`, and must be a valid date.
 * `TIME` must be in the format `HH:mm`, and must be a valid time.
 
+**Examples**:
+* `addlesson d/2024-11-08 t/08:00` adds a Lesson Timing that has passed.
+  ![addlessonExamplePast.png](images/addlessonExamplePast.png)
+* `addlesson d/3145-11-23 t/01:00` adds a Lesson Timing.
+  ![addlessonExample.png](images/addlessonExample.png)
+
 ### Refreshing the lesson list : `listlessons`
 
 Refreshes and displays the lesson list.
@@ -379,17 +400,6 @@ Useful to fix minor UI glitches, e.g. the display not updating after adding a st
 
 **Example**:
 * `listlessons`
-
-### Deleting a lesson : `deletelesson`
-
-Deletes lesson(s) from TAHub.
-
-Format: `deletelesson LESSON_INDEX[;LESSON_INDEX]…`
-
-* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
-
-Examples:
-* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the lesson list
 
 ### Adding a student to a lesson : `addtolesson`
 
@@ -406,6 +416,8 @@ Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 Examples:
 * `addtolesson 1 n/John Doe` adds `John Doe` to lesson number 1.
 * `addtolesson 1 n/John Doe i/3 i/5` adds `John Doe` and students numbered 3 and 5 to lesson number 1.
+* `addtolesson 3 n/Nakahara Chuuya i/3` adds students Nakahara Chuuya & Student at Index 3 to the 3rd lesson.
+  ![addtolessonExample.png](images/addtolessonExample.png)
 
 ### Removing a student from a lesson : `removefromlesson`
 
@@ -419,7 +431,9 @@ Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
 Examples:
 * `removefromlesson 1 n/John Doe n/Jane Doe` removes `John Doe` and `Jane Doe` from lesson number 1.
-
+* `removefromlesson 3 n/Osamu Dazai` removes student named Osamu Dazai from the 3rd lesson.
+![removefromlessonExample.png](images/removefromlessonExample.png)
+* 
 ### Marking a student's attendance : `marka`
 
 Marks student(s)' attendance in a lesson. The student's attendance is represented by the
@@ -436,6 +450,8 @@ Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 Examples:
 * `marka 1 n/John Doe a/y` marks `John Doe` as present for lesson number 1.
 * `marka 2 n/John Doe n/Jane Doe a/N` marks `John Doe` and `Jane Doe` as absent for lesson number 2.
+* `marka 3 n/Nakahara Chuuya a/Y` marks Student Nakahara Chuuya as present for lesson number 3.
+![markaExample.png](images/markaExample.png)
 
 ### Marking a student's participation : `markp`
 
@@ -460,6 +476,21 @@ Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 Examples:
 * `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
 * `markp 2 n/John Doe n/Jane Doe pt/5` marks `John Doe` and `Jane Doe` as having 5 participation marks for lesson number 2.
+* `markp 3 n/Nakahara Chuuya pt/100` marks Student Nakahara Chuuya as having 100 participation marks for lesson number 3.
+  ![markpExample.png](images/markpExample.png)
+
+### Deleting a lesson : `deletelesson`
+
+Deletes lesson(s) from TAHub.
+
+Format: `deletelesson LESSON_INDEX[;LESSON_INDEX]…`
+
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
+
+Examples:
+* `deletelesson 2`
+![deletelessonExample.png](images/deletelessonExample.png)
+* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the lesson list
 
 ## Storage Operations
 
