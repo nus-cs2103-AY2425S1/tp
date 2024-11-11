@@ -581,7 +581,7 @@ The WEDDING_NUMBER corresponds to each Wedding's position in the `Wedding` list
 Examples:
 * To edit the address of the Wedding named `Wedding!`, to XYZ street:
     * First, identify the Wedding number by entering the command: `list-weddings`
-    * Should wedding number be 1, enter the command: `edit-wedding 1 a/XYZ street`
+    * Should the Wedding number of `Wedding!` be 1, enter the command: `edit-wedding 1 a/XYZ street`. If the Wedding number is different, simply replace the 1 in the command with the corresponding Wedding positional number.
 
 #### Unassigning contacts from a Wedding : `unassign-wedding` or `uw`
 
@@ -613,7 +613,7 @@ Examples:
 * To delete the wedding named `Wedding 1`, enter the command:
     * `delete-wedding w/Wedding 1`
 
-**Known issue:** the unassign-wedding command is case-sensitive, so if person 2 is assigned to the wedding, Wedding 2, only entering the command `unassign-wedding 2 w/Wedding 2` or `uw 2 w/Wedding 2`
+**Known issue:** the `unassign-wedding` command is case-sensitive, so if person 2 is assigned to the wedding, Wedding 2, only entering the command `unassign-wedding 2 w/Wedding 2` or `uw 2 w/Wedding 2`
 will unassign the wedding from person 2 and `unassign-wedding 2 w/wedding 2` or `uw 2 w/wedding 2` will not.
 ---
 <br>
@@ -725,7 +725,7 @@ Examples:
 
 ### Unmarking a task  : `unmark-task` or `untask`
 
-Use the `unmark-task` command to mark one or more Tasks as not completed.
+You can mark one or more `Tasks` as not completed by using the `unmark-task` command.
 
 Format: `unmark-task TASK_NUMBER...` or `untask TASK_NUMBER...`
 
@@ -736,12 +736,12 @@ Following that, type `unmark-task` followed by the Task number(s).
 
 Examples:
 * To mark the completed task with the description `Finalise itinerary` as incomplete:
-    * First, identify the Task number of the task.
+    * First, identify the Task number of the task by entering the command: `list-tasks`.
     * Should the Task number be 1, enter the command `unmark-task 1`.
 
 ### Deleting a Task : `delete-task` or `dtask`
 
-Use the `delete-task command` to delete a specific Task.
+You can delete a specific Task using the `delete-task` command.
 
 Format: `delete-task TASK_NUMBER` or `dtask TASK_NUMBER`
 
@@ -752,8 +752,8 @@ Following that, type "delete-task" and the Task number of the task that you wish
 
 Examples:
 * To delete a task with the description `Buy cake`:
-    * First, identify the Task number by entering the command: `list-tasks`
-    * Should the Task number be 1, enter the command: `delete-task 1`
+    * First, identify the Task number by entering the command: `list-tasks`.
+    * Should the Task number be 1, enter the command: `delete-task 1`.
 
 ---
 <br>
@@ -762,34 +762,34 @@ Examples:
 
 ### Assigning a Vendor : `assign-vendor` or `asv`
 
-Use the `assign-vendor` command to designate a contact as a vendor.
+You can use the `assign-vendor` command to designate a contact to be a Vendor.
 
 Format: `assign-vendor PERSON_NUMBER` or `asv PERSON_NUMBER`
 
-To designate a contact as a vendor, type "assign-vendor" followed by the positional number of the person.
+To designate a contact as a vendor, type `assign-vendor` followed by the positional number of the person in the contact list.
 
 > [!NOTE]
-> Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, be assigned with tags etc.
+> Vendors can be managed with the same functionalities as a regular contact, e.g. Vendors can be assigned to Weddings, can be assigned with tags etc.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Vendor` can now have `Tasks` assigned to them.
 
 Examples:
-* To designate the first contact as a vendor, enter the command:
+* To designate the first contact in the person list as a vendor, enter the command:
     * `assign-vendor 1`.
 
 ### Unassigning a Vendor : `unassign-vendor` or `uv`
 
-Use the `unassign-vendor` command to remove a vendor designation from a contact, making them a regular contact in WedLinker.
+You can use the `unassign-vendor` command to remove a `Vendor` designation from a contact, making them a regular non-vendor contact in WedLinker.
 
 Format: `unassign-vendor PERSON_NUMBER [f/]` or `uv PERSON_NUMBER [f/]`
 
-To remove a vendor designation from a contact, type "unassign-vendor" followed by the positional number of the person.
+To remove a `Vendor` designation from a contact, type `unassign-vendor` followed by the positional number of the person in the contact list.
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * Unassigns a `Vendor` at the specified `PERSON_NUMBER` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
 * No tasks should be assigned to the `Vendor` before it is unassigned.
-* If the specified `Vendor` has tasks assigned to them, you can use the label `f/` to force the removal of the vendor designation and remove all tasks currently assigned to that `Vendor`.
+* However, if the specified `Vendor` has tasks assigned to them, you can use the label `f/` to force the removal of the vendor designation and remove all tasks currently assigned to that `Vendor`.
 * A regular contact can no longer have `Tasks` assigned them.
 
 Examples:
