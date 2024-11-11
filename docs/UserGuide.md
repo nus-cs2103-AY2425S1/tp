@@ -321,7 +321,7 @@ Refer to the table below for more details.
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
 
-### 4.4.2 Non-Flag Arguments 
+### 4.4.2 Non-Flag Arguments
 
 Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
 
@@ -477,7 +477,7 @@ Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for
 >
 > If you need to update details for an existing contact, use the `edit` command instead.
 > For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
-- **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
+- If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
 
 
 
@@ -493,7 +493,7 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
 
@@ -548,7 +548,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
-- **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
+- **Note:** If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
   - This can be used to remove all remarks for a given client: `edit <INDEX> rn/ NA` .
 
 
@@ -564,7 +564,7 @@ delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
@@ -697,8 +697,8 @@ For detailed explanations for the matching criteria of each flag and the accepta
   - To filter by phone number, enter a complete and valid phone number (refer to [4.4 Arguments](#44-arguments)). This filter requires an exact match with the specified phone number.
   - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
 
-- **Tier (Prefix Matching):**
-    - Tier filtering use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
+- **Tier/Status (Prefix Matching):**
+    - Searches in these fields use **prefix matching**, meaning the search term must match the beginning of the field exactly.
     - **Example:**
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
@@ -752,7 +752,7 @@ view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
 
 **Examples:**
 - **View client no.1**
