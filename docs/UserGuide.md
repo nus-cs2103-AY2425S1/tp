@@ -40,11 +40,11 @@ The user guide contains formatting to highlight important info. The standards us
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - **Employee Commands**
-  - [Adding an employee : `add`](#adding-an-employee-add)
+  - [Adding an employee : `add`](#adding-an-employee--add)
   - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
-  - [Filtering employees by skills : `filter`](#filtering-employees-by-skills-filter)
-  - [Locating employees by name : `find`](#locating-employees-by-name-find)
+  - [Filtering employees by skills : `filter`](#filtering-employees-by-skills--filter)
+  - [Locating employees by name : `find`](#locating-employees-by-name--find)
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
   - **Project Commands**
@@ -56,9 +56,9 @@ The user guide contains formatting to highlight important info. The standards us
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
   - **Assignment Commands**
-  - [Create Assignment : `assign`](#create-assignment--assign)
-  - [List Assignments : `listassignments`](#list-assignments--listassignments)
-  - [Delete Assignment : `unassign`](#delete-assignment-unassign)
+  - [Create assignment : `assign`](#create-assignment--assign)
+  - [List assignments : `listassignments`](#list-assignments--listassignments)
+  - [Delete assignment : `unassign`](#delete-assignment--unassign)
   - **Other Commands**
   - [Exiting the program : `exit`](#exiting-the-program--exit)
   - [Saving the data](#saving-the-data)
@@ -73,6 +73,13 @@ The user guide contains formatting to highlight important info. The standards us
   - [Assignment Commands](#assignment-commands)
   - [Other Commands](#other-commands)
 - [Glossary](#glossary)
+  - [Command word](#command-word)
+  - [Alphanumeric](#alphanumeric)
+  - [Graphical User Interface](#graphical-user-interface)
+  - [Java](#java)
+  - [JSON](#json)
+  - [Numeric](#numeric)
+  - [Prefix](#prefix)
 
 ---
 
@@ -86,7 +93,7 @@ Start here if you are new to HRConnect.
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
-4. **Double-click the `.jar` file** in the folder you placed. 
+4. **Double-click the `.jar` file** in the folder you placed.
    - (If this does not work: Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
 
 A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
@@ -164,7 +171,7 @@ Format: `help`
 
 [Return to Top](#table-of-contents)
 
-### Adding an employee: `add`
+### Adding an employee : `add`
 
 **Adds an employee** to the address book.
 
@@ -248,7 +255,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Filtering employees by skills: `filter`
+### Filtering employees by skills : `filter`
 
 **Finds employees who have at least one skill or tag matching** at least one of the search items.
 
@@ -273,7 +280,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Locating employees by name: `find`
+### Locating employees by name : `find`
 
 **Finds employees whose names contain any of the given keywords.**
 
@@ -479,7 +486,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Create Assignment : `assign`
+### Create assignment : `assign`
 
 **Creates an assignment** between an Employee and a Project.
 
@@ -503,7 +510,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### List Assignments : `listassignments`
+### List assignments : `listassignments`
 
 Shows a list of **all stored assignments**.
 
@@ -518,7 +525,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Delete Assignment: `unassign`
+### Delete assignment : `unassign`
 
 **Deletes an assignment** between an Employee and a Project.<br>
 This does not delete the Employee nor the Project.
