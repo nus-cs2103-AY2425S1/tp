@@ -262,6 +262,8 @@ The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whe
 
 ## Planned enhancements
 
+Team Size: 5
+
 ### 1. Multi-Language Support
 **Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
 
@@ -713,7 +715,6 @@ testers are expected to do more *exploratory* testing.
 ### Editing a client
 
 1. Editing a client while all clients are being shown
-
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
     2. Test case: `edit 1 n/ <NAME>`<br>
          Expected: The name of the client in index 1 will be changed to <NAME>.
@@ -749,6 +750,19 @@ testers are expected to do more *exploratory* testing.
       `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
       `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
       Expected: Similar to previous.
+
+### Viewing a client
+1. Viewing a client while all clients are being shown
+    1. Prerequisites: List all clients using the `list` command. At least one client in the list.
+    2. Test case: `view 1`<br>
+       Expected: The detailed view of the client in index 1 will be shown.
+   3. Test case: `view 0 n/ <NAME>`<br>
+       Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
+
+2. Viewing a client after having filtered based on a criteria
+    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+    2. Functions similar to above example except that the indexes to be used are based on the new list shown.
+
 
 ### Saving data
 
