@@ -212,11 +212,11 @@ The following methods are involved:
 
 Below is an activity diagram that explains what happens when a user tries to find tasks:
 <puml src="diagrams/FindTaskActivityDiagram.puml" />
-<br></br>
+<br>
 
 #### Proposed Implementation
 
-The proposed undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` class with an undo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Nurse requests to edit the patient details of a specific patient.
-2. NovaCare edits the details of the specified person in the list.
+2. NovaCare edits the details of the specified patient in the list.
 
    Use case ends.
 
@@ -946,7 +946,7 @@ This section outlines proposed improvements to address known feature flaws ident
      * :x: `username1@example`<br></br>
 2. **Implement more robust phone number validation:**
    * Currently, NovaCare's phone number validation only requires for entries to be numeric, and at least 3 digits long. This means that the system accepts phone number entries that exceed the upper limit of possible phone number lengths, and also disallows entries that try and input country code, i.e. `+6512345678`, since phone numbers must be strictly numeric. This flaw could cause data entry errors, especially for international contacts.
-   * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the addressbook.
+   * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the NovaCare.
    * We plan to enhance the phone number validation logic to allow the usage of the `+` character only as the first character of the phone number, and to limit the length of the phone number entered.
    * For example:
      * :white_check_mark: `+6512345678`
@@ -955,7 +955,7 @@ This section outlines proposed improvements to address known feature flaws ident
      * :x: `11111111111111111111`<br></br>
 3. **Implement more robust name validation:**
     * Currently, names in NovaCare can only contain alphanumeric characters and spaces, limiting inclusivity by excluding names with special characters such as hyphens or slashes. This flaw may reduce inclusivity, which is essential for a healthcare application.
-    * As names are both used in a patient's name field and in the emergency contact name field, this flaw affects two fields in the addressbook.
+    * As names are both used in a patient's name field and in the emergency contact name field, this flaw affects two fields in the NovaCare.
     * We plan to enhance the name validation logic to allow the usage of the `-` and `/` character, but not as the first or lsat characters of any word in the name.
     * For example:
       * :white_check_mark: `Simon Andy-Fletcher`
