@@ -7,7 +7,7 @@ title: User Guide
   <h1 style="font-weight:800;font-size:70px;">CCAConnect</h1>
 </div>
 
-CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as help to **track attendance details for CCA sessions**.
+CCAConnect is a desktop application that aims to **assist NUS CCA leaders** in **managing and collating relevant CCA personnel’s contact details**, as well as to help **track attendance details for CCA sessions**.
 Equipped with features like **attendance marking**, **contact management**, **contact filtering** and **profile switching**, CCAConnect helps to reduce the headaches of personnel tracking.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 2. Download the latest `ccaconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data. For example, if you put `ccaconnect.jar` in a folder named `CCA`, then `CCA` will the _home folder_.
+3. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data. For example, if you put `ccaconnect.jar` in a folder named `CCA`, then `CCA` will be the _home folder_.
 
 4. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in.
 
@@ -47,7 +47,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
     ```
     java -jar ccaconnect.jar
     ```
-   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+   A GUI similar to that given below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
@@ -75,8 +75,6 @@ Equipped with features like **attendance marking**, **contact management**, **co
     * e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12 r/Exco Member f/</code>.<br><br>
 * Items in square brackets are optional.<br>
   * e.g <code>n/NAME [r/ROLE]</code> can be used as <code>n/John Doe r/exco</code> or as <code>n/John Doe</code>.<br><br>
-* Items in square brackets are optional.<br>
-  * e.g <code>n/NAME [r/ROLE]</code> can be used as <code>n/John Doe r/exco</code> or as <code>n/John Doe</code>.<br><br>
 * Items with <code>…</code>​ after them can be used multiple times. If the item is optional, e.g. <code>[r/ROLE]…​</code>, it can also be used zero times<br>
     * e.g. <code>[r/ROLE]…​</code> can be used as <code> </code> (i.e. 0 times), <code>r/exco</code>, <code>r/member r/exco</code> etc. <br><br>
 * Parameters can be in any order.<br>
@@ -102,7 +100,7 @@ help
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the [address book](#glossary).
 
 #### Format
 ```
@@ -177,7 +175,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]…​ [f/ or nf/ (
 
 | Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |----------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a positive unsigned integer and must not exceed the size of the displayed contact list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a [non-zero unsigned integer](#glossary) and must not exceed the size of the displayed contact list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/>`EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and then a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
@@ -302,9 +300,9 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
-|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                           |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a [non-zero unsigned integer](#glossary) and must not exceed the size of the displayed contact list. |
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
@@ -328,6 +326,8 @@ attendance
 This command does not take any additional parameters.
 
 #### Example
+`attendance`
+
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
 ### Marking attendance: `mark`
@@ -427,7 +427,7 @@ Views all the contact information of the specified contact.
 
 #### Format
 ```
-view t/TELEGRAM_HANDLE
+view t/TELEGRAM
 ```
 
 #### Parameters
@@ -493,6 +493,8 @@ If the specified `PROFILE` does not already exist, switch will create it; otherw
 The current profile is indicated at the bottom left window. ![current-profile](images/current-profile.png)
 </div>
 
+
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 The most recent [sort](#sort-command) and [find](#find-command) settings (referred to as "active settings") are automatically applied when you switch profiles, enhancing search efficiency by removing the need to reapply them after each switch. For example, if you use `find f/` in the 'addressbook' profile to view favourite  contacts, this "find favourite " filter will stay active when you switch to another profile like 'competition-team', until a different [valid](#command-summary) command (except `switch`) is issued which removes this active setting.
 </div>
@@ -524,9 +526,14 @@ This is a logical sequence of commands, assuming your current profile is 'addres
 * `sw alice` switches the current profile to 'alice'
 * `delp addressbook` deletes the 'addressbook' profile after switching to 'alice'
 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+Profile data is only permanently deleted from the hard disk when the application is closed. If you accidentally delete a profile, you can recover it by switching back to that profile before exiting the application. This allows you to undo accidental deletions during the same [session](#glossary).
+</div>
+
 ### Saving the data
 
-CCAConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CCAConnect data are saved in the hard disk automatically when the application is closed. There is no need to save manually.
 
 ### Editing the files
 
@@ -545,7 +552,7 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 **Q**: How do I transfer my data to another computer?
 
 **A**: To transfer your data:
-1. [Install](#quick-start) the app on the new computer.
+1. [Run](#quick-start) the app on the new computer.
 2. Ensure the app is closed on both computers.
 3. Locate the `data` folder in your [home folder](#glossary). Replace the default `data` folder in the new installation with this folder.
 4. In the original home folder, locate the `preference.json` file. Copy this file and overwrite the default `preference.json` in the new computer's home folder.
@@ -556,7 +563,8 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 ## Known issues
 
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-2. If you're using CCAConnect **across two days**, in order for the attendance status of members to be updated (e.g. _marked present at 11:59pm today, not present at 12:00am the next day_), you would have to **execute any other command** to trigger the re-render of the card to display the update attendance status.
+
+2. If you're using CCAConnect **across two days**, in order for the attendance status of members to be updated (e.g. _marked present at 11:59pm today, not present at 12:00am the next day_), you would have to **execute any other command** to update the card so that the most recent attendance status is displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -581,12 +589,14 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 
 ## Glossary
 
+- **Addressbook**: Is the file that CCAConnect uses to store contact details
 - **Home folder**: The folder that `ccaconnect.jar` is placed in
 - **Directory**: A synonym for a folder on the computer
 - **GUI**: Graphical User Interface. This represents the graphical interface that the user can interact with
 - **User**: The individual using the app
 - **System/Application**: The CCAConnect program
 - **Parameter**: A variable that the command uses
-- **JSON**: JavaScript Object Notation. A lightweight data-interchange format used for storing and exchanging data. It is human-readable and easy for machines to parse and generate.
+- **JSON**: JavaScript Object Notation. A lightweight data-interchange format used for storing and exchanging data. It is human-readable and easy for machines to parse and generate
 - **Non-zero unsigned integer**: An integer that ranges 1 to 2147483647 both inclusive
 - **Profile**: A collection of contacts in the system, identified by a profile name
+- **Session**: The period during which the application is open and running, from the time it is launched until it is closed
