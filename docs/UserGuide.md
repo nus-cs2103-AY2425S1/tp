@@ -271,7 +271,7 @@ Similar to the supplier data file, if your changes to the data file makes its fo
 
 SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown below.
 
-![Draggable UI elements](images/DraggableUI.png)
+![Draggable UI elements](images/DraggableUi.png)
 
 The elements will resize according to the position of the divider, allocating more space for the output to be displayed, or more space for the suppliers/goods to be displayed.
 
