@@ -7,12 +7,6 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -529,8 +523,6 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `sort`, `sort s`, `...` (where s is not one of the four default parameters)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Adding Reminders
 
