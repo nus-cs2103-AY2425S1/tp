@@ -913,8 +913,8 @@ Address: 123 PASIR RIS (S)123456
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/1 buy/1`
 >
 > **Output**: <br>
-The seller index specified is not a seller: <br>
-1. Alex Yeoh
+The seller index specified is not a seller:
+><br>1. Alex Yeoh
 >
 > ---
 >
@@ -923,8 +923,8 @@ The seller index specified is not a seller: <br>
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/2`
 >
 > **Output**: <br>
-The buyer index specified is not a buyer: <br>
-2. Bernice Yu
+The buyer index specified is not a buyer:
+><br>2. Bernice Yu
 >
 > ---
 
