@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 
 When using the `edit` command, note that:
 * You are unable to edit comments via the `edit` command.
-* There should be no additional arguments between the INDEX and the first prefix (e.g n/)
+* There should be no additional arguments between the `INDEX` and the first prefix (e.g n/)
 </div>
 
 Continuing from the previous example in `add`, you could try this:
