@@ -191,6 +191,7 @@ Otherwise, it creates a new instance of `HelpCommand`.
 
 Upon execution, `HelpCommand` returns an instance of `CommandResult` which contains the help message.
 
+> **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
 ### Create new internship application
 The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -324,6 +325,7 @@ The implementation of the command follows the convention of a normal command, wh
 Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
 `MainWindow` checks for the intent via `isExit`, after which, it calls `handleExit` to close the application.
 
+> **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -393,52 +395,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not include the company name.
+* 1a. The user has missing fields in input.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
 
-
-* 1b. The user does not include the internship role.
+* 1b. The user provided some invalid input for field.
     * 1b1. HireMe shows an error message.
 
       Use case ends.
-
-
-* 1c. The user does not include the company email.
+  
+* 1c. The user provided multiple fields of the same type.
     * 1c1. HireMe shows an error message.
 
       Use case ends.
 
-
-* 1d. The user does not include the date of application.
-    * 1d1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1e. The user provided an invalid company name.
-    * 1e1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1f. The user provided an invalid internship role.
-    * 1f1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1g. The user provided an invalid company email.
-    * 1g1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1h. The user provided an invalid date of application.
-    * 1h1. HireMe shows an error message.
-
-      Use case ends.
+    
 
 <br></br>
 **System**: HireMe application
@@ -634,8 +606,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There are no internship entries.
-    * 1a1. HireMe shows a message indicating "no entries."
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
 
       Use case ends.
 
@@ -653,6 +625,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HireMe shows a summary chart of all internship entries.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
 
 
 <br></br>
@@ -690,6 +669,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
+
 
 <br></br>
 **System**: HireMe application
@@ -704,6 +690,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HireMe application closes and auto-saves the file.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
+  
 <br></br>
 
 ### Non-Functional Requirements
@@ -1021,7 +1015,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Chart window is already opened.
    
    2. Test case: Click on the close button on the Help window. <br>
-      Expected: Help window closes.
+      Expected: Chart window closes.
 
 ### Filtering internship applications
 1. Filter with a valid status in uppercase
@@ -1079,3 +1073,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/exit` to close the window.<br>
    Expected: The window should close.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+The team consists of 5 members.
+Given below are enhancements planned for future versions.
