@@ -28,7 +28,7 @@ public class FindConcertContactCommand extends Command {
 
     public static final String COMMAND_WORD = "findcc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all concertContacts which are associated to "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all concert contacts which are associated to "
             + "the person at the specified person index and the concert at the specified concert index "
             + "and displays them as a list with index numbers.\n"
             + "The person or concert index, or both of them must be included.\n"
@@ -64,10 +64,7 @@ public class FindConcertContactCommand extends Command {
         model.updateFilteredConcertContactList(predicate);
 
         return new CommandResult(String.format(Messages.MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW,
-                model.getFilteredConcertContactList().size()),
-                false, false, true,
-                false, false, true,
-                false, false, false);
+                model.getFilteredConcertContactList().size()), false, false, true);
     }
 
     private Person getPersonFromIndex(Model model) throws CommandException {

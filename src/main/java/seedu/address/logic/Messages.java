@@ -23,10 +23,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX = "The concert index provided is invalid!\n"
             + INDEX_HELP;
     public static final String MESSAGE_INVALID_CONCERT_CONTACT_DISPLAYED_INDEX =
-            "The concertContact index provided is invalid!\n" + INDEX_HELP;
+            "The concert contact index provided is invalid!\n" + INDEX_HELP;
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_CONCERTS_LISTED_OVERVIEW = "%1$d concerts listed!";
-    public static final String MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW = "%1$d concertContacts listed!";
+    public static final String MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW = "%1$d concert contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -54,7 +54,7 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Roles: ")
+                .append("; Role: ")
                 .append(person.getRole())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
