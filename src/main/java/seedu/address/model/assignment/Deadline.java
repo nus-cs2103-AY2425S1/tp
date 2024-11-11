@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid date format. Please use YYYY-MM-DD.";
+            "Invalid date format or invalid date. Please provide a correct date in YYYY-MM-DD format.";
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
     public final LocalDate deadline;
