@@ -125,9 +125,7 @@ to ensure that 2 names with the same letters but different cases are not conside
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a help window with a list of commands and their formats with a link to the User Guide.
 
 Format: `help`
 
