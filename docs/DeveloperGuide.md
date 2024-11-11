@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2c. Duplicate NRIC.
+- 2c. Duplicate IC Number.
 
   - 2c1. PawPatrol shows an error message:
 
