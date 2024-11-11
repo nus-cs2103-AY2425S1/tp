@@ -514,6 +514,13 @@ Use case ends.
 - Same as the Extensions from <u>UC10 - Assign a contact to a Wedding</u> excluding 1d.
 
 ---
+## **Appendix: Enhancements**
+
+1. Name field could also allow slash symbol such as: 's/o', 'd/o'.
+2. Restrict wedding date to five years into the future.
+3. Allow deletion of wedding data and venue.
+4. Prevent a vendor to be double booked.
+5. Remind which wedding a vendor in the error message when the vendor already have the wedding assigned.
 
 ## **Appendix: Requirements**
 
