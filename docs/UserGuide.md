@@ -13,7 +13,7 @@ GamerBook Pro Max lets you type quick commands using a Command Line Interface (C
 visuals of a Graphical User Interface (GUI).
 
 You get the best of both worlds: speedy command-based interactions with an intuitive, user-friendly display!
-If you can type fast, GamerBook can get your contact management tasks done faster than traditional GUI apps.
+If you can type fast, GamerBook Pro Max can get your contact management tasks done faster than traditional GUI apps.
 
 
 <!-- * Table of Contents -->
