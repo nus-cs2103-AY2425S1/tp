@@ -99,6 +99,8 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
+
 ## Contact Management
 
 <div markdown="block" class="alert alert-info">
@@ -169,7 +171,6 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david o/meta` returns `David Li from Meta`
 
-<div style="page-break-after: always;"></div>
 
 ### Sorting persons : `sort` or `s`
 
@@ -269,6 +270,8 @@ person at index 1 for lunch
 * `remind 2 d/25-12-2024 des/Christmas Date` will create a reminder with the date 25-12-2024, about having a 
 Christmas date with the person at index 2
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a reminder: `delete_reminder` or `dr`
 
 Deletes the specified reminder from NetBook.
@@ -286,8 +289,6 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Reminders cannot be edited. To make changes, delete the original reminder and create a new one with updated details.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit` or `ex`
 
