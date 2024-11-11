@@ -40,8 +40,8 @@ Alerts you to potential issues or problems that may arise.
 
 ## Quick start
 
-1. Ensure that Java 17 is installed on your computer. 
-   * Open a command terminal. 
+1. Ensure that Java 17 is installed on your computer.
+   * Open a command terminal.
      * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
      * For Mac users, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
    * Type the following command to check the Java version:<br>
@@ -71,7 +71,7 @@ Alerts you to potential issues or problems that may arise.
        **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
        </box>
-       
+     
      * For Mac users, type:
        ```
        cd /path/to/your/folder
@@ -143,7 +143,7 @@ Format: `help [COMMAND_KEYWORD]`
 
 **Shows a message explaining the usage of the specified command keyword**
 
-Example: 
+Example:
 - `help add` shows the help message for `add` command in the following format
 ![help_example](images/helpExample.png)
 
@@ -182,7 +182,7 @@ The command accepts either one phone number, one email, or both.
 <box type="info" seamless>
 
 **Info: Duplicate Handling**
-- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers.
 - For the same reason, the app will prevent the user from changing the email address or phone number of a contact to one that is already in use by another contact.
 
 </box>
@@ -210,8 +210,7 @@ The module-role pairs can be edited by adding and deleting.
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
-* Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed 
-person list. 
+* Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one module-role pair must be provided.
 * Multiple module-role pairs can be added at once, separated by `" "`.
@@ -516,5 +515,5 @@ To allow more flexibility in the input format, we have to sacrifice some validat
  **Undo**   | `undo`                                                                                                                                                                                                                                                                  
  **Redo**   | `redo`                                                                                                                                                                                                                                                                  
  **List**   | `list`                                                                                                                                                                                                                                                                  
- **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                                 
- **Exit**   | `exit` 
+ **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                              
+ **Exit**   | `exit`
