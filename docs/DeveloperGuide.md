@@ -1293,6 +1293,8 @@ testers are expected to do more *exploratory* testing.
    - **Solution:** Change the tags (and any relevant sample data) to fit more with the context of the target user.
    - **Rationale:** It is unlikely that a target user will label their customers as the current tags in the sample data. Making the sample data more relevant will allow users trying out the application to better simulate the experience of a target user using the application.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 This section documents the involved effort to evolve AB3 into SellSavvy.
