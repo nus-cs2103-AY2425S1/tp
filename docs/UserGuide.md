@@ -141,7 +141,7 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
 
 <box type="tip" seamless>
 
-**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
+**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the command box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
 </box>
 
 6. Refer to the [Features](#features) below for details of each command.
@@ -162,7 +162,7 @@ Field      | Details
 **Address**   | The address that belongs to the `Person`. The first character for the input for this field can only contain alphanumeric characters and these special characters: `# , -`. <br><br> After the first character, any additional characters are allowed, including whitespace and further text.
 **Phone Number**  | The phone number that belongs to the `Person`. The input for this field can only contain digits and must at least be 8 digits long.
 **Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
-**Role**   | The role assigned to the `Person`. A person can either be a "`Student`" or "`Tutor`".
+**Role**   | The role assigned to the `Person`. A person can either be a `Student` or `Tutor`.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
