@@ -171,7 +171,7 @@ Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Here are a few examples to help you:
 * `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/23 Orchard Street, Suite 5`
-* `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/International t/Organic`
+* `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/Organic`
 
 ---
 
