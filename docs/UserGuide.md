@@ -196,6 +196,7 @@ Format: `list [archive/] [all/]`
 **Caution:**
 - Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
 - `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
+- Parameters other than `archive/` and `all/` are disallowed, e.g. `list 1` ❌, `list archie/` ❌
 </box>
 
 ### Editing a person: `edit`
