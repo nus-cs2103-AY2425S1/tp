@@ -20,36 +20,39 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar`
    command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. To get started, you can play around with some of the sample data that the app comes with!<br>
    ![Ui](images/Ui.png)
 
 1. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
    content being cut-off if the window size is too small.
 
-1. Type the command in the command box.
+1. Let's try opening up a contact with the `view` command!
 
-   - Note that invalid commands will be coloured in red.
-       ![incomplete command](images/incompleteCommand.png)
-   - Valid command words would briefly show in colour grey to indicate the command word is correct.
-       ![valid_command](images/validCommand.png)
-   - Once the completed, valid command is entered, the command will return to colour black.<br>
-       ![complete command](images/completedCommand.png)
-   - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
-     will open the help window.<br>
+   - As you type, notice that an invalid command word will be coloured in red.
+       ![incomplete command](images/syntax_highlighting_1.png)
+   - You can try autocompleting the command by pressing `TAB` on your keyboard too. In this case, the command `view` will be matched, and it will be displayed in grey to indicate that it's a valid command word that is waiting for an argument.
+       ![valid_command](images/syntax_highlighting_2.png)
+   - In this case, `view 1` indicates that we want to view the first contact in the list. Once a full valid command is entered, the command will be colored black.<br>
+       ![complete command](images/syntax_highlighting_3.png)
+   - Press Enter to execute command, and you should see the details for the first contact `Alex Yeoh` appear on the right pane!
+   ![view command result](images/quickStart_1.png)
 
-4. Some example commands you can try:
+4. Let's delve a little deeper now, try adding a new contact using `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`. This adds a contact named `John Doe` to the application.
+![add new person](images/quickStart_addNew.png)
 
-   * `list` : Lists all contacts.
+5. You can use `shift+tab` to navigate between your command box and the contact list. You will see a brown box around the list when it is selected.
+Try using the arrow key to navigate around the list until you find `John Doe`
+   ![shift tab](images/quickStart_shiftTab_2.png)
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Case Management System.
+6. To add a new log entry for John, try `addlog 1 r/First meetup. d/2019-10-15 14:00`. You can add multiple logs for the same contact, and the logs will appear as a list in the right pane.
+   ![logs](images/quickStart_log_2.png)
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+7. Finally, to delete a contact, simply use `delete <id>`. In this case, John has an id of 6 (visible from the contact list), so we can run `delete 6` to delete his contact.
+8. For security, you will be prompted to confirm your delete command. Press `y` to confirm, or `n` to cancel.
+   ![delete](images/quickStart_delete_1.png)
+9. Confirm that the contact has been removed from the list on the right
+   ![delete finished](images/quickStart_delete_2.png)
+10. That's all! Feel free to refer to the [Features](#features) below for more details on each command and other features included in CareConnect.
 
 --------------------------------------------------------------------------------------------------------------------
 
