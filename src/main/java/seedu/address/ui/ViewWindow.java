@@ -64,7 +64,7 @@ public class ViewWindow extends UiPart<Stage> {
             appointment.setText("No appointment set.");
         } else {
             appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
-        }        
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
