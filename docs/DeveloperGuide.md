@@ -262,7 +262,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+Our target user is a receptionist at a small clinic who:
+* has a need to manage a significant number of patients and doctors contacts
 * has a need to manage appointments for these contacts
 * prefer desktop apps over other types
 * can type fast
