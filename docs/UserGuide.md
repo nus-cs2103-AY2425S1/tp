@@ -531,11 +531,11 @@ The `undo` and `redo` commands allow you to undo/redo the most recent changes ma
 - `redo` – Reverses the latest `undo` command.
 
 **Example Usage:**
-*Input: User enters the `undo` command to reverse the last change.*
+**Input:** User enters the `undo` command to reverse the last change.
 ![Ui](images/undo_input.png)
-*Output: The UI updates to reflect the reversal of the most recent change.*
+**Output:** The UI updates to reflect the reversal of the most recent change.*
 ![Ui](images/undo_output.png)
-*Input: User then enters the `redo` command to reapply the change.
+**Input:** User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redo.png)
 
@@ -670,7 +670,7 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
+  <div style="width: 45%; margin-bottom: 20px; margin-top: 0px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%;" />
   </div>
@@ -684,17 +684,19 @@ Displaying the detailed information window can be done in two ways:
 
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
-    <p><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
+    <p style="margin-top: 30px;"><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
     <img src="images/infocommandoutput2.png" alt="Info Command Input 2" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
+  <div style="width: 45%; margin-bottom: 30px; margin-top: 10px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
 
 </div>
+
+
 
 
 **Tips:**
@@ -754,7 +756,7 @@ Exiting the program can be done in two ways:
 <p>3. The program will close.</p>
 
 
-### Method 2:
+#### Method 2:
 1. Type the command [exit](#exit) in the command box and press Enter.
    ![Ui](images/exitcommandinput.png)
 
