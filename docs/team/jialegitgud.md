@@ -9,4 +9,8 @@ SupplyCentral is a desktop address book application based off AddressBook - Leve
 
 ### Contributions 
 
-1. Add Goods Class
+1. Add Goods Class, along with GoodsName and Date classes.
+2. AddGoodsCommand, AddGoodsCommandParser
+3. ListGoodsCommand, ListGoodsCommandParser & Respective predicates
+4. Auto marking of deliveries feature (for real-time tracking)
+5. Test coverage for all goods related commands and classes.

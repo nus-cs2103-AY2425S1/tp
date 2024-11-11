@@ -3,39 +3,39 @@ layout: page
 title: User Guide
 ---
 
-Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
+Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners (narrowed to the Singapore context) by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for SupplyCentral.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SupplyCentral.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/old-Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all suppliers.
 
-   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to SupplyCentral.
 
    * `delete Alex Yeoh` : Deletes the supplier "Alex Yeoh".
 
    * `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/John Doe` : Adds an order for "Gardenia Milk Bread" from supplier "John Doe" for tracking.
 
-   * `clear` : Deletes all contacts and goods registered in the application.
+   * `clear` : Deletes all suppliers and goods registered in the application.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits SupplyCentral.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -67,7 +67,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -76,7 +76,7 @@ Format: `help`
 
 ### Adding a supplier: `add`
 
-Adds a supplier to the address book.
+Adds a supplier to the SupplyCentral.
 
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
@@ -92,15 +92,17 @@ Examples:
 * `add n/John Doe p/98765432 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456`
 * `add n/Betsy Crowe p/99991111 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456 p/12345678 t/Vegetable`
 
+Note: The application is optimized for convenience store owners within the Singapore context, hence the address and phone numbers accepted are locked to Singapore's format. 
+
 ### Listing all suppliers : `list`
 
-Shows a list of all suppliers in the address book.
+Shows a list of all suppliers registered in SupplyCentral.
 
 Format: `list`
 
 ### Editing a supplier : `edit`
 
-Edits an existing supplier in the address book.
+Edits an existing supplier in SupplyCentral.
 
 Format: `edit NAME [n/NEW_NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
@@ -120,35 +122,39 @@ Finds suppliers whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
 
+* At least one keyword or category should be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The keyword will be search on the name of the supplier.
+* The keywords will be searched on the name of the supplier.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Optionally, a selection of categories `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY` can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
+* When both keywords and category are provided in the search, they will be handled in an `OR` manner.
+  e.g. `find Alex c/CONSUMABLES` will return both suppliers who match `Alex` and all suppliers who can supply `CONSUMABLE` items.
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find alex c/LIFESTYLE`
+* `find alex c/LIFESTYLE` returns both `Alex` matches and suppliers for `LIFESTYLE` products<br>
+  ![result for 'find alex c/LIFESTYLE'](images/findAlexLifeStyleResult.png)
 * `find c/CONSUMABLES c/LIFESTYLE`
 
 ### Deleting a supplier : `delete`
 
-Deletes the specified supplier from the address book.
+Deletes the specified supplier from SupplyCentral.
 
 Format: `delete NAME`
 
 * Deletes the person with the specified `NAME`.
 
 Examples:
-* `delete Amy` deletes the supplier of name `Amy` in the address book.
+* `delete Amy` deletes the supplier of name `Amy` in SupplyCentral.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book, including all tracked goods.
+Clears all entries from SupplyCentral, including all tracked goods.
 
 Format: `clear`
 
@@ -162,23 +168,23 @@ Format: `exit`
 
 Adds a specific goods item tied to a supplier. All fields are required for this command.
 
-Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME`
+Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
 
 Examples:
 
 * `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh` will add goods of name `Gardenia Milk Bread` that belongs to the supplier `Alex Yeoh`.
 
-Note: The goods category of goods will be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of `CONSUMABLES`, a `CONSUMABLES` tag will be added to the supplier (visually). The tag information of the supplier remains as it is.
+Note: The goods category of goods will also be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of `CONSUMABLES`, a `CONSUMABLES` tag will be added to the supplier (only visually). The tag information of the supplier remains as it is.
 
 ### Deletion of Goods : `deletegoods`
 
-Deletes the specified goods from the specified supplier.
+Deletes all of the specified goods from the specified supplier.
 
 Format: `deletegoods n/NAME gn/GOODS_NAME`
 
 Examples:
 
-* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes the goods that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
+* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes all goods record that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
 
 ### View statistics for Goods : `viewgoods`
 
@@ -195,18 +201,25 @@ Note: All filters are optional, and all goods will be shown if no filters are pr
 ### Export Goods Data to CSV: `export`
 
 Exports the currently displayed goods in a new CSV file. Should be used after filters have been applied to obtain a clean set of data for any external usage.
-- This command is dependent on the `viewgoods` command.
+- This command is entirely dependent on the `viewgoods` command.
+- As such, if the `viewgoods` function has not been used, the default export will be the list of goods with pending deliveries.
 - The new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`
 
 Format: `export`
 
+Examples:
+
+* if `viewgoods c/CONSUMABLES` was entered, followed by `export`, you will receive a list of `CONSUMABLES` in the newly created CSV file.
+
+Note: If the `filteredGoods.csv` file already exists, the information contained will simply be overwritten with new data from the currently applied filter.
+
 ### Saving the data
 
-Supply Central data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SupplyCentral data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the Supplier data file
 
-SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SupplyCentral supplier data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SupplyCentral will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -215,7 +228,7 @@ Furthermore, certain edits can cause SupplyCentral to behave in unexpected ways 
 
 ### Editing the Goods data file
 
-SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
+SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use externally for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
@@ -223,15 +236,17 @@ Similar to the supplier data file, if your changes to the data file makes its fo
 
 ### Resizing UI elements
 
-SupplyCental allows you to resize the UI elements to better fit your screen. You can resize the UI elements by clicking and dragging the dividers as highlighted below.
+SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown below.
 
 ![Draggable UI elements](images/DraggableUI.png)
 
 The elements will resize according to the position of the divider, allocating more space for the output to be displayed, or more space for the suppliers/goods to be displayed.
 
-### Delivery status
+### Delivery Status
 
 The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
+
+This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.)
 
 ![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
@@ -264,5 +279,5 @@ Action | Format, Examples
 **Help** | `help`
 **Add Goods** | `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME` <br> e.g. `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
 **Delete Goods** | `deletegoods n/NAME gn/GOODS_NAME` <br> e.g. `deletegoods n/John Doe gn/Gardenia Milk Bread`
-**View Statistics** | `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]` <br> e.g. `viewgoods gn/Banana c/CONSUMABLES`
-**Export Data** | `export`
+**View Goods List** | `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]` <br> e.g. `viewgoods gn/Banana c/CONSUMABLES`
+**Export Goods Data** | `export`
