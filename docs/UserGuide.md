@@ -328,7 +328,9 @@ section for detailed information
 >**Tip:** You can add a student without specifying a tutorial ID!
 >
 >**Warning** You will need to add a tutorial before assign student to new tutorial.
-
+>
+>**Note** Since this application is only catered to one module, each student can only be assigned to one tutorial.
+ 
 Command detail & constraints:
 
 - This command registers a new student in the system with essential details like name and student ID, and optionally assigns them to a tutorial.
@@ -439,7 +441,7 @@ Example:
 
 >**Note:** We can have tutorials with different tutorial names and the same tutorial id to support better flexibility over classes.
 > For example, there can be 2 tutorial classes with `TUTORIAL_NAME` `CS2103T-W08`, but can have 2 different tutorial ids to account for the 2 different groups.
->
+> 
 
 #### 4.2.2 Delete a tutorial: `deleteTut`
 > Delete a specified tutorial from the TrackMate application.
