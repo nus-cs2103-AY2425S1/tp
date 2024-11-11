@@ -149,11 +149,6 @@ public class ParserUtil {
             throw new ParseException("Invalid date format or invalid date. Please provide a correct date in YYYY-MM-DD format.");
         }
 
-        // Check if date is in the future.
-        if (parsedDate.isAfter(LocalDate.now())) {
-            throw new ParseException("The date provided should not be in the future.");
-        }
-
         return parsedDate;
     }
 

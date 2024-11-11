@@ -31,19 +31,25 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
+
     private static final String INVALID_TAG = "#friend";
+
+    private static final String INVALID_DATE_WITH_INCORRECT_FORMAT = "non-date";
+    private static final String INVALID_DATE_WITH_CORRECT_FORMAT_1 = "2024-13-01";
+    private static final String INVALID_DATE_WITH_CORRECT_FORMAT_2 = "2024-11-31";
+    private static final String INVALID_DATE_WITH_CORRECT_FORMAT_3 = "2025-02-29";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_NAME_WITH_EXCESS_WHITESPACE_IN_MIDDLE = "Rachel   Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
+
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+
+    private static final String VALID_NORMAL_DATE = "2024-11-09";
+    private static final String VALID_LEAP_YEAR_DATE = "2024-02-29";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -280,5 +286,25 @@ public class ParserUtilTest {
     @Test
     public void parseAttendance_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("invalid-status"));
+    }
+
+    @Test
+    public void parseDate_validNormalDate_success() throws Exception {
+        LocalDate expectedDate = LocalDate.of(2024, 11, 9);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_NORMAL_DATE));
+    }
+
+    @Test
+    public void parseDate_validLeapYearDate_success() throws Exception {
+        LocalDate expectedDate = LocalDate.of(2024, 2, 29);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_LEAP_YEAR_DATE));
+    }
+
+    @Test
+    public void parseDate_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_WITH_INCORRECT_FORMAT));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_WITH_CORRECT_FORMAT_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_WITH_CORRECT_FORMAT_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_WITH_CORRECT_FORMAT_3));
     }
 }
