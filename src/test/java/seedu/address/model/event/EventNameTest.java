@@ -26,10 +26,15 @@ public class EventNameTest {
         // invalid event name
         assertFalse(EventName.isValidName("")); // empty string
         assertFalse(EventName.isValidName(" ")); // spaces only
+        assertFalse(EventName.isValidName("^")); // only non-alphanumeric characters
+        assertFalse(EventName.isValidName("meeting*")); // contains non-alphanumeric characters
+        assertFalse(EventName.isValidName("50")); // numbers only
+        assertFalse(EventName.isValidName("50wdwdwdw")); // start with a number
+        assertFalse(EventName.isValidName("#%$")); // symbols only
+        assertFalse(EventName.isValidName("#$%$wdwdwdwdw")); // start with a symbol
 
         // valid event name
         assertTrue(EventName.isValidName("peter jack")); // alphabets only
-        assertTrue(EventName.isValidName("12345")); // numbers only
         assertTrue(EventName.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(EventName.isValidName("Capital Tan")); // with capital letters
         assertTrue(EventName.isValidName("David Roger Jackson Ray Jr 2nd")); // long names

@@ -8,10 +8,10 @@
 
 Welcome to ClubConnect!
 
-ClubConnect is your go-to desktop application for keeping your contacts and events organised and connected. 
-With ClubConnect, you can quickly access and manage all your member details, sponsor contacts, 
-and event participant lists in one convenient place. 
-This guide will show you how to use ClubConnect’s features to enhance collaboration, boost member engagement, 
+ClubConnect is your go-to desktop application for keeping your contacts and events organised and connected.
+With ClubConnect, you can quickly access and manage all your member details, sponsor contacts,
+and event participant lists in one convenient place.
+This guide will show you how to use ClubConnect’s features to enhance collaboration, boost member engagement,
 and make planning a breeze — so you can focus more on what matters and spend less time on administrative work.
 
 
@@ -36,15 +36,15 @@ and make planning a breeze — so you can focus more on what matters and spend l
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ClubConnect's contact list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current contact list.
+    * `delete 3` : Deletes the 3rd contact shown in the current contact list.
 
-   * `clear` : Deletes all contacts and events.
+    * `clear` : Deletes all contacts and events.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -72,7 +72,7 @@ and make planning a breeze — so you can focus more on what matters and spend l
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 <box type="warning" seamless>
 
@@ -96,6 +96,11 @@ Adds a person to ClubConnect's contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+* `NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
+* `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
@@ -111,14 +116,23 @@ Edits an existing person in ClubConnect's contact list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. 
-* `INDEX` refers to the index number shown in the displayed contact list. 
+* Edits the person at the specified `INDEX`.
+* `INDEX` refers to the index number shown in the displayed contact list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
+* `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
+
+<box type="tip" seamless>
+
+**Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
+</box>
 
 <box type="tip" seamless>
 
@@ -187,7 +201,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Searching persons by a specified field : `search` 
+#### Searching persons by a specified field : `search`
 
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
@@ -211,7 +225,7 @@ Examples:
 
 #### Exporting persons: `export`
 
-Exports all persons in ClubConnect into a csv file named `ExportedContacts.csv` located in the data folder.
+Exports all persons in ClubConnect into a csv file `[JAR file location]/data/ExportedContacts.csv`.
 
 Format: `export`
 
@@ -221,11 +235,23 @@ Reads the specified file to import from and adds the persons to ClubConnect.
 
 Format: `import FILENAME`
 
+* The file must be located in the data folder of the application directory.
+* The specified file name must exactly match the name of the file to import from.
+* The file name must end with `.csv`.
+
+<box type="tip" seamless>
+
+**Tip:** The import command is designed to work specifically with files exported by ClubConnect. If you export data using the export command, you can re-import it as needed using the same file.
+</box>
+
+<box type="warning" seamless>
+
+**Caution:**
+Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as ClubConnect expects the file to retain the exact format of the exported data.
+</box>
+
 Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to the ClubConnect.
-* The file has to be located in the data folder.
-* The specified file name has to exactly match the name of the file to import from.
-* Name of file to import contacts from must end with `.csv`.
+* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -244,6 +270,8 @@ Adds an event to ClubConnect's event list.
 Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
 
 * The date inputs must be in the format `YYYY-MM-DD`.
+* `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 
 <box type="info" seamless>
 
@@ -263,6 +291,8 @@ Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/
 
 * `INDEX` refers to the index number shown in the displayed event list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 * The date inputs must be in the format `YYYY-MM-DD`.
 * At least one of the optional fields (`EVENT_NAME`, `EVENT_DESCRIPTION`, `EVENT_START_DATE`, `EVENT_END_DATE`) must be provided to make changes.
 
