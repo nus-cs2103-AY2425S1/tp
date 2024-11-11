@@ -15,11 +15,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -245,6 +240,7 @@ Use case ends.
   * 2b2. User requests to add a contact again
   * 2b3. Steps 2b1 and 2b2 are repeated until the information entered is valid
   * **Use case resumes from Step 3**
+
 ***
 **Use case:** UCO2 - Delete Contact  
 **Actor:** User
@@ -276,6 +272,7 @@ Use case ends.
 4. NetBook displays the relevant users in the GUI, and displays a message stating the number of contacts displayed
 
 Use case ends.
+
 ***
 **Use case:** UCO4 - List All Contacts  
 **Actor:** User
@@ -286,8 +283,8 @@ Use case ends.
 informing users that all contacts have been displayed
 
 Use case ends.
-***
 
+***
 **Use case:** UCO5 - Open Help Page  
 **Actor:** New User
 
@@ -296,6 +293,7 @@ Use case ends.
 2. NetBook displays the help page to the user
 
 Use case ends.
+
 ***
 **Use case:** UCO6 - Assign Priority To Contact   
 **Actor:** User
@@ -315,6 +313,7 @@ Use case ends.
     * 2a2. User requests to add a priority to a contact again
     * 2a3. Steps 2bi and 2bii are repeated until the information entered is valid
     * **Use case resumes from Step 3**
+
 ***
 **Use case:** UCO7 - Edit Contact 
 **Actor:** User
