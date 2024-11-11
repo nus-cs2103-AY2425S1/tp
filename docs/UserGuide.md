@@ -175,7 +175,7 @@ Format:
 
 Note:
 * If parameters are provided for the `v/` and `e/` flags, they will be ignored.
-<box type="tip" seamless><br>
+<box type="tip" seamless>
 Tip: A vendor or event can have any number of tags (including 0).
 </box>
 * If an event or a vendor already has the exact same name (case-sensitive), the command will fail and an error message will be displayed.
