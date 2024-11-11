@@ -641,12 +641,13 @@ Team Size: 5
 3. **Fixing issues with error messages.**
     1. In the current implementation, some commands display the wrong error message when the user enters an invalid command.
     2. We plan to correct these instances:
-       1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large or negative.
-       2. `delete` should display "The person index provided is invalid." when index `0` is entered.
+       1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large, instead of "Invalid command format!". (e.g `delete-appt 1000000000000000000000000`)
+       2. `delete` should display "The person index provided is invalid." when index `0` or a negative integer is entered.
        3. `add-patient` should display "Invalid date of birth provided" when the date of birth is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        4. `add-appt` should display "Invalid date provided" when the date is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        5. `add-appt` should display "Invalid time provided" when the time is outside of the range 0000 - 2359, instead of the current generic message "Times must be in the format of HHmm".
        6. Giving invalid tags error messaage needs to be updated to let user know that tags should not only contain alphanumeric characters, but also not contain any spaces.
+    3. Some messages also have the term "address book". Though not entirely wrong, we plan to change this to "MediContacts" to maintain consistency with the application's name.
 
 4. **Update `add-doctor` command to take in a wider range of specialties**
    1. Currently, the `add-doctor` command only allows for specialties with no spaces and only alphabets.
@@ -675,6 +676,7 @@ Team Size: 5
 9. **Ensure Minimum Window Size for Improved Layout** 
    1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+
 10. **Sort Appointment by Date** 
    1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
    2. Sorting of appointments will be in ascending order (earliest to latest).
@@ -683,6 +685,11 @@ Team Size: 5
     1. Intended Behaviour: For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected. (e.g. 30-02-2024 will return 29-02-2024)
     2. Current Behaviour: Entering a date that is too large but below 32 will not be automatically corrected in the UI. (e.g. 30-02-2024 will return 30-02-2024). But, the date stored correctly in storage, therefore restarting the app will show the corrected date.
     3. We plan to fix the UI to display the corrected date immediately after the user enters the date.
+
+12. **Add feature to update patient and doctor records `edit-patient` and `edit-doctor`**
+    1. Currently, there is no feature to update patient and doctor records. This feature will allow users to update patient and doctor records when there are changes in their details.
+    2. The update feature will allow users to update patient and doctor details such as name, phone number, email, address, date of birth
+
 
 --------------------------------------------------------------------------------------------------------------------
 
