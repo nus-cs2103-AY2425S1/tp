@@ -955,6 +955,9 @@ testers are expected to do more *exploratory* testing.
     - Update the UI to display group-specific attendance more clearly.
     - Ensure compatibility with other group and attendance features.
 
+- **Rename `createattn` Command to `createevent` for Consistency**
+
+  Currently, the command for creating attendance events (`createattn`) is inconsistent with the naming of other event-related commands such as `deleteevent` and `listevents`. To improve usability and consistency, we plan to rename the `createattn` command to `createevent`.
 
 - **Specificity of error message for Edit function**
   
