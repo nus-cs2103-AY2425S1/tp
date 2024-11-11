@@ -187,6 +187,15 @@ The command accepts either one phone number, one email, or both.
 
 </box>
 
+<box type="info" seamless>
+
+**Info: Input data containing prefixes**
+- Should any of the fields contain reserved prefixes (e.g. `add ... d/For a/b testing` contains `a/` which is reserved), the message will be split into multiple fields.
+- To work around this, you can add a character in front of the reserved prefix (e.g. `add ... d/For 'a/b testing`).
+- This issue will be fixed in a later version using a special delimiter to handle such cases.
+
+</box>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`. John is a CS1101S student.
   ![result for adding John Doe](images/addJohnDoeResult.png)

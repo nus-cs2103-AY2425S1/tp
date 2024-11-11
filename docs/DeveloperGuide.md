@@ -738,3 +738,15 @@ hence reducing the usefulness of this command.
 
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
+
+3. **Allow the user to delimit special prefixes appearing in the contact details.**
+Currently, if any of the input fields contain the special prefixes, the string will be split into multiple fields, which may not be the user's intention.
+For example, if the user attempts to execute `edit 1 d/For a/b testing`, the command will be wrongly interpreted as
+   - change the description of the first contact to `For`, and
+   - add a new contact with description `b testing`. (refer to the screenshot below)
+
+![point3 screenshot](images/Planned_Enhancements_Screenshots/Point3.png)
+
+The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
+We plan to follow a more standard approach of using a backslash to escape the special prefixes.
+More importantly, the parser will remove the backslash at the end of parsing, so that the user does not see the backslash in the final output.
