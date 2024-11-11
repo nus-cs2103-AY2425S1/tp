@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
+It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-reliant apps.
 
 ---
 
@@ -35,36 +35,51 @@ The user guide contains formatting to highlight important info. The standards us
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Quick Start](#quick-start)
+  - [Some commands to get started](#some-commands-to-get-started)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
-  - [Adding an employee : `add`](#adding-an-employee-add)
-  - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
-  - [Editing an employee : `edit`](#editing-an-employee--edit)
-  - [Filtering employees by skills : `filter`](#filtering-employees-by-skills-filter)
-  - [Locating employees by name : `find`](#locating-employees-by-name-find)
-  - [Deleting an employee : `delete`](#deleting-an-employee--delete)
-  - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
-  - [Adding a project : `addproject`](#adding-a-project--addproject)
-  - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
-  - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
-  - [Editing a project : `editproject`](#editing-a-project--editproject)
-  - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
-  - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
-  - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
-  - [Create an assignment : `assign`](#create-assignment--assign)
-  - [List assignments : `listassignments`](#list-assignments--listassignments)
-  - [Delete Assignment : `unassign`](#delete-assignment-unassign)
+  - [Employee commands](#employee-commands)
+    - [Adding an employee : `add`](#adding-an-employee--add)
+    - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
+    - [Editing an employee : `edit`](#editing-an-employee--edit)
+    - [Filtering employees by skills : `filter`](#filtering-employees-by-skills--filter)
+    - [Locating employees by name : `find`](#locating-employees-by-name--find)
+    - [Deleting an employee : `delete`](#deleting-an-employee--delete)
+    - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
+  - [Project commands](#project-commands)
+    - [Adding a project : `addproject`](#adding-a-project--addproject)
+    - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
+    - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
+    - [Editing a project : `editproject`](#editing-a-project--editproject)
+    - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
+    - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
+    - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - [Assignment commands](#assignment-commands)
+    - [Create assignment : `assign`](#create-assignment--assign)
+    - [List assignments : `listassignments`](#list-assignments--listassignments)
+    - [Delete assignment : `unassign`](#delete-assignment--unassign)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
-- [Saving / Editing the data file](#saving-the-data)
+  - [Traversing command history](#traversing-command-history)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Editing the command history save file](#editing-the-command-history-save-file)
 - [FAQ](#faq)
-- [Known Issues](#known-issues)
+- [Known issues](#known-issues)
 - [Command Summary](#command-summary)
-  - [Employee Commands](#employee-commands)
-  - [Project Commands](#project-commands)
-  - [Assignment Commands](#assignment-commands)
-  - [Other Commands](#other-commands)
+  - [Summary of employee commands](#summary-of-employee-commands)
+  - [Summary of project commands](#summary-of-project-commands)
+  - [Summary of assignment commands](#summary-of-assignment-commands)
+  - [Summary of other commands](#summary-of-other-commands)
 - [Glossary](#glossary)
+  - [Command word](#command-word)
+  - [Alphanumeric](#alphanumeric)
+  - [Graphical User Interface](#graphical-user-interface)
+  - [Java](#java)
+  - [JSON](#json)
+  - [Numeric](#numeric)
+  - [Prefix](#prefix)
 
 ---
 
@@ -78,7 +93,7 @@ Start here if you are new to HRConnect.
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
-4. **Double-click the `.jar` file** in the folder you placed. 
+4. **Double-click the `.jar` file** in the folder you placed.
    - (If this does not work: Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
 
 A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
@@ -89,7 +104,7 @@ A GUI similar to the screenshot below should appear in a few seconds. Note how t
 
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-### Some commands to get started:
+### Some commands to get started
 
    - `listemployees` : Lists all employees.
 
@@ -101,7 +116,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `listprojects`: Lists all projects.
 
-   - `addproject pid/3 pn/Project Charlie s/Backend`: Adds a project named `Project Charlie` with skill  `Backend`.
+   - `addproject pid/3 pn/Project Charlie s/Backend`: Adds a project named `Project Charlie` with skill `Backend`.
 
    - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
 
@@ -156,7 +171,9 @@ Format: `help`
 
 [Return to Top](#table-of-contents)
 
-### Adding an employee: `add`
+### Employee commands
+
+#### Adding an employee : `add`
 
 **Adds an employee** to the address book.
 
@@ -199,7 +216,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `listemployees`
+#### Listing all employees : `listemployees`
 
 Shows a **list of all employees** in the address book.
 
@@ -207,11 +224,13 @@ Format: `listemployees`
 
 Expected output:
 - System message noting success
-- All persons shown in the displayed employee list
+- All employees shown in the displayed employee list
+- Result for `listemployees` with sample data:
+![result for `listemployees`](images/listEmployees.png)
 
 [Return to Top](#table-of-contents)
 
-### Editing an employee : `edit`
+#### Editing an employee : `edit`
 
 **Edits an existing employee** in the address book.
 
@@ -238,9 +257,9 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Filtering employees by skills: `filter`
+#### Filtering employees by skills : `filter`
 
-Finds employees who have **at least one skill or tag matching** at least one of the search items.
+**Finds employees who have at least one skill or tag matching** at least one of the search items.
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
@@ -263,7 +282,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Locating employees by name: `find`
+#### Locating employees by name : `find`
 
 **Finds employees whose names contain any of the given keywords.**
 
@@ -288,7 +307,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Deleting an employee : `delete`
+#### Deleting an employee : `delete`
 
 **Deletes the specified employee** from the address book.
 
@@ -300,8 +319,8 @@ Format: `delete INDEX`
 
 Examples:
 
-- `listemployees` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `listemployees` followed by `delete 2` deletes the 2nd employee in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Expected output:
 - System message noting success
@@ -309,10 +328,13 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Clearing all employee entries : `clear`
+#### Clearing all employee entries : `clear`
 
 **Clears all employee entries** from the address book.
-**<span style="color:red">This deletes all employee data!</span>**
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This deletes all employee data!
+</div>
 
 Format: `clear`
 
@@ -322,7 +344,9 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Adding a project : `addproject`
+### Project commands
+
+#### Adding a project : `addproject`
 
 **Adds a new project** to HRConnect.
 
@@ -345,7 +369,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all projects : `listprojects`
+#### Listing all projects : `listprojects`
 
 Shows a list of **all stored projects**.
 
@@ -354,13 +378,18 @@ Format: `listprojects`
 Expected output:
 - System message noting success, including number of projects listed
 - All projects shown in the displayed project list
+- Result of `listprojects` with sample data:
+![result for `listprojects`](images/listProjects.png)
 
 [Return to Top](#table-of-contents)
 
+#### Listing all members of a project : `listprojectmembers`
 
-### Listing all members of a project : `listprojectmembers`
+Shows a list of **all project members of the specified project**.
 
-Shows a list of **all project members**.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Users can use the `listemployees` and `listassignments` commands to reset the display to show all employees and assignments again.
+</div>
 
 Format: `listprojectmembers pn/PROJECT_NAME`
 
@@ -373,8 +402,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-
-### Editing a project : `editproject`
+#### Editing a project : `editproject`
 
 **Edits an existing project** in the address book.
 
@@ -399,9 +427,9 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Finding projects by name : `findproject`
+#### Finding projects by name : `findproject`
 
-Finds projects whose **names contain any of the given keywords**.
+**Finds projects whose names contain any of the given keywords**.
 
 Format: `findproject KEYWORD [MORE_KEYWORDS]`
 
@@ -418,11 +446,11 @@ Examples:
 
 Expected output:
 - System message noting success
-- Projects matching criteria above  shown in the displayed project list
+- Projects matching criteria above shown in the displayed project list
 
 [Return to Top](#table-of-contents)
 
-### Deleting a project : `deleteproject`
+#### Deleting a project : `deleteproject`
 
 **Deletes the specified project <span style="color:red">and all its assignments</span>** from HRConnect.
 
@@ -444,10 +472,13 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Clear all project entries : `clearproject`
+#### Clear all project entries : `clearproject`
 
 **Clears all project entries** from HRConnect.<br>
-<span style="color:red">This will delete all project records AND their assignments\!</span>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This will delete all project records AND their assignments!
+</div>
 
 Format: `clearproject`
 
@@ -457,9 +488,11 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Create Assignment : `assign`
+### Assignment commands
 
-**Creates an assignment** between a Person and a Project.
+#### Create assignment : `assign`
+
+**Creates an assignment** between an Employee and a Project.
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
@@ -468,7 +501,7 @@ Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
   - Assignment IDs are compared numerically. `0001` is treated the same as `1`.
 
 - The `PROJECT_ID` must belong to an existing project.
-- The `EMPLOYEE_ID` must belong to an existing person.
+- The `EMPLOYEE_ID` must belong to an existing employee.
 - There must not be an existing assignment with the same `PROJECT_ID` and `EMPLOYEE_ID`.
 
 Examples:
@@ -481,7 +514,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### List Assignments : `listassignments`
+#### List assignments : `listassignments`
 
 Shows a list of **all stored assignments**.
 
@@ -490,14 +523,16 @@ Format: `listassignments`
 Expected output:
 
 - System message noting success
-- All assignments shown in the top display list
+- All assignments shown in the assignment display list
+- Result of `listassignments` with sample data:
+![result of `listassignments`](images/listAssignments.png)
 
 [Return to Top](#table-of-contents)
 
-### Delete Assignment: `unassign`
+#### Delete assignment : `unassign`
 
-**Deletes an assignment** between a Person and a Project.<br>
-This does not delete the Person nor the Project.
+**Deletes an assignment** between an Employee and a Project.<br>
+This does not delete the Employee nor the Project.
 
 Format: `unassign aid/ASSIGNMENT_ID`
 
@@ -515,9 +550,22 @@ Expected output:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+**Exits the program.**
 
 Format: `exit`
+
+[Return to Top](#table-of-contents)
+
+### Traversing command history
+
+HRConnect keeps a log of past commands entered, up to a maximum of the 50 latest commands. To access past commands, make sure that your cursor is in the command box (indicated within the red box below), then press the up (↑) and down (↓) arrow keys.
+
+![cursorInCommandBox.png](images/cursorInCommandBox.png)
+
+- Press the up arrow key (↑) to navigate to the previous command.
+- Press the down arrow key (↓) to navigate to the next command.
+
+Previously entered commands are saved to disk (up to a maximum of 50 commands). Users can navigate to previous commands from earlier sessions as commands are saved across exit(s) of the application.
 
 [Return to Top](#table-of-contents)
 
@@ -535,12 +583,23 @@ HRConnect data is saved automatically as a [*JSON*](#json) file `[JAR file locat
 Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to backup the file before editing it.<br>
+
+Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
+
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
 [Return to Top](#table-of-contents)
+
+### Editing the command history save file
+
+Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/hrconnect.json`.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to this file makes its format invalid, HRConnect will discard all data and start with an empty file at the next run. Hence, it is recommended to backup the file before editing it.<br>
+
+Likewise, certain edits can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
 
 ---
 
@@ -553,7 +612,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 **A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see the data files anywhere.<br>
@@ -563,10 +622,11 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ---
 
-## Known Issues
+## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
+1. **If your computer has multiple displays**, if you move the application to a secondary display, and later switch to using only the primary display, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Running and using multiple instances of HRConnect at the same time** will result in unpredictable behavior, including inconsistent data saving and displaying.
 
 [Return to Top](#table-of-contents)
 
@@ -574,7 +634,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Command Summary
 
-### Employee Commands
+### Summary of employee commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -588,7 +648,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 [Return to Top](#table-of-contents)
 
-### Project Commands
+### Summary of project commands
 
 | Action                          | Format, Examples                                                                                                  |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -602,7 +662,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 [Return to Top](#table-of-contents)
 
-### Assignment Commands
+### Summary of assignment commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -612,7 +672,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 [Return to Top](#table-of-contents)
 
-### Other Commands
+### Summary of assignment commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -645,10 +705,11 @@ List of certain technical terms / uncommon words used in this user guide.
 - It can be opened in Notepad, or other text or code editors.
 
 ### Numeric
-- Consisting of the digits 0 to 9.
+- Consisting only of the digits 0 to 9.
+- Does not include the negative sign (-), the decimal point (.), spaces, or other symbols.
 
 ### Prefix
-- 1 or more characters, followed by a `/`. 
+- 1 or more characters, followed by a `/`.
 - Used in commands to indicate a value supplied by the user. Examples: `n/`, `id/`, `pid/`.
 
 [Return to Top](#table-of-contents)
