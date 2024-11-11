@@ -307,8 +307,8 @@ Udder data are saved in the hard disk automatically after any command that chang
 
 <box type="warning">
 
-Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrudders.json`. This JSON file is to not be edited directly by you and serves as a database for the contact book.
-Changing this file directly can lead to undesirable behaviour of the app.
+Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrudders.json`. This JSON file is to not be edited directly by you.
+Changing this file directly can lead to undesirable behaviour of the app and should not be done.
 </box>
 
 ### More exciting features coming in `[v2.0]`
