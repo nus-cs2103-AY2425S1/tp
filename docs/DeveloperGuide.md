@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
 | `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
-| `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Hungry foodie with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
 | `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
@@ -304,7 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### System: Grub Address Book (GAB)
 
 **Use Case:** UC1 - Search by Vendor Name
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -328,7 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use Case:** UC2 - Filter by Tag Names
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -337,16 +341,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. GAB detects an error in tags command format.
+* 3a. GAB detects an error in entered user command.
    * 3a1. GAB responds with a command error message and requests correct data. 
    * 3a2. User enters new data.
-   * Steps 3a1-3a2 are repeated until the command format entered is correct.
+   * Steps 3a1-3a2 are repeated until the data entered is correct.
+   * Use case resumes at step 4.
+
+* 3b. GAB detects an error in entered user tag.
+   * 3b1. GAB responds with a command error message and requests correct data.
+   * 3b2. User enters new data.
+   * Steps 3b1-3b2 are repeated until the data entered is correct.
    * Use case resumes at step 4.
 
 ---
 
 **Use Case:** UC3 - Filter by Price Label
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -362,7 +374,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Use case resumes at step 5.
 
 **Use Case:** UC4 - Create new vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -383,7 +397,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC5 - Update vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -392,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
+* 3a. Wrong edit command format
     * 3a1. GAB responds with wrong command format error message
     * 3a2. User enters new data
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
@@ -405,7 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC6 - Adding tags
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -414,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
+* 3a. Wrong edit command format
     * 3a1. GAB responds with wrong command format error message
     * 3a2. User enters new data
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
@@ -427,7 +445,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC7 - Getting Help
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. User enters a command for help.
