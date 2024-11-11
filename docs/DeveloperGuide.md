@@ -689,7 +689,7 @@ otherwise)
   with others
 * <a id="glossary-user"/>**User**: A letting agent that is using TrueRental to manage the contact information of their
   clients
-* <a id="glossary-client"/>**Client**: An individual that is renting a property from a letting agent
+* <a id="glossary-client"/>**Client**: A person whose properties are managed by a letting agent
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
 * <a id="glossary-system"/>**System**: TrueRental desktop application
 * <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number
