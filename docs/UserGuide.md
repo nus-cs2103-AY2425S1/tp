@@ -482,7 +482,7 @@ All client information, including contact details, address, job information, and
 edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
-  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+  - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
     - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
@@ -553,7 +553,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+  - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
     - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
@@ -736,7 +736,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
 view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+  - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
     - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 
 **Examples:**
