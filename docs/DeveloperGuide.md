@@ -3,30 +3,30 @@ layout: page
 title: Developer Guide
 ---
 # Table of Contents
-1. [Acknowledgements](#Acknowledgements)
-2. [Setting up, getting started](#Setting_up,_getting_started)
-3. [Design](#Design)
-  3.1. [Architecture](#Architecture)
-  3.2. [UI component](#UI-component)
-  3.3. [Logic component](#Logic-component)
-  3.4. [Model component](#Model-component)
-  3.5. [Storage component](#Storage-component)
-  3.6. [Common classes](#Common-classes)
-4. [Implementation](#Implementation)
-  4.1. [Undo/redo feature](#Undo/redo-feature)
-    4.1.1. [Implementation](#Implementation)
-5. [Documentation, logging, testing, configuration, dev-ops](#Documentation,-logging,-testing,-configuration,-dev-ops)
-6. [Appendix: Requirements](#Appendix:-Requirements)
-  6.1. [Product scope](#Product-scope)
-  6.2. [User stories](#User-stories)
-  6.3. [Use cases](#Use-cases)
-  6.4. [Non-Functional Requirements](#Non-Functional-Requirements)
-  6.5. [Product scope](#Product-scope)
-  6.6. [Glossary](#Glossary)
-7. [Appendix: Instructions for manual testing](#Appendix:-Instructions-for-manual-testing)
-  7.1. [Launch and shutdown](#Launch-and-shutdown)
-  7.2. [Deleting a person](#Deleting-a-person)
-  7.3. [Saving data](#Saving-data)
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)<br>
+  3.1. [Architecture](#architecture)<br>
+  3.2. [UI component](#ui-component)<br>
+  3.3. [Logic component](#logic-component)<br>
+  3.4. [Model component](#model-component)<br>
+  3.5. [Storage component](#storage-component)<br>
+  3.6. [Common classes](#common-classes)<br>
+4. [Implementation](#implementation)<br>
+  4.1. [Undo/redo feature](#undoredo-feature)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation)<br>
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-opss)
+6. [Appendix: Requirements](#appendix-requirements)<br>
+  6.1. [Product scope](#product-scope)<br>
+  6.2. [User stories](#user-stories)<br>
+  6.3. [Use cases](#use-cases)<br>
+  6.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+  6.5. [Product scope](#product-scope)<br>
+  6.6. [Glossary](#glossary)<br>
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
+  7.1. [Launch and shutdown](#launch-and-shutdown)<br>
+  7.2. [Deleting a person](#deleting-a-person)<br>
+  7.3. [Saving data](#saving-data)<br>
 
 ---
 
@@ -96,9 +96,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/ui/Ui.java)
 
-<div style="text-align: center;">
-  <img src="images/UiClassDiagram.png" alt="Structure of the UI Component" width="1700">
-</div>
+<img src="images/UiClassDiagram.png" width="1960"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -670,6 +668,32 @@ _Similar to UC10 except without extension 2b._
     - 3a2. System displays each previous command in sequence.
 
       Use case ends.
+
+
+**Use case: UC18 - Edit a person's information**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit the details of a specific person.
+3.  System shows details of the newly edited person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+- 2b. The details entered are invalid or are in the wrong format.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
