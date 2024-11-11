@@ -106,7 +106,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) and each tag has a maximum length of 30 characters including spaces.
 </div>
 
 * The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b>, and it will be displayed in lowercase.
@@ -125,13 +125,17 @@ Edits an existing person in the address book.
 
 Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Conditions for each field is the same as the `add` command.
+</div>
+
 * Edits the person with the specified `NAME`. The name refers to the name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-* Conditions for each field is the same as the `add` command.
+* Each tag has a maximum length of 30 characters including spaces.
 
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `john doe` to be `91234567` and `johndoe@example.com` respectively.
