@@ -319,8 +319,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1a2. User reenters new command.
 
         Steps 1a1-1a2 are repeated until the command entered is correct.
-
-    Use case resumes at step 1.
+        
+        Use case resumes from step 1.
 
 * 1b. Input fields are incorrectly formatted.
 
@@ -328,14 +328,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b2. User reenters command.
 
       Steps 1b1-1b2 are repeated until the command entered is correct.
+      
+      Use case resumes from step 1.
 
-  Use case resumes at step 1.
-
-* *a. At any time, User decides to stop adding the client, or exits the application.
+* *a. At any time, user decides to stop adding the client, or exits the application.
 
     * *a1. Nothing is added to the client list.
+       
+      Use case ends.
 
-  Use case ends.
+<br>
 
 **Use case: Delete a client**
 
@@ -353,27 +355,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   * 2a1. Clientele+ shows an error message.
-
-  Use case ends.
+        
+    Use case ends.
 
 * 3a. The given index or name is invalid.
 
     * 3a1. Clientele+ shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 * 3b. Multiple names matching the given name exist.
 
     * 3b1. Clientele+ shows list of clients with matching names.
     * 3b2. Clientele+ prompts user to delete by index.
 
-      Use case resumes at step 3.
+      Use case resumes from step 3.
 
-* *a. At any time, User decides to stop deleting the client, or exits the application.
+* *a. At any time, user decides to stop deleting the client, or exits the application.
 
-    * *a1. Nothing is deleted from client list.
+    * *a1. Nothing is deleted from client list.  
+        
+        Use case ends.
 
-  Use case ends.
+<br>
 
 **Use case: Modify a client's details**
 
@@ -390,21 +394,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  * 2a1. Clientele+ shows an error message.
+  * 2a1. Clientele+ shows an error message. 
+    
+    Use case ends.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
+* 3a. The selected index is invalid.
 
     * 3a1. Clientele+ shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 * 3b. The given details are invalid.
 
     * 3b1. Clientele+ shows an error message.
 
-    Use case resumes at step 2.
+       Use case resumes from step 2.
+
+<br>
 
 **Use case: Find a client**
 
@@ -423,9 +429,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User reenters command.
 
       Steps 1a1-1a2 are repeated until the command entered is correct.
-
-  Use case resumes at step 1.
-
+      
+      Use case resumes from step 1.
 
 ### Non-Functional Requirements
 
@@ -449,6 +454,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Versioned AddressBook**: An extension to the AddressBook class that allows undoing/redoing actions.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+**Note:** Our team size is 5
+
+1. **Make the GUI wrap large addresses to the next line:** With the current implementation, if you type in an address which is longer than the width of the screen, it stretches the person card (for all contacts), forcing the user to scroll to the right to see the rest of the address, the project status and deadline. In future updates, we plan to enable `textWrap` and set a `maxWidth` for the address label to enhance the UI and improve readability.
+2. **Add support for patronymics, like 's/o' or 'd/o', in the name field:** The current implementation only allows alphanumeric characters, spaces, and dashes, and so users have to work around this restriction by using "s o" or "son of". In the future, we will adjust the regex to something like this `[\\p{Alnum}]+(([ -][\\p{Alnum}]+)*|(([ -](s|d)/o\\s)[\\p{Alnum}]+))\\s*` to allow special strings like "s/o" and "d/o".
+3. **Make prefix for deadlines `dl/`:** This is in conjunction with point 2. Our current implementation of deadline is implemented with `d/DEADLINE`. If we implement a regex to accept "d/o", this would trigger an error since it would match "d/". In the future, we will change the prefix to something like `PREFIX_DEADLINE = new Prefix("dl/")` 
+4. **Allow users to clear current sorting scheme:** Currently, users cannot 'undo' a sort command. In the future, we plan to add an undo and redo feature, which will complete this enhancement as well. Do refer to [the proposed undo and redo feature](#proposed-undoredo-feature).
+5. **Adjust sorting function to be stable:** With the current implementation of sort, a rather rare bug occurs. When you first sort the list, clients will be sorted correctly based on name/deadline depending on the parameter you chose. Following this, the bug arises when multiple clients have the same name (if you sorted based on name) or same deadline (if you sorted based on deadline). If you change one of the fields of the people with the same name (if you sorted based on name) or same deadline (if you sorted based on deadline), sometimes, the list will reorder among people of the same name/deadline. For future implementations, we plan to modify this such that the list doesn't reorder those with the same name/deadline.
+6. **Make `add` and `edit` commands accept blacklisted client status:** The current implementation throws an error of invalid command format for the parameter `cs/blacklisted`. Users can work around this by using the blacklist command implemented. In the future, we plan to remove the restriction on blacklisted client status from both `AddCommandParser` and `EditCommandParser`.
+7. **Make rejection of blacklisted client status for add and edit command more specific:** This is an alternative to point 6 above. The current error message thrown is that of **"Invalid command format!"** which does not accurately explain to the user that the issue lies with the blacklisted parameter. We plan to make the error message mention that `cs/blacklisted cannot be used for this command`. **It is important to note that this enhancement will be deemed redundant if point 6 has been implemented, where `cs/blacklisted` is indeed accepted.**
+8. **Reject email inputs without a period between alphanumeric characters for the domain portion:** Currently, an input like `e/john@example` is accepted, however, this should not be the case as a valid domain format would require at least 1 period for the top level domain (ie.john@example.com). We plan to adjust the regex for the domain portion of the email from `"(" + DOMAIN_PART_REGEX + "\\.)*"` to `"(" + DOMAIN_PART_REGEX + "\\.)+"` to reject such an input.
 
 --------------------------------------------------------------------------------------------------------------------
 
