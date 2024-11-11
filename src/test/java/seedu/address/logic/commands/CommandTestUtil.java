@@ -3,14 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FAMILY_SIZE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -51,6 +54,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_DATE_AMY = "2024-11-01";
+    public static final String VALID_DATE_BOB = "2024-11-01";
+    public static final String VALID_START_TIME_AMY = "09:00";
+    public static final String VALID_START_TIME_BOB = "09:30";
+    public static final String VALID_END_TIME_AMY = "10:00";
+    public static final String VALID_END_TIME_BOB = "10:30";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -70,6 +80,13 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
+    public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
+    public static final String FROM_DESC_AMY = " " + PREFIX_FROM + VALID_START_TIME_AMY;
+    public static final String FROM_DESC_BOB = " " + PREFIX_FROM + VALID_START_TIME_BOB;
+    public static final String TO_DESC_AMY = " " + PREFIX_TO + VALID_END_TIME_AMY;
+    public static final String TO_DESC_BOB = " " + PREFIX_TO + VALID_END_TIME_BOB;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -82,6 +99,10 @@ public class CommandTestUtil {
     public static final String INVALID_FAMILY_SIZE_DESC = " " + PREFIX_FAMILY_SIZE + 0;
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "01-11-2024";
+    public static final String INVALID_FROM_DESC = " " + PREFIX_FROM + "0900";
+    public static final String INVALID_TO_DESC = " " + PREFIX_TO + "1000";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
