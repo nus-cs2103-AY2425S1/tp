@@ -313,6 +313,25 @@ This returns an `EditPatientDescriptor` object which is used to create an `EditC
 The sequence diagram below illustrates the process behind the parsing of the user input.
 In this example, it takes an `edit` command: `execute(edit T0123456A n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567 al|nuts al|shellfish rmal|wheat rl|HIGH ec|Diabetes no|Patient needs extra care)`
 
+![EditParserSequenceDiagram](images/EditParserSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+The sequence diagram below illustrates the process behind creating an `EditPatientDescriptor`:
+
+![CreateEditPatientDescriptor](images/CreateEditPatientDescriptor.png)
+
+##### Executing the Command
+The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system. 
+It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`. 
+The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate. 
+It is then used to replace the patient to edit through the `setPatient` method in the `Model` component.
+
+The activity diagram below illustrates the workflow behind the execution of the `edit` command:
+
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+##### Design Consideration
 
 
 #### Delete Command : `delete`
