@@ -1034,6 +1034,9 @@ Team size: 5
    It may improve user experience to have the values be displayed in a more readable format instead.
 8. **Enable sorting in both directions**: Currently, sorting is restricted to a predefined order (e.g. ascending or descending). 
    We plan to improve the sort functionality by allowing users to toggle between ascending and descending order.
+9. **Text wrapping for long names**: At present, when a contact name is too lengthy, it gets truncated with '...', making it 
+   difficult for users to view the full name. Implementing text wrapping in the name field will accommodate 
+   longer names and allow users to see the entire contact name.
 
 
 
