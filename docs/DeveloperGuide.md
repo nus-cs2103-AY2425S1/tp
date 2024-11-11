@@ -516,6 +516,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
+**Use case: UC11 - Sort Contact List**
+
+**MSS**
+
+1. User requests to sort the contact list, providing the sort criteria.
+2. KonTActs sots the contact list and displays the sorted list.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. KonTActs detects an error in the input.
+
+    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a2. Users enter a new input.
+    - Steps 1a1-1a2 are repeated until the input entered is correct.
+
+      Use case resumes from step 2.
+
+<br>
+
+
+**Use case: UC12 - Open student's GitHub page**
+
+**Precondition**
+
+1. The user have permission to open the browser.
+
+**MSS**
+
+1. User requests to open the Github page of a student.
+2. KonTActs opens the Github page on the user's default browser.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. KonTActs detects an error in the input.
+
+    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a2. Users enter a new input.
+    - Steps 1a1-1a2 are repeated until the input entered is correct.
+
+      Use case resumes from step 2.
+
+<br>
+
+
 {{ newPage }}
 
 ### Non-Functional Requirements
