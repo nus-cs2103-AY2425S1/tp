@@ -92,7 +92,9 @@ public class EditTaskAllGroupCommand extends Command {
     private void updateTaskInGroup(Model model, Group group, Index index, Task editedTask, Task taskToEdit) {
         model.setTask(taskToEdit, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
-        addOrUpdateEditedTask(model, editedTask);
+        if (!group.hasTask(editedTask)) {
+            addOrUpdateEditedTask(model, editedTask);
+        }
     }
 
     private void addOrUpdateEditedTask(Model model, Task editedTask) {
