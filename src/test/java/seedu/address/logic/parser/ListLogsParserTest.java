@@ -32,6 +32,13 @@ public class ListLogsParserTest {
                 ListLogsCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_multipleIdentityNumber_throwsParseException() {
+        // User decides to list multiple users' NRIC
+        assertParseFailure(parser, "i/S8642950J i/S0894499G", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ListLogsCommand.MESSAGE_USAGE));
+    }
+
     //TODO: Cant parse succesfully - perhaps due to missing person someetimes?
     /*
     @Test
