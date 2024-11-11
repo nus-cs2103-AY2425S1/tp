@@ -223,11 +223,11 @@ Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [inc
 
 * The search is case-insensitive. e.g `n/alice` will match `Alice`.
 * At least one filter must be specified (i.e. no empty `find` command).
-* For names, only those that start with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
-* For addresses, those that contain the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only. 
-* For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
-* For income, those with income less than or equal to the specified value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
-* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
+* For **names**, only those that **start** with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
+* For **addresses**, those that **contain** the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only. 
+* For **priorities**, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
+* For **income**, those with income **less than or equal** to the specified value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
+* To specify multiple filters of the **same type**, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
 * Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but also have high priority. 
 
 Examples:
@@ -250,12 +250,12 @@ Format: `sort [name] [address] [priority] [income] [updated]`
 * The only valid parameters are exactly as above: `name`, `address`, `priority`, `income`, `updated`.
 * Only one parameter can be specified at any time.
 * The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
-* For name, the sorting is in alphabetical order.
-* For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
+* For **name**, the sorting is in **alphabetical order**.
+* For **address**, the sorting is in **lexicographical order** (similar to alphabetical order but also takes the special characters and numerical digits into account). 
   * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` followed by `sort address` will sort the contact list of those staying in Clementi in order of their address. 
-* For priority, the sorting is in order from HIGH to LOW.
-* For income, the sorting order is in increasing order from the lowest to highest.
-* For updated, the sorting order is from the person updated least recently to the one updated most recently.
+* For **priority**, the sorting is in order from **HIGH to LOW**.
+* For **income**, the sorting order is in **increasing order** from the lowest to highest.
+* For **updated**, the sorting order is from the person updated **least recently** to the one updated **most recently**.
 
 Examples:
 * `sort updated`
