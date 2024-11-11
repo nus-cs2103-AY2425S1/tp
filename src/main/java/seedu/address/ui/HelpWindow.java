@@ -43,7 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
             new String[]{"List", "list"},
             new String[]{"Undo", "undo"},
             new String[]{"Redo", "redo"},
-            new String[]{"View", "view"},
+            new String[]{"View", "view INDEX\n e.g., view 1"},
             new String[]{"View Tutor Hours", "vtc"},
             new String[]{"Exit", "exit"},
             new String[]{"Help", "help"}

@@ -1,15 +1,19 @@
+
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+
+layout: default.md
+title: "User Guide"
+pageNav: 3
+
 ---
 
 # VolunTier User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 <!-- Table of Contents -->
-- [VolunTier User Guide](#voluntier-user-guide)
+
 - [Quick start](#quick-start)
     - [Installation of application](#installation-of-application)
 - [Features](#features)
@@ -122,9 +126,11 @@ Ctrl + Alt + T
 ## Features
 
 
+
 <box type="tip" seamless>
 
 **Tips:**
+
 
 * start the app with `java -jar VolunTier.jar` when you are in the folder you put the jar file in.
 
@@ -155,7 +161,9 @@ Ctrl + Alt + T
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+
 * For users who have used VolunTier before can jump to [Command Summary](#Command-summary)
+
 
   </box>
 
@@ -201,7 +209,9 @@ Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUB
 
 * A person can have any number of subjects (including 0).
 
+
 </box>
+
 
 
 ### Adding a Lesson: `addLesson`
@@ -258,6 +268,7 @@ Examples:
 ### Locating persons by subject: `findSubject`
 
 Finds persons who have any of the SUBJECT(s).
+
 
 Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 
