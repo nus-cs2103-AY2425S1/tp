@@ -208,7 +208,16 @@ The sort mechanism allows for sorting by one of three fields, the contact's name
 After parsing a sort command from the UI, the SortCommandParser will then decide on which `Comparator<Person>` to use based on the given prefixes of the command.
 
 The activity diagram below shows how the correct Comparator is selected:
-<img src="images/SortCommandActivityDiagram.png" width="800" />
+
+<img src="images/SortCommandActivityDiagram.png" width="400" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The rake symbol used in "Check for prefixes" is not officially supported by PlantUML. Credits go to an anonymous poster in this <a href="https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol">forum</a>.
+</div>
+
+Further details on how prefixes are checked can be seen here in this activity diagram:
+
+<img src="images/SortCommandCheckForPrefixesRake.png" width="800" />
+
 
 ### Wildcard Indexing feature
 
