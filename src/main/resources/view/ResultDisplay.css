@@ -1,0 +1,10 @@
+.result-display {
+    -fx-background-color: transparent;
+    -fx-font-size: 13pt;
+    -fx-text-fill: #111111;
+    -fx-padding: 0 0 8 0;
+}
+
+.result-display .label {
+    -fx-text-fill: #111111 !important;
+}

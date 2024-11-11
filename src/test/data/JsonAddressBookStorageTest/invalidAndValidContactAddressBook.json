@@ -1,0 +1,23 @@
+{
+  "contacts" : [ {
+    "type" : "vendor",
+    "name" : "contact with invalid name field: Ha!ns Mu@ster",
+    "phone" : "12345678",
+    "email" : "contact@abccatering.com",
+    "address" : "Blk 123 Bukit Merah St 7",
+    "tags" : [ "vegetarian", "budget" ],
+    "service" : "abc",
+    "id" : 0
+  }, {
+    "type" : "client",
+    "name" : "abc",
+    "phone" : "12345678",
+    "email" : "contact@abccatering.com",
+    "address" : "Blk 123 Bukit Merah St 7",
+    "tags" : [ "vegetarian", "budget" ],
+    "id" : 1
+  }],
+  "events": [],
+  "nextContactId" : 0,
+  "nextEventId": 0
+}

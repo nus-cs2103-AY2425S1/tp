@@ -1,0 +1,14 @@
+{
+  "contacts" : [ {
+    "type" : "client",
+    "name" : "abc",
+    "phone" : "abc",
+    "email" : "contact@abccatering.com",
+    "address" : "Blk 123 Bukit Merah St 7",
+    "tags" : [ "vegetarian", "budget" ],
+    "id" : 0
+  } ],
+  "events": [],
+  "nextContactId": 0,
+  "nextEventId" : 0
+}

@@ -12,13 +12,29 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
+'common in model
 Class Name
-Class Phone
+Class Id
 Class Tag
+
+'contact
+'client
+Class Client
+'vendor
+Class Vendor
+Class Service
+'common in contact
+Class Address
+Class Contact
+Class Email
+Class Phone
+Class UniqueContactList
+
+'event
+Class Date
+Class Description
+Class Event
+Class UniqueEventList
 
 Class I #FFFFFF
 }
@@ -31,24 +47,45 @@ AddressBook .up.|> ReadOnlyAddressBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager --> "1" AddressBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueContactList
+AddressBook *--> "1" UniqueEventList
+UniqueContactList --> "~*" Contact
+UniqueEventList --> "~*" Event
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Client .up.--|> Contact
+
+Vendor .up.--|> Contact
+Vendor *--> "1" Service
+
+Contact *--> Name
+Contact *--> Phone
+Contact *--> Email
+Contact *--> Address
+Contact *--> "*" Tag
+Contact *--> "1" Id
+Contact *--> Event
+
+Event *--> Name
+Event *--> Description
+Event *--> Date
+Event *--> "1" Id
+Event *--> "1..*" Client
+Event *--> "1..*" Vendor
+
+Contact -[hidden]up--> I
+Contact -[hidden]left--> Event
+UniqueContactList -[hidden]right-> I
+UniqueEventList -[hidden]right-> UniqueContactList
+Client -[hidden]left--> Vendor
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~*" Contact : filteredContacts
+ModelManager --> "~*" Event : filteredEvents
 @enduml
