@@ -786,11 +786,9 @@ If your changes to the data file makes its format invalid, NovaCare will discard
 Furthermore, certain edits can cause NovaCare to have unexpected behavior 
 * e.g., if a value entered is outside the acceptable range, NovaCare will skip and delete the data related to that invalid patient or task. 
 * Therefore, edit the data file only if you are confident that you can update it correctly.
-</box> 
+</box>
 
-<br></br>
 [⬆️ Back to Table of Contents](#table-of-contents)
-<br></br>
 
 --------------------------------------------------------------------------------------------------------------------
 
