@@ -50,6 +50,8 @@ public class ContactCard extends UiPart<Region> {
      */
     public ContactCard(Contact contact, int displayedIndex) {
         super(FXML);
+        assert contact != null;
+        assert displayedIndex >= 1;
         this.contact = contact;
 
         final String nicknamePrelabel = "aka ";
