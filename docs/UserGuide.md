@@ -131,9 +131,9 @@ Action     | Format, Examples
 
 Shows a message explaining how to access the help page.
 
-**Format**: `help`
+**Format:** `help`
 
-**Output**:
+**Output:**
 ![help message](images/helpMessage.png)
 
 
