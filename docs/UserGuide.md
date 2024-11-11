@@ -192,7 +192,7 @@ If a client's project deadline has passed and the client status is still `active
 
 </div>
 
-### Locating Clients: `find`
+### Finding Clients: `find`
 
 Finds persons in main client list who match parameters specified. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
@@ -267,7 +267,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 <br>
-Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
+Entering `blacklist` on its own without any other parameters will display all clients who have been blacklisted.
 </div>
 
 ### Whitelist a Client: `whitelist`
@@ -290,7 +290,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-Entering `whitelist` on its own without any other parameters will filter and display all clients who have been whitelisted.
+Entering `whitelist` on its own without any other parameters will display all clients who have been whitelisted.
 
 </div>
 
