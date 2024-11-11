@@ -155,95 +155,83 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add Patient and Add Doctor Features
+This feature allows users to add new patients and doctors to MediContacts.
 
-#### Proposed Implementation
+Given below is an example usage scenario and how the `add-patient` command behaves at each step.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+Step 2. The user executes `add-patient` command, with all the required parameters and with valid inputs. The `add-patient` command will indirectly call `Model#addPerson()` to add the new patient to the address book.
 
 
+See below sequence diagram for the `add-patient` command:
+![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png)
+
+The sequence of operations for `add-doctor` is similar to `add-patient`, with the only difference being that the `add-doctor` command will indirectly call `Model#addDoctor()` to add the new doctor to the address book.
+
+### Delete Patient and Delete Doctor Features
+This feature allows users to delete patients and doctors from MediContacts.
+
+Given below is an example usage scenario and how the `delete` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `delete` command, with the index of the patient/doctor to be deleted. The `delete` command will indirectly call `Model#deletePerson()` to delete the patient/doctor from the address book.
+
+See below sequence diagram for the `delete` command:
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+### List Patients and List Doctors Features
+This feature allows users to list all patients and doctors stored in MediContacts.
+
+Given below is an example usage scenario and how the `list-patient` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `list-patient` command. The `list-patient` command will indirectly call `Model#getFilteredPersonList()` to get the list of patients/doctors to be displayed.
+
+See below sequence diagram for the `list` command:
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+The sequence of operations for `list-doctor` is similar to `list-patient`, with the only difference being that the `list-doctor` command will indirectly call `Model#getFilteredPersonList()` to get the list of doctors to be displayed.
+
+### Find Patient and Find Doctor Features
+This feature allows users to find a specific patient or doctor stored in MediContacts.
+
+Given below is an example usage scenario and how the `find-patient` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `find-patient` command, with the name of the patient to be found. The `find-patient` command will indirectly call `Model#getFilteredPersonList()` to get the list of patients/doctors to be displayed.
+
+Sequence Diagram is similar to the above list command, therefore not repeated here.
+
+The sequence of operations for `find-doctor` is similar to `find-patient`, with the only difference being that the `find-doctor` command will indirectly call `Model#getFilteredPersonList()` to get the list of doctors to be displayed.
+
+### Add Appointment Feature
+This feature allows users to add appointments for patients and doctors in MediContacts.
+
+Given below is an example usage scenario and how the `add-appt` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `add-appt` command, with all the required parameters and with valid inputs. The `add-appt` command will indirectly call `Model#addAppointment()` to add the new appointment to the address book.
+
+See below sequence diagram for the `add-appt` command:
+![AddApptSequenceDiagram](images/AddApptSequenceDiagram.png)
+
+### Delete Appointment Feature
+This feature allows users to delete appointments from MediContacts.
+
+Given below is an example usage scenario and how the `delete-appt` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `delete-appt` command, with the index of the appointment to be deleted. The `delete-appt` command will indirectly call `Model#deleteAppointment()` to delete the appointment from the address book.
+
+See below sequence diagram for the `delete-appt` command:
+![DeleteApptSequenceDiagram](images/DeleteApptSequenceDiagram.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -280,42 +268,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-| Priority | As a …​                                  | I want to …​                                                                                     | So that I can…​                                                                                                                 |
-|----------|------------------------------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | receptionist                             | add new patient records                                                                          | maintain an up-to-date list of patients                                                                                         |
-| `* * *`  | receptionist                             | delete outdated patient records                                                                  | keep the patient database clean and relevant                                                                                    |
-| `* * *`  | receptionist                             | search for a patient's record by their name                                                      | quickly retrieve their information                                                                                              |
-| `* * *`  | receptionist                             | mark appointments done or undone                                                                 | keep track of the appointments                                                                                                  |
-| `* * *`  | receptionist                             | add appointments for both patients and doctors                                                   | keep track of their respective appointments                                                                                     |
-| `* * *`  | receptionist                             | delete appointments for both patients and doctors                                                | keep track of their respective appointments                                                                                     |
-| `* * *`  | user                                     | add doctor records                                                                               | manage a list of all doctors working in the clinic                                                                              |
-| `* * *`  | user                                     | delete doctor records                                                                            | manage a list of all doctors working in the clinic                                                                              |
-| `* *`    | receptionist                             | update existing patient details                                                                  | keep up with the latest information                                                                                             |
-| `* *`    | receptionist                             | view a summary of all patient records                                                            | prepare for upcoming consultations                                                                                              |
-| `* *`    | receptionist                             | view upcoming appointments for each doctor                                                       | manage the clinic's daily schedule effectively                                                                                  |
-| `* *`    | receptionist                             | tag certain patients according to their needs                                                    | search for patients based on their care requirements                                                                            |
-| `* *`    | receptionist                             | tag certain patients according to their priorities                                               | contact them when necessary                                                                                                     |
-| `* *`    | receptionist                             | view which patients need to be called on the current date                                        | so that I easily find out who to I need to contact them                                                                         |
-| `* *`    | receptionist                             | add reminders for certain days                                                                   | keep track of all reminders/tasks for the given date                                                                            |
-| `* *`    | receptionist                             | update reminders I made                                                                          | keep up with the latest information                                                                                             |
-| `* *`    | receptionist                             | delete reminders I made                                                                          | remove entries that have the wrong details.                                                                                     |
-| `* *`    | receptionist                             | search for patients based on the tag given to them                                               | easily find and identify patients                                                                                               |
-| `*`      | receptionist                             | fetch the history of missed appointments                                                         | contact the patient and inform the doctor                                                                                       |
-| `* *`    | receptionist                             | search for patient based on their name/contact number                                            | easily find their contact details and records                                                                                   |
-| `* *`    | receptionist                             | generate a list of all upcoming appointments for the current date (or a specified one)           | to assist in daily scheduling (which patient consult which doctor) and preparation                                              |
-| `* *`    | receptionist                             | filter patient records by the type of doctor/specialist they are meeting/have already consulted  | manage referrals and specialist appointments effectively                                                                        | 
-| `*`      | receptionist                             | set recurring appointments for patients                                                          | streamline the process for those who require regular consultations (instead of them having to repeatedly schedule appointments) |
-| `* *`    | receptionist                             | add/link a patient appointment to a specific doctor after checking the doctor's availability     |                                                                                                                                 |
-| `* *`    | receptionist                             | change/update a patient's linked doctor if there is a sudden change in the doctor's availability |                                                                                                                                 |
-| `* *`    | user                                     | view records in a calendar view                                                                  | get an organised overview of all appointments                                                                                   |
-| `*`      | user                                     | sort and view records based on their dates                                                       |                                                                                                                                 |
-| `* *`    | user                                     | update the status of doctors (available, on leave, etc)                                          |                                                                                                                                 |
-| `* *`    | user                                     | track the availability of doctors and when they are free based on patient records                | to help create appointments to patients                                                                                         |
-| `* * *`  | user                                     | list all the doctors stored in the address book.                                                 | see all doctors’ contact details in the address book                                                                            |
-| `* * *`  | user                                     | find a specific doctor in the address book                                                       | check if a certain doctor's details are stored in the address book                                                              |
-| `* *`    | healthcare provider                      | add notes to patient records                                                                     |                                                                                                                                 |
-| `*`      | healthcare provider                      | view a patient's past appointments in this clinic                                                | better understand their medical history and prepare their doctor for consultations                                              |
+| Priority | As a …​              | I want to …​                                                                                     | So that I can…​                                                                                                                 |
+|----------|----------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | receptionist         | add new patient records                                                                          | maintain an up-to-date list of patients                                                                                         |
+| `* * *`  | receptionist         | delete outdated patient records                                                                  | keep the patient database clean and relevant                                                                                    |
+| `* * *`  | receptionist         | search for a patient's record by their name                                                      | quickly retrieve their information                                                                                              |
+| `* * *`  | receptionist         | add appointments for both patients and doctors                                                   | keep track of their respective appointments                                                                                     |
+| `* * *`  | receptionist         | delete appointments for both patients and doctors                                                | keep track of their respective appointments                                                                                     |
+| `* * *`  | user                 | list all the doctors stored in the address book.                                                 | see all doctors’ contact details in the address book                                                                            |
+| `* * *`  | user                 | add doctor records                                                                               | manage a list of all doctors working in the clinic                                                                              |
+| `* * *`  | user                 | delete doctor records                                                                            | manage a list of all doctors working in the clinic                                                                              |
+| `* * *`  | user                 | find a specific doctor in the address book                                                       | check if a certain doctor's details are stored in the address book                                                              |
+| `* *`    | receptionist         | view a summary of all patient records                                                            | prepare for upcoming consultations                                                                                              |
+| `* *`    | receptionist         | view upcoming appointments for each doctor                                                       | manage the clinic's daily schedule effectively                                                                                  |
+| `* *`    | receptionist         | tag certain patients according to their needs                                                    | search for patients based on their care requirements                                                                            |
+| `* *`    | receptionist         | tag certain patients according to their priorities                                               | contact them when necessary                                                                                                     |
+| `* *`    | receptionist*        | update existing patient details                                                                  | keep up with the latest information                                                                                             |
+| `* *`    | receptionist*        | view which patients need to be called on the current date                                        | so that I easily find out who to I need to contact them                                                                         |
+| `* *`    | receptionist*        | add reminders for certain days                                                                   | keep track of all reminders/tasks for the given date                                                                            |
+| `* *`    | receptionist*        | update reminders I made                                                                          | keep up with the latest information                                                                                             |
+| `* *`    | receptionist*        | delete reminders I made                                                                          | remove entries that have the wrong details.                                                                                     |
+| `* *`    | receptionist*        | search for patients based on the tag given to them                                               | easily find and identify patients                                                                                               |
+| `*`      | receptionist*        | fetch the history of missed appointments                                                         | contact the patient and inform the doctor                                                                                       |
+| `* *`    | receptionist         | search for patient based on their name/contact number                                            | easily find their contact details and records                                                                                   |
+| `* *`    | receptionist*        | generate a list of all upcoming appointments for the current date (or a specified one)           | to assist in daily scheduling (which patient consult which doctor) and preparation                                              |
+| `* *`    | receptionist*        | filter patient records by the type of doctor/specialist they are meeting/have already consulted  | manage referrals and specialist appointments effectively                                                                        | 
+| `* * *`  | receptionist         | set recurring appointments for patients                                                          | streamline the process for those who require regular consultations (instead of them having to repeatedly schedule appointments) |
+| `* * *`  | receptionist         | add/link a patient appointment to a specific doctor after checking the doctor's availability     |                                                                                                                                 |
+| `* *`    | receptionist*        | change/update a patient's linked doctor if there is a sudden change in the doctor's availability |                                                                                                                                 |
+| `* *`    | user*                | view records in a calendar view                                                                  | get an organised overview of all appointments                                                                                   |
+| `*`      | user*                | sort and view records based on their dates                                                       |                                                                                                                                 |
+| `* *`    | user*                | update the status of doctors (available, on leave, etc)                                          |                                                                                                                                 |
+| `* *`    | user*                | track the availability of doctors and when they are free based on patient records                | to help create appointments to patients                                                                                         |
+| `* *`    | healthcare provider* | add notes to patient records                                                                     |                                                                                                                                 |
+| `*`      | healthcare provider* | view a patient's past appointments in this clinic                                                | better understand their medical history and prepare their doctor for consultations                                              |
+| `*`      | receptionist*        | mark appointments done or undone                                                                 | keep track of the appointments                                                                                                  |
 
+User stories tagged with * are considered as stretch goals and will be implemented in future versions of the product.
 ### Use cases
 
 (For all use cases below, the **System** is the `MediContacts` and the **Actor** is the `user`, unless specified otherwise)
@@ -618,7 +607,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. The system should be designed to allow the addition of new features, such as supporting other user types (e.g., nurses, staff) or integrating external systems, with minimal changes to the core codebase.
 3. The system must securely store patient and doctor information to comply with healthcare data privacy regulations, such as HIPAA.
 4. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
@@ -717,7 +706,24 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a patient
+1. Adding a patient
+
+   1. Test case: `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+      Expected: A new patient is added to the list. The status message shows the details of the added patient. Timestamp in the status bar is updated.
+   
+   1. Test case: `add-patient n/John Doe123 p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+        Expected: Error message indicating the name format is wrong. No patient is added. Status bar remains the same.
+
+### Adding a doctor
+1. Adding a doctor
+
+   1. Test case: `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+        Expected: A new doctor is added to the list. The status message shows the details of the added doctor. Timestamp in the status bar is updated.
+
+   1. Test case: `add-doctor n/Jane Doe123 p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+        Expected: Error message indicating the name format is wrong. No doctor is added. Status bar remains the same.
 
 ### Deleting a person
 
@@ -787,11 +793,3 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete-appt UNIQUE_ID` (`UNIQUE_ID` is not a positive integer)  
    Expected: Error message indicating an invalid id. No appointment is deleted.
 
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

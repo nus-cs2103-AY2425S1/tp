@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListPatientCommandParser" as ListPatientCommandParser LOGIC_COLOR
+participant "l:ListPatientCommand" as ListPatientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("list-patient")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("list-patient")
+activate AddressBookParser
+
+create ListPatientCommandParser
+AddressBookParser -> ListPatientCommandParser
+activate ListPatientCommandParser
+
+ListPatientCommandParser --> AddressBookParser
+deactivate ListPatientCommandParser
+
+AddressBookParser -> ListPatientCommandParser : parse()
+activate ListPatientCommandParser
+
+create ListPatientCommand
+ListPatientCommandParser -> ListPatientCommand
+activate ListPatientCommand
+
+ListPatientCommand --> ListPatientCommandParser : l
+deactivate ListPatientCommand
+
+ListPatientCommandParser --> AddressBookParser : l
+deactivate ListPatientCommandParser
+
+AddressBookParser --> LogicManager : l
+deactivate AddressBookParser
+
+LogicManager -> ListPatientCommand : execute()
+activate ListPatientCommand
+
+ListPatientCommand -> Model : getFilteredPersonList(predicate)
+activate Model
+
+Model --> ListPatientCommand
+deactivate Model
+
+create CommandResult
+ListPatientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListPatientCommand
+deactivate CommandResult
+
+ListPatientCommand --> LogicManager : r
+deactivate ListPatientCommand
+ListPatientCommand -[hidden]-> LogicManager : r
+destroy ListPatientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
