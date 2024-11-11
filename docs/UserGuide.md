@@ -9,7 +9,7 @@
 
 Are you a Singaporean private tutor who has trouble keeping track of your student's details? Ever thought of having an easier and more efficient way to keep track of students and their parents? Introducing GOATS!
 <br><br>
-The Greatest Offline AddressBook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of student information (such as phone number, grades and education level), it also helps you access your students' parents' information as well! GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
+The Greatest Offline Addressbook for Teaching Students, or GOATS, is an **offline desktop app** designed for your administrative needs for private tutoring. GOATS does not only help you keep track of students information such as phone number, grades and education level, it also helps you access the students' parents information as well. GOATS also boasts features such as archiving, sorting and pinning contacts to make sure you organise and find contacts quickly and easily.
 <br><br>
 The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the terminal emulator. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
 <br><br>
@@ -68,7 +68,7 @@ Please ensure that you have the following:
 4. Type in the following command to navigate to the GOATS home folder: `cd`, followed by the location of your home folder.<br>
    e.g. `cd Documents/GOATS_Home_Folder`
 5. Type in the following command to launch the GOATS application: `java -jar GOATS.jar`<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 6. You are ready to start using GOATS! Try out some example commands in the command box and press Enter to execute them.<br>
    Some example commands you can try:
@@ -111,44 +111,44 @@ Please ensure that you have the following:
 | **[Unpin](#unpinning-contacts-unpin)**                                      | `unpin INDEX [MORE_INDICES]…` (`unpin 1 2 3 4`)                                                                                                                                                                                      |
 
 ## Features
+<br>
+
+### Command Format
+| Notation                                                                           | Explanation                                                                                                                             | Example                                                                                                                                                                                                                                            |
+|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE`                                                              | These are the parameters to be supplied by the user. Parameters for all commands are valid regardless of the order they are supplied in | For example, in `addstudent n/NAME`, `NAME` is a parameter which can be used as `addstudent n/John Doe` <br><br> If the command specifies `n/NAME p/PHONE_NUMBER`, the writing the input in this order, `p/PHONE_NUMBER n/NAME` is also acceptable. |
+| Items in square brackets                                                           | These are optional parameters.                                                                                                          | For example, `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.                                                                                                                                                             |
+| Extraneous parameters for commands that do not take in parameters will be ignored. | If any parameters are given for commands that do not require them, the given parameters will be ignored.                                | Some examples of commands that do not take in parameters include: <br> -`help` <br> -`list` <br> -`clear` <br> -`exit` <br><br> If `list n/Betsy` is entered, then the `n/Betsy` portion wil be ignored.                                           |
 
 <box type="info">
 
-**Notes about the command format:**<br>
+**Notes about the command format:**<br><br>
+Separate commands cannot be strung together into one input<br>
+e.g. Entering the input `archive 1 pin 2 list` instead of entering commands separately, `archive 1`, `pin 2`, `list`
+<br><br>
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</box>                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `addstudent n/NAME`, `NAME` is a parameter which can be used as `addstudent n/John Doe`.
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* Separate commands cannot be strung together into one input<br>
-  e.g. Entering the input `archive 1 pin 2 list` instead of entering commands separately, `archive 1`, `pin 2`, `list`
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+### Command Parameters
+| Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Examples                                                               |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `NAME`         | The contact's name. <br><br> It should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | - `James Ho` <br> - `Jane Doe`                                         |
+| `PHONE_NUMBER` | The contact's phone number. <br><br> It should only contain numbers, and it should be 3 to 17 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | - `99228833` <br> - `6598986767`                                       |
+| `EMAIL`        | The contact's email address. <br> <br> It should be of the format local-part@domain and adhere to the following constraints: <br> - The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br> - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br><br> The domain name must:<br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | - `web@dev` <br> -`jamesho@gmail.com`                                  |
+| `ADDRESS`      | The contact's residential address. <br><br> It can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | - `123, Clementi Rd, 123465` <br> - `Blk 417, Tampines St 71, S510666` |
+| `TAG`          | A single word description to categorise contacts <br><br> It should be alphanumeric and should not contain spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | - `owesMoney` <br> - `friend`                                          |
+| `LESSON_TIME`  | The day and time of the student's lesson. <br><br> It should be in format 'day:HH:mm' (e.g. mon:16:00),  where 'day' is a three-letter abbreviation (mon, tue, wed, thu, fri, sat, sun) and time is in 24-hour format (HH:mm) between 00:00 and 23:59.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | - `wed:13:00` <br> - `tue:00:03`                                       |
+| `EDUCATION`    | The student's education level. <br><br> It should be alphanumeric and length must be within 1 to 25.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | - `Primary 2` <br> - `Secondary 5`                                     |
+| `INDEX`        | The index number shown in the displayed list of contacts. <br><br> It should be a positive integer (1, 2, 3, …) and cannot exceed the number of contacts in the displayed list of contacts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | - `2` <br> - `10`                                                      |
+| `GRADE_INDEX`  | The grade of the student. <br><br> The grade index ranges from 0 to 4: <br> - 0: `Unknown` <br> - 1: `Failing` <br> - 2: `Satisfactory` <br> - 3: `Good` <br> - 4: `Excellent`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | - `0` <br> - `3`                                                       |
+| `KEYWORD`      | The keyword specified for find-related commands. <br><br> Please refer to the section detailing the specific command on how to use `KEYWORD` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
+| `DAY`          | The day specified for finding students in `findday`. <br><br> Please refer to the section detailing the specific command on how to use `DAY` appropriately.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N.A.                                                                   |
 
-### Adding a student: `addstudent` 
+### Adding a student: `addstudent`
 
 Adds a student to the address book.
 
 Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/EDUCATION [t/TAG]…`
-
-<box type="info">
-
-**Notes about the fields:**
-
-* **NAME:**
-* **PHONE_NUMBER:**
-* **EMAIL:**
-* **ADDRESS:**
-* **LESSON_TIME:**
-* **EDUCATION:**
-* **TAG:**
-</box>
 
 <box type="tip">
 
@@ -160,7 +160,7 @@ Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/E
 **Examples:**
 
 * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague` adds a student named `James Ho` to the address book
-* `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book.
+* `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/123 Hougang Ave 3 p/1234567 t/dyslexic edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book.
 </box>
 
 ### Adding a parent: `addparent`
@@ -179,7 +179,7 @@ Format: `addparent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 **Examples:**
 
 * `addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named `James Ho` to the address book
-* `addparent n/Billie t/friend e/billie@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addparent n/Billie e/billie@example.com a/111 Crawfurd Drive p/1234567 t/friend`
 </box>
 
 ### Editing a contact : `edit`
@@ -557,7 +557,10 @@ The GOATS data are saved automatically as a JSON file `[JAR file location]/data/
 <box type="warning">
 
 **Caution:**
-Do **NOT** edit the contents in the file. Changes made in JSON file can cause GOATS to behave in unexpected ways.
+If your changes to the data file makes its format invalid, GOATS will discard all data and start with an empty data file at the
+next run. Hence, it is recommended to take a backup of the file before editing it.
+Furthermore, certain edits can cause the GOATS to behave in unexpected ways (e.g., if a value entered is outside the acceptable
+range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ---
