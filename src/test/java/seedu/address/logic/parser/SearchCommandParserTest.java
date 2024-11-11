@@ -7,13 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_BEGIN_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_EARLIER_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 
 import java.time.LocalDateTime;
 
