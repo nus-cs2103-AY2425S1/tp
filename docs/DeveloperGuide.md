@@ -284,10 +284,10 @@ any other command which is the correct behavior, it is just that the feedback pr
 message requesting for confirmation should supersede any parse error message.
 
 ### Strengthen Duplicate Detection
-We aim to enhance the robustness of duplicate detection. Currently, the system checks for exact string matches, which means a name like "John Doe" is treated as distinct from "john doe" due to case sensitivity. This approach is flawed because differences, such as capitalization, should not cause client profiles to be classified as distinct. To address this, we plan to implement fuzzy string matching, allowing the system to identify similar entries more effectively even if minor variations exist. Additionally, if a new user entry closely resembles an existing one, a warning will prompt the user to review before creating the new entry, reducing accidental duplicates.
+We aim to enhance the robustness of duplicate detection. Currently, the system checks for exact string matches, which means a name like "John Doe" is treated as distinct from "john doe" due to case sensitivity. This approach is flawed because minor differences, such as capitalization, should not cause client profiles to be classified as distinct. To address this, we plan to implement fuzzy string matching, allowing the system to identify similar entries more effectively even if minor variations exist. Additionally, if a new user entry closely resembles an existing one, a warning will prompt the user to review before creating the new entry, reducing accidental duplicates.
 
 ### Enhance Log Scrolling Experience
-We are also planning to improve the log scrolling functionality. Currently, users may experience issues where not all parts of a log entry are visible due to two scenarios:
+We are also planning to improve the log scrolling experience. Currently, users may experience issues where not all parts of a log entry are visible due to two scenarios:
 - **Long Logs**: When logs are lengthy, scrolling through them with the arrow keys causes the view to jump to the next log instead of continuing within the current log.
 - **End-of-Log Visibility**: If the last log is active, and part of it is hidden from view, users cannot scroll further down to see the entire entry, as there are no additional logs to continue the scroll.
 
