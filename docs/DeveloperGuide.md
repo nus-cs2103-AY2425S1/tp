@@ -172,7 +172,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### Current Implementation
+
+#### Add Grade
+
+<puml src="diagrams/addGradeCommand.puml" alt="AddGrade" />
+
+#### Mark
 
 ### \[Proposed\] Undo/redo feature
 

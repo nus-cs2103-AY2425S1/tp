@@ -1,0 +1,68 @@
+@startuml
+!include ./style.puml
+skinparam ArrowFontStyle plain
+
+Actor User MODEL_COLOR
+Participant ":MainWindow" as MW LOGIC_COLOR
+Participant ":LogicManager" as LM LOGIC_COLOR
+Participant ":AddressBookParser" as ABP LOGIC_COLOR
+Participant "g:AddGradeCommand" as OAGC LOGIC_COLOR
+Participant ":ResultDisplay" as RD LOGIC_COLOR
+Participant "cr:CommandResult" as CR LOGIC_COLOR
+Participant ":Model" as M LOGIC_COLOR
+Participant "oldPerson:Person" as P LOGIC_COLOR
+Participant "newPerson:Person" as NP LOGIC_COLOR
+
+/'
+This diagram shows the normal flow of adding grade to a person's gradeList.
+The flow assumes correct input from user.
+'/
+
+User -> MW: executeCommand("addGrade ...")
+activate MW
+MW -> LM: execute("addGrade ...")
+activate LM
+LM -> ABP: parseCommand("addGrade ...")
+activate ABP
+create OAGC
+ABP -> OAGC: new
+activate OAGC
+OAGC --> ABP
+deactivate OAGC
+ABP --> LM: g
+deactivate ABP
+LM -> OAGC: execute()
+
+activate OAGC
+OAGC -> P: addGrade(grade)
+activate P
+create NP
+P -> NP: new
+activate NP
+
+NP --> P: newPerson
+
+deactivate NP
+P --> OAGC: newPerson
+deactivate P
+OAGC -> M: setPerson(newPerson)
+activate M
+M --> OAGC
+deactivate M
+create CR
+OAGC -> CR: new
+activate CR
+CR --> OAGC: cr
+deactivate CR
+OAGC --> LM: cr
+deactivate OAGC
+LM --> MW: cr
+deactivate LM
+MW -> RD: setFeedbackToUser(cr)
+activate RD
+RD -> User: display feedback to user
+RD --> MW
+deactivate RD
+MW --> User
+deactivate MW
+@enduml
