@@ -750,7 +750,7 @@ testers are expected to do more *exploratory* testing.
       <br></br>
 
 --------------------------------------------------------------------------------------------------------------------
-## Appendix: Effort
+## **Appendix: Effort**
 
 To summarise, PlanPerfect extends the AB3 framework considerably by not only enhancing and adding new
 contact-management features (like `tag`, `untag`, `filter`)  but also a list of weddings as a new entity type with its
@@ -778,7 +778,7 @@ management and changed the UI to increase its complexity and better reflect an i
 - Achieving a passing code coverage of 76% reflecting thorough testing of core features.
 
 --------------------------------------------------------------------------------------------------------------------
-## Appendix: Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 1. **Enhanced duplicate detection handling for Wedding Names and Contacts**
 
