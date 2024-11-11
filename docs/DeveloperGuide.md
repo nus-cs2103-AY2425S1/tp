@@ -8,8 +8,16 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+This project is based on the [AddressBook-Level3 Project](https://se-education.org/) originally created by the 
+SE-EDU initiative. We extend our thanks to the developers of AB3 for their foundational work.
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+We also extend our gratitude to the creators of the following resources and libraries that were essential in developing Health Connect:
+
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io/)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
 
 --------------------------------------------------------------------------------------------------------------------
 
