@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the student's name is added to the system and can be used to track their academic progress.
@@ -344,21 +344,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  System adds the student to the system.
 5.  System adds the student name to the student profile.
 6.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid name command format, with no special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the name field empty.
     * 3a1. System displays an error message to ask for a valid name.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters a duplicate name.
     * 3b1. System displays an error message notifying that the name already exists in the system.
-      Use case ends.
+      <br>Use case ends.
 
 
 **System: StudentManagerPro**
@@ -368,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -382,21 +382,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the email to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid email command format, with no special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the email field empty.
     * 3a1. System displays an error message to ask for a valid email.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters a duplicate email.
     * 3b1. System displays an error message notifying that the email already exists in the system.
-      Use case ends.
+      <br>Use case ends.
 
 
 **System: StudentManagerPro**
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -420,22 +420,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the register number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid register number command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the register number field empty.
     * 3a1. System displays an error message to ask for a valid register number.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters a duplicate register number.
     * 3b1. System displays an error message notifying that the register number already exists in the system.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -444,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -458,18 +458,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the sex to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid sex command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the sex field empty.
     * 3a1. System displays an error message to ask for a valid sex.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -492,18 +492,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the address to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid address command format, with only acceptable
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the address field empty.
     * 3a1. System displays an error message to ask for a valid address.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -512,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -526,22 +526,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the contact number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid contact number command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the contact number field empty.
     * 3a1. System displays an error message to ask for a valid contact number.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters a duplicate contact number.
     * 3b1. System displays an error message notifying that the contact number already exists in the system.
-      Use case ends.
+      <br>Use case ends.
 
 
 **System: StudentManagerPro**
@@ -551,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -565,18 +565,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the emergency contact name to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid emergency contact name command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the emergency contact name field empty.
     * 3a1. System displays an error message to ask for a valid emergency contact name.
-      Use case ends.
+      <br>Use case ends.
 
 
 **System: StudentManagerPro**
@@ -586,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -600,18 +600,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the emergency contact number to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid emergency contact number command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the emergency contact number field empty.
     * 3a1. System displays an error message to ask for a valid emergency contact number.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -620,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -634,18 +634,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System adds the class to the student profile in the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid class command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the class field empty.
     * 3a1. System displays an error message to ask for a valid class.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -654,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ StudentManagerPro is open.
 * Student to be removed exists in the system.
 
 **Guarantees:**
@@ -668,22 +668,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the input.
 4.  System removes the student from the system.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters.
     * 2a1. System displays an error message to ask for a valid name command format, with no
       special characters.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the name field empty.
     * 3a1. System displays an error message to ask for a valid name.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters a name that does not exist in the system.
     * 3b1. System displays an error message to ask for a valid name of a student in the system.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -691,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the attendance record for the student is added to the system and can be used to track their attendance history.
@@ -704,21 +704,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System validates the attendance data.
 4.  System adds the attendance record to the student’s profile.
 5.  System confirms the success by displaying a success message.
-    Use case ends.
+    <br>Use case ends.
 
 **Extensions**
 
 * 2a. User enters invalid characters in the attendance data.
     * 2a1. System displays an error message asking for valid attendance format.
-      Use case ends.
+      <br>Use case ends.
 
 * 3a. User leaves the absent reason blank (indicating deletion of attendance).
     * 3a1. System deletes the attendance record for that entry, and displays a confirmation message.
-      Use case ends.
+      <br>Use case ends.
 
 * 3b. User enters absent date in an invalid format.
     * 3b1. System displays an error message asking for a valid absent date format.
-      Use case ends.
+      <br>Use case ends.
 
 * 3c. User enters a date that does not exist (e.g., 30-02-2024).
     * 3c1. System displays an error message asking for a valid absent date.
@@ -726,11 +726,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3d. User enters absent reason in an invalid format.
     * 3d1. System displays an error message asking for a valid absent reason format.
-      Use case ends.
+      <br>Use case ends.
 
 * 3e. User tries to add attendance for a student that does not exist.
     * 3e1. System displays an error message notifying that the student does not exist in the system.
-      Use case ends.
+      <br>Use case ends.
 
 * 3f. User tries to add multiple attendances for a student at one go.
     * 3f1. System displays an error message notifying that input with multiple attendances is not allowed.
@@ -741,7 +741,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the exam is added for all students currently in the system with a score of "NIL".
@@ -753,15 +753,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System validates the exam data.
 4. System adds the exam to every student currently in the system.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
     * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
-      Use case ends.
+      <br>Use case ends.
 * 3a. User tries to add an exam that already exists in the system.
     * 3a1. System displays an error message telling the user that the exam already exists.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -769,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the student's exam score is added to the specified exam in the student's profile and saved in the system.
@@ -781,21 +781,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System validates the exam data.
 4. System adds the exam score to the specified exam in the student's profile.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the exam name.
     * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.
-      Use case ends.
+      <br>Use case ends.
 * 2b. User enters invalid characters in the exam score.
     * 2b1. System displays an error message asking for valid exam score format, an integer between 0 and 100.
-      Use case ends.
+      <br>Use case ends.
 * 3a. User tries to add a score to an exam that does not exist.
     * 3a1. System displays an error message notifying that the exam does not exist in the system.
-      Use case ends.
+      <br>Use case ends.
 * 3b. User tries to add a score to a student that does not exist.
     * 3b1. System displays an error message notifying that the student does not exist in the system.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -803,7 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the submission is added for all students currently in the system with a status of "NIL".
@@ -815,15 +815,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System validates the submission data.
 4. System adds the submission to every student currently in the system.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      Use case ends.
+      <br>Use case ends.
 * 3a. User tries to add a submission that already exists in the system.
     * 3a1. System displays an error message telling the user that the submission already exists.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -831,7 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the student's submission status is added to the specified submission in the student's profile and saved in the system.
@@ -843,21 +843,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System validates the submission data.
 4. System adds the submission status to the specified submission in the student's profile.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      Use case ends.
+      <br>Use case ends.
 * 2b. User enters invalid characters in the submission status.
     * 2b1. System displays an error message asking for valid submission status format, "Y", "N" or "NIL".
-      Use case ends.
+      <br>Use case ends.
 * 3a. User tries to add a status to a submission that does not exist.
     * 3a1. System displays an error message notifying that the submission does not exist in the system.
-      Use case ends.
+      <br>Use case ends.
 * 3b. User tries to add a status to a student that does not exist.
     * 3b1. System displays an error message notifying that the student does not exist in the system.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -865,7 +865,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, the submission is deleted from all students currently in the system.
@@ -877,15 +877,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System validates the submission data.
 4. System deletes the submission from every student currently in the system.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. User enters invalid characters in the submission name.
     * 2a1. System displays an error message asking for valid submission name format, with only alphanumeric characters and spaces.
-      Use case ends.
+      <br>Use case ends.
 * 3a. User tries to delete a submission that does not exist in the system.
     * 3a1. System displays an error message telling the user that the submission does not exist.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -893,7 +893,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, student list displayed will be sorted.
@@ -905,12 +905,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System sorts the displayed list based on the attribute.
 4. System displays the sorted list.
 5. System confirms the success by displaying a success message.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 2a. System detects an invalid attribute.
     * 2a1. System displays an error message asking for valid input.
-      Use case ends.
+      <br>Use case ends.
 
 **System: StudentManagerPro**
 
@@ -918,7 +918,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: StudentManagerPro is open.**
 
 **Guarantees:**
 * If successful, student list displayed will be filtered according to the predicate provided.
@@ -930,18 +930,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System filters the student list based on the provided predicates.
 4. System displays the filtered list.
 5. System confirms the success by displaying a success message stating the number of filtered students.
-   Use case ends.
+   <br>Use case ends.
 
 **Extensions**
 * 1a. User inputs a filter command that is incomplete with no prefixes mentioned. 
     * 1a1. System displays an error message showing the correct format of the filter command.
-      Use case ends.
+      <br>Use case ends.
 * 1b. User tries to filter by a predicate that is not supported by the filter functionality. 
     * 1b1. System displays an error message that shows the attributes supported by the filter command and corresponding prefixes.
-      Use case ends.
+      <br>Use case ends.
 * 2a. System detects an empty predicate value after the attribute prefix.
     * 2a1. System displays an error message stating that predicates cannot be empty.
-      Use case ends.
+      <br>Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1014,16 +1014,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding a student into the list
 
     1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/2A`<br>
-       Expected: Student is added to the list. Details of the new contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Student is added to the list. Details of the new contact shown in the status message.
 
     2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
-       Expected: No student is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding sex is shown in the status message.
 
     3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/41 s/M c/2A`<br>
-       Expected: No student is added. Error detail regarding register number is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding register number is shown in the status message.
 
     4. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
-       Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding class is shown in the status message.
 
     5. Other incorrect add commands to try:<br>
        `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
@@ -1040,10 +1040,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try:<br>
       `delete`<br>
@@ -1060,10 +1060,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     2. Test case: `edit 1 c/1A`<br>
-       Expected: First student's class is changed. Details of the edited student shown in the status message. Timestamp in the status bar is updated.
+       Expected: First student's class is changed. Details of the edited student shown in the status message.
 
     3. Test case: `edit 1 c/A1`<br>
-       Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
+       Expected: No student's detailed are changed. Error details shown in the status message.
 
     4. Other incorrect edit commands to try:<br>
        `edit`<br>
@@ -1109,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First student will have his emergency contact number deleted. Name of student with the emergency contact number deleted will be shown in the status message.
     
     4. Test case: `addEcNumber 1 ep/123`<br>
-       Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
+       Expected: No emergency contact number is changed. Error details shown in the status message.
 
     5. Other incorrect addEcNumber commands to try:<br> 
        `addEcNumber`<br>
@@ -1126,10 +1126,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
     2. Test case: `addAttendance 1 ad/24-09-2024 ar/MC`<br>
-       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Attendance record with date 24-09-2024 and reason MC is added to the first student. Confirmation message shown in the status message.
    
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
-       Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No attendance is added. Error details shown in the status message.
 
     4. Other incorrect addAttendance commands to try:<br>
        `addAttendance`<br>
@@ -1146,10 +1146,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding attendance should be done first as the student must have an existing attendance to be deleted.
 
     2. Test case: `addAttendance 1 ad/24-09-2024 ar/`<br>
-       Expected: Attendance record with date 24-09-2024 is deleted from the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Attendance record with date 24-09-2024 is deleted from the first student. Confirmation message shown in the status message.
 
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
-       Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No attendance is deleted. Error details shown in the status message.
 
     4. Other incorrect addAttendance commands to try:<br>
        `addAttendance 1 ad/24-09-2024`<br>
@@ -1164,10 +1164,10 @@ testers are expected to do more *exploratory* testing.
 1. Adding exam for all students currently in the list
 
     1. Test case: `addExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is added to all students in the addressbook. Confirmation message shown in the status message.
 
     2. Test case: `addExam ex/Midterm#`<br>
-       Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam is added. Error details shown in the status message.
 
     3. Other incorrect addExam commands to try:<br>
        `addExam`<br>
@@ -1184,10 +1184,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding exam should be done first as the student must have an existing exam to add an exam score to.
 
     2. Test case: `addExamScore 1 ex/Midterm sc/70.0`<br>
-       Expected: Exam with exam name Midterm is updated with a exam score of 70.0 for the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is updated with a exam score of 70.0 for the first student. Confirmation message shown in the status message.
 
     3. Test case: `addExamScore 1 ex/Midterm sc/101.0`<br>
-       Expected: No exam score is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam score is added. Error details shown in the status message.
 
     4. Other incorrect addExamScore commands to try:<br>
        `addExamScore 1 ex/Midterm`<br>
@@ -1204,10 +1204,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The test for adding exam should be done first as the students must have an existing exam to be deleted.
 
     2. Test case: `deleteExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is deleted from all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is deleted from all students in the addressbook. Confirmation message shown in the status message.
 
     3. Test case: `deleteExam ex/Midterm#`<br>
-       Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam is deleted. Error details shown in the status message.
 
     4. Other incorrect deleteExam commands to try:<br>
        `deleteExam`<br>
@@ -1222,10 +1222,10 @@ testers are expected to do more *exploratory* testing.
 1. Adding submission for all students currently in the list
 
     1. Test case: `addSubmission sm/Assignment 1`<br>
-       Expected: Submission with submission name Assignment 1 is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Submission with submission name Assignment 1 is added to all students in the addressbook. Confirmation message shown in the status message.
 
     2. Test case: `addSubmission sm/Assignment #1`<br>
-       Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission is added. Error details shown in the status message.
 
     3. Other incorrect addSubmission commands to try:<br>
        `addSubmission`<br>
@@ -1242,10 +1242,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding submission should be done first as the student must have an existing submission to add a submission status to.
 
     2. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/Y`<br>
-       Expected: Submission with submission name Assignment 1 is updated with a submission status of Y for the first student. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Submission with submission name Assignment 1 is updated with a submission status of Y for the first student. Confirmation message shown in the status message.
 
     3. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/A`<br>
-       Expected: No submission status is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission status is added. Error details shown in the status message.
 
     4. Other incorrect addSubmissionStatus commands to try:<br>
        `addSubmissionStatus 1 sm/Assignment 1`<br>
@@ -1262,10 +1262,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The test for adding submission should be done first as the students must have an existing submission to be deleted.
 
     2. Test case: `deleteSubmission sm/Assignment 1`<br>
-       Expected: Submission with submission name Assignment 1 is deleted from all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Submission with submission name Assignment 1 is deleted from all students currently in the list. Confirmation message shown in the status message.
 
     3. Test case: `deleteSubmission sm/Assignment #1`<br>
-       Expected: No submission is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission is deleted. Error details shown in the status message.
 
     4. Other incorrect deleteSubmission commands to try:<br>
        `deleteSubmission`<br>
@@ -1313,7 +1313,7 @@ testers are expected to do more *exploratory* testing.
       Expected: List of students is sorted according to register number. Confirmation message shown in the status message.
 
    3. Test case: `sort abc`<br>
-      Expected: List is not sorted, Error details shown in the status message. Status bar remains the same.
+      Expected: List is not sorted, Error details shown in the status message.
 
    4. Other incorrect sort commands to try:<br> 
       `sort`<br>
