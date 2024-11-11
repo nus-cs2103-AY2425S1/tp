@@ -372,23 +372,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ConTActs shows a message that the list is empty.
 
       Use case ends.
-  
+
 * 3c. User tries to modify tutorial state to itself e.g. mark someone present as present.
-  
+
     * 3c1. ConTActs shows a message that the modification is unnecessary.
-        
-      Use case ends.
   
+      Use case ends.
+
 * 3d. User uses wildcard(*) index.
 
     * 3d1. The list is empty.
-  
+
         ConTActs shows error message that there are no students to modify.
-        
-        Use case resumes at step 5.
   
+        Use case resumes at step 5.
+
     * 3d2. List is not empty.
-    
+
         ConTActs will modify all tutorials for every student.
 
 **UC05: Edit student details**
@@ -562,3 +562,33 @@ This is sensible as names are non-unique, and we have other unique fields such a
 
 
 6. We plan to allow TAs to flexibly change the number of tutorials for each contact. Current implementation assumes there to be exactly 12 tutorials, which could be visually unpleasant for mods with less than 12 tutorials, and unusable for mods with more than 12 tutorials.
+
+---
+## **Appendix: Effort**
+
+### Difficulty Level
+The beginning of the project was difficult since the AB3 implementation was rather unknown and required some time to trace through to fully understand.
+However, once we managed to get an intuitive understanding of the AB3 code, the modification of existing features and addition of new ones were pretty straightforward.
+
+### Challenges Faced
+1. Data Storing: This required extensive planning to ensure we don't break currently existing commands, especially when adding the 3-state tutorials.
+2. JavaFX GUI: The lack of familiarity with JavaFX required additional time to fully learn and utilise it in our project.
+3. Testing and CodeCov: Ensuring that testcases used were effective and efficient, whilst covering as much of the code as possible was a cumbersome task.
+4. Exception Handling: Finding every possible exception, and throwing the appropriate meaningful error message required time and testing.
+
+### Effort Required
+1. Understanding AB3: Time was needed to understand the inner working of AB3, so that we can modify it with minimal errors.
+2. Implementing Features: The logic and code needed for each new feature required deep understanding of the program flow and the dependent classes.
+3. Overall Design: Extensive planning for each new feature was required to ensure that it works, whilst minimising coupling and dependency.
+4. Testing: Testcases were added for each new line of code to improve the likelihood of catching bugs. Alpha testing was also done to catch as many bugs as possible.
+5. Documentation: Ensuring that documentation stayed consistent with the functionality of the app, whilst written in an easily understood manner.
+
+### Achievements
+1. Graceful Exception Handling: Program is able to catch different types of invalid inputs without crashing on the user.
+2. Smooth Performance: Program is able to handle all commands quickly and smoothly.
+
+### Code Reuse
+1. AB3 Storage Component
+2. AB3 UI Component
+3. AB3 Logic and Parsing Component
+4. Overall AB3 Architecture
