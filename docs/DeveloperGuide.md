@@ -479,27 +479,27 @@ This will be fixed in a future version such that claim ID is unique across all c
 ### 2. addClaim amount
 Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
 the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our
-restriction on claim amount (claim amount cannot exceed 1 million)
+restriction on claim amount (claim amount cannot exceed 1 million).
 
-### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details
 Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
 name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
 duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
-the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
+the same full name with different contact details, but it will be unreasonably rare for clients to have the same name,
 number, email and addresses simultaneously.
 
 ### 4. Some common names are not allowed to be entered
-Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
+Currently, our app does not allow some common names with some special characters to be entered. An example
 is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
 commands.
 
-### 5. No Wrapping for very long ui details
+### 5. No wrapping for very long UI details
 Currently, if the name, tags or other details are very long, they are cut off in the UI. This will be fixed in a future
 version by enabling wrapping for texts in the UI such that they are more easily viewable.
 
 ### 6. Currently, our find function only supports finding by name
-This may not be ideal when you want to search clients by what insurance plans or claim ID they have. This will be supported
-in a future version when we enhance the search function to search by either insurance plan type or claim ID.
+This may not be ideal when you want to find clients by what insurance plans they have. This will be supported
+in a future version when we enhance the find function to search by finding insurance plans.
 
 ### 7. Flexible Command Keywords.
 Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
@@ -516,4 +516,4 @@ However, **this fix initially caused other tests break**. This includes tests li
 
 Our implementations were at **least as difficult compared to half of AB-3 effort**. While we did not have to create many huge structures from scratch like the `ModelManager`, `Logic` and `Storage` components, we had to work with moving parts compared to AB-3. AB-3 does not support any form in automatic sorting. However, since we wanted a quick and easy way for insurance managers to view their most critical claims, we implemented an automatic sorting of claims for each client to show their respective open claims first.
 
-Lastly, as **our project involved money**, which is a sensitive value that we must get right. We decided to store all values in cents to avoid having to use float (and having issues with floating point accuracy). However, this led to **greater care required to parse and convert values** to cents and ended up being a very time-consuming method to unit test. This method was still not completely fixed (the constraint of a maximum claim amount of $1 Million was yet to be implemented).
+Lastly, as **our project involved money**, which is a sensitive value that has to be precise and accurate. We decided to store all values in cents to avoid having to use float (and having issues with floating point accuracy). However, this led to **greater care required to parse and convert values** to cents and ended up being a very time-consuming method to unit test. This method was still not completely fixed (the constraint of a maximum claim amount of $1 Million was yet to be implemented).
