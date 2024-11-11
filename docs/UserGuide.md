@@ -338,6 +338,7 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 
 
 * **History List View**: This is the display that shows the contact records and profile view of a specific elderly. It is displayed after using the `history` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
