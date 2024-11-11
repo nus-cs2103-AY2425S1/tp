@@ -114,8 +114,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, in this case `execute("contact delete 1)`, it is passed to an `TutorEaseParser` object which in turn creates a parser that matches the type of command. In this case, it is the `ContactCommandParser` as we are executing a command related to contacts. Commands related to lessons will use `LessonCommandParser`.
@@ -329,6 +327,8 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use Case: UC04 - Edit contacts**
 
 **MSS**:
@@ -455,6 +455,8 @@ Precondition: Student exists in the system.
     * **1b2**. Tutor enters a new keyword.  
       Use case resumes from Step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use Case: UC10 - Clear all entries**  
 
 **MSS:**
@@ -470,9 +472,6 @@ Precondition: Student exists in the system.
     * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
-
-
-<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -506,6 +505,8 @@ Precondition: Student exists in the system.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Pre-U Home Tuition Teacher**: A teacher who offers Primary to Junior College level tuition at the student’s home.
 * **Locale date time format**: The date time format the users’ computer uses.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -637,6 +638,7 @@ Given below are instructions to test the app manually.
     1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a lesson
 
@@ -703,6 +705,8 @@ Given below are instructions to test the app manually.
     1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x` (where x is larger
        than the filtered list size)<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding a lesson
 
