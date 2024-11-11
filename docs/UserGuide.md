@@ -152,10 +152,12 @@ Find or create a folder on your computer where you want to store the AgentAssist
     - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
     - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
 
-<img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
+    <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
+
+
 
 <div style="page-break-after: always;"></div>
 
@@ -626,7 +628,7 @@ delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments-).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
