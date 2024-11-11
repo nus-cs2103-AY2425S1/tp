@@ -46,7 +46,7 @@ import spleetwaise.transaction.storage.TransactionBookStorage;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 5, 1, true);
+    public static final Version VERSION = new Version(1, 6, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
