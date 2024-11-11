@@ -116,13 +116,13 @@ for the team of AddressBook-Level 3.
 - If you are a more technical or experienced user, feel free to check out our [Developer Guide](DeveloperGuide.md) for detailed technical information about TrueRental.
 - The **client** referred to in this user guide is the property owner or landlord who has engaged you to manage their property.
 - The **rental information** referred to in this user guide consists of the details of the property being rented, including key information for example address, rental start date, and other relevant property details.
-- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property managed by the client.
+- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property owned by the client.
 - **Monthly rent** is equivalent to **monthly rent amount**.
   - Both are referring to the monthly rent amount for the property managed by your client.
 - **Deposit** is equivalent to **deposit amount**.
-  - Both are referring to the security deposit amount for the property managed by your client, paid by the tenant at the start of the lease.
+  - Both are referring to the security deposit amount for the property owned by your client, paid by the tenant at the start of the lease.
 - **Customer list** is equivalent to **customers**.
-  - Both are referring to the name(s) of the tenant(s) for the property managed by your client.
+  - Both are referring to the name(s) of the tenant(s) for the property owned by your client.
 - **Rent due date** is equivalent to **rental monthly payment date**.
   - Both are referring to the specific day (of the month) on which the rent payment is due for the property managed by your client.
 
@@ -1022,7 +1022,7 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 
 * **Extraneous**: Not directly related connected with or related to something.
 
-* **Client**: An individual that is renting a property from you (a letting agent).
+* **Client**: A landlord whose properties are managed by you (a letting agent).
 
 * **Letting agent**: An individual that facilitates agreements between tenants and landlords to rent properties.
 
