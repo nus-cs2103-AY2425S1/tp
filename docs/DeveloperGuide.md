@@ -356,7 +356,7 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 ### 10. Close Command Response Enhancement
 **Current issue:** The feedback messages for the `close` command lack context sensitivity. When users request to close a detailed view that is not opened, the system returns "Detailed view closed" rather than a more accurate message indicating that no client was viewed. While the command functions correctly and maintains system integrity, this response could be more informative.
 
-**Proposed Enhancement:** Implement context-aware feedback messages for the close command. When no client is being viewed, the system should return a more appropriate message such as "No client currently being viewed" rather than indicating a closure action that didn't actually occur. This would align with user expectations and improve clarity.
+**Proposed Enhancement:** Implement context-aware feedback messages for the `close` command. When no client is viewed, the system should return a more appropriate message such as "No client currently being viewed" rather than indicating a closure action that did not occur. This would better align with user expectations and improve clarity.
 
 **Status:** Scheduled for future release as the current behavior, while not optimal, doesn't impact system functionality or data integrity. The enhancement is purely cosmetic and aimed at improving user experience through more precise feedback messaging.
 
