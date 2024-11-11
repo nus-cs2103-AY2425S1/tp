@@ -756,3 +756,7 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Instructions for manual testing**
+1. Being able to edit/delete order history of a customer 
+2. Being able to export customer order history into csvs file 
