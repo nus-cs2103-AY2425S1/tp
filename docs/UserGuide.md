@@ -6,7 +6,7 @@
 
 # UniLink User Guide
 
-UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
+UniLink is a desktop app that allows NUS students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
 ## Table of Contents
@@ -26,8 +26,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
-
-<page-nav-print />
+- [Field Constraints](#field-constraints)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,10 +44,10 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - Move the `.jar` file to where you want to store your UniLink data. This will be your 'home folder'.
 
 **4. Launch the app!**
-- Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path-to/folder`
-    - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
+- Open Command Prompt (for Windows) or Terminal (for Mac) and navigate to the folder where your JAR file is located. Use the cd command followed by the path to the folder. 
+    - E.g. If my jar file is in a folder called 'Contacts', which is inside another folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
 - Run UniLink by typing `java -jar UniLink.jar`
-- The app should open within a few seconds, showing some sample data that you can explore! 
+- The app should open within a few seconds, showing some sample data that you can explore!
 
 - **Using the Command Line**: New to the command line? Check out this [Command Line for Beginners](https://www.freecodecamp.org/news/command-line-for-beginners/) guide!
 
@@ -63,11 +62,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
-
    * `exit` : Exits the app.
-
-1. For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
+- For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,6 +72,10 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 <box type="info" seamless>
 
 **Notes about the Command Format:**<br>
+
+* All command words (e.g. `add`, `list`) and prefixes (e.g. `n/`, `ct/`) are to be written in lowercase 
+
+* Certain fields used in commands have specific constraints (e.g., format, length). For a full list of field requirements, please refer to the [Field Constraints](#field-constraints) section.
 
 * Words in `UPPER_CASE` need to be provided by you.<br>
     * e.g. in `add n/NAME`: if you want to add someone named John Doe, you'd type `add n/John Doe`.
@@ -86,15 +86,18 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 * Items with `…`​ after them can be repeated or omitted entirely<br>
   e.g. `[t/TAG]…​` can be left blank, or used like `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` will also work.
+* Fields can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` will also work.
 
 * Anything after certain commands such as `help`, `list`, `exit` and `clear` will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Some fields don't have a character limit, but it's best to keep entries concise. Longer entries may make some details harder to view.
+
 * PDF Users
   * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
 
 ### Viewing help : `help`
 
@@ -109,13 +112,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
-* At least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL` must be provided to add a contact.
+* At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided to add a contact.
 
 <box type="info" seamless>
 
-**Info:** You can add multiple tags (or none at all).
+**Note:** 
+* You can add multiple tags (or none at all).
+* To avoid duplicate entries, ensure each contact has a unique Telegram handle, phone number, or email address. You can add multiple contacts with the same name, as long as their contact details (Telegram handle, phone number, or email) are different.
 </box>
 
 Examples:
@@ -194,7 +199,7 @@ Format: <br>
 
 * The search is case-insensitive. e.g `friend` will match `Friend`
 * The order of the keywords does not matter. e.g. `Friend Family` will match `Family Friend`
-* Partial matches are allowed, meaning searching part of a tag will still return contacts with the full tag e.g. `fam` will match `family`
+* Partial matches are allowed, meaning searching part of a tag will still return contacts with the full tag (e.g. `fam` will match `family`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `friend family` will return all contacts with `friend` OR `family` as a tag
 
@@ -214,7 +219,6 @@ Format: `filter CONTACT_TYPE`
 * The search is case-insensitive. e.g. 'work' is the same as 'WORK'
 
 Examples:
-
 * `filter WORK` returns all the 'work' contacts
 * `filter SCHOOL` returns all the 'school' contacts
 * `filter PERSONAL` returns all the 'personal' contacts
@@ -250,8 +254,8 @@ Format: `switch THEME`
 * `THEME` is case-insensitive. e.g. 'light' is the same as 'LIGHT'
 
 Examples:
-
 * `switch LIGHT` switches to the 'light' display theme
+  ![result for 'switch light'](images/switchLight.png)
 * `switch DARK` switches to the 'dark' display theme
   ![result for 'switch dark'](images/switchDark.png)
 
@@ -289,7 +293,7 @@ UniLink data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UniLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniLink data are saved automatically as a JSON file `[JAR file location]/data/unilink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -313,6 +317,7 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **[For macOS users] If you open the application in fullscreen** and then use the `help` command, the Help Window may sometimes display visual glitches (such as a black background). Despite this, the application will continue to function normally after closing the Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -320,13 +325,32 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
+**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`<br>Note: At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br><br> `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br> e.g., `findtele @james_lake`<br><br> `findtag TAG [MORE_TAG_KEYWORDS]`<br> e.g., `findtag friend`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **Import** | `import`
 **List**   | `list`
-**Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
+**Switch** | `switch THEME`<br> e.g., `switch LIGHT`, `switch DARK`
 **Help**   | `help`
+**Exit**   | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Field Constraints
+
+To ensure your commands work as expected, refer to the table below for guidance on each field’s requirements, including format and length. This way, you’ll know exactly how to input information like names, phone numbers, and other fields correctly. We’ve also included examples to make things easier!
+
+| **Field**       | **Constraints**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | **Examples**                                           |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| NAME            | - Should only contain alphabets and spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Alice Tan <br> Hubert Koh                              |
+| CONTACT TYPE    | - Should be 'WORK', 'PERSONAL' or 'SCHOOL' <br> - Not case sensitive                                                                                                                                                                                                                                                                                                                                                                                                                                | Work <br> personal                                     |
+| TELEGRAM_HANDLE | - Should begin with '@' <br> - Can contain alphabets, numbers, or underscores <br> - Between 5 and 32 characters (excluding '@')                                                                                                                                                                                                                                                                                                                                                                    | @kacey_lim <br> @Maxine123                             |
+| PHONE           | - May start with optional '+' followed by a country code <br> - Should contain only digits <br> - Between 3 and 15 digits long                                                                                                                                                                                                                                                                                                                                                                      | 999 <br> +6598765432                                   |
+| EMAIL           | - Must follow the 'local-part@domain' format <br> <br> **Local Part:** <br> - Can include letters, numbers, underscores (_), periods (.), and dashes (-) <br> - Must not start or end with a special character <br> <br> **Domain:** <br> - Must begin with '@', followed by domain labels separated by periods and dashes <br> - Each domain label must start and end with an alphabet or number <br> - Must end with a domain label of at least 2 characters following a period (e.g. .com, .edu) | ryan_teo@example.com <br> caleb-sim@email.edu.sg       |
+| MODULE          | - Should start with 2 to 4 letters, followed by 4 numbers <br> - May end with optional single letter or a dash and one letter                                                                                                                                                                                                                                                                                                                                                                       | CS2103-T <br> HSI1000                                  |
+| REMARK          | - Should be between 1 and 200 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                                       | likes coffee in the morning <br> stays at Temasek Hall |
+| TAG             | - Should be a single word - Can contain letters and numbers                                                                                                                                                                                                                                                                                                                                                                                                                                         | friend <br> 24h                                        |
+
