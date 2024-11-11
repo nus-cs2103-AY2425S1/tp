@@ -133,6 +133,9 @@ Users engage with the AgentConnect application by inputting a series of commands
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* AgentConnect automatically checks and corrects dates to ensure that they are valid, helping to prevent scheduling errors.
+  * If a date is entered with an invalid day (eg. `2028-02-30`), Agent Connect will adjust it to the nearest valid date within the month, such as `2028-02-29`. This intelligent replacement only applies to dates up to the 31st day of any month.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 * Before every prefix, ensure that there is a whitespace at the front. Else, the command might not work. (E.g. `add n/John p/889955` will work but `add n/Johnp/889955` will not work.)
@@ -194,6 +197,7 @@ Format:
 `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>`
 
 - **Parameters**:
+    * Name can only contain alphanumeric and spaces. 
     * Birthday should be in `yyyy-mm-dd` and only can be a date before today's date.
     * Appointment should be in `yyyy-mm-dd HH:mm` and accept only future dates.
     * Phone number can only be 3 to 8 digits long.

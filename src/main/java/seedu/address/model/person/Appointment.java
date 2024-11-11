@@ -22,6 +22,7 @@ public class Appointment {
      * Example: 2023-01-31 13:00
      */
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}";
+
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public final LocalDateTime date;
