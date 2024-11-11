@@ -260,6 +260,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
+  <p><p/>
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
@@ -878,14 +879,16 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `findcustomer bernice` <br>
        Expected:
        - All customers with 'bernice' in their names are listed. A success message shown in the status message.
-       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.<br>
+       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
+       <p><p/>
 
 2. Finding customers with multiple keywords using the command alias.
 
     1. Test case: `findc alex david` <br>
        Expected:
        - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
-       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.<br>
+       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+       <p><p/>
 
 3. Finding customer who does not exist in the address book.
 
@@ -928,7 +931,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
-        - The customer to be edited is not `Betsy Crowe`.<br>
+        - The customer to be edited is not `Betsy Crowe`.
+       <p><p/>
 
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
        Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
