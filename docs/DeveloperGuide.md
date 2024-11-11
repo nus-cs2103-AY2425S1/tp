@@ -276,7 +276,7 @@ The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whe
 **Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
 ### 3.  Support for Symbols such as `@` and Parentheses in Names
-**Current Issue:** ames containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
+**Current Issue:** Names containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
 
 **Technical Impact:**
 - There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
