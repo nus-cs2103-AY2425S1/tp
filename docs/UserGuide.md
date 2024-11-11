@@ -353,7 +353,7 @@ Command detail & constraints
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When a student’s tutorial class is updated, their attendance record will remain intact, as attendance is tracked at the module level, not by individual tutorial groups. This ensures that any classes the student attended before the change are still recorded accurately.
+- User is not allowed to assign student to empty tutorial ID
 
 Note:
 - Execute `edit` command after `find` command will edit the student data based on the filtered list after `find` command
