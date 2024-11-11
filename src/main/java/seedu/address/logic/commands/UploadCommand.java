@@ -63,7 +63,9 @@ public class UploadCommand extends Command {
         fileChooser.setDialogTitle("Select Profile Picture");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        // adapted from https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser
+        //@@author fymbc-reused
+        //Reused from https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser
+        //with minor modifications
         fileChooser.setFileFilter(new FileFilter() {
 
             public String getDescription() {

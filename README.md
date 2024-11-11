@@ -1,7 +1,7 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F14b-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F14b-4/tp/graph/badge.svg?token=33G8N0D437)](https://codecov.io/gh/AY2425S1-CS2103T-F14b-4/tp)
 
-# Financial Advisors Revolutionary Telemarketer
+# Financial Assurance Revolutionary Telemarketer
 
 ![Ui](docs/images/Ui.png)
 

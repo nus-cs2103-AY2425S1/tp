@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
+* Github Copilot / ChatGPT 4.0 was used to autocomplete parts of code
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -418,6 +419,8 @@ Use case ends.
 * **Financial Advisor**: A professional who provides expertise for clients' decisions around money matters, personal finances, and investments
 * **Client**: A financial advisor's contact
 * **GUI**: Graphical User Interface, a type of user interface through which users interact with electronic devices via visual indicator representations
+* * **Paid**: A client has the status paid when they have paid for their current policy and the current policy is active
+* **Unpaid**: A client has the status unpaid when they have not paid for their current policy and the current policy is expired
 * **Payment frequency**: The frequency of which a Financial Advisor receives payments from their clients. Typically, every 1, 3, 6 or 12 months
 * **Policy**: An agreement between the Financial Advisor and their client on the financial advisory services provided
 

@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -15,11 +17,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException("Please enter a valid index.");
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteCommand(index);
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Index index = ParserUtil.parseIndex(args);
-        return new DeleteCommand(index);
     }
 
 }
