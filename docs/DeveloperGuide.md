@@ -697,20 +697,20 @@ You can use your own VRNs that follow the format in the User Guide.
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that no client named `John Doe` exists in the list.
 
-   1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+   1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
       **Expected:** A new client named `John Doe` is added to the list. Details of the added client are shown in the status message.
 
-   - **Subsequent Command:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (same command again)
+   - **Subsequent Command:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (same command again)<br>
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Adding a client with a car**
 
    1. **Prerequisites:** Ensure the client list is displayed. Confirm that no client named `Betsy Crowe` exists and no car with VRN `SJH9514P` or VIN `1G6ABC129P5123456` exists.
 
-   1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+   1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`<br>
       **Expected:** A new client named `Betsy Crowe` with a car is added to the list. Details of the added client and car are shown in the status message.
 
-   - **Subsequent Command:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla` (same command again)
+   - **Subsequent Command:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla` (same command again)<br>
       **Expected:** No client is added. Error message indicating that the client already exists.
 
 <box type="tip" seamless>
@@ -725,24 +725,21 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure there is at least one client without a car in the list. Suppose the client at index `1` is `John Doe` without a car.
 
-   1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`
+   1. **Test case:** `add-car 1 vrn/SJH81E vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** A car is added to `John Doe`. Details of the added car are shown in the status message.
-
-   - **Subsequent Command:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004353 make/Ford model/Focus`
-      **Expected:** No car is added. Error message indicating that the client already has a car.
 
 2. **Adding a car to a client who already has a car**
 
    1. **Prerequisites:** Ensure that `John Doe` at index `1` now has a car after the previous test.
 
-   1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Ford model/Focus`
+   1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004354 make/Ford model/Focus`<br>
       **Expected:** No car is added. Error message indicating that the client already has a car.
 
 3. **Adding a car to a non-existent client**
 
    1. **Prerequisites:** Assume the client list has fewer than 10 clients.
 
-   1. **Test case:** `add-car 10 vrn/SJH9514P vin/1HGCM82633A004355 make/Nissan model/Altima`
+   1. **Test case:** `add-car 10 vrn/SJH9514P vin/1HGCM82633A004355 make/Nissan model/Altima`<br>
       **Expected:** No car is added. Error message indicating that the client index is out of bounds.
 
 <box type="tip" seamless>
@@ -784,33 +781,25 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` without a car.
 
-   1. **Test case:** `del-car 1`
-
-
-      **Expected:** No car is deleted. Error details shown in the status message.
+   1. **Test case:** `del-car 1`<br>
+         **Expected:** No car is deleted. Error details shown in the status message.
 
 2. **Deleting a car from a client with a car**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is not checked in.
 
-   1. **Test case:** `del-car 1`
-
-
+   1. **Test case:** `del-car 1`<br>
       **Expected:** `John Doe`'s car is deleted. Status message reflects which client the car was deleted from.
 
 3. **Attempting to delete a car that is checked-in**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is checked in.
 
-    1. **Test case:** `del-car 1`
-
-
+    1. **Test case:** `del-car 1`<br>
        **Expected:** No car is deleted. Status message states that car is currently checked in.
 
 4. **Attempting to delete a car from a non-existent client**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that the client to delete a car from does not exist.
 
-    1. **Test case:** `del-car 0`
-
-
+    1. **Test case:** `del-car 0`<br>
        **Expected:** No car is deleted. Error details shown in the status message.
 
 ### Checking in/ out a Client
@@ -819,19 +808,13 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to check exists and **has a car**.
 
-   1. **Test case:** `check 1`
-
-
+   1. **Test case:** `check 1`<br>
       **Expected:** First client is checked in/ out from the list. Details of the checked client are shown in the status message. If client is checked-in, display `Checked-In` icon in the list, else if client is checked-out, hide the `Checked-In` icon.
 
-   1. **Test case:** `check 0`
-
-
+   1. **Test case:** `check 0`<br>
       **Expected:** No client is checked. Error details shown in the status message.
 
-   1. Other incorrect check commands to try: `check`, `check x`, `...` (where x is larger than the list size)
-
-
+   1. Other incorrect check commands to try: `check`, `check x`, `...` (where x is larger than the list size)<br>
       **Expected:** Similar to previous.
 
 ### Editing a Client
@@ -840,33 +823,23 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** `edit 1 n/John Doe p/98765432`
-
-
+   1. **Test case:** `edit 1 n/John Doe p/98765432`<br>
       **Expected:** First client's name and phone number are edited. Details of the edited client are shown in the status message.
-   - **Subsequent Command:** `edit 2 n/John Doe p/98765432`
-
-
+   - **Subsequent Command:** `edit 2 n/John Doe p/98765432`<br>
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Editing a client's car details**
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit exists and **has a car**. Ensure that the values to edit are different from the current values and they do not violate any constraints such as duplicate clients or cars.
 
-   1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`
-
-
+   1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** First client's car vrn and vin are edited. Details of the edited car are shown in the status message.
-   - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`
-
-
+   - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** No car is edited. Error message displayed indicating that the car already exists.
 3. **Editing a non-existent client's details**
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit does not exist.
 
-   2. **Test case:** `edit 10 n/John Doe p/98765432`
-
-
+   2. **Test case:** `edit 10 n/John Doe p/98765432`<br>
       **Expected:** No client is edited. Error details shown in the status message.
 
 <box type="tip" seamless>
@@ -881,14 +854,10 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure that client to view exists.
 
-   1. **Test case:** `view 1`
-
-
+   1. **Test case:** `view 1`<br>
       **Expected:** Popup window of the clients details displayed. Details of client is showed in the window
 
-   1. **Test case:** `view -1`
-
-
+   1. **Test case:** `view -1`<br>
       **Expected:** No client is viewed. Error details shown in the status message.
 
 
@@ -898,29 +867,20 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that client to find exists.
 
-   1. **Test case:** `find John`
-
-
+   1. **Test case:** `find John`<br>
       **Expected:** All clients with the name John is listed.
 
-   2. **Test case:** `find Pablo`
-   
-   
-   (Pablo doesn't exist)
+   2. **Test case:** `find Pablo`<br> (Pablo doesn't exist)
       **Expected:** No clients are Listed. List will not be populated
 
 2. **Finding a specific client from the list using their car VRN**
 
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Ensure that the client with the specific car to find exists.
 
-   1. **Test case:** `find SJH9514P`
-
-
+   1. **Test case:** `find SJH9514P`<br>
       **Expected:** All clients with the car VRN SJH9514P is listed.
 
-   2. **Test case:** `find SJH9514L`
-   
-   (SJH9514L car or 'SJH9514L' as client's name doesn't exist)
+   2. **Test case:** `find SJH9514L`<br> (SJH9514L car or 'SJH9514L' as client's name doesn't exist)
       **Expected:** No clients are Listed. List will not be populated
 
 ## Appendix: Planned Enhancements
