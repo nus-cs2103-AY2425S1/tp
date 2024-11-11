@@ -564,8 +564,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person or persons
 
 1. Deleting a person while all persons are being shown
@@ -611,25 +609,33 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing files
 
-   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
+   1. Delete `config.json` and re-launch the app. 
+      Expected: New `config.json` created. Existing data is not affected.
 
-   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected.
+   2. Delete `preferences.json` and re-launch the app. 
+      Expected: New `preferences.json` created. Existing data is not affected.
 
-   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
+   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. 
+      Expected: App starts on clean slate (i.e. with sample data only).
 
-   4. Delete `data/` or `data/socialbook.json`. Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
+   4. Delete `data/` or `data/socialbook.json`. 
+      Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
 
 2. Dealing with corrupted data files
 
-   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
+   1. Add `"p"` to a `"phone"` field in data file. 
+      Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
 
-   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
+   2. Add a new field `"newField" : "newField"` to a person. 
+      Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
 
-   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
+   3. Remove `"remark"` field from a person. 
+      Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
-   4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+   4. Add a `","` to the `"remark"` field of a person. 
+      Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
 
-### Sorting the person list
+### Sorting of person list
 
 1. Sorting entries while all persons are being shown
 
@@ -641,7 +647,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `sort d/desc`<br>
        Expected: Persons are sorted in descending order according to date of last visit. Where a person doesn't have a date of last visit they are at the end of the list. A message saying the list has been sorted by date of last visit in descending order is displayed.
 
-1. Editing a parameter being sorted while all persons are being shown
+2. Editing a parameter being sorted while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Sort using `sort n/asc`
 
