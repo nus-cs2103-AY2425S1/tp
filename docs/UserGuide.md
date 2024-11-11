@@ -138,7 +138,6 @@ Adds a patient contact to the address book.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -174,7 +173,6 @@ the action will be aborted, and the address book will remain unchanged.
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -230,7 +228,6 @@ Deletes the specified patient contact from the address book.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -283,9 +280,6 @@ Edits an existing patient contact in the address book.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
-
-<div style="page-break-before:always">&nbsp;</div>
 
 ### <i class="fa-solid fa-right-from-bracket"></i> Exiting the program : `exit`
 
@@ -296,7 +290,6 @@ Exits the program.
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -347,7 +340,6 @@ Filter patients whose age and/or appointment dates are within the specified rang
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -391,7 +383,6 @@ Finds patients whose names or phone numbers contain any of the given keywords.
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -534,7 +525,6 @@ The following is an example of a valid JSON file content.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -565,7 +555,6 @@ Shows an alphabetically sorted list of all patients in the address book.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -594,7 +583,6 @@ Shows a list of all starred patient contacts in the address book.
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -634,6 +622,7 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
+
 **Input**<br>
 
 <img src="images/noteCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
@@ -644,7 +633,6 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -683,7 +671,6 @@ Sorts the patient contact list in the address book on the basis of their earlies
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -718,7 +705,6 @@ Stars the specified patient contact from the address book into favourites.
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
@@ -755,7 +741,6 @@ Unstars the specified patient contact from the address book removing them from f
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -790,7 +775,6 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
 <br>
-<br>
 
 <div style="page-break-before:always">&nbsp;</div>
 
@@ -799,7 +783,6 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 MediContact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 ### <i class="fa-solid fa-file-export"></i> Exporting the data
@@ -813,8 +796,6 @@ MediContact data are saved in the hard disk automatically after any command that
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-
-<br>
 <br>
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
@@ -829,7 +810,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 </box>
 
 [<i class="fa-solid fa-angle-up" style="border: 2px solid lightgrey; border-radius: 5px; padding: 10px;"></i>](#medicontact)
-<br>
 <br>
 
 <div style="page-break-before:always">&nbsp;</div>
