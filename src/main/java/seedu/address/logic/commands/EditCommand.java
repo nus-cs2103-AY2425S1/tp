@@ -32,6 +32,7 @@ import seedu.address.model.contact.Nickname;
 import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
+import seedu.address.model.contact.exceptions.DuplicateFieldException;
 
 /**
  * Edits the details of an existing contact in the address book.
@@ -134,7 +135,11 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FIELDS_CONTACT);
         }
 
-        model.setContact(contactToEdit, editedContact);
+        try {
+            model.setContact(contactToEdit, editedContact);
+        } catch (DuplicateFieldException e) {
+            throw new CommandException(e.getMessage());
+        }
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
