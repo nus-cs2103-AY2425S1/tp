@@ -170,7 +170,7 @@ The seed command adds a `Person` object, in `SampleDataUtil` to the `Model`, if 
 
 The following activity diagram summarises what happens when a user executes the seed command:
 
-insert activity diagram for seed command for loop
+<puml src="diagrams/SeedActivityDiagram.puml" alt="SeedActivityDiagram" />
 
 ### View feature
 
