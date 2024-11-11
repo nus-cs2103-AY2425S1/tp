@@ -352,7 +352,6 @@ Exceptionally long names will be cut off on the display, but you can read the st
 detail command.
 </div>
 
-<div style="page-break-after: always;"></div>
 ### Deleting a student : `delete`
 
 Removes a student from the tuition center management system.
@@ -379,8 +378,6 @@ Examples:
   * Deletes the student with the ID S00001.
 
 ![Delete Success Message](images/delete.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Editing a student : `edit`
 
@@ -428,8 +425,6 @@ For example, if the student is taking English and Math and you use the command '
 only be taking Science.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ### Listing all students : `list`
 
 Shows a list of all students in the system.
@@ -455,8 +450,6 @@ Examples:
   * Displays the details of the student with the ID S00001.
 
 ![Detail Success Message](images/detail.png)
-
-<div style="page-break-after: always;"></div>
 
 ## Searching and Sorting
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -494,8 +487,6 @@ After finding, you can use `list` command to return to the full list of students
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ### Sorting students : `sort`
 
 Sort the list of students based on a specified field.
@@ -532,8 +523,6 @@ group 2 students will be sorted.
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ### Filtering students : `filter`
 
 Shows a list of students filtered by year group or subject.
@@ -564,8 +553,6 @@ will be displayed.
 Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
 
@@ -593,8 +580,6 @@ Examples:
 
 ![Addsubject Success Message](images/addsubject.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Tracking student count for each subject : `tracksubject`
 
 Displays a window that shows how many students are taking each of all the subjects.
@@ -617,8 +602,6 @@ Please ensure to close the tracker to view the most current information.
 </div>
 
 ![TrackSubject Success Message](images/tracksubject.png)
-
-<div style="page-break-after: always;"></div>
 
 ## Utility Features
 ### Clearing all entries : `clear`
@@ -649,8 +632,6 @@ Exits the program.
 Format: `exit`
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 # Data Management in AcademyAssist
 
@@ -704,8 +685,6 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 # FAQ
 This section provides answers to frequently asked questions about AcademyAssist. If you have any other questions or
 encounter issues while using the application, please feel free to reach out to us via our email (academyassist@gmail.com).
@@ -744,8 +723,6 @@ main window for a cleaner user interface. To view more detailed information abou
 command followed by the student's ID. This will provide you with all the additional details you need.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 # Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
 introduce the following features aimed at providing greater flexibility in subject management:
@@ -770,8 +747,6 @@ users to manage student interactions effectively<br><br>
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 # Glossary
 1. **Command**: An instruction given by a user to a computer program.
 2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
