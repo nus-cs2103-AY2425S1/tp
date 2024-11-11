@@ -29,15 +29,16 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
-        assertFalse(Name.isValidName("12345")); // must start with a letter
+        assertFalse(Name.isValidName("1ater")); // must start with a letter
+        assertFalse(Name.isValidName("/Dodo")); // also must start with a letter
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
-
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("peter jack")); // alphabets and spaces only
+        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters ok
+        assertTrue(Name.isValidName("Capital Tan")); // capital letters also ok
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
         assertTrue(Name.isValidName("Tag S/o Keith")); // slashes are allowed
+        assertTrue(Name.isValidName("dog s/0 CAT")); // all in combination
     }
 
     @Test
@@ -46,6 +47,11 @@ public class NameTest {
 
         // same values -> returns true
         assertTrue(name.equals(new Name("Valid Name")));
+
+        // same up to case -> returns true
+        assertTrue(name.equals(new Name("valid name")));
+        assertTrue(name.equals(new Name("VALID NAME")));
+        assertTrue(name.equals(new Name("valid nAMe")));
 
         // same object -> returns true
         assertTrue(name.equals(name));
