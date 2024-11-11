@@ -1114,6 +1114,15 @@ Team size: 5
 * **Sample Input:** User enters `2023-03-32` for an appointment date.
 * **Expected Output:** The result display box shows `Invalid date: The day is out of range for the month`.
 
+
+4. **Modify index parsing to check for valid indexes**
+* **Flaw:** For `edit` commands utilising `INDEX` as a field, when users input an index larger than the 
+  list size of `Person` or `Appointment`, the application does not check for the validity of the index.
+* **Enhancement:** Implement a check to ensure that the index provided by the user is within the valid range 
+  of the list size. If the index is invalid, display an error message to the user.
+* **Sample Input:** `edit person 100000`
+* **Expected Output:** The result display box shows `Invalid index! Please enter a valid index within the list size.`
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
