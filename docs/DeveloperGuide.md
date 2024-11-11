@@ -155,16 +155,17 @@ How the parsing works:
 **API** : [
 `Model.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 The `Model` component,
 
-- stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+- stores the address book data e.g., all `Student` objects (which are contained in a `UniqueStudentList` object).
 - stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
   which
   is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound
   to
   this list so that the UI automatically updates when the data in the list change.
+- the same is applied to `Group` and `Task` objects
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
@@ -529,6 +530,65 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Edit a Student**
+
+**MSS**
+
+1. Users requests to list students.
+2. T_Assistant shows a list of students.
+3. User requests to edit a Student's information from the list.
+4. T_Assistant updates the Student's information as per user's input.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Student does not exist.
+
+  - 3a1. T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+  
+- 3b. The input Student parameters to edit are invalid.
+  
+  - 3b1. T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+
+- 3c. No changes are made to the Student’s information.
+  
+  - 3c1.  T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+
+**Use case: Find Student**
+
+**MSS**
+
+1. User inputs a command to find students with specific keywords.
+
+2. T_Assistant processes the input and searches for students matching the keywords.
+
+3. T_Assistant displays a list of students who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+  - 1a1. T_Assistant shows an error message indicating the correct format.
+    
+    Use case ends.
+
+- 3a. No Student match the search criteria.
+
+  - 3a1. T_Assistant shows an error message.
+  
+    Use case ends.
+
 **Use case: Sort Students**
 
 **MSS**
@@ -603,6 +663,40 @@ Use case ends.
 - 3a. The Group parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit a Group**
+
+**MSS**
+1. Users requests to list groups.
+2. T_Assistant shows a list of groups.
+3. User requests to edit a Group's information from the list.
+4. T_Assistant updates the Group's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Group does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Group parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Group’s information.
+
+    - 3c1.  T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -716,6 +810,30 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Find Group**
+
+**MSS**
+
+1. User inputs a command to find groups with specific keywords.
+2. T_Assistant processes the input and searches for groups matching the keywords.
+3. T_Assistant displays a list of groups who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Group match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: Sort Groups**
 
 **MSS**
@@ -790,6 +908,98 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Edit a Task for all Groups having the task**
+
+**MSS**
+1. Users requests to list tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to edit a Task's information from the list.
+4. T_Assistant updates the Task's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Task does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Task parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Task’s information.
+
+    - 3c1.  T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit a Task for a Group**
+
+**MSS**
+1. Users requests to list a group's tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to edit a Task's information from the list.
+4. T_Assistant updates the Task's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Task does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Task parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Task’s information.
+
+    - 3c1.  T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find Task**
+
+**MSS**
+
+1. User inputs a command to find tasks with specific keywords.
+2. T_Assistant processes the input and searches for tasks matching the keywords.
+3. T_Assistant displays a list of tasks who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Task match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: Sort Tasks**
 
 **MSS**
@@ -838,8 +1048,6 @@ Use case ends.
     - 1a1. T_Assistant shows an error message.
 
       Use case ends.
-
-Use case ends.
 
 ### Non-Functional Requirements
 
