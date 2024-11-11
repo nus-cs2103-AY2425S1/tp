@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEPARTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.LILY;
@@ -17,6 +20,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    @Test
+    public void constructor_employeeWithEmptyContractEndDate_throwsAssertionException() {
+        assertThrows(AssertionError.class, () -> new Person(new Name(VALID_NAME_BOB), new Phone(VALID_PHONE_BOB),
+                new Email(VALID_EMAIL_BOB), new Address(VALID_ADDRESS_BOB), new Department(VALID_DEPARTMENT_BOB),
+                new Role(VALID_ROLE_BOB), ContractEndDate.empty(), true));
+    }
 
     @Test
     public void isSamePerson() {
