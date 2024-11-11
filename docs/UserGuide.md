@@ -138,7 +138,7 @@ Examples:
 
 Note:
 * `add` command will fail if you try to add a person who is already in the address book. You may refer to [invalid contacts](#what-is-considered-as-invalid-contacts) to see what is considered as having the same identity.
-* `add` command will fail if you attempt to add person with a duplicate field as an existing contact, please refer to [invalid contacts](#what-is-considered-as-invalid-contacts) for more information.
+* `add` command will fail if you attempt to add a person with a duplicate field as an existing contact, please refer to [invalid contacts](#what-is-considered-as-invalid-contacts) for more information.
 
 <div style="page-break-after: always;"></div>
 
