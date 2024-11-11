@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ContactMate is a **desktop app for managing clients (Singaporeans and Permanent Residents) at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
+ContactMate is a **desktop app for managing clients (Singaporeans and Permanent Residents) of the Befriending Program at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -102,6 +102,8 @@ Field | Description                                                             
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 * The `personList` view is the view where the list of elderly is shown. It is the default view when you start the application. Use the `list` command to return to this view if you are in another view.
+
+* The fields in a command cannot contain whitespace followed by any of the command's prefix as part of the input. For example, `address` cannot be `a/Clementi Ave a/2` but can be `a/Clementi Area/2`. Another example is `notes` can neither be `o/This is a note o/part of same note` nor `o/Note with d/in it` but can be `o/I asked a no/yes question`.
 </div>
 
 ### Viewing help : `help`
@@ -198,6 +200,7 @@ Marks the specified elderly from the current person list as called.
 
 ContactMate will update the list to show the new next contact date of the elderly and sort the list accordingly.
 You can also mark the specified elderly as called on a specific date and add notes.
+It is allowed to mark the same elderly multiple times on the same day.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
@@ -280,6 +283,15 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactMate home folder.
 
+**Q**: Why can't I execute certain commands like `mark S2208201I` when the displayed person list is empty after a `find` command?<br>
+**A**: Commands that refer to an elderly by index or NRIC will not work if the elderly is not shown in the displayed person list view. To execute these commands, you can use the `list` command to return to the full, unfiltered displayed person list view.
+
+**Q**: Why are the `delete`, `edit` and `mark` commands are restricted in the history list view?<br>
+**A**: These commands are restricted in the history list view to prevent unintended modifications to an elder's details. To modify an elderly's information accurately, you can use the `list` command to return to the person list view. 
+
+**Q**: Why can't I `mark S2208201I` when I am currently viewing the contact records of the elderly with NRIC `S2208201I`? <br>
+**A**: The `mark` command requires you to be in the person list view rather in the individual history list view. It ensures that all-elderly related commands function as expected and to avoid confusion. 
+
 **Q**: How do I save my data?<br>
 **A**: ContactMate ensures your data is saved automatically after every command.
 
@@ -316,6 +328,8 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 
 * **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` or `find` commands.
 
+
+* **History List View**: This is the display that shows the contact records and profile view of a specific elderly. It is displayed after using the `history` command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
