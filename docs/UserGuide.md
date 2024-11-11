@@ -93,6 +93,8 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 - A person's name can only contain alphanumeric characters and spaces.
 
 - A person's phone number must be unique.
+
+- A person's tag must not contain any spaces e.g `Twitch Streamer` is not a valid tag.
 </div>
 
 <div markdown="block" class="alert alert-info">
