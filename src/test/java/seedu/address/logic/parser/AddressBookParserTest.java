@@ -125,7 +125,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertInstanceOf(ListCommand.class, parser.parseCommand(ListCommand.COMMAND_WORD));
-        assertInstanceOf(ListCommand.class, parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

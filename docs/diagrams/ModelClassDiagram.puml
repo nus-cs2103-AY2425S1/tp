@@ -22,6 +22,7 @@ Class DateOfBirth
 Class Priority
 Class Income
 Class FamilySize
+Class Scheme
 Class Tag
 
 Class I #FFFFFF
@@ -49,6 +50,7 @@ Person *--> DateOfBirth
 Person *--> Priority
 Person *--> Income
 Person *--> FamilySize
+Person *--> "*" Scheme
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
