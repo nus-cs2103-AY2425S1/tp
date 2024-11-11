@@ -294,6 +294,11 @@ Team Size: 5
 5. **Dynamic message box sizing**<br/>
     The message box should increase in height and wrap the text within it as needed so that the user can view the error
     message or other command messages easily.
+6. **International phone numbers**<br/>
+    Allow the application to accept international phone numbers on top of  Singapore phone numbers. 
+7. **Email validation**<br/>
+    Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
+    the validation permits `abc@aa`.
 
 ## **Appendix: Requirements**
 
