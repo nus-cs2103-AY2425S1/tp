@@ -7,7 +7,7 @@ title: User Guide
 
 ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your Concert contacts, optimized for use via
 a Command Line Interface (CLI) with also a Graphical User Interface (GUI) in place to assist with information display.
-Manage your _contacts_ and _concerts_ in the book, finding contact information faster than your regular GUI contact
+Manage your _persons_ and _concerts_ in the book, finding contact information faster than your regular GUI contact
 management applications.
 
 1. [Quick start](#quick-start)
@@ -55,16 +55,16 @@ management applications.
 
    - `help` : Shows a message explaining how to access the help page.
 
-   - `listp` : Lists all contacts in the ConcertPhonebook.
+   - `listp` : Lists all persons in the ConcertPhonebook.
 
    - `listc` : Lists all concerts in the ConcertPhonebook.
 
-   - `list` : Lists all contacts and concerts in the ConcertPhonebook.
+   - `list` : Lists all persons and concerts in the ConcertPhonebook.
 
    - `listcc` : Lists all concert contacts in the ConcertPhonebook.
 
    - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a
-     contact named `John Doe` to the ConcertPhonebook.
+     person named `John Doe` to the ConcertPhonebook.
 
    - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert
      named `Coachella` to the ConcertPhonebook.
@@ -101,7 +101,7 @@ management applications.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: General Notes on Commands:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addp n/NAME`, `NAME` is a parameter which can be used as `addp n/John Doe`.
@@ -136,6 +136,10 @@ management applications.
 - The application's view will switch to persons and concerts when commands involving concerts or persons are executed.
 
 - The application's view will switch to concert contacts when commands involving concert contacts are executed.
+
+- In this user guide, the terms _contact_ and _person_ are used interchangeably.
+
+- The term _concert contact_ refers to an association between a _person_ and a _concert_.
 
 </div>
 
@@ -220,7 +224,7 @@ Examples:
 
 ### Adding a concert contact: `addcc`
 
-Adds an association to the contact in the ConcertPhonebook with another concert.
+Adds an association between a person and concert, to the ConcertPhonebook.
 
 Format: `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`
 
@@ -283,7 +287,7 @@ Format: `findp [n/NAME_KEYWORDS] [r/ROLE]`
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching both name and role from the command entry will be returned (i.e. `AND` search).
   e.g. `findp n/Hans Bo r/Artist` will return `Hans Gruber, Artist` and `Bo Yang, Artist`
-- At least one of the 2 fields must be present
+- At least one of the 2 keywords must be present
 
 Examples:
 
@@ -321,7 +325,7 @@ Finds all concert contacts that are associated to the person and the concert at 
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
 - The order of the keywords does not matter e.g. `findcc pi/1 ci/1` is equivalent to `findcc ci/1 pi/1`
-- At least one of the 2 fields must be present
+- At least one of the 2 keywords must be present
 
 Examples:
 
@@ -337,7 +341,7 @@ Format: `editp INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]�
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
+- At least one of the optional keywords must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be **removed** i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
@@ -357,7 +361,7 @@ Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 
 - Edits the concert at the specified `INDEX`. The index refers to the index number shown in the displayed concert list.
   The index **must be a positive integer** 1, 2, 3, …​
-- At least one of the optional fields must be provided.
+- At least one of the optional keywords must be provided.
 - Existing values will be updated to the input values.
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
 - FYI: If user were to add a date that does not exist, closest date in the same month will be added
@@ -397,8 +401,7 @@ Furthermore, certain edits can cause ConcertPhonebook to behave in unexpected wa
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer. Copy the data directory of your previous ConcertPhonebook home folder into the home folder of your new installation, and overwrite the data directory of the new installation if any.
 
 ---
 
