@@ -19,7 +19,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your Computer.
    1. To check if you have Java installed, open a command terminal:
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
       * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
@@ -37,8 +37,8 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 1. Before you run the application for the **first time**, ensure that your _home folder_ **does not contain** a `config.json` and `preferences.json` file. If it does, delete them.
 
-1. Open a command terminal, `cd` into the folder that you put the jar file in.
-   * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
+1. Open a command terminal, `cd` into the folder that you put the `.jar` file in.
+   * For example, if the `.jar` file is still in the Downloads folder, type `cd Downloads`
 
 1. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -119,6 +119,8 @@ Action     | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 
 ### Viewing help : `help`
 
@@ -175,7 +177,7 @@ Adds a student to UGTeach.
 * **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
   * Special case: `-0`, `-0.0`, `-0.00` are not allowed! UGTeach will behave weirdly if you enter these values.
-* **SUBJECT** should only be
+* **SUBJECT** must only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
   * **SUBJECT** is case-insensitive.
@@ -461,8 +463,6 @@ Please note:
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Glossary
 * **CLI**: Command-line interface, where you interact with the system using your keyboard.
