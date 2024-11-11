@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -44,6 +45,9 @@ public class ViewPersonCard extends UiPart<Region> {
     @FXML
     private FlowPane viewAttendance;
 
+    @FXML
+    private ScrollPane viewScroll;
+
     /**
      * Creates a {@code ViewPersonCard} with the given {@code Person}.
      */
@@ -73,6 +77,8 @@ public class ViewPersonCard extends UiPart<Region> {
         viewRoles.getChildren().stream().map(node -> (Label) node)
                 .filter(label -> label.getText().equals(Member.MEMBER_ROLE))
                 .forEach(label -> label.setId("memberRole"));
+        viewScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        viewScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
     public Label getViewName() {
