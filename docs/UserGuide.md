@@ -30,13 +30,13 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <img src="images/Ui.png" alt="Ui" style="width: 90%;">
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press **Enter** to execute it. e.g. typing **`help`** and pressing **Enter** will
    open the help window.<br>
    Some example commands you can try:
 
     - `list`: Lists all contacts.
     - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 u/NUS m/Computer Science b/13-12-2003`:
-      Adds a contact named **John Doe** to the address book.
+      Adds a contact named **John Doe** to UniVerse.
 
       <box type="info" seamless>
       
@@ -57,6 +57,7 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
     - `findu u/NUS`: Finds all contacts studying at **NUS**.
     - `findi i/Swimming`: Finds all contacts whose interests include **Swimming**.
     - `exit`: Exits the app.
+   
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -94,56 +95,70 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+_Shows a message explaning how to access the help page._
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
 <br>
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+_Adds a new person to UniVerse with their contact information._
 
-Format:
-
+**Format**:
 ```plaintext
 add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/WORK_EXPERIENCE] [i/INTEREST]... [t/TAG]...
 ```
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of interests and tags (including 0)
-</box>
-
-Parameters:
+**Parameters**:
 
 - `n/NAME`: Full name of the contact.
 - `p/PHONE_NUMBER`: Numeric input of any length.
 - `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
-- `u/UNIVERSITY`: University name. It is case-sensitive.
-- `m/MAJOR`: Major or field of study.
+- `u/UNIVERSITY`: University name (case-sensitive).
+- `m/MAJOR`: Major or field of study (case-sensitive).
 - `b/BIRTHDATE`: Date of birth in `dd-mm-yyyy` format.
-- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`, where role, company and year are capitalised.
-- `[i/INTEREST]...`: Interests of the contact.
-- `[t/TAG]...`: Tags for categorization.
+- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`, where role, company, and year are capitalised.
+- `[i/INTEREST]...`: Interests of the contact (case-sensitive).
+- `[t/TAG]...`: Tags for categorisation (case-sensitive).
 
-<box type="note" seamless>
+<box type="info" seamless>
 
-**Note:** Contacts can have same names but different phone numbers
+**Notes**:
+- Contacts can have the same names but different phone numbers.
+
 </box>
 
-Examples:
+**Examples**:
 
-```plaintext
-add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/Intern,Google,2024 u/NUS m/Computer Science t/friends t/owesMoney i/swimming i/reading b/13-12-2003
-```
+1. Adding a person with work experience and interests:
+   ```plaintext
+   add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 u/NUS m/Computer Science b/13-12-2003 w/Intern,Google,2023 i/Swimming t/friends
+   ```
+   **Expected output**:
+   ```plaintext
+   New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Work Experience: Intern,Google,2023; Tags: [[friends]]; University: NUS; Major: Computer Science; Interests: [Swimming]
+   ```
 
-```plaintext
-add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 w/Intern,Meta,2024 u/NTU m/Computer Science t/classmate b/01-01-2001
-```
+2. Adding a person with minimal fields:
+   ```plaintext
+   add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 u/NTU m/Engineering b/01-01-2001
+   ```
+   **Expected output**:
+   ```plaintext
+   New person added: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []
+   ```
+
+<box type="warning" seamless>
+
+**Caution**:
+- Ensure the email follows the `local-part@domain` format.
+- The command accepts only one work experience entry per contact.
+
+</box>
 
 <br>
 
@@ -151,379 +166,531 @@ add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12
 
 #### Adding Interests: `addi`
 
-Adds interest(s) to an existing contact.
+_Adds interest(s) to an existing contact._
 
-Format:
-
+**Format**:
 ```plaintext
 addi in/INDEX i/INTEREST...
 ```
 
-- `in/INDEX`: Index of contact user wishes to add interests to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters at most.
-- **Note:** 
-  - Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
-  - The first letter of each new interest added will automatically be capitalized in both the display message and in the `interests` field under the specified contact.
+**Parameters**:
 
-Example:
+- `in/INDEX`: Index of the contact to which you wish to add interests. It must be a number from 1 to the total number of existing contacts.
+- `i/INTEREST...`: Interests to add. You can add multiple interests in a single command, with each interest limited to 20 characters.
 
-```plaintext
-addi in/1 i/Swimming i/Cycling
-```
+<box type="info" seamless>
+
+**Note**:
+- Only newly added interests (i.e., interests not already part of the contact's list) will appear in the confirmation message and be added.
+- Each new interest will automatically be capitalised.
+
+</box>
+
+<box type="warning" seamless>
+
+**Caution**:
+- Interests should not exceed **20 characters** per interest. Adding interests longer than this limit may cause them to be cut off in the UI display. For example, using `addi in/1 i/VeryLongInterestNameExceedingLimit` will save the interest but may not display fully.
+
+</box>
+
+**Examples**:
+
+1. Adding a single interest:
+   ```plaintext
+   addi in/1 i/Swimming
+   ```
+   **Expected output**:
+   ```plaintext
+   New interests added to Alex Yeoh: [Swimming]
+   ```
+
+2. Adding multiple interests:
+   ```plaintext
+   addi in/2 i/Swimming i/Cycling
+   ```
+   **Expected output**:
+   ```plaintext
+   New interests added to Betsy Crower: [Cycling, Swimming]
+   ```
 
 <br>
 
 #### Adding Work Experience: `addw`
 
-Adds work experience to an existing contact.
 
-Format:
+_Adds work experience to an existing contact._
 
+**Format**:
 ```plaintext
 addw in/INDEX w/ROLE,COMPANY,YEAR
 ```
 
-- `in/INDEX`: Contact's position in the list.
+**Parameters**:
+
+- `in/INDEX`: Index of the contact to which you wish to add work experience. It must be a number from 1 to the total number of existing contacts.
 - `w/ROLE,COMPANY,YEAR`: Work experience details.
-
-Example:
-
-```plaintext
-addw in/1 w/Engineer,Google,2023
-```
-
-- `in/INDEX`: Index of contact user wishes to add work experience to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
-- `w/ROLE,COMPANY,YEAR`: Work experience details user wishes to add.
-  - `ROLE`: Must be a single word without spaces, start with a capital letter, consist only of alphabetic characters. 
-  - `COMPANY`: Must be a single word without spaces, start with a capital letter, consist of alphabetic characters. `&` and `-` are the only special characters allowed.
-  - `YEAR`: A four-digit year.
-- **Note:** If the specified contact already has existing work experience, it will just be replaced by the user input.
-
-Example:
-
-```plaintext
-addw in/1 w/Intern,Johnson&Johnson,2024
-```
-
-- Adds the work experience `Intern,Johnson&Johnson,2024` to the 1st person in the contact list.
-
-```plaintext
-addw in/2 w/Analyst,Procter-Gamble,2024
-```
-
-- Adds the work experience `Analyst,Procter-Gamble,2024` to the 2nd person in the contact list.
+    - `ROLE`: One word, capitalised, alphabetic.
+    - `COMPANY`: One word, capitalised, may include `&` and `-`, but not as the first character.
+    - `YEAR`: A four-digit year.
   
+<box type="warning" seamless>
+
+**Caution**:
+There should be no spacings between role, company, and year.
+
+</box>
+<box type="info" seamless>
+
+**Note**:
+Adding work experience to a contact with an existing entry will overwrite the old data.
+
+</box>
+
+**Examples**:
+
+1. Adding a work experience entry:
+   ```plaintext
+   addw in/1 w/Engineer,Google,2023
+   ```
+   **Expected output**:
+   ```plaintext
+   Alex Yeoh work experience replaced to: Engineer,Google,2023
+   ```
+
+2. Overwriting work experience:
+   ```plaintext
+   addw in/2 w/Intern,Johnson&Johnson,2024
+   ```
+   **Expected output**:
+   ```plaintext
+   Betsy Crower work experience replaced to: Intern,Johnson&Johnson,2024
+   ```
+
 <br>
-<div style="page-break-after: always;"></div>
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
-Shows a list of all persons in UniVerse.
+_Displays a list of all contacts in UniVerse._
 
-Format:
-
+**Format**:
 ```plaintext
 list
 ```
 
 <br>
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
-Edits an existing person in UniVerse.
+_Edits an existing person’s information in UniVerse._
 
-Format:
-
+**Format**:
 ```plaintext
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INTEREST] [w/WORK_EXPERIENCE] 
-[m/MAJOR] [u/UNIVERSITY]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INTEREST] [w/WORK_EXPERIENCE] [m/MAJOR] [u/UNIVERSITY]...
 ```
 
-- **Index:**
-  - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-  - The index should not be longer than 1000. 
-- **Updating Values:**
-  - At least one of the optional fields must be provided.
-  - Existing values will be updated to the input values.
-- **Removing Optional Fields:**
-  - `Interests`: If the edit command is executed with an empty `i/` field, it will remove the `interests` from the specified contact.
-  - `Work Experience`: If the edit command is executed with an empty `w/` field, it will remove the `work experience` from the specified contact.
-  - `Tag`: If the edit command is executed with an empty `t/` field, it will remove the `tag` from the specified contact.
-**Note:** When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+**Parameters**:
 
-Examples:
+- `INDEX`: Index of the contact to edit, as shown in the displayed list. It must be a number from 1 to the total number of existing contacts.
+- `[n/NAME]`: Updated name for the contact.
+- `[p/PHONE]`: Updated phone number.
+- `[e/EMAIL]`: Updated email address.
+- `[a/ADDRESS]`: Updated address.
+- `[t/TAG]`: New tags to replace existing ones (case-sensitive).
+- `[b/BIRTHDATE]`: Updated birthdate in `dd-mm-yyyy` format.
+- `[i/INTEREST]`: New interests to replace existing ones (case-sensitive).
+- `[w/WORK_EXPERIENCE]`: Updated work experience in `ROLE,COMPANY,YEAR` format.
+- `[m/MAJOR]`: Updated major or field of study (case-sensitive).
+- `[u/UNIVERSITY]`: Updated university (case-sensitive).
 
-```plaintext
-edit 1 p/91234567 e/johndoe@example.com
-```
-- Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+<box type="info" seamless>
 
-```plaintext
-edit 2 n/Betsy Crower t/
-```
-- Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Notes**:
+- At least one of the optional fields must be provided.
+- Existing values are replaced by the new input values.
+- **Removing Fields**: Use an empty parameter to remove values.
+    - `i/`: Removes all interests.
+    - `w/`: Removes work experience.
+    - `t/`: Removes all tags.
 
-```plaintext
-edit 3 i/
-```
-- Removes all interests from the third contact.
+</box>
 
-```plaintext
-edit 4 w/
-```
-- Removes the work experience for the fourth contact.
+**Examples**:
 
+1. Edit phone number and email:
+   ```plaintext
+   edit 1 p/91234547 e/johndoe@example.com
+   ```
+   **Expected output**:
+   ```plaintext
+   Edited Person: Alex Yeoh; Phone: 91234547; Email: johndoe@example.com; Address: Blk 30 Geylang Street 29, #06-40; Work Experience: Engineer,Google,2023; Tags: [[friends]]; University: nus; Major: Business; Interests: [reading, cycling, Swimming]
+   ```
+
+2. Edit name and remove all tags:
+   ```plaintext
+   edit 2 n/Betsy Crower t/
+   ```
+   **Expected output**:
+   ```plaintext
+   Edited Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Engineer,Microsoft,2023; Tags: []; University: NTU; Major: engineering; Interests: [swimming]
+   ```
+
+3. Remove all interests from a contact:
+   ```plaintext
+   edit 3 i/
+   ```
+   **Expected output**:
+   ```plaintext
+   Edited Person: Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04; Work Experience: Manager,Amazon,2024; Tags: []; University: SMU; Major: Accounting; Interests: []
+   ```
+
+4. Remove work experience:
+   ```plaintext
+   edit 4 w/
+   ```
+   **Expected output**:
+   ```plaintext
+   Edited Person: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Work Experience: ; Tags: [[family]]; University: NUS; Major: Law; Interests: [Reading, Traveling, Photography]
+   ```
+   
 <br>
 
 ### Finding contacts 
-#### Locating persons by name: `find`
+#### Finding Contacts by Name: `find`
 
-Finds persons whose names contain any of the given keywords.
+_Finds persons whose names contain any of the given keywords._
 
-Format:
-
+**Format**:
 ```plaintext
 find KEYWORD [MORE_KEYWORDS]
 ```
 
+**Parameters**:
+
+- `KEYWORD`: One or more keywords to search for within names. The search is case-insensitive.
+
 <box type="tip" seamless>
 
-**Tip:** Type `list` to view the full list of contacts again.
+**Tip**: Type `list` to view the full list of contacts again.
 </box>
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+**Notes**:
 
-Examples:
+- The search is case-insensitive. E.g., `hans` matches `Hans`.
+- The order of keywords does not matter. E.g., `Hans Bo` matches `Bo Hans`.
+- Only full words are matched; e.g., `Han` does not match `Hans`.
+- At least one keyword must match (OR search).
 
-```plaintext
-find John
-```
-- returns `john` and `John Doe`
+**Examples**:
 
-```plaintext
-find bob lee
-```
-- returns `Bob Chen`, `Catherine Lee`<br>
+1. Search for a contact by name:
+   ```plaintext
+   find John
+   ```
+   **Expected output**:
+   ```plaintext
+   2 persons listed!
+   ```
+
+2. Search using multiple keywords:
+   ```plaintext
+   find bob lee
+   ```
+   **Expected output**:
+   ```plaintext
+   2 persons listed!
+   ```
+   Displays `Bob Chen` and `Catherine Lee`
 
   <img src="images/findBobLeeResult.png" alt="result for 'find bob lee'" style="width: 80%;">
 
 <br>
+<br>
 
 #### Finding Contacts by Interest: `findi`
 
-Finds contacts with specific interests.
+_Finds contacts with specific interests._
 
-Format:
-
+**Format**:
 ```plaintext
 findi i/INTEREST
 ```
 
-- `i/INTEREST`: Interest to search for. **Partial matches** are allowed, meaning any contact with an interest that partially matches the provided keyword will be listed.
+**Parameters**:
 
-Example: Finds contacts with the interest "swimming."
-- **Exact Match**: 
-```plaintext
-findi i/swimming
-```
-- **Partial Match**: 
-```plaintext
-findi i/swim
-```
+- `i/INTEREST`: Interest to search for. **Partial matches** are allowed.
+
+<box type="info" seamless>
+
+**Note**: The search matches any contact with an interest that partially matches the provided keyword.
+</box>
+
+**Examples**:
+
+1. Exact match search for "Swimming":
+   ```plaintext
+   findi i/swimming
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 1 person that have similar interest
+   ```
+    <img src="images/findPplSwimming.png" alt="Result for 'findi i/swimming'" style="width: 70%;">
+
 <br>
 
-<img src="images/findPplSwimming.png" alt="result for 'find i/swimming'" style="width: 80%;">
-
-<br><br>
+2. Partial match search for "swim":
+   ```plaintext
+   findi i/swim
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 3 people that have similar interest
+   ```
+  
 
 <box type="warning" seamless>
 
 **Caution**:
+- **Searching by multiple interests is not supported** and will trigger an error message.
 
-Invalid Input: **Searching by multiple interests** is not supported and will trigger an error message:
-```plaintext
-Invalid command format! 
-findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers.
-Parameters: i/KEYWORD
-```
 Invalid formats:
 ```plaintext
 findi i/reading i/swimming
-```
-```plaintext
 findi i/reading,i/swimming
-```
-```plaintext
 findi i/reading, i/swimming
-```
-```plaintext
 findi i/reading swimming
-```
-```plaintext
 findi i/reading,swimming
-```
-```plaintext
 findi i/reading, swimming
 ```
 </box>
 
 <br>
 
+
 #### Finding Contacts by Work Experience: `findw`
 
-Finds contacts with specific work experiences based on **company** and optionally **role** and **year**.
+_Finds contacts with specific work experiences based on **company** and optionally **role** and **year**._
 
-Format:
-
+**Format**:
 ```plaintext
 findw w/ROLE,COMPANY,YEAR
 ```
 
-- **`COMPANY`**: Required. The name of the company to search for.
-- **`ROLE`**: Optional. The role or position held at the company (e.g., `Engineer`).
-- **`YEAR`**: Optional. The year of employment at the company.
+**Parameters**:
+
+- `COMPANY`: Required. Name of the company.
+- `ROLE`: Optional. Position held at the company.
+- `YEAR`: Optional. Year of employment at the company.
 
 <box type="info" seamless>
 
-**Note**: The fields `ROLE` and `YEAR` can be omitted, but `COMPANY` must always be specified.
+**Note**: `ROLE` and `YEAR` are optional, but `COMPANY` must always be specified.
 </box>
 
-Examples:
+**Examples**:
 
-- Find all contacts who worked at Google:
-  ```plaintext
-  findw w/Google
-  ```
-- Find contacts who interned at Google:
-  ```plaintext
-  findw w/Intern,Google
-  ```
-- Find contacts who interned at Google in 2024:
-  ```plaintext
-  findw w/Intern,Google,2024
-  ```
+1. Find all contacts who worked at Google:
+   ```plaintext
+   findw w/Google
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 6 people who have worked or are working at Google
+   ```
+
+2. Find contacts who interned at Google:
+   ```plaintext
+   findw w/Intern,Google
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 4 people who have worked or are working as Intern at Google
+   ```
+
+3. Find contacts who interned at Google in 2024:
+   ```plaintext
+   findw w/Intern,Google,2024
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 1 person who has worked or is working as Intern at Google in 2024
+   ```
+   <img src="images/findwInternGoogle2024.png" alt="Result for 'findw w/Intern,Google,2024'" style="width: 70%;">
+
 
 <br>
 
 #### Finding Contacts by University: `findu`
 
-Finds contacts with a specific university from the currently displayed list.
+_Finds contacts associated with a specific university from the currently displayed list._
 
-<box type="tip" seamless>
-
-**Tip:** University name is case-sensitive.
-
-</box>
-
-Format:
+**Format**:
 ```plaintext
 findu u/UNIVERSITY
 ```
 
+**Parameters**:
+
+- `u/UNIVERSITY`: The university to search for. This field is **case-sensitive**, and **partial matches** are supported.
+
 <box type="tip" seamless>
 
-**Tip:** University name is case-sensitive.
+**Tip**: University name is case-insensitive.
 </box>
-
-- `u/UNIVERSITY`: The university to search for (case-sensitive). **Partial matches** are supported, allowing any contact with a university name that partially matches the keyword to be listed.
-
-Example: Find contacts associated with SUTD.
-- **Exact Match**:
-```plaintext
-findu u/SUTD
-```
-- **Partial Match**:
-```plaintext
-findu u/SUT
-```
 
 <box type="info" seamless>
 
 **Note**:
-The `findu` command operates based on the **current list of contacts displayed**. To ensure you search from the full contact list, type `list` before using `findu`. This refreshes the view to show all contacts, allowing `findu` to accurately filter contacts from the complete data set.
-
-</box>
+The `findu` command searches within the **current list of displayed contacts**. To search the full contact list, type `list` before using `findu`.
 
 **Example Workflow**:
 1. Type `list` to display all contacts.
 2. Use `findu u/NUS` to filter and show only contacts from NUS.
+</box>
+
+**Examples**:
+
+1. **Exact Match**:
+   ```plaintext
+   findu u/SUTD
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 1 person in SUTD
+   ```
+
+2. **Partial Match**:
+   ```plaintext
+   findu u/SUT
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 1 person in SUT
+   ```
+
+
 
 <br>
 
 #### Finding Contacts by Major: `findm`
 
-Finds contacts with a specific major from the currently displayed list.
+_Finds contacts with a specific major from the currently displayed list._
 
-Format:
-
+**Format**:
 ```plaintext
 findm m/MAJOR
 ```
 
-- `m/MAJOR`: Major or field of study. **Partial matches** are supported, so any contact with a major that partially matches the provided keyword will be included.
+**Parameters**:
 
-Example: Finds contacts with the major "Computer Science"
-- **Exact Match**:
-```plaintext
-findm m/Computer Science
-```
-- **Partial Match**:
-```plaintext
-findm m/Comp
-```
-<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
+- `m/MAJOR`: Major or field of study to search for. **Partial matches** are supported.
+
+**Examples**:
+
+1. **Exact Match**:
+   ```plaintext
+   findm m/Computer Science
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 2 people that are taking Computer Science
+   ```
+
+2. **Partial Match**:
+   ```plaintext
+   findm m/Comp
+   ```
+   **Expected output**:
+   ```plaintext
+   Found 3 people that are taking Comp
+   ```
+   Display people taking `Computer Engineering` and `Computer Science`.
+
+<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 70%;">
 
 
-<br><br>
+<br>
+<br>
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+### Deleting a person: `delete`
 
+_Deletes a specified person from UniVerse._
+
+**Format**:
 ```plaintext
 delete INDEX
 ```
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+**Parameters**:
 
-Examples:
+- `INDEX`: The index number of the person to delete, as shown in the displayed list. It must be a number from 1 to the total number of existing contacts.
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Examples**:
+
+1. Delete the second person in the full contact list:
+   ```plaintext
+   list
+   delete 2
+   ```
+   **Expected output**:
+   ```plaintext
+   Deleted Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Intern,Johnson&Johnson,2024; Tags: []; University: NTU; Major: engineering; Interests: [Cycling, Swimming]
+   ```
+
+2. Delete the first person in search results for "Betsy":
+   ```plaintext
+   find Betsy
+   delete 1
+   ```
+   **Expected output**:
+   ```plaintext
+   Deleted Person: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []
+   ```
 
 <br>
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+_Removes all entries from UniVerse._
 
+**Format**:
 ```plaintext
 clear
 ```
+
+**Expected output**:
+```plaintext
+All contacts cleared from UniVerse.
+```
+
+<box type="warning" seamless>
+
+**Caution**: This command permanently deletes all contacts. Ensure you want to clear all data before executing.
+</box>
+
 <br>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
-Exits the program.
+_Closes the UniVerse application._
 
+**Format**:
 ```plaintext
 exit
 ```
 
-<br>
+**Expected output**:
+Exit from application.
+
+
+<div style="page-break-after: always;"></div>
 
 ## Data Management
 
 ### Saving the data
 
-UniVerse data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UniVerse data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -542,7 +709,6 @@ _Details coming soon ..._
 
 ---
 
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -551,30 +717,49 @@ _Details coming soon ..._
 
 ---
 
-## Known issues
+<div style="page-break-after: always;"></div>
 
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Major and University Field Validation**:
-    - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
-    - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
-    - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
-4. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
-5. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
-6. **When adding `interests` to contacts**, running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
-7. **When adding `work experience` to contacts** : 
-    - `role` field cannot contain numbers or special characters. `company` field cannot contain numbers. Additionally, `year` is allowed to be in the future.
-    - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
-    - **Limitation**: The `role` and `company` fields for the `addw` command cannot contain spaces and can only consist of one word
-    - **Planned Solution**: We plan to relax the input validation to allow :
-      - Spaces after commas
-      - Optional capitalization in the first word
-      - Multi-word inputs for both role and company (e.g., `software engineer, Jane Street, 2024`)
-
-
-
+1. **Using multiple screens**:  
+If you move the application to a secondary screen, then switch back to using only the primary screen, the GUI may open off-screen. To resolve this, delete the `preferences.json` file created by the application before running it again.
+2. **Help Window minimization issue**:  
+If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the `F1` shortcut) again, the original Help Window will stay minimized, and no new Help Window will appear. To resolve this, manually restore the minimized Help Window.
+3. **Major and University field validation**:
+   - **Current Behaviour**: The application allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`).
+   - **Limitation**: There is no restriction to prevent users from entering purely numerical values or module codes as majors and universities, which can cause inaccurate data.
+   - **Planned Solution**: Stricter input validation to prevent numbers-only entries for these fields in future versions.
+4. **Empty address book after deleting fields in JSON data file**:
+   - **Current Behaviour**: If certain fields are deleted directly in the JSON data file, the UniVerse app may start with an empty address book without displaying an error message.
+   - **Limitation**: There is no error handling to detect missing fields in the JSON data file, leading to data loss.
+   - **Planned Solution**: Future versions may include validation to check for required fields in the JSON file and notify users of any missing fields upon loading.
+5. **Future dates allowed in the `birthday` field**:
+   - **Current Behaviour**: The application allows dates in the future to be entered as a birthday when adding a new contact.
+   - **Limitation**: Accepting future dates for birthdays may lead to unrealistic data entries.
+   - **Planned Solution**: Implement input validation to restrict the `birthday` field to past dates only.
+6. **Adding interests with multiple `in/` prefixes**:
+   - **Current Behaviour**: When using the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last `in/` index will receive the newly added interest.
+   - **Limitation**: The command does not support adding interests to multiple contacts simultaneously, which could be confusing if users attempt to use multiple `in/` prefixes.
+   - **Planned Solution**: Enforce validation to allow only one `in/` prefix in the `addi` command, or consider expanding functionality to support multiple contacts.
+7. **Limitations with the `Work experience` field**:
+   - **Current Behaviour**:
+     - The `role` field cannot contain numbers or special characters, and can only accept one word.
+     - The `company` field cannot contain numbers, and can only accept one word.
+     - The `year` field accepts dates in the future.
+   - **Limitation**:
+     - The `role` and `company` fields for the `addw` command cannot contain spaces and are limited to single words.
+     - There is limited flexibility in formatting for `Work experience`, which can cause inconsistencies.
+   - **Planned Solution**: Relax the input validation for the `Work experience` field to allow:
+     - Spaces after commas.
+     - Optional capitalization of the first word.
+     - Multi-word entries for both role and company (e.g., `software engineer, Jane Street, 2024`).
+8. **Interest field length limit in `addi` command**:
+   - **Current Behaviour**: Users can add interests that exceed 20 characters using the `addi` command, but the UI may truncate or cut off interests that are longer, potentially causing some interests to be partially displayed or hidden.
+   - **Limitation**: The application does not enforce a character limit for interests in the `addi` command, resulting in display issues for longer entries.
+   - **Planned Solution**: Introduce validation to limit interests to 20 characters in the `addi` command, or  ensure that all displayed interests fit within the UI without truncation.
+   
 ---
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
@@ -605,6 +790,7 @@ _Details coming soon ..._
 - **Partial Match**: A feature in some commands where the search does not require an exact match of the keyword, but can find results that contain the keyword as part of a longer string (e.g., `findm m/Comp` could match "Computer Science" and "Computer Engineering").
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 | Action                                      | Format, Examples                                                                                                                                                                                                                                                                                       |
