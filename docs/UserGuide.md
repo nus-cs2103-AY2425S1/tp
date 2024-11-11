@@ -203,8 +203,8 @@ Users can search for customers by entering part or all of their phone number.
 Users can search for customers by entering part or all of their postal code. Postal codes should follow the format of a 6-digit number.
 
 **Examples:**
-- `find 560123` — Finds any customers with the postal code "560123".
-- `find 560` — Finds any customers with postal codes starting with "560".
+- `find S560123` — Finds any customers with the postal code "560123".
+- `find S560` — Finds any customers with postal codes starting with "560".
 
 
 #### Simultaneous Search with Multiple Criteria
