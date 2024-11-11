@@ -357,7 +357,7 @@ Additional Details:
 * Invalid date or time values (e.g., months outside 1-12 or days outside 1-31) will show an error, considering month-specific days and leap years.
 * The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. For example, if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
 * The time is in the 24-hour format. (e.g. `1800` for 6:00 PM)
-* Date can be with or without leading zeroes (e.g., `1/1/2024 1400` and `01/01/2024 1400` are accepted). 
+* Day and month can be with or without leading zeroes (e.g., `1/1/2024 1400` and `01/01/2024 1400` are accepted). 
 
 
 Examples:
