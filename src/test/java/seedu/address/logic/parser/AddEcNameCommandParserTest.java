@@ -46,12 +46,11 @@ public class AddEcNameCommandParserTest {
         String expectedParamMessage = MESSAGE_INVALID_FORMAT;
 
         // EP: no index
-        String userInput = AddEcNameCommand.COMMAND_WORD + PREFIX_ECNAME
-                + validEmergencyContactName;
+        String userInput = PREFIX_ECNAME + validEmergencyContactName;
         assertParseFailure(parser, userInput, expectedParamMessage);
 
         // EP: no parameters
-        userInput = AddEcNameCommand.COMMAND_WORD;
+        userInput = "";
         assertParseFailure(parser, userInput, expectedParamMessage);
     }
 
