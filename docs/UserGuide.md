@@ -189,6 +189,7 @@ After entering the details, click the `Save` button to add the log entry to the 
 2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
 3) This feature is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the `addlog` command directly.
 4) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow users from saving it as a log.
+5) Adding an older log is allowed, considering a user may want to move their logs from a physical notebook to the application.
 <br>
 <br>
 
