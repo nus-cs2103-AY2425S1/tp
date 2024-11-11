@@ -17,9 +17,9 @@ management applications.
    3. [Listing all concerts](#listing-all-concerts--listc)
    4. [Listing all persons and concerts](#listing-all-persons-and-concerts--list)
    5. [Listing all concert contacts](#listing-all-concertcontacts--listcc)
-   6. [Adding a Person](#adding-a-person-addp)
-   7. [Adding a Concert](#adding-a-concert-addc)
-   8. [Adding a Concert Contact](#adding-a-concertcontact-addcc)
+   6. [Adding a person](#adding-a-person-addp)
+   7. [Adding a concert](#adding-a-concert-addc)
+   8. [Adding a concert contact](#adding-a-concertcontact-addcc)
    9. [Deleting a person](#deleting-a-person--deletep)
    10. [Deleting a concert](#deleting-a-concert--deletec)
    11. [Deleting a concert contact](#deleting-a-concertcontact--deletecc)
@@ -133,6 +133,12 @@ management applications.
 - `TAG` is limited to about 45 characters (when the GUI is at the minimum allowed size), any longer may lead to
   truncated view of the `TAG`. It is recommended to keep within these bounds for the best experience.
 
+- `TAG` only allows single words and does not allow duplicates.
+
+- The application's view will switch to persons and concerts when commands involving concerts or persons are executed.
+
+- The application's view will switch to concert contacts when commands involving concert contacts are executed.
+
 </div>
 
 ---
@@ -154,31 +160,24 @@ Format: `help`
 ### Listing all persons : `listp`
 
 Shows a list of all persons in the ConcertPhonebook.
-If the concert contact view is currently being shown, the application will switch to the view of persons and
-concerts instead.
 
 Format: `listp`
 
 ### Listing all concerts : `listc`
 
 Shows a list of all concerts in the ConcertPhonebook.
-If the concert contact view is currently being shown, the application will switch to the view of persons and
-concerts instead.
 
 Format: `listc`
 
 ### Listing all persons and concerts : `list`
 
 Shows a list of all persons and concerts in the ConcertPhonebook.
-If the concert contact view is currently being shown, the application will switch to the view of persons and
-concerts instead.
 
 Format: `list`
 
 ### Listing all concert contacts : `listcc`
 
 Shows a list of all concert contacts in the ConcertPhonebook.
-If the persons and concerts are currently being shown, the application will switch to the concert contact view instead.
 
 Format: `listcc`
 
@@ -277,8 +276,6 @@ Format: `clear`
 ### Finding a person: `findp`
 
 Finds persons whose names contain any of the given keywords.
-If the concert contact view is currently being shown, the application will switch to the view of persons and
-concerts instead.
 
 Format: `findp [n/NAME_KEYWORDS] [r/ROLE]`
 
@@ -298,8 +295,6 @@ Examples:
 ### Finding a concert: `findc`
 
 Finds concerts whose names contain any of the given keywords.
-If the concert contact view is currently being shown, the application will switch to the view of persons and
-concerts instead.
 
 Format: `findc n/NAME_KEYWORDS`
 
@@ -323,7 +318,6 @@ Use a combination of `findp`, `findc`, `listp` and `listc` to view specific pers
 ### Finding a concert contact: `findcc`
 
 Finds all concert contacts that are associated to the person and the concert at the specified index.
-If the persons and concerts are currently being shown, the application will switch to the concert contact view instead.
 
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
