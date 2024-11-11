@@ -307,7 +307,7 @@ results based on the specified criteria.
 #### Implementation
 
 * The `delete` command extends `Command` and implements `Undoable`.
-* the `delete` command is based on the index of the contact.
+* The `delete` command is based on the index of the contact.
 
 Below is a detailed process illustration using a sequential diagram:
 
