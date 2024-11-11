@@ -32,7 +32,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
        ![incomplete command](images/incompleteCommand.png)
    - Valid command words would briefly show in colour grey to indicate the command word is correct.
        ![valid_command](images/validCommand.png)
-   - Once the completed, valid command is entered, the command will return to colour black.<br>
+   - Once the full valid command is entered, the command words will return to black color.<br>
        ![complete command](images/completedCommand.png)
    - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
      will open the help window.<br>
