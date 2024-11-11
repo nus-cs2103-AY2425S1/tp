@@ -215,7 +215,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | concert organiser | delete a person                        | remove entries that I no longer need                                   |
 | `* * *`  | concert organiser | view a person by name                  | locate details of persons without having to go through the entire list |
 | `* * *`  | concert organiser | assign roles to people                 | categorise each contact by what they do                                |
-| `* * *`  | concert organiser | edit a contact                         | have the most updated contact details including roles                  |
+| `* * *`  | concert organiser | edit a contact                         | have the most updated contact details                                  |
 | `* * *`  | concert organiser | view people by their roles             | easily contact the personnel I need for a concert                      |
 | `* * *`  | concert organiser | create a new concert                   | manage the personnel involved in the concert                           |
 | `* * *`  | concert organiser | view a list of personnel for a concert | view everyone involved in a concert easily                             |
