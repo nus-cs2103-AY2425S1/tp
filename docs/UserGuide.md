@@ -341,7 +341,7 @@ Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 Examples:
 *  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
-   Edited Person: Dr Jane Smith; Phone: 91234567; Email: johndoe@example.com; Address: 456 Elm Street
+   Edited Person: Dr Jane Smith; Phone: 91234567; Email: johndoe@example.com; Address: 456 Elm Street;
 
 *  `edit z/2` <br>
    **Output**: <br>
@@ -376,8 +376,8 @@ Examples:
 
 * `get johnny` <br>
   **Output**: <br>
-  Two persons listed that suits your keyword! <br>
-  enters more specific name keywords to retrieve the ID of the person
+  2 persons listed that suits your keyword! <br>
+  Enter more specific name keywords to retrieve the ID of the person
 
 ### [Finding Doctor or Patient by Name](#command-summary): `find`
 
