@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -97,6 +97,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -352,7 +353,7 @@ The following activity diagram summarizes what happens when a user executes a `c
 
 * the findCommand is enhanced by new Predicates 
 * RoomNumber predicates, PhonePredicate, and TagContainsKeywordsPredicate allows
-the a wider range of searching based on more features
+ a wider range of searching based on more features
 
 Below is a detailed process illustration using a sequential diagram:
 
@@ -818,9 +819,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<box type="info" seamless> 
 
+**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
+
+</box>
 
 ### Launch and shutdown
 
@@ -896,7 +899,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
 
 2. Importing a json file with invalid data
-   1. Prequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   1. Prerequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json`
    Expected: No information is imported into DorManagerPro. Error details shown in the status message.
 
