@@ -31,12 +31,12 @@ create AddCommand
 AddCommandParser -> AddCommand
 activate AddCommand
 
-AddCommand --> AddCommandParser : c
+AddCommand --> AddCommandParser
 deactivate AddCommand
 
 AddCommandParser --> AddressBookParser : c
 deactivate AddCommandParser
-
+destroy AddCommandParser
 
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
