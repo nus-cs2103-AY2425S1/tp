@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-<img src="images/wardwatch_banner.png" alt="wardwatch-logo" style="pointer-events: none;">
+<img src="images/wardwatch_banner.png" alt="wardwatch-logo" style="pointer-events: none; width: 100%; height: auto;">
 
 # WardWatch User Guide
 
@@ -52,7 +52,7 @@ WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managi
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
 
 A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-<img src="images/Ui.png" alt="Ui" style="pointer-events: none;">
+<img src="images/Ui.png" alt="Ui" style="pointer-events: none; width: 100%; height: auto;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -103,7 +103,8 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 **Save and Storage information:**
 
 - WardWatch data are saved in the [hard disk](#glossary) automatically after any command that changes the data. There is no need to save manually.
-- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+- WardWatch data are saved automatically as a JSON file `[JAR file location]/data/wardwatch.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -131,13 +132,13 @@ Parameters often take up the form of `p/[PARAMETER]` where p is the parameter sy
 ### Patient Parameters
 
 
-| Symbol  | Parameter    | Constraints                                                                                                                                                                                 |
-| ------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`n`** | `NAME`       | - Must contain at least 1 alphabetic character and has a character limit of 50.<br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.       |
-| **`i`** | `ID`         | - Must contain at least 1 alphanumeric character and has a character limit of 36.<br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.                 |
-| **`w`** | `WARD`       | - Must contain at least 1 alphanumeric character and has a character limit of 50.                                                                                                           |
-| **`d`** | `DIAGNOSIS`  | - Must contain at least 1 alphabetic character and has a character limit of 80.                                                                                                             |
-| **`m`** | `MEDICATION` | - Must contain at least 1 alphanumeric character and has a character limit of 80.<br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods. |
+| Symbol  | Parameter    | Constraints                                                                                                                                                                                                                           |
+| ------- | ------------ |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`n`** | `NAME`       | - Must contain at least 1 alphabetic character and has a character limit of 50.<br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.                                                 |
+| **`i`** | `ID`         | - Must contain at least 1 alphanumeric character and has a character limit of 36.<br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.<br> - **Unique**: Cannot have duplicates (case sensitive) |
+| **`w`** | `WARD`       | - Must contain at least 1 alphanumeric character and has a character limit of 50.                                                                                                                                                     |
+| **`d`** | `DIAGNOSIS`  | - Must contain at least 1 alphabetic character and has a character limit of 80.                                                                                                                                                       |
+| **`m`** | `MEDICATION` | - Must contain at least 1 alphanumeric character and has a character limit of 80.<br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.                                           |
 
 ### Notes Parameters
 
@@ -148,10 +149,9 @@ Parameters often take up the form of `p/[PARAMETER]` where p is the parameter sy
 
 ### Appointment Parameters
 
-
 | Symbol  | Parameter     | Constraints                                                                                                                                                    |
 | ------- | ------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`a`** | `DESCRIPTION` | - Must contain at least 1 alphabetic character and has a limit of 40 characters.                                                                               |
+| **`a`** | `DESCRIPTION` | - Must contain at least 1 alphabetic character and has a limit of 80 characters.                                                                               |
 | **`s`** | `START`       | - A singular`DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute. |
 | **`e`** | `END`         | - A singular`DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute. |
 
@@ -171,7 +171,7 @@ However, dates exceeding the maximum possible (e.g., the 32nd of any month) will
 
 Symbol     | Parameter   | Constraints
 -----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**-**  | `INDEX`     |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `INDEX`     |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​<br>- Must not be greater than `Integer.MAX_VALUE` of `2147483647`
 **-**  | `DATE`      |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
 **-**  | `KEYWORD`   |- Cannot be empty.<br>- Accepts any character.
 
@@ -185,7 +185,7 @@ Symbol     | Parameter   | Constraints
 
 Shows a pop-up message explaining how to access the help page.
 
-<img src="images/helpMessage.png" alt="help message" style="pointer-events: none;">
+<img src="images/helpMessage.png" alt="help message" style="pointer-events: none; width: 100%; height: auto;">
 
 Format: `help`
 
@@ -209,7 +209,7 @@ Format: `exit`
 
 ### Adding a patient: `add`
 
-<img src="images/add.png" alt="add patient result" style="pointer-events: none;">
+<img src="images/add.png" alt="add patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Adds a patient to WardWatch.
 
@@ -228,7 +228,7 @@ Examples:
 
 ### Editing a patient : `edit`
 
-<img src="images/edit.png" alt="edit patient result" style="pointer-events: none;">
+<img src="images/edit.png" alt="edit patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Edits an existing person in WardWatch.
 
@@ -247,7 +247,7 @@ Examples:
 
 ### Deleting a patient : `delete`
 
-<img src="images/delete.png" alt="delete patient result" style="pointer-events: none;">
+<img src="images/delete.png" alt="delete patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Deletes the specified person from WardWatch.
 
@@ -303,7 +303,7 @@ Examples:
 * `find w/ B1` returns all patients in ward B1
 * `find m/ Dave` returns an empty list
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
-  <img src="images/findAliceBensonResult.png" alt="find n/ alice benson" style="pointer-events: none;">
+  <img src="images/findAliceBensonResult.png" alt="find n/ alice benson" style="pointer-events: none; width: 100%; height: auto;">
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -320,7 +320,7 @@ Format: `view INDEX`
 Examples:
 
 * `view 1` to view the 1st patient's details.
-<img src="images/viewResult.png" alt="result for 'view 1'" style="pointer-events: none;">
+<img src="images/viewResult.png" alt="result for 'view 1'" style="pointer-events: none; width: 100%; height: auto;">
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -358,7 +358,7 @@ Examples:
 
 ### Adding an Appointment to a patient: `makeappt`
 
-<img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none;">
+<img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Makes an appointment for a person.
 
@@ -398,7 +398,7 @@ Format: `delappt INDEX`
 
 ### Show appointments on a specific date: `scheduledate`
 
-<img src="images/scheduledate.png" alt="scheduledate result" style="pointer-events: none;">
+<img src="images/scheduledate.png" alt="scheduledate result" style="pointer-events: none; width: 100%; height: auto;">
 
 Lists all the appointments on a specific date.
 
@@ -415,7 +415,7 @@ Examples:
 
 ### List all patient appointment: `scheduleall`
 
-![scheduleall result](images/scheduleall.png)
+<img src="images/scheduleall.png" alt="scheduleall result" style="pointer-events: none; width: 100%; height: auto;">
 
 Lists all the appointments assigned to every patient.
 

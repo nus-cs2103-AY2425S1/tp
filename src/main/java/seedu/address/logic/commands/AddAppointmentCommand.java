@@ -36,7 +36,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_END + " 21-12-2024-23-59 "
             + "\n Datetime is in the form of dd-MM-yyyy-HH-mm";
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: \n\n%1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Patient: \n\n%1$s";
     public static final String MESSAGE_OVERLAPPING_APPOINTMENT =
             "Appointment overlaps with another pre-existing appointment! Please check your schedule and try again";
     private final Index index;

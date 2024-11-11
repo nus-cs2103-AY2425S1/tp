@@ -19,11 +19,11 @@ public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "delappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person's appointment identified by the index number used in the displayed person list.\n"
+            + ": Deletes the patient's appointment identified by the index number used in the displayed patient list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Person: \n\n%1$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Patient: \n\n%1$s";
     public static final String MESSAGE_NO_APPOINTMENT = "The Patient indicated does not have an appointment";
 
     private final Index targetIndex;
