@@ -7,12 +7,35 @@ Welcome to the NomNomNotifier User Guide, your essential toolkit for mastering c
 
 NomNomNotifier brings powerful features right to your desktop, enabling quick and accurate access to customer data like names, addresses, contact details, and dietary preferences. Our app enhances the speed of customer service while helping teams manage VIPs and special requests with ease. Combining a Command Line Interface (CLI) with a user-friendly Graphical Interface (GUI), NomNomNotifier offers the flexibility to work however you prefer—type commands to streamline actions or navigate visually to find exactly what you need.
 
+
 * Table of Contents
-  * Quick start
-  * Command summary
-  * Features
-  * FAQ
-  * Known Issues
+    * [Quick start](#quick-start)
+    * [Command summary](#command-summary)
+    * Features
+        * [Add Customer: `add`](#adding-a-customer-add)
+        * [List Customers: `list`](#listing-all-customers--list)
+        * [Edit Customer: `edit`](#editing-a-customer--edit)
+        * [Find Customers: `find`](#locating-customers-by-name-find)
+        * [Delete Customer: `delete`](#deleting-a-customer--delete)
+        * [Delete Customers by Postal Code: `deletePC`](#deleting-customers-by-postal-code-deletepc)
+        * [Clear all Customers: `clear`](#clearing-all-entries--clear)
+        * [Add Order: `order`](#adding-an-order-order)
+        * [Delete Order: `deleteOrder`](#deleting-an-order-deleteorder)
+        * [List Orders: `listOrder`](#listing-all-orders-listorder)
+        * [Assign Order to Customer: `put`](#adding-an-order-to-a-customer-put)
+        * [View Order History for Customer: `history`](#listing-all-order-histories-for-a-customer-history)
+        * [Create Shortcut for Tags: `addShortCut`](#creating-shortcuts-for-tags-addshortcut)
+        * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcuts-for-tags-delshortcut)
+        * [List All Shortcuts: `listShortCut`](#listing-existing-shortcuts-listshortcut)
+        * [Using Shortcuts for Tagging](#using-shortcuts-for-tagging)
+        * [Filter Customers by Tags: `filter`](#filtering-by-tags-filter)
+        * [Archive Customer: `archive`](#archive-customer-archive)
+        * [View Archived Customers: `listarchive`](#list-archived-customers-listarchive)
+        * [Unarchive Customer: `unarchive`](#unarchive-customer-unarchive)
+        * [Download Customer Data: `download`](#downloading-customer-data-download)
+        * [Exit Command: `exit`](#exiting-the-program--exit)
+    * [FAQ](#faq)
+    * [Known Issues](#known-issues)
   
 ---
 
@@ -73,7 +96,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 | **List Shortcuts**          | `listShortCut`                                                                                                                                                       |
 | **Filter**                  | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
 
-> **Note**: NomNomNotifier only accepts inputs in english without any emojis
+> **Disclaimer**: NomNomNotifier only accepts inputs in english without any emojis, any inputs in other languages could cause unexpected behaviour
 
 ---
 
@@ -113,8 +136,12 @@ Adds a customer to the address book.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTAL_CODE [t/TAG]…​`
 
-- Phone number (with `p/` prefix) should be an 8-digit number starting with 9, 8, 7, or 6.
+- Phone number (with `p/` prefix) should be an 8-digit mainstream Singaporean phone number starting with 9, 8, 7, or 6.
 - Postal code (with `pc/` prefix) should be a 6-digit number.
+
+> Note: Any name inputs with space before and after name string will be trimmed
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** Any further specification in ability to add or edit fields is described in the respective field's error message</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** A person can have any number of tags (including 0)</div>
 
@@ -206,7 +233,7 @@ Users can search for customers by entering part or all of their phone number.
 
 #### Search by Postal Code
 
-Users can search for customers by entering part or all of their postal code. Postal codes should follow the format of a 6-digit number.
+Users can search for customers by entering part or all of their postal code. Postal code inputs for find command should follow the format prefixed by "S" followed by a number.
 
 **Examples:**
 - `find S560123` — Finds any customers with the postal code "560123".
@@ -256,11 +283,8 @@ Deletes the specified customer from the address book.
 
 ---
 
-<<<<<<< HEAD
 ### Deleting customers by postal code: `deletePC`
-=======
-### Deleting customers by PostalCode: `deletePC`
->>>>>>> upstream/master
+
 * Delete all persons from the address book with the given postal code.
 
 Format: `deletePC POSTALCODE`
@@ -382,7 +406,7 @@ Lists all order histories of a customer, including the time of each order.
 
 ---
 
-### Creating Shortcuts for Tags
+### Creating Shortcuts for Tags: `addShortCut`
 
 Tag shortcuts allow you to create aliases for commonly used tags, saving you time when tagging contacts.
 
@@ -406,7 +430,7 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
 
 ---
 
-### Deleting Shortcuts for Tags
+### Deleting Shortcuts for Tags:`DelShortCut`
 
 You can delete an existing shortcut by specifying its alias and tag name.
 
@@ -423,7 +447,7 @@ You can delete an existing shortcut by specifying its alias and tag name.
 
 ---
 
-### Listing Existing Shortcuts
+### Listing Existing Shortcuts: `listShortCut`
 
 View all current shortcuts to see the mappings of aliases to tag names.
 
@@ -456,12 +480,16 @@ Examples:
     <em>Figure 17: Shows shortcut being used to edit tags</em>
 </div>
 
-> **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`/t`) in commands, they are case-sensitive.
+> **Note**: While adding shortcuts, aliases and tag names are case-insensitive. However, when using tags (`t/`) in commands, they are case-sensitive.
+> 
+> This means that when the shortcut, "v" (alias) is set to "Vegan" (tag name), the shortcut, "V" (alias) cannot be set "VEGAN". 
+>
+> However, when using the command `edit 1 t/Vegan t/VEGAN`, where the tags of contact at index 1 is being replaced with "Vegan" and "VEGAN", those two tags are considered different
 
 Example:
 - Assuming the shortcut "v" maps to "Vegan":
-    - `add ... t/v` — Tags with "Vegan".
-    - `add ... t/V` — Tags with "V".
+    - `add ... t/v` — Tags Person with "Vegan".
+    - `add ... t/V` — Tags Person with "V".
 
 ---
 
@@ -469,13 +497,10 @@ Example:
 You can filter the customer list by tags or shortcuts to view only the relevant contacts. The filter command supports prefix searches, is case-insensitive, and allows multiple keywords.
 
 Format: `filter [TAG1] [TAG2] ...`
-* Filters the list by the specified tags. 
-* Shortcuts can also be used to filter, allowing quick access to commonly used tags.
+* Filters the list by the specified tags.
 
 Examples:
-* Assuming "v" (Vegan) and "vg" (Vegetarian) shortcuts are set:
-    - `filter Vegan Vegetarian` — Shows all customers with tags starting with "Vegan" or "Vegetarian" (e.g., "VeganPlus").
-    - `filter v vg` — Uses shortcuts to show customers tagged as "Vegan" or "Vegetarian" or tags that start with those aliases (e.g., "VeganFriendly").
+* `filter Vegan Vegetarian` — Shows all customers with tags containing keywords listed, "Vegan" or "Vegetarian" (e.g., "VeganPlus").
 
 <div style="text-align: center;">
     <img src="images/filter.png" alt="filter" width="350"/>
@@ -483,14 +508,8 @@ Examples:
     <em>Figure 18: Shows filter based on tag: Vegan</em>
 </div>
 
-<div style="text-align: center;">
-    <img src="images/filter_shortcuts.png" alt="filter shortcuts" width="350"/>
-    <br>
-    <em>Figure 19: Shows filters based on preassigned shortcut</em>
-</div>
-
 ---
-### **Archive user: `archive`**
+### **Archive customer: `archive`**
 
 Archive a customer so that it doesn't show when we run `list`
 
@@ -509,7 +528,7 @@ Assuming there's at least one person that is unarchived.
 2. `archive 1`
 
 ---
-### **List archived users `listarchive`**
+### **List archived customer: `listarchive`**
 
 Shows all archived users only in address book
 
@@ -523,7 +542,7 @@ Assuming there's at least one person that is archived.
 1. `listarchive`
 
 ---
-### **Unarchive user: `unarchive`**
+### **Unarchive customer: `unarchive`**
 
 Unarchive a customer so that it shows when we run `list`
 
@@ -543,8 +562,9 @@ Assuming there's at least one person that is archived.
 
 ---
 
-### **Downloading Data: `download`**  
+### **Downloading Customer Data: `download`**
 Exports the currently displayed Address Book data as a CSV file with optional tag-based filtering.
+
 
 **Format:**  
 `download [t/TAG1] [t/TAG2] ...`
@@ -558,20 +578,21 @@ Exports the currently displayed Address Book data as a CSV file with optional ta
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
-- `download` — Exports all contacts.
-- `download t/Vegan` — Exports only the contacts tagged as "Vegan."
-- `download t/friend t/colleague` — Exports contacts tagged as both, "friend" and "colleague."
+- `download` — Exports all contacts that exists in displayed list.
+- `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan" within the displayed list.
+- `download t/Vegan t/Vegetarian` — Exports contacts or orders tagged as "Vegan" and "Vegetarian" within the displayed list.
+
 
 <div style="text-align: center;">
     <img src="images/dowload.png" alt="download" width="350"/>
     <br>
-    <em>Figure 20: Shows entire contact list being downloaded</em>
+    <em>Figure 19: Shows entire contact list being downloaded</em>
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 20px">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 21: Shows only people with vegan tag being downloaded</em>
+    <em>Figure 20: Shows only people with vegan tag being downloaded</em>
 </div>
 
 ---

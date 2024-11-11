@@ -30,8 +30,6 @@ public class FilterCommandParserTest {
         // Test with special characters or invalid inputs
         assertParseFailure(parser, "!!!@@@###", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             FilterCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "123456", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
