@@ -230,7 +230,8 @@ Format: `clean`
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> If you execute `clean` after executing a `find` command, the search results of the `find` command remains in place. Use `list` to see the full effects of the `clean` command.
+> * If you execute `clean` after executing a `find` command, the search results of the `find` command remains in place. Use `list` to see the full effects of the `clean` command.
+> * This is such that the results of your query with `find` are not lost after applying `clean`. 
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
