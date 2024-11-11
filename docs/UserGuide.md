@@ -24,7 +24,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 
 <div style="page-break-after: always;"></div>
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -209,7 +209,7 @@ Refer to the specific sections for a detailed guide on how to use each command.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -247,7 +247,7 @@ Expected output:
 
 <div style="page-break-after: always;"></div>
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the TAHub.
 
@@ -259,7 +259,7 @@ Expected output:
 
 <div style="page-break-after: always;"></div>
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the TAHub.
 
@@ -307,7 +307,7 @@ Expected output:
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from the TAHub.
 
@@ -346,8 +346,8 @@ Examples:
 
 - `addGrade 2 n/Midterm s/85 w/30`<br>
   Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
-- `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30`<br>
-  Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
+- `find Betsy` followed by `grade 1 n/Final Exam s/92 w/30`<br>
+  Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "Final Exam" and 30% weightage.
 
 Expected output:
 
@@ -369,8 +369,8 @@ Examples:
 
 - `deleteGrade 2 n/Midterm`<br>
   Deletes the grade for the "Midterm" test for the 2nd person in the list.
-- `find Betsy` followed by `deleteGrade 1 n/FinalExam`<br>
-  Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+- `find Betsy` followed by `deleteGrade 1 n/Final Exam`<br>
+  Deletes the "Final Exam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
 
@@ -481,7 +481,7 @@ Expected output:
 
 <div style="page-break-after: always;"></div>
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the TAHub.
 
@@ -493,7 +493,7 @@ Expected output:
 
 <div style="page-break-after: always;"></div>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program and closes.
 
@@ -556,7 +556,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 
 ---
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
