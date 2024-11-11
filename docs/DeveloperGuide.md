@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="550" />
+<puml src="diagrams/ModelClassDiagram.puml" width="100%" />
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="550" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="750" />
 
 </box>
 
@@ -185,7 +185,7 @@ The optional fields allow users to include more detailed information, making the
   * The information is stored using the `JsonAddressBookStorage#saveAddressBook()` method which calls the `JsonSerializableAddressBook`
     constructor, to create an object that can be serialized in JSON format.
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="550" />
+<puml src="diagrams/AddSequenceDiagram.puml" width="100%" />
 
 #### Design Considerations
 
@@ -220,7 +220,7 @@ The command format is as follows:<br>
 * **Storage (ThemePreference)**
     * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to 'LIGHT' if none is found.
 
-<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="100%" />
 
 #### Design Considerations
 
