@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.ASC;
 import static seedu.address.logic.commands.SortCommand.ASCENDING;
+import static seedu.address.logic.commands.SortCommand.DESC;
 import static seedu.address.logic.commands.SortCommand.DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -67,15 +69,15 @@ public class SortCommandParser implements Parser<SortCommand> {
     private String formatArgument(String args) throws ParseException {
         String trimmedArgs = args.trim().toLowerCase();
         if (trimmedArgs.isEmpty()) {
-            trimmedArgs = ASCENDING;
+            trimmedArgs = ASC;
         }
-        if (trimmedArgs.equals("ascending")) {
-            trimmedArgs = ASCENDING;
+        if (trimmedArgs.equals(ASCENDING)) {
+            trimmedArgs = ASC;
         }
-        if (trimmedArgs.equals("descending")) {
-            trimmedArgs = DESCENDING;
+        if (trimmedArgs.equals(DESCENDING)) {
+            trimmedArgs = DESC;
         }
-        if (!(trimmedArgs.equals(ASCENDING) || trimmedArgs.equals(DESCENDING))) {
+        if (!(trimmedArgs.equals(ASC) || trimmedArgs.equals(DESC))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

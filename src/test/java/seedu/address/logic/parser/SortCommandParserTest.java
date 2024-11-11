@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.SortCommand.ASCENDING;
-import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.commands.SortCommand.ASC;
+import static seedu.address.logic.commands.SortCommand.DESC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -40,10 +40,10 @@ public class SortCommandParserTest {
     public void parse_validArgs_returnsSortCommand() {
         //checks if no ORDER is given command will sort by ascending order by default
         SortCommand expectedSortAscNameCommand =
-                new SortCommand(ASCENDING, false);
+                new SortCommand(ASC, false);
         assertParseSuccess(parser, " n/", expectedSortAscNameCommand);
         SortCommand expectedSortAscScheduleCommand =
-                new SortCommand(ASCENDING, true);
+                new SortCommand(ASC, true);
         assertParseSuccess(parser, " sch/", expectedSortAscScheduleCommand);
         // checks handling of arguments of asc and ascending
         assertParseSuccess(parser, " n/asc", expectedSortAscNameCommand);
@@ -52,9 +52,9 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, " sch/ascending", expectedSortAscScheduleCommand);
         // checks handling of arguments of desc and descending
         SortCommand expectedSortDescNameCommand =
-                new SortCommand(DESCENDING, false);
+                new SortCommand(DESC, false);
         SortCommand expectedSortDescScheduleCommand =
-                new SortCommand(DESCENDING, true);
+                new SortCommand(DESC, true);
         assertParseSuccess(parser, " n/desc", expectedSortDescNameCommand);
         assertParseSuccess(parser, " n/descending", expectedSortDescNameCommand);
         assertParseSuccess(parser, " sch/desc", expectedSortDescScheduleCommand);

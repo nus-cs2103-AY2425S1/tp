@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.SortCommand.ASCENDING;
-import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.commands.SortCommand.ASC;
+import static seedu.address.logic.commands.SortCommand.DESC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -190,7 +190,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(BOB);
         uniquePersonList.add(CARL);
         uniquePersonList.add(ALICE);
-        uniquePersonList.sortPersons(ASCENDING, false);
+        uniquePersonList.sortPersons(ASC, false);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
@@ -204,7 +204,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(BOB);
         uniquePersonList.add(CARL);
         uniquePersonList.add(ALICE);
-        uniquePersonList.sortPersons(DESCENDING, false);
+        uniquePersonList.sortPersons(DESC, false);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
@@ -224,7 +224,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(CARL);
         uniquePersonList.add(DANIEL);
         uniquePersonList.add(GEORGE);
-        uniquePersonList.sortPersons(ASCENDING, true);
+        uniquePersonList.sortPersons(ASC, true);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
@@ -244,7 +244,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(CARL);
         uniquePersonList.add(DANIEL);
         uniquePersonList.add(GEORGE);
-        uniquePersonList.sortPersons(DESCENDING, true);
+        uniquePersonList.sortPersons(DESC, true);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
@@ -252,13 +252,13 @@ public class UniquePersonListTest {
     public void sortPersons_emptyList_noChange() {
         // Sorting an empty list should not do anything
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
-        uniquePersonList.sortPersons(ASCENDING, true);
+        uniquePersonList.sortPersons(ASC, true);
         assertEquals(expectedUniquePersonList, uniquePersonList);
-        uniquePersonList.sortPersons(DESCENDING, true);
+        uniquePersonList.sortPersons(DESC, true);
         assertEquals(expectedUniquePersonList, uniquePersonList);
-        uniquePersonList.sortPersons(ASCENDING, false);
+        uniquePersonList.sortPersons(ASC, false);
         assertEquals(expectedUniquePersonList, uniquePersonList);
-        uniquePersonList.sortPersons(DESCENDING, false);
+        uniquePersonList.sortPersons(DESC, false);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
