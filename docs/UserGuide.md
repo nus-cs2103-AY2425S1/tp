@@ -743,20 +743,24 @@ Exiting the program can be done in two ways:
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
 
   <!-- Step 1 -->
-  <div style="width: 45%; margin-bottom: 20px;">
-    <p>1. Click the File button at the top right corner of the window.</p>
+  <div style="width: 45%; vertical-align: top;">
+    <p><b>Step 1:</b> Click the File button at the top right corner of the window.</p>
     <img src="images/exitcommand.png" alt="Exit Command Step 1" style="width: 100%;" />
   </div>
 
-  <!-- Step 2 with added top margin -->
-  <div style="width: 45%; margin-bottom: 20px; margin-top: 20px;">
-    <p>2. Click on the Exit button.</p>
-    <img src="images/exitcommand2.png" alt="Exit Command Step 2" style="width: 100%;" />
+  <!-- Step 2 with only the image lowered further -->
+  <div style="width: 45%; vertical-align: top; margin-top: 1px;">
+    <p><b>Step 2:</b> Click on the Exit button.</p>
+    <img src="images/exitcommand2.png" alt="Exit Command Step 2" style="width: 100%; margin-top: 20px;" />
   </div>
 
 </div>
 
-<p>3. The program will close.</p>
+<p><b>Step 3:</b> The program will close.</p>
+
+
+
+
 
 
 #### Method 2:
