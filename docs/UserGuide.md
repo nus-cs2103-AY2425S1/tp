@@ -137,7 +137,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
     * e.g. `filter p/hello` will display an error message stating that phone numbers can only contain numbers of minimum 3 digits.
 
 **Filtering Attributes**
-* For **names, tags, emergency contact names and addresses**, persons matching at least one keyword will be returned (i.e. `OR` search).
+* For **names, emergency contact names and addresses**, persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * For **register numbers and class**, the entire number or class name must be provided in the command to filter
 * For **phone numbers and emergency phone numbers**, a partial phone number will match, however must follow the phone number constraints of minimum 3 digits. 
