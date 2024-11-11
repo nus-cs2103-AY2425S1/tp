@@ -1,7 +1,6 @@
 package seedu.eventfulnus.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_PARTICIPANT;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_TEAM;
