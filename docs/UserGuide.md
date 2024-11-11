@@ -478,7 +478,7 @@ If you are facing problems while setting up or using HireMe, we want to help you
 <br></br>
 
 #### HireMe application setup failed
-Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
+Check that you have the `hireme.jar` in the correct folder and copied the correct file path into the terminal. Check that you have Java `17` or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
 <br></br>
 
 #### Getting errors when using the commands
@@ -521,15 +521,15 @@ Term     | Definition
 **Command Bar** | The input bar at the top of the HireMe application which allows users to type in a string command.
 **Company Email** | The email of the company that the user is applying for an internship role at.
 **Company Name** | The name of the company that the user is applying for an internship role at.
-**Command Line Interface (CLI)** | The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. 
+**Command Line Interface (CLI)** | An interface that the user interacts with by typing text commands instead of using a mouse to click on buttons or icons. 
 **Filepath** | The location through which a file can be accessed in a file system.
-**Graphical User Interface (GUI)** | The user interacts with the computer using visual elements like buttons, icons and windows.
+**Graphical User Interface (GUI)** | An interface that the user interacts with using visual elements like buttons, icons and windows.
 **Index** | The application number of the internship application displayed in the list.
 **Java** | A programming language for coding applications, websites and other software.
 **Java Archive (Jar)** | A file format used to package multiple files into one file for distribution. 
 **JavaScript Object Notation (JSON)** | A readable format to represent structured data, which is commonly used for web applications.
 **Order** | The order that the user would like the list to be in, based on the date of application.
-**Parameter** | The details needed for to perform specific commands. (e.g. Add command has a parameter for company name) 
+**Parameter** | The details needed to perform specific commands. (e.g. Add command has a parameter for company name) 
 **Role** | The role of the internship the user applied for.
 **Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
 
