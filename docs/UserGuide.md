@@ -55,9 +55,9 @@ Alerts you to potential issues or problems that may arise.
    * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
 <br>
 3. Set up the home folder
-   * Choose a folder where you want to store your AddressBook data.
+   * Choose a folder where you want to store your ContactCS data.
    * Copy the downloaded `.jar` file to this folder.
-   * This folder will serve as the "home folder" for your AddressBook.
+   * This folder will serve as the "home folder" for your ContactCS.
 <br>
 4. Run the application
    * Open a command terminal.
@@ -69,7 +69,7 @@ Alerts you to potential issues or problems that may arise.
        <box type="warning" seamless>
 
        **Caution:**
-       Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
+       Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
        </box>
        
      * For Mac users, type:
@@ -79,7 +79,7 @@ Alerts you to potential issues or problems that may arise.
        <box type="warning" seamless>
 
        **Caution:**
-       Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/AddressBook`
+       Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/ContactCS`
        </box>
    * Run the application with the following command:
      ```
@@ -139,20 +139,21 @@ Alerts you to potential issues or problems that may arise.
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
 
-**Shows a message explaining the usage of the specified command keyword**
-
 Format: `help [COMMAND_KEYWORD]`
+
+**Shows a message explaining the usage of the specified command keyword**
 
 Example: 
 - `help add` shows the help message for `add` command in the following format
 ![help_example](images/helpExample.png)
 
+Format: `help`
+
 **Shows a message and a pop-up window showing the full list of help messages,
 and an external link to the full user guide.**
 
-![help message](images/helpMessage.png)
-
-Format: `help`
+Example:
+- ![help message](images/helpMessage.png)
 
 
 ### Adding a person: `add`
@@ -172,6 +173,8 @@ The command accepts either one phone number, one email, or both.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
+* Note: A professor is not considered a teaching assistant (TA).
+* Email addresses are considered valid even if they do not contain a period(``.``). For example, ``example@domain`` is considered valid.
 * `ADDRESS` can take any values and can not be blank.
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
@@ -403,23 +406,27 @@ and no effect would be applied to the address book.
 Examples:
 * If you accidentally delete a contact using the `delete` command,
 you can revert this change by input `undo` command.
+![result for 'delete 1'](images/accidentallydelete.png)
+![result for 'undo'](images/undoing.png)
 * Similarly, if you accidentally clear the whole address book using the `clear` command,
 you can restore the whole address book using `undo` command as well.
 * Wrong adding/editing of contact info can be reverted by inputting `undo` as well.
 
 ### Redoing latest undone change to contact data: `redo`
 Redoes the latest undone modification on contact data, if any.
-
 Format: `redo`
 
 * Redo only helps to restore command results that can be handled by undo command,
 such as add, edit, delete and clear.
 * If you input `redo` when there's nothing to redo, GUI will remind you about this
 and no effect would be applied to the address book.
+![result for 'no more redo'](images/nomoreredo.png)
 
 Examples:
 * If you undo a change to the contact data, but end up thinking that it may be
 better to keep it, you can input `redo` after undo the change to restore it back.
+* Taking the same example from the undo session:
+  ![result for 'redo'](images/redoing.png)
 
 ### Exiting the program: `exit`
 
@@ -429,17 +436,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ContactCS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/contactcs.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactCS data are saved automatically as a JSON file `[JAR file location]/data/contactcs.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ContactCS will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ContactCS to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -486,7 +493,7 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactCS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -510,3 +517,4 @@ To allow more flexibility in the input format, we have to sacrifice some validat
  **Redo**   | `redo`                                                                                                                                                                                                                                                                  
  **List**   | `list`                                                                                                                                                                                                                                                                  
  **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                                 
+ **Exit**   | `exit` 
