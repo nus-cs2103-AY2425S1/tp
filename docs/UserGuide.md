@@ -33,7 +33,7 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `ClinicConnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-2/tp/releases).
 
@@ -181,7 +181,7 @@ Example:
 * Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number
   * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Adding a patient with additional information : `addf`
 
@@ -217,7 +217,7 @@ Examples:
   * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
      e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Viewing a patient's full profile : `view`
 
@@ -233,7 +233,7 @@ Example:
 
 ### Editing a patient : `edit`
 
-Edits the information of an existing patient in the system by searching for their NRIC.
+Edits the information of an existing patient in the system with the corresponding NRIC.
 
 Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE_NUMBER] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
@@ -277,7 +277,7 @@ Examples:
 * Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed
   * `edit S9758366N al|wheat al|eggs rmal|fish`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Returning to home page : `home`
 
@@ -301,18 +301,14 @@ Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
-<ul>
-<li>
 Appointments can only be booked for future dates and times
-</li>
-</ul>
 </div>
 
 Example:
-* Books a vaccination appoinment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Books a vaccination appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
   * `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Deleting an appointment : `deleteappt`
 
@@ -326,7 +322,7 @@ Example:
 * Deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
   * `deleteappt T0123456A dt|2024-12-29 13:00`
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Filtering appointments : `filter`
 
@@ -361,18 +357,18 @@ Examples:
 * Filters all appointments from today's date to Oct 01 2028
   *  `filter ed|2028-10-01` 
 
-For more information on each individual parameter click [here](#command-parameters-summary).
+For more information on each individual parameter, click [here](#command-parameters-summary).
 
 ### Deleting a patient : `delete`
 
-Deletes the patient with the corresponding NRIC from ClinicConnect.
+Deletes the patient with the corresponding NRIC.
 
 Format: `delete NRIC`
 
 ![delete message](images/deleteResult.png)
 
 Example:
-* Deletes the patient with NRIC T0123456A from ClinicConnect
+* Deletes the patient with NRIC T0123456A
   * `delete T0123456A`
 
 ### Clearing all entries : `clear`
@@ -406,22 +402,25 @@ ClinicConnectSystem data are saved in the hard disk automatically after any comm
 ClinicConnectSystem data are saved automatically as a JSON file `[JAR file location]/data/clinicconnectsystem.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br>
-If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClinicConnectSystem home folder.
+
+**Q**: How do I remove a patient's `EXISTING_CONDITIONS` and `NOTES` from the patient's record? <br>
+**A**: Use the `edit` command to edit the respective fields to NIL<br>e.g.`edit T0123456A ec|NIL no|NIL`.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the window will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
+3. **When adding or editing patient entries**, the combination of an NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
 4. **When adding allergies**, there is no distinction between capitalized and uncapitalized forms and plural and singular variations.
 5. **For `no` and `ec` parameters**, the parameter summary has stated that it has to be non-empty. However,
