@@ -264,6 +264,8 @@ Examples:
 * `clear /classes 7A` clears all contacts related to class 7A (students or teachers).
 * `clear /name John /subject Physics` clears contacts for all persons named John or anyone associated with the subject Physics.
 
+[Back to Table of Contents](#table-of-contents)
+
 ## Attendance Taking
 ### Marking attendance : `mark`
 
@@ -373,7 +375,7 @@ Format: `sort ATTRIBUTE`
 > The `sort` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
 
 Examples:
-* `list` followed by `sort attendance` sorts the list of students by attendance in descending order.
+* `sort attendance` sorts the list of students by attendance in descending order.
   <br/><br/>
 
 ![sort attendance command](images/sort_attendance.png)
@@ -382,7 +384,7 @@ Examples:
 
 ## Command History:
 
-EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. For example, if you have entered `delete 1` and then `delete 2`, pressing the **Up** arrow key will display `delete 2`, and pressing it again will display `delete 1`.
+EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2`, and pressing it again will display `delete 1`.
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
