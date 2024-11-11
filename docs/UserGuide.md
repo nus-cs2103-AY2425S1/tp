@@ -757,6 +757,14 @@ If you minimize the Help Window and then run the `help` command (or use the `Hel
    - **Current Behaviour**: Users can add interests that exceed 20 characters using the `addi` command, but the UI may truncate or cut off interests that are longer, potentially causing some interests to be partially displayed or hidden.
    - **Limitation**: The application does not enforce a character limit for interests in the `addi` command, resulting in display issues for longer entries.
    - **Planned Solution**: Introduce validation to limit interests to 20 characters in the `addi` command, or  ensure that all displayed interests fit within the UI without truncation.
+9. **Missing Birthday Field in Confirmation Message**
+   - **Current Behavior**: When a new contact is added, deleted, or edited, the birthday field is omitted from the confirmation message.
+      - Example output:
+      ```plaintext
+      New person added: John Doe; Phone: 98735432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Work Experience: Intern,Google,2024; Tags: [[owesMoney], [friends]]; University: NUS; Major: Computer Science; Interests: [swimming, reading]
+      ```
+   - **Limitation**: This makes it unclear if the birthday field has been correctly saved.
+   - **Planned Solution**: Update the confirmation message to include the birthday field for consistency.
    
 ---
 <div style="page-break-after: always;"></div>
