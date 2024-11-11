@@ -9,7 +9,7 @@
 BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a text-based interface** while retaining the advantages of a visual and mouse-based interface.
 It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
 
-As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
+As wedding planners, we understand that you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
 
 With BridalBuddy, you can easily:
@@ -74,7 +74,8 @@ This section tells you what information you will find in each of the sections of
 3. [Features](#features) helps you understand how all our features work.
 4. [FAQ](#faq) clarifies the doubts that many of our users have.
 5. [Command Summary](#command-summary) summarises all our features for easy reference.
-6. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
+6. [**Glossary**](#glossary) explains the definitions of any technical terms used in this guide.
+7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
 
 [_Back to Top_](#table-of-contents)
 
@@ -89,10 +90,13 @@ This section tells you what information you will find in each of the sections of
 
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-   An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, navigate to the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
+    > If you need any help opening a command terminal, you may refer to the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
+    
+    > If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt#:~:text=Open%20the%20Command%20Prompt%20(CMD,the%20root%20of%20the%20drive. ) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
+
+    An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-    > If you need any help opening a command terminal, you may find the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -381,9 +385,9 @@ This command will help you add a new guest to the bottom of the existing overall
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-**Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
-
 **Example Usage:** `add_guest n/Alan Tan p/97462948 e/alantan@example.com a/123, Jurong Ave 12, #012-845 rsvp/d r/w`
+
+**Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
@@ -412,9 +416,9 @@ This command will allow you to edit the details of the guest identified by the `
 
    * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
-**Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
-
 **Example Usage:** `edit_guest 2 p/98274626 e/helloworld@example.com`
+
+**Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
@@ -464,9 +468,9 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 * :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
-**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
-
 **Example Usage:** `add_vendor n/Alan Tan p/94838274 e/alantan@example.com a/842, Jurong Mall, #02-297 c/Alan's Jewellery b/100000.99`
+
+**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
@@ -495,9 +499,9 @@ This command will allow you to edit the details of the vendor identified by the 
 
     * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
-**Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
-
 **Example Usage:** `edit_vendor 2 p/82737573 e/hiworld@example.com`
+
+**Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
@@ -539,7 +543,7 @@ You do not need to save manually as BridalBuddy data are saved in the hard disk 
 
 ### Editing the data file
 
-BridalBuddy data are saved automatically as a JSON file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
+BridalBuddy data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
 
 :warning: **Caution:**
 If your changes to the data file makes its format invalid, BridalBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -561,7 +565,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 ## **Known issues**
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
 
@@ -594,9 +598,9 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 ## **Glossary**
 
-| Term/Keyword                       | Definition                                                                                                 |
-|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
-
+| Term/Keyword | Definition                                                                                            |
+|--------------|-------------------------------------------------------------------------------------------------------|
+| **Prefix**   | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.         |
+| **JSON**     | JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data |
 
 [_Back to Top_](#table-of-contents)
