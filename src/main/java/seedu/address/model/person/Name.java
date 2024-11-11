@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only should not be blank, and contain at least 1 character";
+            "Names should not be blank, and should contain at least 1 character";
 
     public final String fullName;
 
