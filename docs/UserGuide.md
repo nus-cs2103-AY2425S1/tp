@@ -4,7 +4,7 @@ title: CareLink User Guide
 ---
 
 - Table of Contents
-  {:toc}
+{:toc}
 
 ## Introduction
 
@@ -668,7 +668,7 @@ AMake sure each NRIC adheres to the following format and constraints:
 
 8. **Model Not Updated After `find` or `findapp` Commands**: When executing certain commands immediately following `find` or `findapp` commands, the UI would continue to display the result from `find` or `findapp`commands.
 
-  - **Workaround**: Use the `list` command immediately after `find` or `findapp` commands to refresh and update the model. 
+  - **Workaround**: Use the `list` command immediately after `find` or `findapp` commands to refresh and update the model.
 
 ---
 
