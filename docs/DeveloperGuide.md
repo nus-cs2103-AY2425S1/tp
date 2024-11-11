@@ -791,3 +791,8 @@ Enable users to unassign multiple vendors from an event or multiple events from 
 
 ### Enhanced Support for Foreign Phone Numbers
 Improve the system’s ability to handle phone numbers in various international formats and with non-standard characters. This includes recognizing and storing diverse formats such as country codes, extensions, and special characters to accommodate a wider range of contact details. The current approach relies on users adding these specifiers without symbols or using tags to identify them, which can be confusing and cumbersome.
+
+### Case Sensitivity for Commands
+Make commands case-insensitive to allow users more input flexibility.
+* Current command words e.g. `create`, `list` require user inputs to be strictly lowercase.
+* `lISt`, `List` or `LIST` would not be recognised as valid commands.
