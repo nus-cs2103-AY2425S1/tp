@@ -126,8 +126,9 @@ public class AddAppointmentCommandParserTest {
         assertParseFailure(parser, "1" + APPOINTMENT_DESC_AMY + " s/10-12-2023-12-70"
                 + DATETIME_END_DESC_AMY, DATETIME_INVALID_INDEX + DATETIME_INVALID_SPECIFY
                 + "10-12-2023-12-70"); // non-existent minute
+        // start time after end
         assertParseFailure(parser, "1" + APPOINTMENT_DESC_AMY + " s/05-11-2024-12-00"
-                + " e/04-11-2024-13-00", "The end time must be after the start time."); // start time after end
+                + " e/04-11-2024-13-00", "Start date and time must not be after end date and time.");
 
     }
 }

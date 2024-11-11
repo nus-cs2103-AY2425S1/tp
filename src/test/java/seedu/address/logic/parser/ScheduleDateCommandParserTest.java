@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.DATE_INVALID_INDEX;
@@ -35,7 +36,8 @@ public class ScheduleDateCommandParserTest {
                 DATE_INVALID_INDEX + "\nInput causing the error: " + "invalidDate");
 
         // Test with missing input
-        assertParseFailure(parser, "", DATE_INVALID_INDEX + "\nInput causing the error: ");
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ScheduleDateCommand.MESSAGE_USAGE));
     }
 }
 
