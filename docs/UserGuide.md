@@ -283,7 +283,7 @@ Examples:
 
 ### Setting a reminder note: `reminder`
 
-Sets a reminder note for a client before their appointment in the address book.
+Sets a reminder note for a client before their <b>most upcoming</b> appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
@@ -297,6 +297,7 @@ You can only set a reminder note for a person who already has a scheduled appoin
     * Days: You can specify 1 to 7 days (e.g 1 day, 7 days)
     * Hours: You can specify 1 to 23 hours (e.g 1 hour, 23 hours)
 * Multiple reminder times (r/) cannot be specified in a single command. Only one reminder time can be set per command.
+* Extra white spaces are <b>not</b> accepted. Only one space between the number and the unit is allowed.
 
 Examples:
 * `reminder John Doe r/6 days`
