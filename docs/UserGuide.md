@@ -324,7 +324,10 @@ Format: `exit`
 
 Teacher's Pet allows you to create and manage attendance events, such as lectures, tutorials, or lab sessions. You can mark or unmark students' attendance for these events.
 
-<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+<div markdown="block" class="alert alert-info">
+ 
+:information_source: **Information:**  
+ 
 **General Contraints**
 
 * **Event Names:**
@@ -499,7 +502,9 @@ Displays the list of students who are either present or absent for a specific at
 
 ---
 
-<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+<div markdown="block" class="alert alert-info">
+ 
+ :information_source: **Information:**  
 
 **Common Errors and Solutions**
 
