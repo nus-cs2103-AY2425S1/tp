@@ -126,7 +126,32 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 
 8. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
 
+---
 
+## Overview of TalentSG Graphical User Interface
+
+<img src="images/UiDetailsImg.png" width="800">
+
+TalentSG’s UI has five main components:
+
+1. **Applicants List**: Contains the list of the applicants.
+
+2. **Overview Panel**: Contains details about the applicants. It can be their full detail or the summary of all the applicants.
+
+3. **Command Input Box**: Enter the commands here for the input.
+
+4. **Feedback/Result Display**: Shows the result of the command when executed or the feedback if there’s some error.
+
+5. **Menu Bar**: It has two menus:
+
+    a. File which consists of Close and Summary.
+
+    b. Help which consists of Help and Bug Report.
+
+<strong>[Note]</strong>: The application utilizes a fixed-size user interface to ensure a consistent and predictable layout across all devices. 
+This approach provides precise control over design elements, maintaining the intended aesthetic and usability without the need for resizing, 
+optimized for the target screen resolution. This design choice simplifies user interaction and reduces potential compatibility issues, supporting
+ a streamlined and focused workflow.
 
 ---
 ## Features
