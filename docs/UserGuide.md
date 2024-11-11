@@ -153,7 +153,7 @@ Symbol     | Parameter    | Constraints
 
 Symbol     | Parameter    | Constraints
 -----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 40 characters.
+**`a`**| `DESCRIPTION` |- Must contain at least 1 alphabetic character and has a limit of 80 characters.
 **`s`**| `START`      |- A singular `DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute.
 **`e`**| `END`        |- A singular `DATE-TIME` in the form `dd-MM-yyyy-HH-mm`, where `dd` is the day, `MM` is the month, `yyyy` is the year, `HH` is the hour and `mm` is the minute..
 
