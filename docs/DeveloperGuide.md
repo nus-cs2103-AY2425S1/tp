@@ -131,8 +131,6 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/model/Model.java)
 
-Here is a partial and representative class diagram of the `Model` component:
-
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 The `Model` component has the following responsibilites:
