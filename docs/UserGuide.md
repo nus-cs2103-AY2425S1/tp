@@ -244,7 +244,9 @@ New student added: (details of the student added)
 | `a/ADDRESS`      | Physical address                  | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
 | `t/TAG`          | [Tag](#tag) to categorize contact | Must be alphanumeric characters and no spaces ([case sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
 
-<div markdown="block" class="alert alert-info"> 🔔 **Notes**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
+<div markdown="block" class="alert alert-info"> 🔔 **Notes**: 
+Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. 
+</div>
 
 <div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
 While names and address can include `/` for valid formats, using parameter-like sequences (e.g., `n/`, `p/`) within the name and address fields will result in an error.
