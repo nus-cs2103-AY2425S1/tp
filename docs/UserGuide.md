@@ -436,6 +436,12 @@ Finds persons whose names contain any of the given keywords.
 | `KEYWORD`      | Keyword of the contact's name to search           | Can take any values | Compulsory |
 | `MORE_KEYWORD` | Additional keyword to search (separate by spaces) | Can take any values | Optional   |
 
+**Expected Message**:
+
+```
+(Number of) persons listed!
+```
+
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
@@ -470,6 +476,12 @@ Finds contacts whose tags are the same as the specified keyword.
 | -------------- | ----------------------------------------------------------------- | ---------- |
 | `KEYWORD`      | Keyword of the tag's name to filter through the list of contacts. | Compulsory |
 | `MORE_KEYWORD` | More keywords to filter                                           | Optional   |
+
+**Expected Message**:
+
+```
+(Number of) persons listed!
+```
 
 <div markdown="block" class="alert alert-info">
 
