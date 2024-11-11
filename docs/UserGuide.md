@@ -253,6 +253,7 @@ Format: `archive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+* `archive` works on archived and unarchived contact(s). 
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
@@ -295,10 +296,10 @@ Format: `unarchive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-
+* `unarchive` works on archived and unarchived contact(s). 
 
 Examples:
-* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
@@ -403,6 +404,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
+* This command works for both archived and unarchived delivery. 
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
@@ -497,6 +499,6 @@ Action     | Format, Examples
 Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
-**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
 **Client**    |A contact that has the role `client`
 **Employee**    |A contact that has the role `employee`
+**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
