@@ -14,8 +14,8 @@ This project uses the [Java coding standard (basic)
 ](https://se-education.org/guides/conventions/java/basic.html) and the Google Java style guide. The code style is
 enforced using Checkstyle. The checks are run as part of the CI process.
 
-Developers are recommended to import the [`Intellij IDEA code style XML`](/config/IntelliJ.xml) and [
-`Eclipse XML Profile`](/config/Eclipse.xml) from the `config` folder to IntelliJ IDEA to ensure that the code style is
+Developers are recommended to import the [`Intellij IDEA code style XML`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/config/IntelliJ.xml) and [
+`Eclipse XML Profile`](https://github.com/AY2425S1-CS2103-F13-1/tp/blob/master/config/Eclipse.xml) from the `config` folder to IntelliJ IDEA to ensure that the code style is
 consistent across all developers after reformatting. Follow the following steps to import the code style settings:
 
 1. Navigate to `Settings/Preferences` -> `Editor` -> `Code Style` -> `Java`.
