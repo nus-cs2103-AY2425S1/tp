@@ -141,6 +141,12 @@ The sequence diagram below shows how the `clear confirm` command is processed by
 <div markdown="span" class="alert alert-info">:information_source: **Note:** This diagram illustrates the additional step where the command checks for explicit confirmation before clearing all data.
 </div>
 
+#### Link Command Sequence Diagram
+
+The sequence diagram below shows how the `link` command is processed by the `Logic` component:
+
+![Interactions Inside the Logic Component for the `link` Command](images/LinkCommandSequenceDiagram.png)
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
