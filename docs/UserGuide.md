@@ -73,6 +73,15 @@ For immediate setup, proceed to [Quick Start](#quick-start). For detailed featur
 
 1. Ensure you have Java `17` or above installed on your computer. For optimal display, use a 13-inch screen or larger with a resolution of 1280x720 pixels or higher. Avoid resizing the window below this resolution, as it may hide essential interface elements.
 
+- Check for Java version:
+  - Open your computer’s terminal:
+    - For Windows: Press the Windows key + R, type cmd, and press Enter
+    - For Mac: Press Command + Space, type terminal, and press Enter
+  - In the window that appears, type the following: `java --version`
+  - Press Enter
+  - If you see “Java version 17”, you are all set!
+  - If you see any other error/ java version, visit [Java’s download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+
 2. Download the latest CareLink `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
 3. Copy the file to your desired CareLink **home folder**.
