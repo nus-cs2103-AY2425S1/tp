@@ -176,6 +176,27 @@ This section describes some noteworthy details on how certain features are imple
 4. Effectively creating/updating the ```filteredGoods.csv``` file
 5. ```LogicManager``` then sets ```exportFilterGoods``` to false
 
+### Observable views of suppliers with supplier goods information.
+
+As per the MVC architecture, the underlying data containers are stored as observable lists, which allows the UI to listen for changes to the data model and update its view. Our current implementation aggregates suppliers and goods separately, which means that suppliers and goods are stored in separate observable lists. This means that rather than having a reference from the supplier to his/her goods (i.e. the supplier stores his/her goods), the relationship is reversed (the supplier is stored in each of his/her goods).
+
+Typically, this isn't too much of a problem if the UI suppliers view does not use information from the goods, as it is vice versa, as none of them would know any underlying data changes from the other side. However, this initial assumption does not hold for a case of a feature which is to tag goods categories for suppliers based on the goods they have (e.g. if alice has a good with goods category 'consumables', then a tag of 'consumables' will be present in alice card in the UI view of suppliers). This means adding a new goods would inevitably require updating the UI view of the supplier.
+
+One approach could be to update the supplier tags every time a new goods is added (and then updating the observable view of suppliers), but this is error-prone as it causes duplication of information.
+
+How this is actually accomplished, is by creating a new observable list (that the suppliers listview of the UI will use) that observes the two observable lists of suppliers and goods. Any changes from either the suppliers or goods lists will be observed in this joint observable list which will allow the UI to update accordingly. Not only does this allow for dynamic updates of the supplier listview whenever the goods observable list is updated, but also mitigate the issue of having to constantly update the (original) suppliers list.
+
+The diagram below illustrates the implementation of the observer pattern. Note that this diagram is only for conceptual understanding and the names of the classes may be different from what is present in the code.
+
+Before:
+
+<img src="images/SupplierAndGoodsObserverPatternObjectDiagram.png" />
+
+After:
+
+
+<img src="images/SupplierAndGoodsJointObserverPatternObjectDiagram.png" />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
