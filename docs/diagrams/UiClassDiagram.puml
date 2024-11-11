@@ -37,8 +37,8 @@ MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" DoctorCard
-PersonListPanel -down-> "*" PatientCard
+PersonListPanel *-down-> "*" DoctorCard
+PersonListPanel *-down-> "*" PatientCard
 
 MainWindow -left-|> UiPart
 
