@@ -102,9 +102,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listWithInvalidWords_throwsParseException() {
-        assertThrows(ParseException.class, ListCommand.MESSAGE_WRONG_ARGUMENTS,
-                ()-> parser.parseCommand(ListCommand.COMMAND_WORD + " " +
-                        "3"));
+        assertThrows(ParseException.class, ListCommand.MESSAGE_WRONG_ARGUMENTS, ()-> parser.parseCommand(
+                ListCommand.COMMAND_WORD + " " + "3"));
     }
 
     @Test

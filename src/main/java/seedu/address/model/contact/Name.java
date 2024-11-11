@@ -14,7 +14,7 @@ public class Name {
     public static final String SON_OF = "S/O";
     public static final String DAUGHTER_OF = "D/O";
     public static final String BRACKET_PAIR = "(INSERT_NAME)";
-    public static final String OPEN_BRACKET ="(";
+    public static final String OPEN_BRACKET = "(";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "
@@ -30,8 +30,6 @@ public class Name {
     public static final String REGEX_OPEN_BRACKET = "\\" + OPEN_BRACKET; // to be compatible with regex
     public static final String REGEX_CLOSE_BRACKET_AT_END_ONLY = ".*\\)$";
     // @@author
-
-    // Regex obtained from teammate author wuzengfu's suggestion
     public static final String REGEX_WHITESPACE_WITH_REPEATS = "\\s+";
 
     private static final String EMPTY_STRING = "";
