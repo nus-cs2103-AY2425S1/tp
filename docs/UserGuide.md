@@ -711,7 +711,7 @@ Imports contacts based on CSV file.
 
 * File path can be relative or absolute, but must end with ".csv".
   * If using relative path, you may use ".." to move up one directory level (you may refer to example below).
-  * Although ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
+  * Although the ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
     home path instead.
 * Importing a file will delete **ALL** existing contacts before adding the contacts from the file.
 </box>
@@ -800,7 +800,7 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 * File path can be relative or absolute but must end with ".csv". 
   * If using relative path, you may use ".." to move up one directory level (you may refer to example below).
-  * Although ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
+  * Although the ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
   home path instead.
       </box>
 * You must have write permission in order to export CSV file to specified location.
