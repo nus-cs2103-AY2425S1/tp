@@ -690,12 +690,14 @@ A patient will be added to the system if the patient is not already in the syste
       Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
       Use case resumes from step 2.
       <br>
+      <br>
 
 
 * 1b. User inputs an invalid prefix
     * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
       Step 1b1 is repeated until the input entered only contains valid prefixes<br>
       Use case resumes from step 2.
+      <br>
       <br>
 
 
@@ -704,12 +706,14 @@ A patient will be added to the system if the patient is not already in the syste
       Step 1c1 is repeated until the field is in the correct format<br>
       Use case resumes from step 2.
       <br>
+      <br>
 
 
 * 1d. User inputs duplicate prefixes (except for `al`)
     * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
       Step 1d1 is repeated until the input entered has distinct prefixes<br>
       Use case resumes from step 2.
+      <br>
       <br>
 
 
@@ -735,26 +739,36 @@ A patient will be added to the system if the patient is not already in the syste
     * 1a1. ClinicConnect shows an error message saying the prefix is invalid.<br>
       Step 1a1 is repeated until the input entered only contains valid prefixes.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1b. User does not input all the required parameters.
     * 1b1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1b1 is repeated until the input entered is valid containing all the required parameters.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1d. User inputs an NRIC that does not exist in the system due to a typo.
     * 1d1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
       Step 1d1 is repeated until a valid NRIC that is in the system is inputted.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1e. User inputs duplicate appointments.
     * 1e1. ClinicConnect shows an error message and prompts the user to input a valid appointment that is not in the patient's list of appointments.<br>
       Step 1e1 is repeated until a valid appointment that is not in the patient's list of appointments is inputted.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1f. User inputs date and time that are in the past.
     * 1f1. ClinicConnect shows an error message and prompts the user to input date and time that are not in the past.<br>
@@ -778,21 +792,29 @@ A patient will be added to the system if the patient is not already in the syste
     * 1a1. ClinicConnect shows an error message saying the prefix is invalid.<br>
       Step 1a1 is repeated until the input entered only contains valid prefixes.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1b. User does not input all the required parameters.
     * 1b1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1b1 is repeated until the input entered is valid containing all the required parameters.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1d. User inputs an NRIC that does not exist in the system due to a typo.
     * 1d1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
       Step 1d1 is repeated until a valid NRIC that is in the system is inputted.<br>
       Use case resumes from step 2.
+      <br>
+      <br>
 
 * 1e. User inputs an appointment that is not found in the patient's list of appointments.
     * 1e1. ClinicConnect shows an error message and prompts the user to input a valid appointment that is in the patient's list of appointments.<br>
