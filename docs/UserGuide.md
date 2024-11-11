@@ -173,33 +173,33 @@ to the relevant commands!
 
 ### Commands for managing Companies
 
-| Action                       | Format, Examples                                                                                                                                                                  |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#ug-add)           | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
-| [**Delete**](#ug-delete)     | `delete INDEX`                                                                                                                                                                    |
-| [**List**](#ug-list)         | `list`                                                                                                                                                                            |
-| [**Edit**](#ug-edit)         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
-| [**Favourite**](#ug-fav)     | `fav INDEX`                                                                                                                                                                       |
-| [**Unfavourite**](#ug-unfav) | `unfav INDEX`                                                                                                                                                                     |
-| [**Find**](#ug-find)         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
-| [**View**](#ug-view)         | `view INDEX`                                                                                                                                                                      |
+| Action                                                       | Format, Examples                                                                                                                                                                  |
+|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-company-add)                             | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
+| [**Delete**](#deleting-a-company-delete)                     | `delete INDEX`                                                                                                                                                                    |
+| [**List**](#listing-all-companies-list)                      | `list`                                                                                                                                                                            |
+| [**Edit**](#editing-a-company-edit)                          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
+| [**Favourite**](#adding-a-company-to-favourites-fav)         | `fav INDEX`                                                                                                                                                                       |
+| [**Unfavourite**](#removing-a-company-from-favourites-unfav) | `unfav INDEX`                                                                                                                                                                     |
+| [**Find**](#locating-companies-find)                         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
+| [**View**](#viewing-detailed-applications-of-a-company-view) | `view INDEX`                                                                                                                                                                      |
 
 ### Commands for managing Applications 
 
-| Action                       | Format, Examples                                                                                                          |
-|------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [**Apply**](#ug-apply)       | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React` |
-| [**Update**](#ug-update)     | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                    |
-| [**Withdraw**](#ug-withdraw) | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                           |
-| [**Reopen**](#ug-reopen)     | `reopen INDEX`                                                                                                            |
+| Action                                                             | Format, Examples                                                                                                          |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| [**Apply**](#adding-an-application-record-for-a-company-apply)     | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React` |
+| [**Update**](#updating-an-application-for-a-company-update)        | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                    |
+| [**Withdraw**](#withdrawing-an-application-for-a-company-withdraw) | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                           |
+| [**Reopen**](#reopening-a-company-reopen)                          | `reopen INDEX`                                                                                                            |
 
 ### Miscellaneous commands
 
-| Action                 | Format, Examples                                                                                                                                                                 |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Help**](#ug-help)   | `help`                                                                                                                                                                           |
-| [**Clear**](#ug-clear) | `clear`                                                                                                                                                                          |
-| [**Exit**](#ug-exit)   | `exit`                                                                                                                                                                           |
+| Action                                | Format, Examples                                                                                                                                                                 |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Help**](#clearing-all-data-clear)  | `help`                                                                                                                                                                           |
+| [**Clear**](#viewing-help-help)       | `clear`                                                                                                                                                                          |
+| [**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                                                           |
 
 [back to top](#internbuddy-user-guide)
 
@@ -275,7 +275,6 @@ not** put any parameters or prefixes that are not recognised by the command.
 ### Company commands
 
 #### Adding a company: `add`
-<a id="ug-add"/>
 
 Adds a company to the address book.
 
@@ -314,8 +313,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Deleting a company : `delete`
-<a id="ug-delete"/>
+#### Deleting a company: `delete`
 
 Deletes the specified company from the address book.
 
@@ -335,8 +333,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Listing all companies : `list`
-<a id="ug-list"/>
+#### Listing all companies: `list`
 
 Shows a list of all companies in the address book.
 
@@ -348,8 +345,7 @@ Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Editing a company : `edit`
-<a id="ug-edit"/>
+#### Editing a company: `edit`
 
 Edits an existing company in the address book.
 
@@ -391,7 +387,6 @@ Examples:
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a company to favourites: `fav`
-<a id="ug-fav"/>
 
 Labels an existing company as a favourite.
 
@@ -417,7 +412,6 @@ Format: `fav INDEX`
 --------------------------------------------------------------------------------------------------------------------
 
 #### Removing a company from favourites: `unfav`
-<a id="ug-unfav"/>
 
 Unlabels an existing company as a favourite.
 
@@ -432,7 +426,6 @@ Format: `unfav INDEX`
 --------------------------------------------------------------------------------------------------------------------
 
 #### Locating companies: `find`
-<a id="ug-find"/>
 
 Finds companies whose names, applications, or tags contain any of the given keywords.
 
@@ -459,7 +452,6 @@ Examples:
 --------------------------------------------------------------------------------------------------------------------
 
 #### Viewing detailed applications of a company: `view`
-<a id="ug-view"/>
 
 Displays a specified company with all its application details.
 
@@ -484,8 +476,7 @@ a given company.
 
 ### Application commands
 
-#### Adding application record for a company: `apply`
-<a id="ug-apply"/>
+#### Adding an application record for a company: `apply`
 
 Adds an internship application record to an existing company in the address book.
 
@@ -517,7 +508,6 @@ Examples:
 --------------------------------------------------------------------------------------------------------------------
 
 #### Updating an application for a company: `update`
-<a id="ug-update"/>
 
 Updates the application status of an application for an existing company in the address book.
 
@@ -542,8 +532,7 @@ check that you have put the correct `APPLICATION_STATUS` to ensure that you corr
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Withdrawing application for a company: `withdraw`
-<a id="ug-withdraw"/>
+#### Withdrawing an application for a company: `withdraw`
 
 Removes an internship record for an existing company in the address book.
 
@@ -566,8 +555,7 @@ The index refers to the index number shown in the displayed company list. The in
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Reopening company: `reopen`
-<a id="ug-reopen"/>
+#### Reopening a company: `reopen`
 
 Changes the status of a company from `CLOSED` to `INTERESTED`
 
@@ -584,10 +572,9 @@ Format: `reopen INDEX`
 
 ### Miscellaneous
 
-#### Clearing all entries : `clear`
-<a id="ug-clear"/>
+#### Clearing all data: `clear`
 
-<span style="color:red">**Deletes all entries**</span> from the address book.
+<span style="color:red">**Deletes all companies and applications**</span> from the address book.
 
 Format: `clear`
 
@@ -602,7 +589,7 @@ Format: `clear`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -616,7 +603,7 @@ Format: `help`
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 Exits the program.
 
@@ -643,10 +630,10 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-[back to command summary](#command-summary)
-[back to features](#features)
-[back to miscellaneous](#miscellaneous)
-[back to top](#internbuddy-user-guide)
+[back to command summary](#command-summary) <br>
+[back to features](#features) <br>
+[back to miscellaneous](#miscellaneous) <br>
+[back to top](#internbuddy-user-guide) <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
