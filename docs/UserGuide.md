@@ -461,7 +461,7 @@ Duplicate handling:
 
 ### Tags
 
-Format: A sequence of alphanumeric characters.
+Format: A sequence of alphanumeric characters corresponding to student's attributes or roles.
 
 Constraints:
 * `tag` can contain any alphanumeric character or whitespace.
