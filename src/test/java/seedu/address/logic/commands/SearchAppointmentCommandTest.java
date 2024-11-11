@@ -35,18 +35,42 @@ public class SearchAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private SearchAppointmentCommand searchFirstCommand = initialiseTestVar("2023-12-31 14:30");
+    private SearchAppointmentCommand searchSecondCommand = initialiseTestVar("2024-01-01 09:00");
+
+    public SearchAppointmentCommand initialiseTestVar(String appointment) {
+        try {
+            SearchAppointmentCommand output = new SearchAppointmentCommand(appointment);
+            return output;
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Test
-    public void equals() throws CommandException {
-        SearchAppointmentCommand searchFirstCommand = new SearchAppointmentCommand("2023-12-31 14:30");
-        SearchAppointmentCommand searchSecondCommand = new SearchAppointmentCommand("2024-01-01 09:00");
-
+    public void execute_sameCommandObject() {
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
+    }
 
+    @Test
+    public void execute_sameValueObject() throws CommandException {
         SearchAppointmentCommand searchFirstCommandCopy = new SearchAppointmentCommand("2023-12-31 14:30");
-        assertFalse(searchFirstCommand.equals(null));
-        assertFalse(searchFirstCommand.equals(1));
         assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
+    }
 
+    @Test
+    public void execute_differentObject() {
+        assertFalse(searchFirstCommand.equals(1));
+    }
+
+    @Test
+    public void execute_nullCompare() {
+        assertFalse(searchFirstCommand.equals(null));
+    }
+
+    @Test
+    public void execute_differentDateTime() {
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
 

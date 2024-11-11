@@ -763,6 +763,7 @@ Team size: 5
 2. Implement refresh feature to ensure UI is updated with the latest information after every command is executed.
 3. Implement a more robust email validation feature. 
 4. Implement a fix to prevent the application from crashing when attempting to close the program while the delete confirmation pop-up window is still present.
+5. Implement robust input checks in search functions to ensure invalid date and datetime input will be flagged out as input error by the program.
 
 
 --------------------------------------------------------------------------------------------------------------------
