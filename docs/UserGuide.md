@@ -9,48 +9,14 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## How to Use this User Guide
-This section provides tips on how to effectively navigate through the user guide to find and understand the information you need quickly.
-### Glossary
 
-This section defines key terms and concepts used throughout the user guide.
-
-- **Command**: A text instruction that you type into the command box to perform a specific action in EduConnect.
-- **Command box**: The text input field where you type commands to interact with EduConnect.
-- **Parameter**: A value that you provide to a command to specify details about the action to be performed.
-- **Index**: A number that refers to the position of an item in a list.
-- **Attribute**: A specific characteristic or property of a person, such as name, class, or attendance.
-- **Format**: The required structure for entering commands in EduConnect.
-- **Syntax**: The specific arrangement of characters and parameters required to execute a command correctly.
-- **Constraints**: The rules or conditions that a parameter must meet.
-- **Case-insensitive**: Refers to text matching that ignores uppercase and lowercase differences.
-- **Top-level domain**: The last part of an email address, such as `.com`, `.org`, or `.net`.
-- **JSON file**: A file format used to store data in a structured way that is easy for software to read and write.
-- **Person**: Refers to either a student or a teacher in EduConnect.
-
-### Annotated Box Conventions
-
-This section explains the different types of annotated boxes used in the user guide to highlight important information.
+## Quick start
 
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> This box contains additional information that can help you use EduConnect more effectively.
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> This box contains helpful tips to enhance your experience with EduConnect.
-
-{: .alert .alert-warning}
-> :exclamation: **Warning:**
->
-> This box contains warnings about potential issues or important things to be aware of.
-
-Now that you are familiar with the key terms and annotated boxes, you can proceed to the [Quick Start](#quick-start) guide to get started or explore the [Features](#features) and [Commands Summary](#command-summary) available in EduConnect.
-
---------------------------------------------------------------------------------------------------------------------
-## Quick Start
+> If you're new to this User Guide, check out the [How to Use this User Guide](#how-to-use-this-user-guide) section
+> to get familiar with the terms and layout we use.
 
 1. Check that Java is installed:
    - EduConnect requires **Java 17 or higher** to run. If you're not sure if you have the correct Java version installed, you can click [here for the relevant instructions](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
@@ -485,6 +451,46 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 > * If your changes to the data file makes its format invalid, EduConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 > * Furthermore, certain edits can cause the EduConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+## How to Use this User Guide
+This section provides tips on how to effectively navigate through the user guide to find and understand the information you need quickly.
+### Glossary
+
+This section defines key terms and concepts used throughout the user guide.
+
+- **Command**: A text instruction that you type into the command box to perform a specific action in EduConnect.
+- **Command box**: The text input field where you type commands to interact with EduConnect.
+- **Parameter**: A value that you provide to a command to specify details about the action to be performed.
+- **Index**: A number that refers to the position of an item in a list.
+- **Attribute**: A specific characteristic or property of a person, such as name, class, or attendance.
+- **Format**: The required structure for entering commands in EduConnect.
+- **Syntax**: The specific arrangement of characters and parameters required to execute a command correctly.
+- **Constraints**: The rules or conditions that a parameter must meet.
+- **Case-insensitive**: Refers to text matching that ignores uppercase and lowercase differences.
+- **Top-level domain**: The last part of an email address, such as `.com`, `.org`, or `.net`.
+- **JSON file**: A file format used to store data in a structured way that is easy for software to read and write.
+- **Person**: Refers to either a student or a teacher in EduConnect.
+
+### Annotated Box Conventions
+
+This section explains the different types of annotated boxes used in the user guide to highlight important information.
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+>
+> This box contains additional information that can help you use EduConnect more effectively.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+>
+> This box contains helpful tips to enhance your experience with EduConnect.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> This box contains warnings about potential issues or important things to be aware of.
 
 --------------------------------------------------------------------------------------------------------------------
 
