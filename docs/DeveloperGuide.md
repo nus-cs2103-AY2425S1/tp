@@ -915,7 +915,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
       The main purpose for allowing negative hours for `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid by the student.
       Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
 
-
+ 
 1. **Allow Find command to search for partial word in name:** The current `find command` only allows exact full word matching for the KEYWORDS specified for the `n/` prefix.
     e.g. typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, but will **not** match the students named `Alexander Yeoh` or `Alexa Tan`, etc.
     This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
