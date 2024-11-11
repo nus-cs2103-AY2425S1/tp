@@ -1,13 +1,13 @@
 # ![icon](images/hireme_logo.png) HireMe User Guide
-<br></br>
+
 ## Welcome to HireMe! 
 
 Thank you for choosing **HireMe** to simplify your internship journey.
 With so many positions to apply for, managing applications becomes a real challenge, on top of classes, projects, and exams.
 **HireMe** is here to keep you organised and focused on landing your dream internship.
-In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. If you have some questions or doubts, refer to the [FAQ](#faq) section. Let's dive in and make your internship search a little easier!
+Let's dive in and make your internship search a little easier!
 
-<span style="color: #ff6978;">*Use HireMe to get hired now!*</span>
+<span style="color: #ff6978;">**_Use HireMe to get hired now!_**</span>
 <br></br>
 
 ## Overview of User Guide
@@ -65,11 +65,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 ## Overview of target users
 
-If you are a Computer Science undergraduate who **does not have much time**, can **type fast** and want to **better manage your internship applications**,
-HireMe is the perfect solution for you! Sometimes, tracking internship applications can be troublesome and time-consuming. 
-We understand the importance of tracking as it allows you to follow up on your applications. Hence, we came up with HireMe to help you
-**stay organised without having to put in much effort** because we know that you may be busy with your coursework. Let's get you
-started with HireMe!
+If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing you may be busy with coursework. Let’s get you started with HireMe
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use our User Guide
@@ -80,7 +76,7 @@ First time using **HireMe**? Don't worry! We've got you covered! This tutorial w
 * Is there a burning question you want answers for? The [FAQ](#faq) might have the answer.
 
 Before continuing, here are some important information you need to know about the User Guide:
-1. There are 2 different kinds of boxes that provide extra information.
+1. There are two different kinds of boxes that provide extra information.
     * *Notice boxes* provide important information that you should take note of.
 
       <box type="info" seamless>
@@ -103,10 +99,10 @@ Before continuing, here are some important information you need to know about th
 This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading-hireme) **once**, and **repeat** [Part 2](#part-2-using-the-hireme-application) **each time** you wish to use HireMe.
 
 ### Part 1: Setting up and downloading HireMe
-1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their website [here](https://www.oracle.com/sg/java/technologies/downloads/).
+1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their [website](https://www.oracle.com/sg/java/technologies/downloads/).
 
 
-2. Download `hireme.jar` file from our github [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download `hireme.jar` file from our [github](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
     ![downloadhireme](images/DownloadHireMe.png)
 
@@ -122,7 +118,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 For steps 5 and 6, refer to **either** [Mac Users](#mac-users) **or** [Windows Users](#windows-users) section that matches your computer system.
 Continue to [Using the terminal](#using-the-terminal) after completing steps 5 and 6.
 <br></br>
-#### _Mac Users_
+#### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
     <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
@@ -134,22 +130,25 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
    ![macfilepathinfo](images/Macfilepathinfo.png)
-
+    <br></br>
     On the new open that pops up, left click on `Where` and copy the file path.
+
    <img src="images/Macfilepath.png" alt="macfilepath" width="810"/>
    <br></br>
 
-#### _Windows Users_
-7. Use windows search and type Terminal, click on open. <br>
+#### _Windows users_
+5. Use windows search and type Terminal, click on open. 
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
 You will see a window like this. <br>
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
-8. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path. <br>
+6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.<br>
    ![windowsfilepath](images/Windowsfilepath.png)
-    _file path here is highlighted in blue_
+   <box type="info" seamless>
+   <strong>Note:</strong> File path here is highlighted in blue
+   </box>
    <br></br>
 
 #### _Using the terminal_
@@ -163,21 +162,20 @@ You will see a window like this. <br>
      <br></br>
    - Mac Terminal:
       ![maccd](images/Maccd.png)
-     <br></br>
 <br></br>
 
 
 #### _Using the HireMe application_
-A GUI similar to the below should appear in a few seconds. It is encouraged to expand the window to full screen for better viewability. Note how the app contains some sample data.<br>
+A GUI similar to the below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
 
    ![Ui](images/LabelledUi.png)
 
 9. Type the command in the command box and press `Enter` to execute it. (e.g. typing **`/help`** and pressing `Enter` will open the help window.)<br></br>
    Some example commands you can try:
 
-    * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
+    * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`: Adds an internship application at Google to the list of added entries.
 
-    * `/delete 1` : Deletes the 1st internship application shown in the displayed list.
+    * `/delete 1` : Deletes the first internship application shown in the displayed list.
 
     * `/list` : Lists all your internship applications.
 
@@ -188,7 +186,8 @@ A GUI similar to the below should appear in a few seconds. It is encouraged to e
     * `/exit` : Exits the app.
 
 
-Refer to the [Features](#features) below for more details of each command. Check [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
+Refer to the [Features](#features) below for more details of each command. <br>
+Refer to [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,9 +226,9 @@ Adds your internship application to HireMe with required details such as company
 
 Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
-* `NAME` must be alphanumeric but these special characters `_`,`&`,`/`,`.`,`:`,`(`, and `)` can also be used.
-* `ROLE` must be alphanumeric but these special characters `/` can also be used.
-* `EMAIL` must be a valid email address.
+* `NAME` can only contain alphanumeric or special characters like `_`,`&`,`/`,`.`,`:`,`(`, and `)`.
+* `ROLE` can only contain alphanumeric or `/`.
+* `EMAIL` must be a [valid email address](#faq).
 * The `DATE` must be within the year 2000 and the current year. It also cannot be a future date which means that the date used must be before today or today's date.
 * It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
 
@@ -309,42 +308,35 @@ Examples:
 
 <br></br>
 
-### Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`
+### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
 
 Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
-**Commands:**
-- `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
-- `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
-- `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
+Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 
-**Details:**
-- The `INDEX` refers to the position of the application in the current displayed list. The index is relative to the list shown on the screen after filtering or listing commands.
-- `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
-- `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than 5 applications in the displayed list).
+* `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
+* `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
+* `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
+*  The `INDEX` refers to the position of an application in the displayed list, relative to the current filtered or listed view.
+* `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
+* `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than five applications in the displayed list).
 
-**Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have 10 total applications, but after using `/filter ACCEPTED` only 5 applications are shown, then `/reject 5` will target the last item on this filtered list.
+**Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have ten total applications, but after using `/filter ACCEPTED` only five applications are shown, then `/reject 5` will target the last item on this filtered list.
 
 **Examples:**
-1. `/list` followed by `/accept 2`: Changes the status of the 2nd application in the full list to `ACCEPTED`.
-2. `/pending 3`: Changes the status of the 3rd application in the currently displayed list to `PENDING`.
-3. `/reject 1`: Changes the status of the 1st application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the 1st application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
-5. `/list` followed by `/accept 4` when there are only 3 internship applications returns an error message.
-
-
-<box type="info" seamless>
-**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
-</box>
+1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
+2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
+3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
 <div style="display: flex;">
   <img src="images/accept-status-before.png" width="360" alt="Accept-Status-Before" style="margin-right: 20px;">
   <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
-
 <box type="info" seamless>
-<strong>Note:</strong><br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
 </box>
 
 
