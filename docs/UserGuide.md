@@ -93,7 +93,7 @@ Action     | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER** number.
+* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
 > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
 
@@ -140,10 +140,12 @@ Adds a student to the address book.
 ##### Constraints
 
 * **NAME** must only contain alphanumeric characters and spaces.
+* **ADDRESS** has no restrictions.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
-* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
+> Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
   * Minimum: $0.01 (must be a positive value)
   * Maximum: $1000.00 (two decimal places allowed)
@@ -157,7 +159,7 @@ Adds a student to the address book.
 
 <box type="tip" header="##### Tips">
 
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
@@ -193,7 +195,7 @@ Edits an existing student in the address book.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -262,7 +264,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -402,6 +404,11 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Glossary
+* **CLI**: Command-line interface, where you interact with the system using your keyboard.
+* **GUI**: allows you to interact with your computer through text-based commands. It provides a way to run programs, navigate through files and directories, manage processes, and perform various other tasks.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
