@@ -241,7 +241,7 @@ Format: `vip INDEX IS_VIP`
 
 Examples:
 * `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
-* `search Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `search` command.
+* `search Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `search` command.<br>
   ![result for 'vip 1 false'](images/unmark%20Bernice%20as%20non%20vip.png)
 
 ### Saving the data
