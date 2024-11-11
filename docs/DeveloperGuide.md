@@ -11,12 +11,6 @@ pageNav: 3
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -249,13 +243,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -265,8 +252,6 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Requirements**
 
 ## Product Scope
 
@@ -310,12 +295,13 @@ Priorities:
 
 For all use cases below, refer to the [User Guide](UserGuide.md) for more details.
 
-#### **Use Case: Add a Contact**
+#### **Use Case: UC1 - Add a Contact**
 
 **MSS:**
 
 1. Wedding Organizer adds a contact using the add command.
-   Use case ends.
+2. Contact details are added to the address book.
+Use case ends.
 
 **Extensions:**
 
@@ -335,7 +321,7 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1e1.** Error message displayed in result display.
         - Use case ends.
 - **1f.** Role is not one word
-    - **1f1.** Error message is displayed in result display.  
+    - **1f1.** Error message is displayed in result display.
 - **1g.** Wedding is blank when prefix is inputted, or is not one word
     - **1g1.** Error message is displayed in result display.
 - **1h.** Wedding field is not an index.
@@ -343,8 +329,10 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
 - **1i.** Wedding index inputted is not in the list.
     - **1i1.** Error message is displayed in result display.
 
-#### **Use Case: View a Contact**
+#### **Use Case: UC2 - View a Contact**
 1. Wedding Organizer views a contact using the view command.
+2. Contact details are displayed.
+Use case ends.
 
 **Extensions:**
 
@@ -362,12 +350,11 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1d2.** Person list filtered to contain contacts with names containing inputted name.
     - **1d3.** Error message is displayed in result display.
         - Use case ends.
-- **1e.** Person is a client of a wedding
-    - **1e1.** Error message is displayed in result display.
-        - Use case ends.
 
-#### **Use Case: Filter Contacts**
+#### **Use Case: UC3 - Filter Contacts**
 1. Wedding Organizer filters contacts using the filter command.
+2. Contacts are displayed based on the filter criteria.
+Use case ends.
 
 **Extensions:**
 
@@ -375,8 +362,10 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1a1.** Error message displayed in result display.
         - Use case ends
 
-#### **Use Case: Delete a Contact**
+#### **Use Case: UC4 - Delete a Contact**
 1. Wedding Organizer deletes a contact using the delete command.
+2. Contact is removed from the address book.
+Use case ends.
 
 **Extensions:**
 
@@ -391,31 +380,102 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1c2.** Use case resumes from step 1.
 - **1d.** Person is a client of a wedding
     - **1d1.** Error message is displayed in result display.
+    - **1d2.** User do <u>UC9 - Delete a wedding</u>
+    - **1d3.** User redo this use case.
         - Use case ends.
 
-#### **Use Case: Add a Wedding**
+
+#### **Use Case: UC5 - Edit a Contact**
+1. Wedding Organizer edits a contact using the edit command.
+2. Contact details are updated.
+Use case ends.
+
+**Extensions:**
+
+- **1a.** Contact details is not valid
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Contact index is not in the displayed list.
+  - **1b1.** Same as 1a1.
+- **1c.** Person name does not exist in the address book
+  - **1c1.** Same as 1a1.
+- **1d.** Duplicate contacts.
+  - **1d1.** Same as 1a1.
+
+
+#### **Use Case: UC6 - Add a Wedding**
 
 **MSS:**
 
 1. Wedding Organizer adds a wedding using the addw command.
+2. Wedding details are added to the wedding list.
    Use case ends.
 
 **Extensions:**
 
-- **1a.** Contact name does not exist in the address book
+- **1a.** Client name does not exist in the address book
     - **1a1.** Error message displayed in result display.
         - Use case ends.
-- **1b.** Contact/Wedding index is not in the displayed list
+  - **1b.** Contact/Wedding index is not in the displayed list
+      - **1b1.** Error message displayed in result display.
+          - Use case ends.
+  - **1c.** Duplicate contacts with name containing inputted name
+      - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+      - **1c2.** Use case resumes from step 1.
+    - **1d.** Contact is already a client of another wedding
+      - **1d1.** Error message displayed in result display.
+          - Use case ends.
+
+#### **Use Case: UC7 - View a Wedding**
+
+1. Wedding Organizer views a wedding using the vieww command.
+2. Wedding details are displayed.
+Use case ends.
+
+**Extensions:**
+
+- **1a.** No prefixes inputted.
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Wedding name does not exist in the address book
+    - **1b1.** Same as 1a1.
+- **1c.** Wedding index is not in the displayed list
+    - **1c1.** Same as 1a1.
+- **1d.** Duplicate wedding with name containing inputted name
+    - **1d1.** Bridal Boss filters the wedding list to show weddings containing inputted name.
+    - **1d2.** Same as 1a1.
+
+#### **Use Case: UC8 - Delete a wedding**
+1. Wedding Organizer deletes a wedding using the deletew command.
+2. Wedding is removed from the address book.
+Use case ends.
+
+**Extensions:**
+
+- **1a.** Wedding name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Wedding index is not in the displayed list
     - **1b1.** Error message displayed in result display.
         - Use case ends.
-- **1c.** Duplicate contacts with name containing inputted name
-    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
-    - **1c2.** Use case resumes from step 1.
-  - **1d.** Contact is already a client of another wedding
-    - **1d1.** Error message displayed in result display.
-        - Use case ends.
+- **1c.** Duplicate wedding with name containing inputted name
+    - **1c1.** Same as 1d1 in <u>UC7 - View a wedding</u>
 
-#### **Use Case: Assign a contact to a Wedding**
+#### **Use Case: UC9 - Edit a Wedding**
+
+1. Wedding Organizer edits a contact using the edit command.
+2. Contact details are updated.
+Use case ends.
+
+**Extensions:**
+
+- **1a.** Contact details is not valid
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Contact index is not in the displayed list.
+  - **1b1.** Same as 1a1.
+
+#### **Use Case: UC10 - Assign a contact to a Wedding**
 
 **MSS:**
 
@@ -438,6 +498,20 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
 - **1e.** Contact is the client of the wedding
     - **1e1.** Error message displayed in result display.
         - Use case ends.
+
+#### **Use Case: UC11 - Delete a contact from a Wedding**
+
+**MSS:**
+
+1. Wedding Organizer unassigns the person (by name or index) from the wedding (by index) using the delete command.
+   Use case ends.
+
+**Extensions:**
+- **1a.** Contact is already not assigned to the wedding
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+
+- Same as the Extensions from <u>UC10 - Assign a contact to a Wedding</u> excluding 1f.
 
 ---
 
@@ -526,8 +600,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Editing a person
 
 Success action: Details of edited contact shown in the status message, person in person list is edited.
@@ -541,7 +613,7 @@ Success action: Details of edited contact shown in the status message, person in
    1. Test case: `edit`<br>
       Test case: `edit 1`<br>
       Expected: No person is edited. `edit` command format is shown in the status message.
-    
+
    1. Test case: `edit 0 [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]`<br>
       Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is a negative number) <br>
       Expected: No wedding added. `edit` command format is shown in the status message.
@@ -565,10 +637,10 @@ Success action: Details of edited contact shown in the status message, person in
       Expected (Valid Address): First contact has address field edited to NEW ADDRESS. Success action will be carried out.<br>
       Expected (Invalid Address): No person is edited. Error message with address restrictions shown in status message.
 
-   1. Test case: `edit 1 n/EXISTING NAME p/EXITING PHONE e/EXISTING EMAIL a/EXISTING ADDRESS`<br>
+   1. Test case: `edit 1 n/EXISTING NAME p/EXISTING PHONE e/EXISTING EMAIL a/EXISTING ADDRESS`<br>
       Expected: No person is edited. Error message shows person already exist in status message.
 
-   1. Test case: `edit 1 p/EXITING PHONE`<br>
+   1. Test case: `edit 1 p/EXISTING PHONE`<br>
       Expected: No person is edited. Error message shows phone already exist in status message.
 
    1. Test case: `edit 1 e/EXISTING EMAIL`<br>
@@ -586,7 +658,7 @@ Success action: Details of edited contact shown in the status message, person in
 
 ### Viewing a person
 
-Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed. 
+Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed.
 The weddings involved of the person will be reflected in the wedding list on the right.
 
 #### Viewing with INDEX
@@ -605,7 +677,7 @@ The weddings involved of the person will be reflected in the wedding list on the
        Expected: Error message prompting the user to choose an index within the range shown.
 
     1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii). 
+       Expected: Similar to point #1(iii).
 
 1. Viewing a person while a partial list of contacts is shown.
 
@@ -702,7 +774,6 @@ The weddings involved of the person will be reflected in the wedding list on the
 
     1. Test cases used can be the same since `filter` searches from the entire list of contacts, rather than only the partial list.
 
-    
 ### Adding a Wedding
 Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
 
@@ -776,7 +847,7 @@ Success action: When wedding is successfully edited, the details of the updated 
 ### Viewing weddings
 
 Success action: When wedding is successfully viewed, the details of the viewed wedding is shown in the status message and reflected in wedding list.
-The persons involved in the viewed wedding will be shown in the person list. 
+The persons involved in the viewed wedding will be shown in the person list.
 
 #### Viewing weddings using INDEX
 
@@ -796,7 +867,7 @@ The persons involved in the viewed wedding will be shown in the person list.
     1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
        Expected: Similar to point #1(iii).
 
-1. Viewing of a wedding while a partial list of weddings is shown. 
+1. Viewing of a wedding while a partial list of weddings is shown.
 
     1. Prerequisite: List some of the weddings using `vieww NAME` command, where a partial list of weddings that matches NAME will be shown, assuming there are multiple of such weddings.
 
@@ -877,7 +948,7 @@ Success action: When a person is successfully assigned:
 
     1. Test case: `assign x r/photographer` (where x is an invalid index (< 0, 0 , larger than list size)))<br>
        Expected: Error message shown about invalid person index.
-   
+
     1. Test case: `assign 1 r/`<br>
        Expected: Role of first person in list is removed. Success action carried out
 
@@ -952,7 +1023,7 @@ Success action: When a person is successfully assigned:
     1. Test case: `assign 1 w/1 w/2`<br>
        Expected: Error message about already being assigned to wedding 1.
 
-### Removing wedding jobs assigned to a person 
+### Removing wedding jobs assigned to a person
 
 #### Removing with INDEX of person list and wedding list
 
@@ -985,11 +1056,81 @@ Success action: When a person is successfully assigned:
        Expected (No Alice Tan): No person to unassign. Error details is shown in the status message, as the NAME does not belong to anyone in the address book.
 
 
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: Have the app running with some sample data saved
 
-1. _{ more test cases …​ }_
+    2. Test case: Delete addressbook.json
+        * Steps:
+            1. Navigate to data folder (default: `[App Home]/data/`)
+            2. Delete `addressbook.json`
+            3. Restart the application
+        * Expected:
+            - App creates new `addressbook.json` with empty data
+            - Creata a new data file data/addressbook.json populated with a sample AddressBook.
+
+
+    3. Test case: Corrupt addressbook.json with invalid JSON
+        * Steps:
+            1. Navigate to data folder
+            2. Open `addressbook.json`
+            3. Add random text or remove brackets to make it invalid JSON
+            4. Save file and restart application
+        * Expected:
+            - Creates new `addressbook.json` with empty data
+            - Status bar shows "Corrupted data found. Starting with empty address book"
+            - List shows no persons or weddings
+
+    4. Test case: Corrupt addressbook.json with valid JSON but invalid data
+        * Steps:
+            1. Navigate to data folder
+            2. Open `addressbook.json`
+            3. Modify data while keeping valid JSON structure (e.g., remove required fields, change data types)
+            4. Save file and restart application
+        * Expected:
+            - Creates new `addressbook.json` with empty data
+            - Status bar shows "Corrupted data found. Starting with empty address book"
+            - List shows no persons or weddings
+
+2. Testing data persistence
+
+    1. Test case: Normal shutdown
+        * Steps:
+            1. Modify data (add/edit/delete person or wedding)
+            2. Exit application through UI
+            3. Restart application
+        * Expected: All modifications are preserved
+
+    2. Test case: Forced shutdown
+        * Steps:
+            1. Modify data
+            2. Force close application (Task Manager/Force Quit)
+            3. Restart application
+        * Expected:
+            - Last saved state (address book after last valid command executed) is recovered.
+            - Any unsaved modifications are lost
+            - No data corruption
+
+3. Testing data integrity
+
+    1. Test case: Wedding-Person relationship integrity
+        * Steps:
+            1. Open `addressbook.json`
+            2. Manually modify wedding references (change hashcodes)
+            3. Save file and restart application
+        * Expected:
+            - App detects corrupted relationships
+            - Shows error message: "Address book data is corrupted: Found weddings without corresponding clients"
+            - Starts with empty address book
+
+    2. Test case: Client-Wedding integrity
+        * Steps:
+            1. Open `addressbook.json`
+            2. Manually remove client data while keeping wedding reference
+            3. Save file and restart application
+        * Expected:
+            - App detects missing client data
+            - Shows error message about corrupted data
+            - Starts with empty address book
