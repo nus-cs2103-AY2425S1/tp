@@ -45,6 +45,8 @@
     * [Non-Functional Requirements]({{ baseUrl }}/DeveloperGuide.html#non-functional-requirements)
     * [Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
+  * [Appendix: Effort]({{ baseUrl }}/DeveloperGuide.html#appendix-effort)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
