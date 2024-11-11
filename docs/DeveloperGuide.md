@@ -256,6 +256,12 @@ Currently: Opening the help window creates an external popup that requires the u
 
 Plan: Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
 
+8. Enhance contacts and weddings visibility
+
+Currently: The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
+
+Plan: To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
+
 
 
 // Support for Multi-Languages
