@@ -1,7 +1,7 @@
 
 # VendorVault User Guide
 
-VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency!
+VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact and delivery management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency!
 
 Overview of key features:
 * Supplier Contact Management
@@ -25,7 +25,7 @@ Overview of key features:
         - 3.3.1. [Adding a supplier](#3-3-1-adding-a-supplier-add-s)
         - 3.3.2. [Listing all suppliers](#3-3-2-listing-all-suppliers-list-s)
         - 3.3.3. [Deleting a supplier](#3-3-3-deleting-a-supplier-delete-s)
-        - 3.3.4. [Marking a supplier with a status](#3-3-4-marking-a-supplier-with-a-status-mark-s)
+        - 3.3.4. [Marking a supplier](#3-3-4-marking-a-supplier-mark-s)
         - 3.3.5. [Finding suppliers](#3-3-5-finding-suppliers-find-s)
         - 3.3.6. [Sorting suppliers](#3-3-6-sorting-suppliers-sort-s)
     - 3.4. [Delivery commands](#3-4-delivery-commands)
@@ -36,10 +36,10 @@ Overview of key features:
         - 3.4.5. [Finding deliveries](#3-4-5-finding-deliveries-find-d)
         - 3.4.6. [Sorting deliveries](#3-4-6-sorting-deliveries-sort-d)
         - 3.4.7. [Upcoming deliveries](#3-4-7-upcoming-deliveries-upcoming)
-    - 3.5. [Extended valid format guidelines](#3-5-extended-valid-format-guidelines)
+    - 3.5. [Extended format guidelines](#3-5-extended-format-guidelines)
         - 3.5.1. [Valid email address format](#3-5-1-valid-email-address-format)
         - 3.5.2. [Valid company name format](#3-5-2-valid-company-name-format)
-4. [Managing my data](#4-managing-your-data)
+4. [Managing your data](#4-managing-your-data)
    - 4.1. [Saving your data](#4-1-saving-the-data)
    - 4.2. [Editing your data directly](#4-2-editing-the-data-file)
    - 4.3. [Archiving your data files](#4-3-archiving-data-files-coming-in-v2-0)
@@ -51,13 +51,13 @@ Overview of key features:
     - 7.3. [Delivery-specific Commands](#7-3-delivery-specific-commands)
 8. [Glossary](#8-glossary)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 1. How to get started
 
-1. If you are new to Vendor Vault, we suggest starting from the [Setting up VendorVault section](#2-setting-up-vendorvault).
+1. If you are new to VendorVault, we suggest starting from the [Setting up VendorVault section](#2-setting-up-vendorvault).
 
-2. If you have already set up Vendor Vault and are looking for information of our commands and features, take a look at our [Features](#3-features) or [Command Summary](#7-command-summary) sections. 
+2. If you have already set up VendorVault and are looking for information of our commands and features, take a look at our [Features](#3-features) or [Command Summary](#7-command-summary) sections. 
 
 3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#8-glossary) section for definitions and explanations.
 
@@ -71,20 +71,20 @@ Overview of key features:
    - 1a. Open up your command terminal. 
      * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. 
      * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space). 
-     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu.
+     * Linux users can open the command terminal by searching for `Terminal` or `Console` in the Applications Menu.
    
-   - 1b. Type in java -version to check if you have Java installed. If you have Java installed you should see something like this:
+   - 1b. Type in `java -version` to check if you have Java installed. If you have Java installed you should see something like this: <br></br>
      ![Terminal Example showcasing java version](images/intro/terminalJavaVersion.png)
    
    - 1c. If you do not have Java installed or are currently on a different version, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
-2. Download the latest `vendorvault.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
-   ![Download jar file](images/intro/jarFile.png)
+2. Download the latest `vendorvault.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases). <br></br>
+   ![Download jar file](images/intro/jarFile.png) <br></br>
 
 3. Upon downloading the `vendorvault.jar` file, copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
 
-4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you placed the jar file in step 3) and use the `java -jar vendorvault.jar` command in the terminal to run the application.<br>
-   ![Starting up application](images/intro/startingApp.png). If you are unsure how to do this step follow these guides below:
+4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you placed the jar file in step 3) and use the `java -jar vendorvault.jar` command in the terminal to run the application. <br></br>
+   ![Starting up application](images/intro/startingApp.png) <br></br> If you encounter difficulties in this step, you may follow these guides below:
     * Windows users follow this [guide](https://wiki.communitydata.science/Windows_terminal_navigation).
     * Mac users follow this [guide](https://darkroomphotos.com/mac-terminal-navigate-folders/).
     * Linux users follow this [guide](https://www.redhat.com/en/blog/Linux-file-navigation-commands).
@@ -100,8 +100,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 6. The box below the command box is called the **results display box**. This is where the result of your inputted command will be displayed. 
 
-7. Type commands in the **command box** and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+7. You can type a command in the **command box** and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br></br> Some example commands you can try:
 
    * `list -a` : Lists all suppliers and deliveries.
 
@@ -111,7 +110,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
    * `exit` : Exits the app.
 
-8. Refer to the [Features](#3-features) below for details of each command.
+8. Refer to the [Features](#3-features) section below for details of each command.
 <br>
 
 [[Back to Table of Contents]](#table-of-contents)
@@ -121,15 +120,14 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 # 3. Features
 
 ## 3.1. Understanding the Command Syntax
-<box type="info" seamless>
 
-**Notes about the command format:**<br>
+<box type="info" seamless>
 
 * Words in `UPPER_CASE` are the parts of the parameters to be supplied by the user.<br>
   e.g. the parameter `add n/NAME` can be used as `add n/John Doe`.
 
 * Parameters in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters **with** `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -177,13 +175,15 @@ Lists all suppliers and deliveries in VendorVault.
 
 Format: `list -a`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - No other parameters should be given for this command.
 - Give at least one space between list and -a.
 
 </box>
+
+[[Back to Table of Contents]](#table-of-contents)
 
 ---
 
@@ -221,9 +221,9 @@ Parameters:
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `p/PHONE`: `PHONE` is the supplier's phone number. It must be numeric, and contain at least 3 digits.
 - `e/EMAIL`: `EMAIL` is the supplier's email address. It must be in a valid email address format, and cannot be blank.
-  - Please see [below](#valid-email-address-format) for more information on what constitutes a valid email address format.
+  - Please see [below](#3-5-1-valid-email-address-format) for more information on what constitutes a valid email address format.
 - `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
-  - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
+  - Please see [below](#3-5-2-valid-company-name-format) for more information on what constitutes a valid company name format.
 - `[t/TAG]`: `TAG` is the tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
 - `[pro/PRODUCT]`: `PRODUCT` is the product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
   - One space is counted as one character.
@@ -238,7 +238,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-s`.
@@ -275,11 +275,10 @@ Shows a list of all suppliers in VendorVault. The delivery list will not be affe
 
 Format: `list -s`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-s`.
-- A space is not necessary between `-s` and `INDEX`.
 - No other parameters should be given for this command.
 
 </box>
@@ -301,7 +300,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `delete` and `-s`.
@@ -325,7 +324,7 @@ Expected output:
 
 ---
 
-### 3.3.4. Marking a supplier with a status : `mark -s`
+### 3.3.4. Marking a supplier : `mark -s`
 
 Marks a specified supplier with the specified status in VendorVault.
 
@@ -339,7 +338,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `mark` and `-s`.
@@ -381,7 +380,7 @@ Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 Parameters:
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
-    - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
+    - Please see [below](#3-5-2-valid-company-name-format) for more information on what constitutes a valid company name format.
 - `pro/PRODUCT`: `PRODUCT` is the product associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - A `PRODUCT` cannot be made up of only spaces.
@@ -392,16 +391,15 @@ Parameters:
 
 **Tips:**
 - The find result(s) will contain/satisfy all the given parameters.
-  - Comparison between parameters is case-sensitive.
 - You can provide all the parameters or any combination of parameters, as long as at least one is given!
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `find` and `-s`.
-- - At least one space is needed between `-s` and the first parameter.
+- At least one space is needed between `-s` and the first parameter.
 - At least one parameter must be given.
 - At least one space is needed between parameters.
 - `NAME`, `COMPANY` and `PRODUCT` are case-insensitive.
@@ -435,7 +433,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space between `sort` and `-s` is needed.
@@ -477,7 +475,7 @@ Parameters:
 - `pro/PRODUCT`: `PRODUCT` is the product associated with the delivery. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - `PRODUCT` cannot be made up of only spaces.
-- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit, and must not be blank.
+- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by at least one space, and then a unit. This parameter must not be blank.
     - `QUANTITY` cannot have decimal places.
     - `QUANTITY` units are case sensitive.
     - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
@@ -493,7 +491,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-d`.
@@ -513,8 +511,8 @@ Examples:
 - `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20`
 
 Expected output:
-- Delivery details is shown and paired to supplier at index 1, assuming there is at least one supplier displayed. Otherwise, an error message will be shown.
-- Delivery details is shown and paired to supplier at index 2, assuming there is at least two suppliers displayed. Otherwise, an error message will be shown.
+- Delivery details are shown and paired to supplier at index 1, assuming there is a supplier at index 1 with an `ACTIVE` status. Otherwise, an error message will be shown.
+- Delivery details are shown and paired to supplier at index 2, assuming there is a supplier at index 2 with an `ACTIVE` status. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
@@ -530,7 +528,7 @@ Shows a list of all deliveries in VendorVault. The supplier list will not be aff
 
 Format: `list -d`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-d`.
@@ -555,14 +553,14 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `delete` and `-d`.
 - A space is not necessary between `-d` and `INDEX`.
 - All parameters must be given.
 - Only one delivery can be deleted by one command.
-  - `delete -d 1 3 5` is not allowed.
+  - e.g. `delete -d 1 3 5` is not allowed.
 
 </box>
 
@@ -595,7 +593,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `mark` and `-d`.
@@ -646,12 +644,11 @@ Parameters:
 
 **Tips:**
 - The find result(s) will contain/satisfy all the given parameters.
-    - Comparison between parameters is case-sensitive.
 - You can provide all the parameters or any combination of parameters, as long as at least one is given!
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `find` and `-d`.
@@ -691,7 +688,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+
 
 <box type="tip" seamless>
 
@@ -699,6 +696,8 @@ Parameters:
 - Sorting deliveries by status in ascending order will display deliveries in the following order: `CANCELLED`, `DELIVERED`, `PENDING`
 
 </box>
+
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `sort` and `-d`.
@@ -726,7 +725,7 @@ Expected output:
 
 ### 3.4.7. Upcoming deliveries: `upcoming`
 
-Shows a list of pending deliveries in VendorVault based on delivery date and time. You can choose to view all pending deliveries within a specified date range or
+Shows a list of **pending** deliveries in VendorVault based on delivery date and time. You can choose to view all **pending** deliveries within a specified date range or
 before or after a given date.
 
 Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
@@ -746,14 +745,14 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `upcoming` and the first parameter.
 - At least one parameter must be provided.
 - At least one space is needed between parameters.
 - If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
-- 
+
 </box> 
 
 Examples:
@@ -771,7 +770,7 @@ Expected output:
 
 ---
 
-## 3.5. Extended valid format guidelines
+## 3.5. Extended format guidelines
 
 #### 3.5.1. Valid email address format
 
@@ -818,13 +817,13 @@ VendorVault data are saved in the hard disk automatically after any command that
 
 ## 4.2. Editing the data file
 
-VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
+VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file. Find out how you can access the data file in the [FAQ section](#5-faq).
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Caution:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
-- Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+- Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -842,14 +841,18 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Can I undo my commands?
+**A**: Currently there isn't a way to undo your commands. Hence, be careful before inputting in your commands!
+
+
 [[Back to Table of Contents]](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 # 6. Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application window will open off-screen. The remedy is to delete the `preferences.json` file created by the application and then run the application again.
+2. **Minimizing the Help Window**: If the Help Window is minimized, and you try to reopen it (using the help command, Help menu, or F1), it will continue to stay minimized. To fix this, you need to manually restore the minimized Help Window.
 
 [[Back to Table of Contents]](#table-of-contents)
 
@@ -860,35 +863,35 @@ _Details coming soon ..._
 ## 7.1. General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[List]()**   | `list -a`
-**[Clear]()**   | `clear`
-**[Help]()**   | `help`
-**[Exit]()**   | `exit`
+**[Help](#3-2-1-viewing-help-help)**   | `help`
+**[List](#3-2-2-viewing-all-deliveries-and-suppliers-list-a)**   | `list -a`
+**[Clear](#3-2-3-clearing-all-suppliers-and-deliveries-clear)**   | `clear`
+**[Exit](#3-2-4-exiting-the-program-exit)**   | `exit`
 
 
 ## 7.2. Supplier-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add]()**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete]()** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List]()**   | `list -s`
-**[Mark]()**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find]()**   | `find -s n/NAME com/COMPANY pro/PRODUCT` <br> e.g., `find -s n/link com/NU`
-**[Sort]()**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Add](#3-3-1-adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g. `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[List](#3-3-2-listing-all-suppliers-list-s)**   | `list -s`
+**[Delete](#3-3-3-deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g. `delete -s 3`
+**[Mark](#3-3-4-marking-a-supplier-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.`mark -s 2 active`
+**[Find](#3-3-5-finding-suppliers-find-s)**   | `find -s n/NAME com/COMPANY pro/PRODUCT` <br> e.g. `find -s n/link com/NU`
+**[Sort](#3-3-6-sorting-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g. `sort -s so/a sb/n`
 
 
 ## 7.3. Delivery-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add]()**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY  c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete]()** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List]()**   | `list -d`
-**[Mark]()**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find]()**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort]()**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
-**[Upcoming]()** | `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+**[Add](#3-4-1-adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY  c/COST` <br> e.g. `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[List](#3-4-2-listing-all-deliveries-list-d)**   | `list -d`
+**[Delete](#3-4-3-deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g. `delete -d 3`
+**[Mark](#3-4-4-marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g. `mark -d 2 PENDING`
+**[Find](#3-4-5-finding-deliveries-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g. `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#3-4-6-sorting-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g. `sort -d so/a sb/c`
+**[Upcoming](#3-4-7-upcoming-deliveries-upcoming)** | `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`<br> e.g. `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 [[Back to Table of Contents]](#table-of-contents)
 
@@ -898,10 +901,15 @@ Action     | Format, Examples
 
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **Command**: An instruction given to the application to perform a specific action. They are entered by the user in a text-based format and are used to interact with and manage data.
+* **Command Terminal**: A text-based interface where users type commands to interact with the app or operating system.
+* **Domain**: The part of an email address that comes after the "@" symbol, representing the email provider or organisation
+* **GUI**: Graphical User Interface; a visual layout that allows users to interact with the application using elements like buttons, icons, and menus instead of text commands.
+* **Index**: A number shown next to each supplier or delivery in the displayed list, used to identify and refer to specific suppliers or deliveries.
 * **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
-* **Java**: Java is the main language used to build and manage the app’s features, ensuring it runs smoothly and securely.
+* **Java**: Java is the main programming language used to build and manage the app’s features, ensuring it runs smoothly and securely.
 * **Parameter**: Contains words in `UPPER_CASE` that needs to be supplied by user. Some parameters also contain a prefix that should be followed by the user.
 * **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
+* **Tag**: An one-word descriptive label users can add to a supplier to provide extra information.
 
 
 [Back to Top](#vendorvault-user-guide)

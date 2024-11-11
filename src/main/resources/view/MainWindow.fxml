@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="750" onCloseRequest="#handleExit" title="Vendor Vault" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="750" onCloseRequest="#handleExit" title="VendorVault" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/icon.png" />
   </icons>

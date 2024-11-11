@@ -895,3 +895,88 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `exit`<br>
        Expected: The app closes.
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Enhancement 1**: Make deletion of suppliers with pending deliveries throw a warning and error message.
+   * **Description**: The current implementation allows users to delete suppliers with pending deliveries without any warning. 
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to delete a supplier with pending deliveries.
+     * e.g. "Warning: Unable to delete supplier. There are pending deliveries associated with this supplier."
+
+
+2. **Enhancement 2**: Make marking an active supplier with pending deliveries inactive throw a warning and error message.
+   * **Description**: The current implementation allows users to mark active suppliers with pending deliveries as inactive without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to mark an active supplier with pending deliveries as inactive.
+     * e.g. "Warning: Unable to mark supplier as inactive. There are pending deliveries associated with this supplier."
+     
+
+3. **Enhancement 3**: Make improvements to detect duplicate suppliers. 
+   * **Description**: The current implementation defines duplicate suppliers as suppliers with the same name and company name.
+   However, it allows users to add duplicate suppliers with names with different case (e.g. "John Doe" and "john doe")
+   and multiple spacings (e.g. "John Doe" and "John   Doe").
+   * **Tasks**:
+     * We plan to redefine duplicate suppliers as suppliers with the same name and phone number. 
+     For the supplier name, we plan to make improvements to detect duplicate suppliers case-insensitively.
+     Supplier names with multiple spacings will also be considered as the same supplier.
+     Under this new implementation, suppliers are not allowed to have the same name and phone number. 
+     * e.g. "Warning: Duplicate supplier 'John Doe' already exists. Please use a different name."
+     * e.g. "Warning: Duplicate supplier with the same phone number '98765432' already exists. Please use a different phone number."
+     
+
+4. **Enhancement 4**: Make adding a delivery of a product that is not supplied by the supplier throw a warning and error message.
+   * **Description**: The current implementation allows users to add a delivery of a product that is not supplied by the supplier without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to add a delivery of a product that is not supplied by the supplier.
+     * e.g. "Warning: Unable to add delivery. The product is not supplied by the selected supplier."
+     
+
+5. **Enhancement 5**: Make adding supplier tags check for duplicates case-insensitively and throw a warning message.
+   * **Description**: The current implementation allows users to add duplicate tags with different case (e.g. "friends" and "Friends").
+   * **Tasks**:
+     * We plan to check for duplicate tags case-insensitively and throw a warning message.
+     * e.g. "Warning: Duplicate tag 'friends' already exists. Please use a different tag."
+     
+
+6. **Enhancement 6**: Make improvements to detect duplicate deliveries. 
+   * **Description**: The current implementation defines duplicate deliveries as deliveries
+   with the same supplier, product, delivery date and time, cost, and quantity.
+   However, it allows users to add duplicate deliveries with different case for the product name (e.g. "bread" and "Bread").
+   * **Tasks**:
+     * We plan to check for duplicate deliveries case-insensitively for the product name and throw a warning message.
+     * "Warning: Duplicate supplier detected. Please use a different name/phone number."
+
+
+7. **Enhancement 7**: Make upcoming command throw an error when the date and time input for the `aft/DELIVERY_DATE_TIME` parameter is later than the date and time input for parameter `bef/DELIVERY_DATE_TIME`.
+   * **Description**: The current implementation allows users to key in an invalid date range for PENDING deliveries for the upcoming command without any warning.
+   * **Tasks**:
+     * We plan to add an error message when a user tries to use the upcoming command with an invalid date range where the `bef/DELIVERY_DATE_TIME` parameter has an earlier date and time than the `aft/DELIVERY_DATE_TIME` parameter.
+     * e.g. "Warning: `The DELIVERY_DATE_TIME` value for the `aft/ DELIVERY_DATE_TIME` parameter should be earlier than the value for `bef/DELIVERY_DATE_TIME`."
+
+
+8. **Enhancement 8**: Allow for adding a supplier name with special characters.
+   * **Description**: The current implementation only allows for alphanumeric characters in the supplier name.
+   * **Tasks**:
+     * We plan to allow for adding a supplier name with special characters.
+     * e.g. "add -s n/John Doe & Sons p/98765432
+
+
+9. **Enhancement 9**: Better input checks for invalid date in commands that require date input.
+   * **Description**: The current implementation allows for certain invalid dates
+    because the LocalDateTime module automatically converts the date to the first previous valid date
+   * e.g. "add -d on/31-04-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For months with less than 31 days,
+   the date is converted to the last day of the previous month)
+   * e.g. "add -d on/29-02-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For non-leap years, the date is converted to 28-02-2023)
+   * No error message is shown.
+   * **Tasks**:
+     * We plan to add better input checks for invalid dates in commands that require date input.
+
+
+10. **Enhancement 10**: Allow finding deliveries by date and time range.
+   * **Description**: The current implementation only allows finding deliveries by a single date and time.
+   * **Tasks**:
+     * We plan to allow users to find deliveries within a specified date and time range.
+     * e.g. "find -d aft/18-01-2023 12:00 bef/18-01-2023 18:00 stat/DELIVERED"
