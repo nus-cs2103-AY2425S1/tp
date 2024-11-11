@@ -119,6 +119,7 @@ Refer to the [Features](#features) below to know more about the commands you cou
   e.g. if the command specifies `n/SUPPLIER_NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/SUPPLIER_NAME` is also acceptable.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123` or `help -10`, it will be interpreted as `help`.
+> * If duplicate tags are found for product or supplier, the system takes only one copy of it, others are ignored, but it is case-sensitive.
 > * Command words are case-insensitive. eg: `help` and `HELP` are the same.
 > * **Copying Commands from PDFs:** If you’re copying commands from a PDF, be careful that spaces at line breaks may be omitted when pasted, so double-check the spacing.
 > * Prefixes Glossary: <br>
@@ -189,6 +190,9 @@ Here are a few examples to help you:
 > **IMPORTANT**:
 > The product and supplier must already exist in the system before you can assign them.
 
+> **NOTE:**
+> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+
 ---
 
 ### Assigning a product to supplier: `assign` 🧋 ➡️ 🙋‍♀️
@@ -243,6 +247,9 @@ Here are a few examples to help you:
 > At least one of the prefixes is mandatory: min/ OR max/ <br>
 > (Prefixes min/ AND max/ can be used together also, see examples)
 
+> **NOTE:**
+> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+
 - Before executing the command
 ![Before set threshold](images/before_setthreshold.png)
 
@@ -265,6 +272,8 @@ Here are a few examples to help you:
 > Stock levels must be a number equal or above 0(zero).<br>
 > Products should already exist in the system, otherwise errors are displayed.
 
+> **NOTE:**
+> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
 ---
 
 ### Locating all suppliers: `view_supplier` 🔎🙋‍♀️
