@@ -630,7 +630,7 @@ Similar to [<ins>UC14](#use-case-uc14-search-for-contacts-by-name) except search
       Use case resumes at step 1.
 
 ### **Use case: UC23 — Unassign a Contact from one or more Weddings**
-Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) except un-assigning a contact from Weddings. Additionally, it checks to ensure the specified wedding is currently associated with the contact, instead of simply existing in the system.
+Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) except un-assigning a contact from Weddings. Additionally, for **Extension 2a.** it checks to ensure the specified wedding is currently associated with the contact, instead of simply existing in the system.
 
 ---
 
@@ -656,7 +656,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
       Use case resumes at step 1.
 
 ### **Use case: UC25 — Unassign one or more Tasks from a Contact**
-Similar to [<ins>UC22](#use-case-uc24-assign-one-or-more-tasks-to-a-contact) except un-assigning tasks from a contact. Additionally, it checks to ensure the specified task is currently assigned to the contact, instead of simply existing in the system.
+Similar to [<ins>UC22](#use-case-uc24-assign-one-or-more-tasks-to-a-contact) except un-assigning tasks from a contact. Additionally, for **Extension 2a.** it checks to ensure the specified task is currently assigned to the contact, instead of simply existing in the system.
 
 ### **Use case: UC26 — Mark one or more Tasks as Completed**
 
