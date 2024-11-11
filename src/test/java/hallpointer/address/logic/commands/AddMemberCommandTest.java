@@ -58,13 +58,13 @@ public class AddMemberCommandTest {
 
         // same name and different telegram
         Member differentTelegramMember = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
-        AddMemberCommand differentTelegramAddMemberCommand  = new AddMemberCommand(differentTelegramMember);
+        AddMemberCommand differentTelegramAddMemberCommand = new AddMemberCommand(differentTelegramMember);
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> differentTelegramAddMemberCommand.execute(modelStub));
 
         // same telegram and different name
         Member differentNameMember = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        AddMemberCommand differentNameAddMemberCommand  = new AddMemberCommand(differentNameMember);
+        AddMemberCommand differentNameAddMemberCommand = new AddMemberCommand(differentNameMember);
         assertThrows(CommandException.class,
                 AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> differentNameAddMemberCommand.execute(modelStub));
 
