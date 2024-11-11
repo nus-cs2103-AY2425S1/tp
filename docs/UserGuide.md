@@ -21,6 +21,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
   <page-nav-print />
 </div>
 
+<br>
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 ![Ui](images/Ui.png)
 
-5. **Try Out Some Commands!** : Type the command in the command box and press Enter to see it in action!
+5. **Try Out Some Commands** : Type the command in the command box and press Enter to see it in action!
    Here are a few examples:
     * `help` : Opens the help window.
 
@@ -61,6 +62,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
     * `exit` : Exits the app.
 
 Refer to the [Features](#features) below for more details.
+<br>
 <div style="page-break-after: always;"></div>
 
 -------------------------------------------------
@@ -89,26 +91,18 @@ Each suggestion includes the command name, command format and any required detai
 
 <box type="tip" seamless>
 
-To scroll through the suggestions:
+**To scroll through the suggestions**:
 
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
   _In the image above, the **current selection** would be `editgame`._
 
-</box>
-
-<box type="tip" seamless>
-
-Quickly complete your commands!
+**To quickly complete your commands**:
 
 * If your **current selection** is correct press `tab` to autocomplete it within the command box.
 
-</box>
+**To look for a quick reference**:
 
-<box type="tip" seamless>
-
-Need a quick reference?
-
-* The PopUp stays open as you finish typing your command, so you can check it for syntax or details if you need them.
+* The PopUp stays open as you finish typing your command, so you can check it for syntax or details of the command you want to use.
 
 </box>
 
@@ -119,6 +113,76 @@ Need a quick reference?
 * Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it!
 
 * The PopUp will adjust its position to stay fully visible, even if your app window is partially off-screen.
+
+</box>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Important Notes about Command Formats
+
+<box type="info" seamless>
+
+* **Commands Are Case-Sensitive and All Lowercase**  
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+
+
+* **Copying Commands from PDF**  
+  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+### Understanding Commands Format
+<box type="info" seamless>
+
+* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
+  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
+
+
+* **Items in square brackets are optional**.  
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
+
+
+* **Items with `…`​ after them can be used multiple times.**  
+  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
+
+
+* **Flexible Parameter Order**  
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+
+* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
+  and `clear`)  
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  <br>
+  </box>
+
+### Understanding Parameters Format
+<box type="info" seamless>
+
+* `NAME` **only accepts alphanumeric characters and spaces**.  
+  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
+
+
+* `INDEX` **must be a must be a positive integer**  
+  If it’s not, you’ll see an invalid command format error.
+
+
+* `NAME` **is case-sensitive**.  
+  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
+  allowed.
+
+
+* `TIME-TIME` **must be within the same day**.  
+  Use the format `HHmm-HHmm` for time ranges within the same day.  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
+  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
+
+* `TIME-TIME`**cannot refer to a single point in time**
+  The start and end times must be different (e.g. `1200-1200` is invalid).
 
 </box>
 
@@ -182,6 +246,7 @@ Lists all persons in GamerBook. Use this after you are done searching for someon
 
 Format: `list`  
 Output: `Listed all persons`
+
 <br>
 
 #### **Adding a person :** `add`
@@ -240,6 +305,8 @@ Examples:
 * `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and
   preferred times.
 
+<br>
+
 #### **Deleting a person :** `delete`
 
 Deletes the specified person from the GamerBook.
@@ -275,7 +342,7 @@ Output: `Address book has been cleared!`
 Exits the program.
 
 Format: `exit`  
-Output: None
+Output: The GamerBook application window will be closed.
 
 <br>
 
@@ -392,6 +459,8 @@ Examples:
 
 * `unfavgame 3 g/LoL` Removes the "favourite" status from the game "LoL" of the 3rd person.
 
+<br>
+
 ### Search Commands
 
 #### **Locating persons by name :** `find`
@@ -476,6 +545,8 @@ Examples:
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any
   one of the specified ranges.
 
+<br>
+
 ### Utility Commands
 
 #### **Undoing previous command :** `undo`
@@ -537,79 +608,7 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
 <br></br>
-
---------------------------------------------------------------------------------------------------------------------
-
-## Important Notes about Command Formats
-
-<box type="info" seamless>
-
-* **Commands Are Case-Sensitive and All Lowercase**  
-  Make sure to type commands exactly as shown.  
-  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
-
-
-* **Copying Commands from PDF**  
-  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
-
-### Understanding Commands Format
-<box type="info" seamless>
-
-* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
-  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
-
-
-* **Items in square brackets are optional**.  
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
-
-
-* **Items with `…`​ after them can be used multiple times.**  
-  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
-
-
-* **Flexible Parameter Order**  
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-
-* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
-  and `clear`)  
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  <br>
-  </box>
-
-### Notes About Parameters Format
-<box type="info" seamless>
-
-* `NAME` **only accepts alphanumeric characters and spaces**.  
-  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
-
-
-* `INDEX` **must be a must be a positive integer**  
-  If it’s not, you’ll see an invalid command format error.
-
-
-* `NAME` **is case-sensitive**.  
-  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
-  allowed.
-
-
-* `TIME-TIME` **must be within the same day**.  
-  Use the format `HHmm-HHmm` for time ranges within the same day.  
-  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
-
-  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
-  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
-
-* `TIME-TIME`**cannot refer to a single point in time**
-  The start and end times must be different (e.g. `1200-1200` is invalid).
-
-</box>
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -635,6 +634,7 @@ GamerBook home folder to the new installation’s data folder, typically located
 **Q**: Why did my GamerBook open blank when I had data saved previously?
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
 
+ <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -645,5 +645,6 @@ GamerBook home folder to the new installation’s data folder, typically located
    application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
-   is to manually restore the minimized Help Window.  
+   is to manually restore the minimized Help Window.
+
 --------------------------------------------------------------------------------------------------------------------
