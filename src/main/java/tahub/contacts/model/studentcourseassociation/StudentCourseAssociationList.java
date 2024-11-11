@@ -223,9 +223,10 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
      */
     public void remove(StudentCourseAssociation toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!internalList.contains(toRemove)) {
             throw new RuntimeException("SCA not found in list");
         }
+        internalList.remove(toRemove);
     }
 
     /**
