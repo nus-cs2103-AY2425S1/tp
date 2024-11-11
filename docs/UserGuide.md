@@ -1,5 +1,5 @@
 # ![icon](images/hireme_logo.png) HireMe User Guide
-
+<br></br>
 ## Welcome to HireMe! 
 
 Thank you for choosing **HireMe** to simplify your internship journey.
@@ -8,7 +8,6 @@ With so many positions to apply for, managing applications becomes a real challe
 In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. If you have some questions or doubts, refer to the [FAQ](#faq) section. Let's dive in and make your internship search a little easier!
 
 <span style="color: #ff6978;">*Use HireMe to get hired now!*</span>
-
 <br></br>
 
 ## Overview of User Guide
@@ -25,13 +24,14 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * _Detailed Insights_
   - **Tailored summary**: gain hidden insights from your list of internship applications.
 
+<br></br>
 ### Table of Contents
 <!-- TOC -->
 * [HireMe User Guide](#-hireme-user-guide)
   * [Welcome to HireMe!](#welcome-to-hireme-)
-  * [Overview](#overview)
+  * [Overview of User Guide](#overview-of-user-guide)
     * [Table of Contents](#table-of-contents)
-    * [Overview of target users](#overview-of-target-users)
+  * [Overview of target users](#overview-of-target-users)
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
@@ -102,18 +102,23 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 ### Part 1: Setting up and downloading HireMe
 1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their website [here](https://www.oracle.com/sg/java/technologies/downloads/).
 
+
 2. Download `hireme.jar` file from our github [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
     ![downloadhireme](images/DownloadHireMe.png)
 
+
 3. Create a new folder and name it any name you want (e.g. HireMe).
+
+
 4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3.
     ![hiremejar](images/HireMeJar.png)
 
+<br></br>
 ### Part 2: Using the HireMe application
 For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows Users](#_windows-users_) section that matches your computer system.
-Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6. 
-
+Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6.
+<br></br>
 #### _Mac Users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
@@ -122,37 +127,49 @@ Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5
     You will see a window like this.
 
     ![openmacterminal](images/OpenMacTerminal.png)
+    
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
    ![macfilepathinfo](images/Macfilepathinfo.png)
 
     On the new open that pops up, left click on `Where` and copy the file path.
    <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
+   <br></br>
 
 #### _Windows Users_
-5. Use windows search and type Terminal, click on open. 
+7. Use windows search and type Terminal, click on open. 
    ![windowsterminal](images/WindowsTerminal.png)
+<br></br>
 You will see a window like this.
    ![openwindows](images/OpenWindowsTerminal.png)
-6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
+
+
+8. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
    ![windowsfilepath](images/Windowsfilepath.png)
     _file path here is highlighted in blue_
+   <br></br>
 
 #### _Using the terminal_
-7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press enter. 
+7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press enter.
+
+
 8. Type `java -jar hireme.jar` and press enter to run the HireMe application.
+<br></br>
    - Windows Terminal:
       ![windowscd](images/Windowscd.png)
+     <br></br>
    - Mac Terminal:
       ![maccd](images/Maccd.png)
-   <br>
+     <br></br>
+<br></br>
+
 
 #### _Using the HireMe application_
 A GUI similar to the below should appear in a few seconds. It is encouraged to expand the window to full screen for better viewability. Note how the app contains some sample data.<br>
 
    ![Ui](images/LabelledUi.png)
 
-9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
+9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br></br>
    Some example commands you can try:
 
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
@@ -168,8 +185,8 @@ A GUI similar to the below should appear in a few seconds. It is encouraged to e
     * `/exit` : Exits the app.
 
 
-Refer to the [Features](#features) below for more details of each command. 
-Check [troubleshooting](#troubleshooting) if you are facing problems for setting up.
+Refer to the [Features](#features) below for more details of each command. Check [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -217,16 +234,17 @@ Examples:
 * `/add r/Data Scientist Intern n/Facebook e/fb@example.com d/21/10/24`
 * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/01/01/24`
 
-<p>Before and after images of the second example</p>
+<p>These are the before and after images of the second example</p>
 <div style="display: flex;">
-  <img src="images/add-before.png" width="350" alt="Add-Before" style="margin-right: 20px;">
-  <img src="images/add-after.png" width="350" alt="Add-After">
+  <img src="images/add-before.png" width="360" alt="Add-Before" style="margin-right: 20px;">
+  <img src="images/add-after.png" width="360" alt="Add-After">
 </div>
 
 <box type="info" seamless>
 <strong>Note:</strong>  HireMe considers an entry to be a duplicate of all of its fields match <strong>(case-insensitive)</strong>  an existing internship application entry. An attempt to add duplicates will result in an error.
 </box>
 
+<br></br>
 
 ### Listing all internship applications : `/list`
 
@@ -252,10 +270,10 @@ Examples:
 * `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
 * `/list` followed by `/delete 4` when you only have 3 internship applications returns an error message.
 
-<p>Before and after images of the first example</p>
+<p>These are the before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/delete-before.png" width="350" alt="Delete-Before" style="margin-right: 20px;">
-  <img src="images/delete-after.png" width="350" alt="Delete-After">
+  <img src="images/delete-before.png" width="360" alt="Delete-Before" style="margin-right: 20px;">
+  <img src="images/delete-after.png" width="360" alt="Delete-After">
 </div>
 
 <br></br>
@@ -280,10 +298,10 @@ Examples:
 * `/find young` returns `Ernest & Young`
 * `/find amaZoN NetFlix` returns `Amazon` and `Netflix`
 
-<p>Before and after images of the last example</p>
+<p>These are the before and after images of the last example</p>
 <div style="display: flex;">
-  <img src="images/find-before.png" width="350" alt="Find-Before" style="margin-right: 20px;">
-  <img src="images/find-after.png" width="350" alt="Find-After">
+  <img src="images/find-before.png" width="360" alt="Find-Before" style="margin-right: 20px;">
+  <img src="images/find-after.png" width="360" alt="Find-After">
 </div>
 
 <br></br>
@@ -311,11 +329,15 @@ Use these commands to update the status of a specified internship application to
 4. `/filter PENDING` followed by `/accept 1`: Updates the status of the 1st application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
 5. `/list` followed by `/accept 4` when there are only 3 internship applications returns an error message.
 
----
-<p>Before and after images of the first example</p>
+
+<box type="info" seamless>
+**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+</box>
+
+<p>These are the before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/accept-status-before.png" width="350" alt="Accept-Status-Before" style="margin-right: 20px;">
-  <img src="images/accept-status-after.png" width="350" alt="Accept-Status-After">
+  <img src="images/accept-status-before.png" width="360" alt="Accept-Status-Before" style="margin-right: 20px;">
+  <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
 
 <box type="info" seamless>
@@ -339,10 +361,10 @@ Examples:
 * `/filter accepted` displays all the internship applications that have a status of accepted.
 * `/filter rejected` displays all the internship applications that have a status of rejected.
 
-<p>Before and after images of the second example</p>
+<p>These are the before and after images of the second example</p>
 <div style="display: flex;">
-  <img src="images/filter-before.png" width="350" alt="Filter-Before" style="margin-right: 20px;">
-  <img src="images/filter-after.png" width="350" alt="Filter-After">
+  <img src="images/filter-before.png" width="360" alt="Filter-Before" style="margin-right: 20px;">
+  <img src="images/filter-after.png" width="360" alt="Filter-After">
 </div>
 
 <br></br>
@@ -356,15 +378,16 @@ Format: `/sort ORDER`
 * There are only 2 orders that are valid: `earliest` or `latest` only.
 * The order is case-insensitive. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
 * Once you sort the list, even if you exit the application and reopen it, the list remains sorted unless you add more internship applications.
+* Even if you find or filter the list, sorting it afterwards will also sort the entire main list.
 
 Examples:
 * `/sort earliest` displays the internship application list sorted according to the earliest applications first.
 * `/sort latest` displays the internship application list sorted according to the latest applications first.
 
-<p>Before and after images of the first example</p>
+<p>These are the before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/sort-before.png" width="350" alt="Sort-Before" style="margin-right: 20px;">
-  <img src="images/sort-after.png" width="350" alt="Sort-After">
+  <img src="images/sort-before.png" width="360" alt="Sort-Before" style="margin-right: 20px;">
+  <img src="images/sort-after.png" width="360" alt="Sort-After">
 </div>
 
 <br></br>
@@ -385,8 +408,8 @@ Format: `/clear`
 
 ### Viewing status chart: `/chart`
 
-<img src="images/piechart.png" alt="drawing" width="350"/>
-
+<img src="images/piechart.png" alt="drawing" width="360"></img>
+<br></br>
 Opens a new window that displays a pie chart with summary data of the statuses of all of your internship applications.
 
 Format: `/chart`
@@ -405,8 +428,6 @@ Format: `/exit`
 
 HireMe data are saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
-<br></br>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -414,6 +435,7 @@ Get your questions or doubts about HireMe's functionality and details answered h
 
 #### Q1: Where is the data for the application stored?
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
+<br></br>
 
 #### Q2: Can I edit the data file directly?
 Ans: You are strongly encouraged to **not** edit the JSON data file directly. You can use the commands as mentioned above to augment any data.
@@ -421,6 +443,7 @@ Should the changes made to the data file causes the format to be invalid, HireMe
 It is highly recommended to make a copy of the date file before editing it. <br>
 
 Users should only edit the data file only if they are confident in updating it correctly.
+<br></br>
 
 #### Q3: What is considered valid, when editing the JSON data file directly?
 Ans: Data entries are valid, if they are achievable through a sequence of commands. <br>
@@ -429,31 +452,38 @@ Examples: <br>
 Having `30/02/24` is an invalid `dateString` field for an application, as there is no sequence of commands that will lead to an application having the respective date.<br>
 
 Having `REJECTED` is a valid `statusString` field for an application, as the user can `/add` an internship and update the status via `/reject`.
+<br></br>
 
 #### Q4: Can I find followed by filter to filter out the applications with a specific keyword?
 Ans: Currently, `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
+<br></br>
 
 #### Q5: After I sort my internship applications, will a new entry be added in the right order automatically?
 Ans: New entries will not be inserted in the right order. They are inserted to the bottom of the list.
+<br></br>
 
 #### Q6: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
+<br></br>
 
 #### Q7: What is considered a valid email address format?
 Ans: If you have an existing email address account, it will be allowed by HireMe. You can check [here](https://verifalia.com/validate-email).
 
 --------------------------------------------------------------------------------------------------------------------
 ## Troubleshooting
-If you are facing problems while setting up or using HireMe, we want to help you. This section covers some of the common problems and ways to solve them. If you need futher help, you can reach out to us through our email `hireme@gmail.com`.
+If you are facing problems while setting up or using HireMe, we want to help you. This section covers some of the common problems and ways to solve them. If you need further help, you can reach out to us through our email `hireme@gmail.com`.
+<br></br>
 
 #### HireMe application setup failed
-Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up. 
+Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
+<br></br>
 
-#### I got errors using the commands
+#### Getting errors when using the commands
 Check that you have the typed the correct [command format](#notes-about-the-command-format). Check that you have included all necessary parameters. Check that you have used valid inputs (refer to each command for valid inputs).
+<br></br>
 
-#### I can't see the full text on the screen
-Try opening the window to full screen or scroll to view the full text. Avoid inputing too texts.
+#### Unable to see the full text on the screen
+Try opening the window to full screen or scroll to view the full text. Avoid inputting texts that are too lengthy.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -99,6 +99,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br></br>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -119,6 +121,8 @@ The `UI` component,
 The `HelpWindow` component is shown when you execute a help command. It contains a link to the detailed user and developer guide on this HireMe documentation website.
 
 The `ChartWindow` component is shown when you execute a chart command. It contains a visual representation of the various statuses of your internship applications, in the form of a pie chart.
+
+<br></br>
 
 ### Logic component
 
@@ -144,6 +148,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br></br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -157,6 +163,7 @@ The `Model` component:
 - **Stores a `UserPrefs` object**, representing the user’s preferences. This object is exposed externally as a `ReadOnlyUserPrefs`, ensuring that the preferences can be accessed but not modified directly.
 - **Is self-contained**, meaning that the `Model` does not depend on any other external components. As it represents the core domain entities, it maintains logical independence to ensure modularity and encapsulation.
 
+<br></br>
 
 ### Storage component
 
@@ -169,6 +176,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<br></br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.hireme.commons` package.
@@ -178,7 +187,6 @@ Classes used by multiple components are in the `seedu.hireme.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
 
 ### Getting help
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -192,6 +200,8 @@ Otherwise, it creates a new instance of `HelpCommand`.
 Upon execution, `HelpCommand` returns an instance of `CommandResult` which contains the help message.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
+
+<br></br>
 
 ### Create new internship application
 The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -207,6 +217,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then adds the internship application into the data.
 
+<br></br>
 
 ### List all internship applications
 The implementation of the list command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -216,6 +227,7 @@ The implementation of the list command follows the convention of a normal comman
 `AddressBookParser` creates `ListCommand`
 Upon execution, `ListCommand` calls on `model::updateFilteredList` to show all internship applications.
 
+<br></br>
 
 ### Delete an internship application
 
@@ -231,13 +243,22 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 `DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
+> **_NOTE:_** The sequence diagram shows a simplified execution of the DeleteCommand.
+
+<br></br>
 
 ### Update the status of an Internship Application
 The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
 
 <puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
+`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
+
+<br></br>
+
+### Update the Status of an Internship Application
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
 For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
 
 AddressBookParser:
@@ -256,6 +277,8 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
 
+<br></br>
+
 ### Find internship applications
 The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
@@ -270,6 +293,7 @@ Otherwise, it creates a new instance of `FindCommand` that corresponds to the us
 Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
 `setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
+<br></br>
 
 ### Filter internship applications
 
@@ -286,6 +310,8 @@ Otherwise, it creates a new instance of `FilterCommand` that corresponds to the 
 
 Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
 
+<br></br>
+
 ### Sort internship application list
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 In this case, `AddressBookParser` creates `SortCommandParser` to parse user input string.
@@ -300,6 +326,7 @@ Otherwise, it creates a new instance of `SortCommand` that corresponds to the us
 Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
 `sortItems` updates the `filteredList` in `model` to sort the internship applications in the list according to the order specified by the user.
 
+<br></br>
 
 ### Clear
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -308,6 +335,9 @@ The implementation of the command follows the convention of a normal command, wh
 
 `AddressBookParser` creates `ClearCommand`. 
 Upon execution, `ClearCommand` calls on `model::setAddressBook` with a new address book that has zero internship applications. Finally, `ClearCommand` generates a `CommandResult` with a confirmation message.
+> **_NOTE:_** The sequence diagram shows a simplified execution of the ClearCommand.
+
+<br></br>
 
 ### View chart
 The implementation of the chart command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -317,8 +347,7 @@ The implementation of the chart command follows the convention of a normal comma
 `AddressBookParser` creates `ChartCommand`.
 Upon execution, `ChartCommand` gets the chart data which is encapsulated in `CommandResult`
 
-
-[//]: # (Exit section here)
+<br></br>
 
 ### Close the application
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -329,6 +358,8 @@ The implementation of the command follows the convention of a normal command, wh
 Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
+
+<br></br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,10 +388,12 @@ Upon execution, `ExitCommand` gets encapsulates the intent to close the applicat
 
 **Value proposition**: manage internships faster than a typical mouse/GUI driven app
 
+<br></br>
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (future plans) - `*`
+
 
 | Priority | As a …​                       | I want to …​                                                                     | So that …​                                                               |
 |----------|-------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
@@ -375,12 +408,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS Undergraduate              | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
 | `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
 | `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
-| `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                   | I know know the breakdown of each status                                 |
+| `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                  | I know know the breakdown of each status                                 |
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
 | `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
 
 *{More to be added}*
+
+<br></br>
 
 ### Use cases
 
@@ -713,6 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
 7. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
 
+<br></br>
 
 ### Glossary
 
@@ -753,6 +789,8 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+<br></br>
+
 ### Launch
 
 1. Initial launch
@@ -767,6 +805,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+<br></br>
 
 ### Help Window
 1. Opening Help window via Command Line
@@ -810,6 +850,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Click on the close button on the Help window. <br>
    Expected: Help window closes.
 
+<br></br>
+
 ### Clearing all internship applications
 1. Clear all internship applications
     1. Prerequisites: Ensure that the list is not empty. 
@@ -822,6 +864,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `/clear x`<br>
        Expected: An error message stating the valid use of the `/clear` command.
+
+<br></br>
 
 ### Adding an internship application
 1. Adding a valid internship application
@@ -870,6 +914,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
    Expected: An error message stating the valid use of the `/add` command.
 
+<br></br>
+
 ### List
 1. List all internship applications
     1. Prerequisites: Ensure that the list is not empty. 
@@ -880,6 +926,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `/list x`<br>
        Expected: An error message stating the valid use of the `/list` command.
 
+<br></br>
 
 ### Deleting an internship application
 1. Deleting an internship application while all internship applications are being shown
@@ -895,6 +942,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...`, `/delete a` (where x is larger than the list size)<br>
       Expected: An error message should be shown which explains how to use the delete command and what parameters are valid.
 
+<br></br>
 
 ### Sorting the list of internship applications
 
@@ -912,6 +960,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect sort commands to try: `/sort`, `/sort test`, `/sort earliest latest`, `/sort 1`<br>
        Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
+
+<br></br>
 
 ### Finding internship applications
 1. Find using an exact match
@@ -955,6 +1005,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `/find`<br>
        Expected: An error message should be shown which explains how to use the find command and what parameters are valid.
 
+<br></br>
+
 ### Updating the status of an internship application
 1. Update status to `ACCEPTED`
 
@@ -979,6 +1031,8 @@ testers are expected to do more *exploratory* testing.
    
     2. Test case: `/reject 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
+
+<br></br>
 
 ### Chart Window
 1. Open chart window
@@ -1023,6 +1077,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Click on the close button on the Help window. <br>
       Expected: Chart window closes.
 
+<br></br>
+
 ### Filtering internship applications
 1. Filter with a valid status in uppercase
 
@@ -1060,6 +1116,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case `/filter`<br>
       Expected: An error message indicating that the status is invalid.
 
+<br></br>
+
 ### Saving data
 1. Auto saves file
 
@@ -1068,6 +1126,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/exit` and open the HireMe application again<br>
       Expected: The list of internship applications previously saved are displayed.
 
+<br></br>
 
 ### Exit HireMe Application
 1. Exit via Window's close button
