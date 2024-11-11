@@ -355,7 +355,8 @@ public class AssignCommandTest {
         AssignCommand assignCommand = new AssignCommand(invalidIndex, null, descriptor, null);
 
         assertThrows(CommandException.class, () -> assignCommand.execute(model),
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        invalidIndex.getOneBased(), model.getFilteredPersonList().size()));
     }
 
     @Test
