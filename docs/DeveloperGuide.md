@@ -360,15 +360,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. The student name does not exist in the system.
-    * 3a1. Teletutors App displays an error message: `This student is not in your student list.`
+    * 3a1. Teletutors App informs the tutor that the student cannot be found.
+  
       Use case resumes from Step 3. 
   
 * 3b. There are multiple students that share the same name in the system.
-    * 3b1. Teletutors App displays a list of student numbers of students with the same name.
+    * 3b1. Teletutors App informs the tutor that there are multiple students with the same name.
+  
       Use case resumes from Step 3.
 
 * 3c. The student number does not exist in the system.
-    * 3c1. Teletutors App displays an error message: `This student is not in your student list.`
+    * 3c1. Teletutors App informs the tutor that the student cannot be found.
+  
       Use case resumes from Step 3.
 
 **Use case: Add an assignment to a student**
