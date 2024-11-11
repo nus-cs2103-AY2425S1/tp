@@ -107,6 +107,10 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 </box>
 
 
+### Viewing an Udder 👀
+
+To view an Udder's details, click on the Udder in Person List Panel on the left.
+
 
 ### Viewing help : `help` 💡
 
