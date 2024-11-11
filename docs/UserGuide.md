@@ -25,23 +25,24 @@ Let’s begin and get you up to speed with AgentAssist!
 3. [Getting Started](#3-getting-started)
    - 3.1 [Installation](#31-installation)
    - 3.2 [Graphical User Interface (GUI) Layout](#32-graphical-user-interface-gui-layout)
-4. [Understanding Commands in AgentAssist](#4-understanding-commands-in-agentassist)
-   - 4.1 [Command Structure Overview](#41-command-structure-overview)
-   - 4.2 [Commands](#42-commands)
-   - 4.3 [Flags](#43-flags)
-   - 4.4 [Arguments](#44-arguments)
-   - 4.5 [Using Commands](#45-using-commands)
-5. [Commands](#5-commands)
-   - 5.1 [How to Read Commands](#51-how-to-read-commands)
-   - 5.2 [Data Modification Commands](#52-data-modification-commands)
-   - 5.3 [Data Filtering Commands](#53-data-filtering-commands)
-   - 5.4 [General Commands](#54-general-commands)
-   - 5.5 [Saving Data](#55-saving-data)
-   - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
-   - 5.7 [Modifying the Preferences File](#57-modifying-the-preferences-file)
-6. [FAQ](#6-faq)
-7. [Known Issues](#7-known-issues)
-8. [Command Summary](#8-command-summary)
+4. [Glossary](#4-glossary)
+5. [Understanding Commands in AgentAssist](#5-understanding-commands-in-agentassist)
+   - 5.1 [Command Structure Overview](#51-command-structure-overview)
+   - 5.2 [Commands](#52-commands)
+   - 5.3 [Flags](#53-flags)
+   - 5.4 [Arguments](#54-arguments)
+   - 5.5 [Using Commands](#55-using-commands)
+6. [Commands](#6-commands)
+   - 5.1 [How to Read Commands](#61-how-to-read-commands)
+   - 5.2 [Data Modification Commands](#62-data-modification-commands)
+   - 5.3 [Data Filtering Commands](#63-data-filtering-commands)
+   - 5.4 [General Commands](#64-general-commands)
+   - 5.5 [Saving Data](#65-saving-data)
+   - 5.6 [Modifying the Data File](#66-modifying-the-data-file)
+   - 5.7 [Modifying the Preferences File](#67-modifying-the-preferences-file)
+7. [FAQ](#7-faq)
+8. [Known Issues](#8-known-issues)
+9. [Command Summary](#9-command-summary)
 
 <div style="page-break-after: always;"></div>
 
@@ -139,19 +140,16 @@ Find or create a folder on your computer where you want to store the AgentAssist
     - **macOS**: press `Command + Space`, type `Terminal`, and press `Enter`.
     - **Linux**: open your **Terminal** application from the system menu.
 
-
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
     - In the terminal, type: `cd <folder path>` and press **Enter**. (Replace <folder path> with the actual location of AgentAssist.)
     - For example, if AgentAssist is stored in your **Downloads** folder:
        - **Windows**: `cd C:\Users\<YourUsername>\Downloads`
        - **macOS/Linux**: `cd /Users/<YourUsername>/Downloads`
 
-
 3. **Run the application:**
     - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
     - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
-
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
@@ -212,11 +210,46 @@ To learn more about how to use commands in AgentAssist, proceed to the next sect
 
 <div style="page-break-after: always;"></div>
 
-# 4. Understanding Commands in AgentAssist
+
+# 4. Glossary
+This section contains a list of terms used in this user guide. Feel free to refer back to this section if you are unsure of what a term means!
+
+- **Command Line Interface (CLI):** A text-based interface where users interact with the application by typing commands rather than using a graphical interface.
+
+- **User Interface (UI) / Graphical User Interface (GUI):** A visual interface that allows users to interact with the application through graphical icons, like buttons and menus.
+
+- **Credit Card Sales Agents:** Users of the system who are responsible for selling credit cards to clients.
+
+- **Contact:** A record in AgentAssist that contains client details.
+
+- **Commands:** Text entered into the command box to instruct the application to perform an action, usually starting with a command word. 
+
+- **Flag(s):** Modifier(s) in a command that specify the type of data being handled, typically represented by 1-2 letters followed by a backslash (e.g., n/ for "name").
+
+- **Argument(s):** Value(s) provided in a command, typically following a flag.
+
+- **Index:** The number displayed next to a client’s name in the current list of clients, which changes when the list view is updated.
+
+- **Remark(s):** Additional note(s) or comment(s) about a client.
+
+- **Tier:** The credit card category that a client belongs to, based on their credit card type.
+
+- **Status:** An indicator of whether a client requires follow-up action from the user.
+
+- **Auto-Save:** A feature that automatically saves all changes made by the user, without needing manual input.
+
+- **JSON (JavaScript Object Notation):** A file format used in AgentAssist to store data, including client information.
+
+- **Backup:** A copy of saved data that can be restored for safekeeping.
+
+[↑ Return to Table of Contents](#table-of-contents)
+
+
+# 5. Understanding Commands in AgentAssist
 
 The true power of AgentAssist lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
 
-## 4.1 Command Structure Overview
+## 5.1 Command Structure Overview
 Each command in AgentAssist consists of three key components: the **command**, **flag(s)**, and **argument(s)**.
 
 Let's take a look at the structure in more detail:
@@ -236,7 +269,7 @@ add n/ John Doe e/ john@example.com
 * **Arguments:** `John Doe` and `john@example.com` are the actual values being input for the respective flags.
 
 
-## 4.2 Commands
+## 5.2 Commands
 A command is the action that AgentAssist will perform, such as adding, deleting, or editing a client's contact.
 
 Here is a reference table that briefly summarizes available commands:
@@ -255,11 +288,11 @@ Here is a reference table that briefly summarizes available commands:
 | `help`      | Displays a list of available commands and their usage.  |
 | `exit`      | Exits the AgentAssist application.                      |
 
-Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
+Refer to the [Commands Section](#6-commands) for more comprehensive details of each command.
 
 <div style="page-break-after: always;"></div>
 
-## 4.3 Flags
+## 5.3 Flags
 
 AgentAssist uses flags as a shorthand for different options in commands. Flags help you specify what kind of information you are providing, allowing you to write shorter and more efficient commands, improving your workflow.
 
@@ -285,7 +318,7 @@ Here’s a reference table of available flags and the type of data they correspo
 
 <div style="page-break-after: always;"></div>
 
-## 4.4 Arguments
+## 5.4 Arguments
 
 Arguments are the values that are used in a command. 
 - Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
@@ -293,7 +326,7 @@ Arguments are the values that are used in a command.
 - When an argument is entered, any spaces before or after the argument are **ignored**. For example, `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
 - In this guide we often add a space before any arguments to improve readability, however this is purely cosmetic (i.e., it is still correct without a space).
 
-### 4.4.1  Flag Arguments
+### 5.4.1  Flag Arguments
 Flag arguments are the values that follow each flag in a command.
 
 Refer to the table below for more details.
@@ -321,7 +354,7 @@ Refer to the table below for more details.
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
 
-### 4.4.2 Non-Flag Arguments
+### 5.4.2 Non-Flag Arguments
 
 Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
 
@@ -337,11 +370,11 @@ Refer to the table below for more details.
 > 
 > Ensure that the index supplied is accurate to the current view.
 
-**Note**: There is a known issue when the supplied index argument is too large. For more information, see [Known Issues in Section 7](#7-known-issues).
+**Note**: There is a known issue when the supplied index argument is too large. For more information, see [Known Issues in Section 8](#8-known-issues).
 
 <div style="page-break-after: always;"></div>
 
-## 4.5 Using Commands
+## 5.5 Using Commands
 To get started, simply type a command into the command box and hit **Enter**.
 
 Some initial commands to try:
@@ -370,7 +403,7 @@ Some initial commands to try:
 
 The GUI will dynamically update to show the results of your commands, making it easy to see the impact of your actions in real time.
 
-Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
+Refer to the [Commands Section](#6-commands) for more comprehensive details of each command.
 
 > 💡 **Pro Tip:**
 >
@@ -384,20 +417,20 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 
 <div style="page-break-after: always;"></div>
 
-# 5. Commands
+# 6. Commands
 
-## 5.1 How to Read Commands
+## 6.1 How to Read Commands
 
 When working with commands in AgentAssist, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
 
-If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#41-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
+If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 5.1](#51-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
 
 ### Command Syntax
 
 When reading commands, there are certain syntax conventions that help indicate how to use them:
 
 - **`< >` (Angle Brackets):**
-  Text enclosed in angle brackets represents a **placeholder** for the actual value you need to provide. For example, `<NAME>` should be replaced by the client's actual name, such as "John Doe."
+  Text enclosed in angle brackets represents a **placeholder** for the actual value you need to provide. For example, `<NAME>` should be replaced by the client's actual name, such as "John Doe".
 
 - **`[ ]` (Square Brackets):**
   Components enclosed in square brackets are **optional**. You can choose to include them if necessary, but they are not required for the command to execute. For instance, `[t/ <TIER>]` means that the credit card tier is optional, and if omitted, a default value will be used.
@@ -409,9 +442,9 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 - **Mandatory Components**: Flags such as `n/`, `p/`, `e/`, `a/`, `j/`, and `i/` must be followed by valid arguments like the name, phone number, and job title.
 - **Optional Components**: Flags like `t/`, `r/` and `s/` are enclosed in square brackets, indicating they are optional.
 
-## 5.2 Data Modification Commands
+## 6.2 Data Modification Commands
 
-### 5.2.1 Adding a new client
+### 6.2.1 Adding a new client
 
 **Purpose:** Save detailed records of a new client.
 
@@ -424,7 +457,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
 * Optional Fields: `t/`, `r/`, `s/`
 
-Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for detailed explanations of each flag and acceptable arguments
+Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for detailed explanations of each flag and acceptable arguments
 
 **Examples:**
 - Add new client (without optional fields):
@@ -487,12 +520,12 @@ Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for
 > **The duplicate contact will not be saved** to prevent redundancy.
 >
 > If you need to update details for an existing contact, use the `edit` command instead.
-> For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
+> For more information, see Section [6.2.2 Editing a client](#622-edit-an-existing-clients-information).
 - If the value for `Tier`, `Status` or `Remark` is the default value (`NA`), they will not be shown.
 
 
 
-### 5.2.2 Edit an Existing Client's Information
+### 6.2.2 Edit an Existing Client's Information
 
 **Purpose:** Update the details of an existing client in the database.
 
@@ -504,11 +537,11 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
-- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#641-viewing-a-clients-details).
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments).
+For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments).
 
 **Examples:**
 - Edit only 1 specific field:
@@ -577,7 +610,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.3 Delete an Existing Client
+### 6.2.3 Delete an Existing Client
 
 **Purpose:** Remove records of clients who are no longer using your credit card services.
 
@@ -587,10 +620,10 @@ delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments-).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+For detailed explanations of each flag and acceptable arguments, refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
 
 **Examples:**
 - Remove a client with a specific index (e.g. at index 12):
@@ -629,7 +662,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.4 Delete All Existing Clients
+### 6.2.4 Delete All Existing Clients
 
 **Purpose:** Delete all clients from the database, effectively resetting the application’s contact list.
 
@@ -657,9 +690,9 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 - **On Error:**
     - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
 
-## 5.3 Data Filtering Commands
+## 6.3 Data Filtering Commands
 
-### 5.3.1 List All Clients
+### 6.3.1 List All Clients
 
 **Purpose:** View a list of all clients saved in AgentAssist.
 
@@ -672,7 +705,7 @@ list
 
 
 
-### 5.3.2 Filter Clients by Details / Find a Client
+### 6.3.2 Filter Clients by Details / Find a Client
 
 **Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
@@ -686,7 +719,7 @@ filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMA
     - **Example:** `i/ >5000` will filter clients with an income greater than 5000.
     - See [Matching Criteria for Income](#filter-by-income) for more information.
 
-For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments)
 
 **Examples:**
 - Filter clients by name:
@@ -707,17 +740,17 @@ For detailed explanations for the matching criteria of each flag and the accepta
   ```
 **Matching Criteria & Filter Behavior:**
 
-- **Name/Address/Job/Remarks (Substring Matching)**
+- **Name/Address/Job/Remarks (Substring Matching)**:
   - Searches in these fields use **substring matching**, where the search term must match a portion of the field in the exact order it appears in the client record.
   - **Example:**
     If a client’s name is `Gordon Moore`, search terms like `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
 - **Email Address (Substring Matching)**:
-  - To filter by email address, enter a valid email in the required format (refer to [4.4 Arguments](#44-arguments)). This will return substring matches for the email provided. 
+  - To filter by email address, enter a valid email in the required format (refer to [5.4 Arguments](#54-arguments)). This will return substring matches for the email provided. 
   - **Example:** Entering `emily@gmail` or `emily@gmail.co` will match `emily@gmail.com`, as partial matches within a valid email format are allowed. However, inputs like `emily` will be rejected, as they do not meet the full email format requirement.
 
 - **Phone Number (Exact Match)**: 
-  - To filter by phone number, enter a complete and valid phone number (refer to [4.4 Arguments](#44-arguments)). This filter requires an exact match with the specified phone number.
+  - To filter by phone number, enter a complete and valid phone number (refer to [5.4 Arguments](#54-arguments)). This filter requires an exact match with the specified phone number.
   - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
 
 - **Tier/Status (Prefix Matching):**
@@ -774,9 +807,9 @@ For detailed explanations for the matching criteria of each flag and the accepta
 
 
 
-## 5.4 General Commands
+## 6.4 General Commands
 
-### 5.4.1 Viewing a Client's Details
+### 6.4.1 Viewing a Client's Details
 
 **Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remark(s) and additional details.
 
@@ -786,7 +819,7 @@ view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
   - **Note:** The provided index must be **greater than 0**, and **less than or equal to the total number of clients in the list**.
-    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments).
+    - More details can be found in [Section 5.4.2 Non-Flag Arguments](#542-non-flag-arguments).
 
 **Examples:**
 - **View client no.1**
@@ -824,7 +857,7 @@ view <INDEX>
 > You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
 
 
-### 5.4.2 Closing a Client's Details
+### 6.4.2 Closing a Client's Details
 
 **Purpose:** Close the split view of client details and return to the full list view.
 
@@ -853,7 +886,7 @@ close
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open.
 
-### 5.4.3 Undo Previous Command
+### 6.4.3 Undo Previous Command
 
 **Purpose:** Undo previous command.
 
@@ -869,7 +902,9 @@ undo
   - `clear`
 - **Note:** You can only use `undo` once. Using `undo` twice in a row has the same effect as not using the `undo` command at all.
 
-### 5.4.4 Help Menu
+
+
+### 6.4.4 Help Menu
 
 **Purpose:** Provides quick access to a command summary and the user guide for AgentAssist.
 
@@ -884,7 +919,7 @@ help
 
 
 
-### 5.4.5 Exiting AgentAssist
+### 6.4.5 Exiting AgentAssist
 
 **Purpose:** Exit the application directly from the command line, providing a quick and easy way to close the program without using external controls.
 
@@ -897,7 +932,7 @@ exit
 
 
 
-## 5.5 Saving Data
+## 6.5 Saving Data
 
 AgentAssist **automatically saves** all client data to your computer after each command. There's no need to manually save anything.
 
@@ -905,7 +940,7 @@ AgentAssist **automatically saves** all client data to your computer after each 
 
 
 
-## 5.6 Modifying the Data File
+## 6.6 Modifying the Data File
 The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 > ⚠️ **Danger:**
@@ -915,7 +950,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 > 
 >**Only modify the data file if you're confident in doing so correctly.**
 
-## 5.7 Modifying the Preferences File
+## 6.7 Modifying the Preferences File
 The window size settings for AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/preferences.json`. Advanced users are welcome to update the window size directly by editing that preferences file.
 - Note: The minimum window size for AgentAssist is fixed at 800x600.
 
@@ -932,13 +967,13 @@ The window size settings for AgentAssist is automatically saved as a [JSON](http
 
 <div style="page-break-after: always;"></div>
 
-## 6. FAQ
+## 7. FAQ
 
 ### How do I transfer my data to another Computer?
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks, credit card tier, or status of an existing client?
-Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command. To remove all remarks of a client, use `rn/ NA` with the `edit` command.
+Use the [`edit` command](#622-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command. To remove all remarks of a client, use `rn/ NA` with the `edit` command.
 
 **Note**: If you append to a remark with the value `NA` (an empty remark), it will be replaced with the new remark, without any blank lines appearing.
 
@@ -952,11 +987,11 @@ Each credit card tier and client status is visually distinguished in the UI with
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 7. Known issues
+## 8. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Names Containing `/`**: Using `/` in names can result in an invalid command error or may inadvertently assign incorrect attributes to the client. To avoid this, spell out names fully. For example, instead of "Ramesh s/o Ravichandran," use "Ramesh Son Of Ravichandran."
+3. **Names Containing `/`**: Using `/` in names can result in an invalid command error or may inadvertently assign incorrect attributes to the client. To avoid this, spell out names fully. For example, instead of "Ramesh s/o Ravichandran," use "Ramesh Son Of Ravichandran".
 4. **Names Containing `@`**: The system does not currently support names with the `@` symbol, but it is planned for a future enhancement. To avoid errors in the meantime, please replace `@` with an alternative format, such as "John at Doe" instead of "John @ Doe."
 5. **Using non-english text input can cause bugs**. This release fully supports only standard English text input and does not support the extended Latin alphabet or non-English characters. Using accented characters (e.g., é, ñ), non-Latin scripts (e.g., Chinese), or right-to-left text (e.g., Arabic) may lead to unexpected behavior, including display issues, data processing errors, or even command parsing failures. Expanded support for international characters and languages is planned for future releases.
 6. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
@@ -967,7 +1002,7 @@ Each credit card tier and client status is visually distinguished in the UI with
 --------------------------------------------------------------------------------------------------------------------
 
 
-## 8. Command Summary
+## 9. Command Summary
 
 | **Action**                 | **Command Format**                                                                                                                                                      | **Example**                                                                                                         |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
