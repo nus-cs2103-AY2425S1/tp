@@ -163,9 +163,23 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Sort feature
-The sort command is reliant on the `SortOrder` enumeration. Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
+
+#### Implementation
+The sort command is reliant on the `SortOrder` enumeration.
+
+Each constant in `SortOrder` contains 2 additional values: the `keyword`, and the `stringRep` (which is the string representation of the order).
+
 The command itself is encapsulated by the `SortCommand` class, which extends the abstract class `Command`, overriding its execution method.
+
 On execution, the `SortCommand#execute()` method calls the `updateSortedPersonListComparator` method of the `model`, and passes in the relevant comparator, depending on which order the user selects.
+
+The following sequence diagram illustrates the `sort` mechanism:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br/>
+The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Mark/Unmark feature
 
@@ -199,8 +213,8 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 
 ![MarkAttendanceSequenceDiagram-Logic](images/MarkAttendanceSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAttendanceCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br/>
+The lifelines for `MarkAttendanceCommand` and `AttendanceMarkingCommandParser` should end at their respective destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)
