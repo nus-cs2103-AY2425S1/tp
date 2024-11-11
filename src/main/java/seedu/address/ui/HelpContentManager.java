@@ -127,8 +127,8 @@ public class HelpContentManager {
 
         contentMap.put("Viewing a client's details", """
                 Viewing a Client’s Details
-                 You may use your arrow keys to traverse the client list, then **double-click**
-                 or **press `Enter`** on a client in the client list to bring up a more
+                 You may use your arrow keys to traverse the client list, then double-click
+                 or press `Enter` on a client in the client list to bring up a more
                  detailed view of the client, including information like address and birthday.\n
                  The detailed view can be broken down into three main sections. From the above:
                  1. The client's profile picture. A default profile picture is given to
