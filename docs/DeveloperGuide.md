@@ -365,6 +365,8 @@ Use case ends.
 
 **Use case: Delete a client**
 
+**Preconditions: Financial consultant is in client list view**
+
 **MSS**
 
 1. Financial consultant enters the delete command with the client index
@@ -388,6 +390,8 @@ Use case ends.
 
 **Use case: Search for a client by name**
 
+**Preconditions: Financial consultant is in client list view**
+
 **MSS**
 
 1. Financial consultant enters the find command with the client name or search criteria
@@ -402,6 +406,8 @@ Use case ends.
 
 **Use case: Add a transaction to a client's record**
 
+**Preconditions: Financial consultant is in client list view**
+
 **MSS**
 
 1. Financial consultant enters the command to add a transaction with all required details
@@ -414,8 +420,13 @@ Use case ends.
 * 2a. The financial consultant enters invalid transaction details or an invalid client index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
+* 2c. The financial consultant inputs an amount that is beyond the range that can be handled by Clientell.
+    * 2c1. Clientell shows an error message.
+    * Use case ends.
 
 **Use case: View list of transactions for a specific client**
+
+**Preconditions: Financial consultant is in client list view**
 
 **MSS**
 
@@ -431,6 +442,8 @@ Use case ends.
 
 **Use case: Delete a transaction from a client's record**
 
+**Preconditions: Financial consultant is in transaction list view**
+
 **MSS**
 
 1. Financial consultant enters the deletet command with the client index and transaction index
@@ -445,6 +458,8 @@ Use case ends.
     * Use case ends.
 
 **Use case: Search transactions by description**
+
+**Preconditions: Financial consultant is in transaction list view**
 
 **MSS**
 
@@ -614,4 +629,9 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client.
+2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+4. Improve `find` to take in additional logic info to specify what fields to search for. Existing implementation searches for name OR company. Future enhancement will allow user to specify the search with greater granularity e.g company OR address, (name AND email AND company) OR tags, etc.
+5. Improve data saving/loading of corrupted files. Currently, corruption in data file causes app to launch with empty book, and any updates in this session, upon the session's termination, will override the existing corrupted data file. Future enhancement will launch the app with a specified error to inform that the data file is corrupted, and disables usage until the corrupted data file is corrected/recovered. This is to ensure the corrupted data file (which may be important and only suffering from a minor typo) is not permanently lost.
+6. Improve implementation of `tags` to support more complex tag relationships. Currently, tags are simply in a list. Future enhancement allows more intricate relationship between tags to better model real world relationships via hierachial structure, likely implemented with nested lists and some global info. For example, it can be specified that the tags `bakery` `hawker` inherent from tag `FnB`, so any tag with `bakery` would also be auto-tagged with `FnB` for other purposes like searching.
 

@@ -39,6 +39,39 @@ public class NameTest {
     }
 
     @Test
+    public void isValidRomanNumeral() {
+        // Test valid Roman numerals
+        assertTrue(Name.isRomanNumeral("I")); // single numeral
+        assertTrue(Name.isRomanNumeral("IV")); // subtraction rule
+        assertTrue(Name.isRomanNumeral("VI")); // addition rule
+        assertTrue(Name.isRomanNumeral("XIV")); // complex number
+        assertTrue(Name.isRomanNumeral("XXXIX")); // multiple numerals
+        assertTrue(Name.isRomanNumeral("CDXLIV")); // various numerals
+        assertTrue(Name.isRomanNumeral("MCMXCIX")); // complex combinations
+        assertTrue(Name.isRomanNumeral("MMM")); // big number
+
+        // Test case insensitivity
+        assertTrue(Name.isRomanNumeral("ii")); // lowercase
+        assertTrue(Name.isRomanNumeral("Xi")); // mixed case
+        assertTrue(Name.isRomanNumeral("vIi")); // mixed case
+
+        // Test invalid Roman numerals
+        assertFalse(Name.isRomanNumeral("ABC")); // non-Roman letters
+        assertFalse(Name.isRomanNumeral("IIII")); // invalid repetition
+        assertFalse(Name.isRomanNumeral("VV")); // invalid repetition of V
+        assertFalse(Name.isRomanNumeral("LL")); // invalid repetition of L
+        assertFalse(Name.isRomanNumeral("DD")); // invalid repetition of D
+        assertFalse(Name.isRomanNumeral("IC")); // invalid subtraction
+        assertFalse(Name.isRomanNumeral("XM")); // invalid subtraction
+        assertFalse(Name.isRomanNumeral("VX")); // invalid ordering
+        assertFalse(Name.isRomanNumeral("XIIX")); // invalid combination
+        assertFalse(Name.isRomanNumeral("IVIV")); // invalid repetition of subtractive pair
+        assertFalse(Name.isRomanNumeral("V II")); // contains space
+        assertFalse(Name.isRomanNumeral("XV3")); // contains numbers
+        assertFalse(Name.isRomanNumeral("X_V")); // contains special characters
+    }
+
+    @Test
     public void equals() {
         Name name = new Name("Valid Name");
 

@@ -12,6 +12,8 @@ Clientell is structured as an address book (a database to store details of clien
 
 Our guiding principle is: a small app for you to do big things. As such, we allow great flexibility in storing your data. While some features are designed with a certain use in mind (e.g `NAME` should be actual names of your clients), you may use and interpret them in a way that better suits your workflow (e.g `NAME` as NRIC/FIN/IDs rather than name, or both!). Of course, do this at your own risk. With great power comes great responsibility.
 
+Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troubleshooting, [Technical Help](#technical-help) for how to get things running, [Command Summary](#command-summary) for available commands, and [Parameter Summary](#parameter-summary) to know what values are accepted.
+
 ## Table of Contents
 - [Quick Start](#quick-start)
 - [Features](#features)
@@ -19,10 +21,11 @@ Our guiding principle is: a small app for you to do big things. As such, we allo
   - [Client Management Commands](#client-management-commands)
   - [Transaction Management Commands](#transaction-management-commands)
   - [Data Management](#data-management)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 - [Parameter Summary](#parameter-summary)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Technical Help](#technical-help)
 
 
 
@@ -38,27 +41,27 @@ Our guiding principle is: a small app for you to do big things. As such, we allo
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in by typing  `cd [folder directory]` (where the folder is at), followed by `java -jar clientell.jar` in the same directory to run the application.<br>
-   You should see the GUI below with some sample clients to start with. By default, the app displays the Client List View upon launch, which is the view that lists your clients.<br>
+   You should see the GUI below with some sample clients to start with. By default, the app displays the client list view upon launch, which is the view that lists your clients.<br>
    ![Ui](images/Ui.png)
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    We suggest this sequence of commands to get a feeling for the app first:
 
-   * `list` : Lists all clients. This takes you to the **Client List View**.
+   * `list` : Lists all clients. This takes you to the **client list view**.
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
    * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
 
-   * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **Transaction List View**.
+   * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **transaction list view**.
 
-   * `list` : Lists all clients, again. This returns you to the **Client List View**.
+   * `list` : Lists all clients, again. This returns you to the **client list view**.
    
    * `exit` : Exits the app.
    
    * Now, in the same folder, you should see a data file `clientell.json`. Opening it will show the saved data from the app, which will be loaded the next time you launch Clientell.
   
-   * Try finding the client and transaction you just added! This file is sensitive, so do not edit it. You may transfer this file to another device with Clientell and load the same data.
+   * Try finding the client and transaction you just added. This file is sensitive, so do not edit it. You may transfer this file to another device with Clientell installed and load the same data in that device's app's directory.
 
 6. Refer to the [Features](#features) below for details of each command. Happy Bookkeeping!
 
@@ -92,13 +95,19 @@ Our guiding principle is: a small app for you to do big things. As such, we allo
 
 <box type="warning" seamless>
 
-**Handling Errors In User Input:**
+**Handling Errors In User Input:** Errors are caught in this order of severity
 * First checks for valid command. Did you type a real command word?
 * Then checks for presence of fields for that command. Did you give enough/correct info?
-* Next checks if the command is run in the correct view (Client VS Transaction List View). Are you using it in the right view?
+* Next checks if the command is run in the correct view (Client VS transaction list view). Are you using it in the right view?
+* Next checks if, if there's a positive integer index, is it in range?
 * Lastly checks if the command alters the balance beyond the supported range.
 
 *Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
+
+**Notes about extreme user behaviour:**
+* Extreme inputs for some very flexible parameters (e.g name, address) are allowed but at your own risk of inconvenience.
+* Namely, the window may not fully display the text/info. This can be remedied by expanding your window.
+* This in no way affects other behaviours. In addition, these extreme inputs are also saved in the data file `clientell.json`.
 
 </box>
 
@@ -159,9 +168,12 @@ Format: `list`
 <box type="tip" seamless>
 
 **Tips:** Negative balances are red. Positive and zero balances are green.
-</box>
 
-![result for `list`](images/listResult.png =600x)
+</box>
+<box type="warning" seamless>
+
+**Note:** `list` displays the **client list view**, and can be used in both client and transaction list views.
+</box>
 
 #### Editing a client : `edit`
 
@@ -268,7 +280,7 @@ Format: `listt INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `listt` can only be used in client list view.
+**Note:** `listt` can only be used in client list view, and will take you to the **transaction list view**.
 </box>
 
 Examples:
@@ -319,7 +331,7 @@ In a transaction list, summarises the transactions' amount within the specified 
 
 Format: `summary s/START_MONTH e/END_MONTH`
 * `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
-* Month should be in the range `1-12` and year should be an integer.
+* Month should be in the range `01-12` and year should be an integer.
 * The `START_MONTH` should be before or equal to the `END_MONTH`
 * The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
 
@@ -349,9 +361,65 @@ If your changes to the data file makes its format invalid, Clientell will discar
 For some cases, the app can autocorrect some mistakes:<br>
 * Extraneous key-value pairs (i.e irrelevant fields/info) are ignored<br>
 * Copies of relevant key-value pairs (e.g multiple names/companies) only admit the last copy<br>
+
+
 As a rule of thumb: if the edits you make could've been achieved by using the commands normally and legally, then the edits are valid. Most common mistakes include updating the file to include illegal values. Therefore, edit the data file only if you are confident that you can update it correctly.<br>
 Lastly, never update the JSON file while the app is running. As the data saves at the end of a session (e.g when you `exit`), it will override the JSON file (i.e you will lose all manual changes to the JSON)
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Command Summary
+
+Switching between... | Command | Format
+---------------|---------------|------------
+Client to transaction list view | List Transactions | `listt INDEX`
+Transaction to client list view | List Clients | `list`
+
+Client Commands | Format | Usable in what view?
+---------------|--------------|--------
+Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`|Client list view
+List | `list`|Client and transaction list views  
+Find | `find KEYWORD [MORE_KEYWORDS]`|Client list view
+Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`|Client list view
+Delete | `delete INDEX`|Client list view
+
+
+Transaction Commands | Format | Usable in what view?
+---------------|--------------|--------
+Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`|Client list view
+List Transactions | `listt INDEX`|Client list view
+Delete Transaction | `deletet INDEX`|Transaction list view
+Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`|Transaction list view
+Summarise Transactions | `summary s/START_MONTH e/END_MONTH`|Transaction list view
+
+General Commands | Format| Usable in what view?
+----------------|--------------|--------
+Help | `help`|Client and transaction list views  
+Clear | `clear`|Client and transaction list views  
+Exit | `exit`|Client and transaction list views  
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Parameter Summary
+
+This table summarises the non-obvious parameters in natural language.
+
+Parameter | Restrictions | Extreme accepted example | Invalid example 
+---------------|---------------|---------------|--------
+Index | Positive integer not exceeding list size | `5` (assuming at least 5 clients/transactions in list) | `0` (not positive)
+Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe` (contains `/`)
+Company | Anything, but not blank. | `💁 Inc.`| ` ` (blank)
+Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 9 8 7 [short note]`| `(+1234) [this is too long]` 
+Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d` (too many special characters in between, ends with only 1 alphanumeral)
+Address |Anything, but not blank. | `💁`| ` ` (blank)
+Tag | Alphanumeric, but not blank. | `something`| `some thing` (space, not alphanumeric)
+Transaction description | Anything, but not blank. | `💁`| ` ` (blank)
+Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it. | `-1000000000.00`| `-.001` (no digit before `.`, and more than 2 decimal places)
+Transaction party | Anything, but not blank. | `💁`| ` ` (blank)
+Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `9999-12-31` | `9999-12-31`| `2025-02-29` (date doesn't exist)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -361,7 +429,7 @@ Lastly, never update the JSON file while the app is running. As the data saves a
 **A**: Copy the `clientell.json` data file you want to transfer. On your other device and in the application directory (the folder containing the app), if there's already an existing data file, replace it with your version (preferably saving the replaced copy somewhere). Otherwise if there's no such file, safely paste the file inside the folder.
 
 **Q**: What should I do if the application won't start? <br>
-**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
+**A**: First verify Java `17` or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
 
 **Q**: Can I customize the data file location?<br>
 **A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
@@ -382,57 +450,82 @@ Lastly, never update the JSON file while the app is running. As the data saves a
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Future Enhancements
-
-1. **Matching partial words for `find` and `findt` commands.**<br>
-Currently, only full words are matched. E.g. `Han` doesn't match `Hans`. 
-In the future, we plan to allow partial word matches.
-2. **Finding clients and transactions by other fields.**<br>
-Currently, only names and companies are searchable for clients, and only descriptions are searchable for transactions.
-In the future, we plan to allow searching by other fields e.g. phone number, address.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## Technical Help
+Here is a collection of helpful info regarding setting up the application.
 
-Client Commands | Format |
----------------|--------
-Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
-List | `list`
-Find | `find KEYWORD [MORE_KEYWORDS]`
-Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-Delete | `delete INDEX`
+Downloading Java `17` for various operating systems (OS):
 
-**Transaction Commands**
+Linux:
+- **x64**: **Debian Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.deb)
+- **ARM 64**: **RPM Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-aarch64_bin.rpm)
 
-For Client List View | Format
---------------------|--------
-Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
-List Transactions | `listt INDEX`
+macOS:
+- **ARM 64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-aarch64_bin.dmg)
+- **x64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-x64_bin.dmg)
 
-For Transaction List View | Format
---------------------|--------
-Delete Transaction | `deletet INDEX`
-Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
-Summarise Transactions | `summary s/START_MONTH e/END_MONTH`
+Windows:
+- **x64**: **Installer (.exe)** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_windows-x64_bin.exe)
 
-General Commands | Format
-----------------|--------
-Help | `help`
-Clear | `clear`
-Exit | `exit`
+**Accessing Terminal**<br>
+On Windows:
+   - **Method 1**: Press **Windows Key + R**, type `cmd`, and press **Enter** to open the Command Prompt.
+   - **Method 2**: For PowerShell, right-click on the **Start** button and select **Windows PowerShell** or **Terminal** (on Windows 11).
+   - **Method 3**: Search for **Command Prompt** or **PowerShell** directly in the Windows search bar.
 
---------------------------------------------------------------------------------------------------------------------
+On macOS:
+   - **Method 1**: Press **Command + Space** to open **Spotlight Search**, type "Terminal," and press **Enter**.
+   - **Method 2**: Open **Finder** > **Applications** > **Utilities** > **Terminal**.
 
-## Parameter Summary
+On Linux:
+   - **Method 1**: Use the shortcut **Ctrl + Alt + T** to open the terminal directly in most distributions.
+   - **Method 2**: Search for "Terminal" in your applications menu.
+   - **Method 3**: Right-click on the desktop or within a folder and select **Open Terminal** (works on many distributions).
 
-Parameter | Restrictions | Extreme example | Banned example 
----------------|---------------|---------------|--------
-Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe`
-Company | Anything, but not blank. | `💁 Inc.`| ` `
-Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 3 [short note]`| `(+1234) [this is too long]` 
-Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d`
-Address |Anything, but not blank. | `💁`| ` `
-Tag | Alphanumeric, but not blank. | `something`| `some thing`
+Once open, you can enter commands like `java -version` or `java -jar path/to/yourfile.jar` directly in the terminal.
+
+**Check Java Version**<br>
+To see if Java is installed and verify its version, use the following command:
+
+```bash
+java -version
+```
+
+You should see information about the Java version, like `java version "17.0.12"`. If Java is not installed, this command may return an error or say "command not found."
+
+**Run a JAR File**<br>
+Once Java is installed, you can run a JAR file using:
+
+```bash
+java -jar path/to/yourfile.jar
+```
+
+- **Replace `path/to/yourfile.jar`** with the full path or relative path to your JAR file.
+- **Note**: Ensure you’re in the directory of the JAR file or provide its full path.
+
+To change directories in the terminal, you use the `cd` (change directory) command, followed by the path to the directory you want to access.
+
+**Changing Directory**<br>
+To a specific directory:
+   ```bash
+   cd path/to/directory
+   ```
+   - Replace `path/to/directory` with the full path or relative path of your desired directory.
+   - **Example**: To go to a folder named `Documents`, use:
+     ```bash
+     cd ~/Documents
+     ```
+
+Go up one level:
+   ```bash
+   cd ..
+   ```
+   - `..` tells the terminal to move up one level in the directory structure.
+
+Go to home directory (usually the most "natural" or "default" directory that you'd start in):
+   ```bash
+   cd ~
+   ```
+   - The tilde (`~`) symbol represents your home directory.
