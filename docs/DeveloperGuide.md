@@ -670,15 +670,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Person to delete is shown in the list.
+   1. Test case: `delete S1234567A`<br>
+      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Status bar updated.
 
-   2. Test case: `delete S1234567A`<br>
-      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   3. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
       Expected: Similar to previous.
 
 ### Saving data
@@ -688,9 +686,9 @@ testers are expected to do more *exploratory* testing.
     1. Simulating a Missing Data File
        1. Locate the data file used by the application `data/addressbook.json`
        2. Move or delete this file before launching the application<br>
-       Expected: The application should automatically create an empty data file, without displaying any errors and the application should function normally.
+       Expected: The application should automatically create a new data file with default sample data loaded into the created file and app.
     2. Simulating a Corrupted Data File
        1. Open the data file `data/addressbook.json` in a text editor.
        2. Introduce invalid JSON syntax into the file.
        3. Save the corrupted file and launch the application.<br>
-    Expected: Application will display an error message to the user, indicating that the data is corrupted.
+       Expected: The application should automatically create a new empty data file with no contacts loaded into the app.
