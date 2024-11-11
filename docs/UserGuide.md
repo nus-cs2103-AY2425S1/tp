@@ -90,6 +90,8 @@ Shows a list of all persons stored in ClubConnect's contact list.
 
 Format: `list`
 
+![result for 'list'](images/list.png)
+
 #### Adding a person: `add`
 
 Adds a person to ClubConnect's contact list.
