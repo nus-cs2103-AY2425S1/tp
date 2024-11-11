@@ -858,3 +858,10 @@ Lines of Code: 24608
 
 ### Challenges faced
 
+#### Challenge 1: Implementing undo functionality for import command
+
+The undo functionality was initially implemented by extending an abstract class `ConcreteCommand` with the `undo` abstract method.
+However, the import command is an undoable command that also extends the `FileAccessCommand` class. 
+This posed a challenge as the import command could not extend two classes at once because Java does not allow multiple inheritance.
+To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
+This allowed us to implement the `undo` method in the import command.
