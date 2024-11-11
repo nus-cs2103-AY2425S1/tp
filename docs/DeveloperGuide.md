@@ -882,7 +882,9 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Finding a person
+### Person Features
+
+#### Finding a person
 
 <box type="info" seamless>
       **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
@@ -1071,7 +1073,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Listing persons
+#### Listing persons
 
 1. Listing persons when viewing all persons.
 
@@ -1085,7 +1087,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Adding a person
+#### Adding a person
 
 1. Adding a person
 
@@ -1114,7 +1116,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Editing a person
+#### Editing a person
 
 1. Editing a person while all persons are being shown
 
@@ -1154,7 +1156,7 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Deleting a person
+#### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -1192,6 +1194,29 @@ testers are expected to do more *exploratory* testing.
         Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect test cases to try can be found at point 1.iv of [Deleting a person](#deleting-a-person)
+
+<br>
+
+### Vendor Features
+
+#### Assigning vendors
+
+1. Assigning a `Person` as a vendor
+
+<box type="info" seamless>
+      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+</box>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, not all of whom are `Vendors`.
+
+   2. Test case: `assign-vendor 2` (assuming the second `Person` **is not** a `Vendor`) <br>
+      Expected: Contact 2 is updated to be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor assignment.
+
+   3. Test case: `assign-vendor 1` (assuming the first `Person` **is** a `Vendor`) <br> 
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is already a `Vendor`.
+
+   4. Test case: `assign-vendor` <br>
+         Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
 
 <br>
 
