@@ -660,6 +660,10 @@ Team Size: 5
    1. Currently, the `add-doctor` command only allows for specialties with no spaces and only alphabets.
    2. We plan to update the command to allow for specialties with spaces and some special characters (e.g. `Cardiovascular Surgeon`, `General Practitioner`, `Orthopedic Surgeon`) to be supported.
 
+5. **Fix `find` command to behave similarly to `find-doctor` and `find-patient`**
+   1. Currently, `find` command does not check for invalid input (e.g `find eth1/`), unlike our `find-doctor` and `find-patient` commands.
+   2. We plan to update the `find` command to check for invalid input and display an error message if the input has an invalid characters (e.g special characters or numbers).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
