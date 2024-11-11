@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+
 Package Model as ModelPackage <<Rectangle>>{
     Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
     Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
@@ -43,7 +44,8 @@ VersionedAddressBook -up-> "1 current" AddressBook
 VersionedAddressBook -up-> "1..* history" AddressBook
 
 VersionedAddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+AddressBook *--> "1" UniquePersonList
+UniquePersonList -left-> "~* all" Person
 Person *--> "1" Name
 Person *--> "0..1" Phone
 Person *--> "0..1" Email
