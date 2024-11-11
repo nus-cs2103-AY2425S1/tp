@@ -340,7 +340,7 @@ Use case ends.
 
 * **Use Case**: UC02 - Add Customer
 * **Guarantees**:
-  * Customer will be added to customer list if input parameters are valid.
+    * Customer will be added to customer list if input parameters are valid.
 
 **MSS**
 
@@ -366,20 +366,21 @@ Use case ends.
 
 * 1c. SellSavvy detects that a customer with identical name already exists.
   * 1c1. SellSavvy displays an error that the customer already exists.
-  
+
   Use case ends.
 
 
 * 2a. SellSavvy detects that there is an existing customer with a similar name.
   * 2a1. SellSavvy gives a warning that a customer with a similar name already exists.
-  
+
   Use case resumes from step 3.
 
 
 * 2b. SellSavvy detects that the new customer has tags with similar names.
   * 2b1. SellSavvy gives a warning that there are similar tags on the new customer.
-  
+
   Use case resumes from step 3.
+
 
 **Use case 3: Delete Customer and All Orders Related to The Customer**
 
@@ -407,7 +408,7 @@ Use case ends.
 
 * 2b. SellSavvy detects that there are no customers with the specified index.
   * 2b1. SellSavvy displays an error that the customer index is invalid. 
-  
+
   Use case ends.
 
 
@@ -420,7 +421,7 @@ Use case ends.
 
 * **Use Case**: UC04 - Find the Customer by their Name
 * **Guarantees**:
-  * All customers displayed will have at least one of the specified keywords in their name.
+    * All customers displayed will have at least one of the specified keywords in their name.
 
 **MSS**
 
@@ -796,14 +797,13 @@ testers are expected to do more *exploratory* testing.
 1. Saving changes in data
 
    1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI
-    
+
    1.  Add an order under a customer using the `addorder` command.<br>
       Example: `addorder 1 i/Lamp d/20-11-2024 q/3`
-      Expected: Order added under the first customer in the customer list and all his orders will be displayed. 
+      Expected: Order added under the first customer in the customer list and all his orders will be displayed.
 
    1.  Re-launch the app by double-clicking the jar file.<br>
        Expected: The newest order added is retained.
-
 
 ### Adding a customer
 
