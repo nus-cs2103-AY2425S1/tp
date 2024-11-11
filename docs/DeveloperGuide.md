@@ -1032,6 +1032,13 @@ We plan to add support for setting EmergencyName, EmergencyPhone and GraduationY
 3. **Add more features to the help command pop up window.** The `help` command pop up window currently only shows instructions for three commands, `add`, `edit` and `delete`. We plan
 to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide. 
 
+4. **Add support to file path formatting in `import`.** Currently, the FILE_PATH parameter for the `import` command only takes in forward slashes, `/`, when taking in user input, e.g. `import fp/./data/SaveFile.json` would be a valid file path for `import`, but `import fp/.\data\SaveFile.json` would not be valid. We plan to add support to `\` as a delimited between folders and files in the future to be more intuitive for users of all Operating Systems, especially those that use backslashes in file paths like Windows.
+
+5. **Improve specificity of `import` error messages.** Currently, the error message for when the file exists on the device but is otherwise incompatible with DorManagerPro, whether this be because it is of the wrong file type, has a format incompatible with DorManagerPro or contains invalid data is as follows: <br>
+Could not read data from file FILE_PATH due to inability to find or access the file. <br>
+This error message could be more specific and our team plans to update this to the following error message: <br>
+DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
+
 ## **Appendix: Effort**
 
 ### Overview
@@ -1063,3 +1070,8 @@ However, the import command is an undoable command that also extends the `FileAc
 This posed a challenge as the import command could not extend two classes at once because Java does not allow multiple inheritance.
 To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
 This allowed us to implement the `undo` method in the import command.
+
+### Challenge 2: Creating a dependency between Storage and FileAccessCommand for export and import
+
+Import and export was initially deemed odd to do since it would have to access `Storage`, whereas all other commands at the time only needed to have access to `Model` to be executed. Accordingly, we were fairly certain that it would have been inadequate for the `import` and `export` commands to inherit directly from `Command`.
+The workaround our team decided on was to create a new class `FileAccessCommand` that would require a `Model` and `Storage` for it's execute which `export` and `import` could then inherit from. As `FileAccessCommand` inherits from `Command` this allowed `export` and `import` to continue using the polymorphism when parsing commands and in the LogicManager while having a unique execute to carry out its functions.
