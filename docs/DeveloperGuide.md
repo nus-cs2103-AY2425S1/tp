@@ -142,7 +142,11 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram.png](images%2FModelClassDiagram.png)
-**Note:** Some arrows might be blurred from the conversion between markdown and pdf. 
+**Note:** Some arrows might be blurred from the conversion between markdown and pdf. Here is a description in case arrows are not visible:
+- Person contains phone, email, information, name and optional tag
+- Customer and Supplier inherit from person
+- Customer and Supplier contains address
+- ModelManager has a filtered number of persons. UniquePersonList has all persons in the address book.
 
 The Model component is responsible for managing the core data of the application, structured based on the updated UML diagram.
 
