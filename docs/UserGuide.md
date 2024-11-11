@@ -381,14 +381,51 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <h2 style="color: black; padding-top: 30px"> Command Summary </h2>
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Gift**   | `gift`
-**Revenue**| `revenue` <br> e.g. `revenue paid`, `revenue unpaid`
+### 1. General Commands
+
+| Action | Format, Examples |
+|---|---|
+| `help` | `help` |
+| `exit` | `exit` |
+
+### 2. Student Commands
+
+| Action | Format, Examples |
+|---|---|
+| `add` | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/FEE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague f/100` |
+| `list` | `list` |
+| `edit` | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [f/FEE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com f/50` |
+| `find` | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` |
+| `delete` | `delete INDEX` or `delete NAME`<br> e.g., `delete 3`, `delete Nikhil` |
+| `clear` | `clear` |
+
+### 3. Calendar Commands
+
+| Action | Format, Examples |
+|---|---|
+| `addc` | `addc d/DESCRIPTION day/DAY_OF_THE_WEEK from/START_TIME_(24H_FORMAT) to/END_TIME_(24H_FORMAT)` <br> e.g `addc d/Sec 4 Science Class day/Sunday from/1000 to/1215` |
+| `dc` | `dc` |
+| `deletec` | `deletec DESCRIPTION` <br> e.g. `deletec Secondary 4 Chemistry Class` |
+
+
+### 4. Gift Commands
+
+| Action | Format |
+|---|---|
+| `gift` | `gift` |
+
+### 5. Revenue Commands
+
+| Action | Format, Examples |
+|---|---|
+| `mark` | `mark INDEX` or `mark STUDENT_NAME` <br> e.g. `mark 3`, `mark Alex Yeoh` |
+| `markall` | `markall` |
+| `unmark` | `unmark INDEX` or `unmark STUDENT_NAME` <br> e.g. `unmark 3`, `unmark Alex Yeoh` |
+| `unmarkall` | `unmarkall` |
+| `revenue` | `revenue [paid/unpaid]` <br> e.g. `revenue paid`, `revenue unpaid` |
+
+
+
+
+
+
