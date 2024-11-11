@@ -537,7 +537,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Finding a restaurant
+### Finding a restaurant by name
 
 1. Find a restaurant by its saved name
 
@@ -548,7 +548,7 @@ The first test case below assumes the user has not added any more restaurants wi
      Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
   1. Test case: `find !@#`<br>
-     Expected: A restaurant name may only contain alphanumeric values.
+     Expected: Error message displays that names may only contain alphanumeric values and spaces.
 
   1. Other incorrect find commands to try: `find`<br>
      Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
@@ -566,7 +566,50 @@ The first test case below assumes the user has not added any more restaurants wi
    Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
 1. Test case: `tags $$$`<br>
-   Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: Error message display stating tags are alphanumeric, requests user to use the price command for filtering price labels instead.
 
-1. Other incorrect find commands to try: `find`<br>
+1. Other incorrect find commands to try: `tags`<br>
    Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+
+
+### Filtering by price
+
+1. Find a restaurant by its price labels
+
+1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   The first test case below assumes the user has not added any more restaurants with the price label of `$`.
+
+1. Test case: `tags $`<br>
+   Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+1. Test case: `price expensive`<br>
+   Expected: Error message display stating prices searched should only be the approved price labels. 
+
+1. Other incorrect find commands to try: `price`<br>
+   Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+
+
+
+
+## **Appendix: Effort**
+Overall the difficulty that was faced in the project was mainly at the start in understanding the overall structure of the source code.
+Luckily the diagrams that were provided indeed helped a lot in our teams journey in understanding and developing the project.
+One of the methods that helped us a lot in our speed and ability to meet all the necessary datelines were to take inspiration of some of the code
+that had already been implemented. For example, the source code for the `tags` command and feature was heavily inspired by the 
+already existing `find` command and feature that came with the project.<br>
+
+Additionally, another tough lesson we learnt was to not be too over ambitious in our planned features and implementation. At the start of the project, 
+while we were ambitious with excitement on what were the list of features we wanted to add, we realised that scrapping some ideas we created was the best 
+strategy as at the end of the day, we had to deliver iterations within a one-week time span, thus, looking back, while unfortunate, it was the most sound strategy we could 
+have adopted, which was to work on features that we could deliver by the stipulated dateline.
+
+
+
+## **Appendix: Planned Enhancements**
+Team size: 4<br>
+
+1. **Make add command accept non-alphanumeric values:** The current implementation for the add command is such where names and tags can only be saved as alphanumeric values. We plan to allow adding non-alphanumeric
+values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/12345678 e/test@email.com a/Pasir Ris pr/$$$ t/Crème brûlée`.
+2. **Make tags command accept non-alphanumeric values:** Similar to the above-mentioned enhancement, we also plan on enhancing the tags command to allow searches for non-alphanumeric values. E.g. `tags Crème brûlée`.
+3. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
+spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
