@@ -274,10 +274,6 @@ public class EditCommand extends Command {
                     doctorName, doctorPhone, doctorEmail, tags);
         }
 
-        public boolean isAnyDoctorFieldEdited() {
-            return CollectionUtil.isAnyNonNull(doctorName, doctorPhone, doctorEmail);
-        }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }

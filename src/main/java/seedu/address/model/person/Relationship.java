@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Relationship {
     public static final String RELATIONSHIP_TYPE_CONSTRAINTS =
-            "Relationship type should be Parent, Child, Sibling, Spouse, "
+            "Relationship type should be Parent, Child, Sibling, Spouse, Friend, "
             + "Grandparent or Relative or their gendered variants";
     public static final String ALPHANUMERIC_CONSTRAINTS = "Relationship name "
             + "should only contain alphanumeric characters and spaces, and it should not be blank";
