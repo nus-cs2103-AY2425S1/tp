@@ -15,6 +15,8 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Listing all persons](#listing-all-persons--list)
     - [Sorting contacts](#sorting-contacts--sort)
     - [Editing a person](#editing-a-person--edit)
+    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
+    - [Birthday Reminder](#birthday-reminder)
     - [Adding history to a person](#adding-history-to-a-person--log)
     - [Remarking a person](#remarking-a-person--remark)
     - [Single page person view](#single-page-person-view--view)
@@ -25,8 +27,7 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Deleting a person](#deleting-a-person--delete)
     - [Clearing all entries](#clearing-all-entries--clear)
     - [Exiting the program](#exiting-the-program--exit)
-    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
-    - [Birthday Reminder](#birthday-reminder)
+    
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
 6. [Parameter Requirements](#parameter-requirements)
@@ -125,8 +126,6 @@ only the last one will be recorded.
 
 ---
 
-
-
 ### Adding a person : `add`
 
 Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks. Note that
@@ -185,7 +184,6 @@ Examples:
 > ###### ⚠️ **Warning**
 > The sort function will only sort the current list of contacts, newly added contacts after sorting will not be in sorted order.
 
-
 ---
 
 ### Editing a person : `edit`
@@ -215,6 +213,38 @@ only the last one will be recorded.
 -  `edit 4 n/James Lee b/1989-07-20 t/friend t/premium` Edits the name of the 4th person to `James Lee`, sets their birthday to `1989-07-20`, and updates their tags to `friend` and `premium`.
 -  `edit 5 p/98765432 t/` Edits the phone number of the 5th person to `98765432` and removes all existing tags.
 
+---
+
+### Store Birthday of a Contact: `birthday`
+
+Stores a contact’s birthday. Note that although multiple birthdays may be entered,
+only the last one will be recorded.
+
+**Command Format:**  
+`birthday INDEX b/<Birthday Date>`
+
+- `b/` The contact’s birthday `yyyy-mm-dd` format.
+
+**Examples:**
+- `birthday 123 b/1990-05-15`
+
+---
+
+### Birthday Reminder
+
+Displays a contacts' birthday if they are happening within a week from the system's current date.
+
+> ###### ⚠️ **Warning**
+> Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
+
+**Command Format:**
+None, as it is an automatic feature.
+
+![Birthday Reminder Example](images/Birthday.png)
+
+---
+
 ### Adding history to a person : `log`
 
 Edits an existing person in the address book.
@@ -238,6 +268,8 @@ Examples:
   ![result for 'log 2 l/had lunch together'](images/Log2.png)
   ![result for 'view 2'](images/Log2View2.png)
 
+---
+
 ### Remarking a person : `remark`
 
 Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered,
@@ -254,6 +286,8 @@ Examples:
   ![result for 'remark 1 r/remark message'](images/Remark.png)
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
   ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
+
+---
 
 ### Single page person view : `view`
 
@@ -327,7 +361,7 @@ Finds persons whose names contain any of the given keywords. <br>
   For example, `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples:**
-- `find John` returns `john` and `John Doe`
+- `find John` returns `John Doe`
   ![result for 'find John'](images/FindJohn.png)
 - `find Amy go` returns `Amy Wee`, `William Go`<br>
   ![result for 'find Amy go'](images/FindAmyGo.png)
@@ -335,7 +369,7 @@ Finds persons whose names contain any of the given keywords. <br>
 ### Marking a person as favourite: `favourite`
 
 Mark a specific person from the address book as favourite by assigning a special favourite tag.
-Using this command on an already favourited person will remove the person from favourite
+**Using this command on an already favourited person will remove the person from favourite**
 by removing the special favourite tag.
 
 Format: `favourite INDEX`
@@ -351,7 +385,7 @@ Examples:
 
 Format: `favourite`
 
-* Bring all persons marked as favourite to the front. Note that when the list is modified, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
+* Bring all persons marked as favourite to the front. **Note that when the list is modified**, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
@@ -375,6 +409,11 @@ Deletes the specified person from the address book.
 **Examples:**
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+> ###### ⚠️ **Warning**
+> Deleting a contact while its view window is up will not close the view window. Users are strongly encouraged to close the view window using `close` command before deleting.
+
+---
 
 ### Clearing all entries : `clear`
 
@@ -408,33 +447,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-### Store Birthday of a Contact: `birthday`
-
-Stores a contact’s birthday. Note that although multiple birthdays may be entered,
-only the last one will be recorded.
-
-**Command Format:**  
-`birthday INDEX b/<Birthday Date>`
-
-- `b/` The contact’s birthday `yyyy-mm-dd` format.
-
-**Examples:**
-- `birthday 123 b/1990-05-15`
-
----
-
-### Birthday Reminder
-
-Displays a contacts' birthday if they are happening within a week from the system's current date.
-
-> ###### 💡 **Tip**
-> Note that the reminder is only shown when the application is launched,
-any command feedback shown will clear the reminder. To view the reminder again restart the application.
-
-**Command Format:**
-None, as it is an automatic feature.
-
-![Birthday Reminder Example](images/Birthday.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
