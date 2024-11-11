@@ -244,7 +244,7 @@ Examples:
 
 Adds the date and reason as to why the specified person in the student list is absent.
 
-Format: `addAttendance INDEX ad/[DATE] ar/[REASON]`
+Format: `addAttendance INDEX ad/DATE ar/[REASON]`
 
 <box type="tip" seamless>
 
@@ -431,12 +431,12 @@ _Details coming soon ..._
 | **Filter**                       | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`<br> e.g., `filter n/James p/90332234`                                           |
 | **List**                         | `list`                                                                                                                                                                                                             |
 | **Help**                         | `help`                                                                                                                                                                                                             |
-| **Add Emergency Contact Name**   | `addEcName INDEX en/[EMERGENCY_CONTACT_NAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                                 |
-| **Add Emergency Contact Number** | `addEcNumber INDEX ep/[EMERGENCY_CONTACT_NUMBER]`<br> e.g., `addEcNumber 2 ep/91231234`                                                                                                                            |
+| **Add Emergency Contact Name**   | `addEcName INDEX en/[ECNAME]` <br> e.g., `addEcName 1 en/John Doe`                                                                                                                                 |
+| **Add Emergency Contact Number** | `addEcNumber INDEX ep/[ECNUMBER]`<br> e.g., `addEcNumber 2 ep/91231234`                                                                                                                            |
 | **Add Exam**                     | `addExam ex/EXAM_NAME` <br> e.g., `addExam ex/Midterm`                                                                                                                                                             |
 | **Add Exam Score**               | `addExamScore INDEX ex/EXAM_NAME sc/EXAM_SCORE` <br> e.g., `addExamScore 1 ex/Midterm sc/70.0`                                                                                                                     |
 | **Delete Exam**                  | `deleteExam ex/EXAM_NAME` <br> e.g., `deleteExam ex/Midterm`                                                                                                                                                       |
-| **Add Attendance**               | `addAttendance INDEX ad/[DATE] ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                      |
+| **Add Attendance**               | `addAttendance INDEX ad/DATE ar/[REASON]`<br> e.g., `addAttendance 1 ad/24-09-2024 ar/Sick`                                                                                                                          |
 | **Add Submission**               | `addSubmission sm/SUBMISSION_NAME` <br> e.g., `addSubmission sm/Assignment 1`                                                                                                                                      |
 | **Add Submission Status**        | `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS` <br> e.g., `addSubmissionStatus 1 sm/Assignment 1 ss/Y`                                                                                        |
 | **Delete Submission**            | `deleteSubmission sm/SUBMISSION_NAME` <br> e.g., `deleteSubmission sm/Assignment 1`                                                                                                                                |
