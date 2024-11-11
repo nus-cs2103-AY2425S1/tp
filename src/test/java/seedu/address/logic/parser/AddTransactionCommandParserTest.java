@@ -103,7 +103,7 @@ public class AddTransactionCommandParserTest {
                 + VALID_DATE_INPUT;
 
         // negative index
-        assertParseFailure(parser, "-5" + userInputWithNoIndex, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-1" + userInputWithNoIndex, MESSAGE_INVALID_FORMAT);
 
         // zero index
         assertParseFailure(parser, "0" + userInputWithNoIndex, MESSAGE_INVALID_FORMAT);
@@ -129,6 +129,7 @@ public class AddTransactionCommandParserTest {
         Index targetIndex = INDEX_SECOND_CLIENT;
         String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + INCORRECT_DATE_FORMAT_INPUT;
+
         assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
     }
 
@@ -138,6 +139,7 @@ public class AddTransactionCommandParserTest {
         Index targetIndex = INDEX_SECOND_CLIENT;
         String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + INVALID_DATE_INPUT;
+
         assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
     }
 

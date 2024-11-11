@@ -52,9 +52,12 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT_1 = "100";
     private static final String VALID_AMOUNT_2 = "100.5";
     private static final String VALID_AMOUNT_3 = "100.55";
+    private static final String VALID_AMOUNT_4 = "-1000000000";
+    private static final String VALID_AMOUNT_5 = "1000000000";
     private static final String VALID_DATE_1 = "2024-10-30";
     private static final String VALID_DATE_2 = "0000-10-30";
     private static final String VALID_DATE_3 = "-0001-10-30";
+    private static final String VALID_DATE_4 = "2024-02-29";
     private static final String VALID_YEAR_MONTH = "2020-12";
     private static final String VALID_YEAR_MONTH_2 = "0000-01";
     private static final String VALID_YEAR_MONTH_3 = "-0001-01";
@@ -225,21 +228,35 @@ public class ParserUtilTest {
     }
     @Test
     public void parseAmount_invalidValue_throwsParseException() {
-        //amount more than 3 decimal places
+        //amount has more than 3 decimal places
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_1));
-        //amount contains comma
+
+        //amount contains invalid symbol
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_2));
+
         //amount is smaller than minimum amount
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_3));
+
         //amount is larger than maximum amount
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_4));
     }
 
     @Test
     public void parseAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {
+        //amount with no decimal places
         assertEquals(Double.parseDouble(VALID_AMOUNT_1), ParserUtil.parseAmount(VALID_AMOUNT_1));
+
+        //amount with 1 decimal place
         assertEquals(Double.parseDouble(VALID_AMOUNT_2), ParserUtil.parseAmount(VALID_AMOUNT_2));
+
+        //amount with 2 decimal places
         assertEquals(Double.parseDouble(VALID_AMOUNT_3), ParserUtil.parseAmount(VALID_AMOUNT_3));
+
+        //lower boundary value
+        assertEquals(Double.parseDouble(VALID_AMOUNT_4), ParserUtil.parseAmount(VALID_AMOUNT_4));
+
+        //upper boundary value
+        assertEquals(Double.parseDouble(VALID_AMOUNT_5), ParserUtil.parseAmount(VALID_AMOUNT_5));
     }
 
     @Test
@@ -256,24 +273,36 @@ public class ParserUtilTest {
     public void parseDate_invalidValue_throwsParseException() {
         //day out of range [1, 31]
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_1));
+
         //month out of range [1, 12]
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_2));
+
         //incorrect format of YYYY-M-DD
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_3));
+
         //invalid date which does not exist
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_4));
+
         //invalid date which does not exist on non-leap years
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_5));
-
     }
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsLocalDate() throws ParseException {
+        //regular date
         assertEquals(LocalDate.parse(VALID_DATE_1, DateTimeUtil.DEFAULT_DATE_PARSER),
                 ParserUtil.parseDate(VALID_DATE_1));
+
+        //year 0000
         assertEquals(LocalDate.parse(VALID_DATE_2, DateTimeUtil.DEFAULT_DATE_PARSER),
                 ParserUtil.parseDate(VALID_DATE_2));
+
+        //negative year
         assertEquals(LocalDate.parse(VALID_DATE_3, DateTimeUtil.DEFAULT_DATE_PARSER),
                 ParserUtil.parseDate(VALID_DATE_3));
+
+        //valid date only on leap year
+        assertEquals(LocalDate.parse(VALID_DATE_4, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(VALID_DATE_4));
     }
     @Test
     public void parseDate_validValueWithWhitespace_returnsLocalDate() throws Exception {

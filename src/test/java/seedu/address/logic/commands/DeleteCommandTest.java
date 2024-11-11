@@ -46,12 +46,11 @@ public class DeleteCommandTest {
     public void execute_emptyList_throwCommandException() {
         showEmptyClientList(model);
 
-
         Index outOfBoundIndex = INDEX_FIRST_CLIENT;
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, "delete");
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, DeleteCommand.COMMAND_WORD);
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
 

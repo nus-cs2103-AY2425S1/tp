@@ -42,7 +42,7 @@ public class ListTransactionCommandTest {
 
         ListTransactionCommand listTransactionCommand = new ListTransactionCommand(outOfBoundIndex);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, "listt");
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, ListTransactionCommand.COMMAND_WORD);
 
         assertCommandFailure(listTransactionCommand, model, expectedMessage);
 
