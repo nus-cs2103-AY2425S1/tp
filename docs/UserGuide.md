@@ -177,7 +177,7 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]`
+Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
 
 **Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE, ROOM_NUMBER, and TAG are applicable
 
@@ -191,7 +191,7 @@ Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]`
   should be exactly the same as the person's ROOM_NUMBER and PHONE
 * Order of the TAGs do not matter, `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* Tag search is case-sensitive, `Friends` will not match `friends`
+* Tag search is case-insensitive, `Friends` will match `friends`
 * In tag search, the contacts have to contain all the specified TAGs in order to match
 * If the user inputs multiple fields in parameter, then only the contacts that match all the field
 in the parameter will be listed out.
