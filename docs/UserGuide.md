@@ -423,7 +423,7 @@ If you would like to remove all sample data, you can run the command
 
 <br>
 
-* Words in `UPPER_CASE` are the **compulsory** parameters to be **supplied by the user**.
+* Words in `UPPER_CASE` are the **compulsory** parameters to be **supplied by you**.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 
 <br>
