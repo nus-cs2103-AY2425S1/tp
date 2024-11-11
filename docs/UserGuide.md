@@ -119,7 +119,7 @@ Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ 
 
 <box type="tip" seamless>
 
-**Tip:** A contact must have at least one role which matches\* the following:
+**Tip:** A contact must have at least one role. Roles should match\* the following:
 1. President
 2. Vice President
 3. Admin
