@@ -450,6 +450,9 @@ Format: `status INDEX as/STATUS`
 - The `STATUS` can be any text that describes the current application status.
 - You can remove the company's application status by typing `status INDEX as/` without specifying any text after `as/`.
 
+**Note**: If there are multiple `as/`, only the last `as/STATUS` will be recorded.
+
+
 **Examples**:
 
 ```
