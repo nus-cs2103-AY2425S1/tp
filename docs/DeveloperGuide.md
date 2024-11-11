@@ -191,7 +191,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `undoStateList` for the undo history and `redoStateList` for the redo history. Additionally, it implements the following operations:
 
 - `VersionedAddressBook#canRedo()` — Checks if there is a version to redo to.
 - `VersionedAddressBook#canUndo()` — Checks if there is a version to undo to.
@@ -201,19 +201,19 @@ The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `Ad
 
 These operations are exposed in the `Model` interface as `Model#canRedo()`, `Model#canUndo()`, `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` and `Model#redoAddressBookVersion()` respectively.
 
-The `UndoStateList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
+The `undoStateList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `UndoStateList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `RedoStateList` will be empty.
+Step 1. The user launches the application for the first time. The `undoStateList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `redoStateList` will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `UndoStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `undoStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `UndoStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `undoStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -221,7 +221,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `RedoStateList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `redoStateList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -242,17 +242,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `UndoStateList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `undoStateList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `RedoStateList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `redoStateList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `UndoStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `undoStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `RedoStateList`, all address book states in `RedoStateList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `redoStateList`, all address book states in `redoStateList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
