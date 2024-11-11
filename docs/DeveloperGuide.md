@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -296,12 +296,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -499,20 +493,25 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutting down
+  1. Test case: `exit`<br>
+     Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
+  1. Test case: Click the `X` button on the window
+     Expected: Identical to above.
 
 ### Deleting a client
 
-1. Deleting a client while all clients are being shown
+1. Deleting a client in the Client List View
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -525,7 +524,17 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a client in the Transaction List View
+   1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
+  
+    1. Test case: `delete 0`<br>
+      Expected: No client is deleted. Error detail informing environemnt discreprancy shown in the status message.
+
+    2. Test case: `delete 1`<br>
+      Expected: No client is deleted. Error detail informing environemnt discreprancy shown in the status message.
+
+    3. Test case: `delete x`, where `x` is exactly 1 more than transaction list size<br>
+      Expected: No client is deleted. Error detail informing out of range index shown in the status message.
 
 ### Adding a transaction to a client 
 
@@ -575,11 +584,29 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.
+      Expected: The app launches correctly with a client list populated with sample clients.
 
-1. _{ more test cases …​ }_
+2. Corrupted data file
+
+  1. Test case: Add in irrelevant key-value pairs in `clientell.json`
+     Expected: The app populates data ignoring all irrelevant key-value pairs.
+
+  2. Test case: Add in duplicate key-value pairs in `clientell.json`
+     Expected: The app populates data ignoring all duplicates except the final pair.
+
+  3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`
+     Expected: The app launches with an empty UI and no data.
+
+3. Editing while app is active
+
+   1. Prerequisite: The app is active
+   1. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
+      Expected: The legal edit is overwritten by the new data from the app's recentmost session.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
