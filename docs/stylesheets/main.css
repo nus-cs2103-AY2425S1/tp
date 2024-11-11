@@ -168,3 +168,25 @@ h5,
 h6 {
   color: #e46c0a;
 }
+
+/*@@author wxiaoyun -reused
+ Reused from
+ https://github.com/AY2324S2-CS2103T-F13-1/tp/blob/206f041b65d9f0e6e13ac3011d16d77d577ae3d3/docs/stylesheets/main.css
+ With minor modifications*/
+
+ /* Font size for table of contents on print pdf version */
+.page-nav-print {
+    font-size: 1.5em;
+}
+
+.rounded-image {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fit-container {
+    width: 100%;
+    object-fit: contain;
+}
+
+/*@@author wxiaoyun */
