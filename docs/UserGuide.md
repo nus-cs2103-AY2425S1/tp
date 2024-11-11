@@ -52,7 +52,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Helpful Guidelines for the User Guide
+## **Helpful Guidelines for the User Guide**
 
 ### Interpreting symbols
 
@@ -79,7 +79,7 @@ This section tells you what information you will find in each of the sections of
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## **Quick Start**
 
 1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17` if you do not already have it installed.
     > :information_source: To check if you have Java `17` installed, simply run `java -version` on a command terminal to find out.
@@ -111,9 +111,10 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Tutorial for Beginners
+## **Tutorial for Beginners**
 
 If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+For this tutorial section, you are highly encouraged to use exactly the sample commands provided for each tutorial, and only start trying out the commands on your own after going through the [Features](#features) section.
 
 
 ### Tutorial Contents
@@ -142,7 +143,7 @@ Finally, below the *Outcome Box* is the *Display Panel*, which will contain the 
 [_Back to Top_](#table-of-contents)
 
 
-### Starting a fresh template
+### **Starting a fresh template**
 
 In order to get ready to use BridalBuddy, let's first remove the existing sample guests and vendors on our guest list and vendor list.
 All we have to do is to enter the command `clear` in the Command Line, and both the guest list and the vendor list will be emptied and ready for you to plan a new wedding.
@@ -155,7 +156,7 @@ Once successful, you should see the following on your screen:
 [_Back to Top_](#table-of-contents)
 
 
-### Adding guests
+### **Adding guests**
 
 Now let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
 Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
@@ -173,7 +174,7 @@ For more details on the `add_guest` command, such as the additional optional fie
 [_Back to Top_](#table-of-contents)
 
 
-### Adding vendors
+### **Adding vendors**
 
 Let us now add a vendor to the list of vendors you are intending to collaborate with, and familiarise ourselves with the `add_vendor` command, which you will need in order to add vendors to the vendor list.
 
@@ -190,7 +191,7 @@ For more details on the `add_vendor` command, such as the additional optional fi
 [_Back to Top_](#table-of-contents)
 
 
-### Deleting persons
+### **Deleting persons**
 
 Suppose the bride tells us that she has a preferred florist in mind, and so you need to delete the florist you previously added to the vendor list.
 
@@ -208,7 +209,7 @@ For more details on the `delete_guest` and `delete_vendor` commands, we encourag
 [_Back to Top_](#table-of-contents)
 
 
-### Exiting the program
+### **Exiting the program**
 
 It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
 
@@ -224,7 +225,7 @@ After trying out the tutorial, we strongly recommend you to explore our [feature
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <box type="info" seamless>
 
@@ -375,7 +376,9 @@ This command will help you add a new guest to the bottom of the existing overall
 
 > :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
@@ -396,7 +399,9 @@ This command will allow you to edit the details of the guest identified by the `
 
 > :warning: At least one field of a `Guest` has to be changed to properly utilise the `edit_guest` command without error.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
@@ -446,7 +451,9 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 > :warning: If you attempt to add a new vendor with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 **Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
@@ -467,7 +474,9 @@ This command will allow you to edit the details of the vendor identified by the 
 
 > :warning: At least one field of a `Vendor` has to be changed to properly utilise the `edit_vendor` command without error.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
@@ -524,7 +533,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BridalBuddy home folder. This file will be known as `[JAR file location]/data/bridalbuddy.json`.
@@ -533,7 +542,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -541,7 +550,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Command summary**
 
 | Action            | Format, Examples                                                                                                                                                                                                             |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
