@@ -423,18 +423,18 @@ Edits an existing patient in DocTrack.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
+<box type="tip" light>
+
+**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
+
+</box>
+
 **Examples**:
 
 - `list person` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
   address of the first person in the list to be `91234567` and `johndoe@example.com` respectively.
 - `list person` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
   be `Betsy Crower` and clears all existing tags.
-
-<box type="tip" light>
-
-**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
-
-</box>
 
 <box type="info" light>
 
@@ -499,13 +499,6 @@ You can delete a specified person from the patient book.
 
 - Deletes the person at the specified `INDEX`.
 
-<box type="warning" light>
-
-**Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
-Note that deleting a person will also delete all related appointments.
-
-</box>
-
 <box type="tip" light>
 
 **Tip:** Make sure you have the correct index of the patient before deleting. Use `list person` to check.
@@ -516,6 +509,13 @@ Note that deleting a person will also delete all related appointments.
 
 - `list person` followed by `delete person 2` deletes the second person in the list.
 - `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
+
+<box type="warning" light>
+
+**Warning:** This action is irreversible. Ensure you have selected the correct person before deleting.
+Note that deleting a person will also delete all related appointments.
+
+</box>
 
 <br>
 
@@ -602,6 +602,11 @@ You can add an appointment to DocTrack.
 **Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
 - The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
 
+<box type="tip" light>
+
+**Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
+</box>
+
 **Examples**:
 
 - `add appt i/1 ty/Consulation d/2024-12-01 09:30 s/Diabetes m/Insulin` adds an appointment to the person with personId `1`. The appointment has appointment type `Consulation`, date and time `2024-12-01 09:30`, sickness `Diabetes`, and medicine `Insulin`.
@@ -619,11 +624,6 @@ _**Example:** You will see `2024-12-10 12:30` displayed as `December 10, 2024, 1
 **Note:** Ensure that you enter a **unique person, date and time,
 and appointment type** for the appointment you are adding. Else, it will be detected as a duplicate, and an error message will be shown.
 
-</box>
-
-<box type="tip" light>
-
-**Tip:** You can decide to leave out sickness and medicine inputs when adding them, then edit them later.
 </box>
 
 <br>
@@ -699,22 +699,17 @@ You can find appointments whose person names and / or dates contain any of the g
 - At least one keyword must be provided.
 - The format of `DATE` is `YYYY-MM-DD`. For example, `2024-10-16`.
 
-**Examples**:
-- `find appt n/John` returns appointments with patients named `John`.
-- `find appt d/2024-12-05` returns appointments on `2024-12-05`.
-- `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
-
-<br>
-
-![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
-
-<br>
-
 <box type="tip" light>
 
 **Tip:** Use the `find appt` command to filter out appointments for a certain day or patient.
 
 </box>
+
+**Examples**:
+- `find appt n/John` returns appointments with patients named `John`.
+- `find appt d/2024-12-05` returns appointments on `2024-12-05`.
+- `find appt n/John d/2024-12-05` returns appointments with patients named `John`, and is on `2024-12-05`.
+  <br><br>![result for 'find appt John and 2024-12-05'](images/findApptExample.png)
 
 <br>
 
@@ -738,9 +733,9 @@ You can delete a specified appointment from appointment book.
 
 - Deletes the appointment at the specified `INDEX`.
 
-<box type="warning" light>
+<box type="tip" light>
 
-**Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
+**Tip:** Use the `list appt` to check the index of the appointment before deleting one.
 
 </box>
 
@@ -750,12 +745,9 @@ You can delete a specified appointment from appointment book.
 - `find appt d/2024-12-05` followed by `delete appt 1` deletes the first appointment in the results of the 
   `find` command.
 
+<box type="warning" light>
 
-<br>
-
-<box type="tip" light>
-
-**Tip:** Use the `list appt` to check the index of the appointment before deleting one.
+**Warning:** This action is irreversible. Ensure you have selected the correct appointment before deleting.
 
 </box>
 
