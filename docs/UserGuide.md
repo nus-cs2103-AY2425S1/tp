@@ -29,6 +29,7 @@ The command words are shown beside their corresponding commands below. The comma
    1. [Adding a volunteer](#adding-a-volunteer-v-new) `/v new`
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find) `/v find`
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del) `/v del`
+   1. [Listing all events participated in by a volunteer](#listing-all-events-a-volunteer-is-participating-in-v-view) `/v view`
    1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free) `/v free`
    1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree) `/v unfree`
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign) `assign`
@@ -260,6 +261,28 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
+### Listing all events a volunteer is participating in: `/v view`
+
+Want to see which events a volunteer is joining? This command shows you everything they're signed up for.
+It will display all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
+
+Format: `/v view VOLUNTEER_INDEX`
+
+* The `INDEX` is the number you see next to their name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+
+* `/v view 1` displays the events the first volunteer is participating in.
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
 ### Adding available dates to a volunteer: `/v free`
 
 Update when a volunteer is available to help.<br>
@@ -339,28 +362,6 @@ Examples:
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
-<div style="page-break-after: always;"></div>
-
-### Listing all events a volunteer is participating in: `/v view`
-
-Want to see which events a volunteer is joining? This command shows you everything they're signed up for.
-It will display all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
-
-Format: `/v view VOLUNTEER_INDEX`
-
-* The `INDEX` is the number you see next to their name in the list
-
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
-
-Examples:
-
-* `/v view 1` displays the events the first volunteer is participating in.
-
-![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
-
-
-[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
 
