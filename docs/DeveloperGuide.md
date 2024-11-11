@@ -588,9 +588,8 @@ Currently, users can only use one type of prefix for each `find` command. As suc
 For example, `find n/John p/98765432` is an invalid command.
 
 **Proposed Enhancement**
-Enhance `find` command to allow multiple types of prefixes to be used for each `find` command. 
-When multiple types of prefixes are specified, the `find` command returns all guest(s) and vendor(s) that match all the specified fields. 
-For example, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
+Enhance `find` command to allow multiple types of prefixes to be used for each `find` command so that users can search for multiple fields with a single `find` command.
+For example, with this enhancement, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
 
 ### Restrict special characters in the address field
 
