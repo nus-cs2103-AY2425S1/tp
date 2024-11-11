@@ -458,10 +458,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all students using the `list` command. The student `John` is in the list, but not the student `Jane`.
 
     1. Test case: `deletes n/John`<br>
-       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. 
+       Expected: `John` is deleted from the list. The name and student number of the deleted contact are shown in the status message. 
 
     1. Test case: `deletes n/Jane`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No student is deleted. Error details shown in the status message. State of command box remains the same, i.e. the command that was typed in remains in the command box.
 
     1. Other incorrect delete commands to try: `deletes`, `deletes x/`, `...` (where x is any invalid prefix)<br>
        Expected: Similar to previous.
