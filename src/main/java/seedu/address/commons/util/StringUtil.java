@@ -72,6 +72,8 @@ public class StringUtil {
      * @return The minimum number of single-character edits needed for {@code b} to become a substring of {@code a}.
      */
     public static int getLevenshteinDistanceSubstring(String a, String b) {
+        //@@author ty4g1-reused
+        //This code was generated with the assistance of GitHub Copilot, an AI-powered code completion tool.
         int[][] dp = new int[a.length() + 1][b.length() + 1];
 
         // Initialize the dp array
@@ -100,5 +102,6 @@ public class StringUtil {
         }
 
         return minDistance;
+        //@@author
     }
 }

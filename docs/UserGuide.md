@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a person to SalesContactPro. People with **both** exact same **Name** (case-sensitive) and **Phone** are not allowed.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 While we allow any letter for names for flexibility, our primary language is English, and any formatting errors due to other languages is not part of our scope.
@@ -160,7 +160,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords. If no exact match is found, SalesContactPro displays the names in decreasing order of similarity to search term.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [KEYWORD]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -187,7 +187,7 @@ Parameters:
 * `e/EMAIL`: The email criteria to filter by. For multiple emails, it checks if any email is present.
 * `a/ADDRESS`: The address criteria to filter by. For multiple addresses, it checks if any address is present.
 * `t/TAG…​`: The tags to filter by. For multiple tags, it checks if **all** tags are present.
-* `i/INCOME_GROUP…​`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high`. Multiple income values can be used in the same `i/`, and will check with an `OR` criteria.
+* `i/INCOME_GROUP…​`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high` (case sensitive). Multiple income values can be used in the same `i/`, and will check with an `OR` criteria.
 * `age/AGE_CRITERIA…​`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria used in the same `age/`, it checks if all **age** criteria are satisfied.
 
 **Examples**:
@@ -298,6 +298,10 @@ Examples:
 ### Clearing all entries: `clear`
 
 Clears all entries from SalesContactPro.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+Clearing will delete all contacts and it is an irreversible command.
+</div>
 
 Format: `clear`
 

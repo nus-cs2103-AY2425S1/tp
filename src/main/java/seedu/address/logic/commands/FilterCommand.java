@@ -24,19 +24,19 @@ public class FilterCommand extends Command {
             + ": Filters the displayed list to include all persons who meet "
             + "the specified criteria and displays them with index numbers.\n"
             + "Parameters: "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_INCOME + "INCOME GROUP "
-            + PREFIX_AGE + "AGE     "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_INCOME + "INCOME ] "
+            + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PHONE + "+65"
+            + PREFIX_PHONE + "+65 "
             + PREFIX_EMAIL + "example.com "
-            + PREFIX_ADDRESS + "Clementi"
-            + PREFIX_INCOME + "low"
-            + PREFIX_AGE + "24"
-            + PREFIX_TAG + "Inactive";
+            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_INCOME + "low "
+            + PREFIX_AGE + "24 "
+            + PREFIX_TAG + "Inactive ";
 
     private final PersonMeetsCriteriaPredicate predicate;
 
