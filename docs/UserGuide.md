@@ -81,6 +81,9 @@ E.g. `help`: `<Command>`
 
 ![Command Format](images/CommandFormat.png)
 
+> ###### 💡 **Tip**
+> Note that for some commands, although multiple of the same field may be entered,
+only the last (most up to date one) will be recorded.
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
@@ -409,8 +412,6 @@ only the last (most up to date one) will be recorded.
 ### Birthday Reminder
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
-Note that the reminder is only shown when the application is launched,
-any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 > ###### 💡 **Tip**
 > Note that the reminder is only shown when the application is launched,
