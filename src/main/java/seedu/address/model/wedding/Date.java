@@ -40,7 +40,7 @@ public class Date {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test, FORMATTER);
+            LocalDate.parse(test);
             return true;
         } catch (DateTimeParseException e) {
             return false;
