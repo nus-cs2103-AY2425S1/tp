@@ -38,6 +38,7 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
+   - 5.7 [Modifying the Preferences File](#57-modifying-the-window-size)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -93,6 +94,21 @@ AgentAssist allows you to manage client data like names, phone numbers, emails, 
 Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
 
 ## 3.1 Installation
+
+### Quick Check: Do I Already Have Java 17? <a id="verify-java-version"></a>
+Before installing Java, you can check if it’s already on your computer:
+1. **Open a terminal** (or command prompt):
+    - **Windows**: Press Windows Key + R, type cmd, and press Enter.
+    - **macOS**: Press Command + Space, type Terminal, and press Enter.
+    - **Linux**: Open your Terminal application.
+2. **Type the following command and press Enter:**
+   ```
+    java -version
+   ```
+3. **Review the output:**
+   - If the output shows "Java 17," you’re ready to go and can skip to **Step 2**.
+   - If Java 17 is not installed, continue with **Step 1** below.
+
 ### Step 1: Install Java
 
 Ensure you have **Java 17** installed on your computer. AgentAssist is optimized for **Java 17**, and using other versions may affect performance or functionality. If you already have Java 17 installed, you can skip this step.
@@ -101,13 +117,13 @@ To install Java 17:
 * Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#step-4-run-the-application) and typing:
-    ```
-    java -version
-    ```
-* If you see Java 17 in the output, you’re good to go!
+* Once installed, verify the installation as per the [section above](#verify-java-version).
 
-### Step 2: Download the AgentAssist application
+> ℹ️ **What is Java?**
+>
+> Java is the platform that this AgentAssist runs on, providing the environment needed for smooth operation across different types of computers. Java is also used by many popular desktop applications, such as Minecraft and Apache OpenOffice. By using Java, we ensure that our app performs reliably on all supported systems, including Windows, macOS, and Linux.
+
+### Step 2: Download the AgentAssist application**
 
 Download the latest version of the `.jar` file from the AgentAssist [repository](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases).
 
@@ -154,24 +170,22 @@ The AgentAssist GUI is designed with intuitive sections and color-coded elements
 <img src="images/UiSplitViewWithChartAnnotated.png" alt="UISplitViewWithChartAnnotated">
 
 #### <span style="color: #FF5C5C; font-size: 18px;">⬤</span> Command Box
-The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This dual CLI-GUI functionality combines speed with clarity, allowing for command-line efficiency within a graphical environment.
+The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This integration of CLI and GUI functionalities provides the efficiency of command-line input within a clear, visual interface.
 
 #### <span style="color: #FFC0CB; font-size: 18px;">⬤</span> Result Box
-Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents quickly verify each action's outcome and maintain accuracy.
+Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents to quickly verify outcomes, ensuring accuracy and efficiency with each action.
 
 #### <span style="color: #22C7FF; font-size: 18px;">⬤</span> Clients’ Contacts List
-A scrollable list showcasing client contact details in a concise format, with symbols in front of each field to identify it clearly. Quick labels display each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
+A scrollable list that concisely displays client contact information, with icons identifying each field. Colored labels highlight each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
 
 #### <span style="color: #016D90; font-size: 18px;">⬤</span> Client Detail Panel
-When a client is selected from the contacts list with the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
+When a client is selected from the contacts list via the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
 
 #### <span style="color: #B251CF; font-size: 18px;">⬤</span> Status Chart
-A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a quick overview of their client workload distribution and priorities.
-To learn more about how to use commands in AgentAssist, proceed to the next section.
+A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a clear overview of their workload distribution and case priorities.
 
 ### Tier Color Code for AgentAssist GUI:
-The tier is labeled with color-coded fill located next to a client's name on the list, or under a client's name 
-on Client Detail Panel, aiming to help represent the credit card tier. This will help agents quickly assess the importance of each client and serve them with right credit card promotion.
+Each client’s tier is represented with a color-coded label located beside their name in the client list or under their name in the Client Detail Panel. This visual aid helps agents quickly assess the importance of each client and serve them with tailored credit card promotions.
 
 #### <span style="color: #B59410; font-size: 18px;">⬤</span> Gold Tier
 
@@ -183,16 +197,15 @@ on Client Detail Panel, aiming to help represent the credit card tier. This will
 
 Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
-
 ### Status Color Code of AgentAssist GUI:
-The status is labeled with color-coded fill located next to a client's name on the list, or under a client's name
-on Client Detail Panel, aiming to represent case status: the urgency of the client's case, and help agents prioritize their actions.
+Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping agents prioritize tasks.
 
 #### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
 #### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
 
-Clients that are assigned to **NA** status (don't need to follow up) will not display a status label on the UI. However, on the pie chart that visualizes the client case statuses, these clients are represented with a green color (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate that their cases are marked as done.
+Clients with **NA** status (no follow-up required) do not display a status label on the UI. However, on the pie chart summarizing client case statuses, these clients are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate their cases are resolved.
 
+To learn more about how to use commands in AgentAssist, proceed to the next section.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -275,15 +288,17 @@ Here’s a reference table of available flags and the type of data they correspo
 
 ## 4.4 Arguments
 
-Arguments are the values that follow each flag in a command. **Arguments cannot be empty**, and each must meet specific parsing and format requirements to ensure proper execution of the command.
+Arguments are the values that are used in a command. **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
+
+### 4.4.1  Flag Arguments
+Flag arguments are the values that follow each flag in a command.
 
 Refer to the table below for more details.
-
 
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 6, 8 or 9                                            |
+| `p/`     | `<PHONE>`             | The client's personal phone number                                                           | Valid Singapore personal phone number:<br/> • 8-digit number<br/> • Starts with 6, 8 or 9                                   |
 | `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  |
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
@@ -302,6 +317,24 @@ Refer to the table below for more details.
 > Ensure every flag is followed by a valid argument!
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
+
+### 4.4.2 Non-Flag Arguments 
+
+Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
+
+Refer to the table below for more details.
+
+| **Expected Argument** | **Description**                     | **Requirements**                                                                                             |
+|-----------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `<INDEX>`             | The index of the item to be edited. | Positive number.<br/> • Must be less than or equal to the total number of clients in the current list view.  |
+
+> 💡 **Pro Tip:**
+> 
+> Indexes will change when the current list view changes!
+> 
+> Ensure that the index supplied is accurate to the current view.
+
+Note: There is a known issue when the supplied index argument is too large. For more information, see Section [7. Known Issues](#7-known-issues).
 
 <div style="page-break-after: always;"></div>
 
@@ -511,6 +544,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
+  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/NA` .
 
 
 
@@ -524,7 +558,6 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
@@ -621,7 +654,7 @@ filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMA
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#filter-by-income) for more information.
+    - See [Matching Criteria for Income](#filter-by-income) for more information.
 
 For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -693,7 +726,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
         Parameters: <FLAG>/ <SEARCH TERM>
         Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
         Example: filter n/ Alice p/ 9111222
-        This will find all clients whose names contain 'Alice'and whose phone number is '91112222'.
+        This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.
         ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
@@ -711,7 +744,6 @@ For detailed explanations for the matching criteria of each flag and the accepta
 view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 
 **Examples:**
 - **View client no.1**
@@ -765,12 +797,12 @@ close
 undo
 ```
 - Reverts all changes of the previous command.
-- **Note:** This command is only used on the latest command which made a permanent change to the list of clients. If there have been no previous permanent changes, this command will not work at all. The commands that `undo` works on are:
-  - add
-  - edit
-  - delete
-  - clear
-- **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
+- **Note:** The `undo` command can only be used on `the most recent command that made a permanent change to the client list`. If no such changes have been made, the `undo` command will not function. Commands eligible for `undo` include:
+  - `add`
+  - `edit`
+  - `delete`
+  - `clear`
+- **Note:** You can only use `undo` once. Using `undo` twice in a row has the same effect as not using the `undo` command at all.
 
 ### 5.4.4 Help Menu
 
@@ -782,7 +814,7 @@ help
 ```
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
-    - **Hyperlink to the User Guide**
+    - **Link to the User Guide**
 
 
 
@@ -795,8 +827,7 @@ help
 ```
 exit
 ```
-- The message `Terminating program…` is displayed.
-- After a brief delay, the program will close, effectively exiting the application.
+- After executing the command, the program will close, effectively exiting the application.
 
 
 
@@ -810,12 +841,25 @@ AgentAssist **automatically saves** all client data to your computer after each 
 
 
 ## 5.6 Modifying the Data File
-The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
+The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. 
+> 
+>**Only modify the data file if you're confident in doing so correctly.**
+
+## 5.7 Modifying the Preferences File
+The window size settings for AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/preferences.json`. Advanced users are welcome to update the window size directly by editing that preferences file.
+- Note: The minimum window size for AgentAssist is fixed at 800x600.
+
+> ⚠️ **Danger:**
+> If the window size is set too large, the application will render incorrectly. 
+> 
+> Incorrect preference modifications may also cause unexpected behavior. Do take note that no warnings will be given. 
+>         
+> **Only modify the preferences file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -834,11 +878,8 @@ Use the [`edit` command](#522-edit-an-existing-clients-information), and specify
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
-### What do the different tier colors represent in the UI?
-Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a maroon banner. This makes it easy to see at a glance the tier of each client.
-
-### What do the different status colors represent in the UI?
-Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
+### What do the different tier/status colors represent in the UI?
+Each credit card tier and client status is visually distinguished in the UI with colored labels. You may view the section about [Tier and Status color codes](#tier-color-code-for-agentassist-gui).
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -848,9 +889,11 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'
-4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only. Using non-English characters or text—especially those with right-to-left direction, like Arabic—may result in display problems, including incorrect text alignment, direction, and character rendering. We are actively working to expand support for international languages in future releases.
-5. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
+3. **Names Containing `/`**: Using `/` in names can result in an invalid command error or may inadvertently assign incorrect attributes to the client. To avoid this, spell out names fully. For example, instead of "Ramesh s/o Ravichandran," use "Ramesh Son Of Ravichandran."
+4. **Names Containing `@`**: The system does not currently support names with the `@` symbol, but it is planned for a future enhancement. To avoid errors in the meantime, please replace `@` with an alternative format, such as "John at Doe" instead of "John @ Doe."
+5. **Using non-english text input can cause bugs**. This release fully supports only standard English text input and does not support the extended Latin alphabet or non-English characters. Using accented characters (e.g., é, ñ), non-Latin scripts (e.g., Chinese), or right-to-left text (e.g., Arabic) may lead to unexpected behavior, including display issues, data processing errors, or even command parsing failures. Expanded support for international characters and languages is planned for future releases.
+6. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
+7. **For the edit command**, edits that do not result in changes to client details are currently considered valid. We are working on adding warnings to notify users of unchanged edits in future releases.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
