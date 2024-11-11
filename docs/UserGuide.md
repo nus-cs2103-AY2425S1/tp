@@ -255,16 +255,13 @@ Adds a person with optional details like phone, email, address, games, tags, and
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
 Output: `New person added: DETAILS…`
-<box type="tip" seamless>
 
-**Notes about adding!**
-
+**Notes**:
 * A person can have any number of tags, games and preferred times (including 0).
 * `TIME-TIME` should be in the format `HHmm-HHmm` and **must be a valid time range within the same day.**  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 * `TIME-TIME` **time ranges cannot be a single point in time.**
   e.g. `1200-1200` is not a valid time range.
-  </box>
 
 Examples:
 
@@ -280,21 +277,15 @@ Edits an existing person in the GamerBook.
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
 Output: `Edited Person: DETAILS…`
 
-<box type="tip" seamless>
-
+**Notes**:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-  </box>
-
-<box type="info" seamless>
-
 * Existing values will be updated to the input values.
 * When editing tags, games or preferred times, the existing tags/games/preferred times of the person will be removed i.e
   adding of tags/games is not cumulative.
 * You can remove all the person’s tags/games/preferred times by typing `t/`, `g/` or `pt/` without
   specifying any tags after it.
-  </box>
 
 Examples:
 
@@ -314,12 +305,10 @@ Deletes the specified person from the GamerBook.
 Format: `delete INDEX`  
 Output: `Deleted Person: DETAILS…`   
 
-<box type="tip" seamless>
-
+**Notes**:
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
 
 Examples:
 
@@ -355,17 +344,11 @@ Adds a game to an existing person in the GamerBook.
 Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
 Output: `Added Game to Person: DETAILS…`
 
-<box type="tip" seamless>
-
+**Notes**:
 * Adds a game `GAME` to the person at the specified `INDEX`. The index refers to the index number shown in the displayed
   person list. The index **must be a positive integer** 1, 2, 3, …​
-  </box>
-
-<box type="info" seamless>
-
 * If the game `GAME` already exists for that person, it will not be added. It may be edited using the `editgame` command
   instead.
-  </box>
 
 Examples:
 
@@ -382,18 +365,11 @@ Edits the game of an existing person in the GamerBook.
 Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
 Output: `Edited Game: DETAILS…`  
 
-<box type="tip" seamless>
-
+**Notes**:
 * Edits the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-
 * At least one of the optional fields must be provided.
-  </box>
-
-<box type="info" seamless>
-
 * Existing values will be updated to the input values.
-  </box>
 
 Examples:
 
@@ -410,12 +386,14 @@ Deletes the specified game from an existing person in the GamerBook.
 Format: `deletegame INDEX g/GAME`  
 Output: `Deleted Game from Person: DETAILS…`  
 
-<box type="tip" seamless>
-
+**Notes**:
 * Deletes the game `GAME` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
+
+Examples:
+
+* `deletegame 1 g/Overwatch` Deletes the game `Overwatch` of the 1st person in the list(if there is a game `Overwatch` associated to the person). 
 
 <br>
 
@@ -426,13 +404,11 @@ Gives a **singular** game under an existing person in the GamerBook the "favouri
 Format: `favgame INDEX g/GAME`
 Output: `Favourited Game: GAME`  
 
-<box type="info" seamless>
-
+**Notes**:
 * Favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Favourited games are denoted by a star icon.
 * There will be no observable change if this command is used on a game that is already given the "favourite" status.
-  </box>
 
 Examples:
 
@@ -447,13 +423,11 @@ Removes the "favourite" status from a **singular** game under an existing person
 Format: `unfavgame INDEX g/GAME`  
 Output: `Unfavourited Game: GAME`  
 
-<box type="info" seamless>
-
+**Notes**:
 * Un-favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in
   the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Once un-favourited, the star icon for that particular game should disappear.
 * There will be no observable change if this command is used on a game that is not set to "favourite" status.
-  </box>
 
 Examples:
 
@@ -470,15 +444,13 @@ Finds persons whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]…`  
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="important" seamless>
-
+**Notes**:
 * The search is **case-insensitive**. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  </box>
 
 Examples:
 
@@ -495,15 +467,13 @@ Finds persons whose games' names contain any of the given keywords.
 Format: `findgame KEYWORD [MORE_KEYWORDS]…`   
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="important" seamless>
-
+**Notes**:
 * The search is **case-insensitive**. e.g `lol` will match `LoL`
 * The order of the keywords does not matter. e.g. `Impact Genshin` will match `Genshin Impact`
 * Only the name of games is searched.
 * Only full words will be matched e.g. `Legends` will not match `Legend`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Honkai Impact` will return `Genshin Impact`, `Honkai Star Rail`
-  </box>
 
 Examples:
 
@@ -520,24 +490,16 @@ Finds persons whose preferred time ranges overlap with any of given time ranges.
 Format: `findtime TIME-TIME [TIME-TIME]…`  
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="tip" seamless>
-
+**Notes**:
 * `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day.  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 * `TIME-TIME` time ranges cannot be a single point in time.
   e.g. `1200-1200` is not a valid time range.
-
-You can enter more than one time range to search for.
-
-You can enter the same time twice e.g. `2300-2300` to only search that time.
-</box>
-
-<box type="info" seamless>
-
+* You can enter more than one time range to search for.
+* You can enter the same time twice e.g. `2300-2300` to only search that time.
 * The search is border-sensitive. e.g. `1200-1300` will match `1300-1400`
 * The order of ranges does not matter.
 * Persons matching at least one range will be returned(i.e. `OR` search).
-  </box>
 
 Examples:
 
