@@ -1244,7 +1244,7 @@ Example: deletelisting 1
 - **Description:** Deletes ALL listings.
 - **Successful Execution:**
 > ---
-> **Use Case**: Clear all listings in addressbook
+> **Use Case**: Clear all listings in EZSTATES
 >
 > **Input**: clearlistings
 >
@@ -1264,7 +1264,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 - **Description:** Clears all clients and listings.
 - **Successful Execution:**
 > ---
-> **Use Case**: Fresh addressbook and listings
+> **Use Case**: Clear all clients and listings in EZSTATES
 >
 > **Input**: clear
 >
