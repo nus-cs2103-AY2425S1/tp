@@ -98,7 +98,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 5. **Application Interface:** A user interface similar to the below should appear in a few seconds.
 
-6. ![help message](images/Ui.png)
+    ![help message](images/Ui.png)
 
 6. **Try It Out:**
     - **Enter a Command:**
@@ -141,7 +141,7 @@ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * Before every prefix, ensure that there is a whitespace at the front. Else, the command might not work. (E.g. `add n/John p/889955` will work but `add n/Johnp/889955` will not work.)
 
 * For commands that requires datetime input, ensure that there is a whitespace between the date and the time (E.g. `2024-10-10 13:00`)
-* 
+
 ### Viewing Help : `help`
 
 Shows a message explaining how to access the help page.
@@ -208,7 +208,7 @@ Format:
       all characters lowercase. This means that "311, Clementi Ave 5, unit 02-2" and
       "311 Clementi ave 5 unit 022" (without commas) will be treated as the same client address.
 
-Examples:
+Example:
 * The command below adds a new client to the client list with the following information:
     * Client name: John Doe
     * Client number: 98765432
@@ -217,17 +217,6 @@ Examples:
     * Client birthday: 2000-12-12
     * Client next appointment: 2024-12-12 12:00  
     `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
-
-* The command below adds a new client to the client list with the following information:
-    * Client name: Betsy Crowe
-    * Client number: 1234567
-    * Client email: betsycrowe@example.com
-    * Home address: Newgate Prison
-    * Client birthday: 2001-10-10
-    * Client next appointment: 2024-12-01 09:00  
-    `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
-    ![result for 'find alex david'](images/addUI.png)
-
 ---
 
 ### Deleting a client : `delete`
