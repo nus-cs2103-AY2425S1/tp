@@ -251,10 +251,9 @@ Examples:
 * `list company` followed by `delete company 2` deletes the 2nd company in the address book.
 * If the company at index 1 has a job attributed to it, `delete company 1` will also delete the job.
 
-### Screening contacts by a job's name : `screen job`
+### Screening contacts by a job : `screen job`
 
-Screens the list of contacts in the address book with the name of the
-job specified.
+Screens the list of contacts in the address book with the job specified.
 
 Format: `screen job INDEX`
 
