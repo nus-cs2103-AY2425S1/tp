@@ -1157,11 +1157,10 @@ on why the command is invalid. The error message could be more specific to state
    - Justification: In doing so, users will have a clearer idea on what they did wrong when they typed in the command and they will be able to easily fix the issue. This enables the users to have a more pleasant experience when using HireMe.
    <br></br>
 
-4. **Improve UI to deal with long texts:** <br>
-   - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text.
+4. **Improve UI to deal with long texts:** <br></br>
+   - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text. <br></br>
    - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. 
-   - Justification: This lets the user see the full text in application. 
-   <br>
+   - Justification: This lets the user see the full text in application. <br></br>
 
 5. **Improve the validator for `email`:** The current email validator flags valid emails as invalid, such as `faceb__k@fb.com.sg`. This could cause some inconvenience to the users. 
 We plan to fix the validator for email to allow for more valid emails. <br>
