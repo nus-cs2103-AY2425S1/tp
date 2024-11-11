@@ -1,44 +1,81 @@
 @startuml
-!include <office/Concepts/globe_internet>
-!include <office/Concepts/documents>
-!include <office/Users/user>
 !include style.puml
+skinparam ArrowFontStyle plain
 
-Participant "User" as User
-Participant "LinkCommand" as LinkCommand
-Participant "Model" as Model
-Participant "LinkManager" as LinkManager
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":LinkCommandParser" as LinkCommandParser LOGIC_COLOR
+participant "l:LinkCommand" as LinkCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-User -> LinkCommand: execute()
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "lm:LinkManager" as LinkManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("link patient/S1234567D caregiver/S2345678H")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("link patient/S1234567D caregiver/S2345678H")
+activate AddressBookParser
+
+create LinkCommandParser
+AddressBookParser -> LinkCommandParser
+activate LinkCommandParser
+
+LinkCommandParser --> AddressBookParser
+deactivate LinkCommandParser
+
+AddressBookParser -> LinkCommandParser : parse("patient/S1234567D caregiver/S2345678H")
+activate LinkCommandParser
+
+create LinkCommand
+LinkCommandParser -> LinkCommand : LinkCommand(S1234567D, S2345678H)
 activate LinkCommand
 
-LinkCommand -> Model: getPerson(patientNric)
+LinkCommand --> LinkCommandParser
+deactivate LinkCommand
+
+LinkCommandParser --> AddressBookParser : l
+deactivate LinkCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LinkCommandParser -[hidden]-> AddressBookParser
+destroy LinkCommandParser
+
+AddressBookParser --> LogicManager : l
+deactivate AddressBookParser
+
+LogicManager -> LinkCommand : execute(m)
+activate LinkCommand
+
+LinkCommand -> Model : getPerson(patientNric)
 activate Model
-Model --> LinkCommand: patientPerson
+Model --> LinkCommand : patientPerson
 deactivate Model
 
-LinkCommand -> Model: getPerson(caregiverNric)
+LinkCommand -> Model : getPerson(caregiverNric)
 activate Model
-Model --> LinkCommand: caregiverPerson
+Model --> LinkCommand : caregiverPerson
 deactivate Model
 
-LinkCommand -> Model: hasLink(patientPerson, caregiverPerson)
-activate Model
-Model --> LinkCommand: true/false (if link exists)
-deactivate Model
-
-LinkCommand -> Model: addLink(patientPerson, caregiverPerson)
-activate Model
-Model -> LinkManager: addLink(patientPerson, caregiverPerson)
+LinkCommand -> LinkManager : addLink(patientPerson, caregiverPerson)
 activate LinkManager
-
-LinkManager -> LinkManager: validateLinkConditions
-LinkManager --> Model: success/failure
+LinkManager -> LinkManager : validateLinkConditions
+LinkManager --> LinkCommand : success/failure
 deactivate LinkManager
 
-Model --> LinkCommand: success/failure
-deactivate Model
+create CommandResult
+LinkCommand -> CommandResult
+activate CommandResult
 
-LinkCommand -> User: showSuccessMessage()/showErrorMessage()
+CommandResult --> LinkCommand
+deactivate CommandResult
+
+LinkCommand --> LogicManager : r
 deactivate LinkCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml
