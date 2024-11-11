@@ -5,24 +5,39 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPatientCommandParser" as AddPatientCommandParser LOGIC_COLOR
 participant "a:AddPatientCommand" as AddPatientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(add-patient)
+[-> LogicManager : execute("add-patient n/...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(add-patient)
+LogicManager -> AddressBookParser : parseCommand("add-patient n/...")
 activate AddressBookParser
 
+create AddPatientCommandParser
+AddressBookParser -> AddPatientCommandParser
+activate AddPatientCommandParser
+
+AddPatientCommandParser --> AddressBookParser
+deactivate AddPatientCommandParser
+
+AddressBookParser -> AddPatientCommandParser : parse("n/...")
+activate AddPatientCommandParser
+
 create AddPatientCommand
-AddressBookParser -> AddPatientCommand
+AddPatientCommandParser -> AddPatientCommand
 activate AddPatientCommand
 
-AddPatientCommand --> AddressBookParser
+AddPatientCommand --> AddPatientCommandParser : a
 deactivate AddPatientCommand
+
+AddPatientCommandParser --> AddressBookParser : a
+deactivate AddPatientCommandParser
 
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
@@ -36,9 +51,16 @@ activate Model
 Model --> AddPatientCommand
 deactivate Model
 
-AddPatientCommand --> LogicManager : result
+create CommandResult
+AddPatientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPatientCommand
+deactivate CommandResult
+
+AddPatientCommand --> LogicManager : r
 deactivate AddPatientCommand
-AddPatientCommand -[hidden]-> LogicManager : result
+AddPatientCommand -[hidden]-> LogicManager : r
 destroy AddPatientCommand
 
 [<--LogicManager
