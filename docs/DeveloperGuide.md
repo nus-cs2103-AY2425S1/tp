@@ -250,14 +250,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User enters delete contact command with the contact's full name.
-2. Cher shows list of contacts with name that matches user input.
-3. User re-enters delete command with index of the contact in list shown to delete.
-4. Cher prompts for delete confirmation.
-5. User confirms deletion.
-6. Cher deletes the contact from memory.
-7. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-8. Cher shows a success message. <br>
+1. User enters delete contact command with a specified attribute.
+2. Cher shows list of contacts that matches user input.
+3. User re-enters delete command with the full attribute of the desired contact to delete.
+4. Cher deletes the contact from memory.
+5. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+6. Cher shows a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -318,6 +316,18 @@ Use case ends
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
+
+#### Use case: UC8 - Find Contacts
+
+**MSS**
+1. User enters find contacts command with specified attribute.
+2. Cher shows list of contacts that matches user input.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.<br>
+      Use case ends.
 
 #### Use case: UC8 - Select contacts by index
 
@@ -429,6 +439,7 @@ Use case ends
 * 1a. Cher detects that there is no student in the list.
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
+
 
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -562,8 +573,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: <br>
    Execute the following:
       - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+      - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+      - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
       - List all persons using the `list` command.
         
    2. Test case: `batch-delete t/tag3` <br>
@@ -581,6 +592,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: <br>
        Execute the following:
         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
