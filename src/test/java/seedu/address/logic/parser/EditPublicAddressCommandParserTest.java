@@ -59,6 +59,15 @@ public class EditPublicAddressCommandParserTest {
             new EditPublicAddressCommand(index, publicAddress));
     }
 
+    @Test
+    public void parse_validNetworkLowerCase_success() {
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "btc "
+                        + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+                new EditPublicAddressCommand(Index.fromOneBased(1),
+                        new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel")));
+    }
+
     // Missing arguments
     @Test
     public void parse_noArgs_failure() {
@@ -164,15 +173,6 @@ public class EditPublicAddressCommandParserTest {
     }
 
     @Test
-    public void parse_invalidNetworkWrongCase_success() {
-        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "btc "
-                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
-                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
-            new EditPublicAddressCommand(Index.fromOneBased(1),
-                new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel")));
-    }
-
-    @Test
     public void parse_invalidNetworkEmpty_failure() {
         assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + " "
                 + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
@@ -180,5 +180,4 @@ public class EditPublicAddressCommandParserTest {
             Network.MESSAGE_CONSTRAINTS);
     }
 
-    // TODO: Invalid public address
 }
