@@ -24,6 +24,7 @@ Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -50,6 +51,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -67,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -391,7 +398,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 <br/><br/>
 
-**Use case: UC04 - Tag a contact**
+**Use case: UC04 - Edit a contact**
+
+**MSS**
+
+1. Wedding planner requests to edit the personal details of an existing contact
+2. PlanPerfect edits the contact's as specified by the wedding planner
+3. PlanPerfect shows a success message to the wedding planner.
+
+**Extensions**
+* 1a. The input format for adding the contact is invalid.
+
+    * 1a1. PlanPerfect shows an error message requesting for the correct input format.
+
+      Use case ends.
+* 1b. Wedding planner requests to edit a contact's phone number to one that is held by another contact
+
+   *  1b1.  PlanPerfect shows an error message that the input phone number already exists in PlanPerfect.
+
+      Use case ends.
+<br/><br/>
+
+**Use case: UC05 - Tag a contact**
 
 **MSS**
 
@@ -412,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC05 - Untag a contact**
+**Use case: UC06 - Untag a contact**
 
 **MSS**
 
@@ -439,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC06 - List contacts by tag**
+**Use case: UC07 - List contacts by tag**
 
 **MSS**
 
@@ -456,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC07 - Find contact by name**
+**Use case: UC08 - Find contact by name**
 
 **MSS**
 
@@ -475,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC08 - Getting help**
+**Use case: UC09 - Getting help**
 
 **MSS**
 
@@ -486,7 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC09 - Sort contacts alphabetically**
+**Use case: UC10 - Sort contacts alphabetically**
 
 **MSS**
 
@@ -497,7 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC10 - Filter contacts by tag**
+**Use case: UC11 - Filter contacts by tag**
 
 **MSS**
 
@@ -516,7 +544,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC11 - Clear all wedding and contact data**
+**Use case: UC12 - Clear all wedding and contact data**
 
 **MSS**
 
@@ -537,7 +565,7 @@ Use case ends.
 
 <br/><br/>
 
-**Use case: UC12 - View contacts of a specified wedding**
+**Use case: UC13 - View contacts of a specified wedding**
 
 **MSS**
 
@@ -557,16 +585,29 @@ Use case ends.
 <br/><br/>
 
 
-**Use case: UC13- Add a wedding**
+**Use case: UC14 - Add a wedding**
+
+**MSS**
+
+1. Wedding planner requests to add a new wedding.
+2. PlanPerfect adds the wedding with the specified details to PlanPerfect
+
+   Use case ends.
+
+**Extensions**
+* 1a. User provides invalid details about a wedding to PlanPerfect.
+  * 1a1. PlanPerfect shows an error message detailing why the details provided are invalid.
+
+    Use case ends.
 
 <br/><br/>
 
-**Use case: UC14 - Delete a wedding**
+**Use case: UC15 - Delete a wedding**
 
 **MSS**
 
 1. User requests to delete a wedding with specified details.
-2. PlanPerfect deletes the wedding and removes it from the weddings panel view.
+2. PlanPerfect deletes the wedding.
 
    Use case ends.
 
@@ -579,13 +620,12 @@ Use case ends.
 
 <br/><br/>
 
-**Use case: UC15 - Edit a wedding**
+**Use case: UC16 - Edit a wedding**
 
 **MSS**
 
 1. User requests to edit the name and/or date of the wedding.
-2. PlanPerfect edits the wedding as specified and updates the wedding name and date in the weddings panel 
-   view.
+2. PlanPerfect edits the wedding as specified by the command.
 
    Use case ends.
 
@@ -727,14 +767,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a wedding
    - **Recommendation:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. 
-   - Test case: `addw n/Emily and John Wedding d/25/12/2024 c/1 2`<br>
+   - Test case: `addw n/Emily and John d/25/12/2024 c/1 2`<br>
           **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
      <br></br>
-2. Viewing wedding details
+2. Editing a wedding's details
+    - Test case: `editw 1 n/Emmy and Johnny d/29/12/2024` <br>
+        **Expected:** The name and date at the wedding at index 1 have been updated with the specified name and date.
+    <br></br>
+3. Deleting a wedding
+    - Test case: `deletew 1` <br>
+      **Expected:** The wedding at index 1 has been deleted 
+      <br></br>
+4. Viewing wedding details
    - Test case: `view 1`<br>
        **Expected:** Displays the contacts assigned to the wedding at index 1.
      <br></br>
-3. Assigning and unassigning contacts to/from a wedding
+5. Assigning and unassigning contacts to/from a wedding
    - Test case: `assign 1 c/3`<br>
        **Expected:** Contact at index 3 is assigned to wedding 1. A confirmation message is displayed.
    - Test case: `unassign c/3`<br>
