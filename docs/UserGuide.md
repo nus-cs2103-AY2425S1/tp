@@ -5,64 +5,85 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# DLTbook User Guide
+# Welcome to DLTbook!
 
-<box type="info" seamless>
-DLTbook is a desktop application that helps you manage your contacts and their Distributed Ledger Technology (DLT) public addresses. It combines an easy-to-use interface with powerful command-line features, making it perfect for both beginners and advanced users.
-To prevent manipulation of the data stored in this application, it is recommended that the device this software is installed to is not connected to the internet at all times as hackers can manipulate the data stored in this application.
+We are so thrilled to present a new contact and DLT Public Address management tool.
+
+In the world of cryptocurrency, we know that managing public addresses manually currently is a hassle and improper
+management of public addresses might lead to financially costly mistakes.
+
+This is why we developed **DLTbook** for crypto users to manage the public addresses of contacts with greater
+convenience and security.
+
+**DLTbook** offers a command-line first interface, allowing you to manage your contacts and their DLT
+addresses with ease.
+
+We’ll walk you through each feature, so you can discover with ease **DLTbooks** offerings. Let’s get started with *
+*DLTbook** and manage your contact's public addresses with greater ease.
+
+<div style="page-break-after: always"></div>
+⚠️ **Security Note**: To protect your data from potential manipulation, we recommend using DLTbook on a device with no internet connectivity.  
+
+# Contents
+
+- [Introduction](#introduction)
+- [How to use this user guide](#how-to-use-this-user-guide)
+- [Quick Start](#quick-start)
+- [GUI Summary](#gui-summary)
+- [Features](#features)
+    - [Basic Features](#basic-features)
+        - [Getting help: `help`](#help)
+        - [Clearing all contacts from DLTbook: `clear`]()
+        - [Exiting the application: `exit`](#exiting-the-program--exit)
+    - [Contact Management Features](#contact-management-features)
+        - [Adding a contact: `add`](#adding-a-contact--add)
+        - [Deleting a contact: `delete`](#deleting-a-contact--delete)
+        - [Editing a contact: `edit`](#editing-a-contact--edit)
+        - [Finding contacts: `find`](#finding-contacts--find)
+        - [Listing all contacts: `list`](#listing-all-contacts--list)
+
+    - [Public Address Management Features](#public-address-management-features)
+        - [Adding a public address to a contact: `addpa`](#adding-a-public-address--addpa)
+        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address--deletepa)
+        - [Editing a public address of a contact: `editpa`](#editing-a-public-address--editpa)
+        - [Retrieving public address given contact infomation:
+          `retrievepa`](#retrieving-a-public-address-by-label--retrievepa)
+        - [Searching for currently displayed contacts for a public address:
+          `searchpa`](#searching-a-public-address--searchpa)
+        - [Filters contacts based on presence of network: `filter`](#filtering-contacts--filter)
+- [Support](#Support)
+    - [Frequently Asked Questions](#frequently-asked-questions)
+    - [Known Limitations](#known-issues)
+    - [Help](#Help)
+    - [Data Storage](#Data Storage)
+    - [Troubleshooting Guide](#common-errors)
+    - [Setup Guide](#setup-guide)
+- [Feature Summary](#command-feature)
+    - [Basic Features](#basic-commands)
+    - [Contact Management Features](#contact-management-commands)
+    - [Public Address Management Features](#public-address-management-features)
+    -
+- [Glossary](#glossary)
+
+<div style="page-break-after: always"></div>
+
+# Introduction
+
+**DLTbook** is a application for users to manage DLT public addresses.
+
+**DLTbook** is:
+
+- Essentially a basic address book with the added functionality to effectively manage public addresses of contact.
+- Is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
+  Interface** (GUI).
+
+[Back to Top]
 
 
-</box>
 
-### Disclaimer
-
-<box type="info" seamless>
-The names of contacts in DLTbook do not support special symbols and only accepts characters from the English alphabet.
-The phone numbers of contacts in DLTbook are only suited for Singapore phone numbers with no support for country code for international numbers. Duplicates allowed
-The email field of contacts in DLTbook have no restrictions and can be duplicated across contacts.
-This app was created as part of a Minimum Viable Product (MVP) to build excitement among students and users 
-This assumes that you have throughly read through our userguide and aware of the financial risks involved when using our 
-app
-</box>
+<div style="page-break-after: always"></div>
 
 
-
-<panel header="💡 **New Users Start Here**" type="primary" expanded>
-
-### Before You Begin
-
-If terms like 'command line', 'terminal', or 'Java' sound unfamiliar to you, don't worry! Visit our:
-
-- 📘 [Beginner's Guide](#beginner-s-guide) for basic concepts
-- 🔧 [Setup Guide](#setup-guide) for installation help
-- ❓ [FAQ Section](#faq) for common questions
-- 🛠️ [Troubleshooting Guide](#common-errors) for known issues
-
-### Experienced Users
-
-If you're already familiar with DLTbook, jump straight to [Quick Start](#quick-start) for a quick overview on basic
-commands.
-Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
-</panel>
-
-## Quick Start
-
-1. **Check System Requirements**: Ensure you have Java 17 or newer installed on your computer
-
-    <box type="info" seamless>
-    
-    Not sure if you have Java? Check out [Setup Guide](#setup-guide)
-    
-    </box>
-
-2. **Download**: Download the latest release of [DLTbook.jar](https://github.com/AY2425S1-CS2103T-T08-1/tp/releases)
-
-3. **Install**: Create a folder and move DLTbook.jar to it according to the [Setup Guide](#setup-guide) 
-
-4. **Start**: Open Terminal and run `java -jar DLTbook.jar`
-
-5. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands
-   or go to [Features](#features) for a detailed list of all commands.
 
 ## Beginner's Guide
 
@@ -125,6 +146,7 @@ Before diving in, let's clarify some essential terms:
 - **Java**: The programming language required to run DLTbook.
 
   </box>
+
 
 3. **Getting Started: Your First Steps**
 
@@ -193,6 +215,17 @@ Here’s how you can start using DLTbook:
 After a few seconds, you'll see the DLTbook window:
 
 ![Ui](images/Ui.png)
+
+### Inexperienced Users
+
+Continue to [Try It Out!](#try-it-out) for a guide of the basic commands
+
+### Experienced Users
+
+If you have used DLTbook before, jump straight to [Quick Start](#quick-start) for a quick overview on basic
+commands.
+Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
+</panel>
 
 ### Try It Out!
 
@@ -580,30 +613,22 @@ Examples:
 
 ### Searching for a public address : `searchpa`
 
-Searches for a public address.
+Based on contacts displayed, it searches for a contact using the unique public address
 
 Format: `searchpa pa/PUBLIC_ADDRESS`
 
-
-<box type="tip" seamless>
-
-
-
-</box>
+| Parameter        | Explanation          | Constraints                                                                                                               | Safeguards                                                                                      |
+|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters | This field is **case-insensitive** and searches for contacts based on lowercase public address. |
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
-  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
-  contain alphanumeric characters.
-*
-
-This field is **case-insensitive** and will be converted to lowercase.
-
-* This command only searches the current list of public addresses displayed (eg if all contacts are displayed
-  searchpa will perform a global search. if a filtered list of contacts are
+<box type="tip" seamless>
+This command only searches the current list of public addresses displayed (e.g. if all contacts are displayed
+  searchpa will perform a global search. if a filtered list of contacts
   displayed, searchpa will perform a local
   search on list of contacts displayed).
+  </box>
 
 Examples:
 
@@ -611,6 +636,7 @@ Examples:
   address `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` and displays the contact and wallet to
   which it belongs.
 
+![searchpa](images/searchpa.png)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -735,6 +761,10 @@ the data of your previous AddressBook home folder.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
    `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
    manually restore the minimized Help Window.
+3. **Limited names allowed** The names of contacts in DLTbook do not support special symbols and only accepts characters
+   from the English alphabet.
+4. **Missing email validation** The email field of contacts in DLTbook have no restrictions and can be duplicated across
+   contacts.
 
 --------------------------------------------------------------------------------------------------------------------
 
