@@ -201,7 +201,6 @@ public class CommandBox extends UiPart<Region> {
     }
 
 
-
     private void handleControlPressed() {
         /* Trim excess spaces but keep the input intact
         "\\s+$" is the REGEX pattern being used here:
@@ -324,7 +323,7 @@ public class CommandBox extends UiPart<Region> {
         // Create a set of valid prefixes for easier lookup
         Set<String> validPrefixes = new HashSet<>(parameterMap.keySet());
 
-        String currentPrefix = null;  // Track curr param prefix
+        String currentPrefix = null;  // Track current param prefix
 
         for (String part : parts) {
             if (part.trim().isEmpty()) {
@@ -388,17 +387,23 @@ public class CommandBox extends UiPart<Region> {
         return true;
     }
     private boolean isValidCommandPrefix(String input) {
-        String[] parts = input.split("\\s+");
+        // Split the input by spaces to isolate the first word (the command keyword)
+        String[] parts = input.trim().split("\\s+");
         String commandPrefix = parts[0];
-
-        for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(commandPrefix)) {
-                return true;
+        if (parts.length == 1) {
+            // Show suggestions if commandPrefix exactly matches any command
+            // or is a valid beginning of a command in the syntax map
+            for (String command : commandSyntaxMap.keySet()) {
+                if (command.startsWith(commandPrefix)) {
+                    return true;
+                }
             }
         }
 
-        return false;
+        // Check if the commandPrefix exactly matches any valid command in the syntax map
+        return commandSyntaxMap.containsKey(commandPrefix);
     }
+
     private void handleTextChanged(String input) {
 
         if (!isValidCommandPrefix(input)) {
@@ -413,7 +418,6 @@ public class CommandBox extends UiPart<Region> {
         // Check if the last part of the input contains a slash
         String[] parts = input.split("\\s+");
         String lastPart = parts[parts.length - 1];
-
 
         // For just the command (before any parameters)
         if (!input.contains(" ")) {
