@@ -17,7 +17,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * The file name must contain only alphanumeric characters.
      */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9_/]*$";
-    public static final String MESSAGE_INVALID_FILE_NAME = "File name should only contain alphanumeric "
+    public static final String MESSAGE_INVALID_FILE_NAME = "File name or file path should only contain alphanumeric "
             + "characters, '_' and '/'.";
 
     /**
