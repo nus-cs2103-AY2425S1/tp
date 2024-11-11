@@ -70,12 +70,12 @@ activate CommandResult LOGIC_COLOR
 CommandResult -[LOGIC_COLOR]> AddApptCommand : r
 deactivate CommandResult LOGIC_COLOR
 
-AddApptCommand -[LOGIC_COLOR]> Logic : r
+AddApptCommand -[LOGIC_COLOR]-> Logic : r
 deactivate AddApptCommand LOGIC_COLOR
 
 destroy AddApptCommand
 Logic -[LOGIC_COLOR]> : save addressbook to storage
 ]-[STORAGE_COLOR]-> Logic
-Logic -[LOGIC_COLOR]> user : r
+Logic -[LOGIC_COLOR]-> user : r
 deactivate Logic LOGIC_COLOR
 @enduml

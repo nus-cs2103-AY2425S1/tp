@@ -10,17 +10,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
+    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format \"local-part@domain\" "
             + "and adhere to the following constraints:\n"
-            + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
-            + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
-            + "separated by periods.\n"
-            + "The domain name must:\n"
-            + "    - end with a domain label at least 2 characters long\n"
+            + "1. The local-part must:\n"
+            + "    - only contain alphanumeric characters and these special characters: " + SPECIAL_CHARACTERS + "\n"
+            + "    - not start or end with any special.\n"
+            + "    - not contain consecutive special characters.\n"
+            + "2. The local-part is followed by a '@' and then a domain name.\n"
+            + "3. The domain name is made up of \"domain labels\" separated by periods.\n"
+            + "4. The domain name must:\n"
             + "    - have each domain label start and end with alphanumeric characters\n"
-            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.";
+            + "    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any\n"
+            + "    - end with a domain label that is at least 2 characters long.\n"
+            + "    - end with a domain label that is NOT following format: alphanumeric, hyphen, alphanumeric "
+            + "(e.g. \"local@example.c-m\" and \"local@o-g\" are not allowed).";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
     private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"

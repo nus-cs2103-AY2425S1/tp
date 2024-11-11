@@ -40,7 +40,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -73,13 +73,13 @@ The sections below give more details of each component.
 [Back to Table of Contents](#table-of-contents)
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png){:width="740"}
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -91,7 +91,7 @@ The `UI` component,
 [Back to Table of Contents](#table-of-contents)
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -123,7 +123,7 @@ How the parsing works:
 
 [Back to Table of Contents](#table-of-contents)
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 ![](images/ModelClassDiagram.png){:width="740"}
 
@@ -143,7 +143,7 @@ The `Model` component,
 [Back to Table of Contents](#table-of-contents)
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![](images/StorageClassDiagram.png){:width="740"}
 
@@ -199,7 +199,7 @@ When executed, this command parses user input and creates an internal representa
 
 #### Sequence Diagram
 
-When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmentName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
 
 ![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
@@ -414,6 +414,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
     * 2a1. MediBase3 does not show any patients.
 
       Use case ends.
+
 
 ---
  
@@ -1028,10 +1029,15 @@ Deleting an existing appointment from a patient
 
 Team size: 5
 
-1\. **Allow names to include symbols and special characters**
+1\. **Enhance Name Validation**
 
-  As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
-  However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
+   Currently, MediBase3 restricts patient names to alphanumerics and spaces only, preventing the inclusion of common symbols, hyphens, and accented characters that are often found in legal names (e.g., 'Nagaratnam s/o Suppiah', 'Anya Taylor-Joy', 'Sergio Pérez'). Additionally, the app allows leading, trailing, and multiple consecutive spaces, which can result in inconsistent formatting.
+
+   This enhancement will:
+    - Loosen restrictions to allow all other special and accented characters, enabling the accurate entry of a wider range of legitimate names.
+    - Automatically trim any leading or trailing spaces and reduce multiple consecutive spaces to a single space, ensuring consistent formatting and reducing errors from accidental spacing during data entry.
+
+   These changes will improve the inclusivity and data consistency of MediBase3's patient records.
 
 2\. **Improve `addAppt` command to allow users to add multiple appointments at once**
 
