@@ -435,13 +435,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Launch the jar using the java -jar command Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Launch the jar using the java -jar command Expected: Shows the GUI with no contacts currently. The window size may not be optimum.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by using the java -jar command.<br>
        Expected: The most recent window size and location is retained.
 
 
