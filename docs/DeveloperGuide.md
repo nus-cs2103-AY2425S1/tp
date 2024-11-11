@@ -477,7 +477,7 @@ Use case ends.
 1. Talent Manager requests to find persons whose name contains `keywords`
 2. TalentHub processes and list person(s) whose name contains `keywords`
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -593,7 +593,7 @@ Use case ends.
 1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
 2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
 
-   Use case ends.
+Use case ends.
 
 **Use case: UC12 - Delete Event after Find**
 
@@ -734,7 +734,7 @@ Use case ends.
 2. TalentHub requests for confirmation of clear
 3. TalentHub clears all persons and events in the list
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
