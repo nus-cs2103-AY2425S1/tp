@@ -2,8 +2,63 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+<!-- TOC -->
+  * [Table of Contents](#table-of-contents)
+  * [**Acknowledgements**](#acknowledgements)
+  * [**Setting up, getting started**](#setting-up-getting-started)
+  * [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+    * [SupplyCentral: Goods Classes](#supplycentral-goods-classes)
+  * [**Implementation**](#implementation)
+    * [Export](#export-)
+  * [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+  * [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+      * [UC1: Delete a contact](#uc1-delete-a-contact)
+        * [MSS](#mss)
+        * [Extensions](#extensions)
+      * [UC2: Add a contact](#uc2-add-a-contact)
+        * [MSS](#mss-1)
+        * [Extensions](#extensions-1)
+      * [UC3: View contacts](#uc3-view-contacts)
+      * [MSS](#mss-2)
+      * [Extensions](#extensions-2)
+      * [UC4: Add goods to a supplier](#uc4-add-goods-to-a-supplier)
+      * [MSS](#mss-3)
+    * [Extensions](#extensions-3)
+      * [UC5: Delete goods from supplier](#uc5-delete-goods-from-supplier)
+      * [MSS](#mss-4)
+    * [UC6: View Goods](#uc6-view-goods)
+    * [MSS](#mss-5)
+      * [UC7: Edit contact](#uc7-edit-contact)
+      * [MSS](#mss-6)
+      * [Extensions](#extensions-4)
+      * [UC8: Export Csv](#uc8-export-csv)
+      * [UC9: Clear suppliers and goods](#uc9-clear-suppliers-and-goods)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a person](#adding-a-person)
+    * [Deleting a person](#deleting-a-person)
+    * [Adding Goods to the system](#adding-goods-to-the-system)
+    * [Deleting Goods from the system](#deleting-goods-from-the-system)
+    * [Saving data](#saving-data)
+  * [**Appendix: Effort**](#appendix-effort)
+    * [Effort Summary](#effort-summary)
+    * [Goods Storage](#goods-storage)
+    * [Main Challenges Faced](#main-challenges-faced)
+    * [Empathising with our Persona: Non-Tech Savvy Business Owner](#empathising-with-our-persona-non-tech-savvy-business-owner)
+  * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,10 +98,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): UI of the application.
+* [**`Logic`**](#logic-component): Executes & parses commands.
+* [**`Model`**](#model-component): Data of the application is stored here.
+* [**`Storage`**](#storage-component): Reads/Writes data to the disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -96,8 +151,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 
 How the `Logic` component works:
 
@@ -128,12 +182,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -153,7 +204,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
-### SupplyCentral: Goods Classes ###
+### SupplyCentral: Goods Classes
 
 <img src="images/GoodsClassDiagram.png" width="550">
 
@@ -170,11 +221,12 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Export 
 
-1. The export command modifies the userPref variable ```exportFilterGoods``` to true when called
+1. The export command modifies ```UserPrefs#exportFilterGoods``` to true when called
 2. When the command is executed, ```LogicManager``` will check this variable
-3. If the variable is true, ```LogicManager``` will call ```saveFilteredGoods``` from the storage class
+3. If the variable is true, ```LogicManager``` will call ```Storage#saveFilteredGoods``` from the storage class
 4. Effectively creating/updating the ```filteredGoods.csv``` file
-5. ```LogicManager``` then sets ```exportFilterGoods``` to false
+5. ```LogicManager``` then calls ```Model#setExportFilterGoodsToFalse``` to set ```UserPrefs#exportFilterGoods``` to false.
+6. Thus, the filtered file is only created when the export command is used.
 
 ### Observable views of suppliers with supplier goods information.
 
@@ -216,7 +268,7 @@ After:
 
 **Target user profile**: A business owner managing a small business who frequently procures goods from suppliers.
 
-**Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in tampines. She finds it difficult to track her procurements, and is bad with numbers.
+**Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in Tampines. She finds it difficult to track her procurements, and is bad with numbers.
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -385,26 +437,23 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to store up to 1000 contacts persistently.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5.  Should be able to store up to 10000 goods persistently.
-6.  Updating persistent storage should not result in unnecessary data modifications.
-7.  Startup time for the application should be less than 3 seconds on all _mainstream OS_.
-8.  The system should perform commands within 3 seconds on all _mainstream_OS.
-9.  The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
-10. The _help system_ must be easily accessible for users.
-11. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
-12. Naming and functions of commands should be similar to it's meaning in natural english language, and should not be too abstract.
-13. The application must be able to export data in _commonly used formats_.
-14. The application must not require any internet connection to function.
-15. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
-16. The project is not required to handle any messaging functions between users and contacts.
-17. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
-18. Price of goods should not be negative.
-19. Quantity of goods should not be negative.
-20. Arrival date of goods should not be earlier than the current date.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to store up to 1000 contacts persistently.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should be able to store up to 10000 goods persistently.
+5. Updating persistent storage should not result in unnecessary data modifications.
+6. Startup time for the application should be less than 3 seconds on all _mainstream OS_.
+7. The system should perform commands within 3 seconds on all _mainstream_OS.
+8. The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
+9. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
+10. The application must be able to export data in _commonly used formats_.
+11. The application must not require any internet connection to function.
+12. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
+13. The project is not required to handle any messaging functions between users and contacts.
+14. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
+15. Price of goods should not be negative.
+16. Quantity of goods should not be negative.
+17. Arrival date of goods should not be earlier than the current date.
 
 ### Glossary
 
@@ -412,6 +461,7 @@ Use case ends.
 * **Commonly Used Formats**: Text Files, CSV Files
 * **Help System**: The built-in documentation or command that provides guidance on using the application, including descriptions of commands and examples.
 * **Goods**: A commodity that is sold to the user.
+* **Goods Receipt**: Receipt that contains data about the delivery information (e.g. procurement date, arrival date, delivery status).
 * **Supplier**: Someone who is selling goods to the user. For this application, they are the contacts.
 * **Procurement Date**: The date in which the order for the goods have been made.
 * **Arrival Date**: The expected date of delivery for the goods.
@@ -423,10 +473,8 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
-</div>
 
 ### Launch and shutdown
 
@@ -529,3 +577,16 @@ Team Size: 5
 
 1. Make the error message for adding of goods more detailed. The current error message is too general and can be improved upon by mentioning which field is failing the sanity check and reflecting that to the user.
 2. Add a feature to allow the user to sort the goods by price, quantity, and arrival date. This will allow the user to better manage their goods.
+3. Bound the unit level and unit number in the address field for the relevant commands. Currently, the commands allow an unrestricted unit level and number, resulting in inputs such as 421 Marina Bay Road 
+#123222222222-34444444444444 Tan Kim PTE Building Singapore 123456 to be accepted as valid.
+4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands does not automatically capitalize it appropriately.
+5. Add case insensitivity for tags. Currently, identical tags that differ only in letter casing are considered as unique tags.
+6. Enhance error handling for the address parameter by providing specific feedback on which part of the input is invalid. The error message should clearly inform the user about the exact issue, such as incorrect street name, invalid postal code, or missing building name information.
+7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Adjust the message to accurately reflect this requirement.
+8. Modify categories to be case-insensitive in the related commands for ease of use. Currently, the program only considers strictly fully upper-cased categories to be valid.
+9. Modify addgoods to accept special characters for real-world applicability. Current functionality does not allow a goods name with special characters.
+10. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows the user to fully maximize/minimize UI elements which may impact the user experience negatively.
+11. Adjust the colors of the supplier and category tags to be distinct, as using the same color for both may cause confusion for users.
+12. Modify addgoods to refresh the goods view to show all the goods. Current functionality does not refresh the goods view after adding a good.
+13. Optimize the address parameter to automatically include compulsory aspects (e.g. Singapore preceding the postal code and the hash symbol # prefixing the unit level).
+14. Allow the address parameter to unit level, unit number and block number as some buildings do not include them.
