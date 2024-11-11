@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_POLICY_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
@@ -18,6 +19,8 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -198,7 +201,7 @@ public class ParserUtil {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
                 PREFIX_POLICY_END_DATE, PREFIX_NEXT_PAYMENT_DATE, PREFIX_PAYMENT_AMOUNT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_NAME, PREFIX_POLICY_START_DATE,
@@ -241,9 +244,9 @@ public class ParserUtil {
             Index index;
 
             try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+                index = parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_POLICY_FORMAT), pe);
+                throw new ParseException(String.format(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX), pe);
             }
 
             if (toEditIndexSet.contains(index.getZeroBased())) {
