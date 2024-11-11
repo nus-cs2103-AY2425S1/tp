@@ -15,8 +15,8 @@ import seedu.address.model.person.FieldContainsKeywordsPredicate;
  */
 public class MeetingContactsCommand extends Command {
     public static final String COMMAND_WORD = "meeting-contacts";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View contacts of this meeting.\n"
-            + "Parameters: INDEX"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View contacts of this meeting. "
+            + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 2";
 
     private final Index targetMeetingIndex;
