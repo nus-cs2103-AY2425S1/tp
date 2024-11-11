@@ -27,7 +27,7 @@ public class EventFilterCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_FILTER_EVENT_SUCCESS = "Showing details of volunteers who are free for %s";
+    public static final String MESSAGE_FILTER_EVENT_SUCCESS = "Showing details of volunteers who are free for %s";
 
     private final Index targetIndex;
 
