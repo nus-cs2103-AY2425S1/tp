@@ -197,6 +197,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### View Command
+
+Here's an overview of what happens when the view command is executed:
+![alt text](ViewActivityDiagram.png)
+
+- **The View Command checks:**
+  - that the specified index is positive and within the bounds of the contacts list.
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -355,10 +363,10 @@ _{More to be added}_
   - 2b1. AdmiNUS shows an error message for the specific invalid field.
     Use case resumes at step 2.
 - 2c. The contact at the given index is a student, and the user tries to edit the industry field.
-  - 2c1. AdmiNUS displays an error message indicating that editing the industry field for a student is not allowed. 
+  - 2c1. AdmiNUS displays an error message indicating that editing the industry field for a student is not allowed.
     Use case resumes at step 2.
 - 2d. The contact at the given index is a company, and the user tries to edit the student-related field.
-  - 2d1. AdmiNUS displays an error message indicating that editing a student-related field for a company is not allowed. 
+  - 2d1. AdmiNUS displays an error message indicating that editing a student-related field for a company is not allowed.
     Use case resumes at step 2.
 
 **Use case: UC06 - View a contact**
@@ -388,9 +396,9 @@ _{More to be added}_
 
 - 2a. No contacts match the specified name.
 
-    - 2a1. AdmiNUS displays an empty list.
+  - 2a1. AdmiNUS displays an empty list.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC08 - Filter contacts by category**
 
@@ -422,9 +430,9 @@ _{More to be added}_
 
 - 2a. No contacts have the specified tag.
 
-    - 2a1. AdmiNUS displays an empty list.
+  - 2a1. AdmiNUS displays an empty list.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC10 - Import contacts from a CSV file**
 
