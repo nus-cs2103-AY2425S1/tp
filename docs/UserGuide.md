@@ -113,8 +113,8 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
   e.g., in `add n/NAME`, `NAME` is a parameter that can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
   e.g., `n/NAME [t/TAG]` can be used as `n/John Doe t/Vegan` or simply as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times, including zero times.<br>
-  e.g., `[t/TAG]…​` can be used as ` ` (i.e., 0 times), `t/Vegan`, or `t/Vegetarian t/VIP`.
+* Items with `…` after them can be used multiple times, including zero times.<br>
+  e.g., `[t/TAG]…` can be used as ` ` (i.e., 0 times), `t/Vegan`, or `t/Vegetarian t/VIP`.
 * Parameters can be in any order.<br>
   e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.<br>
