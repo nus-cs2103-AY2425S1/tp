@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant "a:AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+activate AddressBookParser
+
+create AddStudentCommandParser
+AddressBookParser -> AddStudentCommandParser : parse("sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+activate AddStudentCommandParser
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : parse("sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser : a
+deactivate AddStudentCommand
+
+AddStudentCommandParser --> AddressBookParser : a
+deactivate AddStudentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddStudentCommandParser -[hidden]-> AddressBookParser
+destroy AddStudentCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddStudentCommand : execute(m)
+activate AddStudentCommand
+
+AddStudentCommand -> Model : addPerson(student)
+activate Model
+
+Model --> AddStudentCommand
+deactivate Model
+
+create CommandResult
+AddStudentCommand -> CommandResult : new CommandResult(message)
+activate CommandResult
+
+CommandResult --> AddStudentCommand
+deactivate CommandResult
+destroy CommandResult
+
+AddStudentCommand --> LogicManager : r
+deactivate AddStudentCommand
+destroy AddStudentCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

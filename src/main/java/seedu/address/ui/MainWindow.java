@@ -238,12 +238,10 @@ public class MainWindow extends UiPart<Stage> {
                 logic.setMostRecentGroupTaskDisplay();
             } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
                 informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-                logic.setMostRecentGroupDisplay();
             } else {
                 informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
             }
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            // fillInnerParts();
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (!logic.getMostRecentGroupTaskDisplay().equals("")) {

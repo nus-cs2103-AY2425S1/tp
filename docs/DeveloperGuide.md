@@ -228,13 +228,52 @@ and more detailed implementation on model changes have been omitted.
 
 ---
 
+### Add Student Feature
+
+The `Add Student` feature allows users to add a new student in the address book given a student's student
+number `sno`, email `e`, and name `sn`.
+
+The following shows the activity diagram when the user executes the `add_s` command:
+<puml src="diagrams/AddStudentActivityDiagram.puml" alt="AddStudentCommandAD" />
+
+#### Usage
+
+**Syntax:** `add_s/as sno/STUDENT_NUMBER sn/NAME e/EMAIL`
+
+**Example:** `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu`
+
+#### Implementation details
+
+1. The user executes `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` to add the student with student number `A0123456K`, name `Bob Smith`, and email `bobsmith@u.nus.edu`.
+   The command is parsed in the `AddressBookParser`.
+2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The Student object is
+   then used to construct an `AddStudentCommand` object.
+3. The `AddStudentCommand` object then calls `addPerson(student)` in the `ModelManager` with the specified student
+   to be added. This method adds the specified `Student` in the model.
+4. Finally, the `AddStudentCommand` returns the `CommandResult`.
+
+##### Note
+
+This feature will also check if there already exists a Student with the same student number or email.
+
+**Sequence Diagram:** The following sequence diagram shows how the above steps for add student works:
+<puml src="diagrams/AddStudentSequenceDiagram.puml" alt="AddStudentCommandSD"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `AddStudentCommandParser`, `AddStudentCommand`, and
+`CommandResult` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+
+</box>
+
 ### Delete Student Feature
 
 The `Delete Student` feature allows users to delete an existing student in the address book given a student's student
 number `sno`.
 
 The following shows the activity diagram when the user executes the `del_s` command:
-<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteGroupCommandAD" />
+<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteStudentCommandAD" />
 
 #### Usage
 
@@ -261,8 +300,8 @@ The following shows the activity diagram when the user executes the `del_s` comm
 This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`,
 resetting the affected `Group` affiliation.
 
-**Sequence Diagram:** The following sequence diagram shows how the above steps for delete group works:
-<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+**Sequence Diagram:** The following sequence diagram shows how the above steps for delete student works:
+<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteStudentCommandSD"/>
 
 <box type="info" seamless>
 
@@ -349,6 +388,42 @@ PlantUML, the lifeline continues till the end of diagram.
 ---
 
 <div style="page-break-after: always;"></div>
+
+### Edit Task for Group feature
+
+The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the group's name and the task index in
+the specified group's task list.
+
+The following shows the activity diagram when the user executes the `edit_t_g` command:
+<puml src="diagrams/EditTaskCommandAD.puml" alt="EdiTaskAD" />
+
+#### Usage
+
+**Syntax:** `edit_t_g/etg gn/GROUP_NAME i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE]`
+
+**Example:** `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800`
+
+#### Implementation details
+
+1. User has the application launched with at least 1 group added and at least 1 task added to that group.
+2. User executes `lt gn/GROUP_NAME` to view the group's task list. For this example, the user wishes to edit the first task for `CS2103-F12-2`.
+3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800` to edit the task's deadline to `2024-12-12 1800`. The command is parsed in the `AddressBookParser`.
+4. `EditTaskCommandParser` is created and gets the group name and task index of the task to be edited. The group name and task index is used to
+   construct a `EditTaskCommand` object.
+5. The `EditTaskCommand` object then calls `model.setTask(taskToEdit, editedTask, group)` in the `ModelManager` with the specified group's name, task to be
+   edited, and the edited task. This method edits the specified `Task` in the model.
+6. Finally, the `EditTaskCommand` returns the `CommandResult`.
+
+#### Sequence diagram
+
+The following sequence diagram shows how the above steps for delete group works:
+<puml src="diagrams/EditTaskCommandSequence.puml" alt="EditTaskCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `EditTaskCommandParser`, `CommandResult`, and `EditTaskCommand` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 ### Undo/redo feature
 
@@ -573,7 +648,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find students with specific keywords.
+1. User requests to find students with specific keywords.
 
 2. T_Assistant processes the input and searches for students matching the keywords.
 
@@ -798,7 +873,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find groups with specific keywords.
+1. User requests to find groups with specific keywords
 2. T_Assistant processes the input and searches for groups matching the keywords.
 3. T_Assistant displays a list of groups who match the search criteria.
 
@@ -856,7 +931,7 @@ Use case ends.
 
 **MSS**
 
-1. User adds a task to a specified group.
+1. User requests to a task to a specified group.
 2. T_Assistant displays all current tasks for the group.
 
 Use case ends.
@@ -879,7 +954,7 @@ Use case ends.
 
 **MSS**
 
-1. User removes a task from a specified group.
+1. User requests to remove a task from a specified group.
 2. T_Assistant displays all current tasks for the group.
 
 Use case ends.
@@ -966,7 +1041,7 @@ Use case ends.
 
 **MSS**
 
-1. User marks task as complete.
+1. User requests to mark task as complete.
 2. T_Assistant marks the task accordingly.
 
 Use case ends.
@@ -989,7 +1064,7 @@ Use case ends.
 
 **MSS**
 
-1. User inputs a command to find tasks with specific keywords.
+1. User requests to find tasks with specific keywords.
 2. T_Assistant processes the input and searches for tasks matching the keywords.
 3. T_Assistant displays a list of tasks who match the search criteria.
 
