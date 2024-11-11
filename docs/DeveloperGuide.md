@@ -36,10 +36,12 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
+This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
 
-ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
-as well as the JavaDocs for code written by BuffWuff1712. ChatGPT was also used by tayxuenye and cited in the code where applicable.
+ChatGPT by OpenAI was used by [BuffWuff1712](https://github.com/BuffWuff1712) to generate the 
+Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712. 
+
+ChatGPT was also used by [tayxuenye](https://github.com/tayxuenye) and cited in the code where applicable.
 
 ---
 
