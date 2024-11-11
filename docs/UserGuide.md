@@ -352,7 +352,7 @@ Some initial commands to try:
 * `add n/ Jane Doe p/ 87654321 e/ jane@example.com a/ 123 Jane Road j/ doctor i/ 120000`: Adds Jane Doe to your database with detailed contact information, job title, and income.
 
 **Editing a Client's Information**
-* `edit 1 p/ 12345678`: Updates the phone number of the first client in your list to `12345678`.
+* `edit 1 p/ 92345678`: Updates the phone number of the first client in your list to `92345678`.
 * `edit 4 rn/ Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
 
 **Removing a Client**
@@ -450,18 +450,18 @@ Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for
         ```
         The following mandatory prefixes are missing: [...]
         Invalid command format!
-        add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
-        [r/REMARK]...[s/STATUS]...
-        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'
+        add: Adds a client to the address book. Parameters: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>]...
+        [r/ <REMARK>]...[s/ <STATUS>]...
+        Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
   - Error caused by invalid values for some fields
       - Message:
         ```
         Invalid command format!
         <INDIVIDUAL FIELD'S ERROR MESSAGES>...
-        add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
-        [r/REMARK]...[s/STATUS]...
-        Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'
+        add: Adds a client to the address book. Parameters: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>]...
+        [r/ <REMARK>]...[s/ <STATUS>]...
+        Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
 
 > **Note on Duplicates:**
@@ -536,8 +536,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           Invalid command format!
           edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
           Required Parameters: INDEX (must be a positive integer)
-          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
-          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
+          Optional Parameters: [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
+          Example Usage: 'edit 1 p/ 91234567 e/ johndoe@example.com'
           ```
     - Error caused by invalid values for some fields
         - Message:
@@ -549,7 +549,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
-  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/NA` .
+  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/ NA` .
 
 
 
@@ -591,10 +591,14 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       Command has been cancelled.
       ```
 - **On Error:**
-    - Invalid index error message:
-      ```
-      The client index provided is invalid.
-      ```
+    - Error caused by invalid index
+      - Message:
+        ```
+        Invalid command format!
+        delete: : Deletes the client identified by the index number used in the displayed client list.
+        Parameters: INDEX (must be a positive integer)
+        Example: 'delete 1'
+        ```
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
@@ -604,7 +608,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ### 5.2.4 Delete All Existing Clients
 
-**Purpose:** Delete all clients from the database, effectively resetting the application’s contact list
+**Purpose:** Delete all clients from the database, effectively resetting the application’s contact list.
 
 **Command Format:**
 ```
@@ -651,7 +655,7 @@ list
 
 **Command Format:**
 ```
-filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]
+filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMARK>] [t/ <TIER>] [i/ (=/</>) <INCOME>] [s/ <STATUS>]
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
@@ -722,14 +726,15 @@ For detailed explanations for the matching criteria of each flag and the accepta
       where `x` is the number of matching results.
 - **On Error:**
     - If no valid flags are used:
-      ```
-      Invalid command format!
-      filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
-      Parameters: <FLAG>/ <SEARCH TERM>
-      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
-      Example: filter n/ Alice p/ 9111222
-      This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.
-      ```
+      - Message:
+        ```
+        Invalid command format!
+        filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
+        Parameters: <FLAG>/ <SEARCH TERM>
+        Flags: n/ <NAME>, p/ <PHONE>, e/ <EMAIL>, a/ <ADDRESS>, j/ <JOB>, i/ (=/</>) <INCOME> r/ <REMARK> t/ <TIER> s/ <STATUS>
+        Example: filter n/ Alice p/ 9111222
+        This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.
+        ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
 
@@ -761,10 +766,14 @@ view <INDEX>
     - A split view opens showing the selected client's complete information
     - The main list remains visible and functional on the left while detailed information appears on the right
 - **On Error:**
-    - Invalid index error message:
-      ```
-      The client index provided is invalid.
-      ```
+    - Error caused by invalid index
+      - Message:
+        ```
+        Invalid command format! 
+        view: Views the client identified by the index number used in the displayed client list.
+        Parameters: INDEX (must be a positive integer)
+        Example: 'view 1'
+        ```
 
 > 💡 **Pro Tip:**
 > You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
@@ -783,10 +792,10 @@ close
 
 **What to Expect:**
 - **On Success:**
-    - The split view closes
-    - The main list view returns to full width
+    - The split view closes.
+    - The main list view returns to full width.
 - **On Error:**
-    - No error messages are shown; the command is simply ignored if no split view is open
+    - No error messages are shown; the command is simply ignored if no split view is open.
 
 ### 5.4.3 Undo Previous Command
 
@@ -873,7 +882,7 @@ The window size settings for AgentAssist is automatically saved as a [JSON](http
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks, credit card tier, or status of an existing client?
-Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command.
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command. To remove all remarks of a client, use `rn/ NA` with the `edit` command.
 
 **Note**: If you append to a remark with the value `NA` (an empty remark), it will be replaced with the new remark, without any blank lines appearing.
 
@@ -906,11 +915,11 @@ Each credit card tier and client status is visually distinguished in the UI with
 
 | **Action**                 | **Command Format**                                                                                                                                                      | **Example**                                                                                                         |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| **Add New Client**         | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [r/<REMARK>] [s/<STATUS>]`                                                                  | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold r/ remark s/ urgent`         |
+| **Add New Client**         | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]`                                                         | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold r/ remark s/ urgent`         |
 | **Delete Existing Client** | `delete <INDEX>`                                                                                                                                                        | `delete 69`                                                                                                         |
 | **Edit Existing Client**   | `edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info s/ urgent` |
 | **List All Clients**       | `list`                                                                                                                                                                  | `list`                                                                                                              |
-| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]`                                          | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
+| **Filter Client List**     | `filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMARK>] [t/ <TIER>] [i/ (=/</>) <INCOME>] [s/ <STATUS>]`                                  | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
 | **View Client Details**    | `view <INDEX>`                                                                                                                                                          | `view 1`                                                                                                            |
 | **Close Client Details**   | `close`                                                                                                                                                                 | `close`                                                                                                             |
 | **Clear All Data**         | `clear`                                                                                                                                                                 | `clear`                                                                                                             |
