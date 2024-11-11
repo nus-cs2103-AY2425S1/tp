@@ -95,6 +95,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NU
 * The class should be a non-zero digit followed by a capital alphabet.
 * The sex should only be "M" or "F".
 * The register number should be a value between 1 and 40.
+* The tag should only contain alphanumeric characters and should only be one word long. 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1`
