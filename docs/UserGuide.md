@@ -76,7 +76,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 ## **Step 3: Try Your First Commands**
 
-Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
+Now that BakeBuddy is running, let's maximize your screen for the best viewing experience. In the BakeBuddy window, you'll see a space to type commands at the top.
 
 1. First, check out the [Glossary](#glossary-and-command-formats) and [List of Commands](#list-of-commands) sections to understand what BakeBuddy can do
 2. Review the [FAQ](#faq) to clear any initial doubts
@@ -417,6 +417,19 @@ addCustomerOrder n/John p/91234567 o/1 2 r/Collector: Mary (sister),
 Collection: 25/12/2024 6pm
 ```
 This system helps maintain clean contact records while still allowing flexibility in order collection arrangements.
+
+<div style="page-break-after: always;"></div>
+
+## **Q15: Why do I still see deleted pastries/ingredients in my orders?**
+**A:** When a pastry or ingredient is removed from the catalogue, orders containing these items will retain their names:
+- This preserves the order history and ensures you can track past transactions
+- The system maintains a record of what was actually ordered, even if the item is no longer available
+- While you cannot add new orders with deleted items, existing orders remain unchanged for accounting purposes
+
+For example, if you delete "Croissant" from your pastry catalogue:
+- All past customer orders for croissants will still show "Croissant" in their order details
+- New orders cannot include croissants until the item is added back to the catalogue
+- This helps maintain accurate business records while preventing new orders of discontinued items
 
 <div style="page-break-after: always;"></div>
 
