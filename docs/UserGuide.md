@@ -10,7 +10,7 @@ Has CS become too stressful? Tired of connecting through Talent Connect, LinkedI
 Want to form a more personal relationship full of genuine human touch? Let's make finding benefactors, dependable colleagues, and insightful mentors easier for you!
 
 FindingbrUdders is a **desktop app designed exclusively for School of Computing (SoC) students** to manage contacts and schedule meetings, keeping track of the countless friends
-you can make along the way during your university journey. As anUdder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
+you can make along the way during your university journey. As an Udder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
 Command Line Interface (CLI). Furthermore, you can edit, update and keep track of meetings with others in an organised fashion. 
 You will _**never forget**_ the meaningful connections you make or the meetings you have after using FindingbrUdders!
 
@@ -228,7 +228,7 @@ Edits the specified meeting with an Udder from the meetings list.
 **Format:** `editm INDEX [n/NAME] [st/DD-MM-YYYY] [et/DD-MM-YYYY] [l/LOCATION]`
 
 * Use the `list` command before editing any meeting!
-* Edits a meeting with anUdder at the specified meeting `INDEX`.
+* Edits a meeting with an Udder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 * At least one field of the meeting must be changed.
 * Take note that the `NAME` field is case-sensitive!
@@ -266,7 +266,7 @@ Deletes the specified meeting with an Udder from the meetings list.
 
 **Format:** `deletem INDEX`
 
-* Deletes a meeting with anUdder at the specified meeting `INDEX`.
+* Deletes a meeting with an Udder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 
 **Examples:**
