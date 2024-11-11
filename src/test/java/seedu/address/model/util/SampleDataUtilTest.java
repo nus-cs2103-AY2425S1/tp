@@ -46,4 +46,9 @@ public class SampleDataUtilTest {
 
         assertArrayEquals(expectedSuppliers, actualSuppliers.toArray());
     }
+    @Test
+    public void getSampleProducts_validProductsArray_correctArrayLength() {
+        Product[] sampleProducts = SampleDataUtil.getSampleProducts();
+        assertEquals(6, sampleProducts.length);
+    }
 }
