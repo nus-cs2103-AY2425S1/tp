@@ -22,6 +22,7 @@ Class Role
 Class Attendance
 Class FilteredList
 Class SortedList
+Class FavouriteStatus
 
 Class I #FFFFFF
 }
@@ -48,6 +49,7 @@ Person *--> Email
 Person *--> Telegram
 Person *--> "*" Role
 Person *--> "*" Attendance
+Person *--> FavouriteStatus
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
