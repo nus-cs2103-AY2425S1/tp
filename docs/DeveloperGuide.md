@@ -351,7 +351,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 ### Edit Task for Group feature
 
-The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the group's name and the task index in 
+The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the group's name and the task index in
 the specified group's task list.
 
 The following shows the activity diagram when the user executes the `edit_t_g` command:
