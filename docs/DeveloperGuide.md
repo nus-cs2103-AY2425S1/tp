@@ -622,6 +622,7 @@ Current implementation displays matching contacts by index (i.e: chronologically
 This is makes the `find` command meaningless for large data sets.
 Possible improvement is to implement a "match score" to rank the contacts by, and display them in that order instead.
 
+10. We plan to allow sorting by more than 1 fields (e.g: by name AND tutorial), to further improve the usefulness of sort.
 ---
 ## **Appendix: Effort**
 
