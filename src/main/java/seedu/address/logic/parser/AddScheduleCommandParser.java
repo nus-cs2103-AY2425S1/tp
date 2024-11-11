@@ -48,7 +48,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                         }
                     }).collect(Collectors.toList());
             
-            // Simple comparison for duplicates
             for (int i = 0; i < contactIndexes.size(); i++) {
                 for (int j = i + 1; j < contactIndexes.size(); j++) {
                     if (contactIndexes.get(i).equals(contactIndexes.get(j))) {
