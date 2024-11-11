@@ -993,14 +993,42 @@ This section outlines proposed improvements to address known feature flaws ident
       * :white_check_mark: `Ravi s/o Indra`
       * :x: `Timothy /Ng`
       * :x: `-Lim En An`<br></br>
-4. **Edit displayed error message for priority command when index is invalid:**
+4. **Implement stricter validation for duplicate description prefixes (`d/`) in task commands:**
+    * Currently, NovaCare allows multiple `d/` prefixes in the `addtask` command without flagging it as an error, as NovaCare will accept any task descriptions after the last prefix `d/`. This can lead to unintended behavior, where only the last `d/` prefix is considered as the task description, while earlier prefixes and text are ignored. 
+    * Although unlikely that users will enter an additional `d/`, we are aware that this behavior can result in data inconsistencies and confusion for users, especially if they unintentionally use multiple description prefixes, thinking all information will be stored.
+    * For example:
+        * `addtask 1 d/first d/second` will only store "second" as the task description.
+        * `addtask 1 d/ p/task` will store "p/task" as the description.
+        * `addtask 1 d/ d/first` will store "first" as the description.
+    * We plan to enhance the command parsing logic to detect and disallow multiple occurrences of the `d/` prefix within a single command. If duplicate prefixes are detected, the system will throw an error message explaining the issue to the user, helping to ensure command clarity and data integrity.
+    * For example:
+        * :white_check_mark: `addtask 1 d/task description`
+        * :white_check_mark: `addtask 1 d/Doctor appointment at p/2 physiotherapy room`
+        * :x: `addtask 1 d/first d/second` (Error: Duplicate `d/` prefix detected)
+        * :x: `addtask 1 d/    d/first` (Error: Duplicate `d/` prefix detected)
+        * :x: `addtask 1 d/d/first` (Error: Duplicate `d/` prefix detected)<br></br>
+5. **Edit displayed error message for priority command when index is invalid:**
     * Currently, when an invalid index (i.e. an index greater than the size of the patient list) is entered with the priority command, The error message `Invalid patient ID. Please enter a valid patient identifier.` is displayed.
     * However, for other commands when an invalid index is used, the error message `The patient index provided is invalid` is displayed instead.
     * We plan to edit the displayed error message for the priority command, to ensure consistency in error messages by using similar terminology throughout the system.
-5. **Change `deletelevel` command to `resetpriority`:**
+6. **Change `deletelevel` command to `resetpriority`:**
     * Currently, the `deletelevel` command is used to reset a patient's given priority level to level 3, which is the default level.
     * As `deletelevel` actually resets a patient's priority level, we plan to change the command to `resetpriority` which is more indicative of the command's usage, improving clarity.
-6. **Add `sortpriority` feature:**
+7. **Add `sortpriority` feature:**
     * Currently, nurses can use the `priority` command to label each patient with a priority level from 1 to 3, with 1 being of the highest priority.
     * To add on to the priority feature, we plan to implement a `sortpriority` feature, in which calling `sortpriority` will sort the displayed patient list by priority level, with patient's that are priority level 1 at the top of the list.
     * This enhancement will allow nurses to sort their patient list based on highest priority patients, helping them pay more attention to the patients who require more care.
+8. **Implement an "Edit Emergency Contact" command:**
+    * Currently, NovaCare does not provide a way to edit an existing emergency contact directly. Users must delete the emergency contact and add a new one to make any updates, which is inconvenient and time-consuming, especially for minor edits such as updating a phone number or correcting a name spelling.
+    * We propose introducing a new `editemergency` command that allows users to edit specific fields of an emergency contact (e.g., name, phone number) without the need to delete and re-add the contact. This enhancement will improve user experience by streamlining contact management.
+    * For example:
+        * `editemergency 1 n/New Name` - Edits the name of the emergency contact for patient with index 1.
+        * `editemergency 2 p/98765432` - Updates the phone number for the emergency contact associated with patient with index 2.
+        * `editemergency 3 n/Updated Name p/98765431` - Allows multiple fields to be edited in one command.
+    * This new command will check for valid input in each field and ensure that the specified emergency contact exists for the given patient ID before making any changes. Error messages will be displayed for any invalid input or if the specified emergency contact does not exist.
+    * For example:
+        * :white_check_mark: `editemergency 1 n/John Doe`
+        * :white_check_mark: `editemergency 2 n/John Doe p/91234567`
+        * :white_check_mark: `editemergency 3 p/91234567`
+        * :x: `editemergency 1 n/` (Error: Name cannot be empty)
+        * :x: `editemergency 3` (Error: Command requires at least one field to edit)<br></br>
