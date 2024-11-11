@@ -123,7 +123,7 @@ public class SearchAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // This method made use of ChatGPT to ensure its correctness when comparing the Command object
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command objects
         if (other == this) {
             return true;
         }
