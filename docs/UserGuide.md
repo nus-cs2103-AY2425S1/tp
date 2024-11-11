@@ -287,7 +287,7 @@ The `delete NAME` feature will only delete if NAME is exact match with contact f
 Examples:
 * `delete Alice`: Deletes the person named Alice from SalesContactPro.
 * `delete 1`: Deletes the first person in the currently displayed list.
-* `delete alex`: If there is no alex in contact, display list has filtered based on the name "alex".
+* `delete Alex`: If there is no Alex in contact, display list has filtered based on the name "Alex".
 
 <img src="images/deleteAlex.png" alt="delete alex">
 
