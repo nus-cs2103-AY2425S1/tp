@@ -574,7 +574,7 @@ Output: `The saved address book has been loaded!`
 
 <br>
 
-#### Editing the data file
+#### **Editing the data file**
 
 GamerBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` after every command. Advanced users are
 welcome to update data directly by editing that data file.
@@ -591,26 +591,94 @@ acceptable range). Therefore, edit the data file only if you are confident that 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Important Notes about Command Formats
+
+<box type="info" seamless>
+
+* **Commands Are Case-Sensitive and All Lowercase**  
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+
+
+* **Copying Commands from PDF**  
+  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+### Understanding Commands Format
+<box type="info" seamless>
+
+* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
+  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
+
+
+* **Items in square brackets are optional**.  
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
+
+
+* **Items with `…`​ after them can be used multiple times.**  
+  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
+
+
+* **Flexible Parameter Order**  
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+
+* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
+  and `clear`)  
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  <br>
+  </box>
+
+### Notes About Parameters Format
+<box type="info" seamless>
+
+* `NAME` **only accepts alphanumeric characters and spaces**.  
+  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
+
+
+* `INDEX` **must be a must be a positive integer**  
+  If it’s not, you’ll see an invalid command format error.
+
+
+* `NAME` **is case-sensitive**.  
+  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
+  allowed.
+
+
+* `TIME-TIME` **must be within the same day**.  
+  Use the format `HHmm-HHmm` for time ranges within the same day.  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
+  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
+
+* `TIME-TIME`**cannot refer to a single point in time**
+  The start and end times must be different (e.g. `1200-1200` is invalid).
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install GamerBook on the new computer, and then copy the data file `addressbook.json` from your previous 
 GamerBook home folder to the new installation’s data folder, typically located at `[JAR file location]/data/addressbook.json`. Replace the empty data file on the new computer with your copied file.
 
-
 **Q**: What should I do if I accidentally delete someone from GamerBook?<br>
 **A**: You can use the `undo` command right after the delete command to restore the deleted person’s data, or use `load` if you have been saving frequently.
 
-**Q**: Should I ever use the `clear` command?
+**Q**: Should I ever use the `clear` command?<br>
 **A**: The `clear` command deletes all entries in GamerBook. You should use it mainly to clear the sample data that GamerBook starts with.
 
-**Q**: Why do my searches sometimes return unexpected results?  
+**Q**: Why do my searches sometimes return unexpected results?<br>
 **A**: GamerBook's search functions like `find` are case-insensitive, but they only match full words. If your search is not returning results, try again with full keywords like `John` instead of `J`.
 
-**Q**: Can I undo more than one command?  
+**Q**: Can I undo more than one command?<br>
 **A**: Yes! The `undo` command remembers your command history from when GamerBook was opened, and you can `undo` consecutive times.
 
-**Q**: Why did my GamerBook open blank when I had data saved previously?
+**Q**: Why did my GamerBook open blank when I had data saved previously?<br>
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
 
  <br>
