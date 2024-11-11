@@ -18,7 +18,16 @@ public class ConfirmClearCommand extends Command {
     public static final String MESSAGE_SUCCESS_FULL_CLEAR = "Address book has been cleared.";
     public static final String MESSAGE_SUCCESS_FILTERED_CLEAR = "Filtered participants have been deleted.";
 
-
+    /**
+     * Executes the clear command, which removes either
+     * all entries in the address book
+     * or filtered entries,
+     * based on the current filtered list of participants.
+     *
+     * @param model the {@code Model} that the command should operate on.
+     * @return a {@code CommandResult} with a message indicating the success of the operation.
+     * @throws CommandException if the clear command is not enabled or known.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (!ClearCommand.getIsClear()) {

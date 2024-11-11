@@ -42,6 +42,15 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes the command entered by the user, parses the command, and processes it to update the address book.
+     * Saves the updated address book to storage if the command does not signal an exit.
+     *
+     * @param commandText The text of the command to be executed.
+     * @return The result of executing the command.
+     * @throws CommandException If an error occurs during command execution or storage access.
+     * @throws ParseException If there is an error in parsing the command.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -66,26 +75,51 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    /**
+     * Retrieves the current address book.
+     *
+     * @return A read-only view of the address book.
+     */
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
     }
 
+    /**
+     * Retrieves the filtered list of persons based on the current filtering criteria.
+     *
+     * @return An observable list of persons.
+     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 
+    /**
+     * Retrieves the file path to the address book.
+     *
+     * @return The path to the address book file.
+     */
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
 
+    /**
+     * Retrieves the current GUI settings, including window size and position.
+     *
+     * @return The current GUI settings.
+     */
     @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
 
+    /**
+     * Sets the GUI settings, such as window size and position.
+     *
+     * @param guiSettings The GUI settings to be applied.
+     */
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);

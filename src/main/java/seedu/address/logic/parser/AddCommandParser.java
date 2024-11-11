@@ -58,7 +58,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * Returns true if none of the prefixes contains empty
+     * {@code Optional} values
      * in the given {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

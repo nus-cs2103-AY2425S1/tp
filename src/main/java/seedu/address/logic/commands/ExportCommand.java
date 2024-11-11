@@ -31,10 +31,22 @@ public class ExportCommand extends Command {
 
     private final File exportFile;
 
+    /**
+     * Constructs an ExportCommand to export contacts to the specified file.
+     *
+     * @param exportFile The file to which the contacts will be exported.
+     */
     public ExportCommand(File exportFile) {
         this.exportFile = exportFile;
     }
 
+    /**
+     * Executes the export command, exporting the list of contacts' emails to the specified file.
+     *
+     * @param model The model containing the list of contacts.
+     * @return CommandResult containing the result message after exporting.
+     * @throws CommandException If there is an issue with writing to the specified file.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -61,6 +73,12 @@ public class ExportCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS + exportFile.getAbsolutePath());
     }
 
+    /**
+     * Compares this ExportCommand to another object.
+     *
+     * @param other The object to be compared with this ExportCommand.
+     * @return true if the object is an instance of ExportCommand with the same export file, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -76,6 +94,11 @@ public class ExportCommand extends Command {
         return exportFile.equals(otherExportCommand.exportFile);
     }
 
+    /**
+     * Returns a string representation of this ExportCommand.
+     *
+     * @return String representation of this ExportCommand.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

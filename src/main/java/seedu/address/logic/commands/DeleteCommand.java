@@ -13,7 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using its
+ * displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -38,10 +39,27 @@ public class DeleteCommand extends Command {
 
     private final List<Index> targetIndices;
 
+    /**
+     * Constructs a {@code DeleteCommand} with the specified list of target indices.
+     *
+     * @param targetIndices the list of indices of persons to be deleted.
+     */
     public DeleteCommand(List<Index> targetIndices) {
         this.targetIndices = targetIndices;
     }
 
+    /**
+     * Executes the delete command, deleting the persons at the specified indices
+     * from the model's filtered person list.
+     * The indices are sorted in reverse order to prevent shifting issues
+     * when deleting multiple entries.
+     *
+     * @param model the {@code Model} that the command should operate on.
+     * @return a {@code CommandResult} containing a message
+     *     indicating the success of the deletion.
+     * @throws CommandException if any of the specified indices are
+     *     invalid (i.e., out of bounds).
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

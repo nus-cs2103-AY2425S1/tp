@@ -33,7 +33,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_FILE_NAME = "File name should not be empty.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be
      * trimmed.
      *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
@@ -47,7 +48,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code filePath} into an {@code File} and returns it. Leading and trailing whitespaces will be trimmed.
+     * Parses {@code filePath} into an {@code File} and returns it. Leading
+     * and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the specified filePath is invalid (empty string filePath or null filePath).
      */
@@ -70,7 +72,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -84,7 +87,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -98,7 +102,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String gender} into a {@code Gender}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code gender} is invalid.
      */
@@ -112,7 +117,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String age} into an {@code Age}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String age} into an {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code age} is invalid.
      */
@@ -126,7 +132,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String detail} into a {@code Detail}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String detail} into a {@code Detail}.
+     * Leading and trailing whitespaces will be trimmed.
      */
     public static Detail parseDetail(String detail) {
         requireNonNull(detail);
@@ -135,7 +142,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String studyGroup} into a {@code StudyGroupTag}. Leading and trailing whitespaces will be
+     * Parses a {@code String studyGroup} into a {@code StudyGroupTag}.
+     * Leading and trailing whitespaces will be
      * trimmed.
      *
      * @throws ParseException if the given {@code studyGroup} is invalid.
@@ -150,7 +158,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> studyGroups} into a {@code Set<StudyGroupTag>}.
+     * Parses {@code Collection<String> studyGroups} into a
+     * {@code Set<StudyGroupTag>}.
      */
     public static Set<StudyGroupTag> parseStudyGroups(Collection<String> studyGroups)
             throws ParseException {
@@ -163,7 +172,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses input {@code String keywords} into a {@code Set<String>}. Leading and trailing whitespaces will be
+     * Parses input {@code String keywords} into a {@code Set<String>}.
+     * Leading and trailing whitespaces will be
      * trimmed.
      *
      * @throws ParseException if the given {@code studyGroup} is invalid.
@@ -179,7 +189,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses input {@code String agekeywords} into a {@code Set<String>}.
+     * Parses input {@code String agekeywords}
+     * into a {@code Set<String>}.
      *
      * @throws ParseException if any of the given {@code keywords} is invalid.
      */
@@ -195,7 +206,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses input {@code String keywords} into a {@code Set<String>}.
+     * Parses input {@code String keywords}
+     * into a {@code Set<String>}.
      *
      * @throws ParseException if any of the given {@code keywords} is invalid.
      */
