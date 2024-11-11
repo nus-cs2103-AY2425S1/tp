@@ -602,7 +602,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing using the User Guide.
 
 </box>
 
@@ -621,16 +621,56 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+
+1. Adding a person
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
+       Expected: Success message with John Doe's details shown. Ui displays person list.
+    2. Incorrect add command to try: `add n/John Doe p/98765432 e/johnd@example.com`<br>
+       Expected: Error message due to invalid command shown.
+
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person
 
    1. Test case: `del n/Alex` followed by `y`<br>
-      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted.
+      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted. Ui displays person list.
    2. Test case: `del n/Jonus` followed by `n`<br>
-      Expected: No person is deleted.
-   3. Other incorrect delete commands to try: `del`, `del 123123`<br>
-      Expected: Similar to previous.
+      Expected: Delete operation cancelled and no person is deleted. Ui displays person list.
+   3. Incorrect delete command to try: `del`, `del 123123`<br>
+      Expected: Error message due to invalid command shown.
+
+### Editing a person
+
+1. Editing a person
+
+    1. Test case: `edit n/Alex new/John Doe` <br>
+       Expected: Success message with edited details shown. Ui displays person list.
+    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
+       Expected: Error message stating tags cannot be edited shown. 
+
+### Adding a wedding
+
+1. Adding 
+
+    1. Test case: `edit n/Alex new/John Doe` <br>
+       Expected: Success message with edited details shown.
+    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
+       Expected: Error message stating tags cannot be edited shown.
+
+### Deleting a wedding
+
+### Adding a Tag
+
+### Deleting a tag
+
+1. Editing a person while all persons are being shown
+
+    1. Test case: `edit n/Alex new/John Doe` <br>
+       Expected: Success message with edited details shown.
+    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
+       Expected: Error message stating tags cannot be edited shown.
 
 ### Saving data
 

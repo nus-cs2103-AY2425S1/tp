@@ -65,7 +65,11 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
 
+<box type="info" seamless>
+
 **Note**: We have a default database for you to try out and test commands! If you prefer not to have it, you can use the commands `clear-ab` and `clear-wb` to clear the address book and wedding book respectively.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
@@ -265,7 +269,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 * Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
 * Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` will edit phone number to `222`)
-* If you edit a person with the same parameters, we will not alert you
+* Please take note that KnottyPlanners will not consider editing a parameter with an identical input an error (e.g. `edit n/John Tan new/John Tan` will not be deemed as an error, the same applied to all other parameters)
 
 </box>
 
@@ -503,7 +507,7 @@ Examples:
 
 ### Clearing All Entries: `clear-ab` / `cab` and `clear-wb` / `cwb`
 
-You can delete ALL contacts in the address book OR  ALL wedding events from the wedding book from the application.
+You can delete ALL contacts in the address book OR ALL wedding events from the wedding book from the application.
 
 Format:
 * `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
