@@ -603,3 +603,4 @@ Team Size: 5
 10. Add a maximum amount that the UI elements can be expanded/minimized to. Current functionality allows the user to fully maximize/minimize UI elements which may impact the user experience negatively.
 11. Adjust the colors of the supplier and category tags to be distinct, as using the same color for both may cause confusion for users.
 12. Modify addgoods to refresh the goods view to show all the goods. Current functionality does not refresh the goods view after adding a good.
+13. Optimize the address parameter to automatically include compulsory aspects (e.g. Singapore preceding the postal code and the hash symbol # prefixing the unit level).
