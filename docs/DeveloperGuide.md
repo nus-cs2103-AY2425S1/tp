@@ -543,9 +543,11 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: No persons in the list.
 
    1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
-      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. 
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
+
    2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2106`<br>
       Expected: No person added. Error details shown in the status message. Status bar remains the same.
+
    3. Test case: `add n/Alice d/o Sally p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2107`<br>
       Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
 
@@ -557,12 +559,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `edit 1 c/CS2106`<br>
       Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message.
+
    2. Test case: `edit 0 c/CS2106`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
    3. Test case: `edit 1 f/200`<br>
       Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message.
+
    4. Test case: `edit 2 f/200 c/CS2106`<br>
       Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message.
+
    5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
       Expected: Similar to 2nd test case above.
 
@@ -574,8 +580,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find n/Mario`<br>
       Expected: The person with the name Mario is shown in the list. The person card in the UI is highlighted.
+
    2. Test case: `find n/Alice`<br>
       Expected: The person with the name Alice is shown in the list. The person card in the UI is highlighted.
+
    3. Test case: `find n/`
       Expected: Error message shown in the status bar. 
 
@@ -585,6 +593,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case: `find c/CS2105`<br>
       Expected: The person with the class ID CS2105 is shown in the list. 
+
    2. Test case: `find c/` <br>
       Expected: Error message shown in the status bar. 
 
@@ -593,10 +602,13 @@ testers are expected to do more *exploratory* testing.
     
    1. Test case: `find n/Mario c/CS2105`<br>
      Expected: The person with the name Mario and class ID CS2105 is shown in the list. 
+
    2. Test case: `find n/Alice c/`<br>
      Expected: Error message shown in status bar.
+
    3. Test case: `find n/ c/CS2105`<br>
      Expected: Error message showin in status bad.
+
    4. Test case: `find n/ c/`<br>
      Expected: Error message shown in the status bar. 
 
@@ -663,11 +675,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `markpaid 1 m/2024-12`<br>
       Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message.
+
    1. Test case: `markpaid 0 m/2023-10`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect mark as paid commands to try: `markpaid`, `markpaid x`, `markpaid x m/1` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
    2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
       Expected: Similar to previous.
 
@@ -703,8 +717,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `info 1` <br>
       Expected: The first person's details are shown in the status message. The person card in the UI is highlighted.
+
    1. Test case: `info 0` <br>
       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+
    1. Other incorrect view commands to try: `info`, `info x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
