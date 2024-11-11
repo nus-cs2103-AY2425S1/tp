@@ -23,8 +23,8 @@ public class AddRemarksCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds remarks to the patient. "
             + "Existing remarks will be concatenated by the input.\n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_REMARK + "[ADDITIONAL REMARKS]\n"
+            + PREFIX_ID + "PATIENT_ID "
+            + PREFIX_REMARK + "REMARK\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234 "
             + PREFIX_REMARK + "Much better than previous appointment.";

@@ -21,8 +21,8 @@ import seedu.address.model.person.Person;
 public class CreateDoctorCommand extends Command {
     public static final String COMMAND_WORD = "createD";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. \n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
