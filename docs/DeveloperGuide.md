@@ -633,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 Team Size: 5
-1. **Update `add-patient` and `add-doctor` commands to check the date of birth and phone number input for validity.**
+1. **Update `add-patient` and `add-doctor` commands to check the date of birth and phone number input for validity**
    1. Currently, both commands do not check whether the given data is a valid date of birth.
    2. We plan to make the commands check whether the data of birth given is not just in the correct format given, but also to check that it is:
       1. In the past (dates that are in the future from current date are invalid)
@@ -641,7 +641,11 @@ Team Size: 5
    3. We also plan to make the commands check whether the phone number given is not just in the correct format given, but also to check that it is:
       1. A valid phone number (e.g. 7 - 15 digits, handling the shortest and longest phone numbers internationally)
 
-
+2. **Make 'successfully added patient/doctor' message more detailed**
+   1. Both commands success message do not show all the details of the patient/doctor added. Specifically:
+      1. The `add-patient` command does not show the patient's date of birth and gender
+      2. The `add-doctor` command does not show the doctor's speciality
+   2. We plan to make the success message show all the details of the patient/doctor added, including those above.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
