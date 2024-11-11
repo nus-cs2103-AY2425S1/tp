@@ -29,6 +29,7 @@ done faster than traditional GUI apps.
    <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
+6. Pressing the **down arrow key (↓)** will recall the next valid command entered, allowing for retrieval of succeeding commands, similar to a command terminal
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
