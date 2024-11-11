@@ -12,9 +12,9 @@ import java.util.Objects;
 public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8'"
+            "Phone numbers should only contain 8 digits in the range [0-9] and can only start with '3', '6', '8'"
                     + "or '9' (as per the format for Singapore phone numbers). "
-                    + "Spaces are not allowed between the 8 numbers.";
+                    + "Spaces are not allowed between the 8 digits.";
     public static final String VALIDATION_REGEX = "^[3689]\\d{7}$";
     public final String value;
 
