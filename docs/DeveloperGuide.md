@@ -124,7 +124,7 @@ How the `Logic` component works:
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -147,7 +147,7 @@ How the parsing works:
 **API** : [
 `Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -156,6 +156,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
+* store the schedule list data i.e. all `Meeting` objects (which are contained in `UniqueMeetingList` object).
+* stores the currently selected `Meeting` objects (e.g. result of search query using `see` command) as a seperate _filtered_ list.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
@@ -176,7 +178,7 @@ needing their own `Tag` objects.<br>
 **API** : [
 `Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="800" />
 
 The `Storage` component,
 
@@ -199,7 +201,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### View meeting contacts feature
 
-Using `FindCommand`, we list contacts which are in the meeting based on UID.
+`meeting-contacts` using `FindCommand` to list contacts which are in the meeting based on UID.
 
 <puml src="diagrams/MeetingContactsSequenceDiagram.puml"/>
 
@@ -243,13 +245,13 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
+Step 2. The user executes `delete 5` command to delete the 5th contact in the address book. The `delete` command calls
 `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
 saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
+Step 3. The user executes `add n/David …​` to add a new contact. The `add` command also calls
 `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
@@ -261,7 +263,7 @@ not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the
 `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
 to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -330,7 +332,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -379,60 +381,60 @@ navigate multiple screens and input their meetings.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                     | So that…​                                                                                 |
-|----------|--------------------------------------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                                                           | refer to instructions when I forget how to use the App                                    |
-| `* * *`  | user                                       | add a new person                                                                 |                                                                                           |
-| `* * *`  | user                                       | delete a person                                                                  | remove entries that I no longer need                                                      |
-| `* * *`  | user                                       | find a person by name                                                            | locate details of persons without having to go through the entire list                    |
-| `* *`    | user                                       | hide private contact details                                                     | minimize chance of someone else seeing them by accident                                   |
-| `*`      | user with many persons in the address book | sort persons by name                                                             | locate a person easily                                                                    |
-| `* * *`  | novice user                                | be able to add my schedule                                                       | I am able to keep track of my own schedule to plan meetings with others                   |
-| `* * *`  | novice user                                | be able to delete my schedule                                                    | I am able to remove unwanted schedule                                                     |
-| `* * *`  | novice user                                | be able to see my schedule                                                       | I am able to find a suitable timing for me to schedule meetings with others               |
-| `* * *`  | beginner user                              | be able to see information of my contacts                                        | I am able to find the relevant information needed to contact and arrange for meetings     |
-| `* *`    | new user                                   | have a tutorial on the SeeRee 2.0                                                | I can use it efficiently in planning for my weekly tasks                                  |
-| `* *`    | new user                                   | have a settings tab                                                              | I can configure SeeRee 2.0 to my needs and preferences                                    |
-| `* *`    | beginner user                              | have error messages that inform me of my mistakes                                | I can learn the correct implementation of the commands of the CLI                         |
-| `* *`    | beginner user                              | edit present contacts that I have                                                | I do not need to delete made contacts and can easily edit any changes                     |
-| `* *`    | novice user                                | be able to edit my schedule                                                      | I am able to adjust my schedule details according to any changes that occur               |
-| `* *`    | cli enthusiast                             | be able to navigate the entire app using only keyboard commands                  | I can use the app effectively without a mouse                                             |
-| `*`      | new user                                   | have a nice streamlined CLI interface                                            | it is easy on my eyes when I am focusing on planning my tasks                             |
-| `*`      | expert user                                | be able to see the schedules of my contacts                                      | I am able to schedule meetings at approriate timings for everyone                         |
-| `*`      | expert user                                | delete large groups of contacts                                                  | I am able to reduce clutter of information and schedules when they become irrelevant      |
-| `*`      | expert user                                | add large groups of contacts                                                     | I am able to efficiently add related members and not have to type redundant information   |
-| `*`      | beginner user                              | have reminders for project and task deadline                                     | I am able to stay on track with my work within the week                                   |
-| `*`      | expert user                                | be able to create personalised shortcuts for commonly used functions             | I am able to save time on frequently performed tasks                                      |
-| `*`      | beginner user                              | add notes to each contact (e.g. project role, preferred contact method)          | I can remember important details when reaching out                                        |
-| `*`      | new user                                   | categorize my contacts by groups (e.g. students, team members)                   | I can easily find the right people based on the project or class                          |
-| `*`      | novice user                                | mark certain contacts as "favorites"                                             | I can easily access key people I frequently interact with, like project leads or students |
-| `*`      | expert user                                | create contact reminders (e.g. "check in with students after the midterm")       | I remember to follow up at key points throughout the semester                             |
-| `*`      | new user                                   | sort my contacts alphabetically or by other method                               | I can quickly find the contact I need                                                     |
-| `*`      | expert user                                | archive contacts that I no longer need but might want to reference in the future | my main contact list stays clutter-free without losing old connections                    |
-| `*`      | new user                                   | have a reccomended path to travel to meeting rooms                               | I will be able to reach meeting venues easily                                             |
-| `*`      | speedy user                                | be able to check whether a specific meeting time has conflicts easily            | plan meeting time more efficiently                                                        |
-| `*`      | busy user                                  | have notifications of my upcoming meetings everyday                              | I will remember what meetings I want to attend                                            |
-| `*`      | team member                                | export my schedule into a nice text using a single command                       | I will be able to communicate to my teammates my schedule easily                          |
-| `*`      | team member                                | import my teammate schedule using a single command                               | I can use the App to plan meeting times easily                                            |
-| `*`      | careless user                              | be able to bulk edit or delete the tasks for the day                             |                                                                                           |
-| `*`      | long time user                             | merge duplicate contacts easily                                                  | I can consolidate information from multiple entries                                       |
-| `*`      | speedy user                                | (I want) the app to load my schedule within 2 seconds                            | I can quickly access my information without waiting                                       |
-| `*`      | non-native English speaker                 | (I want) the app to be available in multiple languages                           | I can use it in my preferred language                                                     |
-| `*`      | expert user                                | be able to export my data in standard formats (e.g., iCal, CSV)                  | I can easily migrate my information if needed                                             |
-| `*`      | power user                                 | be able to customize the app's interface and features to my preferences          | I can optimize my workflow                                                                |
+| Priority | As a …​                                     | I want to …​                                                                     | So that…​                                                                                 |
+|----------|---------------------------------------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                    | see usage instructions                                                           | refer to instructions when I forget how to use the App                                    |
+| `* * *`  | user                                        | add a new contact                                                                |                                                                                           |
+| `* * *`  | user                                        | delete a contact                                                                 | remove entries that I no longer need                                                      |
+| `* * *`  | user                                        | find a contact by name                                                           | locate details of contacts without having to go through the entire list                   |
+| `* *`    | user                                        | hide private contact details                                                     | minimize chance of someone else seeing them by accident                                   |
+| `*`      | user with many contacts in the address book | sort contacts by name                                                            | locate a contact easily                                                                   |
+| `* * *`  | novice user                                 | be able to add my schedule                                                       | I am able to keep track of my own schedule to plan meetings with others                   |
+| `* * *`  | novice user                                 | be able to delete my schedule                                                    | I am able to remove unwanted schedule                                                     |
+| `* * *`  | novice user                                 | be able to see my schedule                                                       | I am able to find a suitable timing for me to schedule meetings with others               |
+| `* * *`  | beginner user                               | be able to see information of my contacts                                        | I am able to find the relevant information needed to contact and arrange for meetings     |
+| `* *`    | new user                                    | have a tutorial on the SeeRee 2.0                                                | I can use it efficiently in planning for my weekly tasks                                  |
+| `* *`    | new user                                    | have a settings tab                                                              | I can configure SeeRee 2.0 to my needs and preferences                                    |
+| `* *`    | beginner user                               | have error messages that inform me of my mistakes                                | I can learn the correct implementation of the commands of the CLI                         |
+| `* *`    | beginner user                               | edit present contacts that I have                                                | I do not need to delete made contacts and can easily edit any changes                     |
+| `* *`    | novice user                                 | be able to edit my schedule                                                      | I am able to adjust my schedule details according to any changes that occur               |
+| `* *`    | cli enthusiast                              | be able to navigate the entire app using only keyboard commands                  | I can use the app effectively without a mouse                                             |
+| `*`      | new user                                    | have a nice streamlined CLI interface                                            | it is easy on my eyes when I am focusing on planning my tasks                             |
+| `*`      | expert user                                 | be able to see the schedules of my contacts                                      | I am able to schedule meetings at approriate timings for everyone                         |
+| `*`      | expert user                                 | delete large groups of contacts                                                  | I am able to reduce clutter of information and schedules when they become irrelevant      |
+| `*`      | expert user                                 | add large groups of contacts                                                     | I am able to efficiently add related members and not have to type redundant information   |
+| `*`      | beginner user                               | have reminders for project and task deadline                                     | I am able to stay on track with my work within the week                                   |
+| `*`      | expert user                                 | be able to create personalised shortcuts for commonly used functions             | I am able to save time on frequently performed tasks                                      |
+| `*`      | beginner user                               | add notes to each contact (e.g. project role, preferred contact method)          | I can remember important details when reaching out                                        |
+| `*`      | new user                                    | categorize my contacts by groups (e.g. students, team members)                   | I can easily find the right people based on the project or class                          |
+| `*`      | novice user                                 | mark certain contacts as "favorites"                                             | I can easily access key people I frequently interact with, like project leads or students |
+| `*`      | expert user                                 | create contact reminders (e.g. "check in with students after the midterm")       | I remember to follow up at key points throughout the semester                             |
+| `*`      | new user                                    | sort my contacts alphabetically or by other method                               | I can quickly find the contact I need                                                     |
+| `*`      | expert user                                 | archive contacts that I no longer need but might want to reference in the future | my main contact list stays clutter-free without losing old connections                    |
+| `*`      | new user                                    | have a reccomended path to travel to meeting rooms                               | I will be able to reach meeting venues easily                                             |
+| `*`      | speedy user                                 | be able to check whether a specific meeting time has conflicts easily            | plan meeting time more efficiently                                                        |
+| `*`      | busy user                                   | have notifications of my upcoming meetings everyday                              | I will remember what meetings I want to attend                                            |
+| `*`      | team member                                 | export my schedule into a nice text using a single command                       | I will be able to communicate to my teammates my schedule easily                          |
+| `*`      | team member                                 | import my teammate schedule using a single command                               | I can use the App to plan meeting times easily                                            |
+| `*`      | careless user                               | be able to bulk edit or delete the tasks for the day                             |                                                                                           |
+| `*`      | long time user                              | merge duplicate contacts easily                                                  | I can consolidate information from multiple entries                                       |
+| `*`      | speedy user                                 | (I want) the app to load my schedule within 2 seconds                            | I can quickly access my information without waiting                                       |
+| `*`      | non-native English speaker                  | (I want) the app to be available in multiple languages                           | I can use it in my preferred language                                                     |
+| `*`      | expert user                                 | be able to export my data in standard formats (e.g., iCal, CSV)                  | I can easily migrate my information if needed                                             |
+| `*`      | power user                                  | be able to customize the app's interface and features to my preferences          | I can optimize my workflow                                                                |
 
 ### Use cases
 
 For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is the `user`, unless specified otherwise
 
-<u>**Use case: UC0 - Delete a person**</u>
+<u>**Use case: UC0 - Delete a contact**</u>
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+1. User requests to list contacts
+2. System shows a list of contacts
+3. User requests to delete a specific contact in the list
+4. System deletes the contact
 
    Use case ends.
 
@@ -444,9 +446,16 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. Specified contact exists in one or more meetings.
+
+    * 3b1. System does not delete specified user
+    * 3b2. System shows an error message.
+
+      Use case ends.
 
 <u>**Use Case: UC1 - Adding events to a schedule**</u>
 
@@ -471,15 +480,15 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 
 - 1a. System detects an error in the entered data command format.
 
-    - 1a1. System requests the user to enter the proper command format.
+    - 1a1. System displays error message.
 
-      Use case resume from step 1.
+      Use case ends.
 
 - 1b. System detects a duplicate error in the entered data command.
 
-    - 1b1. System requests the user to enter a non-conflicting time for the event.
+    - 1b1. System displays error message.
 
-      Use case resumes from step 1.
+      Use case ends.
 
 <u>**Use Case: UC2 - Delete events of a schedule**</u>
 
@@ -603,14 +612,14 @@ For all use cases below, the **System** is the `SeeRee 2.0` and the **Actor** is
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Is portable, the software should work without requiring an installer, only requires Java 17.
 5. The data should be stored locally and should be in a human editable text file.
 6. The product should be for a single user.
 7. The product is not required to use a Database Management System to store data.
-8. The product is not required to depend on your a remote server.
+8. The product is not required to depend on a remote server.
 9. The GUI should work well, the GUI should be usable.
 10. The product should be packaged into a single JAR file.
 11. The product is not required to use third-party frameworks/libraries/services.
@@ -655,33 +664,43 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Deleting a contact
 
-### Deleting a person
+1. Deleting a contact while all contacts are being shown
 
-1. Deleting a person while all persons are being shown
-
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Test case: Dealing with missing data files.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete all existing data files such as `addressbook.json` and `schedule.json`.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: `addressbook.json` and `schedule.json` will be created an populated with sample data.
 
-1. _{ more test cases …​ }_
+2. Test case: Dealing with corrupted files. In this test, corrupted refers to invalid JSON format.
+
+    1. **Prerequisites**: Ensure `addressbook.json` and `schedule.json` exists and are populated.
+    1. From both of the files, remove the first line with the opening bracket `{`. This will render both files as invalid JSON format.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: Program will render both files invalid JSON format and empty `addressbook` and `schedulelist` will be created.
+
+3. Test case: Dealing with corrupted files. In this test, corrupted refers to valid JSON format with missing fields.
+
+    1. **Prerequisites**: Ensure `addressbook.json` and `schedule.json` exists and are populated.
+    1. From both of the files, remove some fields while maintaining valid JSON format.
+    1. Run jar file as per normal, `java -jar SeeRee2.0.jar`.
+    1. **Expected**: Program will remove entries which has invalid/missing fields while keeping valid entries. A backup of the invalid file is created as `schedule.json.*.bak` and `addressbook.json.*.bak`.
 
 ### Adding a Schedule
 
@@ -695,7 +714,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Expected: New schedule added: Team Meeting on 2024-10-11 at 14:00
 
-3. Test case: `add-schedule c/1 n/Team Meeting d/10-10-2024 t/1400` (duplicated command)
+3. Test case: `add-schedule c/1 n/Team Meeting d/11-10-2024 t/1400` (duplicated command)
 
     1. Expected: This schedule conflicts with an existing schedule.
 
@@ -766,3 +785,17 @@ testers are expected to do more *exploratory* testing.
    
     1. Test Cases: Similar to Scenario 1
     1. Expected: Similar to Scenario 1
+
+## Appendix: Planned Enhancements
+
+Team size: 5
+
+1. **Modify flow of [loading schedule storage](#load-schedule-storage) to check for if address book sample data generated first.**
+   Currently when the programs loads with missing `addressbook.json` and valid `schedule.json`, the program will generate sample contacts data while retaining old schedule list.
+   Ideal in this situation we want to backup `schedule.json` and create new schedule list from sample data too to match sample data from addressbook.
+1. **Provide GUI warning that data files was not read properly ontop of logging.**
+   Currently only logging is provided when data files is read incorrectly.
+   Can include some visual error message or the likes from the GUI end to indicate that data files was read incorrectly.
+1. **Modify meeting sample data to generate whole number timings.**
+   Currently time fields for meetings sample data is generated using `LocalTime#now` which provides very precise timing up to the milliseconds.
+   While it is not wrong, some user complained that it looks wrong or invalid to display timings as such, and it would be much appropriate to display time fields as available to the users through other commands, i.e. if user cannot add time field up to milliseconds of precision, do not display time fields up to milliseconds of precision.
