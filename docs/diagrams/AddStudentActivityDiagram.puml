@@ -12,7 +12,7 @@ if () then ([input is valid])
     :Construct AddStudentCommand object;
     :Return AddStudentCommand object to LogicManager;
     :LogicManager executes AddStudentCommand;
-    if () then ([Student already exists])
+    if () then ([Student doesn't exist])
         :Add student to StudentList;
         :Update model state;
         :Update UI;
