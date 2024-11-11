@@ -305,13 +305,10 @@ Here are a few examples to help you:
     </ul>
 </div>
 
-<<<<<<< HEAD
-=======
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
     <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
 </div>
 
->>>>>>> master
 - Before executing the command
 ![Before set threshold](images/before_setthreshold.png)
 
@@ -337,13 +334,6 @@ Here are a few examples to help you:
     </ul>
 </div>
 
-<<<<<<< HEAD
-=======
-<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
-</div>
-
->>>>>>> master
 <div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
     <strong>💡 Tip:</strong> If the stock level is below the minimum stock level, the system will highlight these products in red to alert you that they need restocking.
     <br>
