@@ -236,7 +236,7 @@ Here are a few examples to help you:
 
 ---
 
-### Assigning a product to supplier: `assign` 🧋 ➡️ 🙋‍♀️
+### Assigning a product to supplier: `assign` ➡️ 🙋‍♀️
 
 This feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for supplying each product in your store.
 
@@ -516,7 +516,7 @@ _Details coming soon ..._
 | **Unassign Product** | `unassign pr/PRODUCT_NAME `<br> e.g., `unassign pr/Tissue Paper`                                                                                                                                                  |
 | **Set Threshold**    | `set_threshold pr/PRODUCT_NAME [min/MIN_STOCK_LEVEL] max/MAX_STOCK_LEVEL` or `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL [max/MAX_STOCK_LEVEL]`<br> e.g., `set_threshold pr/Tissue Paper min/100 max/1000` |
 | **Update Stock**     | `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`<br> e.g., `update_stock pr/Tissue Paper stk/300`                                                                                                                   |
-| **View Suppliers**   | `view_supplier n/[KEYWORD] [t/TAG]...`<br> e.g., `view_supplier` or `view_supplier Fresh`                                                                                                                         |
+| **View Suppliers**   | `view_supplier [n/KEYWORD] [t/TAG]...`<br> e.g., `view_supplier` or `view_supplier Fresh`                                                                                                                         |
 | **View Products**    | `view_product [n/NAME] [t/TAG]... [su/SUPPLIER_NAME] [sort/i\|sort/d]` <br> e.g., `view_product Tissue` or `view_product t/household sort/i`                                                                      |
 | **Delete Supplier**  | `delete_supplier su/SUPPLIER_NAME`<br> e.g., `delete_supplier su/Global Produce`                                                                                                                                  |
 | **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                                                                       |
