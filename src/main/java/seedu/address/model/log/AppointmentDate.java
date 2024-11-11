@@ -98,6 +98,9 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public static boolean isValidDay(String dateString) {
         requireNonNull(dateString);
+        if (extractDay(dateString) > 99 || extractDay(dateString) < 0) {
+            return true;
+        }
         if (extractDay(dateString) < 1 || extractDay(dateString) > 31) {
             return false;
         }
