@@ -43,7 +43,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,8 +117,8 @@ How command execution works:
 1. When the user types a command and presses Enter, the `CommandBox` retrieves the command text from the `TextField`.
 2. If the command is not empty, it is passed to the `CommandExecutor` for execution.
 3. Upon successful execution:
-   - The command is added to the `CommandHistory` for tracking previous commands
-   - The text field is cleared
+   - The command is added to the `CommandHistory` for tracking previous commands.
+   - The text field is cleared.
 4. If a `CommandException` or `ParseException` occurs:
    - The error style class is added to the text field to indicate error.
    - The command text will not be added to the `CommandHistory`.
@@ -395,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword followed by student details into the textbox.
+1. User requests to add a student, entering relevant student details.
 2. Tuteez acknowledges that a new student has been added.
 3. Use case ends.
 
@@ -418,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword.
+1. User requests to list all students.
 2. Tuteez displays a list of all students.
 3. Use case ends.
 
@@ -434,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list students.
 2.  Tuteez shows a list of students <u>(UC2)</u>.
-3.  User types keyword followed by delete index or name.
+3.  User requests to delete student using index or name.
 4.  Tuteez deletes the person.
 5.  Use case ends.
 
@@ -443,107 +444,111 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-  * 3a1. Tuteez shows an error message
+  * 3a1. Tuteez shows an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
   
-* 3b. The given name does not exist
+* 3b. The given name does not exist.
 
-  * 3b1. Tuteez shows an error message
+  * 3b1. Tuteez shows an error message.
         
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
 **Use case: UC4 - Add a lesson to a student**
 
 **MSS**
 
-1. User requests to list students
-1. Tuteez shows a list of students <u>(UC2)</u>
-1. User types keyword followed by index of the student and then lesson day and time
-1. Tuteez adds lesson to student
+1. User requests to list students.
+1. Tuteez shows a list of students <u>(UC2)</u>.
+1. User requests to add lesson, selecting student by index and entering lesson day and time.
+1. Tuteez adds lesson to student.
+1. Use case ends.
 
 **Extensions**
 
-* 3a. The lesson clashes with an existing lesson(s)
+* 3a. The lesson clashes with an existing lesson(s).
 
-   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with
+   * 3a1. Tuteez shows error message with timings of the lesson(s) that it clashes with.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
-* 3b. The lesson has invalid day or times
+* 3b. The lesson has invalid day or times.
 
-   * 3b1. Tuteez shows error message specifying the error
+   * 3b1. Tuteez shows error message specifying the error.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
-* 3c. The given index is invalid
+* 3c. The given index is invalid.
 
-   * 3c1. Tuteez shows an error message
+   * 3c1. Tuteez shows an error message.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
 ** Use case: UC5 - Delete a lesson from a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then lesson index to delete
-4. Tuteez deletes the lesson from the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User requests to delete lesson, selecting student by index and specifying the lesson index to delete.
+4. Tuteez deletes the lesson from the student.
+5. Use case ends.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
   
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. The given lesson index is invalid
+* 3b. The given lesson index is invalid.
 
-    * 3b1. Tuteez shows an error message
+    * 3b1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 **Use case: UC6 - Add a remark to a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then the remark to be added
-4. Tuteez adds the remark to the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User requests to add remark, selecting student by index and specifying the remark to be added.
+4. Tuteez adds the remark to the student.
+5. Use case ends.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 **Use case: UC7 - Delete a remark from a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then the remark index to delete
-4. Tuteez deletes the remark from the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User requests to delete remark, selecting student by index and specifying the remark index to delete.
+4. Tuteez deletes the remark from the student.
+5. Use case ends.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. The given remark index is invalid
+* 3b. The given remark index is invalid.
 
-    * 3b1. Tuteez shows an error message
+    * 3b1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
