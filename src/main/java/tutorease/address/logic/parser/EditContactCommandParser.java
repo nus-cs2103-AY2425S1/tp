@@ -13,7 +13,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.EditContactCommand;
 import tutorease.address.logic.commands.EditContactCommand.EditPersonDescriptor;
@@ -24,6 +27,7 @@ import tutorease.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditContactCommandParser implements Parser<EditContactCommand> {
+    private static Logger logger = LogsCenter.getLogger(AddContactCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -32,6 +36,7 @@ public class EditContactCommandParser implements Parser<EditContactCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditContactCommand parse(String args) throws ParseException {
+        logger.log(Level.INFO, "Parsing EditContactCommand with args: " + args);
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,

@@ -1,5 +1,10 @@
 package tutorease.address.model.person;
 
+import tutorease.address.commons.core.LogsCenter;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 
@@ -33,6 +38,7 @@ public class Email {
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
+    private static Logger logger = LogsCenter.getLogger(Email.class);
 
     /**
      * Constructs an {@code Email}.
@@ -40,15 +46,18 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
+        logger.log(Level.INFO, "Creating email object with value: " + email);
         requireNonNull(email);
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
+        logger.log(Level.INFO, "Created email object with value: " + email);
     }
 
     /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
+        logger.log(Level.INFO, "Checking if email is valid: " + test);
         return test.matches(VALIDATION_REGEX);
     }
 

@@ -31,7 +31,7 @@ public class ListLessonCommand extends Command {
             logger.log(Level.INFO, "No lessons found for the given predicate.");
             return new CommandResult(MESSAGE_NO_LESSONS_FOUND);
         }
-        logger.log(Level.INFO, "Found " + model.getFilteredPersonListSize() + " lessons.");
+        logger.log(Level.INFO, "Found " + model.getFilteredLessonListSize() + " lessons.");
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

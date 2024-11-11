@@ -195,11 +195,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getFilteredPersonListSize() {
-        return filteredLesson.size();
-    }
-
-    @Override
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         lessonSchedule.addLesson(lesson);

@@ -1,5 +1,10 @@
 package tutorease.address.model.person;
 
+import tutorease.address.commons.core.LogsCenter;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 
@@ -8,6 +13,8 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
+    private static Logger logger = LogsCenter.getLogger(Address.class);
+
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
@@ -25,15 +32,18 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
+        logger.log(Level.INFO, "Creating Address object with address: " + address);
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
+        logger.log(Level.INFO, "Created Address object with address: " + address);
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
+        logger.log(Level.INFO, "Checking if address is valid: " + test);
         return test.matches(VALIDATION_REGEX);
     }
 
