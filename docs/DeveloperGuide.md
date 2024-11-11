@@ -422,6 +422,11 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
   - Use case ends.
 
 - **2b. Specified Patient NRIC Does Not Exist**:
+
+  - CareLink displays an error message, and link not formed.
+  - Use case ends.
+
+- **2c. NRIC Given For Patient/Caregiver Does Not Match The Respective Roles**:
   - CareLink displays an error message, and link not formed.
   - Use case ends.
 
