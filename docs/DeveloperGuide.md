@@ -133,7 +133,7 @@ The `Model` component,
 * stores the meeting book data i.e., all `Meeting` objects (which are contained in a `UniqueMeetingList` object).
 * stores the currently 'selected' `Client`, `Property`, and `Meeting` objects (e.g., results of a list command) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Client>`, `ObservableList<Property>`, and `ObservableList<Meeting>` respectively. These lists can be 'observed' e.g. the UI can be bound to these lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -144,7 +144,7 @@ The `Model` component,
 The `Storage` component,
 * can save client book, property book, meeting book, and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from `ClientBookStorage`, `PropertyBookStorage`, `MeetingBookStorage` and `UserPrefStorage`, which means `Storage` can be treated as either one (if the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -162,7 +162,7 @@ This section describes some future noteworthy details on how certain features ma
 
 The proposed note-taking mechanism is facilitated by `NoteBook`. It extends `Meeting` by allowing users to take notes during the meeting. It implements the following operation:
 
-* `NoteBook#write()` — Appends notes to the meeting
+* `NoteBook#write()` — Appends notes to the meeting.
 
 * These operations are exposed in the Model interface as `Model#note()`.
 
@@ -261,7 +261,7 @@ Extensions:
 
       Use case ends.
 
-* 2a. ClientGrid detects that the buyer/seller already exists in the client book
+* 2a. ClientGrid detects that the buyer/seller already exists in the client book.
 
     * 2a1. ClientGrid informs the real estate agent that the buyer/seller already exists in the client book and does not add the duplicate buyer/seller.
 
@@ -319,7 +319,7 @@ Use case ends.
 
       Use case ends.
 
-* 2a. ClientGrid detects that the property already exists in the property book
+* 2a. ClientGrid detects that the property already exists in the property book.
 
     * 2a1. ClientGrid informs the real estate agent that the property already exists in the property book and does not add the duplicate property.
 
@@ -494,7 +494,7 @@ Extensions:
    * Benefit: Agents will have greater flexibility in defining meeting titles.
 10. Display relevant clients, buyers, properties upon calling command:
     * Current issue: Calling a command does not result in the relevant list eg. clients, buyers, sellers, or properties list being displayed to the user, resulting in the inner-workings of the app (eg. clearing of filters) being exposed to the user.
-    * Proposed change: Calling a command will result in the relevant list eg. clients, buyers, sellers, or properties list to be displayed to the user: For example, calling addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456  will cause the list of meetings to be displayed.
+    * Proposed change: Calling a command will result in the relevant list eg. clients, buyers, sellers, or properties list to be displayed to the user: For example, calling `addmeeting mt/Meeting 1 d/01-01-2025 bp/95352563 sp/87652533 t/HDB c/123456` will cause the list of meetings to be displayed.
     * Benefit: Hide the inner-workings of the app to prevent confusing the user.
 
 ## **Appendix: Instructions for manual testing**
