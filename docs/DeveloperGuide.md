@@ -632,8 +632,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
 ### Deleting a person
 
-1. Deleting a person
-
+1. Deleting a person that exists in AddressBook
    1. Test case: `del n/Alex` followed by `y`<br>
       Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted. Ui displays person list.
    2. Test case: `del n/Jonus` followed by `n`<br>
@@ -643,34 +642,79 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
 ### Editing a person
 
-1. Editing a person
+1. Editing a person that exists in AddressBook
 
     1. Test case: `edit n/Alex new/John Doe` <br>
        Expected: Success message with edited details shown. Ui displays person list.
     2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
        Expected: Error message stating tags cannot be edited shown. 
 
+### Filtering a person
+
+1. Filtering a person based on name and job
+
+    1. Test case: `filter n/John j/Photographer` <br>
+       Expected: Success message with number of persons filtered. Ui displays filtered person list with name `John` and job `Photographer`.
+    2. Incorrect edit command to try: `filter John`<br>
+       Expected: Error message due to invalid command shown
+
 ### Adding a wedding
 
-1. Adding 
+1. Adding a wedding
 
-    1. Test case: `edit n/Alex new/John Doe` <br>
-       Expected: Success message with edited details shown.
-    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
-       Expected: Error message stating tags cannot be edited shown.
+    1. Test case: `add-wed w/James Hauw & Rachel Loh v/Pan Pacific Hotel d/11/03/2025` <br>
+       Expected: Success message with wedding details shown. Ui displays wedding list.
+    2. Incorrect add wedding command to try: `add-wed v/Pan Pacific Hotel d/11/03/2025`<br>
+       Expected: Error message due to invalid command shown.
+    3. Other incorrect add wedding to try: `add-wed w/James Hauw and Rachel Loh v/Pan Pacific Hotel d/11/03/2025`<br>
+       Expected: Error message stating the correct wedding name format.
 
 ### Deleting a wedding
 
+1. Deleting a wedding that exists in WeddingBook
+
+    1. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `y`<br>
+       Expected: Confirmation Prompt with wedding details shown. Wedding is then deleted. Ui displays wedding list.
+    2. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `n`<br>
+       Expected: Delete operation cancelled and no wedding is deleted. Ui displays wedding list.
+    3. Incorrect delete command to try: `del-wed`, `del-wed Jonus & Izzat`<br>
+       Expected: Error message due to invalid command shown.
+
 ### Adding a Tag
 
+1. Adding a tag of an existing wedding in WeddingBook to a person
+
+    1. Test case: `tag-add n/Jonus t/James Hauw & Rachel Loh` <br>
+       Expected: Success message stating that person is added to a wedding. Ui displays person list.
+    2. Incorrect add wedding command to try: `tag-add n/Jonus w/James Hauw & Rachel Loh`<br>
+       Expected: Error message due to invalid command shown.
+   
 ### Deleting a tag
 
-1. Editing a person while all persons are being shown
+1. Deleting a tag of an existing wedding in WeddingBook of a person
 
-    1. Test case: `edit n/Alex new/John Doe` <br>
-       Expected: Success message with edited details shown.
-    2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
-       Expected: Error message stating tags cannot be edited shown.
+    1. Test case: `tag-del n/Jonus t/James Hauw & Rachel Loh` <br>
+       Expected: Success message stating that person is removed from a wedding. Ui displays person list.
+    2. Incorrect add wedding command to try: `tag-del n/Jonus w/James Hauw & Rachel Loh`<br>
+       Expected: Error message due to invalid command shown.
+
+### GUI
+
+1. Showing person list
+
+    1. Test case: `list` <br>
+       Expected: Success message with total number of persons. Ui displays person list.
+   
+2. Showing wedding list
+
+   1. Test case: `list` <br>
+      Expected: Success message with total number of weddings. Ui displays wedding list.
+
+3. Showing help window
+
+   1. Test case: `help` <br>
+      Expected: Ui displays help window.
+
 
 ### Saving data
 

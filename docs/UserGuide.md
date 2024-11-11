@@ -529,7 +529,7 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
 <box type="important" seamless>
 
-**TAKE NOTE:** 
+**TAKE NOTE:**
 * No prefixes are required for this command.
 * If there are no contacts in the wedding, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
 
@@ -551,7 +551,7 @@ Format:
 
 1. `clear-ab` / `cab` clears all contacts in address book.
 2. The command will prompt for confirmation before deleting all entries.
-3. If you confirmwith `y`, all entries will be deleted.
+3. If you confirm with `y`, all entries will be deleted.
 4. If you cancel with `n`, no entries will be deleted.
 
 <box type="important" seamless>
@@ -604,6 +604,7 @@ There is no need to save manually.
   * `[JAR file location]/data/addressbook.json`.
   * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
+
 <box type="warning" seamless>
 
 **<span style="color: red;">CAUTION:</span>**
@@ -611,6 +612,8 @@ There is no need to save manually.
 * If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
 * Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
