@@ -70,7 +70,11 @@ Alerts you to potential issues or problems that may arise.
 
        **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
-       </box>
+
+        To find the actual path to your folder: <br>
+     
+       Press the Windows key + S to open the search bar, type in the name of the file, and right-click the file that appears. Click on copy path.
+           </box>
 
      * For Mac users, type:
        ```
@@ -80,6 +84,13 @@ Alerts you to potential issues or problems that may arise.
 
        **Caution:**
        Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/ContactCS`
+
+       To find the actual path to your folder: <br>
+       1. Navigate to the file in the Finder and select it.
+       2. Right-click or Control-click on it and choose Get Info.
+       3. In the window that opens, look at the Where field.
+       4. Copy the path from the Where field.
+        
        </box>
    * Run the application with the following command:
      ```
@@ -116,7 +127,7 @@ Alerts you to potential issues or problems that may arise.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in square brackets and with `+` after them can be used zero or more times.<br>
+* Items in **square** brackets and with `+` after them can be used zero or more times.<br>
   e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
@@ -168,7 +179,7 @@ The command accepts either one phone number, one email, or both.
 
 * `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
 * `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
-* `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
+* ContactCS expects the ``MODULECODE`` to be formatted as valid NUS module codes such as 'CS2040S' or 'MA1521', without spaces or additional characters.
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
@@ -228,6 +239,17 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
 
+<box type="warning" seamless>
+
+  **Reminder**: the other meaning of ``+``
+
+* Items in **square** brackets and with `+` after them can be used zero or more times.<br>
+  e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Items in **round** brackets and with `+` after them can be used one or more times.<br>
+  e.g. `(t/TAG)+` can be used as `t/friend`, `t/friend t/family` etc.
+</box>
+
 ##### Deleting existing module-role pairs
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
@@ -250,7 +272,6 @@ Examples:
   - For adding roles, the role type is assumed to be `Student`.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
 
-If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
 #### Editing all other fields
@@ -504,6 +525,7 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. If you type ``/`` in the input field for the add or edit command, apart from the input field for the name, it might cause the input to be wrongly parsed into other fields.
 
 --------------------------------------------------------------------------------------------------------------------
 
