@@ -1,0 +1,17 @@
+<svg width="1800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#ffffff" fill="#007fff" stroke-width="0" x="-2.00048" y="-0.66681" width="1804.00092" height="601.33357" id="svg_25" rx="100"/>
+  <rect fill="#007fff" x="88.66706" y="116" width="463.99997" height="410" id="svg_1" rx="50" stroke="#ffffff" stroke-width="30"/>
+  <rect fill="#fff" x="99.16703" y="125.8" width="442.99999" height="95" id="svg_4" stroke="#000" stroke-width="0"/>
+  <rect fill="#ffffff" x="180.66703" y="46" width="53" height="113.99999" id="svg_6" rx="20" stroke-width="15" stroke="#007fff"/>
+  <rect fill="#fff" x="407.50036" y="46" width="53" height="113.99999" id="svg_8" rx="20" stroke-width="15" stroke="#007fff"/>
+  <ellipse fill="#fff" stroke-width="0" cx="320.66705" cy="479.79999" id="svg_14" rx="118" ry="109" stroke="#000"/>
+  <ellipse fill="#fff" stroke-width="20" cx="320.66702" cy="316" id="svg_10" rx="67.5" ry="67.5" stroke="#007fff"/>
+  <rect fill="#007fff" stroke-width="0" x="167.66703" y="474.99999" width="306" height="36" id="svg_16" stroke="#fff"/>
+  <rect fill="#007fff" stroke-width="0" x="167.66703" y="540.99999" width="306" height="54" id="svg_18" stroke="#fff"/>
+  <text fill="#ffffff" stroke-width="0" x="277.2292" y="163.31315" id="svg_22" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve" stroke="#000000" transform="matrix(5.87528 0 0 5.87528 -950.321 -725.815)" font-weight="normal" font-style="normal">Get Started With</text>
+  <text fill="#ffffff" stroke-width="0" x="322.5337" y="387.3489" id="svg_24" font-size="24" font-family="sans-serif" text-anchor="start" xml:space="preserve" stroke="#000000" transform="matrix(8.75124 0 0 8.75124 -2035.69 -2906.73)" font-weight="normal" font-style="normal">Eventory</text>
+ </g>
+
+</svg>

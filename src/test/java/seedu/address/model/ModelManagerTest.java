@@ -3,8 +3,16 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ART_EXHIBIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_ART_EXHIBIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CULTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.ART_EXHIBIT;
+import static seedu.address.testutil.TypicalEvents.BOOK_FAIR;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -15,8 +23,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
+import seedu.address.model.types.common.NameContainsKeywordsPredicate;
+import seedu.address.model.types.event.Event;
+import seedu.address.model.types.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -73,6 +86,52 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setEventList_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEventList(null));
+    }
+
+    @Test
+    public void setEventList_validAddressBook_setsEventList() {
+        AddressBook newAddressBook = new AddressBook();
+        Event event = new EventBuilder(ART_EXHIBIT).withAddress(VALID_ADDRESS_ART_EXHIBIT)
+                .withStartTime(VALID_START_TIME_ART_EXHIBIT).withTags(VALID_TAG_CULTURE).build();
+        newAddressBook.addEvent(event);
+        modelManager.setEventList(newAddressBook);
+        assertTrue(modelManager.hasEvent(event));
+    }
+
+    @Test
+    public void setPersonList_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPersonList(null));
+    }
+
+    @Test
+    public void setPersonList_validAddressBook_setsPersonList() {
+        AddressBook newAddressBook = new AddressBook();
+        Person person = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        newAddressBook.addPerson(person);
+        modelManager.setPersonList(newAddressBook);
+        assertTrue(modelManager.hasPerson(person));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(ART_EXHIBIT));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(ART_EXHIBIT);
+        assertTrue(modelManager.hasEvent(ART_EXHIBIT));
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -94,8 +153,14 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON)
+                .withEvent(ART_EXHIBIT).withEvent(BOOK_FAIR).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,17 +181,35 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        // different filteredPersons -> returns false
+        String[] personKeywords = ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(personKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredEvents -> returns false
+        String[] eventKeywords = ART_EXHIBIT.getName().fullName.split("\\s+");
+        modelManager.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(eventKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
+        // different clearCommandPrompted -> returns false
+        modelManager.setClearCommandPrompted(true);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        // resets clearCommandPrompted
+        modelManager.setClearCommandPrompted(false);
+
+        // different clearCommandConfirmed -> returns false
+        modelManager.setClearCommandConfirmed(true);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        // resets clearCommandConfirmed
+        modelManager.setClearCommandConfirmed(false);
     }
 }

@@ -1,13 +1,15 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.types.event.Event;
+import seedu.address.model.types.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -40,11 +42,13 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane eventNameTag;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, Set<Event> associatedEvents) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -55,5 +59,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        associatedEvents.stream()
+            .sorted(Comparator.comparing(event -> event.getName().toString()))
+            .forEach(event -> eventNameTag.getChildren().add(new Label(event.getName().toString())));
     }
 }

@@ -17,6 +17,22 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.eventcommands.AddEventCommand;
+import seedu.address.logic.commands.eventcommands.ClearEventCommand;
+import seedu.address.logic.commands.eventcommands.DeleteEventCommand;
+import seedu.address.logic.commands.eventcommands.EditEventCommand;
+import seedu.address.logic.commands.eventcommands.FindEventCommand;
+import seedu.address.logic.commands.eventcommands.ScheduleCommand;
+import seedu.address.logic.commands.eventcommands.SearchEventCommand;
+import seedu.address.logic.commands.personcommands.AddPersonCommand;
+import seedu.address.logic.commands.personcommands.ClearPersonCommand;
+import seedu.address.logic.commands.personcommands.DeletePersonCommand;
+import seedu.address.logic.commands.personcommands.EditPersonCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
+import seedu.address.logic.commands.personcommands.LinkPersonCommand;
+import seedu.address.logic.commands.personcommands.SearchPersonCommand;
+import seedu.address.logic.commands.personcommands.UnlinkPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -27,7 +43,9 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
+        "(?<commandWord>\\S+)(?<combined>\\s+(?<modelType>\\S+)?(?<arguments>.*)?)?"
+    );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -38,35 +56,49 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+
+        if (ClearCommand.isPrompted()) {
+            String trimmedInput = userInput.trim();
+            if (trimmedInput.equals("Y") || trimmedInput.equals("Yes")) {
+                return new ClearCommandParser().parseClear();
+            } else {
+                return new ClearCommandParser().parseAbort();
+            }
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String modelTypeShortHand = matcher.group("modelType");
+        final ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
+        final String arguments = (modelType == ModelType.NEITHER)
+                ? matcher.group("combined")
+                : matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(modelType, arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(modelType, arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(modelType, arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(modelType, arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(modelType, arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -77,10 +109,138 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case SearchPersonCommand.COMMAND_WORD:
+            return new SearchCommandParser().parse(modelType, arguments);
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommandParser().parse(modelType, arguments);
+
+        case LinkPersonCommand.COMMAND_WORD:
+            return new LinkCommandParser().parse(modelType, arguments);
+
+        case UnlinkPersonCommand.COMMAND_WORD:
+            return new UnlinkCommandParser().parse(modelType, arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * Provides usage hints based on the partial command entered.
+     *
+     * @param userInput The partially entered user input.
+     * @return Usage information as a hint for the user.
+     */
+    public String getHint(String userInput) {
+        userInput = userInput.strip(); // Trim any leading or trailing whitespace
+
+        switch (userInput.charAt(0)) {
+        case 'a':
+            return getAddHint(userInput);
+        case 'd':
+            return getDeleteHint(userInput);
+        case 'e':
+            if (userInput.startsWith("ed")) {
+                return getEditHint(userInput);
+            } else if (userInput.startsWith("ex")) {
+                return ExitCommand.MESSAGE_USAGE;
+            } else {
+                return EditCommand.MESSAGE_USAGE + "\n" + ExitCommand.MESSAGE_USAGE;
+            }
+        case 'f':
+            return getFindHint(userInput);
+        case 's':
+            if (userInput.startsWith("se")) {
+                return getSearchHint(userInput);
+            } else if (userInput.startsWith("sc")) {
+                return ScheduleCommand.MESSAGE_USAGE;
+            } else {
+                return SearchCommand.MESSAGE_USAGE + "\n" + ScheduleCommand.MESSAGE_HINT;
+            }
+        case 'l':
+            if (userInput.startsWith("lis")) {
+                return ListCommand.MESSAGE_USAGE;
+            } else if (userInput.startsWith("lin")) {
+                return LinkPersonCommand.MESSAGE_USAGE;
+            } else {
+                return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT;
+            }
+        case 'u':
+            return UnlinkPersonCommand.MESSAGE_USAGE;
+        case 'c':
+            return getClearHint(userInput);
+        default:
+            return HelpCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getAddHint(String userInput) {
+        if (userInput.startsWith("add e")) {
+            return AddEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("add p")) {
+            return AddPersonCommand.MESSAGE_USAGE;
+        } else {
+            return AddCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getDeleteHint(String userInput) {
+        if (userInput.startsWith("delete e")) {
+            return DeleteEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("delete p")) {
+            return DeletePersonCommand.MESSAGE_USAGE;
+        } else {
+            return DeleteCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getEditHint(String userInput) {
+        if (userInput.startsWith("edit e")) {
+            return EditEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("edit p")) {
+            return EditPersonCommand.MESSAGE_USAGE;
+        } else {
+            return EditCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getFindHint(String userInput) {
+        if (userInput.startsWith("find e")) {
+            return FindEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("find p")) {
+            return FindPersonCommand.MESSAGE_USAGE;
+        } else {
+            return FindCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getSearchHint(String userInput) {
+        if (userInput.startsWith("search e")) {
+            return SearchEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("search p")) {
+            return SearchPersonCommand.MESSAGE_USAGE;
+        } else {
+            return SearchCommand.MESSAGE_USAGE;
+        }
+    }
+
+    private String getClearHint(String userInput) {
+        if (userInput.startsWith("clear e")) {
+            return ClearEventCommand.MESSAGE_USAGE;
+        } else if (userInput.startsWith("clear p")) {
+            return ClearPersonCommand.MESSAGE_USAGE;
+        } else {
+            return ClearCommand.MESSAGE_USAGE;
+        }
+    }
+
+    /**
+     * For testing of the regex
+     */
+    public Pattern getParserRegex() {
+        return BASIC_COMMAND_FORMAT;
     }
 
 }

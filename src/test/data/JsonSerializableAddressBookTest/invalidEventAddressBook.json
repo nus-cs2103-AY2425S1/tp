@@ -1,0 +1,8 @@
+{
+  "events" : [ {
+    "name" : "Weekend Hiking Trip",
+    "address" : "Trailhead at Bukit Timah",
+    "startTime" : "invalid-start-time",
+    "tags" : [ "hobby", "outdoor" ]
+  } ]
+}

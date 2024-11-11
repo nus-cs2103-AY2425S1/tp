@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,18 +18,29 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final HintHandler hintHandler;
+    private final MainWindow mainWindow;
 
     @FXML
     private TextField commandTextField;
 
     /**
-     * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
+     * Creates a {@code CommandBox} with the given {@code CommandExecutor} and {@code HintHandler}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, HintHandler hintHandler, MainWindow mainWindow) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.hintHandler = hintHandler;
+        this.mainWindow = mainWindow;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            setStyleToDefault();
+            if (!newValue.trim().isEmpty() && !ClearCommand.isPrompted()) {
+                hintHandler.handleRealTimeHint(newValue);
+            } else if (mainWindow.isHintDisplayed()) {
+                mainWindow.clearResultDisplay();
+            }
+        });
     }
 
     /**
@@ -82,4 +94,14 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Represents a function that can provide real-time hints based on user input.
+     */
+    @FunctionalInterface
+    public interface HintHandler {
+        /**
+         * Provides real-time hints based on current input.
+         */
+        void handleRealTimeHint(String inputText);
+    }
 }

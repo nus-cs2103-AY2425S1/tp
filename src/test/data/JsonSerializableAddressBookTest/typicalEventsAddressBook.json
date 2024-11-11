@@ -1,0 +1,24 @@
+{
+  "_comment": "AddressBook save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
+  "events" : [ {
+    "name" : "Weekend Hiking Trip",
+    "address" : "Trailhead at Bukit Timah",
+    "startTime" : "2025-12-01 08:00",
+    "tags" : [ "hobby", "outdoor" ]
+  }, {
+    "name" : "Ice Cream Festival",
+    "address" : "5, Clarke Quay",
+    "startTime" : "2025-12-21 14:00",
+    "tags" : [ ]
+  }, {
+    "name" : "Art Exhibit",
+    "address" : "101, Art Street",
+    "startTime" : "2025-11-15 10:00",
+    "tags" : [ "culture" ]
+  }, {
+    "name" : "Book Fair",
+    "address" : "45, Library Lane",
+    "startTime" : "2025-11-20 09:00",
+    "tags" : [ "culture", "literature" ]
+  } ]
+}

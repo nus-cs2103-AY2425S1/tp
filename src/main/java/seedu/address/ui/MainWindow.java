@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.types.common.DateTimeUtil;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,9 +35,13 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private NavBar navBar;
 
+    @FXML
+    private StackPane navBarPlaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -45,10 +52,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane eventListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private VBox personList;
+
+    @FXML
+    private VBox eventList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +82,14 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        // Resort Events at the exact minute mark
+        long currentTimeMillis = System.currentTimeMillis();
+        long delayMillis = 60000 - (currentTimeMillis % 60000);
+
+        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(logic::reSortEvents,
+                javafx.util.Duration.minutes(1), delayMillis);
+        eventReSortTimeline.play();
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +134,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getPersonEventAssociationMap());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,8 +146,46 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::handleRealTimeHint, this);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        navBar = new NavBar(this::handleNav);
+        navBarPlaceholder.getChildren().add(navBar.getRoot());
+
+        // Default view shows the contacts list
+        displayContactsList();
+
+        // Explicitly remove focus from the command box to ensure it does not start focused
+        primaryStage.getScene().getRoot().requestFocus();
+    }
+
+
+    private void handleNav(String page) {
+        if (page.equals("Contacts")) {
+            displayContactsList();
+        } else if (page.equals("Events")) {
+            displayEventsList();
+        }
+    }
+
+    private void displayContactsList() {
+        navBar.setActiveButton(navBar.getContactsButton());
+
+        personList.setVisible(true);
+        personList.setManaged(true);
+
+        eventList.setVisible(false);
+        eventList.setManaged(false);
+    }
+
+    private void displayEventsList() {
+        navBar.setActiveButton(navBar.getEventsButton());
+
+        eventList.setVisible(true);
+        eventList.setManaged(true);
+
+        personList.setVisible(false);
+        personList.setManaged(false);
     }
 
     /**
@@ -167,6 +232,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -186,6 +255,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isRefresh()) {
+                handleRefresh();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -193,4 +266,38 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Handles the display of real-time command hints based on current input.
+     *
+     * @param inputText The current input text to generate a hint for.
+     */
+    private void handleRealTimeHint(String inputText) {
+        // Assuming AddressBookParser can parse usage hints based on partial input
+        String hint = logic.getCommandHint(inputText);
+        resultDisplay.setFeedbackToUser(hint);
+        resultDisplay.setHint(hint);
+    }
+
+    /**
+     * Checks if a hint is being displayed.
+     */
+    public boolean isHintDisplayed() {
+        return resultDisplay.getHint();
+    }
+
+    /**
+     * Clears the result display when no hint is shown.
+     */
+    public void clearResultDisplay() {
+        resultDisplay.clearFeedback();
+    }
+
+    /**
+     * Refresh person list.
+     */
+    public void handleRefresh() {
+        personListPanel.refreshPersonListView();
+    }
+
 }

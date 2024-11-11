@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.types.common.LinkedPersonsEntry;
+import seedu.address.model.types.event.Event;
+import seedu.address.model.types.person.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +22,31 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedEvent> events = new ArrayList<>();
+    private final List<JsonAdaptedLinkedPersonsEntry> linkedPersonsEntries = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, events, and linked persons entries.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("events") List<JsonAdaptedEvent> events,
+            @JsonProperty("linkedPersonEntries") List<JsonAdaptedLinkedPersonsEntry> linkedPersonsEntries) {
+        if (persons != null) {
+            this.persons.addAll(persons);
+        }
+
+        if (events != null) {
+            this.events.addAll(events);
+        }
+
+        if (linkedPersonsEntries != null) {
+            this.linkedPersonsEntries.addAll(linkedPersonsEntries);
+        }
     }
 
     /**
@@ -38,6 +56,10 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        linkedPersonsEntries.addAll(source.getPersonEventManager().getLinkedPersonsEntryList().stream()
+                .map(entry -> new JsonAdaptedLinkedPersonsEntry(entry))
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +75,19 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
+            Event event = jsonAdaptedEvent.toModelType();
+            if (addressBook.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+            }
+            addressBook.addEvent(event);
+        }
+
+        for (JsonAdaptedLinkedPersonsEntry jsonAdaptedLinkedPersonsEntry : linkedPersonsEntries) {
+            LinkedPersonsEntry linkedPersonsEntry = jsonAdaptedLinkedPersonsEntry.toModelType();
+            addressBook.addLinkedPersonsEntry(linkedPersonsEntry);
         }
         return addressBook;
     }

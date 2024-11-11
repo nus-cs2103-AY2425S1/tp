@@ -1,7 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.types.event.Event;
+import seedu.address.model.types.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -25,6 +26,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withEvent(Event event) {
+        addressBook.addEvent(event);
         return this;
     }
 
