@@ -202,7 +202,7 @@ Invalid usages
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
-The student to be added cannot have the same name and phone number as an existing student, but having either one field the same is alright.
+The student to be added cannot have the same name and phone number as an existing student.
 
 If there is a student with name `John Doe` and phone number `87654321` in the list:
 
@@ -462,7 +462,7 @@ Invalid usage:
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
-The student cannot be edited to have the same name and phone number as an existing student, but having either one field the same is alright.
+The student cannot be edited to have the same name and phone number as an existing student.
 
 If there is a student with name `John Doe` and phone number `87654321` in the list:
 
