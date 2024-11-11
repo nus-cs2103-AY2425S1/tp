@@ -754,6 +754,18 @@ If these fields are left unchanged over a long period of time, user may forget t
 not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
 deleting them from the selected contact.
 
+3. **Allow the user to delimit special prefixes appearing in the contact details.**
+Currently, if any of the input fields contain the special prefixes, the string will be split into multiple fields, which may not be the user's intention.
+For example, if the user attempts to execute `edit 1 d/For a/b testing`, the command will be wrongly interpreted as
+   - change the description of the first contact to `For`, and
+   - add a new contact with description `b testing`. (refer to the screenshot below)
+
+![point3 screenshot](images/Planned_Enhancements_Screenshots/Point3.png)
+
+The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
+We plan to follow a more standard approach of using a backslash to escape the special prefixes.
+More importantly, the parser will remove the backslash at the end of parsing, so that the user does not see the backslash in the final output.
+
 4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
 This is unrealistic, as an individual is typically either a student or a professor, but not both.
 
@@ -763,3 +775,8 @@ This is unrealistic, as an individual is typically either a student or a profess
 We plan to enforce stricter role assignment, ensuring that:
 * A contact can be designated as a Professor across multiple modules. 
 * Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
+
+5. **Allows command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
+This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
+We plan to allow the user to navigate through the command history using the up and down arrows.
+

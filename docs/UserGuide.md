@@ -187,6 +187,15 @@ The command accepts either one phone number, one email, or both.
 
 </box>
 
+<box type="info" seamless>
+
+**Info: Input data containing prefixes**
+- Should any of the fields contain reserved prefixes (e.g. `add ... d/For a/b testing` contains `a/` which is reserved), the message will be split into multiple fields.
+- To work around this, you can add a character in front of the reserved prefix (e.g. `add ... d/For 'a/b testing`).
+- This issue will be fixed in a later version using a special delimiter to handle such cases.
+
+</box>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`. John is a CS1101S student.
   ![result for adding John Doe](images/addJohnDoeResult.png)
@@ -506,7 +515,9 @@ To allow more flexibility in the input format, we have to sacrifice some validat
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **There is an unused space below the command history box**. 
 ![unused space](images/UiUnusedSpace.png)<br>
-As shown in the screenshot above, marked by the red box. This will be fixed in the next version.
+As shown in the screenshot above, marked by the red box.
+4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
+For example, adding a contact with the phone number `+65 6601 7878 (24 hrs)` and then adding another contact with the phone number `6601 7878` will be allowed as long as the emails are different.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
