@@ -1432,6 +1432,8 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
 
+**Q**: Where can I find more help or report bugs?<br>
+**A**: For more help, refer to the User Guide or reach out to the project’s repository on [GitHub](https://github.com/AY2425S1-CS2103T-F11-4/tp). If you encounter any bugs or issues, please submit an issue report through the GitHub Issues section.
 
 --------------------------------------------------------------------------------------------------------------------
 
