@@ -19,9 +19,12 @@ public class TelegramUsernameTest {
     public void isValidUsername_correctlyVerifiesUsernames() {
         // invalid name
         assertFalse(TelegramUsername.isValidUsername("")); // empty string
-        assertFalse(TelegramUsername.isValidUsername("1234")); // < 5 characters
-        assertFalse(TelegramUsername.isValidUsername("123456789012345678901234567890123")); // > 32 characters
-        assertFalse(TelegramUsername.isValidUsername("_1234")); // cannot start with underscore
+        assertFalse(TelegramUsername.isValidUsername(" ")); // spaces only
+        assertFalse(TelegramUsername.isValidUsername("1234")); // length of 4 characters < 5 (minimum)
+        assertFalse(TelegramUsername.isValidUsername("quickbrownfoxjumpsoverthelazygoat")); // length of 33 > 32 allowed
+        assertFalse(TelegramUsername.isValidUsername("_1234")); // cannot start with an underscore
+        assertFalse(TelegramUsername.isValidUsername("1234_")); // cannot end with an underscore
+        assertFalse(TelegramUsername.isValidUsername("12345")); // cannot have numbers only
         assertFalse(TelegramUsername.isValidUsername("9hello")); // cannot start with a number
         assertFalse(TelegramUsername.isValidUsername("^^^^^^^")); // only non-alphanumeric characters
         assertFalse(TelegramUsername.isValidUsername("peter*")); // contains non-alphanumeric characters
@@ -32,6 +35,7 @@ public class TelegramUsernameTest {
         assertTrue(TelegramUsername.isValidUsername("peter_the_2nd")); // alphanumeric characters with underscores
         assertTrue(TelegramUsername.isValidUsername("CapitalTan")); // with capital letters
         assertTrue(TelegramUsername.isValidUsername("David_Roger_Jackson_Ray_Jr_2nd")); // long names
+        assertTrue(TelegramUsername.isValidUsername("quickbrownfoxjumpsoverthelazydog")); // 32 characters
     }
 
     @Test
