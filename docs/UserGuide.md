@@ -13,6 +13,7 @@ This app is designed for GP clinics in Singapore, where all patients should have
 <!-- * Table of Contents -->
 <page-nav-print />
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -53,6 +54,7 @@ Your terminal should look something like this right before entering the last com
 
 7. Refer to the [Features](#features) below for details of each command.
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fa-solid fa-address-book"></i> Features
@@ -89,6 +91,8 @@ Your terminal should look something like this right before entering the last com
 
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-user-plus"></i> Adding a patient contact: `add`
 
@@ -140,6 +144,9 @@ Adds a patient contact to the address book.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
 Clears all patient entries from the address book.
@@ -174,6 +181,8 @@ the action will be aborted, and the address book will remain unchanged.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-user-slash"></i> Deleting a patient contact: `delete`
 
@@ -227,6 +236,9 @@ Deletes the specified patient contact from the address book.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-pen"></i> Editing a patient contact : `edit`
 
 Edits an existing patient contact in the address book.
@@ -278,6 +290,9 @@ Edits an existing patient contact in the address book.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-right-from-bracket"></i> Exiting the program : `exit`
 
 Exits the program.
@@ -290,6 +305,8 @@ Exits the program.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-filter"></i> Filtering patient contacts by age group or appointment dates: `filter`
 
@@ -339,6 +356,9 @@ Filter patients whose age and/or appointment dates are within the specified rang
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-magnifying-glass"></i> Locating patient contacts by name or phone number: `find`
 
 Finds patients whose names or phone numbers contain any of the given keywords.
@@ -385,6 +405,9 @@ Finds patients whose names or phone numbers contain any of the given keywords.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-circle-question"></i> Viewing help : `help`
 
 Shows you a help window with useful resources which includes:
@@ -406,6 +429,9 @@ Shows you a help window with useful resources which includes:
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
+
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-file-import"></i> Importing patient contacts: `import`
 
@@ -449,6 +475,9 @@ Furthermore, certain edits can cause the MediContact to behave in unexpected way
 
    <img src="images/importStep3.png" width="800"/>
 </box>
+
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ##### Expected format:
 
@@ -523,6 +552,8 @@ The following is an example of a valid JSON file content.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-list"></i> Listing all patient contacts : `list`
 
@@ -553,6 +584,8 @@ Shows an alphabetically sorted list of all patients in the address book.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fas fa-clipboard-list"></i> Listing starred patient contacts : `list *`
 
@@ -581,6 +614,9 @@ Shows a list of all starred patient contacts in the address book.
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
+
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-note-sticky"></i> Editing a patient's notes : `note`
 
@@ -630,6 +666,8 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-arrow-up-wide-short"></i> Sorting patient contact list based on Appointment Dates : `sort`
 
@@ -667,6 +705,9 @@ Sorts the patient contact list in the address book on the basis of their earlies
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-star"></i> Adding a patient contact to favourites list : `star`
 
 Stars the specified patient contact from the address book into favourites.
@@ -701,6 +742,8 @@ Stars the specified patient contact from the address book into favourites.
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-regular fa-star"></i> Removing a patient contact from favourites list : `unstar`
 
@@ -736,6 +779,9 @@ Unstars the specified patient contact from the address book removing them from f
 <br>
 <br>
 
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
+
 ### <i class="fa-solid fa-eye"></i> Viewing a patient's notes : `view`
 
 Views an existing patient's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
@@ -768,6 +814,9 @@ Views an existing patient's note in the address book, which contains `PREVIOUS A
 [Return to Table of Contents](#medicontact)
 <br>
 <br>
+
+{{ newPage }}
+--------------------------------------------------------------------------------------------------------------------
 
 ### <i class="fa-solid fa-floppy-disk"></i> Saving the data
 
@@ -808,6 +857,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 <br>
 <br>
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fa-solid fa-question"></i> FAQ
@@ -833,6 +883,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fa-solid fa-triangle-exclamation"></i> Known issues
@@ -842,6 +893,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fas fa-file-alt"></i> Command summary
@@ -868,6 +920,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 [Return to Table of Contents](#medicontact)
 
+{{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fas fa-file-alt"></i> Summary of parameter constraints
