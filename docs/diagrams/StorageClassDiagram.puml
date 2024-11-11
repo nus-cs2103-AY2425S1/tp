@@ -14,12 +14,25 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "ClientBook Storage" #F4F6F6{
+Class "<<interface>>\nClientBookStorage" as ClientBookStorage
+Class JsonClientBookStorage
+Class JsonSerializableClientBook
+Class JsonAdaptedClient
+}
+
+package "MeetingBook Storage" #F4F6F6{
+Class "<<interface>>\nMeetingBookStorage" as MeetingBookStorage
+Class JsonMeetingBookStorage
+Class JsonSerializableMeetingBook
+Class JsonAdaptedMeeting
+}
+
+package "PropertyBook Storage" #F4F6F6{
+Class "<<interface>>\nPropertyBookStorage" as PropertyBookStorage
+Class JsonPropertyBookStorage
+Class JsonSerializablePropertyBook
+Class JsonAdaptedProperty
 }
 
 }
@@ -29,15 +42,26 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ClientBookStorage
+StorageManager -up-> "1" MeetingBookStorage
+StorageManager -up-> "1" PropertyBookStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> ClientBookStorage
+Storage -right-|> MeetingBookStorage
+Storage -right-|> PropertyBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonClientBookStorage .up.|> ClientBookStorage
+JsonClientBookStorage ..> JsonSerializableClientBook
+JsonSerializableClientBook --> "*" JsonAdaptedClient
+
+JsonMeetingBookStorage .up.|> MeetingBookStorage
+JsonMeetingBookStorage ..> JsonSerializableMeetingBook
+JsonSerializableMeetingBook --> "*" JsonAdaptedMeeting
+
+JsonPropertyBookStorage .up.|> PropertyBookStorage
+JsonPropertyBookStorage ..> JsonSerializablePropertyBook
+JsonSerializablePropertyBook --> "*" JsonAdaptedProperty
 
 @enduml

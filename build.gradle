@@ -63,10 +63,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.4.0'
 }
 
+run {
+    enableAssertions = true
+}
+
+
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'clientGrid.jar'
 }
 
 defaultTasks 'clean', 'test'

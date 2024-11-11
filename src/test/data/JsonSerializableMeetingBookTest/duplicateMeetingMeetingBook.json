@@ -1,0 +1,20 @@
+{
+  "meetings": [
+    {
+      "meetingTitle": "Admiralty HDB Client Viewing",
+      "meetingDate": "31-10-2025",
+      "buyer": "91234567",
+      "seller": "81234567",
+      "type": "hdb",
+      "postalCode": "654321"
+    },
+    {
+      "meetingTitle": "Admiralty HDB Client Viewing",
+      "meetingDate": "31-10-2025",
+      "buyer": "91234567",
+      "seller": "81234567",
+      "type": "hdb",
+      "postalCode": "654321"
+    }
+  ]
+}

@@ -1,9 +1,12 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
+import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
+
+import java.lang.reflect.Modifier;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,18 +25,20 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(new UserPrefs(), getTypicalPropertyBook(),
+                getTypicalClientBook(), getTypicalMeetingBook());
+        expectedModel = new ModelManager(new UserPrefs(), model.getPropertyBook(),
+                model.getClientBook(), model.getMeetingBook());
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void listCommandIsAbstract() {
+        Class<ListCommand> clazz = ListCommand.class;
+        // Check if the class is abstract
+        assertTrue(Modifier.isAbstract(clazz.getModifiers()), "ListCommand should be abstract");
     }
-
     @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void commandWordEqualsList() {
+        assertEquals("list", ListCommand.COMMAND_WORD);
     }
 }

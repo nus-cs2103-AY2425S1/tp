@@ -9,5 +9,7 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "addressbook.json"
+  "clientBookFilePath" : "data/clientbook.json",
+  "propertyBookFilePath" : "data/propertybook.json",
+  "meetingBookFilePath" : "data/meetingbook.json"
 }

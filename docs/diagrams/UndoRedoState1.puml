@@ -1,6 +1,6 @@
 @startuml
 !include style.puml
-skinparam ClassFontColor #000000
+skinparam ClassFontColor #444444
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 

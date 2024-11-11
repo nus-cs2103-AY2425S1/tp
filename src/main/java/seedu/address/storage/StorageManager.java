@@ -7,7 +7,9 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -15,17 +17,22 @@ import seedu.address.model.UserPrefs;
  * Manages storage of AddressBook data in local storage.
  */
 public class StorageManager implements Storage {
-
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private PropertyBookStorage propertyBookStorage;
+    private ClientBookStorage clientBookStorage;
+    private MeetingBookStorage meetingBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(UserPrefsStorage userPrefsStorage,
+                          PropertyBookStorage propertyBookStorage, ClientBookStorage clientBookStorage,
+                          MeetingBookStorage meetingBookStorage) {
         this.userPrefsStorage = userPrefsStorage;
+        this.propertyBookStorage = propertyBookStorage;
+        this.clientBookStorage = clientBookStorage;
+        this.meetingBookStorage = meetingBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -45,34 +52,86 @@ public class StorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
-    // ================ AddressBook methods ==============================
+    // ================ PropertyBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getPropertyBookFilePath() {
+        return propertyBookStorage.getPropertyBookFilePath();
     }
-
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyPropertyBook> readPropertyBook() throws DataLoadingException {
+        return readPropertyBook(propertyBookStorage.getPropertyBookFilePath());
     }
-
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyPropertyBook> readPropertyBook(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return propertyBookStorage.readPropertyBook(filePath);
     }
-
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void savePropertyBook(ReadOnlyPropertyBook propertyBook) throws IOException {
+        savePropertyBook(propertyBook, propertyBookStorage.getPropertyBookFilePath());
     }
-
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void savePropertyBook(ReadOnlyPropertyBook propertyBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        propertyBookStorage.savePropertyBook(propertyBook, filePath);
     }
 
+    // ================ ClientBook methods ==============================
+
+    @Override
+    public Path getClientBookFilePath() {
+        return clientBookStorage.getClientBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook() throws DataLoadingException {
+        return readClientBook(clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyClientBook> readClientBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return clientBookStorage.readClientBook(filePath);
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook) throws IOException {
+        saveClientBook(clientBook, clientBookStorage.getClientBookFilePath());
+    }
+
+    @Override
+    public void saveClientBook(ReadOnlyClientBook clientBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        clientBookStorage.saveClientBook(clientBook, filePath);
+    }
+
+    // ================ MeetingBook methods ==============================
+
+    @Override
+    public Path getMeetingBookFilePath() {
+        return meetingBookStorage.getMeetingBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetingBook> readMeetingBook() throws DataLoadingException {
+        return readMeetingBook(meetingBookStorage.getMeetingBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetingBook> readMeetingBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return meetingBookStorage.readMeetingBook(filePath);
+    }
+
+    @Override
+    public void saveMeetingBook(ReadOnlyMeetingBook meetingBook) throws IOException {
+        saveMeetingBook(meetingBook, meetingBookStorage.getMeetingBookFilePath());
+    }
+
+    @Override
+    public void saveMeetingBook(ReadOnlyMeetingBook meetingBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        meetingBookStorage.saveMeetingBook(meetingBook, filePath);
+    }
 }

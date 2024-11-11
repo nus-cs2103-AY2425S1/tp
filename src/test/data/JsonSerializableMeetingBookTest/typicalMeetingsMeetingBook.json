@@ -1,0 +1,21 @@
+{
+  "_comment": "Meeting records based on typical meetings for property agents.",
+  "meetings": [
+    {
+      "meetingTitle": "Admiralty HDB Client Viewing",
+      "meetingDate": "01-01-2025",
+      "buyer": "91234562",
+      "seller": "81234563",
+      "type": "hdb",
+      "postalCode": "654321"
+    },
+    {
+      "meetingTitle": "Bedok Villa Finalizing Purchase Agreement",
+      "meetingDate": "11-06-2030",
+      "buyer": "91234561",
+      "seller": "81234562",
+      "type": "hdb",
+      "postalCode": "654321"
+    }
+  ]
+}
