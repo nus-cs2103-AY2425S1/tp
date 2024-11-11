@@ -9,6 +9,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerIsAssignedToUnfreeDayTargetException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -164,7 +166,8 @@ public interface Model {
     void addDatesToVolunteer(Volunteer volunteerToAddDate, String dateList) throws VolunteerDuplicateDateException;
 
     void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException;
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException,
+            VolunteerIsAssignedToUnfreeDayTargetException;
 
     boolean filterEventsByName(Predicate<Event> predicate);
 

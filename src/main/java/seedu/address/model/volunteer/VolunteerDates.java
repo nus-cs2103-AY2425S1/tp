@@ -8,12 +8,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerIsAssignedToUnfreeDayTargetException;
 import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 
 /**
@@ -74,6 +77,7 @@ public class VolunteerDates {
         this.datesListAsObservableString.set(this.toString());
     }
 
+
     /**
      * Removes a given string of dates from its list of dates.
      * @param dates
@@ -81,8 +85,9 @@ public class VolunteerDates {
      * @throws VolunteerDuplicateDateException
      */
 
-    public void removeStringOfDatesFromAvailList(String... dates) throws DateTimeParseException,
-            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
+    public void removeStringOfDatesFromAvailList(List<Event> participatingEvent, String... dates) throws
+            DateTimeParseException, VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException,
+            VolunteerIsAssignedToUnfreeDayTargetException {
 
         requireNonNull(dates);
         // Check each date's format and uniqueness
@@ -99,6 +104,14 @@ public class VolunteerDates {
 
         if (uniqueDates.size() >= this.dates.size()) {
             throw new VolunteerNotAvailableOnAnyDayException();
+        }
+
+        for (LocalDate d: uniqueDates) {
+            for (Event e : participatingEvent) {
+                if (e.getDate().date.isEqual(d)) {
+                    throw new VolunteerIsAssignedToUnfreeDayTargetException(e.getName().toString());
+                }
+            }
         }
 
         for (LocalDate d: uniqueDates) {
