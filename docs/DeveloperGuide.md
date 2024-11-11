@@ -1288,16 +1288,6 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
-
-* The project required a significant amount of effort and focus to implement the new features.
-* There were some challenges along the way when we did not know how to implement specific features such as filter and sort.
-* It was also quite challenging to add new attributes and represent them as tables in the GUI, such as exams, submissions, and attendance.
-* While AB3 deals with simple attributes of a person, we had to include attributes that were more complex and tailored for our application use and needs, thus requiring us to store more non-trivial data for every student.
-* Some achievements of the project include learning the workflows of having multiple developers work on the same product and managing each other's changes.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Planned Enhancements**
 
 ### Ui
@@ -1339,3 +1329,12 @@ testers are expected to do more *exploratory* testing.
 * “addAttendance” command can be changed to “trackAbsenteeism” to reduce confusion since the command can delete the records as well.
 * As only dates in the current year are allowed when adding attendance, the command can be adjusted such that it only requires users to enter the date in the form of DD-MM.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+* The project required a significant amount of effort and focus to implement the new features.
+* There were some challenges along the way when we did not know how to implement specific features such as filter and sort.
+* It was also quite challenging to add new attributes and represent them as tables in the GUI, such as exams, submissions, and attendance.
+* While AB3 deals with simple attributes of a person, we had to include attributes that were more complex and tailored for our application use and needs, thus requiring us to store more non-trivial data for every student.
+* Some achievements of the project include learning the workflows of having multiple developers work on the same product and managing each other's changes.
