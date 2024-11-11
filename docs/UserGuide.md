@@ -52,7 +52,7 @@ If it is not installed, download and install the right one for your system by fo
 Download the most recent HallPointer `.jar` file from the release page [here](https://github.com/ay2425s1-cs2103t-w14-3/tp/releases/latest).
 
 3. **Place the file in your desired folder:**\
-Move the downloaded `.jar` file into the _home folder_ where you want to store your data.
+Move the downloaded `.jar` file into the _home folder_ where you want to store your data. 
 
 4. **Run HallPointer:**
 - Open a command terminal, and use the `cd` command to navigate to the folder where you saved the `.jar` file.
@@ -78,19 +78,19 @@ Refer to the [Command Summary](#command-summary) section below for a quick overv
 
 ## Command Summary
 
-| Action             | Format, Examples                                                                                                                                                |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Action             | Format / Examples                                                                                                                                                 |
+| ------------------ |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
-| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`      |
-| **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                               |
-| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX...​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                 |
-| **Delete session** | `delete_session s/NAME m/INDEX...`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                               |
-| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_members James Jake`                                                                                      |
-| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_sessions Team meeting`                                                                                  |
-| **List**           | `list`                                                                                                                                                          |
-| **Clear**          | `clear`                                                                                                                                                         |
-| **Help**           | `help`                                                                                                                                                          |
-| **Exit**           | `exit`                                                                                                                                                          |
+| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`        |
+| **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                                 |
+| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX…​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                   |
+| **Delete session** | `delete_session s/NAME m/INDEX…`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                                 |
+| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_members James Jake`                                                                                        |
+| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_sessions Team meeting`                                                                                    |
+| **List**           | `list`                                                                                                                                                            |
+| **Clear**          | `clear`                                                                                                                                                           |
+| **Help**           | `help`                                                                                                                                                            |
+| **Exit**           | `exit`                                                                                                                                                            |
 
 ---
 
@@ -98,17 +98,17 @@ Refer to the [Command Summary](#command-summary) section below for a quick overv
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Understanding the Command Format:**<br>
 
-- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g., in `add_member n/NAME`, `NAME` is a parameter that can be used as `add_member n/John Doe`.
-- Items in square brackets are optional.<br>
+- Words in `UPPER_CASE` are the placeholders you'll replace with your own input.<br>
+  e.g., in `add_member n/NAME`, `NAME` can be replaced with `John Doe ` The full command will be `add_member n/John Doe`.
+- Fields in `[square brackets]` are optional. You can choose to include them or leave them out.<br>
   e.g., `n/NAME [tag/TAG]` can be used as `n/John Doe tag/friend` or as `n/John Doe`.
-- Items with `…`​ after them can be used multiple times, including zero times.<br>
-  e.g., `[tag/TAG]…​` can be used as ` ` (i.e., 0 times), `tag/friend`, `tag/friend tag/family`, etc.
+- Fields with `…`​ after them can be used multiple times or not at all.<br>
+  e.g., The field `[tag/TAG]…​` can be typed as ` ` (i.e., used 0 times and left out entirely), `tag/friend`, `tag/friend tag/family`, etc.
 - Parameters can be in any order.<br>
   e.g., if the command specifies `n/NAME t/TELEGRAM`, `t/TELEGRAM n/NAME` is also acceptable.
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.<br>
+- For commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) , any extra information you typed after the command will be ignored.<br>
   e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
 
