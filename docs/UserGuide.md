@@ -329,14 +329,20 @@ Result for `rdelete 1`:
 
 ### Viewing a client: `view`
 
-Creates a single popup view of the specified client from ClientHub.
+Creates a popup view of the specified client from ClientHub containing all the information about the specified client.
+* The `NAME`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `DESCRIPTION`, and `CLIENT_TYPE`s of the client will be displayed.
+* The `REMINDER` tagged to the client will **not** be displayed in the popup view
 
 Format: `view NAME` or `v NAME` or `view NAME$`
-* The command is case-insensitive. eg. `alice` will match `Alice`
+
 * The command does a `find` and displays the popup view only if the no. of clients found is exactly 1.
-* If duplicates are found, `view` will throw an error telling user to specify the name further.
-    * For eg. if 2 contacts have names such as "David Li" and "David Lim", typing `view David` will throw an error.
-* Executing another `view` command will change the contents of the popup view to the new specified client.
+    * If more than 1 name is found, `view` will throw an error telling user to specify the name further.
+    * For eg. if 2 contacts have names such as "David" and "David Lim", typing `view David` will throw an error.
+* The command is case-insensitive. eg. `alice` will match `Alice`
+* Executing another `view` command will create a new popup view of the specified client.
+* Duplicate view pops are **allowed**.
+* `$` is used to indicate specific name to `view`
+
 
 Examples:
 * `view John Doe` shows the contact named `John Doe`
