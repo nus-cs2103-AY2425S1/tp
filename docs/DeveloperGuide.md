@@ -795,5 +795,20 @@ Team size: 5
 1. **Modify meeting sample data to generate whole number timings.**
    Currently time fields for meetings sample data is generated using `LocalTime#now` which provides very precise timing up to the milliseconds.
    While it is not wrong, some user complained that it looks wrong or invalid to display timings as such, and it would be much appropriate to display time fields as available to the users through other commands, i.e. if user cannot add time field up to milliseconds of precision, do not display time fields up to milliseconds of precision.
-1. **Modify Date Time Logic for Invalid Dates**
+1. **Modify Date Time Logic for Invalid Dates.**
    Currently, Java LocalDate library helps to correct the string if the user types in invalid dates like `29-02-2023` to `28-02-2023`. We plan to improve the logic such that our application has better logic to detect Leap Year Dates.
+1. **Add another UI view to display information fully for long inputs.**
+   Currently, certain UI text get truncated when inputs are long and are not able to be seen in the current iteration of the UI.
+   While it is not wrong to assume that most meetings and names will not be that long (since "Dinner with Jane, Josh and Edward" can be summarised to "Dinner" as the contacts should be already associated with the meeting and be displayed),
+   however having a separate view to showcase fully the details of long meeting names and contact may be useful for edge cases.
+1. **Favourited contacts can be shown at the top of the list.**
+   Currently, the only indicator of favourite contacts depends on the color of the star beside the respective contact details and serve minimal purpose. 
+   Intuitively, favouriting a contact should be similar to adding a contact to speed dial where the details of the favourited contact can be quickly accessed and should thus be shown at the top of the list.
+1. **Modify Schedule display.**
+   Currently, there are a few feature flaws with the current UI of the scheduler. When the application is resized to be too small or have too many meetings on the same day, the scrollbars of the Ui causes a white box to appear, additionally meetings are not displayed in chronological order but instead by index.
+   Future improvement to the Ui could include having a proper weekly calendar with timeslot and timings, where meetings could be given a duration and will take up the respective timeslot for better user clarity when it comes to managing their time. 
+   Scrollbar could also then be removed if the calendar/scheduler was shifted to another view to fully make use of the application size instead of squeezing it in a split view.
+1. **Shift Sunday to be displayed first in scheduler.**
+   Currently, Sunday is being displayed as the last day in the scheduler, however the scheduler treats Sunday as the first day of the week.
+   While the current iteration is not wrong, however users may be confused and assume the Sunday at the end of the list to be the Sunday of the following week since it comes after Saturday.
+   Thus for clarity, Sunday should instead be displayed at the start of the scheduler instead.
