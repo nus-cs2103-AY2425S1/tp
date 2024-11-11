@@ -221,7 +221,7 @@ Stores a contact’s birthday. Note that although multiple birthdays may be ente
 only the last one will be recorded.
 
 **Command Format:**  
-`birthday INDEX b/<Birthday Date>`
+`birthday INDEX b/BIRTHDAY`
 
 - `b/` The contact’s birthday `yyyy-mm-dd` format.
 
