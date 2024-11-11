@@ -753,8 +753,6 @@ The following activity diagram summarizes the steps involved in adding a contact
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
-* **CLI (Command Line Interface)**: A text-based interface where users interact with the application by typing commands.
-* **GUI (Graphical User Interface)**: A visual interface where users interface with the application through graphical elements, such as buttons, icons and menus.
 * **Person**: An entity representing a client who can buy properties, sell properties or do both. It contains personal details such as name, phone number, email and address. Contact can also include preferences like seller or buyer ranges and associated properties.
 * **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.)
 * **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
@@ -762,6 +760,12 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Selling Price**: The price in which the seller is willing to sell the property.
 * **Buying Price**: The price in which the buyer is willing to buy the property.
 * **Actual Price**: The price for which the property is actually bought or sold.
+* **Buying Properties**: A list of properties that a Person wants to buy but has not made the purchase.
+* **Selling Properties**: A list of properties that a Person owns and wants to sell, but has not sold the property yet.
+* **Properties-To-Buy**: A Property that a Person wants to buy but has not made the purchase.
+* **Properties-To-Sell**: A Property that a Person wants to sell but has not sold the property yet.
+* **Bought Property**: A Property that has been purchased by a Person.
+* **Sold Property**: A Property that has been sold by a Person.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 * **L Order**: A sorting method where elements are arranged in ascending order, from the lowest to the highest value.
 * **H Order**: A sorting method where elements are arranged in descending order, from the highest to the lowest value.
