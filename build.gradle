@@ -8,8 +8,8 @@ plugins {
 }
 
 javafx {
-    version = '17.0.7' // Adjust version as needed
-    modules = [ 'javafx.controls', 'javafx.web', 'javafx.fxml' ] // Include necessary modules
+    version = '17.0.7'
+    modules = [ 'javafx.web' ] // the javafx web is needed for the help page
 }
 
 mainClassName = 'seedu.address.Main'

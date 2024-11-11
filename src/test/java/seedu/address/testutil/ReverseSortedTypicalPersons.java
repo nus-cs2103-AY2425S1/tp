@@ -23,13 +23,13 @@ import seedu.address.model.person.Person;
  */
 public class ReverseSortedTypicalPersons {
 
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withSex("M").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withSex("M").withPhone("94822442")
             .withRole("parent")
             .withEmail("anna@example.com").withAddress("4th street").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withSex("F").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withSex("F").withPhone("94824272")
             .withRole("sTuDenT")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withSex("F").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withSex("F").withPhone("94822244")
             .withRole("student")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Person DANIEL = new PersonBuilder().withName("Carl Meier").withSex("M").withPhone("87652533")
@@ -49,10 +49,10 @@ public class ReverseSortedTypicalPersons {
             .withTags("friends").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withSex("M").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withSex("M").withPhone("84822424")
             .withRole("student")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withSex("F").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withSex("F").withPhone("84821131")
             .withRole("student")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 

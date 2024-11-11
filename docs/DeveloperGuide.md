@@ -329,6 +329,118 @@ Use case ends
     - 1a1. Cher shows correct input format.<br>
       Use case ends.
 
+#### Use case: UC8 - Select contacts by index
+
+**MSS**
+1. User enters the select command with a list of indexes.
+2. Cher verifies that each index corresponds to a valid contact in the current list.
+3. Cher highlights or marks the selected contacts.
+4. Cher displays the selected contacts to the user.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an invalid or out-of-range index.
+    - 1a1. Cher shows an error message with the list of invalid indexes.
+      Use case ends.
+* 1b. User enters an index that is not displayed in the current displayed list.
+    - 1b1. Cher shows an error indicating the index is not displayed.
+      Use case ends.
+
+#### Use case: UC9 - Filter and then select contacts
+
+**MSS**
+1. User enters a filter command with criteria to narrow down the displayed list of contacts (e.g., by tags or names).
+2. Cher filters and displays only the contacts that match the specified criteria.
+3. User enters the select command with specific indexes from the filtered list.
+4. Cher highlights and displays the selected contacts to the user.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an error in user input for the filter criteria.
+    - 1a1. Cher shows an error message and provides the correct filter input format.
+      Use case ends.
+* 3a. Cher detects an invalid index or indexes outside the filtered list.
+    - 3a1. Cher displays an error message indicating the invalid indexes.
+      Use case ends.
+* 3b. No contacts match the filter criteria.
+    - 3b1. Cher shows a message that no contacts matched the criteria.
+      Use case ends.
+
+
+#### Use case: UG10 - Mark attendance
+**MSS**
+1. User enters mark command with the index of a specific contact.
+2. Cher increases the attendance count of the specified contact by 1.
+3. Cher shows success message that the attendance of the specified contact have been marked.
+4. Cher shows the list of all contacts. <br>
+   Use case ends. 
+
+**Extensions**
+* 1a. Cher detects an error in the input.
+   - 1a1. Cher shows the correct input format. <br>
+     Use case ends.
+* 1b. Cher detects that the specified contact is not a student.
+   - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
+     Use case ends.
+
+#### Use case: UG11 - Unmark attendance
+**MSS**
+1. User enters unmark command with the index of a specific contact.
+2. Cher decreases the attendance count of the specified contact by 1.
+3. Cher shows success message that the attendance of the specified contact have been unmarked.
+4. Cher shows the list of all contacts. <br>
+   User case ends.
+
+**Extensions**
+* 1a. Cher detects an error in the input.
+  - 1a1. Cher shows the correct inout format. <br>
+  Use case ends. 
+* 1b. Cher detects that the specified contact is not a student.
+  - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
+  Use case ends. 
+* 1c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 1c1. Cher shows error message that the attebdabce count is already at 0. <br>
+  Use case ends.
+
+#### Use case: UG12 - Reset attendance 
+**MSS**
+1. User enters the reset attendance command.
+2. Cher resets the attendance count of all students in list to 0.
+3. Cher shows the success message with the names of students whose attendance have been reset.
+4. Cher shows the list of all contacts. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends.
+
+#### Use case: UG13 - Mark group attendance
+**MSS**
+1. User enters the batch-mark command.
+2. Cher increases the attendance count of all students in the list by 1.
+3. Cher shows the success message with the names of all students whose attendance have been marked.
+4. Cher shows the list of all contacts. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends.
+
+#### Use case: UG14 - Unmark group attendance
+**MSS**
+1. User enters the batch-unmark command.
+2. Cher ignores students whose attendance count is already 0 and decreases the attendance count of other students by 1.
+3. Cher shows the sucess message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends. 
+
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -386,28 +498,92 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Marking attendance for a person 
+
+1. Marking the attendance of a selected student while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student at index 1 and a person with the role Parent at index 2. 
+  
+   1. Test case: `mark 1`<br>
+      Expected: The attendance field of the first contact is incremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+
+   1. Test case: `mark 0`<br>
+      Expected: Error details shown in the status message.
+
+   1. Test case: `mark 2`<br>
+      Expected: Similar to previous.
+
+### Unmarking attendance for a person
+
+1. Unmarking the attendance of a selected student while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student and attendance count of 1 at index 1, a person with the role Student      and  attendance count of 0 at index 2, and a person with the role Parent at index 3. 
+
+   1. Test case: `unmark 1`<br>
+   Expected: The attendance field of the first contact is decremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+
+   1. Test case: `unmark 2` <br>
+   Expected: Attendance field of the person remains at 0. Error details shown in the satus message.
+
+   1. Test case: `unmark 2`<br>
+   Expected: Error details shown in the status message. 
+
+### Resetting attendance
+
+1. Resetting the attendance count of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+  
+   1. Test case: `reset-att` <br>
+      Expected: The attendance field of all students in the list resets to 0. Name(s) of student(s) whose attendance is reset is shown in the status message. The list of all contacts is shown.
+
+### Marking attendance for a group of persons
+
+1. Marking the attendance of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+
+   1. Test case: `batch-mark`<br>
+      Expected: The attendance count of all students in the list increases by 1. Names of students whose attendance is marked are shown in the status message. The list of all contacts is shown. 
+
+### Unmarking attendance for a group of persons
+
+1. Unmarking the attendance of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student and attendance count of more than 0 and 1 person with the role Student and the attendance count of 0.
+
+   1. Test case: `batch-unmark`<br>
+      Expected: The attendance count of all students whose attendance count was originally at 0 remain at 0. The attendance count of all other students in the list decreases by 1. Names of all students whose attendance is unmarked (including those whose attendance count remained at 0) are shown. The list of all contacts is shown.
+
+   
+
 
 ### Batch deleting a group of people
 1. Deleting a group of people.
+   
    1. Prerequisites: <br>
    Execute the following:
       - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
       - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
       - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
       - List all persons using the `list` command.
+        
    2. Test case: `batch-delete t/tag3` <br>
       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-   3. Test case: `batch-delete t/tag1 t/tag2` <br>
+   
+   4. Test case: `batch-delete t/tag1 t/tag2` <br>
       Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
-   4. Test case: `batch-delete t/tag1` <br>
+      
+   6. Test case: `batch-delete t/tag1` <br>
       Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
       previous test case `iii`. Feedback box will show detail of deleted person.
 
@@ -417,17 +593,67 @@ testers are expected to do more *exploratory* testing.
        Execute the following:
         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
+          
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+   
+    4. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
+
+    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`.
+
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
-    4. Test case: `batch-edit t/tag2 t/tag4` <br>
+       
+    6. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
+
+### Selecting Persons
+
+1. Select one person while all persons are being shown:
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 2` where N > 2
+        - Expected: Contacts at indexes 2 is selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at index 2]" (e.g., "Selected Person(s): John Doe"). No errors are shown.
+
+2. Select multiple persons while all persons are being shown:
+   1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+   2. Test case: `select 1 2 4` where N > 4
+       - Expected: Contacts at indexes 1, 2, and 3 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1, 2, and 4]" (e.g., "Selected Person(s): John Doe, Jane Smith, Bob Lee"). No errors are shown.
+   3. Test case: `select 1 7` where N > 7
+       - Expected: Similar to the previous. Contacts at indexes 1, 2 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1 and 2]" (e.g., "Selected Person(s): John Doe, Bob Lee"). No errors are shown.
+
+3. Select with invalid indexes that do not match the currently displayed person list
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 7` where N < 6
+       - Expected: The feedback box will display an error message: "The following indexes are invalid: 7." No changes are made to the contact list, and it remains as originally displayed.
+    3. Test case: `select 6 20 40` where N < 6
+       - Expected: Similar to the previous. The feedback box will display an error message: "The following indexes are invalid: 6, 20, 40." No changes are made to the contact list, and it remains as originally displayed.
+
+### Testing the Main Window
+
+1. Open the Main Window:
+   1. Prerequisites: Ensure that the application has started and the main window is initialized.
+   2. Test case: Launch the application and wait for the main window to appear.
+      - Expected: The main window should appear on the screen, showing the application layout with the menu bar, the person list panel, result display area (Feedback Box), command box, and status bar footer. No errors should be shown.
+   3. Test case: Try the functionalities of the UI, follow Selecting Persons 2.2
+      - Expected: Same as Selecting Persons 2.2 Expected. The Ui components should function without errors. The corresponding persons should be highlighted or indicated as selected in the UI.
+
+### Testing the Help Window
+
+1. Open the Help Window:
+   1. Prerequisites: Ensure that the main window is open and the application is running.
+   2. Test case: Press F1 or click the "Help" menu item, then click the dropdown menu button.
+      - Expected: The help window should appear, displaying the message: "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html". No errors should be shown, and the user guide should be loaded in the web view.
+
+2. Focus on an already opened Help Window:
+   1. Prerequisites: Ensure that the help window is open.
+   2. Test case: Press F1 again or click the "Help" menu item while the help window is already showing.
+      - Expected: The help window should gain focus and bring itself to the front. The URL "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html" should remain displayed in the help message label.
 
 ### Saving data
 
@@ -436,4 +662,27 @@ testers are expected to do more *exploratory* testing.
    1. Delete all generated save file if there is any.
    2. Re-start the Cher application which will automatically regenerate the basic data.
    3. It will result in loss of data.
+
+
+### Finding persons
+
+1. Finding persons by tag
+      1. Prerequisites: <br>
+         Execute the following:
+         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+         - List all persons using the `list` command.
+           
+      2. Test case: `find t/tag1`<br>
+         Expected: test person 1, test person 2, and test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      3. Test case: `find t/tag2`<br>
+         Expected: test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
+         Expected: List of persons shown remains unchanged.
+         Feedback box shows error details regarding incorrect input format.
 
