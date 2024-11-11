@@ -97,7 +97,7 @@ Format: `exit`
 ### Undoing the previous command : `undo`
 
 Undoes the previous command. <br>
-The help and closeat command is currently not undoable (planned for future versions).
+The help and closeat commands are currently not undoable (planned for future versions).
 
 Format: `undo`
 
