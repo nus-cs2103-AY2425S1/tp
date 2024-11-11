@@ -201,8 +201,7 @@ The `Model` component,
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -387,9 +386,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <div style="page-break-after: always;"></div>
 
 ### Use cases
-
-(For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified
-otherwise)
 
 (For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
 
