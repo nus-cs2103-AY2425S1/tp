@@ -925,7 +925,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
     This might be inconvenient for the user, as the user might accidentally type the `clear command` and lose all the students' data.
     Therefore, we plan to enforce a double confirmation for the `clear command`. When the user types the `clear command`, UGTeach will prompt the user to confirm the deletion of all students in the list.
-    The user will have to type `yes` (case-insensitive) to confirm the deletion of all students in the list. If the user types anything else, the deletion will not be executed. Even typing 'y' will not be accepted as confirmation, to prevent accidental deletion of all students in the list.
+    The user will have to type `yes` (case-insensitive) to confirm the deletion of all students in the list. If the user types anything else, the deletion will not be executed. Even typing `y` will not be accepted as confirmation, to prevent accidental deletion of all students in the list.
     While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
     We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
 
