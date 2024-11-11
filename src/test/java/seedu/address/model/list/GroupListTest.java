@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.group.Group;
 
 public class GroupListTest {
-    // AI was used in the generation of SOME test cases in this class
+    // AI was used in SOME test cases in this class
     // mainly to efficiently find out about proper junit syntax and structure
     // AI code was used as a base and then the code was manually changed a lot to better fit the needs of testing
     private GroupList groupList;
