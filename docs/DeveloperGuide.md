@@ -275,8 +275,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find based on name.
-2. System displays a list of person who have the name.
+1. User requests to find a person using the keywords.
+2. System displays a list of persons whose fields matches the keywords.
 
    Use case ends.
 
@@ -287,48 +287,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 1a1. System shows an error message.
 
       Use case resumes at step 1.
+* 1b. At least one field does not match any keywords.
 
-* 1b. There is no name that fits the search.
+    * 1b1. System shows an empty list. 
+  
+      Use case ends.
+* 1c. User request the find to be of an employee.
 
-   * 1b1. The list is empty.
+   * 1c1. System displays a list of employees whose fields matches the keywords.
 
       Use case ends.
 
-* 1c. User requests to find employees by name.
+* 1d. User request the find to be of a potential hire.
 
-   * 1c1. System displays a list of employees who have the name.
-
-      Use case ends.
-
-* 1d. User requests to find potential hires by name.
-
-   * 1d1. System displays a list of potential hires who have the name.
+   * 1d1. System displays a list of potential hires whose fields matches the keywords.
 
       Use case ends.
 
-* 1e. User requests to find based on phone number.
-
-   * 1e1. System displays a list of person who have the phone number.
-
-      Use case ends.
-
-* 1f. User requests to find based on email.
-
-   * 1f1. System displays a list of person who have the email.
-
-      Use case ends.
-
-* 1g. User requests to find based on department.
-
-   * 1g1. System displays a list of person who have the department.
-
-      Use case ends.
-
-* 1h. User requests to find based on role.
-
-   * 1h1. System displays a list of person who have the role.
-
-      Use case ends.
 
 **Use case: Promoting a potential hire to an employee**
 
