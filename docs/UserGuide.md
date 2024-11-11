@@ -2,9 +2,11 @@
 layout: page
 title: User Guide
 ---
+## <a id="top"></a>
 
-**ConTActs** is a **desktop app for teaching assistants (TAs) to manage student contact information, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, ConTActs can get your contact management tasks done faster than traditional GUI apps.
+**ConTActs** is a desktop application designed specifically for Teaching Assistants (TAs) to **manage student contact information efficiently**. 
+Optimised for TAs **comfortable with Command Line Interface** (CLI) commands, ConTActs exploits the speed of CLI commands while retaining the benefits of a Graphical User Interface (GUI).
+For TAs who type quickly, ConTActs provides a faster, more streamlined solution for student contact management compared to traditional GUI applications.
 
   - [Installation Guide](#installation-guide)
   - [Features](#features)
@@ -18,15 +20,15 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your **ConTActs**.
+3. Copy the file to the folder you want to use as the _home folder_ for your **ConTActs**.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ConTActs.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ConTActs.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all students in the contact list.
@@ -39,7 +41,7 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -52,14 +54,16 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- **Tutorials** are labelled starting from **1**, regardless of when they commence.
+
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/CS1101S` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/CS1101S`, `t/MA1521 t/CS1101S` etc.
 
-- Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- For commands with only prefixes (e.g. `add`, `edit`), parameter order does not matter.<br>
+  e.g. `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are both acceptable.
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -94,7 +98,7 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in the contact list.
+Displays all students in the contact list.
 
 Format: `list`
 
@@ -126,7 +130,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [t/TAG]` or `find [KEYWORDS] t/TAG`
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - The name as well as the tags will be searched.
-- students matching at least one keyword or tag will be returned (i.e. `OR` search).
+- Students matching at least one keyword or tag will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 - Searching for both name and tags will return all results that have either the name or the respective tag, which is basically the union of both groups.
 
@@ -140,19 +144,13 @@ Examples:
 - `find alex t/CS1101S` returns `Alex Yeoh` and all students tagged with tag `CS1101S`<br>
   ![result for 'find alex t/CS110S'](images/findAlexTag.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Updated index:**<br>
-After a `find` command, the **next** command's `INDEX` will refer to the index in the displayed list.
-</div>
-
 ### Marking student as present : `mark`
 
-Marks specified tutorial attendance as present of the student by the index number.
+Sets the specified tutorial(s) as present for the student at the given index.
 
 Format: `mark INDEX tut/TUTORIAL`
 
-- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
+- `Index` refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
 - `TUTORIAL` can be in the format of:
   - A positive number between 1 - 12 (inclusive) e.g. `1`.
   - A list of numbers e.g. `[1,3,5]`.
@@ -166,7 +164,7 @@ Examples:
 
 Visual Effect:
 
-- After the command `mark 1 tut/1`, tutorial box 1 of the 1st student will turn <span style="color:green">green</span>.
+- After the command `mark 1 tut/1`, tutorial box 1 of the 1st student will turn **<span style="color:green">green</span>**.
 
   |Before|After|
   |---|---|
@@ -174,11 +172,11 @@ Visual Effect:
 
 ### Marking student as absent : `unmark`
 
-Marks specified tutorial attendance as absent of the student by the index number.
+Sets the specified tutorial(s) as absent for the student at the given index.
 
 Format: `unmark INDEX tut/TUTORIAL`
 
-- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, ...).
+- `Index` refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, ...).
 - `TUTORIAL` can be in the format of:
     - A positive number between 1 - 12 (inclusive) e.g. `1`.
     - A list of numbers e.g. `[1,3,5]`.
@@ -192,18 +190,18 @@ Examples:
 
 Visual Effect:
 
-The specified tutorial box of the specified student will turn <span style="color:red">red</span>.
+The specified tutorial box of the specified student will turn **<span style="color:red">red</span>**.
 
-|❗ *To reduce visual clutter, an image will not be provided*.|
+>❗ *To reduce visual clutter, an image will not be provided*.
 ---
 
 ### Resetting student's attendance : `reset`
 
-Resets specified tutorial attendance of the student by the index number.
+Resets attendance for the specified tutorial(s) for the student at the given index.
 
 Format: `reset INDEX tut/TUTORIAL`
 
-- Resets the attendance of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** (1, 2, 3, ...).
+- `Index` refers to the index number shown in the displayed student list. The index **must be a positive integer** (1, 2, 3, ...).
 - `TUTORIAL` can be in the format of:
     - A positive number between 1 - 12 (inclusive) e.g. `1`.
     - A list of numbers e.g. `[1,3,5]`.
@@ -217,17 +215,17 @@ Examples:
 
 Visual Effect:
 
-The specified tutorial box of the specified student will turn <span style="color:grey">grey</span>.
+The specified tutorial box of the specified student will turn **<span style="color:grey">grey</span>**.
 
-|❗ *To reduce visual clutter, an image will not be provided*.|
+>❗ *To reduce visual clutter, an image will not be provided*.
 ---
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Faster attendance updating:**<br>
 You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all currently displayed students in the contact list at once.
-- `mark * tut/1` marks all students as attended for tutorial 1.
-- `unmark * tut/1` marks all students as absent for tutorial 1.
+- `mark * tut/1` sets all students as present for tutorial 1.
+- `unmark * tut/1` sets all students as absent for tutorial 1.
 - `reset * tut/1` resets the attendance of all students for tutorial 1.
 
 A combination of commands can be used to optimise attendance updating. e.g. *John* did not attend tutorial 1 but the rest of the students did.
@@ -250,19 +248,13 @@ Format: `sort ORDER [n/] [i/] [tut/TUTORIAL]`
 - `n/` indicates sorting according to name.
 - `i/` indicates sorting according to student id.
 - `tut/TUTORIAL` indicates sorting according to tutorial attendance for a specific tutorial.
-- At least one sorting criterion `[n/]`, `[i/]`, `[tut/TUTORIAL]` must be present. `sort ORDER` is an invalid command.
+- Exactly one sorting criterion `[n/]`, `[i/]`, `[tut/TUTORIAL]` must be specified. `sort ORDER` is an invalid command.
 
 Examples:
 
 - `sort -1 i/` sorts the student list in descending order according to student id.
 - `sort 1 tut/3` sorts the student list according to tutorial 3 attendance in this order: present, absent and not marked (grey box).
 - `sort -1 tut/3` sorts the student list according to tutorial 3 attendance in this order: absent, present and not marked (grey box).
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Updated index:**<br>
-After a `sort` command, the **next** command's `INDEX` will refer to the index in the displayed list.
-</div>
 
 ### Deleting a student : `delete`
 
@@ -284,6 +276,11 @@ Examples:
 Clears all entries from the contact list.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command will delete **ALL student contact data** in the contact list, and it **cannot be undone**. 
+Please ensure that you really want to remove all contact records before proceeding.
+</div>
 
 ### Exiting the program : `exit`
 
@@ -338,12 +335,12 @@ Click on each command to jump to their subsection.
 
 ## Field Constraints
 
-|Field|Acceptable Values|
-|---|---|
-|`NAME`|alphanumeric|
-|`STUDENT_ID`|E followed by 7 digits (0 to 9)|
-|`PHONE`|digits (0 to 9)|
-|`EMAIL`|**local-part**@**domain**<br>**local-part**:<br> - alphanumeric and special characters: (`+_.-`), not starting / ending with any special characters.<br>**domain**:<br> - end with a domain label at least 2 characters long<br> - have each domain label start and end with alphanumeric characters<br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any|
+|Field| Acceptable Values                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`NAME`| Alphanumeric                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|`STUDENT_ID`| E followed by 7 digits (0 to 9)                                                                                                                                                                                                                                                                                                                                                                                                    |
+|`PHONE`| Digits (3 to 9)                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|`EMAIL`| Acceptable format: **local-part**@**domain**<br><br>**local-part**:<br> - Alphanumeric and special characters: (`+_.-`), not starting / ending with any special characters <br><br>**domain**:<br> - End with a domain label at least 2 characters long<br> - Have each domain label start and end with alphanumeric characters<br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any |
 
 ---
 
@@ -353,4 +350,4 @@ Click on each command to jump to their subsection.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
-[Back to Top](#installation-guide)
+[Back to Top](#top)
