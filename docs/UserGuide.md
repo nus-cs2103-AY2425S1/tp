@@ -525,9 +525,9 @@ you more flexibility in annotating your contact and avoid potential input issues
 
 The `ADDRESS` field can be used to refer to the address of any location related to a contact, such as home, office, consultation venue etc.
 Since the length of address input may differ drastically because of the nature of the location and the complexity in its address name structure,
-we do not enforce restriction on the input length and as long as the input is not blank, it is considered as valid address.
+we do not enforce restriction on the input length and as long as the input is not blank, it is considered as a valid address.
 
-Some valid `ADDRESS` values include `COM3-01-20`, `#05-03, Blk 211, Any Place Street 123, Singapore 123456`, `Utown Residence #12-34 etc`.
+Some valid `ADDRESS` values include `COM3-01-20`, `#05-03, Blk 211, Any Place Street 123, Singapore 123456`, `Utown Residence #12-34` etc.
 
 ### `TAG` field
 
