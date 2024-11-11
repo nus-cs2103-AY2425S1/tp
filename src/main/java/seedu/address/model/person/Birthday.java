@@ -29,7 +29,8 @@ public class Birthday {
      * @param dateStr A valid date string.
      */
     public Birthday(String dateStr) {
-        requireNonNull(dateStr);
+        requireNonNull(dateStr); // check entry is not null
+        // check valid birthday input
         checkArgument(isValidBirthday(dateStr), MESSAGE_CONSTRAINTS);
         date = parseDate(dateStr);
         this.value = date.format(FORMATTER);
@@ -52,6 +53,7 @@ public class Birthday {
         requireNonNull(input);
         try {
             LocalDate testBirthday = LocalDate.parse(input, FORMATTER);
+            // compare current date with birthday. If birthday exceeds current, throw an exception
             return testBirthday.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
@@ -66,7 +68,6 @@ public class Birthday {
     @Override
     public boolean equals(Object other) {
         // This method made use of ChatGPT to ensure its correctness when comparing the birthday object
-
         return this == other
                 || (other instanceof Birthday
                 && date.equals(((Birthday) other).date));

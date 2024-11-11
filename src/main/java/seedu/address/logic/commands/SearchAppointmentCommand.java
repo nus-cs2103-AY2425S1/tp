@@ -21,7 +21,6 @@ import seedu.address.model.person.Person;
  * Searches for clients who have appointments on the specified date and time.
  */
 public class SearchAppointmentCommand extends Command {
-    // ChatGPT used to generate javadocs
     public static final String COMMAND_WORD = "search " + PREFIX_SEARCH_APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -75,6 +74,7 @@ public class SearchAppointmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // This execute method relied on GPT to help check the correctness of the code.
         requireNonNull(model);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Predicate<Person> predicate = person -> {
