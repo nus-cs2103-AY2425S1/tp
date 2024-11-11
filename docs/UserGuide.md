@@ -279,7 +279,9 @@ Here’s a reference table of available flags and the type of data they correspo
 
 ## 4.4 Arguments
 
-Arguments are the values that are used in a command. **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
+Arguments are the values that are used in a command. 
+- Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
+- **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
 
 ### 4.4.1  Flag Arguments
 Flag arguments are the values that follow each flag in a command.
@@ -480,6 +482,8 @@ All client information, including contact details, address, job information, and
 edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
+  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
 
@@ -549,6 +553,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
+  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
@@ -730,6 +736,8 @@ For detailed explanations for the matching criteria of each flag and the accepta
 view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
+  - **Note:** The provided index must be **greater than 0**, and **less than the total number of clients in the list**.
+    - More details can be found in [Section 4.4.2 Non-Flag Arguments](#442-non-flag-arguments-).
 
 **Examples:**
 - **View client no.1**
