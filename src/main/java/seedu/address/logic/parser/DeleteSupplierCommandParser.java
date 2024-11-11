@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,12 +18,12 @@ public class DeleteSupplierCommandParser implements Parser<DeleteSupplierCommand
      */
     public DeleteSupplierCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
-        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_NAME},
+                ArgumentTokenizer.tokenize(args, PREFIX_SUPPLIER_NAME);
+        ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_SUPPLIER_NAME},
                 DeleteSupplierCommand.MESSAGE_USAGE);
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_NAME);
-        Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+                PREFIX_SUPPLIER_NAME);
+        Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SUPPLIER_NAME).get());
 
         return new DeleteSupplierCommand(supplierName);
     }
