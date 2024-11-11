@@ -657,7 +657,7 @@ testers are expected to do more *exploratory* testing.
    1. By default, these files are located in the `data` folder.
    2. Whenever a command is executed (e.g., `add`, `list`, `editappt`), the data is saved automatically to the respective files.
 
-2. **Dealing with missing data files**
+2. **Dealing with missing data files**:
 
    1. To simulate a missing file, navigate to the `data` folder (in the same location as `socialbook.jar`) and delete either `socialbook.json` or `appointments.json` (or both).
    2. Re-launch the application:<br>
@@ -665,7 +665,7 @@ testers are expected to do more *exploratory* testing.
       * If only `appointments.json` is missing, the app will continue to run with an empty appointment list.
       * If both `socialbook.json` and `appointments.json` are missing, the app will repopulate with sample data for persons only, while appointments will remain empty.
 
-3. **Dealing with corrupted data entries**
+3. **Dealing with corrupted data entries**:
 
    1. To simulate a corrupted data entry, open either `socialbook.json` or `appointments.json` in the `data` folder and change a compulsory field to an invalid value (e.g., set a phone number to `-1`).
    2. Re-launch SocialBook.
