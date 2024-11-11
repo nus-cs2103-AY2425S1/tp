@@ -165,6 +165,10 @@ The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches
 ##### Executing the Command
 The `HelpCommand` creates a `KeywordCommandResult` object which is handled in `MainWindow.java` to display the appropriate help window.
 
+##### Activity Diagram
+The following activity diagram illustrates the workflow of the execution of the `help` command:
+![HelpCommandActivityDiagram](images/HelpCommandActivityDiagram.png)
+
 ##### Design Considerations
 The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
 Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
