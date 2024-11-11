@@ -60,7 +60,10 @@ To get started,
 5. Once the application starts, type `view name/Alex Yeoh` into the command box as shown in the picture below.<br>
 
    An interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![quick start GUI on launch](images/updatedQuickStartLaunchScreenshot.png)
+<center>
+<pic src="images/updatedQuickStartLaunchScreenshot.png" width="650" alt="quick start GUI on launch" lazy>
+</pic>
+</center>
    
 {{ newPage }}
 
@@ -77,7 +80,12 @@ To get started,
     * `addGrade name/Alex Yeoh assignment/Ex01 score/9` : Assigns and adds `Ex01` with a score of 9 to `Alex Yeoh`.
 
    * The GUI should now look something like this.<br>
-   ![quick start GUI after commands](images/quickStartResultScreenshot.png)
+   
+<center>
+<pic src="images/quickStartResultScreenshot.png" width="650" alt="quick start GUI after commands" lazy>
+</pic>
+</center>
+
 
    * `clear` : Deletes all contacts. <b>THIS IS AN IRREVERSIBLE ACTION.</b>
 
