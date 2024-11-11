@@ -431,6 +431,43 @@ Format: `clear`
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary of Terms
+
+<table>
+    <tr>
+        <th>Term</th>
+        <th>Definition</th>
+        <th>Example</th>
+    </tr>
+    <tr>
+        <td><b>ABCLI</b></td>
+        <td>A desktop application used to manage buyers, meet-ups and properties efficiently.</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Buyer</b></td>
+        <td>A client that is interested and looking to purchase a house.</td>
+        <td>A buyer that you may add as you use the application could be someone named <code>Jeremy Tan</code></td>
+    </tr>
+    <tr>
+        <td><b>Case sensitive/insensitive</b></td>
+        <td>Case sensitive/insensitive is when the computer cares/doesn't care about uppercase or lowercase, respectively.</td>
+        <td><b>Case sensitive:</b> <code>Apple</code>, <code>apple</code>, <code>aPPle</code> are recognised as three different words.<br><br><b>Case insensitive:</b> <code>Banana</code>, <code>banana</code>, <code>BaNaNa</code> are recognised as the same word.</td>
+    </tr>
+    <tr>
+        <td><b>Command Line Interface (CLI)</b></td>
+        <td>Allows a user to interact with the computer or application to execute instructions or commands by typing using a keyboard.</td>
+        <td>When typing commands in ABCLI, the panel where you see your typed commands acts as the CLI.</td>
+    </tr>
+    <tr>
+        <td><b>Parser</b></td>
+        <td>Takes in user's commands and translate them into instructions understandable by the computer or application .</td>
+        <td>When the command <code>delete 1</code> is typed and entered into ABCLI, the parser will read through the command and inform the application that the user desires to <code>delete</code> at the index <code>1</code>.</td>
+    </tr>
+</table>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
 <table>
