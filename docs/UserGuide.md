@@ -285,6 +285,7 @@ Additional Details:
 For example:
 filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
 filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
+* Specifying any parameters beyond those required will result in an error.
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
