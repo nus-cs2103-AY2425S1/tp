@@ -48,13 +48,21 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_NRIC));
         }
 
-        String remarkString = Arrays.stream(argParts, 1, argParts.length)
-                .collect(Collectors.joining(" ")).substring(2);
+        String remarkStringArgs = Arrays.stream(argParts, 1, argParts.length)
+                .collect(Collectors.joining(" "));
+        String expectedRemarkPrefix = remarkStringArgs.substring(0, 2);
+        String expectedRemarkValue = remarkStringArgs.substring(2);
 
-        if (!remarkString.isEmpty() && !remarkString.matches("[a-zA-Z0-9 ]+")) {
-            throw new ParseException(MESSAGE_NOT_ALPHANUMERIC + PREFIX_REMARK);
+        if (!expectedRemarkPrefix.equals("r/")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
         }
 
-        return new RemarkCommand(nric, new Remark(remarkString));
+        if (!expectedRemarkValue.isEmpty()) {
+            if (!expectedRemarkValue.matches("[a-zA-Z0-9 ]+")) {
+                throw new ParseException(MESSAGE_NOT_ALPHANUMERIC + PREFIX_REMARK);
+            }
+        }
+
+        return new RemarkCommand(nric, new Remark(expectedRemarkValue));
     }
 }
