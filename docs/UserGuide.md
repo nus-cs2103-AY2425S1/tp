@@ -162,6 +162,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+  * If you wish to add tag instead of replacing all existing tags, use the [`tag`](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#tagging-a-client-tag) command.
 * You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 
