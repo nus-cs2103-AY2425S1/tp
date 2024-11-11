@@ -69,7 +69,7 @@ benefits of a Graphical User Interface (GUI).
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` :
+    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` : <br>
       Adds a patient named `John Doe` whose appointment is at `02 October 2024 18:30` to ClinicBuddy.
 
     * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
@@ -82,7 +82,7 @@ benefits of a Graphical User Interface (GUI).
    
     * `backup` : Creates a backup by default naming (`manual_backup`).
    
-    * `restore 0` : Prompts a confirmation message and restore backup file from the /backups/ path with the naming starts with index 0 by typing `Y'.
+    * `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
    
     * `listbackups` : Lists all available backup files in the /backups/ path.
 
@@ -104,7 +104,7 @@ benefits of a Graphical User Interface (GUI).
 
 <div markdown="block" class="alert alert-info">
 
-* Commands are in lower-case
+* Commands are in lower-case.<br>
   e.g. `add` is allowed, while `Add` or `aDD` will not be recognised.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -149,12 +149,12 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINT
 * Names only allow alphanumeric characters and spaces. Case-sensitive
 * Age should only contain numbers and should be between 0-999 inclusive.
 * Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
-* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier
+* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier.
 * Phone numbers should only contain numbers, and it should be `3-10` digits long.
 * Addresses can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
 * Emails should be of the format local-part@domain. Case-sensitive.
 * Appointments should be in a format of `dd/MM/yyyy HH:mm`.
-* Tags are alphanumeric. Case-sensitive.
+* Tags are alphanumeric with the exception of blood types, which must contain a + or - (e.g. A+, AB-, O+ etc.). Case-sensitive.
 * Appointments are made in 15 minute intervals starting from given time and cannot be made after 14 minutes before closing time.
 * Appointments cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
@@ -170,7 +170,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINT
 Examples:
 
 * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
-* `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
+* `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/Patient e/betsycrowe@example.com h/Newgate Street p/1234567 t/A+`
 
 ![add patient](images/adding%20patient.png)
 
@@ -193,12 +193,11 @@ OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDR
 * You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567`
-  and `johndoe@example.com` respectively.
+* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+
 * `update 2 n/Betsy Crower t/` Updates the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567`
-  and `johndoe@example.com` respectively.
+* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567` and `johndoe@example.com` respectively.
 
 ![update](images/update%20patient.png)
 
@@ -211,7 +210,7 @@ by NRIC if the record is not currently displayed will not work.
 
 ### Deleting a patient : `delete`
 
-Deletes the specified patient from ClinicBuddy either by **NRIC** or **index** on the patient record.
+Deletes the specified patient from ClinicBuddy either by **NRIC** or **Index** on the patient record.
 
 #### Deleting a patient by NRIC:
 
@@ -233,20 +232,20 @@ Deletions only work if the displayed list contains the entry you are deleting. H
 by NRIC if the record is not currently displayed will not work.
  </div>
 
-#### Deleting a patient by index:
+#### Deleting a patient by Index:
 
 Format: `delete Index`
 
 * Deletes the patient at the specified `Index`.
 * The Index refers to the patient's position in the displayed patient list.
-* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+* The Index **must be a positive whole number no larger than the size of the list.**
 
 Examples:
 
 * `list` followed by `delete 1` deletes the first patient in the list.
 * `find Betsy` followed by `delete 1` deletes the first patient in the results of the `find` command.
 
-![delete](images/deletepatient.png)
+![delete](images/delete.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -254,9 +253,10 @@ Examples:
 
 Clears all entries from ClinicBuddy.
 
-![clear](images/clearentries.png)
-
 Format: `clear`
+
+![clear](images/clear.png)
+
 
 ### Listing all patients : `list`
 
@@ -342,23 +342,23 @@ Examples:
 
 Deletes the specified patient from ClinicBuddy.
 
-Format: `deleteappt NRIC dd-mm-yyyy HH:mm`
+Format: `deleteappt NRIC DATE HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
 * The NRIC refers to the unique identifier displayed in the current patient list.
 * The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Example:
-* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient identified by the NRIC s1234567z.
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
 
-Format: `deleteappt Index dd-mm-yyyy HH:mm` 
+Format: `deleteappt Index DATE HH:mm` 
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
 * The Index refers to the patient’s position in the displayed list.
-* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+* The Index **must be a positive whole number no larger than the size of the list.**
 
 Example:
-* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient at index 1 of the displayed list.
+* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024 for the patient at index 1 of the displayed list, assuming 12:12 falls within his appointment window.
 
 ![deleteapt](images/delete%20appointment.png)
 
@@ -403,27 +403,25 @@ save manually.
 
 ### Backup the records : `backup`
 
-ClinicBuddy ensures the security and recovery of patient records through manual and automated backup options.
+ClinicBuddy ensures the security and recovery of patient records through manual and automated backups.
 These are useful to save the state of your current data at a specific point in time.
 
 #### **Manual Backup: Save your current data**
 - The `backup` command allows users to manually save a copy of their current patient records.
 
-
 - Key Features:
   - **Description Option:** You can add a meaningful description to identify the backup.
-  - **Indexed Backups:** Backup files are automatically assigned an index (0–9).
+  - **Indexed Backups:** Backup files are automatically assigned an index (`0`–`9`).
   - **Automated Deletion:** Only the latest 10 backups are retained to optimize storage.
-
 
 - How Manual Backup Works:
   - **Basic Command:** Input `backup` to create a backup with a default description (`manual_backup`).
   - **Custom Description:** Use `backup DESCRIPTION` to label your backup with details about changes.
   - **File Location:** Backups are stored in `[Application Directory]/backups/`.
-  - Each backup file is assigned the timestamp of creation time and an index number from `0` to `9`.
+  - Each backup file is assigned a timestamp of the creation time and an index number.
   - The index will reset to `0` after reaching `9`, **overwriting** the oldest backup file.
   
-- Naming Format:
+- File Naming Format:
   ```
   INDEX_DESCRIPTION_TIMESTAMP.json
   ```
@@ -438,7 +436,7 @@ These are useful to save the state of your current data at a specific point in t
 - A backup name is limited to 250 characters only.
  </div>
 
-![manual_backup](images/manualbackup.png)
+![manual_backup](images/manual_backup.png)
 
 #### **Automated Backup: Ensure data safety with minimal effort**
 - ClinicBuddy automatically creates backups during critical operations:
@@ -448,7 +446,7 @@ These are useful to save the state of your current data at a specific point in t
 - How Automated Backup Works:
     - **Description Naming:** Backups are labeled with the action, such as `delete_<name>` or `clear`.
     - **No User Action Required:** These backups are generated automatically and stored in the same `/backups/` folder.
-    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain the timestamp of creation time.
+    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain a timestamp of the creation time.
 
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
@@ -456,9 +454,7 @@ These are useful to save the state of your current data at a specific point in t
   ```
   1_clear_2024-10-30_18-05-29-745.json
   ```
-![delete_patient](images/deletepatient.png)
-![clear_entries-](images/clearentries.png)
-
+![automated_backup](images/automatedbackup.png)
 
 ### Listing all backups : `listbackups`
 
@@ -496,7 +492,6 @@ Format: `restore INDEX`
 #### How Restore Works:
 - **View Available Backups:** Use the listbackups command to display all backup files. 
 - **Restore Command:** Enter restore INDEX to restore the backup with the specified index. 
-- **Confirmation Prompt:** You will be asked to confirm before proceeding with the restoration.
 - Example:
   ```
   restore 2
@@ -505,11 +500,9 @@ Format: `restore INDEX`
 <div markdown="span" class="alert alert-primary">:bangbang:
 **Warnings:** <br>
 - Restoring a backup overwrites all current patient records.<br>
-- Create a manual backup before restoring to preserve recent changes.<br>
-- Restoring without confirmation is not allowed, preventing accidental data loss.
+- It is suggested to create a manual backup before restoring to preserve recent changes.<br>
  </div>
 
-![confirmation](images/confirmation.png)
 ![resto re](images/restore.png)
 
 <div style="page-break-after: always;"></div>
@@ -550,15 +543,11 @@ the data of your previous AddressBook home folder.
 **Q**: What if I forget the command formats?<br>
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
 
-**Q**: Can I cancel a restore operation if I change my mind?<br>
-**A**: Yes. The restore operation prompts for confirmation. If you cancel the operation by typing anything other than `Y`, no changes will be made to your current records.
-
 **Q**: How are backups sorted in the listbackups command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
 
 **Q**: Is there a limit on the number of backups I can store?
 **A**: Yes. ClinicBuddy retains only the 10 most recent backups for storage efficiency. Older backups are automatically overwritten when a new backup is created.
-
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -568,28 +557,36 @@ the data of your previous AddressBook home folder.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
    application before running the application again.
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
-3. ClinicBuddy has a limit of storing only the 10 most recent backups. Once this limit is reached, older backups are automatically overwritten. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
-4. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may display an error. <br>
+
+3. ClinicBuddy has a **limit of storing only the 10 most recent backups**. Once this limit is reached, older backups are automatically overwritten. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
+
+4. ClinicBuddy **requires specific formats for dates** `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may display an error. <br>
    **Solution:** Double-check the format of date and time inputs before submission.
-5. The `restore` command overwrites current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
-   **Solution:** Always create a new **backup before performing a restore to preserve current records.
-6. Updating operating hours will fail if there are existing appointments outside the new hours. <br>
+
+5. The `restore` command **overwrites current patient records with backup data**. This could lead to unintentional loss of recent changes. <br>
+   **Solution:** Always create a new **backup** before performing a restore to preserve current records.
+
+6. **Updating operating hours will fail** if there are existing appointments outside the new hours. <br>
    **Solution:** Use the `deleteappt` command to delete or `update` appointments that fall outside the proposed hours before making the update.
-7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.<br>
+
+7. **If multiple backups have similar descriptions**, it may be challenging to distinguish between them.<br>
    **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
-8. Backup descriptions longer than 250 characters will cause the operation to fail.<br>
+
+8. Backup descriptions **longer than 250 characters will cause the operation to fail**.<br>
    **Solution:** Ensure backup descriptions are concise and do not exceed the character limit.
-9. Attempting to restore from an invalid or unavailable index results in an error.<br>
+
+9. **Attempting to restore from an invalid or unavailable index** results in an error.<br>
    **Solution:** Use the `listbackups` command to verify available backup indexes before attempting a restore.
-10. When the backup limit (10 files) is reached, older backups are automatically overwritten without warning.<br>
+
+10. When the **backup limit (10 files) is reached, older backups are automatically overwritten** without warning.<br>
     **Solution:** Move older backups to a different folder if they need to be retained.
-11. The backup list is sorted by timestamp but may not match user expectations (e.g., expecting sorting by index).<br>
+
+11. The backup list is **sorted by timestamp** but may not match user expectations (e.g., expecting sorting by index).<br>
     **Solution:** Understand that backups are sorted by creation time, not index, to locate backups accurately.
-12. The restore operation requires confirmation, but users might overlook this step, causing confusion.<br>
-    **Solution:** Pay attention to the confirmation message and respond as instructed (Y to confirm or any other key to cancel).
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -601,16 +598,16 @@ the data of your previous AddressBook home folder.
  **Help**              | `help`  
  **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`  
  **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​` <br> e.g.,`update 2 n/James Lee e/jameslee@example.com`                                                                 
- **Delete**            | `delete` [NRIC] <br> `delete` [index] <br> e.g., `delete S1234567Z`, `delete 1`
+ **Delete**            | `delete` NRIC <br> `delete` Index <br> e.g., `delete S1234567Z`, `delete 1`
  **Clear**             | `clear`                  
  **List**              | `list` 
- **Find**              | `find` [NRIC] <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
- **Bookings**          | `bookings` [DATE] <br> e.g., `bookings 01/02/2024`
- **Delete Appointments** | `deleteappt` [NRIC dd-mm-yyyy HH:mm] <br> `deleteappt` [Index dd-mm-yyyy HH:mm] <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
+ **Find**              | `find` NRIC <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
+ **Bookings**          | `bookings` DATE <br> e.g., `bookings 01/02/2024`
+ **Delete Appointments** | `deleteappt` NRIC DATE HH:mm <br> `deleteappt` Index DATE HH:mm <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
  **Hours**             | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]` <br> e.g., `hours`, `hours o/09:30 c/18:00`, `hours o/09:30 c/18:00`                                                                                                                                                                                                     
- **Backup**            | `backup`  <br/>  `backup` [DESCRIPTION] <br> e.g., `backup After updating John's contact info`  
+ **Backup**            | `backup` [Description] <br> e.g., `backup` `backup After updating John's contact info`  
  **ListBackups**       | `listbackups`
- **Restore**           | `restore` [INDEX] <br> e.g., `restore 1`   
+ **Restore**           | `restore` Index <br> e.g., `restore 1`   
  **Exit**              | `exit`
 
                                                                                                                                                                                                     

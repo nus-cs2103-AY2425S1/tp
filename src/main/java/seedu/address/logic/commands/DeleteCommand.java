@@ -22,13 +22,11 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by their NRIC or Index used in the patient list.\n"
             + "Parameters: NRIC (must be a valid NRIC)\n"
-            + "Example: " + COMMAND_WORD + " S1234567A "
-            + "OR \n"
+            + "Example: " + COMMAND_WORD + " S1234567A \n"
             + "Parameters: Index (must be a valid Index in the list)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS =
-            "Deleted Patient: %1$s\n\nBackup %2$d is created successfully.\nDescription: %3$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
 
     private final Nric targetNric;
     private final Index targetIndex;
@@ -65,7 +63,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         // Search for the person with the given NRIC
         Person personToDelete = null;
         if (targetNric != null) {
@@ -75,7 +72,6 @@ public class DeleteCommand extends Command {
                     break;
                 }
             }
-
             // If the person is not found, throw an exception
             if (personToDelete == null) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_NRIC);
@@ -87,13 +83,8 @@ public class DeleteCommand extends Command {
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
         }
 
-        String description = "delete_" + personToDelete.getName().fullName;
-        int backupIndex = model.backupData(description);
         model.deletePerson(personToDelete);
-
-        return new CommandResult(
-                String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete), backupIndex, description)
-        );
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override

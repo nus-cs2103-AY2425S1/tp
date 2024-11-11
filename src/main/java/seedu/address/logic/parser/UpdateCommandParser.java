@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,6 +30,8 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditCommand object
  */
 public class UpdateCommandParser implements Parser<UpdateCommand> {
+
+    public static final String MESSAGE_INVALID_INDEX_OR_NRIC = "Index or NRIC provided is invalid.\n%s\n%s\n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -50,19 +54,22 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
 
         // Parse the NRIC or index
         boolean isContainNric = Nric.isValidNric(preamble);
+        boolean isContainIndex = StringUtil.isNaturalNumber(preamble);
+
+        if (!isContainIndex && !isContainNric) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX_OR_NRIC,
+                    Nric.MESSAGE_CONSTRAINTS, MESSAGE_INVALID_INDEX));
+        }
+
         Nric nric = null;
         Index index = null;
 
-
-        try {
-            if (isContainNric) {
-                nric = ParserUtil.parseNric(preamble);
-            } else {
-                index = ParserUtil.parseIndex(preamble);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+        if (isContainNric) {
+            nric = ParserUtil.parseNric(preamble);
+        } else {
+            index = ParserUtil.parseIndex(preamble);
         }
+
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AGE, PREFIX_GENDER, PREFIX_NRIC,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_APPOINTMENT, PREFIX_ADDRESS, PREFIX_APPOINTMENT);
