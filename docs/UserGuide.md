@@ -85,21 +85,21 @@ specific topics or commands.
 
 Below is a summary of the main sections in this User Guide and what you can expect from each one.
 
-- [Install PlanPal](#3-Installation): New to PlanPal? Visit this section for a step-by-step guide to installing and launching the application.
+- [Get Started With PlanPal](#3-quick-start): New to PlanPal? Visit this section for a step-by-step guide to installing and launching the application.
 - [Tutorial](#4-tutorial-getting-started-with-planpal): Gain a basic understanding on how to use PlanPal to its fullest potential.
 - [Features](#5-features): Explore the full range of PlanPal’s capabilities, with detailed instructions and examples for each command.
 - [FAQ](#6-faq): Stuck or have questions? Find answers to common problems and queries here.
 - [Command Summary](#8-command-summary): Need a quick reference? This section provides an at-a-glance list of all supported commands.
 
 <box type="info" seamless>
-First-time users are strongly encouraged to read the Installation section before diving into PlanPal’s features.
+First-time users are strongly encouraged to read the <a href="#3-quick-start">Quick-Start</a> section before diving into PlanPal’s features.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
 
-## 3. Installation
+## 3. Quick Start
 
 ### 3.1 Pre-requisites
 
@@ -153,10 +153,63 @@ If Java is not installed or if the version is below `17`, download the latest Ja
 
 5. **Explore Additional Features**: For detailed explanations of each command and additional features, refer to the [Features](#features) section below.
 
+
+### 3.3 Graphical User Interface Layout
+
+This section gives a quick overview of the different User Interface layouts you may encounter while using PlanPal.
+
+#### 3.3.1 User Interface (UI) Overview
+
+![UI_Overview image](images/AppImages/UI_Overview.png)
+
+This image shows the default User Interface you'll see when you first launch PlanPal. Let’s go through each part of the 
+interface, moving clockwise from the top left:
+
+- **Menu Bar**: Provides quick access to key functions and features within PlanPal.
+- **Data Bar**: Displays the relative path to the current storage file in use.
+- **Contact List Panel**: Shows a list of contact cards.
+- **Contact Card**: Displays detailed system recorded information about a specific contact.
+- **Command Box**: Space for users to enter commands for PlanPal to execute.
+- **Result Box**: Displays the outcomes of executed commands.
+- **Event Card**: Displays detailed system recorded information about a specific event.
+- **Event List Panel**: Shows a list of event cards.
+
+#### 3.3.2 Additional UI Components
+
+![UI_Components_image](images/AppImages/UI_Components.png)
+
+Let's go through the UI components in more detail.
+- **Index**: The identifier used for selecting or referencing a specific contact.
+- **Contact Name**: The name of the contact person.
+- **Telegram Username**: The Telegram handle of the contact.
+- **Role**: The role assigned to the contact (e.g., attendee, volunteer, sponsor, vendor).
+- **Phone Number**: The contact's phone number.
+- **Address**: The physical address of the contact.
+- **Email**: The contact's email address.
+- **Total Event Contacts**: The total number of contacts associated with the current event.
+- **Event Role Count**: The count of each role in the event; note that the total may differ as some contacts can hold multiple roles.
+- **Event Name**: The name of the event being managed.
+
+#### 3.3.3 Searchmode UI Overview
+
+![UI_searchmode](images/AppImages/UI_searchmode.png)
+
+This image shows how the User Interface will change when you use 
+[Search Mode](#54-search-mode-for-event-management--search-mode-or-sm). You can also learn how to use Search Mode in 
+[Step 5](#45-using-search-mode) of the tutorial. Let's go through each part of the Search Mode interface, moving clockwise
+from the top right:
+
+- **Contact List Panel (Minimised)**: In search mode, the original Contact List Panel remains but is minimised.
+- **Search Results Panel**: A separate panel to displays the contact cards that match your search criteria.
+- **Contact Card**: Contact cards in the search results continue to have the same format.
+- **Event List Panel**: Remains unchanged, displaying a list of event cards.
+
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
 ## 4. Tutorial: Getting Started with PlanPal
+
 
 This tutorial guides you step-by-step to use the key features of PlanPal effectively. 
 If there are any commands that you do not understand, refer to the [Features](#features) section below for more details.
