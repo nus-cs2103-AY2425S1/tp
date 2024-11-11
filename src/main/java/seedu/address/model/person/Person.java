@@ -198,12 +198,12 @@ public class Person {
             return false;
         }
 
-        boolean sameClass = (otherPerson.getStudentClass().equals(this.getStudentClass()));
-        boolean sameRegNo = (otherPerson.getRegisterNumber().equals(this.getRegisterNumber()));
-        boolean samePhone = (otherPerson.getPhone().equals(this.getPhone()));
-        boolean sameEmail = (otherPerson.getEmail().equals(this.getEmail()));
+        boolean isSameClass = (otherPerson.getStudentClass().equals(this.getStudentClass()));
+        boolean isSameRegNo = (otherPerson.getRegisterNumber().equals(this.getRegisterNumber()));
+        boolean isSamePhone = (otherPerson.getPhone().equals(this.getPhone()));
+        boolean isSameEmail = (otherPerson.getEmail().equals(this.getEmail()));
 
-        return (sameClass && sameRegNo) || samePhone || sameEmail;
+        return (isSameClass && isSameRegNo) || isSamePhone || isSameEmail;
     }
 
     /**
