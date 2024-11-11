@@ -241,7 +241,7 @@ Format: `archive [INDEXES]...`
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
 
 Examples:
-* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
 Note:
 * You will not be able to use `inspect` and `edit` for archived contacts.
@@ -272,7 +272,7 @@ Format: `unarchive [INDEXES]...`
 
 
 Examples:
-* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
