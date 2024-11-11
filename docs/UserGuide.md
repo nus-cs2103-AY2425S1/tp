@@ -194,7 +194,7 @@ Example usages
 
 Invalid usages
 * Student already exists in EduVault
-  * *Error message: This person already exists in the address book.*
+  * *Error message: This person already exists in EduVault.*
 * Format errors, check [here](#12-format-errors).
 
 </div>
@@ -439,7 +439,7 @@ Invalid usage:
 * None of the option fields are input
     * *Error message: At least one field to edit must be provided.*
 * Values to edit result in a copy of a student already in EduVault
-    * *Error message: This person already exists in the address book.*
+    * *Error message: This person already exists in EduVault.*
 * `ATTENDANCE` & `TUTORIAL` & `PAYMENT` prefix used
     * Error message: PREFIX cannot be used in this command
 * Format errors, check [here](#12-format-errors)
