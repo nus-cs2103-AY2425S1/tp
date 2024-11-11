@@ -73,7 +73,7 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]…​`
 
-* Name should consist of alphanumeric characters and spaces, and should not be blank
+* Name should consist of alphanumeric characters and spaces, and should not be blank or contain ONLY numeric characters.
 * Phone numbers should only contain digits, and should have at least 3 digits.
 * Emails should be of the format local-part@domain and adhere to the following constraints:<br>
   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (``). The local-part may not start or end with any special characters.
@@ -94,6 +94,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence vip/false`
 
+![img.png](images/AddCommandDemo.png)
 
 ### Clearing all entries : `clear`
 
