@@ -211,7 +211,7 @@ Format: `deleteall`
 
 <box type="tip" seamless>
 
-**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+**IMPORANT:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
 
 </box>
 
@@ -254,6 +254,11 @@ Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 ### Getting Attendance : `getat`
 
 Gets attendance of student for a particular date
+
+* If `Adam Lee` is a unique name, `getat n/Adam Lee dt/2024-12-12` gets the student with the name `Adam Lee`'s attendance on `2024-12-12`.
+* If `Mary Tan` is a unique name, `getat n/Mary Tan dt/2024-09-11` gets the student with the name `Mary Tan`'s attendance on `2024-09-11`.
+* If there are multiple students with the name `Adam Lee`, `getat n/Adam Lee dt/2024-12-12 sn/A1234567Z` gets the student with the name `Adam Lee` and student number `A1234567Z`'s attendance on `2024-12-12`.
+* If there are multiple students with the name `Mary Tan`, `getat n/Mary Tan dt/2024-09-11 sn/A0123456X` gets the student with the name `Mary Tan` and student number `A0123456X`'s attendance on `2024-09-11`.
 
 Format: `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
