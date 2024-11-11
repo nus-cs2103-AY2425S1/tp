@@ -1193,6 +1193,17 @@ Address: 134 Clementi Ave.
 > **Output**: The person index provided is invalid!
 > 
 > ---
+> 
+> **User Error #6**: Missing `buy/` prefix
+> 
+> **Input**: `removelistingbuyers 1`
+> 
+> **Output**: 
+> <br>Invalid command format!
+> <br>removelistingbuyers: Removes buyers from the listing identified by its index number used in the displayed listing list Parameters: LISTING_INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...
+> <br>Example: removelistingbuyers 1 buy/1 buy/3
+> 
+> ---
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefix: [buy/](#sel--buy)
