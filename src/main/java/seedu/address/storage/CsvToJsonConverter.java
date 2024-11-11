@@ -37,8 +37,8 @@ public class CsvToJsonConverter {
         }
         this.directory = directory;
 
-        if (!directory.exists() || !this.directory.isDirectory()) {
-            throw new IllegalArgumentException("The provided path is not a directory");
+        if (!directory.exists()) {
+            throw new IllegalArgumentException("The import file is missing. Restart the program.");
         }
     }
 
@@ -90,6 +90,7 @@ public class CsvToJsonConverter {
     private void addAllJSonObjects(BufferedReader br, ObjectMapper objectMapper,
                                    String[] headers, ArrayNode jsonArray) throws IOException {
         String line = br.readLine();
+
         while (line != null) {
             ObjectNode jsonObject = addNextJsonObject(line, objectMapper, headers);
             line = br.readLine();
@@ -146,6 +147,10 @@ public class CsvToJsonConverter {
 
             if (values[i].isBlank()) {
                 values[i] = null;
+            }
+
+            if (values[i] != null && !values[i].isBlank()) {
+                values[i] = values[i].trim();
             }
 
             jsonObject.put(headers[i], values[i]);
