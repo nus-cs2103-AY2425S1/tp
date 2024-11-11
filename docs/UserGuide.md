@@ -193,6 +193,7 @@ Visual Effect:
 The specified tutorial box of the specified student will turn **<span style="color:red">red</span>**.
 
 >❗ *To reduce visual clutter, an image will not be provided*.
+
 ---
 
 ### Resetting student's attendance : `reset`
@@ -218,6 +219,7 @@ Visual Effect:
 The specified tutorial box of the specified student will turn **<span style="color:grey">grey</span>**.
 
 >❗ *To reduce visual clutter, an image will not be provided*.
+
 ---
 
 <div markdown="block" class="alert alert-info">
