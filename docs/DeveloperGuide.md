@@ -117,6 +117,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AcademyAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AcademyAssistParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Output after parsing:
+* If an invalid command is input, a help message is shown to a user to specify the proper use of the command.
+* Depending on the parameters input by the user, the same command type can result in different output. 
+  * For example, the `filter` command can filter by either `subject` or `yearGroup` as shown below.
+
+<img src="images/FilterActivityDiagram.png" width="600"/>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/model/Model.java)
 
@@ -236,9 +243,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
