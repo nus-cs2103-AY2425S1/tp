@@ -223,28 +223,54 @@ The following sequence diagram shows how a `find f/` command goes through both `
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 ### Switch Profile Feature
+The `switch` command allows users to manage contacts with distinct contexts by switching between profiles. Each profile represents an independent contact list within the application which allows for better organization (e.g. 'master-list', 'recreational-team' etc.).
 
-The `switch` command allows users to manage separate profiles within the application, each storing independent data in an isolated session. This feature enables users to work on different datasets without interference, as if each profile represented a unique instance of the application.
 
 #### Implementation
+The `switch` command follows the same pattern as other commands, using `SwitchCommand` to execute and `SwitchCommandParser` to parse its arguments. The `switch` command also rely on the `Model` component but uses it to track active and inactive profiles in the application's memory (active profile is the profile currently in-use, inactive means the profile exists but not in-use). Each profile's contact data is stored in individual JSON files in the `data` directory at the application's root, and the profile names are recorded in `preferences.json` at the application's root.
 
-The `switch` command relies on the `Model` component to manage active and inactive profiles. Each profile’s data is stored separately, and they are accessible through the application’s working directory.
+The following sequence diagram shows how the `switch` mechanism works:
+![SwitchSequenceDiagram](images/SwitchSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SwitchCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+##### Core Methods
+The following methods in the `Model` component are **core** to the `switch` command:
+- `Model#addToProfiles(Profile profile)`: Adds the current profile to the inactive profiles list.
+- `Model#removeFromProfiles(Profile profile)`: Removes the new profile from the inactive list if it exists.
+- `Model#setAddressBookFilePath(Path filePath)`: Updates the application’s data file path to point to the new profile’s JSON file.
+
+##### Command Execution
 When a profile switch is initiated:
-1. **Current Profile Update:** The `Model` adds the current profile to the inactive profiles list.
-2. **Profile Data Swap:** The new profile is set as the active profile, and the `preferences.json` file is updated to reflect this change.
-3. **Persistence Management:** `LogicManager` ensures the data is persisted to the hard disk upon valid command execution or application exit.
+1. In the `Model` component:
+   - The current profile is moved to the inactive profiles list.
+   - The new profile is removed from the inactive profiles if it exists.
+   - The `Model` updates its data file path to reference the new profile’s JSON file.
+2. In the `LogicManager` component:
+   - Control returns to `LogicManager`, which updates the displayed contact list to reflect contacts in the active profile.
+   - The application continues as normal, using the new profile.
 
-> **Note for Developers:** When testing in Gradle, avoid using the stop button, as it may bypass the standard data-saving mechanism. Use the GUI to exit to ensure data integrity.
+##### Profile File Creation
+There are two instances where a profile's JSON file will be created if it doesn't already exist:
+1. When any valid command is executed: `LogicManager` initiates a method chain that results in the `Storage` component handling the file creation for the current profile.
+2. When the user exits the program: If the program is closed via the GUI’s 'close' button, then `MainWindow` triggers the file creation chain instead.
 
-#### Testing
+##### Design Considerations
+##### Aspect: What key to store to identify a profile
+- Alternative 1 (Current Choice): Identify by profile name
+  - Pros: 
+    - Easy for developers to modify profile names rather than file paths.
+    - Reduces the risk of OS-dependent issues that may arise from handling file paths directly.
+    - Allows dynamic file path computation at runtime, offering flexibility for future extensions.
+  - Cons:
+    - Developers must ensure that the correct path is consistently computed, as any mismatch could lead to erros.
+- Alternative 2: Identify by file path
+  - Pros:
+    - Could offer users more flexibility by allowing profile data to be stored in any directory.
+  - Cons:
+    - More keystrokes required of users, which is error-prone and not beginner-friendly
 
-Consider these test cases for `switch` command validation:
-1. **Basic Profile Switching:** Verify that profiles are swapped correctly and data is isolated per profile.
-2. **Data Persistence on Exit:** Confirm that profile changes are saved on application exit.
-3. **Error Handling:** Test the different error messages that should appear based on the program's state:
-   - **Single Profile Scenario:** If no other profiles are available to be swapped (i.e., only one profile exists), the application should display a help message to guide the user.
-   - **Multiple Profiles Scenario:** If multiple profiles are available, the application should list the available profiles, showing the options that can be switched to.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,50 +302,39 @@ Consider these test cases for `switch` command validation:
 This is done via a clean user interface with a focus on the CLI, with fast access to the contact information of relevant CCA personnel,
 providing users a one-stop solution to help manage CCA manpower related considerations.
 
-
-
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …        | I want to …                                                                 | So that I can…                                                          |
 |----------|---------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | user          | add multiple contacts with one command                                      | add in multiple contacts at one time                                    |
+| `* * *`  | user          | add individual contacts                                                     | save the information of relevant contact and retrieve it when I want it |
 | `* * *`  | user          | view all the information of a particular contact                            | focus on that one sole contact without distractions from other contacts |
 | `* * *`  | user          | search for a contact by querying the saved name                             | get the information of the contact when needed                          |
-| `* * *`  | user          | easily view the available commands on the app                               | quickly find the usage for a command I had forgotten                    |
-| `* * *`  | user          | quickly duplicate a contact's information                                   | add similar contacts without re-entering details                        |
-| `* * *`  | user          | add new contacts with the fewest possible keystrokes                        | add new contacts quickly                                                |
-| `* * *`  | user          | add individual contacts                                                     | save the information of the contact and retrieve it when I want it      |
-| `* * *`  | user          | edit the contact information of any entry                                   | update any outdated information, and keep the list current              |
-| `* * *`  | user          | delete an entry if needed                                                   | remove any individuals who are no longer relevant to my organisation    |
+| `* * *`  | user          | easily view the available commands on the app                               | easily find the usage for a command I had forgotten without internet    |
+| `* * *`  | user          | add new contacts with the few keystrokes                                    | add new contacts efficiently                                            |
+| `* * *`  | user          | edit the details of a contact                                               | keep the contact list up to date                                        |
+| `* * *`  | user          | delete a contact entry if needed                                            | remove any individuals who are no longer relevant to my organisation    |
+| `* *`    | user          | add multiple contacts with one command                                      | save time and streamline the contact entry process                      |
 | `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                      |
-| `* *`    | user          | role contacts to a group/role name                                          | group individuals into relevant sections for better clarity             |
+| `* *`    | user          | assign contacts to a group/role name                                        | group individuals into relevant sections for better clarity             |
 | `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role    |
-| `* *`    | user          | save my current profile                                                     | persist my profile locally through different sessions                   |
-| `* *`    | user          | export my profile                                                           | use my profile on other machines/by other people                        |
-| `* *`    | user          | import another profile onto my local program                                | access the contact details from another user/another machine            |
+| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities          |
+| `* *`    | user          | have a separate profile for different purpose                               | organize my contacts based on various context                           |
+| `* *`    | user          | transfer my profile                                                         | easily access and use my profile on other machines                      |
 | `* *`    | user          | add notes to any contact                                                    | remember important details about them                                   |
 | `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others               |
-| `* *`    | user          | export my contacts to an external file                                      | send the contacts to another user or filter externally                  |
+| `* *`    | user          | export my contacts to an external file                                      | share contacts with others or manage them externally                    |
 | `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                     |
-| `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities          |
 | `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities          |
-| `*`      | user          | start a temporary session that does not persist between sessions            | experiment with and play around with the environment                    |
-| `*`      | user          | sort the contacts by popularity (how often I query the contact)             | quickly access frequently queried contacts                              |
-| `*`      | user          | switch profiles to another profile, containing a separate list of contacts  | separate contacts of individuals in different organisations             |
+| `* *`    | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
+| `* *`    | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
+| `*`      | user          | sort the contact list based on how often I access each contact)             | quickly find contacts I use most freqeuntly without extensive searching |
 | `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands                 |
-| `*`      | user          | customise commands to manage the contacts                                   | add, remove, modify, search contacts with greater efficiency            |
 | `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                        |
-| `*`      | user          | back up my contacts regularly                                               | not lose important contact information                                  |
 | `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                     |
 | `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                                 |
 | `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                    |
-| `*`      | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
 | `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts                |
-| `*`      | user          | set up quick actions (e.g. call, message…)                                  | reach out with a single click                                           |
-| `*`      | user          | set privacy levels for each contact's information                           | protect sensitive details                                               |
-| `*`      | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
-
 
 
 ### Use cases
@@ -522,6 +537,49 @@ Use Case ends.
 <br>
 
 
+<br>
+
+**Use Case: UC10 - Switch the profile**<br/>
+**Actor: User**<br/>
+**MSS**
+1. User requests to switch to a different profile
+2. CCAConnect swaps the current profile to the specified profile
+
+    Use Case ends.
+
+**Extensions**
+* 2a. The specified profile is invalid.
+    * 2a.1 CCAConnect shows an error message.
+    
+      Use Case ends.
+* 2b. The specified profile is the current profile.
+    * 2b.1 CCAConnect shows an error message.
+    
+      Use Case ends.
+
+<br>
+
+**Use Case: UC11 - Delete a profile**<br/>
+**Actor: User**<br/>
+**MSS**
+1. User requests to delete a profile.
+2. CCAConnect deletes the specified profile.
+
+    Use Case ends.
+
+**Extensions**
+* 2a. The specified profile is invalid.
+    * 2a.1 CCAConnect shows an error message.
+    
+      Use Case ends.
+* 2b. The specified profile is the current profile.
+    * 2b.1 CCAConnect shows an error message.
+    
+      Use Case ends.
+* 2c. The specified profile does not exist.
+    * 2c1. CCAConnect shows an error message.
+    
+      Use Case ends.
 
 ___
 
@@ -530,14 +588,8 @@ ___
 1. The system should work on any mainstream OS as long as it has Java `17` or above installed. This primarily applies for Windows, MacOS and Linux.
 2. The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should not be bloated in application size.
-5. All functionality should be well documented, with example usages.
-6. The system must ensure that all contact information is stored accurately, and able to be retrieved without any loss of information or data corruption.
-7. The system should be able to respond to user inputs within 2 seconds, under normal load conditions.
-8. The program must include automated tests for all of its functionalities to ensure code reliability.
-9. All code changes must be tracked with a Revision Control Software.
-10. All code changes must be subject to peer review and approval by two separate team members (not including the owner of the change).
-11. All releases must have proper documentation.
+4. The system should be able to respond to user inputs within 2 seconds, under normal load conditions.
+5. The application is not required to support any other language other than English.
 
 ### Glossary
 
@@ -550,6 +602,7 @@ ___
 * **Flag**: A specifier to indicate the start of an argument after a command. E.g. `n/` represents a name flag
 * **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
 * **Member**: A member is a special type of contact that has the role `Member` in its `roles`
+- **Profile**: A collection of contacts in the system, identified by a profile name
 ___
 
 ## **Appendix: Instructions for manual testing**
@@ -668,6 +721,48 @@ testers are expected to do more *exploratory* testing.
 **Expected Result**:
 - Error message specifying exact error in telegram input displayed.
 
+### Switch Feature
+**Description**: switches the current profile to the specified profile
+
+**Test Case 1**
+1. Assuming the current profile is 'addressbook'
+2. Enter `switch alice`
+
+**Expected Result**
+- The current profile is swapped to 'alice'
+
+**Test Case 2**
+1. Assuming the current profile is 'addressbook'
+2. Enter `switch adressbook'
+
+**Expected Result**
+- Error message specifying that `Already on 'addressbook'`
+
+
+### Delete profile Feature
+**Description**: Deletes an existing profile from the system
+
+**Test Case 1**
+1. Assuming the profile 'alice' already exists
+2. Enter `deleteProfile alice`
+
+**Expected Result**
+- The profile 'alice' is removed
+
+**Test Case 2**
+1. Assuming the current profile is 'addressbook'
+2. Enter `deleteProfile adressbook`
+
+**Expected Result**
+- Error message specifying that `Unable to delete the profile currently in use. Please switch to a different profile before attempting deletion.`
+
+**Test Case 3**
+1. Assuming the profile 'alice' does not exist
+2. Enter `deleteProfile alice`
+
+**Expected Result**
+- Error message specifying that `Profile not found. Unable to delete a non-existing profile.`
+
 ### General Testing Notes
 - Ensure to test each feature with both valid and invalid inputs.
 - Check for proper handling of edge cases, such as extremely large or small input values.
@@ -699,3 +794,5 @@ In the future, we plan to implement UI truncation measures to allow for users to
    we plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
 
 5. Add command to view members with attendance on the input date.
+6. Increase specificity of error message when an invalid index is used for `edit` command:<br/>
+The current error message when an invalid index is passed as argument to `edit` command is 'invalid command format ...' which we plan to change it to inform users that specifically their input index is invalid.

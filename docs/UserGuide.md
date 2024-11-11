@@ -177,7 +177,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]…​ [f/ or nf/ (
 
 | Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |----------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a positive unsigned integer and must not exceed the size of the displayed contact list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a [positive unsigned integer](#glossary) and must not exceed the size of the displayed contact list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/>`EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and then a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
@@ -302,9 +302,9 @@ delete INDEX
 
 #### Parameters
 
-| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
-|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                           |
+|-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a [positive unsigned integer](#glossary) and must not exceed the size of the displayed contact list. |
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
@@ -493,6 +493,8 @@ If the specified `PROFILE` does not already exist, switch will create it; otherw
 The current profile is indicated at the bottom left window. ![current-profile](images/current-profile.png)
 </div>
 
+
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 The most recent [sort](#sort-command) and [find](#find-command) settings (referred to as "active settings") are automatically applied when you switch profiles, enhancing search efficiency by removing the need to reapply them after each switch. For example, if you use `find f/` in the 'addressbook' profile to view favourite  contacts, this "find favourite " filter will stay active when you switch to another profile like 'competition-team', until a different [valid](#command-summary) command (except `switch`) is issued which removes this active setting.
 </div>
@@ -524,9 +526,14 @@ This is a logical sequence of commands, assuming your current profile is 'addres
 * `sw alice` switches the current profile to 'alice'
 * `delp addressbook` deletes the 'addressbook' profile after switching to 'alice'
 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+Profile data is only permanently deleted from the hard disk when the application is closed. If you accidentally delete a profile, you can recover it by switching back to that profile before exiting the application. This allows you to undo accidental deletions during the same [session](#glossary).
+</div>
+
 ### Saving the data
 
-CCAConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CCAConnect data are saved in the hard disk automatically when the application is closed. There is no need to save manually.
 
 ### Editing the files
 
@@ -588,5 +595,6 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 - **System/Application**: The CCAConnect program
 - **Parameter**: A variable that the command uses
 - **JSON**: JavaScript Object Notation. A lightweight data-interchange format used for storing and exchanging data. It is human-readable and easy for machines to parse and generate.
-- **Non-zero unsigned integer**: An integer that ranges 1 to 2147483647 both inclusive
+- **Positive unsigned integer**: An integer that ranges 1 to 2147483647 both inclusive
 - **Profile**: A collection of contacts in the system, identified by a profile name
+- **Session**: The period during which the application is open and running, from the time it is launched until it is closed.
