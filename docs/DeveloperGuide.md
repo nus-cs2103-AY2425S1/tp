@@ -709,7 +709,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 3c. User enters a date that does not exist (e.g., 30-02-2024).
-    * 3c1. System displays an error message asking for a valid absent date.
+    * 3c1. System displays an error message asking for a valid absent date.<br>
       Use case ends
 
 * 3d. User enters absent reason in an invalid format.
