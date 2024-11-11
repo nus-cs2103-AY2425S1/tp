@@ -254,7 +254,10 @@ The elements will resize according to the position of the divider, allocating mo
 
 The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
 
-This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.)
+This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time.<br>
+
+Examples:
+* If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.
 
 ![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
