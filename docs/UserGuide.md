@@ -189,7 +189,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-If a client's project deadline has passed, the client status is still `active` and the client's project status is `in progress`, the GUI labels the client card as `OVERDUE`. So if the client has paid, and your business with them is finished, you can set their client status to `old` (or set their project status to `completed`) so the deadline field doesn't show `OVERDUE`.
+If a client's project deadline has passed and the client's project status is `in progress`, the GUI labels the client card as `OVERDUE`. So if the client has paid, and your business with them is finished, you can set their project status to `completed` so the deadline field doesn't show `OVERDUE`.
 
 </div>
 
