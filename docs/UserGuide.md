@@ -122,8 +122,9 @@ A person can have any number of roles (including 0)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-Member is a special type of contact in CCAConnect, attendance related command will only work for members.
-If you are adding a new member with `add` command, please add "member" (case-insensitive) as a role for the new contact.
+`Member` is a **special reserved role** in CCAConnect. Attendance related commands will only work for contacts that have the `Member` role.
+
+When adding/editing a person with the role of `Member`, the spelling of `Member` in `r/Member` is case-insensitive. E.g. `r/mEmBER` will also set the person to be a `Member`.
 </div>
 
 #### Example
