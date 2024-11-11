@@ -637,12 +637,13 @@ Displaying the detailed command window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px;">
+  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%;" />
   </div>
 
 </div>
+
 
 #### Method 2:
 **Example Usage:**
@@ -655,12 +656,13 @@ Displaying the detailed command window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 20px;">
+  <div style="width: 45%; margin-bottom: 20px; margin-top: 30px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
 
 </div>
+
 
 **Tips:**
 - Ensure that data is updated for accurate visualisation.
