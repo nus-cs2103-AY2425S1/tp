@@ -185,13 +185,13 @@ Each feature is implemented with careful consideration of compatibility and exte
 
 **Target User Profile**:
 
-* Students or recent graduates who are actively looking for job opportunities, specifically internships in the tech industry.
+* Students who are actively looking for internships in the tech industry.
 * Users who prefer using a desktop app over mobile or web applications.
 * Users comfortable with typing commands, benefiting from a Command Line Interface (CLI) for faster data entry.
 * Users looking for an organized way to manage a list of companies, contact statuses, and related job application data.
 
 **Value Proposition**:
-TechConnect assists students in managing and organizing their internship and job applications efficiently. The app enables users to bookmark, tag, and retrieve company information with ease, all through a simple, efficient command-based interface.
+TechConnect assists students in managing and organizing their internship. The app enables users to bookmark, tag, and retrieve company information with ease, all through a simple, efficient command line based interface.
 
 ---
 
@@ -447,7 +447,7 @@ There were some efforts that was saved by reusing parts from the existing AB3 co
 1. **UI Components**: The existing AB3 user interface aligned with our goals, and most of it was retained. Only slight modifications were made to include the UI of new features.
 2. **Command Parsers**: Our team adapted the existing parsing logic from AB3 to handle the additional commands that we added to the project.
 
-The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saveed.
+The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saved.
 
 ---
 
@@ -458,5 +458,6 @@ Team size: 5
 1. **Standardise how different fields can be modified**: Currently, fields like `Remark` and `ApplicationStatus` have their own commands to change these fields (`remark` and `status` respectively). We plan to combine this functionality under this `edit` command to provide users with a more seamless experience.
 2. **Enhancing the use of URLs**: Currently, the `careerPageUrl` field takes in any values and users are not able to click on them to go to the specified link or copy the URL from the application. We plan to enhance the app to only accept valid URL values and give them a way to easily open up the links from the application.
 3. **Improving how names are handled**: Currently, the `name` of a company only accepts alphanumeric values. Also, additional whitespaces in names are not handled with the idea of human error in mind. For example, `Company 1` and `Company  1` will be listed as two different companies even though the latter could be caused by an accidental extra whitespace. We plan to make names include more than just alphanumeric characters as well as collapsing any additional whitespace into a single whitespace.
+4. **Standardise the parameters of `add` command**: Currently, `add` command makes `r/` a mandatory prefix even though the value of the remark can be blank. We plan to make this prefix optional to improve user experience by omitting the `r/` prefix when users do not wish to add in a remark.
 
 ---

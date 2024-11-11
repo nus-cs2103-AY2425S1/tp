@@ -10,7 +10,7 @@
 
 <img src="images/Ui.png" alt="Ui" width="500" height="400"/>
 
-**TechConnect helps users access company information and contacts, aiding in job discovery in the tech industry.**
+**TechConnect helps students track company information and contacts, aiding in internship opportunities in the tech industry.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 - If you are interested in using TechConnect, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).

@@ -105,7 +105,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateCompanyUnfilteredList_failure() {
         Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(firstCompany).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_COMPANY, descriptor);
@@ -114,7 +114,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateCompanyFilteredList_failure() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
         // edit company in filtered list into a duplicate in address book
@@ -126,7 +126,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidCompanyIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder().withName(VALID_NAME_MICROSOFT).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -139,7 +139,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidCompanyIndexFilteredList_failure() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
         Index outOfBoundIndex = INDEX_SECOND_COMPANY;
         // ensures that outOfBoundIndex is still in bounds of address book list

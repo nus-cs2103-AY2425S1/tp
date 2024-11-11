@@ -44,7 +44,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateCompanies_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateCompanies_throwsDuplicateCompanyException() {
         // Two companies with the same identity fields
         Company editedAlice = new CompanyBuilder(GOOGLE).withAddress(VALID_ADDRESS_MICROSOFT)
                 .withTags(VALID_TAG_BIGTECH)
