@@ -254,9 +254,6 @@ New company added: (details of the company added)
 
 </div>
 
-<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
-
-</div>
 
 
 **Examples**:
@@ -668,11 +665,11 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 | Action            | Format                                                                                              | Example                                                                                                             |
 |-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| **Add a student** | `student n/NAME id/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add a student** | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`      |
 | **Clear**         | `clear`                                                                                             | `clear`                                                                                                             |
 | **Delete**        | `delete INDEX [MORE_INDEX]`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
-| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
 | **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]`                                                                 | `filtertag bestie` or `filtertag bestie slay`                                                                       |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                      | `find James Jake`                                                                                                   |
 | **List**          | `list`                                                                                              | `list`                                                                                                              |
