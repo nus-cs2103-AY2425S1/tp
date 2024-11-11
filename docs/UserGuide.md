@@ -194,7 +194,7 @@ Example:
 * `list -v s/catering`
 * `list -e des/wedding`
 
-<box type="info" header="**Note:**" >
+<box type="tip" header="**Tip:**" >
   All parameters are optional! Running <code>list</code> by itself will list all contacts (clients and vendors) by default. If the input is <code>list abc</code>, <code>abc</code> will be discarded and the input will be treated as <code>list</code>. 
 </box>
 
@@ -221,7 +221,7 @@ Format:
 edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG…​]
 ```
 
-<box type="warning" header="**Caution**">
+<box type="warning" header="**Caution:**">
   Although all the parameters are optional, you must specify at least one field to make an edit!
 </box>
 
@@ -292,7 +292,7 @@ exit
 
 DDD data are saved automatically as a JSON file `HOME_FOLDER/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" header="**Caution**">
+<box type="warning" header="**Caution:**">
   If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. Certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is null/outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
