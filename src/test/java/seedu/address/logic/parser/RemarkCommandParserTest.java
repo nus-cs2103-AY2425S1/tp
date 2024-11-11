@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -13,7 +14,7 @@ import seedu.address.model.person.Remark;
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
-    private final String nonEmptyRemark = "Some remark.";
+    private final String nonEmptyRemark = "Some remark";
     @Test
     public void parse_nricSpecified_success() {
         // have remark
@@ -29,10 +30,13 @@ public class RemarkCommandParserTest {
     }
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
+        String expectedMessageNoParameters = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
+        String expectedMessageInvalidNric = String.format(MESSAGE_INVALID_NRIC);
         // no parameters
-        assertParseFailure(parser, RemarkCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, RemarkCommand.COMMAND_WORD, expectedMessageNoParameters);
         // no nric
-        assertParseFailure(parser, RemarkCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessage);
+        assertParseFailure(parser, RemarkCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessageInvalidNric);
+        //invalid nric
+        assertParseFailure(parser, RemarkCommand.COMMAND_WORD + "123" + nonEmptyRemark, expectedMessageInvalidNric);
     }
 }
