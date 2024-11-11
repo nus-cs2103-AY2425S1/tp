@@ -64,6 +64,7 @@ ModelManager --> "~* filtered" Person
 
 ' Shortcut-related associations
 AddressBook *--> "1" UniqueShortCutList
+AddressBook *--> "1" UniqueOrderList
 UniqueShortCutList --> "*" ShortCut
 ShortCut *--> Alias
 ShortCut *--> FullTagName
