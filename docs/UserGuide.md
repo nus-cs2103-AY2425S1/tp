@@ -499,6 +499,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. Occasionally, **the consults and lessons list** may not display properly, i.e. have wrong heights. Try using the relevant list command `listconsults` or `listlessons` to refresh the list. Alternatively, try scrolling the list with a mouse. This should update the display to remedy the bug.
 
 --------------------------------------------------------------------------------------------------------------------
 
