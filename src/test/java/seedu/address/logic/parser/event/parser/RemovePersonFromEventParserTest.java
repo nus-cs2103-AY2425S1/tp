@@ -21,11 +21,41 @@ public class RemovePersonFromEventParserTest {
         // no index specified
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
-        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
-
-        // no index and no field specified
+        // empty input
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // blank input
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
+
+        // keyword "remove" not specified
+        assertParseFailure(parser, "ei/1 ci/1", MESSAGE_INVALID_FORMAT);
+
+        // keyword "remove" is the only thing specified
+        assertParseFailure(parser, "remove", MESSAGE_INVALID_FORMAT);
+
+        // ci missing
+        assertParseFailure(parser, "remove ei/1", MESSAGE_INVALID_FORMAT);
+
+        // ei missing
+        assertParseFailure(parser, "remove ci/1", MESSAGE_INVALID_FORMAT);
+
+        // ci index missing
+        assertParseFailure(parser, "remove ei/1 ci/", MESSAGE_INVALID_FORMAT);
+
+        // ei index missing
+        assertParseFailure(parser, "remove ei/ ci/1", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidParts_failure() {
+        // negative integers
+        assertParseFailure(parser, "remove ei/1 ci/-1", MESSAGE_INVALID_FORMAT);
+
+        // decimal numbers
+        assertParseFailure(parser, "remove ei/1.5 ci/1", MESSAGE_INVALID_FORMAT);
+
+        // letters
+        assertParseFailure(parser, "remove ei/a ci/1", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
