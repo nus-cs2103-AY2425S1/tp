@@ -344,18 +344,6 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 
 ---
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
----
-
-### Modification of sessions across all members `[coming in v2.0]`
-
-_Details coming soon ..._
-
----
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
