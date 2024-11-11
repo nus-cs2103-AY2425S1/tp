@@ -1992,13 +1992,7 @@ displayed in the result display box.
 
 #### Clear
 
-Clearing the entire True Rental's database, wiping all clients and their respective rental information.
-
-<box type="warning">
-
-**Prerequisites**: There is at least 1 client in the application.
-
-</box>
+Clearing the entire True Rental's database, wiping all clients and their respective rental information (if any).
 
 <box type="info" seamless>
 
