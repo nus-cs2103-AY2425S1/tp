@@ -153,10 +153,10 @@ You will see a window like this.
    <br></br>
 
 #### _Using the terminal_
-7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press enter.
+7. Type `cd FILEPATH`  (replacing FILEPATH with the actual file path copied in step 6) and press `Enter`.
 
 
-8. Type `java -jar hireme.jar` and press enter to run the HireMe application.
+8. Type `java -jar hireme.jar` and press `Enter` to run the HireMe application.
 <br></br>
    - Windows Terminal:
       ![windowscd](images/Windowscd.png)
@@ -172,7 +172,7 @@ A GUI similar to the below should appear in a few seconds. It is encouraged to e
 
    ![Ui](images/LabelledUi.png)
 
-9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br></br>
+9. Type the command in the command box and press `Enter` to execute it. (e.g. typing **`/help`** and pressing `Enter` will open the help window.)<br></br>
    Some example commands you can try:
 
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
