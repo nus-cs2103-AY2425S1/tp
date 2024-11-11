@@ -134,5 +134,6 @@ public interface Model {
     Product findProductByName(ProductName productName);
 
     Supplier findSupplier(Name supplierName);
-}
 
+    boolean isProductAssignedToAnySupplier(Product product);
+}

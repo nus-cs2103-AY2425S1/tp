@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,12 +29,12 @@ public class UnassignProductCommand extends Command {
             + PREFIX_PRODUCT_NAME + "apple pie "
             + PREFIX_SUPPLIER_NAME + "Amy Bee";
 
-    public static final String MESSAGE_SUCCESS = "Successfully unassigned product %s.";
-    public static final String MESSAGE_SUPPLIER_NOT_FOUND = "Supplier not found: %1$s";
+    public static final String MESSAGE_SUCCESS = "Unassigned Product: %1$s to Supplier: %2$s";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found: %1$s";
     public static final String MESSAGE_PRODUCT_NOT_ASSIGNED = "Product was not assigned to the supplier initially.";
 
     private final ProductName productName;
+
     /**
      * @param productName of the product in the filtered product list to unassign.
      */
@@ -47,43 +46,9 @@ public class UnassignProductCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Objects.requireNonNull(model);
 
-        List<Supplier> lastShownSupplierList = model.getModifiedSupplierList();
-        List<Product> lastShownProductList = model.getModifiedProductList();
-
-        Product productToUnassign = lastShownProductList.stream()
-                .filter(product -> product.getName().equals(this.productName))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, this.productName)));
-
-        // Check if product is assigned to any supplier
-        boolean isAssignedToAnySupplier = lastShownSupplierList.stream()
-                .anyMatch(supplier -> supplier.getProducts().contains(productToUnassign));
-
-        if (!isAssignedToAnySupplier) {
-            throw new CommandException(MESSAGE_PRODUCT_NOT_ASSIGNED);
-        }
-
-        // Locate the specific supplier that has this product assigned
-        Name supplierName = productToUnassign.getSupplierName();
-        Supplier supplierToUnassign = lastShownSupplierList.stream()
-                .filter(supplier -> supplier.getName().equals(supplierName))
-                .findFirst()
-                .orElseThrow(() -> new CommandException(String.format(MESSAGE_SUPPLIER_NOT_FOUND, supplierName)));
-
-        Set<Product> updatedProductList = new HashSet<>(supplierToUnassign.getProducts());
-        //Remove product from product list of supplier
-        updatedProductList.remove(productToUnassign);
-        Product updatedProduct = new Product(
-                productToUnassign.getName(),
-                productToUnassign.getStockLevel(),
-                productToUnassign.getTags()
-        );
-        Supplier updatedSupplier = new Supplier(supplierToUnassign.getName(), supplierToUnassign.getPhone(),
-                supplierToUnassign.getEmail(), supplierToUnassign.getAddress(),
-                supplierToUnassign.getTags(), updatedProductList);
-
-        model.setProduct(productToUnassign, updatedProduct);
-        model.setSupplier(supplierToUnassign, updatedSupplier);
+        Product productToUnassign = findProductByName(model, productName);
+        Supplier supplierToUnassign = findSupplierWithProduct(model, productToUnassign);
+        removeProductFromSupplier(model, supplierToUnassign, productToUnassign);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         model.updateFilteredSupplierList(Model.PREDICATE_SHOW_ALL_SUPPLIERS);
 
@@ -91,6 +56,44 @@ public class UnassignProductCommand extends Command {
                 supplierToUnassign.getName()));
     }
 
+    // Helper methods
+    private Product findProductByName(Model model, ProductName productName) throws CommandException {
+        Product product = model.findProductByName(productName);
+        if (product == null) {
+            throw new CommandException(String.format(MESSAGE_PRODUCT_NOT_FOUND, productName));
+        }
+        return product;
+    }
+
+    private Supplier findSupplierWithProduct(Model model, Product product) throws CommandException {
+        Name supplierName = product.getSupplierName();
+
+        // Assertions to ensure consistency between supplier name and assignment status
+        if (supplierName == null) {
+            assert !model.isProductAssignedToAnySupplier(product)
+                    : "Product with null supplier name should not be assigned to any supplier";
+        } else {
+            assert model.isProductAssignedToAnySupplier(product)
+                    : "Product with non-null supplier name should be assigned to a supplier";
+        }
+
+        // Check if the product is assigned to any supplier
+        if (supplierName == null || !model.isProductAssignedToAnySupplier(product)) {
+            throw new CommandException(MESSAGE_PRODUCT_NOT_ASSIGNED);
+        }
+        return model.findSupplier(supplierName);
+    }
+    private void removeProductFromSupplier(Model model, Supplier supplier, Product product) {
+        Set<Product> updatedProductList = new HashSet<>(supplier.getProducts());
+        updatedProductList.remove(product);
+        Product updatedProduct = new Product(product.getName(), product.getStockLevel(), product.getTags());
+        Supplier updatedSupplier = new Supplier(
+                supplier.getName(), supplier.getPhone(), supplier.getEmail(),
+                supplier.getAddress(), supplier.getTags(), updatedProductList);
+
+        model.setProduct(product, updatedProduct);
+        model.setSupplier(supplier, updatedSupplier);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

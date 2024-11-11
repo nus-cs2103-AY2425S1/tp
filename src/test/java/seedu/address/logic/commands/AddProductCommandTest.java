@@ -1,26 +1,16 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalSuppliers.ALICE;
-
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -28,71 +18,56 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
-import seedu.address.testutil.SupplierBuilder;
+import seedu.address.testutil.ProductBuilder;
 
-public class AddSupplierCommandTest {
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 
+public class AddProductCommandTest {
+
+    //null passed
     @Test
-    public void constructor_nullSupplier_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddSupplierCommand(null));
+    public void constructor_nullProduct_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddProductCommand(null));
     }
 
+    //Product does not exist and supplier exists initially
     @Test
-    public void execute_supplierAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingSupplierAdded modelStub = new ModelStubAcceptingSupplierAdded();
-        Supplier validSupplier = new SupplierBuilder().build();
+    public void execute_productAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingProductAdded modelStub = new ModelStubAcceptingProductAdded();
+        Product validProduct = new ProductBuilder().build();
 
-        CommandResult commandResult = new AddSupplierCommand(validSupplier).execute(modelStub);
+        CommandResult commandResult = new AddProductCommand(validProduct).execute(modelStub);
 
-        assertEquals(String.format(AddSupplierCommand.MESSAGE_SUCCESS, Messages.format(validSupplier)),
+        assertEquals(String.format(AddProductCommand.MESSAGE_SUCCESS, Messages.format(validProduct)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validSupplier), modelStub.suppliersAdded);
+        assertEquals(Arrays.asList(validProduct), modelStub.productsAdded);
     }
-
+    //Product exists initially
     @Test
-    public void execute_duplicateSupplier_throwsCommandException() {
-        Supplier validSupplier = new SupplierBuilder().build();
-        AddSupplierCommand addSupplierCommand = new AddSupplierCommand(validSupplier);
-        ModelStub modelStub = new ModelStubWithSupplier(validSupplier);
+    public void execute_duplicateProduct_throwsCommandException() {
+        Product validProduct = new ProductBuilder().build();
+        AddProductCommand addProductCommand = new AddProductCommand(validProduct);
+        ModelStub modelStub = new ModelStubWithProduct(validProduct);
 
-        assertThrows(CommandException.class, AddSupplierCommand.MESSAGE_DUPLICATE_SUPPLIER, () ->
-                addSupplierCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddProductCommand.MESSAGE_DUPLICATE_PRODUCT, () ->
+                addProductCommand.execute(modelStub));
     }
-
+    //Supplier does not exist initially
     @Test
-    public void equals() {
-        Supplier alice = new SupplierBuilder().withName("Alice").build();
-        Supplier bob = new SupplierBuilder().withName("Bob").build();
-        AddSupplierCommand addAliceCommand = new AddSupplierCommand(alice);
-        AddSupplierCommand addBobCommand = new AddSupplierCommand(bob);
+    public void execute_nonExistentSupplier_throwsCommandException() {
+        Product productWithNonExistentSupplier = new ProductBuilder()
+                .withSupplierName("NonExistentSupplier")
+                .build();
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        AddProductCommand addProductCommand = new AddProductCommand(productWithNonExistentSupplier);
 
-        // same values -> returns true
-        AddSupplierCommand addAliceCommandCopy = new AddSupplierCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different supplier -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        ModelStubWithoutSupplier modelStub = new ModelStubWithoutSupplier();
+        assertThrows(CommandException.class, String.format(AddProductCommand.MESSAGE_SUPPLIER_NOT_FOUND,
+                "NonExistentSupplier"), () -> addProductCommand.execute(modelStub));
     }
 
-    @Test
-    public void toStringMethod() {
-        AddSupplierCommand addSupplierCommand = new AddSupplierCommand(ALICE);
-        String expected = AddSupplierCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addSupplierCommand.toString());
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -213,49 +188,70 @@ public class AddSupplierCommandTest {
         @Override
         public boolean isProductAssignedToAnySupplier(Product product) {
             throw new AssertionError("This method should not be called.");
+        };
+    }
+
+    /**
+     * A Model stub that accepts any product being added.
+     */
+    private class ModelStubAcceptingProductAdded extends ModelStub {
+        final ArrayList<Product> productsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasProduct(Product product) {
+            requireNonNull(product);
+            return productsAdded.stream().anyMatch(product::isSameProduct);
+        }
+
+        @Override
+        public void addProduct(Product product) {
+            requireNonNull(product);
+            productsAdded.add(product);
+        }
+
+    }
+    /**
+     * A Model stub for testing duplicate products.
+     */
+    private class ModelStubWithProduct extends ModelStub {
+        private final Product product;
+
+        ModelStubWithProduct(Product product) {
+            requireNonNull(product);
+            this.product = product;
+        }
+
+        @Override
+        public boolean hasProduct(Product product) {
+            requireNonNull(product);
+            return this.product.isSameProduct(product);
+        }
+        @Override
+        public Supplier findSupplier(Name supplierName) {
+            return null;
         }
     }
 
     /**
-     * A Model stub that contains a single supplier.
+     * A Model stub for testing non-existent supplier scenarios.
      */
-    private class ModelStubWithSupplier extends ModelStub {
-        private final Supplier supplier;
+    private class ModelStubWithoutSupplier extends ModelStub {
+        final ArrayList<Product> productsAdded = new ArrayList<>();
 
-        ModelStubWithSupplier(Supplier supplier) {
-            requireNonNull(supplier);
-            this.supplier = supplier;
+        @Override
+        public boolean hasProduct(Product product) {
+            requireNonNull(product);
+            return productsAdded.stream().anyMatch(product::isSameProduct);
         }
 
         @Override
-        public boolean hasSupplier(Supplier supplier) {
-            requireNonNull(supplier);
-            return this.supplier.isSameSupplier(supplier);
+        public void addProduct(Product product) {
+            requireNonNull(product);
+            productsAdded.add(product);
+        }
+        @Override
+        public Supplier findSupplier(Name supplierName) {
+            return null; // Simulates a missing supplier by returning null.
         }
     }
-
-    /**
-     * A Model stub that always accept the supplier being added.
-     */
-    private class ModelStubAcceptingSupplierAdded extends ModelStub {
-        final ArrayList<Supplier> suppliersAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasSupplier(Supplier supplier) {
-            requireNonNull(supplier);
-            return suppliersAdded.stream().anyMatch(supplier::isSameSupplier);
-        }
-
-        @Override
-        public void addSupplier(Supplier supplier) {
-            requireNonNull(supplier);
-            suppliersAdded.add(supplier);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

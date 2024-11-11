@@ -24,6 +24,7 @@ import seedu.address.testutil.SupplierBuilder;
 
 public class AssignProductCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    //Successfully assign products to supplier
     @Test
     public void execute_assignProductToSupplier_success() throws Exception {
         Supplier supplier = new SupplierBuilder().withName(VALID_NAME_AMY).build();
@@ -47,6 +48,7 @@ public class AssignProductCommandTest {
         assertCommandSuccess(assignProductCommand, model, expectedMessage, expectedModel);
     }
 
+    //Supplier not found
     @Test
     public void execute_supplierNotFound_throwsCommandException() {
         Product product = new ProductBuilder().withName(VALID_PRODUCT_APPLE_PIE).build();
@@ -59,7 +61,7 @@ public class AssignProductCommandTest {
         assertCommandFailure(assignProductCommand, model, String.format(AssignProductCommand.MESSAGE_SUPPLIER_NOT_FOUND,
                 "Nonexistent Supplier"));
     }
-
+    //Product not found
     @Test
     public void execute_productNotFound_throwsCommandException() {
         Supplier supplier = new SupplierBuilder().withName(VALID_NAME_AMY).build();
@@ -72,7 +74,7 @@ public class AssignProductCommandTest {
         assertCommandFailure(assignProductCommand, model, String.format(AssignProductCommand.MESSAGE_PRODUCT_NOT_FOUND,
                 "Nonexistent Product"));
     }
-
+    //Product is already assigned to same supplier
     @Test
     public void execute_productAlreadyAssigned_throwsCommandException() {
         Product product = new ProductBuilder()
@@ -93,7 +95,7 @@ public class AssignProductCommandTest {
 
         assertCommandFailure(assignProductCommand, model, AssignProductCommand.MESSAGE_PRODUCT_ALREADY_ASSIGNED);
     }
-
+    //Product is already assigned to a different supplier
     @Test
     public void execute_productAssignedToDifferentSupplier_throwsCommandException() {
 
