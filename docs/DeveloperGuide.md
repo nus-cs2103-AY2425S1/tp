@@ -1157,3 +1157,57 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Adding a patient with all fields
+1. Adding a patient with all required and optional fields
+   * **Prerequisites:**
+     * No patients in the list
+   * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com a|Blk 555, Clementi Avenue, S123555 b|O+ nokn|Tio Wei Hsein nokp|91874918 al|Nuts al|Shellfish rl|LOW ec|High Blood Pressure no|Patient has anger management issues`<br>
+     **Expected:** A patient with the following fields is added to the system
+     * Name: `Jake Tio`
+     * NRIC: `T0171281N`
+     * Sex: `M`
+     * Date-of-Birth: `2001-10-27`
+     * Phone Number: `98178571`
+     * Email: `jakejake@gmail.com`
+     * Address: `Blk 555, Clementi Avenue, S123555`
+     * Blood Type: `O+`
+     * Next-of-Kin Name: `Tio Wei Hsein`
+     * Next-of-Kin Phone: `91874918`
+     * Allergies: `Nuts` & `Shellfish`
+     * Health Condition: `LOW`
+     * Existing Condition: `High Blood Pressure`
+     * Note: `Patient has anger management issues`
+
+
+2. Adding a patient with only the required fields
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571`<br>
+      **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+
+
+3. Adding a patient with all the required fields and 1 optional field
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com`<br>
+      **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+        * Email: `jakejake@gmail.com`
+
+
+4. Adding a patient with missing required fields
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`<br>
+      **Expected:** An error is shown stating `Invalid commmand format`
