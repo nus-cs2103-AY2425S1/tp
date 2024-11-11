@@ -126,7 +126,7 @@ For detailed instructions on all commands, you can proceed to the [Features](#fe
 
 - [**Schedule an Appointment**](#adding-an-appointment-addapp): Sets up an appointment with ease.
 
-- [**Link Patient to  Caregiver**](#linking-a-patient-to-a-caregiver-link): Connects a patient with a caregiver for streamlined management.
+- [**Link Patient to Caregiver**](#linking-a-patient-to-a-caregiver-link): Connects a patient with a caregiver for streamlined management.
 
 - [**Find a Person**](#locating-persons-by-name-nric-phone-email-role-or-tags-find): Quickly locates a person.
 
