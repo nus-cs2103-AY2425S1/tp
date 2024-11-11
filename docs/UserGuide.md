@@ -11,7 +11,7 @@
 ![Tuteez logo](images/TUTEEZ.png)
 <br>
 
-## Welcome aboard Tuteez
+## Welcome Aboard Tuteez
 
 Welcome to Tuteez – a **powerful desktop address book application** designed specifically for **private tutors** to **manage student contacts and lesson schedules**.
 Tuteez empowers you to effortlessly keep all your student information organized and accessible in one place, putting any information you need right at your fingertips.
@@ -252,7 +252,7 @@ You should see a message indicating that all entries have been cleared, and the 
 
 If everything went well, you'll be greeted by this view:
 
-![clear_command](images/clear_command_tutorial.png)
+![clear_command](images/clear_command.png)
 
 <br>
 
@@ -364,7 +364,7 @@ If you are in doubt, type this command to access the online user guide tailored 
 
 **Format**: `help`
 
-![help message](images/helpMessage.png)
+![help message](images/help_command.png)
 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
@@ -572,8 +572,6 @@ When you are searching for lessons, you can search for lesson day and/or lesson 
 
 Examples:
 * `find n/alex david` returns `Alex Yeoh`, `David Li`, as shown below:<br>
-  <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="800">
-
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
