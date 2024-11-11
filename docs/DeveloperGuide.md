@@ -750,3 +750,70 @@ Our goal was to enhance AB3 by introducing new commands and improving functional
 **Achievements**:
 - The project successfully extended the original AB3 with functionality focused on university students' needs, balancing ease of use and powerful data organization.
 - Careful planning and rigorous testing ensured the new features did not introduce regressions or instability.
+
+## **Appendix: Planned Enhancements**
+
+## Planned Enhancements
+
+**Team size**: 5
+
+**1. Relax Formatting Restrictions and Support Multi-Word Input for Work Experience in `addw` Command**  
+Currently, when adding work experience with the `addw` command (e.g., `addw in/1 w/Intern,Google,2024`), the `work experience` field must follow a strict format: it must not contain spaces after commas, the first word must be capitalized, and both role and company names are restricted to a single word each. In future updates, we plan to relax these restrictions by allowing:
+
+- Spaces after commas
+- Optional capitalization in the first word
+- Multi-word inputs for both role and company (e.g., `software engineer, Jane Street, 2024`)
+
+This enhancement will improve flexibility, allowing users to enter more realistic and descriptive job titles and company names for work experience entries.
+
+**2. Allow Multiple Work Experiences per Contact**  
+Currently, each contact can only have a single work experience entry. To better reflect real-life situations where individuals often have multiple job experiences, we plan to allow multiple work experiences for each contact. These entries will be stored as a list, enabling users to add, view, and manage multiple roles over time for each contact. This enhancement will provide a more complete and accurate representation of each contact's professional background.
+
+**3. Support Multiple Interest Fields in `findi` Command**  
+Currently, the `findi` command only allows a single interest to be specified at a time. We plan to enhance this command to allow multiple interests (e.g., `findi i/swimming i/reading`), enabling users to search for contacts with any combination of interests. This will return contacts who have **all** specified interests, allowing users to refine their searches for more specific results.
+
+**Example Usage and Expected Results**:
+- Command: `findi i/swimming i/reading`
+  - **Expected Result**: The command will return contacts who have both "swimming" and "reading" listed as interests. For instance:
+    - Contact 1: Alice Lee (interests: swimming, reading, cooking)
+    - Contact 2: Bob Tan (interests: reading, swimming)
+    - Contacts with only one of these interests (e.g., "swimming" but not "reading") will not be included in the results.
+
+**4. Support `m/` Substring in Names**  
+In the current version, names that contain `m/` (such as `add n/John m/Doe i/...`) can be mistakenly interpreted as the `major` prefix, which leads to parsing errors. To resolve this, we plan to update the parser so that `m/` within a name field is not confused with the major prefix. This change will allow names like "Jeremy m/Chia" to be entered without issues, improving flexibility in name input.
+
+**5. Enhanced Input Validation for Search Commands**  
+Currently, the `find` commands (e.g., `findm`, `findu`) lack strict input validation, which can lead to misleading search results. For instance, a command like `findm m/###` (where `###` is not a valid major) currently returns "No users listed," even though the input is invalid. We plan to improve these commands to validate input and throw a clear error message if the search criteria are invalid. This will prevent inaccurate results and improve the reliability of search feedback.
+
+**6. Consistent Scope Selection for `find` Commands**  
+Currently, some `find` commands operate on the entire contact list, while others search only within the currently displayed list. This inconsistency can be confusing for users. We plan to introduce a scope option that allows users to specify whether they want to search within the entire contact list or only within the currently displayed list.
+
+- **Example Usage**:
+  - Command: `findm #e m/computer science`
+    - **Scope**: Entire list. This command will search the entire contact list for contacts with the major "computer science," regardless of the currently displayed subset.
+  - Command: `findm #c m/computer science`
+    - **Scope**: Currently displayed list. This command will only search within the contacts currently displayed on the screen.
+
+This enhancement will give users greater control over their searches, ensuring consistency and clarity in search behavior across different commands.
+
+**7. Validate `birthday` Field to Prevent Future Dates**  
+Currently, users can enter a future date for the `birthday` field when creating a new contact using the `add` command. In a future update, we plan to add validation for the `birthday` field to ensure that only dates in the past or present are allowed. This will prevent users from accidentally setting a birthday in the future, ensuring more accurate data entry.
+
+**Example**:
+- Command: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/Intern,Google,2024 u/NUS m/Computer Science t/friends t/owesMoney i/swimming i/reading b/13-12-2030`
+  - **Current Behavior**: This command would be accepted even though the birthday is in the future.
+  - **Planned Behavior**: The command will be rejected with an error message indicating that the `birthday` field must be a past or present date.
+
+This validation will help maintain data accuracy and prevent unrealistic birthday entries.
+
+**8. Validate Year in Work Experience to Prevent Unrealistic Future Dates**  
+Currently, users can specify any year for the `work experience` field, even years far in the future, when adding work experience (e.g., `addw in/1 w/Intern,Google,2035`). In a future update, we plan to implement validation for the year in the `work experience` field to ensure that it cannot be set more than 2 years ahead of the current year. This will prevent unrealistic work experience entries that are unlikely to be valid.
+
+**Example**:
+- Command: `addw in/1 w/Intern,Google,2035`
+  - **Current Behavior**: This command would be accepted even though the work experience date (2035) is far in the future.
+  - **Planned Behavior**: The command will be rejected with an error message if the work experience year exceeds the limit (e.g., current year + 2 years), ensuring more realistic data entry.
+
+This validation will help maintain data accuracy by ensuring that work experience entries are realistic and relevant.
+
+These planned enhancements are intended to make the application more user-friendly, realistic, and adaptable to real-world data needs.
