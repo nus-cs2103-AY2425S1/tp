@@ -45,7 +45,7 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
     
     {: .alert .alert-info}
     > :information_source: **Note:**
-    > * EduConnect will look slightly different on macOS, and on Windows. Particularly, the graphic symbols on macOS will be colourised, while those on Windows will be in monochrome.
+    > * EduConnect will look slightly different on macOS, and on Windows. Particularly, the emojis on macOS will be colourised, while those on Windows will be in monochrome.
     > * The screenshots on this User Guide will be primarily on macOS.
 
 5. Enter a command:
@@ -313,7 +313,7 @@ Format: `list`
 >
 > Use this command after `find` to return to the full list of students and teachers.
 
-### Finding persons: `find`
+#### Finding persons: `find`
 
 Finds and displays person(s) who satisfies the provided parameters.
 
