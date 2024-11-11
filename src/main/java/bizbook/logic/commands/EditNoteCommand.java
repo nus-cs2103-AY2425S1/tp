@@ -49,6 +49,9 @@ public class EditNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        assert model != null : "Model should not be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -59,6 +62,9 @@ public class EditNoteCommand extends Command {
 
         ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
+        assert notesList != null : "Notes list should not be null";
+        assert note != null : "Note to be edited to should not be null";
+
         if (notesList.contains(note)) {
             throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
         } else if (noteIndex.getZeroBased() >= notesList.size()) {
@@ -66,6 +72,8 @@ public class EditNoteCommand extends Command {
         }
 
         Person editedPerson = updateNote(personToEdit, notesList);
+
+        assert editedPerson != null : "Edited person should not be null";
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -89,7 +97,7 @@ public class EditNoteCommand extends Command {
      * {@code personToEdit, notesToEdit}.
      */
     private Person updateNote(Person personToEdit, ArrayList<Note> notesToEdit) {
-        // Convert Set to List for indexed access
+
         List<Note> notesList = new ArrayList<>(notesToEdit);
         notesList.set(noteIndex.getZeroBased(), note);
         ArrayList<Note> editedNotes = new ArrayList<>(notesList);
