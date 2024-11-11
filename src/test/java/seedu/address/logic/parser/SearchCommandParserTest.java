@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -66,7 +65,8 @@ class SearchCommandParserTest {
 
     @Test
     void parse_endTimeBeforeBegin_throwsParseException() {
-        assertParseFailure(parser, INVALID_END_EARLIER_INPUT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, INVALID_END_EARLIER_INPUT,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
     }
 
     @Test
