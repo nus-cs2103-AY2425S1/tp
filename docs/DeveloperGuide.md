@@ -2,32 +2,34 @@
 layout: page
 title: Developer Guide
 ---
+
 # Table of Contents
+
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)<br>
-  3.1. [Architecture](#architecture)<br>
-  3.2. [UI component](#ui-component)<br>
-  3.3. [Logic component](#logic-component)<br>
-  3.4. [Model component](#model-component)<br>
-  3.5. [Storage component](#storage-component)<br>
-  3.6. [Common classes](#common-classes)<br>
+   3.1. [Architecture](#architecture)<br>
+   3.2. [UI component](#ui-component)<br>
+   3.3. [Logic component](#logic-component)<br>
+   3.4. [Model component](#model-component)<br>
+   3.5. [Storage component](#storage-component)<br>
+   3.6. [Common classes](#common-classes)<br>
 4. [Implementation](#implementation)<br>
-  4.1. [Undo/redo feature](#undoredo-feature)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation-1)<br>
+   4.1. [Undo/redo feature](#undoredo-feature)<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation-1)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 7. [Appendix: Requirements](#appendix-requirements)<br>
-  7.1. [Product scope](#product-scope)<br>
-  7.2. [User stories](#user-stories)<br>
-  7.3. [Use cases](#use-cases)<br>
-  7.4. [Non-Functional Requirements](#non-functional-requirements)<br>
-  7.5. [Product scope](#product-scope)<br>
-  7.6. [Glossary](#glossary)<br>
+   7.1. [Product scope](#product-scope)<br>
+   7.2. [User stories](#user-stories)<br>
+   7.3. [Use cases](#use-cases)<br>
+   7.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+   7.5. [Product scope](#product-scope)<br>
+   7.6. [Glossary](#glossary)<br>
 8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
-  8.1. [Launch and shutdown](#launch-and-shutdown)<br>
-  8.2. [Deleting a person](#deleting-a-person)<br>
-  8.3. [Saving data](#saving-data)<br>
+   8.1. [Launch and shutdown](#launch-and-shutdown)<br>
+   8.2. [Deleting a person](#deleting-a-person)<br>
+   8.3. [Saving data](#saving-data)<br>
 
 ---
 
@@ -261,7 +263,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 - [Documentation guide](Documentation.md)
@@ -277,31 +278,31 @@ The following activity diagram summarizes what happens when a user executes a ne
 Team Size: 5
 
 1. **Detailed errors for importing**<br/>
-    When the user imports a file with the wrong extension and the importer fails to import the contents of the file, add 
-    a check to see whether the file has the right file extension.
-    <br/><br/>
+   When the user imports a file with the wrong extension and the importer fails to import the contents of the file, add
+   a check to see whether the file has the right file extension.
+   <br/><br/>
 2. **Warn the user when exporting will cause a file to be overwritten**<br/>
-    When the export file location already has a file, warn and ask for permission from the user before overwriting the 
-    file.
-    <br/><br/>
+   When the export file location already has a file, warn and ask for permission from the user before overwriting the
+   file.
+   <br/><br/>
 3. **Maintaining focus on currently selected person after any command execution**<br/>
-    The currently focused person should remain even after commands like `addnotes` or even `delete` as much as possible.
-    <br/><br/>
+   The currently focused person should remain even after commands like `addnotes` or even `delete` as much as possible.
+   <br/><br/>
 4. **Limit number of tags that can be displayed**<br/>
-    The person list panel and the pinned person list panel should only show a summary of tags. If there are too many
-    tags or the tag names are too long, they should be hidden and only shown in the contact details panel when focused.
-    <br/><br/>
+   The person list panel and the pinned person list panel should only show a summary of tags. If there are too many
+   tags or the tag names are too long, they should be hidden and only shown in the contact details panel when focused.
+   <br/><br/>
 5. **Dynamic message box sizing**<br/>
-    The message box should increase in height and wrap the text within it as needed so that the user can view the error
-    message or other command messages easily.
+   The message box should increase in height and wrap the text within it as needed so that the user can view the error
+   message or other command messages easily.
 6. **International phone numbers**<br/>
-    Allow the application to accept international phone numbers on top of Singapore phone numbers. 
+   Allow the application to accept international phone numbers on top of Singapore phone numbers.
 7. **Email validation**<br/>
-    Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
-    the validation permits `abc@aa`.
+   Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
+   the validation permits `abc@aa`.
 8. **Long note content support**<br/>
-    Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
-    hidden content in the next line.
+   Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
+   hidden content in the next line.
 
 ## **Appendix: Requirements**
 
@@ -325,7 +326,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
+| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -599,9 +600,9 @@ _Similar to UC10 except without extension 2b._
 
 - 3a. There is no version to revert to.
 
-    - 3a1. System shows an error message.
+  - 3a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC13 - Redo a command**
 
@@ -617,9 +618,9 @@ _Similar to UC10 except without extension 2b._
 
 - 2a. There is no version to revert to.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC14 - Export contact list**
 
@@ -657,15 +658,15 @@ _Similar to UC10 except without extension 2b._
 
 - 1a. System detects that the file does not exist.
 
-    - 1a1. System shows an error message
+  - 1a1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
 - 1b. System detects that the file is not supported by the program
 
-    - 1b1. System shows an error message
+  - 1b1. System shows an error message
 
-      Use case ends.
+    Use case ends.
 
 **Use case: UC16 - Toggle application's theme**
 
@@ -684,23 +685,22 @@ _Similar to UC10 except without extension 2b._
 2. System processes the command and confirms its success.
 3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 - 2a. Command fails.
 
-    - 2a1. System displays an error message indicating the failure reason.
+  - 2a1. System displays an error message indicating the failure reason.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
 
 - 3a. Multiple previous commands available.
 
-    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
-    - 3a2. System displays each previous command in sequence.
+  - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+  - 3a2. System displays each previous command in sequence.
 
-      Use case ends.
-
+    Use case ends.
 
 **Use case: UC18 - Edit a person's information**
 
@@ -716,16 +716,15 @@ _Similar to UC10 except without extension 2b._
 
 - 2a. The specified person is invalid.
 
-    - 2a1. System shows an error message.
+  - 2a1. System shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 - 2b. The details entered are invalid or are in the wrong format.
 
-    - 2b1. System shows an error message.
+  - 2b1. System shows an error message.
 
-      Use case ends.
-
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -762,16 +761,20 @@ testers are expected to do more *exploratory* testing.
 
    1a. Download the jar file and copy into an empty folder
 
-   2b. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2b. Execute the jar file by running `java -jar bizbook.jar` in command prompt.<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    2a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2b. Re-launch the app by double-clicking the jar file.<br>
+   2b. Re-launch the app by running `java -jar bizbook.jar` in command prompt.<br>
    Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+3. Automatic help page launch
+
+   3a. Open the help window, and click the "Open URL" button.<br>
+   Expected: The user guide page should automatically open in the browser.
 
 ### Deleting a person
 
@@ -788,12 +791,13 @@ testers are expected to do more *exploratory* testing.
    1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1a. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1a. Prerequisites: Prepare a valid `bizbook.json` data file with at least 3-4 persons.
 
-2. _{ more test cases …​ }_
+   1b. Manually edit the data file so have 2 persons with the same name.
+
+   1c. Re-launch the app by running `java -jar bizbook.jar` in command prompt.<br>
+   Expected: App starts with an empty database.
