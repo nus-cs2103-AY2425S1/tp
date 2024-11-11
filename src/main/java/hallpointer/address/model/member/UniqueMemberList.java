@@ -63,6 +63,8 @@ public class UniqueMemberList implements Iterable<Member> {
 
         if (!target.isSameMember(updatedMember) && contains(updatedMember)) {
             throw new DuplicateMemberException();
+        } else if (target.isSameMember(updatedMember) && countOccurrences(updatedMember) > 1) {
+            throw new DuplicateMemberException();
         }
 
         internalList.set(index, updatedMember);
@@ -81,6 +83,7 @@ public class UniqueMemberList implements Iterable<Member> {
 
     /**
      * Returns the number of times an equivalent member as the given argument appears in the list.
+     * If this returns > 1, either the member update should be rejected or there is a bug somewhere.
      *
      * @param toCheck The member to count occurrences of.
      * @return The number of times the member appears in the list.

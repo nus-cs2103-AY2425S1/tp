@@ -36,7 +36,7 @@ public class SessionNameTest {
         assertTrue(SessionName.isValidSessionName("Math Workshop")); // alphabets and spaces only
         assertTrue(SessionName.isValidSessionName("Session 101")); // alphanumeric characters
         assertTrue(SessionName.isValidSessionName("Physics Seminar 2024")); // long valid names
-        assertTrue(SessionName.isValidSessionName("2024")); // just numbmers is fine here
+        assertTrue(SessionName.isValidSessionName("2024")); // just numbers is fine here
     }
 
     @Test
@@ -45,6 +45,11 @@ public class SessionNameTest {
 
         // same values -> returns true
         assertTrue(sessionName.equals(new SessionName("Valid Session Name")));
+
+        // same up to case -> returns true
+        assertTrue(sessionName.equals(new SessionName("valid session name")));
+        assertTrue(sessionName.equals(new SessionName("VALID SESSION NAME")));
+        assertTrue(sessionName.equals(new SessionName("Valid SesSIOn Name")));
 
         // same object -> returns true
         assertTrue(sessionName.equals(sessionName));

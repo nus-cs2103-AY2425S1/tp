@@ -1,5 +1,6 @@
 package hallpointer.address.model.member;
 
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.SessionBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
@@ -57,9 +59,17 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol", "Alice"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Carol").build()));
 
-        // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        // Keyword same up to case
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("aliCE"));
         assertTrue(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
+
+        // Keyword with slash
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("s/o"));
+        assertTrue(predicate.test(new MemberBuilder().withName("Alice s/o Carl").build()));
+
+        // Alphanumeric keyword
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Lai1"));
+        assertTrue(predicate.test(new MemberBuilder().withName("David Lai1").build()));
     }
 
     @Test
@@ -72,10 +82,14 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice Bob").build()));
 
-        // Keywords match telegram and room, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aliceinwonderland", "1-2-3"));
+        // Keywords match telegram and room and session, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aliceinwonderland", "1-2-3", "Meeting"));
         assertFalse(predicate.test(new MemberBuilder().withName("Alice").withTelegram("aliceinwonderland")
-                .withRoom("1-2-3").build()));
+                .withRoom("1-2-3").withSessions(new SessionBuilder(MEETING).build()).build()));
+
+        // No partial match
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol1"));
+        assertFalse(predicate.test(new MemberBuilder().withName("Carol").build()));
     }
 
     @Test

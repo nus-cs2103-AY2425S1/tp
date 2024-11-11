@@ -34,24 +34,30 @@ public class TelegramTest {
 
         // invalid telegrams: starting and ending requirements
         assertFalse(Telegram.isValidTelegram("_aaaaaa")); // start cannot be underscores
-        assertFalse(Telegram.isValidTelegram("1aaaaaa")); // start cannot be numberic
+        assertFalse(Telegram.isValidTelegram("1aaaaaa")); // start cannot be numeric
         assertTrue(Telegram.isValidTelegram("tota1")); // end cannot be numeric
 
         // valid telegrams
         assertTrue(Telegram.isValidTelegram("AAAAA")); // exactly 5 chars, just caps
-        assertTrue(Telegram.isValidTelegram("bbbbbbbb")); // just lowercase
+        assertTrue(Telegram.isValidTelegram("aaaaa")); // exactly 5 chars, just lowercase
+        assertTrue(Telegram.isValidTelegram("a1111")); // exactly 5 chars, just one letter
         assertTrue(Telegram.isValidTelegram("A22W_f_wfe3")); // numbers and underscores ok
         assertTrue(Telegram.isValidTelegram("A_____A")); // consecutive underscores ok
         assertTrue(Telegram.isValidTelegram("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")); // exactly 32 chars
-        assertTrue(Telegram.isValidTelegram("Ra_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a")); // certain regexes fail this too
+        assertTrue(Telegram.isValidTelegram("Ra_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a")); // certain regexes miss this too
     }
 
     @Test
     public void equals() {
-        Telegram telegram = new Telegram("vegetable");
+        Telegram telegram = new Telegram("Vegetable");
 
         // same values -> returns true
+        assertTrue(telegram.equals(new Telegram("Vegetable")));
+
+        // same up to case -> returns true
+        assertTrue(telegram.equals(new Telegram("VEGETABLE")));
         assertTrue(telegram.equals(new Telegram("vegetable")));
+        assertTrue(telegram.equals(new Telegram("vEGETABLE")));
 
         // same object -> returns true
         assertTrue(telegram.equals(telegram));

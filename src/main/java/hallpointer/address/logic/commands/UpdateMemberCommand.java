@@ -69,6 +69,7 @@ public class UpdateMemberCommand extends Command {
         this.updateMemberDescriptor = new UpdateMemberDescriptor(updateMemberDescriptor);
     }
 
+    //@@author {taggyhan}
     /**
      * Executes the update member command and returns the result message.
      *
@@ -92,7 +93,7 @@ public class UpdateMemberCommand extends Command {
         }
 
         long matchCount = model.countMemberOccurrences(updatedMember);
-
+        // Guarding against the updated member .isSameMember with the original and another member at the same time.
         if (memberToUpdate.isSameMember(updatedMember) && matchCount > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }

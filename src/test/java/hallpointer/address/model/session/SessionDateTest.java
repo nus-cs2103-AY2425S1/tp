@@ -20,15 +20,21 @@ public class SessionDateTest {
     }
 
     @Test
-    public void isValidDate() {
-        // null date
+    public void isValidDate_null_false() {
         assertThrows(NullPointerException.class, () -> SessionDate.isValidDate(null));
+    }
 
+    @Test
+    public void isValidDate_notNull() {
         // invalid dates
         assertFalse(SessionDate.isValidDate("")); // empty string
         assertFalse(SessionDate.isValidDate(" ")); // spaces only
+        assertFalse(SessionDate.isValidDate("123456")); // just numbers
+        assertFalse(SessionDate.isValidDate("sdfadfasdfsdf")); // just letters
+
         assertFalse(SessionDate.isValidDate("32 Dec 2024")); // invalid day
         assertFalse(SessionDate.isValidDate("31 Feb 2024")); // invalid month-day combination
+        assertFalse(SessionDate.isValidDate("29 Feb 2023")); // not leap year
         assertFalse(SessionDate.isValidDate("24-09-2024")); // wrong format
         assertFalse(SessionDate.isValidDate("24 September 2024")); // wrong format
         assertFalse(SessionDate.isValidDate("Oct 24 2024")); // wrong format
@@ -39,6 +45,8 @@ public class SessionDateTest {
         assertFalse(SessionDate.isValidDate(" Mar 2024")); // missing day
         assertFalse(SessionDate.isValidDate("29  2024")); // missing month
         assertFalse(SessionDate.isValidDate("30 Mar ")); // missing year
+        assertFalse(SessionDate.isValidDate("320000000000000000000 Dec 2024")); // overflow day
+        assertFalse(SessionDate.isValidDate("31 Dec 10000000000000000000000000000000000")); // overflow year
 
         // valid dates
         assertTrue(SessionDate.isValidDate("24 Sep 2024"));
@@ -46,7 +54,8 @@ public class SessionDateTest {
         assertTrue(SessionDate.isValidDate("15 Aug 2023"));
         assertTrue(SessionDate.isValidDate("1 Jan 2000")); // no zero-padding
         assertTrue(SessionDate.isValidDate("15 aUg 2023")); // wrong case
-        assertTrue(SessionDate.isValidDate("4 fEB 1989")); //both
+        assertTrue(SessionDate.isValidDate("4 fEB 1989")); // both
+        assertTrue(SessionDate.isValidDate("29 Feb 2024")); // leap year
     }
 
     @Test

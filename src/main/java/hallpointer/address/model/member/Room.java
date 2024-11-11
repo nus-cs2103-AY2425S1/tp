@@ -11,7 +11,7 @@ public class Room {
 
     public static final String MESSAGE_CONSTRAINTS = "Room must be in the format block-floor-room number.\n"
             + "Example: 10-3-100\n"
-            + "Unfortunately, non-numeric block or room numbers are currently unsupported.";
+            + "Unfortunately, non-numeric block, room or floor numbers are currently unsupported.";
 
     public static final String VALIDATION_REGEX = "^[0-9]+-[0-9]+-[0-9]+$";
 
@@ -27,6 +27,8 @@ public class Room {
         checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
 
         // remove zero-padding of block or floor or room number
+        // causes uncatched exception if integers are too large
+        // however, since this make no sense in realistic scenarios and fixing this counts as enhancement, ignoring it
         String[] arr = room.split("-");
         value = Integer.parseInt(arr[0]) + "-" + Integer.parseInt(arr[1]) + "-" + Integer.parseInt(arr[2]);
     }
