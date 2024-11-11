@@ -84,8 +84,8 @@ If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMA
 | **[Add Wedding](#adding-a-wedding-add-wed--aw)**                   | `add-wed w/NAME & NAME v/VENUE d/DATE` or `aw w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add-wed w/ John & June v/Orchard Hotel d/12/12/2030` or `aw w/ John & June v/Orchard Hotel d/12/12/2030` |
 | **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                     |
 | **[List Weddings](#listing-all-weddings-list-wed--lw)**            | `list-wed` or `lw`                                                                                                                                                                               |
-| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James` or `ta n/John Doe t/June & James t/Jeremy & Maya`             |
-| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James` or `td n/John Doe t/June & James t/Jeremy & Maya`             |
+| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG [t/TAG]...` or `ta n/NAME t/TAG [t/TAG]...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James` or `ta n/John Doe t/June & James t/Jeremy & Maya`             |
+| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG [t/TAG]...` or `td n/NAME t/TAG [t/TAG]...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James` or `td n/John Doe t/June & James t/Jeremy & Maya`             |
 | **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                               |
 | **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                               |
 | **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab`  pr `cab` followed by `y` or `n`                                                                                             |
@@ -388,7 +388,7 @@ Format: `list-wed` / `lw`
 ### Adding Tag(s) to a Contact: `tag-add` / `ta`
 Add your contacts to a particular wedding!
 
-Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
+Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 
 * The name of the tag must match the wedding that you want to add the contact to.
 
@@ -422,7 +422,7 @@ Examples:
 ### Deleting Tag(s) from a Contact: `tag-del` / `td`
 Remove your contacts from a particular wedding!
 
-Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
+Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 
 * The name of the tag must match the wedding that you want to delete the contact from.
 
