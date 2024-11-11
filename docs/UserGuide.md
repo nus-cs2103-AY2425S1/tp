@@ -257,6 +257,7 @@ Below are additional notes regarding certain prefixes. Please keep these in mind
 ##### t/
 1. Tags are `case-sensitive`. This means that `t/FRIEND` and `t/friend` are treated as unique tags.
 2. Very long tags (e.g., t/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) are permissible but might be visually truncated.
+3. When editing tags, the existing tags of the person will be removed (i.e. adding of tags is not cumulative).
 
 ##### d/
 1. There is no restriction on the date range, so unrealistic dates in the far future or past may be entered (e.g. `d/01-01-99`).
@@ -279,6 +280,7 @@ NIL (all covered in Constraints)
 ##### add/
 1. Unrealistically long addresses passes but will affect the display of data.
 2. Since addresses accept any value, symbols and non-standard characters (e.g. `add/123 *^&`) will pass.
+3. There is a known issue with the add/ prefix. Please refer to the [Known Issues](#known-issues) section.
 
 ##### reg/
 1. Regions are case-insensitive (i.e. `reg/east` and `reg/East` are the same).
@@ -1147,7 +1149,8 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
 > ---
 
-- **Special Comments:** NIL
+- **Special Comments:**
+1. There is a known issue where the chatbot text input field appears in black, which does not contrast well with its gray background. This will also be documented under [Known Issues](#known-issues) for reference.
 
 ### Saving the data
 
@@ -1180,6 +1183,8 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen).
+4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
+5. **For the chatbot**, the text input field appears in black, which does not contrast well with its gray background.
 
 --------------------------------------------------------------------------------------------------------------------
 
