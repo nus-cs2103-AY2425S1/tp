@@ -936,7 +936,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
         * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
     * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want. <br>
 
-1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
+1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allows **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
    e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paid` field using the `edit` command.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
@@ -954,13 +954,6 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
     The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
     Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
-
-
-1. **Allow Find command to search for partial word in name:** The current `find command` only allows exact full word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, but will **not** match the students named `Alexander Yeoh` or `Alexa Tan`, etc.
-    This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
-    Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
 
 
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
