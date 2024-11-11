@@ -691,12 +691,13 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 30px; margin-top: 15px;">
+  <div style="width: 45%; margin-bottom: 30px; margin-top: 25px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
-    <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%; margin-top: 18px;" />
+    <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
 
 </div>
+
 
 
 
