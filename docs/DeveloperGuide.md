@@ -563,6 +563,13 @@ This is sensible as names are non-unique, and we have other unique fields such a
 
 6. We plan to allow TAs to flexibly change the number of tutorials for each contact. Current implementation assumes there to be exactly 12 tutorials, which could be visually unpleasant for mods with less than 12 tutorials, and unusable for mods with more than 12 tutorials.
 
+
+7. We plan to allow INDEX to accept list and range, just like TUTORIAL for `mark`/`unmark`/`reset` commands, to further improve efficiency of marking attendance.   
+
+
+8. We plan to add an option that TAs can enable/disable to choose whether they would like the currently visible contact list to refresh after each list-altering command. For example,
+the filtered list displayed after using the `find` command will not reset after using `add`, depending on user preference.
+
 ---
 ## **Appendix: Effort**
 
