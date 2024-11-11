@@ -73,6 +73,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+---
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -89,6 +91,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Client` object residing in the `Model`.
+
+---
 
 ### Logic component
 
@@ -125,6 +129,8 @@ How the parsing works:
 * When called upon to parse a user command, the `PrudyParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `PrudyParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+---
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -147,6 +153,7 @@ The `Model` component,
 
 </div>
 
+---
 
 ### Storage component
 
@@ -158,6 +165,8 @@ The `Storage` component,
 * can save both Prudy's data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `PrudyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+---
 
 ### Common classes
 
@@ -257,6 +266,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+---
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -318,6 +329,7 @@ Key attributes of the target user include:
 
 **Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policy. Next, also improve client's relationships. Ensures agents never miss a client policy renewal. Manage clients' pending claims effectively.
 
+---
 
 ### User stories
 
@@ -343,8 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Insurance agent                | import and export client data                                                                                                           | work with the data outside of the platform when necessary                                         |
 | `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date                                       | prioritize my work and focus on the most important or time-sensitive client needs                 |
 
-
-*{More to be added}*
+---
 
 ### Use cases
 
@@ -664,6 +675,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+---
+
 ### Non-Functional Requirements
 
 1. **Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
@@ -686,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. **Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
 
-
+---
 
 ### Glossary
 
