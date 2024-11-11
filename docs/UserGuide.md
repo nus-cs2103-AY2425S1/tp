@@ -78,8 +78,8 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-1. First, check out the [List of Commands](#list-of-commands) section to understand what BakeBuddy can do
-2. Review the [FAQ](#faq) and [Glossary](#glossary-and-command-formats) to clear any initial doubts
+1. First, check out the [Glossary](#glossary-and-command-formats) and [List of Commands](#list-of-commands) sections to understand what BakeBuddy can do
+2. Review the [FAQ](#faq) to clear any initial doubts
 3. For detailed command information, refer to the [Features](#features) section which contains comprehensive documentation for each command
 
 ![screenshot](images/Screenshot-5.png)
