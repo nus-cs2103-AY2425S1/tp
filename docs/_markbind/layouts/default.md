@@ -37,9 +37,8 @@
   * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
-  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
+  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
-  * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
   * [Documentation, Logging, Testing, Configuration, DevOps]({{ baseUrl }}/DeveloperGuide.html#specific-guides)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
