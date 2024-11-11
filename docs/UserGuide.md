@@ -539,7 +539,7 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 
 **Details:**
 - Creates a CSV file containing the people that match the specified tags.
-- The exported file will be saved in the same directory as the application.
+- The exported file will be saved in the `./data` subdirectory.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
 - If no tags are specified, all data will be exported.
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
