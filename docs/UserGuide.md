@@ -15,6 +15,8 @@ tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -44,6 +46,8 @@ tasks done faster than traditional GUI apps.
 
 1. Refer to the [Features](#features) below for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 ## UI Layout
 <a id="ui-layout"></a>
 Here are the different components of the TutorEase UI:
@@ -55,6 +59,8 @@ Here are the different components of the TutorEase UI:
 4. **Lesson List**: The lesson list displays all the lessons that you have added to TutorEase.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -105,6 +111,7 @@ Format: `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]â€¦â€
 Remarks:
 * Add a contact with the specified details.
 
+<div style="page-break-after: always;"></div>
 
 Field          | Optional/Compulsory | Prefix | Remarks
 ---------------|---------------------|--------|-----------------------------------------
@@ -124,6 +131,8 @@ Examples:
 * `contact add n/Norbeast p/987654322131 e/norbeast@example.com a/John street, block 123, #01-01 r/Student`
 
 ![contact-add-student](images/contact-add-Student.png)
+
+<div style="page-break-after: always;"></div>
 
 * `contact add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Guardian a/Newgate Prison p/1234567 t/criminal`
 
@@ -175,6 +184,8 @@ Remarks:
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 
 * `contact find John` returns `john` and `John Doe`.
@@ -205,6 +216,8 @@ Examples:
 Adds a lesson tied to a student with start date time, end date time, name, address and fee.
 
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
+
+<div style="page-break-after: always;"></div>
 
 Remarks:
 * Add a lesson with the specified details.
@@ -238,6 +251,8 @@ Adds a lesson with the student at index 1, price per hour of 10, starting on 23r
 Shows a list of all lessons in the schedule.
 
 Format: `lesson list`
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a lesson : `lesson delete`
 
@@ -329,6 +344,8 @@ We recognize the need for clarity around overlapping lesson scheduling. Options 
 
 * Allowing overlapping sessions for group lessons or pair lessons.
 * Enabling you to customize settings for overlap permissions based on the type of lesson.
+
+<div style="page-break-after: always;"></div>
 
 #### 3. **Enhanced Name Field Support**
 To accommodate a more diverse range of names, such as names with commas, accented characters, or etc, we plan to update the application to allow names with these characters.
