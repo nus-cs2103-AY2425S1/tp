@@ -557,7 +557,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
 
-3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors. This also applies if the `INDEX` provided is non-positive.
+3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable). This also applies if the `INDEX` provided is non-positive.
 
 [_Back to Top_](#table-of-contents)
 
