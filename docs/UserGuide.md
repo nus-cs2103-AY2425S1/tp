@@ -54,6 +54,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 ## Table of Contents
 
 - [Quick Start :rocket:](#QUICKSTART)
+  - [Example TA Workflow](#example-ta-workflow)
 - [Features :computer:](#FEATURES)
   - [Data Formats](#data-formats)
   - [MAIN Commands](#main-commands)
@@ -130,6 +131,72 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Example TA Workflow
+
+<box type="info" seamless>
+
+Check this section out for an example on how you might use *TAHub Contacts* as a TA!
+
+</box>
+
+<box type="tip" theme="light">
+
+The specific commands in this section, e.g. [`clear`](#clear), are
+[hyperlinked](https://www.youtube.com/watch?v=dQw4w9WgXcQ) to their respective
+command feature sections. Use them to learn more!
+</box>
+
+1. Make sure you're starting from an **empty** student list. Use the command
+   <u>[`clear`](#clear)</u>
+   if it isn't.
+2. Let's say you have two students from your **T05** class for the course
+   **CS2005, Computer Examples**,
+   **Jane**, and **John**.
+3. Add the two students into TAHub Contacts using
+   <u>[`person-add`](#person-add)</u>
+   :
+   - `person-add m/A1234567Q n/Jane p/99871234 e/jahn@email.com a/12 AMK Ave`
+   - `person-add m/A2233445X n/John p/88112233 e/john@email.com a/200 Bedok Road`
+4. Now add the course `CS2005` using
+   <u>[`course-add`](#course-add)</u>
+   - `course-add c/CS2005 n/Computer Examples`
+5. Then, add your students to their class using
+   <u>[`enroll`](#enroll)</u>
+   .
+   - **Jane**: `enroll m/A1234567Q c/CS2005 tut/T05`
+   - **John**: `enroll m/A2233445X c/CS2005 tut/T05`
+6. You should now see the following in *TAHub Contacts*.
+
+  <div style="text-align:center">
+    <img src="images/exampleWorkflow1.png" alt="Example Workflow 1" width="70%">
+  </div>
+
+7. Fast forward a bit, you just had your first tutorial session with this class.
+   **Jane** showed up, but **John** didn't. So it's time to mark attendance!
+8. Use the
+   <u>[`attend-present`](#attend-present)</u>
+   and
+   <u>[`attend-absent`](#attend-absent)</u>
+   commands:
+   - **Jane**: `attend-present m/A1234567Q c/CS2005 tut/T05`
+   - **John**: `attend-absent m/A2233445X c/CS2005 tut/T05`
+9. You just recorded their attendance!
+   Click on the `Attendance` button to see their attendance. For instance,
+   here's **Jane**'s:
+
+   <div style="text-align:center">
+      <img src="images/exampleWorkflow2.png" alt="Example Workflow 2" width="70%">
+    </div>
+
+This is just a simple example. For more details, check the [Features](#FEATURES)
+section below.
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 <a name="FEATURES">
@@ -141,24 +208,18 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 **Notes about the command format: :fa-solid-lightbulb:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a parameter which can be used as `person-add m/A1234567L`.
+  e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a
+  parameter which can be used as `person-add m/A1234567L`.
 
-- Items in square brackets are optional.<br>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
-=======
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+- Items in square brackets are optional. e.g.
+  - `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+  - `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as
   ``
    (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
->>>>>>> master
-=======
-  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
->>>>>>> 65b2133aca34831d2baea8f0c028e8a7e33e3dea
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
@@ -531,6 +592,22 @@ Each of your students will have an attendance record associated with each unique
 This record is to be edited over the duration of a semester (or longer), where you can
 mark ([present :)](#attend-present) or [absent :(](#attend-absent)) and [unmark](#attend-remove)
 attendance for for **each** consecutive session.
+
+To view the attendance record of a student,
+
+<div style="text-align:center">
+
+  Click on the `Attendance` button:
+
+  <img src="images/attendance1.png" alt="Attendance Button" width="30%">
+
+  Then the following Attendance window will be shown:
+
+  <img src="images/attendance2.png" alt="Attendance Window" width="30%">
+
+</div>
+
+<br>
 
 <box type="warning">
 
