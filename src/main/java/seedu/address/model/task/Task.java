@@ -25,7 +25,7 @@ public class Task {
     public Task() {
         name = new TaskName("default");
         deadline = new Deadline(LocalDateTime.now());
-        status = Status.PENDING;
+        setStatus();
     }
 
     /**
@@ -35,7 +35,7 @@ public class Task {
     public Task(TaskName name, Deadline deadline) {
         this.name = name;
         this.deadline = deadline;
-        this.status = Status.PENDING;
+        setStatus();
     }
 
     /**
@@ -80,6 +80,10 @@ public class Task {
     public void setStatus() {
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
+        if (deadline == null) {
+            this.status = Status.PENDING;
+            return;
+        }
         if (deadline.getTime().isBefore(currentTime)
             && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
             this.status = Status.OVERDUE;
