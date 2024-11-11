@@ -217,7 +217,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find Betsy` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find Betsy` command.
 
 
 ### Clearing all entries : `clear`
@@ -246,7 +246,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 ### Undoing the previous command : `undo`
 
-Undoes the most last command that changed the data in the address book.
+Undoes the latest command that changed the data in the address book.
 
 Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
@@ -260,7 +260,7 @@ Format: `exit`
 
 ### Saving the data
 
-DorManagerPro data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually, although there is an option to do so in the `export` and `import` functions.
+DorManagerPro data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually, although there is an option to do so in the [export](#manual-saving-export) and [import](#manual-data-restoration-import) functions.
 
 ### Manual saving: `export`
 
@@ -274,8 +274,6 @@ Format: `export`
 
 Example:
 
-`export`
-
 The following screenshots shows the results of executing `export`
 ![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 ![ExportToFolderExample.png](images/ExportToFolderExample.png)
@@ -288,6 +286,7 @@ Format: `import fp/FILE_PATH`
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * `FILE_PATH` must correspond to an actual json file in the device.
+> * `Import` will not work if the json file to be imported would result in any invalid data in DorManagerPro!
 > * Use `.` in the FILE_PATH to refer to the home folder of the application.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
 > * The home folder of the application is the folder that contains the jar file!
 
