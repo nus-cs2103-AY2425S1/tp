@@ -196,7 +196,6 @@ public class ModelManager implements Model {
     private static Student createEditedStudent(Student studentToEdit,
                                                EditCommand.EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
-
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         TutorialId updatedTutorialId = editStudentDescriptor.getTutorialId()

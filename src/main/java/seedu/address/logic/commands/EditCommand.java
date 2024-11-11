@@ -113,6 +113,7 @@ public class EditCommand extends Command {
         TutorialId updatedTutorialId = editStudentDescriptor.getTutorialId()
                 .orElse(studentToEdit.getTutorialId());
         PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
+        updatedDates.setStudentID(studentToEdit.getStudentId(), updatedStudentId);
 
         return new Student(updatedName, updatedStudentId, updatedTutorialId, updatedDates);
     }

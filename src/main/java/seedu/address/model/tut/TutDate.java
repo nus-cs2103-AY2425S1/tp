@@ -46,6 +46,15 @@ public class TutDate implements Comparator<TutDate> {
         students.add(student);
     }
 
+    public void setStudentId(StudentId currStudentId, StudentId studentId) {
+        for (StudentId id : students) {
+            if (currStudentId.equals(id)) {
+                students.remove(currStudentId);
+                students.add(studentId);
+            }
+        }
+    }
+
     /**
      * Removes a student from the list of students for the tutorial session.
      *

@@ -70,6 +70,12 @@ public class PresentDates {
         return dates;
     }
 
+    public void setStudentID(StudentId currStudentId, StudentId studentId) {
+        for (TutDate tutDate : dates) {
+            tutDate.setStudentId(currStudentId, studentId);
+        }
+    }
+
     /**
      * Returns a string representation of the {@code PresentDates} object.
      * The string is formatted as a list of {@link TutDate} objects enclosed in square brackets.
