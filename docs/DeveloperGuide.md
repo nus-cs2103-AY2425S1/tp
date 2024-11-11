@@ -2,6 +2,31 @@
 layout: page
 title: Developer Guide
 ---
+# Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)<br>
+  3.1. [Architecture](#architecture)<br>
+  3.2. [UI component](#ui-component)<br>
+  3.3. [Logic component](#logic-component)<br>
+  3.4. [Model component](#model-component)<br>
+  3.5. [Storage component](#storage-component)<br>
+  3.6. [Common classes](#common-classes)<br>
+4. [Implementation](#implementation)<br>
+  4.1. [Undo/redo feature](#undoredo-feature)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation)<br>
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-opss)
+6. [Appendix: Requirements](#appendix-requirements)<br>
+  6.1. [Product scope](#product-scope)<br>
+  6.2. [User stories](#user-stories)<br>
+  6.3. [Use cases](#use-cases)<br>
+  6.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+  6.5. [Product scope](#product-scope)<br>
+  6.6. [Glossary](#glossary)<br>
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
+  7.1. [Launch and shutdown](#launch-and-shutdown)<br>
+  7.2. [Deleting a person](#deleting-a-person)<br>
+  7.3. [Saving data](#saving-data)<br>
 
 ---
 
@@ -71,9 +96,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F10-3/tp/blob/master/src/main/java/bizbook/ui/Ui.java)
 
-<div style="text-align: center;">
-  <img src="images/UiClassDiagram.png" alt="Structure of the UI Component" width="1700">
-</div>
+<img src="images/UiClassDiagram.png" width="1960"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -168,7 +191,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `addressBookOlderVersionList` for the undo history and `addressBookNewerVersionList` for the redo history. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally in an `undoStateList` for the undo history and `redoStateList` for the redo history. Additionally, it implements the following operations:
 
 - `VersionedAddressBook#canRedo()` — Checks if there is a version to redo to.
 - `VersionedAddressBook#canUndo()` — Checks if there is a version to undo to.
@@ -178,19 +201,19 @@ The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `Ad
 
 These operations are exposed in the `Model` interface as `Model#canRedo()`, `Model#canUndo()`, `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` and `Model#redoAddressBookVersion()` respectively.
 
-The `addressBookOlderVersionList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
+The `undoStateList` will only hold up to 5 seperate unique versions of the address book, therefore BizBook will only remember up till 5 previously executed commands that in some way have modified the address book.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `addressBookOlderVersionList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `addressBookNewerVersionList` will be empty.
+Step 1. The user launches the application for the first time. The `undoStateList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state. While the `redoStateList` will be empty.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookOlderVersionList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveAddressBookVersion()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `undoStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `addressBookOlderVersionList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveAddressBookVersion()`, causing another modified address book state to be saved into the `undoStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -198,7 +221,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `addressBookNewerVersionList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `redoStateList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -219,17 +242,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `addressBookOlderVersionList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBookVersion()`, which removes the item at the `redoPointer` and adds it to the back of the `undoStateList`, it also shifts the `currentStatePointer` to the right as well as restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `addressBookNewerVersionList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoPointer` is at index `redoStateList.size() - 1` or the list is empty, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `addressBookOlderVersionList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#saveAddressBookVersion()`, `Model#revertAddressBookVersion()` or `Model#redoAddressBookVersion()`. Thus, the `undoStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `addressBookNewerVersionList`, all address book states in `addressBookNewerVersionList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#saveAddressBookVersion()`. Since the `redoPointer` is pointing at an item in the `redoStateList`, all address book states in `redoStateList` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -552,20 +575,17 @@ _Similar to UC10 except without extension 2b._
 
 **MSS**
 
-1.  Actor performs a command that updates the System.
-2.  System executes the command.
-3.  Actor requests to undo the recently executed command.
-4.  System reverts changes made by the actor.
-5.  Actor requests to redo the recently executed undo command.
-6.  System reverts changes made by the actor.
+1.  Actor <u>undos a command (UC12)</u>.
+2.  Actor requests to redo the recently executed undo command.
+3.  System reverts changes made by the actor.
 
     Use case ends.
 
 **Extensions**
 
-- 5a. There is no version to revert to.
+- 2a. There is no version to revert to.
 
-    - 5a1. System shows an error message.
+    - 2a1. System shows an error message.
 
       Use case ends.
 
@@ -615,7 +635,7 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-**Use case: UC16 - Toggle application's theme** 
+**Use case: UC16 - Toggle application's theme**
 
 **MSS**
 
@@ -641,13 +661,39 @@ _Similar to UC10 except without extension 2b._
     - 2a1. System displays an error message indicating the failure reason.
 
       Use case resumes from step 1.
-  
+
 - 3a. Multiple previous commands available.
 
     - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
     - 3a2. System displays each previous command in sequence.
 
       Use case ends.
+
+
+**Use case: UC18 - Edit a person's information**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit the details of a specific person.
+3.  System shows details of the newly edited person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+- 2b. The details entered are invalid or are in the wrong format.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 

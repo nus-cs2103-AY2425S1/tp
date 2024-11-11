@@ -19,6 +19,7 @@ import bizbook.model.person.Name;
 import bizbook.model.person.Note;
 import bizbook.model.person.Person;
 import bizbook.model.person.Phone;
+import bizbook.model.person.exceptions.DuplicatePersonException;
 import bizbook.model.tag.Tag;
 import ezvcard.Ezvcard;
 import ezvcard.VCard;
@@ -34,6 +35,8 @@ public class VcfImporter implements Importer {
             + "make a person.";
     public static final String MESSAGE_INVALID_INFORMATION = "A vCard inside the file contains information that "
             + "cannot be converted to make a person.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "At least two vCards in the file have the same name which is "
+            + "not allowed by this application. Please update the vCards so that they do not have the same name.";
 
     // ================ Validation methods ==============================
     private void validateNotEmpty(List<VCard> vCards) throws InvalidFileException {
@@ -88,8 +91,12 @@ public class VcfImporter implements Importer {
         requireNonNull(vCards);
 
         AddressBook addressBook = new AddressBook();
-        for (VCard vCard : vCards) {
-            addressBook.addPerson(convertToPerson(vCard));
+        try {
+            for (VCard vCard : vCards) {
+                addressBook.addPerson(convertToPerson(vCard));
+            }
+        } catch (DuplicatePersonException dpe) {
+            throw new InvalidFileException(MESSAGE_DUPLICATE_PERSON);
         }
 
         return addressBook;

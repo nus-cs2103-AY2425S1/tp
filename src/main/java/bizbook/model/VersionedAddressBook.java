@@ -9,9 +9,9 @@ import java.util.Deque;
 public class VersionedAddressBook extends AddressBook {
 
     /* Stores the copy of the previous list of contacts */
-    public final Deque<AddressBook> addressBookOlderVersionList = new ArrayDeque<>();
+    public final Deque<AddressBook> undoStateList = new ArrayDeque<>();
     /* Stores the copy of the newer versions of the address book */
-    public final Deque<AddressBook> addressBookNewerVersionList = new ArrayDeque<>();
+    public final Deque<AddressBook> redoStateList = new ArrayDeque<>();
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -25,21 +25,21 @@ public class VersionedAddressBook extends AddressBook {
      * Retrieves the list of the old address book versions.
      */
     public Deque<AddressBook> getAddressBookHistoryList() {
-        return addressBookOlderVersionList;
+        return undoStateList;
     }
 
     /**
      * Checks if there is a newer version that can be reverted to or not.
      */
     public boolean canRedo() {
-        return addressBookNewerVersionList.size() > 0;
+        return redoStateList.size() > 0;
     }
 
     /**
      * Checks if there is a version that can be reverted to or not.
      */
     public boolean canUndo() {
-        return addressBookOlderVersionList.size() > 1;
+        return undoStateList.size() > 1;
     }
 
     /**
@@ -50,31 +50,31 @@ public class VersionedAddressBook extends AddressBook {
         addressBookCopy.setPersons(getPersonList());
         addressBookCopy.setPinnedPersons(getPinnedPersonList());
         // If equal to the previous version in the list then do not save
-        if (!addressBookOlderVersionList.isEmpty() && addressBookCopy.equals(addressBookOlderVersionList.getLast())) {
+        if (!undoStateList.isEmpty() && addressBookCopy.equals(undoStateList.getLast())) {
             return;
         }
         // Limit the versions saved to be 5 but 1 slot will be for the base version
-        if (addressBookOlderVersionList.size() == 6) {
-            addressBookOlderVersionList.removeFirst();
+        if (undoStateList.size() == 6) {
+            undoStateList.removeFirst();
         }
-        addressBookOlderVersionList.addLast(addressBookCopy);
+        undoStateList.addLast(addressBookCopy);
 
-        addressBookNewerVersionList.clear();
+        redoStateList.clear();
     }
 
     /**
      * Reverts to the latest version of the {@code AddressBook} and removed it from the list.
      */
     public void undo() {
-        AddressBook currentVersion = addressBookOlderVersionList.removeLast();
-        AddressBook previousVersion = addressBookOlderVersionList.getLast();
+        AddressBook currentVersion = undoStateList.removeLast();
+        AddressBook previousVersion = undoStateList.getLast();
 
         // Limit the versions saved to be 5
-        if (addressBookNewerVersionList.size() == 5) {
-            addressBookNewerVersionList.removeFirst();
+        if (redoStateList.size() == 5) {
+            redoStateList.removeFirst();
         }
 
-        addressBookNewerVersionList.addLast(currentVersion);
+        redoStateList.addLast(currentVersion);
 
         setPersons(previousVersion.getPersonList());
         setPinnedPersons(previousVersion.getPinnedPersonList());
@@ -84,8 +84,8 @@ public class VersionedAddressBook extends AddressBook {
      * Reverts to a newer version of the {@code AddressBook} and removed it from the list.
      */
     public void redo() {
-        AddressBook newerVersion = addressBookNewerVersionList.removeLast();
-        addressBookOlderVersionList.addLast(newerVersion);
+        AddressBook newerVersion = redoStateList.removeLast();
+        undoStateList.addLast(newerVersion);
         setPersons(newerVersion.getPersonList());
         setPinnedPersons(newerVersion.getPinnedPersonList());
     }
