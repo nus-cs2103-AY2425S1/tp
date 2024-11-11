@@ -308,7 +308,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 **Extensions**
 * 1a. User leaves the sort field empty.
-    - 1a1. Cher detects error in user input and shows correct input format.
+    - 1a1. Cher detects error in user input and shows correct input format. <br>
+      Use case ends.
 * 2a. User enters invalid field.
     - 2a1. Cher detects error in user input and shows correct input format. <br>
       Use case ends.
@@ -470,9 +471,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: <br>
 Execute the following:
-   - add n/Charlie s/m r/student p/567893 a/Bukit batok e/nus@dfsh.dsfvc  t/tag1 
-   - add n/anna s/f r/parent p/23456 a/Jurong e/sutd@dfsh.dsfvc  t/tag1 
-   - add n/Benet s/m r/student p/346826 a/Pungol e/rjc@dfsh.dsfvc  t/tag1 t/tag2 
+   - add n/Charlie s/m r/student p/56789312 a/Bukit batok e/nus@dfsh.dsfvc  t/tag1 
+   - add n/anna s/f r/parent p/23456121 a/Jurong e/sutd@dfsh.dsfvc  t/tag1 
+   - add n/Benet s/m r/student p/34682621 a/Pungol e/rjc@dfsh.dsfvc  t/tag1 t/tag2 
    - List all persons using the `list` command.
 2. Sorting list by name
    1. Test case: `sort name` <br>
@@ -485,7 +486,7 @@ Execute the following:
    2. Test case: `sort role` <br>
       Expected: Feedback box will show message: `Sorted by role` <br>
       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
-      the role, in the following order: anna, Charlie, Benet
+      the role, (parents followed by students) in the following order: anna, Charlie, Benet
 4. Sorting list by phone
     1. Prerequisites: <br>
        List all persons using the `list` command.
@@ -503,7 +504,7 @@ Execute the following:
 6. Sorting list by address
     1. Prerequisites: <br>
        List all persons using the `list` command.
-    2. Test case: `sort name` <br>
+    2. Test case: `sort address` <br>
        Expected: Feedback box will show message: `Sorted by address` <br>
        Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
        the address, in the following order: Charlie, anna, Benet
@@ -512,7 +513,8 @@ Execute the following:
        List all persons using the `list` command.
     2. Test case: `sort k` <br>
        Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. <br>
-       Parameters: [name] [role] [phone] [email] [address] Example: sort name`
+       Parameters: [name] [role] [phone] [email] [address] Example: sort name` <br>
+       Contact entries will remain unsorted.
 
 ### Marking attendance for a person 
 
