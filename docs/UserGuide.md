@@ -23,7 +23,7 @@ StudentManagerPro (SMP) is a **desktop app for secondary school teachers in Sing
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar studentmanagerpro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui.png](images%2FUi.png)
+   ![Ui.png](images%2FUi.png)<br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -171,7 +171,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * **Multiple Predicates with Multiple Values**: both an `OR` and an`AND` search is run.
   * e.g. **Student 1**: Name - Alex; Phone number - 99999999, **Student 2**: Name - Bernice; Phone Number - 92443567, **Student 3**: Name - Christine; Phone Number: 88888888
   * `filter n/Alex Bernice p/99999999 92443567` matches Alex and Bernice, as both students out of 6 students have at least one matching name and phone number, as seen below.
-![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)
+![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)<br>
   
 
   * Reversing the order of phone numbers, `filter n/Alex Bernice p/92443567 99999999` still returns Alex and Bernice.
