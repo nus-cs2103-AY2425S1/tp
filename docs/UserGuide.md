@@ -247,7 +247,7 @@ Lists the active [tags](#glossary) across *all* [contacts](#glossary) in the con
 * Lists active tags in alphabetical order.
 * Useful to keep track of which tags you have used in order to maintain consistency.
 
-<div style="page-break-after: always;"></div>
+<br><br/>
 
 #### Locating contacts by name: `find`
 
@@ -565,9 +565,6 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<br><br/>
-<div style="page-break-after: always;"></div>
-
 ## Glossary
 
 | Term                        | Explanation                                                                                                                                                                                                 |
@@ -575,6 +572,8 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 | <a id="contact">Contact</a> | Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                                             |
 | <a id="wedding">Wedding</a> | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/> <br/> Weddings are considered duplicate if they have identical names (case-sensitive). |
 | <a id="tag">Tag</a>         | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                            | 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 Action     | Format, Examples
