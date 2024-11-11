@@ -147,6 +147,7 @@ Shows a list of all customers in the address book.
 
 Command alias: `listc`<br>
 Format: `listcustomer`
+<div style="page-break-after: always;"></div>
 
 ### Editing a customer : `editcustomer`
 
