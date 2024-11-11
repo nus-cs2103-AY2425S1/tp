@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Augmented customer classes into order and order list classes with relevant parameter handling (Pull requests [\#39](https://github.com/AY2425S1-CS2103T-F14a-2/tp/pull/39).
-  * Enhanced storage functionality to accommodate customer order lists and respective orders (Pull requests [\#70](https://github.com/AY2425S1-CS2103T-F14a-2/tp/pull/70). 
+  * Enhanced storage functionality to accommodate customer order lists and respective orders (Pull requests [\#70](https://github.com/AY2425S1-CS2103T-F14a-2/tp/pull/70).
 
 * **Documentation**:
   * User Guide:
