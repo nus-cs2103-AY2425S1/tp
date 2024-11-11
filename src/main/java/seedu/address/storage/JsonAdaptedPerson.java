@@ -152,56 +152,27 @@ class JsonAdaptedPerson {
     public boolean isValidPerson() {
         boolean hasValidContactInfo = phone != null && Phone.isValidPhone(phone)
                 || telegramHandle != null && TelegramHandle.isValidTelegramHandle(telegramHandle)
-                || email != null && Email.isValidEmail(email)
-                || moduleName != null && ModuleName.isValidModName(moduleName);
+                || email != null && Email.isValidEmail(email);
         return name != null && Name.isValidName(name)
                 && hasValidContactInfo
                 && contactType != null && ContactType.isValidContactType(contactType);
     }
 
     /**
-     * @return true if either email, telegramHandle, or email are empty
-     */
-    public boolean hasEmptyContactInfo() {
-        return phone == null
-                || telegramHandle == null
-                || email == null
-                || moduleName == null;
-    }
-
-    /**
      * Replaces invalid contact info with default values
      */
-    public void clearInvalidContactInfo() {
-        if (!Phone.isValidPhone(phone)) {
+    public void clearInvalidInfo() {
+        if (phone != null && !Phone.isValidPhone(phone)) {
             phone = DEFAULT_PHONE;
         }
-        if (!Email.isValidEmail(email)) {
+        if (email != null && !Email.isValidEmail(email)) {
             email = DEFAULT_EMAIL;
         }
-        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+        if (telegramHandle != null && !TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             telegramHandle = DEFAULT_TELEGRAMHANDLE;
         }
-        if (!ModuleName.isValidModName(moduleName)) {
+        if (moduleName != null && !ModuleName.isValidModName(moduleName)) {
             moduleName = DEFAULT_MODNAME;
-        }
-    }
-
-    /**
-     * Fills empty contact Info with default values
-     */
-    public void fillEmptyContactInfo() {
-        if (phone == null) {
-            this.phone = DEFAULT_PHONE;
-        }
-        if (email == null) {
-            this.email = DEFAULT_EMAIL;
-        }
-        if (telegramHandle == null) {
-            this.telegramHandle = DEFAULT_TELEGRAMHANDLE;
-        }
-        if (moduleName == null) {
-            this.moduleName = DEFAULT_MODNAME;
         }
     }
 }
