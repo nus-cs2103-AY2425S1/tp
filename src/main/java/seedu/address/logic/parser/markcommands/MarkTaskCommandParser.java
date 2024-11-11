@@ -38,12 +38,6 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME, PREFIX_INDEX);
 
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_GROUP_NAME, PREFIX_INDEX));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + MarkTaskCommand.MESSAGE_USAGE);
-        }
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_GROUP_NAME)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -64,7 +58,4 @@ public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
-        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
-    }
 }

@@ -33,12 +33,7 @@ public class ListTaskCommandParser implements Parser<ListTaskCommand> {
     public ListTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_GROUP_NAME));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + ListTaskCommand.MESSAGE_USAGE);
-        }
+
         if (arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME) && argMultimap.getPreamble().isEmpty()) {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
             GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
@@ -56,10 +51,6 @@ public class ListTaskCommandParser implements Parser<ListTaskCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
-        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
     }
 
 }

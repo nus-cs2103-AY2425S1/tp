@@ -37,13 +37,7 @@ public class EditTaskAllGroupCommandParser implements Parser<EditTaskAllGroupCom
     @Override
     public EditTaskAllGroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_INDEX,
-            PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE, PREFIX_TASK_STATUS));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditTaskAllGroupCommand.MESSAGE_USAGE);
-        }
+
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_TASK_NAME,
                 PREFIX_TASK_DEADLINE, PREFIX_TASK_STATUS);
