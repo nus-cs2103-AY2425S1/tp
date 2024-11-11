@@ -21,8 +21,8 @@ public class AddPetCommand extends Command {
 
     public static final String COMMAND_WORD = "pet";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to PawPatrol.\n" +
-            "Note: It is recommended to link pets to owners immediately after adding a pet.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pet to PawPatrol.\n"
+            + "Note: It is recommended to link pets to owners immediately after adding a pet.\n"
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_SPECIES + "SPECIES "
