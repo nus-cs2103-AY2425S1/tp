@@ -540,7 +540,7 @@ You do not need to save manually as BridalBuddy data are saved in the hard disk 
 
 ### Editing the data file
 
-BridalBuddy data are saved automatically as a JSON file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
+BridalBuddy data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
 
 :warning: **Caution:**
 If your changes to the data file makes its format invalid, BridalBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -595,9 +595,9 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 ## **Glossary**
 
-| Term/Keyword                       | Definition                                                                                                 |
-|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
-
+| Term/Keyword | Definition                                                                                            |
+|--------------|-------------------------------------------------------------------------------------------------------|
+| **Prefix**   | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.         |
+| **JSON**     | JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data |
 
 [_Back to Top_](#table-of-contents)
