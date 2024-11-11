@@ -355,10 +355,18 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known limitations
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **No length restrictions for tags, names, and phone numbers**, which may cause UI display issues.
+4. **Tag names only accept alphanumeric characters**, special characters like hyphens are not allowed.
+5. **Phone numbers only accept the "+" symbol** at the beginning.
+6. **Cannot filter for empty fields**.
+7. **The edit command processes multiple INCOME or AGE parameters** in a single command, using only the last value.
+8. **Contact names are case-sensitive**, potentially allowing duplicate entries with different capitalization.
+
+Please keep these limitations in mind when using the application. We are working to address them in future updates.
 
 --------------------------------------------------------------------------------------------------------------------
 
