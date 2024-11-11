@@ -92,10 +92,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withPriority("HIGH").build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different remark -> returns false
-        editedAlice = new PersonBuilder(ALICE).withRemark("DIFFERENT REMARK").build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different date of birth -> returns false
         editedAlice = new PersonBuilder(ALICE).withDateOfBirth(LocalDate.of(1978, 5, 28)).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -124,8 +120,7 @@ public class PersonTest {
                 + ALICE.getPhone() + ", email="
                 + ALICE.getEmail() + ", address="
                 + ALICE.getAddress() + ", priority="
-                + ALICE.getPriority() + ", remark="
-                + ALICE.getRemark() + ", dateOfBirth="
+                + ALICE.getPriority() + ", dateOfBirth="
                 + ALICE.getDateOfBirth() + ", income="
                 + ALICE.getIncome() + ", familySize="
                 + ALICE.getFamilySize() + ", tags="

@@ -24,7 +24,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.scheme.Scheme;
 import seedu.address.model.scheme.SchemeRetrieval;
@@ -128,16 +127,14 @@ public class AddSchemeCommand extends Command {
         Email updatedEmail = person.getEmail();
         Address updatedAddress = person.getAddress();
         Priority updatedPriority = person.getPriority();
-        Remark updatedRemark = person.getRemark();
         DateOfBirth updatedDateOfBirth = person.getDateOfBirth();
         Income updatedIncome = person.getIncome();
         FamilySize updatedFamilySize = person.getFamilySize();
         Set<Tag> updatedTags = person.getTags();
         boolean isArchived = person.isArchived();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, newSchemes, UpdatedAt.now(),
-                isArchived);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedDateOfBirth,
+                updatedIncome, updatedFamilySize, updatedTags, newSchemes, UpdatedAt.now(), isArchived);
     }
 
     @Override

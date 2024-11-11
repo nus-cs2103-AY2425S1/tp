@@ -28,11 +28,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_OF_BIRTH_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -45,7 +44,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -76,7 +74,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + PRIORITY_DESC_BOB + REMARK_DESC_BOB + DATE_OF_BIRTH_DESC_BOB + INCOME_DESC_BOB
+                + ADDRESS_DESC_BOB + DATE_OF_BIRTH_DESC_BOB + PRIORITY_DESC_BOB + INCOME_DESC_BOB
                 + FAMILY_SIZE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
@@ -84,16 +82,16 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATE_OF_BIRTH_DESC_BOB
-                        + PRIORITY_DESC_BOB + REMARK_DESC_BOB + INCOME_DESC_BOB + FAMILY_SIZE_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + PRIORITY_DESC_BOB + INCOME_DESC_BOB + FAMILY_SIZE_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + PRIORITY_DESC_BOB + REMARK_DESC_BOB
-                + DATE_OF_BIRTH_DESC_BOB + INCOME_DESC_BOB + FAMILY_SIZE_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + DATE_OF_BIRTH_DESC_BOB + PRIORITY_DESC_BOB + INCOME_DESC_BOB
+                + FAMILY_SIZE_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -115,10 +113,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PRIORITY_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
-        // multiple remarks
-        assertParseFailure(parser, REMARK_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_REMARK));
-
         // multiple family sizes
         assertParseFailure(parser, FAMILY_SIZE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FAMILY_SIZE));
@@ -126,11 +120,11 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + PRIORITY_DESC_AMY + REMARK_DESC_AMY + FAMILY_SIZE_DESC_AMY
+                        + ADDRESS_DESC_AMY + PRIORITY_DESC_AMY + FAMILY_SIZE_DESC_AMY
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(
-                        PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PRIORITY, PREFIX_REMARK,
-                        PREFIX_DATE_OF_BIRTH, PREFIX_INCOME, PREFIX_FAMILY_SIZE));
+                        PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE_OF_BIRTH,
+                        PREFIX_PRIORITY, PREFIX_INCOME, PREFIX_FAMILY_SIZE));
 
         // invalid value followed by valid value
 
@@ -150,15 +144,15 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        // invalid priority
-        assertParseFailure(parser, INVALID_PRIORITY_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
-
         // invalid date of birth
         assertParseFailure(parser, INVALID_FORMAT_DATE_OF_BIRTH_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
         assertParseFailure(parser, INVALID_FUTURE_DATE_OF_BIRTH_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
+
+        // invalid priority
+        assertParseFailure(parser, INVALID_PRIORITY_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
         // invalid income
         assertParseFailure(parser, INVALID_INCOME_DESC + validExpectedPersonString,
@@ -186,15 +180,15 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
-        // invalid priority
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PRIORITY_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
-
         // invalid date of birth
         assertParseFailure(parser, validExpectedPersonString + INVALID_FORMAT_DATE_OF_BIRTH_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
         assertParseFailure(parser, validExpectedPersonString + INVALID_FUTURE_DATE_OF_BIRTH_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE_OF_BIRTH));
+
+        // invalid priority
+        assertParseFailure(parser, validExpectedPersonString + INVALID_PRIORITY_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
 
         // invalid income
         assertParseFailure(parser, validExpectedPersonString + INVALID_INCOME_DESC,
@@ -207,7 +201,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags and no remark
+        // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withIncome(0).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + DATE_OF_BIRTH_DESC_AMY,
@@ -219,24 +213,28 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + DATE_OF_BIRTH_DESC_BOB, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + DATE_OF_BIRTH_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + DATE_OF_BIRTH_DESC_BOB, expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + DATE_OF_BIRTH_DESC_BOB, expectedMessage);
+
+        // missing date of birth prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + VALID_DATE_OF_BIRTH_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                + VALID_DATE_OF_BIRTH_BOB, expectedMessage);
     }
 
     @Test
