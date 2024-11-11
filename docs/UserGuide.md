@@ -154,7 +154,7 @@ Here will be a basic guide on how to use the application.
    * Type the following command in the command box and press Enter to **add a patient**:
       > `add n/Johnson p/11111111 e/johnson123@gmail.com a/123 Clementi Rd, 1234665 t/Diabetic`
    * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to NovaCare!
-<br></br>  
+<br></br>
 
 4. **Edit patient information**:
    * Type the following command in the command box and press Enter to **edit a patient's information**:
@@ -177,7 +177,7 @@ Here will be a basic guide on how to use the application.
 7. **Add a task**:
     * Type the following command in the command box and press Enter to **add a task to the patient**:
        > `addtask 1 d/Eat paracetamol 1000mg`
-    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of NovaCare, in this case being the patient `Lily` who was just added! 
+    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of NovaCare, in this case being the patient `Lily` who was just added!
 <br></br>
 
 8. **Exit**:
@@ -272,7 +272,7 @@ Adds a patient's details to NovaCare.
 <box type="info" seamless>
 
 **Note:**
-* Upon adding a patient the default priority is set to *3*. 
+* Upon adding a patient the default priority is set to *3*.
   * Users can change the priority level using the [`priority` command](#6-2-8-adding-priority-level-priority).
 * To update emergency contact details, use the [`emergency` command](#6-2-6-adding-emergency-contact-emergency).
 * A patient will not be added if the name and phone number is already in NovaCare.
@@ -296,7 +296,7 @@ Examples:
 
 Expected output (First example):
 ```
-New patient added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Tags: 
+New patient added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Tags:
 ```
 
 Expected output (Second example):
@@ -306,7 +306,7 @@ New patient added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; A
 
 Expected output (Third example):
 ```
-New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
+New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags:
 ```
 <br>
 
@@ -353,7 +353,7 @@ Edited patient: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 
 
 Expected output (Second example):
 ```
-Edited patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+Edited patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags:
 ```
 <br>
 
@@ -777,7 +777,7 @@ _Details coming soon ..._
 **A**: NovaCare is able to run without internet connection.
 
 **Q**: What is the difference between INDEX and ID?<br>
-**A**: Both are referring to the same thing as shown in the [glossary](#10-glossary). 
+**A**: Both are referring to the same thing as shown in the [glossary](#10-glossary).
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
