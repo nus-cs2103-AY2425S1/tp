@@ -20,6 +20,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_MATCH = "No match found!";
     public static final String MESSAGE_INVALID_POSTAL = "This postal code is invalid.";
+    public static final String MESSAGE_INVALID_POSTAL_CODE =
+            "This postal code is invalid. Find by postal code must start with 'S', followed by up to 6 digits.";
 
 
     /**
