@@ -361,14 +361,13 @@ The following shows the activity diagram when the user executes the `edit_t_g` c
 
 **Syntax:** `edit_t_g/etg gn/GROUP_NAME i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE]`
 
-**Example:** `edit_t_g gn/CS2103-F12-2 i/1 tn/Complete Assignment td/2024-12-12 1800`
+**Example:** `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800`
 
 #### Implementation details
 
 1. User has the application launched with at least 1 group added and at least 1 task added to that group.
 2. User executes `lt gn/GROUP_NAME` to view the group's task list. For this example, the user wishes to edit the first task for `CS2103-F12-2`.
-3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 tn/Complete Assignment td/2024-12-12 1800` to edit the task with a task name `Complete Assignment`, and 
-set deadline to `2024-12-12 1800`. The command is parsed in the `AddressBookParser`.
+3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800` to edit the task's deadline to `2024-12-12 1800`. The command is parsed in the `AddressBookParser`.
 4. `EditTaskCommandParser` is created and gets the group name and task index of the task to be edited. The group name and task index is used to
    construct a `EditTaskCommand` object.
 5. The `EditTaskCommand` object then calls `model.setTask(taskToEdit, editedTask, group)` in the `ModelManager` with the specified group's name, task to be
