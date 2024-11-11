@@ -306,18 +306,19 @@ results based on the specified criteria.
 
 #### Implementation
 
-* the delete command is based on the index of the contact
+* The `delete` command extends `Command` and implements `Undoable`.
+* the `delete` command is based on the index of the contact.
 
 Below is a detailed process illustration using a sequential diagram:
 
 Step 1. The user input a delete command followed by an index,
 for example: `delete 1`, delete the contact with an index of 1.
 
-Step 2. The parser analysis the input command and returns a `DeleteCommand`.
+Step 2. The parser parses the input command and returns a `DeleteCommand`.
 
-Step 3. The `DeleteCommand` get executed by the LogicManager and delete popup get displayed. 
+Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed. 
 
-Step 4. If user click ok on the popup, model updates the filteredPersonList, otherwise cancel deletion.
+Step 4. If user click ok on the popup, model updates the filteredPersonList and removes the contact, otherwise cancel the deletion.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
 
@@ -647,13 +648,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: Delete popup shows up. After confirming on the popup, first contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Finding a person
