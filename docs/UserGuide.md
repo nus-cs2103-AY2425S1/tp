@@ -279,9 +279,9 @@ Note:
 * If the specified vendor-event pair is already associated (assigned to each other), the operation will fail.
 
 Examples:
-The following examples are for illustrative purposes only. The `aassign` command will still fail if the chosen `INDEX` points to an item that is already assigned.
-* `view v/2` then `assign 1` will view the vendor at index 2 in the current list, then assign the event at index 1 to the chosen vendor.
-* `view e/1` then `assign 3` will view the event at index 1 in the current list, then assign the vendor at index 3 to the chosen event.
+The following examples are for illustrative purposes only. The `aassign` command will still fail if the chosen item to assign is invalid.
+* `view v/2` then `assign 1` will view the vendor at index 2 in the current list, then assign the event at index 1 in the assignable list to the chosen vendor.
+* `view e/1` then `assign 3` will view the event at index 1 in the current list, then assign the vendor at index 3 in the assignable list to the chosen event.
 
 ### Unassigning Vendors & Events: `unassign`
 
@@ -295,12 +295,12 @@ Note:
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
   * The displayed indexes for items may not always be the same. See [Changing Indexes](#changing-indexes) for more details.
-* If the specified vendor-event pair is not already associated (not assigned to each other), the operation will fail.
+* If the specified vendor-event pair is already not associated (not assigned to each other), the operation will fail.
 
 Examples:
-The following examples are for illustrative purposes only. The `unassign` command will still fail if the chosen `INDEX` points to an item that is already unassigned.
-* `view v/2` then `unassign 6` will view the vendor at index 2 in the current list, then unassign the event at index 6 in the list while viewing the chosen vendor.
-* `view e/1` then `unassign 3` will view the event at index 1 in the current list, then unassign the vendor at index 3 in the list while viewing the chosen event.
+The following examples are for illustrative purposes only. The `unassign` command will still fail if the chosen item to unassign is invalid.
+* `view v/2` then `unassign 6` will view the vendor at index 2 in the current list, then unassign the event at index 6 in the assigned list while viewing the chosen vendor.
+* `view e/1` then `unassign 11` will view the event at index 1 in the current list, then unassign the vendor at index 11 in the assigned list while viewing the chosen event.
 
 ### Searching for Vendors & Events: `find`
 
