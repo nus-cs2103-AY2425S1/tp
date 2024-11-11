@@ -14,7 +14,6 @@ public class CommandHistory {
 
     private ObservableList<String> history;
     private int currentIndex;
-    
 
     private final Logger logger = LogsCenter.getLogger(CommandHistory.class);
 
