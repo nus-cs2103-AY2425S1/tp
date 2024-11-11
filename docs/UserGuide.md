@@ -136,7 +136,7 @@ To add specific roles to a person, you can use the following commands:
 Example:
 * `add n/John Doe p/98765432 e/john@mail.com r/athlete - COM - Soccer Men`
 
-You may check a summary of the list of roles, faculties, sports, positions, and more via [this link.](#more-features)
+You may check a summary of the list of roles, faculties, sports, positions, and more via [this link](#using-shortcuts).
 
 ### Listing all persons : `list`
 
