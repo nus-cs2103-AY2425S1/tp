@@ -1017,13 +1017,13 @@ testers are expected to do more *exploratory* testing.
        Expected: Student is added to the list. Details of the new contact shown in the status message.
 
     2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/L c/2A`<br>
-       Expected: No student is added. Error detail regarding sex is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding sex is shown in the status message.
 
     3. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/41 s/M c/2A`<br>
-       Expected: No student is added. Error detail regarding register number is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding register number is shown in the status message.
 
     4. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/M c/A`<br>
-       Expected: No student is added. Error detail regarding class is shown in the status message. Status bar remains the same.
+       Expected: No student is added. Error detail regarding class is shown in the status message.
 
     5. Other incorrect add commands to try:<br>
        `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/1 s/ c/2A`<br>
@@ -1043,7 +1043,7 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No student is deleted. Error details shown in the status message.
 
    4. Other incorrect delete commands to try:<br>
       `delete`<br>
@@ -1063,7 +1063,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First student's class is changed. Details of the edited student shown in the status message.
 
     3. Test case: `edit 1 c/A1`<br>
-       Expected: No student's detailed are changed. Error details shown in the status message. Status bar remains the same.
+       Expected: No student's detailed are changed. Error details shown in the status message.
 
     4. Other incorrect edit commands to try:<br>
        `edit`<br>
@@ -1109,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
        Expected: First student will have his emergency contact number deleted. Name of student with the emergency contact number deleted will be shown in the status message.
     
     4. Test case: `addEcNumber 1 ep/123`<br>
-       Expected: No emergency contact number is changed. Error details shown in the status message. Status bar remains the same.
+       Expected: No emergency contact number is changed. Error details shown in the status message.
 
     5. Other incorrect addEcNumber commands to try:<br> 
        `addEcNumber`<br>
@@ -1129,7 +1129,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Attendance record with date 24-09-2024 and reason MC is added to the first student. Confirmation message shown in the status message.
    
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/MC`<br>
-       Expected: No attendance is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No attendance is added. Error details shown in the status message.
 
     4. Other incorrect addAttendance commands to try:<br>
        `addAttendance`<br>
@@ -1149,7 +1149,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Attendance record with date 24-09-2024 is deleted from the first student. Confirmation message shown in the status message.
 
     3. Test case: `addAttendance 0 ad/24-09-2024 ar/`<br>
-       Expected: No attendance is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No attendance is deleted. Error details shown in the status message.
 
     4. Other incorrect addAttendance commands to try:<br>
        `addAttendance 1 ad/24-09-2024`<br>
@@ -1167,7 +1167,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Exam with exam name Midterm is added to all students in the addressbook. Confirmation message shown in the status message.
 
     2. Test case: `addExam ex/Midterm#`<br>
-       Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam is added. Error details shown in the status message.
 
     3. Other incorrect addExam commands to try:<br>
        `addExam`<br>
@@ -1187,7 +1187,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Exam with exam name Midterm is updated with a exam score of 70.0 for the first student. Confirmation message shown in the status message.
 
     3. Test case: `addExamScore 1 ex/Midterm sc/101.0`<br>
-       Expected: No exam score is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam score is added. Error details shown in the status message.
 
     4. Other incorrect addExamScore commands to try:<br>
        `addExamScore 1 ex/Midterm`<br>
@@ -1207,7 +1207,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Exam with exam name Midterm is deleted from all students in the addressbook. Confirmation message shown in the status message.
 
     3. Test case: `deleteExam ex/Midterm#`<br>
-       Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No exam is deleted. Error details shown in the status message.
 
     4. Other incorrect deleteExam commands to try:<br>
        `deleteExam`<br>
@@ -1225,7 +1225,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Submission with submission name Assignment 1 is added to all students in the addressbook. Confirmation message shown in the status message.
 
     2. Test case: `addSubmission sm/Assignment #1`<br>
-       Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission is added. Error details shown in the status message.
 
     3. Other incorrect addSubmission commands to try:<br>
        `addSubmission`<br>
@@ -1245,7 +1245,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Submission with submission name Assignment 1 is updated with a submission status of Y for the first student. Confirmation message shown in the status message.
 
     3. Test case: `addSubmissionStatus 1 sm/Assignment 1 ss/A`<br>
-       Expected: No submission status is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission status is added. Error details shown in the status message.
 
     4. Other incorrect addSubmissionStatus commands to try:<br>
        `addSubmissionStatus 1 sm/Assignment 1`<br>
@@ -1265,7 +1265,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Submission with submission name Assignment 1 is deleted from all students currently in the list. Confirmation message shown in the status message.
 
     3. Test case: `deleteSubmission sm/Assignment #1`<br>
-       Expected: No submission is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No submission is deleted. Error details shown in the status message.
 
     4. Other incorrect deleteSubmission commands to try:<br>
        `deleteSubmission`<br>
@@ -1313,7 +1313,7 @@ testers are expected to do more *exploratory* testing.
       Expected: List of students is sorted according to register number. Confirmation message shown in the status message.
 
    3. Test case: `sort abc`<br>
-      Expected: List is not sorted, Error details shown in the status message. Status bar remains the same.
+      Expected: List is not sorted, Error details shown in the status message.
 
    4. Other incorrect sort commands to try:<br> 
       `sort`<br>
