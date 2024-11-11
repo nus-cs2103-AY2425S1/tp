@@ -23,6 +23,7 @@ Class Schedule
 Class "{abstract}\nFee" as Fee
 Class PaidAmount
 Class OwedAmount
+Class Rate
 
 Class I #FFFFFF
 }
@@ -49,9 +50,10 @@ Student *--> Schedule
 Student *--> Subject
 Student *--> PaidAmount
 Student *--> OwedAmount
+Student *--> Rate
 PaidAmount -up-|> Fee
 OwedAmount -up-|> Fee
-
+Rate -up-|> Fee
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
