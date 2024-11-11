@@ -67,7 +67,7 @@ public class Messages {
     public static String markPaidFormat(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; MonthsPaid: ")
+                .append("; Months Paid: ")
                 .append(person.getMonthsPaidToString());
         return builder.toString();
     }
@@ -78,7 +78,7 @@ public class Messages {
     public static String unmarkPaidFormat(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; MonthsPaid: ")
+                .append("; Months Paid: ")
                 .append(person.getMonthsPaidToString());
         return builder.toString();
     }

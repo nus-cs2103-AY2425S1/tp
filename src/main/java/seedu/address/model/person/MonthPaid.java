@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents a Person's months paid in the address book.
  */
 public class MonthPaid implements Comparable<MonthPaid> {
-    public static final String MESSAGE_CONSTRAINTS = "MonthPaid should take a string with the pattern"
+    public static final String MESSAGE_CONSTRAINTS = "Month Paid should take a string with the pattern"
             + " YYYY-MM, where YYYY should be between 1900 and 2100, and MM should be between 01 and 12.";
     public static final String SPLIT_VALIDATION_REGEX = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])$";
     public final String monthPaidValue;
