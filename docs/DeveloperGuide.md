@@ -210,6 +210,37 @@ To make this more convenient for the user, we made the `exit` command close all 
 ### Patient Management Features
 
 #### Add Command : `add`
+The `add` command is used to add a patient to the patient list quickly with only necessary details.
+
+The user has to specify the patient's:
+* NRIC (`Nric`)
+* Name (`Name`)
+* Date-of-Birth (`Birthdate`)
+* Phone number (`Phone`)
+* Sex (`Sex`)
+
+##### Parsing User Input
+The `AddCommandParser` class parses the user input to extract the various parameters that have been specified.
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. This returns an `ArgumentMultiMap` object which has extracted all the prefixes and their corresponding values.
+The `ArgumentMultiMap` object is then used to ensure that all the required fields have been specified and ensure that there are no duplicate prefixes.
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `add` command: `execute(add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666)`
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+The parsing of the fields is as follows:
+
+![AddSequenceDiagram](images/AddParseFieldsSequenceDiagram.png)
+
+##### Executing the Command
+The `AddCommand` class is initialized with a new `Patient` object created from the parsed input. The `Patient` object is then added to the `UniquePatientList` through the `addPatient` method in the `Model` component.
+
+The activity diagram below illustrates the workflow behind the execution of the `add` command:
+
+![AddActivityDiagram](images/AddActivityDiagram.png)
+
 
 #### Add Full Command : `addf`
 The `addf` command is used to add a patient to the patient list.
@@ -309,6 +340,32 @@ The following fields are required as they are essential details that the clinic 
 * NRIC (`Nric`)
 
 #### View Command : `view`
+The `view` command is used to display detailed information of a patient.
+
+The user has to specify the target patient's:
+* NRIC (`Nric`)
+
+##### Parsing User Input
+The `ViewCommandParser` class parses the user input to extract the NRIC parameter that has been specified.
+
+##### Executing the Command
+The `ViewCommand` class is initialized and the `Patient` object with a matching NRIC with the argument is retrieved. A `PatientInfoPanel` containing detailed information about the patient entry is then displayed in the `guiPanelPlaceholder` section of the UI.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing and execution of the user input.
+In this example, it takes a `view` command: `view T0123456A`
+
+![DeleteSequenceDiagram](images/ViewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>ViewCommandParser</code> and <code>ViewCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `view` command.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to identify and delete a patient entry.
+* NRIC (`Nric`)
 
 ### Appointment Management Features
 
@@ -360,6 +417,59 @@ The activity diagram below illustrates the workflow behind the execution of the 
 The `deleteappt` command uses `Nric` as a unique identifier to delete an appointment for the patient identified. `LocalDateTime` is the required field to ensure that a unique appointment is deleted from the `Patient`.
 
 #### Filter Appointment : `filter`
+
+The `filter` command lets users search for a list of patients' appointments based on a date range and health service.
+
+The user can specify the
+* end date of the date range
+
+and optionally provide the
+* start date of the date range
+* `HealthService` that matches the purpose of the appointment
+
+If the start date is not provided, the start date is set to today's date. Furthermore, if health service is not provided, all appointments in
+the date range will be shown.
+
+##### Parsing User Input
+
+The `FilterCommandParser` class is responsible for parsing user input to extract the details of the date range and
+health service to be added. It uses the `ArgumentTokenizer` to tokenize the input string, extracting prefixes and their associated values.
+It returns an `ArgumentMultiMap` object which is used to create a `AppointmentDateFilter` object with the start and end date
+and `HealthService`.
+
+#### Sequence Diagram
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `filter` command: `execute(filter sd|2022-10-01 ed|2022-11-01 h|Blood Test)`
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>FilterCommandParser</code>,<code>ArgumentMultiMap</code> and <code>FilterCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+The parsing of the fields is as follows:
+
+![FilterParseFieldsSequenceDiagram](images/FilterParseFieldsSequenceDiagram.png)
+
+
+##### Executing the Command
+
+The `FilterCommand` class then filters through all the appointments in the `Model` component and selects those which lie within the date range and matches the healthservice.
+This is done though the `filterAppts` method in the `Model` component. This method iterates through all patients and checks if
+each appointment falls within the date range and matches the `HealthService` if provided.
+
+The filtered appointments are then sorted and stored in the model.
+
+![FilterExecuteSequenceDiagram](images/FilterExecuteSequenceDiagram.png)
+
+#### Design Considerations
+
+The `filter` command is designed such that the user has versatility in filtering appointments.
+
+1. If the user specifies all fields, the appointments that lie within the date range and matches the `HealthService` will be returned.
+2. If the user specifies the end date and health service, the appointment that lies from today's date to end date and matches the `HealthService` will be displayed.
+3. If the user specifies the start and end date, all appointments that lies from start to end date will be shown.
+4. If the user only specifies end date, all appointments that lies from today's to end date will be displayed.
+5. If the user wants to show appointments on a single day, the user can specify the start and end date as the same date.
 
 
 ### \[Proposed\] Undo/redo feature

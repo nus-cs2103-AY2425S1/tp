@@ -178,7 +178,7 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 Use this command to quickly add a patient with only the required information.
 </div>
 
-Example: 
+Example:
 * Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
   * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 
@@ -214,7 +214,7 @@ Examples:
   * `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
      e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
      al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`
-* Adds a patient named Lincoln Park with compulsory fields and some optional fields. 
+* Adds a patient named Lincoln Park with compulsory fields and some optional fields.
   * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
      e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 
@@ -229,8 +229,8 @@ Format: `view NRIC`
 ![view result](images/viewResult.png)
 
 Example:
-* View all information of the patient with NRIC T0123456A. 
-  * `view T0123456A` 
+* View all information of the patient with NRIC T0123456A.
+  * `view T0123456A`
 
 ### Editing a patient : `edit`
 
@@ -350,7 +350,7 @@ Examples:
 * Filters all appointments from Oct 01 2012 to Nov 01 2012.
   * `filter sd|2012-10-01 ed|2012-11-01`
 * Filters all appointments from today's date to Oct 01 2028.
-  *  `filter ed|2028-10-01` 
+  *  `filter ed|2028-10-01`
 
 For more information on each individual parameter, click [here](#command-parameters-summary).
 
@@ -415,7 +415,7 @@ Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpe
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the window will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding or editing patient entries**, the combination of an NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
+3. **When adding or editing patient entries**, the combination of an NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
 4. **When adding allergies**, it is case-sensitive and allows for both plural and singular variations.
 5. **For `no` and `ec` parameters**, the parameter summary has stated that it has to be non-empty. However,
