@@ -29,19 +29,19 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `list` : Lists all contacts.
 
-  * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
+   * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
 
-  * `delete 3` : Deletes the 3rd person shown in the current list of people.
+   * `delete 3` : Deletes the 3rd person shown in the current list of people.
 
-  * `listevent`: Lists all events.
+   * `listevent`: Lists all events.
 
-  * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with the given details.
+   * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with the given details.
 
-  * `deleteevent 2`: Deletes the second event shown in the current list of events.
+   * `deleteevent 2`: Deletes the second event shown in the current list of events.
 
-  * `clear` : Deletes all contacts and events.
+   * `clear` : Deletes all contacts and events.
 
-  * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 Refer to the [Features](#features) below for details of each command.
 
