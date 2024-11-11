@@ -23,12 +23,12 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with certain criteria.\n"
-            + "Parameters: "
-            + "{[" + PREFIX_NAME + "NAME] |"
-            + "[" + PREFIX_PHONE + "PHONE] |"
-            + "[" + PREFIX_EMAIL + "EMAIL] |"
-            + "[" + PREFIX_JOBCODE + "JOB CODE] |"
-            + "[" + PREFIX_TAG + "TAG] "
+            + "Parameters:\n"
+            + "{[" + PREFIX_NAME + "NAME] | "
+            + "[" + PREFIX_PHONE + "PHONE] | "
+            + "[" + PREFIX_EMAIL + "EMAIL] | "
+            + "[" + PREFIX_JOBCODE + "JOB CODE] | "
+            + "[" + PREFIX_TAG + "TAG] | "
             + "[" + PREFIX_REMARK + "REMARK]}1..*\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John "

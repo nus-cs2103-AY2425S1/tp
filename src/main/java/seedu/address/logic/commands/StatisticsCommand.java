@@ -43,7 +43,7 @@ public class StatisticsCommand extends Command {
         return new CommandResult(statisticsMessage);
     }
 
-    private void calculateJobCodeStatistics(FilteredList<Person> fullContactList,
+    protected void calculateJobCodeStatistics(FilteredList<Person> fullContactList,
                                             HashMap<JobCode, JobCodeStatistics> jobStatisticsMap) {
         for (Person person : fullContactList) {
             JobCode jobCode = person.getJobCode(); // get person job code

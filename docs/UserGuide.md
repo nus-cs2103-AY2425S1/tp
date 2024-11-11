@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]`
 
 <box type="tip" seamless>
 
@@ -121,7 +121,7 @@ Format:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB_CODE] | [t/TAG] | [r/REMARK]}1..*`
+Format: `edit INDEX {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
@@ -137,7 +137,7 @@ Examples:
 Finds persons by at least one criteria given.
 
 Format:
-`find {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB_CODE] | [t/TAG] | [r/REMARK]}1..*`
+`find {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo`, `Hans Bobo`, and `Rohans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -188,7 +188,7 @@ Examples:
 Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
 
 Format:
-`massreject {[j/JOBCODE] | [t/TAG]}1..*`
+`massreject {[j/JOB CODE] | [t/TAG]}1..*`
 
 * Updates person's tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
@@ -286,7 +286,7 @@ _Details coming soon ..._
 - All characters after the "@" symbol will be converted to lowercase (e.g., "hhh@GMAil.com" will become "hhh@gmail.com").
 - Checking for valid email domain is not in scope.
 
-### JOBCODE
+### JOB CODE
 - Must be at most 50 characters.
 - Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
 - The first and last character must be alphanumeric.
@@ -334,19 +334,19 @@ for list of valid tags:
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                                    
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| **Add**      | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`                                      
-| **Clear**    | `clear`                                                                                                                                                                            
+| Action       | Format, Examples                                                                                                                                                 
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Add**      | `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`                    
+| **Clear**    | `clear`                                                                                                                                                          
 | **Delete**   | `delete {[INDEX] \| [n/NAME] \| [e/EMAIL] \| [p/PHONE]}1`<br> e.g. `delete 3`<br> `delete n/Alex Yeoh`<br> `delete e/alexyeoh@gmail.com`<br> `delete p/88306733` 
-| **Edit**     | `edit INDEX {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB_CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`       
-| **Exit**     | `exit`
-| **Find**     | `find {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB_CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g. `find n/John j/123 ABC` `find p/12345678`                                                          
-| **List**     | `list`                                                                                                                                                                              
-| **Mass Reject**| `massreject {[j/JOBCODE] \| [t/TAG]}1..*`<br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                                                     
-| **Sort**     | `sort [n/] [p/] [e/] [j/] [t/]` <br> e.g. `sort` `sort n/ e/` `sort p/`
-| **Statistics**| `stats`    
-| **Help**     | `help`
+| **Edit**     | `edit INDEX {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`             
+| **Exit**     | `exit`                                                                                                                                                           
+| **Find**     | `find {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g. `find n/John j/123 ABC` `find p/12345678`                      
+| **List**     | `list`                                                                                                                                                           
+| **Mass Reject**| `massreject {[j/JOB CODE] \| [t/TAG]}1..*`<br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                             
+| **Sort**     | `sort [n/] [p/] [e/] [j/] [t/]` <br> e.g. `sort` `sort n/ e/` `sort p/`                                                                                          
+| **Statistics**| `stats`                                                                                                                                                          
+| **Help**     | `help`                                                                                                                                                           
 
 
                                                                                                                                                

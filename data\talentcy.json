@@ -21,6 +21,13 @@
     "tag" : "A",
     "remark" : ""
   }, {
+    "name" : "HERAHI",
+    "phone" : "88306833",
+    "email" : "herahi@gmail.com",
+    "jobCode" : "123ABC",
+    "tag" : "A",
+    "remark" : ""
+  }, {
     "name" : "IRFAN IBRAHIM",
     "phone" : "92492021",
     "email" : "irfan@example.com",
@@ -45,13 +52,6 @@
     "name" : "VICELYA",
     "phone" : "88306733",
     "email" : "email@email.com",
-    "jobCode" : "123ABC",
-    "tag" : "A",
-    "remark" : ""
-  }, {
-    "name" : "HERAHI",
-    "phone" : "88306833",
-    "email" : "herahi@gmail.com",
     "jobCode" : "123ABC",
     "tag" : "A",
     "remark" : ""
