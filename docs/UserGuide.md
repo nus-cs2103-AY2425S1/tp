@@ -126,6 +126,15 @@ Examples:
 * `list s/email r/` - Lists all contacts sorted by email in reverse order (Z to A)
   <img src="images/listEmail.png" alt="List sorted by email reverse">
 
+Expected outcome for `list s/name`:
+```
+Listed all persons
+Results:
+1. Alice Pauline (Phone: 94351253)
+2. Benson Meier (Phone: 98765432)
+...
+```
+
 ### Editing a person: `edit`
 
 Edits an existing person in the address book. People with **both** exact same **Name** (case-sensitive) and **Phone** are not allowed.
