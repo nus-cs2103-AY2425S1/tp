@@ -291,7 +291,7 @@ The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes 
 ### Schedule Date Feature
 
 #### Overview
-The `scheduledate` command allows users to filter the appointments occuring on a specified date. The command requires:
+The `scheduledate` command allows users to filter the appointments occurring on a specified date. The command requires:
 - **Date** – Date regarding schedule of interest.
 
 <puml src="diagrams/ScheduleDateActivityDiagram.puml" alt="ScheduleDateActivityDiagram" />
@@ -320,6 +320,40 @@ The **`ScheduleDateCommandParser`** and **`ScheduleDateCommand`** classes enforc
     - **Parser** checks if the date format follows `dd-MM-yyyy`.
     - **Parser** checks if the date is valid.
 
+#### Find Command
+
+#### Overview
+The `find` command allows users to search through the entire patient list and filter it based on a given field and certain keywords. The command requires:
+- **Field** - The specific field to perform the search on.
+- **Keyword(s)** - The keyword(s) to search for.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+#### 1. Parsing User Input
+The **`FindCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Prefix** - the prefix associated with the field we wish to search through.
+- **Search String** - A String containing the keyword(s) to search for.
+
+During the parsing process:
+- The Search String is split by white spaces, creating a list of Keyword(s).
+- A `FieldContainsKeywordPredicate` instance is created to hold the field and Keyword(s) details.
+
+#### 2. Executing the Command
+The **`FindCommand`** class performs the following steps to filter the patient list:
+
+1. **Update filteredPersons**:
+    Uses the `FieldContainsKeywordPredicate` from the parser to update filteredPersons in **Model**.
+    This will perform a search on the specified field for every patient, returning `true` if any word in the field contains any of the keyword(s) as a substring.
+
+2. **Display filteredPersons**:
+    The displayed list of patients will automatically update with the new filteredPersons as it is an `ObservableList`.
+
+#### 3. Handling Invalid Inputs
+The **`FindCommandParser`** class enforce validation rules to ensure that the input is valid:
+
+- **Format Verification**:
+  - **Parser** checks if there is one and only one field specified.
+  - **Parser** checks to ensure the search string is not empty.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
