@@ -255,10 +255,10 @@ Examples:
 1. `edit 1 p/87438807 e/alexyeoh@example.com` edits the phone number and email address of the `1st` client to be `87438807` and `alexyeoh@example.com` respectively.
 
 
-2. `edit 2 n/Betsy Crower t/` edits the name of the `2nd` client to be `Betsy Crower` and clears all existing tags.
+2. `edit 2 n/Betsy Crower t/` edits the name of the second client to be `Betsy Crower` and clears all existing tags.
 
 
-3. `edit 2 t/condo` edits the tag of the `2nd` client to be `condo`.
+3. `edit 2 t/condo` edits the tag of the second client to be `condo`.
 
 Visual example of correct output [Example `1.`]:
 
@@ -286,10 +286,10 @@ Use the `list` or `find` command to determine the `INDEX` of the client you want
 
 Examples:
 
-1. `list` followed by `delete 2` deletes the 2nd client listed in PROperty.
+1. `list` followed by `delete 2` deletes the client at index `2` listed in PROperty.
 
 
-2. `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+2. `find Betsy` followed by `delete 1` deletes the client at index `1` in the **results of the `find` command**.
 
 Visual example of correct output [Example `1.`]:
 
@@ -367,10 +367,10 @@ Use `show` to view a client in-depth.
 
 Examples:
 
-1. `show 2` shows the name, client information, tags, and property listings of the second client in the PROperty.
+1. `show 2` shows the name, client information, tags, and property listings of the client at index `2` in PROperty.
 
 
-2. `show 7` shows the name, client information, tags, and property listings of the seventh client in the PROperty.
+2. `show 7` shows the name, client information, tags, and property listings of the client at index `7` in PROperty.
 
 Visual example of correct output [Example `1.`]:
 
