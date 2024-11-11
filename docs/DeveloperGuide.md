@@ -864,16 +864,22 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Additional uml diagrams for other cases**
 
 <puml src="diagrams/ListSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
+
 Diagram for interactions inside the `Logic` component, taking execute("list all") API call.
 
 <puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
+
 Diagram for interactions inside the `Logic` component, taking execute("demote 1") API call.
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
-Diagram for interactions inside the `Logic` component, taking `edit 1 n/tom` API call.
+
+Diagram for interactions inside the `Logic` component, taking execute("edit 1 n/tom") API call.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find all n/John` Command" />
-Diagram for interactions inside the `Logic` component, taking `execute(find all n/John)` API call.
+
+Diagram for interactions inside the `Logic` component, taking execute("find all n/John") API call.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
