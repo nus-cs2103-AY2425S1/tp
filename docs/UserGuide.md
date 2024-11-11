@@ -8,7 +8,7 @@ pageNav: 3
 
 ## Welcome to the TrackMate User Guide
 
-Welcome to the **TrackMate User Guide** - your essential supplementary tools in your teaching journey as a SOC
+Welcome to the **TrackMate User Guide** - your essential supplementary tools in your teaching journey as a School of Computing (SoC)
 Teaching Assistant at National University of Singapore (NUS).
 
 In this comprehensive user guide, we will take you to experience a full journey with TrackMate step by step.
@@ -655,7 +655,7 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. FAQ
+## 5. FAQ 
 
 
 **Q**: How do I transfer my data to another Computer?<br>
