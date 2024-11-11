@@ -558,351 +558,407 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GOATS` application and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a contact**
+#### **Use case: UC1 - Add a contact**
+
+Guarantees: The new contact will be added to the GOATS Address Book, provided the command format is valid, all required information is present and valid, and the contact does not already exist in the GOATS Address Book.
 
 **MSS**
 
-1. User enters name, phone number, email and address
-2. User submits details
-3. GOATS adds the person
-4. GOATS outputs list of all contacts
-5. GOATS shows success message
+1. User enters the new contact's details.
+2. GOATS adds the contact.
+3. GOATS displays the list of all unarchived contacts.
+4. GOATS shows success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User enters a tag
-
-  * Use case resumes at step 2.
-* 2a. The given command or data is invalid.
-
-  * 2a1. GOATS shows an error message.
-
+* 1a. User enters an invalid command or invalid/missing details.
+  * 1a1. GOATS shows an error message.
+  
+    Use case ends.
+* 1b. User enters a contact with a name that already exists in the GOATS Address Book.
+  * 1b1. GOATS shows an error message.
+    
     Use case ends.
 
-**Use case: UC2 - Delete a contact**
+#### **Use case: UC2 - Delete contacts**
+
+Preconditions: The contact(s) to delete exist in the displayed list of contacts.
+Guarantees: The specified contact(s) will be removed from the GOATS Address Book, provided the command format is valid.
 
 **MSS**
 
-1. User requests to <u>list persons (UC3)</u>
-2. User requests to delete a specific person in the list
-3. GOATS deletes the person
-4. GOATS outputs list of all contacts
-5. GOATS shows success message
+1. User requests to delete specific contact(s) in the displayed list of contacts by passing in the displayed indices of the contacts to be deleted.
+2. GOATS deletes the specified contact(s).
+3. GOATS removes the deleted contact(s) from the displayed list of contacts.
+4. GOATS shows success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC3 - List contacts**
-
-**MSS**
-
-1. User requests to list contact list.
-2. GOATS outputs list of all contacts
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given command is invalid.
-
+* 1a. User enters an invalid command or invalid indices.
   * 1a1. GOATS shows an error message.
 
     Use case ends.
 
-**Use case: UC4 - Sort contacts**
+#### **Use case: UC3 - List contacts**
+
+Guarantees: The displayed list be updated to show all unarchived contacts.
 
 **MSS**
 
-1. User requests to sort contact list.
-2. GOATS sorts the list and outputs the sorted list
+1. User requests to list contacts.
+2. GOATS displays the list of all unarchived contacts.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given command is invalid.
-
+* 1a. User enters an invalid command.
   * 1a1. GOATS shows an error message.
 
     Use case ends.
 
-**Use case: UC5 - Exit application**
+#### **Use case: UC4 - Sort contacts**
+
+Guarantees: The displayed list will be sorted in alphabetical order.
 
 **MSS**
 
-1. User requests to exit application
-2. GOATS closes
+1. User requests to sort the displayed list of contacts.
+2. GOATS sorts the list and displays the sorted list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given command is invalid.
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
 
-  * 1a1. GOATS shows an error message.
+      Use case ends.
 
-    Use case ends.
+#### **Use case: UC5 - Edit a contact**
 
-**Use case: UC6 - Edit a contact**
+Preconditions: The contact to edit exists in the displayed list of contacts.
+Guarantees: The specified contact will be updated with the new information, provided the command format and all information provided is valid.
 
 **MSS**
 
-1. User requests to <u>list persons (UC3)</u>
-2. User requests to edit a specific person in the list
-3. GOATS edits the person
-4. GOATS outputs list of all contacts
-5. GOATS shows success message
+1. User requests to edit a specific contact in the displayed list of contacts by entering the displayed index of the contact to be edited and the updated details.
+2. GOATS edits the person.
+3. GOATS displays the list of all unarchived contacts.
+4. GOATS shows success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. User enters an invalid command or invalid index/details.
+    * 1a1. GOATS shows an error message.
 
-  * Use case ends.
-* 2a. The given command or index is invalid.
+      Use case ends.
 
-  * 2a1. GOATS shows an error message.
+* 1b. User attempts to update the contact with a name that already exists in the GOATS Address Book.
+    * 1b1. GOATS shows an error message.
 
-    Use case ends.
+      Use case ends.
 
-**Use case: UC7 - Find contacts by name**
+#### **Use case: UC6 - Find contacts by name**
+
+Guarantees: The displayed list will be updated to show all contacts whose names contain any of the specified keywords.
 
 **MSS**
 
-1. User requests to find person with name
-2. GOATS outputs list of all contacts with matching name
+1. User requests to find contacts by entering one or more keywords.
+2. GOATS displays the list of all contacts whose names contain one or more of the specified keywords.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The given command is invalid.
+* 1a. User enters an invalid command or does not provide any keywords.
+    * 1a1. GOATS shows an error message.
 
-  * 1a1. GOATS shows an error message.
+      Use case ends.
 
-    Use case ends.
+#### **Use case: UC7 - Find contacts by tag**
 
-  1b. User does not enter a name.
+Guarantees: The displayed list will be updated to show all contacts who has one or more of the specified keywords as tags.
 
+**MSS**
+
+1. User requests to find contacts by entering one or more keywords.
+2. GOATS displays the list of all contacts who have a tag that matches any of the specified keywords.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or does not provide any keywords.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC8 - Find contacts by day of lesson**
+
+Guarantees: The displayed list will be updated to show all students who have a lesson on the specified day of the week.
+
+**MSS**
+
+1. User requests to find contacts by entering one or more keywords.
+2. GOATS displays the list of all students whose lesson day matches any of the specified keywords.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or does not provide any keywords.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC9 - Show user guide**
+
+**MSS**
+
+1. User requests to show user guide.
+2. GOATS displays a link to the user guide.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC10 - Clearing all contacts**
+
+Guarantees: All contacts in the list of contacts will be deleted from the GOATS Address Book.
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. GOATS deletes all contacts.
+3. GOATS displays an empty list of contacts.
+4. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC11 - Archive a contact**
+
+Preconditions: The contact(s) to archive exist in the displayed list of contacts.
+Guarantees: The specified contact(s) will be archived, provided the command format is valid.
+
+**MSS**
+
+1. User requests to archive specific contact(s) in the displayed list of contacts by passing in the displayed indices of the contacts to be archived.
+2. GOATS archives the specified contact(s).
+3. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or invalid indices.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC12 - Unarchive a contact**
+
+Preconditions: The contact(s) to unarchive exist in the displayed list of contacts.
+Guarantees: The specified contact(s) will be unarchived, provided the command format is valid.
+
+**MSS**
+
+1. User requests to unarchive specific contact(s) in the displayed list of contacts by passing in the displayed indices of the contacts to be unarchived.
+2. GOATS unarchives the specified contact(s).
+3. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or invalid indices.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC13 - List archived contacts**
+
+Guarantees: The displayed list be updated to show all archived contacts.
+
+**MSS**
+
+1. User requests to list archived contacts.
+2. GOATS displays the list of all archived contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC14 - Pin a contact**
+
+Preconditions: The contact(s) to pin exist in the displayed list of contacts.
+Guarantees: The specified contact(s) will be pinned, and the displayed list will be updated to show all pinned contacts at the top of the list, provided the command format is valid.
+
+**MSS**
+
+1. User requests to pin specific contact(s) in the displayed list of contacts by passing in the displayed indices of the contacts to be pinned.
+2. GOATS pins the specified contact(s).
+3. GOATS updates the displayed list of contacts to show all pinned contacts at the top of the list.
+4. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or invalid indices.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC15 - Unpin a contact**
+
+Preconditions: The contact(s) to unpin exist in the displayed list of contacts.
+Guarantees: The specified contact(s) will be unpinned, and the displayed list will be updated to show all pinned contacts at the top of the list, provided the command format is valid.
+
+**MSS**
+
+1. User requests to unpin specific contact(s) in the displayed list of contacts by passing in the displayed indices of the contacts to be unpinned.
+2. GOATS unpins the specified contact(s).
+3. GOATS updates the displayed list of contacts to show all pinned contacts at the top of the list.
+4. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command or invalid indices.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC16 - Update a student's grade**
+
+Preconditions: The student whose grade is to be updated exists in the displayed list of contacts.
+Guarantees: The grade of the specified contact will be updated, provided the command format is valid and the specified contact is a student.
+
+**MSS**
+
+1. User requests to update the grade of a specific contact in the displayed list of contacts by entering the displayed index of the contact to be edited and the updated grade.
+2. GOATS edits the contact.
+3. GOATS displays the list of all unarchived contacts.
+4. GOATS shows success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command, an invalid index or an invalid grade value.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1b. GOATS detects that the specified contact is not a student.
   * 1b1. GOATS shows an error message.
 
     Use case ends.
-* 2a. There is no matching name in list of contacts.
 
-  * 2a1. GOATS shows an empty list.
+#### **Use case: UC17 - Link a student to a parent**
 
-    Use case ends.
-
-**Use case: UC8 - Showing all commands**
+Preconditions: The student and parent to be linked both exist in the GOATS Address Book.
+Guarantees: The student and the parent will be linked in a parent-child relationship, provided the command format and all information provided is valid.
 
 **MSS**
 
-1. User requests to show all commands
-2. GOATS outputs a link to the user guide and the summarised list of commands supported by the application.
+1. User requests to link a parent and a child by entering the names of both the parent and the child.
+2. GOATS links the parent and the child.
+3. GOATS updates the displayed list of contacts to show the link.
+4. GOATS shows success message.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1b. GOATS detects that the specified contacts do not consist of a student and a parent.
+    * 1b1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1c. User enters a name that does not exist in the GOATS Address Book.
+    * 1c1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC18 - Unlink a student from a parent**
+
+Preconditions: The student to be unlinked exists in the GOATS Address Book, and has a link to a parent.
+Guarantees: The student and the parent will be linked in a parent-child relationship, provided the command format and all information provided is valid.
+
+**MSS**
+
+1. User requests to unlink a child from a parent by entering the name of the child.
+2. GOATS unlinks the parent from the child.
+3. GOATS updates the displayed list of contacts to remove the link.
+4. GOATS shows success message.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1b. GOATS detects that the specified contact is not a student.
+    * 1b1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1c. User enters a name that does not exist in the GOATS Address Book.
+    * 1c1. GOATS shows an error message.
+
+      Use case ends.
+
+* 1d. GOATS detects that the specified student has no links to any parent.
+    * 1d1. GOATS shows an error message.
+
+      Use case ends.
+
+#### **Use case: UC19 - Exit application**
+
+**MSS**
+
+1. User requests to exit application.
+2. GOATS exits and closes.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The given command is invalid.
+* 1a. User enters an invalid command.
+    * 1a1. GOATS shows an error message.
 
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC9 - Clearing all contacts**
-
-**MSS**
-
-1. User requests to clear all contacts
-2. GOATS removes all contacts
-3. GOATS outputs an empty list
-4. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC10 - Find contacts by tag**
-
-**MSS**
-
-1. User requests to find person with tag
-2. GOATS outputs list of all contacts with matching tag
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The given command is invalid.
-
-  * 1a1. GOATS shows an error message.
-
-    Use case ends.
-
-  1b. User does not enter a tag.
-
-  * 1b1. GOATS shows an error message.
-
-    Use case ends.
-* 2a. There is no matching name in list of contacts.
-
-  * 2a1. GOATS shows an empty list.
-
-    Use case ends.
-
-**Use case: UC10 - Archive a contact**
-
-**MSS**
-
-1. User requests to <u>list persons (UC3)</u>
-2. User requests to archive a specific person in the list
-3. GOATS archives the person
-4. GOATS outputs list of all unarchived contacts
-5. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC11 - List archived contacts**
-
-**MSS**
-
-1. User requests to list archived contact list
-2. GOATS outputs list of all archived contacts
-
-   Use case ends.
-
-**Use case: UC12 - Unarchive a contact**
-
-**MSS**
-
-1. User requests to <u>list archived contacts (UC11)</u>
-2. User requests to unarchive a specific person in the list
-3. GOATS unarchives the person
-4. GOATS outputs list of all archived contacts
-5. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC13 - Pin a contact**
-
-**MSS**
-
-1. User requests to <u>list contacts (UC3)</u>
-2. User requests to pin a specific person in the list
-3. GOATS pins the person
-4. GOATS outputs list of all contacts and pins the person at the top of the list
-5. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC14 - Unpin a contact**
-
-**MSS**
-
-1. User requests to <u>list contacts (UC3)</u>
-2. User requests to unpin a specific person in the list
-3. GOATS unpins the person
-4. GOATS outputs list of all contacts
-5. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-
-**Use case: UC15 - Grade a student**
-
-**MSS**
-
-1. User requests to <u>list persons (UC3)</u>
-2. User requests to edit a specific student in the list
-3. GOATS edits the student
-4. GOATS outputs list of all contacts
-5. GOATS shows success message
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The list is empty.
-
-  * Use case ends.
-* 2a. The given command or index is invalid.
-
-  * 2a1. GOATS shows an error message.
-
-    Use case ends.
-* 2b. The given index is not a student
-
-  * 2b1. GOATS shows an error message.
-
-    Use case ends.
-
-*{More to be added}*
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -917,17 +973,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Details**: A contact detail that is to be kept confidential.
 * **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
 * **API**: The Application Programming Interface specifies the interface through which software and other programs interact.
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.
-* **Command**: A command is a specific instruction that you give to `GOATS` to perform a certain action, like adding a new participant to the list. Commands will be the primary way that you will interact with `GOATS`.
-* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the done command requires a single integer as a parameter so that it knows which event to mark as done.
+* **Command**: A command is a specific instruction to be provided to `GOATS` in order to perform a certain action, like adding a new contact to the GOATS Address Book. Commands will be the primary way of interacting with `GOATS`.
+* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the delete command requires one or more integers as a parameters, which will specify the contacts to be deleted from the GOATS Address Book.
 * **Prefix**: Prefixes are unique identifiers in front of parameters so that `GOATS` understands what kind of values they are. For example, the prefix "n/" lets `GOATS` know that a name is expected to follow behind it, while the prefix "d/" lets `GOATS` know that a date is expected.
-* **Archive**: A command that stores and removes all unused contact for later use, which can be retrieved by un-archiving.
+* **Archive**: A command that stores all unused contacts for later use, which can be retrieved by un-archiving.
 * **Parent**: A person that is responsible for a Student.
-* **Student**: A person studying under `user`
+* **Student**: A person studying under `user`.
+* **GOATS Address Book**: The list of all contacts stored by GOATS.
 * **Education**: The education level of the Student
 * **Grade**: The grade of the Student
 * **LessonTime**: The tuition lesson time of the Student.
@@ -1123,8 +1180,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `unlink ch/John Doe` when no parent is linked<br>
        Expected: No change occurs. An error message indicates that "John Doe" does not have a linked parent.
 
-
-
 ### Loading data
 
 1. Dealing with corrupted data files
@@ -1140,3 +1195,78 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: Start GOATS app
       Expected: GOATS should initialise a new data/addressbok.json file with sample data and user is presented an addressbook with that data
+
+## Appendix: Effort
+
+### Difficulty Level
+
+The project was a step-up in difficulty as compared to AddressBook Level3 (AB3), due to the number of commands added, and the need to support multiple entity types.
+Contacts in AB3 only constituted one single entity type, but in GOATS, they are split it into two different entities: **Student** and **Parent**, both with differing functionalities and representation in the UI.
+In addition, a large number of commands were added, with a high level of interaction between them, which made it difficult to keep track of and fix all the unintended behaviours and interactions that inevitably arose.
+
+### Challenges Faced
+
+* **Mitigating Unintended Behaviours and Interactions Between Commands**: Some of our commands initially had unintended behaviours when used after one another, which proved difficult to detect and to rectify. 
+* **Testing and Coverage**: Given the large number of commands added, it was difficult to maintain the same level of test coverage (roughly 75% in AB3).
+* **Implementation of Multiple Entity Types and Relationships Between Entities**: A lot of effort was required to implement the Student and Parent classes without excessive code duplication, and to implement the Link between Student and Parent.
+
+### Effort Required
+
+The project required significant effort due to the implementation of the following features on top of AB3:
+
+* Addition of two distinct entity types: **Student** and **Parent**, each with different functionalities and both storing references to each other
+* Addition and Modification of multiple additional commands and fields to support Tutor Use Cases: Grade, Education Level, Lesson Time
+* Addition of an Archive Feature
+
+Each member of the group wrote an average of 1,400 lines of code.
+
+### Achievements
+
+Over the course of the project, the group achieved the following:
+
+* Built upon AB3 to create a contact management system specifically tailored to the needs of private tutors
+* Gained familiarity with the software development process, e.g. forking workflow, documentation, sprints etc.
+* Improved technical proficiency with tools such as IntelliJ IDE, JUnit, GitHub etc.
+
+## Appendix: Planned Enhancements
+Team Size: 5. Hence, maximum number of planned enhancements is **10**.
+
+### 1. Hide archived contacts when using the find command.
+* **Current Situation**: When using the `find` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `find`, only unarchived contacts will be displayed.
+
+### 2. Hide archived contacts when using the findtag command.
+* **Current Situation**: When using the `findtag` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findtag`, only unarchived contacts will be displayed.
+
+### 3. Hide archived contacts when using the findday command.
+* **Current Situation**: When using the `findday` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findday`, only unarchived contacts will be displayed.
+
+### 4. Prevent pinning of already pinned contacts.
+* **Current Situation**: Pinning already pinned contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already pinned.
+
+### 5. Prevent unpinning of already unpinned contacts.
+* **Current Situation**: Unpinning already unpinned contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already unpinned.
+
+### 6. Improve name validation to allow for special characters.
+* **Current Situation**: Names must be alphanumeric, hence characters such as '/', ',' or '-' are not allowed to be input into the Address Book despite their prevalence in names in real life.
+* **Proposed Improvement**: Update the name validation to allow for special characters to be included in names.
+
+### 7. Improve Grade Command success message.
+* **Current Situation**: Current success message for the GradeCommand is "Added grade to Person: PERSON_NAME", even though the GradeCommand can be used to edit a student's grade as well.
+* **Proposed Improvement**: Update the success message to "Edited grade of Person: PERSON_NAME"
+
+### 8. Maintain the same displayed list when editing contacts.
+* **Current Situation**: Upon a successful edit of a contact, the displayed list will update to show the list of all unarchived contacts.
+* **Proposed Improvement**: Maintain the same list of contacts from before the edit command was executed, and display the updated information of the edited person.
+
+### 9. Maintain the same displayed list when editing contacts' grades.
+* **Current Situation**: Upon a successful edit of the grade a contact, the displayed list will update to show the list of all unarchived contacts.
+* **Proposed Improvement**: Maintain the same list of contacts from before the grade command was executed, and display the updated information of the edited person.
+
+### 10. Improve input validation for `findday` command to only take in days of the week.
+* **Current Situation**: Users can input any value for the `DAY` parameter of the `findday` command.
+* **Proposed Improvement**: Create an enum of valid `DAY` inputs (i.e. the days of the week), and display an error message to the user if the value input to the `DAY` parameter does not match any of the valid inputs.

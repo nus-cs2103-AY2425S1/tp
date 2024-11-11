@@ -20,10 +20,11 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 
-
-Student "child" <-up-> "parent" Parent
 Student *--> "1" Grade
 Student *--> "1" Education
 Student *--> "1" LessonTime
+
+Student *--> "parent" Name
+Parent *--> "children" Name
 
 @enduml
