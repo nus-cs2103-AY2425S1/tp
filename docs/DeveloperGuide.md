@@ -520,7 +520,7 @@ unless specified otherwise)
       Use case ends.
 
 * 1b. The student information already exists.
-    * 1b1. TAchy an error message of duplicate student.
+    * 1b1. TAchy an error message of duplicate student. TAchy considers the entry as a duplicate if the student's name, phone number and email are identical to an existing student.
     * 1b2. Teacher adds the student again by providing a different name, phone number, or email.
 
       Use case resumes at step 2.
@@ -562,7 +562,7 @@ unless specified otherwise)
 
 **Extensions**
 
-* 1a. There is no students in the app.
+* 1a. There are no students in the app.
     * 1a1. TAchy displays a "no students" message.
 
       Use case ends.
@@ -609,7 +609,7 @@ unless specified otherwise)
       Use case ends.
 
 * 1c. The assignment already exists under the student.
-    * 1c1. TAchy shows a warning message.
+    * 1c1. TAchy shows an error message.
 
       Use case ends.
 
@@ -643,7 +643,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to edit an assignment for a student by index.
-2. TAchy modifies the assignment detail in the student's assignment list.
+2. TAchy modifies the assignment detail in the student's assignment list. Any previously assigned grade (if any) and submission status are reset. 
 
    Use case ends.
 
@@ -694,7 +694,7 @@ unless specified otherwise)
 **MSS**
 
 1. Teacher requests to mark an assignment as not submitted for a student by index.
-2. TAchy modifies the assignment submission status in the student's assignment list and resets the score to 0.
+2. TAchy modifies the assignment submission status in the student's assignment list and resets the score.
 
    Use case ends.
 
