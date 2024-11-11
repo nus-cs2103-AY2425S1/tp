@@ -753,6 +753,32 @@ testers are expected to do more *exploratory* testing.
       2. Step 2: `add n/Alex Yeoh p/12345678 e/heyhey@example.com` <br>
          Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
 
+### Editing a person
+
+1. Editing a person with only some optional parameters specified.
+   1. Prerequisites: There is at least one person in the address book and edit will not result in duplicates.
+   2. Test case: `edit 1 n/John Doe` <br>
+      Expected: The name of the first person in the address book is changed to John Doe. Success message shown in the status message.
+
+2. Editing a person with all possible parameters specified.
+   1. Prerequisites: There is at least one person in the address book and edit will not result in duplicates.
+   2. Test case: `edit 1 n/John Doe p/98765432 e/johndoe@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 en/Bob ep/12346789 g/2020 t/Floor10` <br>
+      Expected: The first person in the address book is updated with the new details. Success message shown in the status message.
+
+3. Editing a person with data that does not conform to data validation.
+   1. Prerequisites: There is at least one person in the address book.
+   2. Test case: `edit 1 p/abcd` <br>
+      Expected: An error message is shown informing the user about the correct data format for PHONE.
+   3. Test case: `edit 1 e/HAI` <br>
+      Expected: An error message is shown informing the user about the correct data format for EMAIL.
+
+4. Editing a person with duplicate phone.
+   1. Prerequisites: There are at least two persons in the address book.
+   2. Test case:
+      1. Step 1: `edit 1 p/12345678` <br>
+      2. Step 2: `edit 2 p/12345678` <br>
+         Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
+
 ### Undo a command
 
 1. Undoing a `delete` command
