@@ -6,9 +6,8 @@
 
 # LogiLink User Guide
 
-LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts<sup>1</sup> and their associated delivery information from your desktop.
+LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts and their associated delivery information from your desktop.
 Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
-<br><sup><small>1</small></sup> <small>"Contacts" referring to either employees or clients.</small>
 
 
 If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
