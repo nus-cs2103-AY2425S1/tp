@@ -801,3 +801,25 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Planned enchancments
+1. Ability to export explicit groups to csv files
+  - Support for users to choose specific group or groups to export to csv file
+2. Ability to change export filename or file path
+  - Support for users to type in their own filename for the exported data or specific absolute file path
+3. Ability to import groups
+  - New importGroup command which creates group(s) based on the data inside the csv file
+  - Would create students in groups who are not in database
+  - Would use existing students in database
+4. Better student duplication handling
+  - Students can have the same name we will be migrating to a different primary key for    students in the future.
+5. Support for special characters in name and class fields
+  - Students may legally have special characters in their name thus we will be adding support for special characters in the future.
+6. Increasing support to host more student information
+  - Students grades, key notes about them and guardian information to be added as fields
+7. Increased filter options for students
+  - Ability to filter students based on grades, attendance, class etc.
+8. Support for precise student name searching
+  - Currently find cannot search keywords with white space inbetween. Support to solve this issue so users can search for students names with space's such as Gong Yi will be added.
+
+### Known Issues
