@@ -252,8 +252,6 @@ Examples:
 * `list` followed by `delete id/2` deletes the 2nd person in the list.
 * `find n/Betsy` followed by `delete id/1` deletes the 1st person in the result of the `find` command.
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
