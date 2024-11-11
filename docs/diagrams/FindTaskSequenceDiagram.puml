@@ -55,9 +55,8 @@ Model --> FindTaskCommand
 deactivate Model
 
 
-FindTaskCommand -[hidden]-> LogicManager
+FindTaskCommand --> LogicManager
 destroy FindTaskCommand
-
 [<-- LogicManager
 deactivate LogicManager
 
