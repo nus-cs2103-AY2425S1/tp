@@ -147,7 +147,7 @@ Note:
 <box type="definition" seamless>
 
 **Action:** Edits an existing contact in the address book. <br> You may edit by specifying the index of 
-the contact of the displayed address book that you wish to edit, or you may edit by specifying the full name
+the contact in the displayed address book, or by specifying the full name
 of the contact that is currently displayed that you wish to edit. <br>
 </box>
 
