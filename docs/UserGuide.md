@@ -232,7 +232,9 @@ To edit the details of an existing contact in WedLinker, type `edit` followed by
 * At least one of the optional fields must be provided.
 * Existing details will be updated to the input values.
 
-![img_1.png](img_1.png)
+<div align="center">
+  <img src="img_1.png" width="600">
+</div>
 <p align="center">
 The PERSON_NUMBER corresponds to each person's position in the `Person` list. <br>
 </p>
@@ -404,7 +406,9 @@ Following that, type "edit-wedding" followed by the Wedding number enter the det
 * The WEDDING_NUMBER **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
-![img_4.png](img_4.png)
+<div align="center">
+  <img src="img_4.png" width="600">
+</div>
 <p align="center">
 The WEDDING_NUMBER corresponds to each Wedding's position in the `Wedding` list
 </p>
@@ -479,7 +483,9 @@ Following that, type "assign-task" followed by assigned person's positional numb
 
 * The `PERSON_NUMBER` and `TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
-![img_6.png](img_6.png)
+<div align="center">
+  <img src="img_6.png" width="600">
+</div>
 <p align="center">
 The TASK_NUMBER corresponds to each Task's position in the `Task` list
 </p>
@@ -505,7 +511,9 @@ To remove a `task` from a contact, type `unassign-task` followed by the position
 **Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.* 
 * The `PERSON_NUMBER` and `PERSON_TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
-![img_7.png](img_7.png)
+<div align="center">
+  <img src="img_7.png" width="600">
+</div>
 <p align="center">
 The PERSON_TASK_NUMBER corresponds to each task's position within a contact's assigned tasks.
 </p>
