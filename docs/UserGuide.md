@@ -53,7 +53,7 @@ It is a desktop app optimized for fast user interactions through a Command Line 
 * All the commands in ClientGrid (e.g. `list`, `addbuyer`, `addproperty`, `addmeeting`, etc.) are case-sensitive and must be entered in lower case.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME` is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
+  e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME`, `BUYER_PHONE_NUMBER` and `BUYER_EMAIL` are parameters which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
 
 * Parameters in square brackets are optional.<br>
   e.g. `t/TYPE [lte/MATCHING_PRICE]` can be used as `t/HDB lte/300` or `t/HDB`.
@@ -404,7 +404,7 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 1. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`).
 2. **CLI (Command Line Interface)**: A text-based interface that allows users to interact with a software application by typing commands.
 2. **Domain**: The portion of the email address after the `@` symbol.
-3. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`).
+3. **Domain label**: A subdivision of the domain name, separated by periods (e.g. `gmail` and `com` in `gmail.com`).
 4. **GUI (Graphical User Interface)**: A visual interface that allows users to interact with a software application through visual elements such as buttons, icons, menus, and windows, instead of text-based commands. 
 5. **Local-part**: The portion of the email address before the `@` symbol.
 6. **Matching price**: The estimated price of the property given by the average of the property's lowest `ASK` price and highest `BID` price.
