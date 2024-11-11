@@ -49,6 +49,13 @@ public abstract class OrderList<T extends Order> {
     }
 
     /**
+     * Clears all orders from the orderlist.
+     */
+    public void clear() {
+        orders.clear();
+    }
+
+    /**
      * Get an order of the specified index.
      *
      * @param index The index of the order to retrieve (0-based index).

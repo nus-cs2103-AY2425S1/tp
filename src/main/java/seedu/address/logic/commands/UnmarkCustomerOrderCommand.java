@@ -17,7 +17,7 @@ public class UnmarkCustomerOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNMARK_ORDER_SUCCESS = "Marked customer order as pending: %1$s";
+    public static final String MESSAGE_UNMARK_ORDER_SUCCESS = "Marked customer order as pending:";
     public static final String MESSAGE_ORDER_ALREADY_PENDING = "The order at index %1$s is already pending.";
     public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
@@ -45,7 +45,9 @@ public class UnmarkCustomerOrderCommand extends Command {
 
         customerOrderList.removeOrder(targetIndex - 1);
         customerOrderList.addOrder(customerOrder);
-        return new CommandResult(String.format(MESSAGE_UNMARK_ORDER_SUCCESS, targetIndex));
+
+        String resultMessage = MESSAGE_UNMARK_ORDER_SUCCESS + "\n" + customerOrder.toString();
+        return new CommandResult(resultMessage);
     }
 
     @Override

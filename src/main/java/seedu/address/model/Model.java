@@ -12,7 +12,6 @@ import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 
@@ -159,5 +158,4 @@ public interface Model {
      *
      * @return The current inventory.
      */
-    Inventory getInventory();
 }

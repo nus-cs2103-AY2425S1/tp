@@ -7,12 +7,23 @@ participant "Order" as O
 participant "Person" as P
 
 User -> DCC: deleteCustomerOrder()
+activate DCC
 DCC -> M: getCustomerOrderList()
+activate M
 DCC -> COL: getOrder(targetIndex - 1)
+activate COL
 COL --> DCC: order
+deactivate COL
 DCC -> O: getOriginalPerson()
+activate O
 O --> DCC: person
+deactivate O
 DCC -> P: removeOrder(order)
+activate P
+deactivate P
 DCC -> COL: removeOrder(targetIndex - 1)
+activate COL
+deactivate COL
 DCC --> User: CommandResult
+deactivate DCC
 @enduml

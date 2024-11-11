@@ -16,6 +16,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
@@ -45,7 +46,12 @@ public class AddSupplierCommand extends Command {
             + PREFIX_TAG + "wholesale";
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
-    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PHONE = "A contact in the address book already has this phone number. "
+            + "Please use a different phone number.";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "A contact in the address book already has this email address. "
+            + "Please use a different email address.";
+    public static final String MESSAGE_DUPLICATE_ADDRESS = "A contact in the address book already has this home address. "
+            + "Please use a different home address.";
     public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. "
             + "Please add it using the addIngredient command.";
 
@@ -84,10 +90,20 @@ public class AddSupplierCommand extends Command {
         // Update the supplier's ingredients list with the validated ingredients
         toAdd.setIngredientsSupplied(updatedIngredients);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SUPPLIER);
+        // Check for duplicate phone number across all contacts
+        for (Person person : model.getFilteredPersonList()) {
+            if (person.getPhone().equals(toAdd.getPhone())) {
+                throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+            }
+            if (person.getEmail().equals(toAdd.getEmail())) {
+                throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+            }
+            if (person.getAddress().equals(toAdd.getAddress())) {
+                throw new CommandException(MESSAGE_DUPLICATE_ADDRESS);
+            }
         }
 
+        // Add the new supplier if no duplicates are found
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
