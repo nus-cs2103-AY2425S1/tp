@@ -216,7 +216,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `listemployees`
+#### Listing all employees : `listemployees`
 
 Shows a **list of all employees** in the address book.
 
