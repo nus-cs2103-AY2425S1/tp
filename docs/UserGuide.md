@@ -173,8 +173,8 @@ Preference types: `high`, `low`, `recent`, `distant`
 
 * `high`: Persons with high priority rise to the top, followed by medium then low
 * `low`: Persons with low priority rise to the top, followed by medium then high
-* `recent`: Persons with more recent "last seen" dates rise to the top
-* `distant`: Persons with more distant "last seen" dates rise to the top
+* `recent`: Persons are sorted chronologically in descending order based on "last seen" dates
+* `distant`: Persons are sorted chronologically in ascending order based on "last seen" dates
 
 Examples:
 * `sort high`
