@@ -495,10 +495,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `find`<br>
       Expected: Error details informing of invalid command format shown in the status message.
 
-   4. Test case: `find fhodolkg`<br>
-      Expected: No client is shown due to no matching clients. Details of the search shown in the status message.
-   
-   5. Test case: `find Alex innovative`<br>
+   4. Test case: `find Alex innovative`<br>
       Expected: All clients whose name or company contain Alex or innovative are shown. Details of the search shown in the status message.
 
 
