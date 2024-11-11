@@ -258,6 +258,7 @@ Deletes the specified member from HallPointer.
 
 ![result for 'delete_member 2'](images/deleteMemberResult.png)
 ---
+<div style="page-break-after: always;"></div>
 
 ### Adding a Session:
 
