@@ -14,8 +14,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
-import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
+
+
 public class PhoneNumberContainsKeywordPredicateTest {
 
     @Test
