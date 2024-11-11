@@ -41,7 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            String errorMessage = String.format("%s Or INDEX may contain invalid arguments (e.g. c/)\n%s",
+            String errorMessage = String.format("%s Or Index may contain invalid arguments (e.g. c/)\n%s",
                     pe.getMessage(),
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
