@@ -222,7 +222,7 @@ Note:
 
 **Action:**
 Deletes the specified contact from the address book.<br> You may delete by specifying the index of
-the contact in the displayed address book, or by specifying the full name
+the contact in the displayed address book, or you by specifying the full name
 of any currently displayed contact that you wish to delete. <br>
 </box>
 
@@ -328,8 +328,7 @@ Format: `list [all]... [contacts]...`
 <box type="definition" seamless>
 
 **Action:** Shows a list of all contacts in the address book.
-* Optional parameters of `all` or `contacts` or any permutations of these two words separated by spaces are accepted
-
+* optional parameters of all or contacts or allcontacts or any combinations of these three words separated by spaces are accepted
 </box>
 
 
