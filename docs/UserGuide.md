@@ -258,7 +258,7 @@ Deletes the specified customer from the address book.
 ### Deleting customers : `deletePC`
 * Delete all persons from the address book with the given postal code.
 
-Format: `delete POSTALCODE`
+Format: `deletePC POSTALCODE`
 
 * Delete all persons with the specified `POSTALCODE`.
 * The postal code **must be a 6 digits** 
