@@ -6,7 +6,7 @@ pageNav: 3
 
 # Bridal Boss User Guide
 
-Bridal Boss is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
+**Bridal Boss** is a desktop app designed for **wedding planners to managing contacts**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -24,6 +24,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a Co
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar BridalBoss.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+1. At the top is the command box for users to enter their commands. The column on the left contains the list of client and vendor contacts while the right column contains a list of weddings. <br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
