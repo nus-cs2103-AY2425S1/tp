@@ -225,7 +225,7 @@ Examples:
 
 #### Exporting persons: `export`
 
-Exports all persons in ClubConnect into a csv file named `ExportedContacts.csv` located in the data folder.
+Exports all persons in ClubConnect into a csv file `[JAR file location]/data/ExportedContacts.csv`.
 
 Format: `export`
 
