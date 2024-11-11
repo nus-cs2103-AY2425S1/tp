@@ -16,6 +16,7 @@ pageNav: 3
 * [AB3](https://github.com/nus-cs2103-AY2425S1/tp) for being the base of our project.
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * [imPoster](https://github.com/AY2021S2-CS2103T-T12-4/tp), a CS2103T senior group where we adapted our `MainWindow.fxml` code from.
+* [Stackoverflow post on Java password hashing](https://stackoverflow.com/a/2861125): We followed this post from Stackoverflow to guide us in the password hashing function in `PasswordManager.java`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +68,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br>
+<br>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +87,9 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<br>
+<br>
 
 ### Logic component
 
@@ -117,6 +124,9 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+<br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -138,6 +148,8 @@ The `Model` component,
 
 </box>
 
+<br>
+<br>
 
 ### Storage component
 
@@ -149,6 +161,9 @@ The `Storage` component
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<br>
+<br>
 
 ### Common classes
 
@@ -251,6 +266,8 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `:remove`, just save the person being removed).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+<br>
+<br>
 
 ### Remove Feature
 
@@ -291,6 +308,9 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: More user-friendly as the user can specify the name.
     * Cons: Requires additional logic to handle duplicate names.
 
+<br>
+<br>
+
 ### Add Feature
 
 #### Implementation
@@ -330,6 +350,10 @@ Finally, a parameter that accepts multiple values at once like `Tag` is parsed a
 Similar to the remove feature, how an add operation goes through the `Model` component is shown below:
 <puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" />
 
+<br>
+<br>
+<br>
+
 ### Export Feature
 #### Implementation
 
@@ -355,7 +379,7 @@ Step 1. The user initiates an export by executing `:export`. The `ExportCommand`
 before exporting it.
 
 Step 2. The `execute(Model model)` method reads encrypted data from the `sourceFile`, decrypting it with
-`EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `addressbook.json`.
+`EncryptionManager.decrypt()` using the provided `keyPath`. The decrypted data is written to a temporary file `vbook.json`.
 
 Step 3. If `destinationFile` is not set, `ExportCommand` invokes `chooseExportLocation(Stage stage)`, which displays
 a file chooser dialog for the user to select an export location. If the user cancels this dialog, the export process
@@ -384,6 +408,8 @@ The following sequence diagram explains how the export operation works:
 - Pros: Streamlined and faster for frequent exports.
 - Cons: Less flexible, as it may overwrite existing files without warning.
 
+<br>
+<br>
 
 ### Encryption Feature
 
@@ -397,22 +423,22 @@ The encryption mechanism is managed by the `EncryptionManager` class. This compo
     - Encrypts plain text data using the AES algorithm.
     - Takes the path to the key store as an argument (defaulting to `vbook.jks` if not provided).
     - Returns a byte array containing the encrypted data.
-
+      <br>
 2. **`decrypt(byte[] data, String keyPath)`**:
     - Decrypts the given encrypted byte array back into plain text.
     - Also takes the path to the key store as an argument (defaulting to `vbook.jks` if not provided).
     - Returns the decrypted string.
-
+      <br>
 3. **`generateKey(String keyPath)`**:
     - Generates a new AES secret key and stores it in a local key store file.
     - If the key store already exists, it does not overwrite it but notifies that the alias already exists.
     - Saves the generated key under the alias `vbook-encryption`.
-
+      <br>
 4. **`getKey(String keyPath)`**:
     - Retrieves the AES secret key from the specified key store.
     - If the key store does not exist, it calls `generateKey()` to create one.
     - Returns the retrieved secret key.
-
+      <br>
 #### Usage in Application
 
 - The `EncryptionManager` is used in the `ExportCommand` to decrypt data before exporting it and in `JsonAddressBookStorage` to encrypt data before writing it to a file.
@@ -469,6 +495,9 @@ The following sequence diagram shows how the encryption process works:
     - As a local application, VBook prioritizes convenience, which may lead users to prefer simpler access to their data over maximum security. Finding a balance between security and usability is crucial.
     - Given that VBook handles contact data, adequate security measures must be in place while ensuring users are not overwhelmed by complex key management.
 
+<br>
+<br>
+
 ### Password Management Feature
 
 #### Implementation
@@ -480,18 +509,18 @@ The password management mechanism is handled by the `PasswordManager` class. Thi
 1. **`readPassword(String path)`**:
     - Reads the stored hashed password from the specified file (defaulting to `password.txt`).
     - Returns the hashed password as a string or `null` if the file does not exist.
-
+      <br>
 2. **`savePassword(String password, String path)`**:
     - Accepts a plaintext password, generates a salt, hashes the password using **PBKDF2**, and saves the resulting hash and salt to the specified file (default: `password.txt`).
     - Creates the file if it does not already exist.
-
+      <br>
 3. **`isPasswordCorrect(String inputPassword, String path)`**:
     - Compares the input plaintext password against the stored hashed password.
     - Reads the stored hash and salt, hashes the input password, and returns `true` if they match or `false` otherwise.
-
+      <br>
 4. **`hashPassword(String password, byte[] salt)`**:
     - Hashes the provided password using the specified salt with **PBKDF2** and returns a string containing both the salt and hash encoded in Base64.
-
+      <br>
 5. **`generateSalt()`**:
     - Generates a secure random salt using `SecureRandom` for use in password hashing.
 
@@ -553,11 +582,11 @@ The following sequence diagram illustrates how the password management process o
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://ay2425s1-cs2103t-f12-4.github.io/tp/Documentation.html)
+* [Testing guide](https://ay2425s1-cs2103t-f12-4.github.io/tp/Testing.html)
+* [Logging guide](https://ay2425s1-cs2103t-f12-4.github.io/tp/Logging.html)
+* [Configuration guide](https://ay2425s1-cs2103t-f12-4.github.io/tp/Configuration.html)
+* [DevOps guide](https://ay2425s1-cs2103t-f12-4.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -576,15 +605,19 @@ The following sequence diagram illustrates how the password management process o
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
+<br>
+<br>
 
 ### User stories
-
+#### Implemented user stories
+Listed below are user stories for features that have already been implemented in the current version of the application.
 | Priority | As a …​                                    | I want to …​                                                     | So that I can…​                                                           |
 |----------|--------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------|
 | `* * *`  | first-time user                            | add contacts to my contact book                                  | store my contacts                                                         |
 | `* * *`  | user                                       | add contacts to my contact book using only partial details       | store contacts that I may not have full information about                 |
 | `* * *`  | user                                       | see all my contacts                                              | see and manage my contacts                                                |
 | `* * *`  | user                                       | remove contacts                                                  | remove contacts I do not need anymore                                     |
+| `* *`    | user                                       | edit contact details                                             | correct errors I made when adding a contact                                   |
 | `* *`    | first-time user                            | see sample contacts                                              | explore the app's features without adding real data                       |
 | `* *`    | first-time user                            | clear sample data and start fresh                                | input my real contacts securely                                           |
 | `* *`    | first-time user                            | view a tutorial on the app                                       | learn how to use the app quickly                                          |
@@ -592,39 +625,50 @@ The following sequence diagram illustrates how the password management process o
 | `* *`    | new user                                   | secure my contact data with a password                           | feel confident that my client information is protected                    |
 | `* *`    | new user                                   | choose to encrypt the contact data that is stored                | ensure my client information cannot be accessed from the storage location |
 | `* *`    | new and inexperienced user                 | undo actions like deletions (CTRL+Z)                             | recover data quickly if I make a mistake                                  |
-| `* *`    | new and inexperienced user                 | be prompted with why an invalid command is invalid               | receive immediate and specific feedback if I type an invalid command      |
-| `* *`    | new user                                   | open up a settings menu                                          | configure keyboard shortcuts                                              |
+| `* *`    | new and inexperienced user                 | redo an action that was undone with undo (CTRL+SHIFT+Z)          | reapply an action if I realise I need it after undoing it                 |
+| `* *`    | new and inexperienced user                 | be prompted with why an invalid command is invalid               | receive immediate and specific feedback if I type an invalid command|
 | `* *`    | returning user                             | search contacts using partial details (name, email)              | find relevant contacts faster                                             |
-| `* *`    | user                                       | edit contact details                                             | avoid errors when updating information                                    |
 | `* *`    | user whose contacts span multiple projects | tag contacts with a project or organisation name                 | organise my contacts better                                               |
 | `* *`    | user                                       | filter contacts by project or organisation                       | quickly locate clients related to specific tasks                          |
 | `* *`    | experienced user                           | use keyboard shortcuts to bring up the CLI                       | execute commands faster                                                   |
-| `* *`    | experienced user                           | use keyboard shortcuts to manage contacts                        | manage my contacts faster                                                 |
+| `* *`    | experienced user                           | use keyboard shortcuts to manage contacts                        | manage my contacts faster|
+| `*`      | user                                       | multi-select contacts for deletion                               | manage my list more efficiently  |
+| `*`      | power user                                 | export my contact list to JSON format                     | use it in other tools or projects
+
+
+
+
+#### Future user stories
+Listed below are user stories that represent features that we have not implemented yet, but plan to in the future.
+| Priority | As a …​                                    | I want to …​                                                     | So that I can…​                                                           |
+|----------|--------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------|
 | `* *`    | new user                                   | import contacts from a CSV or another format (e.g. Apple's .vcf) | quickly populate my contact book without manual entry                     |
+| `* *`    | new user                                   | open up a settings menu                                          | configure keyboard shortcuts |
 | `*`      | returning user                             | customise the app's theme                                        | make my user experience more personalised as I use the app more           |
-| `*`      | user                                       | multi-select contacts for deletion                               | manage my list more efficiently                                           |
 | `*`      | frequent user                              | navigate command history with arrow keys                         | quickly fill the search field and modify and execute previous commands    |
-| `*`      | power user                                 | export my contact list to CSV or JSON format                     | use it in other tools or projects                                         |
 | `*`      | programmer                                 | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and VBook more effectively                 |
 | `*`      | frequent user                              | pin important contacts                                           | have them appear at the top of my list for easy access                    |
-| `*`      | long time user                             | archive old contacts                                             | clean up my contact book without having to delete contacts                |                                          |
+| `*`      | long time user                             | archive old contacts                                             | clean up my contact book without having to delete contacts                |
+
+<br>
+<br>
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `VBook` and the **Actor** is the user, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 
-1.  User requests to add a specific person to the addressbook.
+1.  User requests to add a specific person to VBook.
 2.  VBook adds the person.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. One or more of the inputted parameters are invalid.
+* 1a. One or more of the inputted parameters, or the command, is invalid.
 
     * 1a1. VBook shows an error message.
 
@@ -634,14 +678,14 @@ The following sequence diagram illustrates how the password management process o
 
       Use case resumes at step 2.
 
-**Use case: Remove a person**
+**Use case: Edit a person's details**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to remove a specific person in the list
-4.  AddressBook removes the person
+1.  User requests to list persons.
+2.  VBook shows a list of persons.
+3.  User requests to edit a specific person's details in the list.
+4.  VBook edits the person's details.
 
     Use case ends.
 
@@ -653,18 +697,154 @@ The following sequence diagram illustrates how the password management process o
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. VBook shows an error message.
+
+      Use case resumes at step 2.
+* 3b. One or more of the inputted parameters, or the command, is invalid.
+
+    * 3b1. VBook shows an error message.
+
+      Use case resumes at step 2.
+* 3c. The name of the requested person is the same as an existing person in the addressbook.
+    * 3c1. VBook shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Remove a person**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  VBook shows a list of persons.
+3.  User requests to remove a specific person in the list.
+4.  VBook removes the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. VBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find persons matching criteria**
+
+**MSS**
+
+1.  User requests to find persons in the list that match provided search criteria.
+2.  VBook  displays a list of persons that match the criteria.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No persons match the search criteria.
+
+    * 1a1. VBook displays a message indicating that no persons were found.
+
+      Use case ends.
+
+* 1b. The command entered is invalid.
+
+    * 1b1. VBook shows an error message.
+
+      Use case ends.
+
+
+
+**Use case: Export data**
+
+**MSS**
+
+1.  User requests to export data.
+2.  VBook opens the file explorer window.
+3.  User chooses the destination and name of the exported data.
+4.  VBook exports the data to the destination folder in JSON format.
+    Use case ends.
+
+**Extensions**
+* 2a. User closes the file explorer window without selecting a destination.
+  Use case ends.
+* 3a. The name of the exported data clashes with an existing name in the same file destination.
+    * 3a1. The file explorer displays an error message.
+      Use case returns to step 2.
+
+* 3b. The user enters an invalid name.
+    * 3b1. The file explorer displaus an error message.
+      Use case returns to step 2.
+
+
+**Use case: Enter password**
+
+**Preconditions:** User has already set a password previously.
+
+**MSS**
+1.  User starts the app.
+2.  VBook displays a window prompting the user to enter a password.
+3.  User enters the correct password.
+4.  VBook closes the password prompt window and opens the main app window.
+    Use case ends.
+
+
+**Extensions**
+* 2a. User enters the wrong password.
+    * 2a1. VBook displays an error message.
+      Use case returns to step 2.
+
+
+**Use case: Undo command**
+**MSS**
+1.  User requests to undo the last command.
+2.  VBook undoes the last change to the data.
+3.  Use case ends.
+
+**Extensions**
+* 1a. There is no previously done add/edit/delete command found.
+    * 1a1. VBook displays a message that there are no more commands to undo.
+      Use case ends.
+
+* 1b. User has undone more commands than the maximum amount allowed.
+    * 1b1. VBook displays a message that there are no more commands to undo.
+      Use case ends.
+
+
+**Use case: Redo command**
+**MSS**
+1.  User requests to redo the last undone command.
+2.  VBook redoes the last undone command.
+    Use case ends.
+    **Extensions**
+* 1a. There is no previously undone command.
+    * 1a1. VBook displays a message that there are no more commands to redo.
+      Use case ends.
+
+* 1b. User has redone more commands than the maximum amount allowed.
+    * 1b1. VBook displays a message that there are no more commands to redo.
+      Use case ends.
+
+
+<br>
+<br>
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should work without any Internet connection.
+5.  Data is stored in an encrypted file that can be edited by exporting a decrypted version of the file from the GUI.
+6.  Commands should execute within 0.5 seconds under normal usage conditions.
+7.  Should use strong encryption standards for data storage and secure export/import.
+8.  Should support keyboard-only navigation for users with limited mouse access.
 
+<br>
+<br>
 
 ### Glossary
 
@@ -684,6 +864,17 @@ The following sequence diagram illustrates how the password management process o
 5. This issue does not exist on Mac and Linux machines.
 
 --------------------------------------------------------------------------------------------------------------------
+## Appendix: Planned Enhancements
+
+Team Size: 4
+1. **Make result display text selectable:** The current result display window can display text but users cannot select text to copy and paste into the command box. We plan to make the window selectable so users can copy and paste in example commands to try out.
+2. **Expanded contact information:** The current contact list wraps around long text so the user can see the information. However, this makes the list uneven and very long remarks can make one contact unreasonably long. We plan to create a contact page per contact that contains full information about every contact, while keeping a truncated view for the main window.
+3. **Improved input validation for tags:** Currently, our tags have no restriction on size, which cause them to exceed the UI space. We plan to add a maximum length for the tags to be 50 characters, as the longest English word is 45 characters.
+4. **Add input validation for find command:** Currently, the find command does not check if parameters like name / phone number etc. are valid before executing the find command. We plan to add input validation for the find command so that searching with an invalid parameter will fail with an error.
+5. **Add input validation for location:** Currently, the location field takes in any values. However, this is not specific and the user can enter in values that are clearly not locations, such as `0000000`. Hence, we plan to split the location field into three distinct fields: postal code, street name, and block number. Input validation will ensure specificity, restrict ambiguity, and allow only valid special characters relevant to location data.
+6. **Add input validation for phone numbers:** The current phone number field does not have a strict limit on the kind of values it accepts. We plan to use regular expressions to validate phone number inputs.
+7. **Address integer overflow issues for index:** Currently, when a number larger than the maximum value for the data type `integer` is entered into our index field, the error message displays: `Invalid command format!` instead of `The person index provided is invalid`. This is likely due to an integer overflow error throwing a different exception than expected. We plan to fix this by adding a check for overflow and returning the appropriate error message afterwards.
+--------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
@@ -695,6 +886,9 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
+<br>
+<br>
 
 ### Launch and shutdown
 
@@ -716,6 +910,9 @@ java -jar {{ jarFile }}
     1. Re-launch the app by using the same command above.<br>
        Expected: The most recent window size and location is retained.
 
+<br>
+<br>
+
 ### Removing a person
 
 1. Removing a person while all persons are being shown
@@ -731,11 +928,20 @@ java -jar {{ jarFile }}
     1. Other incorrect remove commands to try: `:remove -i`, `:remove -i x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+<br>
+<br>
+
 ### Saving data
 
 1. Dealing with missing data files
 
-    1. Prerequisites: There is an existing /data/addressbook.json file in the home folder of the .jar file.
-    2. Delete the /data/addressbook.json file. Close the address book and open it again.
+    1. Prerequisites: There is an existing data/vbook.json file in the home folder of the .jar file.
+    2. Delete the data/vbook.json file. Close the address book and open it again.
 
        Expected: The data is replaced with the sample data that shows when the app is first open.
+
+## Appendix: Effort
+
+This project was challenging to implement, especially with our ambition of making it as keyboard-friendly as possible. Implementing keyboard shortcuts, as well as keyboard-friendly UI was not easy.
+
+While we didn't expand the fields much from AB3, certain features like the Export feature took us a lot of time to debug, especially given known bugs with the Windows system (see [failing tests on Windows when run more than once](#failing-tests-on-windows-when-run-more-than-once))
