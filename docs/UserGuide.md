@@ -19,25 +19,24 @@ the process of accessing and updating resident student details. What's more, Dor
 
 
 <!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
 
 - [Quick start](#quick-start)
 - [Features](#features)
-    - [Viewing help : `help`](#viewing-help-help)
-    - [Adding a person : `add`](#adding-a-person-add)
-    - [Listing all persons : `list`](#listing-all-persons-list)
-    - [Editing a person : `edit`](#editing-a-person-edit)
-    - [Finding a person : `find`](#finding-a-person-find)
-    - [Deleting a person : `delete`](#deleting-a-person-delete)
-    - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-    - [Cleaning graduated students : `clean`](#cleaning-graduated-students-clean)
-    - [Undoing the previous command : `undo`](#undoing-the-previous-command-undo)
-    - [Exiting the program : `exit`](#exiting-the-program-exit)
-    - [Manual saving : `export`](#manual-saving-export)
-    - [Manual data restoration : `import`](#manual-data-restoration-import)
+  - [Viewing help : `help`](#viewing-help-help)
+  - [Adding a person : `add`](#adding-a-person-add)
+  - [Listing all persons : `list`](#listing-all-persons-list)
+  - [Editing a person : `edit`](#editing-a-person-edit)
+  - [Finding a person : `find`](#finding-a-person-find)
+  - [Deleting a person : `delete`](#deleting-a-person-delete)
+  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  - [Cleaning graduated students : `clean`](#cleaning-graduated-students-clean)
+  - [Undoing the previous command : `undo`](#undoing-the-previous-command-undo)
+  - [Exiting the program : `exit`](#exiting-the-program-exit)
+  - [Manual saving : `export`](#manual-saving-export)
+  - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -71,15 +70,15 @@ the process of accessing and updating resident student details. What's more, Dor
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+   * `list` : Lists all contacts.
 
-    * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
+   * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -101,7 +100,7 @@ the process of accessing and updating resident student details. What's more, Dor
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -130,16 +129,16 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-), commas (,) and apostrophes (').
-> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format local-part@domain
 > * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
 > * You cannot set graduation year when adding a person. Use the `edit` command to add graduation year.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 > <span style="color:Tomato"> WARNING! </span> <br>
-> 
+>
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
-> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 
@@ -178,20 +177,29 @@ Examples:
 
 Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 
-* All possible orders and combinations of the 3 parameters `NAME`, `PHONE` and `ROOM_NUMBER` are accepted
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+> All possible orders and combinations of the 4 parameters `NAME`, `PHONE`, `ROOM_NUMBER` and `TAG` are accepted.
+
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched for `Name` e.g. `Han` will not match `Hans`
+* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`
 * Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
 * Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The order of the tags does not matter e.g. `t/friends colleagues` works the same
-  as `t/colleagues friends`
+* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
+  as `t/colleagues t/friends`
+* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`
+* When searching by `TAG`, the contact must match every `TAG` in the input fields to appear in the listed results.
+* If the user inputs multiple fields for the `find`, then only contacts that match all the input fields will appear in the listed results.
 
 Examples:
-* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues` Finds people who have the tags `friends` and `colleagues`. 
-  They have must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
+* `find n/John` Finds contacts who have the word John in their name.
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues` Finds contacts who have the tags `friends` and `colleagues`. They also must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
+
+The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`
+
+![FindCommandExampleUsage](images/FindCommandExampleUsage.png)
 
 ### Deleting a person : `delete`
 
@@ -356,7 +364,7 @@ Constraints:
 * `name` can contain any alphanumeric character or whitespace.
 * `name` can contain hyphens, commas and apostrophes.
 * `name` can be 1 to 300 characters long.
-  
+
 Duplicate handling:
 * Two resident student contacts with the same name are not allowed
 > <span style="color:Gray"> NOTE! </span> <br>
@@ -389,9 +397,9 @@ Format: `l@d`, where `l` is the local part of the email and `d` is the domain of
 
 Constraints:
 * The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` is made up of domain labels separated by periods.
 * The domain name `d` must end with a domain label at least 2 characters long.
-* Each domain label must start and end with alphanumeric characters 
+* Each domain label must start and end with alphanumeric characters
 * Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
 * `l`, `@` and `d` are not supposed to be separated by whitespace.
 
@@ -447,8 +455,8 @@ Duplicate handling:
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Dorm**: A university or college hall of residence / hotel for students and teachers
 * **Dorm resident**: Student and / or teacher currently staying in a dorm
-* **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
-* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
+* **Dorm manager**: User of DorManager Pro that has to keep track of the residents in their dorm
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in DorManager Pro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
 * **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
