@@ -190,8 +190,6 @@ Not all commands require parameters. Some commands are standalone and do not req
 Refer to the tables below or the [Features](#features) section for more details on each command.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ## Command Format and Examples
 This section provides a quick overview of the available commands for managing student records. Each command is accompanied by its format and an example to help you understand how to use it effectively.
 
@@ -210,8 +208,6 @@ This section provides a quick overview of the available commands for managing st
 | **Clear Data**      | `clear`                                                                                   |                                                                                             |
 | **Get Help**        | `help`                                                                                    |                                                                                             |
 | **Exit**            | `exit`                                                                                    |                                                                                             |
-
-<div style="page-break-after: always;"></div>
 
 ## Command Parameters Reference
 In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
@@ -329,7 +325,7 @@ will be added.
 </div>
 
 <div markdown="span" class="alert alert-note">:memo: **Note:**
-* A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
+A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 </div>
 
