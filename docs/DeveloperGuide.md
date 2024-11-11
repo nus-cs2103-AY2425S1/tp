@@ -8,8 +8,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-This project is based on the [AddressBook-Level3 Project](https://se-education.org/) originally created by the 
-SE-EDU initiative. We extend our thanks to the developers of AB3 for their foundational work.
+This project is based on the [AddressBook-Level3 Project](https://github.com/se-edu/addressbook-level3) originally created by the
+[SE-EDU initiative](https://se-education.org/). We extend our thanks to the developers of AB3 for their foundational work.
 
 
 We also extend our gratitude to the creators of the following resources and libraries that were essential in developing Health Connect:
@@ -208,7 +208,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 The Date feature allows users to add, edit, and view appointment dates and times for each person in the address book, helping doctors maintain an organized schedule without conflicts.
 
-#### Feature Architecture
+#### Feature Architecture Design
 1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates and times are in the correct format (`d/M/yyyy HHmm`) before passing them to `DateCommand`.
     - Benefits and Challenges similar to Add Feature
 
@@ -255,12 +255,12 @@ Team Size: 5
    Making sure the system checks if the user enters any unexpected or incorrect symbols. If the user does, the system will let them know what the correct options are, helping avoid confusion and mistakes.
 
 
-2. **Allow address to have "/n" or other prefixes:**
+2. **Allow address to have `n/` or other prefixes:**
    Currently, address validation does not allow certain characters, preventing users from adding addresses with newline characters ("/n") or special prefixes. Enhancing this to allow specific characters, like "/n" for multi-line addresses, would give users more flexibility to enter detailed or complex addresses.
 
 
-3. **Allowing "d/o" in the name field:** Currently, the system does not permit the use of "d/o" in the name field as "d/" is reserved for the date command. 
-This enhancement would allow users to input "d/o" in names without triggering conflicts, offering more flexibility and ensuring that date-related commands are unaffected by name entries.
+3. **Allowing `d/o` in the name field:** Currently, the system does not permit the use of `d/o` in the name field as `d/` is reserved for the date command. 
+This enhancement would allow users to input `d/o` in names without triggering conflicts, offering more flexibility and ensuring that date-related commands are unaffected by name entries.
 
 
 4. **Add, Delete, or Replace Allergy Functionality:**
@@ -271,14 +271,15 @@ This enhancement would allow users to input "d/o" in names without triggering co
    This enhancement allows doctors to create, delete, and edit tags, providing flexibility to personalize patient categorization.
    It enables doctors to define tags that align with their specific needs, improving patient management and enhancing the overall efficiency of the system.
 
-6. **Adding an end time to the Date feature:** Currently, the app allows only the start time and date, preventing duplicate `DATE_TIME` entries. Adding an end time enables users to 
+
+6. **Adding an end time to the `date` feature:** Currently, the app allows only the start time and date, preventing duplicate `DATE_TIME` entries. Adding an end time enables users to 
 define precise appointment durations, helping to prevent overlapping and double-booked slots. It improves scheduling clarity, allowing for better time management and conflict prevention, especially 
 for managing busy schedules.
 
 
 7. **Warn user that date entered is in the past:** 
 Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment.
-However, in the future, an enhancement can be added where the user is warned when a past date or time in the added. For example, 'WARNING: Date and time that was added has already passed.'
+However, in the future, an enhancement can be added where the user is warned when a past date or time in the added. For example, `WARNING: Date and time that was added has already passed.`
 
 
 8. **Specific error message about date and time format:**
@@ -286,8 +287,13 @@ However, in the future, an enhancement can be added where the user is warned whe
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
    In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date and time formats.
 
+
 9. **Accept other phone formats:**
 Currently, the app only accepts phone numbers that are 8 digits long and start with 3, 6, 8 or 9, according to Singapore's standard format for phone numbers. However, we understand that some users may key in their NOK's number, which may not be a Singapore number, as they might be based overseas. In the future, more phone formats can be added, such as including area codes and accepting more digits.
+
+
+10. **Add more date formats:**
+Currently, we found that our priority was to ensure that the date command functionality was working seamlessly before we added more date formats. However, in the future, we plan to accept more date and time formats so that the user can conveniently use the one that is most familiar.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -328,23 +334,22 @@ Priorities:
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
 
-| Priority | As a …​                        | I want to …​                                                        | So that I can…​                                                                                        |
-|----------|--------------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `***`    | home-based healthcare provider | add the data of new clients                                         | register new clients in the system for tracking                                                        |
-| `***`    | home-based healthcare provider | add the contact details of my patients for easy access              | contact and notify them accordingly if there are any emergencies                                       |
-| `***`    | home-based healthcare provider | add the address of my patients                                      | know where to get access to my patients                                                                | 
-| `**`     | home-based healthcare provider | tag patients based on their urgency                                 | prioritise higher-risk patients                                                                        |
-| `**`     | home-based healthcare provider | tag a client's important details                                    | keep track of medical allergies or urgency                                                             |
+| Priority | As a …​                        | I want to …​                                                      | So that I can…​                                                                                        |
+|----------|--------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `***`    | home-based healthcare provider | add the data of new clients                                       | register new clients in the system for tracking                                                        |
+| `***`    | home-based healthcare provider | add the contact details of my patients for easy access            | contact and notify them accordingly if there are any emergencies                                       |
+| `***`    | home-based healthcare provider | add the address of my patients                                    | know where to get access to my patients                                                                | 
+| `**`     | home-based healthcare provider | tag patients based on their urgency                               | prioritise higher-risk patients                                                                        |
+| `**`     | home-based healthcare provider | tag a client's important details                                  | keep track of medical allergies or urgency                                                             |
 | `***`    | home-based healthcare provider | be notified of overlapping names, phone numbers and email addresses | avoid duplicate client entries                                                                         |
-| `***`    | home-based healthcare provider | find my patients' records                                           | understand how my patient is doing                                                                     |
-| `***`    | home-based healthcare provider | find my patients' allergies                                         | provide the correct prescription for my patients                                                       |
-| `*`      | home-based healthcare provider | filter patients according to address and priority                   | save travel time or focus on more urgent cases                                                         |
-| `**`     | home-based healthcare provider | delete the records of patients whom I am not seeing anymore         | keep my address book concise and clutter-free                                                          |
-| `***`    | home-based healthcare provider | edit my patients' contact details accordingly                       | contact them easily without having to worry about not being able to reach the due to wrong information |
-| `***`    | home-based healthcare provider | edit my patients' address if they move locations                    | get to my patients without worrying about going to the wrong location                                  |   
-| `***`    | home-based healthcare provider | add new appointment details                                         | add appointments in my schedule for tracking later on                                                  |
-| `***`    | home-based healthcare provider | be notified of overlapping appointments                             | reschedule my appointments as required                                                                 |
-| `***`    | home-based healthcare provider | see my schedule for the day                                         | organise my time and ensure that there is sufficient time to travel to different locations             |
+| `***`    | home-based healthcare provider | find my patients' allergies                                       | provide the correct prescription for my patients                                                       |
+| `*`      | home-based healthcare provider | filter patients according to priority                             | focus on more urgent patients                                                                          |
+| `**`     | home-based healthcare provider | delete the records of patients whom I am not seeing anymore       | keep my address book concise and clutter-free                                                          |
+| `***`    | home-based healthcare provider | edit my patients' contact details accordingly                     | contact them easily without having to worry about not being able to reach the due to wrong information |
+| `***`    | home-based healthcare provider | edit my patients' address if they move locations                  | get to my patients without worrying about going to the wrong location                                  |   
+| `***`    | home-based healthcare provider | add new appointment details                                       | add appointments in my schedule for tracking later on                                                  |
+| `***`    | home-based healthcare provider | be notified of overlapping appointments                           | reschedule my appointments as required                                                                 |
+| `***`    | home-based healthcare provider | see my schedule for the day                                       | organise my time and ensure that there is sufficient time to travel to different locations             |
 
 ### Use cases
 
@@ -355,21 +360,20 @@ Priorities:
 **MSS**
 
 1.  User requests to add a client and provides the required client details.
-2.  AddressBook validates the input
-3.  AddressBook adds the client data.
-4.  AddressBook confirms the successful addition of the client.
+2.  AddressBook adds the client data.
+3.  AddressBook confirms the successful addition of the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
+* 1a.  AddressBook detects an error in the command format.
+    * 1a1. AddressBook shows an error message.
 
         Use case ends.
 
-* 2b. Duplicate Client
-    * 2b1. AddressBook shows an error message.
+* 1b. AddressBook detects a duplicate person entry.
+    * 1b1. AddressBook shows an error message.
   
         Use case ends.
 
@@ -381,28 +385,27 @@ Priorities:
 1.  User requests to list clients
 2.  AddressBook shows a list of clients
 3.  User requests to delete a client’s data and inputs the client's attributes (name, phone number, and/or email).
-4.  AddressBook validates the input
-5.  AddressBook deletes the person
+4.  AddressBook deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 4a.  Invalid Input Format
-    * 4a1. AddressBook shows an error message.
+* 3a. AddressBook detects an error in the command format.
+    * 3a1. AddressBook shows an error message.
   
         Use case ends.
 
-* 4b. AddressBook detects duplicate client
-    * 4b1. AddressBook shows an error message indicating that multiple clients match the input.
-    * 4b2. User requests to delete the client's data with more of the client's attributes.
+* 3b. AddressBook detects a duplicate person entry.
+    * 3b1. AddressBook shows an error message indicating that multiple clients match the input.
+    * 3b2. User requests to delete the client's data with more of the client's attributes.
 
-        Steps 4b1-4b2 are repeated until a unique person is found from details in input.
+        Steps 3b1-3b2 are repeated until a unique person is found from details in input.
   
-        Use case resumes from step 5.
+        Use case resumes from step 4.
 
-* 4c. Client Does Not Exist
-    * 4c1. AddressBook shows an error message.
+* 3c. AddressBook detects non-existent client.
+    * 3c1. AddressBook shows an error message.
 
         Use case ends.
 
