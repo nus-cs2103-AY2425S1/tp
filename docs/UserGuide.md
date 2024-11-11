@@ -16,15 +16,31 @@ at the National University of Singapore. While optimised for use via a Command L
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file that will execute the app from [here](https://github.com/AY2425S1-CS2103T-W14-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
+3. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS, where both the app and your data will be stored.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
+4. Open the command terminal on your computer (Search `terminal` and open the first app in your search results)
+5. See where your terminal's current working folder, or directory, is by typing `pwd` and pressing 'Enter'.
+6. Locate the path you need to take to change the terminal's directory into the one you put the jar file in.
+   For example, if your `eventfulnus.jar` file is in `Users/{your_computer_username/Downloads/eventfulnus`, and your
+   terminal's current wokring directory is `Users/{your_computer_username}`, you must relocate your working directory by
+   entering `cd Downloads/eventfulnus` into the terminal.
+
+   If your terminal's working directory is `Users/{your_computer_username}/Desktop` and you need to relocate the terminal's working
+   directory to `Users/{your_computer_username}/Downloads/eventfulnus`, you can first enter `cd ..` to escape out of the `Desktop` folder into
+   the `Users/{your_computer_username}` folder, then enter `cd Downloads/eventfulnus` to relocate into the folder with the `.jar` file.
+
+   As a general tip, `cd ..` relocates the terminal's working directory to the folder directly containing the current working directory.
+
+   Once you have reached the folder containing the `.jar` file, when you type `ls` and press 'Enter', the `.jar` file should show up in the list
+   of files in the terminal's current working directory.
+   
+8. Enter the `java -jar eventfulnus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+9. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -114,6 +130,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 * When editing roles, the existing roles of the person will be removed i.e adding of roles is not cumulative.
 * You can remove all the person’s roles by typing `r/` without
     specifying any roles after it.
+* When a person's details are edited, if they are participants of an Event, their changed details will be reflected in
+  the participants section of an Event in the GUI.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -127,8 +145,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The `name`, `phone`, `email`, and `roles` are searched for a match.
+* Partial matches will also show in results e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -146,6 +164,8 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* When the person deleted is part of an Event (see more below), the Event's participants will reflect
+  this deletion and no longer show the person among its participants.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -206,10 +226,12 @@ Finds all events whose names or attributes contain any of the specified keywords
 
 Format: `findevent KEYWORD [MORE_KEYWORDS]…​`
 
-* The search is case-insensitive. e.g `usc` will match `Usc`
-* The order of the keywords does not matter. e.g. `USC Chess` will match `Chess USC`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Utown Usc` will return Events containing `Utown Chess`, `Usc Table Tennis`
+* The search is case-insensitive. e.g `usc` will match `Usc`, `USC`, etc.
+* The order of the keywords does not matter. e.g. `USC Chess` will match `Chess USC`.
+* The `name` (`sport` and `teams`), `venue`, `date`, and `participants` are searched for a match.
+* Partial matches will also show in results e.g. `Che` will match `Chess`.
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Utown Usc` will return events containing `Utown Chess`, `Usc Table Tennis`, etc.
 
 ## Miscellaneous Features
 ### Clearing all entries : `clear`
