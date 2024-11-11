@@ -85,11 +85,10 @@ Adds a person to the address book with the provided information.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
 
 * The only required fields for a person are a name and a phone number, 
-so you can create a contact with just those 2 fields. 
-Providing an email, address, date of last visit, emergency contact or tags is optional.
-* This `add` command allows users to fill in all information fields about a person, except for the "remarks" field.
+so you can create a contact with just those 2 fields. Providing an email, address, date of last visit, emergency contact, or tags is optional.
+* This `add` command allows users to fill in all information fields about a person, **except for the "remarks" field**.
   * The "remarks" field is intended for long-form information about a person, so it is recommended that the addition of remarks be done with the `remark` command or `edit` command (which are explained below).
-  * More information about the fields within a contact are located [here](#contact-field-requirements).
+  * More information about the fields within a contact is located [here](#contact-field-requirements).
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0).<br>
@@ -100,7 +99,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/03-28-2024`
 * `add p/92345678 n/Jane Smith d/01-01-2024 ec/98765432`
-* `add p/92345678 n/Jane Smith d/01-01-2024`
+* `add p/92345678 n/Sam Smith`
 
 ### Listing all persons : `list`
 
