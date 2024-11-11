@@ -95,7 +95,7 @@ Format: `help`
 
 You can add a student to StoreClass using this command.
 
-Format: `add n/NAME p/PHONER g/GENDER m/MODULE... [t/TAG]…​`
+Format: `add n/NAME p/PHONE g/GENDER m/MODULE... [t/TAG]…​`
 
 * `n/NAME` : The full name of the student to be added.
 * `p/PHONE` : The phone number of the student to be added.
