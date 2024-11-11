@@ -65,7 +65,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
 4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
    and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following window appear.<br>
-   ![Ui](images/TemplateUi.png)
+   <img src="images/TemplateUi.png" alt="Ui screenshot" height=auto width="850"/>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -148,7 +148,7 @@ Examples:
 
 The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
 
-![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
+<img src="images/AddCommandExampleUsage.png" alt="AddCommand screenshot" height=auto width="850"/>
 
 ### Listing all persons : `list`
 
@@ -198,7 +198,7 @@ Examples:
 
 The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`
 
-![FindCommandExampleUsage](images/FindCommandExampleUsage.png)
+<img src="images/FindCommandExampleUsage.png" alt="FindCommand screenshot" height=auto width="850"/>
 
 ### Deleting a person : `delete`
 
@@ -244,8 +244,9 @@ Example:
 
 `clean`, executed in 2024.
 
-This deletes all students who graduate in 2023 or earlier.  
-![img.png](images/CleanCommandExampleUsage.png)
+This deletes all students who graduate in 2023 or earlier.
+
+<img src="images/CleanCommandExampleUsage.png" alt="CleanCommand screenshot" height=auto width="850"/>
 
 
 ### Undoing the previous command : `undo`
@@ -279,8 +280,10 @@ Format: `export`
 Example:
 
 The following screenshots shows the results of executing `export`
-![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
-![ExportToFolderExample.png](images/ExportToFolderExample.png)
+
+<img src="images/ExportCommandExampleUsage.png" alt="ExportCommand screenshot" height=auto width="850"/>
+
+<img src="images/ExportToFolderExample.png" alt="ExportToFolder screenshot" height=auto width="850"/>
 
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
@@ -300,7 +303,8 @@ Examples:
 * `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
 The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
-![ImportCommandExampleUsage.png](images/ImportCommandExampleUsage.png)
+
+<img src="images/ImportCommandExampleUsage.png" alt="ImportCommand screenshot" height=auto width="850"/>
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
