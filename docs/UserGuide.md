@@ -1466,7 +1466,7 @@ By reading through our User Guide, you will be able to learn how to use EZSTATES
 
 **Q**: Can I look at all my clients and listings at the same time?<br>
 **A**: Although you are allowed to open EZSTATES using two terminals, this is not recommended as the data saved on one window is not saved on
-the separate window. Please utilise the [`showclients`](#show-clients) or [`showlistings`](#show-listings) to navigate between your clients and listings.
+the separate window. Please utilise the [`showclients`](#show-clients) or [`showlistings`](#show-listings) commands to navigate between your clients and listings.
 
 **Q**: Where can I find more help or report bugs?<br>
 **A**: For more help, refer to the User Guide or reach out to the project’s repository on [GitHub](https://github.com/AY2425S1-CS2103T-F11-4/tp). If you encounter any bugs or issues, please submit an issue report through the GitHub Issues section.
