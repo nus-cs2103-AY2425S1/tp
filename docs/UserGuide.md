@@ -101,8 +101,8 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 **:information_source: Optionals** <br>
 
-A person can have any number of `tags` or none at all!
-The `address` and `email` fields are also optional!
+A person can have any number of tags or none at all!
+The address and email fields are also optional!
 
 </div>
 
@@ -110,7 +110,7 @@ Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
 <div markdown="block" class="alert alert-info">:pushpin:<br> 
-Note that John Doe does not have an `address` in this example.
+Note that John Doe does not have an address in this example.
 </div>
 
 - `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
