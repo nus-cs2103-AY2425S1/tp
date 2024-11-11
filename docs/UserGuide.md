@@ -252,6 +252,11 @@ Examples:
   delete Betsy Crowe
   ```
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Upon entering the delete command, a pop up for confirmation will appear. Do not close or minimize the
+CLI interface when the pop up is displayed. This will cause the program to crash.
+</div>
+
 ---
 
 ### Listing all clients : `list`
@@ -614,11 +619,11 @@ Examples:
 
 ## Advanced Features
 
-| **Action**                                          | **Command Format** | **Command Example** |
-|-----------------------------------------------------|--------------------|---------------------|
-| [Undo the Last Deleted Work](#undo-a-command--undo) | `undo`             | `undo`              |
-| [Redo the Last Undo Work](#redo-a-command--redo)    | `redo`             | `redo`              |
-| [Clear All Entries](#clearing-all-entries--clear)   | `clear`            | `clear`             |
+| **Action**                                        | **Command Format** | **Command Example** |
+|---------------------------------------------------|--------------------|---------------------|
+| [Undo the Last Command](#undo-a-command--undo)    | `undo`             | `undo`              |
+| [Redo the Last Undo Work](#redo-a-command--redo)  | `redo`             | `redo`              |
+| [Clear All Entries](#clearing-all-entries--clear) | `clear`            | `clear`             |
 
 ### Undo a command : `undo`
 Undo the last command. This command works for add, edit, delete client and clear commands.
@@ -628,7 +633,8 @@ Format: `undo`
 
 * Undo the last command to restore the address book to the state before the last command.
 <div markdown="span" class="alert alert-info"> **Note:**
-The `undo` command does not work for assign and deletion of policies.
+The `undo` command does not work for assign and deletion of policies, so any commands before the assign/delete of policies
+will be undone. For example, if I add a client, assign a policy to that client, then enter undo, it will undo the add command.
 </div>
 
 Examples:
@@ -664,6 +670,9 @@ Format: `clear`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If you accidentally used the `clear` command and want to revert back, do not run any other commands.
 Run `undo` immediately to restore the data.
+
+Upon entering the clear command, a pop up for confirmation will appear. Do not close or minimize the
+CLI interface when the pop up is displayed. This will cause the program to crash.
 </div>
 
 ---
