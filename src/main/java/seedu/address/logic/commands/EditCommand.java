@@ -137,8 +137,9 @@ public class EditCommand extends Command {
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    lastShownList.size()));
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                            index.getOneBased(), lastShownList.size()));
         }
 
         return lastShownList.get(index.getZeroBased());

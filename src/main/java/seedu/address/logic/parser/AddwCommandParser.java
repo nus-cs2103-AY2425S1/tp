@@ -50,7 +50,7 @@ public class AddwCommandParser implements Parser<AddwCommand> {
         if (isNumeric(stringClient)) {
             index = ParserUtil.parseIndex(stringClient);
         } else {
-            String[] nameKeywords = stringClient.split("\\s+");
+            String[] nameKeywords = stringClient.split(ParserUtil.WHITESPACE_REGEX);
             predicate = new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords));
         }
 

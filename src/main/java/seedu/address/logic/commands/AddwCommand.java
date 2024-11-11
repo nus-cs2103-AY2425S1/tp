@@ -40,12 +40,11 @@ public class AddwCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
-    public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
-    public static final String MESSAGE_ALREADY_A_CLIENT = "This person is already a client for another wedding";
+    public static final String MESSAGE_ALREADY_A_CLIENT = "This person is already a client for another wedding.";
 
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to set as client.\n"
-                    + "Find the index from the list below and type edit INDEX ...\n"
+                    + "Find the index from the list below and type c/INDEX ...\n"
                     + "Example: " + COMMAND_WORD + "n/WEDDING NAME c/1 ...";
 
     private final Index index;
@@ -89,18 +88,13 @@ public class AddwCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person client;
-
-        if (this.index != null) {
-            client = selectClientWithIndex(model);
-        } else {
-            client = selectClientWithKeyword(model);
-        }
+        Person client = selectClient(model);
 
         if (client.hasOwnWedding()) {
             throw new CommandException(MESSAGE_ALREADY_A_CLIENT);
         }
 
+        // re-initialise wedding with client
         toAdd = new Wedding(toAdd.getName(), new Client(client), toAdd.getDate(), toAdd.getVenue());
 
         if (model.hasWedding(toAdd)) {
@@ -110,6 +104,21 @@ public class AddwCommand extends Command {
         client.setOwnWedding(toAdd);
         model.addWedding(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    /**
+     * Selects the client.
+     *
+     * @param model The model containing the list of persons.
+     * @return The selected client.
+     * @throws CommandException If the list is empty, index is invalid, no name matches or duplicate name matches.
+     */
+    public Person selectClient(Model model) throws CommandException {
+        if (this.index != null) {
+            return selectClientWithIndex(model);
+        } else {
+            return selectClientWithKeyword(model);
+        }
     }
 
     /**
@@ -123,12 +132,12 @@ public class AddwCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    lastShownList.size()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased(), lastShownList.size()));
         }
 
         return lastShownList.get(index.getZeroBased());
@@ -147,7 +156,7 @@ public class AddwCommand extends Command {
 
         if (filteredPersonList.isEmpty()) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         } else if (filteredPersonList.size() == 1) {
             return filteredPersonList.get(0);
         } else {

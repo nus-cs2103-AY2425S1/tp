@@ -48,6 +48,6 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList, null), model,
-                AddCommand.MESSAGE_DUPLICATE_CONTACT);
+                Messages.MESSAGE_DUPLICATE_CONTACT);
     }
 }

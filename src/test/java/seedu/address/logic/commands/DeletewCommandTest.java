@@ -49,7 +49,8 @@ public class DeletewCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletewCommand deletewCommand = new DeletewCommand(outOfBoundIndex, null);
 
-        assertCommandFailure(deletewCommand, model, String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+        assertCommandFailure(deletewCommand, model, String.format(
+                Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                 model.getFilteredWeddingList().size()));
     }
 
@@ -82,7 +83,8 @@ public class DeletewCommandTest {
 
         DeletewCommand deletewCommand = new DeletewCommand(outOfBoundIndex, null);
 
-        assertCommandFailure(deletewCommand, model, String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+        assertCommandFailure(deletewCommand, model, String.format(
+                Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                 model.getFilteredWeddingList().size()));
     }
 

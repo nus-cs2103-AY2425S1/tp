@@ -47,7 +47,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson, null);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class AddCommandTest {
         Person otherPerson = new PersonBuilder().withName("Alice").build();
         ModelStub modelStub = new ModelStubWithPerson(otherPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_PHONE_EXIST, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_PHONE_EXIST, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class AddCommandTest {
         Person otherPerson = new PersonBuilder().withName("Alice").withPhone("91234567").build();
         ModelStub modelStub = new ModelStubWithPerson(otherPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_EMAIL_EXIST, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_EMAIL_EXIST, () -> addCommand.execute(modelStub));
     }
 
     @Test
