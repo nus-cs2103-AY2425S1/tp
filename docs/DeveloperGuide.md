@@ -309,7 +309,7 @@ The following fields are required as they are essential details that the clinic 
 * NRIC (`Nric`)
 
 #### View Command : `view`
-The `view` command is used to view detailed information about a patient entry from the patient list.
+The `view` command is used to display detailed information of a patient.
 
 The user has to specify the target patient's:
 * NRIC (`Nric`)
