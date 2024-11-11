@@ -61,7 +61,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
                 try {
                     // Password file doesn't exist
                     // Start with empty data
-                    Files.deleteIfExists(Path.of("data/addressbook.json"));
+                    Files.deleteIfExists(Path.of("data/vbook.json"));
                     Files.deleteIfExists(Path.of(PASSWORD_PATH));
                 } catch (IOException ex) {
                     ex.printStackTrace();
