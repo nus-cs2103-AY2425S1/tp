@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreatePatientCommand;
@@ -18,7 +16,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 
 /**
@@ -47,9 +44,8 @@ public class CreatePatientCommandParser implements Parser<CreatePatientCommand> 
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = new Remark("");
-        Set<Tag> tagList = new HashSet<>();
 
-        Person patient = new Person(name, role, phone, email, address, remark, tagList);
+        Person patient = new Person(name, role, phone, email, address, remark);
 
 
         return new CreatePatientCommand(patient);
