@@ -177,6 +177,10 @@ The following sequence diagram illustrates the `sort` mechanism:
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br/>
+The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 ### Mark/Unmark feature
 
 #### Implementation
@@ -209,8 +213,8 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 
 ![MarkAttendanceSequenceDiagram-Logic](images/MarkAttendanceSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAttendanceCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:**<br/>
+The lifelines for `MarkAttendanceCommand` and `AttendanceMarkingCommandParser` should end at their respective destroy markers (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 ![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)

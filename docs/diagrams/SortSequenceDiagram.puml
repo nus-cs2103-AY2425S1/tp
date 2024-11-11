@@ -79,7 +79,7 @@ activate CommandResult
 CommandResult --> SortCommand
 deactivate CommandResult
 
-SortCommand --> LogicManager : r
+SortCommand --> LogicManager : result
 deactivate SortCommand
 
 [<--LogicManager

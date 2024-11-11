@@ -6,56 +6,75 @@ skinparam style strictuml
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":MarkAttendanceCommandParser" as MarkAttendanceCommandParser LOGIC_COLOR
-participant "m:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
+participant ":AttendanceMarkingCommandParser" as AttendanceMarkingCommandParser LOGIC_COLOR
+participant "a:MarkAttendanceCommand" as MarkAttendanceCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(mark)
+[-> LogicManager : execute("mark t/johnDoe d/2024-11-10")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(mark)
+LogicManager -> AddressBookParser : parseCommand("mark t/johnDoe d/2024-11-10")
 activate AddressBookParser
 
-create MarkAttendanceCommandParser
-AddressBookParser -> MarkAttendanceCommandParser
-activate MarkAttendanceCommandParser
+create AttendanceMarkingCommandParser
+AddressBookParser -> AttendanceMarkingCommandParser
+activate AttendanceMarkingCommandParser
+
+AttendanceMarkingCommandParser --> AddressBookParser
+deactivate AttendanceMarkingCommandParser
+
+AddressBookParser -> AttendanceMarkingCommandParser : parse("t/johnDoe d/2024-11-10")
+activate AttendanceMarkingCommandParser
 
 create MarkAttendanceCommand
-MarkAttendanceCommandParser -> MarkAttendanceCommand : parse(arguments)
+AttendanceMarkingCommandParser -> MarkAttendanceCommand
 activate MarkAttendanceCommand
 
-MarkAttendanceCommand --> MarkAttendanceCommandParser : m
+MarkAttendanceCommand --> AttendanceMarkingCommandParser : a
 deactivate MarkAttendanceCommand
 
-MarkAttendanceCommandParser --> AddressBookParser
-deactivate MarkAttendanceCommandParser
+AttendanceMarkingCommandParser --> AddressBookParser : a
+deactivate AttendanceMarkingCommandParser
 
-AddressBookParser --> LogicManager : m
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AttendanceMarkingCommandParser -[hidden]-> AddressBookParser
+destroy AttendanceMarkingCommandParser
+
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> MarkAttendanceCommand : execute()
+LogicManager -> MarkAttendanceCommand : execute(m)
 activate MarkAttendanceCommand
 
 MarkAttendanceCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model --> MarkAttendanceCommand : filteredPersonList
+Model --> MarkAttendanceCommand
 deactivate Model
 
-MarkAttendanceCommand -> MarkAttendanceCommand : markAttendance()
-activate MarkAttendanceCommand
-
-MarkAttendanceCommand -> Model : setPerson()
-activate Model
-
-MarkAttendanceCommand -> MarkAttendanceCommand : findByTelegram()
+MarkAttendanceCommand -> MarkAttendanceCommand : findByTelegram(...)
 activate MarkAttendanceCommand
 
 MarkAttendanceCommand --> MarkAttendanceCommand
 deactivate MarkAttendanceCommand
+
+MarkAttendanceCommand -> MarkAttendanceCommand : markAttendance(...)
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand -> MarkAttendanceCommand : addAttendanceToPerson(...)
+activate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommand
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommand -> Model : setPerson(...)
+activate Model
+
+Model --> MarkAttendanceCommand
+deactivate Model
 
 MarkAttendanceCommand --> MarkAttendanceCommand
 deactivate MarkAttendanceCommand
