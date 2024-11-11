@@ -19,6 +19,8 @@ public class Messages {
 
     public static final String MESSAGE_VIEW = "Viewing %1$s:";
     public static final String MESSAGE_NO_PERSON_FOUND = "No patient with specified NRIC.";
+    public static final String MESSAGE_NOT_ALPHANUMERIC =
+            "Please note that the values specified for the following field(s) must be alphanumeric: ";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

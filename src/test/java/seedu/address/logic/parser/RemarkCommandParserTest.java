@@ -14,7 +14,7 @@ import seedu.address.model.person.Remark;
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
-    private final String nonEmptyRemark = "Some remark.";
+    private final String nonEmptyRemark = "Some remark";
     @Test
     public void parse_nricSpecified_success() {
         // have remark

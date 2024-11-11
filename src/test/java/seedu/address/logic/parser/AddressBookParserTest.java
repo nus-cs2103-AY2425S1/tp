@@ -96,7 +96,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_remark() throws Exception {
-        final Remark remark = new Remark("Some remark.");
+        final Remark remark = new Remark("Some remark");
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + NRIC_FIRST_PERSON + " " + PREFIX_REMARK + remark.value);
 

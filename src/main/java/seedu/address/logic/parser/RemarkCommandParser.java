@@ -1,8 +1,13 @@
 package seedu.address.logic.parser;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_NRIC;
+import static seedu.address.logic.Messages.MESSAGE_NOT_ALPHANUMERIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -43,10 +48,13 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_NRIC));
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_REMARK);
+        String remarkString = Arrays.stream(argParts, 1, argParts.length)
+                .collect(Collectors.joining(" ")).substring(2);
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
-        return new RemarkCommand(nric, new Remark(remark));
+        if (!remarkString.isEmpty() && !remarkString.matches("[a-zA-Z0-9 ]+")) {
+            throw new ParseException(MESSAGE_NOT_ALPHANUMERIC + PREFIX_REMARK);
+        }
+
+        return new RemarkCommand(nric, new Remark(remarkString));
     }
 }
