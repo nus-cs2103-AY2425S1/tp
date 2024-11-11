@@ -110,8 +110,12 @@ the app.
 
 Shows a help window with a list of commonly used commands for the current window. You can click on any command button to automatically enter it into the command box.
 
-Note: 
-* Does not show an exhaustive list of all available commands, only the most helpful. 
+<box type="info" seamless>
+
+**Note:**
+Does not show an exhaustive list of all available commands, only the most helpful. 
+
+</box>
 
 <box type="tip" seamless>
 
@@ -136,12 +140,16 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
 
 <br>
-Note: 
+<box type="info" seamless>
+
+**Note:**<br>
 
 * In order to keep your address book organised, `NAME` has to be **unique**
 * Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
 * The default field for `[r/ROLE]` is client if left empty.
 * `Address` needs to have the format: `[Address line], S[6-digit postal code]`
+
+</box>
 
 **<ins>When in the inspect window**
 
