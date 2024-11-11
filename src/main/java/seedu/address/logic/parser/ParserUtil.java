@@ -92,7 +92,7 @@ public class ParserUtil {
         if (!seedu.address.model.pet.Name.isValidName(trimmedPetName)) {
             throw new ParseException(seedu.address.model.pet.Name.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.pet.Name(capitalizeEachWord(trimmedPetName));
+        return new seedu.address.model.pet.Name(trimmedPetName);
     }
 
     /**
@@ -168,7 +168,7 @@ public class ParserUtil {
         if (!seedu.address.model.pet.Age.isValidAge(trimmedAge)) {
             throw new ParseException(seedu.address.model.pet.Age.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.pet.Age(capitalizeEachWord(trimmedAge));
+        return new seedu.address.model.pet.Age(trimmedAge);
     }
 
     /**
@@ -183,7 +183,7 @@ public class ParserUtil {
         if (!seedu.address.model.pet.Breed.isValidBreed(trimmedBreed)) {
             throw new ParseException(seedu.address.model.pet.Breed.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.pet.Breed(capitalizeEachWord(trimmedBreed));
+        return new seedu.address.model.pet.Breed(trimmedBreed);
     }
 
     /**
@@ -203,7 +203,7 @@ public class ParserUtil {
         } else if (trimmedSex.equalsIgnoreCase("f")) {
             return new seedu.address.model.pet.Sex("Female");
         }
-        return new seedu.address.model.pet.Sex(capitalizeEachWord(trimmedSex));
+        return new seedu.address.model.pet.Sex(trimmedSex);
     }
 
     /**
@@ -218,7 +218,7 @@ public class ParserUtil {
         if (!seedu.address.model.pet.Species.isValidSpecies(trimmedSpecies)) {
             throw new ParseException(seedu.address.model.pet.Species.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.pet.Species(capitalizeEachWord(trimmedSpecies));
+        return new seedu.address.model.pet.Species(trimmedSpecies);
     }
 
     /**
@@ -247,25 +247,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-    /**
-     * Helper function to capitalize the first letter of each word
-     * while converting the rest of the characters to lowercase.
-     *
-     * @param input The string to be formatted.
-     * @return A string with each word's first letter capitalized and the rest in lowercase.
-     */
-    public static String capitalizeEachWord(String input) {
-        String[] words = input.toLowerCase().split("\\s+");
-        StringBuilder formattedName = new StringBuilder();
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                formattedName.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
-            }
-        }
-        return formattedName.toString().trim();
-    }
-
 }
