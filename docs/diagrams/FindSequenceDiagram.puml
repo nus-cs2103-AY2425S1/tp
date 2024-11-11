@@ -64,8 +64,6 @@ deactivate FilteredList
 Model --> FindCommand :
 deactivate Model
 
-
-
 create CommandResult
 FindCommand -> CommandResult
 activate CommandResult
