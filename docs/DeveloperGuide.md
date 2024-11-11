@@ -297,7 +297,7 @@ The **`ScheduleDateCommand`** class performs the following steps to filter the a
 The **`ScheduleDateCommandParser`** and **`ScheduleDateCommand`** classes enforce validation rules to ensure correct date format and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
+    - **Parser** checks if the date format follows `dd-MM-yyyy`.
     - **Parser** checks if the date is valid.
 
 ### \[Proposed\] Data archiving
