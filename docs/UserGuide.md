@@ -204,7 +204,7 @@ Users can search for customers by entering part or all of their postal code. Pos
 
 **Examples:**
 - `find S560123` — Finds any customers with the postal code "560123".
-- `find S560` — Finds any customers with postal codes starting with "560".
+- `find S560` — Finds any customers with postal codes containing "560".
 
 
 #### Simultaneous Search with Multiple Criteria
@@ -214,7 +214,7 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 **Examples:**
 - `find Alice 9876` — Finds all customers with the name "Alice" **or** a phone number containing "9876".
 - `find 9456 S630123` — Finds all customers with phone numbers containing "9456" **or** postal code "630123".
-- `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
+- `find S550 Bob` — Finds all customers with postal codes containing "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
 <div style="text-align: center;">
