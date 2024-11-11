@@ -1136,20 +1136,26 @@ testers are expected to do more *exploratory* testing.
 The team consists of 5 members.
 Given below are enhancements planned for future versions. <br>
 
-1. **Make 'Roles' and 'Company Names' less restrictive:** The current validator is too restrictive on what is allowed as `Role` and `Company Name`. 
-Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. 
-Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. 
-We plan to loosen the restrictions for roles and company names, to be more inclusive of the possible roles and company names in the real world. <br>
+1. **Make 'Role' and 'Company Name' in the `add` command less restrictive:** 
+- Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
+- Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
+- Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
 
 2. **Improve consistency in `find` feature:** Currently, while we prevent special characters in the `Company Name` (such as ~\`!@#),  
 we did not prevent the same characters from being used as keywords for the `find` feature. This leads to an inconsistent user experience, 
 since these characters would never be found in company names. We plan to be more consistent, 
 and check whether the keywords provided to the `find` command are valid characters that are allowed in `Company Name`. <br>
 
-3. **Make error message for `add` command more specific:** Currently, the error message provided when the user inputs an invalid `add` command is too generic. 
-For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
-on why the command is invalid. It could be improved to state the email field is missing. 
-We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. <br>
+3. **Make error message for `add` command more specific:**
+   <br></br>
+   - Current behaviour: The error message provided when the user inputs an invalid `add` command is too generic.
+     For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
+on why the command is invalid. The error message could be more specific to state the email field is missing.
+   <br></br>
+   - Planned enhancement: We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. 
+   <br></br>
+   - Justification: In doing so, users will have a clearer idea on what they did wrong when they typed in the command and they will be able to easily fix the issue. This enables the users to have a more pleasant experience when using HireMe.
+   <br></br>
 
 4. **Improve UI to deal with long texts:** <br>
    - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text.

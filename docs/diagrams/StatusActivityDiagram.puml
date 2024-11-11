@@ -1,14 +1,13 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
-skinparam DefaultFontSize 18  // Adjust this value as needed
 
 start
 :User wants to update the status of
 the internship application at index i (where i is an integer);
 
 switch ()
-case (    [User enters the command "/accept i"])
+case ( [User enters the command "/accept i"])
     if () then ([Index is valid])
         :Updates the internship
         application status to
@@ -18,7 +17,7 @@ case (    [User enters the command "/accept i"])
         an error message;
         stop
     endif
-case (    [User enters the command "/reject i"])
+case (   [User enters the command "/reject i"])
     if () then ([Index is valid])
         :Updates the internship application
         status to **REJECTED**;
@@ -42,3 +41,4 @@ endswitch
 :User receives a success message;
 stop
 @enduml
+
