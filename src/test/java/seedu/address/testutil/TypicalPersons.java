@@ -128,6 +128,24 @@ public class TypicalPersons {
             } else if (person instanceof Parent parent) {
                 Person newParent = new ParentBuilder(parent).withArchived(toArchive).build();
                 ab.addPerson(newParent);
+                toArchive = !toArchive;
+            }
+        }
+        return ab;
+    }
+
+    public static AddressBook getPinnedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toPin = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withPinned(toPin).build();
+                ab.addPerson(newStudent);
+                toPin = !toPin;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withPinned(toPin).build();
+                ab.addPerson(newParent);
+                toPin = !toPin;
             }
         }
         return ab;
