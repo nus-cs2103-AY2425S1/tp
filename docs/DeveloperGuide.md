@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2
 
-* 1b. The details of the student to be deleted is in the wrong format
+* 1b. The details of the student to be deleted is in the wrong format/missing
   * 1b1. System gives error message and requests for details in correct format
   * 1b2. User re-enters the correct information
 
@@ -368,19 +368,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User chooses a student that doesn't exist to edit
   * 1a1. System alerts user that there is no such student found
-  * 1a2. User re-enters the correct information
+  * 1a2. User re-enters the correct student information
 
     Steps 1a1-1a2 are repeated until student to be edited exists
 
     Use case resumes at step 2
 
-* 1b. User enters an invalid field or missing new input
-  * 1b1. System requests for the correct field/new input
-  * 1b2. User re-enters the correct field or new input
+* 2a. User enters an invalid/missing field or new input
+  * 2a1. System requests for the correct field/new input
+  * 2a2. User re-enters the correct field or new input
 
-    Steps 1b1-1b2 are repeated until the information in correct format is entered
+    Steps 2a1-2a2 are repeated until the information in correct format is entered
   
-    Use case resumes from step 2
+    Use case resumes from step 3
 
 ---
 
@@ -400,8 +400,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-* 1b. No students are found in the system
-  * 1b1. System gives a blank list
+* 2a. No students are found in the system
+  * 2a1. System gives a blank list
 
     Use case ends
 
@@ -425,9 +425,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the correct name is entered.
     Use case resumes from step 2.
 
-* 1b. No matching student found in the system
-  * 1b1. System informs user that there are no such students found
-  * 1b2. System gives an empty list
+* 2a. No matching student found in the system
+  * 2a1. System informs user that there are no such students found
+  * 2a2. System gives an empty list
 
     Use case ends
 
@@ -475,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User wants to arrange students by their name/subject/studentId/yearGroup
-2. System arranges the students in alphabetical order by name/subject and ascending order by yearGroup/studentId
+2. System arranges the students in alphabetical order by name/subject or ascending order by yearGroup/studentId
 3. System displays students sorted correctly
 
     Use case ends
@@ -486,11 +486,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. System informs user to sort using only name/subject/studentId/yearGroup
   * 1a2. User re-enters the command with a valid field.
 
-    Steps 1a1-1a2 are repeated until only name/subject/studentId/yearGroup is entered as the field
+    Steps 1a1-1a2 are repeated until only one of name/subject/studentId/yearGroup is entered as the field
     Use case resumes from step 2.
 
-* 1b. There are no students added
-  * 1b1. System gives a blank screen
+* 3a. There are no students added
+  * 3a1. System gives a blank screen
 
     Use case ends
 
@@ -552,8 +552,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case resumes from step 2
 
-* 1c. There are no students added
-    * 1c1. System gives a blank screen
+* 2a. There are no students added
+    * 2a1. System gives a blank screen
 
       Use case ends
 
@@ -570,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC12 - Adding subjects to existing students**
+**Use case: UC12 - Adding subjects to students**
 
 **MSS**
 
@@ -598,11 +598,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2
 
-* 2b. User gives an invalid/missing subject
-    * 2b1. System informs user of the valid subject inputs 
-    * 2b2. User re-enters the command with valid subjects
+* 2a. User gives an invalid/missing subject
+    * 2a1. System informs user of the valid subject inputs 
+    * 2a2. User re-enters the command with valid subjects
 
-      Steps 2b1-2b2 are repeated until the user enters the correct subjects
+      Steps 2a1-2a2 are repeated until the user enters the correct subjects
 
       Use case resumes from step 3
 
@@ -630,21 +630,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Testability
 9.  The system should include automated unit tests and integration tests to validate all major components.
 
+#### Response Time
+10. The system should respond to user commands within 2 seconds, ensuring a smooth and efficient user experience.
+
+#### Scalability
+11. The system should be able to handle up to 99999 student records without significant performance degradation, assuming we were to scale the product for use in bigger tuition centres.
+
+#### Accessibility
+12. The system should provide keyboard shortcuts and other accessibility features to support users with disabilities.
+
+#### Extensibility
+13. The system should have a modular design that allows for easy addition of new features and integrations in the future.
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **AcademyAssist**: The CLI application developed for tuition centers in Singapore to manage their student data and administrative tasks.
 * **Administrator**: Tutors and admin staff at the tuition centre.
+* **API (Application Programming Interface)**:  Facilitates communication between different software components.
+* **Architecture Diagram**: A high-level design diagram showing the primary components and their interactions.
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software by typing commands.
-* **MSS (Main Success Scenario)**: The primary flow of actions in a use case that leads to a successful outcome.
-* **Extension (in use cases)**: Alternative flows that might arise due to errors or exceptions while performing the main success scenario.
-* **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
-* **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
-* **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
-* **Modular Design**: A software architecture approach that divides the system into independent components for easier maintenance and scalability.
-* **Field**: A specific attribute or category in the context of a student's details, such as name or class, used for sorting or filtering information.
 * **Command**: A specific instruction or request issued by the user to perform a certain action within the application.
-* **Invalid Input**: Data or commands entered by the user that do not conform to the expected format or criteria, resulting in an error or rejection of the command.
 * **Contact Details**: Information related to a student or staff member, including their name, phone number, email, and any other relevant identifiers.
+* **Extension (in use cases)**: Alternative flows that might arise due to errors or exceptions while performing the main success scenario.
+* **Field**: A specific attribute or category in the context of a student's details, such as name or class, used for sorting or filtering information.
+* **GUI (Graphical User Interface)**: A type of user interface that provides a visual representation of the system.
+* **Interface**: A contract in Java (or similar languages) that defines methods a class must implement.
+* **Invalid Input**: Data or commands entered by the user that do not conform to the expected format or criteria, resulting in an error or rejection of the command.
+* **JSON (JavaScript Object Notation)**: A lightweight data interchange format used to store and manage the student data in AcademyAssist.
+* **Logic**: The part of the application that handles command execution and application logic.
+* **Model**: Represents the app's data held in memory.
+* **Modular Design**: A software architecture approach that divides the system into independent components for easier maintenance and scalability.
+* **MSS (Main Success Scenario)**: The primary flow of actions in a use case that leads to a successful outcome.
+* **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
+* **NRIC (National Registration Identity Card)**: The identification document used in Singapore.
+* **Persistence**: A characteristic of data that ensures it is stored and available even after the application is closed and reopened.
+* **Storage**: Manages data persistence, handling read/write operations to the hard disk.
+* **Sequence Diagram**: A type of diagram showing interactions between components in a sequential order.
+* **Testability**: The ease with which the system can be tested to ensure its correct behavior, including automated and manual testing.
+* **UI (User Interface)**: The component of the app that manages user interaction.
 
 --------------------------------------------------------------------------------------------------------------------
 
