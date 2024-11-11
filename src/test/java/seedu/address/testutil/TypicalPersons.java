@@ -102,4 +102,18 @@ public class TypicalPersons {
         // Alice, Benson, Carl and Daniel are Students; Elle, Fiona and George are Parents
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static AddressBook getUnlinkedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Student unlinkedStudent = new StudentBuilder(student).withParentName(null).build();
+                ab.addPerson(unlinkedStudent);
+            } else if (person instanceof Parent parent) {
+                Parent unlinkedParent = new ParentBuilder(parent).withChildren().build();
+                ab.addPerson(unlinkedParent);
+            }
+        }
+        return ab;
+    }
 }
