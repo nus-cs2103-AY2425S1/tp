@@ -41,7 +41,7 @@ If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMA
 
 3. If your version of Java is 17 and above, skip to step 6. If it is less than 17, click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java 17.
 
-4. For Windows users, download the Windows x64 Installer. For MacBook users, download the macOS Arm 64 DMG Installer. Follow the respective installation guides.
+4. For Windows users, download the Windows x64 Installer. For MacBook users, download the macOS ARM 64 DMG Installer. Follow the respective installation guides.
 
 5. After successfully completing the installation, repeat steps 1 to 3 to ensure that you have Java 17.
 
@@ -67,7 +67,7 @@ If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMA
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanners.jar` command to run the application.
 
-5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
+5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details regarding each command.
 
 <box type="info" seamless>
 
@@ -345,7 +345,7 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DAT
 
 **IMPORTANT:**
 
-* Please take not that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
+* Please take note that the order of the names matters. `John & Jane` is NOT same as `Jane & John` and will not be treated as a duplicate.
 
 </box>
 
@@ -485,7 +485,7 @@ Conveniently search for contacts in your address book by name and/or job.
 Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]...`
 
 * At least one of the `NAME` or `JOB` fields must be present.
-* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
+* `KEYWORD` is not case-sensitive. e.g. `photographer` will match `Photographer`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
 * `filter` returns the largest range of matches based on your input.
 
@@ -493,7 +493,7 @@ Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]
 
 **Tip:** 
 * You can filter by multiple name and/or job fields at once!
-* Keep in mind that partial matches within the name (e.g., middle or last names alone) won’t return results.
+* Keep in mind that partial matches within the name (e.g. middle or last names alone) won’t return results.
 To ensure a match, start from the beginning of the full name or first name.
 
 </box>
@@ -522,7 +522,7 @@ You can view a list of all contacts tagged to the specified wedding.
 Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
 * `view-wed` / `vw` shows participants based on wedding names that match the keyword.
-* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g. `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
   e.g. `Alice` will not return `Alice & Bob`.
@@ -612,7 +612,7 @@ There is no need to save manually.
   
 * If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
-* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
