@@ -785,6 +785,13 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 
+### Planned Enhancements
+
+1. Currently, the app allows contacts with the same name but in different cases. The future version will not permit this.
+2. Currently, the app allows names to be entered in any format, with no standardization. The future version will implement a standardized format for name entries.
+3. Currently, the app allows different people to have the same phone number. Future versions will enforce unique phone numbers for each contact.
+4. Currently, the app displays the statistical graphs with no labelling of the units of the x-axes and y-axes. Future versions will include this labelling.
+5. Currently, the app displays pie charts labels for categories that have no recorded values. Future versions of will hide the labelling until there are recorded values for those categories.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
