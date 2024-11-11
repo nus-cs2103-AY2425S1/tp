@@ -177,9 +177,7 @@ Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/0
 
 </box>
 
-
 Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book. 
-
 
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
