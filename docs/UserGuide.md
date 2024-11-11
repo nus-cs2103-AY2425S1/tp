@@ -174,6 +174,8 @@ If you’re unsure how to open a terminal, refer back to the [Prerequisites](#2-
 
 Understanding the structure of Prudy’s commands will allow you to use the application more effectively. Each command in Prudy consists of **Commands**, **Flags**, and **Arguments**. This section explains each of these components and how they work together to execute actions in Prudy.
 
+---
+
 ### 4.1 Overview
 
 Prudy commands are structured to be straightforward and efficient, consisting of three parts:
@@ -190,6 +192,8 @@ In this command:
 - **Command**: `add-client` instructs Prudy to add a new client.
 - **Flags**: `n/`, `p/`, `e/`, and `a/` specify the data fields (name, phone, email, address).
 - **Arguments**: `John Doe`, `98765432`, `johnd@example.com`, and `123 Elm St` are the values for each flag.
+
+---
 
 ### 4.2 Commands
 
@@ -215,6 +219,8 @@ Commands represent the **primary actions** Prudy will perform. Each command init
 | `exit`                   | Closes the Prudy application.                                        |
 
 These are the overview of Prudy's commands, please refer to [Command Overview](#5-command-overview) for a comprehensive list of Prudy's features.
+
+---
 
 ### 4.3 Flags
 
@@ -242,6 +248,8 @@ These are the overview of Prudy's commands, please refer to [Command Overview](#
 **Tip:**
 Flags are generally derived from the first letter of the data type, making them easy to remember.
 </div>
+
+---
 
 ### 4.4 Arguments
 
@@ -283,6 +291,8 @@ In Prudy, arguments ensure that the command functions as expected. Without corre
 In the following [Command Overview](#5-command-overview) section below, arguments and flags enclosed in square brackets <code>[]</code> are optional, while those suffixed with <code>…</code> can be used any number of times. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed. Furthermore, you can input multiple <code>[t/TAG]</code> in the above command.
 </box>
 
+---
+
 ### 4.5 Common Error Messages
 
 | Error message                                 | Remedy                                                                                    |
@@ -317,6 +327,7 @@ Prudy uses a command-line interface with **four primary categories** of commands
 
 These commands help with **general navigation**, displaying help information, saving data, and exiting the program.
 
+---
 
 #### 5.1.1 Viewing Help : `help`
 Shows a message explaining how to **access the help page**.
@@ -328,6 +339,8 @@ Shows a message explaining how to **access the help page**.
 ```
 help
 ```
+
+---
 
 #### 5.1.2 Clearing All Entries: `clear`
 **Clears all entries** from Prudy, resetting the data.
@@ -345,6 +358,8 @@ clear
 This action is destructive and irreversible.
 </div>
 
+---
+
 #### 5.1.3 Exiting the Program: `exit`
 **Exits** the program.
 
@@ -354,8 +369,12 @@ This action is destructive and irreversible.
 exit
 ```
 
+---
+
 #### 5.1.4 Saving the Data
 Prudy **automatically saves data** to the hard disk after every command that modifies the data. Manual saving is **not required**.
+
+---
 
 #### 5.1.5 Editing the Data File
 Prudy data is **automatically saved** as a JSON file at `[JAR file location]/data/prudy.json`. Advanced users may edit this file directly to update the data.
@@ -376,6 +395,8 @@ More on how to edit the data file in future updates!
 ### 5.2 Client Management Commands
 
 **Client management commands** allow you to add, edit, delete, and filter client data.
+
+---
 
 #### 5.2.1 Adding a Client: `add-client`
 
@@ -414,11 +435,20 @@ A client can have any number of tags (including 0).
 * Clients are considered duplicates if `NAME` and `PHONE` match with another existing client.
 </div>
 
+<box type="info" seamless>
+
+**Info:**
+Currently, Prudy treats client names as case-sensitive. This means that names entered with different cases, such as `John Tan` and `john Tan`, will be treated as separate clients in the system. 
+
+To maintain data consistency, we recommend agents verify name formats before adding clients to ensure the first letter is capitalized for each word in a name, e.g., `John Tan` instead of `john tan`.
+</box>
+
 **On success:**
 ```shell
 New client added: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
 ```
 
+---
 
 #### 5.2.2 Listing All Clients: `list-clients`
 Shows a **list of all clients** in Prudy.
@@ -436,9 +466,12 @@ list-clients
 This command is useful for finding the `INDEX` of a specific client. `INDEX` is used in many other commands in Prudy!
 </div>
 
+
 **On success:**
 
 <img src="images/list-clients.png" width="1000px">
+
+---
 
 #### 5.2.3 Filtering Clients: `find-client`
 **Filters clients** based on the specified parameters.
@@ -487,6 +520,8 @@ For the next few commands, an `INDEX` parameter is required. This `INDEX` is bas
 This command modifies the main client list display as well.<br>
 ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
+---
+
 #### 5.2.4 Editing a Client: `edit-client`
 
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [Editing a Policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
@@ -526,6 +561,8 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 Edited client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
 ```
 
+---
+
 #### 5.2.5 Deleting a Client: `delete-client`
 **Deletes a specified client** at the specified `INDEX`.
 
@@ -554,6 +591,8 @@ Deleted client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
 ### 5.3 Policy Management Commands
 
 **Policy management commands** allow you to add, edit, and delete policies associated with each client.
+
+---
 
 #### 5.3.1 Adding a Policy: `add-policy`
 Adds a **new policy** for a client in Prudy.
@@ -591,6 +630,8 @@ Added the following policy to NAME:
 
 Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | No claims
 ```
+
+---
 
 #### 5.3.2 Deleting a Policy: `delete-policy`
 
@@ -640,6 +681,8 @@ Policies Left:
 
 ```
 
+---
+
 #### 5.3.3 Editing a Policy: `edit-policy`
 **Edit the policy** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
 
@@ -677,6 +720,8 @@ Policy type: POLICY_TYPE  | Premium amount: PREMIUM_AMOUNT | Coverage amount: CO
         Status: CLAIM_STATUS, Description: CLAIM_DESCRIPTION
 ```
 
+---
+
 #### 5.3.4 Listing All Policies: `list-policies`
 Lists **all policies** associated with a client at the specified `INDEX`.
 
@@ -708,6 +753,8 @@ Policies listed for client: NAME
 Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | Claims:
         Status: CLAIM_STATUS, Description: CLAIM_DESCRIPTION
 ```
+
+---
 
 #### 5.3.5 Listing Expiring Policies: `list-expiring-policies`
 List all policies that are **expiring** within a specified number of days. If no arguments are provided, default to list all policies expiring after **30 days**.
@@ -753,6 +800,8 @@ Coverage Amount: COVERAGE_AMOUNT   |   Expiry Date: EXPIRY_DATE
 
 Claims management commands allow you to add, edit, delete, and list claims for clients.
 
+---
+
 #### 5.4.1 Adding a claim: `add-claim`
 Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
 
@@ -793,6 +842,8 @@ Added Claim Details:
 Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 
 ```
+
+---
 
 #### 5.4.2 Deleting a Claim: `delete-claim`
 Deletes a specific claim from a policy type for the client identified by the specified INDEX.
@@ -838,6 +889,8 @@ Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 Note: The indexing of remaining claims may have changed due to this deletion.
 ```
 
+---
+
 #### 5.4.3 Editing a Claim: `edit-claim`
 Edits a specific claim in a policy for the client identified by the specified INDEX.
 
@@ -882,6 +935,8 @@ Claim edited for policy type POLICY_TYPE of client: NAME
 Updated Claim Details:
 Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 ```
+
+---
 
 #### 5.4.4 Listing All Claims: `list-claims`
 Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
