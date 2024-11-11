@@ -190,7 +190,7 @@ First-time users are strongly encouraged to read the Getting Started section bef
 
 * `addTut tn/CS2103T W01 c/T1001` : Adds a tutorial of name `CS2103T W01` and tutorial id `T1001`.
 * `addStu n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
-* `markAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the
+* `markAtt s/A1234567X c/T1001 d/2024-01-24`: Marks the attendance of the student with id `A1234567X` for the tutorial class with id `T1001` on the
   date `2024-01-24`.
 * `list` : Lists all student details.
 * `clear` : Clears all data from TrackMate.
@@ -229,9 +229,9 @@ The designated names for each component of the User Interface will be used consi
 
 * **Student Name:** The Student Name is displayed in both the Student Card and the Student Panel Card, representing the student’s name.
 
-* **Student Id:** Each student is assigned a unique student ID before being added to the system. This ID serves as a simple way to identify a student.
+* **Student ID:** Every student will be assigned to a student ID before being added to a system. Take note that the student ID is unique and is an easy way to identify a student.
 
-* **Tutorial Class allocated to student:** This component appears just below the student id. The component displays the tutorial class that the student is allocated to.
+* **Tutorial Class allocated to student:** This component appears just below the student ID. The component displays the tutorial class that the student is allocated to.
   * Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
   * However, if there are no tutorial class added to the student. Then it will display "No Tutorial Assigned" instead.
 
@@ -272,17 +272,17 @@ Essentially they are to be supplied by the user.
 **Note:** All user inputs including parameters will be trimmed (all leading and trailing whitespaces will be ignored).
 
 
-| Parameter             | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|-----------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `STUDENT_NAME`        | `n/`             | Specifies the name of a student. <br/><br/> **Requirements:** <ul><li>Names must contain only alphabetic characters and whitespace.</li><li>Names with only whitespace are not allowed.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a capital letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                           |
-| `TUTORIAL_NAME`       | `tn/`            | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>`TUTORIAL_NAME` may contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
-| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>`ASSIGNMENT_TITLE` may contain any characters, including alphanumeric characters, whitespaces and special symbol, excluding any prefix preceded and followed by whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li><li>`ASSIGNMENT_TITLE` is case sensitive.</li></ul>                                                                                                                                                                                                                                     |
-| `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
-| `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
-| `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li>                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `INDEX`               | Not Applicable   | Refers to the index number shown in the Student List Panel. <br/><br/> **Requirements:** <ul><li>Must be a positive integer.</li><li>The value must fall within the range of 1 to 2,147,483,647.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter             | Parameter Prefix | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|-----------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `STUDENT_NAME`        | `n/`             | Specifies the name of a student. <br/><br/> **Requirements:** <ul><li>Names must contain only alphabetic characters and whitespace.</li><li>Names with only whitespace are not allowed.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                         |
+| `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a capital letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                  |
+| `TUTORIAL_NAME`       | `tn/`            | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>`TUTORIAL_NAME` may contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                            |
+| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>`ASSIGNMENT_TITLE` may contain any characters, including alphanumeric characters, whitespaces and special symbol, excluding any prefix preceded and followed by whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li><li>`ASSIGNMENT_TITLE` is case-sensitive.</li></ul>                                                                                                                                                                                                                            |
+| `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The assignment due date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
+| `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                    |
+| `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li>                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `INDEX`               | Not Applicable   | Refers to the index number shown in the Student List Panel. <br/><br/> **Requirements:** <ul><li>Must be a positive integer.</li><li>The value must fall within the valid range.</li><li>A valid range represents the set of positive values starting from 1 to the number of students within the list.</li><li>Example: If there are 10 students in the list, the valid range will be from 1 to 10 (inclusive).</li></ul>                                                                                                                                                                |
 
 #### 3.3.3 Command Format:
 
@@ -306,8 +306,7 @@ To understand how a full command is interpreted, we will utilise the following e
 > 1. `COMMAND` + `PARAMETER_PREFIX` + `PARAMETER`
 > 2. `COMMAND` + `PARAMETER`
 > 3. `COMMAND`
->
-> The second format applies specifically to deleteStu commands!
+
 
 **Hint:**<br>
 > Adding a tutorial before enrolling a student would make the process more efficient!
@@ -317,8 +316,8 @@ To understand how a full command is interpreted, we will utilise the following e
 ## 4. Commands
 
 This section provides comprehensive guidance on how to use each command, detailing their functionalities and
-usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#3-3-2-parameters)
-section for detailed information
+usage scenarios. For specific constraints related to each parameter, please refer to the [Parameters](#3-3-2-parameters)
+section for detailed information.
 
 ### 4.1 Student Data Commands:
 
@@ -329,44 +328,43 @@ section for detailed information
 **Format:** `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]`
 
 >**Tip:** You can add a student without specifying a tutorial ID!
-> 
->**Note:** Since this application is catered to only one module, each student can only be assigned to one tutorial.
 
 <box type="warning" seamless>
 <b>Warning:</b>
 You will need to add a tutorial before assigning the student to new tutorial.
 </box>
  
-Command detail & constraints:
+Command Detail & Constraints:
 
 - This command registers a new student in the system with essential details like name and student ID, and optionally assigns them to a tutorial.
 - The field format: `[c/TUTORIAL_ID]`is optional to add. If not provided, the student will not be assigned to any tutorial upon addition.
 - Each student must have a unique student ID within the system.
-- Duplicate name with different student ID is allowed
+- Duplicate names with different student ID are allowed.
 
-Note:
-- Execute `addStu` command after `find` command will return the full list of students in TrackMate application
+>**Notes:**
+> - Execute `addStu` command after `find` command will return the full list of students in TrackMate application.
+> - Since this application is catered to only one module, each student can only be assigned to one tutorial.
 
 **Examples:**
 
-- `addStu n/Samson s/A1234567X c/T1001` : Adds a student named "Samson" with the student ID "A1234567X" and assigns them to tutorial ID "T1001".
+- `addStu n/Samson s/A1234567X c/T1001` : Adds a student named "Samson" with the student ID "A1234567X" and assigns him/her to tutorial ID "T1001".
   >**Expected output:** New student added: Samson; Student ID: A1234567X; Tutorial Class: T1001
-- `addStu n/Alice s/A1234567C` : Adds a student named "Alice" with the student ID "A1234567C" without assigning a tutorial ID.
+- `addStu n/Alice s/A1234567C` : Adds a student named "Alice" with the student ID "A1234567C" without assigning a tutorial class.
   >**Expected output:** New student added: Alice; Student ID: A1234567C; Tutorial Class: No tutorial assigned
 
 #### 4.1.2 Edit existing student detail: `edit`
 
-> Edits an existing student details to the TrackMate application.
+> Edits the existing student details in the TrackMate application.
 
 **Format:** `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]`
 
-Command detail & constraints
+Command Detail & Constraints:
 
 - This command allows you to specify new values for a student's name, student ID, and/or tutorial ID, ensuring that each student's information is up to date and accurately reflects any changes in their academic or tutorial assignments.
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- User is not allowed to assign student to empty tutorial ID
+- User must only edit a student's tutorial ID to the tutorial ID of an existing tutorial class.
 
 Note:
 - Execute `edit` command after `find` command will edit the student data based on the filtered list after `find` command
@@ -385,7 +383,7 @@ Command Details & Constraints:
 * Deletes the student at the specified `INDEX`.
 * The `INDEX` must not exceed the number of student in the displayed list.
 * No prefix is required for `deleteStu` command.
-* The command should only consist of exactly two words: `deleteStu` and a valid `INDEX`
+* The command should only consist of exactly two words: `deleteStu` and a valid `INDEX`.
 * All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Note:
@@ -415,13 +413,18 @@ Example:
 
 #### 4.1.5 Listing students: `list`
 
-> Shows a list of all students in the TrackMate application
+> Shows a list of all students in the TrackMate application.
+
+Format: `list`
+
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
 ### 4.2 Tutorial Data Related Commands:
 
 <box type="warning" seamless>
 <b>Warning:</b>
-This application is catered to only one module, thus one student can only be added to one tutorial.
+This application is catered to only one module, thus one student can only be assigned to one tutorial, and you should not have tutorials being named after different modules.
 </box>
 
 #### 4.2.1 Adding a tutorial: `addTut`
@@ -429,11 +432,6 @@ This application is catered to only one module, thus one student can only be add
 > Adds a tutorial with a specified tutorial name and tutorial id to the TrackMate application.
 
 Format: `addTut tn/[TUTORIAL NAME] c/[TUTORIAL ID]`
-
-<box type="warning" seamless>
-<b>Warning:</b>
-This application is catered to only one module, thus you should not have tutorials being named after different modules.
-</box>
 
 >**Tip:** For tutorials that you have trouble in naming, use the module name as the tutorial name. (ie. CS2103T)
 
@@ -472,13 +470,13 @@ Example:
 
 > List all the tutorials that are currently stored in the application
 
-
 Format: `listTut`
 
 Command Details & Constraints:
-* This command will display all Tutorials with details such as:
+* This command will display all tutorials with details such as:
     * tutorial name
     * tutorial id
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
 ### 4.3 Assignment Data Related Commands:
 
@@ -533,6 +531,7 @@ Command Details & Constraints:
     * title
     * due date
     * number of students who have completed the assignment
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
 >**Tip:** For sections 4.3.4 and 4.3.5, before using the `mark` and `unmark` commands, users should first run the `listAsg` command to view assignment names.
 
@@ -578,7 +577,7 @@ Format: `checkAsg n/ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
 * This command will display the statistics for the given assignment. This includes:
-    * Number of students who have completed the assignments
+    * Number of students who have completed the assignment.
     * List of students who have completed the assignment.
     * List of students who have not completed the assignment.
 * Assignment with the given non-empty title must exist.
@@ -590,7 +589,7 @@ Example:
 ### 4.4 Attendance Data Related Commands:
 
 #### 4.4.1 Marking an attendance: `markAtt`
-> Maintain accurate records of student attendance across various tutorial classes.
+> Mark student attendance within the tutorial class.
 
 Format: `markAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`
 
@@ -605,7 +604,7 @@ Example:
 2. `markAtt s/A1234567X c/T1001` marks the attendance of student with student ID A1234567X in tutorial class T1001 on today's date.
 
 #### 4.4.2 Unmarking an attendance: `deleteAtt`
-> Remove records of student attendance across various tutorial classes.
+> Delete student attendance within the tutorial class.
 
 Format: `deleteAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`
 
@@ -618,8 +617,6 @@ Example:
 1. `deleteAtt s/A01234567X c/T1001 d/2024-02-21` deletes the attendance of student with student ID A01234567X in tutorial class T1001 on 2024/02/21.
 2. `deleteAtt s/A01234567X c/T1001` deletes the attendance of student with student ID A01234567X in tutorial class T1001 on today's date.
 
-
-
 ### 4.5 General Commands:
 
 #### 4.5.1 Viewing a Student on the Student Card:
@@ -628,6 +625,7 @@ Example:
 
 **Method -  Using GUI**: Double-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
+**Note:** After editing student details, user needs to re-click the Student Panel Card on the right to refresh the student card on the left to show the updated student details.
 
 #### 4.5.2 Clearing all data: `clear`
 
@@ -671,15 +669,15 @@ The TrackMate data are automatically saved as JSON files at the following locati
 
 <box type="warning" seamless>
 <b>Warning:</b>
-If your changes to the data file makes its format invalid, the TrackMate application will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TrackMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file make its format invalid, TrackMate application will discard all data and start with an empty data file when the data file is edited at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ 
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackMate home folder.
 
 **Q**: Can this app be used to handle multiple modules?              
@@ -689,7 +687,7 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 
 ## 6. Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 ## 7. Glossary
@@ -702,34 +700,33 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 | **Student ID** | A particular format of ID followed in NUS, Starting with a letter `A` followed by 7 digits and ending with a capital letter e.g A0252195L |
 | **GUI**        | Graphical User Interface , all the part of the application which you can interact with your mouse                                         |
 | **CLI**        | Command Line Interface , part of application which can only be used with commands from the Keyboard                                       |
-| **CSV**        | Comma-Separated Values, a file format generally used to import data in Spreadsheets and Do analysis                                       |
 | **JSON**       | JavaScript Object Notation, a standard file format for data interchange                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 8. Command summary
 
-| Action                | Format, Examples                                                                                                  |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------|
-| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`                      |
-| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`                |
-| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                                         |
-| **Find Student**      | `find KEYWORD [KEYWORD]...`<br> e.g., `find Samson San Chian`                                                     |
-| **List Students**     | `list`                                                                                                            |
-| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/T1011`                                      |
-| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/T1011`                                                           |
-| **List Tutorials**    | `listTut`                                                                                                         |
-| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                        |
-| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                               |
-| **List Assignments**  | `listAsg`                                                                                                         |
-| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                           |
-| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                       |
-| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                                 |
-| **Mark Attendance**   | `markAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g., `markAtt s/A1234567X c/T1001 d/2024-02-21`     |
-| **Unmark Attendance** | `deleteAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g., `deleteAtt s/A1234567X c/T1001 d/2024-02-21` |
-| **Clear**             | `clear`                                                                                                           |
-| **Help**              | `help`                                                                                                            |
-| **Exit**              | `exit`                                                                                                            |
+| Action                | Format, Examples                                                                                        |
+|-----------------------|---------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`            |
+| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g. `edit 1 n/Samson Chew s/A1234567M`       |
+| **Delete Student**    | `deleteStu INDEX`<br> e.g. `deleteStu 3`                                                                |
+| **Find Student**      | `find KEYWORD [KEYWORD]...`<br> e.g. `find Samson San Chian`                                            |
+| **List Students**     | `list`                                                                                                  |
+| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g. `addTut tn/CS1010 c/T1011`                             |
+| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g. `deleteTut c/T1011`                                                  |
+| **List Tutorials**    | `listTut`                                                                                               |
+| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g. `addAsg n/Assignment 1 d/2024-10-23 1230`               |
+| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g. `deleteAsg n/Assignment 1`                                      |
+| **List Assignments**  | `listAsg`                                                                                               |
+| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g. `markAsg 1 n/Assignment 1`                                  |
+| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g. `unmarkAsg 1 n/Assignment 1`                              |
+| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g. `checkAsg n/Assignment 1`                                        |
+| **Mark Attendance**   | `markAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g. `markAtt s/A1234567X c/T1001 d/2024-02-21` |
+| **Unmark Attendance** | `deleteAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g. `deleteAtt s/A1234567X c/T1001 d/2024-02-21` |
+| **Clear**             | `clear`                                                                                                 |
+| **Help**              | `help`                                                                                                  |
+| **Exit**              | `exit`                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
