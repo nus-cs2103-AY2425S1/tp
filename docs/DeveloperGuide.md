@@ -68,6 +68,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -118,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -139,6 +143,8 @@ The `Model` component,
 <puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -639,5 +645,5 @@ Team size: 5
 6. **Accept multiple pieces of financial information**: Currently, there can be only 0 or 1 `FINANCIALINFO` stored for a given contact, and should an `add` or `edit` command with more than one `fi\FINANCIALINFORMATION` field be entered, only the last one would be stored. Some users may prefer to store multiple pieces of `FINANCIALINFO` of their contacts for different purposes. Hence, we plan to store `FINANCIALINFO` in a set so that contacts can have more than 1 piece of `FINANCIALINFO`.
 7. **Add horizontal scroll bar to UI to prevent text truncation**: Currently, if a user enters a very long value for certain fields, such as, but not limited to, `NAME` or `ADDRESS`, and the application is open in a window that is not wide enough to display the entire value of that field, the value will be truncated with `...` at the end. This could cause inconvenience to certain users, who may not be able to view the entire value as a result. Thus, we plan to modify the UI to create a horizontal scroll bar so that the user can see the entire value instead of it being truncated.
 8. **Accept negative numbers and mathematical expressions in Tag names and values**: Currently, the `TAG` and `TAG:value`'s TagName and TagValue fields do not accept mathematical symbols or expressions, including, but not limited to, `+`, `-`, `*` or `/`, along with negative numbers. This could cause an inconvenience to certain users, who may wish to store `TAG`s with such information. Hence, we intend to adjust the validation RegEx of the `Tag` class to allow for such expressions.
-9. **Block fullscreen of application in Unix and Unix-Like environments**: On certain systems with Unix-based or Unix-like operating systems, including but not limited to MacOS, Linux and its distributions, making the application run in full screen mode leads to slightly buggy behaviour in the GUI, such as the Help window not scaling fully to the size of the display. This may inconvenience users who attempt to run the application in fullscreen mode. Hence, we intend to modify the `UiManager` file to block attempts for Unix-based and Unix-like operating systems from making the application run in fullscreen mode.
+9. **Block fullscreen of application in Unix and Unix-Like systems**: On certain systems running Unix-based or Unix-like operating systems, including but not limited to MacOS, Linux and its distributions, making the application run in full screen mode leads to slightly buggy behaviour in the GUI, such as the Help window not scaling fully to the size of the display. This may inconvenience users who attempt to run the application in fullscreen mode. Hence, we intend to modify the `UiManager` file to block attempts for Unix-based and Unix-like operating systems from making the application run in fullscreen mode.
 10. **Include a more specific error for exporting on Windows**: On systems running Windows, if a user has a previous export's CSV or TXT file open in another application (for instance, Microsoft Excel or Notepad), and they attempt to use the `export` command, they will see a standard export failure error. This may not be sufficiently specific to inform users of the reason for the error. Thus, we intend to modify the `ExportCommand` class to detect such an issue and remind the user to close the previously exported file if they have it open.
