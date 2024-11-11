@@ -648,7 +648,7 @@ Example usages
 Invalid usages
 
 * Unmarking attendance of student who does not take specified tutorial
-    * *Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial*
+    * *Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial, or TUTORIAL tutorial does not exist*
 * Unmarking attendance of student who does not have attendance marked for the specified date and tutorial
     * *Error message: STUDENT_NAME's attendance for date ATTENDANCE for TUTORIAL tutorial has not been marked before*
 * Format errors, check [here](#12-format-errors)
