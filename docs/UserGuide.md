@@ -81,7 +81,7 @@ Field | Accepted input values | Examples | Exceptions
 ----------|-----------------------|----------|-----------
 `NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed to account for scenarios where clients may prefer to use a username or pseudonym instead of their real name. | `Josh1248`, `Jean Mary-Jane`, `Jackie  Chan` | None
 `PHONE_NUMBER` | Must consist of digits (0 to 9). Spaces and dashes are allowed between digits, and a plus sign (`+`) at the start of the phone number is allowed (to indicate country code). | `9143 9032`, `872-233-8554`, `987223414`, `+91 23883 90022` | None
-`EMAIL` | Must be a in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
+`EMAIL` | Must be in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
 `DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 1-digit, 2-digit or 4-digit (i.e. a number between 0-99, or a number >= 1000)<br>3-digit years (numbers between 100-999) are considered invalid<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (&#124;) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), <code>29&#124;2&#124;8</code> (represents "February 29, 2008") | None
 `TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
@@ -192,7 +192,7 @@ If a client's project deadline has passed and the client status is still `active
 
 </div>
 
-### Locating Clients: `find`
+### Finding Clients: `find`
 
 Finds persons in main client list who match parameters specified. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
@@ -206,7 +206,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TA
 * Phone number, email, address, project status, tags, payment status, client status and deadline must match the exact string.
   e.g. `ps/in progress` will not match `ps/in prog`.
 * All fields need to be matched for a person to be found
-  e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name starts with "Rah", payment status is `paid` and project status is `in progress`.
+  e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name segment (first name, middle name, last name etc) starts with "Rah", payment status is `paid` and project status is `in progress`.
 * When searching by tags, if multiple tags are specified then only one of the tags need to be matched.
 
 Examples:
@@ -217,6 +217,10 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+<br>
+After applying the find command, making changes to the displayed client list will bring you back to the main client list where the changes are applied.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
 **Shortcuts: Finding blacklisted/whitelisted clients**
@@ -225,7 +229,7 @@ To find all clients that are blacklisted (with no other fields specified), the c
 
 Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
 <br>
-_Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
+_Note: Both of these commands need to be entered without any parameters otherwise the app responds with an error message. Similar to the find command, making changes to the displayed client list will bring you back to the main client list where the changes are applied._
 </div>
 
 ### Delete Client Details: `delete`
@@ -267,7 +271,7 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 <br>
-Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
+Entering `blacklist` on its own without any other parameters will display all clients who have been blacklisted.
 </div>
 
 ### Whitelist a Client: `whitelist`
@@ -290,7 +294,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-Entering `whitelist` on its own without any other parameters will filter and display all clients who have been whitelisted.
+Entering `whitelist` on its own without any other parameters will display all clients who have been whitelisted.
 
 </div>
 
@@ -417,7 +421,6 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding/editing a client after using a `find`/`blacklist`/`whitelist` command**, the application resets to the main client list. This is because newly added/edited clients may not match your previous `find`/`blacklist`/`whitelist` command. The remedy is to reuse the `find`/`blacklist`/`whitelist` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
