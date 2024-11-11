@@ -171,7 +171,10 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
  Need to delete a field? If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Information:** 
+
 When using the `edit` command, note that:
 * You are unable to edit comments via the `edit` command.
 * There should be no additional arguments between the INDEX and the first prefix (e.g n/)
