@@ -501,7 +501,7 @@ Delete a priority level to a patient in NovaCare, resetting it to the default va
 <box type="info" seamless>
 
 **Note:**
-* Delete the current priority level at the specified `INDEX`.
+* Delete the current priority level at the specified `INDEX`, resetting it to level 3.
 * The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​.
