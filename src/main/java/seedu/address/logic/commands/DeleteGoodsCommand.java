@@ -13,8 +13,6 @@ import seedu.address.model.goods.GoodsName;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
 
-
-
 /**
  * Deletes the goods receipt that belongs to a supplier.
  */

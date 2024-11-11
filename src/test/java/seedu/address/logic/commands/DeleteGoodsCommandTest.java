@@ -93,6 +93,7 @@ public class DeleteGoodsCommandTest {
                 .build();
         GoodsReceipt appleReceipt = new GoodsReceiptBuilder()
                 .withSupplierName(ALICE.getName())
+                .withQuantity(6)
                 .withGoods(apple)
                 .build();
         GoodsReceipt appleReceipt2 = new GoodsReceiptBuilder()
