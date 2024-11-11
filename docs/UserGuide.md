@@ -311,6 +311,8 @@ Examples:
     **Output**: <br>
    Successfully added remarks: cancer to patient of ID: 0.
 
+<div style="page-break-after: always;"></div>
+
 ### [Listing All Persons](#command-summary): `list`
 
 Displays a list of all persons in the address book.
@@ -403,6 +405,8 @@ Examples:
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
+
+<div style="page-break-after: always;"></div>
 
 ### [Adding an Appointment](#command-summary): `addA`
 
@@ -548,6 +552,8 @@ Examples:
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the Data
 
