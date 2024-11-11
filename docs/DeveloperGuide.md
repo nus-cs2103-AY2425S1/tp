@@ -941,7 +941,7 @@ testers are expected to do more *exploratory* testing.
 
     Currently, the `find` command supports exact matches for names and student IDs, which may limit its usability when TAs want to locate students based on partial names. Additionally, `find` does not work well when used after `show`, as it displays students from all groups, rather than only those from the filtered group list. To improve functionality, we plan to enhance the `find` command to support both partial matching and group filtering.
 
-  **Enhancement Goals:**
+    **Enhancement Goals:**
 
     - **Partial Matching:** Allow the `find` command to match partial names, enabling TAs to locate students even if they remember only part of a student's name.
     - **Group Filtering:** Enable `find` to respect any active `show` filter, so it only searches within the displayed subset of students. This ensures that if a TA has filtered by group using `show`, the `find` command will only search within that group rather than across all students.
