@@ -28,6 +28,7 @@ public class ClearCommand extends Command {
      * @param confirmationController provides the result for confirm clear.
      */
     public ClearCommand(ConfirmationController confirmationController) {
+        assert confirmationController != null;
         this.confirmationController = confirmationController;
     }
 

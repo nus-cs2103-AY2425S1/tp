@@ -107,7 +107,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Ui` to show an alert dialog and obtain confirmation from user.
-1. When user confirms the action (selects "OK"), the command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When user confirms the action (selects "OK"), the command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -153,110 +153,6 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
-
---------------------------------------------------------------------------------------------------------------------
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,26 +225,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. Necessary field is missing
+* 2a. Necessary field is missing.
+    * 2a1. MediContact shows an error message indicating which field is missing.
+  
+      Use case ends.
 
-    * 2a1. Medicontact shows an error message indicating which field is missing
-    * 2a2. Use case ends.
+* 2b. Wrong format in input.
+    * 2b1. MediContact shows an error message specifying the incorrect format.
+  
+      Use case ends.
 
-* 2b. Wrong format in input
-
-    * 2b1.Medicontact shows an error message specifying the incorrect format.
-    * 2b2. Use case ends.
-
-**Use case: Delete a person**
+**Use case: Delete a patient**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  Confirmation window appears
-5.  User clicks `OK`
-6.  AddressBook deletes the person
+1.  User requests to list patients. 
+2.  MediContact shows a list of patients. 
+3.  User requests to delete a specific patient in the list. 
+4.  MediContact requests for confirmation. 
+5.  User confirms to delete. 
+6.  MediContact deletes the patient.
 
     Use case ends.
 
@@ -358,44 +254,215 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index or name is invalid.
+  - 3a1. MediContact shows an error message.
+  
+    Use case resumes at step 2.
+  
+* 4a. User chooses to cancel the deletion.
 
-    * 3a1. AddressBook shows an error message.
+  Use case ends.
 
-      Use case resumes at step 2.
+**Use case: Clear all contacts**
 
-* 4a. User clicks `Cancel`
-  Use case ends. 
+**MSS**
 
-**Use case: Find a person**
+1.  User requests to clear address book. 
+2.  MediContact requests for confirmation. 
+3.  User confirms to clear. 
+4.  MediContact clears all contacts in MediContact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User chooses to cancel the clear action.
+
+  Use case ends.
+
+**Use case: Edit a patient**
+
+**MSS**
+
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to edit a patient and specifies edited fields. 
+4. MediContact updates the patient. 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid. 
+  - 3a1. MediContact shows an error message.
+
+    Use case ends.
+
+* 3b. No specified field or any field specified is in the wrong format.
+  - 3b1. MediContact shows an error message.
+
+    Use case ends.
+
+
+**Use case: Filter a patient**
+
+**MSS**
+
+1. User requests to filter contacts and specifies the criteria.
+2. Medication shows a list of patients matching details.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. Criterion is missing.
+    - 1a1. MediContact shows an error message.
+
+      Use case ends.
+
+- 1b. Wrong format in input
+    - 1b1. MediContact shows an error message specifying the incorrect format.
+  
+      Use case ends.
+
+**Use case: Find a patient**
 
 **MSS**
 
 1. User requests to find contact
 2. User inputs the find command with contact details
-3. Medicontact shows a list of persons matching details
+3. MediContact shows a list of patients matching details
+
    Use case ends.
 
 **Extensions**
 
 - 2a. Necessary field is missing
-  - 2a1. Medicontact shows an error message indicating which field is missing
-  - 2a2. Use case ends.
+  - 2a1. MediContact shows an error message indicating which field is missing.  
+  
+    Use case ends.
+  
 - 2b. Wrong format in input
-  - 2b1.Medicontact shows an error message specifying the incorrect format.
-  - 2b2. Use case ends.
-- 2c. No match in users
-  - 2b1.Medicontact shows an error message specifying that there are no users that match the query.
-  - 2b2. Use case ends.
+  - 2b1. MediContact shows an error message specifying the incorrect format.
+  
+    Use case ends.
+  
+**Use case: Import data**
+
+**MSS**
+
+1. User requests to import data.
+2. User inputs the import command with new address book file name.
+3. MediContact imports the data.
+4. MediContact replaces original data with new data.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. File is not in the same folder as application JAR file.
+    - 2a1. MediContact shows an error message indicating file not found.
+
+      Use case ends.
+
+- 2b. File is not in JSON format.
+    - 2b1. MediContact shows an error message indicating wrong file format.
+
+      Use case ends.
+  
+- 2c. File is not in expected format of MediContact data.
+    - 2c1. MediContact shows an error message indicating invalid JSON format.
+
+      Use case ends.
+
 
 **Use case: List contacts**
 
 **MSS**
 
-1. User requests to list contacts
-2. User inputs the list command
-3. Medicontact shows a list of contacts
+1. User requests to list contacts.
+2. User inputs the list command.
+3. MediContact shows a list of contacts.
+
    Use case ends.
+
+**Use case: List starred contacts**
+
+**MSS**
+
+1. User requests to list starred contacts.
+2. User inputs the list star command.
+3. MediContact shows a list of starred contacts.
+
+   Use case ends.
+
+**Use case: Star a patient**
+
+**MSS**
+
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to add a patient into starred list.
+4. User inputs the star command with index or full name of the patient.
+5. MediContact adds the patient into starred list.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. Name or index given is invalid
+    - 4a1. MediContact shows an error message indicating invalid name or index.
+
+      Use case ends.
+
+**Use case: Sort contacts**
+
+**MSS**
+
+1. User requests to sort contacts.
+2. User inputs the sort command.
+3. MediContact sorts the displayed list of contacts by appointments.
+
+**Extensions**
+
+- 2a. No contact with appointment dates found.
+
+    - 2a1. MediContact shows an error message.
+    - 2a2. MediContact sorts the contacts alphabetically.
+  
+      Use case ends.
+
+
+**Use case: View note**
+
+**MSS**
+
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to view a patient's note.
+4. User inputs the view command with index or full name of the patient.
+5. MediContact shows the patient's contact with the note.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. Name or index given is invalid
+    - 4a1. MediContact shows an error message indicating invalid name or index.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -452,10 +519,10 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app.<br>
       Expected: List of contacts are the same as before.
 
-### Adding a person
-1. Adding a person
+### Adding a patient
+1. Adding a patient
 
-   1. Prerequisites: List all persons using `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using `list` command. Multiple patients in the list.
 
    2. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
       Expected: Bryan Lim is added to the list.
@@ -478,12 +545,12 @@ testers are expected to do more *exploratory* testing.
    8. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/`<br>
       Expected: No contact is added to the list, error message regarding gender should be shown.
 
-2. Adding a duplicate person
-    1. Prerequisites: List all persons using `list` command. Multiple persons in the list.<br>
+2. Adding a duplicate patient
+    1. Prerequisites: List all patients using `list` command. Multiple patients in the list.<br>
        Person with name `Bryan Lim` should already be in list.
 
     2. Test case: `add n/Bryan Lim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
-       Expected: No contact is added to the list, error message regarding person already existing should be shown.
+       Expected: No contact is added to the list, error message regarding patient already existing should be shown.
 
     3. Test case: `add n/Bryan Sim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
        Expected: Bryan Lim is added to the list.
@@ -500,36 +567,36 @@ testers are expected to do more *exploratory* testing.
     3. Test case: Click on `Cancel`<br>
        Expected: Address book is unchanged
 
-### Deleting a person
+### Deleting a patient
 
-1. Deleting a person via index while all persons are being shown
+1. Deleting a patient via index while all patients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    1. Test case: `delete 1`<br>
       Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Message reflecting delete action successful is shown.
-      <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
+      <br><br>If cancelled, no patient is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No patient is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a person via name while all persons are being shown
+1. Deleting a patient via name while all patients are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.<br>
        John Doe is an existing contact
 
     1. Test case: `delete John Doe`<br>
        Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Message reflecting delete action successful is shown.
-       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
+       <br><br>If cancelled, no patient is deleted, message reflecting delete action being cancelled is shown.
 
     1. Test case: `delete Jane Doe`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+       Expected: No patient is deleted. Error details shown in the status message.
 
-### Editing a person
+### Editing a patient
 
-1. Editing a person's fields
+1. Editing a patient's fields
 
     1. Prerequisites: Person named `John Doe` must exist.
 
@@ -545,7 +612,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `edit John Doe n/John Doe b/35` (given that John Doe's age is not 35) <br>
        Expected: Contact with name `John Doe` has age updated to 35
 
-2. Editing a non-existent person's field
+2. Editing a non-existent patient's field
 
     1. Prerequisites: Person named `John Doe` must not exist.
 
@@ -555,7 +622,7 @@ testers are expected to do more *exploratory* testing.
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results.
 
-3. Editing a person with no fields
+3. Editing a patient with no fields
 
     1. Test case: `edit John Doe`<br>
        Expected: Error message reflecting at least one field must be provided.
@@ -563,7 +630,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edit Non Existent Person`<br>
        Expected: Similar to previous results.
 
-4. Clearing a persons appointments and tags
+4. Clearing a patients appointments and tags
 
     1. Prerequisites: Person named `John Doe` must exist.
 
@@ -650,12 +717,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a contact's notes
 
-1. Adding new notes to an existing person
+1. Adding new notes to an existing patient
 
     1. Test cases: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
-       Expected: Notes are added to person (Behaviour is very similar to Edit Command's appointments and tags)
+       Expected: Notes are added to patient (Behaviour is very similar to Edit Command's appointments and tags)
 
-2. Removing note's fields of an existing person
+2. Removing note's fields of an existing patient
 
     1. Test cases: `note Bryan ap/ r/`, `note John m/`<br>
        Expected: Respective Note fields are removed (Behaviour is very similar to Edit Command's appointments and tags)
@@ -669,7 +736,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Starring a contact
 
-1. Starring an unstarred person
+1. Starring an unstarred patient
 
     1. Prerequisite: Address book is populated with contacts.
 
@@ -685,7 +752,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `star somebody`<br>
        Expected: Error message reflecting name provided is invalid
 
-2. Starring a starred person
+2. Starring a starred patient
     1. Prerequisite: First contact is starred
 
     2. Test case: `star 1`, `star x` (where x is the name of the first contact)<br>
@@ -693,7 +760,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Unstarring a contact
 
-1. Unstarring a starred person
+1. Unstarring a starred patient
 
     1. Prerequisite: Address book is populated with contacts.
 
@@ -709,7 +776,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `unstar somebody`<br>
        Expected: Error message reflecting name provided is invalid
 
-2. Starring a starred person
+2. Starring a starred patient
 
     1. Prerequisite: First contact is unstarred
 
@@ -718,12 +785,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing a contacts details
 
-1. Viewing an existent person
+1. Viewing an existent patient
 
     1. Test case: `view 1`, `view John`<br>
        Expected: Person's details are shown
 
-2. Viewing a non-existent person
+2. Viewing a non-existent patient
 
     1. Test case: `view 0`, `view -1`, `view x` (where x is larger than the list size)<br>
        Expected: Error message reflecting index provided is invalid.

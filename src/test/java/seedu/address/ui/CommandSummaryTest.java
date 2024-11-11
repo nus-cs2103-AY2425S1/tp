@@ -13,7 +13,7 @@ public class CommandSummaryTest {
     }
 
     @Test
-    void testGetAction_throwsNullPointerException() {
+    void testGetAction_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new CommandSummary(null, "add n/NAME"));
     }
 
@@ -24,7 +24,7 @@ public class CommandSummaryTest {
     }
 
     @Test
-    void testGetFormat_throwsNullPointerException() {
+    void testGetFormat_throwsAssertionError() {
         assertThrows(AssertionError.class, () -> new CommandSummary("Add", null));
     }
 

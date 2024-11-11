@@ -105,4 +105,29 @@ public class AddressBookTest {
         }
     }
 
+    @Test
+    public void equals() {
+        // address book with same content
+        AddressBook addressBook1 = new AddressBook();
+
+        // address book with different content
+        AddressBook addressBook2 = new AddressBook();
+        addressBook2.addPerson(ALICE);
+
+        // same values -> returns true
+        assertTrue(addressBook.equals(addressBook1));
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different types -> returns false
+        assertFalse(addressBook.equals(5.0f));
+
+        // different values -> returns false
+        assertFalse(addressBook.equals(addressBook2));
+    }
+
 }
