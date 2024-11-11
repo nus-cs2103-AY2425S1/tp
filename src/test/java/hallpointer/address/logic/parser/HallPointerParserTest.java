@@ -2,10 +2,6 @@ package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.ROOM_DESC_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static hallpointer.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_DATE_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_MEMBER_INDEX_ONE;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_POINTS_MEETING;

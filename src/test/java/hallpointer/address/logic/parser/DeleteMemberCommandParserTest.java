@@ -9,7 +9,6 @@ import static hallpointer.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.commands.DeleteMemberCommand;
-import hallpointer.address.logic.commands.FindMemberCommand;
 
 public class DeleteMemberCommandParserTest {
 
