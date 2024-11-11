@@ -43,13 +43,15 @@ Storage -right-|> AddressBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "0..*" JsonAdaptedPerson
-JsonAdaptedPerson --> "0..*" JsonAdaptedTag
-JsonAdaptedPerson --> "0..*" JsonAdaptedWedding
-JsonAdaptedVendor --|> JsonAdaptedPerson
-JsonAdaptedVendor --> "0..*" JsonAdaptedTask
-JsonAdaptedEvent --|> JsonAdaptedTask
-JsonAdaptedTodo --|> JsonAdaptedTask
-JsonAdaptedDeadline --|> JsonAdaptedTask
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedWedding
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedTask
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedTag
+JsonAdaptedPerson -up-> "0..*" JsonAdaptedTag
+JsonAdaptedWedding --> "0..*" JsonAdaptedPerson
+JsonAdaptedVendor -up-|> JsonAdaptedPerson
+JsonAdaptedVendor -up-> "0..*" JsonAdaptedTask
+JsonAdaptedEvent -up-|> JsonAdaptedTask
+JsonAdaptedTodo -up-|> JsonAdaptedTask
+JsonAdaptedDeadline -up-|> JsonAdaptedTask
 
 @enduml
