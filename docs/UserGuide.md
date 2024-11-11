@@ -98,6 +98,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * `NAME` must start with an alphabet and should only contain alphabets and numbers.
 * `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
 * `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
 
 <box type="tip" seamless>
 
@@ -126,6 +127,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * `NAME` must start with an alphabet and should only contain alphabets and numbers.
 * `PHONE_NUMBER` should only contain numbers, and needs to be at least 3 digits long.
 * `EMAIL` should follow the structure `local-part@domain`.
+* `ADDRESS` must not contain only white spaces.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
