@@ -194,10 +194,10 @@ Each client’s tier is represented with a color-coded label located beside thei
 
 #### <span style="color: #5C0002; font-size: 18px;">⬤</span> Reject Tier
 
-Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
+Clients that are not assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
 ### Status Color Code of AgentAssist GUI:
-Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping you prioritize tasks.
+Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This visual aid indicates the urgency level of each client’s case, helping you prioritize tasks.
 
 #### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
 #### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
@@ -290,7 +290,7 @@ Here’s a reference table of available flags and the type of data they correspo
 Arguments are the values that are used in a command. 
 - Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
 - **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
-- When an argument is entered, any spaces before or after the argument are **ignored**. Example: `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
+- When an argument is entered, any spaces before or after the argument are **ignored**. For example, `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
 - In this guide we often add a space before any arguments to improve readability, however this is purely cosmetic (i.e., it is still correct without a space).
 
 ### 4.4.1  Flag Arguments
