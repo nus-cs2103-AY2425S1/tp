@@ -1182,18 +1182,44 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-   1. Download the jar file and copy into an empty folder
+   * **Test case:** Launching the app for the first time.
+     1. Download the jar file and copy into an empty folder.
+     2. Open Terminal and type the following:
+     `java -jar ClinicConnect.jar`
+   * **Expected:** Shows the GUI with a set of sample patients. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   * **Prerequisites:**
+     * Launch the app.
+     * Resize the window.
+     * Shift the window around.
+     * Close the app.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   * **Test case:** Launch the app.
+   * **Expected:** The most recent window size and location is retained.
+
+
+3. Shutdown.
+
+   * **Test case:** `exit`
+   * **Expected:** All ClinicConnect windows closes and the application exits.
+
+
+### Saving Data
+
+1. Saving of data.
+   * **Prerequisite:** The app is a clean state.
+   * **Test case:** Launch and exit the app.
+   * **Expected:** A new `data/ClinicConnect.json` file is created. This is the storage file.
+
+
+2. Dealing with missing or corrupted data files.
+   * **Prerequisites:** There is an existing storage file in the default location.
+
 
 1. _{ more test cases …​ }_
 
