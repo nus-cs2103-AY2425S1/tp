@@ -213,17 +213,19 @@ Examples:
 
 Finds all customers whose any tag contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 
-Format: `searchtag TAG [MORE TAGS]`
+Format: `searchtag TAG [MORE TAGS]…​`
 
 * The search is case-insensitive. e.g `FRIENDS` will match `friends`
 * Only the tags are searched.
 * Only full words will be matched e.g. `fri` will not match `friends`
-* Persons have at least one matching tag will be returned.
+* Persons have at least one matching tag of any tags will be returned.
   e.g. If `searchtag friends` is the input, a person with tags `friends` and `colleagues` will be included in the search result.
 
 Examples:
 * `searchtag friends` returns all persons containing the tag `friends`<br>
   ![result for 'searchtag friends'](images/Searchtag%20Friends.png)
+* `searchtag friends colleagues` returns all persons containing the tag `friends` or `colleagues`<br>
+  ![result for 'searchtag friends colleagues'](images/SearchtagFriendsColleagues.png)
 
 ### Marking whether a person is a VIP : `vip`
 
