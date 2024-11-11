@@ -7,7 +7,7 @@ pageNav: 3
 
 <div style="display: flex; align-items: center;">
   <div style="flex: 0 0 auto;">
-    <img src="images/EduLog.png" alt="EduLog Logo" style="width: 90px; height: auto;" />
+    <img src="images/EduLog.png" alt="EduLog Logo" style="width: 60px; height: auto;" />
   </div>
  <div style="margin-left: 15px;">
     <h1 style="font-size: 40px; padding-top: 20px; margin-bottom: 0;">EduLog User Guide</h1> <!-- Remove bottom margin on h1 -->
@@ -381,14 +381,16 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
-### 1. General Commands
+## Command Summary 
+
+### General Commands
 
 | Action | Format, Examples |
 |---|---|
 | `help` | `help` |
 | `exit` | `exit` |
 
-### 2. Student Commands
+### Student Commands
 
 | Action | Format, Examples |
 |---|---|
@@ -399,7 +401,7 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 | `delete` | `delete INDEX` or `delete NAME`<br> e.g., `delete 3`, `delete Nikhil` |
 | `clear` | `clear` |
 
-### 3. Calendar Commands
+### Calendar Commands
 
 | Action | Format, Examples |
 |---|---|
@@ -408,13 +410,13 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 | `deletec` | `deletec DESCRIPTION` <br> e.g. `deletec Secondary 4 Chemistry Class` |
 
 
-### 4. Gift Commands
+### Gift Commands
 
 | Action | Format |
 |---|---|
 | `gift` | `gift` |
 
-### 5. Revenue Commands
+### Revenue Commands
 
 | Action | Format, Examples |
 |---|---|
