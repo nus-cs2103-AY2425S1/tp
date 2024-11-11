@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # VolunTier Developer Guide
@@ -110,6 +110,7 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The command also commits the address book to the model.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The CommandHistory.add() method is called to add the command string entered to the command history.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -156,16 +157,16 @@ This section describes some noteworthy details on how certain features are imple
 
 ### CSV import feature
 
-The ImportCommand class in [`ImportCommand.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ImportCommand.java) 
-allows users to import data from a CSV file and add multiple persons at once to the address book. 
+The ImportCommand class in [`ImportCommand.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ImportCommand.java)
+allows users to import data from a CSV file and add multiple persons at once to the address book.
 
-The import process reads the CSV file, validates the data, and converts each row into a JsonAdaptedPerson object, 
-which is then added to the model if it meets specified constraints. If any rows fail validation or contain duplicates, 
+The import process reads the CSV file, validates the data, and converts each row into a JsonAdaptedPerson object,
+which is then added to the model if it meets specified constraints. If any rows fail validation or contain duplicates,
 they are skipped, and detailed feedback is provided to the user.
 
 
 
-The `ImportCommand` makes use of the `CsvImport` helper class, which is responsible for parsing and validating CSV data. 
+The `ImportCommand` makes use of the `CsvImport` helper class, which is responsible for parsing and validating CSV data.
 Here's how the command works:
 
 Step 1. File Path Input: The command accepts a file path as an argument, specifying the location of the CSV file to import.
@@ -187,7 +188,7 @@ The Import mechanism is facilitated by `CsvImport` which is responsible for pars
 
 
 ### View Tutee Chart feature
-The View Tutee Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java) 
+The View Tutee Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java)
 displays tutors in a bar chart, sorted by their tutoring hours in ascending order.
 
 The ViewTutorChartCommand class retrieves all tutors from the Model, sorts them in ascending order by tutoring hours, and generates a message alongside a bar chart displaying this data in the UI.
@@ -284,13 +285,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -310,7 +311,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-**Target user profile**:
 
 * has a need to manage a significant number of volunteer tutoring records
 * prefer desktop apps over other types
@@ -386,10 +386,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User <u>views list of persons (UC1)</u>
 2.  User requests to delete a specific person in the list
-3.  VolunTier prompts the user for confirmation
-4.  VolunTier deletes the person
+3. VolunTier deletes the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -501,8 +500,8 @@ testers are expected to do more *exploratory* testing.
 ### Adding a person
 
 1. Adding a tutor with no email
-    1a. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
-    Expected: No tutor is added. Error is thrown, saying invalid command format.
+   1a. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
+   Expected: No tutor is added. Error is thrown, saying invalid command format.
 
 
 ### Deleting a person
@@ -568,13 +567,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a lesson with all fields filled
 
-    1a. Prerequisites: Clear the list with the command `clear` <br>
-        Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
-        Add a tutee with the command `addTutee \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
-    
-    1b. Test case: `addLesson 1 2 math`<br>
-        Expected: New lesson is added to the list. Details of the new lesson shown in the status message.
-    
-    1c. Test case: `addLesson 1 2 math`<br>
-        Expected: No lesson is added. Error details shown in the status message for duplicate lesson.
+   1a. Prerequisites: Clear the list with the command `clear` <br>
+   Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
+   Add a tutee with the command `addTutee \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
+
+   1b. Test case: `addLesson 1 2 math`<br>
+   Expected: New lesson is added to the list. Details of the new lesson shown in the status message.
+
+   1c. Test case: `addLesson 1 2 math`<br>
+   Expected: No lesson is added. Error details shown in the status message for duplicate lesson.
+
 

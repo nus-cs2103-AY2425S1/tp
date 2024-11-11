@@ -16,6 +16,7 @@ Class "{abstract}\nCommand" as Command
 
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
+Class CommandHistory
 }
 
 package Model {
@@ -45,4 +46,6 @@ note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult : <<create>>
+
+LogicManager -left->"1" CommandHistory
 @enduml
