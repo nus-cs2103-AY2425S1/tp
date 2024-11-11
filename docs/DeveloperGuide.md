@@ -68,6 +68,7 @@
 - To assist in writing parts of User Guide and Developer Guide and test code 
 
 ### ChatGPT usage - Tse Hui
+**Used to assist in writting a snippet of code in `ContactCard.java`** <br>
 Input: 
 > add a listener that says when the label width exceeds the current card pane, increase the label width size to the current card pane width
 
@@ -125,37 +126,33 @@ public void start(Stage primaryStage) {
     }
 }
 ```
+<br>**Used to assist in writting a Regex in `Name.java`** <br>
 
-Input: how to do open bracket regex
-Snippet of output:
-**In Java:**
-If you're using this regex in Java, you'll need to escape the backslash itself because Java string literals treat backslashes as escape characters. This means that in Java, you would need to use:
-```"\\("```
-This escapes the backslash properly so that it matches a literal open parenthesis.
-
-
-Input: 
+Input: <br>
 > how to do open bracket regex
 
-Snippet of output:
-> **In Java:**
+Snippet of output: <br>
+> **In Java:** <br>
 If you're using this regex in Java, you'll need to escape the backslash itself because Java string literals treat backslashes as escape characters. This means that in Java, you would need to use:
 ```"\\("```
-This escapes the backslash properly so that it matches a literal open parenthesis.
+<br> This escapes the backslash properly so that it matches a literal open parenthesis.
 
-Input: 
+Input: <br>
 > how to do alphabets with whitespaces regex 
  
-Snippet of output:
-> 4. Example in Java:
-In Java, you would write the regex as a string, and because backslashes are escape characters in Java string literals, you need to escape each backslash by adding another backslash:
-```String regex = "^[A-Za-z\\s]+$";```
+Snippet of output:<br>
+> 4. Example in Java:<br>
+> In Java, you would write the regex as a string, and because backslashes are escape characters in Java string literals, you need to escape each backslash by adding another backslash:
+<br> ```String regex = "^[A-Za-z\\s]+$";```
 
-Input: how to use plantUML to create class diagram
-Snippet of Output: 
-> Here are examples for some common UML diagrams:
+<br>**Used to assist in drawing class diagram in the via PlantUML files before further processing** <br>
+Input: <br>
+> how to use plantUML to create class diagram
 
-**Class Diagram**
+<br> Snippet of Output: <br>
+> Here are examples for some common UML diagrams: <br>
+> **Class Diagram**
+
 ```
 @startuml
 class Car {
@@ -172,7 +169,8 @@ class Engine {
 Car "1" -- "1" Engine : has
 @enduml
 ```
-`@startuml` and `@enduml` are used to define the start and end of the PlantUML diagram.
+
+> `@startuml` and `@enduml` are used to define the start and end of the PlantUML diagram.
 class defines a class, and you can use modifiers like `-` for private and `+` for public.
 `"1" -- "1"` represents a relationship between `Car` and `Engine` (like a one-to-one relationship).
 
