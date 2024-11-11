@@ -157,9 +157,9 @@ Format: `newtag t/TAG1…​`
 * Duplicate tags are **not** allowed.
 * Tag names are **case-insensitive**. e.g. `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
 * Only 30 (or fewer) tags can exist in the tag list at any point. Attempts to add tags that could exceed this limit will not be allowed.
+* Additional leading entries will be ignored. e.g. `newtag 1 t/bride's side` is the same as `newtag t/bride's side`.
 * Attempting to add tags with mix of invalid and valid names at once will result in an error.
 * Attempting to add a mix of duplicate and non-duplicate tags at once will only allow the non-duplicate tags to be added.
-* Any extra parameters (that do not have the prefix `t/`) will be ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may add any number of tags at once (as long as the total number does not exceed 30). e.g. `newtag t/bride's side t/groom's side t/friends`
@@ -180,10 +180,10 @@ Format: `deletetag [-force] t/TAG1…​`
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
 * User cannot delete a tag that has not been added via `newtag` before.
-* If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g. `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
+* Additional leading entries will be ignored. e.g. `deletetag 1 t/bride's side` is the same as `deletetag t/bride's side`.
+* If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Attempting to delete a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
-* Any extra parameters (that do not have the prefix `t/`) will be ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may delete any number of tags at once. e.g. `deletetag t/bride's side t/groom's side t/friends`
@@ -218,6 +218,7 @@ Tags a guest with the specified tag.
 Format: `tag INDEX…​ t/TAG…​`
 
 * Tag must have already been defined using `newtag` before tagging it to a guest.
+* There is a limit of 10 guests that can be tagged in a single `tag` command.
 * The index(es) **must be within the index boundaries of the guest list**. i.e. If there are 10 guests, INDEX accepts values from 1 to 10.
 * Attempting to tag guests with an invalid tag will not halt tagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `tag 1 t/friends t/bride's side` will still successfully tag `bride's side` on the guest indexed at 1.
 * Attempting to tag guests with a tag already on some will not halt tagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `tag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 2.
@@ -240,7 +241,7 @@ Format: `untag INDEX…​ t/TAG…​`
 * A guest must already have the tag for it to be removed.
 * Index(es) of the guest(s) must be within valid range (i.e. greater than 0 and less than or equals to the current shown list length)
 * Attempting to untag guests with an invalid tag will not halt untagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `untag 1 t/friends t/bride's side` will still successfully untag `bride's side` on the guest indexed at 1.
-* Attempting to untag guests with a tag already on some will not halt untagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `untag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 1.
+* Attempting to untag guests with a tag already on some will not halt untagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `untag 1 2 t/friends` will still successfully untag `friends` on the guest indexed at 1.
 
 Examples:
 * `untag 1 t/bride's side`
