@@ -209,7 +209,7 @@ interact with other classes.
 
 #### Add Assignment
 
-Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorials. The activity diagram below will
+Users can also add assignments to the TrackMate Application that are shared among all the students in every tutorial class. The activity diagram below will
 demonstrate what the users need to do to add assignment for students.
 
 <puml src="diagrams/CreateAssignmentActivityDiagram.puml" />
@@ -758,6 +758,40 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `markAtt s/A1234567X t/T1001 d/21-10-2023`<br>
        Expected: Error message indicating that the date format is invalid. Correct format should be "YYYY-MM-DD".
+
+### Marking/Unmarking assignment
+
+Note: Users are expected to use the command `listAsg` to find out the assignment names before marking or unmarking. This is explained under tip for User Guide Section 4.3.3.
+
+1. Marking/Unmarking a student's assignment status for a specific assignment.
+
+    1. Prerequisites: Student at specified index exists and assignment with specified name exists (case-sensitive).
+
+    2. Test case: `markAsg 1 n/Assignment 1` where the student's assignment status is not marked before.<br>
+       Expected: Assignment marked successfully!
+    3. Test case: `markAsg 1 n/Assignment 1` where the student's assignment status is marked before.<br>
+       Expected: Assignment marked successfully!
+    4. Test case: `unmarkAsg 1 n/Assignment 1` where the student's assignment status is previously marked as completed.<br>
+       Expected: Assignment unmarked successfully!
+    5. Test case: `unmarkAsg 1 n/Assignment 1` where the student's assignment status is previously incomplete.<br>
+       Expected: Assignment unmarked successfully!
+    6. Note: Repeated marking or unmarking actions on the same assignment (e.g., marking an already marked assignment) yield the same success message. This is because write after write operation does not affect the usage. Same message is displayed to avoid users' confusion.
+
+2. Marking/Unmarking a student's assignment status with invalid/missing index.
+
+    1. Test case: `markAsg 0 n/Assignment 1`<br>
+       Expected: The student index provided is invalid.
+    2. Test case: `unmarkAsg 1000 n/Assignment 1` where student at index 1000 does not exist.<br>
+       Expected: The student index provided is invalid.
+    3. Test case: `markAsg n/Assignment 1`<br>
+       Expected: Error message indicating that the provided command format is invalid.
+
+3. Marking/Unmarking a student's assignment status with invalid/missing assignment name.
+
+    1. Test case: `markAsg 1 n/lorem ipsum` where assignment with name "lorem ipsum" does not exist.<br>
+       Expected: There is no matching assignment with the given name!
+    2. Test case: `unmarkAsg 1 n/` where assignment has empty name.<br>
+       Expected: Assignment title cannot be empty!
 
 ### Saving data
 
