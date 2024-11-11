@@ -9,7 +9,6 @@ pageNav: 3
 TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a university student looking for internship opportunities in the tech industry, TechConnect can help you manage your applications more efficiently than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
 
 ---
 
@@ -451,7 +450,6 @@ Format: `status INDEX as/STATUS`
 - You can remove the company's application status by typing `status INDEX as/` without specifying any text after `as/`.
 
 **Note**: If there are multiple `as/`, only the last `as/STATUS` will be recorded.
-
 
 **Examples**:
 
