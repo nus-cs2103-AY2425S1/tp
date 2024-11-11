@@ -609,24 +609,26 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancement**
 Team size: 5
-### 1. Delete subject feature
-Currently, subjects must be manually deleted using 
 
-### 2. Add subject feature
-Currently, Subjects are implemented using an Enum with a list of common subjects offered by tuition centers in Singapore. 
+1. **Add subject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
 Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
 define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
 those subjects as well without losing the benefit of validation and duplication checks. 
 
-### 3. Enhance Subject Tracking with list sorted alphabetically or by enrolment
-Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
+2. **Enhance Subject Tracking with list sorted alphabetically or by enrolment:** Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
 to sort by alphabetical order or by enrolment numbers in the future to support easier accessing and allocation of resources.
 
-### 4. Allowing additional special characters in names 
-Currently, only the special characters 
+3. **Enhance UI for scrolling and viewing:** Currently, the UI (e.g. scrollbar) can experience some errors when resizing the window. In the future, we plan to improve 
+the UI responsiveness to work across various window sizes and different computer settings. 
 
-### 5. Improved verification of address
-In the future, we plan to improve the verification of the address field of the add functionality, such that we can check 
-that necessary fields are present, e.g. post code, country, street name etc., to ensure that addresses saved are valid addresses. 
+4. **Allowing additional special characters in names:** Currently, only the special characters (-/') are allowed in names. In the future, we plan to improve our validation checks 
+to include more special characters such as '.'. 
+
+5. **Accepting consecutive spaces in names:** Currently, consecutive spaces in names are not allowed. We plan to improve the validation checks of names to treat  
+multiple spaces in names, which arise likely due to mistakes in entry, as just one space (e.g. treating Jane     Tan as Jane Tan). 
+
+6. **Improved verification of address:** Currently, any String is accepted as an address. In the future, we plan to improve the verification of the address field of 
+the add functionality, such that we can check that necessary fields are present, e.g. post code, country, street name etc., 
+to ensure that addresses saved are valid addresses. 
 
 --------------------------------------------------------------------------------------------------------------------
