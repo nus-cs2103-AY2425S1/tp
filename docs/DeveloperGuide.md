@@ -236,7 +236,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+<box type="info" seamless>
+
 **Note:** `Model#undoAddressBook()` and `Model#redoAddressBook()` will also throw a `CommandException` in the unlikely case that there are uncommitted changes when an undo or a redo is attempted. This may happen if a data changing command did not call `Model#commitAddressBook()`.
+
+</box>
 
 #### Design considerations:
 
