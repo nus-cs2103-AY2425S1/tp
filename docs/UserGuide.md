@@ -114,6 +114,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 ## Tutorial for Beginners
 
 If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+For this tutorial section, you are highly encouraged to use exactly the sample commands provided for each tutorial, and only start trying out the commands on your own after going through the [Features](#features) section.
 
 
 ### Tutorial Contents
@@ -375,7 +376,9 @@ This command will help you add a new guest to the bottom of the existing overall
 
 > :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
@@ -396,7 +399,9 @@ This command will allow you to edit the details of the guest identified by the `
 
 > :warning: At least one field of a `Guest` has to be changed to properly utilise the `edit_guest` command without error.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
@@ -446,7 +451,9 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 > :warning: If you attempt to add a new vendor with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 **Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
@@ -467,7 +474,9 @@ This command will allow you to edit the details of the vendor identified by the 
 
 > :warning: At least one field of a `Vendor` has to be changed to properly utilise the `edit_vendor` command without error.
 
-* :information_source: As of now, BridalBuddy only supports one single word per tag.
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
