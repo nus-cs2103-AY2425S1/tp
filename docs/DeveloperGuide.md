@@ -22,6 +22,16 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+## **Minor definitions**
+
+The documentation uses the terms "client list view" and "transaction list view" to refer to the environment displayed on the UI when the respective list is shown. This table informs you how to switch between these views, which will be useful for later parts of this Developer Guide, such as in some test cases.
+
+Switching between... | Command | Format
+---------------|---------------|------------
+Client to transaction list view | List Transactions | `listt INDEX`
+Transaction to client list view | List Clients | `list`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
 
