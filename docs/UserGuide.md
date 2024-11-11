@@ -39,8 +39,8 @@ Refer to the sidebar if you are on the website.
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
 
-**InternBuddy** is an offline desktop application for university students studying a STEM major to manage 
-the contacts of companies that they are potentially applying or have already applied for internships. 
+**InternBuddy** is an offline desktop application for university students studying a STEM major to manage
+the contacts of companies that they are potentially applying or have already applied for internships.
 
 **InternBuddy** allows users to:
 * store and manage companies' contact information for various internship applications.
@@ -66,23 +66,23 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
     * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
-   
+
       <box type="tip" seamless>
-   
+
       **Tip:** This is a tip box.
       </box>
-      
+
     * *Notice boxes* provide important information that you should take note of.
-   
+
       <box type="info" seamless>
-      
+
       **Notice:** This is a notice box.
       </box>
-   
+
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
-   
+
       <box type="warning" seamless>
-      
+
       **Warning:** This is a warning box.
       </box>
 
@@ -91,7 +91,7 @@ Before continuing, here are some important information you need to know about th
    brings you back to the top of the User Guide.
 
    <box type="tip" seamless>
-   
+
    **Tip:** If you are viewing this guide on our website, you can hover over links to see where the hyperlink takes you!
    </box>
 
@@ -128,7 +128,7 @@ Before continuing, here are some important information you need to know about th
     * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-1. Make sure to check out the [Glossary](#glossary) for definitions of some vocabulary used in this guide. 
+1. Make sure to check out the [Glossary](#glossary) for definitions of some vocabulary used in this guide.
 
 [back to top](#internbuddy-user-guide)
 
@@ -194,7 +194,7 @@ not** put any parameters or prefixes that are not recognised by the command.
 
 * Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is **case-sensitive** and thus
   must be used exactly as shown <br>
-  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
+  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
@@ -235,6 +235,8 @@ not** put any parameters or prefixes that are not recognised by the command.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Company commands
 
 ### Adding a company: `add`
 
@@ -417,6 +419,8 @@ Format: `reopen INDEX`
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Application commands
+
 ### Adding application record for a company: `apply`
 
 Adds an internship application record to an existing company in the address book.
@@ -485,6 +489,8 @@ The index refers to the index number shown in the displayed company list. The in
 > Result after executing `withdraw c/2 app/1`
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Miscellaneous
 
 ### Clearing all entries : `clear`
 
