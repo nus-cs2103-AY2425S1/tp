@@ -179,8 +179,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             // Immediately refresh person list panel after course deletion or enrollment changes
-            if (commandText.startsWith("deletec") || commandText.startsWith("enroll") ||
-                    commandText.startsWith("unenroll")) {
+            if (commandText.startsWith("deletec") || commandText.startsWith("enroll")
+                    || commandText.startsWith("unenroll")) {
                 personListPanel.refreshPersonView();
             }
 
