@@ -268,7 +268,7 @@ This enhancement would allow users to input "d/o" in names without triggering co
    This enhancement allows doctors to create, delete, and edit tags, providing flexibility to personalize patient categorization.
    It enables doctors to define tags that align with their specific needs, improving patient management and enhancing the overall efficiency of the system.
 
-6. **Adding an end time to the Date feature:** Currently, the app allows only the start time and date, preventing duplicate `dateAndTime` entries. Adding an end time enables users to 
+6. **Adding an end time to the Date feature:** Currently, the app allows only the start time and date, preventing duplicate `DATE_TIME` entries. Adding an end time enables users to 
 define precise appointment durations, helping to prevent overlapping and double-booked slots. It improves scheduling clarity, allowing for better time management and conflict prevention, especially 
 for managing busy schedules.
 
