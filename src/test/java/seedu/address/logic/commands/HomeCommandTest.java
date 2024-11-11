@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.HomeCommand.successMessageCreator;
 import static seedu.address.testutil.TypicalPatients.getTypicalClinicConnectSystem;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,7 @@ public class HomeCommandTest {
 
     @Test
     public void execute_homeCommand_success() {
-        String msgSuccess = String.format(HomeCommand.MESSAGE_SUCCESS, model.getPatientSize());
+        String msgSuccess = successMessageCreator(model);
         assertCommandSuccess(new HomeCommand(), model, msgSuccess, expectedModel);
     }
 }

@@ -11,7 +11,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Nric {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "NRIC should be 9 digit uppercased sequence with an alphabet at the start and at the end.\n"
+            "NRIC should be 9 character uppercased sequence with an alphabet at the start and at the end.\n"
         + "Starting character should either be an uppercased \"S\", \"T\", \"F\", \"G\" or \"M\".\n"
         + "Followed by 7 digits and ending with an uppercased alphabet.";
 
