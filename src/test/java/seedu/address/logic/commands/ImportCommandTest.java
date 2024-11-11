@@ -295,7 +295,8 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(tempFile.toString());
 
         CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
-        assertEquals(String.format(MESSAGE_FAILURE, tempFile.toString()) + "\n" + MESSAGE_NON_CSV_FILE, exception.getMessage());
+        assertEquals(String.format(MESSAGE_FAILURE, tempFile.toString()) + "\n" + MESSAGE_NON_CSV_FILE,
+                exception.getMessage());
 
         Files.deleteIfExists(tempFile);
     }
