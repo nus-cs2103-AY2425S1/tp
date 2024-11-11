@@ -27,7 +27,7 @@ TechConnect is a **desktop app for managing internship applications, optimized f
   - [Removing a bookmark from a bookmarked company : `removebm`](#removing-a-bookmark-from-a-bookmarked-company-removebm)
   - [Listing all bookmarked companies : `bmlist`](#listing-all-bookmarked-companies-bmlist)
   - [Editing a company : `edit`](#editing-a-company-edit)
-  - [Editing a company's remark : `remark`](#editing-a-companys-remark-remark)
+  - [Editing a company's remark : `remark`](#editing-a-company-s-remark-remark)
   - [Locating companies by name: `find`](#locating-companies-by-name-find)
   - [Deleting a company : `delete`](#deleting-a-company-delete)
   - [Editing an application status: `status`](#editing-an-application-status-status)
