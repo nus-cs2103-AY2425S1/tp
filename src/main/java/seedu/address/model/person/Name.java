@@ -13,8 +13,8 @@ public class Name {
             + "Both given name and surname should be included.";
 
     /*
-     * The name must only contain alphabetical characters and spaces. It must contain at least two words, for given name
-     * and surname.
+     * The name must only contain alphabetical characters and spaces.
+     * It must contain at least two words, for given name and surname.
      */
     public static final String VALIDATION_REGEX = "([a-zA-Z]+ )+[a-zA-Z]+";
 
