@@ -153,7 +153,37 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
+### General Features
 This section describes some noteworthy details on how certain features are implemented.
+
+#### Help Command : `help`
+
+#### Home Command : `home`
+
+#### Clear Command : `clear`
+
+#### Exit Command : `Exit`
+
+### Patient Management Features
+
+#### Add Command : `add`
+
+#### Add Full Command : `addf`
+
+#### Edit Command : `edit`
+
+#### Delete Command : `delete`
+
+#### View Command : `view`
+
+### Appointment Management Features
+
+#### Book Appointment : `bookappt`
+
+#### Delete Appointment : `deleteappt`
+
+#### Filter Appointment : `filter`
+
 
 ### \[Proposed\] Undo/redo feature
 
