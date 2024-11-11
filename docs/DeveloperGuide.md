@@ -199,8 +199,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+### Data archiving
 
---------------------------------------------------------------------------------------------------------------------
+The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
+Archiving can be used to manage inactive or unneeded contacts without losing historical information or
+requiring deletion, which is irreversible after the app has been exited or closed.
+
+#### Implementation Details
+The archiving feature is implemented using the `ArchiveCommand` class, which uses a boolean flag `shouldArchive`
+to handle both archiving and unarchiving actions. Instead of directly modifying the `Person` object, which is immutable,
+a new `Person` instance is created with the updated archive status.
+
+<puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -517,6 +528,49 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete 1,10000`<br>
       Expected: No person is deleted. Error details about invalid index shown in the display message.
 
+### Archiving a person
+
+1. Archiving a person while all persons are being shown
+
+    1. Prerequisites: List persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+
+    2. Test case: `archive <index_of_current_person>`<br>
+       Expected: The specified person is marked as archived in the list. His/her name is shown in the display message.
+    3. Test case: `archive 0`<br>
+       Expected: No person is archived. Error details about invalid format shown in the display message.
+    4. Test case: `archive john`<br>
+       Expected: No person is archived. Error details about invalid format shown in the display message.
+    5. Test case: `archive`<br>
+         Expected: No person is archived. Error details about invalid format shown in the display message.
+
+2. Archiving an archived person
+
+    1. Prerequisites: At least one person in the list is already archived.
+
+    2. Test case: `archive <index_of_archived_person>`<br>
+       Expected: No change in the list. Error message is displayed indicating that the person is currently archived.
+
+### Unarchiving a person
+
+1. Unarchiving a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+
+   2. Test case: `unarchive <index_of_archived_person>`<br>
+     Expected: The specified person is marked as not archived in the list. His/her name is shown in the display message.
+   3. Test case: `unarchive 0`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+   4. Test case: `unarchive john`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+   5. Test case: `unarchive`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+
+2. Unarchiving a current person
+
+    1. Prerequisites: At least one person in the list is currently not archived.
+
+    2. Test case: `unarchive <index_of_current_person>`<br>
+       Expected: No change in the list. Error message is displayed indicating that the person is currently not archived.
 
 ### Saving data
 

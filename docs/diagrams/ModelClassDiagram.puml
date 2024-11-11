@@ -13,7 +13,9 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+Class Person {
+    - isArchived : boolean
+}
 Class Name
 Class Phone
 Class Email
@@ -27,6 +29,8 @@ Class Tag
 
 Class I #FFFFFF
 }
+
+show Person fields
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
