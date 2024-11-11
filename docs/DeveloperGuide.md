@@ -353,7 +353,7 @@ Use case ends.
   - 1ai. System displays an error message.  
   Use case ends.
 
-#### UC6: List suppliers
+#### UC6: List all suppliers
 
 **MSS**
 1. User requests to view all suppliers.
@@ -413,7 +413,7 @@ Use case ends.
 **Extensions**
 - 1a. Details are not properly formatted or complete.
   - 1ai. System displays an error message.   
-    Use case ends.
+  Use case ends.
 - 1b. No goods are found.
   - 1bi. System displays an empty list of goods.
   - 1bii. System displays a feedback saying that no goods are found.  
@@ -424,7 +424,7 @@ Use case ends.
 **MSS**
 1. User requests to export goods data.
 2. System generates a csv based on the goods displayed to the user.  
-  Use case ends.
+Use case ends.
 
 ### Non-Functional Requirements
 
