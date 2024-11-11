@@ -61,12 +61,14 @@ WeddingListPanel --|> UiPart
 PersonCard --|> UiPart
 TaskCard --|> UiPart
 WeddingCard --|> UiPart
+TagCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ....> Model
 TaskCard ....> Model
 WeddingCard ....> Model
+TagCard ....> Model
 UiManager -right-> Logic
 MainWindow -right-> Logic
 
