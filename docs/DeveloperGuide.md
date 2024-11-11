@@ -849,6 +849,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `addcustomer n/Betsy crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` <br>
        Expected: The customer is successfully added. A warning and details of the added customer shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 5. Adding a customer with duplicate tags.
 
     1. Prerequisites: Customer with name `Yu Sutong` or other similar names does not already exist in the address book.
