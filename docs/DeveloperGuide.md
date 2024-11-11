@@ -434,7 +434,7 @@ Use case ends.
 4. Should be able to store up to 10000 goods persistently.
 5. Updating persistent storage should not result in unnecessary data modifications.
 6. Startup time for the application should be less than 3 seconds on all _mainstream OS_.
-7. The system should perform commands within 3 seconds on all _mainstream_OS.
+7. The system should perform commands within 3 seconds on all _mainstream OS_.
 8. The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
 9. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
 10. The application must be able to export data in _commonly used formats_.
