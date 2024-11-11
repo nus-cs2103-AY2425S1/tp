@@ -292,6 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | intermediate user       | automatically update particulars (year of study, graduation status, on exchange) when necessary, especially at the beginning of a new semester                             | ensure data accuracy with minimal manual effort.                                                            |
 | `* *`        | intermediate user       | generate a custom list of selected member information with only the needed details                                                                                         | easily retrieve the specific data required.                                                                 |
 | `* * *`      | user who values data privacy | set a password for the app                                                                                                                                                 | restrict access to only authorised individuals.                                                             |
+| `* * *`      | user | edit an existing member's particulars                                                                                                                                                    | easily update the particular without re-creating.                                                                                |
 
 
 --------------------------------------------------------------------------------------------------------------------
