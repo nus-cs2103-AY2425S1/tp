@@ -115,6 +115,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
 <div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
@@ -578,6 +579,7 @@ Use case ends.
   * SellSavvy displays that the customer does not have any orders currently.
 
   Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Use case 8: Mark Order as Completed**
 
@@ -646,6 +648,7 @@ Use case ends.
     * 2c1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Use case 10: Delete an order**
 
@@ -722,6 +725,7 @@ Use case ends.
     * 3a1. SellSavvy gives a warning that the customer already has an order with similar details.
 
   Use case resumes from step 4.
+<div style="page-break-after: always;"></div>
 
 **Use case 12: Filter order list by order status**
 
