@@ -348,16 +348,16 @@ Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
 Additional Details:
 * Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`.
-* If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match to a person.
+* If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match a person.
 * To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for their appointment.
 * If no date and time are set, none are displayed.
 * In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in order and selection, but at least one must be provided for unique identification.
-* This feature supports the year 0001 onwards. Any years before that is not supported. 
+* This feature supports the year `0001` onwards. Any years before that is not supported. 
 * Invalid date or time values (e.g., months outside 1-12 or days outside 1-31) will show an error, considering month-specific days and leap years.
-* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. e.g. if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
-* The time is in the 24-hour format. (e.g. 1800 for 6:00 PM)
-* Allows fast typing with or without leading zeroes (e.g., 1/1/2024 and 01/01/2024 are accepted). 
+* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year. For example, if `31/4/2024 1200` is input when APRIL only has 30 days, there will be an error since that date value is invalid.
+* The time is in the 24-hour format. (e.g. `1800` for 6:00 PM)
+* Date can be with or without leading zeroes (e.g., `1/1/2024 1400` and `01/01/2024 1400` are accepted). 
 
 
 Examples:
@@ -416,7 +416,7 @@ The data is saved in the hard disk automatically after any command that changes 
 
 ### Editing the data file
 
-The data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+The data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 If your changes to the data file makes its format invalid, Health Connect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause Health Connect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
