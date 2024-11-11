@@ -1130,6 +1130,48 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with missing or corrupted data files.
    * **Prerequisites:** There is an existing storage file in the default location.
 
+### Getting help: `help`
+
+**Command:** `help`
+
+1. Getting more information on the commands ClinicConnect provide.
+   * **Test case:** `help`
+   * **Expected:** A help window detailing a summary of the commands available and their functions is displayed.
+
+
+2. Getting more information on specific commands.
+   * **Test case:** `help edit`
+   * **Expected:** A help window showing more information about `edit` is displayed. This includes description, parameters, usage and example of the command.
+
+
+3. Entering wrong command keyword.
+   * **Test case:** `help efit`
+   * **Expected:** An error message is shown to fix the command keyword typo.
+
+### Editing a Patient: `edit`
+
+**Command:** `edit`
+
+1. Editing a patient with all fields (except remove allergies)
+   * **Prerequisites:** Start with the provided sample data.
+   * **Test case:** `edit T0123456A n|Linda Tan i|T0987654Y s|F d|2009-10-10 p|87496969 e|lindatan@email.com a|Potong Pasir b|O+ nokn|Lincoln Tan nokp|97989999 al|wheat al|eggs rl|LOW ec|diabetes, cholesterol no|Patient is a fall risk`
+   * **Expected:** Patient with NRIC T0123456A details are updated with all the new values.
+
+
+2. Editing a patient with repeated prefixes (except `al|` `rmal|`)
+   * **Prerequisites:** Start with the provided sample data.
+   * **Test case (repeated `n|` prefix):** `edit T0123456A n|Thomas Tan n|Darius Quek p|87659999`
+   * **Expected:** An error message is shown indicating that multiple values specified for `n|`.
+
+   * **Other incorrect `edit` commands to try:** Commands with repeated `i|`, `s|`, `d|`, `p|`, `e|`, `a|`, `b|`, `nokn|`, `nokp|`, `rl|`, `ec|`, `no|`
+   * **Expected:** Similar to previous.
+
+
+3. Editing a patient NRIC to an existing NRIC
+   * **Prerequisites:** Start with the provided sample data.
+   * **Test case:** `edit T0123456A i|S0123456B`
+   * **Expected:** An error message is shown indicating that the patient already exists in the ClinicConnect system.
+
 
 1. _{ more test cases …​ }_
 
