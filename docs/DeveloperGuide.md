@@ -417,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list concerts
 2.  AddressBook shows a list of concerts
 3.  User requests to delete a concert in the list
-4.  AddressBook adds the concert
+4.  AddressBook deletes the concert
 
     Use case ends.
 
