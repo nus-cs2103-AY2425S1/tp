@@ -197,8 +197,8 @@ Format: `find KEYWORD [MORE_KEYWORDS] || p/PHONE`
 * Only the name or the number is searched.
 * Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `hans gruber`, `bo yang`
-* Persons matching the phone number (or parts of it) will be returned
-* Phone number input must not have any spaces in between 
+* Persons matching the phone number (or parts of it) will be returned.
+* Phone number input must not have any spaces in between.
 
 Examples:
 * `find john` returns `john` and `john doe`
