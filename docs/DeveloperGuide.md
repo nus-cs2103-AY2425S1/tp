@@ -15,6 +15,8 @@
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* The implementation description of the `add` command in this documentation was inspired by the documentation of the past project [NetworkBook](https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details).
+* The non-functional requirement related to the standard screen resolution was inspired by the documentation of the current year project [PlanPerfect](https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -921,7 +923,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
    e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owedAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
-   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount by the student by 3 hours instead.
+   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount of the student by 3 hours instead.
    He can first type `owe 1 hr/-2` to 'undo' the previous owe command, and type `owe 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * hr/0 will still not be accepted.
@@ -940,7 +942,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
    e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paidAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
-   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours * `rate` field of that student instead.
+   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount of the student by 3 hours * `rate` field of that student instead.
    He can first type `pay 1 hr/-2` to "undo" the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * `hr/0` will still not be accepted.
