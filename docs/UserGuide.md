@@ -443,7 +443,18 @@ Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for
       New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>
       ```
     - If `Tier`, `Status` or `Remark` is not provided, they will be set to "NA" and displayed as such in the success message.
-
+  - The image below shows the GUI before and after using `add n/ John Doe p/ 91234567 e/ john@example.com a/ Blk 30 Geylang Street 29, #06-40 j/ engineer i/ 87654 t/ gold`:
+    <div style="text-align: left">
+    <div style="display: inline-block;">
+    <img src="images/BeforeAddCommand.png" width="300">
+    <div>Before Add</div>
+    </div>
+    <div style="display: inline-block;">
+    <img src="images/AfterAddCommand.png" width="300">
+    <div>After Add</div>
+    </div>
+    </div>
+    
 - **On Error**
   - Error caused by missing mandatory fields
       - Message:
@@ -529,6 +540,18 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       ```
       Edited Client: <CLIENT DETAILS>
       ```
+    - The image below shows the GUI before and after using `edit 1 t/ gold s/ urgent`:
+      <div style="text-align: left">
+      <div style="display: inline-block;">
+      <img src="images/BeforeEditCommand.png" width="300">
+      <div>Before Edit</div>
+      </div>
+      <div style="display: inline-block;">
+      <img src="images/AfterEditCommand.png" width="300">
+      <div>After Edit</div>
+      </div>
+      </div>
+    
 - **On Error:**
     - Error caused by invalid index
         - Message:
@@ -724,6 +747,17 @@ For detailed explanations for the matching criteria of each flag and the accepta
       x client(s) listed!
       ```
       where `x` is the number of matching results.
+    - The image below shows the GUI before and after using `filter t/ gold s/ urgent`:
+      <div style="text-align: left">
+      <div style="display: inline-block;">
+      <img src="images/BeforeFilterCommand.png" width="300">
+      <div>Before Filter</div>
+      </div>
+      <div style="display: inline-block;">
+      <img src="images/AfterFilterCommand.png" width="300">
+      <div>After Filter</div>
+      </div>
+      </div>
 - **On Error:**
     - If no valid flags are used:
       - Message:
