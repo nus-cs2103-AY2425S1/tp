@@ -26,7 +26,7 @@ public class NameTest {
 
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("   ")); // spaces only
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only

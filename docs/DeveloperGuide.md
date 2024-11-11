@@ -743,7 +743,7 @@ testers are expected to do more *exploratory* testing.
        Currently multiple comments per student is not supported. However, you are allowed to have /c as part of
        your string for your comment so long as it is not preceded with blank space.
 
-  
+
 ### Managing Attendance Events
 
 1. **Creating attendance events**
@@ -830,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-  
+
        Expected: Application closes
     2. Test case: `exit 2`
 
@@ -936,7 +936,8 @@ testers are expected to do more *exploratory* testing.
 
 **Team size: 4**
 
-- **Enhanced Find Command with Partial Matching and Group Filtering**
+
+1. **Enhanced Find Command with Partial Matching and Group Filtering**
 
   Currently, the `find` command supports exact matches for names and student IDs, which may limit its usability when TAs want to locate students based on partial names. Additionally, `find` does not work well when used after `show`, as it displays students from all groups, rather than only those from the filtered group list. To improve functionality, we plan to enhance the `find` command to support both partial matching and group filtering.
 
@@ -945,43 +946,37 @@ testers are expected to do more *exploratory* testing.
     - **Partial Matching:** Allow the `find` command to match partial names, enabling TAs to locate students even if they remember only part of a student's name.
     - **Group Filtering:** Enable `find` to respect any active `show` filter, so it only searches within the displayed subset of students. This ensures that if a TA has filtered by group using `show`, the `find` command will only search within that group rather than across all students.
 
-- **Enhance Grouping Functionality for Attendance Tracking**
+2. **Enhance Grouping Functionality for Attendance Tracking**
 
   Currently, the `listattn` command lists all students for a given attendance event without segmentation by groups, which may cause confusion when managing multiple classes or sections. We plan to enhance the `listattn` command to allow filtering by groups, so TAs can view attendance specifically for each group within an event.
 
-  **Implementation Considerations:**
+    **Implementation Considerations:**
 
     - Integrate the existing `group` field with the `listattn` command to support group-based filtering.
     - Update the UI to display group-specific attendance more clearly.
     - Ensure compatibility with other group and attendance features.
 
-- **Rename `createattn` Command to `createevent` for Consistency**
+3. **Rename `createattn` Command to `createevent` for Consistency**
 
   Currently, the command for creating attendance events (`createattn`) is inconsistent with the naming of other event-related commands such as `deleteevent` and `listevents`. To improve usability and consistency, we plan to rename the `createattn` command to `createevent`.
 
-- **Specificity of error message for Edit function**
-  
-  Currently, when users type in `edit 1 c/comment`, it gives the error message that the index must be a non-zero unsigned integer.
-  
-  As it may be confusing to users that they are unable to edit comments using the edit feature, an error message should be shown in this specific case.
+4. **Warning for when edited fields are the same as previous fields**
 
-  Alternatively, in future iterations, the comment feature could be integrated into the `add` or `edit` feature.
-
-- **Add and delete group feature**
-
-  Currently, when users want to add a group, they have to use the `edit` feature to key in all existing groups alongside new ones.
-
-  For better usability, there could be individual functions to add and delete specific tags
-
-- **Warning for when edited fields are the same as previous fields**
-
-  Currently, when users use the `edit` feature to update a field that is exactly the same as before (eg. editing name from `Mary Tan` to `Mary Tan`), 
+    Currently, when users use the `edit` feature to update a field that is exactly the same as before (eg. editing name from `Mary Tan` to `Mary Tan`), 
   there is no warning shown. A message could be shown to warn the user in case this action was not intended.
 
-- **Comments will show a preview and be expandable if they are long to see the full text**
+5. **Comments will show a preview and be expandable if they are long to see the full text**
 
-  Currently, when users use the `comment` feature there is no limit on how long comments can be. Thus, the full comment appears in the UI, which instead be expandable component to prevent overloading of information in the interface.
+    Currently, when users use the `comment` feature there is no limit on how long comments can be. Thus, the full comment appears in the UI, which instead be expandable component to prevent overloading of information in the interface.
 
-- **Enhance delete to support deleting of multiple students at once**
+6. **Enhance delete to support deleting of multiple students at once**
 
-  Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.  
+    Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.
+
+7.  **Add warnings for possible duplicate student**
+    Currently, students with same names but slightly different studentIDs do not generate a warning despite it likely being a user mistake. We plan to add in warnings for when the user tries to add a student with a similar name and similar studentID as an existing student in the list. Similar name means matching names without case sensitivity and without whitespace within the name (eg. `johndoe` is similar to `JOHN DOE`) and similar studentID means two studentIDs that differ by a single character, case-insensitive, for example `A1234567E` is similar to `a2234567e` (2nd character different) and `A1234567U` (Last character different). This accounts for the user trying to add a student that already exists and making a slight typo in the studentID. This applies for both the `add` and `edit` commands and the warning message will be appended to the end of the respective success messages as: `This person may already exist. Please check to ensure this person is not a duplicate.`. The commands will execute normally just with an additional warning to alert users.
+
+8. **Add warnings for Year inputs that may be mistakes**
+
+   Currently, there is no warning if a year such as '15' is inputted which is likely a user mistake since it is unlikely a student has been studying in NUS for 15 years. We plan to add in warnings for when the input to Year is >9. (Accounts for PhD students as well). The warning would apply for `add` and `edit` commands and would be appended to the end of the respective success messages as: `Year specified is larger than 9. Please check that this is not a mistake`. Note that the commands are allowed to execute, just with an additional warning to alert users to their possible mistake.
+

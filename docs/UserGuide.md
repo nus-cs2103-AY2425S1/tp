@@ -29,11 +29,11 @@ If you are already using Teacher's Pet, skipping to the [Commands](#commands) or
 Here are some symbols you may encounter in this user guide:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- This is a tip that may contain additional useful information
+ This contains additional useful information
 </div>
 
-<div markdown="span" class="alert alert-warning">:warning: **Warning:**  
-This contains some information on what you are not able to do
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This contains some important information that you should take note of
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -139,8 +139,8 @@ You can add a student easily to Teacher's Pet!
 
 Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
-* The `NUS_STUDENTID` here refers to the NUS Matriculation Number of the student (Starts with 'A')
-* The `NUS_NETID` here refers to the id that is associated with the student's NUS Outlook account ("NUS_NETID@u.nus.edu")
+* The `NUS_STUDENTID` here refers to the NUS Matriculation Number of the student (Has the format 'AXXXXXXXC', where X is any number and C is any letter)
+* The `NUS_NETID` here refers to the ID that is associated with the student's NUS Outlook account (Found in "NUS_NETID@u.nus.edu" and must be in the format 'eXXXXXXX', where X is any number)
 * The `NUS_STUDENTID` must be unique (ie. Two students cannot have the same `NUS_STUDENTID`)
 
 Here are some examples for you to try!

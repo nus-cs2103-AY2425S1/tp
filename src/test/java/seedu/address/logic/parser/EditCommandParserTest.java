@@ -57,7 +57,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        String errorMessage = String.format("%s Or Index may contain invalid arguments (e.g. c/)\n%s",
+        String errorMessage = String.format("%s Or prefix entered is not supported (eg. 'c/').\n%s",
                 MESSAGE_INVALID_INDEX,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
@@ -73,7 +73,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        String errorMessage = String.format("%s Or Index may contain invalid arguments (e.g. c/)\n%s",
+        String errorMessage = String.format("%s Or prefix entered is not supported (eg. 'c/').\n%s",
                 MESSAGE_INVALID_INDEX,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
@@ -235,6 +235,7 @@ public class EditCommandParserTest {
         // Test input with duplicate group names
         String input = "1 g/ group 1 g/ group 1";
 
+        // AI was used to check the syntax for testing exceptions
         // Expect a ParseException to be thrown due to duplicate groups
         assertThrows(ParseException.class, () -> parser.parse(input));
     }
