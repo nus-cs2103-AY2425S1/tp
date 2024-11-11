@@ -221,11 +221,12 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Export 
 
-1. The export command modifies the userPref variable ```exportFilterGoods``` to true when called
+1. The export command modifies ```UserPrefs#exportFilterGoods``` to true when called
 2. When the command is executed, ```LogicManager``` will check this variable
-3. If the variable is true, ```LogicManager``` will call ```saveFilteredGoods``` from the storage class
+3. If the variable is true, ```LogicManager``` will call ```Storage#saveFilteredGoods``` from the storage class
 4. Effectively creating/updating the ```filteredGoods.csv``` file
-5. ```LogicManager``` then sets ```exportFilterGoods``` to false
+5. ```LogicManager``` then calls ```Model#setExportFilterGoodsToFalse``` to set ```UserPrefs#exportFilterGoods``` to false.
+6. Thus, the filtered file is only created when the export command is used.
 
 
 --------------------------------------------------------------------------------------------------------------------
