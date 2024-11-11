@@ -198,11 +198,15 @@ public class ExportCommandTest {
     @Test
     public void writeFileTest_txtFormatted() throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
-        jsonData.add(new LinkedHashMap<>(Map.of("name", "Johnny Appleseed", "phone", "93321121",
-                "email", "johnnya@example.com", "address", "Malaysia",
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Johnny Appleseed",
+                "phone", "93321121",
+                "email", "johnnya@example.com",
+                "address", "Malaysia",
                 "tags", "\"LifeInsurance\" : \"Yes\"",
-                "financialInfo", "noIncome", "socialMediaHandle", "@johnA")));
-        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar", "email", "kumar@kgoomail.com")));
+                "financialInfo", "noIncome",
+                "socialMediaHandle", "@johnA")));
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar",
+                "email", "kumar@kgoomail.com")));
         Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone", "email", "address",
                 "tags", "financialInfo", "socialMediaHandle"));
 
@@ -218,7 +222,7 @@ public class ExportCommandTest {
         assertEquals("  phone | 93321121", lines.get(2));
         assertEquals("  email | johnnya@example.com", lines.get(3));
         assertEquals("  address | Malaysia", lines.get(4));
-        assertEquals("  tags | [ LifeInsurance : Yes ]", lines.get(5));
+        assertEquals("  tags | LifeInsurance : Yes", lines.get(5));
         assertEquals("  financialInfo | noIncome", lines.get(6));
         assertEquals("  socialMediaHandle | @johnA", lines.get(7));
         assertEquals("}", lines.get(8));
