@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-##### **Use case: View all contacts**
+##### **Use case: UC01 - View all contacts**
 
 **MSS**
 
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-##### **Use case: Add a contact**
+##### **Use case: UC02 - Add a contact**
 
 **MSS**
 
@@ -377,7 +377,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-##### **Use case: View all information about a contact**
+##### **Use case: UC03 - View all information about a contact**
 
 **MSS**
 
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Delete a contact**
+##### **Use case: UC04 - Delete a contact**
 
 **MSS**
 
@@ -429,7 +429,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Edit a contact**
+##### **Use case: UC05 - Edit a contact**
 
 **MSS**
 
@@ -460,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-##### **Use case: Find a contact**
+##### **Use case: UC06 - Find a contact**
 
 **MSS**
 
@@ -485,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Add remarks to a contact**
+##### **Use case: UC07 - Add remarks to a contact**
 
 **MSS**
 
@@ -503,8 +503,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
