@@ -42,7 +42,6 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
                         AssignmentList assignmentList, TutorialList tutorialList) {
-        //TODO: Add sample tutorialList for the test cases (see getTypicalStudentsList())
         requireAllNonNull(addressBook, userPrefs, assignmentList, tutorialList);
 
         logger.fine("Initializing with address book: " + addressBook + ", user prefs " + userPrefs
