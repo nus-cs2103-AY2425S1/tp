@@ -204,7 +204,7 @@ Adds a company to AdmiNUS.
 **Format**:
 
 ```
-company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
 | Parameter Name   | Description                                        | Required   |
