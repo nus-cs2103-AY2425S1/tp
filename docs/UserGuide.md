@@ -10,15 +10,15 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for SupplyCentral.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SupplyCentral.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/old-Ui.png)
 
@@ -27,7 +27,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to SupplyCentral.
 
    * `delete Alex Yeoh` : Deletes the supplier "Alex Yeoh".
 
@@ -67,7 +67,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -76,7 +76,7 @@ Format: `help`
 
 ### Adding a supplier: `add`
 
-Adds a supplier to the address book.
+Adds a supplier to the SupplyCentral.
 
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
@@ -96,13 +96,13 @@ Note: The application is optimized for convenience store owners within the Singa
 
 ### Listing all suppliers : `list`
 
-Shows a list of all suppliers in the address book.
+Shows a list of all suppliers registered in SupplyCentral.
 
 Format: `list`
 
 ### Editing a supplier : `edit`
 
-Edits an existing supplier in the address book.
+Edits an existing supplier in SupplyCentral.
 
 Format: `edit NAME [n/NEW_NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
@@ -122,6 +122,7 @@ Finds suppliers whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
 
+* At least one keyword or category should be provided.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * The keywords will be searched on the name of the supplier.
@@ -142,18 +143,18 @@ Examples:
 
 ### Deleting a supplier : `delete`
 
-Deletes the specified supplier from the address book.
+Deletes the specified supplier from SupplyCentral.
 
 Format: `delete NAME`
 
 * Deletes the person with the specified `NAME`.
 
 Examples:
-* `delete Amy` deletes the supplier of name `Amy` in the address book.
+* `delete Amy` deletes the supplier of name `Amy` in SupplyCentral.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book, including all tracked goods.
+Clears all entries from SupplyCentral, including all tracked goods.
 
 Format: `clear`
 
@@ -214,11 +215,11 @@ Note: If the `filteredGoods.csv` file already exists, the information contained 
 
 ### Saving the data
 
-Supply Central data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SupplyCentral data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the Supplier data file
 
-SupplyCentral supplier data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SupplyCentral supplier data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SupplyCentral will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -227,7 +228,7 @@ Furthermore, certain edits can cause SupplyCentral to behave in unexpected ways 
 
 ### Editing the Goods data file
 
-SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
+SupplyCentral goods data will be stored in a CSV file `[JAR file location]/data/goods.csv` for advanced users to access and use externally for business purposes. However, it is strongly discouraged for users to directly edit this data file due to risk of data corruption.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Similar to the supplier data file, if your changes to the data file makes its format invalid, SupplyCentral will discard all invalid data and will only retain any valid data within the current file. Hence, as mentioned above, it is strongly discouraged to directly edit this file.<br>
@@ -235,7 +236,7 @@ Similar to the supplier data file, if your changes to the data file makes its fo
 
 ### Resizing UI elements
 
-SupplyCental allows you to resize the UI elements to better fit your screen. You can resize the UI elements by clicking and dragging the dividers as highlighted below.
+SupplyCental allows you to resize the UI elements to better fit your screen. You can resize UI elements by clicking and dragging the dividers, as shown below.
 
 ![Draggable UI elements](images/DraggableUI.png)
 
@@ -245,7 +246,7 @@ The elements will resize according to the position of the divider, allocating mo
 
 The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
 
-This is a **key** feature of our application and deliveries will be automatically marked as delivered depending on the time in real life. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without the need of any user action.)
+This is a **key** feature of our application and deliveries are automatically marked as delivered depending on the current time. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without any need for user action.)
 
 ![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
