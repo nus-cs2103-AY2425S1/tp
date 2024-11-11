@@ -414,35 +414,165 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   a. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   b. Open your command interface and run the jar file with the command `java -jar Grub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   a. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   b. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a restaurant
 
 1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
+   a. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
 
-   1. Test case: `delete 1`<br>
+   b. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   c. Test case: `delete 0`<br>
       Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   d. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-## Appendix: Planned Enhancements
-- Enhance duplicate detection
-  - Include address field, not just name to detect duplicates
-  - Handle case-insensitive duplicates
-    - Currently, the app does not handle case-insensitive duplicates. For example, "McDonalds" and "mcdonalds" are treated as different restaurants.
-- Allow non-alphanumeric characters in restaurant names
+### Finding a restaurant by name
+
+1. Find a restaurant by its saved name
+
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
+   The first test case below assumes the user has not added any more restaurants with the name Swenswen.
+
+   b. Test case: `find swenswen`<br>
+      Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+   c. Test case: `find !@#`<br>
+      Expected: Message displays no restaurants found.
+
+   d. Other incorrect find commands to try: `find`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+
+
+### Filtering by tags
+
+1. Find a restaurant by its tag names
+
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
+   The first test case below assumes the user has not added any more restaurants with the tag halal.
+
+   b. Test case: `tags halal`<br>
+      Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+   c. Test case: `tags $$$`<br>
+      Expected: Message displays no restaurants found.
+
+   d. Other incorrect filter-by-tag commands to try: `tags`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+
+### Filtering by price
+
+1. Find a restaurant by its price labels
+
+   a. Prerequisites: The requested restaurant has to be currently saved.<br>
+      The first test case below assumes the user has not added any more restaurants with the price label of `$`.
+
+   b. Test case: `price $`<br>
+      Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+   c. Test case: `price expensive`<br>
+      Expected: Message displays no restaurants found. 
+
+   d. Other incorrect filter-by-price commands to try: `price`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+
+### Rating a restaurant
+
+1. Rating a restaurant while all restaurants are being shown
+
+    a. Prerequisites: The requested restaurant has to be currently saved.<br>
+
+    b. Test case: `rate 1 r/2`<br>
+       Expected: First contact is given a rating of `2` from the list. Left hand side displays updated rating for the restaurant.
+
+    c. Test case: `rate 0`<br>
+       Expected: No restaurant is rated. Error details shown in the status message. Status bar remains the same.
+
+    d. Other incorrect rate commands to try: `rate`<br>
+       Expected: Similar to previous.
+
+
+### Favourite a restaurant
+
+1. Favourite a restaurant while all restaurants are being shown
+
+    a. Prerequisites: The requested restaurant has to be currently saved.<br>
+      In the test case below, we assume that none of the restaurants in the list were previously marked as favourite. 
+
+    b. Test case: `fav 2`<br>
+       Expected: Second contact has its border highlighted orange and brought to the top of the list as the first index.
+
+    c. Test case: `fav 0`<br>
+       Expected: No restaurant is turned to favourite. Error details shown in the status message. Status bar remains the same.
+
+    d. Other incorrect favourite commands to try: `fav`<br>
+       Expected: Similar to previous.
+
+
+### Un-favourite a restaurant
+
+1. Un-favourite a restaurant while all restaurants are being shown
+
+    a. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
+       In the test case below, we assume that the first restaurant in the list is marked as favourite as described by the previous test case mentioned above.
+
+    b. Test case: `unfav 1`<br>
+       Expected: First contact has its border un-highlighted and brought back to its original index in the list before being set as a favourite.
+
+    c. Test case: `unfav 0`<br>
+       Expected: No favourite restaurant is turned back to normal. Error details shown in the status message. Status bar remains the same.
+
+    d. Other incorrect un-favourite commands to try: `unfav`<br>
+       Expected: Similar to previous.
+
+
+
+## **Appendix: Effort**
+Overall the difficulty that was faced in the project was mainly at the start in understanding the overall structure of the source code.
+Luckily the diagrams that were provided indeed helped a lot in our teams journey in understanding and developing the project.
+One of the methods that helped us a lot in our speed and ability to meet all the necessary datelines were to take inspiration of some of the code
+that had already been implemented. For example, the source code for the `tags` command and feature was heavily inspired by the 
+already existing `find` command and feature that came with the project.<br>
+
+Additionally, another tough lesson we learnt was to not be too over ambitious in our planned features and implementation. At the start of the project, 
+while we were ambitious with excitement on what were the list of features we wanted to add, we realised that scrapping some ideas we created was the best 
+strategy as at the end of the day, we had to deliver iterations within a one-week time span, thus, looking back, while unfortunate, it was the most sound strategy we could 
+have adopted, which was to work on features that we could deliver by the stipulated dateline.
+
+
+
+## **Appendix: Planned Enhancements**
+Team size: 4<br>
+
+1. **Enhance `add` command to accept non-alphanumeric values:** The current implementation for the add command is such where names and tags can only be saved as alphanumeric values. We plan to allow adding non-alphanumeric
+values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/12345678 e/test@email.com a/Pasir Ris pr/$$$ t/Crème brûlée`.
+2. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
+spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
+3. **Correct grammar for "1 restaurants listed" message:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
+fixing this in the future to: `1 restaurant listed!`
+4. **Improve `tags` error message:** Currently tags are only allowed to be alphanumeric values, if the user were to search `tags $$$$`, the response of `0 restaurants listed!` is the output. However, a better implementation would have been 
+for the source code to first check if the keywords fits the current criteria for what is allowed as tags before finding. If the conditions were not met, a more appropriate response could have been displayed, one example 
+that would be a response to the above example, would be `tags should only be alphanumeric values, if you are trying to filter by price use to price command`.
+5. **Improve `price` error message:** Currently price are only allowed to be filtered by a given combination of the allowed price labels, if the user were to search `price $$$$$` or `price 4`, the response of `0 restaurants listed!` is the output. However, like the previous point, 
+a better implementation would have been for the source code to first check if the input were price labels before finding. If the conditions were not met, a more appropriate response could have been displayed, for example 
+`Price command only accepts a combination of the following: $ $$ $$$ $$$$`.
+6. **Limit phone number length in `edit` command:** Currently a user can enter a really long phone number, e.g. `120 digits` when editing an already existing contact with the `edit` command. We plan on checking the user inputs in the future for the edit command so as to prevent such 
+things from happening in the future.
+7. **Include address field in duplicate detection:** Currently, the app only uses the name field for restaurant duplicate detection. A more sensible and intuitive strategy would be to include the address field as well, which would lead to a more positive user experience.
+8. **Handle case-insensitive duplicates:** Currently, the app does not handle case-insensitive duplicates. For example, "McDonalds" and "mcdonalds" are treated as different restaurants. It would improve the product usage experience if this would be taken into account.
