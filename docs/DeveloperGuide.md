@@ -787,7 +787,7 @@ Use case ends.
 
 ### Glossary
 
-* **TalentHub**: A structured data set containing contact and event information for Talents managed by Talent Managers.
+* **AddressBook**: A structured data set containing contact and event information for Talents managed by Talent Managers.
 * **Events**: Social and networking events organized by third parties, such as award shows and brand events.
 * **Index**: The position of individual contacts or events in lists referenced by specific commands.
 * **Industry Professional**: Individuals that Talents interact with or service providers from whom Talents may need to procure services during events.
