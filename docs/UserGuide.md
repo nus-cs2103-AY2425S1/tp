@@ -22,11 +22,11 @@ ContactMate is a **desktop app for managing clients (Singaporeans and Permanent 
          2. Type `Terminal` and press `Enter`.
    1. In the terminal, type `java --version` and press `Enter`.
    2. If you have Java `17` or above installed, you should see a message containing something like this, (`openjdk XX.0.12 2024-07-16 LTS`), where `XX` should be `17` or above.
-    3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3.
-2. Install Java `17` using the following steps.
-   1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-   2. Download the appropriate installer for your operating system.
-   3. Run the installer and follow the instructions to install Java.
+    3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3. 
+   4. **Important Note**: for Mac Users, the specific **Java 17 JDK+FX Azul distribution** must be installed. If you do not have it installed, or are unsure whether or not you have it installed, proceed to Step 2.
+2. Install Java `17` by following the guide below.
+   1. For [Windows Users](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
+   2. For [Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-3/tp/releases).
    1. You can find the `.jar` file under the Assets section of the latest release.
    1. Click on the file `contactmate.jar` to download it.
@@ -70,7 +70,7 @@ ContactMate is a **desktop app for managing clients (Singaporeans and Permanent 
 
 Field | Description                                                                                                                                        | Constraints, Examples
 --------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
-**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government). e.g., `S1803269D`
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government), except valid NRICs starting with `M`. Refer to the [FAQ](#faq) section for more info. e.g., `S1803269D`
 **Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
 **Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
 **Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
@@ -104,6 +104,8 @@ Field | Description                                                             
 * The `personList` view is the view where the list of elderly is shown. It is the default view when you start the application. Use the `list` command to return to this view if you are in another view.
 
 * The fields in a command cannot contain whitespace followed by any of the command's prefix as part of the input. For example, `address` cannot be `a/Clementi Ave a/2` but can be `a/Clementi Area/2`. Another example is `notes` can neither be `o/This is a note o/part of same note` nor `o/Note with d/in it` but can be `o/I asked a no/yes question`.
+
+* The fields in a command are displayed exactly as they are in the command (no change of case). For example, if using `n/john doe` in a valid `add` command, it is displayed as `john doe` and not as `John Doe`. Similarly, if using `i/s8645190e` in a valid `add` command, it is displayed as `s8645190e` and not as `S8645190E`.
 </div>
 
 ### Viewing help : `help`
@@ -250,7 +252,7 @@ Exits the program.
 Format: `exit`
 
 ### Navigating the Command History
-You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is in focus (i.e. you have just clicked on the command box).
+You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is already in focus (if you are unsure, click on the command box to refocus on it).
 
 ### Duplicate detection
 Duplicate entries (elderly) are entries with the same NRIC (case-insensitive). ContactMate will not allow duplicate entries, and will stop you from adding (`add`) or editing (`edit`) an elderly if it would result in a duplicate entry.
@@ -294,6 +296,12 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 
 **Q**: How do I save my data?<br>
 **A**: ContactMate ensures your data is saved automatically after every command.
+
+**Q**: They keep saying that the NRIC is invalid. What should I do?<br>
+**A**: ContactMate uses an algorithm to check the validity of the NRIC. Please ensure that you have not typed any digit or character wrongly. Otherwise, confirm with the elderly that they have given you the correct NRIC. 
+
+**Q**: Why can't I add an elderly with an NRIC starting with `M`?<br>
+**A**: Please check if you have the correct NRIC. NRICs starting with `M` are only issued to foreigners and are not valid for the Singaporeans and Permanent Residents in the Befriending Program.
 
 --------------------------------------------------------------------------------------------------------------------
 
