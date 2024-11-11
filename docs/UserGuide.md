@@ -217,7 +217,7 @@ Displays a message with a link to the User Guide (you're here right now!).
 Format: `help`
 
 Examples:
-* `help` <br><br>
+* `help` <br>
   **Output**: <br>
 ![help message](images/helpMessageUpdated.png)
 
@@ -237,12 +237,12 @@ Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 * A _notification message_ will be displayed if MedDict could not create the doctor with the given information.
 
 Examples:
-* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br><br>
+* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
     Successfully created a new doctor with ID: #1 : <br>
     Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street;
 
-* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br><br>
+* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
   This doctor already exists.
   
@@ -264,12 +264,12 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 
 Examples:
-* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br><br>
+* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br> 
     Successfully created a new patient with ID: #0 : <br>
     John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street;
 
-* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br><br>
+* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br>
 This patient already exists.
 
@@ -289,11 +289,11 @@ Format: `delete z/ID`
 * A _notification message_ will be displayed if MedDict could not delete the person with the given ID.
 
 Examples:
-* `delete z/2` <br><br>
+* `delete z/2` <br>
   **Output**: <br>
   Successfully deleted the person.
 
-* `delete z/2` <br><br>
+* `delete z/2` <br>
   **Output**: <br>
   Unable to delete the person, check the ID entered!
 
@@ -307,7 +307,7 @@ Format: `addR z/PATIENT_ID r/REMARK`
 * A _notification message_ will be displayed if MedDict could not add remarks to the patient with the given ID.
 
 Examples:
-*  `addR z/0 r/cancer` <br><br>
+*  `addR z/0 r/cancer` <br>
     **Output**: <br>
    Successfully added remarks: cancer to patient of ID: 0.
 
@@ -318,7 +318,7 @@ Displays a list of all persons in the address book.
 Format: `list`
 
 Examples:
-*   `list` <br><br>
+*   `list` <br>
     **Output**: <br>
     ![list](images/list.png)
 
@@ -335,15 +335,15 @@ Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 * A _notification message_ will be displayed if MedDict could not edit the person with the given ID.
 
 Examples:
-*  `edit z/1 p/91234567 e/johndoe@example.com` <br><br>
+*  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
    Edited Person: Dr Jane Smith; Phone: 91234567; Email: johndoe@example.com; Address: 456 Elm Street
 
-*  `edit z/2` <br><br>
+*  `edit z/2` <br>
    **Output**: <br>
    At least one field to edit must be provided.
 
-* `edit z/1 p/91234567 e/johndoe@example.com` <br><br>
+* `edit z/1 p/91234567 e/johndoe@example.com` <br>
   **Output**: <br>
   This person already exists in the address book.
 
@@ -362,15 +362,15 @@ Format: `get KEYWORD`
 * A _notification message_ will be displayed if MedDict could not find a person associated with the KEYWORD.
 
 Examples:
-* `get john` <br><br>
+* `get john` <br>
   **Output**: <br>
   The ID of the person that you are finding is: 0
 
-* `get johnny` <br><br>
+* `get johnny` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search ID for! Key in 'list' to view all patients
 
-* `get johnny` <br><br>
+* `get johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
@@ -390,16 +390,16 @@ Format: `find KEYWORD`
 * A _notification message_ will be displayed if MedDict could not find a person associated with the KEYWORD.
 
 Examples:
-* `find john` <br><br>
+* `find john` <br>
   **Output**: <br>
   One person listed! Key in [list] to view all patients
 
-* `find ` <br><br>
+* `find ` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search ID for! <br>
   Key in [list] to view all patients
 
-* `find johnny` <br><br>
+* `find johnny` <br>
   **Output**: <br>
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
@@ -424,15 +424,15 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 * A _notification message_ will be displayed if MedDict could not add the appointment successfully.
 
 Examples:
-*  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br><br>
+*  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
 
-*  `addA z/0 z/1 x/2024-12-31 15:23` <br><br>
+*  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
 
-*  `addA z/0 z/1 x/2024-12-31 15:23` <br><br>
+*  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The patient or doctor already has another appointment!
 
@@ -447,16 +447,16 @@ Format: `view z/ID [x/DATE_TIME]`
 * A _notification message_ will be displayed if MedDict could not find any history or appointments associated with the person's ID.
 
 Examples:
-*  `view z/0 x/2024-12-31 15:23` <br><br>
+*  `view z/0 x/2024-12-31 15:23` <br>
    **Output**: <br>
    \[Incomplete] Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`.
 
-*  `view z/0` <br><br>
+*  `view z/0` <br>
    **Output**: <br>
    \[Completed] Appointment: `2024-12-31 15:23` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
    \[Incomplete]Appointment: `2024-12-31 16:23` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
 
-*  `view z/1 x/2024-12-31 16:23` <br><br>
+*  `view z/1 x/2024-12-31 16:23` <br>
    **Output**: <br>
    No history found for the person.
 
@@ -470,13 +470,13 @@ Format: `checkA z/ID y/DATE`
 * A _notification message_ will be displayed if MedDict could not find any appointments associated with the person's ID.
 
 Examples:
-*  `checkA z/1 y/2024-12-31` <br><br>
+*  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
    Appointments on 2024-12-31:<br>
    \[Incomplete] Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session` <br>
    \[Completed] Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`
 
-*  `checkA z/2 y/2024-12-30` <br><br>
+*  `checkA z/2 y/2024-12-30` <br>
    **Output**: <br>
    No appointment found for the person: `Amy Bee`
 
@@ -496,15 +496,15 @@ Format: `mark z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 * A _notification message_ will be displayed if MedDict could not find the appointment to mark.
 
 Examples:
-*  `mark z/0 z/1 x/2024-12-31 15:23` <br><br>
+*  `mark z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully marked appointment as complete
 
-*  `mark z/0 z/1 x/2024-12-31 15:23` <br><br>
+*  `mark z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The appointment is completed. Check the appointment that you want to mark!
 
-*  `mark z/2 z/3 x/2024-12-31 16:23` <br><br>
+*  `mark z/2 z/3 x/2024-12-31 16:23` <br>
    **Output**: <br>
    No appointments found on this date.
 
@@ -524,11 +524,11 @@ Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 * A _notification message_ will be displayed if MedDict could not find the appointment to delete.
 
 Examples:
-*  `deleteA z/0 z/1 x/2024-12-31 15:23` <br><br>
+*  `deleteA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully deleted appointment to a patient
 
-*  `deleteA z/1 z/3 x/2024-12-31 15:23` <br><br>
+*  `deleteA z/1 z/3 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The appointment doesn't exist! Please check again the details you have entered!
 
@@ -539,7 +539,7 @@ Clears all entries from the database, in other words, delete all contacts from t
 Format: `clear`
 
 Examples:
-* `clear` <br><br>
+* `clear` <br>
   **Output**: <br>
   ![clear message](images/clearMessage.png)
 
