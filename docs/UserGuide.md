@@ -5,7 +5,7 @@ title: User Guide
 
 Welcome to EduConnect – a tool designed to help teachers manage student and teacher details with speed and simplicity. EduConnect streamlines your everyday tasks, such as tracking attendance and managing contact information, allowing you to organize important information in a fast, efficient way. By typing commands, you can quickly update, search, and handle details with minimal effort, making it a valuable companion for busy school environments.
 
-## Table of Contents
+* ## Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
