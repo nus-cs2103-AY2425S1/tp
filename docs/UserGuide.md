@@ -181,7 +181,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 | Field | Format                                                                                                                                                                  |
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `MATRICULATION_NUMBER` | must be a valid **NUS** matriculation number in the form `AxxxxxxxB`, where `A` is the fixed as 'A', `B` is any *uppercase* character, and `xxxxxxx` is any 7 integers. |
-| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. The name can have a maximum length of 50 characters.                                    |
 | `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
 | `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                     |
