@@ -6,8 +6,8 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore.
-Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for **real estate agents based in Singapore**.
+Built for **fast, efficient use** through a Command Line Interface (CLI) - a text based system that accepts typed commands, NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
 - **Manage and Tag Clients**: Easily add, tag, and retrieve client (buyer/seller) details.
@@ -100,7 +100,6 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
    * `addSell 1 ht/c bp/1750000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to sell of type `Condo` to the Address Book for the contact at index 1.
 
-
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
@@ -182,7 +181,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - `NAME` must be at least one character long, and should only contain alphanumeric characters and spaces.
-- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers.
+- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers. 
 - `EMAIL` must be a valid email address.
 - `ADDRESS` must be at least one character long.
 - `TAG` must be at least one character long, and should only contain alphanumeric characters and spaces.
@@ -194,6 +193,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 - `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
 
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
+
+- The phone number can have any number of digits, not just limited to 8 digits as in Singapore.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
