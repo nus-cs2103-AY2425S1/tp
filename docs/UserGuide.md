@@ -465,7 +465,7 @@ The `find` command allows you find student by a field or any combination of fiel
   <!-- Output Section -->
   <div style="width: 45%; vertical-align: top;">
     <p><b>Output:</b> The UI updates to show persons matching the search keyword.</p>
-    <img src="images/find_output.png" alt="Find output example" style="width: 100%; margin-top: 3px;" />
+    <img src="images/find_output.png" alt="Find output example" style="width: 100%; margin-top: 8px;" />
   </div>
 
 </div>
