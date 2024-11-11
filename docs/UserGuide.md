@@ -177,6 +177,12 @@ Commands in EZSTATES follow the same structure:
 |-----------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
+**Notes:**
+1. Since `INDEX` is **one-based**, the first item in the list cannot start with `0`.
+2. EZSTATES handles errors related to the INDEX parameter in two ways: 
+   1. If `INDEX` is an invalid number ((e.g., non-positive integers, numbers larger than Integer.MAX_VALUE, or non-integer values like 4.5), it will be flagged as an invalid command format. 
+   2. If `INDEX` is a valid integer but exceeds the size of the currently displayed list (client/listing), it will be flagged as an invalid index. Supported values are [1, displayed list size].
+
 #### Prefix Notation
 
 Prefixes follow the same structure:
