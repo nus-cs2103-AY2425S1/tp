@@ -305,7 +305,7 @@ the entering the command, which will either confirm or cancel the command, respe
 execute another command until the `delete` command is either confirmed or cancelled.
 
 Examples:
-* `delete 2` deletes the 2nd client in the case management system.
+* `delete 2` deletes the 2nd client in the displayed client list.
 
 
 ### Adding a log entry : `addlog`
@@ -324,8 +324,7 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
-* `find n/Alice` followed by `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the results of the `find` command.
-* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the case management system with the remark `Client is doing well` and the current date and time.
+* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the displayed client list, with the current date and time.
 
 ### Deleting a log entry : `deletelog`
 
@@ -336,8 +335,8 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The `LOG_INDEX` refers to the index number shown in the displayed log list.
-* The log index **must be a positive integer** 1, 2, 3, …​
-* The log index is specific to the client at the specified `INDEX`.
+* The `LOG_INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `LOG_INDEX` is specific to the client at the specified `INDEX`.
 * Note that the `deletelog` command requires confirmation. You will be prompted to key in either `y` or `n` after 
   the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
   execute another command until the `deletelog` command is either confirmed or cancelled.
