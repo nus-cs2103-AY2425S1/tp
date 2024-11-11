@@ -194,7 +194,44 @@ Step 2. The user executes `list-patient` command. The `list-patient` command wil
 See below sequence diagram for the `list` command:
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
+The sequence of operations for `list-doctor` is similar to `list-patient`, with the only difference being that the `list-doctor` command will indirectly call `Model#getFilteredPersonList()` to get the list of doctors to be displayed.
 
+### Find Patient and Find Doctor Features
+This feature allows users to find a specific patient or doctor stored in MediContacts.
+
+Given below is an example usage scenario and how the `find-patient` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `find-patient` command, with the name of the patient to be found. The `find-patient` command will indirectly call `Model#getFilteredPersonList()` to get the list of patients/doctors to be displayed.
+
+Sequence Diagram is similar to the above list command, therefore not repeated here.
+
+The sequence of operations for `find-doctor` is similar to `find-patient`, with the only difference being that the `find-doctor` command will indirectly call `Model#getFilteredPersonList()` to get the list of doctors to be displayed.
+
+### Add Appointment Feature
+This feature allows users to add appointments for patients and doctors in MediContacts.
+
+Given below is an example usage scenario and how the `add-appt` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `add-appt` command, with all the required parameters and with valid inputs. The `add-appt` command will indirectly call `Model#addAppointment()` to add the new appointment to the address book.
+
+See below sequence diagram for the `add-appt` command:
+![AddApptSequenceDiagram](images/AddApptSequenceDiagram.png)
+
+### Delete Appointment Feature
+This feature allows users to delete appointments from MediContacts.
+
+Given below is an example usage scenario and how the `delete-appt` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `delete-appt` command, with the index of the appointment to be deleted. The `delete-appt` command will indirectly call `Model#deleteAppointment()` to delete the appointment from the address book.
+
+See below sequence diagram for the `delete-appt` command:
+![DeleteApptSequenceDiagram](images/DeleteApptSequenceDiagram.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
