@@ -400,18 +400,23 @@ When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command chang
 
 Example:
 
-- `aggGrade median`<br>
-  Shows the median of the overall grade of the current filtered list.
-- `aggGrade median n/Midterm`<br>
-  Shows the median for midterm tests of the current filtered list.
+- `aggGrade mean`<br>
+  Shows the mean of the overall grade of the current filtered list.
+- `aggGrade mean n/final`<br>
+  Shows the mean for final tests of the current filtered list.
 
-Expected output for `aggGrade median`:
+Expected output for `aggGrade mean`:
 
-![result for 'aggGrade median'](images/aggGrade_normal.png)
+![result for 'aggGrade mean'](images/aggGrade_normal.png)
 
-Expected output for `aggGrade median n/midterm`:
+In the example above, `aggGrade mean` calculates the mean of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 87.00 respectively.
 
-![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
+Expected output for `aggGrade mean n/final`:
+
+![result for 'aggGrade mean n/final'](images/aggGrade_filtered.png)
+
+In the example above, `aggGrade mean n/final` calculates the mean of the final grades of **people who have their final tests recorded in their grade list**.
+In this case, only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
 
 <div style="page-break-after: always;"></div>
 
