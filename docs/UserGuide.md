@@ -120,7 +120,7 @@ Examples:
 ### Adding a remark to a patient profile : `remark`
 
 Adds a remark to a specified patient profile.
-> **Note:** You can only specify **one** remark to add, and patients can only have one remark.
+> **Note:** You can only specify **one** remark to add, and patients can only have one remark. If the patient already has a remark, the original remark will be overwritten.
 
 Format: `remark NRIC r/REMARK`
 
@@ -371,7 +371,7 @@ You can check your Java version by running `java -version` in the command termin
 | `exit`        | `ex`     | Exits the application                    |
 | `find`        | `f`      | Finds patients by name or tags           |
 | `help`        | `h`      | Displays a list of accepted commands     |
-| `list`        | `ls`     | Shows a list of all patient profiles     |
+| `list`        | `l`      | Shows a list of all patient profiles     |
 | `remark`      | `r`      | Add a remark to a patient profile        |
 | `sort`        | `s`      | Sorts the list of patients               |
 | `triage`      | `t`      | Change triage stage of a patient         |
