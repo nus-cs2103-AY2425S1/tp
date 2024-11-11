@@ -1346,7 +1346,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Special Comments:**
-1. Refer to the remarks and constraints for the following prefix: [n/](#n)
+1. Refer to [INDEX](#reference-types) constraints.
 2. The `Output` for User Error #2 has a missing parameters line where the CLIENT_INDEX should be. The intended look is:
    <br>Invalid command format!
    <br>moreinfo: Open a window to more information about the client.
