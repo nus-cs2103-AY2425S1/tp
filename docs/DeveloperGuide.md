@@ -833,12 +833,12 @@ testers are expected to do more *exploratory* testing.
     * **Prerequisites:**
         * No patients in the list
         <br><br>
-    * **Test Case:** `add n/Kathy Prince i/P00002 w/D1 d/Gastrisitis`<br>
+    * **Test Case:** `add n/Kathy Prince i/P00002 w/D1 d/Gastritis`<br>
     * **Expected** A patient with the following fields is added to the list:
         * Name: `Kathy Prince`
         * ID: `P00002`
         * Ward: `D1`
-        * Diagnosis: `Gastrisitis`
+        * Diagnosis: `Gastritis`
         * Medication: `-`
         * Notes: `-`
         * Appointment: `-`
