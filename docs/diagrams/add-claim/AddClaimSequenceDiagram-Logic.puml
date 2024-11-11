@@ -58,7 +58,7 @@ create CommandResult
 AddClaimCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddClaimCommand : r
+CommandResult --> AddClaimCommand
 deactivate CommandResult
 
 AddClaimCommand --> LogicManager : r
