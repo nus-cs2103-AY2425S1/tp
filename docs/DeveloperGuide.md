@@ -917,7 +917,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
        - Customer with name `Betsy Crowe` already exist in the address book.
        - At least 1 customer is listed.
-       - The customer to be edited is not `Betsy Crowe`. <!-- Spacer for extra break -->
+       - The customer to be edited is not `Betsy Crowe`.
+        <p><p/>
 
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
