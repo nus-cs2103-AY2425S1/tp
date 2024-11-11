@@ -278,7 +278,7 @@ If you input multiple indices separated by spaces, e.g.`edit 1 2 n/...`, the app
 
 ### Locating persons: `find`
 
-The find command allows you to locate persons by their names, module-role pairs, or a combination of both.
+The find command allows you to locate persons by their names, module-role pairs, tags or any combinations of them.
 
 #### By name
 
@@ -291,7 +291,7 @@ Format: `find (n/KEYWORD)+`
 * The keyword must exist contiguously in the name. e.g. `John Doe` will not match `John David Doe`
 * Only the name is searched.
 * Partial words will be matched as well. e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons whose names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `find n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -308,7 +308,7 @@ Format: `find (r/KEYWORD)+`
 * Search by module code and optionally specify the role type (separated by a dash). For example, `CS2103T-Prof` will search for the module `CS2103T` with the role `Professor`.
 * The search is case-insensitive. e.g. `cs2103t-student` will match `CS2103T-Student`.
 * If the role type is not specified, role `STUDENT` will be assumed. For example, `find r/CS2103T` will return all students taking `CS2103T`.
-* Persons matching at least one module-role keyword will be returned (i.e. OR search).
+* Persons whose module-role pairs matching at least one module-role keyword will be returned (i.e. OR search).
 
 Examples:
 * `find r/CS2103T` returns all students taking the module `CS2103T`
@@ -316,18 +316,34 @@ Examples:
 
   ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
 
-#### By name and module-role
+#### By tag
 
-Finds persons whose names and module-role pairs contain any combination of the given keywords.
+Finds persons whose tags contain any of the given keywords.
 
-Format: `find (n/KEYWORD | r/KEYWORD)+`
+Format: `find (t/KEYWORD)+`
 
-* Person matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) will be returned (i.e. AND search).
+* The search is case-insensitive. e.g `Friends` will match `friends`
+* Partial words will be matched as well. e.g. `class` will match `classmates`
+* Persons whose tags matching at least one tag keyword will be returned (i.e. OR search)
+
+Examples:
+* `find t/office` returns all contacts whose tags contain word `office`
+* `find t/classmates t/friends` returns all contacts whose tags contain either `classmates` or `friends`
+
+    ![result for 'find t/classmates t/friends'](images/findTagExample.png)
+
+#### By combinations of names, module-roles and tags
+
+Finds persons whose names, module-role pairs and tags contain any combination of the given keywords.
+
+Format: `find (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
+
+* Persons matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) AND at least one tag keyword (if provided) will be returned (i.e. AND search).
 
 Example:
-* `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either (`Martin` **or** `Boyd`) **and** (`CS1101S Professor` **or** `CS1231S Professor`) **and** (having tag name `favorite`).
 
-  ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
+  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
 
 <box type="info" seamless>
 
@@ -489,7 +505,7 @@ To allow more flexibility in the input format, we have to sacrifice some validat
  **Clear**  | `clear`                                                                                                                                                                                                                                                                 
  **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                                                
  **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                                     
- **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521`                                                                                                                                                                   
+ **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD \| t/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521 t/friends t/classmates`                                                                                                                                                                
  **Undo**   | `undo`                                                                                                                                                                                                                                                                  
  **Redo**   | `redo`                                                                                                                                                                                                                                                                  
  **List**   | `list`                                                                                                                                                                                                                                                                  
