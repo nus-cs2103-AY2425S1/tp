@@ -18,7 +18,7 @@ involved in IFG events.** Learn more about IFG [here](https://www.instagram.com/
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer. Learn more about checking and changing
-   your system's version of Java ![here](https://www.java.com/en/download/help/update_runtime_settings.html).
+   your system's version of Java [here](https://www.java.com/en/download/help/update_runtime_settings.html).
 
 2. Download the latest `.jar` file that will execute the app from ![here](https://github.com/AY2425S1-CS2103T-W14-4/tp/releases).
 
