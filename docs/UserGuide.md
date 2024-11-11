@@ -1,5 +1,5 @@
 # ![icon](images/hireme_logo.png) HireMe User Guide
-<br></br>
+
 ## Welcome to HireMe! 
 
 Thank you for choosing **HireMe** to simplify your internship journey.
@@ -123,8 +123,8 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 #### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="700"/>
-   
+    <img src="images/MacTerminal.png" alt="macsterminal" width="750"/>
+    <br></br>
     You will see a window like this.
 
     ![openmacterminal](images/OpenMacTerminal.png)
@@ -132,8 +132,9 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
    ![macfilepathinfo](images/Macfilepathinfo.png)
+    <br></br>
+    On the new open that pops up, left click on `Where` and copy the file path.
 
-    On the new window that pops up, left click on `Where` and copy the file path.
    <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
    <br></br>
 
@@ -163,7 +164,6 @@ You will see a window like this.
      <br></br>
    - Mac Terminal:
       ![maccd](images/Maccd.png)
-     <br></br>
 <br></br>
 
 
