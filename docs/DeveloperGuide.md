@@ -246,10 +246,12 @@ The class diagram of a filter command is given to demonstrate the interactions a
 
 Team Size: 5
 
-1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+1. **Error Validation for CliSyntax:**
+   Making sure the system checks if the user enters any unexpected or incorrect symbols. If the user does, the system will let them know what the correct options are, helping avoid confusion and mistakes.
 2. [Validation for Address: Address should be able to have "/n" or other prefixes]
 3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
-4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
+4. **Add, Delete, or Replace Allergy Functionality:**
+   Allow users to specify whether they want to add, delete, or replace an allergy in the list. This enhancement would give users more control over their allergy list as currently the system only replaces allergies.
 5. [Create his own tags and delete tags]
 6. [insert date end time]
 7. **Warn user that date entered is in the past:** 
