@@ -56,7 +56,7 @@ Move the downloaded `.jar` file into the _home folder_ where you want to store y
 4. **Run HallPointer:**
 - Open a command terminal, and use the `cd` command to navigate to the folder where you saved the `.jar` file.
 - Type the folowing command and press Enter: `java -jar hallpointer.jar`
-- A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the app comes with some sample data to help you get started.<br>
+- A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the application comes with some sample data to help you get started.<br>
    ![Ui](images/Ui.png)
 
 5. **Explore the Sample Data:**
@@ -359,7 +359,7 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous HallPointer home folder.
+**A**: Install the application on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous HallPointer home folder.
 
 ---
 
