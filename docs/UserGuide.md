@@ -42,7 +42,7 @@ Alerts you to potential issues or problems that may arise.
 
 1. Ensure that Java 17 is installed on your computer. 
    * Open a command terminal. 
-   * * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
+     * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
      * For Mac users, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
    * Type the following command to check the Java version:<br>
      ```
@@ -50,15 +50,15 @@ Alerts you to potential issues or problems that may arise.
      ```
    * If Java 17 is installed, you should see an output similar to: `java version "17.0.1" `
    * If you do not have Java 17, you can download it from [Oracle's official website](https://www.oracle.com/java/technologies/downloads/#java17).
-
+<br>
 2. Download the application
    * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
-
+<br>
 3. Set up the home folder
    * Choose a folder where you want to store your AddressBook data.
    * Copy the downloaded `.jar` file to this folder.
    * This folder will serve as the "home folder" for your AddressBook.
-
+<br>
 4. Run the application
    * Open a command terminal.
    * Navigate (`cd`) to the folder where you placed the `.jar` file.
@@ -86,7 +86,7 @@ Alerts you to potential issues or problems that may arise.
      java -jar contactcs.jar
      ```
    A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>![Ui](images/Ui.png)
-
+<br>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -99,8 +99,8 @@ Alerts you to potential issues or problems that may arise.
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+<br>
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +116,7 @@ Alerts you to potential issues or problems that may arise.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in sqaure brackets and with `+` after them can be used zero or more times.<br>
+* Items in square brackets and with `+` after them can be used zero or more times.<br>
   e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
@@ -134,12 +134,12 @@ Alerts you to potential issues or problems that may arise.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
 
-**Shows a message explain the usage of the specified command keyword**
+**Shows a message explaining the usage of the specified command keyword**
 
 Format: `help [COMMAND_KEYWORD]`
 
@@ -189,13 +189,13 @@ Examples:
   ![result for adding John Doe](images/addJohnDoeResult.png)
 * `add n/Jane Doe p/81234567 e/janed@example.com r/CS1101S-TA r/CS2040S`. Jane is a CS1101S tutor and a CS2040S student.
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -251,7 +251,7 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-#### Editing All other fields
+#### Editing all other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
@@ -264,10 +264,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [d/DESCRIP
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 * Similarly, you can remove a person's description by typing `d/` without specifying any description after it.
+* After editing, the app will go back to the main window and display the updated person list.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+<box type="caution" seamless>
+
+**Caution:**
+If you input multiple indices separated by spaces, e.g.`edit 1 2 n/...`, the app will treat `1 2` as a single index which is invalid.
+</box>
 
 ### Locating persons: `find`
 
@@ -319,6 +326,7 @@ Format: `find (n/KEYWORD | r/KEYWORD)+`
 
 Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+
   ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 <box type="info" seamless>
@@ -358,7 +366,7 @@ Examples:
 * `list` followed by `delete 1 2 3` deletes the 1st, 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all contacts from the address book.
 
@@ -371,7 +379,7 @@ Format: `undo`
 
 * Data-modifying commands refers to those who has direct manipulation over the contact data,
 such as add, edit, delete or clear.
-* Commands that does not modify contact data in the address book(list, help, find etc.)
+* Commands that do not modify contact data in the address book(list, help, find etc.)
 are not considered by the undo command.
 * If you input `undo` when there's nothing to undo, GUI will remind you about this
 and no effect would be applied to the address book.
@@ -390,14 +398,14 @@ Format: `redo`
 
 * Redo only helps to restore command results that can be handled by undo command,
 such as add, edit, delete and clear.
-* If you input `redo` when there's nothing to undo, GUI will remind you about this
+* If you input `redo` when there's nothing to redo, GUI will remind you about this
 and no effect would be applied to the address book.
 
 Examples:
 * If you undo a change to the contact data, but end up thinking that it may be
 better to keep it, you can input `redo` after undo the change to restore it back.
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -447,15 +455,21 @@ Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
 The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a valid phone number.
 
-Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (hp) 91234567 (emergency)`.
+Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (office 1) 91234567 (office 2)`.
 
 This allows you to add extra annotations if you wish to.
+
+<box type="caution" seamless>
+
+**Caution:**
+To allow more flexibility in the input format, we have to sacrifice some validation checks. As such, it is important to ensure that the phone number you input is correct.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
