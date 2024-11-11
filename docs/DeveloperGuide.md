@@ -424,3 +424,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+## Appendix: Planned Enhancements
+
+- Enhance duplicate detection 
+  - Include address field, not just name to detect duplicates
+  - Handle case-insensitive duplicates
+    - Currently, the app does not handle case-insensitive duplicates. For example, "McDonalds" and "mcdonalds" are treated as different restaurants.
