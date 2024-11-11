@@ -73,6 +73,14 @@ For immediate setup, you can proceed to [Quick Start](#quick-start). For detaile
 
 1. Ensure you have Java `17` or above installed on your computer. For optimal display, use a 13-inch screen or larger with a resolution of 1280x720 pixels or higher. Avoid resizing the window below this resolution, as it may hide essential interface elements.
 
+- Check for Java version:
+  - Open your computer’s terminal:
+    - For Windows: Press the Windows key + R, type cmd, and press Enter
+    - For Mac: Press Command + Space, type terminal, and press Enter
+  - In the window that appears, type the following: `java --version`
+  - Press Enter
+  - If you see “Java version 17”, you are all set!
+  - If you see any other error/ java version, visit [Java’s download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 2. Download the latest CareLink `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
 3. Copy the file to your desired CareLink **home folder**.
@@ -201,6 +209,8 @@ A person can have any number of tags (including 0)
 
 <div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors or replacing them with an acceptable alternative such as a space should you wish to do so</div>
 
+<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, tags are case-insensitive. We recommend adopting a consistent practice for naming tags to avoid duplication of tags in future. For example, you could choose to make all tags lowercase.</div>
+
 Examples:
 
 - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
@@ -326,7 +336,6 @@ Possible Errors:
 - `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
 - `At least one field to edit must be provided.` - When no fields to edit are specified
 - `This person already exists in the address book.` - When editing would result in a duplicate person
->>>>>>> master
 
 #### Locating persons by name, NRIC, phone, email, role, or tags: `find`
 
@@ -488,7 +497,6 @@ Use this command format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] 
 - `Start time must be in the future` - Can't schedule appointments in the past.
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot.
 - `Please do not enter anything before the keywords` - Do not add anything between the command word `editapp`. The keywords here refer to the parameters.
->>>>>>> master
 
 #### Updating Status of an appointment: `updatestatus`
 
