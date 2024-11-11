@@ -178,10 +178,34 @@ For convenience, users can press the `esc` key to close the help windows easily,
 The `home` command returns the user to the home UI where all the patients are displayed.
 
 ##### Executing the Command
+The `HomeCommand` sets the `filteredPatientList` to include all patients in the `Model` component and returns a `DefaultCommandResult`.
+When the `MainWindow` is refreshed it then sets the view to be the default view which is the home UI where all the patients are displayed.
+
+##### Design Considerations
+We designed the `home` command to display all the patients as we wanted the user to have easy access to an overview of all the patients. This is useful because the UI changes often with the various commands used.
+
+We also display the total number of patients in the system, providing users with a clearer overview of the clinic's customers.
 
 #### Clear Command : `clear`
+The `clear` command allows the user to delete all the patients and appointments from the ClinicConnect system.
+
+##### Executing the Command
+The `ClearCommand` sets the `ClinicConnectSystem` of the `Model` to be a new `ClinicConnectSystem` object. By doing so, there is no longer any reference to the previous `ClinicConnectSystem` object, effectively deleting all the patient and appointment records.
+
+##### Design Considerations
+The `clear` command was implemented so that users can easily remove the sample data and start afresh.
 
 #### Exit Command : `exit`
+The `exit` command allows the user to close all the tabs of the ClinicConnect system.
+
+##### Executing the Command
+The `ExitCommand` returns a `ExitCommandResult` which will eventually invoke the `handleExit` method in the `MainWindow` class causing all the windows (including help windows) to close.
+
+##### Design Considerations
+To stay true to the nature of a CLI-based application, we implemented the `exit` command so that the user can simply just type `exit` and close the application.
+
+Furthermore, the `help` command opens a new window for each `COMMAND_KEYWORD`. Therefore, after a using the application, if the user wants to close the application, he/she will have to close each help window one by one.
+To make this more convenient for the user, we made the `exit` command close all the help windows as well.
 
 ### Patient Management Features
 
