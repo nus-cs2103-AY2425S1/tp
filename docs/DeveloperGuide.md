@@ -237,7 +237,7 @@ The following shows the activity diagram when the user executes the `del_s` comm
 
 #### Usage
 
-**Syntax:** `del_s/ds sno/STUDENT_NUMBER.`
+**Syntax:** `del_s/ds sno/STUDENT_NUMBER`
 
 **Example:** `ds sno/A0123456K`
 
@@ -247,12 +247,9 @@ The following shows the activity diagram when the user executes the `del_s` comm
 2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number
    `A0234567H`.
 3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed
-   in
-   the
-   `AddressBookParser`.
+   in the `AddressBookParser`.
 4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number
-   is used to
-   construct a `DeleteStudentCommand` object.
+   is used to construct a `DeleteStudentCommand` object.
 5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student
    to be
    deleted. This method deletes the specified `Student` in the model.
@@ -301,7 +298,7 @@ The following shows the activity diagram when the user executes the `del_g` comm
 
 #### Usage
 
-**Syntax:** `del_g/dg gn/GROUP_NAME [gn/GROUP_NAME]...`
+**Syntax:** `del_g/dg gn/GROUP_NAME`
 
 **Example:** `dg gn/CS2103-F12-2`
 
