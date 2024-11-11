@@ -323,24 +323,28 @@ A **person** is a patient with several fields. The fields and their correspondin
 |------------------|--------|----------|----------|--------------------------------------------------------|
 | **Name**         | `n/`   | No       | No       | Only alphanumeric characters (Cannot start with space) |
 | **Phone number** | `p/`   | No       | No       | Positive integer of length 3-15 (Inclusive)            |
-| **Email**        | `e/`   | No       | No       | Refer to 1. below                                      |
+| **Email**        | `e/`   | No       | No       | Refer to **1.** below                                  |
 | **Address**      | `a/`   | No       | No       | Any value                                              |
 | **Status**       | `st/`  | No       | No       | Only alphanumeric characters                           |
 | **Tag(s)**       | `t/`   | Yes      | Yes      | Only alphanumeric characters                           |
 
-You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
-The PID can be seen at the top of their information card.
+<box type="info" light seamless>
 
+**Notes:**
+
+**1.** The **email** must have
+*  a local part containing alphanumeric characters and specific symbols (such as `+` 
+  `_` `.` `-`) (not at the start or end), 
+* followed by `@`, and a domain part with labels separated by periods, 
+* ending in a label with at least two alphanumeric characters, 
+* and no labels starting or ending with hyphens.
+
+</box>
+
+You can identify these patients uniquely by their **patient ID (PID)** for easy reference.
+The **PID** can be seen in the top right corner of their information card, as shown below:<br><br>
+<img src="images/personexample.png" width="480" style="display: block; margin-left: auto; margin-right:auto;">
 <br><sbr>
-
-<img src="images/personexample.png" width="500">
-
-<br><sbr>
-
----
-**Notes**
-
-1. Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
 
 <br>
 
@@ -583,16 +587,13 @@ An **appointment** is defined by several fields. The fields and their correspond
 | **Sickness**        | `s/`   | Yes      | No       | At least one alphabetic character     |
 | **Medicine**        | `m/`   | Yes      | No       | At least one alphabetic character     |
 
+<br>
+
 You can identify these appointments uniquely by their **Appointment ID (AID)** for easy reference.
-The AID can be seen at the top of their information card.
-
-<br><sbr>
-
-<img src="images/appointmentexample.png" width="500">
-
-<br><sbr>
-
-The number indicated beside the appointment name is the PID of the person who has the appointment.
+The **AID** can be seen in the top right corner of their information card, as shown below:<br><br>
+<img src="images/appointmentexample.png" width="480" style="display: block; margin-left: auto; 
+margin-right: auto;">
+* The number indicated beside the appointment name is the **PID** of the person who has the appointment.
 
 
 You can manage the appointments through different commands, which can be seen in the table below:
