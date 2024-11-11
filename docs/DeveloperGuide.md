@@ -29,21 +29,21 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the application launch and shut down.
+* At application launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+The bulk of the application's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the application.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the application in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -308,12 +308,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | event planner               | find an event by name and tags                                    | search for an event of interest                                                                |
 | `* *`    | event planner               | view information related to a vendor                              | lookup vendor information                                                                      |
 | `* *`    | event planner               | view information related to an event                              | lookup event information                                                                       |
-| `* *`    | computer user with no mouse | navigate the address book using only a keyboard                   | use the app without a mouse                                                                    |
+| `* *`    | computer user with no mouse | navigate the address book using only a keyboard                   | use the application without a mouse                                                                    |
 | `* *`    | event planner               | modify event and vendor details                                   | correct any mistakes or changes made to an event or vendor                                     |
 | `* *`    | forgetful event planner     | write additional notes for an event or vendor                     | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
 | `*`      | event planner               | categorise vendors                                                | easily see what services a vendor provides                                                     |
 | `*`      | event planner               | rate vendors in the system                                        | keep track of how good past experiences of working with the vendor were                        |
-| `*`      | event planner               | send Whatsapp or Telegram messages from within the app            | easily contact vendors without 'leaving' the address book                                      |
+| `*`      | event planner               | send Whatsapp or Telegram messages from within the application            | easily contact vendors without 'leaving' the address book                                      |
 | `*`      | fast typer                  | chain multiple commands together before entering                  | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
 | `*`      | event planner               | set progress statuses for vendors                                 | keep track of completed vendor deliverables                                                    |
 | `*`      | event planner               | archive events                                                    | clear events that are completed                                                                |
@@ -635,7 +635,7 @@ Preconditions: User is viewing an item.
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <box type="info" seamless>
 
@@ -658,7 +658,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the application by using the java -jar command.<br>
       Expected: The most recent window size and location is retained.
 
 ### Create Command
@@ -778,7 +778,7 @@ testers are expected to do more *exploratory* testing.
 1.  Manually Edit JSON Data:
 
     1. Open the JSON data file located in `[JAR file location]/data/eventTory.json`, make changes, and restart EventTory. <br>
-       Expected: Changes are reflected in the application, but incorrect formatting (e.g., invalid JSON) should prompt the app to reset to an empty state.
+       Expected: Changes are reflected in the application, but incorrect formatting (e.g., invalid JSON) should prompt the application to reset to an empty state.
 
 ## **Appendix: Planned Enhancements**
 ### Name similarity warning
