@@ -202,14 +202,14 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    5. Other incorrect `markDone` commands to try: `markDone`, `markDone x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Reverting a done transaction back to undone
+### Reverting a done transaction back to not done 
 
-1. Reverting a done transaction back to undone while all transactions are being shown.
+1. Reverting a done transaction back to not done while all transactions are being shown.
 
    1. Prerequisites: List all transactions using the `listTxn` command. One transaction is in the list.
 
    2. Test cases: `markUndone 1`<br>
-      Expected: The first transaction is reverted to undone. The existing "done" icon disappears for that transaction. Details of the updated transaction shown in the status message.
+      Expected: The first transaction is reverted to not done. The existing "done" icon disappears for that transaction. Details of the updated transaction shown in the status message.
 
    3. Test cases: `markUndone 1` (Assumes transaction 1 is already undone)<br>
       Expected: No change in transaction status. The transaction remains to have no "done" icon. A status message confirms that the transaction is already undone.
@@ -278,12 +278,13 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
 ### Default Behavior on App Startup
 
-1. Verifying filter state upon app initialization.
+1. Verifying filter state of transaction panel upon app initialization.
 
    1. Prerequisites: At least one done transaction and one undone transaction in the list.
 
    2. Test cases: Initial Filter on App Startup<br>
-      Expected: The list displays all transactions (both done and undone) by default when the app starts.
+      Expected: The list displays all transactions (both done and not done) by default when the app starts.
+      <img src="/images/initial_txn_filter_state.png">
 
 ### Saving data
 
