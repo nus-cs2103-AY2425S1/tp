@@ -625,3 +625,61 @@ additional features.
 
 In summary, this project required considerable effort due to the added functionality, custom UI work, and enhanced search features. The limited reuse of existing libraries meant most of the code had to be written and adapted by our team, adding to the overall effort invested.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Team Size: 5**
+
+1. **Prevent duplicate entries when using the `edit` command:** 
+* Current Issue: When using the edit command, users can edit contact details such that two contacts can have the same Telegram handle, phone number and/or email. 
+* Example: When users do the following commands in order, both contacts will have the same Telegram handle.
+  * `add n/Amy One ct/personal t/@amyone`
+  * `add n/Amy Two ct/personal t/@amytwo`
+  * `edit 2 t/@amyone`
+* Proposed Change: Ensure that duplicate entries cannot be added if it already exists in the address book.
+
+2. **Long inputs make it hard to read certain contact details**
+* Current Issue: When users type in fields with long character lengths, some contact details may be truncated in the display panel, making it hard for users to view.
+* Example:
+* Proposed Change: Introduce horizontal scrolling within the contact panel, allowing users to scroll to view all contact details.
+
+3. **Prevent duplicate fields with case insensitivity**
+* Current Issue: It is possible for two different contacts to have the same email address or telegram handle if the fields are typed in different cases. This leads to duplicate entries.
+* Example:
+* Proposed Change: Introduce case-insensitive validation when contacts are added or edited. If a duplicate email or telegram handle is detected, the action will be prevented with an accompanying error message.
+
+4. **Add labels for each field for better readability**
+* Current Issue: When fields are left blank, the space where the data is supposed to be will be empty. It may be hard to differentiate certain fields as well, such as a phone number and a remark with a string of numbers. 
+* Example:
+* Proposed Change: Add labels next to each field in the contact, so that contact fields are clear and empty fields are made obvious. This will help to improve readability and reduce confusion. 
+
+5. **Change background colour of UI from white to theme colour** 
+* Current Issue: For the current UI, when there are only a few contacts (contacts do not fill the screen), the background of the contact list is shown in white. This can be especially disconcerting for the 'dark' mode, as it looks very bright in contrast to the dark theme.
+* Example:
+* Proposed Change: Change the contact list background to match the background colour of the app.
+
+6. **Allow for deletion of optional fields**
+* Current Issue: The only way to remove optional fields of a contact currently is to delete the entire contact and re-add the contact with all the fields except the one being deleted. There is no way of simply deleting an optional field.
+* Example:
+* Proposed Change: Allow for deletion of optional fields of a contact using the `edit` command (e.g. `edit 1 r/` can delete the remark of the contact)
+
+7. **Import**
+* Current Issue:
+* Example:
+* Proposed Change:
+
+8. **Make error messages more specific and standardised**
+* Current Issue: For most errors in formatting, the app shows a generic error message: Invalid command format! This may be hard for users to find out exactly what is wrong with their format.
+* Example:
+* Proposed Change: Introduce more specific error messages for different command format errors.
+
+9. **Prevent help window from opening in fullscreen**
+* Current Issue: For Mac users, if the app is open in fullscreen and the user opens the help window using the `help` command, the help window sometimes displays visual glitches, such as a black background.
+* Example: ![img.png](images/helpwindowbug.png)
+* Proposed Change: 
+
+10. **Change `find` to `findname` for clarity**
+* Current Issue: The `find` command may cause confusion, as it only searches by names. This can be unclear because there are also separate `findtele` and `findtag` commands that search for Telegram handles and tags respectively.
+* Example:
+* Proposed Change: Change the name of the `find` command to `findname` to standardise with the other find commands.
