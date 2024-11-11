@@ -18,14 +18,14 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 ## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F13-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for the EventTory application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EventTory.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note that the application contains some sample data on initial boot.<br>
+   A GUI similar to the one below should appear in a few seconds. Note that the application contains some sample data on the initial boot.<br>
    ![Ui](images/Ui.png)
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open a help window.<br>
@@ -51,7 +51,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 ## Storing Information
 
-EventTory provides users a way to keep track of events and vendors.
+EventTory provides users with a way to keep track of events and vendors.
 The details of what information can be stored for a vendor/event are as shown below.
 
 ### Vendor
@@ -187,6 +187,7 @@ Note:
 <box type="tip" seamless>
 Tip: A vendor or event can have any number of tags (including 0).
 </box>
+
 * If an event or a vendor already has the exact same name (case-sensitive), the command will fail and an error message will be displayed.
 
 Examples:
@@ -207,7 +208,7 @@ Note:
     * Editing an item but providing no new values is invalid.
 * The existing values will be updated to the input values.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-    * e.g. `edit v/1 t/` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
+    * e.g. `edit v/1 t/` is run after `view v/2`. Even though the vendor with index 1 will not be visible, it can still be edited.
     * See [Off-Screen Operations](#off-screen-operations) for more details.
 * When editing tags, the existing tags of the vendor/event will be **overridden**.
     * Tags cannot be added cumulatively.
@@ -215,7 +216,7 @@ Note:
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit v/1 p/58623042 ` : Edits the phone number of the vendor with index 1 to be `58623042`.
+*  `edit v/1 p/58623042` : Edits the phone number of the vendor with index 1 to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the event with index 2 to be `Baby Shower`, and clears all existing tags.
 
 ### Deleting Vendors & Events : `delete`
@@ -227,7 +228,7 @@ Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 Note:
 * Deletes the event or vendor at the specified `INDEX`.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-    * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion. 
+    * e.g. `delete v/1` is run after `view v/2`. Even though the vendor with index 1 will not be visible, it can still be specified for deletion. 
     * See [Off-Screen Operations](#off-screen-operations) for more details. 
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
@@ -265,7 +266,7 @@ Note:
 * The details page includes assigned events/vendors as well as a list of assignable events/vendors.
   * If already viewing an event, vendors in both assigned and assignable lists can be chosen to be viewed, and vice versa.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-  * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
+  * e.g. `view v/2` can be run after `view v/1`. Even though the vendor with index 1 will not be visible when viewing the vendor with index 2, it can still be accessed and viewed.
   * See [Off-Screen Operations](#off-screen-operations) for more details.
 * The current displayed indexes for items may change after issuing this command. See [Changing Indexes](#changing-indexes) for more details.
 
@@ -347,6 +348,7 @@ Opens a window with instructions on how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+Keybind: F1 key
 
 ### Exiting the program : `exit`
 
@@ -391,7 +393,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Switching back and forth between vendor and event views** can lead to unexpected behaviour, especially when used after a `find` command.
-   * e.g. when issued in order, the commands: `find v/ er`, `view v/1`, `view e/1`, `view v/2` cause the final command `view v/2` to select and display an unexpected vendor.
+   * e.g. when issued in order, the commands: `find v/ er`, `view v/1`, `view e/1`, `view v/2`, `view v/4` cause the final command `view v/4` to select and display an unexpected vendor.
        * Commands that support off-screen operations may also run into this selection issue and operate on the wrong item.
    * To avoid this issue:
        * Use the `list` command to reset the lists displayed after each `view` command, or;
@@ -410,7 +412,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
 | **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
 | **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
-| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                   |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Noodle`, `find e/ fashion`                                                                                                   |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
 | **Exit**     | `exit`                                                                                                                                                                                                                                            |
