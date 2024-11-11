@@ -262,7 +262,7 @@ public class ExportCommand extends Command {
         // Parse the cell value if it's formatted as JSON-like, i.e., "{key1 : value1, key2 : value2}"
         cellValue = cellValue.replaceAll(CURLY_BRACE_AND_QUOTES_REGEX, EMPTY_STRING); // Remove curly braces and quotes
         String[] tagsArray = cellValue.split(COMMA); // Split tags by comma if needed
-        cellValue = "[ " + String.join(", ", tagsArray) + " ]"; // Join with comma and wrap in brackets
+        cellValue = String.join(COMMA + SPACE, tagsArray); // Join with comma and wrap in brackets
         return cellValue;
     }
 
