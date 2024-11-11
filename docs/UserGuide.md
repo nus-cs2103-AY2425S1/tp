@@ -46,7 +46,7 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
     </div>
 
-    - `exit` : Exits the app.<br>
+    - `exit` : Exits the app.<br><br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -523,11 +523,11 @@ Example:
   <figcaption>command: <code>help</code></figcaption>
 </figure>
 
-### Saving the data
+## Saving the data
 
 The data that you store into TalentHub is saved in the hard disk automatically after any command that changes the data. There is no need for you to save your data manually!
 
-### Editing the data file
+## Editing the data file
 
 Your data is saved automatically as a JSON file `[JAR file location]/data/talenthub.json`! If you are experienced with handling such files, you are welcome to update data directly by editing that data file.
 
