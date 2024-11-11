@@ -3,6 +3,7 @@ package seedu.eventfulnus.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.eventfulnus.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    private void resort() {
+        internalList.sort(Comparator.comparing(Event::getDateTime));
+    }
 
     /**
      * Returns true if the list contains an equivalent event as the given argument.
@@ -39,6 +44,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        resort();
     }
     /**
      * Replaces the contents of this list with {@code events}.
@@ -50,11 +56,13 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.setAll(events);
+        resort();
     }
 
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        resort();
 
     }
 
@@ -71,6 +79,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.set(index, editedEvent);
+        resort();
     }
 
     /**
@@ -82,14 +91,20 @@ public class UniqueEventList implements Iterable<Event> {
         if (!internalList.remove(toRemove)) {
             throw new EventNotFoundException();
         }
+        resort();
     }
 
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<Event> asUnmodifiableObservableList() {
+        resort();
         return internalUnmodifiableList;
     }
 
     @Override
     public Iterator<Event> iterator() {
+        resort();
         return internalList.iterator();
     }
 

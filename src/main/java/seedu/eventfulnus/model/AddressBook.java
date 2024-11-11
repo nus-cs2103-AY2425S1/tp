@@ -163,7 +163,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.asUnmodifiableObservableList();
     }
 
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -175,11 +174,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         return persons.equals(otherAddressBook.persons) && events.equals(otherAddressBook.events);
     }
-
-    public Person findPerson(String person) {
-        return persons.findPerson(person);
-    }
-
 
     @Override
     public int hashCode() {

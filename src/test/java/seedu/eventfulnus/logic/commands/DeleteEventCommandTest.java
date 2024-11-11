@@ -62,7 +62,6 @@ public class DeleteEventCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
-        showNoEvent(expectedModel);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }

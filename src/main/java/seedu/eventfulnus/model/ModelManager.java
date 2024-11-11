@@ -116,11 +116,14 @@ public class ModelManager implements Model {
         for (Event event : events) {
             setEvent(event, event);
         }
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
@@ -132,6 +135,7 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
@@ -158,7 +162,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Event}s filtered by the
+     * Returns an unmodifiable view of the list of {@link Person}s filtered by the
      * predicate in the {@link AddressBook}.
      */
     @Override
@@ -172,6 +176,10 @@ public class ModelManager implements Model {
         return filteredEvents;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@link Event}s filtered by the
+     * predicate in the {@link AddressBook}.
+     */
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
