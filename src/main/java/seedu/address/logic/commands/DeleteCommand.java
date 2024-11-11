@@ -65,7 +65,7 @@ public class DeleteCommand extends Command {
      * @return A CommandResult containing a success message with details of the deleted persons.
      * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    private CommandResult handlePersonDeletion(Model model) throws CommandException {
+    public CommandResult handlePersonDeletion(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         validateIndexes(lastShownList.size(), indexList, false);
@@ -83,19 +83,53 @@ public class DeleteCommand extends Command {
      * @return A CommandResult containing a success message with details of the deleted deliveries.
      * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    private CommandResult handleDeliveryDeletion(Model model) throws CommandException {
+    public CommandResult handleDeliveryDeletion(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
+        List<Delivery> deliveryList = model.getFilteredDeliveryList();
         validateIndexes(deliveryList.size(), indexList, true);
 
-        List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList, model);
+        List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
 
         return new CommandResult(String.format(
                 MESSAGE_DELETE_DELIVERY_SUCCESS,
                 inspectedPerson.getName(),
                 Messages.formatDeliveryList(reverseList(deliveryToDeleteList))),
                 DeliveryAction.DELETE);
+    }
+
+    /**
+     * Deletes persons from the model based on the provided indexList.
+     *
+     * @param model The model containing the filtered person list.
+     * @param lastShownList The list of persons to delete from.
+     * @return A list of persons that were deleted.
+     */
+    public List<Person> deletePersons(Model model, List<Person> lastShownList) {
+        List<Person> personToDeleteList = new ArrayList<>();
+        for (Index targetIndex : indexList) {
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            personToDeleteList.add(personToDelete);
+            model.deletePerson(personToDelete);
+        }
+        return personToDeleteList;
+    }
+
+    /**
+     * Deletes deliveries from the inspected person's delivery list based on the provided indexList.
+     *
+     * @param inspectedPerson The person whose deliveries are to be deleted.
+     * @param deliveryList The list of deliveries to delete from.
+     * @return A list of deliveries that were deleted.
+     */
+    public List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+        List<Delivery> deliveryToDeleteList = new ArrayList<>();
+        for (Index targetIndex : indexList) {
+            Delivery deliveryToDelete = deliveryList.get(targetIndex.getZeroBased());
+            deliveryToDeleteList.add(deliveryToDelete);
+            inspectedPerson.deleteDelivery(deliveryToDelete);
+        }
+        return deliveryToDeleteList;
     }
 
     /**
@@ -131,40 +165,6 @@ public class DeleteCommand extends Command {
         if (!outOfBoundList.isEmpty() || !duplicateList.isEmpty()) {
             throw new CommandException(exceptionMessage);
         }
-    }
-
-    /**
-     * Deletes persons from the model based on the provided indexList.
-     *
-     * @param model The model containing the filtered person list.
-     * @param lastShownList The list of persons to delete from.
-     * @return A list of persons that were deleted.
-     */
-    private List<Person> deletePersons(Model model, List<Person> lastShownList) {
-        List<Person> personToDeleteList = new ArrayList<>();
-        for (Index targetIndex : indexList) {
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            personToDeleteList.add(personToDelete);
-            model.deletePerson(personToDelete);
-        }
-        return personToDeleteList;
-    }
-
-    /**
-     * Deletes deliveries from the inspected person's delivery list based on the provided indexList.
-     *
-     * @param inspectedPerson The person whose deliveries are to be deleted.
-     * @param deliveryList The list of deliveries to delete from.
-     * @return A list of deliveries that were deleted.
-     */
-    private List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList, Model model) {
-        List<Delivery> deliveryToDeleteList = new ArrayList<>();
-        for (Index targetIndex : indexList) {
-            Delivery deliveryToDelete = deliveryList.get(targetIndex.getZeroBased());
-            deliveryToDeleteList.add(deliveryToDelete);
-            inspectedPerson.deleteDelivery(targetIndex);
-        }
-        return deliveryToDeleteList;
     }
 
     /**
@@ -221,9 +221,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Check if the list to be deleted are exactly equal
-     *
-     * @param other
-     * @return
      */
     @Override
     public boolean equals(Object other) {
