@@ -652,8 +652,8 @@ Team Size: 5
 3. **Fixing issues with error messages.**
     1. In the current implementation, some commands display the wrong error message when the user enters an invalid command.
     2. We plan to correct these instances:
-       1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large or negative.
-       2. `delete` should display "The person index provided is invalid." when index `0` is entered.
+       1. `delete-appt` should display "Invalid Unique ID, appointment does not exist." when the index specified is too large, instead of "Invalid command format!". (e.g `delete-appt 1000000000000000000000000`)
+       2. `delete` should display "The person index provided is invalid." when index `0` or a negaative integer is entered.
        3. `add-patient` should display "Invalid date of birth provided" when the date of birth is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        4. `add-appt` should display "Invalid date provided" when the date is not a valid date (e.g 32-04-1995 does not exist), instead of the current generic message "Dates must be in the format of DD-MM-YYYY".
        5. `add-appt` should display "Invalid time provided" when the time is outside of the range 0000 - 2359, instead of the current generic message "Times must be in the format of HHmm".
