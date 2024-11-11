@@ -1,11 +1,10 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC2_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -35,15 +34,10 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
@@ -55,6 +49,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -170,60 +165,24 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_allergyListContainsNoneAndMoreThanOneEntry_throwsParseException() {
-        List<Allergy> allergyList = Arrays.asList(
-                new Allergy("None"),
-                new Allergy("Peanuts")
-        );
-        assertThrows(ParseException.class, () -> {
-            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
-                    && allergyList.size() > 1) {
-                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
-            }
-        });
+    public void parse_invalidAllergyNone_failure() {
+
+        // Allergy list contains "none" and another allergy
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB, Allergy.MESSAGE_CONSTRAINTS);
+
+        // Allergy list contains "none" and another allergy (in reverse order)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC_NONE, Allergy.MESSAGE_CONSTRAINTS);
+        // Allergy list contains "none" and multiple valid allergies (should fail)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB
+                + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
     }
 
-    // Case 2: Contains "none" and only one entry (No exception)
-    @Test
-    public void parse_allergyListContainsOnlyNone_noExceptionThrown() {
-        List<Allergy> allergyList = Collections.singletonList(new Allergy("None"));
-        assertDoesNotThrow(() -> {
-            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
-                    && allergyList.size() > 1) {
-                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
-            }
-        });
-    }
-
-    // Case 3: Does not contain "none" and more than one entry (No exception)
-    @Test
-    public void parse_allergyListDoesNotContainNoneButMoreThanOneEntry_noExceptionThrown() {
-        List<Allergy> allergyList = Arrays.asList(
-                new Allergy("Peanuts"),
-                new Allergy("Shellfish")
-        );
-        assertDoesNotThrow(() -> {
-            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
-                    && allergyList.size() > 1) {
-                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
-            }
-        });
-    }
-
-    // Case 4: Does not contain "none" and only one entry (No exception)
-    @Test
-    public void parse_allergyListDoesNotContainNoneAndOnlyOneEntry_noExceptionThrown() {
-        List<Allergy> allergyList = Collections.singletonList(new Allergy("Peanuts"));
-        assertDoesNotThrow(() -> {
-            if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
-                    && allergyList.size() > 1) {
-                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
-            }
-        });
-    }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidAllergyValue_failure() {
 
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
