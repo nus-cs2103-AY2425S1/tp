@@ -1350,6 +1350,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Failed Execution:**
+> ---
 > **User Error #1**: Client index out of bounds
 >
 > **Input**: `moreinfo 100`
@@ -1381,11 +1382,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 #### Chat Window
 
-<br>
 <div class="alert" markdown="span">
 **ALERT:** For this command, `input` refers to the command box **inside** the chat window, and not the one in EZSTATES main GUI.
 </div>
-<br>
 
 - **Command:** `chatbot`
 - **Description:** Opens a chatbot that answers basic queries.
