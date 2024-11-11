@@ -1,19 +1,22 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_INDEXES;
 
-import java.util.Collection;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Relationship;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +24,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEXES =
+            "Indexes must be non-zero unsigned integers separated, each separated by spaces.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +38,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a {@code Set<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer) or there are duplicates.
+     */
+    public static Set<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String[] trimmedIndexArray = oneBasedIndexes.split("\\s+");
+        Set<Index> indexes = new HashSet<>();
+        for (String index : trimmedIndexArray) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index)) {
+                throw new ParseException(MESSAGE_INVALID_INDEXES);
+            }
+            if (!indexes.add(Index.fromOneBased(Integer.parseInt(index)))) {
+                throw new ParseException(MESSAGE_DUPLICATE_INDEXES);
+            }
+        }
+
+        return indexes;
     }
 
     /**
@@ -96,29 +121,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String relationship} into an {@code Relationship}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code relationship} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Relationship parseRelationship(String relationship) throws ParseException {
+        requireNonNull(relationship);
+        String trimmedRelationship = relationship.trim();
+
+        if (!Relationship.isValidRelationship(trimmedRelationship)) {
+            throw new ParseException(Relationship.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Relationship(trimmedRelationship);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Checks if two dates, start date and end date, are valid.
+     * @param startDate the starting date
+     * @param endDate the ending date
+     * @throws ParseException if the end date occurs before the start date
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static void checkValidDates(LocalDate startDate, LocalDate endDate) throws ParseException {
+        requireAllNonNull(startDate, endDate);
+        if (endDate.isBefore(startDate)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATES);
         }
-        return tagSet;
     }
 }

@@ -15,6 +15,11 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class PersonDetailView
+Class EventListPanel
+Class EventDetailView
+Class EventCard
+Class "<<interface>>\nDetailview" as DetailView
 }
 
 package Model <<Rectangle>> {
@@ -30,31 +35,46 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow *-down--> "1" StatusBarFooter
+MainWindow *-down--> "0..1" HelpWindow
+MainWindow *-down-->  "1" CommandBox
+MainWindow *-down--> "1" ResultDisplay
+MainWindow *-down--> "1" PersonListPanel
+MainWindow *-down--> "1" EventListPanel
+MainWindow *-down--> "1" PersonDetailView
+MainWindow *-down--> "1" EventDetailView
 
-PersonListPanel -down-> "*" PersonCard
+PersonListPanel -down> "*" PersonCard
+EventListPanel -down> "*" EventCard
 
-MainWindow -left-|> UiPart
+MainWindow -down-----|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+HelpWindow ----|> UiPart
+StatusBarFooter ----|> UiPart
+ResultDisplay ----|> UiPart
+CommandBox ----|> UiPart
+PersonListPanel ----|> UiPart
+PersonDetailView ----|> UiPart
+EventDetailView ----|> UiPart
 
-PersonCard ..> Model
+PersonCard ---|> UiPart
+EventCard --|> UiPart
+
+PersonCard .right> Model
+EventCard .right> Model
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
+EventDetailView .up.|> DetailView
+PersonDetailView .up.|> DetailView
 
-MainWindow -[hidden]-|> UiPart
+HelpWindow -right[hidden]- ResultDisplay
+ResultDisplay -right[hidden]- CommandBox
+CommandBox -right[hidden]- StatusBarFooter
+StatusBarFooter -right[hidden]- PersonListPanel
+PersonListPanel -right[hidden]- EventListPanel
+EventListPanel -right[hidden]- PersonDetailView
+PersonDetailView -right[hidden]- EventDetailView
+
+MainWindow -[hidden]|> UiPart
 @enduml

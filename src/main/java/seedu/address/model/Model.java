@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +88,31 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Adds the given {@code event} to the list of events. */
+    void addEvent(Event event);
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the event book.
+     */
+    boolean hasEvent(Event event);
+
+    /** Deletes the given {@code event} from the list of events. */
+    void deleteEvent(Event event);
+
+    /** Updates the event at the given {@code oldEventIndex} from the list of events to {@code newEvent} */
+    void updateEvent(Event newEvent, int oldEventIndex);
+
+    /** Returns an unmodifiable view of the list of events. */
+    ObservableList<Event> getEventList();
+
+    /** Returns an unmodifiable view of the filtered event list */
+    ObservableList<Event> getFilteredEventList();
+
+    /** Returns the length of the event list */
+    int getEventListLength();
+
+    void setEventBook(ReadOnlyEventBook eventBook);
+    ReadOnlyEventBook getEventBook();
+    void updateFilteredEventList(Predicate<Event> predicate);
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import javafx.scene.text.Text?>
+<HBox id="cardPane" fx:id="cardPane" styleClass="eventListCard" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox minHeight="105" spacing="8.0" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="0.5" styleClass="eventCard">
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            <VBox.margin>
+               <Insets bottom="8.0" />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="8.0" top="8.0" />
+            </padding>
+            </HBox>
+            <HBox spacing="5">
+                <ImageView fx:id="calendarIcon" fitHeight="15" fitWidth="15">
+                    <Image url="@/images/calendar_light.png"/>
+                </ImageView>
+                <Label fx:id="startDate" styleClass="cell_small_label" text="\$date" />
+                <Text styleClass="detail-contents"> - </Text>
+                <Label fx:id="endDate" styleClass="cell_small_label" text="\$date" />
+            </HBox>
+
+            <HBox spacing="5">
+                <ImageView fx:id="locationIcon" fitHeight="15" fitWidth="15">
+                    <Image url="@/images/location_light.png"/>
+                </ImageView>
+                <Label fx:id="locationLabel" styleClass="cell_small_label" text="\$location" />
+            </HBox>
+
+            <HBox spacing="5">
+                <ImageView fx:id="personIcon" fitHeight="15" fitWidth="15">
+                    <Image url="@/images/person_light.png"/>
+                </ImageView>
+                <FlowPane fx:id="attendees" />
+            </HBox>
+        </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+</HBox>

@@ -1,0 +1,567 @@
+* {
+    // The '-fx-ll-' prefix denotes base colours of the LegacyLink project
+    // CSS variables need to be prefixed with '-fx' to be detected by the JavaFX runtime
+
+    -fx-ll-background: #fff;
+    -fx-ll-background-grey: #F8F8F8;
+    -fx-ll-highlight: #F9F1FF;
+
+    -fx-ll-text: #000;
+    -fx-ll-text-light: #848484;
+    -fx-ll-accent: #6226D9;
+
+    -fx-ll-success: #E4FFDE;
+    -fx-ll-warning: #FFFBDE;
+    -fx-ll-danger: #FFE3DE;
+
+    -fx-ll-stroke-dark: #909090;
+    -fx-ll-stroke-light: #D3D3D3;
+
+    -fx-ll-status-bar-bg: #8549B1;
+
+    // Event UI
+    -fx-ll-event-card-header: #DDB0FF;
+    -fx-ll-event-card-body: #FAE8FF;
+}
+
+.root-layout {
+    -fx-background-color: #fff;
+}
+
+.background {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    background-color: #383838; /* Used in the default.html file */
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Poppins Medium";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Poppins Medium";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Poppins Medium";
+}
+
+.tab-pane {
+    -fx-padding: 0;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 4px 0 1px 32px;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+    -fx-border-color: transparent transparent -fx-ll-stroke-dark transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.tab-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab {
+    -fx-padding: 4px 32px 4px 32px;
+    -fx-background-radius: 4px 4px 0 0;
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0 0 0 0;
+    -fx-font-family: "Poppins Bold";
+}
+
+.tab-label {
+    -fx-text-fill: -fx-ll-text;
+}
+
+.tab:selected {
+    -fx-border-color: transparent transparent -fx-ll-accent transparent;
+    -fx-border-width: 2px;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: -fx-ll-accent;
+}
+
+.tab:selected:hover {
+
+}
+
+.tab:hover {
+    -fx-background-color: -fx-ll-highlight;
+    -fx-padding: 4px 32px 4px 32px;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.split-pane:horizontal .split-pane-divider {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent transparent transparent #4d4d4d;
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 16px 0 0 16px;
+
+
+}
+
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 8px;
+    -fx-background-radius: 16px;
+    -fx-background-insets: 8px;
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #fff;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: -fx-ll-background-grey;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: -fx-ll-highlight;
+}
+
+// Unselected event card
+.list-cell:filled #cardPane.eventListCard .eventCard {
+    -fx-border-color: transparent transparent -fx-ll-stroke-dark transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 0 -15px 0 -15px;
+    -fx-background-color: white;
+    -fx-background-insets: -5px -15px 0 -15px;
+    -fx-background-radius: 16px 16px 0 0;
+}
+
+// Selected event card
+.list-cell:filled:selected #cardPane.eventListCard .eventCard {
+    -fx-background-color: -fx-ll-event-card-header;
+    -fx-border-color: transparent;
+}
+
+.list-cell:filled #cardPane {
+    -fx-border-width: 1;
+    -fx-border-insets: -1;
+    -fx-border-radius: 16px;
+    -fx-border-color: -fx-ll-stroke-dark;
+}
+
+.list-cell:filled:selected #cardPane {
+    -fx-border-color: -fx-ll-accent;
+    -fx-border-width: 1;
+    -fx-border-insets: -1;
+}
+
+.list-cell .label {
+    -fx-text-fill: -fx-ll-text;
+}
+
+.cell_big_label {
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+}
+
+.cell_small_label {
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+
+.stack-pane {
+     -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.status-bar {
+    -fx-background-color: -fx-ll-status-bar-bg;
+}
+
+.result-display {
+    -fx-background-color: transparent;
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 10pt;
+    -fx-text-fill: -fx-ll-text-light;
+}
+
+.result-display .label {
+    -fx-text-fill: -fx-ll-text !important;
+}
+
+.status-bar .label {
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-pref-height: 30px;
+}
+
+.status-bar-with-border {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: white;
+}
+
+.context-menu .label {
+    -fx-text-fill: white;
+}
+
+.menu-bar {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -fx-ll-text-light transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.menu-bar .label {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: -fx-ll-text;
+    -fx-opacity: 0.9;
+}
+
+.menu {
+    -fx-background-color: transparent;
+}
+
+.menu-item {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-ll-text;
+}
+
+.menu-item:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Poppins Regular", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0;;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: white;
+  -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color, 30%);
+}
+
+.dialog-pane {
+    -fx-background-color: #1d1d1d;
+}
+
+.dialog-pane > *.button-bar > *.container {
+    -fx-background-color: #1d1d1d;
+}
+
+.dialog-pane > *.label.content {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.dialog-pane:header *.header-panel {
+    -fx-background-color: derive(#1d1d1d, 25%);
+}
+
+.dialog-pane:header *.header-panel *.label {
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -fx-ll-stroke-light;
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandBox {
+    -fx-background-color: transparent;
+    -fx-padding: 24px 32px 16px 32px;
+}
+
+#commandTextField {
+    -fx-padding: 12px 24px 12px 24px;
+
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 16px;
+
+    -fx-border-color: -fx-ll-stroke-light;
+    -fx-border-radius: 24px;
+    -fx-border-insets: -1;
+    -fx-border-width: 1;
+
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 11pt;
+    -fx-text-fill: -fx-ll-text;
+}
+
+#resultDisplay .content {
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-ll-stroke-light;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 20px;
+}
+
+#relationship .label {
+    -fx-text-fill: white;
+    -fx-background-color: #B36BE7;
+    -fx-padding: 1 12;
+    -fx-border-radius: 0;
+    -fx-background-radius: 7;
+    -fx-font-size: 13;
+    -fx-max-width: 150px;
+    -fx-text-overrun: ellipsis;
+}
+
+.detail-box {
+    -fx-padding: 20;
+}
+
+.detail-view {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 35;
+    -fx-spacing: 35px;
+}
+
+#personDetailView .detail-header {
+    -fx-font-size: 30pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+#personDetailView .detail-sub-header {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+#personDetailView .detail-contents {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: black;
+    -fx-max-width: 275px;
+    -fx-text-overrun: ellipsis;
+}
+
+#personDetailView .detail-grid-header {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: black;
+}
+
+#personDetailView .grid-content-name,
+#personDetailView .grid-content-location {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #000;
+}
+
+#personDetailView .grid-content-startDate {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #848484;
+
+}
+
+#personDetailView .grid-content-status-accept,
+#personDetailView .grid-content-status-pending,
+#personDetailView .grid-content-status-reject {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: #000;
+    -fx-background-radius: 20px;
+    -fx-padding: 5px 15px;
+
+    -fx-alignment: center;
+
+    -fx-pref-width: 100px;
+
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+    -fx-alignment: center;
+}
+
+#personDetailView .grid-content-status-accept {
+    -fx-background-color: #E4FFDE;
+}
+
+#personDetailView .grid-content-status-pending {
+    -fx-background-color: #FFFBDE;
+}
+
+#personDetailView .grid-content-status-reject {
+    -fx-background-color: #FFE3DE;
+}
+
+
+#eventDetailView {
+    -fx-border-color: black;  /* Set border color to black */
+    -fx-border-width: 1px;    /* Set border width */
+    -fx-border-radius: 10px;  /* Set rounded corners */
+    -fx-padding: 35;          /* Add padding around the event detail section */
+    -fx-spacing: 35px;        /* Add spacing between elements */
+}
+
+#eventDetailView .detail-header {
+    -fx-font-size: 30pt;      /* Large font size for the event title */
+    -fx-font-family: "Poppins";  /* Font family */
+    -fx-text-fill: black;     /* Text color */
+}
+
+#eventDetailView .detail-contents {
+    -fx-font-size: 12pt;      /* Smaller font size for the details */
+    -fx-font-family: "Poppins Regular";  /* Regular font for details */
+    -fx-text-fill: black;     /* Text color */
+}
+
+
+#eventDetailView .detail-subheader {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Poppins";
+    -fx-text-fill: black;
+}
+
+.attendee-label {
+    -fx-padding: 5px 0; /* Add vertical space between attendee names */
+    -fx-text-fill: black;
+}

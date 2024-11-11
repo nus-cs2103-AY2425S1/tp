@@ -9,14 +9,18 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CancelCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EventCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventsCommand;
+import seedu.address.logic.commands.ListPersonsCommand;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -51,6 +55,14 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        if (commandWord.equals(ListPersonsCommand.COMMAND_WORD)) {
+            if (arguments.trim().equals(ListPersonsCommand.COMMAND_FLAG)) {
+                return new ListPersonsCommand();
+            } else if (arguments.trim().equals(ListEventsCommand.COMMAND_FLAG)) {
+                return new ListEventsCommand();
+            }
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -62,20 +74,26 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case CancelCommand.COMMAND_WORD:
+            return new CancelCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EventCommand.COMMAND_WORD:
+            return new EventCommandParser().parse(arguments);
+
+        case UpdateCommand.COMMAND_WORD:
+            return new UpdateCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

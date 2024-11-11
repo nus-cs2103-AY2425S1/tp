@@ -5,10 +5,13 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -32,8 +35,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private EventListPanel eventListPanel;
+    private EventDetailView eventDetailView;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PersonDetailView personDetailView;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,10 +51,30 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane eventListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
+    private TabPane tabs;
+
+    @FXML
+    private SplitPane contactsSplitView;
+
+    @FXML
+    private SplitPane eventsSplitView;
+
+    @FXML
+    private VBox personDetailViewPlaceholder;
+
+    @FXML
+    private VBox contactDetailViewPlaceholder;
+
+    @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private VBox eventDetailViewPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,8 +136,18 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personDetailView = new PersonDetailView(logic.getFilteredPersonList(), logic.getFilteredEventList());
+        personDetailView.getRoot().setVisible(false);
+        personDetailViewPlaceholder.getChildren().add(personDetailView.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetailView);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        eventDetailView = new EventDetailView(logic.getFilteredEventList());
+        eventDetailViewPlaceholder.getChildren().clear();
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventDetailView);
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        eventDetailViewPlaceholder.getChildren().add(eventDetailView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +157,16 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Displays the first person in the list if exists onto the PersonDetailView
+        if (!logic.getFilteredPersonList().isEmpty()) {
+            personDetailView.update(logic.getFilteredPersonList().get(0));
+        }
+
+        // Displays the first event in the list if exists onto the EventDetailView
+        if (!logic.getFilteredEventList().isEmpty()) {
+            eventDetailView.update(logic.getFilteredEventList().get(0));
+        }
     }
 
     /**
@@ -184,6 +230,16 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPersons()) {
+                // Switch to the person tab at index 0
+                tabs.getSelectionModel().select(0);
+            }
+
+            if (commandResult.isShowEvents()) {
+                // Switch to the event tab at index 1
+                tabs.getSelectionModel().select(1);
             }
 
             return commandResult;
