@@ -595,3 +595,6 @@ they have reminders. This will allow the user to make changes to the client's na
 
 9. **Add visual warnings to past dates for reminders:** Currently, the app does not provide any visual warnings for reminders that are added with dates past the current date. This may cause some inconveniences for the user as they may not be aware that they have added reminders with past dates. Thus, we plan to make the app provide visual warnings for reminders that are added with dates past the current date.
 
+
+10. **Add more intuitive error message for the add reminder feature:** Currently, the app only provides a general error message. This may cause some inconveniences for the user as they may not be aware of what went wrong. Thus, we plan to make the app provide more intuitive error messages for the add reminder feature. For example, if the user tries to add a reminder but forgot to pass in a `DATETIME`, the app will provide an error saying that the user is missing the `DATETIME` field. 
+
