@@ -28,6 +28,7 @@ ClinicConnect is **the *ideal* patient management and appointment tracker system
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
 6. [Command Parameters Summary](#command-parameters-summary)
+7. [Appendix : Planned Enhancements](#appendix--planned-enhancements)
 
 ---
 
@@ -178,7 +179,7 @@ Use this command to quickly add a patient with only the required information.
 </div>
 
 Example: 
-* Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number
+* Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
   * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 
 For more information on each individual parameter, click [here](#command-parameters-summary).
@@ -200,20 +201,20 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 Use this command if you want to add a patient with additional information in addition to the required fields
-(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NUMBER)
+(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NUMBER).
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 
-Multiple allergies can be added using multiple `al` prefixes
+Multiple allergies can be added using multiple `al` prefixes.
 </div>
 
 Examples:
-* Adds a patient named Abraham Tan with all fields and two allergies 
+* Adds a patient named Abraham Tan with all fields and two allergies.
   * `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
      e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
      al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`
-* Adds a patient named Lincoln Park with compulsory fields and some optional fields 
+* Adds a patient named Lincoln Park with compulsory fields and some optional fields. 
   * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
      e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 
@@ -228,7 +229,7 @@ Format: `view NRIC`
 ![view result](images/viewResult.png)
 
 Example:
-* View all information of the patient with NRIC T0123456A 
+* View all information of the patient with NRIC T0123456A. 
   * `view T0123456A` 
 
 ### Editing a patient : `edit`
@@ -257,18 +258,10 @@ Input must contain at least one parameter for patient to be edited.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-<ul>
-<li>
 
-Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies 
-of the patient
-</li>
-<li>
+* Multiple allergies can be added using multiple `al` prefixes. Ensure allergies to be added are not current allergies of the patient.
 
-Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed
-are current allergies of the patient
-</li>
-</ul>
+* Multiple allergies can be removed using multiple `rmal` prefixes. Ensure allergies to be removed are current allergies of the patient.
 </div>
 
 Examples:
@@ -301,7 +294,7 @@ Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
-Appointments can only be booked for future dates and times
+Appointments can only be booked for future dates and times.
 </div>
 
 Example:
@@ -336,13 +329,13 @@ Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
 
 **:information_source: Important:**<br>
 
-* Specify the start and end date to display appointments from the start to the end date
-* Specify the end date to display appointments from today's date to end date
-* Specify the health service to display appointments that matches the health service
+* Specify the start and end date to display appointments from the start to the end date.
+* Specify the end date to display appointments from today's date to end date.
+* Specify the health service to display appointments that matches the health service.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
-To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
+To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date.
 
 `filter sd|2024-10-20 ed|2024-10-20`
 </div>
@@ -368,7 +361,7 @@ Format: `delete NRIC`
 ![delete message](images/deleteResult.png)
 
 Example:
-* Deletes the patient with NRIC T0123456A
+* Deletes the patient with NRIC T0123456A.
   * `delete T0123456A`
 
 ### Clearing all entries : `clear`
@@ -422,7 +415,7 @@ Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpe
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When adding or editing patient entries**, the combination of an NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
-4. **When adding allergies**, there is no distinction between capitalized and uncapitalized forms and plural and singular variations.
+4. **When adding allergies**, it is case-sensitive and allows for both plural and singular variations.
 5. **For `no` and `ec` parameters**, the parameter summary has stated that it has to be non-empty. However,
    * for `addf` command, the parameters can be left empty and the patient will still be added.
    * for `edit` command, if either of the two parameters are used with other parameters, the edit command will delete the existing notes and existing conditions of the patient if left empty.
@@ -551,7 +544,7 @@ Follow the specifications given below
       <td style="text-align:center;">7</td>
       <td style="text-align:center;">Email</td>
       <td style="text-align:center;">e|</td>
-      <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
+      <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters i.e. <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
         <ul>
           <li>start with a domain name (<em>gmail</em>.com) at least 1 character long.</li>
           <li>end with a domain label (.<em>com</em>) at least 2 characters long.</li>
@@ -570,7 +563,7 @@ Follow the specifications given below
       <td style="text-align:center;">9</td>
       <td style="text-align:center;">Health Risk</td>
       <td style="text-align:center;">rl|</td>
-      <td>Should be either <code>HIGH</code>, <code>MEDIUM</code> or <code>LOW</code>. Case insensitive.</td>
+      <td>Should be either <code>HIGH</code>, <code>MEDIUM</code> or <code>LOW</code>. Case-insensitive.</td>
     </tr>
     <tr>
       <td style="text-align:center;">10</td>
@@ -640,3 +633,16 @@ Follow the specifications given below
     </tr>
   </tbody>
 </table>
+
+--------------------------------------------------------------------------------------------------------------------
+## Appendix : Planned Enhancements
+
+Team size: 5
+
+1. Special characters in names should be accepted e.g. Yugan S/O Murali
+2. A more comprehensive NRIC validity check could be performed to ensure proper correspondence between birthdate and NRIC.
+3. Allowing NRIC to be parsed case-insensitively for all commands.
+4. More specific error messages based on users' input.
+5. For `edit`, `ec` and `no` prefixes can allow empty existing conditions and notes respectively to delete those fields.
+6. For `add`, names should have a character limit.
+7. For `al` and `rmal` prefixes, case-insensitive and singular and plural forms of the allergy are considered the same.
