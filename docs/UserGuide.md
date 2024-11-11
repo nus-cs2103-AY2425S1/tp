@@ -641,7 +641,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
    - **Workaround**: For best results, enter phone numbers within a typical range of 7–15 digits. Numbers exceeding 15 digits may not display or function as expected.
 
 6. **Full-Screen Help Window**: When the app is in full-screen mode, clicking the help button opens the Help Window in a new full-screen view rather than as a pop-up overlay.
+
    - **Solution**: Exit full-screen mode before opening the Help Window to have it display as a pop-up.
+
+7. **Inconsistent NRIC Censorship in Success Messages**: In some success messages, the NRIC appears fully displayed, while in others, it is censored
+
+- **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
 
 ---
 
