@@ -179,7 +179,7 @@ Listed below are the implemented features, and a brief description of what they 
 * **Viewing a student's details**: Displays students details along with the assignments associated with the student
 * **Adding a remark to a student**: Adds a remark to an existing student
 
-## Adding a new Assignment
+### Adding a new Assignment
 This `add_assignment` command is a feature that  allows the user to create a new assignment, based on the student's index. The assignment must have an alphanumeric `Name`, and a valid `Max Score`.
 
 #### Design Considerations:
@@ -391,7 +391,7 @@ This approach ensures that edited assignments start fresh, with any previous gra
 This approach enables flexible and targeted edits, while error handling ensures valid input and avoids duplicate assignments.
 
 
-## Viewing a student's details
+### Viewing a student's details
 This `view_student` command is a feature that allows the user to expand and view all of a student's details in the details panel, based on the student's index.
 Additional details such as a student's assignments and remarks, that are not visible in the list panel, will now also be visible in the details panel.
 
@@ -422,7 +422,7 @@ In order to select a student to be displayed on the detail's panel, the student 
 #### Example invocation sequence for ViewStudentCommand
 <puml src="diagrams/ViewStudentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `view_student` Command" />
 
-## Adding a remark to a student
+### Adding a remark to a student
 This `remark` command allows the user to add a remark for a specific student.
 The user must specify the student's index from the displayed list, followed by the remark to be added.
 
@@ -927,6 +927,18 @@ Given below are instructions to test the app manually.
 2. **Grading an assignment with invalid score**
     1. Test case: `grade si/1 ai/1 s/300` (assuming max score is 100)<br>
        Expected: No changes made. Error message displayed indicating the score is out of bounds.
+
+### Deleting an assignment
+
+1. **Deleting a valid assignment**
+    1. Prerequisites: The student list includes a student with at least one assignment.
+    2. Test case: `delete_assignment si/1 ai/1 `<br>
+       Expected: The first assignment for the first student is deleted. Success message displayed.
+
+2. **Deleting an invalid assignment**
+    1. Prerequisites: The first student in the student list only has one assignment.
+    2. Test case: `delete_assignment si/1 ai/2`<br>
+       Expected: No changes made. Error message shown, indicating the assignment index provided is invalid.
 
 ### Editing an assignment
 
