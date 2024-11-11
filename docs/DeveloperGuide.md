@@ -312,12 +312,19 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
-### 5. Warning for Edit Commands with Inputs Identical to Current Values
+### 7. Warning for Edit Commands with Inputs Identical to Current Values
 **Current issue:** Users are not warned when the inputs for the `edit` command are the identical to the current values, resulting in no changes.
 
 **Proposed Enhancement:** Add a confirmation prompt when the inputs are verified to make no changes to the client.
 
 **Status:** Scheduled for future releases as the lack of confirmation prompt does not affect the intended functionality.
+
+### 8. Edit Command for Remark Improvement
+**Current Issue:** Users are unable to edit specific sections of `remark` using the `edit` command. To make specific changes, users have to remove all remarks before re-entering them with the changes.
+
+**Proposed Enhancement:** Improve the `edit` command functionality for flag `/ra` such that it displays a text-editable window with that allows for the entire remark text to be edited.
+
+**Status:** Scheduled for future releases as current manual process provides a workable solution.
 
 --------------------------------------------------------------------------------------------------------------------
 
