@@ -147,7 +147,6 @@ public class FilterCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        System.out.println("removing: " + validStatusSet + validTagSet);
         model.removeFilters(validTagSet, validStatusSet);
         if (previousPredicate != null) {
             model.updateFilteredPersonList(previousPredicate);
