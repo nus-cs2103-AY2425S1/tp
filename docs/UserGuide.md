@@ -97,7 +97,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_O
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/03-28-2024`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/28-03-2024`
 * `add p/92345678 n/Jane Smith d/01-01-2024 ec/98765432`
 * `add p/92345678 n/Jane Smith d/01-01-2024`
 
@@ -353,7 +353,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
+**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/23-07-2024`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT] [r/REMARK]` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
