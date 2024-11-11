@@ -249,7 +249,7 @@ Format: `archive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-* `archive` works on an archived contact(s). 
+* `archive` works on archived and unarchived contact(s). 
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
@@ -283,7 +283,7 @@ Format: `unarchive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-* `unarchive` works on an archived contact(s). 
+* `unarchive` works on archived and unarchived contact(s). 
 
 Examples:
 * `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
