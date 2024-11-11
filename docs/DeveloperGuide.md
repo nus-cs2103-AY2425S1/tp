@@ -384,6 +384,7 @@ Use case ends.
     - **1d3.** User redo this use case.
         - Use case ends.
 
+
 #### **Use Case: UC5 - Edit a Contact**
 1. Wedding Organizer edits a contact using the edit command.
 2. Contact details are updated.
@@ -396,8 +397,10 @@ Use case ends.
         - Use case ends.
 - **1b.** Contact index is not in the displayed list.
   - **1b1.** Same as 1a1.
-- **1c.** Duplicate contacts.
+- **1c.** Person name does not exist in the address book
   - **1c1.** Same as 1a1.
+- **1d.** Duplicate contacts.
+  - **1d1.** Same as 1a1.
 
 
 #### **Use Case: UC6 - Add a Wedding**
@@ -410,7 +413,7 @@ Use case ends.
 
 **Extensions:**
 
-- **1a.** Contact name does not exist in the address book
+- **1a.** Client name does not exist in the address book
     - **1a1.** Error message displayed in result display.
         - Use case ends.
   - **1b.** Contact/Wedding index is not in the displayed list
@@ -471,8 +474,6 @@ Use case ends.
         - Use case ends.
 - **1b.** Contact index is not in the displayed list.
   - **1b1.** Same as 1a1.
-- **1c.** Duplicate contacts.
-  - **1c1.** Same as 1a1.
 
 #### **Use Case: UC10 - Assign a contact to a Wedding**
 
@@ -496,9 +497,6 @@ Use case ends.
         - Use case ends.
 - **1e.** Contact is the client of the wedding
     - **1e1.** Error message displayed in result display.
-        - Use case ends.
-- **1f.** Contact is already assigned to the wedding
-    - **1f1.** Error message displayed in result display.
         - Use case ends.
 
 #### **Use Case: UC11 - Delete a contact from a Wedding**
@@ -1072,8 +1070,8 @@ Success action: When a person is successfully assigned:
             3. Restart the application
         * Expected:
             - App creates new `addressbook.json` with empty data
-            - Status bar shows "Starting with empty address book"
-            - List shows no persons or weddings
+            - Creata a new data file data/addressbook.json populated with a sample AddressBook.
+
 
     3. Test case: Corrupt addressbook.json with invalid JSON
         * Steps:
@@ -1112,7 +1110,7 @@ Success action: When a person is successfully assigned:
             2. Force close application (Task Manager/Force Quit)
             3. Restart application
         * Expected:
-            - Last saved state is recovered
+            - Last saved state (address book after last valid command executed) is recovered.
             - Any unsaved modifications are lost
             - No data corruption
 
