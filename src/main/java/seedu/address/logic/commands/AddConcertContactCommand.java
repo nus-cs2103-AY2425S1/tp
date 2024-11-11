@@ -31,7 +31,7 @@ public class AddConcertContactCommand extends Command {
 
     public static final String MESSAGE_LINK_PERSON_SUCCESS = "Linked Person: %1$s to Concert: %2$s";
     public static final String MESSAGE_DUPLICATE_CONCERTCONTACT =
-            "This ConcertContact already exists in the address book";
+            "This concert contact already exists in the address book";
 
     private final Index indexP;
     private final Index indexC;
@@ -75,7 +75,7 @@ public class AddConcertContactCommand extends Command {
 
         model.addConcertContact(linkedPerson);
         return new CommandResult(String.format(MESSAGE_LINK_PERSON_SUCCESS, Messages.format(personToLink),
-                Messages.format(concert)));
+                Messages.format(concert)), false, false, true);
     }
 
     @Override

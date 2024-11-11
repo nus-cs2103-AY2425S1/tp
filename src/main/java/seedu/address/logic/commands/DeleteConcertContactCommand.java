@@ -19,7 +19,8 @@ public class DeleteConcertContactCommand extends Command {
     public static final String COMMAND_WORD = "deletecc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the concertContact identified by the index number used in the displayed concertContact list.\n"
+            + ": Deletes the concert contact identified by "
+            + "the index number used in the displayed concert contact list.\n"
             + "Parameters: " + " CONCERT_CONTACT_INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 2";
 

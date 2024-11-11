@@ -27,7 +27,6 @@ public class ConcertContactCard extends UiPart<Region> {
      */
 
     public final ConcertContact concertContact;
-    private boolean showFullDetails;
 
     @FXML
     private HBox cardPane;
@@ -60,7 +59,7 @@ public class ConcertContactCard extends UiPart<Region> {
     /**
      * Creates a {@code ConcertContactCard} with the given {@code ConcertContact} and index to display.
      */
-    public ConcertContactCard(ConcertContact concertContact, int displayedIndex, boolean showFullDetails) {
+    public ConcertContactCard(ConcertContact concertContact, int displayedIndex) {
         super(FXML);
 
         this.concertContact = concertContact;
@@ -82,22 +81,5 @@ public class ConcertContactCard extends UiPart<Region> {
         concertName.setText(concertContact.getConcert().getName().fullName);
         concertAddress.setText(concert.getAddress().value);
         date.setText(concert.getDate().concertDate);
-        this.showFullDetails = showFullDetails;
-
-        setLabelsToWrapText();
-    }
-
-    private void setLabelsToWrapText() {
-        id.setWrapText(showFullDetails);
-
-        personName.setWrapText(showFullDetails);
-        phone.setWrapText(showFullDetails);
-        personAddress.setWrapText(showFullDetails);
-        email.setWrapText(showFullDetails);
-        role.setWrapText(showFullDetails);
-
-        concertName.setWrapText(showFullDetails);
-        concertAddress.setWrapText(showFullDetails);
-        date.setWrapText(showFullDetails);
     }
 }

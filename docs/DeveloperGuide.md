@@ -144,6 +144,9 @@ How the parsing works:
 
 <img src="images/ModelClassDiagramNew.png" width="450" />
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** ConcertContact is an Association Class between Person and Concert.
+</div>
+
 The `Model` component,
 
 - stores the address book data i.e., all `Person`, `Concert` and `ConcertContact` objects (which are contained in a `UniquePersonList`, `UniqueConcertList` and `UniqueConcertContactList` object respectively).
@@ -236,7 +239,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | concert organiser | view a list of bands for a concert     | view the concert lineup easily                                         |
 | `* * *`  | concert organiser | add a contact to a concert             | collate the list of personnel for the concert                          |
 | `* * *`  | concert organiser | remove a contact from a concert        | have the most updated list of personnel for the concert                |
-| `* *`    | concert organiser | edit roles of people                   | have the most updated roles of each contact                            |
+| `* *`    | concert organiser | edit a contact                         | have the most updated contact details                                  |
 | `* *`    | concert organiser | edit a concert                         | have the most updated concert details                                  |
 | `* `     | concert organiser | favourite a contact                    | quickly contact the people I favourite                                 |
 | `*`      | concert organiser | write a review for a contact           | describe past experiences with the contact                             |
@@ -522,7 +525,7 @@ Use case ends
 - **GUI**: Graphical User Interface
 - **CLI**: Command Line Interface
 - **ConcertPhonebook**: Refers to the application
-- **Concert contact**: Link between a Concert and Person in the ConcertPhonebook
+- **Concert contact**: Link between between an existing Person and a particular Concert in the ConcertPhonebook
 
 ---
 

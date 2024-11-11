@@ -19,7 +19,6 @@ Class UniqueConcertList
 Class UniqueConcertContactList
 Class Person
 Class Concert
-Class ConcertContract
 Class ConcertDate
 Class Address
 Class Email
@@ -27,6 +26,7 @@ Class Name
 Class Phone
 Class Role
 Class Tag
+Class ConcertContact
 
 Class I #FFFFFF
 }
@@ -48,7 +48,8 @@ AddressBook *--> "1" UniqueConcertList
 AddressBook *--> "1" UniqueConcertContactList
 UniquePersonList --> "~* all" Person
 UniqueConcertList --> "~* all" Concert
-UniqueConcertContactList --> "~* all" ConcertContract
+UniqueConcertContactList --> "~* all" ConcertContact
+
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -58,8 +59,6 @@ Person *--> "*" Tag
 Concert *--> Name
 Concert *--> Address
 Concert *--> ConcertDate
-Person "1" - "1" Concert
-(Person, Concert) .. ConcertContract
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -70,5 +69,7 @@ Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Concert
-ModelManager --> "~* filtered" ConcertContract
+ModelManager --> "~* filtered" ConcertContact
+(Person, Concert) .. ConcertContact
+Person "1" - "1" Concert
 @enduml
