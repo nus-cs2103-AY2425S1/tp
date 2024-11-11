@@ -384,8 +384,8 @@ What you'll need:
 - Event Name: Alphanumeric characters and spaces only, 1-50 characters.
 - Location: Alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
-- Start Time: 24-hour Format HH:mm (e.g., 12:00).
-- End Time: 24-hour Format HH:mm (e.g., 15:00). Start time must be before end time.
+- Start Time: 24-hour Format HH:mm (e.g., 12:00). Note that 24:00 is not a valid time.
+- End Time: 24-hour Format HH:mm (e.g., 15:00). Note that 24:00 is not a valid time. Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
 <div class="alert alert-block alert-warning">

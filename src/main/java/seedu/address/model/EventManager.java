@@ -69,26 +69,17 @@ public class EventManager {
         if (event.getVolunteers().contains(volunteer.getName().fullName)) {
             throw new DuplicateAssignException();
         }
-        eventHasOverlapWithList(event, getEventsFromListOfNames(volunteer.getEvents()));
+
+        List<Event> participatingEvents = getEventsFromListOfNames(volunteer.getEvents());
+        for (Event e : participatingEvents) {
+            if (e.isOverlappingWith(event)) {
+                throw new OverlappingAssignException(e.getName().toString());
+            }
+        }
 
         event.assignVolunteer(volunteer.getName().fullName);
     }
 
-    /**
-     * Checks if any of the events in the provided list overlap with the target event
-     * @param targetEvent
-     * @param listToCheckAgainst
-     * @return
-     */
-    public boolean eventHasOverlapWithList(Event targetEvent, List<Event> listToCheckAgainst) throws
-            OverlappingAssignException {
-        for (Event e : listToCheckAgainst) {
-            if (e.isOverlappingWith(targetEvent)) {
-                throw new OverlappingAssignException(e.getName().toString());
-            }
-        }
-        return false;
-    }
 
     /**
      * Retreives an event object from the events list using its name.

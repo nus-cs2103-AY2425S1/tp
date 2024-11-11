@@ -37,7 +37,13 @@ public class VolunteerIsAvailableForEventPredicate implements Predicate<Voluntee
 
         List<Event> volnEvents = this.addressBook.getEventFromListOfNames(volunteer.getEvents());
 
-        return !this.addressBook.eventHasOverlapWithList(event, volnEvents);
+        for (Event e : volnEvents) {
+            if (e.isOverlappingWith(event)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

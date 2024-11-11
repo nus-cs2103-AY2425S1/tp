@@ -9,6 +9,7 @@ import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerIsAssignedToUnfreeDayTargetException;
 import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
@@ -127,8 +128,10 @@ public class VolunteerManager {
         volunteerToAddDate.addAvailableDates(dateList);
     }
 
-    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
-        volunteerToRemoveDate.removeAvailableDates(dateList);
+    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList,
+                                         List<Event> participatingEvents) throws
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException,
+            VolunteerIsAssignedToUnfreeDayTargetException {
+        volunteerToRemoveDate.removeAvailableDates(dateList, participatingEvents);
     }
 }
