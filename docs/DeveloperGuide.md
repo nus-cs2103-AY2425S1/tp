@@ -975,6 +975,78 @@ At least one field of the patient will be edited
 
     Use case ends.
 
+#### Use case: UC05 - Filters appointments with only end date.
+**Guarantees:**<br>
+Displays all appointments that lies from today's date and specified end date, if any.
+
+**MSS:**
+
+1.  User types command to filter appointments and inputs the end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+* 1a. User inputs invalid end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1a1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1b. User inputs an end date that is earlier than today's date.
+    * 1b1. ClinicConnect prompts the user to fix the end date by stating that end date should be after today's date.<br>
+      Step 1b1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+      
+     
+#### Use case: UC06 - Filters appointments with start date and end date
+**Guarantees:**<br>
+Displays all appointments that lies in the date range, if any.
+
+**MSS:**
+
+1.  User types command to filter appointments and inputs the start date and end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+      Use case ends.
+
+**Extensions**
+
+* 1a. User inputs invalid start or end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1d1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+* 1b. User inputs an end date that is earlier than the start date.
+    * 1b1. ClinicConnect prompts the user to fix the start and end date by stating that end date should be after start date.<br>
+      Step 1g1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+
+#### Use case: UC07 - Filters appointments with an additional `HealthService` parameter
+**Guarantees:**<br>
+
+Displays appointments that matches with the specified `HealthService`.
+
+**MSS:**
+
+1.  User inputs the start and end date [UC06](#use-case-uc06---filters-appointments-with-start-date-and-end-date)
+2.  User adds the parameter `HealthService`.
+3.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User inputs an invalid `HealthService` that does not belong to the present enum.
+    * 2a1. ClinicConnect prompts the user to choose a `HealthService` that is provided by the clinic.<br>
+      Step 2a1 is repeated until the user inputs a valid `HealthService` that is offered by the clinic.<br>
+      Use case resumes from step 2.
+      <br>
 
 ### Non-Functional Requirements
 
