@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).  
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.  
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -392,8 +392,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. App shows an error message to tell the user that the given index is invalid.  
       Use case ends.
 * 3b. No index is provided.
-    * 3b1. App shows an error message to tell the user that the command format is invalid.
-    <br>Use case ends.
+    * 3b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.
 
 ---
 
@@ -409,8 +409,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. App shows an error message to tell the user that the given name does not exist.  
       Use case ends.
 * 1b. No name is provided.
-    * 1b1. App shows an error message to tell the user that the command format is invalid.
-      <br>Use case ends.
+    * 1b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.
 
 ---
 
@@ -539,8 +539,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. App shows an error message to tell the user that the given index is invalid.  
       Use case ends.
 * 3b. No index is provided.
-    * 3b1. App shows an error message to tell the user that the command format is invalid.
-      <br>Use case ends.  
+    * 3b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.  
 
 ---
 
@@ -556,8 +556,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. App shows an error message to tell the user that the given event name does not exist.  
       Use case ends.
 * 1b. No event name is provided.
-    * 1b1. App shows an error message to tell the user that the command format is invalid.
-      <br>Use case ends.
+    * 1b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.
 
 ---
 
@@ -648,7 +648,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.  
       Expected: The most recent window size and location is retained.
 
 ### Deleting a person
@@ -657,37 +657,37 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`  
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `delete 0`  
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)  
       Expected: Similar to previous.
 
 2. Deleting a person while all persons are being shown using the sample address book given.
     
     1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book).
 
-    2. Test case: `delete David Li`<br>
-       Expected: Contact with name `David Li` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. This contact is provided by the sample address book when you first open the app.
+    2. Test case: `delete David Li`  
+       Expected: Contact with name `David Li` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
 
-    3. Test case: `delete irfan ibrahim`<br>
-       Expected: Contact with name `Irfan Ibrahim` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. This contact is provided by the sample address book when you first open the app.
+    3. Test case: `delete irfan ibrahim`  
+       Expected: Contact with name `Irfan Ibrahim` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
 
-    4. Test case: `delete roy`<br>
+    4. Test case: `delete roy`  
        Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
 3. Deleting a person while in a filtered displayed list.
 
     1. Prerequisites: Start with the sample address book and use a command that filters the current displayed contact list (Eg `search n/charlotte`).
 
-    2. Test case: `delete 2`<br>
+    2. Test case: `delete 2`  
        Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-    3. Test case: `delete 1`<br>
-       Expected: Contact with name `Charlotte Oliveiro` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. This contact is provided by the sample address book when you first open the app.
+    3. Test case: `delete 1`  
+       Expected: Contact with name `Charlotte Oliveiro` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
 
 ### Adding an event
 
@@ -725,27 +725,27 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all events using the `list_events` command. Multiple events in the list.
 
-    2. Test case: `delete_event 1`<br>
-       Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete_event 1`  
+       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
 
-    3. Test case: `delete_event 0`<br>
+    3. Test case: `delete_event 0`  
        Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect `delete_event` commands to try: `delete_event`, `delete_event x` (where x is larger than the list size)<br>
+    4. Other incorrect `delete_event` commands to try: `delete_event`, `delete_event x` (where x is larger than the list size)  
        Expected: Similar to previous.
 
 2. Deleting an event while all events are being shown using the sample address book given.
 
     1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book). List all events using the `list_events` command.
 
-    2. Test case: `delete_event CS2103T Project Meeting`<br>
-       Expected: Event with name `CS2103T Project Meeting` is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated. This event is provided by the sample address book when you first open the app.
+    2. Test case: `delete_event CS2103T Project Meeting`  
+       Expected: Event with name `CS2103T Project Meeting` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
 
-    3. Test case: `delete_event orbital`<br>
+    3. Test case: `delete_event orbital`  
        Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Test case: `delete_event orbital workshop`<br>
-       Expected: Event with name `Orbital Workshop` is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated. This event is provided by the sample address book when you first open the app.
+    4. Test case: `delete_event orbital workshop`  
+       Expected: Event with name `Orbital Workshop` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
 
 ### Unassigning an event from a person
 
