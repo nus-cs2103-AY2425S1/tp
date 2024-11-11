@@ -605,17 +605,34 @@ Given below are instructions to test the app manually.
     1. Test case: `contact edit 1 r/Student`<br>
        Expected: Contact is not edited. Error details are shown in the status message.
 
-### Deleting a person
+### Finding a contact
 
-1. Deleting a person while all persons are being shown
+1. Finding a contact by name.
 
-    1. Prerequisites: List all persons using the `contact list` command. Multiple persons in the list.
+    1. Prerequisites: There are multiple contacts, with at least one contact whose name is `Alice` and at least one contact whose name is `Bob`. None of the
+       contacts whose name is `Test` or contains the word `Test`. These names are case-insensitive.
+
+    1. Test case: `contact find Alice`<br>
+       Expected: Contacts whose name is `Alice` or contains the word `Alice` will be displayed. There should be at least one as per the prerequisites.
+
+    1. Test case: `contact find Test`<br>
+       Expected: No contacts is found. Details are shown in the status message.
+
+    1. Other incorrect contact find commands to try: `contact find`, `contact find x` (where x is a name of a
+       contact, a name that does not belong to any of the contacts or a word that is not in the names of any contact)<br>
+       Expected: Similar to previous.
+
+### Deleting a contact
+
+1. Deleting a contact while all contact are being shown.
+
+    1. Prerequisites: List all contact using the `contact list` command. Multiple contact in the list.
    
     1. Test case: `contact delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    
     1. Test case: `contact delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
    
     1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -631,17 +648,17 @@ Given below are instructions to test the app manually.
       Expected: A lesson is added to the student with index 1. Details of the added lesson shown in the status message.
    
    1. Test case: `lesson add sid/0 f/10 d/11-11-2024 12:00 h/1`<br>
-      Expected: No lesson is added. Error details shown in the status message.
+      Expected: No lesson is added. Error details are shown in the status message.
    
    1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
-      Expected: No lesson is added. Error details shown in the status message.
+      Expected: No lesson is added. Error details are shown in the status message.
 
-1. Adding a lessons on filtered contact list.
+1. Adding a lesson on filtered contact list.
 
    1. Prerequisite: At least one student exists in the contact list.
 
    1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
-      Expected: A lesson is added to the student with index 1 in the filtered contact list. Details of the added lesson shown in the status message.
+      Expected: A lesson is added to the student with index 1 in the filtered contact list. Details of the added lesson is shown in the status message.
 
 ### Listing all lessons
 
@@ -662,10 +679,10 @@ Given below are instructions to test the app manually.
     1. Prerequisites: There are multiple lessons in the lesson schedule.
 
     1. Test case: `lesson delete 1`<br>
-       Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the status message.
+       Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson is shown in the status message.
 
     1. Test case: `lesson delete 0`<br>
-       Expected: No lesson is deleted. Error details shown in the status message.
+       Expected: No lesson is deleted. Error details are shown in the status message.
 
     1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x`, `...` (where x is larger 
        than the list size)<br>
@@ -677,11 +694,11 @@ Given below are instructions to test the app manually.
        schedule.
 
     1. Test case: `lesson delete 1`<br>
-       Expected: First lesson is deleted from the filtered lesson schedule. Details of the deleted lesson 
+       Expected: First lesson is deleted from the filtered lesson schedule. Details of the deleted lesson are
        shown in the status message.
 
     1. Test case: `lesson delete 0`<br>
-       Expected: No lesson is deleted. Error details shown in the status message.
+       Expected: No lesson is deleted. Error details are shown in the status message.
 
     1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x` (where x is larger
        than the filtered list size)<br>
@@ -701,9 +718,9 @@ Given below are instructions to test the app manually.
        on the lesson panel. There should be at least one as per the prerequisites.
 
     1. Test case: `lesson find Test`<br>
-       Expected: No lesson is found. Details shown in the status message.
+       Expected: No lesson is found. Details are shown in the status message.
 
-    1. Other incorrect delete commands to try: `lesson find`, `lesson find x` (where x is a name of a 
+    1. Other incorrect lesson find commands to try: `lesson find`, `lesson find x` (where x is a name of a 
        student who does not have a lesson, a name that does not belong to any of the students that have 
        lessons or a word that is not in the names of the students that have lessons)<br>
        Expected: Similar to previous.
