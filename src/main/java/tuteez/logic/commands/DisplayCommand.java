@@ -25,7 +25,7 @@ public class DisplayCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or NAME (must be a valid name in tuteez)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " John Doe";
 
-    public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Displayed Person: %1$s";
+    public static final String MESSAGE_DISPLAY_PERSON_SUCCESS = "Displayed Student: %1$s";
 
     private final Index targetIndex;
     private final Name targetName;
