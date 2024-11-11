@@ -1123,6 +1123,13 @@ Team size: 5
 * **Sample Input:** `edit person 100000`
 * **Expected Output:** The result display box shows `Invalid index! Please enter a valid index within the list size.`
 
+5. **Modify date parsing to check for valid times**
+* **Flaw:** Entering an invalid times such as `2024-05-12 25:61` returns an error message that says "Invalid date-time format," which is unclear since the format is correct.
+* **Enhancement:** Modify the date parsing logic to check for valid times, such as ensuring that the time is between 00:00 and 23:59.
+* **Sample Input:** User enters `... d/2024-05-12 25:61`
+* **Expected Output:** The result display box shows `Invalid time format. Please enter a valid time between 00:00 and 23:59.`
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
