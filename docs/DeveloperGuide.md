@@ -28,6 +28,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Due to a limitation of PlantUML, the destroy marker (X) for lifelines in sequence diagrams cannot be displayed at the correct position. As a workaround, the lifelines are extended to the end of the diagram.
+</div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -285,8 +289,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### Data archiving
 
 #### Implementation
@@ -313,9 +315,7 @@ For example, the sequence diagram below illustrates the interactions within the 
 
 ### Product Scope
 
----
-
-#### **Target User Profile:**
+#### Target User Profile
 
 - **User Role:** Healthcare Administrator
 - **Workplace:** Old folks home for dementia patients
@@ -330,7 +330,7 @@ For example, the sequence diagram below illustrates the interactions within the 
     - Skilled at typing and prefers keyboard shortcuts over mouse interactions for speed.
     - Comfortable with using command-line interfaces (CLI) for fast data entry and retrieval.
 
-#### **Value Proposition:**
+#### Value Proposition
 
 MedConnect offers a **streamlined contact management system** tailored for healthcare administrators. Its key features include:
 
@@ -344,40 +344,48 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-### Beginner User Stories
+
+#### Beginner User Stories
 
 
-| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                            |
-|----------|--------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data         |
-| `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                       |
-| `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                     |
-| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
-| `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                            |
-| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
-| `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
-| `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                             |
+| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                                |
+|----------|--------------------------|-------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data             |
+| `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                           |
+| `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                         |
+| `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                                 |
+| `* * *`  | healthcare administrator | view all contacts in the address book           | have a comprehensive overview of all patients, doctors, and emergency contacts |
+| `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                                |
+| `* * *`  | healthcare administrator | add emergency contacts for patients             | quickly reach out to next-of-kin during medical emergencies                    |
+| `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                      |
+| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations     |
+| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable                   |
 
 
-### Intermediate User Stories
 
-| Priority | As a …                   | I want to …                              | So that I can…                                                               |
-|----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
-| `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
-| `* *`    | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
-| `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
-| `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
-| `* *`    | healthcare administrator | load backup archived data                | restore a backup copy in case of data corruption or user error              |
+#### Intermediate User Stories
 
-### Advanced User Stories
+| Priority | As a …                   | I want to …                           | So that I can…                                                               |
+|----------|--------------------------|---------------------------------------|------------------------------------------------------------------------------|
+| `* *`    | healthcare administrator | filter contacts by their doctor       | view a consolidated list of all the patients a doctor is responsible for     |
+| `* *`    | healthcare administrator | sort patients by their admission time | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | tag important notes to patients       | remember special considerations about certain patients                       |
+| `* *`    | healthcare administrator | archive outdated contacts             | maintain a clean and relevant contact list without losing historical records |
+| `* *`    | healthcare administrator | load backup archived data             | restore a backup copy in case of data corruption or user error               |
+| `* *`    | healthcare administrator | delete archived data                  | free up storage space and remove unnecessary or outdated contact information |
+| `* *`    | healthcare administrator | view a list of all archived data      | keep track of the archived data for reference or auditing purposes           |
+| `* *`    | healthcare administrator | undo the last operation               | recover from accidental deletions or modifications                           |
+| `* *`    | healthcare administrator | redo the last undone operation        | reverse an undo operation if it was done in error                            |
+
+#### Advanced User Stories
 
 | Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
-| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 | `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
-| `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
+| `*`      | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
 | `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
+| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 
 ---
 
