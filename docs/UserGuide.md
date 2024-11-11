@@ -93,7 +93,7 @@
 * Items in square brackets are optional.
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
   Note: If an optional field is not required, **avoid** leaving the prefix empty, as this will result in an invalid command.
-  e.g. `edit 1 n/NAME t/` is not a valid command
+  e.g. `edit 1 n/` is not a valid command
 
 <br> 
 
