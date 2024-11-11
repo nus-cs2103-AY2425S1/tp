@@ -7,7 +7,6 @@
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
@@ -25,17 +24,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/bonzzz3.png" width="200px">
 
-[[github](http://github.com/bonzzz3)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Bonzzz3)]
 
 * Role: Code Quality
 * Responsibilities: UI
 
-### Johnny Doe
+### Otto Tan
 
 <img src="images/ottotan.png" width="200px">
 
-[[github](http://github.com/OttoTan)] [[portfolio](team/ottotan.md)]
+[[github](http://github.com/OttoTan)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -45,7 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/ritvi12.png" width="200px">
 
 [[github](http://github.com/ritvi12)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -55,7 +52,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/myrilla12.png" width="200px">
 
 [[github](http://github.com/myrilla12)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
