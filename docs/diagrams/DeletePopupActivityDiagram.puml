@@ -11,7 +11,7 @@ start
 if () then ([confirm on delete popup])
     :Delete the contact with the specified index;
 else ([else])
-    :cancel deletion;
+    :Cancel deletion;
 
 endif
 stop
