@@ -79,14 +79,7 @@ Before continuing, here are some important information you need to know about th
       **Warning:** This is a warning box.
       </box>
 
-2. Words that are in <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different
-   part of the User Guide or an external link when you click on them.
-
-   <box type="tip" seamless>
-
-   </box>
-
-3. Refer to [Features](#features) for detailed explanations of each feature of **HireMe**!
+2. Refer to [Features](#features) for detailed explanations of each feature of **HireMe**!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -172,8 +165,9 @@ Examples:
   <img src="images/add-after.png" width="350" alt="Add-After">
 </div>
 
-> **_NOTE:_**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
-<br></br>
+<box type="info" seamless>
+**Note:**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
+</box>
 
 
 ### Listing all internship applications : `/list`
@@ -262,7 +256,7 @@ Use these commands to update the status of a specified internship application to
 ---
 
 <box type="info" seamless>
-**Notes about the status commands:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep it as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+**Note:**<br> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
 </box>
 
 <p>Before and after images of the first example</p>
