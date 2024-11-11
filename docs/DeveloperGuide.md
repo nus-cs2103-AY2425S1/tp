@@ -65,7 +65,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -141,7 +141,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -173,9 +173,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
 
 The `Model` component,
@@ -189,12 +189,17 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="550" />
 
 </box>
 
+<box type="info" seamless>
 
-**API** : [`LessonManager.java`]()
+**Note:** While TelegramUsername, Email, and Address are optional fields in the application, their multiplicities associated to the `Person` class in the diagram remains `1`. This is implemented through a design pattern where these attributes are represented by non-null wrapper objects that can internally contain null values.
+
+</box>
+
+**API** : [`LessonManager.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/model/person/lesson/LessonManager.java)
 
 <puml src="diagrams/LessonClassDiagram.puml" width="450" />
 
@@ -217,7 +222,7 @@ Note: As of `v1.5` clashing lessons are not allowed, hence when a `Person` is de
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -295,9 +300,8 @@ The following sequence diagram illustrates the interactions that take place with
 
 <puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
 
-<box type="info" seamless>
 
-How the this feature works:
+How this feature works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `display` (i.e., `DisplayCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DisplayCommand`) which is executed by the `LogicManager`.
@@ -341,46 +345,46 @@ How the this feature works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​              | I want to …​            | So that I can…​                                                                                                 |
-|---------|----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `* * *` | new user             | add my students' contact details | easily access and communicate with them or their guardians
-| `* * *` | new user             | search for a student's name        | find relevant student(s) easily                                                                                 |
-| `* * *` | new user             | delete students' entries     | remove students that I am no longer teaching                                                                    |
-| `* * *` | new user             | easily access my tutoring schedule with each student | stay organised and manage my records more effectively
+| Priority | As a …​              | I want to …​                                                                                                                          | So that I can…​                                                                                                 |
+|---------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `* * *` | new user             | add my students' contact details                                                                                                      | easily access and communicate with them or their guardians                                                      
+| `* * *` | new user             | search for a student's name                                                                                                           | find relevant student(s) easily                                                                                 |
+| `* * *` | new user             | delete students' entries                                                                                                              | remove students that I am no longer teaching                                                                    |
+| `* * *` | new user             | easily access my tutoring schedule with each student                                                                                  | stay organised and manage my records more effectively                                                           
 | `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
-| `* * *` | new user             | organise my students' contact details                        | find my students' by certain categories easily                                                                  |
-| `* * *` | new user             | have an option to store the address of the students                        | easily go to the student's house if the tuition session is in person                                            |
-| `* * *` | impatient user       | be able to add a task within 15 seconds                        | use the app in a rush                                                                                           |
-| `* * *` | impatient user       | be able to load up the app with the main user interface within 1-2 seconds                        | use the app seamlessly                                                                                          |
-| `* * *` | intermediate user    | schedule classes that repeats every week                        | not  keep scheduling classes on the same day(s)                                                                 |
-| `* * *` | intermediate user    | filter the entries by teaching date, such as “today” or “tomorrow” or "next 3 days"                        | quickly view and manage the students I am teaching on specific days                                             |
-| `* * *` | intermediate user    | be able to prevent duplicate student entries                        | avoid confusion when managing students with similar names                                                       |
-| `* * *` | expert user          | leave notes on a student's entry to track their learning progress                        | monitor and adjust my teaching strategies effectively                                                           |
-| `* * *` | expert user          | keyboard shortcuts                         | quickly add, delete and update students information                                                             ||           |                                            | leave notes on a student's entry to track their learning progress                             |                                                                      |
-| `* *`   | new user             | have a guided tour or input guide                        | know how to add students to the address book                                                                    |
-| `* *`   | new user             | clear all the app data quickly                        | delete data that was used when experimenting with the app.                                                      |
-| `* *`   | new user             | customise my own style of formatting by choosing from a few different options                        | not  follow a single formatting option instructed by the product                                                |
-| `* *`   | long screentime user | filter away data that I deem unnecessary                         | stay undistracted from other data                                                                               |
-| `* *`   | intermediate user    | copy information of my students to my clipboard                        | I can send them their invoice or notes quickly                                                                  |
-| `* *`   | intermediate user    |  filter entries by the payment status for the month                       | easily identify who has paid and who has not, enabling me to send invoices only to the students who are overdue |
-| `* *`   | intermediate user    | export student data in various formats (CSV, Excel, WhatsApp message etc.)                        | students can view their progress easily, and it is easy for students to view it on their end                    |
-| `* *`   | intermediate user    | record and track any special needs or accommodations required by my students                        | adapt my teaching style or lesson content appropriately                                                         |
-| `* *`   | intermediate user    | customise the user interface (color scheme, font size) of the app                        | make it visually appealing and easy to use according to my preferences                                          |
-| `* *`   | intermediate user    | track each student’s performance in specific subjects (e.g. Math, Science)                        | identify their strengths and weaknesses in different areas                                                      |
-| `* *`   | intermediate user    | record whether each student prefers online or in-person tutoring sessions | plan for travelling if needed                                                                                   |
-| `* *`   | impatient user       | quickly search for a student using autocomplete or suggestions as I type the student’s name | find a student quickly                                                                                          |
-| `* *`   | forgetful user       | see students that I am teaching today once I open the address book | reminded of who I need to teach today                                                                           |
-| `* *`   | expect user          | track students' exam results and view their progress over time | update my teaching style to better meet their needs                                                             |
-| `* *`   | expert user          | quickly filter by important dates, such as upcoming exams | effectively tailor my lessons to prepare students in a timely manner                                            |
-| `*  `   | new user             | undo an operation | undo a command if it was an mistake                                                                             |
-| `* `    | new user             | import student data in various formats (e.g., CSV, Excel) | quickly see how the product will look when populated                                                            |
-| `*`     | intermediate user    | set up automated reminders for upcoming lessons | adequately prepare for my lessons                                                                               |
-| `*`     | intermediate user    | attach lesson materials, homework assignments, or additional resources to each student's profile | easily share and track what I’ve assigned to each student                                                       |
-| `*`     | intermediate user    | filter and view students who have upcoming exams | prioritise revision sessions and prepare them effectively                                                       |
-| `*`     | forgetful user       |add a profile picture to my students recognise my student by picture  | recognise my student by picture and contact them without remembering their name                                 |
-| `*`     | expert user          | have some tips of the day / updates on more advanced features  | use the app seamlessly                                                                                          |
-| `*`     | expert user          | automate the process of sending invoice reminders to students or parents | manage payments efficiently and eliminate the need for manual tracking and individual messaging                 |
-| `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
+| `* * *` | new user             | organise my students' contact details                                                                                                 | find my students' by certain categories easily                                                                  |
+| `* * *` | new user             | have an option to store the address of the students                                                                                   | easily go to the student's house if the tuition session is in person                                            |
+| `* * *` | impatient user       | be able to add a task within 15 seconds                                                                                               | use the app in a rush                                                                                           |
+| `* * *` | impatient user       | be able to load up the app with the main user interface within 1-2 seconds                                                            | use the app seamlessly                                                                                          |
+| `* * *` | intermediate user    | schedule classes that repeats every week                                                                                              | not  keep scheduling classes on the same day(s)                                                                 |
+| `* * *` | intermediate user    | filter the entries by teaching date, such as “today” or “tomorrow” or "next 3 days"                                                   | quickly view and manage the students I am teaching on specific days                                             |
+| `* * *` | intermediate user    | be able to prevent duplicate student entries                                                                                          | avoid confusion when managing students with similar names                                                       |
+| `* * *` | expert user          | leave notes on a student's entry to track their learning progress                                                                     | monitor and adjust my teaching strategies effectively                                                           |
+| `* * *` | expert user          | be able to use keyboard shortcuts                                                                                                     | quickly add, delete and update students information                                                             ||           |                                            | leave notes on a student's entry to track their learning progress                             |                                                                      |
+| `* *`   | new user             | have a guided tour or input guide                                                                                                     | know how to add students to the address book                                                                    |
+| `* *`   | new user             | clear all the app data quickly                                                                                                        | delete data that was used when experimenting with the app.                                                      |
+| `* *`   | new user             | customise my own style of formatting by choosing from a few different options                                                         | not  follow a single formatting option instructed by the product                                                |
+| `* *`   | long screentime user | filter away data that I deem unnecessary                                                                                              | stay undistracted from other data                                                                               |
+| `* *`   | intermediate user    | copy information of my students to my clipboard                                                                                       | I can send them their invoice or notes quickly                                                                  |
+| `* *`   | intermediate user    | filter entries by the payment status for the month                                                                                    | easily identify who has paid and who has not, enabling me to send invoices only to the students who are overdue |
+| `* *`   | intermediate user    | export student data in various formats (CSV, Excel, WhatsApp message etc.)                                                            | students can view their progress easily, and it is easy for students to view it on their end                    |
+| `* *`   | intermediate user    | record and track any special needs or accommodations required by my students                                                          | adapt my teaching style or lesson content appropriately                                                         |
+| `* *`   | intermediate user    | customise the user interface (color scheme, font size) of the app                                                                     | make it visually appealing and easy to use according to my preferences                                          |
+| `* *`   | intermediate user    | track each student’s performance in specific subjects (e.g. Math, Science)                                                            | identify their strengths and weaknesses in different areas                                                      |
+| `* *`   | intermediate user    | record whether each student prefers online or in-person tutoring sessions                                                             | plan for travelling if needed                                                                                   |
+| `* *`   | impatient user       | quickly search for a student using autocomplete or suggestions as I type the student’s name                                           | find a student quickly                                                                                          |
+| `* *`   | forgetful user       | see students that I am teaching today once I open the address book                                                                    | reminded of who I need to teach today                                                                           |
+| `* *`   | expect user          | track students' exam results and view their progress over time                                                                        | update my teaching style to better meet their needs                                                             |
+| `* *`   | expert user          | quickly filter by important dates, such as upcoming exams                                                                             | effectively tailor my lessons to prepare students in a timely manner                                            |
+| `*  `   | new user             | undo an operation                                                                                                                     | undo a command if it was an mistake                                                                             |
+| `* `    | new user             | import student data in various formats (e.g., CSV, Excel)                                                                             | quickly see how the product will look when populated                                                            |
+| `*`     | intermediate user    | set up automated reminders for upcoming lessons                                                                                       | adequately prepare for my lessons                                                                               |
+| `*`     | intermediate user    | attach lesson materials, homework assignments, or additional resources to each student's profile                                      | easily share and track what I’ve assigned to each student                                                       |
+| `*`     | intermediate user    | filter and view students who have upcoming exams                                                                                      | prioritise revision sessions and prepare them effectively                                                       |
+| `*`     | forgetful user       | add a profile picture to my students recognise my student by picture                                                                  | recognise my student by picture and contact them without remembering their name                                 |
+| `*`     | expert user          | have some tips of the day / updates on more advanced features                                                                         | use the app seamlessly                                                                                          |
+| `*`     | expert user          | automate the process of sending invoice reminders to students or parents                                                              | manage payments efficiently and eliminate the need for manual tracking and individual messaging                 |
+| `*`     | expert user          | type a similar command to an actual one and get it to work                                                                            | not just adhere to a specific format restricted by the app                                                      |
 
 
 ### Use cases
@@ -391,53 +395,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword followed by student details into the textbox
-2. Tuteez acknowledges that a new student has been added
-3. Use case ends
+1. User types keyword followed by student details into the textbox.
+2. Tuteez acknowledges that a new student has been added.
+3. Use case ends.
 
 **Extensions**
 
-- 2a. Tuteez detects similar/identical name
-    - 2a1. Tuteez rejects the new addition and show error message
-    Use case ends
+* 2a. Tuteez detects an identical name.
 
-- 2b. Tuteez detects clashing lesson
-    - 2b1. Tuteez rejects the new addition and show error message
-    Use case ends
+    * 2a1. Tuteez rejects the new addition and show error message.
+
+    Use case ends.
+
+* 2b. Tuteez detects clashing lesson.
+
+    * 2b1. Tuteez rejects the new addition and show error message.
+
+    Use case ends.
 
 
 **Use case: UC2 - List all students**
 
 **MSS**
 
-1. User types keyword
-2. Tuteez displays all students
-3. Use case ends
+1. User types keyword.
+2. Tuteez displays a list of all students.
+3. Use case ends.
+
+**Extensions**
+
+* 2a. The list of all students is empty.
+
+    Use case ends.
 
 **Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list students
-2.  Tuteez shows a list of student <u>(UC2)</u>
-3.  User types keyword followed by delete index or name
-4.  Tuteez deletes the person
-5. Use case ends
+1.  User requests to list students.
+2.  Tuteez shows a list of students <u>(UC2)</u>.
+3.  User types keyword followed by delete index or name.
+4.  Tuteez deletes the person.
+5.  Use case ends.
 
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
 * 3a. The given index is invalid.
 
-  - 3a1. Tuteez shows an error message.
+  * 3a1. Tuteez shows an error message
 
-      Use case resumes at step 2.
-- 3b. The given name does not exist
-  - 3b1. Tuteez shows an error message.
+      Use case resumes at step 2
+  
+* 3b. The given name does not exist
+
+  * 3b1. Tuteez shows an error message
         
       Use case resumes at step 2
 
@@ -445,10 +457,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons
-1. tuteez shows a list of persons <u>(UC2)</u>
-1. User types keyword followed by index then lesson day and time
-1. tuteez adds lesson to student
+1. User requests to list students
+1. Tuteez shows a list of students <u>(UC2)</u>
+1. User types keyword followed by index of the student and then lesson day and time
+1. Tuteez adds lesson to student
 
 **Extensions**
 
@@ -464,11 +476,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes at step 2
 
-* 3c. The given index is invalid.
+* 3c. The given index is invalid
 
-   * 3c1. Tuteez shows an error message.
+   * 3c1. Tuteez shows an error message
 
    Use case resumes at step 2
+
+** Use case: UC5 - Delete a lesson from a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then lesson index to delete
+4. Tuteez deletes the lesson from the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+  
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+* 3b. The given lesson index is invalid
+
+    * 3b1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+**Use case: UC6 - Add a remark to a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then the remark to be added
+4. Tuteez adds the remark to the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+**Use case: UC7 - Delete a remark from a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then the remark index to delete
+4. Tuteez deletes the remark from the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+* 3b. The given remark index is invalid
+
+    * 3b1. Tuteez shows an error message
+  
+    Use case resumes at step 2
 
 ### Non-Functional Requirements
 
@@ -629,6 +704,12 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `addlesson 1 l/monday 0900-1100` <br>
         Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
+    
+    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300` <br>
+        Expected: No lesson is added. A clashing lesson error will be displayed in the status message.
+
+    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200` <br>
+        Expected: Lessons on "TUESDAY 1000-1100" and "TUESDAY 1100-1200" will be added to the student. The student's details should be displayed on the right panel. Lessons successfully added are shown in the status message.
 
 ### Deleting a lesson from a student
 
@@ -638,6 +719,12 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `deletelesson 1 li/1` <br>
        Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
+
+    3. Test case: `deletelesson` <br>
+       Expected: No lesson is deleted. Error details shown in the status message.
+
+    4. Other incorrect deletelesson commands to try: `deletelesson 0`, `deletelesson x` (where x is larger than the list size) <br>
+       Expected: Invalid lesson index error is shown in the status message.
 
 ### Adding a remark to a student
 
