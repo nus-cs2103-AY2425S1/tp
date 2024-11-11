@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new pet owner by providing the owner's name, contact number, address, and email.
+1.  User requests to add a new pet owner by providing the owner's IC number, name, phone, address, and email.
 2.  PawPatrol validates input.
 3.  PawPatrol successfully adds the new pet owner to the list.
 
@@ -304,27 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-- 2c. Owner name exceeds 50 characters.
+- 2c. Duplicate IC Number.
 
   - 2c1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2d. Owner address exceeds 100 characters.
-
-  - 2d1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2e. Owner email exceeds 50 characters.
-
-  - 2e1. PawPatrol shows an error message:
-
-    Use case resumes at step 1.
-
-- 2f. Duplicate owner number or address.
-
-  - 2f1. PawPatrol shows an error message:
 
     Use case resumes at step 1.
 
@@ -332,10 +314,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User keys in "delete pPET_INDEX" followed by a particular attribute such as name or species
-2.  PawPatrol shows the list of pets that match the searched attribute
-3.  User requests to delete a specific pet by keying in index
-4.  PawPatrol deletes the pet
+1.  User keys in "delete pPET_INDEX"
+2. PawPatrol deletes the pet at the specified index(one-indexed)
 
     Use case ends.
 
