@@ -93,6 +93,7 @@ Field | Accepted input values | Examples | Exceptions
 `PROJECT_STATUS` | Must be `in progress` or `completed` (note the past tense) | `in progress`, `completed` | None
 `PAYMENT_STATUS` | Must be `pending`, `partial`, `paid` or `late` | `pending`, `partial`, `paid`, `late` | None
 
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 ### Viewing help: `help`
@@ -250,6 +251,8 @@ Examples:
 * `delete n/John` deletes the client with the name `John`.
 * `list` followed by `delete id/2` deletes the 2nd person in the list.
 * `find n/Betsy` followed by `delete id/1` deletes the 1st person in the result of the `find` command.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
