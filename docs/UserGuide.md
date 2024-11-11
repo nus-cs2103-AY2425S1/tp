@@ -588,7 +588,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable).
 
-4. Parsing errors can occur when slashes (/) in addresses or company names, such as in W/T Building, are misinterpreted as invalid prefixes.
+4. Parsing errors can occur when slashes `/` in addresses or company names, such as in `W/T Building`, are misinterpreted as invalid prefixes.
 
 [_Back to Top_](#table-of-contents)
 
