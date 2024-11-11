@@ -516,6 +516,7 @@ Action     | Format, Examples
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.<br>
 
+
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
 - **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
