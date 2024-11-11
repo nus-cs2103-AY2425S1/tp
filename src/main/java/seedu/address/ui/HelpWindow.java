@@ -17,6 +17,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "Refer to the User Guide for more info: "
             + "https://ay2425s1-cs2103t-w11-1a.github.io/tp/UserGuide.html";
+
+    public static final String URL_ONLY = "https://ay2425s1-cs2103t-w11-1a.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "List of commands: \n\n"
             + "<<Viewing help>>\n"
             + "Format: help\n\n"
@@ -148,7 +150,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(URL_ONLY);
         clipboard.setContent(url);
     }
 }
