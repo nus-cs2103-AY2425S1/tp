@@ -179,6 +179,7 @@ Adds a student to UGTeach.
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
   * **SUBJECT** is case-insensitive.
+* You cannot add a duplicated student into UGTeach. Refer to [Glossary](#glossary) for more details on a duplicated student.
 
 </box>
 
@@ -451,12 +452,18 @@ Please note:
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Glossary
 * **CLI**: Command-line interface, where you interact with the system using your keyboard.
+* **Duplicated student:** Two students are duplicates if they have the exact same **NAME** and the same **PHONE NUMBER** at the same time.
+    * You can add 2 students with _different names_ but the _same phone number_ (e.g., siblings using a parent's phone number to register).
+    * You can add 2 students with the _exact same name_ but _different phone numbers_ (e.g., you may have 2 students with the same name).
+    * You cannot add a duplicated student or edit an existing student to make it a duplicate in UGTeach.
 * **GUI**: allows you to interact with your computer through text-based commands. It provides a way to run programs, navigate through files and directories, manage processes, and perform various other tasks.
 * **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
  

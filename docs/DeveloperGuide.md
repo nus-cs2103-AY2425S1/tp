@@ -929,6 +929,13 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
     We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
 
+1. **Improve duplicate detection to meet real-world use cases**:
+* The current version only considers students with **both** the same name and the same phone number as duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address could also serve as a unique identifier for students. <br>
+* In the future version, we plan to include email address as another criterion for detecting duplicates. To be specific,
+    * two students with the same name and the same phone number are duplicates;
+    * two students with the same name and the same email address are duplicates;
+    * two students with different names, but the same phone number or the same email address, are acceptable.
+
 1. **Enhance storage component to save data in a backup file**: Assuming user have not changed the `preferences.json` file, the current storage component for UGTeach only saves data in the `ugteach.json` file. If the `ugteach.json` file is corrupted or deleted, **all** the data will be lost.
     This might be inconvenient for the user, as the user might accidentally delete the `ugteach.json` file or the file might be corrupted due to some reasons.
     Therefore, we plan to save data in a backup file named `ugteachbackup.json`. The `ugteachbackup.json` file will be updated whenever the `ugteach.json` file is updated.
