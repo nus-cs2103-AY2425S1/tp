@@ -3,7 +3,38 @@ layout: page
 title: User Guide
 ---
 
-AdmiNUS is a contact management tool designed for NUS club administrators, student leaders, and event coordinators. It provides an easy and efficient way to manage contacts via a Command Line Interface (CLI), making it perfect for users who prefer typing over navigating complex menus.
+**Welcome to AdmiNUS!** <br>
+Thank you for choosing AdmiNUS as your go-to contact management tool. Designed specifically for [NUS Club Administrators](#nus-club-admin). AdmiNUS aims to make your contact management experience easy and efficient. Whether you prefer the speed of typing commands or the clarity of a user-friendly GUI, AdmiNUS has you covered.
+
+---
+
+## Why Choose AdmiNUS?
+AdmiNUS streamlines contact management by combining the speed of CLI commands with an intuitive GUI. It is especially useful for [NUS Club Administrator](#nus-club-admin) who need to manage contacts efficiently for events, vendors, and participants.
+
+### What AdmiNUS Offers:
+* Add, edit, delete, and search student and company contacts easily.
+
+* Track contacts by categories (e.g., students, companies) and tags.
+
+* Seamlessly switch between CLI and GUI for versatile interaction.
+
+* Import and export contact data via CSV files to facilitate data sharing.
+
+The application is designed to optimize workflows for users managing events, coordinating groups, and ensuring smooth communication.
+
+## Example Use Case
+Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
+
+```shell
+student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
+```
+
+This command adds John Doe instantly, tagged as a volunteer. You can then use filtertag volunteer to find all volunteers, saving time compared to traditional methods. 
+
+AdmiNUS helps you stay organized and efficient, allowing you to focus on running successful events.
+
+## Who Benefits from AdmiNUS?
+AdmiNUS is designed primarily for [NUS Club Administrators](#nus-club-admin) who need an efficient way to manage member and participant lists. The tool helps streamline contact organization, track participants effectively, and ensures smooth event coordination, making it an essential resource for those responsible for handling large contact databases.
 
 ---
 
@@ -162,14 +193,14 @@ Adds a student to AdmiNUS.
 student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-| Parameter Name   | Description                                                                                                                                                                                                                                                                                                                                                                       | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required  |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `n/NAME`         | Name of the student                                                                                                                                                                                                                                                                                                                                                               | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`).                                                                                                                                                                                                 | Compulsory |
-| `id/STUDENT_ID`  | Student ID issued by NUS | Must be 7 digits enclosed with two **capital** letters, e.g., A1234567Z                                                                                                                                                                                                                                                                                                                             | Compulsory |
-| `p/PHONE_NUMBER` | Contact number | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                           | Compulsory                                                                                                                                                                                       |
-| `e/EMAIL`        | Email address | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens (e.g., example.com) | Compulsory                                                                                                                                                                                       |
-| `a/ADDRESS`      | Physical address | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
-| `t/TAG`          | Tags to categorize contact | Must be alphanumeric characters and no spaces (case sensitive)                                                                                                                                                                                                                                                                                                                                      | Optional                                                                                                                                                                                                                                                                                                                                                                         |
+| Parameter Name   | Description                | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required  |
+|------------------|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `n/NAME`         | Name of the student        | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`).                                                                                                                                                                                                 | Compulsory |
+| `id/STUDENT_ID`  | Student ID issued by NUS   | Must be 7 digits enclosed with two **capital** letters, e.g., A1234567Z                                                                                                                                                                                                                                                                                                                             | Compulsory |
+| `p/PHONE_NUMBER` | Contact number             | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                           | Compulsory                                                                                                                                                                                       |
+| `e/EMAIL`        | Email address              | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens (e.g., example.com) | Compulsory                                                                                                                                                                                       |
+| `a/ADDRESS`      | Physical address           | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
+| `t/TAG`          | Tag to categorize contact | Must be alphanumeric characters and no spaces [case sensitive](#case-sensitive)                                                                                                                                                                                                                                                                                                                     | Optional                                                                                                                                                                                                                                                                                                                                                                         |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
@@ -195,14 +226,14 @@ Adds a company to AdmiNUS.
 company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 ```
 
-| Parameter Name   | Description                                        | Required   |
-| ---------------- | -------------------------------------------------- | ---------- |
-| `n/NAME`         | Name of the company                                | Compulsory |
-| `i/INDUSTRY`     | Industry type (e.g., Security, Education)          | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                                     | Compulsory |
-| `e/EMAIL`        | Email address                                      | Compulsory |
-| `a/ADDRESS`      | Physical address                                   | Compulsory |
-| `t/TAG`          | Tags to categorize contact (cannot contain spaces) | Optional   |
+| Parameter Name   | Description   | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required   |
+| ---------------- |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| `n/NAME`         | Name of the company | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`).                                                                                                                                                                                                                                          | Compulsory |
+| `i/INDUSTRY`     | Industry type (e.g., Security, Education) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                               | Compulsory |
+| `p/PHONE_NUMBER` | Contact number | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                           | Compulsory |
+| `e/EMAIL`        | Email address   | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens (e.g., example.com) | Compulsory |
+| `a/ADDRESS`      | Physical address     | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory |
+| `t/TAG`          | Tag to categorize contact  | Must be alphanumeric characters and no spaces [case sensitive](#case-sensitive)                                                                                                                                                                                                                                                                                                                                     | Optional   |
 
 <div markdown="block" class="alert alert-info"> 
 
@@ -561,10 +592,15 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 ## Glossary
 
 - **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
+  <a name="case-sensitive"></a>
+- **_Case-Sensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as distinct. For example, Apple, apple, and APPLE would be considered different values.
+  <a name="case-insensitive"></a>
+- **_Case-Insensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as the same. For example, Apple, apple, and APPLE would be considered equivalent values.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
+<a name="nus-club-admin"></a>
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
 <a name="parameter-like-sequence"></a>
 - **_Parameter-like Sequence_**: A combination of a forward slash (`/`) and a single character that resembles the prefixes used in commands (e.g., `n/`, `p/`, `e/`). These are used to specify input fields in commands and should not appear in any text fields.
