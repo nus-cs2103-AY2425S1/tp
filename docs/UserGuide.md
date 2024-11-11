@@ -217,6 +217,10 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+<br>
+After applying the find command, making changes to the displayed client list will bring you back to the main client list where the changes are applied.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
 **Shortcuts: Finding blacklisted/whitelisted clients**
@@ -225,7 +229,7 @@ To find all clients that are blacklisted (with no other fields specified), the c
 
 Similarly, the `whitelist` command can be entered to find all clients who are whitelisted.
 <br>
-_Note: both of these commands need to be entered without any parameters otherwise the app responds with an error message._
+_Note: Both of these commands need to be entered without any parameters otherwise the app responds with an error message. Similar to the find command, making changes to the displayed client list will bring you back to the main client list where the changes are applied._
 </div>
 
 ### Delete Client Details: `delete`
@@ -417,7 +421,6 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding/editing a client after using a `find`/`blacklist`/`whitelist` command**, the application resets to the main client list. This is because newly added/edited clients may not match your previous `find`/`blacklist`/`whitelist` command. The remedy is to reuse the `find`/`blacklist`/`whitelist` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
