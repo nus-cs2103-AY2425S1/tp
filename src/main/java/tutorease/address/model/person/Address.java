@@ -1,21 +1,19 @@
 package tutorease.address.model.person;
 
-import tutorease.address.commons.core.LogsCenter;
+import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
+import tutorease.address.commons.core.LogsCenter;
+
 
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
-    private static Logger logger = LogsCenter.getLogger(Address.class);
-
-
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
@@ -23,6 +21,8 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    private static Logger logger = LogsCenter.getLogger(Address.class);
 
     public final String value;
 

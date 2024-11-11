@@ -1,12 +1,12 @@
 package tutorease.address.model.person;
 
-import tutorease.address.commons.core.LogsCenter;
+import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
+import tutorease.address.commons.core.LogsCenter;
 
 /**
  * Represents a Person's name in the address book.
@@ -26,8 +26,9 @@ public class Name {
 
     public static final String REGEX_NO_SLASHES = "^[^/]*$";
 
-    public final String fullName;
     private static Logger logger = LogsCenter.getLogger(Name.class);
+    public final String fullName;
+
 
     /**
      * Constructs a {@code Name}.

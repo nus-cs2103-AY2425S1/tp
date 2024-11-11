@@ -1,12 +1,12 @@
 package tutorease.address.model.person;
 
-import tutorease.address.commons.core.LogsCenter;
+import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
+import tutorease.address.commons.core.LogsCenter;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -16,8 +16,8 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
     private static Logger logger = LogsCenter.getLogger(Phone.class);
+    public final String value;
 
     /**
      * Constructs a {@code Phone}.

@@ -1,12 +1,13 @@
 package tutorease.address.model.person;
 
-import tutorease.address.commons.core.LogsCenter;
+import static java.util.Objects.requireNonNull;
+import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static java.util.Objects.requireNonNull;
-import static tutorease.address.commons.util.AppUtil.checkArgument;
+import tutorease.address.commons.core.LogsCenter;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; its value is either "Guardian" or "Student".
@@ -16,8 +17,9 @@ public class Role {
     public static final String STUDENT = "Student";
     public static final String MESSAGE_CONSTRAINTS = "Roles can take 'Guardian' or 'Student', and it should not be "
             + "blank.";
-    public final String value;
     private static Logger logger = LogsCenter.getLogger(Role.class);
+    public final String value;
+
 
     /**
      * Constructs a {@code Role}.

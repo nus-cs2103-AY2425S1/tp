@@ -65,10 +65,11 @@ public class EditContactCommand extends ContactCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_ROLE_CANNOT_BE_EDITED = "Role cannot be changed!";
+    private static Logger logger = LogsCenter.getLogger(EditContactCommand.class);
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-    private static Logger logger = LogsCenter.getLogger(EditContactCommand.class);
+
 
     /**
      * Creates an EditContactCommand to edit the details of a person in the filtered person list.

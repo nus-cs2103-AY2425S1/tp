@@ -10,15 +10,15 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 import tutorease.address.model.person.Person;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Adds a contact to the TutorEase.
@@ -48,8 +48,8 @@ public class AddContactCommand extends ContactCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
             + "save an alternative version of a person, "
             + "you may add a unique identifier to his/her name e.g. Ryan Tan Sec 1";
-    private final Person toAdd;
     private static Logger logger = LogsCenter.getLogger(AddContactCommand.class);
+    private final Person toAdd;
 
     /**
      * Creates an AddContactCommand to add the specified {@code Person}.
