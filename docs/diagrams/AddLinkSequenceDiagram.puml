@@ -1,0 +1,44 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Participant "User" as User
+Participant "LinkCommand" as LinkCommand
+Participant "Model" as Model
+Participant "LinkManager" as LinkManager
+
+User -> LinkCommand: execute()
+activate LinkCommand
+
+LinkCommand -> Model: getPerson(patientNric)
+activate Model
+Model --> LinkCommand: patientPerson
+deactivate Model
+
+LinkCommand -> Model: getPerson(caregiverNric)
+activate Model
+Model --> LinkCommand: caregiverPerson
+deactivate Model
+
+LinkCommand -> Model: hasLink(patientPerson, caregiverPerson)
+activate Model
+Model --> LinkCommand: true/false (if link exists)
+deactivate Model
+
+LinkCommand -> Model: addLink(patientPerson, caregiverPerson)
+activate Model
+Model -> LinkManager: addLink(patientPerson, caregiverPerson)
+activate LinkManager
+
+LinkManager -> LinkManager: validateLinkConditions
+LinkManager --> Model: success/failure
+deactivate LinkManager
+
+Model --> LinkCommand: success/failure
+deactivate Model
+
+LinkCommand -> User: showSuccessMessage()/showErrorMessage()
+deactivate LinkCommand
+@enduml
