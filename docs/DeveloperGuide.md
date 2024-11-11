@@ -251,9 +251,21 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Visit History
 
-_{Explain here how the data archiving feature will be implemented}_
+The visit history feature allows users to save a record of visits to contacts with optional remarks. This allows social workers to better keep track of their interactions with beneficiaries. 
+
+The Model component would be altered such that each person would now store a visit history object:
+
+<puml src="diagrams/VisitHistory.puml" />
+
+It is optional to include a remark when adding a visit to the visit history. Given this implementation the person's date of last visit can be obtained from visit history.
+
+
+### \[Proposed\] Emergency Contact Expansion
+
+The emergency contact was designed to only be a phone number in the current implementation. It is intended to extend this so that the emergency contact includes a name and phone number.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -325,9 +337,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced social worker                 | locate a link where I can share my views and suggestions on the app        | help the app be more user centered and helpful over time                                               |
 | `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
 | `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
-
-
-*{More to be added}*
 
 ### Use cases
 
@@ -503,8 +512,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
