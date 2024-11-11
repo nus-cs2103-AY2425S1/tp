@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User keys in "delete PET" followed by a particular attribute such as name or species
+1.  User keys in "delete pPET_INDEX" followed by a particular attribute such as name or species
 2.  PawPatrol shows the list of pets that match the searched attribute
 3.  User requests to delete a specific pet by keying in index
 4.  PawPatrol deletes the pet
