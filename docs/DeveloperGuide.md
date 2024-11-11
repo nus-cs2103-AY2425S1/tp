@@ -334,8 +334,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | physiotherapist                        | search for client contact information by number      | access the client’s details when name is not readily recalled    |
 | `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
 | `* * *`  | physiotherapist                        | schedule appointments for my clients                 | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist                        | make payment for client appointments                 | keep track of payment information                                |
+| `* *`    | physiotherapist                        | edit client information                              | make changes to erroneous or outdated client details             |
 | `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments  | ensure that no client is missed                                  |
 | `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top          | prominently see what I need to do in order to manage my schedule |
+
+
 
 ### Use cases
 
