@@ -331,6 +331,7 @@ The `BookApptCommand` class is initialized with a new `Appt` object, which repre
 ##### Activity Diagram
 The activity diagram below illustrates the workflow behind the execution of the `bookappt` command:
 
+![BookApptActivityDiagram](images/BookApptActivityDiagram.png)
 
 ##### Design Considerations
 The `bookappt` command uses `Nric` as a unique identifier to book an upcoming appointment for the patient identified. `LocalDateTime` and `Healthservice` are required fields to ensure that each upcoming appointment added for the `Patient` is unique.
@@ -353,6 +354,7 @@ In `DeleteApptCommand`, with the NRIC input, a validity check is conducted, afte
 ##### Activity Diagram
 The activity diagram below illustrates the workflow behind the execution of the `deleteappt` command:
 
+![DeleteApptActivityDiagram](images/DeleteApptActivityDiagram.png)
 
 ##### Design Considerations
 The `deleteappt` command uses `Nric` as a unique identifier to delete an appointment for the patient identified. `LocalDateTime` is the required field to ensure that a unique appointment is deleted from the `Patient`.
@@ -585,6 +587,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClinicConnect shows an error message
 
       Use case ends.
+
 
 
 ### Non-Functional Requirements
