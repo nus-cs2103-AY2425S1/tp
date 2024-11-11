@@ -107,6 +107,14 @@ Format: `undo`
 
 ## Student Commands
 
+### Student prefixes
+| Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `p/`   | Phone numbers should only contain numbers, and it should be at least 3 digits long                                                                                                                                                                         | valid: `p/98765432`</br> invalid:`p/1234 5678`               |
+| `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
+| `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `sn/A1234567Z`</br> invalid: `sn/1234567z`            |
+
 ### Adding a student: `adds`
 
 Adds a student to the contact list.
