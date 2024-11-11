@@ -1213,4 +1213,3 @@ testers are expected to do more *exploratory* testing.
         * No patients in the list
     * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`<br>
       **Expected:** An error is shown stating `Invalid commmand format`
-      
