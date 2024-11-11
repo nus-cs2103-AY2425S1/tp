@@ -7,7 +7,7 @@
 # BridalBuddy User Guide
 
 BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](https://ay2425s1-cs2103t-f09-3.github.io/tp/DeveloperGuide.html#glossary).
-It is an app targeted at Wedding Planners to help them streamline guest and vendor management for their clients.
+It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
 
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
@@ -131,12 +131,13 @@ When you open up the application for the first time, you will see the interface 
 
 At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy.
 
-To confirm your instructions, simply the <kbd>Enter</kbd> key on your keyboard.
+To confirm your instructions, simply press the <kbd>Enter</kbd> key on your keyboard.
 
 Below the *Command Line* is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
 
 Finally, below the *Outcome Box* is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
 
+> :bulb: After entering the commands, if the cursor disappears from the *Command Line*, you can always press the <kbd>Tab</kbd> key on your keyboard a few times to bring the cursor back to the *Command Line* and continue typing instead of having to click on the *Command Line* with the mouse.
 
 [_Back to Top_](#table-of-contents)
 
@@ -368,9 +369,9 @@ This command will help you add a new guest to the bottom of the existing overall
 
 **Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
-> :warning: You can only enter 'P' for pending, 'A' for accepted or 'D' for declined for the optional `RSVP` field.
+> :warning: You can only enter 'P'/'p' for pending, 'A'/'a' for accepted or 'D'/'d' for declined for the optional `RSVP` field.
 
-> :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
+> :warning: You can only enter 'H'/'h' for related to husband, 'W'/'w' for related to wife or 'U'/'u' for unknown for the optional `RELATION` field.
 
 > :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
