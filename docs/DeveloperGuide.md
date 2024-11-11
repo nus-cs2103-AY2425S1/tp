@@ -466,7 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 2a. No contact IDs provided.
-    * 1a1. App shows an error message to tell the user that the given name does not exist.  
+    * 2a1. App shows an error message to tell the user that the given name does not exist.  
       Use case ends.
 * 2b. Invalid contact ID(s) provided.
     * 2b1. App shows an error message to tell the user that the contact is invalid and ask the user to provide valid contact IDs  
