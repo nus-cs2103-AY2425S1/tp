@@ -257,7 +257,7 @@ In order to add a remark to a student, the user must provide a number representi
 
 * Alternative 2: Identify student by their name.
     * Pros: Users do not have to worry about filtered indexes, so the user does not have to check the list every time before calling this command.
-    * Cons: Since TAchy allows multiple contacts with the same name, the system may encounter ambiguity when handling duplicate names, so additional fields are required to uniquely identify the contacts.
+    * Cons: Since TAchy allows multiple contacts with the same name, the system may encounter ambiguity when handling duplicate names, so additional fields are required to uniquely identify the contacts, which will require more typing.
 
 #### Implementation
 * LogicManager executes the command "remark".
@@ -276,99 +276,6 @@ In order to add a remark to a student, the user must provide a number representi
 
 #### Example activity diagram for RemarkCommand
 <puml src="diagrams/add-remark/RemarkCommandActivityDiagram.puml" alt="Activities inside the Logic Component for the `remark` Command" />
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -435,7 +342,7 @@ unless specified otherwise)
 
 * 1b. The student information already exists.
     * 1b1. TAchy an error message of duplicate student.
-    * 1b2. Teacher adds the student again by providing a different tag.
+    * 1b2. Teacher adds the student again by providing a different name, phone number, or email.
 
       Use case resumes at step 2.
 
@@ -454,7 +361,7 @@ unless specified otherwise)
 **Extensions**
 
 * 1a. There is no students in the app.
-    * 1a1. TAchy displays a "no students" message.
+    * 1a1. TAchy displays an error message.
 
       Use case ends.
 
@@ -575,7 +482,6 @@ unless specified otherwise)
 
 ---
 
-
 **Use case: Mark assignment**
 
 **MSS**
@@ -681,14 +587,18 @@ unless specified otherwise)
 
       Use case ends.
 
-* 1b. The student already has a remark.
-    * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the Teacher wants to overwrite the remark.
-    * 1b3. Teacher confirms the overwrite.
-    * 1b4. TAchy records the new remark.
-
-      Use case resumes at step 2.
-
+### Planned Enhancements:
+Team size: 5
+1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box and will be able to see the full result if the result is too long to fit in the box.
+3. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
+3. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
+4. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
+5. **Enable Edit Assignment Command to edit graded assignment without losing its submission status and score:** The current implementation of the Edit Assignment command will reset the assignment's submission status and score to default values if the assignment is already graded. This should be fixed to allow the user to edit the assignment without losing its submission status and score.
+6. **Standardize the command success messages:** The current implementation of the command success messages is 
+   inconsistent. Some commands like `edit_student` displays student details, while others like `view_student` do not.
+   This should be standardized to ensure that users receive feedback in consistent formats.
+7. **Allow for "s/" in student names:** The current implementation does not allow for student names to contain "/", which isolates them. This should be fixed to allow for a wider range of valid names.
+8. **Reject new students with the same Student Identifiers, but different capitalisation of email:** The current implementation allows for students with the same Student Identifiers but a different capitalisation of email to be added. This does not make sense as email are traditionally not case-sensitive. It should be fixed to allow better identification of users.
 
 ### Non-Functional Requirements
 
@@ -696,7 +606,7 @@ unless specified otherwise)
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Students cannot have duplicate names. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
+- Business/domain rules: Students cannot have the same Student Identifiers. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
@@ -708,9 +618,9 @@ unless specified otherwise)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Duplicate Names**: Names for students are considered to be duplicates even if the capitalisation is different (e.g: 'Nicholas' is a duplicate of 'nicholas')
 * **Private student detail**: A student detail that is not meant to be shared with others
-* **Teacher** : Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
+* **Teacher**: Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
+* **Student Identifiers** : Student name, phone number, and email
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -738,6 +648,30 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a student
+
+1. **Adding a student with valid details**
+    1. Test case: `add_student n/John Doe p/98765432 e/johnd@example.com`<br>
+       Expected: A new student named "John Doe" with the specified phone number and email is added to the student list. Status message indicates successful addition.
+    2. Test case: `add_student n/Betsy Crowe p/91234567 e/betsycrowe@example.com t/friend`<br>
+       Expected: A new student named "Betsy Crowe" with a "friend" tag is added. Status message shows the addition success message.
+
+2. **Adding a student with invalid details**
+    1. Test case: `add_student n/John Doe p/phone e/johnd@example.com`<br>
+       Expected: No student is added. Error message shown, indicating invalid phone number format.
+    2. Other incorrect add commands to try: `add_student`, `add_student n/ e/`, `add_student n/John Doe e/invalid-email`<br>
+       Expected: No student is added. Error messages shown, indicating which fields are invalid.
+
+### Viewing a student
+
+1. **Viewing a specific student**
+    1. Prerequisites: 1 or more students listed using the `list` command.
+    2. Test case: `view_student 2`<br>
+       Expected: Detailed view of the second student in the list is displayed.
+    3. Test case: `view_student 0`<br>
+       Expected: No student is displayed. Error message shown in the status bar.
+    4. Test case: `view_student x` (where `x` is greater than the list size)<br>
+       Expected: No student is displayed. Error message indicating the index is out of bounds.
 
 ### Deleting a student
 
@@ -753,3 +687,83 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Editing a student
+
+1. **Editing a student’s details with valid inputs**
+    1. Prerequisites: A student list containing at least one student.
+    2. Test case: `edit_student si/1 p/98765432`<br>
+       Expected: The first student's phone number is updated to "98765432". Success message shown in the status bar.
+    3. Test case: `edit_student si/1 n/John Smith t/friend`<br>
+       Expected: The first student's name is changed to "John Smith", and a "friend" tag is added.
+
+2. **Editing a student’s details with invalid inputs**
+    1. Test case: `edit_student si/1 p/invalidphone`<br>
+       Expected: No changes made. Error message indicates invalid phone number format.
+    2. Test case: `edit_student si/2 n/`<br>
+       Expected: No changes made. Error message shown, indicating name cannot be blank.
+
+### Finding students by name
+
+1. **Finding students with existing names**
+    1. Prerequisites: The student list has multiple students with varying names.
+    2. Test case: `find John`<br>
+       Expected: Students with "John" in their names are listed. Status message shows number of matches.
+    3. Test case: `find alex david`<br>
+       Expected: Students with names containing either "alex" or "david" are listed.
+
+2. **Finding students with no matches**
+    1. Test case: `find nonexistent`<br>
+       Expected: No students are listed. Status message indicates no matches found.
+
+### Adding an assignment
+
+1. **Adding a valid assignment**
+    1. Prerequisites: The student list includes at least one student.
+    2. Test case: `add_assignment si/1 an/Assignment 1 ms/100`<br>
+       Expected: An assignment named "Assignment 1" with a maximum score of 100 is added to the first student. Success message displayed.
+
+2. **Adding an invalid assignment**
+    1. Test case: `add_assignment si/1 an/AssignmentWithInvalidCharacters@ ms/100`<br>
+       Expected: No assignment is added. Error message shown, indicating invalid characters in assignment name.
+    2. Test case: `add_assignment si/1 an/ValidName ms/-10`<br>
+       Expected: No assignment is added. Error message shown, indicating invalid score format.
+
+### Marking and unmarking an assignment
+
+1. **Marking an assignment as submitted**
+    1. Prerequisites: The student list includes at least one student with at least one assignment.
+    2. Test case: `mark si/1 ai/1`<br>
+       Expected: The first assignment for the first student is marked as submitted. Success message displayed.
+
+2. **Unmarking an assignment as submitted**
+    1. Test case: `unmark si/1 ai/1`<br>
+       Expected: The submission status for the first assignment of the first student is reset. Success message displayed. Note that if there was a grade assigned to the assignment previously, it will be reset. 
+
+### Grading an assignment
+
+1. **Grading an assignment with valid score**
+    1. Prerequisites: The student list includes at least one student with at least one assignment.
+    2. Test case: `grade si/1 ai/1 s/80`<br>
+       Expected: The score of the first assignment for the first student is set to 80. Success message displayed. Note that if there was already an assigned grade to the assignment, it will be overwritten.
+
+2. **Grading an assignment with invalid score**
+    1. Test case: `grade si/1 ai/1 s/300` (assuming max score is 100)<br>
+       Expected: No changes made. Error message displayed indicating the score is out of bounds.
+
+### Clearing all data
+
+1. **Clearing all entries**
+    1. Test case: `clear`<br>
+       Expected: All students and assignments are removed from the app. Success message shown, indicating the data has been cleared.
+
+### Viewing help
+
+1. **Displaying help message**
+    1. Test case: `help`<br>
+       Expected: A help window is displayed, showing a link to the user guide where detailed usage instructions are provided.
+
+2. **Testing help command in different contexts**
+    1. Prerequisites: The app is open and a student list is displayed.
+    2. Test case: Execute `help` while in the main screen or after performing other commands like `list` or `find`.<br>
+       Expected: Help window is shown, and the app remains in the current state without affecting the student list.

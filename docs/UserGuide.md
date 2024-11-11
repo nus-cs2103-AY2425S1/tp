@@ -19,23 +19,25 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
+2. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
+3. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
    run the application.
 <br> By default, it should be saved in your Downloads folder. <br>
    - For Windows users: Type `cd Downloads`, and press `Enter`.
-   - For MacOS users: Type `cd ~/Downloads`, and press `Enter`.
-   - For Linux users: Type `cd ~/Downloads`, and press `Enter`.
+   - For MacOS and Linux users: Type `cd ~/Downloads`, and press `Enter`.
+<br> However, if you have saved your file in another location, navigate to that location. <br>
+   - For Windows users: Replace `{FILE_PATH}` with the location where the file is stored, type `cd {FILE_PATH}`, and press `Enter`.
+   - For MacOS and Linux users: Replace `{FILE_PATH}` with the location where the file is stored, type `cd ~/{FILE_PATH}`, and press `Enter`.
 
-1. Type the command `java -jar TAchy.jar` into the terminal to run the application.
+5. Type the command `java -jar TAchy.jar` into the terminal to run the application.
 <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all students.
@@ -55,19 +57,23 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
 Term           | Explanation
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**CLI**   | `A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.`
-**GUI**  | `A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.`
-**Assignment**         | `An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.`
-**Index**| `The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.`
-**Score**  | `The score represents the grade a student receives for a specific assignment.`
-**Remark**          | `A remark allows the tutor to record important notes or comments about a student for reference.`
+**CLI**   | A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.
+**GUI**  | A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.
+**Assignment**         | An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.
+**Index**| The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.
+**Score**  | The score represents the grade a student receives for a specific assignment.
+**Remark**          | A remark allows the tutor to record important notes or comments about a student for reference.
+**Unmark**          | An Unmark command will cause a previously submitted Assignment to be reset to "not submitted". If the assignment was previously graded, the score will be reset by default.
+**Mark**            | A Mark command will cause an unsubmitted Assignment to be marked as Submitted. The grade will remain as "not submitted yet", until a Grade Command is performed.
+**Grade**           | A Grade command will assign a score to an assignment. This score must be within the valid range of 0 to the maximum score of the assignment. When the grade command executes, the submission status of the assignment will also be marked as "submitted". 
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -77,19 +83,21 @@ Term           | Explanation
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add_student n/NAME`, `NAME` is a parameter which can be used as `add_student n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* To prevent Java integer overflow issues, all integer values—including indices and scores—must be within the range of -2,147,483,648 to 2,147,483,647.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -107,11 +115,13 @@ Format: `help`
 
 Adds a student to the app.
 
-Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br>
+Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br>
+
 Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
-* Maximum length for a name is 256 characters long
+* Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
+* Phone numbers with area codes (e.g. +65) are not supported.
 * Maximum email length is 256 characters
 <box type="tip" seamless>
 **Tip:** A student can have any number of tags (including 0)
@@ -123,17 +133,19 @@ Examples:
 ![Example for Add Student Command](images/addStudentExample.png)
 ### Viewing a student: `view_student`
 
-Displays all the details of a student in the details panel.
+Displays all the details of a student in the details panel.<br> 
 
 Format: `view_student INDEX`
 
 * Displays the details of a student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 ![Explanation for INDEX](images/student_index.png)
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
 * Index must exist in the current displayed student list.
+* Only one index can be supplied at a time. If additional indices are provided after the first valid index, they will be ignored.
+  (e.g: `view_student 1 2 3` will be identical in behaviour to `view_student 1`)
 
 Examples:
 * `list` followed by `view_student 2` displays the 2nd student in the list.
@@ -149,22 +161,25 @@ Format: `list`
 
 Edits an existing student in the app.
 
-Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
+
 Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 * Tags must be at most 40 characters long, and must be alphanumeric
-* Maximum length for a name is 256 characters long
+* Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
+* Phone numbers with area codes (e.g. +65) are not supported.
 * Maximum email length is 256 characters
   <box type="tip" seamless>
   **Tip:** A student can have any number of tags (including 0)
   </box>
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit_student si/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -197,7 +212,10 @@ Format: `delete_student INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * Similar to the View Command, this index is specified by the number as shown on the left of the Student's name, in the student list display.
-* The index **must be a positive integer** 1, 2, 3, …​
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 
 Examples:
 * `list` followed by `delete_student 2` deletes the 2nd student in the app.
@@ -212,10 +230,13 @@ Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
 * Adds an assignment to the student at the specified `INDEX`. The index refers to the index number shown in the
   displayed student list.
-* The max score must be a positive integer.
 
 Constraints:
-* Assignment name must be at most 256 characters long, and must be alphanumeric
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* Assignment name must be at most 55 characters long, and must be alphanumeric
+* Assignments for the same student cannot have the same name and max score
+* The max score must be a positive integer.
 
 Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
@@ -230,8 +251,13 @@ Deletes an assignment belonging to a student based on the student's index number
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
-* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student
-  list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
+  list and the assignment list on the student detail panel respectively.
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment1.png)
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
 
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
@@ -241,14 +267,21 @@ Examples:
 ### Editing an assignment: `edit_assignment`
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
+If an assignment is edited, but the details remain identical, TAchy will not treat this as an error. Instead,TAchy has been designed to allow for the assignment to be overwritten with the exact details.
 
 Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
 * Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
   list and the assignment list on the student detail panel respectively.
-  The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* Assignment name must be at most 55 characters long, and must be alphanumeric
+* Assignments for the same student cannot have the same name and max score
+* The max score must be a positive integer.
 
 Examples:
 * `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st
@@ -267,11 +300,13 @@ Examples:
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
-Constraints:
-- The assignment must not have been submitted prior to the Mark Command.
-- The assignment must already exist and belong to a particular student.<br>
-
 Format: `mark si/INDEX ai/INDEX`
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* The assignment must not have been submitted prior to the Mark Command.
+* The assignment must already exist and belong to a particular student.<br>
 
 Examples:
 * `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
@@ -283,11 +318,13 @@ Examples:
 
 Unmarks an existing assignment belonging to a student, resetting its status to not submitted.
 
-Constraints:
-- The assignment must already have been submitted prior to the Unmark Command.
-- The assignment must already exist and belong to a particular student.<br>
-
 Format: `unmark si/INDEX ai/INDEX`
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* The assignment must already have been submitted prior to the Unmark Command.
+* The assignment must already exist and belong to a particular student.<br>
 
 Examples:
 * `unmark si/1 ai/1`
@@ -299,11 +336,13 @@ Examples:
 Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
+
 * Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
   list and the assignment list on the student detail panel respectively.
 
 Constraints:
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
 * The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
 * The score can be regraded multiple times by using the `grade` command again. If the assignment was already assigned a grade previously, it will be overwritten, and a warning is shown to the user.
 
@@ -314,9 +353,15 @@ Examples:
   ![result for `grade si/1 ai/1 s/80`](images/gradeAssignment.png)
 
 ### Adding a remark to a student: `remark`
-Adds a remark to a existing student in the displayed list.
+Adds a remark to an existing student in the displayed list.
 
 Format: `remark si/INDEX r/REMARK`
+
+* Existing values will be updated to the input values
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 
 Examples:
 * `remark si/1 r/Weak in Math`
@@ -388,8 +433,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Duplicate names are not allowed**. If students have duplicate names (e.g: common names such as "Nicholas Tan"), then the tutor should add an extra word in the name to distinguish the students. For example ('Nicholas Tan RJC' and 'Nicholas Tan HCI') can be done to distinguish students with duplicate names.
-4. **Student names cannot include the symbol '/'**. Even if legal names include symbols (e.g: Suresh S/O Rama), TAchy will not be able to parse such names. Users are advised to instead remove such characters, or write the names in full (e.g: Suresh son of Rama)
+3. **Student names cannot include the symbol '/'**. Even if legal names include symbols (e.g: Suresh S/O Rama), TAchy will not be able to parse such names. Users are advised to instead remove such characters, or write the names in full (e.g: Suresh son of Rama)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -397,11 +441,11 @@ _Details coming soon ..._
 
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
+**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
 **View Student**  | `view_student INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
 **Delete Student**| `delete_student INDEX`<br> e.g., `delete_student 3`
-**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
