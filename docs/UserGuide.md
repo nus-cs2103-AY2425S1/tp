@@ -367,6 +367,7 @@ Removes wedding jobs assigned to specified person.
         - If multiple matches are found when using name-based format, the system will prompt for index.
         - Can remove multiple weddings jobs a person is assigned to.
         - Wedding indices must be valid and must refer to weddings that the specified person is already assigned to.
+        - If no wedding indices are provided, the contact specified will be deleted.
 - **Examples**:
     - `delete 1 w/1` removes wedding job at index 1 that person at index 1 is assigned to.
     - `delete Alice w/1 w/2` removes wedding jobs at index 1 and 2 assigned to Alice, if there's only one match to 'Alice'.
