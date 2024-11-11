@@ -112,9 +112,9 @@ public class DeleteSessionCommandTest {
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
                 missingSessionName, memberIndexes);
         assertThrows(CommandException.class,
-                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER
-                        , missingSessionName, modelStub.getFilteredMemberList().get(0).getName())
-                , () -> deleteSessionCommand.execute(modelStub));
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        missingSessionName, modelStub.getFilteredMemberList().get(0).getName()), ()
+                        -> deleteSessionCommand.execute(modelStub));
     }
 
     @Test
@@ -127,9 +127,9 @@ public class DeleteSessionCommandTest {
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(REHEARSAL.getSessionName(), memberIndexes);
         assertThrows(CommandException.class,
-                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER
-                        , REHEARSAL.getSessionName(), ALICE.getName())
-                , () -> deleteSessionCommand.execute(modelStub));
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        REHEARSAL.getSessionName(), ALICE.getName()), ()
+                        -> deleteSessionCommand.execute(modelStub));
     }
 
     @Test
@@ -143,9 +143,9 @@ public class DeleteSessionCommandTest {
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(REHEARSAL.getSessionName(), memberIndexes);
         assertThrows(CommandException.class,
-                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER
-                        , REHEARSAL.getSessionName(), ALICE.getName())
-                , () -> deleteSessionCommand.execute(modelStub));
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        REHEARSAL.getSessionName(), ALICE.getName()), ()
+                        -> deleteSessionCommand.execute(modelStub));
         assertEquals(modelStub.getFilteredMemberList().size(), 2); // check if nothing was deleted
         assertTrue(modelStub.getFilteredMemberList().contains(GEORGE));
         assertTrue(modelStub.getFilteredMemberList().contains(ALICE));
