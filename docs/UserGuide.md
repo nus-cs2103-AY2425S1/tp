@@ -879,7 +879,7 @@ _Details coming soon ..._
 **Q**: Do I need any prior technical knowledge to use VendorVault?<br>
 **A**: No, VendorVault is designed to be user-friendly and accessible, regardless of technical experience. However, being able to type fast can allow you to use the app more efficiently.
 
-**Q**: Can I undo my commands?
+**Q**: Can I undo my commands?<br>
 **A**: Currently there isn't a way to undo your commands. Hence, be careful before inputting in your commands!
 
 
