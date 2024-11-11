@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StudentManagerPro`, which `Person` references. This allows `StudentManagerPro` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" alt="Structure of the Better Model Component"/>
 
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StudentManagerPro` and the **Actor** is the `user`, unless specified otherwise)
 
 **System: StudentManagerPro**
 
@@ -978,6 +978,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **EcName**: Emergency contact name of a student
 * **EcNumber**: Emergency contact number of a student
 * **SortAttribute**: Particular attribute of a student that can be compared for sorting purposes
+* **Predicate**: A condition that evaluates to true or false, used to filter or match specific items
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1164,7 +1165,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding exam for all students currently in the list
 
     1. Test case: `addExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is added to all students in StudentManagerPro. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
     2. Test case: `addExam ex/Midterm#`<br>
        Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
@@ -1204,7 +1205,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The test for adding exam should be done first as the students must have an existing exam to be deleted.
 
     2. Test case: `deleteExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is deleted from all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is deleted from all students in StudentManagerPro. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
     3. Test case: `deleteExam ex/Midterm#`<br>
        Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1222,7 +1223,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding submission for all students currently in the list
 
     1. Test case: `addSubmission sm/Assignment 1`<br>
-       Expected: Submission with submission name Assignment 1 is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Submission with submission name Assignment 1 is added to all students in the StudentManagerPro. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
     2. Test case: `addSubmission sm/Assignment #1`<br>
        Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
