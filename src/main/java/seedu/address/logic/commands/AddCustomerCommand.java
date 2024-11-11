@@ -7,14 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.regex.Pattern;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Customer;
+import seedu.address.model.person.Person;
 
 /**
  * Adds a customer to the address book.
@@ -40,11 +38,8 @@ public class AddCustomerCommand extends Command {
             + PREFIX_TAG + "loyal";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book";
-    public static final String MESSAGE_INVALID_INFORMATION = "Invalid information: "
-            + "The information field must only contain alphanumeric characters and spaces.";
-
-    private static final Pattern VALID_INFORMATION_REGEX = Pattern.compile("^[A-Za-z0-9\\s]+$");
+    public static final String MESSAGE_DUPLICATE_PHONE = "A contact in the address book already has this phone number. "
+            + "Please use a different phone number.";
 
     private final Customer toAdd;
 
@@ -60,24 +55,16 @@ public class AddCustomerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Validate the 'information' field of the customer
-        if (!isValidInformation(toAdd.getInformation().value)) {
-            throw new CommandException(MESSAGE_INVALID_INFORMATION);
+        // Check for duplicate phone number across all contacts
+        for (Person person : model.getFilteredPersonList()) {
+            if (person.getPhone().equals(toAdd.getPhone())) {
+                throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+            }
         }
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
-        }
-
+        // Add the new customer if no duplicates are found
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
-    }
-
-    /**
-     * Checks if the given information field is valid (alphanumeric and spaces only).
-     */
-    private boolean isValidInformation(String information) {
-        return VALID_INFORMATION_REGEX.matcher(information).matches();
     }
 
     @Override
