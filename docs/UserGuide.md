@@ -6,9 +6,8 @@
 
 # LogiLink User Guide
 
-LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts<sup>1</sup> and their associated delivery information from your desktop.
+LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts and their associated delivery information from your desktop.
 Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
-<br><sup><small>1</small></sup> <small>"Contacts" referring to either employees or clients.</small>
 
 
 If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
@@ -18,22 +17,22 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Viewing help: `help`](#viewing-help--help)
+  * [Viewing help: `help`](#viewing-help-help)
   * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
-  * [Listing all contacts: `list`](#listing-all-contacts--list)
+  * [Listing all contacts: `list`](#listing-all-contacts-list)
   * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
-  * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Locating contacts or deliveries by name: `find`](#locating-contacts-by-name-find)
   * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
-  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
-  * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
+  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery-archive)
+  * [Unarchiving a contact or delivery: `unarchive`](#unarchive-a-contact-or-delivery-unarchive)
   * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
   * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
-  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
-  * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
-  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee--assign)
-  * [Returning to the main window: `back`](#returning-to-the-main-window--back)
-  * [Clearing all entries: `clear`](#clearing-all-entries--clear)
-  * [Exiting the program: `exit`](#exiting-the-program--exit)
+  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery-delete)
+  * [Inspecting a contact: `inspect`](#inspecting-a-contact-inspect)
+  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee-assign)
+  * [Returning to the main window: `back`](#returning-to-the-main-window-back)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
@@ -53,9 +52,10 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
-   ![openinterminal](images/openinterminal.png)
+   <img src="images/openinterminal.png" alt="openinterminal" width="600">
+   
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -81,9 +81,9 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
-    ![main window](images/Ui.png)
+    <img src="images/ui.png" alt="ui" width="600">
   - **Inspect window**: the window you see when inspecting a contact.
-    ![inspect window](images/Ui2.png)
+    <img src="images/ui2.png" alt="ui2" width="600">
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
@@ -110,8 +110,12 @@ the app.
 
 Shows a help window with a list of commonly used commands for the current window. You can click on any command button to automatically enter it into the command box.
 
-Note: 
-* Does not show an exhaustive list of all available commands, only the most helpful. 
+<box type="info" seamless>
+
+**Note:**
+Does not show an exhaustive list of all available commands, only the most helpful. 
+
+</box>
 
 <box type="tip" seamless>
 
@@ -120,7 +124,7 @@ Note:
 
 Format: `help`
 
-![help window](images/helpWindow.png)
+<img src="images/helpWindow.png" alt="helpWindow" width="600">
 
 ### Adding a contact or delivery: `add`
 **<ins>When in the main window**
@@ -136,12 +140,15 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
 
 <br>
-Note: 
+<box type="info" seamless>
 
-* In order to keep your address book organised, `NAME` has to be **unique**
-* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
+**Note:**<br>
+
+* In order to keep your address book organised, `NAME` has to be **unique**.
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear.
 * The default field for `[r/ROLE]` is client if left empty.
-* `Address` needs to have the format: `[Address line], S[6-digit postal code]`
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -217,7 +224,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+<img src="images/findAlexDavidResult.png" alt="find" width="600">
 
 **<ins>When in the inspect window**
 
@@ -253,11 +260,12 @@ Format: `archive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+* `archive` works on archived and unarchived contact(s). 
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
-![after archiving contact](images/archivedcontact.png)
+<img src="images/archivedcontact.png" alt="archive_contact" width="600">
 
 <box type="info" seamless>
 
@@ -275,7 +283,7 @@ Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
-![after archiving delivery](images/archiveddelivery.png)
+<img src="images/archiveddelivery.png" alt="archive_delivery" width="600">
 
 <box type="info" seamless>
 
@@ -295,10 +303,10 @@ Format: `unarchive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-
+* `unarchive` works on archived and unarchived contact(s). 
 
 Examples:
-* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
@@ -382,7 +390,7 @@ Format: `inspect INDEX`
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
-![inspect_window](images/Ui2.png)
+<img src="images/ui2.png" alt="ui2" width="600">
 
 **<ins>When in the inspect window**
 
@@ -403,6 +411,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
+* This command works for both archived and unarchived delivery. 
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
@@ -497,6 +506,6 @@ Action     | Format, Examples
 Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
-**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
 **Client**    |A contact that has the role `client`
 **Employee**    |A contact that has the role `employee`
+**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
