@@ -120,7 +120,7 @@ Examples:
 ### Adding a remark to a patient profile : `remark`
 
 Adds a remark to a specified patient profile.
-> **Note:** You can only specify **one** remark to add, and patients can only have one remark.
+> **Note:** You can only specify **one** remark to add, and patients can only have one remark. If the patient already has a remark, the original remark will be overwritten.
 
 Format: `remark NRIC r/REMARK`
 
