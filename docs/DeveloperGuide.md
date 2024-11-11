@@ -24,10 +24,30 @@
    4. [Schedule date Feature](#schedule-date-feature)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix](#appendix)
-   1. [Appendix: Requirements](#appendix-requirements)
-   2. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
-   3. [Appendix: Efforts](#appendix-efforts)
+7. [Appendix: Requirements](#appendix-requirements)
+   1. [Product Scope](#product-scope)
+   2. [User Stories](#user-stories)
+   3. [Use Cases](#use-cases)
+   4. [Non-Functional Requirements](#non-functional-requirements)
+   5. [Glossary](#glossary)
+8. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+   1. [Launch and shutdown](#launch-and-shutdown)
+   2. [Adding a patient](#adding-a-patient)
+   3. [Editing a patient](#editing-a-patient)
+   4. [Deleting a patient](#deleting-a-patient)
+   5. [Searching for a patient](#searching-for-a-patient)
+   6. [Viewing a patient](#viewing-a-patient)
+   7. [Adding notes to a patient](#adding-notes-to-a-patient)
+   8. [Deleting notes from a patient](#deleting-notes-from-a-patient)
+   9. [Making an appointment](#making-an-appointment)
+   10. [Deleting an appointment](#deleting-an-appointment)
+   11. [Showing appointments on a particular date](#showing-appointments-on-a-particular-date)
+   12. [Showing all appointments](#showing-all-appointments)
+9. [Appendix: Efforts](#appendix-efforts)
+   1. [Complexity and Scope](#complexity-and-scope)
+   2. [Effort Invested](#effort-invested)
+   3. [Challenges Encountered](#challenges-encountered)
+   4. [Achievements](#achievements)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -318,7 +338,7 @@ The **`AddAppointmentCommandParser`** and **`AddAppointmentCommand`** classes en
 ### Schedule Date Feature
 
 #### Overview
-The `scheduledate` command allows users to filter the appointments occuring on a specified date. The command requires:
+The `scheduledate` command allows users to filter the appointments occurring on a specified date. The command requires:
 - **Date** – Date regarding schedule of interest.
 
 <puml src="diagrams/ScheduleDateActivityDiagram.puml" alt="ScheduleDateActivityDiagram" />
@@ -347,6 +367,40 @@ The **`ScheduleDateCommandParser`** and **`ScheduleDateCommand`** classes enforc
     - **Parser** checks if the date format follows `dd-MM-yyyy`.
     - **Parser** checks if the date is valid.
 
+#### Find Command
+
+#### Overview
+The `find` command allows users to search through the entire patient list and filter it based on a given field and certain keywords. The command requires:
+- **Field** - The specific field to perform the search on.
+- **Keyword(s)** - The keyword(s) to search for.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+#### 1. Parsing User Input
+The **`FindCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Prefix** - the prefix associated with the field we wish to search through.
+- **Search String** - A String containing the keyword(s) to search for.
+
+During the parsing process:
+- The Search String is split by white spaces, creating a list of Keyword(s).
+- A `FieldContainsKeywordPredicate` instance is created to hold the field and Keyword(s) details.
+
+#### 2. Executing the Command
+The **`FindCommand`** class performs the following steps to filter the patient list:
+
+1. **Update filteredPersons**:
+    Uses the `FieldContainsKeywordPredicate` from the parser to update filteredPersons in **Model**.
+    This will perform a search on the specified field for every patient, returning `true` if any word in the field contains any of the keyword(s) as a substring.
+
+2. **Display filteredPersons**:
+    The displayed list of patients will automatically update with the new filteredPersons as it is an `ObservableList`.
+
+#### 3. Handling Invalid Inputs
+The **`FindCommandParser`** class enforce validation rules to ensure that the input is valid:
+
+- **Format Verification**:
+  - **Parser** checks if there is one and only one field specified.
+  - **Parser** checks to ensure the search string is not empty.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
@@ -403,11 +457,9 @@ We plan to make the duplicate ID cross-checking case-insensitive such that simil
 * [DevOps guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
-## **Appendix**
-
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
@@ -423,7 +475,7 @@ We plan to make the duplicate ID cross-checking case-insensitive such that simil
 * manage patients faster than a typical mouse/GUI driven app
 * reduce time spent on administrative tasks by centralizing information, allowing user to focus more on patient care
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -443,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `WardWatch` and the **Actor** is the `doctor`, unless specified otherwise)
 
@@ -600,6 +652,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Doctor request to delete an Appointment tied to a patient
 2. WardWatch deletes specified appointment
+3. WardWatch shows a success message
 
    Use case ends.
 
@@ -614,9 +667,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. Doctor requests to delete an Appointment from an invalid patient
 
     * 1b1. WardWatch shows an invalid patient message.
+
+      Use case resumes at step 1.
   
 * 1c. Doctor requests to delete a non-existing Appointment from a patient
-*
+
     * 1c1. WardWatch shows patient does not have Appointment error message.
 
       Use case resumes at step 1.
@@ -635,7 +690,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Doctor request to see schedule for a certain day
-2. WardWatch displays all appointments for that day
+2. WardWatch shows a success message and displays all appointments for that day
 
    Use case ends.
 
@@ -647,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC11 - See Schedule for all appointments**
+**Use case: UC11 - See all Schedules**
 
 **MSS**
 
@@ -664,40 +719,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC12 - Add notes tied to a specific patient**
+**Use case: UC12 - Add Notes tied to a specific patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
-1. Doctor submits new notes for a certain patient
-2. WardWatch displays patient information with notes 
+1. Doctor submits new Notes for a certain patient
+2. WardWatch displays a success message with the Patient information and the new Notes 
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Patient Notes format is invalid 
+* 1a. The information entered is invalid
 
-    * 1a1. WardWatch shows an invalid note description error message.
+    * 1a1. WardWatch shows an invalid Patient Notes information error message.
 
       Use case resumes at step 1.
 
-**Use case: UC13 - delete notes to a specific patient**
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC13 - delete Notes to a specific patient**
 
 **MSS**
 
-1. Doctor request to delete notes for a certain patient
-2. WardWatch deletes the patient notes
+1. Doctor request to delete Notes for a certain Patient
+2. WardWatch deletes the Patient Notes
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Patient Notes field is empty
+* 1a. The delete Notes command format entered is invalid
 
-    * 1a1. WardWatch shows a notes is already empty error message.
+    * 1a1. WardWatch shows an incorrect format error message.
 
       Use case resumes at step 1.
 
+* 1b. Doctor requests to delete Notes from an invalid patient
+
+    * 1b1. WardWatch shows an invalid patient message.
+
+* 1c. Doctor requests to delete non-existing Notes from a patient
+*
+    * 1c1. WardWatch shows Patient does not have Appointment error message.
+
+      Use case resumes at step 1.
 
 
 ### Non-Functional Requirements
