@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 
 When using the `edit` command, note that:
 * You are unable to edit comments via the `edit` command.
-* There should be no additional arguments between the `INDEX` and the first prefix (e.g n/)
+* There should be no additional arguments between the `INDEX` and the first prefix (e.g `edit 1 blah n/ John` is wrong is wrong and should instead be `edit 1 n/ John`)
 </div>
 
 Continuing from the previous example in `add`, you could try this:
@@ -353,7 +353,7 @@ Creates one or more new attendance events.
 
 **Format:** `createattn e/EVENT_NAME [e/EVENT_NAME]...`
 
-- **Event Names:**
+- **Event Names (Refer to [Constraints](#managing-attendance)):**
     - Specify one or more event names using the `e/` prefix.
     - Duplicate event names within the same command are not allowed.
     - If an event with the same name already exists, the command will fail and indicate the first event which already exists.
@@ -379,7 +379,7 @@ Deletes one or more attendance events.
 
 **Format:** `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`
 
-- **Event Names:**
+- **Event Names (Refer to [Constraints](#managing-attendance)):**
     - Specify one or more event names using the `e/` prefix.
     - Duplicate event names within the same command are not allowed.
     - If any specified event does not exist, the command will fail and indicate the first event which was not found.
@@ -419,7 +419,7 @@ Marks one or more students as present for a specific attendance event.
 
 **Format:** `mark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
     - The event must exist in Teacher's Pet.
 
@@ -451,7 +451,7 @@ Marks one or more students as absent for a specific attendance event.
 
 **Format:** `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
     - The event must exist in Teacher's Pet.
 
@@ -479,7 +479,7 @@ Displays the list of students who are either present or absent for a specific at
 
 **Format:** `listattn e/EVENT_NAME s/STATUS`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
     - The event must exist in Teacher's Pet.
 
@@ -510,9 +510,11 @@ Displays the list of students who are either present or absent for a specific at
    * **Solution:** Ensure your command matches the specified format exactly.
 
 
+
 * **Event Not Found:**
    * If you attempt to mark, unmark, or list attendance for an event that does not exist.
    * **Solution:** Use `listevents` to view existing events and ensure the event name is correct.
+
 
 
 * **Duplicate Entries:**
@@ -520,17 +522,21 @@ Displays the list of students who are either present or absent for a specific at
   * **Solution:** Remove duplicates so each event name or index appears only once.
 
 
+
 * **Invalid Indices:**
    * If you specify indices that are not positive integers or do not correspond to any student in the displayed list.
    * **Solution:** Check the current student list and use valid indices.
+
 
 
 * **Combining Commands:**
    * Use the `find` or `show` commands to filter the student list before marking or unmarking attendance.
 
 
+
 * **Consistent Event Naming:**
    * Decide on a consistent naming convention for events to avoid confusion. (eg. `Tutorial 1`, `Tutorial 2`...)
+
 
 
 * **Regularly List Events:**
