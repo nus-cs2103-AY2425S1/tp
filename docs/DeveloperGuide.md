@@ -158,6 +158,22 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Seed feature
+
+#### Implementation
+
+The seed feature seeds dummy data into SocialBook. In the event that the user clears all the contacts in SocialBook, the user can execute the seed command to seed sample data into the SocialBook and continue trying out its features.
+
+The seed command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#Logic-component).
+
+The seed command adds a `Person` object, in `SampleDataUtil` to the `Model`, if the `Person` object is not already inside SocialBook.
+
+The following activity diagram summarises what happens when a user executes the seed command:
+
+insert activity diagram for seed command for loop
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
