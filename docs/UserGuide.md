@@ -36,7 +36,7 @@ Overview of key features:
         - 3.4.5. [Finding deliveries](#3-4-5-finding-deliveries-find-d)
         - 3.4.6. [Sorting deliveries](#3-4-6-sorting-deliveries-sort-d)
         - 3.4.7. [Upcoming deliveries](#3-4-7-upcoming-deliveries-upcoming)
-    - 3.5. [Extended valid format guidelines](#3-5-extended-valid-format-guidelines)
+    - 3.5. [Extended format guidelines](#3-5-extended-format-guidelines)
         - 3.5.1. [Valid email address format](#3-5-1-valid-email-address-format)
         - 3.5.2. [Valid company name format](#3-5-2-valid-company-name-format)
 4. [Managing my data](#4-managing-your-data)
@@ -177,7 +177,7 @@ Lists all suppliers and deliveries in VendorVault.
 
 Format: `list -a`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - No other parameters should be given for this command.
@@ -238,7 +238,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-s`.
@@ -276,7 +276,7 @@ Shows a list of all suppliers in VendorVault. The delivery list will not be affe
 
 Format: `list -s`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-s`.
@@ -302,7 +302,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `delete` and `-s`.
@@ -341,7 +341,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `mark` and `-s`.
@@ -399,7 +399,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `find` and `-s`.
@@ -437,7 +437,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space between `sort` and `-s` is needed.
@@ -495,7 +495,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-d`.
@@ -532,7 +532,7 @@ Shows a list of all deliveries in VendorVault. The supplier list will not be aff
 
 Format: `list -d`
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-d`.
@@ -557,7 +557,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `delete` and `-d`.
@@ -597,7 +597,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `mark` and `-d`.
@@ -653,7 +653,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `find` and `-d`.
@@ -693,7 +693,7 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 <box type="tip" seamless>
 
@@ -748,14 +748,14 @@ Parameters:
 
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
 - At least one space is needed between `upcoming` and the first parameter.
 - At least one parameter must be provided.
 - At least one space is needed between parameters.
 - If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
-- 
+
 </box> 
 
 Examples:
@@ -773,7 +773,7 @@ Expected output:
 
 ---
 
-## 3.5. Extended valid format guidelines
+## 3.5. Extended format guidelines
 
 #### 3.5.1. Valid email address format
 
@@ -822,7 +822,7 @@ VendorVault data are saved in the hard disk automatically after any command that
 
 VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Caution:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
@@ -862,35 +862,35 @@ _Details coming soon ..._
 ## 7.1. General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[List]()**   | `list -a`
-**[Clear]()**   | `clear`
-**[Help]()**   | `help`
-**[Exit]()**   | `exit`
+**[Help](#3-2-1-viewing-help-help)**   | `help`
+**[List](#3-2-2-viewing-all-deliveries-and-suppliers-list-a)**   | `list -a`
+**[Clear](#3-2-3-clearing-all-suppliers-and-deliveries-clear)**   | `clear`
+**[Exit](#3-2-4-exiting-the-program-exit)**   | `exit`
 
 
 ## 7.2. Supplier-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add]()**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete]()** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List]()**   | `list -s`
-**[Mark]()**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find]()**   | `find -s n/NAME com/COMPANY pro/PRODUCT` <br> e.g., `find -s n/link com/NU`
-**[Sort]()**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Add](#3-3-1-adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[List](#3-3-2-listing-all-suppliers-list-s)**   | `list -s`
+**[Delete](#3-3-3-deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[Mark](#3-3-4-marking-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Find](#3-3-5-finding-suppliers-find-s)**   | `find -s n/NAME com/COMPANY pro/PRODUCT` <br> e.g., `find -s n/link com/NU`
+**[Sort](#3-3-6-sorting-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
 ## 7.3. Delivery-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add]()**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY  c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete]()** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List]()**   | `list -d`
-**[Mark]()**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find]()**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort]()**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
-**[Upcoming]()** | `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+**[Add](#3-4-1-adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY  c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[List](#3-4-2-listing-all-deliveries-list-d)**   | `list -d`
+**[Delete](#3-4-3-deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[Mark](#3-4-4-marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find](#3-4-5-finding-deliveries-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#3-4-6-sorting-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
+**[Upcoming](#3-4-7-upcoming-deliveries-upcoming)** | `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 [[Back to Table of Contents]](#table-of-contents)
 
