@@ -39,7 +39,7 @@ public class DeleteAttendanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Attendance deleted: %1$s on %2$s";
 
-    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There are more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
             + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
             + PREFIX_DATE + "DATE "
