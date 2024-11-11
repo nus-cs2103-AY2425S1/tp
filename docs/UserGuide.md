@@ -468,7 +468,7 @@ Clears all entries from the PROperty.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 `clear` cannot be undone! 
 </div>
 
