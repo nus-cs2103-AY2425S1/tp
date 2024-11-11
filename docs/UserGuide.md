@@ -394,6 +394,8 @@ For the best experience:
 order with a phone number that is already in the address book, the person's name in the address book will be treated as 
 the entity who places the order.
 
+<div style="page-break-after: always;"></div>
+
 ## **Q12: Can I place a customer order from a supplier or vice versa?**
 **A:** Yes, you can. You can feel free to add customer orders from a supplier (or less frequently, place supply orders 
 to a customer). They will be distinguished by the order type under the person's contact card. However, the additional 
@@ -425,7 +427,7 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 
 ![screenshot](images/Screenshot-2.png)
 
-**Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
+**Note:** Phone number must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-6.png)
 
 <div style="page-break-after: always;"></div>
