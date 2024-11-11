@@ -244,7 +244,7 @@ section below.
 
 <box type="warning">
 
-**All** input fields **must** follow the following data formats:
+**All** input fields in the table below **must** follow the specified data formats. Input fields not listed may accept any non-blank value.
 </box>
 
 | Field | Format                                                                                                                                                                  |
@@ -751,9 +751,9 @@ You have been duly warned.
 
 <br>
 
-#### Added Support for more Course Codes and Tutorial IDs
+#### Added Support for more Tutorial IDs
 
-- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support **all** potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
+- Currently, we only support tutorial IDs of a specific format, as mentioned [here](#data-formats). However, we are aware that there are valid but rarer tutorial IDs with an additional character at the back like `T01A`. Due to time limitations, we are not able to support **all** potential tutorial IDs and this could be fixed in a future iteration.
 
 <br>
 
