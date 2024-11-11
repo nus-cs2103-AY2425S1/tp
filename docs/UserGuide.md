@@ -135,6 +135,8 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ## General Commands
 
 ### Viewing help : `help`
@@ -152,6 +154,8 @@ Lists all the commands the address book supports.
 ![list of_commands](images/commandsMessage.png)
 
 Format: `commands`
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing overall statistics : `stats`
 
