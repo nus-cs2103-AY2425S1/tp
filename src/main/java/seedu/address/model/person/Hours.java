@@ -11,7 +11,7 @@ public class Hours {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Hours should be non-negative integers, with a maximum of 876,000.";
-    public static final String VALIDATION_REGEX = "^(?:\\d{1,5}|[1-7]\\d{5}|8[0-6]\\d{4}|87[0-5]\\d{3}|876000)$";
+    public static final String VALIDATION_REGEX = "^(?:0*([0-9]{1,5}|[1-7][0-9]{5}|8[0-6][0-9]{4}|87[0-5][0-9]{3}|876000))$";
     public final String value;
 
     /**
@@ -22,7 +22,7 @@ public class Hours {
     public Hours(String hour) {
         requireNonNull(hour);
         checkArgument(isValidHours(hour), MESSAGE_CONSTRAINTS);
-        value = hour;
+        value = clearLeadingZeroes(hour);
     }
 
     public int getHoursInt() {
@@ -34,6 +34,16 @@ public class Hours {
      */
     public static boolean isValidHours(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static String clearLeadingZeroes(String hours) {
+        requireNonNull(hours);
+        String cleanedString = hours.replaceFirst("^0+", "");
+        if (cleanedString.isEmpty()) {
+            return "0";
+        } else {
+            return cleanedString;
+        }
     }
 
     @Override
