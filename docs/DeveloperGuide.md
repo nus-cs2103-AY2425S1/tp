@@ -389,6 +389,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The product must be able to be used offline.
 7. The product is not expected handle _semantic search_.
 8. The product is not expected to implement user authentication.
+9. The product is not expected to handle more than one user at a time.
+10. 
 
 ### Glossary
 

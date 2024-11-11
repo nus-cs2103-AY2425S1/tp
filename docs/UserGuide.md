@@ -4,6 +4,8 @@ title: User Guide
 ---
 
 CareConnect is a **CLI-first** **case management application** that enables social workers to efficiently manage client details, appointments, and priorities. Repeated chores including data entry and search will be streamlined via simple CLI inputs, easing the mental load of the social workers, allowing them to focus more on delivering high-quality care and support for the clients.
+CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some 
+content being cut-off if the window size is too small.
 
 * Table of Contents
 {:toc}
@@ -74,45 +76,6 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about input formats:**<br>
-
-* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to 
-the system twice.
-    - entering the command:
-      * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-      * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street, 
-        different block, different unit`
-      will not be allowed.
-    - However, clients with the same name spelling but different case can be added. Entering:
-        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-          different block, different unit`
-      will successfully add both `John Doe` and `John doe` to the case management system.
-
-* Client's phone number must not contain any spaces or special characters.
-    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
-    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
-
-* Client's email address should be of the format local-part@domain and adhere to the following constraints:
-  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-     The domain name must:
-      - end with a domain label at least 2 characters long
-      - have each domain label start and end with alphanumeric characters
-      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-* Client's addresses can take any values, and it should not be blank
-
-* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
-
-* Client's logs' date must be in the format `yyyy-MM-dd HH:mm` 
-  - Acceptable date format: `2022-12-12 14:00`
-  - Unacceptable date format: `2022-12-12`, `14:00`, `2022-12-12 14:00:00`, `2022-12-12 2:00 PM`
-
-</div>
-
 ### Viewing help : `help`
 
 Opens up your default browser and displays the CareConnect user guide webpage.
@@ -140,45 +103,50 @@ A client can have any number of tags (including 0)
 The following constraints apply to the `edit` command as well:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-    * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`
-    * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`
-    * name must be unique (case-sensitive). Clients with the same name cannot be added to
-      the system twice.
-        - entering the commands:
-            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-            * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
-              different block, different unit`
-              will not be allowed.
-        - However, clients with the same name spelling but different case can be added. Entering
-          the commands:
-            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-            * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-              different block, different unit`
-              will successfully add both `John Doe` and `John doe` to the case management system.
+  * The name should be within 150 characters long.
+  * name must be unique (case-sensitive). Clients with the same name cannot be added to
+    the system twice.
+      - entering the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit`
+            will not be allowed.
+      - However, clients with the same name spelling but different case can be added. Entering
+        the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit`
+            will successfully add both `John Doe` and `John doe` to the case management system.
+  * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
+  * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
 
-* Client's phone number must not contain any spaces or special characters.
-    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
-    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
+* Client's phone number should only contain numbers, without spaces and special characters.
+  * The phone number should be within 20 characters long.
+  - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`.
+  - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`.
 
 * Client's email address should be of the format local-part@domain and adhere to the following constraints:
+    * The email address should be within 100 characters long.
     1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
         - The local-part may not start or end with any special characters.
         - The local-part may not have consecutive special characters.
     2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
        The domain name must:
-        - end with a domain label at least 2 characters long
-        - have each domain label start and end with alphanumeric characters
+        - end with a domain label at least 2 characters long.
+        - have each domain label start and end with alphanumeric characters.
         - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`
-    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
+    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`.
+    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`.
 
 * Client's addresses can take any values, and it should not be blank
-    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`
-    - Unacceptable address format: ``
+    * The address should be within 100 characters long.
+    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`.
+    - Unacceptable address format: ``.
 
 * Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
-    - Acceptable tag format: `friend`, `colleague`, `newComer`
-    - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`
+    * The tag name should be within 50 characters long.
+    - Acceptable tag format: `friend`, `colleague`, `newComer`.
+    - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`.
 </div>
 
 ### Editing a client : `edit`
@@ -235,10 +203,10 @@ Tags a client in the case management system.
 
 Format: `tag INDEX t/TAG_NAME`
 
-* Adds the tag to the client at the specific `INDEX`
+* Adds the tag to the client at the specific `INDEX`.
 * The tag names should be alphanumeric. They should not contain any spaces or special characters.
-* Only one tag can be added at once
-* Adding a tag that has the same tag name as a pre-existing tag will override the original tag
+* Only one tag can be added at once.
+* Adding a tag that has the same tag name as a pre-existing tag will override the original tag..
 
 Example:
 - `tag 1 t/urgent`
@@ -334,7 +302,8 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 * Adds a log entry to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The remark is mandatory. It can be any non-empty string. e.g. `Client is doing well`
+* The remark is mandatory. It can be any non-empty string within 500 characters. e.g. `Client is 
+  doing well`
 * The date is optional and defaults to the current date and time if not provided.
 * The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`
 
