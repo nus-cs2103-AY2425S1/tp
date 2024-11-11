@@ -29,7 +29,7 @@ package Logic {
 
 package Model {
     Class "<<interface>>\nModel" as ModelClass
-    Class Person
+    Class Student
 }
 
 package Storage {
@@ -63,8 +63,8 @@ ArgumentTokenizer .> Prefix
 
 ' Cross-package relationships
 LogicClass ..> CommandResult
-Command ..> Person : manipulates >
-ModelClass ..> Person : manages >
+Command ..> Student : manipulates >
+ModelClass ..> Student : manages >
 
 ' Hidden relationships for layout
 Storage -[hidden]- ModelClass
