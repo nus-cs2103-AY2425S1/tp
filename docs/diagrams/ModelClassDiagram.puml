@@ -65,20 +65,20 @@ AddressBook *--> "1" UniqueWeddingList
 AddressBook *--> "1" UniqueTagList
 AddressBook *--> "1" UniqueTaskList
 
-UniquePersonList --> "~* all" Person
+UniquePersonList ---> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Task
-Person *--> "*" Wedding
 Vendor -up--|> Person
 
 UniqueWeddingList ---> "~* all" Wedding
 
 Wedding *--> "1" WeddingName
-Wedding *--> "0..2" Person
+Wedding <-> "~* guests" Person
+Wedding <-up-> "0..2 partners" Person
 Wedding *--> "1" Address
 
 UniqueTagList --> "~* all" Tag
