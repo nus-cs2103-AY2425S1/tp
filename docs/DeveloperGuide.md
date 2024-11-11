@@ -553,3 +553,12 @@ This is sensible as names are non-unique, and we have other unique fields such a
 
 
 3. We plan to make the EMAIL field case-insensitive.
+
+
+4. We plan to increase the flexibility of email validation, for example, to allow for emails with local-part ending with special characters as they are valid emails. (e.g: user-@example.com)
+
+
+5. We plan to add a warning prompt for `clear` command as it is potentially destructive if accidentally typed.
+
+
+6. We plan to allow TAs to flexibly change the number of tutorials for each contact. Current implementation assumes there to be exactly 12 tutorials, which could be visually unpleasant for mods with less than 12 tutorials, and unusable for mods with more than 12 tutorials.
