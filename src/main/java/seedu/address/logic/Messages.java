@@ -25,6 +25,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX =
             "The wedding index %d provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
+
     // Parse by name usages
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
 
