@@ -350,8 +350,7 @@ have made the right edits!
 <box type="info" seamless>
 
 **Note about `edit` command**:
-* Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for
-the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
+* Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
 * If you are current in the filtered view of a `find` or `view` command, an execution of `edit` command will return the application
 view to the full list of companies. Hence, please be mindful when running consecutive edits to prevent accidental changes to wrong company.
 </box>
