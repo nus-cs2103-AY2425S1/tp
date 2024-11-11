@@ -412,8 +412,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. Inventory Manager tries to unassign a product to a supplier.
-2. System validates that the product name & supplier name exists in the list.
-3. System validates the product is assigned to any one of the supplier.
+2. System validates that the product name exists in the list.
+3. System validates the product is assigned to any one of the supplier and retrieves the supplier.
 4. The system unassigns the specified product.
 5. System updates the product-supplier information in the system.
 6. System confirms the unassignment with a success message.
@@ -626,7 +626,7 @@ testers are expected to do more *exploratory* testing.
         * View all suppliers using the `view_supplier` command.
         * Ensure that there are multiple suppliers in the list.
 
-    1. Test case 1: `delete_supplier n/Supplier Name`<br>
+    2. Test case 1: `delete_supplier n/Supplier Name`<br>
         * Description: Delete a supplier using a valid unique name.
         * Expected:
             * The specified supplier is deleted from the supplier list.
@@ -634,20 +634,69 @@ testers are expected to do more *exploratory* testing.
             * Use the `view_product` command to verify that products that were assigned the deleted supplier now have no assigned supplier
             * Details of the deleted supplier are shown in the success message.
 
-    1. Test case 2: `delete_supplier n/R@chel`<br>
+    3. Test case 2: `delete_supplier n/R@chel`<br>
         * Description: Attempt to delete a supplier with an invalid name format containing special characters.
         * Expected:
             * No supplier is deleted.
             * An error message is displayed indicating the invalid supplier name format.
 
-    1. Test case 3: `delete_supplier n/NonexistentSupplier`<br>
+    4. Test case 3: `delete_supplier n/NonexistentSupplier`<br>
         * Description: Attempt to delete a supplier that does not exist in the system.
         * Expected:
             * No supplier is deleted.
             * An error message is displayed indicating that the supplier does not exist.
 
-1. Other incorrect delete commands to try: `delete`, `delete_supplier x/`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
+2. Other incorrect delete commands to try: `delete`, `delete_supplier x/`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Updating a stock Level
+
+1. Updating stock levels of a product while consecutively on the products view.
+    1. Prerequisites:
+        * View all products using the `view_product` command.
+
+    2. Test case 1: `update_stock pr/Eggs stk/100`<br>
+        * Description: Update a product's stock with value 100.
+        * Expected:
+            * The specified stock level is updated for the product in list.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * Details/Results are shown in the success message.
+    3. Test case 2: `update_stock pr/Pasteurised/Skimmed Milk packets stk/20`
+        * Description: Invalid product name in command.
+        * Expected:
+            * Stock Level is not updated for the product
+            * System displays error message as names cannot have "/" in them.
+            * Details are shown in the failure message.
+
+### Setting thresholds for products
+
+1. Setting thresholds of a product while consecutively on the products view.
+    1. Prerequisites:
+        * View all products using the `view_product` command.
+
+    2. Test case 1: `set_threshold pr/Bubble tea min/10 max/100`<br>
+        * Description: Update a product's min stock as 10 and max stock as 100.
+        * Expected:
+            * The specified stock levels are updated for the product in list.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * Details/Results are shown in the success message.
+    3. Test case 2: `set_threshold pr/Milk packets min/20`
+        * Description: Only min stock is to be set.
+        * Expected:
+            * Minimum stock Level is set for the product
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * System displays success message with results.
+    4. Test case 3: `set_threshold pr/Yarn max/80`
+        * Description: Only max stock is to be set.
+        * Expected:
+            * Maximum stock Level is set for the product.
+            * You can see the change right there, might have to scroll down to the product before executing command to see it change.
+            * System displays success message with results.
+    5. Test case 4: `set_threshold pr/Sunscreen lotion min/-5`
+       * Description: Invalid stock level in command.
+       * Expected:
+           * Minimum stock Level is not set for the product
+           * Displays failure message with error being that the stock level has to be greater than 0(zero).
 
 ### Saving data
 
