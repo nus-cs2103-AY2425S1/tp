@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The given event description is invalid (i.e. description is empty or consists of only whitespaces).
     * 1b1. App shows an error message to tell the user that the given description is invalid.  
       Use case ends.
-* 1c. The given event duration is invalid (i.e. dates are not in the correct format `YYYY-MM-DD` or dates are not valid, e.g. `30 Feb 2024` or event end date is earlier than the start date).
+* 1c. The given event duration is invalid (i.e. dates are not in the correct format `YYYY-MM-DD` or dates are not valid, e.g. `2024-02-30` or event end date is earlier than the start date).
     * 1c1. App shows an error message to tell the user that the given event dates are not valid.  
       Use case ends.
 * 1d. The given event has the same name as another event in the list.
