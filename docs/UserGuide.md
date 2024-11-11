@@ -66,7 +66,8 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 <box type="tip">
 
-### Before you start...
+------------------------------------
+### Glossary
 
 * **Udder** refers to any type of user described below, which is either a mUdder or a brUdder
 * **brUdder** refers to peers or connections who are experiencing similar things as you
@@ -103,7 +104,9 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.<br>
+
+* The limit of the command length is 2000 characters. Anything beyond that might cause the app to crash.
 </box>
 
 
@@ -130,15 +133,17 @@ Adds an Udder to the address book.
 
 **Constraints:**
 
-    1. Names should only contain alphanumeric characters and spaces, and it should not be blank.
-    2. Phone numbers should only contain numbers, and it should be at least 3 digits long and should not have any whitespaces.
-    3. Roles should only be 'brUdder' or 'mUdder' and it can't be blank.
-    4. Major can only be one of the following: ‘cs’, ‘bza’, ‘ceg’, ‘isys’, ‘isec’.
-    5. Emails should be of the format local-part@domain and the local-part should only contain alphanumeric characters
-    6. Addresses can take any values, and it should not be blank
+1. Names should only contain alphanumeric characters and spaces, and it should not be blank.
+2. Phone numbers should only contain numbers, and it should be at least 3 digits long and should not have any whitespaces.
+3. Roles should only be 'brUdder' or 'mUdder' and it can't be blank.
+4. Major can only be one of the following: ‘cs’, ‘bza’, ‘ceg’, ‘isys’, ‘isec’.
+5. Emails should be of the format local-part@domain and the local-part should only contain alphanumeric characters.
+6. Addresses can take any values, and it should not be blank.
+
 
 * When you type in an `add` command after a `find` command, the displayed list will **reset** from the filtered results.
-* A duplicate contact would mean that the name of the contact is different but the rest of the fields can be the same.
+* As it currently works, FindingbrUdders flags contacts as duplicates only if they have exactly the same name, including 
+identical capitalization and spacing, while contacts with matching values in other fields are not considered duplicates.
 * The name of the contact is _case-sensitive_ so `John Doe` and `JoHn DoE` are treated as 2 different contacts; Be careful in inputting names!
 
 <box type="tip">
@@ -164,6 +169,8 @@ Shows a list of all Udders in the address book.
 Shows a list of all meetings with all Udders, arranged in chronological order.
 
 **Format:** `meetings`
+
+![result of meetings](images/MeetingsCommand.jpg)
 
 ### Editing an Udder : `edit` ✏️
 
@@ -193,8 +200,7 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 **Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
-* Dates **over 29th February** in the month of February will lead to unexpected behaviour in the app!
-* Furthermore, dates should be **_valid dates_** and in inputting invalid ones, the app will show unexpected behaviour!
+* Please input valid meeting dates as inputting invalid ones (e.g. 30th February 2024, 29th February 2023, and 31st April 2024) may lead to unexpected behaviour!
 
 <box type="warning">
 
@@ -204,6 +210,10 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 **Examples:**
 *  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 12:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
 *  `schedule 1 st/09-10-2024 09:00 et/09-10-2024 10:00 l/The Terrace` schedules a meeting with the 1st Udder starting from `9th October 2024, 09:00 a.m.` and ending at `9th October 2024, 10:00 a.m.`, at `The Terrace`.
+
+![before schedule](images/BeforeScheduleCommand.jpg)
+
+![after schedule](images/AfterScheduleCommand.jpg)
 
 ### Edit meeting with an Udder: `editm` ✏️
 
@@ -216,8 +226,7 @@ Edits the specified meeting with an Udder from the meetings list.
 * The index refers to the index number shown in the displayed meetings list.
 * At least one field of the meeting must be changed.
 * Take note that the `NAME` field is case-sensitive!
-* Dates **over 29th February** in the month of February will lead to unexpected behaviour in the app!
-* Furthermore, dates should be **_valid dates_** and in inputting invalid ones, the app will show unexpected behaviour!
+* Please input valid meeting dates as inputting invalid ones (e.g. 30th February 2024, 29th February 2023, and 31st April 2024) may lead to unexpected behaviour!
 
 **Examples:**
 *  `editm 1 st/09-10-2024 10:00` Edits the start time of the 1st meeting to be `09-10-2024 10:00`.
@@ -265,10 +274,6 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 * Deletes the Udder at the specified `INDEX`.
 * The index refers to the index number shown in the displayed Udders list.
 
-![before](images/BeforeDelete.jpg)
-
-![after](images/AfterDelete.jpg)
-
 <box type="warning">
 
 **IMPORTANT:** This command will follow the indexing shown on the Udders list.
@@ -277,6 +282,10 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd Udder in the address book.
 * `find n/Bernice` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
+
+![before](images/BeforeDelete.jpg)
+
+![after](images/AfterDelete.jpg)
 
 ### Clearing all Udders : `clear` 🧹
 
