@@ -642,11 +642,11 @@ This command adds work experience to a contact, replacing any existing work expe
 
 **Test case 1:** `addw in/1 w/SoftwareEngineer,Google,2023`
 
-***Expected:*** Adds the work experience "SoftwareEngineer at Google in 2023" to the contact at index 1.
+***Expected:*** Adds the work experience "SoftwareEngineer,Google,2023" to the contact at index 1.
 
 **Test case 2:** `addw in/2 w/DataScientist,Meta,2022`
 
-***Expected:***  Adds "DataScientist at Meta in 2022" to the contact at index 2.
+***Expected:***  Adds "DataScientist,Meta,2022" to the contact at index 2.
 
 **Test case 3:** `addw in/3 w/`
 
