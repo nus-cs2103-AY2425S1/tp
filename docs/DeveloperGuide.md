@@ -362,7 +362,7 @@ Use case ends.
 **MSS**
 
 1. Talent Manager requests to edit the information of a specific contact
-2. TalentHub change the information of the target person
+2. TalentHub changes the information of the target person
 
 Use case ends.
 
@@ -474,7 +474,7 @@ Use case ends.
 
 **MSS**
 
-1. User requests to find persons whose name contains `keywords`
+1. Talent Manager requests to find persons whose name contains `keywords`
 2. TalentHub processes and list person(s) whose name contains `keywords`
 
    Use case ends.
@@ -489,7 +489,7 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-  * 1b1. TalentHub shows an error message.
+  * 1b1. TalentHub outputs an error message.
 
     Use case ends.
 
@@ -606,7 +606,7 @@ Use case ends.
 
 **Use case: UC13 - Delete Event**
 
-1. Talent Manager requests to delete a specific event in the list
+1. Talent Manager requests to delete a specific event from the list
 2. TalentHub deletes the event
 
 Use case ends.
@@ -649,11 +649,11 @@ Use case ends.
 
       Use case ends.
 
-**Use case: UC15 - Find Contact by Name**
+**Use case: UC15 - Find Event by Name**
 
 **MSS**
 
-1. User requests to find event with name contains `keywords`
+1. Talent Manager requests to find event with name contains `keywords`
 2. TalentHub processes and list event with name contains `keywords`
 
 Use case ends.
