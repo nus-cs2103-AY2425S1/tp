@@ -52,12 +52,13 @@ public class SearchPolicyCommand extends Command {
      * @param input The string to normalize.
      * @return The normalized string.
      */
+
     private String normalizeString(String input) {
         return input.replaceAll("\\s+", "").toLowerCase();
     }
 
     /**
-     * Checks if the given person has the specified policy.
+     * Checks if the given person has the specified policy based on the policy name.
      *
      * @param person The person to check.
      * @param policyName The name of the policy.
@@ -86,6 +87,8 @@ public class SearchPolicyCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command object
+
         if (other == this) {
             return true;
         }

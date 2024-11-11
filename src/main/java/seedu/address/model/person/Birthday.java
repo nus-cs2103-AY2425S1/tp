@@ -48,10 +48,10 @@ public class Birthday {
     /**
      * Returns true if a given string is a valid birthday date.
      */
-    public static boolean isValidBirthday(String test) {
-        requireNonNull(test);
+    public static boolean isValidBirthday(String input) {
+        requireNonNull(input);
         try {
-            LocalDate testBirthday = LocalDate.parse(test, FORMATTER);
+            LocalDate testBirthday = LocalDate.parse(input, FORMATTER);
             return testBirthday.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
@@ -65,8 +65,10 @@ public class Birthday {
 
     @Override
     public boolean equals(Object other) {
-        return this == other // short circuit if same object
-                || (other instanceof Birthday // instanceof handles nulls
+        // This method made use of ChatGPT to ensure its correctness when comparing the birthday object
+
+        return this == other
+                || (other instanceof Birthday
                 && date.equals(((Birthday) other).date));
     }
 

@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
  * Searches for clients who have appointments on the specified date and time.
  */
 public class SearchAppointmentCommand extends Command {
+    // ChatGPT used to generate javadocs
     public static final String COMMAND_WORD = "search " + PREFIX_SEARCH_APPOINTMENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -122,17 +123,15 @@ public class SearchAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // Short circuit if the same object
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command object
         if (other == this) {
             return true;
         }
 
-        // Instance of handles nulls and type check
         if (!(other instanceof SearchAppointmentCommand)) {
             return false;
         }
 
-        // Cast and compare the dateTime attribute
         SearchAppointmentCommand otherCommand = (SearchAppointmentCommand) other;
         return this.startDateTime.equals(otherCommand.startDateTime)
                 && this.endDateTime.equals(otherCommand.endDateTime);
