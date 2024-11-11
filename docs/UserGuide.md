@@ -74,7 +74,7 @@ This section tells you what information you will find in each of the sections of
 3. [Features](#features) helps you understand how all our features work.
 4. [FAQ](#faq) clarifies the doubts that many of our users have.
 5. [Command Summary](#command-summary) summarises all our features for easy reference.
-6. [**Glossary**](#glossary) explains the definitions of any technical terms used in this guide.
+6. [Glossary](#glossary) explains the definitions of any technical terms used in this guide.
 7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
 
 [_Back to Top_](#table-of-contents)
