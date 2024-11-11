@@ -29,7 +29,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "<<Changing Triage Stages>>\n"
             + "Format: triage NRIC t/TRIAGE\n\n"
             + "<<Editing a person>>\n"
-            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]\n\n"
+            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [app/APPOINTMENT] [tag/TAG]\n\n"
             + "<<Logging patient information>>\n"
             + "Format: log NRIC DD-MM-YYYY HH:MM INFO\n\n"
             + "<<Listing all persons>>\n"
