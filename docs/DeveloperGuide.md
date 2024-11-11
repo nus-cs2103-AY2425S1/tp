@@ -1158,7 +1158,7 @@ Linking new entities like Appointment with the Person entity required a thoughtf
 **UI Space Constraints**  
 Designing a user-friendly interface within limited screen space was a significant challenge. We needed to balance providing sufficient information with maintaining a streamlined layout. After several iterations, we finalized a design that offers essential data without cluttering the interface.
 
-**Implementation new fields**  
+**Implementation of new fields**  
 The addition of new fields such as diagnosis and medication functionalities were more intricate than anticipated. These features required careful planning to account for various scenarios, recognising the balance between restricting the user input to overstricting. Regular discussions helped to streamline our ideas tasks and address any arising issues efficiently.
 
 **Implementation of Appointments**  
