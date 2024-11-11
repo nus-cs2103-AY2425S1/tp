@@ -41,6 +41,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_UNARCHIVED_PERSONS);
+        model.sortByPin();
     }
 
     @Override
