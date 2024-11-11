@@ -53,8 +53,4 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
     }
 
-    public static boolean isNumber(String str) {
-        return str.matches("-?\\d+");
-    }
-
 }
