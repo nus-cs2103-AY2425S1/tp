@@ -45,7 +45,7 @@ deactivate AddressBookParser
 LogicManager -> AddAppointmentCommand : execute()
 activate AddAppointmentCommand
 
-AddAppointmentCommand -> Model : getFilteredPersonList(predicate)
+AddAppointmentCommand -> Model : addAppointment(appointment)
 activate Model
 
 Model --> AddAppointmentCommand
