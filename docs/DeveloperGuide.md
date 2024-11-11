@@ -250,6 +250,13 @@ Currently: KnottyPlanner requires users to select the `Person` from their names 
 
 Plan: To allow suers to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
 
+7. Further CLI Support
+
+Currently: Opening the help window creates an external popup that requires the user to use a mouse and close it.
+
+Plan: Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
+
+
 
 // Support for Multi-Languages
  
