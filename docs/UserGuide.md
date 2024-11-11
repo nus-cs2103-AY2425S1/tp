@@ -13,9 +13,9 @@ As wedding planners, we understand that you may frequently encounter challenges 
 That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
 
 With BridalBuddy, you can easily:
-* Add a guest to the wedding that you are planning.
-* Separately, add a vendor you are collaborating with for that wedding.
-* Then view the comprehensive statistics on guest attendance and the vendors involved in the wedding
+* Add, update, and keep track of every detail of your guests and vendors.
+* Filter through your contact list to retrieve important details quickly.
+* Access real-time wedding statistics for an instant snapshot of guest attendance and vendor counts.
 
 To discover more about what BridalBuddy has to offer, continue reading the rest of this comprehensive user guide.
 
@@ -401,7 +401,7 @@ This command will help you add a new guest to the bottom of the existing overall
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
-<img src="images/addGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
+<img src="images/addGuestCommand.png" alt="add guest_command" width="800" height="<500">
 
 [_Back to Top_](#table-of-contents)
 
@@ -433,7 +433,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-<img src="images/editGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
+<img src="images/editGuestCommand.png" alt="add guest_command" width="800" height="<500">
 
 [_Back to Top_](#table-of-contents)
 
@@ -486,7 +486,7 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
-<img src="images/addVendorCommand.png" alt="add guest_command" width="1300" height="<1000">
+<img src="images/addVendorCommand.png" alt="add guest_command" width="800" height="<500">
 
 [_Back to Top_](#table-of-contents)
 
@@ -518,7 +518,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-<img src="images/editGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
+<img src="images/editGuestCommand.png" alt="add guest_command" width="800" height="<500">
 
 [_Back to Top_](#table-of-contents)
 
