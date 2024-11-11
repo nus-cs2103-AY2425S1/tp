@@ -129,7 +129,7 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 > * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-), commas (,) and apostrophes (').
 > * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
-> * `EMAIL` should be of the format local-part@domain
+> * `EMAIL` should be of the format local-part@domain.
 > * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
 > * You cannot set graduation year when adding a person. Use the `edit` command to add graduation year.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
