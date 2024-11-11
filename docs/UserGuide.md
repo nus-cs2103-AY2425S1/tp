@@ -122,8 +122,8 @@ This section contains information about the command formats used in this applica
 
 <p>
 
-* `INDEX` refers to the index number shown in the current displayed event/vendor list.
-  * The index **must be a positive integer** 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed event/vendor list.
+  * The index **must be a positive integer** 1, 2, 3, …
   * The index for each vendor/event is relative and can change depending on previous operations.
 
 <p>
@@ -254,6 +254,7 @@ Format: `view v/INDEX` or `view e/INDEX`
 Note:
 * Views the details of the vendor/event at the specified `INDEX`.
 * The details page includes assigned events/vendors as well as a list of assignable events/vendors.
+  * If already viewing an event, vendors in both assigned and assignable lists can be chosen to be viewed, and vice versa.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
   * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
   * See [Off-Screen Operations](#off-screen-operations) for more details.
@@ -400,7 +401,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
 | **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
 | **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
-| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                   |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
 | **Exit**     | `exit`                                                                                                                                                                                                                                            |
