@@ -1101,16 +1101,8 @@ Address: 123 Clementi Ave
 > **Output**: The listing index provided is invalid!
 > 
 > --- 
-> 
-> **User Error #2**: Buyer not found
-> 
-> **Input**: `addlistingbuyers 1 buy/100`
-> 
-> **Output**: The person index provided is invalid!
-> 
-> ---
-> 
-> **User Error #3**: Person is not a buyer
+>
+> **User Error #2**: Person is not a buyer
 > 
 > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client with index 1 is a seller)_
 > 
@@ -1118,7 +1110,7 @@ Address: 123 Clementi Ave
 >
 > ---
 > 
-> **User Error #4**: Missing `buy/` prefix
+> **User Error #3**: Missing `buy/` prefix
 >
 > **Input**: `addlistingbuyers 1`
 >
