@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_POLICY_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
