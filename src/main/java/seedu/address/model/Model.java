@@ -90,18 +90,23 @@ public interface Model {
     void viewNote(Person person);
 
     /**
-     * Replaces person list with the specified person list
+     * Sorts person list with the specified person list
      *
-     * @return
+     * @return int to throw error for no contact with list in the
      */
     int sortFilteredPersons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the sorted and filtered person list */
+    ObservableList<Person> getSortedPersonList();
+
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
+
     void updateFilteredPersonList(Predicate<Person> predicate);
 }

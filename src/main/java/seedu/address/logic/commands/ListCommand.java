@@ -50,13 +50,13 @@ public class ListCommand extends Command {
 
         if (predicate == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Person> lastShownList = model.getSortedPersonList();
             if (lastShownList.isEmpty()) {
                 return new CommandResult(MESSAGE_EMPTY_LIST);
             }
         } else {
             model.updateFilteredPersonList(predicate);
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Person> lastShownList = model.getSortedPersonList();
             if (lastShownList.isEmpty()) {
                 return new CommandResult(MESSAGE_EMPTY_STARRED_LIST);
             }
