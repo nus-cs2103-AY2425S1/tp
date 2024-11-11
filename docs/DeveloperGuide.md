@@ -398,7 +398,6 @@ calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old compan
 
 Step 3. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`
 
-<puml src="diagrams/FavSequenceDiagram.puml" alt="FavSequenceDiagram" />
 
 #### Design considerations:
 
