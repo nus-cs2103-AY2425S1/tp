@@ -228,13 +228,52 @@ and more detailed implementation on model changes have been omitted.
 
 ---
 
+### Add Student Feature
+
+The `Add Student` feature allows users to add a new student in the address book given a student's student
+number `sno`, email `e`, and name `sn`.
+
+The following shows the activity diagram when the user executes the `add_s` command:
+<puml src="diagrams/AddStudentActivityDiagram.puml" alt="AddStudentCommandAD" />
+
+#### Usage
+
+**Syntax:** `add_s/as sno/STUDENT_NUMBER sn/NAME e/EMAIL`
+
+**Example:** `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu`
+
+#### Implementation details
+
+1. The user executes `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` to add the student with student number `A0123456K`, name `Bob Smith`, and email `bobsmith@u.nus.edu`.
+   The command is parsed in the `AddressBookParser`.
+2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The Student object is
+   then used to construct an `AddStudentCommand` object.
+3. The `AddStudentCommand` object then calls `addPerson(student)` in the `ModelManager` with the specified student
+   to be added. This method adds the specified `Student` in the model.
+4. Finally, the `AddStudentCommand` returns the `CommandResult`.
+
+##### Note
+
+This feature will also check if there already exists a Student with the same student number or email.
+
+**Sequence Diagram:** The following sequence diagram shows how the above steps for add student works:
+<puml src="diagrams/AddStudentSequenceDiagram.puml" alt="AddStudentCommandSD"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `AddStudentCommandParser`, `AddStudentCommand`, and
+`CommandResult` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+
+</box>
+
 ### Delete Student Feature
 
 The `Delete Student` feature allows users to delete an existing student in the address book given a student's student
 number `sno`.
 
 The following shows the activity diagram when the user executes the `del_s` command:
-<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteGroupCommandAD" />
+<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteStudentCommandAD" />
 
 #### Usage
 
@@ -261,8 +300,8 @@ The following shows the activity diagram when the user executes the `del_s` comm
 This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`,
 resetting the affected `Group` affiliation.
 
-**Sequence Diagram:** The following sequence diagram shows how the above steps for delete group works:
-<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+**Sequence Diagram:** The following sequence diagram shows how the above steps for delete student works:
+<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteStudentCommandSD"/>
 
 <box type="info" seamless>
 

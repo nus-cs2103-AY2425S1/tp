@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 15
+start
+:User runs add_s command;
+
+:Parse command input;
+
+if () then ([input is valid])
+    :Construct Student to be added;
+    :Construct AddStudentCommand object;
+    :Return AddStudentCommand object to LogicManager;
+    :LogicManager executes AddStudentCommand;
+    if () then ([Student doesn't exist])
+        :Add student to StudentList;
+        :Update model state;
+        :Update UI;
+    else ([else])
+        :Display duplicate student error message;
+    endif
+else ([else])
+    :Display error message;
+endif
+
+stop
+@enduml
