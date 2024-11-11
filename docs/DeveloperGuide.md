@@ -120,7 +120,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 </box>
 
-Several commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to
+Other commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to
 handle these commands:
 
 Here is a class diagram showing the classes related to the `AbstractEditCommand`:
@@ -350,13 +350,14 @@ testers are expected to do more _exploratory_ testing.
 
 2. The app should start and display the main window with a list of sample contacts.
 
-3. Try adding a public address to a user by entering `add 1 c/BTC l/default pa/123456789012345678901234567890`.
+3. Try adding a public address to a user by entering
+   `add 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
-4. Try retrieving the public address by entering `retrievepa 1 c/BTC` or `retrievepa 1 c/BTC l/default`.
+4. Try retrieving the public address by entering `retrievepa l/default` or `retrievepa l/default c/BTC`.
 
-5. Try editing the public address by entering `editpa 1 c/BTC l/default pa/098765432109876543210987654321`.
+5. Try editing the public address by entering `editpa 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
-6. Try searching for the public address by entering `searchpa pa/098765432109876543210987654321`.
+6. Try searching for the public address by entering `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
 7. Try deleting the public address by entering `deletepa 1 c/BTC` or `deletepa 1 c/BTC l/default`.
 
@@ -437,7 +438,6 @@ otherwise)
 4. AddressBook deletes the person
 
 ~~~~
-    Use case ends.
 
 **Extensions**
 
