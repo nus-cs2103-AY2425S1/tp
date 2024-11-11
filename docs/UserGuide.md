@@ -561,8 +561,9 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
+1. **If your computer has multiple displays**, if you move the application to a secondary display, and later switch to using only the primary display, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Running and using multiple instances of HRConnect at the same time** will result in unpredictable behavior, including inconsistent data saving and displaying. 
 
 [Return to Top](#table-of-contents)
 
