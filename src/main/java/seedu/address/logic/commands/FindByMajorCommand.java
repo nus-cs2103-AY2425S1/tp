@@ -19,7 +19,7 @@ public class FindByMajorCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose major or course contains "
             + "the specified keyword (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " Computer Science";
+            + "Example: " + COMMAND_WORD + " m/Computer Science";
 
     private final MajorContainsKeywordsPredicate predicate;
 
