@@ -72,7 +72,20 @@ public class BatchEditCommand extends Command {
         }
         feedbackToUser.append(String.format(MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED, oldTag, newTag));
 
-        for (Person person : nonObservableList) {
+        switchTagListOfPerson(nonObservableList, model);
+
+        logger.info("Person(s) edited: "
+                + nonObservableList.stream().map(person -> person.getName().toString()).toList());
+
+        PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));
+        model.updateFilteredPersonList(newPredicate);
+
+        logger.info("----------------Execute batch-edit successful----------------");
+        return new CommandResult(feedbackToUser.toString());
+    }
+
+    private void switchTagListOfPerson(ArrayList<Person> personList, Model model) {
+        for (Person person : personList) {
             if (person instanceof Student student) {
                 Student updatedStudent = changeTagStudent(student);
                 model.setPerson(person, updatedStudent);
@@ -81,13 +94,6 @@ public class BatchEditCommand extends Command {
                 model.setPerson(person, updatedPerson);
             }
         }
-        logger.info("Person(s) edited: "
-                + nonObservableList.stream().map(person -> person.getName().toString()).toList());
-
-        PersonContainsTagsPredicate newPredicate = new PersonContainsTagsPredicate(Set.of(newTag));
-        model.updateFilteredPersonList(newPredicate);
-        logger.info("----------------Execute batch-edit successful----------------");
-        return new CommandResult(feedbackToUser.toString());
     }
 
     private Set<Tag> switchTag(Person person) {

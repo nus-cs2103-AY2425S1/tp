@@ -68,18 +68,22 @@ public class BatchDeleteCommand extends Command {
 
         StringBuilder feedbackToUser = new StringBuilder();
 
-        for (Person person : lastShownList) {
+        deleteListOfPerson(lastShownList, model, feedbackToUser);
+        logger.info("Person(s) deleted: "
+                + lastShownList.stream().map(person -> person.getName().toString()).toList());
+
+        logger.info("----------------Execute batch-edit successful----------------");
+        return new CommandResult(feedbackToUser.toString());
+    }
+
+    private void deleteListOfPerson(List<Person> personList, Model model, StringBuilder feedbackToUser) {
+        for (Person person : personList) {
             feedbackToUser.append(String
                     .format(MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
                             Messages.format(person))
             );
             model.deletePerson(person);
         }
-        logger.info("Person(s) deleted: "
-                + lastShownList.stream().map(person -> person.getName().toString()).toList());
-
-        logger.info("----------------Execute batch-edit successful----------------");
-        return new CommandResult(feedbackToUser.toString());
     }
 
     @Override
