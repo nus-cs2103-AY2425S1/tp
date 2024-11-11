@@ -178,10 +178,25 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - `EMAIL`: The contact's email address (Only **english** emails are currently supported).
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact (A contact can have any number of tags, including none).
-- Role-specific fields (not required for `Person`):
-    - **Volunteer**: `h/HOURS`- Represents contributed hours.
-    - **Donor**: `d/DONATED_AMOUNT`- Represents total donation amount in thousands of USD.
-    - **Partner**: `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date. Must be in the **YYYY-MM-DD** format and be a valid date (e.g. 2024-11-07).
+- Role-specific fields(not required for `Person`)
+    - **Volunteer**:
+        -  `h/HOURS` - Represents contributed hours.
+    - **Donor**:
+    - `d/DONATED_AMOUNT` - Represents total donation amount in thousands of USD.
+        - The amount can include **up to two decimal places** for precision (e.g. `123.45` represents 123,450 USD).
+        - The amount is always displayed in thousands of dollars. For very large numbers, **scientific notation** will
+          be used automatically (e.g. `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD).
+    - **Partner**:
+        - `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date.
+            - The date must be in the **YYYY-MM-DD** format.
+            - The date **must be a valid date**:
+                - A valid date is one that has existed in the past or will exist in the future. Both past and future dates are accepted as long as they are actual calendar dates.
+                - Examples of **valid dates**:
+                    - `2023-03-15` (Past date).
+                    - `2025-10-20` (Future date).
+                - Examples of **invalid dates**:
+                    - `2021-02-29` (February 29 does not exist in 2021 because it is not a leap year).
+                    - `2023-03-33` (March does not have 33 days).
 
 <box type="info" seamless>
 
