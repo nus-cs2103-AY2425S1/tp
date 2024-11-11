@@ -597,7 +597,7 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: The app is running slowly; What should i do?<br>
-**A**: Try restarting the application. If the problem persists, ensure your computer meets the app’s performance requirements and consider clearing any unnecessary data.
+**A**: Try restarting the application. If the problem persists, ensure your computer meets the app’s minimum system requirements and consider clearing any unnecessary data. Refer to [Setting Up](SettingUp.md) for further information on this.
 
 --------------------------------------------------------------------------------------------------------------------
 
