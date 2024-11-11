@@ -128,44 +128,7 @@ public class ParserUtil {
         }
         return new Status(trimmedStatus);
     }
-
-    /**
-     * Parses a {@code String logDetails} into a {@code Log}.
-     * Assumes that logDetails is in the format "date|details".
-     *
-     * @throws ParseException if the log string is invalid or cannot be parsed correctly.
-     */
-    public static Log parseLog(String logDetails) throws ParseException {
-        requireNonNull(logDetails);
-
-        String[] parts = logDetails.split("\\|", 2); // Split into two parts only
-        if (parts.length < 2) {
-            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
-        }
-
-        AppointmentDate appointmentDate = new AppointmentDate(parts[0].trim());
-
-        String details = parts[1].trim();
-        if (details.isEmpty()) {
-            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
-        }
-        LogEntry entryDetails = new LogEntry(details);
-
-        return new Log(appointmentDate, entryDetails);
-    }
-
-    /**
-     * Parses {@code Collection<String> logs} into a {@code Set<Log>}.
-     */
-    public static Set<Log> parseLogs(Collection<String> logs) throws ParseException {
-        requireNonNull(logs);
-        final Set<Log> logSet = new HashSet<>();
-        for (String logDetails : logs) {
-            logSet.add(parseLog(logDetails));
-        }
-        return logSet;
-    }
-
+    
     /**
      * Parses a {@code String date} into an {@code AppointmentDate}.
      * Leading and trailing whitespaces will be trimmed.
