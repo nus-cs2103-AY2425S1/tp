@@ -162,6 +162,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -407,7 +408,7 @@ The following sequence diagram shows how the `link` command works:
 
 <puml src="diagrams/LinkParseSequenceDiagram.puml" />
 
-<puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="600" />
+<puml src="diagrams/LinkExecuteSequenceDiagram.puml" />
 
 <br>
 
@@ -481,11 +482,8 @@ The following sequence diagram shows how the `pin` command works:
 
 <puml src="diagrams/PinParseSequenceDiagram.puml" />
 
-<puml src="diagrams/PinExecuteSequenceDiagram.puml" width="600" />
+<puml src="diagrams/PinExecuteSequenceDiagram.puml"/>
 
-<br>
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
