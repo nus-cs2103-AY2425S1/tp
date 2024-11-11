@@ -28,7 +28,7 @@ public class MatchCommand extends Command {
 
     public static final String COMMAND_WORD = "match";
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Match a contact to a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
+            COMMAND_WORD + ": Match a contact to a job\nParameters: CONTACT_INDEX JOB_INDEX\nExample: "
                     + COMMAND_WORD + " 2 1";
     public static final String MESSAGE_MATCH_SUCCESS = "Matched Contact: %1$s with Job: %2$s";
     public static final String MESSAGE_HAS_OTHER_MATCHES = "Contact already has another job!";
