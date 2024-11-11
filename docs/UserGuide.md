@@ -28,8 +28,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
   - [Viewing Help: help](#viewing-help-help)
   - [Clearing all Entries: clear](#clearing-all-entries-clear)
   - [Exiting the Program: exit](#exiting-the-program-exit)
-  - [Displaying Contacts in Pages -- Pagination](#displaying-contacts-in-pages----pagination)
-  - [Showing Total Number of Contacts -- Footer Status Bar](#showing-total-number-of-contacts----footer-status-bar)
+  - [Displaying Contacts in Pages: Pagination](#displaying-contacts-in-pages-pagination)
+  - [Showing Total Number of Contacts: Footer Status Bar](#showing-total-number-of-contacts-footer-status-bar)
   - [Saving the Data](#saving-the-data)
   - [Editing the Data File](#editing-the-data-file)
 - [What is Considered as Invalid Contacts](#what-is-considered-as-invalid-contacts)
@@ -63,7 +63,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
    Note how the app:
    * Contains some sample data 
    * Displays contacts in alphabetical order
-   * Utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
+   * Utilises [Pagination](#displaying-contacts-in-pages-pagination) where 10 contacts are displayed per page at any one time 
    * Shows both the number of contacts listed in the displayed pages and the total number of contacts stored in the app in the status bar footer</br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -381,7 +381,7 @@ Exits the program.
 
 <div style="page-break-after: always;"></div>
 
-### Displaying Contacts in Pages -- Pagination
+### Displaying Contacts in Pages: Pagination
 
 The app comes with a pagination at the bottom of the list. It supports navigation to a specific page or navigation to
 the next or previous page. Each page contains a maximum of **10** items. The pagination supports a maximum of **10** pages
@@ -395,20 +395,20 @@ Pagination UI:
 
 <div style="page-break-after: always;"></div>
 
-### Showing Total Number of Contacts -- Footer Status Bar
+### Showing Total Number of Contacts: Footer Status Bar
 
 A status bar that contains information about the number of contacts in the list and the address book data file path is attached as a footer
 at the bottom of the app. It shows the total number of contacts being listed in the app.
 
+<box type="definition" seamless>
+
 **Definition:** List / show. The footer will display `x out of y contacts listed`, where x is the number of contacts in filtered list while y is the number of contacts in the total list
+</box>
 
 Examples:
 * `find n/Adam` may show only 1 contact out of 19. 1 refers to the number of found contacts, 19 refers to the total number of contacts in the address book.
   ![ui of footer status bar](images/footer_status_bar_ui.png)
 
-<box type="definition" seamless>
-
-   </box>
 
 ### Saving the Data
 
