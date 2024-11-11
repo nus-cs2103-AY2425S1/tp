@@ -8,6 +8,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Acknowledgements
 
 * This project builds upon [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
@@ -36,6 +38,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
+
+<div style="page-break-after: always;"></div>
+
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -59,6 +65,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteContact 1`.
@@ -76,7 +84,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+<div style="page-break-after: always;"></div>
+
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -94,6 +104,8 @@ All these components, including the `MainWindow`, inherit from the abstract `UiP
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T11-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
+<div style="page-break-after: always;"></div>
+
 The `UI` component,
 
 * executes user commands using the `Logic` component.
@@ -107,6 +119,8 @@ Key features:
 * Implements error handling and displays alerts when needed
 * Supports refresh functionality to update all UI components
 * Manages help window functionality
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -131,6 +145,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -138,6 +154,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -186,6 +204,8 @@ Independent of Other Components:
 1) The Model component is self-contained and does not depend on any other application components (e.g., UI, Storage, Logic). 
 2) As it represents core data entities, it is designed to be domain-specific and logically independent.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -206,6 +226,8 @@ The `Storage` component manages data persistence by saving and loading various p
     - `CustomerOrderListStorage`
     - `IngredientCatalogueStorage`
     - `PastryCatalogueStorage`
+
+<div style="page-break-after: always;"></div>
 
 #### Key Interfaces and Classes
 
@@ -250,6 +272,8 @@ Each data type uses specialized `JsonAdapted` classes to handle JSON serializati
     - The `MainApp` ensures all modified data is saved before closing.
     - This includes saving the current state of User Preferences, Address Book, Ingredient Catalogue, Pastry Catalogue, Customer Orders, and Supply Orders.
 
+<div style="page-break-after: always;"></div>
+
 #### Data Flow
 1. **Saving Data**:
     - When data is modified, `Model` notifies `StorageManager`.
@@ -276,6 +300,8 @@ The `Storage` component employs robust error handling to manage potential issues
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 
@@ -314,6 +340,8 @@ Command Execution:
 The sequence diagram below illustrates the interactions within the `AddCustomerOrderCommand` during the execution of the `addCustomerOrder` command:
 ![AddCustomerOrderSequenceDiagram.png](images/AddCustomerOrderSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 **Deleting an Order**
 * An example of how the order management mechanism behaves at each step when an order is removed is given below. 
 * Once again only the customer order list will be focused on.
@@ -333,6 +361,8 @@ Command Execution:
 The sequence diagram below illustrates the interactions within the DeleteCustomerOrderCommand during the execution of the deleteCustomerOrder command.
 ![DeleteCustomerOrderSequenceDiagram.png](images/DeleteCustomerOrderSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Design Considerations:
 
 **Aspect: Storage of Orders**  
@@ -343,6 +373,8 @@ The sequence diagram below illustrates the interactions within the DeleteCustome
 * **Alternative 2:** Store orders in a database.  
   * Pros: More efficient for large datasets, supports complex queries.
   * Cons: Requires additional setup and maintenance.
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -425,7 +457,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
---------------------------------------------------------------------------------------------------------------------
+
+
+<div style="page-break-after: always;"></div>
 
 ## Documentation, Logging, Testing, Configuration, Dev-Ops
 
@@ -436,6 +470,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Requirements
 
@@ -455,6 +491,8 @@ Home-based bakery business owners
 **Value proposition**:
 A one stop solution that helps home-based bakery business owners manage customer and supplier orders, ingredient inventory,
 and pastry catalogues more efficiently, allowing them to streamline their operations and focus more on their craft.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -476,6 +514,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | * * | bakery owner | mark an order as complete once it's delivered or picked up | keep my records up to date                                             |
 | *  | bakery owner | integrate the app with an inventory system                 | monitor ingredient levels more effectively                             |
 | *  | bakery owner | back up data automatically                                 | prevent data loss                                                      |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -763,6 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Instructions for manual testing
 
