@@ -110,6 +110,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasReachedIdLimit() {
+        return academyAssist.hasReachedIdLimit();
+    }
+
+    @Override
     public Person getPersonWithIc(Ic ic) {
         return academyAssist.getPersonWithIc(ic);
     }

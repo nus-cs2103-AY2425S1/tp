@@ -73,6 +73,11 @@ public interface Model {
     boolean hasPersonWithStudentId(StudentId studentId);
 
     /**
+     * Returns true if Academy Assist has generated 99999 student ids.
+     */
+    boolean hasReachedIdLimit();
+
+    /**
      * Returns true if {@code Person} already is taking any of {@code subjects}
      */
     boolean personDuplicateClass(Set<Subject> subjects, Person student);

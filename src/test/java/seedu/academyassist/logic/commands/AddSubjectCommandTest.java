@@ -164,6 +164,11 @@ public class AddSubjectCommandTest {
         }
 
         @Override
+        public boolean hasReachedIdLimit() {
+            return false;
+        }
+
+        @Override
         public boolean personDuplicateClass(Set<Subject> subjects, Person student) {
             throw new AssertionError("This method should not be called.");
         }

@@ -240,7 +240,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -605,3 +604,29 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancement**
+Team size: 5
+### 1. Delete subject feature
+Currently, subjects must be manually deleted using 
+
+### 2. Add subject feature
+Currently, Subjects are implemented using an Enum with a list of common subjects offered by tuition centers in Singapore. 
+Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
+define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
+those subjects as well without losing the benefit of validation and duplication checks. 
+
+### 3. Enhance Subject Tracking with list sorted alphabetically or by enrolment
+Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
+to sort by alphabetical order or by enrolment numbers in the future to support easier accessing and allocation of resources.
+
+### 4. Allowing additional special characters in names 
+Currently, only the special characters 
+
+### 5. Improved verification of address
+In the future, we plan to improve the verification of the address field of the add functionality, such that we can check 
+that necessary fields are present, e.g. post code, country, street name etc., to ensure that addresses saved are valid addresses. 
+
+--------------------------------------------------------------------------------------------------------------------

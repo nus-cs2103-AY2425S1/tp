@@ -333,6 +333,12 @@ Some contact fields such as address and email are intentionally hidden to avoid 
 the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
 
 </div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Exceptionally long names will be cut off on the display, but you can read the student's full name using the 
+[detail command] (#viewing-a-students-detail--detail).
+</div>
+
 ### Deleting a student : `delete`
 
 Removes a student from the tuition center management system.
@@ -587,7 +593,7 @@ Please ensure to close the tracker to view the most current information.
 ## Utility Features
 ### Clearing all entries : `clear`
 
-Clears all student entries from the system, and resets the studentID count to S00001.
+Clears all student entries from the system, and resets the studentID to S00001.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This action is irreversible. All student entries will be deleted permanently.
