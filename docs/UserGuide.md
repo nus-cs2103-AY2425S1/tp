@@ -72,8 +72,8 @@ done faster than traditional GUI apps.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
-  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+* Extra whitespaces between words in a name will be reduced to a single whitespace, and extra whitespaces at the end of a full name will be removed. 
+  e.g. `n/John    Doe   ` will be treated as `n/John Doe`.
 
 * Tutorial group and student number arguments are not case-sensitive. 
   e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
