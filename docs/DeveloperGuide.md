@@ -172,15 +172,23 @@ How the parsing works:
 **API
 ** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
+:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
+
+<img src="images/BuyerMeetupModelClassDiagram.png" width="600" />
+
+<img src="images/PropertyModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
 * stores the buyer list data i.e., all `Buyer` objects (which are contained in a `UniqueBuyerList` object).
+* stores the meet-up list data i.e. all `MeetUp` objects (which are contained in a `UniqueMeetUpList` object).
+* stores the property list data i.e. all `Property` objects (which are contained in a `UniquePropertyList` object).
 * stores the currently 'selected' `Buyer` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Buyer>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `MeetUp` and `Property` objects in a similar fashion to the currently 'selected' `Buyer` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
