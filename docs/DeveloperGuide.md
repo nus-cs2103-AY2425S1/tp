@@ -731,7 +731,6 @@ We plan to enhance the checks by checking if the domain is valid i.e. contains b
    For example, `add-client n/John Doe c/claim p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` will throw `Names should only contain alphanumeric characters and spaces, and it should not be blank`
    instead of recognizing that the wrong prefix is used. We plan to make Prudy check for all prefixes and throw an error if wrong prefix is detected.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for Manual Testing**
