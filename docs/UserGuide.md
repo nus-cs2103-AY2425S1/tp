@@ -300,6 +300,7 @@ Format: `exit`
 ### Saving the data
 
 NetBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
