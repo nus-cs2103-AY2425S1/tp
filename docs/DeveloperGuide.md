@@ -801,15 +801,14 @@ Guarantees: Valid appointments will be deleted if they are already in the patien
 
 **MSS**
 
-1.  User types command to delete with patient's NRIC
-2.  ClinicConnect removes the patient from the system
-3.  ClinicConnect shows a success message
+1.  User types the command to delete a patient from ClinicConnect.
+2.  ClinicConnect deletes the patient from the system successfully.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given NRIC is invalid.
+* 1a. The given NRIC is invalid.
 
     * 2a1. ClinicConnect shows an error message
 
