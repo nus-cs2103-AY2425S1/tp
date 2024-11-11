@@ -508,7 +508,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open your command interface and run the jar file with the command `java -jar Grub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -517,7 +517,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Deleting a restaurant
 
@@ -531,15 +531,42 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Finding a restaurant
 
-1. _{ more test cases …​ }_
+1. Find a restaurant by its saved name
+
+  1. Prerequisites: The requested restaurant has to be currently saved.<br>
+The first test case below assumes the user has not added any more restaurants with the name Swenswen.
+
+  1. Test case: `find swenswen`<br>
+     Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+  1. Test case: `find !@#`<br>
+     Expected: A restaurant name may only contain alphanumeric values.
+
+  1. Other incorrect find commands to try: `find`<br>
+     Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
+
+
+
+### Filtering by tags
+
+1. Find a restaurant by its tag names
+
+1. Prerequisites: The requested restaurant has to be currently saved.<br>
+The first test case below assumes the user has not added any more restaurants with the tag halal.
+
+1. Test case: `tags halal`<br>
+   Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+1. Test case: `tags $$$`<br>
+   Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
+
+1. Other incorrect find commands to try: `find`<br>
+   Expected: Invalid command format!. Description, parameters and an example of the right use of the find command is shown.
