@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User performs <u>Filter for a client (U4)</u> or requests to <u>List all clients (U1)</u>.
-2.  AgentAssist returns a list of people, with the client in it.
+2.  AgentAssist returns a list of clients, with the client of interest in it.
 3.  User requests to view a client, using the index of the client of the list.
 4.  AgentAssist returns a detailed view of the client and a success message.
 
