@@ -401,7 +401,7 @@ Tracks and lists all contacts who are in the [category](#category) of the specif
 **Format**:
 `track CATEGORY`
 
-**Expected outcome**:
+**Expected message**:
 ```
 Listed all persons under category: CATEGORY 
 (tracked list size number) persons listed!
@@ -415,7 +415,7 @@ Listed all persons under category: CATEGORY
 
 🔔 **Notes**: <br>
 
-- `CATEGORY` is case-insensitive. For example, `student` will match `Student`.
+- `CATEGORY` is **case-insensitive**. For example, `student` will match `Student`.
 
 - Only full words will be matched e.g. `student` will not match `students`.
 
@@ -439,14 +439,12 @@ Tagging operation applies to specified contact in the list
 Added tag(s): [TAG], [MORE_TAG(if present)]
 to Person: (details of the person)
 ```
+
 | Parameter Name | Description                                                       | Constraint                                                            | Required   |
 |----------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|------------|
 | `INDEX`        | Index number of the contact to tag from the displayed person list | Must be a positive integer 1, 2, 3, …                                 | Compulsory |
 | `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Must be alphanumeric characters, non-empty, and cannot contain spaces | Compulsory |
 | `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
-* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided
-  no duplicate tag(s) are found in all contacts.
-
 
 
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`<br>
@@ -457,23 +455,31 @@ Tagging operation applies to **all contacts currently shown in the list**, not a
 Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 ```
 
-
+| Parameter Name | Description                                                       | Constraint                                                            | Required   |
+|----------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|------------|
+| `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Must be alphanumeric characters, non-empty, and cannot contain spaces | Compulsory |
+| `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
 
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
-* Constraints:
-  * `INDEX` **must be a positive integer** 1, 2, 3, …​
-  * `TAG` and `MORE_TAG`  must be alphanumeric characters, non-empty, and cannot contain spaces.
-* `tag all t/TAG` adds the tag `TAG` to all contacts currently shown in the list, not all contacts in the database.
 * For both formats 1 and 2, 
-  * The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+  * The tag is **case-insensitive**. For example, `partner` will match `PartnEr`.
   * Only full words will be matched e.g. `partner` will not match `partners`.
   * The added tags are displayed on the contact in alphabetical order. <br>
     e.g. `t/partner t/education` will display `education` before `partner`.
 
 </div>
+
+<div markdown="block" class="alert alert-warning">
+
+⚠️ **Important: Impact of tag duplicate detection when adding tags** <br>
+Specified `TAG` (and `MORE_TAG` if present) are only added to all contacts currently shown in the list, if
+no duplicate tag(s) are found in all contacts.
+
+</div>
+
 
 **Examples**:
 
