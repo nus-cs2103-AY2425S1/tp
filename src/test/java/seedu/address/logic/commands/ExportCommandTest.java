@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXISTS;
@@ -624,11 +625,73 @@ public class ExportCommandTest {
         assertTrue(lines.get(1).contains(sampleStudent.getName().fullName));
     }
 
-    /**
-     * Helper method to throw a fail
-     * @param message Error message to pass to AssertionError
-     */
-    private void fail(String message) {
-        throw new AssertionError(message);
+    @Test
+    public void execute_filenameWithWildcard_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test*", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '*'), () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_filenameWithForwardSlash_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test/file", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '/'), () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_filenameWithBackslash_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test\\file", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '\\'), () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void writeCsvFile_nullPath_throwsAssertionError() throws IOException {
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.writeCsvFile(null, model.getFilteredStudentList()));
+    }
+
+    @Test
+    public void writeCsvFile_nullStudentList_throwsAssertionError() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+        Path dataFile = dataDir.resolve("test.csv");
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.writeCsvFile(dataFile, null));
+    }
+
+    @Test
+    public void coursesToString_nullCourses_throwsAssertionError() {
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.coursesToString(null));
+    }
+
+    @Test
+    public void execute_filenameWithSpecialCharacters_throwsCommandException() {
+        String[] invalidFilenames = {
+            "test-file",
+            "test_file",
+            "test file",
+            "test!file",
+            "test@file",
+            "test#file",
+            "test$file",
+            "test.file"
+        };
+
+        for (String filename : invalidFilenames) {
+            ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+            assertThrows(CommandException.class,
+                    ExportCommand.INVALID_FILENAME_MESSAGE, () -> exportCommand.execute(model));
+        }
     }
 }
