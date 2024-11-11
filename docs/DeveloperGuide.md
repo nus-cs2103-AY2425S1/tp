@@ -206,6 +206,8 @@ The mode of `AbcliParser` can be switched by executing a `SwitchParserModeComman
 
 The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:
 
+<br></br>
+<br></br>
 <img src="images/DeleteMeetUpActivityDiagram.png" width="386" />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -295,109 +297,120 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `User`, unless specified otherwise)
 
 **Use Case 1: Switching parser modes**
 
 **MSS**
 
-1. User requests to switch the parser mode
-2. ABCLI switches to the desired parser mode
-3. ABCLI shows a success message
-4. ABCLI shows the corresponding list of items in the new mode
+1. User requests to switch the parser mode.
+2. ABCLI switches to the desired parser mode.
+4. ABCLI shows the corresponding list of items in the new mode.  
+
+Use case ends.
 
 **Extensions**
 
-* 1a. The parser mode is invalid
-  * 1a1. ABCLI shows an error message
-  * Use case ends.
+* 1a. The inputted parser mode is invalid.
+  * 1a1. ABCLI informs the User of the error.  
+
+  Use case ends.
 
 **Use Case 2: Adding a buyer**
 
 **MSS**
 
-1. User requests to add a buyer
-2. ABCLI adds the buyer
-3. ABCLI shows a success message
-4. ABCLI shows the updated list of buyers on its interface
+1. User requests to add a buyer.
+2. ABCLI adds the buyer and displays the updated list of buyers.  
 
-- Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. The buyer format is invalid
-    * 1a1. ABCLI shows an error message
-    * Use case ends.
+* 1a. The inputted command format is invalid.
+    * 1a1. ABCLI informs the User of the error.  
+  
+    Use case ends.
 
+* 1b. The inputted fields are invalid.
+  * 1b1. ABCLI informs the User of the error.  
+  
+  Use case ends.
+  
 **Use Case 3: Deleting a buyer**
 
 **MSS**
 
-1. User requests to list buyers
-2. ABCLI shows the list of buyers on its interface
-3. User requests to delete a specific buyer
-4. ABCLI deletes the buyer
-5. ABCLI shows a success message
-6. ABCLI shows the updated list of buyers on its interface
+1. User requests to view buyers.
+2. ABCLI shows the list of buyers.
+3. User requests to delete a specific buyer based on the buyer's index in the list.
+4. ABCLI deletes the buyer and displays the updated list of the buyers.  
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-- 3a. The index for deletion is not a positive whole number
-    - 3a1. ABCLI shows an error message
-    - Use case ends
-- 3b. The index for deletion is out of range
-    - 3b1. ABCLI shows an error message
-    - Use case ends
+- 3a. The index for deletion is not a positive whole number.
+    - 3a1. ABCLI informs the User of the error. 
+  
+    Use case ends.
+- 3b. The index for deletion is out of range.
+    - 3b1. ABCLI informs the User of the error.  
+    
+  Use case ends.
 
 **Use Case 4: Editing a buyer**
 
 **MSS**
 
-1. User requests to edit a buyer
-2. ABCLI edits the buyer
-3. ABCLI shows a success message
-4. ABCLI shows the updated list of buyers on its interface
+1. User requests to view buyers.
+2. ABCLI shows the list of buyers.
+3. User requests to edit a specific buyer based on the buyer's index in the list.
+4. ABCLI edits the buyer and displays the updated list of the buyers.  
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-- 1a. The tags for editing are incorrect
-    - 1a1. ABCLI shows an error message
-    - Use case ends
-- 1b. The index for editing is out of range
-    - 1b1. ABCLI shows an error message
-    - Use case ends
-- 1c. The fields to edit are empty
-    - 1c1. ABCLI shows an error message
-    - Use case ends
+* 3a. The inputted fields are invalid.
+    * 3a1. ABCLI informs the User of the error.
+
+  Use case ends.
+
+* 3b. The index for editing is out of range.
+    * 3b1. ABCLI informs the User of the error.
+
+  Use case ends.
+
+* 3c. No field to edit is provided.
+    * 3c1. ABCLI informs the User of the error.
+
+  Use case ends.
 
 **Use Case 5: Viewing all buyers**
 
 **MSS**
 
-1. User requests to view all buyers
-2. ABCLI shows the list of buyers on its interface
+1. User requests to view all buyers.
+2. ABCLI shows the list of buyers.  
 
-- Use case ends
+Use case ends.
 
 **Use Case 6: Finding buyers**
 
 **MSS**
 
-1. User requests to find buyers matching his keywords
-2. ABCLI shows a success message
-3. ABCLI shows the updates list of buyers matching the keywords
+1. User requests to find buyers by matching keywords to the buyers' name.
+2. ABCLI shows the filtered list of buyers whose name matches the keywords.
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-* 1a. The tags for finding are incorrect
-  * 1a1. ABCLI shows an error message
-  * Use case ends
+* 1a. The inputted keywords are invalid.
+  * 1a1. ABCLI informs the User of the error.
+
+Use case ends.
 
 **Use Case 7: Adding a meetup**
 
@@ -513,8 +526,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.  
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -542,12 +555,79 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all buyers using the `view` command. At least one buyer in the list.
    
     1. Launching the app and execute `delete 1`.    
-    Expected: A new instance of the application should open with each double click
+    Expected: A new instance of the application should open and running this command deletes the first contact from the buyer list.
 
     1. Force close the app using Task Manager.
 
-   1. Re-launch another instance of the application.
-       Expected: Changes made is saved.
+   1. Re-launch another instance of the application.  
+       Expected: Changes made are saved.
+   
+### Adding a buyer
+
+1. Adding a new buyer to the buyer list
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. Ensure that no buyer with the name `John Doe` or `Betsy Crowe` is present in the list.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com b/100000`  
+   Expected: A new buyer with the name `John Doe` is added to the list. Details of the added buyer are shown in the status message.
+
+    1. Test case: `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7000000 p/91234567 t/referred`  
+Expected: A new buyer with the name `Betsy Crowe`and tags `urgent` and `referred` is added to the list. Details of the added buyer are shown in the status message.
+
+    1. Test case: `add n/John Doe p/invalidPhone e/johnd@example.com b/100000`   
+   Expected: No buyer is added. Error message indicating an invalid phone number is shown as the status message.
+
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com b/`  
+   Expected: No buyer is added. Error message indicating an invalid budget (because budget is blank) is shown as the status message.
+
+1. Adding an existing buyer to the buyer list
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. Ensure that a buyer with the name `John Doe` is already present in the list.
+
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com b/100000`  
+    Expected: No buyer is added. Error message indicating that the buyer already exists is shown as the status message.
+
+### Adding a meet-up
+
+1. Adding a new meet-up to the meet-up list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Ensure that no meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
+
+    1. Test case: `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li`  
+    Expected: A new meet-up with the subject `Discuss work plans` is added to the list. Details of the added meet-up are shown in the status message. Note:
+       * If the added buyers (i.e. `Alex Yeoh`, `David Li`) do not exist in the buyer list, they are flagged as red.  
+       * If the date-time ranges of the meet-up overlap with that of another meet-up, the from and to date-time of both overlapping meet-ups will be flagged as red.
+
+   1. Test case: `add s/Invalid Meeting i/Discuss with team f/2024-02-04 14:00 t/2024-02-04 13:00 n/John Doe`  
+   Expected: No meet-up is added. Error message indicating that from must be after to is shown as the status message.
+
+1. Adding an existing meet-up to the meet-up list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Ensure that a meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
+
+    1. Test case: `add s/Discuss work plans i/New information f/2024-02-03 14:00 t/2024-02-03 15:30 n/John Doe`  
+Expected: No meet-up is added. Error message indicating that the meet-up already exists is shown as the status message.
+
+### Adding a property
+1. Adding a new property to the property list
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. Ensure that no property with the address `Paya Lebar Rd #01-01` is present in the list.
+
+    1. Test case: `add n/Sean p/87152433 a/Paya Lebar Rd #01-01 s/200000 t/Condominium`  
+Expected: A new property with the address `Paya Lebar Rd #01-01` is added to the list. Details of the added property are shown in the status message.
+       
+    1. Test case: `add n/Sean p/invalidPhone a/Bukit Timah Rd s/200000 t/Condominium`  
+Expected: No property is added. Error message indicating an invalid phone number is shown as the status message.
+
+    1. Test case: `add n/Sean p/87152433 a/Bukit Timah Rd s/ t/Condominium`  
+Expected: No property is added. Error message indicating an invalid asking price (because asking price is blank) is shown as the status message.
+
+1. Adding an existing property to the property list
+
+    1. Prerequisites: Switch to property mode using the switch p command. Ensure that a property with the address `Paya Lebar Rd #01-01` is already present in the list.
+
+    1. Test case: `add n/Alice p/87152433 a/Paya Lebar Rd #01-01 s/300000 t/Landed`  
+Expected: No property is added. Error message indicating that the property already exists is shown as the status message.
 
 ### Deleting a buyer
 
@@ -556,31 +636,32 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+       Expected: First buyer is deleted from the list. Details of the deleted buyer shown in the status message.
 
-    1. Test case: `delete 0`<br>
-       Expected: No buyer is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`, `delete -1`, `delete y` (where y is not a positive number)<br>
+       Expected: No buyer is deleted. Error message indicating invalid command format is shown as the status message.
+   
+    1. Test case: `delete x`(where x is larger than the list size)<br>
+       Expected: No buyer is deleted. Error message indicating invalid buyer index is shown as the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete abc`, `...` <br>
+       Expected: No buyer is deleted. Error message indicating invalid command format is shown as the status message.
 
 1. Deleting a buyer while some buyers are filtered in the list
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyers (fewer than full list) using relevant filters.
 
    1. Test case: `delete 1`    
-   Expected: First (and only) contact in the filtered list is deleted. Details of the deleted contact are shown in the status message. The filtered list becomes empty. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 2` (with only one buyer in the filtered list)  
-    Expected: No buyer is deleted. Error message indicating an invalid buyer index is shown. Status bar remains unchanged.
-
-1. Deleting a buyer with an out-of-bound index
-
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show fewer buyers than the total list size.
+   Expected: First (and only) buyer in the filtered list is deleted. Details of the deleted buyer are shown in the status message.
 
    1. Test case: `delete x` (where x is within the bounds of the full list but not within the filtered list)  
-   Expected: No buyer is deleted. Error message indicating an invalid buyer index for the filtered list is shown. Status bar remains unchanged.
+   Expected: No buyer is deleted. Error message indicating an invalid buyer index is shown as the status message.
+
+### Deleting a meet-up
+1. Similar steps to those outlined in [deleting a buyer](#Deleting-a-buyer) can be followed, but in the context of meet-up mode. Before performing the tests, ensure the application is in meet-up mode by using the `switch m` command.
+
+### Deleting a property
+1. Similar steps to those outlined in [deleting a buyer](#Deleting-a-buyer) can be followed, but in the context of property mode. Before performing the tests, ensure the application is in property mode by using the `switch p` command.
 
 ### Editing a buyer
 
@@ -589,65 +670,162 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present in the list.
 
     1. Test case: `edit 1 b/700000 p/91234567`  
-    Expected: First contact’s budget and phone number are updated. All other fields remain the same. Details of the edited buyer are shown in the status message. Timestamp in the status bar is updated.
+    Expected: First buyer’s budget and phone number are updated. All other fields remain the same. Details of the edited buyer are shown in the status message. 
 
-    1. Test case: `edit 0 b/700000`  
-    Expected: No buyer is edited. Error details are shown in the status message. Status bar remains unchanged.
+    1. Test case: `edit 0 b/700000`, `edit -1 b/700000`, `edit y b/700000` (where y is not a positive number)  
+    Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
 
     1. Test case: `edit 1`  
-    Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit. Status bar remains unchanged.
+    Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid buyer index is shown as the status message.
 
     1. Test case: `edit 1 b/700000 p/91@83817`  
-    Expected: No changes are made. Error message displayed due to invalid phone format. Status bar remains unchanged.
+    Expected: No changes are made. Error message indicating invalid phone number is shown as the status message.
 
 1. Editing a buyer in a filtered list
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyers (fewer than full list) using relevant filters.
 
-   1. Test case: `edit 1 p/87151234 ` 
-   Expected: First (and only) contact in the filtered list has its phone number updated to “87151234”. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `edit 1 p/87151234`   
+   Expected: First (and only) buyer in the filtered list has its phone number updated. Details of the edited buyer shown in the status message. 
 
+   1. Test case: `edit x p/87151234` (where x is within the bounds of the full list but not within the filtered list)  
+      Expected: No changes made. Error message indicating an invalid buyer index is shown as the status message.
+   
 1. Attempting to edit to create a duplicate buyer
 
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. At least two buyers present.
     
-    1. Test case: `edit 2 n/x` (where x is an existing name)
-    Expected: No changes are made. Error message shown indicating that the updated details would create a duplicate buyer. Status bar remains unchanged.
+    1. Test case: `edit 1 n/x` (where x is another existing name)  
+    Expected: No changes are made. Error message indicating that buyer already exists in application is shown as the status message.
 
-1. Attempting to edit a buyer with an invalid index
+### Editing a meet-up
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present.
+1. Editing a meet-up while all meet-ups are being shown
 
-   1. Test case: `edit x p/87151234` (where x is larger than the list size)  
-   Expected: No changes are made. Error message displayed indicating an invalid index. Status bar remains unchanged.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all meet-ups using the `view` command. Multiple meet-ups are present in the list.
 
-1. Editing a buyer in a filtered list with an out-of-bounds index
+    1. Test case: `edit 1 i/New information n/Adam`  
+       Expected: First meet-up information and added buyers are updated. All other fields remain the same. Details of the edited meet-up are shown in the status message. Note that if added buyer (i.e. `Adam`) is not found in the buyer list, it will be flagged out as red.
 
-    1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command, so it has fewer buyers than the total list size.
+    1. Test case: `edit 0 i/New information`, `edit -1 i/New information`, `edit y i/New information` (where y is not a positive number)  
+       Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
+
+    1. Test case: `edit 1`  
+       Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x i/New information`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid meet-up index is shown as the status message.
+
+    1. Test case: `edit 1 t/23 June 2024`  
+       Expected: No changes are made. Error message indicating an invalid to date-time format is shown as the status message.
+
+1. Editing a meet-up in a filtered list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Filter the meet-up list using the `find` command to show only some meet-ups (fewer than full list) using relevant filters.
+
+    1. Test case: `edit 1 i/New information`  
+       Expected: First (and only) meet-up in the filtered list has its information updated. Details of the edited meet-up is shown in the status message.
+
+    1. Test case: `edit x i/New information` (where x is within the bounds of the full list but not within the filtered list)  
+       Expected: No changes made. Error message indicating an invalid meet-up index is shown as the status message.
+
+1. Attempting to edit to create a duplicate meet-up
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all meet-ups using the `view` command. At least two meet-ups present.
+
+    1. Test case: `edit 1 s/xt t/xt f/xf` (where xs, xt, xf are the subject, to and from of another existing meet-up in the list)  
+       Expected: No changes are made. Error message indicating that meet-up already exists in application is shown as the status message.
+
+### Editing a property
+
+1. Editing a property while all properties are being shown
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. List all properties using the `view` command. Multiple properties are present in the list.
+
+    1. Test case: `edit 1 s/700000 p/91234567`  
+       Expected: First property’s asking price and landlord phone number are updated. All other fields remain the same. Details of the edited property are shown in the status message.
+
+    1. Test case: `edit 0 s/700000`, `edit -1 s/700000`, `edit y s/700000` (where y is not a positive number)  
+       Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
+
+    1. Test case: `edit 1`  
+       Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x s/700000`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid property index is shown as the status message.
+
+    1. Test case: `edit 1 s/700000 p/91@83817`  
+       Expected: No changes are made. Error message indicating invalid phone number is shown as the status message.
+
+1. Editing a property in a filtered list
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. Filter the property list using the `find` command to show only some properties (fewer than full list) using relevant filters.
+
+    1. Test case: `edit 1 p/87151234`  
+       Expected: First (and only) property in the filtered list has its landlord phone number updated. Details of the edited property shown in the status message.
 
     1. Test case: `edit x p/87151234` (where x is within the bounds of the full list but not within the filtered list)  
-    Expected: No changes are made. Error message shown indicating an invalid index for the filtered list. Status bar remains unchanged.
+       Expected: No changes made. Error message indicating an invalid property index is shown as the status message.
 
+1. Attempting to edit to create a duplicate property
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. List all properties using the `view` command. At least two properties present.
+
+    1. Test case: `edit 1 a/x` (where x is another existing address)  
+       Expected: No changes are made. Error message indicating that property already exists in application is shown as the status message.
+
+### Finding a buyer
+1. Finding buyers by name keywords
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command.
+
+    1. Test case: `find n/Alex David`  
+       Expected: Buyers with names containing the keywords `Alex` or `David` are shown in the list. The number of buyers found is displayed in the status message.
+
+    1. Test case: `find n/` (empty keyword)  
+       Expected: Error message indicating an invalid name (because name is blank) will be shown as status message.
+
+### Finding a meet-up
+1. Finding meet-up by subject keywords
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command.
+
+    1. Test case: `find s/Sales Investors`  
+       Expected: Meet-ups with names containing the keywords `Sales` or `Investors` are shown in the list. The number of meet-ups found is displayed in the status message.
+
+    1. Test case: `find s/` (empty keyword)  
+       Expected: Error message indicating an invalid subject (because subject is blank) will be shown as status message.
+   
 ### Finding a property
 1. Finding properties by address keywords
 
     1. Prerequisites: Switch to property mode using the `switch p` command.
    
-    1. Test case: find a/Aljunied Marsiling Shibuya  
-Expected: Properties with addresses containing the keywords "Aljunied," "Marsiling," or "Shibuya" are shown in the list. The number of properties found is displayed in the status message.
+    1. Test case: `find a/Bishan Marsiling Shibuya`  
+Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling`, or `Shibuya` are shown in the list. The number of properties found is displayed in the status message.
 
-   1. Test case: find a/ (empty keyword)  
-   Expected: Error message informing you that address should not be blank will be displayed.
+   1. Test case: `find a/` (empty keyword)  
+   Expected: Error message indicating an invalid address (because address is blank) will be shown as status message.
 
 1. Finding properties by landlord name keywords
 
     1. Prerequisites: Switch to property mode using the `switch p` command.
    
-    1. Test case: `find n/Kurz Elle Kunz`  
-    Expected: Properties with landlord names containing "Kurz," "Elle," or "Kunz" are shown in the list. The number of properties found is displayed in the status message.
+    1. Test case: `find n/Kurz Elle Bob`  
+    Expected: Properties with landlord names containing `Kurz`, `Elle`, or `Bob` are shown in the list. The number of properties found is displayed in the status message.
     
-    1. Test case: `find n/`
-    Expected: Error message informing you that the landlord name should not be blank will be displayed.
+    1. Test case: `find n/`  
+    Expected: Error message indicating an invalid name (because landlord name is blank) will be shown as status message.
+
+1. Attempting to input an incorrect find command format
+   
+   1. Prerequisites: Switch to property mode using the `switch p` command.
+   
+   1. Test case: `find a/ n/`, `find`  
+      Expected: Error message indicating invalid command format is shown as status message.
 
 ### Saving data
 
@@ -658,20 +836,27 @@ Expected: Properties with addresses containing the keywords "Aljunied," "Marsili
    1. Under the `data` section, add a new parameter into one of the entries in any file.  
       Expected: The program will ignore any saved data from that file and open an empty file.
 
-## **Appendix: Glossary**
 
+## **Appendix: Planned Enhancements**
+
+Our team size is 5.
+
+### Support for special characters in names
+* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc.
+
+### Restriction of property types
+* Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will limit types to common ones such as `HDB`, `Landed Property`, `Condominium` etc.
+
+### Improved duplication detection
+* Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
+
+## **Appendix: Glossary**
 ### Glossary
 1. **ABCLI**  
 Our product name.
 
 1. **CLI**  
 The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
-
-1. **Command Line**  
-A text box where you enter commands.
-
-1. **Database Management System (DBMS)**  
-A Database Management System (DBMS) is software that allows users to create, manage, and manipulate databases efficiently. It provides tools for data storage, retrieval, and security, enabling multiple users to access and interact with data in an organized way.
 
 1. **Flag**  
 In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
@@ -682,17 +867,11 @@ Graphical user interface. The screen you see when opening the application.
 1. **JAR file**  
 A JAR (Java ARchive) file is a compressed package that bundles multiple Java classes and resources for easier distribution and deployment. It can also be executable if it contains a Main-Class entry, allowing it to be run directly on any system with a Java Runtime Environment (JRE).
 
-1. [**Java**](https://www.java.com/en/)  
-A programming language.
-
 1. **JavaFX**  
 JavaFX is a Java library used to build rich, interactive graphical user interfaces (GUIs) for desktop applications. It provides tools for designing and styling UI components and supports modern features like 2D/3D graphics, animation, and media playback.
 
 1. **Non-Functional Requirement**  
 A non-functional requirement specifies criteria that judge the operation of a system, such as performance, reliability, and usability. Unlike functional requirements, it focuses on how a system performs rather than what it does.
-
-1. **Object-Oriented Programming (OOP)**  
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which contain data and methods to manipulate that data. It emphasizes principles like encapsulation, inheritance, and polymorphism to build modular, reusable, and organized code.
 
 1. **Parameter**  
 A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
@@ -702,6 +881,3 @@ PlantUML is a tool that allows users to create diagrams, such as UML diagrams, b
 
 1. **Use Case**  
 A use case describes a specific way that a user interacts with a system to achieve a goal, often outlining steps from start to finish. It helps clarify system requirements by detailing the actions, conditions, and outcomes for each interaction scenario.
-
-1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
-An operating system.

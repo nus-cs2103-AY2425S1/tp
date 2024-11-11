@@ -28,10 +28,11 @@ public class AddCommand extends Command {
             + PREFIX_INFO + "INFO "
             + PREFIX_FROM + "YYYY-MM-DD HH:mm "
             + PREFIX_TO + "YYYY-MM-DD HH:mm "
-            + "[" + PREFIX_ADDED_BUYER + "BUYER NAME]...\n"
+            + PREFIX_ADDED_BUYER + "BUYER_NAME "
+            + "[" + PREFIX_ADDED_BUYER + "MORE_BUYER_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SUBJECT + "Discuss work plans "
-            + PREFIX_INFO + "Meet with Eswen to discuss the March Project "
+            + PREFIX_INFO + "Meet with Jason to discuss the March Project "
             + PREFIX_FROM + "2024-02-03 14:00 "
             + PREFIX_TO + "2024-02-03 15:30 "
             + PREFIX_ADDED_BUYER + "Alex Yeoh "
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New meet-up added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the application";
-    public static final String MESSAGE_INVALID_TO_FROM = "TO ($1%s) must be after FROM ($2%s)";
+    public static final String MESSAGE_INVALID_TO_FROM = "TO (%1$s) must be after FROM (%2$s)";
 
     private final MeetUp toAdd;
 
