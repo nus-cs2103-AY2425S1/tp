@@ -27,7 +27,6 @@ HireMe is a **free desktop application that helps you manage your extensive list
 <br></br>
 ### Table of Contents
 <!-- TOC -->
-* [![icon](images/hireme_logo.png) HireMe User Guide](#-hireme-user-guide)
   * [Welcome to HireMe!](#welcome-to-hireme)
   * [Overview of User Guide](#overview-of-user-guide)
   * [Overview of target users](#overview-of-target-users)
@@ -126,7 +125,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 #### _Mac Users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="700"/>
+    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
    
     You will see a window like this.
 
@@ -137,7 +136,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
    ![macfilepathinfo](images/Macfilepathinfo.png)
 
     On the new open that pops up, left click on `Where` and copy the file path.
-   <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
+   <img src="images/Macfilepath.png" alt="macfilepath" width="810"/>
    <br></br>
 
 #### _Windows Users_
