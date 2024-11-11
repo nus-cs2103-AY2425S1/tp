@@ -194,7 +194,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`              | HR Manager | view department and role of employees/potential hire.             | match suitable employees and potential hires to open job positions.|
 | `* * *`              | HR Manager | insert department and role of my employees/potential hire.        | retrieve their department and role if required.                    |
 | `* * *`              | HR Manager | view contract end date of my employees.                           | plan when to renew their contract.                                 |
-| `* * *`              | HR Manager | insert contract end date of my employees.                         | retrieve their contract end date if required                       |
+| `* * *`              | HR Manager | insert contract end date of my employees.                         | retrieve their contract end date if required.                      |
 | `* * *`              | HR Manager | delete data through the CLI.                                      | delete users who are incorrectly added.                            |
 | `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them.       |
 | `* *`                | HR Manager | find details of employees/potential hire.                         | quickly view the relevant details of the specific employee/potential hire being searched for.|
@@ -864,16 +864,22 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Additional uml diagrams for other cases**
 
 <puml src="diagrams/ListSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
+
 Diagram for interactions inside the `Logic` component, taking execute("list all") API call.
 
 <puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
+
 Diagram for interactions inside the `Logic` component, taking execute("demote 1") API call.
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
-Diagram for interactions inside the `Logic` component, taking `edit 1 n/tom` API call.
+
+Diagram for interactions inside the `Logic` component, taking execute("edit 1 n/tom") API call.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find all n/John` Command" />
-Diagram for interactions inside the `Logic` component, taking `execute(find all n/John)` API call.
+
+Diagram for interactions inside the `Logic` component, taking execute("find all n/John") API call.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
