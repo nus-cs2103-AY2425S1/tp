@@ -33,8 +33,19 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_invalidArgsWithIndex_throwsParseException() {
         assertParseFailure(parser, "-1", (String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "-1"))));
+    }
+
+    @Test
+    public void parse_invalidArgsWithName_throwsParseException() {
+        assertParseFailure(parser, "alice*", Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidFormat_throwsParseException() {
+        assertParseFailure(parser, "0 li/", (String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE)));
     }
 }
