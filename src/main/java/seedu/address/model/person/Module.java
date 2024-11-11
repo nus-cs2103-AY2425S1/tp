@@ -10,12 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Module {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Modules should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Modules should only contain alphanumeric characters, and it should not be blank";
 
-    /*
-     * The first character of the Module must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
 
     public final String value;
