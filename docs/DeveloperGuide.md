@@ -1494,7 +1494,7 @@ testers are expected to do more _exploratory_ testing.
     2. Test case: `etg i/1 gn/CS2103-F12-1 tn/Add postmortem to team docs and report`<br>
        Expected: `Add postmortem to team docs` edited to `Add postmortem to team docs and report`
 
-## Marking a task
+### Marking a task
 
 1. Marking a group's task
 
