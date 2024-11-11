@@ -133,6 +133,7 @@ Shows a message explaining how to access the help page.
 
 **Format**: `help`
 
+**Output**:
 ![help message](images/helpMessage.png)
 
 
