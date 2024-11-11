@@ -928,11 +928,17 @@ Team size: 5
      * e.g. "Warning: Unable to mark supplier as inactive. There are pending deliveries associated with this supplier."
      
 
-3. **Enhancement 3**: Allow users to create their own units for quantity of products.
-   * **Description**: The current implementation only allows for a fixed set of units for quantity of products (e.g. kg, g, L, mL, unit). 
+3. **Enhancement 3**: Make improvements to detect duplicate suppliers. 
+   * **Description**: The current implementation defines duplicate suppliers as suppliers with the same name and company name.
+   However, it allows users to add duplicate suppliers with names with different case (e.g. "John Doe" and "john doe")
+   and multiple spacings (e.g. "John Doe" and "John   Doe").
    * **Tasks**:
-     * We plan to allow users to define their own units for quantity of products.
-     * e.g. "add -d on/18-01-2023 15:00 s/1 pro/bread q/500 customUnit c/5.50"
+     * We plan to redefine duplicate suppliers as suppliers with the same name and phone number. 
+     For the supplier name, we plan to make improvements to detect duplicate suppliers case-insensitively.
+     Supplier names with multiple spacings will also be considered as the same supplier.
+     Under this new implementation, suppliers are not allowed to have the same name and phone number. 
+     * e.g. "Warning: Duplicate supplier 'John Doe' already exists. Please use a different name."
+     * e.g. "Warning: Duplicate supplier with the same phone number '98765432' already exists. Please use a different phone number."
      
 
 4. **Enhancement 4**: Make adding a delivery of a product that is not supplied by the supplier throw a warning and error message.
@@ -949,12 +955,13 @@ Team size: 5
      * e.g. "Warning: Duplicate tag 'friends' already exists. Please use a different tag."
      
 
-6. **Enhancement 6**: Make mark supplier command less sensitive to spacing for consistency.
-   * **Description**: The current implementation is not sensitive to spacing in other commands but is sensitive to spacing in the mark supplier command.
-   * e.g. "mark -s 1 active" is allowed and "mark -s1 active" is not allowed. 
+6. **Enhancement 6**: Make improvements to detect duplicate deliveries. 
+   * **Description**: The current implementation defines duplicate deliveries as deliveries
+   with the same supplier, product, delivery date and time, cost, and quantity.
+   However, it allows users to add duplicate deliveries with different case for the product name (e.g. "bread" and "Bread").
    * **Tasks**:
-     * We plan to make the mark supplier command less sensitive to spacing for consistency.
-     * e.g. "mark -s 1 active" and "mark -s1 active" should have the same effect.
+     * We plan to check for duplicate deliveries case-insensitively for the product name and throw a warning message.
+     * "Warning: Duplicate delivery already exists. Please use a different product name."
 
 
 7. **Enhancement 7**: Make upcoming command throw an error when the date and time input for the `aft/DELIVERY_DATE_TIME` parameter is later than the date and time input for parameter `bef/DELIVERY_DATE_TIME`.
@@ -976,6 +983,7 @@ Team size: 5
     because the LocalDateTime module automatically converts the date to the first previous valid date
    * e.g. "add -d on/31-04-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For months with less than 31 days,
    the date is converted to the last day of the previous month)
+   * e.g. "add -d on/29-02-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For non-leap years, the date is converted to 28-02-2023)
    * No error message is shown.
    * **Tasks**:
      * We plan to add better input checks for invalid dates in commands that require date input.
