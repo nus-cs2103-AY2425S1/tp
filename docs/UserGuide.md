@@ -5,7 +5,7 @@ title: User Guide
 ![Banner](images/AgentAssistBanner.png)
 # Welcome to the AgentAssist User Guide!
 
-The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
+The **AgentAssist User Guide** is here to help you unlock the full potential of AgentAssist and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
 
 In this guide, you'll learn how to:
 * **Set Up AgentAssist** to be used to manage clients.
@@ -214,7 +214,7 @@ To learn more about how to use commands in AgentAssist, proceed to the next sect
 
 # 4. Understanding Commands in AgentAssist
 
-The true power of **AgentAssist** lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
+The true power of AgentAssist lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
 
 ## 4.1 Command Structure Overview
 Each command in AgentAssist consists of three key components: the **command**, **flag(s)**, and **argument(s)**.
@@ -388,7 +388,7 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 
 ## 5.1 How to Read Commands
 
-When working with commands in **AgentAssist**, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
+When working with commands in AgentAssist, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
 
 If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#41-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
 
@@ -660,7 +660,7 @@ filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [r/ <REMA
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
-    - Example: `i/ >5000` will filter clients with an income greater than 5000.
+    - **Example:** `i/ >5000` will filter clients with an income greater than 5000.
     - See [Matching Criteria for Income](#filter-by-income) for more information.
 
 For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
