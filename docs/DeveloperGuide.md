@@ -1627,7 +1627,7 @@ testers are expected to do more *exploratory* testing.
 ## Appendix: Efforts
 
 WedLinker is a project adapted from the original [AddressBook3 (AB3)](https://se-education.org/addressbook-level3/) customized specifically for wedding planners by our team of five.
-Throughout this project, we had split the work evenly and adhering to the principles and concepts that were taught by the
+Throughout this project, we split the work evenly and adhered to the principles and concepts that were taught by the
 CS2103T teaching team, including:
 - [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
 - [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-feature-branch-flow)
@@ -1646,10 +1646,15 @@ As a result, the difficulty of developing WedLinker came not only from the
 myriad of features we had to implement (and alter from the original AB3), but to also ensure that there were minimal bugs created.
 
 #### Challenges Faced:
-Undoubtedly with any projects, there will be challenges faced. 
 With the number of features that we wanted to implement, we had used the [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
 that enabled us to work on numerous features, debugs, or minor adjustments concurrently. However, with the Forking Workflow came some drawbacks that we personally experienced, such as
 the extra overhead of sending everything through forks, as well as the increased possibility of merge conflicts.
+
+The numerous number of features also meant that our test coverage had to be extensive. This was a challenge as we had to
+write new test codes for every single new feature implemented and perform regression testing with all previous features that might be potentially affected.
+
+We also faced having to make design choices such as bidirectional navigability between `Person` and `Wedding`,
+resulting in further design choices in storage of these data that relies on each other whilst maintaining validity checks.
 
 #### Effort Required:
 As we had chosen to implement numerous features and inevitably introduced bugs per iteration, the effort required to
