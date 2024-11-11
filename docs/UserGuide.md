@@ -141,7 +141,7 @@ By following these sections, you can quickly find the information you need and m
 * Parameters can be in any order unless otherwise stated.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* For a list of valid inputs for each parameter, please refer to the [Glossary](#glossary).
+* To avoid being too verbose, some error messages may be simplified for brevity. For a list of valid inputs for each parameter, please refer to the [Glossary](#glossary).
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -205,7 +205,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NA
 ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient can have any number of tags (including 0)
+A patient can have any number of tags (including 0). Tags can be used to add short descriptions or categories to patients.
 </div>
 
 * You need not enter the prefix 'Dr' when typing `DOCTOR_NAME`. The app automatically adds the prefix `Dr` in front of the `DOCTOR_NAME` entered.
@@ -223,7 +223,7 @@ A patient can have any number of tags (including 0)
 
 ### Listing all patients : `list`
 
-Shows a list of every patient in the address book.
+Shows a list of every patient in the address book and sets the sort order of the list.
 
 Format: `list [SORT_ORDER]`
 
@@ -264,12 +264,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/EMERGENCY_CONTA
 * To edit the patient's emergency contact, provide the index of the emergency contact to edit under `ec/EMERGENCY_CONTACT_INDEX` and at least one of the emergency contact fields.
 * When editing tags, all the existing tags of the person will be removed. You will have to re-enter pre-existing tags if you wish to preserve them.
 
-[//]: # (* An emergency contact is considered a duplicate if it has the same `EMERGENCY_CONTACT_PHONE` as another emergency contact.)
-
-[//]: # (You should not edit an emergency contact to have the same phone number as another emergency contact of the same patient to prevent unexpected app behavior.)
-
-[//]: # (* If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.)
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can remove all of a person’s existing tags by typing `t/` without specifying any tags after it.
 </div>
@@ -300,6 +294,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Names will match if the keyword is found in any part of the name. (e.g. `Ha` will match `Hans`)
 * All patients matching at least one keyword will be shown in the patient list.
   (e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`)
+* The `find` command filters the list, which gets reset after entering an `add`, `addec`, `edit`, `list`, `undo` or `redo` command.
 
 Examples:
 * `find Alex` displays`Alex Yeoh` and `Alexis Tan`
@@ -322,6 +317,7 @@ Format: `finddoc KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. (e.g. `Hans Bo` will match `Bo Hans`)
 * Names will match if the keyword is found in any part of the doctor's name. (e.g. `Ha` will match `Hans`)
 * Persons matching at least one keyword in their doctor's name will be returned. (e.g. `Hans Bo` will return persons whose doctors are `Hans Gruber`, `Bo Yang`)
+* * The `finddoc` command filters the list, which gets reset after entering an `add`, `addec`, `edit`, `list`, `undo` or `redo` command.
 
 **Examples:**
 * `finddoc John` returns persons with doctors `john` and `John Doe`
@@ -359,6 +355,7 @@ Adds an emergency contact to a specified patient in the address book.
 
 Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`
 
+* `INDEX` should come before any of the optional fields.
 * A patient cannot have more than one emergency contact with the same phone number.
 
 **Examples**
@@ -540,15 +537,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Keyword**                                        | The word you want to search for in a `find` or `finddoc` command.                                                                                                                                                                 | Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.                                                                                                                          |
 | **Parameter**                                      | Information that you are required to provide to the MedConnect command.                                                                                                                                                           | `NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-patient-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters. |
 
+[↑ Back to top](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Valid Inputs for Patient parameters
 
 A person is uniquely identified by their `PHONE_NUMBER`. Persons with the same `PHONE_NUMBER` will be flagged as duplicates and cannot be added to the address book.
 
+An emergency contact is considered a duplicate if it has the same `EMERGENCY_CONTACT_PHONE` as another emergency contact. You should not edit an emergency contact to have the same phone number as another emergency contact of the same patient to prevent unexpected app behavior. If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.
+
 | Parameter                                         | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                                                                                                                                    |
 |---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`name/` NAME**                                  | This parameter accepts alphanumeric characters, the words `s/o`, `d/o`, and the following characters: `-`, `.`, `(`, `)`, `@`, `/`, `'`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Connor T'Challa`, `Vika d/o Rajesh`, `Amir Fakri @ Ahmad` and `Buddy (Charles) Baxter` are examples of names you can provide in an [`add`](#adding-a-patient-add), [`edit`](#editing-a-patient--edit) or [`addec`](#adding-an-emergency-contact--addec) command `name/` paramter. <br/> <br/> `Buddy/Charles` is an example of an invalid input to the `name/` parameter. |
+| **`name/` NAME**                                  | This parameter accepts alphanumeric characters, the words `s/o`, `d/o`, spaces, and the following characters: `-`, `.`, `(`, `)`, `@`, `/`, `'`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `Connor T'Challa`, `Vika d/o Rajesh`, `Amir Fakri @ Ahmad` and `Buddy (Charles) Baxter` are examples of names you can provide in an [`add`](#adding-a-patient-add), [`edit`](#editing-a-patient--edit) or [`addec`](#adding-an-emergency-contact--addec) command `name/` paramter. <br/> <br/> `Buddy/Charles` is an example of an invalid input to the `name/` parameter. |
 | **`phone/` PHONE_NUMBER**                         | Phone numbers should only contain numbers and be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `91234567` and `98765432` are examples of phone numbers you can provide in an [`add`](#adding-a-patient-add), [`edit`](#editing-a-patient--edit) or [`addec`](#adding-an-emergency-contact--addec) command `phone/` parameter.                                                                                                                                             |
 | **`email/` EMAIL**                                | Emails should be of the format `local-part@domain` and adhere to the following constraints: <br/> 1. `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. <br/> 2. This is followed by a `@` and then a domain name for `domain`. The domain name is made up of domain labels separated by periods. The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `johndoe@gmail.com` and `janedoe@hotmail.com` are examples of emails you can provide in an [`add`](#adding-a-patient-add), [`edit`](#editing-a-patient--edit) or [`addec`](#adding-an-emergency-contact--addec) command `email/` parameter.                                                                                                                                |
 | **`address/` ADDRESS**                            | Addresses can be any value, but they cannot be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `123, Clementi Rd, 123465` and `Block 123, Jurong West Street 6, #08-111` are examples of addresses you can provide in an [`add`](#adding-a-patient-add), [`edit`](#editing-a-patient--edit) or [`addec`](#adding-an-emergency-contact--addec) command `address/` parameter.                                                                                               |
