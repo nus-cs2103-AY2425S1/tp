@@ -52,6 +52,7 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 7. [**Command summary**](#command-summary)
 8. [**Glossary**](#glossary)
 
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Helpful Guidelines for the User Guide**
@@ -115,6 +116,7 @@ Alternatively, if you’d like to explore the application independently, refer t
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Tutorial for Beginners**
