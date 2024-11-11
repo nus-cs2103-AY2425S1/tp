@@ -515,7 +515,7 @@ Finds contacts whose names contain any of the given keywords.
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/find_example.png)
 
 <br>
 
