@@ -36,8 +36,8 @@ AddressBook .up.|> ReadOnlyAddressBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+ModelManager -left-> "1" AddressBook : ""
+ModelManager -right-> "1" UserPrefs : ""
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -51,7 +51,7 @@ Person *--> "1" PriorityLevel
 Person *--> EmergencyContact
 Person *--> "*" Tag
 UniqueTaskList *--> "~* all" Task
-Task --> "1" Person
+Task --> "1" Person : ""
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -62,5 +62,5 @@ Address -[hidden]right-> Email
 Email -[hidden]right-> PriorityLevel
 PriorityLevel -[hidden]right-> EmergencyContact
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Person : ""
 @enduml
