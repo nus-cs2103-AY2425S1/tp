@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
 
 
@@ -54,34 +54,34 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 ## Table of Contents
 
 - [Quick Start :rocket:](#QUICKSTART)
-    - [Example TA Workflow](#example-ta-workflow)
+  - [Example TA Workflow](#example-ta-workflow)
 - [Features :computer:](#FEATURES)
-    - [Data Formats](#data-formats)
-    - [MAIN Commands](#main-commands)
-        - [Viewing help : `help`](#help)
-        - [Listing all students : `list`](#list)
-        - [Clearing all entries : `clear`](#clear)
-        - [Exiting the program : `exit`](#exit)
-    - [STUDENT](#student-commands)
-        - [Adding a student : `person-add`](#person-add)
-        - [Editing a student : `person-edit`](#person-edit)
-        - [Finding a student: `person-find`](#person-find)
-        - [Deleting a student : `person-delete`](#person-delete)
-    - [COURSE](#course-commands)
-        - [Adding a course: `course-add`](#course-add)
-        - [Editing a course: `course-edit`](#course-edit)
-        - [Deleting a course : `course-delete`](#course-edit)
-    - [ENROLLMENT](#enrollment-commands)
-        - [Enrolling a student : `enroll`](#enroll)
-        - [Unenrolling a student : `unenroll`](#unenroll)
-    - [ATTENDANCE](#attendance-commands)
-        - [Marking presence : `attend-present`](#attend-present)
-        - [Marking absence : `attend-absent`](#attend-absent)
-        - [Removing last attendance : `attend-remove`](#attend-remove)
-        - [Clearing attendance : `attend-clear`](#attend-clear)
-    - [DATA](#data)
-        - [Saving the data](#saving-the-data)
-        - [Editing data file](#editing-the-data-file)
+  - [Data Formats](#data-formats)
+  - [MAIN Commands](#main-commands)
+    - [Viewing help : `help`](#help)
+    - [Listing all students : `list`](#list)
+    - [Clearing all entries : `clear`](#clear)
+    - [Exiting the program : `exit`](#exit)
+  - [STUDENT](#student-commands)
+    - [Adding a student : `person-add`](#person-add)
+    - [Editing a student : `person-edit`](#person-edit)
+    - [Finding a student: `person-find`](#person-find)
+    - [Deleting a student : `person-delete`](#person-delete)
+  - [COURSE](#course-commands)
+    - [Adding a course: `course-add`](#course-add)
+    - [Editing a course: `course-edit`](#course-edit)
+    - [Deleting a course : `course-delete`](#course-edit)
+  - [ENROLLMENT](#enrollment-commands)
+    - [Enrolling a student : `enroll`](#enroll)
+    - [Unenrolling a student : `unenroll`](#unenroll)
+  - [ATTENDANCE](#attendance-commands)
+    - [Marking presence : `attend-present`](#attend-present)
+    - [Marking absence : `attend-absent`](#attend-absent)
+    - [Removing last attendance : `attend-remove`](#attend-remove)
+    - [Clearing attendance : `attend-clear`](#attend-clear)
+  - [DATA](#data)
+    - [Saving the data](#saving-the-data)
+    - [Editing data file](#editing-the-data-file)
 - [FAQ :grey_question:](#FAQ)
 - [Known Issues :bug:](#KNOWN-ISSUES)
 - [Command Summary :ledger:](#CMD-SUMMARY)
@@ -95,11 +95,11 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 ## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
-    - How to check your Java version? Run `java -version` in your terminal.
-    - Don't have Java `17` or above, download [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+   - How to check your Java version? Run `java -version` in your terminal.
+   - Don't have Java `17` or above, download [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for the program.
-    - Make sure that this folder is **empty**. (Program files will be saved in it!)
+   - Make sure that this folder is **empty**. (Program files will be saved in it!)
 4. Open a command terminal
    ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) |
    [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
@@ -115,13 +115,13 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
    which links you back to [this page](https://ay2425s1-cs2103t-f14b-2.github.io/tp/UserGuide.html).<br>
    Some example commands you can try:
 
-    - `list` : Lists all students.
-    - `person-add m/A0296210X n/John Tan p/98765432 e/johnt@email.com a/John street, block 123, #01-01`
+   - `list` : Lists all students.
+   - `person-add m/A0296210X n/John Tan p/98765432 e/johnt@email.com a/John street, block 123, #01-01`
       : Adds a contact named `John Tan` to TAHub Contacts.
-      - `person-delete  m/A0296210X` : Deletes the student with the matriculation number `A0296210X`.
+   - `person-delete  m/A0296210X` : Deletes the student with the matriculation number `A0296210X`.
       In this case, the `John Tan` that we just added.
-      - `clear` : Deletes all contacts.
-      - `exit` : Exits the app.
+   - `clear` : Deletes all contacts.
+   - `exit` : Exits the app.
 
 6. Refer to the [Features](#FEATURES) below for the *juicy* details of each command.
    Alternatively check the [Command Summary](#CMD-SUMMARY) for a quick
@@ -155,16 +155,16 @@ command feature sections. Use them to learn more!
 3. Add the two students into TAHub Contacts using
    <u>[`person-add`](#person-add)</u>
    :
-    - `person-add m/A1234567Q n/Jane p/99871234 e/jahn@email.com a/12 AMK Ave`
-    - `person-add m/A2233445X n/John p/88112233 e/john@email.com a/200 Bedok Road`
+   - `person-add m/A1234567Q n/Jane p/99871234 e/jahn@email.com a/12 AMK Ave`
+   - `person-add m/A2233445X n/John p/88112233 e/john@email.com a/200 Bedok Road`
 4. Now add the course `CS2005` using
    <u>[`course-add`](#course-add)</u>
-    - `course-add c/CS2005 n/Computer Examples`
+   - `course-add c/CS2005 n/Computer Examples`
 5. Then, add your students to their class using
    <u>[`enroll`](#enroll)</u>
    .
-    - **Jane**: `enroll m/A1234567Q c/CS2005 tut/T05`
-    - **John**: `enroll m/A2233445X c/CS2005 tut/T05`
+   - **Jane**: `enroll m/A1234567Q c/CS2005 tut/T05`
+   - **John**: `enroll m/A2233445X c/CS2005 tut/T05`
 6. You should now see the following in *TAHub Contacts*.
 
   <div style="text-align:center">
@@ -178,8 +178,8 @@ command feature sections. Use them to learn more!
    and
    <u>[`attend-absent`](#attend-absent)</u>
    commands:
-    - **Jane**: `attend-present m/A1234567Q c/CS2005 tut/T05`
-    - **John**: `attend-absent m/A2233445X c/CS2005 tut/T05`
+   - **Jane**: `attend-present m/A1234567Q c/CS2005 tut/T05`
+   - **John**: `attend-absent m/A2233445X c/CS2005 tut/T05`
 9. You just recorded their attendance!
    Click on the `Attendance` button to see their attendance. For instance,
    here's **Jane**'s:
@@ -212,13 +212,13 @@ section below.
   parameter which can be used as `person-add m/A1234567L`.
 
 - Items in square brackets are optional. e.g.
-    - `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
-    - `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  - `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+  - `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as
   ``
-  (i.e. 0 times), `t/friend`, `t/friend t/family`
+   (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
 
 - Parameters can be in any order.<br>
@@ -234,7 +234,7 @@ section below.
 - If you are using a PDF version of this document, be careful when copying and
   pasting commands that span multiple lines as space characters surrounding
   line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
 
 </a>
 
@@ -270,13 +270,13 @@ The main basic commands for *TAHub Contacts*.
 <a name="help">
   <panel header="#### Viewing help : `help`" expanded no-close no-switch>
 
-Shows a message explaning how to access the help page.
+  Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+  ![help message](images/helpMessage.png)
 
-<box type="definition" seamless><md>
-Format: **`help`**
-</md></box>
+  <box type="definition" seamless><md>
+  Format: **`help`**
+  </md></box>
 
   </panel>
 </a>
@@ -284,11 +284,11 @@ Format: **`help`**
 <a name="list">
   <panel header="#### Listing all students : `list`" expanded no-close no-switch>
 
-Shows a list of all students saved in TAHub Contacts in the GUI.
+  Shows a list of all students saved in TAHub Contacts in the GUI.
 
-<box type="definition" seamless><md>
-Format: **`list`**
-</md></box>
+  <box type="definition" seamless><md>
+  Format: **`list`**
+  </md></box>
 
   </panel>
 </a>
@@ -296,15 +296,15 @@ Format: **`list`**
 <a name="clear">
   <panel header="#### Clearing all entries : `clear`" expanded no-close no-switch>
 
-Clears all student entries from TAHub Contacts.
+  Clears all student entries from TAHub Contacts.
 
-<box type="definition" seamless><md>
-Format: **`clear`**
-</md></box>
+  <box type="definition" seamless><md>
+  Format: **`clear`**
+  </md></box>
 
-<box type="important" theme="danger"><md>
-**WARNING**: this operation is **irreversible**. You may lose all your data!
-</md></box>
+  <box type="important" theme="danger"><md>
+  **WARNING**: this operation is **irreversible**. You may lose all your data!
+  </md></box>
 
   </panel>
 </a>
@@ -314,11 +314,11 @@ Format: **`clear`**
 <a name="exit">
   <panel header="#### Exiting the program : `exit`" expanded no-close no-switch>
 
-Exits the program.
+  Exits the program.
 
-<box type="definition" seamless><md>
-Format: **`exit`**
-</md></box>
+  <box type="definition" seamless><md>
+  Format: **`exit`**
+  </md></box>
 
   </panel>
 </a>
@@ -392,14 +392,14 @@ Format: **`person-find KEYWORD [MORE_KEYWORDS]​​`**
 </md></box>
 
 - The search is **case-insensitive**.
-    - e.g `hans` will match `Hans`
+  - e.g `hans` will match `Hans`
 - The order of the keywords does not matter.
-    - e.g. `Hans Bo` will match `Bo Hans`
+  - e.g. `Hans Bo` will match `Bo Hans`
 - Only the **name** is searched.
 - Only **full words** will be **matched**.
-    - e.g. `Han` will not match `Hans`
+  - e.g. `Han` will not match `Hans`
 - **All** students matching **at least one keyword** will be returned (i.e. `OR` search).
-    - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 | **Examples** |
 | :--- |
@@ -597,11 +597,11 @@ To view the attendance record of a student,
 
 <div style="text-align:center">
 
-Click on the `Attendance` button:
+  Click on the `Attendance` button:
 
   <img src="images/attendance1.png" alt="Attendance Button" width="30%">
 
-Then the following Attendance window will be shown:
+  Then the following Attendance window will be shown:
 
   <img src="images/attendance2.png" alt="Attendance Window" width="30%">
 
