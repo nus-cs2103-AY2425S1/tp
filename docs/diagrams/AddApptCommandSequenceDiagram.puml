@@ -67,10 +67,10 @@ deactivate Model MODEL_COLOR
 create CommandResult LOGIC_COLOR
 AddApptCommand -[LOGIC_COLOR]> CommandResult : Success
 activate CommandResult LOGIC_COLOR
-CommandResult -[LOGIC_COLOR]> AddApptCommand : r
+CommandResult -[LOGIC_COLOR]-> AddApptCommand : r
 deactivate CommandResult LOGIC_COLOR
 
-AddApptCommand -[LOGIC_COLOR]> Logic : r
+AddApptCommand -[LOGIC_COLOR]-> Logic : r
 deactivate AddApptCommand LOGIC_COLOR
 
 destroy AddApptCommand
