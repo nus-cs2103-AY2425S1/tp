@@ -351,6 +351,11 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. When **editing contacts** with the `edit` or `remark` command, the result display panel will not show the updated or changed information. Use the `view` command on the person of interest to view the updated details.
+4. Some of the commands that edit contacts (such as `add` and `edit`) may have difficulty parsing input if some input fields match the prefixes for contact fields (such as `n/`, `p/`, `a/`, `e/`, `d/`, `ec/`, `t/`, and `r/`). 
+This is due to the way that parsing is handled: any text matching special prefixes will be identified as such.
+To work around this, please prepend a `_`, or any other accepted special character, in front of any input fields that contain a special prefix.
+6. another
 
 --------------------------------------------------------------------------------------------------------------------
 
