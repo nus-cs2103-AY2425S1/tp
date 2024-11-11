@@ -585,8 +585,8 @@ testers are expected to do more *exploratory* testing.
 
 Team size : 5
 
-  1.
-
+  1. To accommodate candidates from various countries, we plan to enhance the phone number input field to include area codes (e.g., +6598765432). 
+     This update will allow for different international formats and enable the field to accept alphanumeric characters in the future.
 
   2. 
 
