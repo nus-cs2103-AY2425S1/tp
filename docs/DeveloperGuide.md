@@ -623,7 +623,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
 5. The system should provide a response time of less than 2 seconds for any user interaction under normal load (i.e., up to 1000 patients and 500 doctors).
 
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -631,6 +630,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **HIPAA**: The Health Insurance Portability and Accountability Act, a regulation in the U.S. that mandates secure handling of personal health information.
 * **Audit**: A record of all changes made in the system, including who made the changes and when.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+Team Size: 5
+1. **Make `add-patient` and `add-doctor` commands check the date of birth input for validity.**
+   1. Currently, both commands do not check whether the given data is a valid date of birth.
+   2. We plan to make the commands check whether the data of birth given is not just in the correct format given, but also to check that it is:
+      1. In the past (dates that are in the future from current date are invalid)
+      2. Not too far in the past (e.g. 200 years ago from current date are invalid)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
