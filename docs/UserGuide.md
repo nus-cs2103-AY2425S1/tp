@@ -157,6 +157,7 @@ Need a quick reference?
 ## Commands
 
 This section provides details on the usage of each command.
+
 <br>
 
 ### Basic Commands
@@ -187,8 +188,8 @@ Output: `Listed all persons`
 
 Adds a person with optional details like phone, email, address, games, tags, and preferred time.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]…​`  
-Output: `New person added: NAME; Phone: PHONE_NUMBER; Email: EMAIL; Address: ADDRESS...; Tags: TAG; Games: GAME...; Preferred Times: TIME-TIME...`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
+Output: `New person added: DETAILS…`
 <box type="tip" seamless>
 
 **Notes about adding!**
@@ -211,7 +212,8 @@ Examples:
 
 Edits an existing person in the GamerBook.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
+Output: `Edited Person: DETAILS…`
 
 <box type="tip" seamless>
 
@@ -242,7 +244,8 @@ Examples:
 
 Deletes the specified person from the GamerBook.
 
-Format: `delete INDEX`
+Format: `delete INDEX`  
+Output: `Deleted Person: DETAILS…`   
 
 <box type="tip" seamless>
 
@@ -262,7 +265,8 @@ Examples:
 
 Clears all entries from the GamerBook.
 
-Format: `clear`
+Format: `clear`  
+Output: `Address book has been cleared!`
 
 <br>
 
@@ -270,17 +274,19 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+Format: `exit`  
+Output: None
 
 <br>
 
 ### Game Management Commands
 
-#### **Adding a game :** `addgame`
+#### Adding a game : `addgame`
 
 Adds a game to an existing person in the GamerBook.
 
-Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
+Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
+Output: `Added Game to Person: DETAILS…`
 
 <box type="tip" seamless>
 
@@ -306,7 +312,8 @@ Examples:
 
 Edits the game of an existing person in the GamerBook.
 
-Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
+Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
+Output: `Edited Game: DETAILS…`  
 
 <box type="tip" seamless>
 
@@ -333,7 +340,8 @@ Examples:
 
 Deletes the specified game from an existing person in the GamerBook.
 
-Format: `deletegame INDEX g/GAME`
+Format: `deletegame INDEX g/GAME`  
+Output: `Deleted Game from Person: DETAILS…`  
 
 <box type="tip" seamless>
 
@@ -349,6 +357,7 @@ Format: `deletegame INDEX g/GAME`
 Gives a **singular** game under an existing person in the GamerBook the "favourite" status.
 
 Format: `favgame INDEX g/GAME`
+Output: `Favourited Game: GAME`  
 
 <box type="info" seamless>
 
@@ -368,7 +377,8 @@ Examples:
 
 Removes the "favourite" status from a **singular** game under an existing person in the GamerBook.
 
-Format: `unfavgame INDEX g/GAME`
+Format: `unfavgame INDEX g/GAME`  
+Output: `Unfavourited Game: GAME`  
 
 <box type="info" seamless>
 
@@ -388,7 +398,8 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]...`
+Format: `find KEYWORD [MORE_KEYWORDS]…`  
+Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
 <box type="important" seamless>
 
@@ -412,7 +423,8 @@ Examples:
 
 Finds persons whose games' names contain any of the given keywords.
 
-Format: `findgame KEYWORD [MORE_KEYWORDS]`
+Format: `findgame KEYWORD [MORE_KEYWORDS]…`   
+Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
 <box type="important" seamless>
 
@@ -436,7 +448,8 @@ Examples:
 
 Finds persons whose preferred time ranges overlap with any of given time ranges.
 
-Format: `findtime TIME-TIME [TIME-TIME]...`
+Format: `findtime TIME-TIME [TIME-TIME]…`  
+Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
 <box type="tip" seamless>
 
@@ -478,15 +491,16 @@ Only undoes commands that change the content of GamerBook or the displayed list 
 Supported commands: `list`, `add`, `edit`, `addgame`, `editgame`, `deletegame`, `favgame`, `unfavgame`,
 `find`, `findtime`, `delete`, `clear`
 
-Format: `undo`
+Format: `undo`  
+Output: `Undid previous command: PREVIOUS COMMAND`
 
 <br>
 
 ### Data storage
 
-GamerBook data is saved automatically as a JSON file at the location `[JAR file location]/data/addressbook.json`.
+GamerBook data is saved automatically after any command that changes the data!  
 
-GamerBook data is saved automatically after any command that changes the data.
+Find the `addressbook` JSON file at the location `[JAR file location]/data/addressbook.json`.  
 
 GamerBook data is loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.
 
@@ -494,17 +508,23 @@ GamerBook data is loaded from `[JAR file location]/data/addressbook.json` automa
 
 #### **Saving the data file :** `save`
 
-Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
+Manually saves the data in another JSON file `[JAR file location]/data/save.json`.  
+
+Format: `save`  
+Output: `Address book has been saved!`  
 
 <br>
 
 #### **Loading the data file :** `load`
 
-Manually loads the data from JSON file `[JAR file location]/data/save.json`.
+Manually loads the data from JSON file `[JAR file location]/data/save.json`.  
+
+Format: `load`
+Output: `The saved address book has been loaded!`
 
 <br>
 
-### Editing the data file
+#### Editing the data file
 
 GamerBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` after every command. Advanced users are
 welcome to update data directly by editing that data file.
@@ -596,8 +616,25 @@ acceptable range). Therefore, edit the data file only if you are confident that 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous GamerBook _home folder_.
+**A**: Install GamerBook on the new computer, and then copy the data file `addressbook.json` from your previous 
+GamerBook home folder to the new installation’s data folder, typically located at `[JAR file location]/data/addressbook.json`. Replace the empty data file on the new computer with your copied file.
+
+
+**Q**: What should I do if I accidentally delete someone from GamerBook?<br>
+**A**: You can use the `undo` command right after the delete command to restore the deleted person’s data, or use `load` if you have been saving frequently.
+
+**Q**: Should I ever use the `clear` command?
+**A**: The `clear` command deletes all entries in GamerBook. You should use it mainly to clear the sample data that GamerBook starts with.
+
+**Q**: Why do my searches sometimes return unexpected results?  
+**A**: GamerBook's search functions like `find` are case-insensitive, but they only match full words. If your search is not returning results, try again with full keywords like `John` instead of `J`.
+
+**Q**: Can I undo more than one command?  
+**A**: Yes! The `undo` command remembers your command history from when GamerBook was opened, and you can `undo` consecutive times.
+
+**Q**: Why did my GamerBook open blank when I had data saved previously?
+**A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -608,6 +645,5 @@ the data of your previous GamerBook _home folder_.
    application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
-   is to manually restore the minimized Help Window.
-
+   is to manually restore the minimized Help Window.  
 --------------------------------------------------------------------------------------------------------------------

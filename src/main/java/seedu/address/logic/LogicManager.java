@@ -65,6 +65,7 @@ public class LogicManager implements Logic {
                 ReadOnlyAddressBook loadedAddressBook = loadedAddressBookOpt.get();
                 model.setAddressBook(loadedAddressBook);
                 storage.saveAddressBook(loadedAddressBook);
+                model.emptyCommandLog();
             } catch (CommandException e) {
                 throw e; // Re-throw to maintain custom message if no file is found
             } catch (Exception e) {
