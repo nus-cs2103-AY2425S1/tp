@@ -6,9 +6,9 @@ title: Developer Guide
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
-- [Setting up, getting started](#Setting-up-getting-started)
-- [Design](#Design)
-  - [Architecture](#Architecture)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
   - [UI component](#ui-component)
   - [Logic component](#logic-component)
   - [Model component](#model-component)
@@ -261,8 +261,8 @@ _{More to be added}_
 
 **MSS**
 
-1. User requests to add a new student by entering the required information (name, student id, phone number, email, and address) and optional information (tag)
-2. AdmiNUS adds the student and displays a success message
+1. User requests to add a new student by entering the required information (name, student id, phone number, email, and address) and optional information (tag).
+2. AdmiNUS adds the student and displays a success message.
 
    Use case ends.
 
@@ -284,8 +284,8 @@ _{More to be added}_
 
 **MSS**
 
-1. User requests to add a new company by entering the required information (name, industry, phone number, email, and address) and optional information (tag)
-2. AdmiNUS adds the company and displays a success message
+1. User requests to add a new company by entering the required information (name, industry, phone number, email, and address) and optional information (tag).
+2. AdmiNUS adds the company and displays a success message.
 
    Use case ends.
 
@@ -307,8 +307,8 @@ _{More to be added}_
 
 **MSS**
 
-1.  User requests to list contacts
-2.  AdmiNUS shows a list of contacts
+1.  User requests to list contacts.
+2.  AdmiNUS shows a list of contacts.
 
     Use case ends.
 
@@ -323,8 +323,8 @@ _{More to be added}_
 **MSS**
 
 1.  User <u>requests to list contacts(UC03)</u>.
-2.  User requests to delete a specific contact in the list
-3.  AdmiNUS deletes the contact
+2.  User requests to delete a specific contact in the list.
+3.  AdmiNUS deletes the contact.
 
     Use case ends.
 
@@ -334,7 +334,7 @@ _{More to be added}_
 
   - 2a1. AdmiNUS shows an error message.
 
-    Use case resumes at step 1.
+    Use case resumes at step 2.
 
 **Use case: UC05 - Edit a contact**
 
@@ -350,10 +350,16 @@ _{More to be added}_
 
 - 2a. The given index is invalid.
   - 2a1. AdmiNUS shows an error message.
-    Use case resumes at step 1.
-- 2a. The given arguments are invalid.
-  - 2a1. AdmiNUS shows an error message for the specific invalid field.
-    Use case resumes at step 1.
+    Use case resumes at step 2.
+- 2b. The given arguments are invalid.
+  - 2b1. AdmiNUS shows an error message for the specific invalid field.
+    Use case resumes at step 2.
+- 2c. The contact at the given index is a student, and the user tries to edit the industry field.
+  - 2c1. AdmiNUS displays an error message indicating that editing the industry field for a student is not allowed. 
+    Use case resumes at step 2.
+- 2d. The contact at the given index is a company, and the user tries to edit the student-related field.
+  - 2d1. AdmiNUS displays an error message indicating that editing a student-related field for a company is not allowed. 
+    Use case resumes at step 2.
 
 **Use case: UC06 - View a contact**
 
@@ -369,12 +375,29 @@ _{More to be added}_
   - 2a1. AdmiNUS shows an error message.
     Use case ends.
 
-**Use case: UC07 - Filter contacts by category or tag**
+**Use case: UC07 - Find contacts by name**
 
 **MSS**
 
-1. User requests to filter contacts by category (e.g., student, company) or tag (eg. "group A")
-2. The system filters and displays the list of contacts belonging to the specified category or tag
+1. User requests to find contacts by name.
+2. The system finds and displays the list of contacts with the specified name.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. No contacts match the specified name.
+
+    - 2a1. AdmiNUS displays an empty list.
+
+      Use case ends.
+
+**Use case: UC08 - Filter contacts by category**
+
+**MSS**
+
+1. User requests to filter contacts by category (e.g., student, company).
+2. The system filters and displays the list of contacts belonging to the specified category.
 
    Use case ends.
 
@@ -386,7 +409,24 @@ _{More to be added}_
 
     Use case ends.
 
-**Use case: UC08 - Import contacts from a CSV file**
+**Use case: UC09 - Filter contacts by tag**
+
+**MSS**
+
+1. User requests to filter contacts by tag (eg. "group A").
+2. The system filters and displays the list of contacts belonging to the specified tag.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. No contacts have the specified tag.
+
+    - 2a1. AdmiNUS displays an empty list.
+
+      Use case ends.
+
+**Use case: UC10 - Import contacts from a CSV file**
 
 **MSS**
 
@@ -400,9 +440,9 @@ _{More to be added}_
 
 - 1a. The specified file path is invalid or does not end with `.csv`.
   - 1a1. AdmiNUS shows an error message indicating an invalid file path or incorrect file format.
-    Use case resumes at step 1.---
+    Use case resumes at step 1.
 
-**Use case: UC09 - Export contacts to a CSV file**
+**Use case: UC11 - Export contacts to a CSV file**
 
 **MSS**
 
@@ -606,7 +646,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Adding a company contact**
    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
-   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison facility`  
+   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison t/facility`  
      **Expected**: Company contact added successfully. Status message updates with details, timestamp updated.
    - **Test case**: `company n/Newgate p/invalid_phone e/email@domain.com a/Address`  
      **Expected**: No contact added. Error message shown in the status message. Status bar remains unchanged.
