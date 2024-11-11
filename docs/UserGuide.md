@@ -40,7 +40,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for NetBook. Ensure this folder does not contain a subfolder named `data`.
+1. Copy the file to the folder you want to use as the _home folder_ for NetBook. Ensure this folder does not contain a sub-folder named `data`.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar netbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -73,7 +73,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -120,7 +120,7 @@ A person can have any number of tags (including 0)
 * Remark defaults to "No remarks added yet" if not specified
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com o/nus`
+* `add n/John Doe p/98765432 e/johnd@example.com o/nus` 
 * `add n/Betsy Crowe p/99423374 t/friend e/betsycrowe@example.com o/nus t/criminal`
 
 ### Listing all persons : `list` or `l`
@@ -153,7 +153,7 @@ Finds persons by names and organisation.
 
 Format: `find [n/NAME] [o/ORGANIZATION]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * At least 1 of the `n/` and `o/` fields must be provided
 * If only 1 field is provided, Persons matching at least one keyword in the field will be returned e.g. `n/ Hans Yu` will return `Hans Gruber` and `Yu Beong`
@@ -180,7 +180,7 @@ Examples:
 * `sort high`
 * `s recent`
 
-### Save sort preference: `save_sort` or `svp`
+### Saving sort preference: `save_sort` or `svp`
 
 Saves the sorting preference specified by the user.
 
@@ -210,7 +210,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in NetBook.
 * `find n/Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
-### Add a remark to a person : `remark`
+### Adding a remark to a person : `remark`
 
 Adds a remark to an existing person in NetBook.
 
@@ -231,7 +231,7 @@ Format: `clear` or `c`
 
 ## Reminder Management
 
-### Create a reminder: `remind` or `rem`
+### Creating a reminder: `remind` or `rem`
 
 Creates a reminder for the specified person in NetBook.
 
