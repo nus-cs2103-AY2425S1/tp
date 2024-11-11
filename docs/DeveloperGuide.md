@@ -507,7 +507,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC8 - Find person**
+**Use case: UC8 - Unassign person from concert**
+
+**MSS**
+
+1. User requests to list concert contacts
+2. ConcertPhonebook shows a list of concert contacts
+3. User requests to unassign a person from a concert in the list
+4. ConcertPhonebook unassigns the person from the concert
+
+Use case ends
+
+**Extensions**
+
+- 2a. The list does not contain the concert contact.
+
+  Use case ends.
+
+- 3a. The given concert contact is invalid.
+
+  - 3a1. ConcertPhonebook shows an error message.
+
+    Use case resumes at step 2.
+
+---
+
+**Use case: UC9 - Find person**
 
 **MSS**
 
@@ -524,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC9 - Find concert**
+**Use case: UC10 - Find concert**
 
 **MSS**
 
@@ -541,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC10 - Find concert contact**
+**Use case: UC11 - Find concert contact**
 
 **MSS**
 
