@@ -199,11 +199,8 @@ Step 2. The user executes `delete person 5` command to delete the 5th person in 
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-<<<<<<< HEAD
-Step 3. The user executes `add n/David …​` to add a new person. The `add person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-=======
+
 Step 3. The user executes `add person n/David …​` to add a new person. The `add person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
->>>>>>> upstream/master
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
