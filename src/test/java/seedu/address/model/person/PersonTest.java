@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -69,6 +71,14 @@ public class PersonTest {
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(HOON.equals(editedAlice));
+
+        // different role -> returns false
+        editedAlice = new PersonBuilder(HOON).withRole(VALID_ROLE_AMY).build();
+        assertFalse(HOON.equals(editedAlice));
+
+        // different sex -> returns false
+        editedAlice = new PersonBuilder(HOON).withSex(VALID_SEX_AMY).build();
         assertFalse(HOON.equals(editedAlice));
 
         // different email -> returns false
