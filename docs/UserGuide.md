@@ -20,13 +20,15 @@ Our application allows you to perform multiple operations that suits your needs 
 2. Updating existing clients
 3. Removing outdated clients
 4. Finding clients who match a criteria
-5. Import and Export client details
+5. Import and export client details
 
 This project is built on top of [AddressBook-Level3 Project](https://se-education.org/). Special thanks and appreciation
 for the team of AddressBook-Level 3.
 
 ## Table of Contents
 <page-nav-print />
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -36,15 +38,19 @@ for the team of AddressBook-Level 3.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TrueRental application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar truerental.jar` command
+4. Open a command terminal, navigate into the folder you put the jar file in using the command `cd`, and use the `java -jar truerental.jar` command
    to run the application.<br>
+   
    <box type="info" seamless>
+
    Note: A GUI similar to the image below should appear in a few seconds. The image below consists of sample data.<br>
+
    </box>
+   
    ![defaultUi](images/uiWithDescription.png)
 
-5. Type the command in the command box and press Enter to execute it. E.g. Typing `help` in the command box and
-   pressing Enter will open the help window.<br>
+5. Type the command in the command box and press `Enter` to execute it. E.g. Typing `help` in the command box and
+   pressing `Enter` will open the help window.<br>
 
 6. **Simple and Quick Tutorial**:
 
@@ -67,7 +73,13 @@ for the team of AddressBook-Level 3.
 
 8. Refer to [Features](#features) for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ## Important Notes
 
@@ -131,6 +143,14 @@ for the team of AddressBook-Level 3.
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 <box type="tip" seamless>
@@ -158,10 +178,18 @@ for the team of AddressBook-Level 3.
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                  | -                                                                |
 | [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                     | -                                                                |
 | [**export**](#exporting-data-export)                                        | Export all TrueRental's data            | `export`                                                                                                                                                     | -                                                                |
-| [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                      | -                                                                |
+| [**clear**](#clearing-all-entries-clear)                                    | Clear all clients' details              | `clear`                                                                                                                                                      | -                                                                |
 | [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                       | -                                                                |
 
 </d-table>
+
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ## Parameter Constraints Table
 
@@ -170,8 +198,8 @@ for the team of AddressBook-Level 3.
 | Parameter name      | Description                                                                                                                   | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Examples                                                             |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
 | `NAME`              | The client's name.                                                                                                            | The value of `NAME` can consist of only `Alphanumeric` combinations of `Unicode` characters, with a minimum length of one character.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `Jason 1 Lee`, `Phua Chu Kang 2`, `123456789`                        |
-| `PHONE_NUMBER`      | The client's phone number.                                                                                                    | The value of `PHONE_NUMBER` can consist of `at least 3 Numeric Characters` without spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `999`, `98123333`, `123123`                                          |
-| `EMAIL`             | The client's email address.                                                                                                   | The value of `EMAIL` can consist of two segments delimited by `@` such as the format `local-part@domain`. <br/> **First** segment, `local-part`, to include `Alphanumeric` with optionally `+_.-` characters. <br> The local-part may not start or end with any `Special` characters. <br/> **Second** segment, `domain`, is made up of domain labels separated by periods. <br> 1. The domain name must end with a domain label `at least 2 characters` long, <br> 2. The domain name must have each domain label `start and end with Alphanumeric characters`. <br> 3. The domain name must have each domain label consist of `Alphanumeric` characters, `separated only by hyphens`, if any. <br>                                                                                                                                                                                            | `jasonlee@example.com`, `user.name+tag@example.com`, `user-name@123` |
+| `PHONE_NUMBER`      | The client's phone number.                                                                                                    | The value of `PHONE_NUMBER` can consist of **at least 3 numeric characters** without spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `999`, `98123333`, `123123`                                          |
+| `EMAIL`             | The client's email address.                                                                                                   | The value of `EMAIL` can consist of two segments delimited by `@` such as the format `local-part@domain`. <br/> **First** segment, `local-part`, to include `Alphanumeric` with optionally `+_.-` characters. <br> The local-part may not start or end with any `Special` characters. <br/> **Second** segment, `domain`, is made up of domain labels separated by periods. <br> **1.** The domain name must end with a domain label `at least 2 characters` long, <br> **2.** The domain name must have each domain label `start and end with Alphanumeric characters`. <br> **3.** The domain name must have each domain label consist of `Alphanumeric` characters, `separated only by hyphens`, if any. <br>                                                                                                                                                                                | `jasonlee@example.com`, `user.name+tag@example.com`, `user-name@123` |
 | `TAG`               | The tags associated with your client.                                                                                         | Only accepts `alphanumeric characters` without spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `FRIENDS`, `ANNOYING`, `LOVERBOY`                                    |
 | `ADDRESS`           | The address of the property owned by your client.                                                                             | The value of `ADDRESS` can consist of any combination of `Unicode` characters, with a minimum length of one character.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `59 Ubi Ave 1 #06-05`, `18 Upper Boon Keng Road #01-1137`            |
 | `RENTAL_START_DATE` | The specific date (including day, month, and year) on which the rental period for the property, owned by your client, begins. | The value of `RENTAL_START_DATE` can be empty (no value is provided after the prefix `s/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENTAL_START_DATE` is not empty (a value is provided after the prefix `s/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be in the format `dd/mm/yyyy`, where `dd` represents the day, `mm` represents the month, and `yyyy` represents the year.<br>**2.** It must represents a valid date and fall within the range of `01/01/1900` to `31/12/2099`.<br>**3.** If the value of `RENTAL_END_DATE` is also specified and not empty, then the date represented by the value of `RENTAL_START_DATE` should be the same date or earlier than the date represented by the value of `RENTAL_END_DATE`.                                | `01/01/2024`, `01/06/2024`                                           |
@@ -182,6 +210,7 @@ for the team of AddressBook-Level 3.
 | `CUSTOMER_LIST`     | The list of the tenant(s) for the property owned by your client.                                                              | The value of `CUSTOMER_LIST` can be empty (no value is provided after the prefix `cl/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `CUSTOMER_LIST` is not empty (a value is provided after the prefix `cl/` for the specified command), it must adhere to the following conditions:<br>**1.** It can consist of any combination of `Unicode` characters.<br>**2.** It must have a length of at least one character.<br>**3.** If it does not contain a `;` character (semicolon), it represents the name of a single tenant.<br>**4.** If it contains the `;` character(s) (semicolon), it is treated as a list of tenant names, with each name separated by a `;` and name cannot be empty.<br>**5.** If it contains the `;` character(s) (semicolon), `;` should not appear at the beginning or end of the value. | `David Ng`, `Steven Ang 2;David Tan`, `123, Dexter;Joshua`           |
 | `CLIENT_INDEX`      | Client index number on the client list panel                                                                                  | Only accepts `Positive Integer` (excluding 0) up till the `last index` shown on the list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `1`                                                                  |
 | `RENTAL_INDEX`      | Rental index number on the rental information list panel                                                                      | Only accepts `Positive Integer` (excluding 0) up till the `last index` shown on the list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `1`                                                                  |
+| `KEYWORD`           | Keyword to be used to match client's information                                                                              | The value of `KEYWORD` can consist of any `Alphanumeric`, `Special` characters `+_.@-`, and spaces with a minimum length of one character.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `Jason`, `0`                                                         |
 
 </d-table>
 
@@ -192,10 +221,13 @@ our [Developer Guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide
 
 </box>
 
+<br>
+<br>
+
 ## Duplicate Client Detection
 
-A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]`
-and `[EMAIL_ADDRESS]` are **exactly the same** (including case sensitivity).
+A client is only considered as **duplicate** **if and only if** all three parameters `NAME`, `PHONE_NUMBER`
+and `EMAIL_ADDRESS` are **exactly the same** (including case sensitivity).
 
 This is to allow the user to have a greater flexibility of manipulating the client's information.
 
@@ -233,6 +265,14 @@ The following is a **DUPLICATE** of the initial client:
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 ## Duplicate Rental Information Detection
 
 Rental information is considered a **duplicate** **if and only if** the value of the `ADDRESS` parameter **matches exactly**, **including case sensitivity**.
@@ -268,7 +308,13 @@ The following are **DUPLICATES** of the initial rental information:
 
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -286,16 +332,9 @@ Format: `help`
 **Tip:** Alternatively, you can press the button at the top of the navigation button bar to view the help page, or
 simply press `f1`.
 
-![helpButton](images/helpButton.png)
+![helpButton](images/helpButton.png){width=750px height=750px}
 
 </box>
-
-
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Adding a client: `cadd`
 
@@ -321,6 +360,14 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG...}`
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 <box type="info" light>
 
 **Example inputs**:
@@ -343,12 +390,6 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG...}`
 
 ![caddUi](images/caddUi.png)
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
-
 ### Adding a rental information for a client: `radd`
 
 Adds a rental information for the specific client to TrueRental.
@@ -364,6 +405,14 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 * The value of **address** for the rental information cannot be empty.
 
 </box>
+
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 <box type="info" light>
 
@@ -388,10 +437,12 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 ![raddUi](images/raddUi.png)
 
 <div style="text-align: right;">
-  <a href="#command-summary">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all clients : `list`
 
@@ -401,11 +452,6 @@ Format: `list`
 
 ![list](images/listUi.png)
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Listing rental information of a client : `rview`
 
@@ -444,13 +490,16 @@ integer starting from 1.
 
 </box>
 
-![rviewUi](images/rviewUi.png)
-
 <div style="text-align: right;">
-  <a href="#command-summary">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
+
+<div style="page-break-after: always;"></div>
+
+![rviewUi](images/rviewUi.png)
+
 
 ### Editing a client : `cedit`
 
@@ -496,6 +545,14 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG...]`
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 <box type="success" light>
 
 **Example outputs**:
@@ -508,11 +565,6 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG...]`
 
 ![ceditUi](images/ceditUi.png)
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Editing a client's rental information: `redit`
 
@@ -544,6 +596,14 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 <box type="info" light>
 
 **Example inputs**:
@@ -566,11 +626,6 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 ![reditUi](images/reditUi.png)
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Locating clients: `find`
 
@@ -590,6 +645,14 @@ Format: `find [k/KEYWORD...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG
 if any of their fields **contains** the keyword, including rental information details (E.g. name, email, address, etc.).
 
 </box>
+
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 <box type="tip" seamless>
 
@@ -629,10 +692,12 @@ if any of their fields **contains** the keyword, including rental information de
 ![findUi](images/findUi.png)
 
 <div style="text-align: right;">
-  <a href="#command-summary">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a client : `cdelete`
 
@@ -658,25 +723,30 @@ Format: `cdelete CLIENT_INDEX`
 1. `cdelete 7` to delete the client at index 7.
     * `y` to confirm deletion of the 7th client in the list.
 
-![cdeleteUi1](images/cdeleteUi1.png)
+![cdeleteUi1](images/cdeleteUi1.png){width=530px height=530px}
 
 </box>
 
 <box type="success" light>
 
-**Examples outputs:**
+**Example outputs:**
 
 1. `Deleted Client: John Doe; Phone: 98765432; Email: johnd@example.com`
 
-![cdeleteUi2](images/cdeleteUi2.png)
+<div style="display: flex; justify-content: space-between; align-items: center;">
 
-</box>
+![cdeleteUi2](images/cdeleteUi2.png){height=530px width=530px}
 
-<div style="text-align: right;">
-  <a href="#command-summary">
+<div style="text-align: right; align-self: flex-end;">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
+
+</div>
+
+</box>
+
 
 ### Deleting a rental information : `rdelete`
 
@@ -716,12 +786,14 @@ Format: `sort`
 ![sortUi](images/sortUi.png)
 
 <div style="text-align: right;">
-  <a href="#command-summary">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
 
-### Command History: `↑ up-arrow key` and `down-arrow key`
+<div style="page-break-after: always;"></div>
+
+### Command History: `↑ up-arrow key` and `↓ down-arrow key`
 
 Navigates through all previously entered commands.
 
@@ -786,30 +858,27 @@ Please set up the following commands before proceeding with the example inputs a
 
 **Example Outputs:** (Steps 1 to 13 are performed sequentially)
 
-1. Expected: `cdelete 2` is shown in the command box.
-2. Expected: `list` is shown in the command box.
-3. Expected: `rview 1` is shown in the command box.
-4. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+1. **Expected**: `cdelete 2` is shown in the command box.
+2. **Expected**: `list` is shown in the command box.
+3. **Expected**: `rview 1` is shown in the command box.
+4. **Expected**: `cadd n/Amy Tan p/99887766` is shown in the command box.
+5. **Expected**: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
    the command box.
-6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
-7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
+6. **Expected**: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
+7. **Expected**: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
    are no more previous commands.
-8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the
+8. **Expected**: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the
    command box.
-9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-10. Expected: `rview 1` is shown in the command box.
-11. Expected: `list` is shown in the command box.
-12. Expected: `cdelete 3` is shown in the command box.
-13. Expected: : Nothing is shown in the command box.
+9. **Expected**: `cadd n/Amy Tan p/99887766` is shown in the command box.
+10. **Expected**: `rview 1` is shown in the command box.
+11. **Expected**: `list` is shown in the command box.
+12. **Expected**: `cdelete 3` is shown in the command box.
+13. **Expected**: : Nothing is shown in the command box.
 
 </box>
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
+<br>
+<br>
 
 ### Autofill: `↹ Tab key`
 
@@ -868,30 +937,32 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 
 </box>
 
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
+
 <box type="success" light>
 
 **Example Outputs:** (Steps 1 to 12 are performed sequentially)
 
-1. Value of the input command is now "r".
-2. Value of the input command is now "radd".
-3. Value of the input command is now "redit".
-4. Value of the input command is now "rdelete".
-5. Value of the input command is now "radd ".
-6. Value of the input command is now "radd a/".
-7. Value of the input command is now "radd cl/".
-8. Value of the input command is now "radd d/".
-9. Value of the input command is now "radd cl/J".
-10. Value of the input command is now "radd cl/Josh".
-11. Value of the input command is now "radd cl/Joshua".
-12. Value of the input command is now "radd cl/Jayden".
+1. Value of the input command is now `r`.
+2. Value of the input command is now `radd`.
+3. Value of the input command is now `redit`.
+4. Value of the input command is now `rdelete`.
+5. Value of the input command is now `radd `.
+6. Value of the input command is now `radd a/`.
+7. Value of the input command is now `radd cl/`.
+8. Value of the input command is now `radd d/`.
+9. Value of the input command is now `radd cl/J`.
+10. Value of the input command is now `radd cl/Josh`.
+11. Value of the input command is now `radd cl/Joshua`.
+12. Value of the input command is now `radd cl/Jayden`.
 
 </box>
-
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Importing data: `import`
 
@@ -916,15 +987,17 @@ Format: `import`
 * Importing data will delete all current data in the address book. It is recommended to back up the current data via
   the `export` command.
 * Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
-* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png){width=750px height=750px}
 
 </box>
 
 <div style="text-align: right;">
-  <a href="#command-summary">
+  <a href="#table-of-contents">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
   </a>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Exporting data: `export`
 
@@ -934,24 +1007,12 @@ Format: `export`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes**, any other input will result in a cancellation.
-
-</box>
-
-<box type="info" seamless>
-
 **Note**:
 
 * Address book data can only be exported as `.json` files.
 * A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
 
 </box>
-
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
 
 ### Clearing all entries : `clear`
 
@@ -965,28 +1026,24 @@ Format: `clear`
 
 </box>
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
-
 ### Exiting the application : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
-
 ### Saving the data
 
 TrueRental data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
+
+<div style="text-align: right;">
+  <a href="#table-of-contents">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
@@ -1040,7 +1097,7 @@ and use the `import` command to import the data file that you previously exporte
 
 * **Customer list**: The list of tenant(s) who are renting a property.
 
-* **Rent due date**: The date ('dd' in `dd/mm/yyyy`) in each month when monthly rent is collected from tenants.
+* **Rent due date**: The date (`dd` in `dd/mm/yyyy`) in each month when monthly rent is collected from tenants.
     Ranges between `1` - `31`, without leading zeros.
 
 * **Command Line Interface (CLI)**: A means of interacting with a computer program by inputting lines of text.
@@ -1058,6 +1115,16 @@ and use the `import` command to import the data file that you previously exporte
     **rental index**.
 
 * **Index**: The position of a _client_ or _rental information_ in the lists shown in the app, represented by a number.
+
+* **Domain name**: The second part of an email address after `@`.
+  For example, `gmail.com` and `outlook.com`.
+
+* **Domain label**: The second part of an email address after `@`.
+  For example, `gmail` and `outlook`.
+
+* **Home Folder**: The folder you saved this application in.
+
+* **Unicode Characters**: Symbols and letters that conform to the [Unicode standard](https://en.wikipedia.org/wiki/List_of_Unicode_characters). Almost all characters on your keyboard will be valid unicode characters.
 
 <div style="text-align: right;">
   <a href="#table-of-contents">
