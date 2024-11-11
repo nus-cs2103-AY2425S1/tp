@@ -126,8 +126,8 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertTrue(model.equals(expectedModel));
         expectedModel.deletePerson(personToDelete);
-
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
@@ -176,6 +176,18 @@ public class DeleteCommandTest {
     }
 
 
+    @Test
+    public void execute_validPredicate_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Meier");
+        DeleteCommand deleteCommand = new DeleteCommand(predicate);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                expectedModel.getFilteredPersonList().size());
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 
     @Test
     public void equals() {

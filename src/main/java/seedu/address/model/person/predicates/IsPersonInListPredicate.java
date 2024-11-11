@@ -8,16 +8,16 @@ import seedu.address.model.person.Person;
 /**
  * A predicate that tests if a given person is present in a list of persons.
  */
-public class FilterListPredicate implements Predicate<Person> {
+public class IsPersonInListPredicate implements Predicate<Person> {
 
     private final List<Person> persons;
 
     /**
-     * Constructs a {@code FilterListPredicate} with the specified list of persons.
+     * Constructs a {@code IsPersonInListPredicate} with the specified list of persons.
      *
      * @param persons The list of persons to match against.
      */
-    public FilterListPredicate(List<Person> persons) {
+    public IsPersonInListPredicate(List<Person> persons) {
         this.persons = persons;
     }
 

@@ -14,19 +14,19 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.predicates.FilterListPredicate;
+import seedu.address.model.person.predicates.IsPersonInListPredicate;
 
 
-public class FilterListPredicateTest {
+public class IsPersonInListPredicateTest {
 
     @Test
     public void test_validList() {
         List<Person> filteredList = new ArrayList<>();
         filteredList.add(ALICE);
         filteredList.add(CARL);
-        FilterListPredicate filterListPredicate = new FilterListPredicate(filteredList);
+        IsPersonInListPredicate isPersonInListPredicate = new IsPersonInListPredicate(filteredList);
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.updateFilteredPersonList(filterListPredicate);
+        model.updateFilteredPersonList(isPersonInListPredicate);
         List<Person> actualFilteredList = model.getFilteredPersonList();
         assertEquals(filteredList, actualFilteredList);
     }
@@ -37,9 +37,9 @@ public class FilterListPredicateTest {
     public void test_invalidList() {
         List<Person> filteredList = new ArrayList<>();
         filteredList.add(AMY);
-        FilterListPredicate filterListPredicate = new FilterListPredicate(filteredList);
+        IsPersonInListPredicate isPersonInListPredicate = new IsPersonInListPredicate(filteredList);
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.updateFilteredPersonList(filterListPredicate);
+        model.updateFilteredPersonList(isPersonInListPredicate);
         List<Person> actualFilteredList = model.getFilteredPersonList();
         List<Person> emptyList = new ArrayList<>();
         assertEquals(emptyList, actualFilteredList);
