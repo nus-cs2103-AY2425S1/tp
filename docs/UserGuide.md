@@ -478,7 +478,7 @@ If you are facing problems while setting up or using HireMe, we want to help you
 <br></br>
 
 #### HireMe application setup failed
-Check that you have the hireme.jar in the correct folder and copied the correct file path into the terminal. Check that you have java 17 or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
+Check that you have the `hireme.jar` in the correct folder and copied the correct file path into the terminal. Check that you have Java `17` or above downloaded in your computer. Follow the correct set of instructions based on your computer system, see [Part 2](#part-2-using-the-hireme-application) of setting up.
 <br></br>
 
 #### Getting errors when using the commands
