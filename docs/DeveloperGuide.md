@@ -832,7 +832,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
       Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a customer with a [similar name](#Glossary) and without the optional `tag` field.
+4. Adding a customer with a [similar name](#glossary) and without the optional `tag` field.
 
     1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the address book.
 
@@ -846,7 +846,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
        Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
 
-6. Adding a customer with [similar tags](#Glossary).
+6. Adding a customer with [similar tags](#glossary).
 
     1. Prerequisites: Customer with name `Foo Chao` or other similar names does not already exist in the address book.
 
@@ -917,12 +917,12 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
        - Customer with name `Betsy Crowe` already exist in the address book.
        - At least 1 customer is listed.
-       - The customer to be edited is not `Betsy Crowe`.<br>
+       - The customer to be edited is not `Betsy Crowe`. <!-- Spacer for extra break -->
 
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
-4. Editing a customer to have a [name similar to an existing customer](#Glossary).
+4. Editing a customer to have a [name similar to an existing customer](#glossary).
 
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
@@ -939,7 +939,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 t/friends t/friends` <br>
        Expected: The customer's tags is successfully edited with one of the duplicated tags ignored. Details of the edited customer shown in the status message.
 
-6. Editing a customer to have [similar tags](#Glossary).
+6. Editing a customer to have [similar tags](#glossary).
 
     1. Prerequisites: At least one customer is listed.
 
@@ -1010,7 +1010,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addo 1 q/100` <br>
         Expected: No order is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a [similar order](#Glossary).
+4. Adding a [similar order](#glossary).
 
     1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
@@ -1079,7 +1079,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edito 2 q/22` <br>
        Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-3. Editing an order to a [similar order](#Glossary).
+3. Editing an order to a [similar order](#glossary).
 
     1. Prerequisites:
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
