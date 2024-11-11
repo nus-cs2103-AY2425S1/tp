@@ -766,6 +766,11 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Buying Price**: The price in which the buyer is willing to buy the property.
 * **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
+* * **Command Terminal**: A window into which users can type commands that are then executed by the computer's operating system. The cursor point in the terminal where you type the commands is known as the CLI.
+* **UI (User Interface)**: The layout of the visual elements that enable a user to interact with a computer system.
+* **CLI (Command Line Interface)**: A text-based User Interface (UI) where commands are typed and used to run programs, manage computer files and interact with the computer. This provides a faster and efficient alternative to GUI interactions.
+* **GUI (Graphical User Interface)**: A visual platform for users to interact with a computer using items such as windows, icons and menus. 
+* **Parameter value**: The inputs to the specific fields provided by a user when running a command in the CLI.
 
 ### Planned Enhancements
 

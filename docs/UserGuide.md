@@ -11,7 +11,8 @@ Built for **fast, efficient use** through a Command Line Interface (CLI), NUStat
 
 With NUStates, agents can:
 - **Manage and Tag Clients**: Easily add, tag, and retrieve client (buyer/seller) details.
-- **Search and Filter**: Quickly find contacts by name, phone number, or tags, and sort by various criteria.
+- **Manage and Tag Properties**: Easily add, tag, and retrieve property (to-buy/to-sell) details associated to the respective clients.
+- **Search and Filter**: Quickly find contacts by name, phone number, properties or tags, and sort by various criteria.
 - **Pin and Unpin Clients**: Keep high-priority clients at the top for quick access.
 - **Scroll through Command History**: Effortlessly scroll through previous commands, making repetitive tasks quicker.
 - **View Statistics Dashboard**: View insightful statistics at a glance, such as the number of active clients, properties sold, and performance metrics.
