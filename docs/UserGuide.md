@@ -213,6 +213,7 @@ and clearing persons/appointments.
 
 Here are some **key points** to keep in mind when you are using the commands:
 
+- Appointments are sorted by date and Patients are sorted in chronological order.
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
 
@@ -425,7 +426,7 @@ Edits an existing patient in DocTrack.
 
 <box type="tip" light>
 
-**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
+**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
 
 </box>
 
@@ -497,7 +498,7 @@ Note that deleting a person will also delete all related appointments.
 
 <box type="tip" light>
 
-**Tip:** Make you have the correct index of the patient before deleting. Use `list person` to check
+**Tip:** Make sure you have the correct index of the patient before deleting. Use `list person` to check.
 
 </box>
 
@@ -565,7 +566,7 @@ You can manage the appointments through different commands, which can be seen in
 
 **Notes:**
 
-1. The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed, e.g. `2025-02-29 12:00` will be parsed as `2024-02-28 12:00`. 
+1. The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed, e.g. `2025-02-29 12:00` will be parsed as `2025-02-28 12:00`. 
 
 <br>
 
@@ -697,7 +698,7 @@ You can find appointments whose person names and / or dates contain any of the g
 
 <box type="tip" light>
 
-**Tip:** Use the `find appt` command to filter out appointments for a certain day or patient
+**Tip:** Use the `find appt` command to filter out appointments for a certain day or patient.
 
 </box>
 
