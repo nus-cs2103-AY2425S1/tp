@@ -81,6 +81,16 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_multipleSubstringKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        FieldContainsKeywordsPredicate predicate = preparePredicate("Ku Ell", "name");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_presentKeywords_wrongField() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         FieldContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz", "id");

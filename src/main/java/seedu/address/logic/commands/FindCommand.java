@@ -2,7 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
@@ -20,6 +24,7 @@ public class FindCommand extends Command {
             + "Parameters: FIELD/ KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/ Amy Dave";
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final FieldContainsKeywordsPredicate predicate;
 
     /**
@@ -32,6 +37,7 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("executing Find Command!");
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

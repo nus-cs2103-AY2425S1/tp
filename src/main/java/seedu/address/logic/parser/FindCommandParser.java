@@ -31,6 +31,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
 
+        logger.info("Parsing Find Command Inputs!");
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_WARD, PREFIX_DIAGNOSIS,
                         PREFIX_MEDICATION, PREFIX_NOTES, PREFIX_APPOINTMENT);
