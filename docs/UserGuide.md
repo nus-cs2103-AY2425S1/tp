@@ -68,6 +68,8 @@ If you haven't installed GoonBook yet, start with the [Quick Start](#quick-start
 - Setting up your workspace
 - Running your first command
 
+<div style="page-break-after: always;"></div>
+
 ### Learning GoonBook
 
 Once GoonBook is running, familiarize yourself with:
