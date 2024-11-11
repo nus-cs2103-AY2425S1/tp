@@ -37,6 +37,7 @@ public class DateOfBirth {
      * Returns if a given string is a valid date of birth.
      */
     public static boolean isValidDateOfBirth(String dob) {
+        assert dob.length() == 10;
         return !(isDateAfterToday(dob));
     }
     @Override

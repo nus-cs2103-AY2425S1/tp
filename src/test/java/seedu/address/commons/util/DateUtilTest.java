@@ -19,8 +19,6 @@ public class DateUtilTest {
 
     @Test
     public void isValidDate_invalidDate_returnsFalse() {
-        assertFalse(isValidDate("")); // empty string
-        assertFalse(isValidDate(" ")); // spaces only
         assertFalse(isValidDate("example")); // non-numeric
         assertFalse(isValidDate("2022-13-01")); // invalid month
         assertFalse(isValidDate("2023-02-29")); // invalid day
@@ -31,6 +29,14 @@ public class DateUtilTest {
     public void isCorrectDateFormat_correctFormat_returnsTrue() {
         assertTrue(isCorrectDateFormat("2022-12-12"));
         assertTrue(isCorrectDateFormat("2023-02-29")); // returns true even if date does not exist
+    }
+
+    @Test
+    public void isCorrectDateFormat_incorrectFormat_returnsFalse() {
+        assertFalse(isCorrectDateFormat("")); // empty string
+        assertFalse(isCorrectDateFormat(" ")); // spaces only
+        assertFalse(isCorrectDateFormat("example")); // non-numeric
+        assertFalse(isCorrectDateFormat("2022/12/12")); // invalid format
     }
 
     @Test
@@ -48,8 +54,6 @@ public class DateUtilTest {
 
     @Test
     public void isDateAfterToday_invalidDate_returnsFalse() {
-        assertFalse(isDateAfterToday("")); // empty string
-        assertFalse(isDateAfterToday(" ")); // spaces only
         assertFalse(isDateAfterToday("example")); // non-numeric
         assertFalse(isDateAfterToday("2022-13-01")); // invalid month
         assertFalse(isDateAfterToday("2022-12-32")); // invalid day
