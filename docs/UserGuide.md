@@ -223,7 +223,7 @@ Examples:
 
 Adds the date and reason as to why the specified person in the student list is absent.
 
-Format: `addAttendance INDEX ad/DATE ar/REASON`
+Format: `addAttendance INDEX ad/DATE ar/[REASON]`
 
 <box type="tip" seamless>
 
