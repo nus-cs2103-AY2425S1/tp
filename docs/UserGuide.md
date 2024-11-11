@@ -4,7 +4,7 @@ title: CareLink User Guide
 ---
 
 - Table of Contents
-  {:toc}
+{:toc}
 
 ## Introduction
 
@@ -186,7 +186,7 @@ Use this command format: `help`
 
 Use this command to add a person to the address book.
 
-**Format**:  
+**Format**:
 `add n/NAME nric/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS role/ROLE [t/TAG]…`
 
 #### Field Constraints:
@@ -334,9 +334,9 @@ Use this command format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/
 
 **Examples:**
 
-- `edit S1234567D p/91234567 e/johndoe@example.com`  
+- `edit S1234567D p/91234567 e/johndoe@example.com`
   Edits the phone number and email address of the person with `S1234567D` to be `91234567` and `johndoe@example.com` respectively.
-- `edit S6483749D n/Betsy Crower t/`  
+- `edit S6483749D n/Betsy Crower t/`
   Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
 Possible Errors:
@@ -376,7 +376,7 @@ The example of using the delete command in CareLink is shown below.
 
 > :bulb: **Tip:** Notice the NRIC used in the example belongs to `David LI`.
 
-![delete command example](images/deleteDavid.png)  
+![delete command example](images/deleteDavid.png)
 _Figure 13: Example of using the `delete` command to remove a person from CareLink_
 
 When the command succeeds, you can notice that David is removed and hence no longer displayed.
@@ -604,15 +604,15 @@ _Figure 12: Example of using the `findapp` command to locate appointments within
 
 > :warning: **Warning:** This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
-**Format**:  
+**Format**:
 `clear confirm`
 
 - You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
 
 **Examples**:
 
-- `clear confirm` clears all entries from the address book.  
-  ![result for 'clear confirm'](images/clearconfirm.png)  
+- `clear confirm` clears all entries from the address book.
+  ![result for 'clear confirm'](images/clearconfirm.png)
   _Figure 15: Example of using the `clear confirm` command to clear all entries in CareLink_
 
 - `clear` without `confirm` will prompt you to include the confirmation keyword.
