@@ -159,15 +159,54 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Patient feature
-#### Implementation
-The `add` command is used to add a new patient into NovaCare. 
-
 ### Add Task feature
 #### Implementation
-The `addTask` command is used to add a new task to a patient in NovaCare.
+The `addtask` command is used to add a new task to a patient in NovaCare. It is executed when a user adds a task to a patient. This command operates on the `Model` component, updating the target patient by appending a new task to their list of tasks.
 
-### \[Proposed\] Undo/Redo feature
+The following methods are involved:
+* `AddTaskCommand#execute(Model model)` — Adds a new `Task` to the specified `Patient`.
+* `Model#addTask(Task task)`  — Adds a new `Task` to the model.
+* `Task`  — Represents a task to be added.
+
+#### Example usage scenario:
+1. The user enters the `addTask` command with the patient index and task description.
+2. The command fetches the selected patient and create a new `Task`.
+3. A check is performed to ensure the task does not already exist for the patient.
+4. The AddTaskCommand calls Model#addTask(Task task) to add the task to the model.
+5. The changes are committed to the model and a success message is displayed to the user.
+
+<puml src="diagrams/AddTaskSequenceDiagram.puml" />
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTaskCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues further down.
+</box>
+
+Below is an activity diagram that explains what happens when a user tries to add a task:
+<puml src="diagrams/AddTaskActivityDiagram.puml" />
+
+### Find Task feature
+#### Implementation
+The `findtask` command is used to find all tasks from a specified patient index in NovaCare. It is executed when a user wants to view all tasks for a specific patient. This command operates on the `Model` component, searching for all tasks that match the specified patient index.
+
+The following methods are involved:
+* `FindTaskCommand#execute(Model model)` — Finds all tasks for the specified `Patient` index.
+* `Model#updateFilteredTaskList(Predicate<Task> predicate)`  — Updates the filtered task list to show only tasks that match the predicate.
+* `Task#getPatient()`  — Returns the patient index of the task.
+
+#### Example usage scenario:
+1. The user selects the patient index and executes the `findtask` command. The command fetches the selected patient and filter the task list to show tasks related to that particular patient.
+2. The model applies the predicate to the task list, showing only tasks that match the predicate.
+3. The GUI displays the filtered task list to the user.
+
+<puml src="diagrams/FindTaskSequenceDiagram.puml" />
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindTaskCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues further down.
+</box>
+
+Below is an activity diagram that explains what happens when a user tries to find tasks:
+<puml src="diagrams/FindTaskActivityDiagram.puml" />
+
 
 #### Proposed Implementation
 
@@ -647,13 +686,11 @@ Use case ends.
 6.  The codebase should be modular, allowing easy updates or feature additions without affecting other parts of the system.
 7.  The application should be packaged as a single jar file for easy deployment.
 8.  The User Guide and Developer Guide should be PDF-friendly. No animated GIFs, embbedded videos, etc.
-9. The data should be stored in a local file in an editable text file that is easy to read and edit manually.
+9.  The data should be stored in a local file in an editable text file that is easy to read and edit manually.
 10. The data should not be stored in a Database Management System. 
 11. The application should function without internet access as it is an offline tool. 
 12. The application should run for extended periods without crashing.
 
-
-*{More to be added}*
 
 ### Glossary
 
@@ -662,6 +699,7 @@ Use case ends.
 * **Priority level**: A priority level is a value assigned to a patient to indicate the urgency of their medical condition. A priority level of 1 indicates a critical condition, 2 indicates a serious but non-critical condition, while 3 indicates a non-critical condition.
 * **Emergency contact**: A person who is preferably close to the patient and is designated to receive information in case of an emergency
 * **Task**: A task to be done for a specific patient
+* **Database Management System**: A software system that uses a standard method to store and organize data.
 
 --------------------------------------------------------------------------------------------------------------------
 

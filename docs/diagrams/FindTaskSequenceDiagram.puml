@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindTaskCommandParser" as FindTaskCommandParser LOGIC_COLOR
+participant "f:FindTaskCommand" as FindTaskCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findtask 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findtask 1")
+activate AddressBookParser
+
+create FindTaskCommandParser
+AddressBookParser -> FindTaskCommandParser
+activate FindTaskCommandParser
+
+FindTaskCommandParser --> AddressBookParser
+deactivate FindTaskCommandParser
+
+AddressBookParser -> FindTaskCommandParser : parse("1")
+activate FindTaskCommandParser
+
+create FindTaskCommand
+FindTaskCommandParser -> FindTaskCommand
+activate FindTaskCommand
+
+FindTaskCommand --> FindTaskCommandParser :
+deactivate FindTaskCommand
+
+FindTaskCommandParser --> AddressBookParser
+deactivate FindTaskCommandParser
+
+FindTaskCommandParser -[hidden]-> AddressBookParser
+destroy FindTaskCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FindTaskCommand : execute(m)
+activate FindTaskCommand
+
+FindTaskCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> FindTaskCommand
+deactivate Model
+
+
+FindTaskCommand -[hidden]-> LogicManager
+destroy FindTaskCommand
+
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml

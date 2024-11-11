@@ -1,0 +1,15 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 13
+start
+:User types FindTaskCommand;
+  if () then ([index is valid])
+    :Get patient by index;
+    :Filter tasks related to the patient;
+    :Display list of tasks;
+  else ([index not valid])
+    :Show error message;
+  endif
+stop
+@enduml
