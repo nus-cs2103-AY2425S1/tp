@@ -218,6 +218,18 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+1. Prefix enhancements
+
+Currently, the view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
+
+To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
+
+// Support for Multi-Languages
+ 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
