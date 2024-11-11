@@ -266,6 +266,7 @@ Format: `list -s`
 
 **Warnings**:
 - At least one space is needed between `list` and `-s`.
+- A space is not necessary between `-s` and `INDEX`.
 - No other parameters should be given for this command.
 
 </box>
@@ -390,8 +391,6 @@ Parameters:
 - At least one space is needed between `find` and `-s`.
 - - At least one space is needed between `-s` and the first parameter.
 - At least one parameter must be given.
-- No duplicate parameters can be used.
-  - `find -s n/an n/di` is not allowed.
 - At least one space is needed between parameters.
 - `NAME`, `COMPANY` and `PRODUCT` are case-insensitive.
 
@@ -431,10 +430,9 @@ Parameters:
 - At least one space between `-s` and `so` is needed.
 - At least one space between `SORT_ORDER` and `sb` is needed.
 - All parameters must be given.
-- No duplicate parameters can be used.
 - `SORT_ORDER` and `SORT_BY` are case-sensitive.
 - The sort command will sort all suppliers in VendorVault, not just the displayed list.
-  - e.g. If you have searched for suppliers using the `find` command, the sort command will not sort the previous results of the `find` command, but will sort all suppliers in VendorVault.
+  - e.g. If you have searched for suppliers using the `find -s` command, the sort command will not sort the previous results of the `find -s` command, but will sort all suppliers in VendorVault.
 
 </box>
 
@@ -489,6 +487,7 @@ Parameters:
 - At least one space is needed between `add` and `-d`.
 - At least one space is needed between `-d` and the first parameter.
 - At least one space is needed between parameters.
+- All parameters must be given.
 - An error message will be shown if the user tries to add a duplicate delivery.
   - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
       - Comparison between different `PRODUCT`is case-sensitive.
@@ -557,7 +556,7 @@ Parameters:
 
 Examples:
 - `delete -d 2`
-- `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+- `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find -d` command.
 
 Expected output:
 - Delivery at index 2 of the displayed list will be deleted, assuming there are at least 2 deliveries in the displayed list. Otherwise, an error message will be shown.
@@ -588,7 +587,7 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `mark` and `-d`.
-- At least one space is needed between `-d` and `INDEX`.
+- A space is not necessary between `-d` and `INDEX`.
 - At least one space is needed between `INDEX` and `STATUS`.
 - All parameters must be given.
 - At least one space is needed between parameters.
@@ -646,8 +645,6 @@ Parameters:
 - At least one space is needed between `find` and `-d`.
 - At least one space is needed between `-d` and the first parameter.
 - At least one parameter must be given.
-- No duplicate parameters can be used.
-  - `find -d pro/milk pro/bread` is not allowed.
 - At least one space is needed between parameters.
 - `STATUS` and `PRODUCT` are case-insensitive.
 
@@ -669,7 +666,7 @@ Expected output:
 
 ### 3.4.6 Sorting deliveries: `sort -d`
 
-Sorts deliveries based on their cost, date and time, and status in VendorVault.
+Sorts deliveries based on their cost, date and time, or status in VendorVault.
 
 Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 
@@ -696,11 +693,9 @@ Parameters:
 - At least one space is needed between `-d` and `so/SORT_ORDER`.
 - At least one space is needed between `so/SORT_ORDER` and `sb/SORT_BY`.
 - All parameters must be given.
-- No duplicate parameter can be used.
-  - `sort -d so/a sb/c sb/d` is not allowed.
 - `SORT_ORDER` and `SORT_BY` are case-sensitive.
 - Using `sort -d` command will sort all deliveries in VendorVault, not just the displayed list.
-  - e.g. If you have searched for deliveries using the `find` command, the sort command will not sort the previous results of the `find` command, but will sort all deliveries in VendorVault.
+  - e.g. If you have searched for deliveries using the `find -d` command, the sort command will not sort the previous results of the `find -d` command, but will sort all deliveries in VendorVault.
 
 </box>
 
