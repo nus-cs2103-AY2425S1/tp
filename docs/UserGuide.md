@@ -69,7 +69,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 ## Features
 
-<div markdown="span" class="alert alert-warning">:information_source: **Notes about the command format:**<br/>
+<div markdown="span" class="alert alert-primary">:information_source: **Notes about the command format:**<br/>
 
 * Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
     * e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.<br><br>
@@ -114,22 +114,24 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> `EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and ten a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
-| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|----------------|--------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> `EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and then a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|                | `nf/`  | No          | Represents the unfavouriting of a contact.<br/> This keyword can be excluded if you intend for this contact to not be a favourite contact.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/>
+
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
 A person is uniquely identified by his/her **telegram handle**.<br/>
 E.g. Once a person with telegram handle `alexYeoh` is added, no other contacts can be created with `alexYeoh` as the telegram handle.<br/>
 </div>
 
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/>
-Valid telegram handles follow the requirements set by Telegram. See [link](https://telegram.org/faq#:~:text=Q%3A%20What%20can%20I%20use,TeleGram%20is%20the%20same%20user).).<br/>
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
+Valid telegram handles follow the requirements set by Telegram. See [link](https://telegram.org/faq#:~:text=Q%3A%20What%20can%20I%20use,TeleGram%20is%20the%20same%20user).<br/>
 Since Telegram treats their handles as case-insensitive, CCAConnect also treats the telegram field as case-insensitive.
 </div>
 
@@ -197,7 +199,7 @@ You can remove all the person’s roles by typing `r/` without specifying any ro
 *  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
 <div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
-Record attendances for previous "Member" contacts are not wiped to allow for future reference and verification of participation. It is also important for tracking overall attendance trends and patterns over time.
+Recorded attendances for previous "Member" contacts are not wiped to allow for future reference and verification of participation. It is also important for tracking overall attendance trends and patterns over time.
 </div>
 
 <a id="find-command"></a>
@@ -264,7 +266,7 @@ Composing all 4 types of search will give an `OR` search, a contact that has at 
 Sorts the list of contacts by name, in a user-specified order.<br/>
 Sorting works together with the `find` command, meaning that if you sort after reducing the number of listed contacts, the sorting occurs for those listed contacts.
 
-<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/><br/>
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/><br/>
 `sort` orders the list of contacts in alphabetical order of their names, and this action is case-insensitive.<br/>
 E.g. The letters `A` and `a` will both be treated as `a`.<br/>
 Symbols will be sorted according to the ordering specified by the American Standard Code of Information Interchange (ASCII).<br/>
@@ -355,11 +357,11 @@ mark t/TELEGRAM…​ d/DATE
 
   ![result of command `mark t/alexYeoh t/berniceYu d/2024-11-07`](images/MarkCommandResult.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
 
-* If the input date matches the current date, the checkbox for marked members will be automatically selected upon successful attendance marking.
+- If the input date matches the current date, the checkbox for marked members will be automatically selected upon successful attendance marking.<br>
 
-* If the input telegrams include members who have already been marked on input date, the result will remind user of these repeatedly marked members while still marking other members as usual.
+- If the input telegrams include members who have already been marked on input date, the result will remind user of these repeatedly marked members while still marking other members as usual.
 </div>
 
 <div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
@@ -392,11 +394,11 @@ unmark t/TELEGRAM…​ d/DATE
 
     ![result of command `unmark t/alexYeoh t/berniceYu d/2024-11-10`](images/UnmarkCommandResult.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
 
-* If the input date matches the current date, the checkbox for previously marked members will be automatically cleared upon successful attendance unmarking.
+- If the input date matches the current date, the checkbox for previously marked members will be automatically cleared upon successful attendance unmarking. <br>
 
-* If the input telegrams include members who have already been unmarked on input date, the result will remind user of these repeatedly unmarked members while still unmarking other members as usual.
+- If the input telegrams include members who have already been unmarked on input date, the result will remind user of these repeatedly unmarked members while still unmarking other members as usual.
 
 </div>
 
@@ -554,6 +556,7 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 ## Known issues
 
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. If you're using CCAConnect **across two days**, in order for the attendance status of members to be updated (e.g. _marked present at 11:59pm today, not present at 12:00am the next day_), you would have to **execute any other command** to trigger the re-render of the card to display the update attendance status.
 
 --------------------------------------------------------------------------------------------------------------------
 
