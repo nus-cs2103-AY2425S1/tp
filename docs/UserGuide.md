@@ -178,7 +178,7 @@ Format: `list`
 
 #### Listing all Weddings : `list-weddings` or `lw`
 
-You can see a list of all [Weddings](#adding-a-wedding--create-wedding-or-cw) in the WedLinker by entering the command `list-weddings`.
+You can see a list of all [Weddings](#adding-a-wedding-create-wedding-or-cw) in the WedLinker by entering the command `list-weddings`.
 
 Format: `list-weddings` or `lw`
 
@@ -186,7 +186,7 @@ Format: `list-weddings` or `lw`
 
 #### Listing all Tasks : `list-tasks` or `ltasks`
 
-You can see a list of all [Tasks](#creating-one-or-more-tasks--create-task-or-ctask) in the WedLinker by entering the command `list-tasks`.
+You can see a list of all [Tasks](#creating-one-or-more-tasks-create-task-or-ctask) in the WedLinker by entering the command `list-tasks`.
 
 Format: `list-tasks` or `ltasks`
 
@@ -194,7 +194,7 @@ Format: `list-tasks` or `ltasks`
 
 #### Listing all Tags : `list-tags` or `ltags`
 
-You can see a list of all [Tags](#creating-a-tag--create-tag-or-ctag) in the WedLinker by entering the command `list-tags`.
+You can see a list of all [Tags](#creating-a-tag-create-tag-or-ctag) in the WedLinker by entering the command `list-tags`.
 
 <br>
 
