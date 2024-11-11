@@ -101,7 +101,7 @@ When you first use AcademyAssist, some sample student contacts have been added t
 our features. Once you are ready to manage your tuition center's students, simply use the clear command
 to clear all existing contacts and reset the StudentID. 
 
-<div markdown="span" class="alert alert-primary">::exclamation: **Caution:**
+<div markdown="span" class="alert alert-primary">:exclamation: **Caution:**
 Please note that clear action is <span style="color:red;font-weight:bold">IRREVERSIBLE!</span> All student entries will be deleted permanently. 
 </div>
 
@@ -134,7 +134,7 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
     * **Exit**: Click on this to exit the application.
 2. **Command Box**: Enter your commands here to interact with the application.
 3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
-4**Student List**: Displays the list of students in the system.
+4. **Student List**: Displays the list of students in the system.
 
 ### Using AcademyAssist 
 To interact with AcademyAssist, type your commands into the command box and press Enter.
@@ -168,8 +168,8 @@ Where:
 - `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
 - `PARAMETERS` are the inputs required for the command to execute successfully.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
 Refer to the tables below or the [Features](#features) section for more details on each command.
 </div>
 
@@ -371,14 +371,16 @@ Examples:
 ![Edit Success Message](images/edit.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
-
+To more efficiently add a subject to a person, see the Add Subject Feature.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete a subject, you can use the edit command. e.g. student S00120 takes the subjects English and Math, but wishes to 
 drop the subject English, you can use the command 'edit S00120 s\Math'.
 
+:exclamation: But note that the subject will be replaced entirely by the new subject.
+For example, if the student is taking English and Math and you use the command 'edit S00120 s\Science', the student will
+only be taking Science.
 </div>
 
 ### Listing all students : `list`
