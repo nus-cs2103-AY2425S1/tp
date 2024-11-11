@@ -1108,6 +1108,12 @@ Team size: 5
 * **Sample Input:** User enters `2023-02-29` for an appointment date.
 * **Expected Output:** The result display box shows `Invalid date: 2023 is not a leap year, so February 29 is not valid.`
 
+3. **Modify date parsing to check for valid dates**
+* **Flaw:** Entering an invalid date such as January 32 returns an error message that says "Invalid date-time format," which is unclear since the format itself is correct.
+* **Enhancement:** Modify the date parsing logic to check for valid dates, such as ensuring that the day is within the range of the month.
+* **Sample Input:** User enters `2023-03-32` for an appointment date.
+* **Expected Output:** The result display box shows `Invalid date: The day is out of range for the month`.
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
