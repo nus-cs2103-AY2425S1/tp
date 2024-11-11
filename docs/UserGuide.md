@@ -275,9 +275,9 @@ Format: `import FILENAME`
 
 **Caution:**
 Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as ClubConnect expects the file to retain the exact format of the exported data.
+</box>
 
 Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
 * `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.<br>
   ![result for 'import contacts'](images/importContactsResult.png)
 
