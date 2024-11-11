@@ -330,7 +330,7 @@ This command allows you to edit an existing event on TalentHub!
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
-- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
+- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` (2147483647) e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
@@ -341,7 +341,7 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
+You can delete an event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
 </div>
   
 Examples:
@@ -389,6 +389,7 @@ Format: `view event KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched. e.g. `Oscar` will not match `Oscars`.
 - Events matching all keywords exactly will be returned.
   e.g. `Hiking` will not match `Park Hiking`
+- Only the first tag of every person in the Point of Contact list is displayed.
 
 Examples:
 
