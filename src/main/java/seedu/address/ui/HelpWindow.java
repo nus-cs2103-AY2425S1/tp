@@ -15,17 +15,41 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t17-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMAND_SUMMARY = """
+        Commands:
+            ▪ Viewing Help: help
+
+            ▪ Adding a Person: add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [i/INCOME] [age/AGE]...
+
+            ▪ Listing All Persons: list [s/SORT_FIELD] [r/]
+
+            ▪ Editing a Person: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG][i/INCOME] [age/AGE]...
+
+            ▪ Locating Persons: find KEYWORD [MORE_KEYWORDS]
+
+            ▪ Filter Persons List: filter [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [i/INCOME_GROUP] [age/AGE_CRITERIA]...
+
+            ▪ Deleting a Person: delete NAME or delete INDEX
+
+            ▪ Notes: View: notes view/NAME Add: notes add/NAME Edit: notes edit/NAME Delete: notes delete/NAME
+
+            ▪ Clearing All Entries: clear
+
+            ▪ Exiting the Program: exit
+        """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Label commandSummary;
 
     /**
      * Creates a new HelpWindow.
@@ -35,13 +59,15 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        commandSummary.setText(COMMAND_SUMMARY);
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
+    public HelpWindow(String savedTheme) {
         this(new Stage());
+        applyTheme(savedTheme);
     }
 
     /**
@@ -98,5 +124,21 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Applies the theme to the HelpWindow based on the given theme string.
+     *
+     * @param theme The theme to apply ("light" or "dark").
+     */
+    public void applyTheme(String theme) {
+        getRoot().getScene().getStylesheets().clear();
+        if ("dark".equals(theme)) {
+            getRoot().getScene().getStylesheets().add(getClass().getResource("/view/DarkHelpWindow.css")
+                    .toExternalForm());
+        } else {
+            getRoot().getScene().getStylesheets().add(getClass().getResource("/view/LightHelpWindow.css")
+                    .toExternalForm());
+        }
     }
 }

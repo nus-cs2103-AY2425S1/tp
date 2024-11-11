@@ -14,8 +14,10 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_CRITERIA_FORMAT = "Invalid criteria format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_NO_PERSONS_LISTED = "No exact matches found! Did you mean any of the below?";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -40,9 +42,15 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(person.getEmail().getValueForUi())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(person.getAddress().getValueForUi())
+                .append("; Income: ")
+                .append(person.getIncome().getValueForUi())
+                .append("; Age: ")
+                .append(person.getAge().getValueForUi())
+                .append("; Notes: ")
+                .append(person.getNotes().getValueForUi())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

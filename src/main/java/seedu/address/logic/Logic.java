@@ -47,4 +47,25 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Adds a command to the command history.
+     *
+     * @param command
+     */
+    void addCommandToHistory(String command);
+
+    /**
+     * Retrieves the previous command from the command history.
+     *
+     * @return The previous command as a string, or an empty string if none exists.
+     */
+    String getPreviousCommand();
+
+    /**
+     * Retrieves the next command from the command history.
+     *
+     * @return The next command as a string, or an empty string if none exists.
+     */
+    String getNextCommand();
 }

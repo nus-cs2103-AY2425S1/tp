@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "65+1234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
@@ -192,5 +193,134 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCriteria(null));
+    }
+
+    @Test
+    public void parseCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parseCriteria_multipleCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseCriteria("criteria1 criteria2 criteria3");
+        List<String> expectedCriteriaList = Arrays.asList("criteria1", "criteria2", "criteria3");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseCriteria("  criteria1  criteria2  ");
+        List<String> expectedCriteriaList = Arrays.asList("criteria1", "criteria2");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseAgeCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAgeCriteria(null));
+    }
+
+    @Test
+    public void parseAgeCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseAgeCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parseAgeCriteria_validCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseAgeCriteria("30 >20 <40");
+        List<String> expectedCriteriaList = Arrays.asList("30", ">20", "<40");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseAgeCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseAgeCriteria("  30  >20  <40  ");
+        List<String> expectedCriteriaList = Arrays.asList("30", ">20", "<40");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseAgeCriteria_invalidCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 >20 <40 abc"));
+    }
+
+    @Test
+    public void parseAgeCriteria_multipleInstancesOfSymbols_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 >>20 <<40"));
+    }
+
+    @Test
+    public void parseAgeCriteria_symbolsNotAtStart_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAgeCriteria("30 2>0 4<0"));
+    }
+
+    @Test
+    public void parsePhoneCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhoneCriteria(null));
+    }
+
+    @Test
+    public void parsePhoneCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parsePhoneCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parsePhoneCriteria_validCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parsePhoneCriteria("12345 +67890 123-456");
+        List<String> expectedCriteriaList = Arrays.asList("12345", "+67890", "123-456");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parsePhoneCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parsePhoneCriteria("  12345  +67890  ");
+        List<String> expectedCriteriaList = Arrays.asList("12345", "+67890");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parsePhoneCriteria_invalidCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhoneCriteria("12345 +67890 abc"));
+    }
+
+    @Test
+    public void parseIncomeCriteria_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseIncomeCriteria(null));
+    }
+
+    @Test
+    public void parseIncomeCriteria_emptyString_returnsEmptyList() throws Exception {
+        assertTrue(ParserUtil.parseIncomeCriteria("").isEmpty());
+    }
+
+    @Test
+    public void parseIncomeCriteria_validCriteria_returnsList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseIncomeCriteria("low mid high");
+        List<String> expectedCriteriaList = Arrays.asList("low", "mid", "high");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseIncomeCriteria_criteriaWithSpaces_returnsTrimmedList() throws Exception {
+        List<String> actualCriteriaList = ParserUtil.parseIncomeCriteria("  low  mid  ");
+        List<String> expectedCriteriaList = Arrays.asList("low", "mid");
+
+        assertEquals(expectedCriteriaList, actualCriteriaList);
+    }
+
+    @Test
+    public void parseIncomeCriteria_invalidCharacter_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIncomeCriteria("low mid abc"));
     }
 }

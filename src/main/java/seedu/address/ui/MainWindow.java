@@ -34,12 +34,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isLightMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem themeMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -63,9 +67,14 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
+        // Load the saved theme from GuiSettings
+        GuiSettings guiSettings = logic.getGuiSettings();
+        String savedTheme = guiSettings.getTheme();
+        isLightMode = savedTheme.equals("light");
+        helpWindow = new HelpWindow(isLightMode ? "light" : "dark");
+        applyTheme(isLightMode ? "light" : "dark");
 
-        helpWindow = new HelpWindow();
+        setAccelerators();
     }
 
     public Stage getPrimaryStage() {
@@ -74,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(themeMenuItem, KeyCombination.valueOf("F3"));
     }
 
     /**
@@ -110,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getGuiSettings().getTheme(), 0);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -119,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -157,11 +167,60 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isLightMode ? "light" : "dark");
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
+
+    /**
+     * Toggles between light and dark mode
+     */
+    @FXML
+    private void handleTheme() {
+        if (isLightMode) {
+            applyTheme("dark");
+            isLightMode = false;
+        } else {
+            applyTheme("light");
+            isLightMode = true;
+        }
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(),
+            isLightMode ? "light" : "dark", personListPanel.getScrollPosition());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY(), isLightMode ? "light" : "dark");
+
+        logic.setGuiSettings(guiSettings);
+    }
+
+    private void applyTheme(String theme) {
+        primaryStage.getScene().getStylesheets().clear();
+
+        if (theme.equals("light")) {
+            String lightTheme = getClass().getResource("/view/LightTheme.css").toExternalForm();
+            assert lightTheme != null : "LightTheme.css is not found";
+            primaryStage.getScene().getStylesheets().add(lightTheme);
+
+            String lightExtensions = getClass().getResource("/view/LightExtensions.css").toExternalForm();
+            assert lightExtensions != null : "LightExtensions.css is not found";
+            primaryStage.getScene().getStylesheets().add(lightExtensions);
+
+        } else if (theme.equals("dark")) {
+            String darkTheme = getClass().getResource("/view/DarkTheme.css").toExternalForm();
+            assert darkTheme != null : "DarkTheme.css is not found";
+            primaryStage.getScene().getStylesheets().add(darkTheme);
+
+            String darkExtensions = getClass().getResource("/view/DarkExtensions.css").toExternalForm();
+            assert darkExtensions != null : "DarkExtensions.css is not found";
+            primaryStage.getScene().getStylesheets().add(darkExtensions);
+        }
+        helpWindow.applyTheme(theme);
+    }
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
