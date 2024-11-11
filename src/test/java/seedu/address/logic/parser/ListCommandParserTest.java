@@ -31,10 +31,14 @@ public class ListCommandParserTest {
         assertParseSuccess(parser, WHITESPACE + PREFIX_LIST_ALL, ListCommand.ofAll());
         assertParseSuccess(parser, WHITESPACE + PREFIX_LIST_ALL + WHITESPACE,
                 ListCommand.ofAll());
+        assertParseSuccess(parser, WHITESPACE.repeat(5) + PREFIX_LIST_ALL,
+                ListCommand.ofAll());
 
         assertParseSuccess(parser, WHITESPACE + PREFIX_LIST_ARCHIVE,
                 ListCommand.ofArchive());
         assertParseSuccess(parser, WHITESPACE + PREFIX_LIST_ARCHIVE + WHITESPACE,
+                ListCommand.ofArchive());
+        assertParseSuccess(parser, WHITESPACE.repeat(5) + PREFIX_LIST_ARCHIVE,
                 ListCommand.ofArchive());
     }
 
@@ -51,5 +55,12 @@ public class ListCommandParserTest {
         assertParseFailure(parser,
                 WHITESPACE + PREFIX_LIST_ALL + WHITESPACE + PREFIX_LIST_ARCHIVE,
                 INVALID_COMMAND_FORMAT);
+    }
+
+    @Test
+    public void parse_withNonEmptyPreamble_throwsParseException() {
+        assertParseFailure(parser, "B", INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "/" + PREFIX_LIST_ALL, INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "BOB" + PREFIX_LIST_ARCHIVE, INVALID_COMMAND_FORMAT);
     }
 }
