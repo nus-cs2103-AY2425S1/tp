@@ -26,19 +26,18 @@
    1. [Appendix: Requirements](#appendix-requirements)
    2. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
    3. [Appendix: Efforts](#appendix-efforts)
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2425s1-cs2103t-t15-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -54,7 +53,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -86,13 +85,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -103,7 +102,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -147,7 +146,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -161,7 +160,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -179,6 +178,48 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Patient Feature
+
+#### Overview
+The `add` command allows users to add new patients. The command requires:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+Here is an activity diagram that summarises the key steps taken.
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
+
+#### 1. Parsing User Input
+The **`AddCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+The parser will check that the compulsory `Name`, `ID`, and `Ward` fields are present, and that there are no duplicate parameters included in the input string. The optional `Diagnosis` and `Medication` fields will be parsed as empty strings if they are not included in the input string.
+
+During this parsing process:
+- A `Person` instance is created to hold the relevant fields.
+
+#### 2. Executing the Command
+The **`AddCommand`** class performs the following when adding a patient:
+
+1. **Update Existing Patient Record**:  
+   The new `Person` instance will be added to the existing patient record in the **Model**.
+
+#### 3. Exceptions and warnings
+
+The **`AddCommand`** class enforces validation rules to ensure non-duplicates and potential incorrect input fields.
+
+- **Ensuring non-duplicates**:
+  Check that the new person added does not already exist in WardWatch, i.e. does not already exist a person with same `ID`.
+
+- **Warnings**
+  The command will also check for the presence of *special characters* in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
 
 ### Add Appointment Feature
 
@@ -218,7 +259,7 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
 The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `DD-MM-YYYY-HH-mm`.
+    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
     - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
 
 - **Conflict Checking**:
@@ -245,11 +286,11 @@ We can make it such that a `Person` object contains a `LocalDateTime` field call
 --------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/Documentation.html)
+* [Testing guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/Testing.html)
+* [Logging guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/Logging.html)
+* [Configuration guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/Configuration.html)
+* [DevOps guide](https://ay2425s1-cs2103t-t15-3.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix**
@@ -351,7 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an invalid format error message.
+    * 1a1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -367,13 +408,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The search field is invalid.
-    * 2a1. AddressBook shows an invalid field error message.
+    * 2a1. WardWatch shows an invalid field error message.
         
         Use case resumes at step 1.
 
 * 2b. There is no patient that matches the search
 
-    * 2b1. AddressBook shows that there is no matching patient.
+    * 2b1. WardWatch shows that there is no matching patient.
 
         Use case ends.
 
@@ -540,7 +581,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Patient Notes format is invalid 
 
-    * 1a1. WardWatch shows a invalid note description error message.
+    * 1a1. WardWatch shows an invalid note description error message.
 
       Use case resumes at step 1.
 
