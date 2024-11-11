@@ -15,8 +15,8 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).\
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 ---
 
@@ -32,74 +32,75 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the application.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components of the application and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the application launch and shut down.
 
-- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At application launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components, and the corresponding classes are in the `hallpointer.address.commons` package.
 
-- [**`UI`**](#ui-component): The UI of the App.
-- [**`Logic`**](#logic-component): The command executor.
-- [**`Model`**](#model-component): Holds the data of the App in memory.
-- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+The bulk of the application's work is done by the following four components:
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+- [**`UI`**](#ui-component): The user interface of the app.
+- [**`Logic`**](#logic-component): Handles parsing and executing the commands received through user input.
+- [**`Model`**](#model-component): Holds the data of the application in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to the hard disk.
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete_member 1`.
+The _Sequence Diagram_ below shows how the components interact with each other when the user issues the command `delete_member 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components (also shown in the diagram above) has these properties:
 
-- defines its _API_ in an `interface` with the same name as the Component.
-- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- It defines its _API_ (Application Programming Interface) in an `interface` with the same name as the Component.
+- It implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned above).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (to prevent outside components being coupled to the concrete implementation of a component), as illustrated in the partial class diagram below.
 
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 While the `Storage` component provides an abstraction layer for persistent data, it also exposes access to specific data structures, such as `ReadOnlyHallPointer` and `UserPrefs`. This design balances abstraction with the need for practical access to certain data classes critical to the application’s functionality.
 
 Ideally, the `Storage` interface would fully abstract storage details by exposing methods like `getHallPointerData()` or `getUserPreferences()`, thus hiding specifics like `ReadOnlyHallPointer`. However, for simplicity and to meet the application’s needs, `Storage` directly returns these specific data structures.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
 
-The sections below give more details of each component.
+
+The sections below give more details about each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/ui/Ui.java)
+As mentioned above, the **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/ui/Ui.java), and a partial but representative class diagram thereof is shown below.
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of various parts like `CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` and so on. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/resources/view/MainWindow.fxml).
 
-The `UI` component,
+The `UI` component has the following responsibilities:
 
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
-- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Member` object residing in the `Model`.
+- Passing user commands to the `Logic` component using its reference thereof, so that the commands can be parsed and executed.
+- Keeping the display up to date with `Model` data, by listening for changes in `Model` data to update the display when appropriate.
+
+It also depends on some classes in the `Model` component like the `Member` or `Session` objects residing in the `Model`, the details of which inform what sort of visual layout is appropriate.
 
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a partial and representative class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_member 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking an API call `execute("delete_member 1")` as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -111,11 +112,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `Parser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a member).<br>
+1. When `Logic` is called upon to execute a command, the API call is passed to an `Parser` object, which in turn creates a parser that matches the command (e.g. `DeleteMemberCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being created, which is then executed by the `LogicManager`.
+3. The `Command` communicates with the `Model` when it is executed (e.g. to delete a member).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is then returned by `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -123,40 +124,36 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `Parser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `HallPointerParser` class creates an `XYZCommandParser` (where `XYZCommandParser` is a placeholder for the specific command name that matches the API call e.g. `AddMemberCommandParser`). This newly created `Parser` then uses the other classes shown above to parse the user command, creating a `XYZCommand` object (e.g. `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible, making adding more commands and further testing easier.
 
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/model/Model.java)
 
+Here is a partial and representative class diagram of the `Model` component:
+
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
-The `Model` component,
+The `Model` component has the following responsibilites:
 
-- stores the hall pointer data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
-- stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- Storing the HallPointer data (i.e. any `Member` and `Session` objects) in memory for easy access.
+- Storing the currently 'selected' `Member` objects (e.g. the results of a search query) in a separate _filtered_ list, one which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed'. This allows the UI to observe the list and automatically update when the data in the list changes.
+- Storing a `UserPref` object that represents the user’s preferences, and exposing to the outside as a `ReadOnlyUserPref` object. 
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Hall Pointer`, which `Member` references. This allows `Hall Pointer` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+It does not depend on any of the other three components, as the `Model` represents data entities of the application and domain, and thus should make sense on its own without depending on other components.
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/storage/Storage.java)
 
+Here is a partial and representative class diagram of the `Storage` component:
+
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
+The `Storage` component has the responsibility of saving HallPointer data and user preferences data to disk in JSON format, and then parsing them back into the corresponding objects when the application is re-opened.
 
-- can save both hall pointer data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+It inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -164,101 +161,6 @@ The `Storage` component,
 Classes used by multiple components are in the `hallpointer.address.commons` package.
 
 ---
-
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-
-### [Proposed] Undo Command
-The proposed undo/redo mechanism is facilitated by `Versioned`. It extends `HallPointer` with an undo/redo history, stored internally as an `hallPointerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-- `VersionedHallPointer#commit()` — Saves the current hall pointer state in its history.
-- `VersionedHallPointer#undo()` — Restores the previous hall pointer state from its history.
-- `VersionedHallPointer#redo()` — Restores a previously undone hall pointer state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitHallPointer()`, `Model#undoHallPointer()` and `Model#redoHallPointer()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedHallPointer` will be initialized with the initial hall pointer state, and the `currentStatePointer` pointing to that single hall pointer state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer system. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer system after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-S
-Step 3. The user executes `add n/David …​` to add a new member. The `add` command also calls `Model#commitHallPointer()`, causing another modified hall pointer state to be saved into the `hallPointerStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitHallPointer()`, so the hall pointer state will not be saved into the `hallPointerStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer system to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial HallPointer state, then there are no previous HallPointer states to restore. The `undo` command uses `Model#canUndoHallPointer()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer system to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `hallPointerStateList.size() - 1`, pointing to the latest hall pointer state, then there are no undone HallPointer states to restore. The `redo` command uses `Model#canRedoHallPointer()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer system, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitHallPointer()`. Since the `currentStatePointer` is not pointing at the end of the `hallPointerStateList`, all hall pointer states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-- **Alternative 1 (current choice):** Saves the entire hall pointer.
-
-    - Pros: Easy to implement.
-    - Cons: May have performance issues in terms of memory usage.
-
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    - Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
-    - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -289,37 +191,36 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                     | So that I can …​                                                        | Remarks/Notes                                                                         |
-|----------|-----------------|------------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `* * *`  | First-time user | Explore the app using sample data                                | I can understand its features without manually entering data            |                                                                                       |
-| `* * *`  | First-time user | See a guide on how to use the app                                | I can better understand its functionalities                             |                                                                                       |
-| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the app                    |                                                                                       |
-| `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                    |                                                                                       |
-| `* * *`  | First-time user | Delete all data in the app                                       | I can start over when I make a mistake and remove sample data           |                                                                                       |
-| `* * *`  | User            | Add new Hall members to the app                                  | I can track points for new Hall members                                 |                                                                                       |
-| `* * *`  | User            | Delete ex-Hall members from the app                              | I can stop tracking points for ex-Hall members                          |                                                                                       |
-| `* * *`  | User            | Customize point allocation criteria                              | I can reward members based on different participation criteria          | E.g., different point weights for different activities                                |
-| `* * *`  | Frequent user   | Add or delete points for each Hall member                        | I can track the overall participation status in the CCA                 |                                                                                       |
-| `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                        |                                                                                       |
-| `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date                               |                                                                                       |
-| `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session               | Using QR codes? That would need some kind of integration though, would be complicated |
-| `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without navigating multiple screens    |                                                                                       |
-| `* *`    | Frequent user   | Export attendance data                                           | I can share participation reports with other stakeholders if needed     |                                                                                       |
-| `* *`    | User            | Bulk update attendance or points for multiple members            | I can efficiently manage large groups                                   |                                                                                       |
-| `* *`    | User            | Set up custom attendance categories (e.g., Excused, Late)        | I can categorize different types of attendance                          |                                                                                       |
-| `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                      | Charts or graphs to visualize data                                                    |
-| `*`      | User            | Sort members by name                                             | I can locate a member easily                                            |                                                                                       |
-| `*`      | Frequent user   | Automatically save changes without manual intervention           | I don’t lose progress if I forget to click save                         | Auto-save feature                                                                     |
-| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the app more efficiently without relying on the GUI |                                                                                       |
-| `*`      | Expert user     | Automate repetitive tasks, such as attendance updates            | I can save time by reducing manual input                                |                                                                                       |
-| `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                  |                                                                                       |
-| `*`      | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                       |                                                                                       |
+| Priority | As a …​         | I want to …​                                                     | So that I can …​                                                                                 | Remarks/Notes                                          |
+|----------|-----------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | First-time user | Explore the application using sample data                        | I can understand its features without manually entering data                                     |                                                        |
+| `* * *`  | First-time user | See a guide on how to use the application                        | I can better understand its functionalities                                                      |                                                        |
+| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the application                                     |                                                        |
+| `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                                             |                                                        |
+| `* * *`  | First-time user | Delete all data in the application                               | I can start over when I make a mistake and remove sample data                                    |                                                        |
+| `* * *`  | User            | Add new Hall members to the application                          | I can track points for new Hall members                                                          |                                                        |
+| `* * *`  | User            | Delete ex-Hall members from the application                      | I can stop tracking points for ex-Hall members                                                   |                                                        |
+| `* * *`  | User            | Customize point allocation criteria between sessions             | I can reward members based on different participation weightage criteria                         | E.g., different point weights for different activities |
+| `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                                                 |                                                        |
+| `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date and fix any mistakes                                   |                                                        |
+| `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session                                        | Perhaps by QR code generation and integration          |
+| `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without having to navigate through multiple screens or commands |                                                        |
+| `* *`    | Frequent user   | Export attendance data                                           | I can share participation reports with other stakeholders if needed                              |                                                        |
+| `* *`    | User            | Bulk update attendance or points for multiple members            | I can efficiently manage large groups                                                            |                                                        |
+| `* *`    | User            | Set up custom attendance categories (e.g. Excused, Late)         | I can categorize different types of attendance                                                   |                                                        |
+| `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                                               | Through charts or graphs to visualize data             |
+| `*`      | User            | Sort members by name                                             | I can locate a member easily                                                                     |                                                        |
+| `*`      | Frequent user   | Automatically save changes as changes are made                   | I don’t lose progress if I forget to click save                                                  | Auto-save feature                                      |
+| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the application more efficiently than with just a GUI                        |                                                        |
+                                                      |
+| `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                                           |                                                        |
+| `*`      | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                                                |                                                        |
 
 ### Use cases
 
 #### Use Case: UC01 - Add Member to CCA
 
-**System**: Hall Pointer App
+**System**: Hall Pointer Application
 
 **Actor**: CCA Leader
 
@@ -339,12 +240,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-    - 2a1. Hall Pointer requests for correct data with an error message indicating the erroneous field.
+    - 2a1. Hall Pointer displays an error message with relevant details.
     - 2a2. CCA Leader re-enters corrected data.
     - Steps 2a1-2a2 are repeated until the input is valid.
     - Use case resumes from step 3.
 
-- **2b. Duplicate member is detected**.
+- **2b. The member to be added is already present in the system**.
     - 2b1. Hall Pointer displays an error message: `This member already exists in the CCA system.`
         - Use case ends.
 
@@ -353,7 +254,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use Case: UC02 - Add Session to Hall Pointer
 
-**System**: Hall Pointer App
+**System**: Hall Pointer Application
 
 **Actor**: CCA Leader
 
@@ -373,12 +274,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-    - 2a1. Hall Pointer requests for correct data with an error message indicating the invalid field.
+    - 2a1. Hall Pointer displays an error message with relevant details.
     - 2a2. CCA Leader re-enters corrected data.
     - Steps 2a1-2a2 are repeated until all data is correct.
     - Use case resumes from step 3.
 
-- **2b. Duplicate session is detected**.
+- **2b. The session to be added is already present in at least one of the relevant members**.
     - 2b1. Hall Pointer displays an error message: `Error: Session already exists.`
         - Use case ends.
 
@@ -387,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use Case: UC03 - Update Member Information
 
-**System**: Hall Pointer App
+**System**: Hall Pointer Application
 
 **Actor**: CCA Leader
 
@@ -416,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use Case: UC04 - View All Members
 
-**System**: Hall Pointer App
+**System**: Hall Pointer Application
 
 **Actor**: CCA Leader
 
@@ -430,22 +331,15 @@ None.
 2. Hall Pointer retrieves and displays all members in the GUI.
     - Use case ends.
 
-**Extensions**:
-
-- **2a. No members found**.
-    - 2a1. Hall Pointer displays an error message:
-        - `Error: No members found.`
-        - Use case ends.
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 1000 members without a noticeable sluggishness in performance for typical usage.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The application should respond to user commands within 2 seconds under normal operating conditions.
-5. The user interface should be intuitive enough for a first-time user to understand basic functionalities without external help.
+5. The user interface should be intuitive enough for a first-time user to understand basic functionalities without external help, after loading the User Guide.
 6. While primarily designed for one user, the application should be able to handle up to 1000 members efficiently, with room for future enhancements.
-7. The application should have a success rate of at least 95% for command executions, ensuring that most user actions are completed successfully without errors.
+7. The application should have a success rate of at least 95% for valid command executions, ensuring that most user actions are completed successfully without errors.
 8. Code should be organized and documented to facilitate future updates or modifications.
 9. The application should run seamlessly across different operating systems without requiring extensive configuration.
 
@@ -455,25 +349,25 @@ None.
 ### **HallPointer Developer Glossary**
 
 1. **Hall Points:**\
-    Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
+   Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 2. **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
+   A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
 3. **Session:**\
-    A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
+   A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
 4. **Tag:**\
-    Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+   Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
 5. **Command:**\
-    A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
+   A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
 6. **Model Component:**\
-    Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
+   Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
 
 7. **Storage Component:**\
-    Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
+   Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
 
 8. **Logic Component:**\
    Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
@@ -496,7 +390,7 @@ None.
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <box type="info" seamless>
 
@@ -517,7 +411,7 @@ testers are expected to do more _exploratory_ testing.
 2. Saving Window Preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-    2. Re-launch the app by double-clicking the `.jar` file.<br>
+    2. Re-launch the application by double-clicking the `.jar` file.<br>
        **Expected:** The most recent window size and location is retained.
 
 
@@ -570,14 +464,14 @@ testers are expected to do more _exploratory_ testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Open the hallpointer.json file located in the data directory (this file is created after the app is first launched). Modify it by deleting the name of the first entry.
+    1. Open the hallpointer.json file located in the data directory (this file is created after the application is first launched). Modify it by deleting the name of the first entry.
 
-        **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
+       **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
 2. Confirming data persistence
 
     1. Add or modify member/session data.
-    2. Exit the app and re-launch it.<br>
+    2. Exit the application and re-launch it.<br>
        **Expected:** All previous data should be saved and displayed upon restart.
 
 ### Other Features
@@ -613,7 +507,7 @@ Team Size: 5
 
 
 2. **Planned Enhancement: Partial Search for Session Names**
-   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`. 
+   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`.
 
    **Example Requirement**:
    > The `find_sessions_partial` command should allow partial name searches so users can input only the first part of the session name to retrieve all matching sessions.
@@ -661,7 +555,7 @@ Team Size: 5
    > - Example: `filter_members_by_tag Team A` would display only members tagged as "Team A," while `sort_members_by_tag` would group all members with similar tags together.
 
    By adding these features, users can better manage and view group associations at scale.
- 
+
 
 7. **Planned Enhancement: Allow Manual Point Adjustments**
    Currently, points can only be awarded or adjusted through sessions. This setup can be restrictive for users who need to manage points directly, without creating a session.
