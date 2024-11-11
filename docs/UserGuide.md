@@ -42,17 +42,17 @@ By following these sections, you can quickly find the information you need and m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your computer.
    * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line).
-   * If you do not have Java `17` or above installed in your Computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
+   * If you do not have Java `17` or above installed in your computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
 2. Download the latest release of the `medconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
+4. *Windows:* Open the home folder and right-click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
 <img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows"><br><br>
-*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
+*MacOS:* Right-click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
    <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
 
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -212,7 +212,7 @@ ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail
 
 **Valid inputs**
 * Name, Email, Relationship: Refer to the [glossary](#glossary).
-* Phone: 
+* Phone:
   * Should only contain numbers, and it should be at least 3 digits long.
   * Should not be the phone number of another patient in the patient list.
 * Address: Can be any value, but it cannot be blank.
@@ -291,7 +291,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/ECINDEX] [ecnam
   * If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.
 
 **Examples:**
-*  `edit 1 p/91234567 e/johndoe@example.com`<br> 
+*  `edit 1 p/91234567 e/johndoe@example.com`<br>
 Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 
 *  `edit 2 n/Betsy Crower t/`<br>
@@ -403,7 +403,7 @@ Format: `archive [DESCRIPTION]`
 
 **Examples**
 * `archive` Archives the current address book data to a timestamped data file.
-* `archive "before major update"`<br>Archives the current address book data to a timestamped data file with the description "before major update".
+* `archive before major update`<br>Archives the current address book data to a timestamped data file with the description "before major update".
 
 [↑ Back to top](#table-of-contents)
 
@@ -551,7 +551,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **`dname/` DOCTOR_NAME**                   | Refer to `name/` below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                      |
 | **`ecname/` EMERGENCY_CONTACT_NAME**       | Refer to `name/` below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                      |
 | **`ecrs/` EMERGENCY_CONTACT_RELATIONSHIP** | This parameter accepts the following valid inputs:<br/>`Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse, Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter`. It is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                           | `Spouse` and `GRANDcHILD` are examples of relationships you can provide in an [`add`](#adding-a-person-add), [`edit`](#editing-a-person--edit) or [`addec`](#adding-an-emergency-contact--addec) command `ecrs/` parameter.                                                                                                                                          |
-| **`email/` EMAIL<br/>**                    | Emails should be of the format local-part@domain and adhere to the following constraints:<br/>1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)). The local-part may not start or end with any special characters.<br/>2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `johndoe@gmail.com` and `janedoe@hotmail.com` are examples of emails you can provide in an [`add`](#adding-a-person-add), [`edit`](#editing-a-person--edit) or [`addec`](#adding-an-emergency-contact--addec) command `email/` parameter.                                                                                                                            |
+| **`email/` EMAIL<br/>**                    | Emails should be of the format local-part@domain and adhere to the following constraints:<br/>**1.** The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)). The local-part may not start or end with any special characters or have more than 1 special character in a row.<br/>**2.** This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | `johndoe@gmail.com` and `janedoe@hotmail.com` are examples of emails you can provide in an [`add`](#adding-a-person-add), [`edit`](#editing-a-person--edit) or [`addec`](#adding-an-emergency-contact--addec) command `email/` parameter.                                                                                                                            |
 | **`name/` NAME**                           | This parameter accepts alphanumeric characters, the words `s/o`, `d/o`, and the following characters: `-`, `.`, `(`, `)`, `@`, `/`, `'`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Connor T'Challa`, `Vika d/o Rajesh`, `Amir Fakri @ Ahmad` and `Buddy (Charles) Baxter` are examples of names you can provide in an [`add`](#adding-a-person-add), [`edit`](#editing-a-person--edit) or [`addec`](#adding-an-emergency-contact--addec) command `ecname/` paramter.<br/>`Buddy/Charles` is an example of an invalid input to the `ecname/` parameter. |
 
 [↑ Back to top](#table-of-contents)
