@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.PersonInEventPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EventBuilder;
 
@@ -101,6 +102,23 @@ public class AddPersonToEventCommandTest {
         vendors.add(Index.fromZeroBased(2));
         sponsors.add(Index.fromZeroBased(1));
 
+        AddPersonToEventCommand addPersonToEventCommand = new
+                AddPersonToEventCommand(Index.fromZeroBased(2),
+                attendees, volunteers, vendors, sponsors);
+        Event expectedEvent = TEST_EVENT;
+        addPersonToEventCommand.execute(this.model, this.eventManager);
+        Event actualEvent = this.eventManager.getEventList().get(2);
+        assertEquals(expectedEvent, actualEvent);
+    }
+
+    @Test
+    public void execute_correctInputsAndInEventView_contactsAddedToEventSuccessfully() throws CommandException {
+        attendees.add(Index.fromZeroBased(0));
+        volunteers.add(Index.fromZeroBased(3));
+        vendors.add(Index.fromZeroBased(2));
+        sponsors.add(Index.fromZeroBased(1));
+
+        this.model.updateFilteredPersonList(new PersonInEventPredicate(TEST_EVENT));
         AddPersonToEventCommand addPersonToEventCommand = new
                 AddPersonToEventCommand(Index.fromZeroBased(2),
                 attendees, volunteers, vendors, sponsors);
