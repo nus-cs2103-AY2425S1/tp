@@ -16,19 +16,19 @@ participant "m:Model" as Model MODEL_COLOR
 participant "p:TagsContainsKeywordsPredicate" as TagsContainsKeywordsPredicate MODEL_COLOR
 end box
 
-[-> LogicManager : execute("filter v vg")
+[-> LogicManager : execute("filter Vegan Vegetarian")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("filter v vg")
+LogicManager -> AddressBookParser : parseCommand("filter Vegan Vegetarian")
 activate AddressBookParser
 
 create FilterCommandParser
-AddressBookParser -> FilterCommandParser : parse("filter v vg")
+AddressBookParser -> FilterCommandParser : parse("filter Vegan Vegetarian")
 activate FilterCommandParser
 
 
 create TagsContainsKeywordsPredicate
-FilterCommandParser -> TagsContainsKeywordsPredicate : new TagsContainsKeywordsPredicate(["v", "vg"])
+FilterCommandParser -> TagsContainsKeywordsPredicate : new TagsContainsKeywordsPredicate(["Vegan", "Vegetarian"])
 activate TagsContainsKeywordsPredicate
 
 TagsContainsKeywordsPredicate --> FilterCommandParser : p

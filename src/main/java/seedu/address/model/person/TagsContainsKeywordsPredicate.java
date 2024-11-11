@@ -24,15 +24,7 @@ public class TagsContainsKeywordsPredicate implements Predicate<Person> {
      * @param keywords A list of keywords to be processed and matched.
      */
     public TagsContainsKeywordsPredicate(List<String> keywords) {
-        List<String> mappedKeywords = new ArrayList<>();
-        for (String item : keywords) {
-            String mappedItem = Tag.getShortCutMappings().getOrDefault(item, item);
-            mappedKeywords.add(item);
-            if (!item.equals(mappedItem)) {
-                mappedKeywords.add(mappedItem);
-            }
-        }
-        this.keywords = mappedKeywords;
+        this.keywords = keywords;
     }
 
     @Override

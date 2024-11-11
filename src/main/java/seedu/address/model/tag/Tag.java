@@ -18,8 +18,8 @@ import seedu.address.model.shortcut.ShortCut;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and within 30 characters";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,28}[\\p{Alnum}]?$";
     private static final Logger logger = LogsCenter.getLogger(Tag.class);
     private static HashMap<String, String> shortCutMap = new HashMap<>();
     public final String tagName;
