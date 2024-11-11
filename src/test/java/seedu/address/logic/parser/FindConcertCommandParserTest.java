@@ -79,7 +79,6 @@ public class FindConcertCommandParserTest {
                 expectedFindCommand);
 
         // multiple whitespaces between keywords
-        String userInput2 = PREAMBLE_WHITESPACE + " " + PREFIX_NAME + " \n Alice \n \t Bob  \t";
         assertParseSuccess(parser,
                 userInput1,
                 expectedFindCommand);
