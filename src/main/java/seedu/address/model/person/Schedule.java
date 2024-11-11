@@ -19,7 +19,7 @@ public class Schedule {
     public static final String SCHEDULE_NAME_CONSTRAINTS =
             "Schedule name field must be strictly alphanumeric.";
     public static final String DATE_CONSTRAINTS =
-            "Date field must be given in the format yyyy-MM-dd.";
+            "Date field must be given in the format yyyy-MM-dd and be a valid date.";
     public static final String TIME_CONSTRAINTS =
             "Time field must be given in the format HH:mm.";
 
