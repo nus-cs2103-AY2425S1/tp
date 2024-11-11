@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -68,6 +69,26 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        setupPersonCardText();
+        setupCardColours(displayedIndex);
+
+        emergencyContactListPanel = new EmergencyContactListPanel(
+                FXCollections.observableArrayList(person.getEmergencyContacts()));
+
+        ListView<EmergencyContact> emergencyContactListView = emergencyContactListPanel.getEmergencyContactListView();
+        ChangeListener<EmergencyContact> emergencyContactListener = emergencyContactSelectionListener();
+        MultipleSelectionModel<EmergencyContact> emergencyContactSelectionModel =
+                emergencyContactListView.getSelectionModel();
+        emergencyContactSelectionModel.selectedItemProperty().addListener(emergencyContactListener);
+
+        emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
+        setupEmergencyContactListPanelPlaceholder();
+    }
+
+    /**
+     * Populates the {@code PersonCard} with {@code Person} details.
+     */
+    private void setupPersonCardText() {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -78,27 +99,38 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
 
+    /**
+     * Sets the background colours of Doctor and Emergency Contact boxes to colours that alternate with
+     * {@code PersonCard} background colours.
+     */
+    private void setupCardColours(int displayedIndex) {
         // Follows syntax of personCard, odd here refers to a zero-indexed list
         if (displayedIndex % 2 == 0) {
-            doctorBox.getStyleClass().add("emergencyContactListView-odd");
-            emergencyContactsBox.getStyleClass().add("emergencyContactListView-odd");
+            doctorBox.getStyleClass().add("alternateColourListView-odd");
+            emergencyContactsBox.getStyleClass().add("alternateColourListView-odd");
         } else {
-            doctorBox.getStyleClass().add("emergencyContactListView-even");
-            emergencyContactsBox.getStyleClass().add("emergencyContactListView-even");
+            doctorBox.getStyleClass().add("alternateColourListView-even");
+            emergencyContactsBox.getStyleClass().add("alternateColourListView-even");
         }
+    }
 
+    /**
+     * Sets the height constraints of the {@code emergencyContactListPanelPlaceholder} with respect to the number of
+     * emergency contacts within the panel.
+     */
+    private void setupEmergencyContactListPanelPlaceholder() {
         int numEmergencyContacts = person.getEmergencyContacts().size();
-        emergencyContactListPanel = new EmergencyContactListPanel(
-                FXCollections.observableArrayList(person.getEmergencyContacts()));
-        emergencyContactListPanel.getEmergencyContactListView().getSelectionModel()
-                .selectedItemProperty().addListener(emergencyContactSelectionListener());
-        emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
         emergencyContactListPanelPlaceholder.setPrefHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT
                 * numEmergencyContacts);
         emergencyContactListPanelPlaceholder.setMaxHeight(EMERGENCY_CONTACT_LIST_DEFAULT_CARD_HEIGHT * 2);
     }
 
+    /**
+     * Changes the height of the {@code emergencyContactListPanelPlaceholder} when the emergency contacts are selected,
+     * to accommodate increased {@code emergencyContactCard} heights, as a border is applied upon selection.
+     */
     private ChangeListener<EmergencyContact> emergencyContactSelectionListener() {
         return (ObservableValue<? extends EmergencyContact> observableValue,
                 EmergencyContact previousSelection,

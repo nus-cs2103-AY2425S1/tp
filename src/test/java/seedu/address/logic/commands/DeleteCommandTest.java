@@ -145,6 +145,19 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_deleteLastEmergencyContact_failure() {
+        Person person = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assert person.getEmergencyContacts().size() < 2;
+
+        DeleteCommandDescriptor deleteCommandDescriptor = new DeleteCommandDescriptor();
+        deleteCommandDescriptor.setEmergencyContactIndex(Index.fromOneBased(1));
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON,
+                deleteCommandDescriptor);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, new DeleteCommandDescriptor());
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, new DeleteCommandDescriptor());
