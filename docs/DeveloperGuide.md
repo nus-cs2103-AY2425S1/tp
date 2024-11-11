@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -161,15 +161,13 @@ This section describes some noteworthy details on how certain features are imple
 ![[Event Sequence Diagram](images/AddEventCommandSequenceDiagram.png)](images/AddEventCommandSequenceDiagram.png)
 
 Above shows the sequence diagram when a user wants to add an event.
-1. The user types the command `new [EVENT NAME]`
+1. The user types the command `new EVENT_NAME`
 2. Logic Manager receives the text input and passes it to addressBookParser
-3. AddressBookParser creates a new NewEventCommandParser and calls its .parse method
-4. NewEventCommandParser creates a new AddEventCommand object
-5. AddEventCommand object calls ParserUtil.parseEvent method to parse the event name
-6. ParserUtil creates and returns a new Event Object, which is then passed back to Logic Manager
-7. Logic Manager calls the execute method of the AddEventCommand object
-8. AddEventCommand object calls the addEvent method of eventManager
-9. AddEventCommand object returns a CommandResult object to Logic Manager
+3. AddressBookParser creates a new NewEventCommandParser and calls its parse method
+4. NewEventCommandParser creates a new AddEventCommand object, which is then passed back to Logic Manager
+5. Logic Manager calls the execute method of the AddEventCommand object
+6. AddEventCommand object calls the addEvent method of eventManager
+7. AddEventCommand object returns a CommandResult object to Logic Manager
 
 ### \[Proposed\] Undo/redo feature
 
