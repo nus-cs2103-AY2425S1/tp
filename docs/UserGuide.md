@@ -37,7 +37,7 @@ This comprehensive guide will walk you through the various features of Tuteez. L
 
 3. [GUI Overview](#gui-overview)<br>
 
-4. [Beginner's Tutorial](#beginners-tutorial)<br>
+4. [Beginner's Tutorial](#beginner-s-tutorial)<br>
     4.1 [Before You Begin](#before-you-begin)<br>
     4.2 [Exploring the Application](#exploring-the-application)<br>
     4.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)<br>
