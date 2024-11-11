@@ -8,8 +8,16 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+This project is based on the [AddressBook-Level3 Project](https://se-education.org/) originally created by the 
+SE-EDU initiative. We extend our thanks to the developers of AB3 for their foundational work.
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+We also extend our gratitude to the creators of the following resources and libraries that were essential in developing Health Connect:
+
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io/)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,12 +56,12 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete n/Jason p/88781234`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="650" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -92,10 +100,10 @@ These diagrams and examples will clarify how `Logic` coordinates with other clas
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -119,14 +127,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">
+<div class="alert alert-info">
 <strong>Note:</strong> An alternative (arguably, a more OOP) model is given below. It includes a <code>Allergy</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to store only one <code>Allergy</code> object per unique tag, rather than each <code>Person</code> needing their own <code>Allergy</code> objects.<br>
 </div>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -204,10 +209,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 The Date feature allows users to add, edit, and view appointment dates for each person in the address book, helping doctors maintain an organized schedule without conflicts.
 
 #### Feature Architecture
-1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates are in the correct format (`d/M/yyyy`) before passing them to `DateCommand`.
+1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates are in the correct format (`d/M/yyyy HHmm`) before passing them to `DateCommand`.
     - Benefits and Challenges similar to Add Feature
 
-2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy` with no spaces).
+2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy HHmm`).
     - **Benefit**: Provides users with immediate feedback on invalid formats, helping maintain data consistency.
     - **Challenge**: Requires thorough validation logic to prevent incorrect or improperly formatted dates from being added.
 
@@ -248,46 +253,40 @@ Team Size: 5
 
 1. **Error Validation for CliSyntax:**
    Making sure the system checks if the user enters any unexpected or incorrect symbols. If the user does, the system will let them know what the correct options are, helping avoid confusion and mistakes.
-2. [Validation for Address: Address should be able to have "/n" or other prefixes]
-3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
+
+
+2. **Allow address to have "/n" or other prefixes:**
+   Currently, address validation does not allow certain characters, preventing users from adding addresses with newline characters ("/n") or special prefixes. Enhancing this to allow specific characters, like "/n" for multi-line addresses, would give users more flexibility to enter detailed or complex addresses.
+
+
+3. **Allowing "d/o" in the name field:** Currently, the system does not permit the use of "d/o" in the name field as "d/" is reserved for the date command. 
+This enhancement would allow users to input "d/o" in names without triggering conflicts, offering more flexibility and ensuring that date-related commands are unaffected by name entries.
+
+
 4. **Add, Delete, or Replace Allergy Functionality:**
    Allow users to specify whether they want to add, delete, or replace an allergy in the list. This enhancement would give users more control over their allergy list as currently the system only replaces allergies.
-5. [Create his own tags and delete tags]
-6. [insert date end time]
+
+
+5. **Adding a customizable tags feature:** Currently, the app only supports the default tags `High Risk`, `Medium Risk` and `Low Risk`.
+   This enhancement allows doctors to create, delete, and edit tags, providing flexibility to personalize patient categorization.
+   It enables doctors to define tags that align with their specific needs, improving patient management and enhancing the overall efficiency of the system.
+
+6. **Adding an end time to the Date feature:** Currently, the app allows only the start time and date, preventing duplicate `DATE_TIME` entries. Adding an end time enables users to 
+define precise appointment durations, helping to prevent overlapping and double-booked slots. It improves scheduling clarity, allowing for better time management and conflict prevention, especially 
+for managing busy schedules.
+
+
 7. **Warn user that date entered is in the past:** 
 Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
 However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
+
+
 8. **Specific error message about date format:**
    Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
    In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
 9. **Accept other phone formats:**
 Currently, the app only accepts phone numbers that are 8 digits long and start with 3, 6, 8 or 9, according to Singapore's standard format for phone numbers. However, we understand that some users may key in their NOK's number, which may not be a Singapore number, as they might be based overseas. In the future, more phone formats can be added, such as including area codes and accepting more digits.
-
-
-## **Implementation**
-This section describes some noteworthy details on how certain features are implemented.
-
-
-
-
-
-### Date Feature
-
-The date feature allows users to add, edit, and view dates for each person in the address book.
-
-#### Implementation
-
-The `Date` class represents a date.
-
-#### Design considerations:
-
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -569,7 +568,7 @@ Preconditions: AddressBook has correct view, including client to edit
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Patient Record**: A collection of patient's personal and medical information. This includes, but is not limited to, name, contact number, email, address, allergies, injuries sustained.
 * **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, date and patient.
 * **Schedule**: A list of all patients' appointments, displaying the date and time and location of the appointments.
@@ -715,7 +714,7 @@ Most of our effort was dedicated to adding essential features, and debugging cas
 
 **Reuse and Adaptation:**
 
-Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. However, some commands required extensive changes due to the duplicate persons logic.
+Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. However, some commands required extensive changes due to the duplicate person's logic.
 
 **Achievements:**
 

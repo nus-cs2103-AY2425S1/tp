@@ -261,10 +261,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 [Parameter Constraints](#parameter-constraints): `NAME`
 
 Additional Details:
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* At least 1 keyword must be provided.
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -286,6 +287,7 @@ Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 
 Additional Details:
 * The search is case-sensitive.
+* At least 1 `PREFIX/FEATURE_NAME` must provided.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
 * You can filter by **tag, email, address, phone number and allergies.** Allergy is the only feature that allows filter by multiple parameters.
 * Only full words will be matched e.g. `99999999` will not match `999`
@@ -294,6 +296,7 @@ Additional Details:
 For example:
 filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
 filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
+* Specifying any parameters beyond those required will result in an error.
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
@@ -442,6 +445,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
+
 | Action   | Format & Examples                                                                   | Examples                                                                                  |
 |----------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | Add      | `add n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`                    | `add n/James Ho p/98765432 e/jamesho@example.com a/123 Clementi Rd t/High Risk m/peanuts` |
