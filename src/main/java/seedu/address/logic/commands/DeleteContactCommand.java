@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 public class DeleteContactCommand extends DeleteCommand<Person> {
     public static final String ENTITY_WORD = "contact";
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Contact deleted: Name: %1$s; "
-            + "Email: %2$s; Phone: %3$s.";
+            + "Phone: %2$s; Email: %3$s.";
 
     public DeleteContactCommand(Index targetIndex) {
         super(targetIndex);

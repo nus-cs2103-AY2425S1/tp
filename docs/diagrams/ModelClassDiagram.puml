@@ -27,6 +27,8 @@ Class JobSalary
 Class JobDescription
 Class Tag
 
+note top of Tag: For implementing\n job's requirement
+
 Class UniqueCompanyList
 Class Company
 Class BillingDate
@@ -55,7 +57,7 @@ Person *--> Email
 Person *--> Role
 Person *--> "*" Skill
 
-Person -[hidden]up--> I
+Person -[hidden]up-> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone

@@ -23,7 +23,7 @@ public class AddContactCommand extends AddCommand<Person> {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROLE + "ROLE "
-            + "[" + PREFIX_SKILL + "SKILLS]... (Optional)\n"
+            + "[" + PREFIX_SKILL + "SKILL]... (Optional)\n"
             + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -31,7 +31,7 @@ public class AddContactCommand extends AddCommand<Person> {
             + PREFIX_ROLE + "copywriter";
 
     public static final String MESSAGE_SUCCESS = "Candidate added: Name: %1$s; "
-            + "Email: %2$s; Phone: %3$s; Applying for: %4$s.";
+            + "Phone: %2$s; Email: %3$s; Applying for: %4$s.";
 
     public static final String MESSAGE_DUPLICATE_CONTACT = "A candidate with this phone number "
             + "or email already exists.";
