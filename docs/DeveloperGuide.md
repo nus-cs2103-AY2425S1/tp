@@ -890,6 +890,48 @@ testers are expected to do more *exploratory* testing.
     3. If the data is beyond repair, delete the entire `docs` folder and the `AddressBook.json` file to start afresh.
 
 
+---
+
+## Appendix: Efforts
+
+WedLinker is a project adapted from the original [AddressBook3 (AB3)](https://se-education.org/addressbook-level3/) customized specifically for wedding planners by our team of five.
+Throughout this project, we had split the work evenly and adhering to the principles and concepts that were taught by the
+CS2103T teaching team, including:
+- [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
+- [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-feature-branch-flow)
+- [UML Class Diagrams](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/uml.html#class-diagrams)
+- [Testing](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/testing.html)
+
+As we envisioned an application for wedding planners, we concocted multiple features that wedding planners we interviewed
+mentioned they wanted. These are features we have implemented to the WedLinker you see today.
+
+#### Difficulty Level:
+Adapting from the original AB3 to the WedLinker has been difficult as we opted for a more daring approach to implement 
+many features that wedding planners wanted. As with any software, the more features implemented, the more bugs there are,
+and WedLinker was no exception to it. 
+
+As a result, the difficulty of developing WedLinker came not only from the
+myriad of features we had to implement (and alter from the original AB3), but to also ensure the minimal number of
+bugs created.
+
+#### Challenges faced:
+Undoubtedly with any projects, there will be challenges faced. 
+With the number of features that we wanted to implement, we had used to [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
+that enabled us to work on numerous features, debugs, or minor adjustments concurrently. However, with the Forking Workflow came some drawbacks that we personally experienced, such as
+the extra overhead of sending everything through forks, as well as the increased possibility of merge conflicts.
+
+#### Effort Required:
+As we had chosen to implement numerous features and inevitably introduced bugs per iteration, the effort required to
+resolve these issues were higher than if we had opted to be safe and tweak AB3 just a little.
+
+#### Achievements:
+As of 12 Nov 2024, WedLinker has:
+
+- [Most LoC (lines of code) in AY2425 S1 CS2103T](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=AY2425S1-CS2103T-F15-4%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20) at 21284
+- **20** new commands as compared to the original AB3
+
+---
+
 ## Appendix: Planned Enhancements
 
 Team size: 5
