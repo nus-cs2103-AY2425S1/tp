@@ -288,6 +288,20 @@ Format:
 exit
 ```
 
+### Error Messages
+
+If the format of the command is invalid, DDD will display an error message:
+
+![Invalid Command Demo](images/invalidCommandDemo.png)
+
+If a parameter within the command is invalid, DDD will display an error message specific to that parameter:
+
+![Invalid Parameter Demo](images/invalidParameterDemo.png)
+
+<box type="warning" header="**Caution:**">
+  If the format of the command is invalid, parameter-specific error messages will not show up. If there are multiple invalid parameters in the command, only <strong>1</strong> parameter-specific error message will be displayed.
+</box>
+
 ### Editing the Data File
 
 DDD data are saved automatically as a JSON file `HOME_FOLDER/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
