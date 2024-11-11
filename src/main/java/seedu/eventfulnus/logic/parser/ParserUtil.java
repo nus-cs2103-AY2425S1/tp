@@ -3,6 +3,7 @@ package seedu.eventfulnus.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -313,8 +314,8 @@ public class ParserUtil {
         String trimmedDateTime = dateTime.trim();
         try {
             return LocalDateTime.parse(trimmedDateTime, Event.DATE_TIME_PARSE_FORMATTER);
-        } catch (Exception e) {
-            throw new ParseException(Event.MESSAGE_CONSTRAINTS, e);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
         }
     }
 
