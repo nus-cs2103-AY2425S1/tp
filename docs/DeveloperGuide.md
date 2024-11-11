@@ -209,6 +209,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 Team size: 5
 
 1. **Improve UI resizing:** Currently, with smaller window sizes (including default size of window on first startup), part of the UI can be cut off. We plan to improve UI resizing and text wrapping to support more window sizes.
+2. **Improve UI design:** The current UI is functional but lacking in aesthetics. We plan to redesign the UI to improve contrast on important info, and add a light mode for users who require it. 
 2. **Clear all assignments feature:** A `clearassignments` command which allows users to delete all assignments.
 
 [Return to Top](#table-of-contents)
