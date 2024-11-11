@@ -3,6 +3,9 @@ package seedu.address.model.task;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+//@@author {DanzaSeah}-reused
+//Reused from https://github.com/DanzaSeah/ip/blob/master/src/main/java/babblebot/task/Event.java
+//With minor modifications
 /**
  * The Event class represents a task that spans over a period of time.
  * It extends the Task class and adds LocalDate fields to store the start and end dates of the event.
@@ -88,3 +91,4 @@ public class Event extends Task {
                 + " to: " + this.to.format(formatter) + ")";
     }
 }
+//@@author

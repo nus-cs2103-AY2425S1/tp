@@ -73,7 +73,7 @@ public class UnassignWeddingCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Wedding> modelWeddingsToKeep = new HashSet<>();
+        Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
 
         if (personToEdit.getWeddings().isEmpty()) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
@@ -83,29 +83,13 @@ public class UnassignWeddingCommand extends Command {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 
-        // Checks whether the model has all the specified weddings AND if the person has all the weddings assigned
-        for (Wedding wedding : weddingsToRemove) {
-            if (!model.hasWedding(wedding)) {
-                throw new CommandException(
-                        MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
-            }
-            if (!personToEdit.hasWedding(wedding)) {
-                throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
-            }
+        if (!updatedWeddings.containsAll(weddingsToRemove)) {
+            throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 
-        // Stores weddings from model that we want to remove - already guaranteed that are all within the model
-        HashSet<Wedding> modelWeddingsToRemove = weddingsToRemove.stream().map(model::getWedding)
-                .collect(Collectors.toCollection(HashSet::new));
+        updatedWeddings.removeAll(weddingsToRemove);
 
-        // Already checks that person has all weddings, so can go ahead and remove
-        for (Wedding wedding : personToEdit.getWeddings()) {
-            if (!modelWeddingsToRemove.contains(wedding)) {
-                modelWeddingsToKeep.add(wedding);
-            }
-        }
-
-        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, modelWeddingsToKeep);
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
 
         // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);
