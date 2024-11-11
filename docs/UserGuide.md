@@ -18,16 +18,34 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   - To check your Java version, you can follow the instructions [here](https://www.java.com/en/download/help/version_manual.html)
+   .
+   - If your computer doesn’t have Java 17 or a newer version installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
+3. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. **Windows**:
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+   **MacOS**: 
+       Right click on the homefolder. Then select "New terminal at Folder". A terminal will pop up. Type `java -jar Talentcy.jar` and press enter.
+       <p align="center">
+       <img src="images/Mac_open_terminal.png" alt="Mac_open_terminal" width="350"/>
+       </p>
+        <p align="center"><em>Right-clicking the home folder and selecting "New Terminal at Folder" on MacOS</em></p>
+
+   **Linux**:
+       Open the folder where you placed the Talentcy.jar file.
+       Right-click inside the folder and select "Open in Terminal" (or use the Ctrl + Alt + T shortcut to open the terminal, then navigate to the folder using the cd command).
+       In the terminal, type java -jar Talentcy.jar and press Enter.
+
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+![Ui](images/Ui.png)
+
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -40,8 +58,11 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
+
+**Notes**:
+When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -56,9 +77,6 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
     e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -76,7 +94,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
 
 <box type="tip" seamless>
 
@@ -102,13 +120,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
 
-### Listing persons based on attribute : `list`
+### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. `list` does not take in any parameters.
 
-Format:
-
-`list`
+Format: `list`
 
 
 
@@ -116,12 +132,12 @@ Format:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
 * Existing values will be updated to the input values.
-* You can use the `edit` command to reapply the same values to a person without making any changes.
+  * You can use the `edit` command to reapply the same values to a person without making any changes.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -140,8 +156,9 @@ Format:
 Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
 * `find t/TP` returns the list of contacts with `TP` tag <br>
-  <img src="images/findTp.png" alt="result for 'findTp'" width="400"/>
-
+    <p align="center">
+        <img src="images/findTp.png" alt="result for 'findTp'" width="300"/>
+    </p>
 * `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
