@@ -249,7 +249,7 @@
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
-  Welcome to StaffSync! Are you a Human Resources (HR) Manager that has a lot of potential hires and employees to manage? StaffSync allows you to manage your potential hires and employees on your desktop, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, you can complete your contact management tasks faster with StaffSync than with GUI apps.
+  Welcome to StaffSync! Are you an HR Manager looking for a better way to handle your hiring and employee management needs? StaffSync makes managing potential hires and employees straightforward, blending the efficiency of a Command Line Interface (CLI) with the visual advantages of a Graphical User Interface (GUI). If you’re a fast typer, you’ll find that StaffSync lets you breeze through contact management tasks more quickly than traditional GUI-only applications.
 </p>
 
 <br>
@@ -257,7 +257,7 @@
 <h1 class="headers">Why Choose StaffSync?</h1>
 
 <p class="content content-special">
-  Why choose StaffSync? We’re dedicated to helping you simplify and accelerate your HR processes. With our innovative CLI-GUI combination, you’ll experience streamlined operations, reduced task times, and a user-friendly approach that adapts to your workflow. Whether you’re handling onboarding, keeping track of employee information, or managing candidate pipelines, StaffSync is designed with your productivity in mind. Let us help you save time, stay organized, and focus on what matters most—your people.
+  We’re dedicated to helping you simplify and accelerate your HR processes. With our innovative CLI-GUI combination, you’ll experience streamlined operations, reduced task times, and a user-friendly approach that adapts to your workflow. Whether you’re handling onboarding, keeping track of employee information, or managing hiring of candidates, StaffSync is designed with your productivity in mind. Let us help you save time, stay organized, and focus on what matters most—your people.
 </p>
 
 <br>
