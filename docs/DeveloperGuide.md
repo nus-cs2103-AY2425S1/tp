@@ -1154,7 +1154,8 @@ command: `add`
 1. Adding a patient with valid fields
 
     * **Prerequisites:**
-      Launch the app.
+      * Launch the app.
+      * No patients in the app.
 
     * **Test case:** `add n|Jane i|T0123456B p|90901282 s|F d|2002-10-10`
         * **Expected:** A patient with the following fields is added to the system:
@@ -1167,7 +1168,8 @@ command: `add`
 2. Adding a patient with invalid `Nric`
 
     * **Prerequisites:**
-      Launch the app.
+      * Launch the app.
+      * No patients in the app.
 
     * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
       * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
