@@ -264,9 +264,11 @@ Plan: To have an integrated view contains both the persons and weddings, allowin
 
 9. Comprehensive Language Support
 
-Currently: KnottyPlanners support names in English language without special characters such as "^".
+Currently: KnottyPlanners support names in English language without special characters such as "^" or non-English names.
 
-Plan: To have a more comprehensive language allowance for names with special characters, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
+Plan: To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
+
+10. 
 
 --------------------------------------------------------------------------------------------------------------------
 
