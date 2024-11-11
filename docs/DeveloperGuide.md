@@ -124,18 +124,20 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `HallPointerParser` class creates an `XYZCommandParser` (where `XYZ` is a placeholder for the specific command name that matches the API call e.g. `AddMemberCommand`). This  which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `HallPointerParser` class creates an `XYZCommandParser` (where `XYZCommandParser` is a placeholder for the specific command name that matches the API call e.g. `AddMemberCommandParser`). This newly created `Parser` then uses the other classes shown above to parse the user command, creating a `XYZCommand` object (e.g. `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible, making adding more commands and further testing easier.
 
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/model/Model.java)
 
+Here is a partial and representative class diagram of the `Model` component:
+
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
-The `Model` component,
+The `Model` component has the following responsibilites:
 
-- stores the hall pointer data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
+- Storing the HallPointer data (i.e. any `Member` and `Session` objects, and application configuration files) in the hard disk.
 - stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
