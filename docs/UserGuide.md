@@ -417,22 +417,22 @@ the data of your previous AddressBook home folder.
 ## Command summary
 
 | Action                       | Format, Examples                                                                                                                                                             |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Help**                     | `help`                                                                                                                                                                       |
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
 | **List Person and Concerts** | `list`                                                                                                                                                                       |
-| **List concert contacts**    | `listcc`                                                                                                                                                                     |
+| **List Concert Contacts**    | `listcc`                                                                                                                                                                     |
 | **Add Person**               | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
 | **Add Concert**              | `addc n/NAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                                    |
-| **Add concert contact**      | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
+| **Add Concert Contact**      | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**           | `deletec INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
-| **Delete concert contact**   | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
+| **Delete Concert Contact**   | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
 | **Clear**                    | `clear`                                                                                                                                                                      |
 | **Find Person**              | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `findp n/James Jake r/organiser`                                                                                                |
 | **Find Concert**             | `findc [n/NAME_KEYWORDS]`<br> e.g., `findc n/Coachella Glastonbury`                                                                                                          |
-| **Find concert contact**     | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
+| **Find Concert Contact**     | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
 | **Edit Person**              | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Edit Concert**             | `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`<br> e.g.,`editc 1 a/2 Stadium Drive d/2024-10-11 2200`                                                                           |
 | **Exit**                     | `exit`                                                                                                                                                                       |
