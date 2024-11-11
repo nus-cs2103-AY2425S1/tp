@@ -10,6 +10,7 @@ title: User Guide
 <br>
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
 
@@ -97,6 +98,7 @@ title: User Guide
   9. An EduVault interface similar to the [below](#12-introduction-to-the-interface) should appear in a few seconds. Note that the app will contain some sample data.
 
 <br>
+<div style="page-break-after: always;"></div>
 
 #### **1.2 Introduction to the interface**
 
@@ -114,6 +116,7 @@ When EduVault is first started, you will see an interface like the one below, ma
 * **Tutorial Box:** Displays the tutorials or classes that each student is currently enrolled in, along with their attendance
 
 <br>
+<div style="page-break-after: always;"></div>
 
 #### **1.3 Brief Walkthrough**
 
@@ -138,6 +141,8 @@ Continue reading this guide to learn about the full functionalities of EduVault.
 </div>
 
 ---
+<div style="page-break-after: always;"></div>
+
 ### **2. General Command Format**
 
 The commands in EduVault follow a general format of `COMMAND INDEX PREFIX/...` .
@@ -159,6 +164,8 @@ This is a general command format, not ALL commands follow this format! For the s
 </div>
 
 ---
+<div style="page-break-after: always;"></div>
+
 ### **3. Adding data**
 
 The commands in this section are used to add new records to the system, such as students and tutorials.
@@ -213,6 +220,8 @@ If there is a student with name `John Doe` and phone number `87654321` in the li
 `add n/Jane Doe p/87654321...` is allowed
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 #### **3.2 Creating a new tutorial**
 
@@ -288,6 +297,7 @@ Invalid usages
 
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **4. Viewing and retrieving data**
 
@@ -391,6 +401,7 @@ Invalid usages
 
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **5. Editing and updating data**
 
@@ -548,6 +559,8 @@ Invalid usages
 </div>
 {% endraw %}
 
+<div style="page-break-after: always;"></div>
+
 #### **5.4 Marking attendance of a student**
 
 Command: `mas`
@@ -601,6 +614,8 @@ Invalid usages
 You can click anywhere in the attendance box to show other weeks' attendance for that tutorial.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### **5.5 Marking attendance of a tutorial**
 *Marks the attendance of all students enrolled in the tutorial for the specified date*
 
@@ -647,6 +662,8 @@ Invalid usages
 
 </div>
 {% endraw %}
+
+<div style="page-break-after: always;"></div>
 
 #### **5.6 Unmarking attendance of a student**
 
@@ -726,6 +743,7 @@ Invalid usages
 {% endraw %}
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **6. Deleting data**
 
