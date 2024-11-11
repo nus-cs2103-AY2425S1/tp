@@ -317,22 +317,23 @@ Displays detailed information about a specified person.
 - **Formats**: 
   - By Index: `view INDEX`
   - By Name: `view NAME`
+    - `NAME` will be divided into separate keywords, using spaces to distinguish each keyword
 - **Notes**:
     - Case-insensitive matching.
-    - Matches names containing the entire keyword.
+    - Matches contacts containing ALL the keyword(s).
     - Wedding list is only updated when one unique person is found. 
-    - When multiple matches are found, only the person list is updated
+    - When multiple matches are found, only the person list is updated.
 - **Information Displayed**:
     - Personal details (name, phone, email, address).
     - Current role (if any).
     - Own wedding (if the person is a client).
     - Weddings where the person is assigned as a vendor (if any).
-    - Wedding person owns (if any) will have a ```Own Wedding``` label.
+    - Wedding person owns (if any) will have an ```Own Wedding``` label.
 - **Examples**:
     - `view Mike` displays details for `Mike`.
     - `view Alex Yeo` displays details for `Alex Yeo`.
 ![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)<br>
-*Viewing a contact with mulitple matches shows their details and weddings remain unfiltered*
+*Viewing a contact with multiple matches: contact details are shown and weddings remain unfiltered*
 
 ---
 
