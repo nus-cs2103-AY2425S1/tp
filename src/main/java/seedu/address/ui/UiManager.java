@@ -33,7 +33,7 @@ public class UiManager implements Ui {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage, String theme) {
         logger.info("Starting UI...");
 
         //Set the application icon.

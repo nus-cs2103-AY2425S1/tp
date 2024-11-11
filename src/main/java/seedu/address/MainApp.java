@@ -45,6 +45,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected ReadOnlyUserPrefs userPrefs; // Store user preferences
 
     @Override
     public void init() throws Exception {
@@ -56,7 +57,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
@@ -171,7 +172,13 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+
+        // Default to dark theme if no preference is set
+        String theme = userPrefs.getTheme();
+        if (theme == null || theme.isEmpty()) {
+            theme = "dark";
+        }
+        ui.start(primaryStage, theme);
     }
 
     @Override
