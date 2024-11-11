@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents additional details of a person, including a specific time format.
+ * Represents additional details of a person.
  * Guarantees: immutable; is always valid
  */
 public class Detail {

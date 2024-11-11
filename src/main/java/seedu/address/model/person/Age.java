@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's age in the address book. Guarantees: immutable; is valid as declared in
- * {@link #isValidAge(String)}
+ * Represents a Person's age in the address book. Guarantees: immutable; is valid as
+ * declared in {@link #isValidAge(String)}
  */
 public class Age {
 
@@ -20,7 +20,8 @@ public class Age {
     public final String value;
 
     /**
-     * Constructs a {@code Age}.
+     * Constructs a {@code Age}. Checks the validity of the input age and strips any leading
+     * zeros from the input age.
      *
      * @param age A valid age.
      */
@@ -31,8 +32,10 @@ public class Age {
     }
 
     /**
-     * Returns true if a given string is a valid age. A valid age should be a non-negative integer, between 0 and 150
-     * (inclusive).
+     * Returns true if a given string is a valid age. A valid age should be a non-negative integer,
+     * between 0 and 150 (both inclusive).
+     *
+     * @return true if valid, otherwise false.
      */
     public static boolean isValidAge(String test) {
 

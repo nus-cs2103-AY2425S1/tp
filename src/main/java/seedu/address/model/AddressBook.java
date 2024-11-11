@@ -13,6 +13,7 @@ import seedu.address.model.person.UniqueSortedPersonList;
  * Models an address book through which ResearchRoster handles all contact information
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
+ * Persons are stored in a sorted list for ease of finding through the {@code UniqueSortedPersonList} persons
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
