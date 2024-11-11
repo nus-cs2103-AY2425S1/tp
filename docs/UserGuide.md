@@ -127,7 +127,7 @@ The parameter `NAME` only accepts alphabetic characters and spaces. The app will
 
 **Examples:**
 * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`
-* `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+* `add-doctor n/Mark Tong p/91234567 e/mt@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 
 ### Adding a patient: `add-patient`
 
@@ -146,7 +146,7 @@ The parameter `DATE` only accepts a valid date which is less than 32. For months
 
 **Examples:**
 * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
-* `add-patient n/John Doe p/91234567 e/johndoe@example.com a/456 Clementi Ave 3 d/01-05-1950 g/M t/elderly`
+* `add-patient n/Kennedy Koh p/91234567 e/kk@example.com a/456 Clementi Ave 3 d/01-05-1950 g/M t/elderly`
 
 ### Adding an appointment: `add-appt`
 
