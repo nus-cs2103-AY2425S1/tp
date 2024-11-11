@@ -247,7 +247,8 @@ The class diagram of a filter command is given to demonstrate the interactions a
 Team Size: 5
 
 1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
-2. [Validation for Address: Address should be able to have "/n" or other prefixes]
+2. **Allow address to have "/n" or other prefixes:**
+    Currently, address validation does not allow certain characters, preventing users from adding addresses with newline characters ("/n") or special prefixes. Enhancing this to allow specific characters, like "/n" for multi-line addresses, would give users more flexibility to enter detailed or complex addresses.
 3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
 4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
 5. [Create his own tags and delete tags]
@@ -259,6 +260,8 @@ However, in the future, an enhancement can be added where the user is warned whe
    Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
    In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
+9. **Accept other phone formats:**
+Currently, the app only accepts phone numbers that are 8 digits long and start with 3, 6, 8 or 9, according to Singapore's standard format for phone numbers. However, we understand that some users may key in their NOK's number, which may not be a Singapore number, as they might be based overseas. In the future, more phone formats can be added, such as including area codes and accepting more digits.
 
 
 ## **Implementation**
