@@ -200,7 +200,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | First-time user | Delete all data in the application                               | I can start over when I make a mistake and remove sample data                                    |                                                        |
 | `* * *`  | User            | Add new Hall members to the application                          | I can track points for new Hall members                                                          |                                                        |
 | `* * *`  | User            | Delete ex-Hall members from the application                      | I can stop tracking points for ex-Hall members                                                   |                                                        |
-| `* * *`  | User            | Customize point allocation criteria                              | I can reward members based on different participation criteria                                   | E.g., different point weights for different activities |
+| `* * *`  | User            | Customize point allocation criteria between sessions             | I can reward members based on different participation weightage criteria                         | E.g., different point weights for different activities |
 | `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                                                 |                                                        |
 | `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date and fix any mistakes                                   |                                                        |
 | `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session                                        | Perhaps by QR code generation and integration          |
@@ -240,12 +240,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-    - 2a1. Hall Pointer requests for correct data with an error message indicating the erroneous field.
+    - 2a1. Hall Pointer displays an error message with relevant details.
     - 2a2. CCA Leader re-enters corrected data.
     - Steps 2a1-2a2 are repeated until the input is valid.
     - Use case resumes from step 3.
 
-- **2b. Duplicate member is detected**.
+- **2b. The member to be added is already present in the system**.
     - 2b1. Hall Pointer displays an error message: `This member already exists in the CCA system.`
         - Use case ends.
 
@@ -274,12 +274,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-    - 2a1. Hall Pointer requests for correct data with an error message indicating the invalid field.
+    - 2a1. Hall Pointer displays an error message with relevant details.
     - 2a2. CCA Leader re-enters corrected data.
     - Steps 2a1-2a2 are repeated until all data is correct.
     - Use case resumes from step 3.
 
-- **2b. Duplicate session is detected**.
+- **2b. The session to be added is already present in at least one of the relevant members**.
     - 2b1. Hall Pointer displays an error message: `Error: Session already exists.`
         - Use case ends.
 
@@ -330,13 +330,6 @@ None.
 1. CCA Leader inputs the `list` command.
 2. Hall Pointer retrieves and displays all members in the GUI.
     - Use case ends.
-
-**Extensions**:
-
-- **2a. No members found**.
-    - 2a1. Hall Pointer displays an error message:
-        - `Error: No members found.`
-        - Use case ends.
 
 ### Non-Functional Requirements
 
