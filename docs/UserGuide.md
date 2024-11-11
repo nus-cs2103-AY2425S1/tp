@@ -96,6 +96,7 @@ The domain name must:
         - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * Addresses can take any values, and it should not be blank
     * Address will accept invalid prefixes e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 x/123` will display address as `John street, block 123, #01-01 x/123`
+* Persons with exactly the same prefixes as an existing person will not be added
 
 <box type="tip" seamless>
 
