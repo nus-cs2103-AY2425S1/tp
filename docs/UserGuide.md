@@ -5,6 +5,7 @@ title: PlanPal User Guide
 
 ### Welcome to PlanPal's User Guide!
 
+
 PlanPal is an **address book and event tracker** designed for **student event planners** at NUS who need to manage
 contacts (e.g., attendees, vendors, sponsors, and volunteers) and track who is in what event efficiently.
 
@@ -21,26 +22,86 @@ _This project is based on the AddressBook-Level3 project created by the [SE-EDU 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
-## 1. How to use this User Guide
+## 1. Introduction
 
-### 1.1 Navigating the Document:
+### 1.1 What is PlanPal
 
-### 1.2 Finding the Section you need:
+PlanPal is a desktop application tailored for student event planners at the National University of Singapore (NUS). 
+It is designed to help users efficiently manage contact information for various stakeholders involved in event planning, 
+such as attendees, vendors, sponsors, and volunteers. With its powerful Command Line Interface (CLI), PlanPal combines
+ease of use with robust functionality, ensuring a seamless experience for planning and coordinating events.
 
-Below is an overview of each section in this User Guide to help you find exactly what you need:
+Overview of Main Features:
+* **Contact Management:** Maintain a centralised database of contacts with detailed information, including roles and communication details.
+* **Event Organisation:** Create, track, and manage events with associated contacts for streamlined event coordination.
+* **Advanced Search:** Leverage powerful search capabilities to filter and manage contacts with precision.
+* **Role-Based Assignments:** Assign roles like attendee, sponsor, vendor, or volunteer to contacts for efficient organisation.
 
-- [Quick Start](#quick-start): A simple, step-by-step guide to help you set up PlanPal for the first time and get started quickly.
-- [Tutorial](#tutorial-getting-started-with-planpal): Learn the basics of PlanPal with easy-to-follow examples, perfect for new users.
-- [Features](#features): A comprehensive overview of PlanPal’s key features and what they can do for you.
-- [Command Summary](#command-summary): A handy quick-reference list of all supported commands for experienced users who want a refresher.
-- [FAQ](#faq): Find answers to common questions and troubleshooting tips.
+### 1.2 User Proficiency
+
+* **Level of Relatedness:** Users of PlanPal are NUS students or event organisers responsible for planning and managing
+campus events. The application is specifically designed to address their unique needs, such as managing large contact
+lists and organising events with multiple participants.
+
+* **Comprehension:** Users are expected to have a basic understanding of event planning and stakeholder management,
+including how to structure and assign roles to contacts.
+
+* **Prior Knowledge:** PlanPal assumes users have a basic level of computer proficiency, particularly with navigating
+CLI environments. Users should also be familiar with common event-planning concepts like attendee registration and
+vendor coordination.
+
+* **Desire for Efficiency:** PlanPal is aimed at users who prioritise organisation and efficiency, helping them reduce
+the time spent on manual tasks like searching for contact details or tracking event participants.
+
+### 1.3 Why This Guide Matters
+
+This user guide is your comprehensive resource for getting the most out of PlanPal. Whether you're organising a small
+workshop or a large-scale festival, this guide will help you understand and use PlanPal’s features effectively.
+By following the step-by-step instructions and examples, you’ll learn to streamline your workflow, save time, and stay
+organised.
+
+From adding contacts to managing events and using advanced features like Search Mode, this guide is structured to ensure
+your success. With PlanPal, you can focus more on delivering an unforgettable event experience and less on logistical
+challenges.
+
+Let’s get started and see how PlanPal can transform your event planning journey!
+
+---
+
+## 2. How to use this User Guide
+
+This section outlines how to effectively navigate the PlanPal User Guide. Whether you're new to the application or a
+returning user, these tips will help you make the most of the document.
+
+### 2.1 Navigating the Document:
+
+- **Table of Contents:** The Table of Contents at the start provides a clear overview of all topics covered.
+Simply click on a section title to jump directly to that part of the guide.
+
+- **Section Organisation:** Each section is divided into clear headings and subheadings, making it easy to locate
+specific topics or commands.
+
+### 2.2 Sections:
+
+Below is a summary of the main sections in this User Guide and what you can expect from each one.
+
+- [Install PlanPal](#3-Installation): New to PlanPal? Visit this section for a step-by-step guide to installing and launching the application.
+- [Tutorial](#4-tutorial-getting-started-with-planpal): Gain a basic understanding on how to use PlanPal to its fullest potential.
+- [Features](#5-features): Explore the full range of PlanPal’s capabilities, with detailed instructions and examples for each command.
+- [FAQ](#6-faq): Stuck or have questions? Find answers to common problems and queries here.
+- [Command Summary](#8-command-summary): Need a quick reference? This section provides an at-a-glance list of all supported commands.
+
+<box type="info" seamless>
+First-time users are strongly encouraged to read the Installation section before diving into PlanPal’s features.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
-## Quick Start
 
-### Pre-requisites
+## 3. Installation
+
+### 3.1 Pre-requisites
 
 Ensure that you have Java `17` or above installed on your computer. If you are unsure whether Java is installed, follow the steps below based on your operating system to check.
 
@@ -63,7 +124,7 @@ If Java is not installed or if the version is below `17`, download the latest Ja
 
 ---
 
-### Steps to Start PlanPal
+### 3.2 Steps to Start PlanPal
 
 1. **Download the Application**: Download the latest `.jar` file for PlanPal from [this link](https://github.com/AY2425S1-CS2103T-F09-2/tp/releases).
 
@@ -95,14 +156,14 @@ If Java is not installed or if the version is below `17`, download the latest Ja
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
-## **Tutorial: Getting Started with PlanPal**
+## 4. Tutorial: Getting Started with PlanPal
 
 This tutorial guides you step-by-step to use the key features of PlanPal effectively. 
 If there are any commands that you do not understand, refer to the [Features](#features) section below for more details.
 
 ---
 
-### **Step 1: Adding Contacts**
+### 4.1 Adding Contacts
 
 Contacts are the heart of PlanPal, so let's start by adding one.
 Imagine you’re organising a university festival, and Alex Yeoh is your first attendee. 
@@ -121,7 +182,7 @@ Feel free to experiment by adding more contacts for vendors, sponsors, or other 
 Remember, you can assign roles like `attendee`, `sponsor`, `vendor`, and `volunteer` to keep things organised.
 Now try and adding a contact with your own details! Once you have done so, let's move onto the next step!
 
-### **Step 2: Deleting Contacts**
+### 4.2 Deleting Contacts
 
 Uh oh, Olivia Ong has just informed you that she is no longer going to be attending the event.
 Find what her index number is and delete her from the contacts!
@@ -136,7 +197,7 @@ Find what her index number is and delete her from the contacts!
 Poof! Olivia is now removed from the list. 
 Don’t worry—you can always re-add them later.
 
-### **Step 3: Adding Events**
+### 4.3 Step 3: Adding Events
 
 Now that your contact list is taking shape, let’s organize them into events. 
 Picture this: You’re planning a “Summer Orientation,” and you want to track everyone involved.
@@ -150,7 +211,7 @@ Congratulations! Your event “Summer Orientation” is now added to the event l
 You can repeat this process for other events like “Tech Symposium” or other events.
 Remember to use descriptive, but succinct, names so you can easily identify your events.
 
-### **Step 4: Adding Contacts to Events**
+### 4.4 Adding Contacts to Events
 
 What’s an event without people? Let’s add some contacts to your new event.
 But before we do that, we need to find the people to add into your contact. 
@@ -167,10 +228,10 @@ Now you can add Jeff to your event! Let's add him to the "Summer Orientation" us
 select the one you want carefully!
 
 To add contacts to an event, use the `event-add` command. 
-You can specify the event index, contact index, and the role of the contact in the event.
+You can specify the event index, contact indices, and the role of the contact in the event.
 Because of our previous search of finding Jeff by name, he should be at the top!
 
-**Command Format:** `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX`
+**Command Format:** `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...`
 
 **Example:** `event-add ei/3 a/1`
 
@@ -183,7 +244,7 @@ Do note that Jeff needs to have a role before he can be added to an event!
 - `ve/` – Vendor
 - `vo/` – Volunteer
 
-### **Step 5: Using Search Mode**
+### 4.5 Using Search Mode
 
 Now imagine your contact list has grown significantly,
 and you need a faster way to filter and manage contacts.
@@ -200,14 +261,14 @@ To activate Search Mode, follow these steps:
 Once activated, you’ll notice the interface changes to display all contacts in PlanPal.
 Let’s move on to filtering these contacts!
 
-### **Step 6: Searching for Contacts**
+### 4.6 Searching for Contacts
 
 Let’s say you want to find attendees with a specific name or role.
 Search Mode makes this easy! Imagine you need to find all contacts named “Alex” who
 are attendees.
 
 1. In Search Mode, type the following command:
-   **Command Format:** `search <n/NAME r/ROLE>`
+   **Command Format:** `search <n/NAME r/ROLE e/EMAIL a/ADDRESS p/PHONE t/TELEGRAM_USERNAME>`
 
    **Example:** `search n/Alex r/attendee`
 
@@ -215,7 +276,7 @@ This will filter the list to show only those contacts named “Alex” with the 
 
 Now try searching for someone from your own contact list!
 
-### **Step 7: Excluding Contacts from Search Results**
+### 4.7 Excluding Contacts from Search Results
 
 Sometimes, you might want to exclude certain contacts from your results to refine your search even more.
 Try the following command which will result in search finding all contacts that have "Co" in their name:
@@ -229,7 +290,7 @@ Try the following command which will result in search finding all contacts that 
 This will exclude the contact at index 2 from your search results. 
 Excluded contacts won’t appear in future searches until you clear the excluded list. Perfect for filtering down to exactly what you need!
 
-### **Step 8: Viewing and Clearing Excluded Contacts**
+### 4.8 Viewing and Clearing Excluded Contacts
 
 Now that you’ve excluded a contact, you might want to review or reset your excluded list.
 
@@ -246,7 +307,7 @@ Now that you’ve excluded a contact, you might want to review or reset your exc
 Once cleared, the excluded contacts will reappear in search results,
 ready to be filtered again. Go ahead and give it a try!
 
-### **Step 9: Adding All Filtered Contacts to an Event**
+### 4.9 Adding All Filtered Contacts to an Event
 
 After refining your search, you might want to add all filtered contacts to an event.
 Let’s say you’ve filtered a group of attendees for the “Summer Orientation” event.
@@ -260,7 +321,7 @@ This command adds all currently displayed contacts in your search results to the
 event with index 3. It’s a huge time-saver for managing large groups of attendees,
 sponsors, or vendors.
 
-### **Step 10: Exiting Search Mode**
+### 4.10 Exiting Search Mode
 
 Once you’ve completed your searches and added contacts to events, you can exit
 Search Mode and return to the normal interface.
@@ -281,7 +342,7 @@ largest contact lists with ease. Onward to managing events like a pro!
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
-## Features
+## 5. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -308,7 +369,7 @@ largest contact lists with ease. Onward to managing events like a pro!
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### 5.1 Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -316,9 +377,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Contact Related Features
+### 5.2 Contact Related Features
 
-#### Adding a contact: `add`
+#### 5.2.1 Adding a contact: `add`
 
 Adds a contact to the address book.
 
@@ -328,7 +389,7 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…�
 * The roles must be one of the following: attendee, vendor, volunteer and sponsor.
 
 <div markdown="span" class="alert alert-primary">:memo: **Note:**
-A contact can have any number of roles (including 0), and the Telegram username is optional. <br>
+A contact can have any number of roles (including 0), and the Telegram username is optional. <br><br>
 
 :memo: **Note:** You will be unable to add a contact to PlanPal if there already exists a contact with the same phone number, email or telegram username.
 </div>
@@ -337,12 +398,12 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor r/vendor`
 
-
+<br>
 ![Successfully added a contact](images/AppImages/FeaturesAddCommand.png)
 
-#### Locating Contacts by Name or Role: `find-name` and `find-role`
+#### 5.2.2 Locating Contacts by Name or Role: `find-name` and `find-role`
 
-##### Find Contacts by Keywords in Name: `find-name` or `fn`
+##### 5.2.2.1 Find Contacts by Keywords in Name: `find-name` or `fn`
 Finds contacts whose names contain provided keywords.
 
 Format: `find-name KEYWORD [MORE_KEYWORDS]...`
@@ -354,13 +415,13 @@ contains **all** the keywords will be returned.<br>
 
 
 Examples:
-* `find-name John` returns `John` and `John Doe`.
+* `find-name John` returns `John Street` and `John Doe`.
 * `find-name alex david` returns `Alex Yeoh` and `David Li`.<br>
 * `find-name Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
   
 ![Result for find-name John](images%2FAppImages%2FFeaturesFindName.png)
 
-##### Find Contacts by Role: `find-role` or `fr`
+##### 5.2.2.2 Find Contacts by Role: `find-role` or `fr`
 Finds contacts who have the specified role.
 
 Format: `find-role ROLE [MORE_ROLES]...`
@@ -375,7 +436,9 @@ Examples:
 * `find-role attendee` returns all contacts with the attendee role.<br>
 * `find-role attendee sponsor` returns all contacts with either the attendee or sponsor roles (or both!).<br>
 
-#### Editing a Contact : `edit`
+![find-role attendee sponsor example](images%2FAppImages%2FFeaturesFindRole.png)
+
+#### 5.2.3 Editing a Contact : `edit`
 
 Edits an existing contact in the address book.
 
@@ -391,7 +454,7 @@ To remove all roles from a contact, type `r/` without specifying any role after 
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Editing a contact's information will update it across all events where that contact is included!<br>
+Editing a contact's information will update it across all events where that contact is included!<br><br>
 
 :exclamation: **Caution:** If a contact’s role is edited so that they no longer hold the role they were originally assigned for an event, they will be removed from that event! (More on this in the events section)
 </div>
@@ -402,9 +465,8 @@ Examples:
 *  `edit 3 n/Betsy Crower r/` Updates the name of the 3rd contact to `Betsy Crower` and removes all existing roles.
 *  `find-name John` followed by `edit 1 n/John Henry` Updates the name of the first contact in the search results to `John Henry`.
 
-![find-role attendee sponsor example](images%2FAppImages%2FFeaturesFindRole.png)
 
-#### Deleting a Contact : `delete`
+#### 5.2.4 Deleting a Contact : `delete`
 
 Removes the specified contact from the address book.
 
@@ -424,9 +486,9 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
-### Event related Features
+### 5.3 Event related Features
 
-#### Adding a new Event : `new`
+#### 5.3.1 Adding a new Event : `new`
 
 Adds a new Event to address book.
 
@@ -440,7 +502,7 @@ Examples:
 * `new Sumo Bot Festival`
 * `new RC Horror Night`
 
-#### Finding all Contacts in an event: `find-event`
+#### 5.3.2 Finding all Contacts in an event: `find-event`
 Displays the list of contacts in the event specified by its index.
 
 Format: `find-event EVENT_INDEX`
@@ -448,13 +510,17 @@ Format: `find-event EVENT_INDEX`
 * The `EVENT_INDEX` refers to the number shown in the displayed events list.
 * The `EVENT_INDEX` must be a positive integer (e.g., 1, 2, 3, …).
 
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
+The list of contacts displayed by find-event will only have their event-specific roles.
+</div>
+
 Examples:
 * `find-event 1`
 
-#### Adding a Contact to an Event : `event-add` or `ea`
+#### 5.3.3 Adding a Contact to an Event : `event-add` or `ea`
 Adds a contact to an event with a specified role.
 
-Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
+Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...`
 
 * Contacts can only be added to an event based on their roles (e.g. If John is a sponsor, he can only be added to Event X as a sponsor, not a volunteer)
 * Contacts with no roles cannot be added to events
@@ -480,7 +546,7 @@ Examples:
 * `event-add ei/1 a/1,2,3` will add the first 3 contacts as attendees to the first event.
 * `find-role attendee` followed by `event-add ei/2 a/1,2,3 ve/2,4,5` will add the first 3 contacts from the search results as attendees and the 2nd, 4th and 5th contact as vendors to the 2nd event.
 
-#### Removing a Contact from an Event : `remove`
+#### 5.3.4 Removing a Contact from an Event : `remove`
 Removes a contact from an event.
 
 Format: `remove ei/EVENT_INDEX ci/CONTACT_INDEX`
@@ -496,7 +562,7 @@ Removing a contact from an event will remove the contact from all the roles that
 Example:
 * `remove ei/1 ci/1`
 
-#### Deleting an Event : `erase`
+#### 5.3.5 Deleting an Event : `erase`
 Deletes an event from the event list.
 
 Format: `erase EVENT_INDEX`
@@ -506,12 +572,12 @@ Format: `erase EVENT_INDEX`
 Example:
 * `erase 1`
 
-#### Clear all events: `clear-event`
+#### 5.3.6 Clear all events: `clear-event`
 Clear all events from the event list.
 
 Format: `clear-event`
 
-### Search Mode for Event Management : `search-mode` or `sm`
+### 5.4 Search Mode for Event Management : `search-mode` or `sm`
 Search Mode allows you to search for contacts based on multiple criteria,
 enabling you to add multiple contacts to an event simultaneously. 
 You can search using criteria such as:
@@ -542,7 +608,7 @@ The following commands can be used in Search Mode:
 
 <div style="page-break-after: always"></div>
 
-#### Searching in Search-mode `search`
+#### 5.4.1 Searching in Search-mode `search`
 
 Format: `search <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`
 
@@ -579,7 +645,7 @@ You can chain multiple searches to get the full list of contacts you are looking
 If you are looking for a specific contact, try to be as specific as possible to get the best results!
 </div>
 
-#### Excluding Contacts in Search Mode : `exclude`
+#### 5.4.2 Excluding Contacts in Search Mode : `exclude`
 Exclude contacts from the search results.
 
 Format: `exclude ci/INDEX, [MORE_INDICES]...`
@@ -588,24 +654,26 @@ Format: `exclude ci/INDEX, [MORE_INDICES]...`
 * Excluded contacts will not appear in any subsequent searches until they are cleared from the excluded list.
 
 Example:
-- `search n/John` returns a list of contacts named `John`.
+- `search n/John` returns a list of contacts named `John`. 
+<br>
   ![FeaturesSearchModeJohn.png](images%2FAppImages%2FFeaturesSearchModeJohn.png)
-- `exclude ci/2` excludes the second contact from the search results.
-  ![FeaturesSearchModeExclude.png](images%2FAppImages%2FFeaturesSearchModeExclude.png)
+- `exclude ci/2` excludes the second contact from the search results. <br>
+  ![FeaturesSearchModeExclude.png](images%2FAppImages%2FFeaturesSearchModeExclude.png) <br>
 - Subsequent searches will not include the excluded contact.
     - `search p/9234512` will match the previously excluded contact but will not reappear in the results.
-    ![FeaturesSearchModeExcludedSearch.png](images%2FAppImages%2FFeaturesSearchModeExcludedSearch.png)
+    <br>
+  ![FeaturesSearchModeExcludedSearch.png](images%2FAppImages%2FFeaturesSearchModeExcludedSearch.png)
 
-#### Viewing Excluded Contacts : `check-excluded` or `chx`
+#### 5.4.3 Viewing Excluded Contacts : `check-excluded` or `chx`
 To view the contacts currently excluded from search results, use the `check-excluded` command.
 
 Format: `check-excluded`
 
 Example:
-- `check-excluded` displays the list of excluded contacts.
+- `check-excluded` displays the list of excluded contacts. <br>
   ![FeaturesSearchModeCheckExcluded.png](images%2FAppImages%2FFeaturesSearchModeCheckExcluded.png)
 
-#### Clearing Excluded Contacts : `clear-excluded` or `clx`
+#### 5.4.4 Clearing Excluded Contacts : `clear-excluded` or `clx`
 To remove all contacts from the excluded list, use the `clear-excluded` command. Excluded contacts will then
 appear in search results again.
 
@@ -614,7 +682,7 @@ Format: `clear-excluded`
 Example:
 ![FeaturesSearchModeClearExcluded.png](images%2FAppImages%2FFeaturesSearchModeClearExcluded.png)
 
-#### Adding All Selected Contacts to an Event : `add-all` or `aa`
+#### 5.4.5 Adding All Selected Contacts to an Event : `add-all` or `aa`
 To add all selected contacts in Search Mode to an event, use the `add-all` command.
 
 Format: `add-all EVENT_INDEX`
@@ -626,7 +694,7 @@ Format: `add-all EVENT_INDEX`
 
 Example: `add-all 2`
 
-#### Exiting Search Mode : `exit-search` or `es`
+#### 5.4.6 Exiting Search Mode : `exit-search` or `es`
 To exit Search Mode and return to the normal display, use the `exit-search` or `es` command.
 
 Format: `exit-search` or `es`
@@ -635,27 +703,29 @@ _This concludes the commands available in Search Mode. The following commands ca
 
 <div style="page-break-after: always"></div>
 
-### Clearing All Entries : `clear`
+### 5.5 Clearing All Entries : `clear`
 
 Removes all entries from the address book.
 
 Format: `clear`
 
-### Exiting the Program : `exit`
+### 5.6 Exiting the Program : `exit`
 
 Closes the program. Typing `exit` in search mode will close the program as well.
 
 Format: `exit`
 
-### Saving Data
+### 5.7 Saving Data
 
 PlanPal data is saved automatically to your hard disk after any command that changes the data. There is no need to save manually.
 
-### Editing the Data File
+### 5.8 Editing the Data File
 
-PlanPal data is stored as a JSON file in `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/eventmanager.json`. **Do not** edit these data files directly.
+PlanPal data is stored as 2 JSON files in `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/eventmanager.json`. 
+While it is possible to edit these files to manually insert data, Planpal has various processes to handle parsing the data and invalid data may lead to unexpected behaviour. 
+We **do not** recommend editing the storage `.json` files directly, unless you are familiar with the JSON format and PlanPal's data structure.
 
-### Navigating Through Command History
+### 5.9 Navigating Through Command History
 
 Use the `up` and `down` arrow keys to navigate through your command history. Pressing the up arrow displays previously executed commands, allowing you to re-run or edit past commands without retyping them. The down arrow moves forward through the command history, returning to more recent commands.
 
@@ -663,7 +733,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 <div style="page-break-after: always"></div>
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app on the other computer and replace the empty data file it creates with the file containing the data from your previous PlanPal home folder.
@@ -683,7 +753,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Known Issues
+## 7. Known Issues
 
 1. **When using multiple screens**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. **Solution**: Delete the `preferences.json` file created by the application before running it again.
 
@@ -691,28 +761,28 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 ---
 
-## Command Summary
+## 8. Command Summary
 
-### Basic Commands
+### 8.1 Basic Commands
 
-| Action               | Format, Examples                                                                                                                                                                                                                 |
-|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                               |
-| **Clear All Contacts** | `clear`                                                                                                                                                                                                                          |
-| **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                              |
-| **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                         |
-| **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                      |
-| **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                     |
-| **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                              |
-| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
-| **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                           |
-| **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                           |
-| **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                              
-| **Clear-Event**      | `clear-event`                                                                                                                                                                                                                    |
-| **List Contacts**    | `list`                                                                                                                                                                                                                           |
-| **Help**             | `help`                                                                                                                                                                                                                           |
+| Action               | Format, Examples                                                                                                                                                                                                               |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                             |
+| **Clear All Contacts** | `clear`                                                                                                                                                                                                                        |
+| **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                       |
+| **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                    |
+| **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                   |
+| **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                            |
+| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX [MORE_CONTACT_INDICES]...` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
+| **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                         |
+| **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                         |
+| **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                            
+| **Clear-Event**      | `clear-event`                                                                                                                                                                                                                  |
+| **List Contacts**    | `list`                                                                                                                                                                                                                         |
+| **Help**             | `help`                                                                                                                                                                                                                         |
 
-### Search Mode Summary
+### 8.2 Search Mode Summary
 
 | Action                        | Format, Examples                                               |
 |-------------------------------|----------------------------------------------------------------|

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -16,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInEventPredicate;
 
 /**
  * Adds contacts to an event in to the address book.
@@ -96,7 +98,23 @@ public class AddPersonToEventCommand extends Command {
         sb.delete(sb.length() - 1, sb.length());
         event.updateUi();
 
+        updateContactsIfInEventViewToShowAddedContact(model, eventManager, event);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, sb, event.getName()));
+    }
+
+    private static void updateContactsIfInEventViewToShowAddedContact(Model model, EventManager eventManager,
+                                                                        Event event) {
+        // check the last shown list if it is event
+        Predicate<Person> lastPred = model.getLastPredicate();
+        if (lastPred instanceof PersonInEventPredicate) {
+            if (((PersonInEventPredicate) lastPred).getEvent().equals(event)) {
+                model.setIsFindEvent(false);
+                //create a new predicate for changed event
+                model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
+                FindEventCommand.updateContactsUiWithEventSpecificRoles(model, event);
+            }
+        }
     }
 
     @Override
@@ -149,6 +167,7 @@ public class AddPersonToEventCommand extends Command {
         for (Index index : indices) {
             Person person = persons.get(index.getZeroBased());
             event.addPerson(person, role);
+            event.updateUi();
             sb.append(person.getName()).append(", ");
         }
         sb.delete(sb.length() - 2, sb.length());
