@@ -385,7 +385,7 @@ Deletes a scheduled appointment from MediBase3.
 > * Only `NRIC`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` are required; `APPOINTMENT_NAME` is not needed.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
-Example:
+**Example**:
 * `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200` deletes an appointment on `2024-10-27` from `1100` to `1200` for the patient with `NRIC` `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
@@ -444,6 +444,8 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
 > * If both unique and non-existent conditions are entered in a single command, an error will be returned, and none of the conditions will be deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
+
+<div style="page-break-after: always;"></div>
 
 **Example**:
 * `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
@@ -642,7 +644,7 @@ Finds patients whose medical condition(s) contain the given keywords.
 
 <div style="page-break-after: always;"></div>
 
-Example:
+**Example**:
  * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
 {: .alert .alert-secondary}
@@ -669,7 +671,7 @@ Finds patients based on his/her NRIC.
 
 <div style="page-break-after: always;"></div>
 
-Example:
+**Example**:
 * `findNric S1234567A` returns `Alex Yeoh`
 
 {: .alert .alert-secondary}
@@ -689,7 +691,7 @@ You can navigate between previous successful commands and your current command b
 
 Shows a message explaining how to access the help page.
 
-Format: `help`
+**Format**: `help`
 
 {: .alert .alert-secondary}
 >![help message](images/helpMessage.png)
@@ -706,7 +708,7 @@ Format: `help`
 
 Clears all entries from the MediBase3 database. 
 
-Format: `clear`
+**Format: `clear`
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
@@ -718,7 +720,7 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 
 #### Saving the data
@@ -873,6 +875,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When entering a patient's date of birth or an appointment date**, the application currently accepts the year `0000` as a valid year. While it might be valid in some contexts such as the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601), it is not a valid year in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) which is the calendar system the typical user might expect.
 
 
 ## Command summary
