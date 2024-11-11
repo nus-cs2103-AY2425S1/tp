@@ -82,6 +82,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [
       - end with a domain label at least 2 characters long,
       - have each domain label start and end with alphanumeric characters,
       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* Tags are case-insensitive (e.g. `FRIEND` and `friend` are not the same tag)
 * (if supplied) `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
 * If multiple `vip/` commands are supplied, the later one will be registered.<br>(e.g. `add n/kelvin p/98765432 e/kelv@example.com a/klev street, block 123, #01-01, vip/true, vip/false` will register kelvin as non-VIP.)
 * Person added is by default a non-VIP if the `vip/` command is omitted.
