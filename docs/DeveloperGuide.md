@@ -268,7 +268,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                     | I want to …​                                                                                                                                                                             | So that I can…​                             -                                                                                    |
 |----------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | new user                    | search the contact information of a CCA member by his/her name or other fields                                                                                                           | find the information of this member quickly.                                                                                     |
-| `* * *`  | user                        | remove a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
+| `* * *`  | user                        | delete a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
 | `* * *`  | user                        | use this app to populate the member’s details into the app database                                                                                                                      | save their details (name, year, tele handle, email address) into the database for future reference                               |
 | `* *`    | user                        | see a demonstration or tutorial for me to get started                                                                                                                                    | know how to use the app                                                                                                          |
 | `*`      | user that values efficiency | “manipulate” member’s data entries in batches                                                                                                                                            | can do things efficiently (Manipulate includes: Edit, Delete and Add)                                                            |
@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters the `delete` command with the contact’s index or unique full name.
-2. Application removes the specified contact.
+2. Application deletes the specified contact.
 3. Application displays a confirmation message with the deleted contact’s details.
      Use case ends.
 
