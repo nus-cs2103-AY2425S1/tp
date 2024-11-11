@@ -21,7 +21,6 @@ If you can type fast, GamerBook can get your contact management tasks done faste
   <page-nav-print />
 </div>
 
-<br>
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -333,8 +332,6 @@ Exits the program.
 Format: `exit`  
 Output: The GamerBook application window will be closed.
 
-<br>
-
 ### Game Management Commands
 
 #### Adding a game : `addgame`
@@ -433,8 +430,6 @@ Examples:
 
 * `unfavgame 3 g/LoL` Removes the "favourite" status from the game "LoL" of the 3rd person.
 
-<br>
-
 ### Search Commands
 
 #### **Locating persons by name :** `find`
@@ -507,8 +502,6 @@ Examples:
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any
   one of the specified ranges.
 
-<br>
-
 ### Utility Commands
 
 #### **Undoing previous command :** `undo`
@@ -526,8 +519,6 @@ Supported commands: `list`, `add`, `edit`, `addgame`, `editgame`, `deletegame`, 
 
 Format: `undo`  
 Output: `Undid previous command: PREVIOUS COMMAND`
-
-<br>
 
 ### Data storage
 
@@ -570,7 +561,7 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-<br></br>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -595,7 +586,6 @@ GamerBook home folder to the new installation’s data folder, typically located
 
 **Q**: Why did my GamerBook open blank when I had data saved previously?
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
-
  <br>
 
 --------------------------------------------------------------------------------------------------------------------
