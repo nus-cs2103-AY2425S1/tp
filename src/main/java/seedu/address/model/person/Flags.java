@@ -9,6 +9,7 @@ import java.util.Set;
  * Represent a set of preset labels to each person. Flags enables grouping of persons by multiple criteria in descending
  * significance.
  * Guarantee: Immutable.
+ * Note: this is a utility class for future feature: group by tags. Not used in app version v1.6.
  * */
 public class Flags {
     private Set<PresetFlags> flagSet = new HashSet<>();
