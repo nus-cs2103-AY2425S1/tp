@@ -12,6 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -63,10 +65,21 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? ParserUtil.parseWorkExp(argMultimap.getValue(PREFIX_WORKEXP).get())
                 : new WorkExp("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
         // Parsing new fields
         University university = ParserUtil.parseUniversity(argMultimap.getValue(PREFIX_UNIVERSITY).get());
         Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
-        Set<Interest> interestList = ParserUtil.parseInterests(argMultimap.getAllValues(PREFIX_INTEREST));
+
+        // Check each interest to ensure it does not contain a comma
+        List<String> interestValues = argMultimap.getAllValues(PREFIX_INTEREST);
+        for (String interestValue : interestValues) {
+            if (interestValue.contains(",")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+        }
+
+        // Parse interests after validation
+        Set<Interest> interestList = ParserUtil.parseInterests(new HashSet<>(interestValues));
         Birthday birthday = ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get());
 
         Person person = new Person(name, phone, email, address, workExp, tagList, university, major,

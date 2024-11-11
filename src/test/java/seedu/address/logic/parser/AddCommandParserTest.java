@@ -183,6 +183,31 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
     }
+    @Test
+    public void parse_invalidInterestWithComma_failure() {
+        // Interest with comma should be invalid
+        String invalidInterestWithComma = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + " i/swimming,diving"
+                + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB;
+
+        assertParseFailure(parser, invalidInterestWithComma,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validInterestWithoutComma_success() {
+        // Valid interest with no commas
+        Person expectedPerson = new PersonBuilder(BOB)
+                .withInterests("rock climbing") // Modify as needed for valid interest
+                .build();
+
+        String validInterestWithoutComma = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + " i/rock climbing"
+                + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB;
+
+        assertParseSuccess(parser, validInterestWithoutComma, new AddCommand(expectedPerson));
+    }
+
 
     @Test
     public void parse_invalidValue_failure() {
@@ -193,52 +218,49 @@ public class AddCommandParserTest {
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + BIRTHDAY_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + BIRTHDAY_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + BIRTHDAY_DESC_BOB,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid workExp
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_WORKEXP_DESC + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
+                        + INVALID_WORKEXP_DESC + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + BIRTHDAY_DESC_BOB,
                 WorkExp.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND
+                        + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND
                         + BIRTHDAY_DESC_BOB,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // invalid university
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + WORKEXP_DESC_BOB + INVALID_UNIVERSITY_DESC + MAJOR_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB, University.MESSAGE_CONSTRAINTS);
+                + WORKEXP_DESC_BOB + INVALID_UNIVERSITY_DESC + MAJOR_DESC_BOB + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB, University.MESSAGE_CONSTRAINTS);
 
         // invalid major
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + INVALID_MAJOR_DESC + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB, Major.MESSAGE_CONSTRAINTS);
+                + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + INVALID_MAJOR_DESC + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND + BIRTHDAY_DESC_BOB, Major.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                         + WORKEXP_DESC_BOB + UNIVERSITY_DESC_BOB + MAJOR_DESC_BOB + BIRTHDAY_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
-
-        // non-empty preamble
-        /* assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));*/
     }
+
 }
