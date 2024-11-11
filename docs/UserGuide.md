@@ -188,8 +188,9 @@ Format: `list`
 Adds a guest to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+
 * Names cannot be more than 100 characters long.
-* Names are **case-sensitive**, for increased flexibility. eg. 'John Doe' is different from 'john doe'.
+* Names are **case-sensitive**, for increased flexibility. e.g. 'John Doe' is different from 'john doe'.
 * Duplicate guests (with the exact same name) cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
