@@ -221,7 +221,7 @@ Note: Users must specify a valid client index from the currently viewed list, en
 The `delete` command is used to remove client's contacts from the existing list of clients saved in AgentAssist.
 
 #### Current implementation
-To execute the delete command, users must specify a valid client index from the currently viewed client list, ensuring the following:
+To execute the `delete` command, users must specify a valid client index from the currently viewed client list, ensuring the following:
 1. The index is a **positive number**.
 2. The index is **within the bounds** of the currently viewed client list.
 
@@ -233,6 +233,25 @@ This follows the activity diagram shown below:
 ![DeleteActivityDiagram.png](images%2FDeleteActivityDiagram.png)
 
 The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
+
+
+
+### 5. Filter Command
+The `filter` command is used to view a specific subset of clients by applying specific filtering criteria to the client list. 
+
+#### Current implementation
+The following diagrams provide a high-level overview of the `filter` command's logic flow:
+![FilterActivityDiagramInputValidation.png](images/FilterActivityDiagramInputValidation.png)
+![FilterActivityDiagramFilterAndDisplay.png](images/FilterActivityDiagramFilterAndDisplay.png)
+Note: The sequence diagram has been omitted due to its complexity.
+
+The filter command performs two primary checks:
+- **Flag Validation:**  Checks there are no invalid flags, no duplicate flags, and that at least one valid flag is specified.
+- **Argument Validation:** Checks that the argument values provided for each flag meet the required parsing criteria (as outlined in the User Guide).
+
+Once these validations are complete, each valid flag and its corresponding argument are used to create a specific `Predicate` object (e.g., `NameContainsSubstringPredicate`, `AddressContainsSubstringPredicate`). These predicates are then combined to form a `CombinedPredicate` object.
+
+The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whether the client meets all filter criteria. Clients that satisfy the criteria are added to the filtered list. After all clients are evaluated, the filtered client list is displayed.
 
 
 ## Planned enhancements
