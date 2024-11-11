@@ -523,6 +523,7 @@ Advanced users can edit the data file directly to modify the address book data.
 - **Command Structure**:
     - Commands are case-sensitive, i.e. must be in **lower-case only**. <br> e.g. `clear` will be accepted but `Clear` will not.
     - Parameters are case-insensitive unless specified.
+    - For optimum viewing experience, restrict fields to 50 characters or less.
 - **Parameters in `UPPER_CASE`** are to be supplied by the user.
     - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
 - **Optional Parameters** are enclosed in square brackets `[ ]`.
@@ -697,6 +698,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 - **Vendor Assignments**:
     - A person can be assigned to multiple weddings as a vendor.
     - Cannot assign the same person to the same wedding multiple times.
+    - A person without a role can still be assigned to a wedding.
 - **Deletion Effects**:
     - Deleting a wedding removes all vendor assignments related to that wedding.
     - Can delete a vendor who is assigned weddings
@@ -716,6 +718,9 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: How do I input the name of a person with `d/o` or `s/o` in it?<br>
+**A**: You can input the name as `son of` or `daughter of` respectively.
 
 **Q**: How do I add a wedding for an existing client?<br>
 **A**: First use `list` to see all contacts. Then use either `addw n/WEDDING_NAME c/INDEX` using the client's index number, or `addw n/WEDDING_NAME c/CLIENT_NAME` using the client's name.
