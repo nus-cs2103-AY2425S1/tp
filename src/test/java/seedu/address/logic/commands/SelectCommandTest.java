@@ -86,9 +86,9 @@ public class SelectCommandTest {
 
     @Test
     public void execute_noMatchIndexOutOfBound_thenThrowExceptions() {
-        String invalidIndexes = String.valueOf(Index.fromZeroBased(getTypicalPersons().size() + 1).getOneBased());
+        String invalidIndexes = String.valueOf(Index.fromZeroBased(getTypicalPersons().size() + 3).getOneBased());
         String expectedMessage = String.format(MESSAGE_INVALID_PERSONS_DISPLAYED_INDEX, invalidIndexes);
-        List<Index> indexes = List.of(Index.fromZeroBased(getTypicalPersons().size() + 1));
+        List<Index> indexes = List.of(Index.fromZeroBased(getTypicalPersons().size() + 3));
         SelectCommand selectCommand = new SelectCommand(indexes);
         assertCommandFailure(selectCommand, model, expectedMessage);
         assertThrows(CommandException.class, () -> selectCommand.execute(model));
@@ -119,7 +119,7 @@ public class SelectCommandTest {
         method.setAccessible(true);
 
         String result = (String) method.invoke(null, indexes);
-        String expectedString = "";
+        String expectedString = "none";
         assertEquals(expectedString, result);
     }
 
