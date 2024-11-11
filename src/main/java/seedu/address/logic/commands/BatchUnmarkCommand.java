@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,37 +33,45 @@ public class BatchUnmarkCommand extends Command {
     public static final String MESSAGE_BATCH_UNMARK_SUCCESS = "Unmarked attendance for: %1$s";
     public static final String MESSAGE_BATCH_UNMARK_NO_STUDENT_LIST = "There is no student in this list";
 
-    private boolean hasStudent;
-    private List<Student> students = new ArrayList<>();
-    public BatchUnmarkCommand() {
-        this.hasStudent = false;
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> students = filterStudents(model.getFilteredPersonList());
 
-        for (Person p : lastShownList) {
-            if (p instanceof Student) {
-                this.hasStudent = true;
-                Student studentToUnmark = (Student) p;
-                students.add(studentToUnmark);
-            }
-        }
-
-        if (!this.hasStudent) {
+        if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_BATCH_UNMARK_NO_STUDENT_LIST));
         }
 
-        for (Student p : students) {
-            Student markedStudent = createNewStudentWithUnmarkedAttendance(p);
-            model.setPerson(p, markedStudent);
-        }
+        unmarkStudents(model, students);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String selectedPersons = formatUnmarkedStudents(students);
 
         return new CommandResult(String.format(MESSAGE_BATCH_UNMARK_SUCCESS, selectedPersons));
+    }
+
+
+    /**
+     * Returns a list of students in the list of contacts
+     * @param persons List of Persons
+     */
+    private List<Student> filterStudents(List<Person> persons) {
+        return persons.stream()
+                .filter(x -> x instanceof Student)
+                .map(x -> (Student) x)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Update model with the unmarked students.
+     * @param model
+     * @param students
+     */
+    private void unmarkStudents(Model model, List<Student> students) {
+        for (Student student : students) {
+            Student markedStudent = createNewStudentWithUnmarkedAttendance(student);
+            model.setPerson(student, markedStudent);
+        }
     }
 
     /**
@@ -72,7 +80,6 @@ public class BatchUnmarkCommand extends Command {
     public Student createNewStudentWithUnmarkedAttendance(Student studentToUnmark) {
         assert studentToUnmark != null;
 
-        this.hasStudent = true;
         Name name = studentToUnmark.getName();
         Sex sex = studentToUnmark.getSex();
         Role role = studentToUnmark.getRole();
