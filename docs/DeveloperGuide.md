@@ -279,28 +279,24 @@ The `GroupCommand` will then call `excecute()`, which checks whether there is a 
 
 ### Delete Group feature
 
-The `DeleteGroupCommand` allows educators to delete Groups within the application. This is particularly  useful 
+The `DeleteGroupCommand` allows educators to delete Groups within the application. This is particularly useful 
 for deleting Groups that the user no longer need, assisting the management of Groups.
 
 #### Implementation Details
 
 The `DeleteGroupCommand` is implemented by extending the base `Command` class. It does not use any prefixes, rather
-using the `groupName` to identify which group to delete. Once the data fields are filled, it will look for the 
-specified group containing that `groupName` and delete it.
+using the `groupName` to identify which group to delete. Once the data fields are filled, it will look for the specified group containing that `groupName` and delete it.
 It implements the following operations:
 
-* `execute(Model)` — Checks the current address book state by calling the `model.getFilteredGroupList()` to obtain 
-  an `ObservableList<Group>` and iterating over it to find a matching `groupName`, throwing a `CommandException` if 
+* `execute(Model)` — Checks the current address book state by calling the `model.getFilteredGroupList()` to obtain an `ObservableList<Group>` and iterating over it to find a matching `groupName`, throwing a `CommandException` if 
   no `Group` is found.
 * `deleteGroup(groupToDelete)` — Deletes the Group from the group list. This operation is exposed in the `Model` 
   interface as `Model#deleteGroup(Group)`.
 
-Given below is an example usage scenario of how the delete group mechanism behaves when the user tries to delete a 
-group 
-from the group list.
+Given below is an example usage scenario of how the delete group mechanism behaves when the user tries to delete a group from the group list.
 
-Step 1. The user launches the application, with some students and groups added to the address book already.
-The `AddressBook` will be initialized with the previously saved address book state.
+Step 1. The user launches the application, with some students and groups added to the address book already. The 
+`AddressBook` will be initialized with the previously saved address book state.
 
 Step 2. The user executes `deleteGroup` command with the specified Group Name to specify the `Group` to be added.
 The `deleteGroupCommand` will then call `excecute()`, which checks whether there is a Group in the group list that 
@@ -314,45 +310,33 @@ matches the name before calling `deleteGroup(Group)`.
 
 **Aspect: How deleteGroup executes:**
 
-- **Alternative 1 (current choice):** Iterating over all `Group` in model and searching for a match and proceeding 
-  to delete that group
+- **Alternative 1 (current choice):** Iterating over all `Group` in model and searching for a match and proceeding to delete that group
 
     - Pros: Easier to implement, and deleting a Group will not cause bugs in other logic components
     - Cons: Can become very slow when there are many groups in `Logic`
 
 - **Alternative 2:** Using a Hash to map every groupName to its respective Group
     - Pros: Deleting a Group is much faster, since there is no longer a need to iterate over all groups within model
-    - Cons: The logic will be much more complicated, and showing a Hash through JavaFx is much more difficult 
-      compared to using the already provided `ObservableList`
+    - Cons: The logic will be much more complicated, and showing a Hash through JavaFx is much more difficult compared to using the already provided `ObservableList`
 
 ### Export feature
 
-The `ExportCommand` allows educators to export the data in their current GoonBook storage out as a csv file for 
-usage in other spreadsheets such as Google spreadsheets, giving GoonBook seamless integration with existing 
-spreadsheet editors.
+The `ExportCommand` allows educators to export the data in their current GoonBook storage out as a csv file for usage in other spreadsheets such as Google spreadsheets, giving GoonBook seamless integration with existing spreadsheet editors.
 
 #### Implementation Details
 
-The `ExportCommand` is implemented by extending the base `Command` class. It does not use any prefixes, and is called 
-as is. Once the data fields, like `projectRootPath` are filled, it will proceed to convert the data in model into a 
-json file, then into a csv file for the user to freely use.
-It implements the following operations:
+The `ExportCommand` is implemented by extending the base `Command` class. It does not use any prefixes, and is called as is. Once the data fields, like `projectRootPath` are filled, it will proceed to convert the data in model into a json file, then into a csv file for the user to freely use. It implements the following operations:
 
-* `execute(Model)` —  Obtain the `Path` Objects that represent both the import directory, and the export directory, 
-  by calling the `Path#resolve` method.
-* `saveJsonfile` —  Takes in the `model`, `importPath` and `exportPath` as parameters to then convert the data in 
-  model to a csv file by further calling the methods `translateJsonToCsv` and `getPersonTags` which will perform the 
-  necessary actions to convert the json file into a csv file
+* `execute(Model)` —  Obtain the `Path` Objects that represent both the import directory, and the export directory, by calling the `Path#resolve` method.
+* `saveJsonfile` —  Takes in the `model`, `importPath` and `exportPath` as parameters to then convert the data in model to a csv file by further calling the methods `translateJsonToCsv` and `getPersonTags` which will perform the necessary actions to convert the json file into a csv file
 
 Given below is an example usage scenario of how the export mechanism behaves when the user tries to export data
 from GoonBook.
 
-Step 1. The user launches the application, with some students and groups added to the address book already.
-The `AddressBook` will be initialized with the previously saved address book state.
+Step 1. The user launches the application, with some students and groups added to the address book already. The 
+`AddressBook` will be initialized with the previously saved address book state.
 
-Step 2. The user executes `export` command. The `ExportCommand` will then call `excecute()`, which proceeds to take 
-the current data stored in the address book and converting it into a csv file, and saving it in the same directory as 
-root for the user to access
+Step 2. The user executes `export` command. The `ExportCommand` will then call `excecute()`, which proceeds to take the current data stored in the address book and converting it into a csv file, and saving it in the same directory as root for the user to access
 
 #### Sequence Diagram
 
