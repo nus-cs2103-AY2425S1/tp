@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 
 When using the `edit` command, note that:
 * You are unable to edit comments via the `edit` command.
-* There should be no additional arguments between the `INDEX` and the first prefix (e.g n/)
+* There should be no additional arguments between the `INDEX` and the first prefix (e.g `edit 1 blah n/ John` is wrong and should instead be `edit 1 n/ John`)
 </div>
 
 Continuing from the previous example in `add`, you could try this:
@@ -196,11 +196,11 @@ Format: `comment INDEX c/COMMENT`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Each student can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
-any COMMENT.
+any `COMMENT`.
 </div>
 
-* The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* The COMMENT refers to any input you want to use as a comment.
+* The `INDEX` refers to the index number shown in the displayed student list.`INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `COMMENT` refers to any input you want to use as a comment.
 
 Examples:
 * `comment 1 c/Is always late to class.`
@@ -210,7 +210,7 @@ Examples:
 
 #### Listing all students : `list`
 
-You can view a list of all students stored in Teachers' Pet.
+You can view a list of all students stored in Teacher's Pet.
 
 Format: `list`
 
@@ -226,14 +226,14 @@ Here is an example of what you might see, our lists would be different, of cours
 
 You can view a list of students in the same group(s)
 
-Format: show KEYWORDS
+Format: `show KEYWORDS`
 
 * The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` (for group 1)
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but not "1 group".
+You can search for substrings within the group names, but the search will only return results where the group names start with the entered text. For example, searching for "gro" will match "group 1", but not "1 group".
 </div>
 
 Here is an example you could try:
@@ -287,8 +287,8 @@ Deletes one of your specified students from your list.
 Format: `delete INDEX`
 
 * The delete command deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` refers to the index number shown in the displayed student list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the list.
@@ -353,9 +353,8 @@ Creates one or more new attendance events.
 
 **Format:** `createattn e/EVENT_NAME [e/EVENT_NAME]...`
 
-- **Event Names:**
+- **Event Names (Refer to [Constraints](#managing-attendance)):**
     - Specify one or more event names using the `e/` prefix.
-    - Must adhere to the [Event Names](#general-constraints) constraints.
     - Duplicate event names within the same command are not allowed.
     - If an event with the same name already exists, the command will fail and indicate the first event which already exists.
 
@@ -380,9 +379,8 @@ Deletes one or more attendance events.
 
 **Format:** `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`
 
-- **Event Names:**
+- **Event Names (Refer to [Constraints](#managing-attendance)):**
     - Specify one or more event names using the `e/` prefix.
-    - Must adhere to the [Event Names](#general-constraints) constraints.
     - Duplicate event names within the same command are not allowed.
     - If any specified event does not exist, the command will fail and indicate the first event which was not found.
 
@@ -405,7 +403,7 @@ Displays a list of all attendance events.
 
 - **No Additional Parameters:**
     - The command must be exactly `listevents`.
-    - Any additional input will result in an invalid command format error.
+    - Any additional input will result in an error.
 
 **Examples:**
 
@@ -421,14 +419,12 @@ Marks one or more students as present for a specific attendance event.
 
 **Format:** `mark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
-    - Must adhere to the [Event Names](#general-constraints) constraints.
     - The event must exist in Teacher's Pet.
 
 - **Student Indices:**
     - Specify one or more student indices using the `i/` prefix.
-    - Each must adhere to the [Student Indices](#general-constraints) constraints.
     - Attendance is not marked for any student, if any one of the indices is invalid (or duplicate).
 
 - **Existing Attendance:**
@@ -455,14 +451,12 @@ Marks one or more students as absent for a specific attendance event.
 
 **Format:** `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
-    - Must adhere to the [Event Names](#general-constraints) constraints.
     - The event must exist in Teacher's Pet.
 
 - **Student Indices:**
     - Specify one or more student indices using the `i/` prefix.
-    - Each must adhere to the [Student Indices](#general-constraints) constraints.
     - Attendance is not marked for any student, if any one of the indices is invalid (or duplicate).
 
 - **Existing Attendance:**
@@ -485,9 +479,8 @@ Displays the list of students who are either present or absent for a specific at
 
 **Format:** `listattn e/EVENT_NAME s/STATUS`
 
-- **Event Name:**
+- **Event Name (Refer to [Constraints](#managing-attendance)):**
     - Specify exactly one event name using the `e/` prefix.
-    - Must adhere to the [Event Names](#general-constraints) constraints.
     - The event must exist in Teacher's Pet.
 
 - **Status:**
@@ -513,8 +506,9 @@ Displays the list of students who are either present or absent for a specific at
 
 
 * **Invalid Command Format:**
-   * If you include extra text or parameters not specified in the command format, you will receive an invalid command format error.
+   * If you include extra text or parameters not specified in the command format, you will receive an error.
    * **Solution:** Ensure your command matches the specified format exactly.
+
 
 
 * **Event Not Found:**
@@ -522,9 +516,11 @@ Displays the list of students who are either present or absent for a specific at
    * **Solution:** Use `listevents` to view existing events and ensure the event name is correct.
 
 
+
 * **Duplicate Entries:**
   * If you specify duplicate event names or indices within the same command.
   * **Solution:** Remove duplicates so each event name or index appears only once.
+
 
 
 * **Invalid Indices:**
@@ -532,12 +528,15 @@ Displays the list of students who are either present or absent for a specific at
    * **Solution:** Check the current student list and use valid indices.
 
 
+
 * **Combining Commands:**
    * Use the `find` or `show` commands to filter the student list before marking or unmarking attendance.
 
 
+
 * **Consistent Event Naming:**
-   * Decide on a consistent naming convention for events to avoid confusion.
+   * Decide on a consistent naming convention for events to avoid confusion. (eg. `Tutorial 1`, `Tutorial 2`...)
+
 
 
 * **Regularly List Events:**
