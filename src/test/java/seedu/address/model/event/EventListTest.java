@@ -9,7 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 public class EventListTest {
 
@@ -79,6 +83,35 @@ public class EventListTest {
         Assertions.assertTrue(eventList.contains(event2));
         Assertions.assertTrue(eventList.contains(event3));
         Assertions.assertFalse(eventList.contains(event1)); // No longer contains event1 since it was replaced
+
+        EventList otherEventList = new EventList();
+        otherEventList.add(event2);
+        otherEventList.add(event3);
+    }
+
+    @Test
+    public void setEvents_eventListReplaceAllEvents_success() {
+        EventList otherEventList = new EventList();
+        otherEventList.add(event2);
+        otherEventList.add(event3);
+
+        eventList.setEvents(otherEventList);
+
+        Assertions.assertTrue(eventList.contains(event2));
+        Assertions.assertTrue(eventList.contains(event3));
+        Assertions.assertFalse(eventList.contains(event1)); // No longer contains event1 since it was replaced
+
+    }
+
+    @Test
+    public void setEvents_nullEvent_throwsNullPointerException() {
+        List<Event> newEvents = new ArrayList<>();
+        newEvents.add(null);
+        newEvents.add(event3);
+        Assertions.assertThrows(NullPointerException.class, () -> eventList.setEvents(newEvents));
+
+        // Test the case where EventList is null
+        Assertions.assertThrows(NullPointerException.class, () -> eventList.setEvents((EventList) null));
     }
 
     @Test
@@ -94,11 +127,28 @@ public class EventListTest {
 
     @Test
     public void equals_sameList_returnsTrue() {
+        eventList.add(event1);
+
+        Assertions.assertEquals(eventList, eventList);
+    }
+
+    @Test
+    public void equals_sameListContents_returnsTrue() {
         EventList otherList = new EventList();
         otherList.add(event1);
         eventList.add(event1);
 
         Assertions.assertEquals(eventList, otherList);
+    }
+
+    @Test
+    public void equals_differentLength_returnsFalse() {
+        EventList otherList = new EventList();
+        eventList.add(event1);
+        otherList.add(event1);
+        otherList.add(event2);
+
+        Assertions.assertNotEquals(eventList, otherList);
     }
 
     @Test
@@ -111,6 +161,13 @@ public class EventListTest {
     }
 
     @Test
+    public void equals_null_returnsFalse() {
+        EventList otherList = null;
+
+        Assertions.assertNotEquals(eventList, otherList);
+    }
+
+    @Test
     public void hashCode_sameList_returnsSameHashCode() {
         eventList.add(event1);
         EventList otherList = new EventList();
@@ -118,4 +175,5 @@ public class EventListTest {
 
         Assertions.assertEquals(eventList.hashCode(), otherList.hashCode());
     }
+
 }
