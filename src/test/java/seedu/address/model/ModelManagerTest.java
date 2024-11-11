@@ -92,6 +92,16 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+    @Test
+    public void getDisplayNote() {
+        // displayNote should be false initially
+        assertFalse(ModelManager.getDisplayNote());
+
+        modelManager.viewNote(ALICE);
+
+        // displayNote set back to false after viewNote called
+        assertFalse(ModelManager.getDisplayNote());
+    }
 
     @Test
     public void equals() {

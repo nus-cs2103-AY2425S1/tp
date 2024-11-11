@@ -62,6 +62,7 @@ public class DeleteCommand extends Command {
      * @param confirmationController provides the result for confirm deletion.
      */
     public DeleteCommand(Name targetName, ConfirmationController confirmationController) {
+        assert confirmationController != null;
         this.targetName = targetName;
         this.targetIndex = null;
         this.confirmationController = confirmationController;
@@ -73,6 +74,7 @@ public class DeleteCommand extends Command {
      * @param confirmationController provides the result for confirm deletion.
      */
     public DeleteCommand(Index targetIndex, ConfirmationController confirmationController) {
+        assert confirmationController != null;
         this.targetIndex = targetIndex;
         this.targetName = null;
         this.confirmationController = confirmationController;
@@ -94,6 +96,7 @@ public class DeleteCommand extends Command {
      * @return true if the user confirms deletion, false otherwise.
      */
     private boolean isDeletionConfirmed(Person personToDelete) {
+        assert personToDelete != null;
         return confirmationController.isConfirmed(
                 "Confirm Delete",
                 String.format(MESSAGE_CONFIRMATION, personToDelete.getName())

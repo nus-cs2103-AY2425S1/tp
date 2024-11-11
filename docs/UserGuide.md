@@ -55,9 +55,9 @@ Your terminal should look something like this right before entering the last com
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## <i class="fa-solid fa-address-book"></i> Features
 
-<box type="info" seamless>
+<box type="info" icon=":fa-solid-circle-info:" no-background light >
 
 **Notes about the command format:**<br>
 
@@ -68,7 +68,7 @@ Your terminal should look something like this right before entering the last com
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/patient`, `t/patient t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -90,11 +90,14 @@ Your terminal should look something like this right before entering the last com
 <br>
 
 
-### Adding a person: `add`
+### <i class="fa-solid fa-user-plus"></i> Adding a patient contact: `add`
 
-Adds a person to the address book.
-
-**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
+Adds a patient contact to the address book.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
+<md>**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX
+[ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
+</md>
+</box>
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
@@ -104,29 +107,30 @@ Adds a person to the address book.
 - `FUTURE APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be after your current time.
 - `TAG` must only contain alphanumeric characters.
 
-<box type="tip" seamless>
+<box type="tip" no-background light>
 
 **Remarks**: 
 
 - Duplicate **names** are not permitted. MediContact cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 
-- A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
+- A patient can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
 
-- A person can have any number of future appointments (including 0).
+- A patient can have any number of future appointments (including 0).
 
-- A person's sex is not limited to Male/Female/Other to provide you with more flexibility.
+- A patient's sex is not limited to Male/Female/Other to provide you with more flexibility.
 
-- A person aged 0 is allowed for accurate tracking of a newborns age. 
+- A patient aged 0 is allowed for accurate tracking of a newborns age. 
 
 - There is also a higher age limit of 999 to provide you with more flexibility.
 
 - Duplicate phone numbers are allowed for cases like parents and children sharing a same number.
 
 - Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
-
-  </box>
+</box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
+
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2025 1100`
@@ -138,75 +142,85 @@ Adds a person to the address book.
 **Output**<br>
 
 <img src="images/addCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Clearing all entries : `clear`
+### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all patient entries from the address book.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `clear`
+</box>
 
-<box type="warning" seamless>
+<box type="warning" icon=":fa-solid-circle-info:" light no-background>
 
-**Warning**: After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
+**Warning**: After confirmation, any cleared data or patient contact cannot be retrieved. This action is IRREVERSIBLE.
 
 </box>
 
 * Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting-the-data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
-* You can directly delete the addressbook.json file which can be found in data folder or in the data directory if you want to recover the sample data.
+* You can directly delete the `addressbook.json` file which can be found in data folder or in the data directory if you want to recover the sample data.
+
+<box type="important" light no-background>
 
 **Confirmation Requirement:**
 
-* A confirmation window will appear before clearing all contacts in MediContact, 
+* A confirmation window will appear before clearing all patient contacts in MediContact, 
 asking you to confirm if you are sure you want to proceed. 
-You must select “OK” to clear the address book. If you select “Cancel,” 
+You must select `OK` to clear the address book. If you select `Cancel`, 
 the action will be aborted, and the address book will remain unchanged.
-* Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
+* Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
 <img src="images/clearConfirmation.png" width="800">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
 
-### Deleting a person : `delete`
+### <i class="fa-solid fa-user-slash"></i> Deleting a patient contact: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient contact from the address book.
+
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `delete INDEX` / `delete NAME`
+</box>
 
-<box type="warning" seamless>
+<box type="warning" icon=":fa-solid-circle-info:" light no-background>
 
-**Warning**: After confirmation, any deleted data or contact cannot be retrieved. This action is IRREVERSIBLE.
+**Warning**: After confirmation, any deleted data or patient contact cannot be retrieved. This action is IRREVERSIBLE.
 
 </box>
 
-* Deletes the person at the specified `INDEX` or with the specified `NAME`.
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The name provided must be the person's full name.
+* Deletes the patient contact at the specified `INDEX` or with the specified `NAME`.
+* The `NAME` refers to the full name as shown in the displayed patient contact list.
+* The `INDEX` refers to the index number shown in the displayed patient contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+* The `NAME` provided must be the patient's full name.
+<box type="important" light no-background>
 
 **Confirmation Requirement:**
 
-* A confirmation window will appear before deleting a person, asking you to confirm the deletion.
-  You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted,
-  and the person will not be deleted.
-* Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
+* A confirmation window will appear before deleting a patient contact, asking you to confirm the deletion.
+  You must select `OK` to proceed with the deletion. If you select `Cancel` the action will be aborted,
+  and the patient contact will not be deleted.
+* Keyboard commands such as `Enter`, `Return`, and `Space` act as shortcuts to select the OK button, while `Esc` triggers the cancel button.
 
 <img src="images/deleteConfirmation.png" width="800">
+</box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 
-* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the person with name `Evie Sage` in the address book.
-* `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.<br>
+* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the patient with name `Evie Sage` in the address book.
+* `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd patient contact in the address book.
+* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st patient contact in the results of the `find` command.<br>
 
 **Input**<br>
 
@@ -215,23 +229,27 @@ Deletes the specified person from the address book.
 **Output**<br>
 
 <img src="images/deleteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Editing a person : `edit`
+### <i class="fa-solid fa-pen"></i> Editing a patient contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing patient contact in the address book.
+
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
+</box>
 
-* Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+* Edits the patient with the specified `NAME`. 
+* The `NAME` refers to the full name shown in the displayed patient contact list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-<box type="tip" seamless>
+<box type="tip" light no-background>
 
 **Remarks**:
 
@@ -239,17 +257,19 @@ Edits an existing person in the address book.
 
 - Edited appointments are meant to be future appointments. If you would like to add previous appointments, please use the **Note command**.
 
-- When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
+- When editing tags/appointments, the existing tags/appointments of the patient will be added i.e adding of tags is cumulative.
 
-- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+- You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
 
-- You can remove all the person’s future appointments by typing `ap/` without specifying any appointments after it.
+- You can remove all the patient’s future appointments by typing `ap/` without specifying any appointments after it.
 
 - Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
 
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
+
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
@@ -260,31 +280,32 @@ Edits an existing person in the address book.
 **Output**<br>
 
 <img src="images/editCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-
-### Exiting the program : `exit`
+### <i class="fa-solid fa-right-from-bracket"></i> Exiting the program : `exit`
 
 Exits the program.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `exit`
+</box>
 
 [Return to Table of Contents](#medicontact)
-
+<br>
 <br>
 
-<br>
 
+### <i class="fa-solid fa-filter"></i> Filtering patient contacts by age group or appointment dates: `filter`
 
-### Filtering persons by age group or appointment dates: `filter`
-
-Filter persons whose age and/or appointment dates are within the specified range.
+Filter patients whose age and/or appointment dates are within the specified range.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]…​`
+</box>
 
 * The order of the keywords does not matter.
 * Only appointment dates and/or age group and/or tags can be used to filter.
@@ -294,18 +315,20 @@ Filter persons whose age and/or appointment dates are within the specified range
 * Each value for each field has to be a range (i.e. lower bound - upper bound)
 * At least one field (age or appointment dates or tags) has to be specified.
 * Range are inclusive (i.e. age 79 is considered True in specified range'79-99')
-* Persons must within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
+* Patients must be within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
   e.g. `filter b/70-99 ap/01/01/2025 - 01/01/2026` will return `Roy b/87 ap/11/11/2025`.
 
-<box type="tip" seamless>
+<box type="tip" light no-background>
 
 **Remarks**:
 
 - Fields in square brackets (e.g. `[t/TAG]`) are optional.
 
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
+
 * `filter b/70-79`
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
@@ -318,33 +341,39 @@ Filter persons whose age and/or appointment dates are within the specified range
 **Output**<br>
 
 <img src="images/filterCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Locating persons by name or phone number: `find`
+### <i class="fa-solid fa-magnifying-glass"></i> Locating patient contacts by name or phone number: `find`
 
-Finds persons whose names or phone numbers contain any of the given keywords.
+Finds patients whose names or phone numbers contain any of the given keywords.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find KEYWORD [MORE_KEYWORDS]`
+</box>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and phone number is searched.
+* Only the `name` and `phone number` can be searched as keywords.
 * Partial words will be matched e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
         `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
+
+<box type="tip" light no-background>
 
 **Remarks**:
 
 - Fields in square brackets (e.g. `[MORE_KEYWORDS]`) are optional.
 
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
-Examples:
+**Examples**:
+
 * `find John` returns `john` and `Johnny Doe`
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
@@ -358,37 +387,42 @@ Examples:
 **Output**<br>
 
 <img src="images/findCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Viewing help : `help`
+### <i class="fa-solid fa-circle-question"></i> Viewing help : `help`
 
 Shows you a help window with useful resources which includes:
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
+
+**Format**: `help`
+</box>
 
 - A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
 - A command summary table below the URL, displaying available commands, their formats, and examples.
 - You can copy the command format or example from the table and paste it into the command box.
 - You can click on the table headers to sort commands in ascending or descending order.
 
-**Format**: `help`
+<box type="warning" no-icon no-background light>
 
 <img src="images/helpWindow.png" width="800">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Importing contacts: `import`
+### <i class="fa-solid fa-file-import"></i> Importing patient contacts: `import`
 
-Imports contact info from the given json file into MediContact.
+Imports patient contact info from the given json file into MediContact.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `import FILENAME.json`
-
-<box type="tip" seamless>
+</box>
+<box type="tip" light no-background>
 
 **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting-the-data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected-format) for more details).
 
@@ -397,16 +431,17 @@ Imports contact info from the given json file into MediContact.
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
 - File **must** be in the same folder as the application JAR file. 
 - File **must** be in the expected format of MediContact data (see [Expected format](#expected-format) for more details). 
-- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details). No duplicate patient names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
 
-<box type="warning" seamless>
+<box type="important" icon=":fa-solid-triangle-exclamation:" light no-background>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. It is recommended **not** to manually edit the data file if you are not an expert user.
+If your changes to the data file makes its format invalid, MediContact will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the MediContact to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. It is recommended **not** to manually edit the data file if you are not an expert user.
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
-**Example**:
+**Examples**:
 
 - `import patientRecords.json`
 
@@ -421,6 +456,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
    <img src="images/importStep3.png" width="800"/>
+</box>
 
 ##### Expected format:
 
@@ -466,7 +502,7 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
+- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient contacts before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
 
   ````
   {
@@ -492,20 +528,25 @@ The following is an example of a valid JSON file content.
 - To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
 [Return to Table of Contents](#medicontact)
-
+<br>
 <br>
 
-<br>
 
+### <i class="fa-solid fa-list"></i> Listing all patient contacts : `list`
 
-### Listing all persons : `list`
+Shows an alphabetically sorted list of all patients in the address book.
 
-Shows an alphabetically sorted list of all persons in the address book.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `list`
+</box>
 
 * No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
+
+<box type="warning" icon=":fa-solid-book:" no-background light>
+
+**Examples**:
 
 **Input**<br>
 
@@ -514,21 +555,27 @@ Shows an alphabetically sorted list of all persons in the address book.
 **Output**<br>
 
 <img src="images/listCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
 
-### Listing starred persons : `list *`
+### <i class="fas fa-clipboard-list"></i> Listing starred patient contacts : `list *`
 
-Shows a list of all starred persons in the address book.
+Shows a list of all starred patient contacts in the address book.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `list *`
+</box>
 
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
+
+<box type="warning" icon=":fa-solid-book:" no-background light>
+
+**Examples**:
 
 **Input**<br>
 
@@ -537,23 +584,25 @@ Shows a list of all starred persons in the address book.
 **Output**<br>
 
 <img src="images/listStarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Editing a person's notes : `note`
+### <i class="fa-solid fa-note-sticky"></i> Editing a patient's notes : `note`
 
-Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+Edits an existing patient's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `note NAME [ap/PREVIOUS APPOINTMENTS] [m/MEDICATION] [r/REMARK]…​`
+</box>
 
-- Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+- Edits the patient's note with the specified `NAME`. The `NAME` refers to the full name shown in the displayed patient contact list.
 - `PREVIOUS APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be **before** your current time.
-- Both `MEDICATIONS` and `REMARKS` must only alphanumerical characters.
+- Both `MEDICATIONS` and `REMARKS` must only contain alphanumerical characters.
 
-<box type="tip" seamless>
+<box type="tip" light no-background>
 
 **Remarks**:
 
@@ -561,15 +610,16 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 
 - At least one of the fields must be provided.
 
-- When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+- When editing fields, the existing fields of the patient will be added i.e adding of medications is cumulative.
 
-- You can remove all the person’s previous appointments by typing `ap/` without specifying any appointments after it.
+- You can remove all the patient’s previous appointments by typing `ap/` without specifying any appointments after it.
 
-- You can remove all the person’s medications by typing `m/` without specifying any medications after it.
+- You can remove all the patient’s medications by typing `m/` without specifying any medications after it.
 
-- You can remove all the person’s remarks by typing `r/` without specifying any remarks after it.
+- You can remove all the patient’s remarks by typing `r/` without specifying any remarks after it.
 
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
@@ -582,30 +632,35 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 **Output**<br>
 
 <img src="images/noteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
 
-### Sorting list based on Appointment Dates : `sort`
+### <i class="fa-solid fa-arrow-up-wide-short"></i> Sorting patient contact list based on Appointment Dates : `sort`
 
-Sorts the persons in the address book on the basis of their earliest appointment dates.
+Sorts the patient contact list in the address book on the basis of their earliest appointment dates.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `sort`
+</box>
 
 * No other parameters should be supplied.
 
-<box type="tip" seamless>
+<box type="tip" light no-background>
 
 **Remarks**:
 
-- If contacts share an appointment timing, they will be sorted alphabetically by name.
+- If patient contacts share an appointment timing, they will be sorted alphabetically by name.
 
-- Any contacts without appointments will remain sorted alphabetically at the end of the list.
+- Any patient contacts without any appointment timings will remain sorted alphabetically at the end of the list.
 
 </box>
+<box type="warning" icon=":fa-solid-book:" no-background light>
+
+**Examples**: 
 
 **Input**<br>
 
@@ -614,28 +669,32 @@ Sorts the persons in the address book on the basis of their earliest appointment
 **Output**<br>
 
 <img src="images/sortCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Adding a person to favourites list : `star`
+### <i class="fa-solid fa-star"></i> Adding a patient contact to favourites list : `star`
 
-Stars the specified person from the address book into favourites.
+Stars the specified patient contact from the address book into favourites.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `star INDEX` / `star NAME`
+</box>
 
-* Stars the person at the specified `INDEX` or with the specified `NAME`.
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Stars the patient at the specified `INDEX` or with the specified `NAME`.
+* The `NAME` refers to the full name as shown in the displayed patient contact list.
+* The `INDEX` refers to the index number shown in the displayed patient contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 
-* `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
-* `list` followed by `star 2` stars the 2nd person in the address book.
-* `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+* `star Alex Yeoh` stars the patient with name `Alex Yeoh` in the address book.
+* `list` followed by `star 2` stars the 2nd patient contact in the address book.
+* `find Betsy` followed by `star 1` stars the 1st patient contact in the results of the `find` command.
 
 **Input**<br>
 
@@ -644,29 +703,33 @@ Stars the specified person from the address book into favourites.
 **Output**<br>
 
 <img src="images/starCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
 
-### Removing a person from favourites list : `unstar`
+### <i class="fa-regular fa-star"></i> Removing a patient contact from favourites list : `unstar`
 
-Unstars the specified person from the address book removing them from favourites.
+Unstars the specified patient contact from the address book removing them from favourites.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `unstar INDEX` / `unstar NAME`
+</box>
 
-* Unstars the person at the specified `INDEX` or with the specified `NAME`.
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Unstars the patient at the specified `INDEX` or with the specified `NAME`.
+* The `NAME` refers to the full name as shown in the displayed patient contact list.
+* The `INDEX` refers to the index number shown in the displayed patient contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 
-* `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
-* `list` followed by `unstar 2` unstars the 2nd person in the address book.
-* `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
+* `unstar Alex Yeoh` unstars the patient with name `Alex Yeoh` in the address book.
+* `list` followed by `unstar 2` unstars the 2nd patient contact in the address book.
+* `find Betsy` followed by `unstar 1` unstars the 1st patient contact in the results of the `find` command.
 
 **Input**<br>
 
@@ -675,29 +738,31 @@ Unstars the specified person from the address book removing them from favourites
 **Output**<br>
 
 <img src="images/unstarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Viewing a person's notes : `view`
+### <i class="fa-solid fa-eye"></i> Viewing a patient's notes : `view`
 
-Views an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+Views an existing patient's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+<box type="definition" icon=":fa-solid-spell-check:" light no-background>
 
 **Format**: `view INDEX` / `view NAME`
+</box>
 
-Views the person's note at the specified `INDEX` or with the specified `NAME`.
+* Views the patient's note at the specified `INDEX` or with the specified `NAME`.
+* The `NAME` refers to the full name as shown in the displayed patient contact list.
+* The `INDEX` refers to the index number shown in the displayed patient contact list.
+* The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
-* The name refers to the full name as shown in the displayed person list.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The name provided must be the person's full name.
+<box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
 
 *  `view John Doe`
-*  `view 1` shows all details of the 1st person's details including notes.
+*  `view 1` shows all details of the 1st patient's details including notes.
 
 **Input**<br>
 
@@ -706,27 +771,25 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 **Output**<br>
 
 <img src="images/viewCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
+</box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
 <br>
 
-### Saving the data
+### <i class="fa-solid fa-floppy-disk"></i> Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediContact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Return to Table of Contents](#medicontact)
-
+<br>
 <br>
 
-<br>
-
-### Exporting the data
+### <i class="fa-solid fa-file-export"></i> Exporting the data
 
 - Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
 
-<box type="warning" seamless>
+<box type="warning" icon=":fa-solid-circle-info:" light no-background>
 
 **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
 
@@ -738,11 +801,11 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 <br>
 
-### Editing the data file
+### <i class="fa-solid fa-pen"></i> Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="important" icon=":fa-solid-triangle-exclamation:" light no-background>
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -750,14 +813,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 </box>
 
 [Return to Table of Contents](#medicontact)
-
 <br>
-
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## <i class="fa-solid fa-question"></i> FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
@@ -782,7 +843,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## <i class="fa-solid fa-triangle-exclamation"></i> Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -791,7 +852,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## <i class="fas fa-file-alt"></i> Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                                                    |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -815,7 +876,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Summary of parameter constraints
+## <i class="fas fa-file-alt"></i> Summary of parameter constraints
 
 | Parameter              | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ---------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
