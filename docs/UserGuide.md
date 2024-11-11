@@ -257,7 +257,7 @@ Note that the app initially contains some sample data.
 
 # GUI summary
 
-We have labelled the various parts of DLTbooks GUI for your reference:
+We have labelled the various parts of DLTbook's GUI for your reference:
 
 ![GUI summary](images/GUISummary.png)
 
@@ -870,5 +870,5 @@ exactly describe this error. This shall be fixed in the future.
 | **GUI**                            | Graphical User Interface, allows users to interact with electronic devices through graphical icons and visual indicators.                                                                            |
 | **JAR**                            | Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                                          |
 | **JSON**                           | JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.                                            |
-| **Public Address**                 | A unique series of alphanumerical charecters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
+| **Public Address**                 | A unique series of alphanumerical characters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
 | **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
