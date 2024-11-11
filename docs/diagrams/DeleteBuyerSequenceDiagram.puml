@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":ClientBookParser" as ClientBookParser LOGIC_COLOR
+participant ":ClientGridParser" as ClientBookParser LOGIC_COLOR
 participant ":DeleteBuyerCommandParser" as DeleteBuyerCommandParser LOGIC_COLOR
 participant "d:DeleteBuyerCommand" as DeleteBuyerCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -41,12 +41,13 @@ DeleteBuyerCommandParser --> ClientBookParser : d
 deactivate DeleteBuyerCommandParser
 
 ClientBookParser --> LogicManager : d
+destroy DeleteBuyerCommandParser
 deactivate ClientBookParser
 
 LogicManager -> DeleteBuyerCommand : execute(m)
 activate DeleteBuyerCommand
 
-DeleteBuyerCommand -> Model : deleteBuyer(phoneNumber)
+DeleteBuyerCommand -> Model : deleteClient(client)
 activate Model
 
 Model --> DeleteBuyerCommand
