@@ -66,18 +66,9 @@ public class DeleteWeddingCommand extends Command {
                         for (Person person : model.getFilteredPersonList()) {
                             HashSet<Wedding> personWeddings = new HashSet<>(person.getWeddings());
                             if (personWeddings.contains(wedding)) {
-                                personWeddings.remove(wedding);
-                                Person newPerson = new Person(
-                                        person.getName(),
-                                        person.getPhone(),
-                                        person.getEmail(),
-                                        person.getAddress(),
-                                        person.getTags(),
-                                        personWeddings,
-                                        person.getTasks()
-                                );
+                                Person newPerson = PersonWeddingUtil.getNewPerson(person, personWeddings);
+                                newPerson.removeWedding(wedding);
                                 model.setPerson(person, newPerson);
-                                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                             }
                         }
                         model.deleteWedding(wedding);

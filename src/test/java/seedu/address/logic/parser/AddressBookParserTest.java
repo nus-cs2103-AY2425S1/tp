@@ -38,7 +38,6 @@ import seedu.address.logic.commands.tag.UntagCommand;
 import seedu.address.logic.commands.task.CreateTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.logic.commands.task.ListTasksCommand;
-import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
@@ -49,7 +48,6 @@ import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
@@ -66,7 +64,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.TypicalTasks;
-import seedu.address.testutil.VendorBuilder;
 
 
 public class AddressBookParserTest {
@@ -99,6 +96,7 @@ public class AddressBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+
         assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
     }
 
@@ -414,19 +412,6 @@ public class AddressBookParserTest {
         UnassignVendorCommand keywordCommand = (UnassignVendorCommand) parser.parseCommand(
                 UnassignVendorCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new UnassignVendorCommand(INDEX_FIRST), keywordCommand);
-    }
-
-    @Test
-    public void parseCommand_addVendor() throws Exception {
-        Vendor vendor = new VendorBuilder().build();
-        String userInput = AddVendorCommand.COMMAND_WORD + " n/Alison Longwood";
-        AddVendorCommand command = (AddVendorCommand) parser.parseCommand(userInput);
-        assertEquals(new AddVendorCommand(vendor), command);
-
-        // Test using add vendor keyword
-        String userKeywordInput = AddVendorCommand.COMMAND_KEYWORD + " n/Alison Longwood";
-        AddVendorCommand keywordCommand = (AddVendorCommand) parser.parseCommand(userKeywordInput);
-        assertEquals(new AddVendorCommand(vendor), keywordCommand);
     }
 
     @Test

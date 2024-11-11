@@ -11,7 +11,6 @@ import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,13 +33,13 @@ public class UnassignVendorCommandParser implements Parser<UnassignVendorCommand
         try {
             Index index;
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FORCE);
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = Index.oneBasedNoConstraints(Integer.parseInt(argMultimap.getPreamble().trim()));
             if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
                 return new UnassignVendorCommand(index, true);
             } else {
                 return new UnassignVendorCommand(index);
             }
-        } catch (ParseException pe) {
+        } catch (NumberFormatException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignVendorCommand.MESSAGE_USAGE), pe);
         }
