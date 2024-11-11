@@ -529,7 +529,7 @@ Term     | Definition
 **Java Archive (Jar)** | A file format used to package multiple files into one file for distribution. 
 **JavaScript Object Notation (JSON)** | A readable format to represent structured data, which is commonly used for web applications.
 **Order** | The order that the user would like the list to be in, based on the date of application.
-**Parameter** | The details needed for to perform specific commands. (e.g. Add command has a parameter for company name) 
+**Parameter** | The details needed to perform specific commands. (e.g. Add command has a parameter for company name) 
 **Role** | The role of the internship the user applied for.
 **Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
 
