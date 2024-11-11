@@ -82,7 +82,7 @@ benefits of a Graphical User Interface (GUI).
    
     * `backup` : Creates a backup by default naming (`manual_backup`).
    
-    * `restore 0` : Prompts a confirmation message and restore backup file from the /backups/ path with the naming starts with index 0 by typing `Y'.
+    * `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
    
     * `listbackups` : Lists all available backup files in the /backups/ path.
 
@@ -245,7 +245,7 @@ Examples:
 * `list` followed by `delete 1` deletes the first patient in the list.
 * `find Betsy` followed by `delete 1` deletes the first patient in the results of the `find` command.
 
-![delete](images/deletepatient.png)
+![delete](images/delete.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -255,7 +255,7 @@ Clears all entries from ClinicBuddy.
 
 Format: `clear`
 
-![clear](images/clearentries.png)
+![clear](images/clear.png)
 
 
 ### Listing all patients : `list`
@@ -403,27 +403,25 @@ save manually.
 
 ### Backup the records : `backup`
 
-ClinicBuddy ensures the security and recovery of patient records through manual and automated backup options.
+ClinicBuddy ensures the security and recovery of patient records through manual and automated backups.
 These are useful to save the state of your current data at a specific point in time.
 
 #### **Manual Backup: Save your current data**
 - The `backup` command allows users to manually save a copy of their current patient records.
 
-
 - Key Features:
   - **Description Option:** You can add a meaningful description to identify the backup.
-  - **Indexed Backups:** Backup files are automatically assigned an index (0–9).
+  - **Indexed Backups:** Backup files are automatically assigned an index (`0`–`9`).
   - **Automated Deletion:** Only the latest 10 backups are retained to optimize storage.
-
 
 - How Manual Backup Works:
   - **Basic Command:** Input `backup` to create a backup with a default description (`manual_backup`).
   - **Custom Description:** Use `backup DESCRIPTION` to label your backup with details about changes.
   - **File Location:** Backups are stored in `[Application Directory]/backups/`.
-  - Each backup file is assigned the timestamp of creation time and an index number from `0` to `9`.
+  - Each backup file is assigned a timestamp of the creation time and an index number.
   - The index will reset to `0` after reaching `9`, **overwriting** the oldest backup file.
   
-- Naming Format:
+- File Naming Format:
   ```
   INDEX_DESCRIPTION_TIMESTAMP.json
   ```
@@ -438,7 +436,7 @@ These are useful to save the state of your current data at a specific point in t
 - A backup name is limited to 250 characters only.
  </div>
 
-![manual_backup](images/manualbackup.png)
+![manual_backup](images/manual_backup.png)
 
 #### **Automated Backup: Ensure data safety with minimal effort**
 - ClinicBuddy automatically creates backups during critical operations:
@@ -448,7 +446,7 @@ These are useful to save the state of your current data at a specific point in t
 - How Automated Backup Works:
     - **Description Naming:** Backups are labeled with the action, such as `delete_<name>` or `clear`.
     - **No User Action Required:** These backups are generated automatically and stored in the same `/backups/` folder.
-    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain the timestamp of creation time.
+    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain a timestamp of the creation time.
 
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
@@ -456,9 +454,7 @@ These are useful to save the state of your current data at a specific point in t
   ```
   1_clear_2024-10-30_18-05-29-745.json
   ```
-![delete_patient](images/deletepatient.png)
-![clear_entries-](images/clearentries.png)
-
+![automated_backup](images/automatedbackup.png)
 
 ### Listing all backups : `listbackups`
 
@@ -496,7 +492,6 @@ Format: `restore INDEX`
 #### How Restore Works:
 - **View Available Backups:** Use the listbackups command to display all backup files. 
 - **Restore Command:** Enter restore INDEX to restore the backup with the specified index. 
-- **Confirmation Prompt:** You will be asked to confirm before proceeding with the restoration.
 - Example:
   ```
   restore 2
@@ -505,11 +500,9 @@ Format: `restore INDEX`
 <div markdown="span" class="alert alert-primary">:bangbang:
 **Warnings:** <br>
 - Restoring a backup overwrites all current patient records.<br>
-- Create a manual backup before restoring to preserve recent changes.<br>
-- Restoring without confirmation is not allowed, preventing accidental data loss.
+- It is suggested to create a manual backup before restoring to preserve recent changes.<br>
  </div>
 
-![confirmation](images/confirmation.png)
 ![resto re](images/restore.png)
 
 <div style="page-break-after: always;"></div>
@@ -550,15 +543,11 @@ the data of your previous AddressBook home folder.
 **Q**: What if I forget the command formats?<br>
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
 
-**Q**: Can I cancel a restore operation if I change my mind?<br>
-**A**: Yes. The restore operation prompts for confirmation. If you cancel the operation by typing anything other than `Y`, no changes will be made to your current records.
-
 **Q**: How are backups sorted in the listbackups command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
 
 **Q**: Is there a limit on the number of backups I can store?
 **A**: Yes. ClinicBuddy retains only the 10 most recent backups for storage efficiency. Older backups are automatically overwritten when a new backup is created.
-
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -579,7 +568,7 @@ the data of your previous AddressBook home folder.
    **Solution:** Double-check the format of date and time inputs before submission.
 
 5. The `restore` command **overwrites current patient records with backup data**. This could lead to unintentional loss of recent changes. <br>
-   **Solution:** Always create a new **backup before performing a restore to preserve current records.
+   **Solution:** Always create a new **backup** before performing a restore to preserve current records.
 
 6. **Updating operating hours will fail** if there are existing appointments outside the new hours. <br>
    **Solution:** Use the `deleteappt` command to delete or `update` appointments that fall outside the proposed hours before making the update.
@@ -598,9 +587,6 @@ the data of your previous AddressBook home folder.
 
 11. The backup list is **sorted by timestamp** but may not match user expectations (e.g., expecting sorting by index).<br>
     **Solution:** Understand that backups are sorted by creation time, not index, to locate backups accurately.
-
-12. The restore operation **requires confirmation**, but users might overlook this step, causing confusion.<br>
-    **Solution:** Pay attention to the confirmation message and respond as instructed (Y to confirm or any other key to cancel).
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>

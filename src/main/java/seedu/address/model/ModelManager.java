@@ -230,6 +230,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deletePerson(Person target) {
+        triggerBackup("delete_" + target.getName().fullName, target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
     }
@@ -302,6 +303,21 @@ public class ModelManager implements Model {
     // ============ Filtered Person List Accessors =======================================================
 
     /**
+     * Triggers a backup for a specified action, including the target person’s details.
+     *
+     * @param actionDescription A description for the action being backed up.
+     * @param target            The person involved in the action.
+     */
+    protected void triggerBackup(String actionDescription, Person target) {
+        try {
+            int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
+            logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
+        } catch (IOException e) {
+            logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
+        }
+    }
+
+    /**
      * Retrieves the list of persons filtered by the current filter predicate.
      *
      * @return The filtered list of persons.
@@ -348,10 +364,7 @@ public class ModelManager implements Model {
             logger.info("Manual backup created at index " + backupIndex + ": " + actionDescription);
             return backupIndex;
         } catch (IOException e) {
-            // Handle long file name error
-            if (e.getMessage().contains("maximum length")) {
-                throw new CommandException("Failed to create backup: " + e.getMessage());
-            }
+            logger.warning("Manual backup failed: " + e.getMessage());
             throw new CommandException("Failed to create manual backup: " + e.getMessage());
         }
     }
@@ -397,20 +410,6 @@ public class ModelManager implements Model {
             throw new IOException("Storage is not initialized!");
         }
         return storage.listBackups();
-    }
-
-    /**
-     * Checks whether a backup exists for the specified index.
-     *
-     * @param index The index of the backup to check.
-     * @return True if a backup exists for the index, otherwise false.
-     */
-    @Override
-    public boolean isBackupAvailable(int index) {
-        if (storage == null) {
-            return false;
-        }
-        return backupManager.isBackupAvailable(index);
     }
 
     // ============ Equality and Storage Access Methods ==================================================

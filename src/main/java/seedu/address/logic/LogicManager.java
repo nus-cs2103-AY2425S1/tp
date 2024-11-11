@@ -10,7 +10,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -39,8 +38,6 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private boolean awaitingConfirmation = false;
-    private Command pendingCommand;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -51,67 +48,20 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
-    /**
-     * Executes the user command and returns the result.
-     * <p>
-     * If a command requires confirmation, the method handles the confirmation flow by
-     * storing the pending command and awaiting the user's response. If the command modifies
-     * data and does not require confirmation, the address book is saved after execution.
-     * </p>
-     *
-     * @param commandText The user input string.
-     * @return The result of command execution.
-     * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException   If an error occurs during parsing.
-     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
 
-        if (awaitingConfirmation) {
-            // Handle the user's response to the confirmation prompt
-            String userResponse = commandText.trim();
-            if (userResponse.equals("Y")) {
-                // User confirmed; re-execute the pending command with confirmation
-                if (pendingCommand instanceof RestoreCommand) {
-                    RestoreCommand previousCommand = (RestoreCommand) pendingCommand;
-                    RestoreCommand confirmedCommand = new RestoreCommand(previousCommand.getIndex(), true);
-                    pendingCommand = null;
-                    awaitingConfirmation = false;
-                    commandResult = confirmedCommand.execute(model);
-                } else {
-                    // Handle other commands that might require confirmation
-                    awaitingConfirmation = false;
-                    pendingCommand = null;
-                    throw new CommandException("Confirmation not handled for this command.");
-                }
-            } else {
-                awaitingConfirmation = false;
-                pendingCommand = null;
-                return new CommandResult(RestoreCommand.MESSAGE_CANCELLED);
-            }
-        } else {
-            // Parse and execute the new command
-            Command command = addressBookParser.parseCommand(commandText);
-            commandResult = command.execute(model);
+        Command command = addressBookParser.parseCommand(commandText);
+        commandResult = command.execute(model);
 
-            if (commandResult.requiresConfirmation()) {
-                awaitingConfirmation = true;
-                pendingCommand = command;
-                return commandResult;
-            }
-        }
-
-        // Save the address book if the command modifies data
-        if (!commandResult.requiresConfirmation()) {
-            try {
-                storage.saveAddressBook(model.getAddressBook());
-            } catch (AccessDeniedException e) {
-                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-            } catch (IOException ioe) {
-                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-            }
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
         return commandResult;

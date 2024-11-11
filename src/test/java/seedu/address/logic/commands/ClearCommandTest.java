@@ -18,17 +18,13 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code ClearCommand}.
  */
 public class ClearCommandTest {
-
     @TempDir
     public Path temporaryFolder;
-
     private StorageManager storage;
-
     /**
      * Sets up the test environment with the required model and storage.
      */
@@ -40,11 +36,9 @@ public class ClearCommandTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
     }
-
     private Model createModelWithAddressBook(AddressBook addressBook) throws IOException {
         return new ModelManagerWithBackupCount(addressBook, new UserPrefs(), storage);
     }
-
     /**
      * Tests the successful execution of clearing an empty address book, ensuring a backup is created.
      */
@@ -55,20 +49,11 @@ public class ClearCommandTest {
         ModelManagerWithBackupCount expectedModel =
                 (ModelManagerWithBackupCount) createModelWithAddressBook(new AddressBook());
 
-        String description = "clear";
-        int expectedBackupIndex = 1;
-
-        // Increment backup count in expected model
-        expectedModel.backupData(description);
-
-        String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, expectedBackupIndex, description);
-
-        assertCommandSuccess(new ClearCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
 
         // Verify a backup was created before clearing
         assertEquals(1, model.getBackupCount(), "Backup should be created once before clearing");
     }
-
     /**
      * Tests the successful execution of clearing a non-empty address book, ensuring a backup is created.
      */
@@ -80,37 +65,25 @@ public class ClearCommandTest {
                 (ModelManagerWithBackupCount) createModelWithAddressBook(getTypicalAddressBook());
         expectedModel.setAddressBook(new AddressBook());
 
-        String description = "clear";
-        int expectedBackupIndex = 1;
-
-        // Increment backup count in expected model
-        expectedModel.backupData(description);
-
-        String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, expectedBackupIndex, description);
-
-        assertCommandSuccess(new ClearCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
 
         // Verify a backup was created before clearing
         assertEquals(1, model.getBackupCount(), "Backup should be created once before clearing");
     }
-
     /**
      * A custom ModelManager that counts backup calls.
      */
     private static class ModelManagerWithBackupCount extends ModelManager {
         private int backupCount = 0;
-
         ModelManagerWithBackupCount(AddressBook addressBook, UserPrefs userPrefs, StorageManager storage)
                 throws IOException {
             super(addressBook, userPrefs, storage);
         }
-
         @Override
         public int backupData(String actionDescription) {
             backupCount++;
             return backupCount;
         }
-
         public int getBackupCount() {
             return backupCount;
         }

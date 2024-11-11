@@ -123,14 +123,6 @@ public class BackupManager {
         }
 
         String backupFileName = String.format("%d_%s_%s.json", usedIndex, actionDescription, timestamp);
-
-        // Check if the file name exceeds the limit
-        if (backupFileName.length() > MAX_FILENAME_LENGTH) {
-            throw new IOException("Backup file name exceeds the maximum length of "
-                    + MAX_FILENAME_LENGTH
-                    + " characters. Please shorten your description.");
-        }
-
         Path backupPath = backupDirectory.resolve(backupFileName);
 
         // Copy source to the backup path
@@ -277,22 +269,6 @@ public class BackupManager {
         } catch (IOException e) {
             logger.warning("Failed to get file creation time for " + path + ": " + e.getMessage());
             return FileTime.fromMillis(0);
-        }
-    }
-
-    /**
-     * Checks if a backup file exists at the specified index.
-     *
-     * @param index The index of the backup to check.
-     * @return {@code true} if the backup exists, {@code false} otherwise.
-     * @throws IOException If an error occurs while accessing the backup directory.
-     */
-    public boolean isBackupAvailable(int index) {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            return backups.anyMatch(path -> extractIndex(path) == index);
-        } catch (IOException e) {
-            logger.warning("Failed to check backup availability: " + e.getMessage());
-            return false;
         }
     }
 
