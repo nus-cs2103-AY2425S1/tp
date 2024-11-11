@@ -78,7 +78,7 @@ experience to their clients without being weighed down by administrative burdens
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/ankle sprain` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/ankle sprain`, `t/anklesprain t/acl tear` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/ankle sprain`, `t/ankle sprain t/acl tear` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -86,7 +86,7 @@ experience to their clients without being weighed down by administrative burdens
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b> across all commands that require it, and it will be displayed in lowercase.
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b> across all commands that require it, and it will be displayed in <b>lowercase</b>.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -109,7 +109,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0) and each tag has a maximum length of 30 characters including spaces.
 </div>
 
-* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b>, and it will be displayed in lowercase.
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b>, and it will be displayed in <b>lowercase</b>.
 * Persons in PhysioPal can share the same phone number, email and address.
 * Persons with dashes, commas, slashes and periods in name should be omitted. For example,
   persons with `s/o` or `d/o` in name should be entered as `s o` and `d o` respectively.
@@ -175,8 +175,9 @@ The name must match the full name exactly
 - Email
 - Address
 - Condition
-- Schedule (including its details such as date, note and payment status)
 - Reminder Note
+- Schedule (including appointment details such as date, note and payment status)
+
 
 **Note:** Pressing `Esc` closes the pop-up window and refocuses on the command input bar in the main window.
 
@@ -196,7 +197,8 @@ Format: `find KEYWORD [MORE_KEYWORDS] || p/PHONE`
 * Only the name or the number is searched.
 * Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `hans gruber`, `bo yang`
-* Persons matching the phone number (or parts of it) will be returned
+* Persons matching the phone number (or parts of it) will be returned.
+* Phone number input must not have any spaces in between.
 
 Examples:
 * `find john` returns `john` and `john doe`
@@ -279,7 +281,7 @@ Examples:
 * `appointment-list d/2024-10-17`
    <br>Displays all appointments scheduled for October 17, 2024, if this date has not yet passed the current local date.
 * `appointment-list d/2024-10-18 1000` 
-   <br>Displays the appointment scheduled for October 17, 2024, 10:00am, if this date and time has not yet passed the current local date and time
+   <br>Displays the appointment scheduled for October 18, 2024, 10:00am, if this date and time has not yet passed the current local date and time
 
 ### Setting a reminder note: `reminder`
 
@@ -361,14 +363,14 @@ Furthermore, certain edits can cause the PhysioPal to behave in unexpected ways 
 * **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
 * **Appointment details**: Information on the appointment including date, time, notes and payment details.
 * **Client**: A person receiving services from the physiotherapist. He/she should have 
-a unique name (not case-sensitive).
+a unique name (case-insensitive).
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, tags etc.
 * **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement,
 strength, flexibility, or overall physical function.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
 * **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
-* **Tag**: A label to indicate the treatment type of the client.
+* **Tag**: A label to indicate the client's condition.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -397,10 +399,10 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
-**Find** | `find [KEYWORD] [MORE_KEYWORDS] / [p/PHONE]`<br> e.g., `find James Jake` `find p/8357 2348`
+**Find** | `find KEYWORD [MORE_KEYWORDS] / p/PHONE`<br> e.g., `find James Jake` `find p/83572348`
 **Help** | `help`
 **List** | `list`
-**Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe 2024-10-20 1100 pay/paid`
+**Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe d/2024-10-20 1100 pay/paid`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Reminder Delete** | `reminder-delete NAME`
 **Schedule** | `schedule NAME d/DATE_AND_TIME…​ note/NOTES…​`

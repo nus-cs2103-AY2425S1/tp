@@ -995,7 +995,7 @@ and does not accept duplicate names, so there will never be a case where more th
 
 **Team Size - 5**
 
-### **1. Support Multiple clients with the Same Name**
+### 1. Support Multiple clients with the Same Name
 **Current Feature Flaw**<br>
 
 PhysioPal currently does not allow duplicate names, which does not reflect real-world scenarios where different clients may have identical names.
@@ -1011,7 +1011,7 @@ PhysioPal currently does not allow duplicate names, which does not reflect real-
          - A list of all clients with the same name is displayed.
          - Users can select the desired client by modifying the command input to include the appropriate index number.
 
-### **2. Allow Special Characters in Names**
+### 2. Allow Special Characters in Names
 **Current Feature Flaw**<br>
 
 PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a person's legal name.
@@ -1020,7 +1020,7 @@ PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a p
 
 Change the check in the add command to allow for special characters in names.
 
-### **3. Enhance Name Display**
+### 3. Enhance Name Display
 **Current Feature Flaw**<br>
 
 PhysioPal's UI displays all names in lowercase, which may not reflect the actual case formatting of users' names.    
@@ -1029,7 +1029,7 @@ PhysioPal's UI displays all names in lowercase, which may not reflect the actual
 
 Modify the UI to display names as they were originally entered, preserving their case formatting.
 
-### **4. Set Reminders for Specific Appointments**
+### 4. Set Reminders for Specific Appointments
 **Current Feature Flaw**<br>
 
 PhysioPal only allows reminders at the client level, limiting users to set reminders only for the next upcoming appointment. This prevents users from setting reminders for each appointment.
@@ -1039,7 +1039,7 @@ PhysioPal only allows reminders at the client level, limiting users to set remin
     1. Users will be able to set a reminder for any scheduled appointment.
 2. Update the command syntax to `REMINDER NAME d/DATE_AND_TIME r/REMINDER_TIME`
 
-### **5. Enhance Reminder Feature**
+### 5. Enhance Reminder Feature
 **Current Feature Flaw**<br>
 
 Currently, PhysioPal sets a reminder note for clients. However, the system to send these reminders have yet to be implemented. 
@@ -1050,7 +1050,7 @@ Currently, PhysioPal sets a reminder note for clients. However, the system to se
 2. Reminders are displayed in chronological order, with the soonest reminders appearing at the top of the list.
 3. As reminders expire (i.e once the appointment time passes), they are automatically removed from the Reminders box.
 
-### **6. Make Scheduling Cumulative**
+### 6. Make Scheduling Cumulative
 **Current Feature Flaw**<br>
 
 PhysioPal’s schedule command replaces a person's existing appointments with new ones, instead of adding to the current list of schedules.
@@ -1063,7 +1063,7 @@ Update the schedule command to append new appointments to the existing list of s
 2. Validate for any duplicate or conflicting time slots.
 3. Append the new schedules to the existing ones.
 
-### **7. Make 'Empty Note in Schedule' Error Message More Specific**
+### 7. Make 'Empty Note in Schedule' Error Message More Specific
 **Current Feature Flaw**<br>
 
 The current error message for an empty note in the schedule command `Invalid command format!
@@ -1074,7 +1074,7 @@ Example: schedule John Doe d/2024-10-17 1200 note/first appointment` is too gene
 
 Update the error message to specifically indicate that the note cannot be empty: The note field cannot be empty. Please provide a note for the appointment.
 
-### **8. Validate No-Change Edits in Edit Command**
+### 8. Validate No-Change Edits in Edit Command
 **Current Feature Flaw**<br>
 
 Currently, if a user calls the `edit` command but does not change any information (e.g they enter the same values for all fields), PhysioPal still returns a success message.
@@ -1082,6 +1082,14 @@ Currently, if a user calls the `edit` command but does not change any informatio
 **Proposed Implementation**<br>
 1. Update the `edit` command to check if the new input values are identical to the existing data.
 2. If no changes are detected, an error message will be displayed, such as `No changes detected. Please enter different values to update the record.`.
+
+### 9. Enable Information Wrapping in Client Window
+**Current Feature Flaw**  
+PhysioPal currently truncates long client details (address, email, name, and medical condition) in the client window, limiting readability.
+
+**Proposed Implementation**
+1. Modify `ClientWindow` to enable wrapping for long fields, ensuring full details are visible across multiple lines.
+2. Use `Text` or `TextArea` components with word-wrapping for address, email, and medical condition fields. The name field will also wrap if it exceeds the header width.
 
 ## **Appendix: Effort**
 
