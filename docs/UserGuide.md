@@ -125,17 +125,16 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters).
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
-* The `BUYER_EMAIL` should follow the format `local-part@domain` and adhere to the following constraints:
+* The `BUYER_EMAIL` should be of the format `local-part@domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by an `@` and then a `domain`.
   * The `domain` must:
-    * consist of one or more domain labels separated by single periods.
-      * each domain label must start and end with alphanumeric characters.
+    * Consist of one or more domain labels separated by a single period.
+      * Each domain label must start and end with alphanumeric characters.
       * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
   * Examples:
-    * Single-label domain: `example@gmail.com` (where `gmail.com` is the domain and `.com` is the TLD). 
-    * Multi-label domain: `example@u.nus.edu` (where `u.nus.edu` is the domain and `.edu` is the TLD).
+    * `example@gmail.com`, `example@u.nus.edu`.
 
 <box type="info" seamless>
 
@@ -406,11 +405,11 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 ## Glossary
 1. **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with a software application through visual elements such as buttons, icons, menus, and windows, instead of text-based commands. 
-2. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`).
-local-part: The portion of the email address before the `@` symbol. It identifies the specific mailbox. 
-3. **Domain**: The portion of the email address after the `@` symbol. 
-4. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`). 
-5. **Top-level domain (TLD)**: The last part of the domain name, such as `.com`, `.org`, or `.edu`. It generally indicates the type or location of the organization.
+2. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`). 
+3. **Local-part**: The portion of the email address before the `@` symbol.
+4. **Domain**: The portion of the email address after the `@` symbol. 
+5. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`). 
+6. **Top-level domain (TLD)**: The last part of the domain name, such as `com`, `org`, or `edu`. It generally indicates the type or location of the organization.
 
 --------------------------------------------------------------------------------------------------------------------
 
