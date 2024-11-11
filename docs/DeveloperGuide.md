@@ -124,7 +124,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the ClinicConnect system data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
-* stores all `FilteredAppointment` objects 
+* stores all `FilteredAppointment` objects
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -157,9 +157,9 @@ The `help` command opens a separate help window detailing a summary of the comma
 The user can optionally provide a `COMMAND_KEYWORD` which opens a separate help window showing more information about the specified command. <br>
 
 ##### Parsing User Input
-The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display. 
+The `HelpCommmandParser` class is responsible for parsing user input to extract the `COMMAND_KEYWORD` which determines which help window to display.
 It uses the `trim` method to remove any leading and trailing white-space characters from the user input.
-If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid. 
+If the user input is empty, the parser creates a `HelpCommand()` object. Alternatively, if a `COMMAND_KEYWORD` is provided, a `HelpCommand(COMMAND_KEYWORD)` object is instantiated, provided the keyword is valid.
 The parser verifies the validity of the `COMMAND_KEYWORD` by ensuring it matches one of the command keywords supported by the application.
 
 ##### Executing the Command
@@ -171,14 +171,13 @@ The following activity diagram illustrates the workflow of the execution of the 
 
 ##### Design Considerations
 The `help` command is designed to provide a quick summary of all the commands available in our application. Users can also use `help [COMMAND_KEYWORD]` to get more detailed information about a specific command.
-Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application. 
-For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.  
+Additionally, our help windows are designed to stay open, allowing users to refer to them while continuing to use the application.
+For convenience, users can press the `esc` key to close the help windows easily, without needing to use the mouse to navigate to the close button.
 
 #### Home Command : `home`
 The `home` command returns the user to the home UI where all the patients are displayed.
 
 ##### Executing the Command
-
 
 #### Clear Command : `clear`
 
@@ -258,6 +257,32 @@ The following fields are optional as they are not essential in serving a patient
 #### Edit Command : `edit`
 
 #### Delete Command : `delete`
+The `delete` command is used to delete a patient entry from the patient list.
+
+The user has to specify the target patient's:
+* NRIC (`Nric`)
+
+##### Parsing User Input
+The `DeleteCommandParser` class parses the user input to extract the NRIC parameter that has been specified.
+
+##### Executing the Command
+The `DeleteCommand` class is initialized and the `Patient` object with a matching NRIC with the argument is retrieved. The `Patient` object is then deleted from the `UniquePatientList` through the `deletePatient` method in the `Model` component.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing and execution of the user input.
+In this example, it takes a `delete` command: `delete T0123456A`
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeleteCommandParser</code> and <code>DeleteCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `delete` command since both commands are fundamentally similar.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to identify and delete a patient entry.
+* NRIC (`Nric`)
 
 #### View Command : `view`
 
