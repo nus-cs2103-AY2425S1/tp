@@ -1,19 +1,39 @@
 ---
 layout: page
-title: User Guide
+title: PlanPal User Guide
 ---
 
-PlanPal is an **address book** designed for **student event planners** at NUS who need to manage contacts
-(e.g., attendees, vendors, sponsors, and volunteers) for their events.
+### Welcome to PlanPal's User Guide!
 
-PlanPal offers a **centralized platform** to organize, track, and access contact information, ensuring 
-efficient coordination and smooth communication throughout the event planning process.
+PlanPal is an **address book and event tracker** designed for **student event planners** at NUS who need to manage
+contacts (e.g., attendees, vendors, sponsors, and volunteers) and track who is in what event efficiently.
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+PlanPal offers a **centralized platform** to organize, track, and easily access contact information, and assign them
+to their events, helping you to stay organized through the entire planning process.
 
+_This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)._
+
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
+
+## 1. How to use this User Guide
+
+### 1.1 Navigating the Document:
+
+### 1.2 Finding the Section you need:
+
+Below is an overview of each section in this User Guide to help you find exactly what you need:
+
+- [Quick Start](#quick-start): A simple, step-by-step guide to help you set up PlanPal for the first time and get started quickly.
+- [Tutorial](#tutorial-getting-started-with-planpal): Learn the basics of PlanPal with easy-to-follow examples, perfect for new users.
+- [Features](#features): A comprehensive overview of PlanPal’s key features and what they can do for you.
+- [Command Summary](#command-summary): A handy quick-reference list of all supported commands for experienced users who want a refresher.
+- [FAQ](#faq): Find answers to common questions and troubleshooting tips.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
