@@ -888,3 +888,19 @@ re-list all patients first.
 real-life behavior, despite the freedom it provides the user. Therefore, we plan to restrict the input for the sex field 
 to predefined values such as "Male", "Female", and "Other".<br><br>
 An example of a command that will trigger an invalid sex error will be: `edit Javier s/Unknown`
+
+9. **Improve UI experience for users**: Currently, the UI may not be as user-friendly as desired. We plan to enhance the 
+UI to provide a better user experience. This includes making the UI more responsive, improving the layout, and adding 
+visual cues to guide users.<br><br>
+Examples of improvements:<br>
+**Responsive Design**: Ensure the UI adapts to different screen sizes, providing a consistent experience across 
+monitors of different sizes.<br>
+**Improved Layout**: Organize the UI elements more logically, making it easier for users to find and use features.<br>
+**Visual Cues**: Add star icons for starred contacts, and other visual indicators to help users understand the functionality of different UI elements.
+
+10. **Introduce more detailed error messages**: Currently, the error messages may not provide enough information to help 
+users understand what went wrong and how to fix it. We plan to enhance the error messages to be more descriptive and 
+helpful.<br><br>
+An example of an improvement will be: **Invalid Date**<br>
+Current: `Invalid date!`<br>
+Improved: `Invalid date! The date '31/06/2025' is invalid because June has only 30 days. Please use the format dd/mm/yyyy. Example: 30/06/2025`
