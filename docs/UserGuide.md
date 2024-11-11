@@ -6,7 +6,8 @@
 
 # EduManage User Guide
 
-Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher.
+Welcome to the **EduManage User Guide** – your comprehensive resource for effectively managing student contacts and tasks as a private tuition teacher.<br>
+Tailored for tuition teachers specialising in one-on-one classes for secondary school students, **EduManage** prioritises a seamless, typing-friendly experience over complex menu navigation.
 
 This detailed guide will walk you through how to make the most of **EduManage** and unlock its full potential. We’re thrilled to help you streamline and organize your contact management process.
 ***
@@ -468,6 +469,18 @@ Exits EduManage.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduManage home folder.
+
+**Q**: How do I recover data if I accidentally clear all students?<br>
+**A**: Unfortunately, the clear command is irreversible. Ensure you regularly back up the data file stored at `[JAR file location]/data/addressbook.json` to prevent accidental data loss.
+
+**Q**: How do I back up my data?<br>
+**A**: Copy the data file located at `[JAR file location]/data/addressbook.json` to a secure location. This file contains all student and task information.
+
+**Q**: What should I do if the GUI opens off-screen?<br>
+**A**: Delete the `preferences.json` file located in the same folder as `EduManage.jar`, then restart EduManage. This should reset the GUI window position.
+
+**Q**: Is there a way to search for students based on multiple attributes at once (e.g., `name` and `subject`)?<br>
+**A**: Currently, searches are limited to one attribute at a time. You can, however, perform multiple searches sequentially to filter results.
 
 [(Back to Top)](#edumanage-user-guide)
 
