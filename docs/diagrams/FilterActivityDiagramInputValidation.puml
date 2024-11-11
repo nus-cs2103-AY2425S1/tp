@@ -1,0 +1,37 @@
+@startuml
+sprite $rake [16x16/8] {
+0000000000000000
+0000000jj0000000
+0000000jj0000000
+0005555jj5555000
+000jjeejjeejj000
+000jj00jj00jj000
+000jj00jj00jj000
+0000000000000000
+}
+'https://plantuml.com/activity-diagram-beta
+title Filter Activity Diagram (Input Validation)
+start
+:Filter command is given;
+
+if () then ([no invalid flags are used])
+    :Tokenize Arguments;
+    if () then ([no duplicate flags are used])
+        if () then ([1 or more flags are used])
+            :Filter and display
+            filtered clients <$rake>;
+        else ([else])
+            :Show filter command
+            usage hint;
+        endif
+
+    else ([else])
+        :Show error message about
+        duplicated flags;
+    endif
+else ([else])
+    :Show filter command usage hint;
+endif
+
+stop
+@enduml

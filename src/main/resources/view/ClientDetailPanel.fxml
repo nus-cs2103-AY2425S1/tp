@@ -23,7 +23,7 @@
             </ImageView>
 
             <VBox spacing="10" HBox.hgrow="ALWAYS">
-                <Label fx:id="nameLabel" styleClass="name-label"/>
+                <Label fx:id="nameLabel" styleClass="name-label" wrapText="true" maxWidth="Infinity"/>
                 <HBox fx:id="tagsContainer" alignment="CENTER_LEFT">
                     <HBox fx:id="tagsGroup" spacing="10" />
                 </HBox>
