@@ -2,6 +2,10 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
 import tutorease.address.model.Model;
@@ -19,7 +23,9 @@ public class FindContactCommand extends ContactCommand {
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + ContactCommand.COMMAND_WORD + " " + COMMAND_WORD + " alice bob charlie";
+
+    private static final Logger logger = LogsCenter.getLogger(FindContactCommand.class);
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -34,12 +40,16 @@ public class FindContactCommand extends ContactCommand {
 
     @Override
     public CommandResult execute(Model model) {
+        logger.info("Executing FindContactCommand with predicate: " + predicate);
+
         requireNonNull(model);
+        assert predicate != null;
         model.updateFilteredPersonList(predicate);
         int foundContacts = model.getFilteredPersonList().size();
-
+        logger.log(Level.INFO, "Number of contacts found: {0}", foundContacts);
         if (foundContacts == 0) {
             // No contacts found
+            logger.info("No contacts found for the given predicate.");
             return new CommandResult(MESSAGE_NO_CONTACTS_FOUND);
         }
         return new CommandResult(

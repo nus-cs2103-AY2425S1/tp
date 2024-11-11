@@ -10,6 +10,10 @@ import static tutorease.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.ToStringBuilder;
 import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
@@ -44,6 +48,7 @@ public class AddContactCommand extends ContactCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This contact already exists in TutorEase. If you wish to "
             + "save an alternative version of a person, "
             + "you may add a unique identifier to his/her name e.g. Ryan Tan Sec 1";
+    private static Logger logger = LogsCenter.getLogger(AddContactCommand.class);
     private final Person toAdd;
 
     /**
@@ -51,17 +56,25 @@ public class AddContactCommand extends ContactCommand {
      */
     public AddContactCommand(Person person) {
         requireNonNull(person);
+
+        assert person != null : "Person cannot be null";
+
         toAdd = person;
+        logger.log(Level.INFO, this.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.log(Level.INFO, "Executing AddContactCommand");
         requireNonNull(model);
 
         checkDuplicateContacts(model, toAdd);
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        String formattedString = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
+        logger.log(Level.INFO, formattedString);
+        return new CommandResult(formattedString);
     }
 
     private static void checkDuplicateContacts(Model model, Person toAdd) throws CommandException {
@@ -86,6 +99,7 @@ public class AddContactCommand extends ContactCommand {
 
         // instanceof handles nulls
         if (!(other instanceof AddContactCommand)) {
+            logger.log(Level.WARNING, "AddContactCommand is not an instance of AddContactCommand ");
             return false;
         }
 

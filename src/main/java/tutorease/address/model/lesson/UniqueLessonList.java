@@ -52,8 +52,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Adds a lesson to the list.
-     * The lesson must not already exist in the list.
+     * Adds a lesson to the list. The lesson must not already exist in the list.
      *
      * @param toAdd The lesson to add.
      * @throws NullPointerException       If {@code toAdd} is null.
@@ -140,6 +139,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
     /**
      * Replaces the contents of the lesson list with the specified {@code lessons}.
+     *
      * @param lessons The list of lessons to replace the current list.
      */
     public void setLessons(List<Lesson> lessons) {

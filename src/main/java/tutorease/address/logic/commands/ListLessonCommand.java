@@ -28,10 +28,10 @@ public class ListLessonCommand extends Command {
 
     private static CommandResult getCommandResult(Model model) {
         if (model.filteredLessonListIsEmpty()) {
-            logger.log(Level.INFO, "No lessons found for the given predicate.");
+            logger.log(Level.INFO, "No lessons found in TutorEase.");
             return new CommandResult(MESSAGE_NO_LESSONS_FOUND);
         }
-        logger.log(Level.INFO, "Found " + model.getFilteredPersonListSize() + " lessons.");
+        logger.log(Level.INFO, "Found " + model.getFilteredLessonListSize() + " lessons.");
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

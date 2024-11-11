@@ -5,9 +5,12 @@ import static tutorease.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.model.person.exceptions.DuplicatePersonException;
 import tutorease.address.model.person.exceptions.PersonNotFoundException;
 
@@ -23,6 +26,7 @@ import tutorease.address.model.person.exceptions.PersonNotFoundException;
  * @see Person#isSamePerson(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
+    private static Logger logger = LogsCenter.getLogger(UniquePersonList.class);
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
@@ -32,8 +36,11 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
+        logger.log(Level.INFO, "Checking if person is in list: " + toCheck);
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        boolean contains = internalList.stream().anyMatch(toCheck::isSamePerson);
+        logger.log(Level.INFO, "Is person in list: " + contains);
+        return contains;
     }
 
     /**
@@ -41,11 +48,14 @@ public class UniquePersonList implements Iterable<Person> {
      * The person must not already exist in the list.
      */
     public void add(Person toAdd) {
+        logger.log(Level.INFO, "Adding person to list: " + toAdd);
         requireNonNull(toAdd);
         if (contains(toAdd)) {
+            logger.log(Level.WARNING, "Person is already in list: " + toAdd);
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        logger.log(Level.INFO, "Added person to list: " + toAdd);
     }
 
     /**
@@ -54,6 +64,7 @@ public class UniquePersonList implements Iterable<Person> {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
+        logger.log(Level.INFO, "Setting person in list: " + editedPerson);
         requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
@@ -62,10 +73,12 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+            logger.log(Level.WARNING, "Person is already in list: " + editedPerson);
             throw new DuplicatePersonException();
         }
 
         internalList.set(index, editedPerson);
+        logger.log(Level.INFO, "Set person in list: " + editedPerson);
     }
 
     /**
@@ -73,10 +86,12 @@ public class UniquePersonList implements Iterable<Person> {
      * The person must exist in the list.
      */
     public void remove(Person toRemove) {
+        logger.log(Level.INFO, "Removing person from list: " + toRemove);
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        logger.log(Level.INFO, "Removed person from list: " + toRemove);
     }
 
     public void setPersons(UniquePersonList replacement) {

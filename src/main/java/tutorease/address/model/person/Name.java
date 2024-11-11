@@ -3,12 +3,16 @@ package tutorease.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}.
  */
 public class Name {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces and brackets, and it should not be blank";
 
@@ -22,7 +26,9 @@ public class Name {
 
     public static final String REGEX_NO_SLASHES = "^[^/]*$";
 
+    private static Logger logger = LogsCenter.getLogger(Name.class);
     public final String fullName;
+
 
     /**
      * Constructs a {@code Name}.
@@ -30,10 +36,12 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
+        logger.log(Level.INFO, "Creating name object with value: " + name);
         requireNonNull(name);
         checkArgument(hasNoSlash(name), MESSAGE_CONSTRAINTS_NO_SLASHES);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
+        logger.log(Level.INFO, "Created name object with value: " + name);
     }
 
     /**

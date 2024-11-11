@@ -3,16 +3,20 @@ package tutorease.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}.
  */
 public class Phone {
-
-
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
+    private static Logger logger = LogsCenter.getLogger(Phone.class);
     public final String value;
 
     /**
@@ -21,9 +25,11 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
+        logger.log(Level.INFO, "Creating phone object with value: " + phone);
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+        logger.log(Level.INFO, "Created phone object with value: " + phone);
     }
 
     /**
