@@ -28,11 +28,6 @@ This section defines key terms and concepts used throughout the user guide.
 - **JSON file**: A file format used to store data in a structured way that is easy for software to read and write.
 - **Person**: Refers to either a student or a teacher in EduConnect.
 
-### Screenshot Conventions
-
-This section explains the differences between the screenshots being used in this user guide, and how they vary for MacOS users and Windows users.
-
-
 ### Annotated Box Conventions
 
 This section explains the different types of annotated boxes used in the user guide to highlight important information.
