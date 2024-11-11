@@ -60,6 +60,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_CLASSES, PREFIX_ATTENDANCE, PREFIX_NEXT_OF_KIN,
+                PREFIX_EMERGENCY_CONTACT);
         // Parse individual components
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
