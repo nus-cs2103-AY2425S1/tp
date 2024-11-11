@@ -68,7 +68,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class, which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -111,10 +111,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -252,19 +252,19 @@ When a profile switch is initiated:
    - The application continues as normal, using the new profile.
 
 ##### Profile File Creation
-There are two instances where a profile's JSON file will be created if it doesn't already exist:
+There are two instances where a profile's JSON file will be created if it does not already exist:
 1. When any valid command is executed: `LogicManager` initiates a method chain that results in the `Storage` component handling the file creation for the current profile.
 2. When the user exits the program: If the program is closed via the GUI’s 'close' button, then `MainWindow` triggers the file creation chain instead.
 
 ##### Design Considerations
 ##### Aspect: What key to store to identify a profile
 - Alternative 1 (Current Choice): Identify by profile name
-  - Pros: 
+  - Pros:
     - Easy for developers to modify profile names rather than file paths.
     - Reduces the risk of OS-dependent issues that may arise from handling file paths directly.
     - Allows dynamic file path computation at runtime, offering flexibility for future extensions.
   - Cons:
-    - Developers must ensure that the correct path is consistently computed, as any mismatch could lead to erros.
+    - Developers must ensure that the correct path is consistently computed, as any mismatch could lead to errors.
 - Alternative 2: Identify by file path
   - Pros:
     - Could offer users more flexibility by allowing profile data to be stored in any directory.
@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities          |
 | `* *`    | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
 | `* *`    | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
-| `*`      | user          | sort the contact list based on how often I access each contact)             | quickly find contacts I use most freqeuntly without extensive searching |
+| `*`      | user          | sort the contact list based on how often I access each contact)             | quickly find contacts I use most frequently without extensive searching |
 | `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands                 |
 | `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                        |
 | `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                     |
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**<br/>
 **MSS**
 
-1. User enters appropriate ‘view’ command to search for ‘John Doe’s contact information.
+1. User enters appropriate ‘view’ command to search for John Doe’s contact information.
 2. System opens up new page with John Doe’s contact information.
 
 Use Case ends.
@@ -594,7 +594,7 @@ ___
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Contact**: A contact comprises of a name, a phone number, an email, a telegram username and a role, represented as `Person` in the model
+* **Contact**: A contact comprises a name, a phone number, an email, a telegram username and a role, represented as `Person` in the model
 * **CLI**: Command Line Interface. This represents the interface where the user uses commands to communicate with the system
 * **GUI**: Graphical User Interface. This represents the graphical interface that the user can interact with
 * **User**: The individual using the app
@@ -733,7 +733,7 @@ testers are expected to do more *exploratory* testing.
 
 **Test Case 2**
 1. Assuming the current profile is 'addressbook'
-2. Enter `switch adressbook'
+2. Enter `switch addressbook`
 
 **Expected Result**
 - Error message specifying that `Already on 'addressbook'`
@@ -777,22 +777,19 @@ The current success message for `sort` does not distinguish between cases where 
 E.g. If a user executes `sort` on an empty contact list, the standard `sort` success message is displayed.
 Even though this is vacuously true, we plan to make the displayed message when there are no contacts in the contact list more specific: `There are no contacts to be sorted`.
 
-
 2. Increase specificity of `Invalid Email` error message:<br/>
 The current error message for the `email` field in `add` and `edit` identifies the possible issues with the entered email, but does not specifically identify which part of the email input is violated.
 We plan to make the error message more specific to let the user know of which exact part (e.g. `local-part` or `domain`) the email input is invalid.
-
 
 3. Increase length tolerance for `role`:<br/>
 Currently, the `role` field is restricted to a maximum of 20 characters. This was done to prevent clutter in the UI, since the team felt that it was sufficient at this point to impose a restriction that should not affect the vast majority of named roles.
 In the future, we plan to implement UI truncation measures to allow for users to specify roles that are longer than the current limit.
 
-
-4. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact.
-
+4. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact: <br/>
    Current error message just warns user the input contains non-member telegram handle,
    we plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
 
 5. Add command to view members with attendance on the input date.
+
 6. Increase specificity of error message when an invalid index is used for `edit` command:<br/>
 The current error message when an invalid index is passed as argument to `edit` command is 'invalid command format ...' which we plan to change it to inform users that specifically their input index is invalid.
