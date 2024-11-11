@@ -22,7 +22,7 @@ public class HelpContentManagerTest {
     public void initializeContents_contentMapInitialized() {
         // Check that the contentMap is initialized and contains the expected keys
         assertNotNull(helpContentManager.getContent("Introduction"));
-        assertNotNull(helpContentManager.getContent("FAQ and Known Issues"));
+        assertNotNull(helpContentManager.getContent("Known Issues"));
     }
 
     @Test
@@ -34,8 +34,8 @@ public class HelpContentManagerTest {
         assertEquals(true, introductionContent.contains("Financial Assurance Revolutionary Telemarketer"),
                 "Introduction content mismatch");
 
-        String faqContent = helpContentManager.getContent("FAQ and Known Issues");
-        assertNotNull(faqContent, "Content for 'FAQ and Known Issues' should not be null");
+        String faqContent = helpContentManager.getContent("FAQ");
+        assertNotNull(faqContent, "Content for 'FAQ' should not be null");
         assertEquals(true, faqContent.contains("transfer my data to another computer"),
                 "FAQ content mismatch");
 
@@ -63,7 +63,7 @@ public class HelpContentManagerTest {
                 "First item in the TOC should be 'Introduction'");
         assertEquals("Visual Features", tableOfContents.get(16),
                 "Expected 'Visual Features' at position 13 in the TOC");
-        assertEquals("Command Summary", tableOfContents.get(19),
+        assertEquals("Command Summary", tableOfContents.get(20),
                 "Last item in the TOC should be 'Command Summary'");
     }
 
@@ -71,19 +71,19 @@ public class HelpContentManagerTest {
     public void tableOfContents_sizeIsCorrect() {
         // Test to verify the Table of Contents size
         ObservableList<String> tableOfContents = helpContentManager.getTableOfContents();
-        assertEquals(20, tableOfContents.size(), "Table of Contents should contain 20 entries");
+        assertEquals(21, tableOfContents.size(), "Table of Contents should contain 21 entries");
     }
 
     @Test
     public void contentMap_containsExpectedKeys() {
         // Verify that all expected keys are present
         String[] expectedKeys = {
-            "Introduction", "Features", "Validation Rules: Name, Phone Number", "Validation Rules: Email, Birthday",
-            "Validation Rules: Address, Tag(s)", "Adding a client", "Listing all clients",
+            "Introduction", "Features", "Formatting: Name, Phone Number", "Formatting: Email, Birthday",
+            "Formatting: Address, Tag(s)", "Adding a client", "Listing all clients",
             "Editing a client", "Locating clients by attribute", "Deleting a client",
             "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
             "Uploading a client's profile picture", "Exiting the program", "Viewing a client's details",
-            "Visual Features", "Saving and Editing Data", "FAQ and Known Issues"
+            "Visual Features", "Saving and Editing Data", "FAQ", "Known Issues"
         };
 
 

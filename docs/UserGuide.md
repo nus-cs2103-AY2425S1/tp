@@ -9,17 +9,6 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## Glossary
-
-* Command Line Interface (CLI): All instructions are done via typing into a textbox at the bottom of your screen
-* Command Terminal:
-    * If you are a Windows user, press the Windows key and in the search bar, type in Powershell. Click on it and that will be your Command Terminal
-    * For Mac/Linux users, look for Terminal under applications and that will be your Command Terminal
-* Graphical User Interface (GUI): A visual platform for you to interact with the F.A.R.T. book. i.e., the window that opens upon starting the book.
-* Parameter: Something that must be typed into the Command Line for the command to be properly recognised
-* Index: The number found beside the client's name in the F.A.R.T book
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -28,7 +17,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
    1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java 17
    1. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.4).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.6).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your F.A.R.T.
    1. A good home folder would be the Downloads folder as it makes the next step easier.
@@ -184,7 +173,7 @@ Examples:
 * `add n/Charlie Chen Cao Cong p/88888888 b/01 02 2003 e/charliechen88@huat.com t/mahjong`
 
 **Note:**
-1. As mentioned in the Validation Rules, only valid email addresses (in the form `local-part@domain`) and **Singapore** phone numbers are accepted.
+1. As mentioned in the Acceptable Formats, only **Singapore** phone numbers and valid email addresses (in the form `local-part@domain`) are accepted.
 2. Birthdays should be added in DD MM YYYY format.
 3. You may add duplicate clients (i.e., clients with the same name, case-insensitive) but the F.A.R.T book will prompt you to confirm that you are adding a duplicate client. If you select `No` in the prompt window, the operation will be aborted and the client will not be added. Else, select `Yes` to add the new client.
 
@@ -210,8 +199,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS]
 * When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can **remove all** the client’s tags by typing `t/` without specifying any tags after it.
 * Similarly, a client's address can be removed by typing `a/` without specifying anything after it.
-* If you edit a client's name to be the same of that of another client in the F.A.R.T. book, a prompt will appear asking you to confirm the edit action. 
-If you select `No` in the prompt window, the operation will be aborted and the name will not be changed. Else, select `Yes` to proceed with the edit.
+* If you edit a client's name to be the same of that of another client in the F.A.R.T. book, a prompt will appear asking you to confirm the edit action. If you select `No` in the prompt window, the operation will be aborted and the name will not be changed. Else, select `Yes` to proceed with the edit.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -231,8 +219,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TA
 * Partial matches of a keyword will also be returned. e.g. ``9123`` will return clients with the phone number ``91234567``.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-When searching with more than one attribute, it will find clients who satisfies ALL keywords. e.g. ``find n/Alice a/Clementi`` will return
-clients named Alice **AND** has an address in Clementi.
+When searching with more than one attribute, it will find clients who satisfy ALL keywords. e.g. ``find n/Alice a/Clementi`` will return clients named Alice **AND** has an address in Clementi.
 </div>
 
 Examples:
@@ -325,7 +312,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Uploading a client's profile picture \[WINDOWS ONLY\]
+## Uploading a client's profile picture: `upload` \[WINDOWS ONLY\]
 
 Too many clients? Keep track of their faces by uploading a profile picture of them.
 
@@ -335,7 +322,9 @@ Format: `upload INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
+<div markdown="block" class="alert alert-info">
+
+**:bulb: Note!:**<br>
 
 * This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
 * The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend square images approximately 300px x 300px. You can achieve this by cropping with your computer's image editor or an online one like this one from [Adobe](https://www.adobe.com/express/feature/image/crop).
@@ -412,3 +401,14 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 | **Paid**   | `paid INDEX f/FREQUENCY`<br> e.g., `paid 3 f/ 3`                                                                                                                                                |
 | **Unpaid** | `unpaid INDEX`<br> e.g., `unpaid 3`                                                                                                                                                             |
 | **Upload** | `upload INDEX`<br> e.g., `upload 3`                                                                                                                                                             |
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+* Command Line Interface (CLI): All instructions are done via typing into a textbox at the bottom of your screen
+* Command Terminal:
+    * If you are a Windows user, press the Windows key and in the search bar, type in Powershell. Click on it and that will be your Command Terminal
+    * For Mac/Linux users, look for Terminal under applications and that will be your Command Terminal
+* Graphical User Interface (GUI): A visual platform for you to interact with the F.A.R.T. book. i.e., the window that opens upon starting the book.
+* Parameter: Something that must be typed into the Command Line for the command to be properly recognised
+* Index: The number found beside the client's name in the F.A.R.T book
