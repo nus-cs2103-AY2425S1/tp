@@ -56,7 +56,9 @@ public class AddTeacherCommandParser implements Parser<AddTeacherCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-        Set<String> classes = ParserUtil.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
+
+        // TODO: Reformat AddStudentCommandParser.parseClasses to some ParserUtil class
+        Set<String> classes = AddStudentCommandParser.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
 
         // Create the Teacher object
         Teacher teacher = new Teacher(name, gender, phone, email, address, tagList, subjectList, classes);
