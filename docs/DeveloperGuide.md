@@ -259,6 +259,18 @@ health service to be added. It uses the `ArgumentTokenizer` to tokenize the inpu
 It returns an `ArgumentMultiMap` object which is used to create a `AppointmentDateFilter` object with the start and end date
 and `HealthService`.
 
+#### Sequence Diagram
+
+The sequence diagram below illustrates the process behind the parsing of the user input.
+In this example, it takes an `filter` command: `execute(filter sd|2022-10-01 ed|2022-11-01 h|Blood Test)`
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The parsing of the fields is as follows:
+
+![FilterParseFieldsSequenceDiagram](images/FilterParseFieldsSequenceDiagram.png)
+
+
 ##### Executing the Command
 
 The `FilterCommand` class then filters through all the appointments in the `Model` component and selects those which lie within the date range and matches the healthservice.
