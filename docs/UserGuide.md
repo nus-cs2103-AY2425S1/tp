@@ -8,7 +8,11 @@ Are you meeting too many people during your internship grind? Struggling to mana
 
 Then NetBook is the application for you!
 
-NetBook is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, NetBook can get your contact management tasks done faster than traditional GUI apps.
+NetBook is a **desktop app specially designed for SoC students**. It aims to help you manage your contacts and
+appointments throughout your internship journey. NetBook utilises a Command Line Interface (CLI) to help boost your
+efficiency, and keeps of everything you need for internships in an organised and beautiful manner.
+
+So, what are you waiting for! Try NetBook today!
 
 ### Table of Contents
 * [Quick Start](#quick-start)
