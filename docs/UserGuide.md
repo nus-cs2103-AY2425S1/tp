@@ -308,7 +308,7 @@ _Details coming soon ..._
 
 ### Emergency Contact
 * Emergency contacts are optional fields, and are denoted by the `ec/` prefix.
-* Emergency contacts are subject to the same formatting requirements as `Phone`.
+* Emergency contacts are subjected to the same formatting requirements as `Phone`.
 * To indicate no emergency contact for a person, you can `add` a contact without the `ec/` prefix, or with a `ec/` followed by whitespace.
 
 ### Tags
