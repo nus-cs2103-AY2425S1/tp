@@ -160,8 +160,8 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo/redo
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`. 
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. 
+The undo/redo mechanism is facilitated by `VersionedAddressBook`.
+It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commitAddressBook()` — Saves the current address book state in its history.
@@ -288,7 +288,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: \
-Allows NUS CS freshmen to easily locate the admin contact details when needed, 
+Allows NUS CS freshmen to easily locate the admin contact details when needed,
 which helps them better manage contact details of their professors, teaching assistants, classmates, CCA mates, offices, emergency helplines, etc.
 so that they can focus more on their study.
 
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Y1 CS student who is involved in any accident or emergency                                                   | find contact details of campus security                                                                                     | protect me and my friends' safety immediately                                        |
 | `* *`    | Y1 CS student who has financial concerns for school                                                          | find contact details of nus financial office                                                                                | settle any financial related issues                                                  |
 | `* *`    | Y1 CS student who needs to update contact info                                                               | update contact info for courses in this semester with that in the next semester                                             | keep info updated in more efficient ways                                             |
-| `* *`    | Y1 CS student who frequently access some of the contact details but lazy to repeat same commands everytime   | classify frequently accessed contacts and query them using shorter commands                                                 | access those frequent contact without wasting too much time                          |  
+| `* *`    | Y1 CS student who frequently access some of the contact details but lazy to repeat same commands everytime   | classify frequently accessed contacts and query them using shorter commands                                                 | access those frequent contact without wasting too much time                          |
 | `* *`    | New user                                                                                                     | see usage instructions                                                                                                      | refer to instructions when I forget how to use the App                               |
 | `* *`    | Y1 CS student who is a fresh man in a cca                                                                    | find contact details of my cca leader/friends                                                                               | settle any cca-related issues with them                                              |
 | `* *`    | Y1 CS student who are unsure about the procedure of making an appointment with a doctor                      | find contact details for UHC and NUH easily                                                                                 | make appointment with doctor as early as possible                                    |
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. ContactCS requests the user to provide the required information
   * 1a2. User enters new data
   * Steps 1a1 - 1a2 are repeated until the data entered are correct
-        
+
     Use case resumes from step 2.
 
 * 1b. The given format is invalid.
@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      * The name of the contact,
      * The module code (optionally including the role), or
      * A combination of both
-    
+
 2. ContactCS shows a list of matching contacts
 
     Use case ends.
