@@ -426,6 +426,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Use case: Find a student (UC06)
 
 **MSS**
@@ -920,6 +922,8 @@ testers are expected to do more *exploratory* testing.
 10. **Improve the clarity of the redo feature by specifying the command that was redone.** Currently, the redo command return result is unclear. The planned enhancement will be to include the command being redone in the redo command result.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
