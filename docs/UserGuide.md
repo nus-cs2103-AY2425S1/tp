@@ -120,6 +120,12 @@ Refer to the [Features](#features) below to know more about the commands you cou
 > #### ❗ Extraneous Parameters Ignored
 > Commands that do not require parameters (such as `help`, `exit`, and `clear`) will ignore any extra inputs.
 > - **Example**: Typing `help 123` or `help -10` will be interpreted as `help`.
+> #### 📦 Setting Current Stock to be Greater than Maximum Threshold
+> - MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> 
+</div>
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px; ">
     <strong>📝 Note:</strong> 
@@ -181,7 +187,7 @@ Want the app to automatically complete the commands, supplier name or the produc
 - If there is exactly one matching autocomplete option, it'll perform the completion automatically!
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> It works only if you press tab button from your keyboard and only for the commands, after <code>pr/</code>, <code>su/</code> or <code>t/</code> currently.
+    <strong>📝 Note:</strong> It works only if you press tab button from your keyboard and only for the command names, after <code>pr/</code> or <code>su/</code> currently.
 </div>
 
 ![Autocomplete feature](images/autocomplete_feature.png)
@@ -202,9 +208,11 @@ Here are a few examples to help you:
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
     <strong>📝 Note:</strong>
     <ul>
-        <li>A supplier can have any number of tags (including 0).</li>
-        <li>Currently, there is no restriction in phone number format, so you can use numbers like (+65) 97136544 or even +91-97664 23668, according to any country-specific format you prefer.</li>
-        <li>No value allows usage of "/", so if you want to use "S/O" in names, it's better to use alternatives like "son of," as there is no length restriction for names.</li>
+         <li>A supplier can have any number of tags (including 0).</li>
+         <li>Currently, there is no restriction in phone number format, so you can use numbers like (+65) 97136544 or even +91-97664 23668, according to any country-specific format you prefer.</li>
+         <li>Email can be the same if different people from same company use same work email hence we don't check for duplicate in emails and phone number too, It is intended for future enhancements.</li>
+         <li>No value allows usage of "/", so if you want to use "S/O" in names, it's better to use alternatives like "son of," as there is no length restriction for names.</li>
+         <li>If you want to see the supplier you have added, use view_supplier to switch panel, as currently the UI would not show newly added supplier information.</li>
     </ul>
 </div>
 
@@ -297,10 +305,13 @@ Here are a few examples to help you:
     </ul>
 </div>
 
+<<<<<<< HEAD
+=======
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
     <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
 </div>
 
+>>>>>>> master
 - Before executing the command
 ![Before set threshold](images/before_setthreshold.png)
 
@@ -326,10 +337,13 @@ Here are a few examples to help you:
     </ul>
 </div>
 
+<<<<<<< HEAD
+=======
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
     <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
 </div>
 
+>>>>>>> master
 <div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
     <strong>💡 Tip:</strong> If the stock level is below the minimum stock level, the system will highlight these products in red to alert you that they need restocking.
     <br>
@@ -496,6 +510,12 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates the file that contains the data of your previous AddressBook home folder.
+
+**Q**: Why can we add stock level more than the maximum stock level(maximum threshold)?<br>
+**A**: MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. <br> It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
+
+**Q**: Why do we have n/ and pr/ and su/ prefixes if they almost fulfill the same purpose?<br>
+**A**: n/ prefix is used for the products and supplier names who are to be newly added to the system. But pr/ and su/ prefixes are for the commands for which the products and suppliers already exist in the system. This differentiating value helps in abstraction!
 
 ---
 
