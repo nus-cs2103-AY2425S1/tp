@@ -56,7 +56,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
    <img src="images/openinterminal.png" alt="openinterminal" width="600">
    
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   <img src="images/ui.png" alt="ui" width="600">
+   <img src="images/Ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -82,9 +82,9 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
-    <img src="images/ui.png" alt="ui" width="600">
+    <img src="images/Ui.png" alt="ui" width="600">
   - **Inspect window**: the window you see when inspecting a contact.
-    <img src="images/ui2.png" alt="ui2" width="600">
+    <img src="images/Ui2.png" alt="ui2" width="600">
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
@@ -391,7 +391,7 @@ Format: `inspect INDEX`
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
-<img src="images/ui2.png" alt="ui2" width="600">
+<img src="images/Ui2.png" alt="ui2" width="600">
 
 **<ins>When in the inspect window**
 
