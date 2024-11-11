@@ -125,9 +125,6 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -250,8 +247,11 @@ Team Size: 5
 2. [Validation for Address: Address should be able to have "/n" or other prefixes]
 3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
 4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
-5. [Create his own tags and delete tags]
-6. [insert date end time]
+5. Adding a customizable tags feature allows doctors to create, delete, and edit tags beyond the default “high,” “medium,” and “low risk” options. This flexibility enables personalized patient categorization, letting doctors define tags that better 
+reflect their specific needs and improve patient management.
+6. Adding an end time to the Date feature ensures that users can define precise appointment durations, which helps prevent overlapping or double-booked slots. 
+This feature enhances scheduling clarity, allowing users to manage their time efficiently and avoid conflicts, ensuring that each appointment has a clear start and end, 
+which is particularly beneficial for managing busy schedules.
 7. **Warn user that date entered is in the past:** 
 Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
 However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
@@ -259,31 +259,6 @@ However, in the future, an enhancement can be added where the user is warned whe
    Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
    In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
-
-
-## **Implementation**
-This section describes some noteworthy details on how certain features are implemented.
-
-
-
-
-
-### Date Feature
-
-The date feature allows users to add, edit, and view dates for each person in the address book.
-
-#### Implementation
-
-The `Date` class represents a date.
-
-#### Design considerations:
-
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
