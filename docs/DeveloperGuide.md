@@ -405,7 +405,7 @@ Use case ends.
 1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
 2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
 
-   Use case ends.
+Use case ends.
 
 **Use case: UC05 - Delete Contact**
 
