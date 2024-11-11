@@ -20,13 +20,13 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=lithops-zty&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=lithops-zty&tabRepo=AY2425S1-CS2103T-F12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3`, `v1.5`, `v1.5.1` on GitHub.
-  * Refined the color scheme for labels on GitHub.
+  * Managed releases `v1.3`, `v1.5`, `v1.5.1`, `v1.6` on GitHub.
+  * Refined the color scheme of GitHub issue labels.
 
 * **Enhancements to existing features**:
   * Added the ability to further filter the previous find results using `find chained`
   * Allowed the `find` command to perform a partial match on names.
-  * Made the error message of `find` more specific.
+  * Made the error messages of `find` and `delete` more specific.
   * Included the exact fields edited in the `edit` command's success message.
 
 * **Documentation**:
@@ -40,6 +40,6 @@ Given below are my contributions to the project.
     * Updated the `Model`'s class diagram to include the `VersionedAddressBook` class.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
+  * 40 PRs reviewed
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2425S1/forum/issues/2), [2](https://github.com/nus-cs2103-AY2425S1/forum/issues/165), [3](https://github.com/nus-cs2103-AY2425S1/forum/issues/495))
 
