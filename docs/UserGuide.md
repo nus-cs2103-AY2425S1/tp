@@ -161,7 +161,7 @@ will be added.
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 
 Examples:
-* `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street \Science`
+* `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street s\Science`
 * `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 
 ![Add Success Message](/images/add.png)
@@ -169,6 +169,11 @@ Examples:
 Some contact fields such as address and email are intentionally hidden to avoid cluttering of information. To view all 
 the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
 
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Exceptionally long names will be cut off on the display, but you can read the student's full name using the 
+[detail command] (#viewing-a-students-detail--detail).
 </div>
 
 ### Deleting a student : `delete`
@@ -380,7 +385,7 @@ are taking each of the subjects.
 ## Utility Features
 ### Clearing all entries : `clear`
 
-Clears all student entries from the system, and resets the studentID count to S00001.
+Clears all student entries from the system, and resets the studentID to S00001.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This action is irreversible. All student entries will be deleted permanently.
