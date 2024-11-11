@@ -292,7 +292,7 @@ In the case where the index passed in is negative, the error message `INDEX prov
 ### Add appointment title and description and `viewappt` command
 Currently, our `makeappt` command only allows users to create appointments with a short description. This prevents users from adding too much information to the current description which may be restrictive.<br><br>
 **Planned implementation**<br><br>
-We plan to separate appointment title and description which gives users more flexibility. Appointment title will just be a short description such as `Surgery` or `Medical checkup` and support a character limit of 40. Appointment description will be for additional information about the appointment that the user may want to add. The appointment description will support a much longer character limit of 300 but will now be shown in the appointment list panel as the long inputs may cause issues with the UI. <br>
+We plan to separate appointment title and description which gives users more flexibility. Appointment title will just be a short description such as `Surgery` or `Medical checkup` and support a character limit of 40. Appointment description will be for additional information about the appointment that the user may want to add. The appointment description will support a much longer character limit of 300 but will not be shown in the appointment list panel as the long inputs may cause issues with the UI. <br>
 As such we will also implement a `viewappt` command that allows users to view all information about the appointment including the new appointment description.
 <br><br>
 
