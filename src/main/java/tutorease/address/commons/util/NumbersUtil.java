@@ -4,14 +4,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
  * Contains utility methods for parsing numbers.
  */
 public class NumbersUtil {
-    private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
+    private static Logger logger = LogsCenter.getLogger(NumbersUtil.class);
 
     /**
      * Parses a string into an integer.
@@ -32,6 +31,7 @@ public class NumbersUtil {
         }
         return parsedValue;
     }
+
     /**
      * Parses a string into a double.
      *
