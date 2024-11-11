@@ -10,34 +10,14 @@ Has CS become too stressful? Tired of connecting through Talent Connect, LinkedI
 Want to form a more personal relationship full of genuine human touch? Let's make finding benefactors, dependable colleagues, and insightful mentors easier for you!
 
 FindingbrUdders is a **desktop app designed exclusively for School of Computing (SoC) students** to manage contacts and schedule meetings, keeping track of the countless friends
-you can make along the way during your university journey. As anUdder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
+you can make along the way during your university journey. As an Udder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
 Command Line Interface (CLI). Furthermore, you can edit, update and keep track of meetings with others in an organised fashion. 
-You will _**never forget**_ the meaningful connections you make or the meetings you have after using findingbrUdders!
+You will _**never forget**_ the meaningful connections you make or the meetings you have after using FindingbrUdders!
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
----------------------- 
-## Table of Contents
-- [FindingbrUdders User Guide](#findingbrudders-user-guide)
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing Help: `help`](#viewing-help--help-)
-  - [Adding an Udder: `add`](#adding-an-udder-add-)
-  - [Listing all Udders: `list`](#listing-all-udders--list-)
-  - [Editing an Udder: `edit`](#editing-an-udder--edit-)
-  - [Scheduling a meeting with an Udder: `schedule`](#scheduling-a-meeting-with-an-udder--schedule-)
-  - [Locating Udders by keywords: `find`](#locating-udders-by-keywords-find-)
-  - [Deleting an Udder: `delete`](#deleting-an-udder--delete-)
-  - [Clearing all Udders:`clear`](#clearing-all-udders--clear-)
-  - [Exiting the program: `exit`](#exiting-the-program--exit-)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
---------------------------------------------------------------------------------------------------------------------
-
+----------------------
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer. 
@@ -88,7 +68,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 ### Before you start...
 
-* **Udder** refers to anyone using the findingbrUdders app and all the contacts in the app
+* **Udder** refers to any type of user described below, which is either a mUdder or a brUdder
 * **brUdder** refers to peers or connections who are experiencing similar things as you
 * **mUdder** refers to mentor users or connections who are more experienced in a relevant field
 </box>
@@ -126,6 +106,10 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+
+### Viewing an Udder 👀
+
+To view an Udder's details, click on the Udder in Person List Panel on the left.
 
 
 ### Viewing help : `help` 💡
@@ -228,7 +212,7 @@ Edits the specified meeting with an Udder from the meetings list.
 **Format:** `editm INDEX [n/NAME] [st/DD-MM-YYYY] [et/DD-MM-YYYY] [l/LOCATION]`
 
 * Use the `list` command before editing any meeting!
-* Edits a meeting with anUdder at the specified meeting `INDEX`.
+* Edits a meeting with an Udder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 * At least one field of the meeting must be changed.
 * Take note that the `NAME` field is case-sensitive!
@@ -246,7 +230,7 @@ Finds Udders by specified keywords for each field.
 **Format:** `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [t/TAG_KEYWORD] [a/ADDRESS_KEYWORD] [e/EMAIL_KEYWORD] [m/MAJOR_KEYWORD] [r/ROLE_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
+* Udders matching every keyword will be returned. e.g. `bob` will match `bobby`
 * For finding Udders based on **EMAIL_KEYWORD**, the keyword provided has to be a valid email (i.e 123example@gmail.com) using exact string matching.
 
 <box type="warning">
@@ -266,7 +250,7 @@ Deletes the specified meeting with an Udder from the meetings list.
 
 **Format:** `deletem INDEX`
 
-* Deletes a meeting with anUdder at the specified meeting `INDEX`.
+* Deletes a meeting with an Udder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 
 **Examples:**
