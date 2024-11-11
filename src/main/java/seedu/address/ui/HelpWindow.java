@@ -26,7 +26,7 @@ import seedu.address.logic.commands.SearchTagCommand;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t17-2.github.io/tp/UserGuide.html";
     public static final String USAGE_OVERVIEW_MESSAGE = "List of commands:\n"
             + AddCommand.COMMAND_WORD + " " + EditCommand.COMMAND_WORD + " " + DeleteCommand.COMMAND_WORD + " "
             + MarkVipCommand.COMMAND_WORD + " " + CommentCommand.COMMAND_WORD + " " + ClearCommand.COMMAND_WORD + " "

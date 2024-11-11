@@ -15,16 +15,29 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 
 ## Quick start
 
+<<<<<<< HEAD
 1. Ensure you have Java `17` or above installed in your Computer. To check this, open a command
  terminal, and type `java -version`.
+=======
+>>>>>>> 17cf3901f223399c3881d8a760d841ef62c4671b
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Ensure you have Java `17` or above installed in your Computer. <br>(If you are  a mac user, you will need to download 
+javaFX first via the following commands) <br>
+   `curl -s "https://get.sdkman.io" | bashsource "$HOME/.sdkman/bin/sdkman-init.sh"` <br>
+   `sdk install java 17.0.11.fx-zulu` <br>
+   `sdk default java 17.0.11.fx-zulu`
+
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
+<<<<<<< HEAD
 1. Open a command terminal, `cd` into the folder you put the jar file in
   (e.g., If the jar file is stored in `/Desktop/ServiceTrackFile`, then the command should be `cd /Desktop/ServiceTrackFile`),
   and use the `java -jar ServiceTrack.jar` command to run the application.<br>
+=======
+1. Open a command terminal, [navigate](https://riptutorial.com/cmd/example/8646/navigating-in-cmd) into the folder you put the jar file in, then enter `java -jar ServiceTrack.jar` into the command line to run the application.<br>
+>>>>>>> 17cf3901f223399c3881d8a760d841ef62c4671b
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -63,28 +76,31 @@ ServiceTrack is a **desktop app for managing customer contacts, optimized for us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for some commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
 
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]…​`
 
-* `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
+* Name should consist of alphanumeric characters and spaces, and should not be blank or contain ONLY numeric characters.
+* Phone numbers should only contain digits, and should have at least 3 digits.
+* Emails should be of the format local-part@domain and adhere to the following constraints:<br>
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (``). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>
+  The domain name must:
+      - end with a domain label at least 2 characters long,
+      - have each domain label start and end with alphanumeric characters,
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* Tags are case-insensitive (e.g. `FRIEND` and `friend` are not the same tag)
+* (if supplied) `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
+* If multiple `vip/` commands are supplied, the later one will be registered.<br>(e.g. `add n/kelvin p/98765432 e/kelv@example.com a/klev street, block 123, #01-01, vip/true, vip/false` will register kelvin as non-VIP.)
 * Person added is by default a non-VIP if the `vip/` command is omitted.
 <box type="tip" seamless>
 
@@ -95,53 +111,28 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence vip/false`
 
-### Listing all persons : `list`
+![img.png](images/AddCommandDemo.png)
 
-Shows a list of all persons in the address book. Vips will be shown on top of the list.
+### Clearing all entries : `clear`
 
-Format: `list`
+Clears all entries from the address book.
 
-### Listing all VIPs : `list vip`
+Format: `clear`
 
-Shows a list of all VIPs in the address book.
+### Adding comments to a person: `comment`
 
-Format: `list vip`
+Adds a comment to the specified person from the address book.
 
-### Editing a person : `edit`
+Format: `comment INDEX c/ [COMMENT]`
 
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* Affects the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* if COMMENT is not supplied, this will delete any existing comment on the person, otherwise it will add the supplied comment.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 c/Working t/` Edits the comment of the 3rd person to be `Working` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `search KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `search John` returns `john` and `John Doe`
-* `search alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'search alex david'](images/findAlexDavidResult.png)
+* `list` followed by `comment 2 c/ Prefers to communicate in chinese` adds the sentence "Prefers to communicate in chinese" as a comment to the second person on the list.
+* `search Betsy` followed by `comment 1 c/` removes the comment from the 1st person in the results of the `search` command.
 
 ### Deleting a person : `delete`
 
@@ -163,28 +154,71 @@ Format: `delete NAME`
 * The name refers to the exact name shown in the displayed person list.
 * The name is **case insensitive**. ​
 
-Examples:
+Example:
 * `list` followed by `delete Betsy` deletes the person with the name `Betsy` in the address book.
 
-### Marking whether a person is a VIP : `vip`
+### Editing a person : `edit`
 
-Marks the specified person from the address book as a VIP or removes said label.
+Edits an existing person in the address book.
 
-Format: `vip INDEX IS_VIP`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`
 
-* Affects the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Constraints regarding each of the fields are the same as those when [adding a person](#adding-a-person-add).
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
 
 Examples:
-* `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
-* `search Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `search` command.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 c/Working t/` Edits the comment of the 3rd person to be `Working` and clears all existing tags.
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Viewing help : `help`
+
+Shows a message explaning how to access the help page.
+
+![img.png](images/HelpWindow.png)
+
+Format: `help`
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book. Vips will be shown on top of the list.
+
+Format: `list`
+
+### Listing all VIPs : `list vip`
+
+Shows a list of all VIPs in the address book.
+
+Format: `list vip`
+
+### Locating persons by name: `search`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `search KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `vip 1 true` marks the 1st person in the address book as VIP.
-* `vip 1 false` unmarks the 1st person in the address book to be a non VIP<br>
-  ![result for 'vip 1 false'](images/unmark Bernice as non vip.png)
+* `search John` returns `john` and `John Doe`
+* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'search alex david'](images/findAlexDavidResult.png)
 
 ### Locating person by tag: `searchtag`
 
@@ -200,20 +234,24 @@ Format: `searchtag TAG [MORE TAGS]`
 
 Examples:
 * `searchtag friends` returns all persons containing the tag `friends`<br>
-  ![result for 'searchtag friends'](images/Searchtag Friends.png)
+  ![result for 'searchtag friends'](images/Searchtag%20Friends.png)
 
+### Marking whether a person is a VIP : `vip`
 
-### Clearing all entries : `clear`
+Marks the specified person from the address book as a VIP or removes said label.<br>
+Persons marked as a VIP will appear at the top of the list when using list, search, or searchtag.
 
-Clears all entries from the address book.
+Format: `vip INDEX IS_VIP`
 
-Format: `clear`
+* Affects the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* IS_VIP should either be `true` or `false`, corresponding to whether you intend to mark the target as a VIP or remove such a mark.
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
+Examples:
+* `list` followed by `vip 2 true` marks the 2nd person in the address book as a VIP.
+* `search Betsy` followed by `vip 1 false` removes VIP status from the 1st person in the results of the `search` command.
+  ![result for 'vip 1 false'](images/unmark%20Bernice%20as%20non%20vip.png)
 
 ### Saving the data
 
@@ -230,9 +268,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,10 +291,12 @@ Action       | Format, Examples
 -------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague c/5'11 tall`
 **Clear**    | `clear`
+**Comment**  | `comment INDEX c/[COMMENT]`<br> e.g., `comment 2 c/Calls too often`
 **Delete**   | `delete INDEX` `delete NAME` <br> e.g., `delete 3` `delete Bernice`
 **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/COMMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com c/change comment`
-**Search**   | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search James Jake`
-**List**     | `list` `list vip`
-**Vip**      | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
-**SearchTag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
+**Exit**     | `exit`
 **Help**     | `help`
+**List**     | `list` `list vip`
+**Search**   | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search James Jake`
+**SearchTag**| `searchtag TAG [MORE TAGS]`<br> e.g., `searchtag friends`
+**Vip**      | `vip INDEX IS_VIP`<br> e.g., `vip 3 true`
