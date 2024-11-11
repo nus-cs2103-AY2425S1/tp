@@ -332,13 +332,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - Duplicates are not created (NRIC uniqueness is enforced).
 
 #### Main Success Scenario (MSS)
-1. Fred enters command to `add` a new person.
+1. Fred enters command to `add` a new person along with their details.
 2. CareLink requests person details.
-3. Fred enters the person details along with their role as patient, caregiver, or both.
-4. CareLink validates the input data.
-5. CareLink saves the person details to the system.
-6. CareLink displays a success message and shows the newly added patient in the system.
-7. Use case ends.
+3. CareLink validates the input data.
+4. CareLink saves the person details to the system.
+5. CareLink displays a success message and shows the newly added patient in the system.
+6. Use case ends.
 
 #### Extensions
 - **4a. Invalid patient data entered**:
@@ -694,6 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
+
 - The address book contains patient data.
 
 #### Guarantees
