@@ -43,6 +43,7 @@ WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managi
 8. [Command Summary](#command-summary)
 
 ---
+<div style="page-break-after: always;"></div>
 
 # Quick start
 
@@ -68,6 +69,8 @@ A GUI similar to the image below should appear in a few seconds. Note how the ap
 [Back to Table of Contents](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 # General Guidelines
 
@@ -119,6 +122,8 @@ Furthermore, certain edits can cause WardWatch to behave in unexpected ways (e.g
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 # Input parameters
 
 <box type="info" seamless>
@@ -169,6 +174,8 @@ However, dates exceeding the maximum possible (e.g. the 32nd of any month) will 
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Other Parameters
 
 Symbol     | Parameter   | Constraints
@@ -180,6 +187,8 @@ Symbol     | Parameter   | Constraints
 [Back to Table of Contents](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -254,6 +263,8 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a patient : `delete`
 
 <img src="images/delete.png" alt="delete patient result" style="pointer-events: none; width: 100%; height: auto;">
@@ -276,6 +287,8 @@ Shows a list of all patients in WardWatch.
 Format: `list`
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Searching patients by field: `find`
 
@@ -334,6 +347,8 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding notes to a patient : `addnotes`
 
 <img src="images/addNotes.png" alt="result for 'addnotes'" style="pointer-events: none; width: 100%; height: auto;">
@@ -374,6 +389,8 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding an Appointment to a patient: `makeappt`
 
 <img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none; width: 100%; height: auto;">
@@ -413,6 +430,8 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an Appointment from a patient: `delappt`
 
 Deletes an appointment from a patient.
@@ -440,6 +459,8 @@ Examples:
 * `scheduledate 01-01-2020` returns all the appointments that takes place on *1st January 2020*.
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### List all patient appointments: `scheduleall`
 
