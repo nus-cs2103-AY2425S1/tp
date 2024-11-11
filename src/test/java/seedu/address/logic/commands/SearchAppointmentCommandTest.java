@@ -40,20 +40,13 @@ public class SearchAppointmentCommandTest {
         SearchAppointmentCommand searchFirstCommand = new SearchAppointmentCommand("2023-12-31 14:30");
         SearchAppointmentCommand searchSecondCommand = new SearchAppointmentCommand("2024-01-01 09:00");
 
-        // same object -> returns true
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
 
-        // same values -> returns true
         SearchAppointmentCommand searchFirstCommandCopy = new SearchAppointmentCommand("2023-12-31 14:30");
+        assertFalse(searchFirstCommand.equals(null));
+        assertFalse(searchFirstCommand.equals(1));
         assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
 
-        // different types -> returns false
-        assertFalse(searchFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(searchFirstCommand.equals(null));
-
-        // different dateTimes -> returns false
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
 
@@ -67,7 +60,7 @@ public class SearchAppointmentCommandTest {
             assertEquals("The date format is invalid. Please use yyyy-MM-dd HH:mm format.", e.getMessage());
         }
 
-        // Invalid date-time range format (missing one date-time)
+        // Invalid date-time range format with missing one date-time
         String invalidDateTimeRange = "2023-12-31 14:30 to";
         try {
             new SearchAppointmentCommand(invalidDateTimeRange);
@@ -76,7 +69,7 @@ public class SearchAppointmentCommandTest {
             assertEquals(MESSAGE_INVALID_DATETIMERANGE_FORMAT, e.getMessage());
         }
 
-        // Invalid date-time range format (both date-times invalid)
+        // Invalid date-time range format both date-times being invalid
         invalidDateTimeRange = "12-31-2023 14:30 to 01-01-2024 09:00";
         try {
             new SearchAppointmentCommand(invalidDateTimeRange);
@@ -97,7 +90,7 @@ public class SearchAppointmentCommandTest {
 
     @Test
     public void execute_noPersonWithAppointment_noPersonFound() {
-        String dateTime = "2025-01-01 14:00"; // Date and time that no person in the typical address book has
+        String dateTime = "2025-01-01 14:00";
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT, "on " + dateTime);
 
         try {
@@ -113,7 +106,7 @@ public class SearchAppointmentCommandTest {
 
     @Test
     public void execute_oneMatch_personFound() {
-        String dateTime = "2024-12-11 11:00"; // Assume AMY has an appointment on this date and time
+        String dateTime = "2024-12-11 11:00";
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT, "on " + dateTime);
 
         try {
@@ -132,7 +125,7 @@ public class SearchAppointmentCommandTest {
 
     @Test
     public void execute_multipleMatches_multiplePersonsFound() {
-        String date = "2024-12-12 10:00"; // Assume both AMY and BOB have appointments on this date
+        String date = "2024-12-12 10:00";
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT, "on " + date);
 
         try {

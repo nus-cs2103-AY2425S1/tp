@@ -9,8 +9,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* Initial project template:
+    * AB3 - Utilised the overall AB3 code structure and some basic core functionalities of AB3 in the AgentConnect application.
+* Third party libraries:
+    * JUnit - For unit testing of the application
+    * JavaFX - For creating user interface
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
