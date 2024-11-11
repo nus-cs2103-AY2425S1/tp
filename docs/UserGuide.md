@@ -254,6 +254,8 @@ After trying out the tutorial, we strongly recommend you to explore our [feature
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* For all commands that take in any [prefix(es)](#glossary), the prefix(es) are case-sensitive (i.e. only small letters allowed, use of capital letters will result in an `Invalid prefix detected` error.)
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
