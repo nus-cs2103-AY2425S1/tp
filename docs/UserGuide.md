@@ -49,9 +49,9 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 4. Open a command terminal, type `cd your_file_path` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/viewContactUI.png)
+   ![Gui](images/GuiExample.png)
 
-5. Type the command into the command box and press "Enter" to execute it. e.g. typing **`help`** and pressing "Enter" will open the help window.<br>
+5. Type the command into the command box, which is indicated by `Enter command here...`, and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
    - `list`: Lists all contacts.
@@ -383,16 +383,18 @@ Finds contacts whose tags are the same as the specified keyword.
 
 Tracks and lists all contacts who are in the category of the specified keyword.
 
+**Format**:
+`track CATEGORY`
+
+**Expected outcome**:
+```
+Listed all persons under category: CATEGORY 
+(tracked list size number) persons listed!
+```
 | Parameter Name | Description                         | Required   |
 |----------------|-------------------------------------| ---------- |
 | `CATEGORY`     | Either student or company to filter | Compulsory |
 
-**Examples**:
-
-- `track student` finds contacts with category `student`
-- `track company` finds contacts with category `company`
-
-![track UI](images/trackUI.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -406,20 +408,37 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 
 </div>
 
+**Examples**:
+
+- `track student` finds contacts with category `student`
+- `track company` finds contacts with category `company`
+
+
 
 #### Adding tag(s) to contact: `tag`
 Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
 
+**Expected message**:
+```
+Added tag(s): [TAG], [MORE_TAG](if present)
+to Person: (details of the person)
+```
 | Parameter Name | Description                                                       | Required   |
 |----------------|-------------------------------------------------------------------|------------|
 | `INDEX`        | Index number of the contact to tag from the displayed person list | Compulsory |
 | `t/TAG`        | Tag to add to the specified contact                               | Compulsory |
 | `t/MORE_TAG` | More tags to add                                                  | Optional|
 
+
+
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
 
+**Expected message**:
+```
+Added tag(s): [[TAG], [MORE_TAG](if present)] to all contacts.
+```
 | Parameter Name | Description                                                                                                              | Required   |
 |----------------|--------------------------------------------------------------------------------------------------------------------------|------------|
 | `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
@@ -428,6 +447,8 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 * Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided
   no duplicate tag(s) are found in all contacts.
+
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -454,7 +475,12 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 *  `paid` tags are easily distinguishable! They have a green background to indicate that the student has paid their membership fee.
 </div>
 
-![View Contact UI](images/paidTag.png)
+**Expected outcome for the above tip on `tag all`:**
+* `track student`
+  ![Track student](images/trackStudentBeforeTagAll.png)
+* `tag all t/paid`
+  ![Tag all paid tag](images/tagAll.png)
+  *Note: in this case, only all students are tagged with the paid tag.*
 
 
 #### Deleting tag(s) from contact: `deletetag`
