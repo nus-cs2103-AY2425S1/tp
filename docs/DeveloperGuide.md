@@ -809,14 +809,18 @@ Given below are instructions to test the app manually.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a terminal or command prompt, depending on your OS, and navigate to the folder where the jar file is located.
+
+   1. Run the command `java -jar medibase3.jar`
+        
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.
-   
+   1. Re-launch the app by running the command `java -jar medibase3.jar`
+ 
        Expected: The most recent window size and location is retained.
 
 [Back to Table of Contents](#table-of-contents)
