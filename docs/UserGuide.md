@@ -99,7 +99,8 @@ Adds a job to the address book.
 
 Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
-* `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.  
+* `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.
+* Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
 * A job with the same `NAME` and `COMPANY` as an existing job is considered a duplicate and cannot be added.
 * It is acceptable for a job to have the same `NAME` if it has a different `COMPANY` and vice versa.
 
