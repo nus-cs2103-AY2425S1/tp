@@ -661,14 +661,14 @@ add support for storing a more specific graduation date, such that we can accura
 
 ### Overview
 
-As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and safeguard against mistakes.
+As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
 This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app. 
 
 Here are some of the achievements of DorManagerPro:
 * Fields
-  * Added fields for room number, emergency contacts and graduation year
-  * Implemented relevant duplicate handling and field constraints for room number, emergency contacts and graduation years.
-  * More specific and relevant field constraints and duplication handling for name, phone number, email address and tags
+  * Added fields for room number, emergency contacts, and graduation year.
+  * Implemented relevant duplicate handling and field constraints for room number, emergency contacts, and graduation years.
+  * More specific and relevant field constraints and duplication handling for name, phone number, email address and tags.
 * Features
   * All commands that change the state of the address book are now undoable!
   * It is now possible to export the state of the address book to a json file.
