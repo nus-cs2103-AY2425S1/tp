@@ -72,9 +72,13 @@ done faster than traditional GUI apps.
 
 * Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
   e.g. `n/John    Doe` will be treated as `n/John Doe`.
+  * Additionally, name fields do not allow Special Characters like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" 
 
-* Tutorial group and student number arguments are not case-sensitive. 
-  e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+* Tutorial group and student number arguments are not case-sensitive.  
+  * Tutorial Groups must be in the format of a letter followed by two numbers i.e `G17`, `Z19`, `T15`, etc.
+      e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+
+* Student Numbers must be in the format of a letter followed by 7 numbers and a letter i.e `A1234567Z`, `a1234567z`, etc.
 
 </box>
 
@@ -322,7 +326,7 @@ _Details coming soon ..._
 | **Clear list**                                  | `deleteall`                                                                                                                                                                   |
 | **Delete Student**                              | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                              |
 | **Edit Student Details**                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
-| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                    |
+| **View**                                        | `view NAME`<br> e.g., `view James Jake`                                                                                                                       |
 | **List**                                        | `list`                                                                                                                                                                        |
 | **Help**                                        | `help`                                                                                                                                                                        |
 | **Undo**                                        | `undo`                                                                                                                                                                        |
