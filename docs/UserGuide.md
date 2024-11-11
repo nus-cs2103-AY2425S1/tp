@@ -123,8 +123,11 @@ Adds a doctor to the address book.
 
 Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
 
+* Doctor names must be unique.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+For common abbreviations such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
 </div>
 
 **Examples:**
@@ -137,8 +140,11 @@ Adds a patient to the address book.
 
 Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
 
+* Patient names must be unique.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+For common abbreviations such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
