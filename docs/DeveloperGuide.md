@@ -18,7 +18,7 @@
    5. [Storage Component](#storage-component)
    6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [(Proposed) Undo/redo feature](#proposed-undoredo-feature)
+   1. [(Proposed) Undo/redo feature](#proposed-data-archiving)
    2. [(Proposed) Data archiving](#proposed-data-archiving)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -956,7 +956,7 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** WardWatch shows the message `Displayed all appointments` and the appointment list will show all appointments.
       <br><br>
 
-# Appendix G: Effort
+# Appendix: Efforts
 
 This section presents an overview of the work invested by our team in developing WardWatch. We will discuss the complexity and scope, obstacles encountered, and effort required to bring this project to completion.
 
@@ -972,7 +972,7 @@ While each of us contributed fewer lines of code than in individual assignments,
 ### Improvements to Existing Features
 
 **New Patient Data Fields**  
-To meet the requirements` of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments—were incorporated to provide a more comprehensive patient profile.
+To meet the requirements of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments were incorporated to provide a more comprehensive patient profile.
 
 **Enhanced Search Capabilities**  
 Our team upgraded the find command from AB3 to offer greater flexibility, allowing searches by not only name but also fields like diagnosis and medications. The enhanced find feature also enables filtering by specific criteria, which involved a full redesign of the search logic and thorough testing.
