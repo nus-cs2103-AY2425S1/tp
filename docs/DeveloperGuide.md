@@ -587,34 +587,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClinicConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a patient**
+**Use case: UC01 - Add a patient**
 
-**MSS**
+**MSS:**
 
-1.  User types command to add patient
-2.  ClinicConnect requests relevant information
-3.  User keys in relevant information
-4.  ClinicConnect adds patient to the system
-5.  ClinicConnect shows a success message
+1.  User types command to add patient and inputs details for the new patient
+2.  ClinicConnect adds the patient to the system
+3.  ClinicConnect shows a success message
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given information is invalid.
+* 1a. User does not input all the required parameters
 
-  * 2a1. ClinicConnect shows an error message
-  * 2a2. ClinicConnect requests for the information again
+    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
+      Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
+      Use case resumes from step 2.
 
-    Steps 2a1-2a2 are repeated until the information entered is valid.
+* 1b. User inputs an invalid prefix
+    * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
+      Step 1b1 is repeated until the input entered only contains valid prefixes<br>
+      Use case resumes from step 2.
 
-    Use case resumes from step 2.
+* 1c. User inputs a field in the wrong format
+    * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
+      Step 1c1 is repeated until the field is in the correct format<br>
+      Use case resumes from step 2.
 
-* 3a. The given patient's NRIC already exists in the system.
+* 1d. User inputs duplicate prefixes
+    * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
+      Step 1d1 is repeated until the input entered has distinct prefixes<br>
+      Use case resumes from step 2.
 
-    * 3a1. ClinicConnect shows an error message
+* 1e. User inputs an NRIC that already exists in the system
+    * 1e1. ClinicConnect shows an error message saying the patient already exists in the system.<br>
+      Step 1e1 is repeated until a new NRIC is inputted<br>
+      Use case resumes from step 2.
 
-        Use case ends.
 
 **Use case: Book appointment for patient**
 
