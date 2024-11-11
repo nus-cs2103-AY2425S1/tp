@@ -264,8 +264,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### Clean feature
 
 #### Implementation
@@ -337,6 +335,30 @@ Step 3. The `FindCommand` get executed and updates the filteredPersonList within
 results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+### Delete Command
+
+#### Implementation
+
+* The `delete` command extends `Command` and implements `Undoable`.
+* The `delete` command is based on the index of the contact.
+
+Below is a detailed process illustration using a sequential diagram:
+
+Step 1. The user input a delete command followed by an index,
+for example: `delete 1`, delete the contact with an index of 1.
+
+Step 2. The parser parses the input command and returns a `DeleteCommand`.
+
+Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed. 
+
+Step 4. If user click ok on the popup, model updates the filteredPersonList and removes the contact, otherwise cancel the deletion.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
+
+Below is the DeletePopupActivityDiagram
+
+<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -727,32 +749,42 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: Delete popup shows up. After confirming on the popup, first contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a person
 
+1. Finding with parameters missing.
+   1. Test case: `find` <br>
+      Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
+   2. Test case: `find t/` <br>
+      Expected: Listing out everyone is the contact list.  
+2. Finding a person with all possible parameters specified.
+   1. Prerequisites: There is a contact in the list with a name `John Doe`, a phone number of `98765432`, a room number of `08-0805`, and a tag of `friends`.
+   2. Test case:  `find n/John Doe p/98765432 r/08-0805 t/friends` <br>
+      Expected: Displaying the contact with name John Doe, a phone number of 98765432, and living in room in the room 08-0805, and has a tag of friends.
+3. Finding a person with parameter that does not conform to data validation.
+   1. Test case: `find n/John Doe p/abcd` <br>
+      Expected: An error message is shown informing the user about the correct data format for PHONE.
+   2. Test case: `find n/John Doe r/abcd` <br>
+      Expected: An error message is shown informing the user about the correct data format for ROOM_NUMBER.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 
 ### Adding a person
