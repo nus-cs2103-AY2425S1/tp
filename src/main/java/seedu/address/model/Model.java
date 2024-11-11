@@ -121,8 +121,11 @@ public interface Model {
      */
     ObservableList<Student> getAllStudentsByName(Name name);
 
+    ObservableList<Student> getAllStudents();
+
     /**
      * Replaces the current student list with the given list.
      */
     void replaceStudentList(ObservableList<Student> studentList);
+
 }

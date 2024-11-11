@@ -108,7 +108,7 @@ public class AttendanceWindow {
     }
 
     private void initializeStudentListListener(Model model) {
-        model.getFilteredStudentList().addListener((ListChangeListener<Student>) change -> {
+        model.getAllStudents().addListener((ListChangeListener<Student>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     handleNewStudents(change.getAddedSubList(), model);
