@@ -44,7 +44,18 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        person.getTags().forEach(tag -> {
+            builder.append("[");
+            builder.append(tag.tagName);
+            if (tag.tagValue != null) {
+                builder.append("=").append(tag.tagValue);
+            }
+            builder.append("]");
+        });
+        builder.append("; Financial Info: ")
+                .append(person.getFinancialInfo())
+                .append("; Social Media Handle: ")
+                .append(person.getSocialMediaHandle());
         return builder.toString();
     }
 

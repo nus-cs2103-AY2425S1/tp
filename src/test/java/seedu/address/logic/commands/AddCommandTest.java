@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_INFO_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SOCIAL_MEDIA_HANDLE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +38,10 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder()
+                .withFinancialInfo(VALID_FINANCIAL_INFO_AMY)
+                .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_AMY)
+                .build();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -46,7 +52,10 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder()
+                .withFinancialInfo(VALID_FINANCIAL_INFO_AMY)
+                .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_AMY)
+                .build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -55,8 +64,14 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice")
+                .withFinancialInfo(VALID_FINANCIAL_INFO_AMY)
+                .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_AMY)
+                .build();
+        Person bob = new PersonBuilder().withName("Bob")
+                .withFinancialInfo(VALID_FINANCIAL_INFO_AMY)
+                .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_AMY)
+                .build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -155,6 +170,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate, Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

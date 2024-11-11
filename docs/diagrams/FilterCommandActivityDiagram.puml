@@ -1,0 +1,52 @@
+@startuml
+'Activity diagram for filter command execution
+
+start
+
+:FilterCommandParser.parse();
+:tokenize input;
+
+if (input format valid?) then (true)
+  :extract names and tags;
+  if (has valid criteria?) then (yes)
+    :create FilterCommand;
+    :execute();
+
+    if (names provided?) then (yes)
+      :create name predicate;
+    else (no)
+      :skip name filtering;
+    endif
+
+    if (tags provided?) then (yes)
+      :create tags predicate;
+    else (no)
+      :skip tag filtering;
+    endif
+
+    :combine predicates;
+    :Model.updateFilteredPersonList();
+
+    if (matches found?) then (yes)
+      :display filtered list;
+      :show success message;
+    else (no)
+      :show no matches message;
+    endif
+
+  else (no)
+    :throw ParseException;
+  endif
+else (false)
+  :throw ParseException;
+endif
+
+if (error occurred?) then (yes)
+  :display error message;
+else (no)
+  :return command result;
+endif
+
+stop
+
+@enduml

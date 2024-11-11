@@ -23,6 +23,12 @@ public class PhoneTest {
     public void isValidPhone() {
         // null phone number
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
+        // phone with 29 digits
+        StringBuilder boundaryPhoneBuilder = new StringBuilder();
+        for (int i = 0; i < 29; i++) {
+            boundaryPhoneBuilder.append("1");
+        }
+        String boundaryPhoneNumber = boundaryPhoneBuilder.toString();
 
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
@@ -31,11 +37,15 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone(boundaryPhoneNumber + "11"));
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone(boundaryPhoneNumber));
+        assertTrue(Phone.isValidPhone(boundaryPhoneNumber + "1"));
+        assertTrue(Phone.isValidPhone("+" + boundaryPhoneNumber));
     }
 
     @Test

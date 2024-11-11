@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,6 +40,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setFinancialInfo((person.getFinancialInfo()));
+        descriptor.setSocialMediaHandle(person.getSocialMediaHandle());
     }
 
     /**
@@ -76,8 +81,32 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        try {
+            Set<Tag> tagSet = ParserUtil.parseTags(Arrays.asList(tags));
+            descriptor.setTags(tagSet);
+            return this;
+        } catch (ParseException e) {
+            System.err.println(e.getMessage());
+            Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+            descriptor.setTags(tagSet);
+            return this;
+        }
+
+    }
+
+    /**
+     * Sets the {@code financialInfo} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFinancialInfo(String info) {
+        descriptor.setFinancialInfo(info);
+        return this;
+    }
+
+    /**
+     * Sets the {@code socialMediaHandle} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSocialMediaHandle(String handle) {
+        descriptor.setSocialMediaHandle(handle);
         return this;
     }
 

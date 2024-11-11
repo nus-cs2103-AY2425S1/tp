@@ -193,4 +193,74 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Handler for exporting address list to CSV format
+     */
+    @FXML
+    private void handleCsvExport() {
+        String exportToCsvCommand = "export format\\csv";
+        try {
+            CommandResult commandResult = executeCommand(exportToCsvCommand);
+        } catch (CommandException | ParseException e) {
+            return;
+        }
+    }
+
+    /**
+     * Handler for exporting address list to TXT format
+     */
+    @FXML
+    private void handleTxtExport() {
+        String exportToTxtCommand = "export format\\txt";
+        try {
+            CommandResult commandResult = executeCommand(exportToTxtCommand);
+        } catch (CommandException | ParseException e) {
+            return;
+        }
+    }
+
+    /**
+     * Handler for filling the command box when clicking the "Filter by Name" menu item.
+     */
+    @FXML
+    private void handleFilterByName() {
+        fillCommandBox("filter n\\");
+    }
+
+    /**
+     * Handler for filling the command box when clicking the "Filter by Tag" menu item.
+     */
+    @FXML
+    private void handleFilterByTags() {
+        fillCommandBox("filter t\\");
+    }
+
+    /**
+     * Handler for filling the command box when clicking the "Advanced Filter by Tag" menu item.
+     */
+    @FXML
+    private void handleAdvancedFilterByTags() {
+        fillCommandBox("advfilter t\\TAG OPERATOR VALUE");
+    }
+
+    @FXML
+    private void handleSortByTags() {
+        fillCommandBox("sort t\\TAG asc/desc");
+    }
+
+    /**
+     * Helper method to fill the command box with a specified command text.
+     *
+     * @param commandText The command text to fill the command box.
+     */
+    private void fillCommandBox(String commandText) {
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        commandBox.getCommandTextField().setText(commandText);
+        commandBox.getCommandTextField().requestFocus();
+        commandBox.getCommandTextField().end();
+    }
+
 }

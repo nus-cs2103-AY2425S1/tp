@@ -99,15 +99,49 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code tag} is invalid or reserved.
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (trimmedTag.contains(":")) {
+            String[] tagKeyValue = getTagKeyValue(trimmedTag);
+            if (Tag.isReservedTagName(tagKeyValue[0])) {
+                throw new ParseException(String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagKeyValue[0]));
+            }
+            return new Tag(tagKeyValue[0], tagKeyValue[1]);
+        } else {
+            if (!Tag.isValidTagName(trimmedTag)) {
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
+            }
+            if (Tag.isReservedTagName(trimmedTag)) {
+                throw new ParseException(String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, trimmedTag));
+            }
+            return new Tag(trimmedTag);
         }
-        return new Tag(trimmedTag);
+    }
+
+    private static String[] getTagKeyValue(String trimmedTag) throws ParseException {
+        String[] tagKeyValue = trimmedTag.split(":");
+
+        // Account for the possibility that the tag is just a lone colon.
+        // i.e. edit 1 t\:
+        if (tagKeyValue.length == 0) {
+            throw new ParseException(Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY);
+        }
+        if (tagKeyValue.length == 1) {
+            throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+        }
+        if (!Tag.isValidTagName(tagKeyValue[0])) {
+            if (tagKeyValue[0].isEmpty()) {
+                throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+            }
+            throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
+        }
+        if (!Tag.isValidTagValue(tagKeyValue[1])) {
+            throw new ParseException(Tag.MESSAGE_TAG_VALUES_SHOULD_BE_ALPHANUMERIC);
+        }
+        return tagKeyValue;
     }
 
     /**
@@ -116,9 +150,39 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        final Set<String> tagKeys = new HashSet<>();
         for (String tagName : tags) {
+            Tag tag = parseTag(tagName);
+            String key = tag.tagName;
+            if (!tagKeys.add(key)) {
+                throw new ParseException("Duplicate tag key found: " + key);
+            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String info} into an {@code String financialInfo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String financialInfo} is invalid.
+     */
+    public static String parseFinancialInfo(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        return trimmedInfo;
+    }
+
+    /**
+     * Parses a {@code String info} into an {@code String socialMediaHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String info} is invalid.
+     */
+    public static String parseSocialMediaHandle(String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        return trimmedInfo;
     }
 }

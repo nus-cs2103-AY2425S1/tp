@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class SortCommand {
+    - final String tagName
+    - final String sortOrder
+    - static final String COMMAND_WORD
+    - static final String MESSAGE_USAGE
+    - static final String MESSAGE_NO_CONTACT_FOUND
+    + SortCommand(String)
+    + execute(Model): CommandResult
+    + static constructSuccessMessage(String, String, String): String
+    + static tryParseDouble(String): Double
+    + equals(Object): boolean
+    + toString(): String
+}
+
+abstract class Command {
+    # execute(Model): CommandResult
+}
+
+class CommandResult {
+    - String feedbackToUser
+    - boolean showHelp
+    - boolean exit
+
+    + CommandResult(String, boolean, boolean): void
+    + CommandResult(String): void
+    + String getFeedbackToUser(): String
+    + isShowHelp(): boolean
+    + isExit(): boolean
+    + equals(Object): boolean
+    + hashCode(): int
+    + toString(): String
+}
+
+class Model {
+    + setUserPrefs(ReadOnlyUserPrefs)
+    + getUserPrefs(): ReadOnlyUserPrefs
+    + getGuiSettings(): GuiSettings
+    + vsetGuiSettings(GuiSettings)
+    + getAddressBookFilePath(): Path
+    + setAddressBookFilePath(Path)
+    + setAddressBook(ReadOnlyAddressBook)
+    + getAddressBook(): ReadOnlyAddressBook
+    + hasPerson(Person): boolean
+    + deletePerson(Person)
+    + addPerson(Person)
+    + setPerson(Person, Person)
+    + getFilteredPersonList(): ObservableList<Person>
+    + void updateFilteredPersonList(Predicate<Person>): void
+
+    - static final Predicate<Person> PREDICATE_SHOW_ALL_PERSONS
+}
+
+Command <|-- SortCommand
+SortCommand --> CommandResult
+SortCommand --> Model
+
+@enduml

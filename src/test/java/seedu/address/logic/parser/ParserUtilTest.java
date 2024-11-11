@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -22,7 +23,7 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "6+51234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
@@ -33,6 +34,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_FINANCIAL_INFO = "Salary: $5000";
+    private static final String VALID_SOCIAL_MEDIA_HANDLE = "@johndoe";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -44,7 +47,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -154,8 +157,55 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_emptyKeyAndValue_throwsParseException() {
+        String tagWithoutKeyAndValue = ":";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY, () -> ParserUtil.parseTag(tagWithoutKeyAndValue));
+    }
+
+    @Test
+    public void parseTag_emptyKey_throwsParseException() {
+        String tagWithEmptyKey = ":value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyKey));
+    }
+
+    @Test
+    public void parseTag_invalidKey_throwsParseException() {
+        String tagWithInvalidKey = "$key:value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidKey));
+    }
+
+    @Test
+    public void parseTag_emptyValue_throwsParseException() {
+        String tagWithEmptyValue = "key:";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING, () -> ParserUtil.parseTag(tagWithEmptyValue));
+    }
+
+    @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        String tagWithInvalidValue = "key:$value";
+        assertThrows(ParseException.class,
+                Tag.MESSAGE_TAG_VALUES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidValue));
+    }
+
+    @Test
+    public void parseTag_reservedKey_returnsTrimmedTag() throws Exception {
+        String tagWithReservedKey = "DuplicatePhone";
+        assertThrows(ParseException.class,
+                String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagWithReservedKey), ()
+                        -> ParserUtil.parseTag(tagWithReservedKey));
+    }
+
+    @Test
+    public void parseTag_reservedKeyAndAnyValue_returnsTrimmedTag() throws Exception {
+        String tagWithReservedKey = "DuplicatePhone";
+        String tagWithReservedKeyAndAnyValue = tagWithReservedKey + ":23";
+        assertThrows(ParseException.class,
+                String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagWithReservedKey), ()
+                        -> ParserUtil.parseTag(tagWithReservedKeyAndAnyValue));
     }
 
     @Test
@@ -192,5 +242,88 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseFinancialInfo_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFinancialInfo(null));
+    }
+
+    @Test
+    public void parseFinancialInfo_validValueWithoutWhitespace_returnsFinancialInfo() throws Exception {
+        String expectedFinancialInfo = VALID_FINANCIAL_INFO;
+        assertEquals(expectedFinancialInfo, ParserUtil.parseFinancialInfo(VALID_FINANCIAL_INFO));
+    }
+
+    @Test
+    public void parseFinancialInfo_validValueWithWhitespace_returnsTrimmedFinancialInfo() throws Exception {
+        String financialInfoWithWhitespace = WHITESPACE + VALID_FINANCIAL_INFO + WHITESPACE;
+        String expectedFinancialInfo = VALID_FINANCIAL_INFO;
+        assertEquals(expectedFinancialInfo, ParserUtil.parseFinancialInfo(financialInfoWithWhitespace));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSocialMediaHandle(null));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_validValueWithoutWhitespace_returnsSocialMediaHandle() throws Exception {
+        String expectedSocialMediaHandle = VALID_SOCIAL_MEDIA_HANDLE;
+        assertEquals(expectedSocialMediaHandle, ParserUtil.parseSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE));
+    }
+
+    @Test
+    public void parseSocialMediaHandle_validValueWithWhitespace_returnsTrimmedSocialMediaHandle() throws Exception {
+        String socialMediaHandleWithWhitespace = WHITESPACE + VALID_SOCIAL_MEDIA_HANDLE + WHITESPACE;
+        String expectedSocialMediaHandle = VALID_SOCIAL_MEDIA_HANDLE;
+        assertEquals(expectedSocialMediaHandle, ParserUtil.parseSocialMediaHandle(socialMediaHandleWithWhitespace));
+    }
+
+    @Test
+    public void parseTags_duplicateTagKeys_throwsParseException() {
+        String duplicateTag1 = "priority:high";
+        String duplicateTag2 = "priority:low";
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(duplicateTag1, duplicateTag2)));
+    }
+
+    @Test
+    public void parseTags_uniqueTagKeys_returnsTagSet() throws Exception {
+        String tag1 = "priority:high";
+        String tag2 = "status:open";
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("priority", "high"), new Tag("status", "open")));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_noDuplicateKeys_returnsTagSet() throws Exception {
+        String tag1 = "friend";
+        String tag2 = "colleague";
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(tag1, tag2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("colleague")));
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseIndex_zero_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex("0"));
+    }
+
+    @Test
+    public void parseIndex_negativeNumber_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex("-1"));
+    }
+
+    @Test
+    public void parseIndex_maxIntegerValue() throws Exception {
+        Index maxIndex = Index.fromOneBased(Integer.MAX_VALUE);
+        assertEquals(maxIndex, ParserUtil.parseIndex(Integer.toString(Integer.MAX_VALUE)));
+    }
+    @Test
+    public void parseTag_decimalValue() throws Exception {
+        String tagWithDecimalValue = "grade:8.5";
+        Tag expectedTag = new Tag("grade", "8.5");
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithDecimalValue));
     }
 }

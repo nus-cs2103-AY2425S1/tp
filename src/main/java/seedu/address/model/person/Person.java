@@ -24,17 +24,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final String financialInfo;
+    private final String socialMediaHandle;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String financialInfo,
+                  String socialMediaHandle) {
+        requireAllNonNull(name, phone, email, address, tags, financialInfo, socialMediaHandle);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.financialInfo = financialInfo;
+        this.socialMediaHandle = socialMediaHandle;
     }
 
     public Name getName() {
@@ -51,6 +56,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getFinancialInfo() {
+        return financialInfo;
+    }
+
+    public String getSocialMediaHandle() {
+        return socialMediaHandle;
     }
 
     /**
@@ -94,13 +107,15 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && financialInfo.equals(otherPerson.financialInfo)
+                && socialMediaHandle.equals(otherPerson.socialMediaHandle)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, financialInfo, socialMediaHandle);
     }
 
     @Override
@@ -111,6 +126,8 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("financialInfo", financialInfo)
+                .add("socialMediaHandle", socialMediaHandle)
                 .toString();
     }
 

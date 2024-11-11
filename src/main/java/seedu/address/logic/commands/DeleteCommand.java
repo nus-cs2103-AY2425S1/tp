@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -25,8 +26,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    private final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
     private final Index targetIndex;
-
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -42,6 +43,8 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        duplicatePhoneTagger.tagPhoneDuplicates(model);
+
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

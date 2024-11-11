@@ -1,15 +1,20 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# BA€ Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Some tests and functional code was written with the help of [Github Copilot](https://github.com/features/copilot) autocomplete
+- Address book app built upon [AB3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -19,16 +24,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +55,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,15 +64,17 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +93,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,16 +114,19 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="700"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 
 The `Model` component,
@@ -127,18 +136,21 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
+</box>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -155,95 +167,131 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Filter feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The filter mechanism is facilitated by `FilterCommand`. It allows users to filter the contact list based on names and/or tags. The feature is implemented using predicates that check for matches in both the contact names and tags.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The filter feature implements the following operations:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+* `FilterCommand#execute()` — Applies the filter criteria to the address book's contact list
+* `FilterCommandParser#parse()` — Parses the user input into name and tag criteria
+* `Model#updateFilteredPersonList()` — Updates the displayed list based on the filter predicate
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+**Step 1.** The user launches the application. The contact list shows all contacts without any filters applied.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+**Step 2.** The user executes `filter n\John t\friend t\client` command to show only contacts named "John" who are tagged as both "friend" and "client". The filter mechanism works as follows:
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+1. `FilterCommandParser` tokenizes the input and extracts:
+    * Names: ["John"]
+    * Tags: ["friend", "client"]<br><br>
 
-![UndoRedoState1](images/UndoRedoState1.png)
+2. A new `FilterCommand` is created with these criteria.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+3. The `execute()` method creates a predicate that:
+    * Checks if the contact's name contains "John" (case-insensitive)
+    * Verifies the contact has both the "friend" and "client" tags
+    * Only displays contacts meeting all criteria<br><br>
 
-![UndoRedoState2](images/UndoRedoState2.png)
+4. The filtered list is updated through `Model#updateFilteredPersonList()`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Step 3.** The user executes `filter t\work` to show only work contacts. This creates a new filter that:
+* Clears the previous name filter
+* Shows only contacts tagged as "work"
 
-</div>
+**Step 4.** The user executes `list` to show all contacts again, removing any active filters.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The following sequence diagram shows how the filter operation works through the `Logic` component:
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/FilterSequenceDiagram.puml" alt="Filter Sequence Diagram" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The following activity diagram summarizes what happens when a user executes a filter command:
 
-</div>
+<puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommand Activity Diagram" />
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+<div style="page-break-after: always;"></div>
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+#### Design Considerations
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+##### Aspect: How filter matching is performed
 
-</div>
+* **Alternative 1 (current choice)**: Matches name by containment and tags by exact match
+    * Pros: More flexible name matching allows partial matches
+    * Cons: May return unintended matches for short name queries<br><br>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+* **Alternative 2**: Exact matching for both names and tags
+    * Pros: More precise results
+    * Cons: Users need to type exact names, which is less convenient<br><br>
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+##### Aspect: Handling multiple filter criteria
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+* **Alternative 1 (current choice)**: AND operation between name and tags, AND between multiple tags
+    * Pros: Returns more focused results
+    * Cons: May return empty results if criteria are too strict<br><br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+* **Alternative 2**: OR operation between all criteria
+    * Pros: More likely to return results
+    * Cons: May return too many unrelated results<br><br>
 
-</div>
+### Tagging Duplicate Phone Numbers
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+#### Implementation
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The detection and tagging of duplicate phone numbers mechanism is facilitated by `DuplicatePhoneTagger`. It tracks duplicate phone numbers across all persons in the address book and automatically tags persons who share the same phone number with a "DuplicatePhone" tag. This mechanism is integrated into commands that can modify a person's phone number or the entire list, such as `add`, `edit` and `delete`.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+The `DuplicatePhoneTagger` implements the following key operations:
+* `DuplicatePhoneTagger#updateFrequenciesOfPhones()` — Counts and stores the frequency of each phone number
+* `DuplicatePhoneTagger#updatePersonsList()` — Updates the tags of all persons based on whether their phone numbers are duplicates
+* `DuplicatePhoneTagger#tagPhoneDuplicates()` — Main method that coordinates the duplicate phone tagging process
 
-![UndoRedoState5](images/UndoRedoState5.png)
+Given below is an example usage scenario and how the duplicate phone tagging mechanism behaves when executing an edit command.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+1. Assume the address book has two persons: Alex (phone: 87654321) and Bob (phone: 91234567). With Alex being the 1st entry in the address book and Bob being the 2nd.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+2. The user executes `edit 2 p/87654321` to change Bob's phone number to match Alex's.
 
-#### Design considerations:
+3. The `edit` command first creates the modified person with the new phone number.
 
-**Aspect: How undo & redo executes:**
+4. After the person is edited, `DuplicatePhoneTagger#tagPhoneDuplicates()` is called. This updates the frequency count of all phone numbers and identifies that "87654321" appears twice.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+5. Finally, both Alex and Bob are tagged with the "DuplicatePhone" tag since they share the same phone number.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The following sequence diagrams show how the detection of duplicate phone numbers is carried out in the case of the `edit` operation being executed.
 
-_{more aspects and alternatives to be added}_
+<puml src="diagrams/EditSequenceDiagram.puml" alt="Edit Sequence Diagram" />
 
-### \[Proposed\] Data archiving
+<puml src="diagrams/DuplicatePhoneTaggerSequenceDiagram.puml" alt="Duplicate Phone Tagger Sequence Diagram" />
 
-_{Explain here how the data archiving feature will be implemented}_
+<box type="info" seamless>
 
+**Note:** If a command fails its execution, the duplicate phone tagging process will not be triggered, so the tags will remain unchanged.
 
+</box>
+
+#### Design considerations
+
+##### Aspect: When to perform duplicate phone tagging
+
+* **Alternative 1 (current choice):** Perform tagging after any command that could modify phone numbers
+    * Pros: Ensures tags are always up-to-date
+    * Cons: May have slight performance impact for commands that modify multiple persons<br><br>
+
+* **Alternative 2:** Only check for duplicates when explicitly requested
+    * Pros: Better performance as checking is done on-demand
+    * Cons: Tags could become outdated if users forget to run the check<br><br>
+
+##### Aspect: Storage of phone number frequencies
+
+* **Alternative 1 (current choice):** Use a HashMap to store phone frequencies
+    * Pros: O(1) lookup time for checking duplicates
+    * Cons: Additional memory usage to maintain the HashMap<br><br>
+
+* **Alternative 2:** Check for duplicates by scanning the person list
+    * Pros: No additional data structures needed
+    * Cons: O(n²) time complexity for checking duplicates<br><br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -262,29 +310,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* salespeople who make recurring sales
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* frequently uses contacts for work (business)
+* has a need to manage multiple pieces of information about each contact
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+
+* manage contacts faster than a typical mouse/GUI driven app
+* prioritise contacts for scheduling and work efficiency
+* consolidates many different pieces of information about contacts
+* get an overview of all contacts easily
+* can search and filter for specific types or pieces of information quickly
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                            |
+|----------|--------------------------------------------|------------------------------|-------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App            |
+| `* * *`  | user                                       | add a new person             | keep my contact list up to date                                   |
+| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                              |
+| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | user with clients who need prioritization  | filter clients by contract value or last contact | identify clients that need attention to hit my KPIs|
+| `* *`    | user with many clients                     | filter persons by tags       | locate persons by category without having to go through the entire list |
+| `* *`    | user who handles client renewals           | filter clients by renewal date | focus on those whose contracts are renewing soon                  |
+| `* *`    | user with many clients                     | export contacts to csv       | share address books                                        |
+| `* *`    | user with busy schedules                   | sort persons by priority metrics | prioritize the most critical clients easily                       |
+| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                            |
+| `* *`    | stressed admin personnel                   | access quick help            | get command assistance without losing time when I forget the commands |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -294,10 +356,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons.
+2.  AddressBook shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  AddressBook deletes the person.
 
     Use case ends.
 
@@ -313,20 +375,106 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add person.
+2.  AddressBook shows a input form for person's details.
+3.  User enters person details like name, phone number, email, tags etc.
+4.  AddressBook validates user input.
+5.  AddressBook saves the person.
+    
+    Use case ends.
+
+**Extensions**
+
+* 4a. The user input is invalid.
+
+   * 4a1. AddressBook shows an error message.
+   * 4a2. AddressBook requests for the correct data.
+   * 4a3. User enters new data.
+   * Steps 4a1-4a2 are repeated until the data entered are correct.
+
+     Use case resumes at step 5.
+
+**Use case: Filter by tag**
+
+**MSS**
+
+1.  User requests to filter persons by tag.
+2.  AddressBook shows a input search bar.
+3.  User enters input related to key of a tag.
+4.  AddressBook shows a list of persons with matching tag key.
+    
+    Use case ends.
+
+**Extensions**
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+**Use case: Advanced Filter by Tag**
+
+**MSS**
+1.  User requests to advanced filter persons by tag.
+2.  AddressBook shows a input search bar.
+3.  User enters input related to a key, an operator and a value of a tag.
+4.  AddressBook shows a list of persons with tags matching the criterion.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+**Use case: Export to CSV**
+
+**MSS**
+
+1. User requests to export file to CSV.
+2. AddressBook outputs list of persons to CSV file in corresponding destination.
+3. AddressBook opens destination directory containing CSV file.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. AddressBook is unable to open file manager.
+
+   * 2a1. AddressBook shows an error message.
+     
+        Use case ends.
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+2.  Should work on any _mainstream OS_ without requiring any further installation or additional platform-specific dependencies
+3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should automatically save changes to the local data file, and it should be able to recover from unexpected shutdowns or power failures without data loss.
+6.  Should have a responsive and intuitive user interface that works well across different screen resolutions (1920 x 1080 or higher).
+7.  Should be easy to use and provide clear instructions and feedback to the user for common tasks like adding, editing, filtering, and exporting contacts.
+8.  Should be designed to accommodate future growth in the number of persons and additional features without major rewriting of code.
+9.  Should be modular and easy to test.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, MacOS
+* **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands, as opposed to a Graphical User Interface (GUI).
+* **Typical Usage**: The expected day-to-day usage of the application by the target user, which should not cause significant performance degradation.
+* **Above-average Typing Speed**: A typing speed that is higher than the average user (40 words per minute), allowing the user to input commands and data more efficiently.
+* **Platform-specific dependencies**:  Additional software required to run the application due to differences in Mainstream OS.
+* **Local data file**: File stored on and only on the user's computer/device running the application.
+* **Sensitive Data**: Data in any form (often text) that may harm the user or persons if exposed to unwanted parties (e.g. financial data, credit card info)
+* **File Manager**: OS-specific software that allows user to view and manage (create, delete etc) files on their computer/device. Often comes pre-installed as part of the OS.
+* **CSV**: Type of format of file that stores data in an ordered fashion using rows and columns. Often used in third-party spreadsheet software such as Microsoft Excel.
+* **Tag**: Form of text-based labelling to categorise persons or data for organisation.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,49 +482,171 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. 
+   
+   **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.<br><br>
 
-1. Saving window preferences
+1. **Saving window preferences**
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   2. Re-launch the app by double-clicking the jar file.
+   
+   **Expected:** The most recent window size and location is retained.<br><br>
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. **Deleting a person while all persons are being shown**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. **Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. **Test case:** `delete 1`<br>
+      **Expected:** First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. **Test case:** `delete 0`<br>
+      **Expected:** No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. **Other incorrect delete commands to try:** `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      **Expected:** Similar to previous.
 
-1. _{ more test cases …​ }_
+### Clearing all entries
+
+1. **Clear all contacts**
+
+   1. **Prerequisites:** Add at least one person to the address book.
+   
+   2. **Test case:** `clear`
+   
+   3. **Expected:** All contacts are removed from the list
+
+### Adding a person (including a duplicate phone case)
+
+1. **Add a person normally**
+
+   1. **Test case:** `add n\Jane Doe p\98765432 e\janedoe@example.com a\123 Maple Street fi\middleClass s\@janeDoe t\friends:4 t\priority:3 t\client`
+   
+   2. **Expected:** Jane Doe is added to the address book with specified details and tags. The UI shows the updated contact list.
+
+2. **Add a person with the same phone number (duplicatePhoneTagger)**
+
+   1. **Prerequisites:** Jane Doe already exists in the address book.
+   
+   2. **Test case:** `add n\John Smith p\98765432 e\johnsmith@example.com a\45 Elm Road fi\highIncome s\@johnSmith t\friends:5 t\priority:2`
+   
+   3. **Expected:** John Smith is added, but a tag `DuplicatePhone` appears in the UI indicating that a duplicate phone number is present.
+
+3. **Add an additional person normally, for the later parts of testing**
+
+   1. **Test case:**: `add n\Tim Jobs p\98222432 e\timjo@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\friends:7 t\priority:1 t\client`
+   
+   2. **Expected:** Tim Jobs is added to the address book with specified details and tags. The UI shows the updated contact list.
+
+4. **Attempt to add a person with a reserved tag**
+
+   1. **Test case:**: `add n\Tan Ah Kow p\98111111 e\tak@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\DuplicatePhone`
+
+   2. **Expected:** An error message stating the tag `DuplicatePhone` is reserved and the entry is not added.
+
+### Filtering contacts
+
+1. **Filter by a single tag**
+
+   1. **Prerequisites:** Add at least two contacts with different tags.
+   
+   2. **Test case:** `filter t\client`
+   
+   3. **Expected:** The list shows only contacts tagged as `client`.
+
+2. **Filter by name and tag**
+
+   1. **Test case:** `filter n\Jane t\client`
+   
+   2. **Expected:** The list shows contacts whose name contains "Jane" and who have the `client` tag.
+
+### Advanced Filtering of contacts (advfilter)
+
+1. **Filter with a comparison operator on tags with values**
+
+   1. **Prerequisites:** At least one contact with a tag that has a numeric value (e.g., `t\friends:4`).
+   
+   2. **Test case:** `advfilter t\friends > 4`
+   
+   3. **Expected:** The list displays only contacts with a `friends` tag greater than 4.
+
+2. **Filter with equality on tags with specific values**
+
+   1. **Test case:** `advfilter t\priority = 3`
+   
+   2. **Expected:** Only contacts with a `priority` tag set to `3` are displayed.
+
+### Sorting contacts
+
+1. **Sort contacts by tag values in ascending order**
+
+   1. **Prerequisites:** At least two contacts with a tag that has a value (e.g., `t\friends:5`).
+   
+   2. **Test case:** `sort t\friends asc`
+   
+   3. **Expected:** Contacts are sorted in ascending order by the value of the `friends` tag.
+
+2. **Sort contacts by tag values in descending order**
+
+   1. **Test case:** `sort t\priority desc`
+   
+   2. **Expected:** Contacts are sorted in descending order by the value of the `priority` tag.
+
+### Exporting contacts
+
+1. **Export contact list to a file**
+
+   1. **Prerequisites:** Have a list of contacts available to export.
+
+   2. **Test case:** Run the `export format\csv` command
+
+   3. **Expected:** Contacts are exported to a file in CSV format. Verify that all contact details are present in the file.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. **Dealing with missing/corrupted data files**
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. **Prerequisites:** BA€ is not running
+   
+   2. **Test case:**
+   
+      1. To simulate a corrupted file, navigate to the data folder, and find bae_addressbook.json
+      
+      2. Delete bae_addressbook.json
+      
+      3. Launch BA€.
+      
+   3. **Expected:** A new addressbook.json file will be created and it will be empty.
 
-1. _{ more test cases …​ }_
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Accept more symbols in names**: When adding or editing the details of a contact, the `NAME` field currently does accept certain symbols, such as `/` and `'`, there are other symbols that a user could desire to add to the `NAME` of a contact that are currently not accepted. This can include, but is not limited to, `,`, `-`, `(`, `)`, `.` or accented characters. We plan to adjust the validation RegEx of the `NAME` class to allow these other characters.
+2. **Improve duplicate contact detection**: When adding or editing the details of a contact, the duplicate detection feature currently compares `NAME` only. This could result in an inconvenience to the user should they choose to add multiple contacts with the same `NAME`. Hence, we plan to extend the current system of detecting duplicates based on `NAME` to one that detects duplicates by comparing multiple fields, such as but not limited to, `NAME`and `EMAIL`, and only considering a contact to be a duplicate of an existing one if both (or multiple) fields match in value.
+3. **Accept multiple phone numbers**: Currently, each contact can only have one `PHONE_NUMBER`, which may inconvenience some users who may wish to add contacts with multiple `PHONE_NUMBER`s. We plan to adjust the manner in which  `PHONE_NUMBER`s are stored, using a set similar to the manner in which `Tag` is stored, so that users are able to add more than one `PHONE_NUMBER`.
+4. **Accept more types of characters in phone numbers**: Currently, the `PHONE_NUMBER` field in each contact does not currently allow characters other than `+` and numbers. While as per the ITU-T, additional characters are not a strict necessity for a `PHONE_NUMBER` to be usable globally, users in certain regions may prefer the inclusion of additional characters to improve readability. Additional characters can include, but are not limited to, ` ` (whitespace), `-`, `(` or `)`. We plan to add support for these additional characters by adjusting the validation RegEX in the Phone class.
+5. **Accept multiple social media handles**: Currently, there can be only 0 or 1 `SOCIALMEDIAHANDLE` stored for a given contact, and should an `add` or `edit` command with more than one `s\SOCIALMEDIAHANDLE` field be entered, only the last one would be stored. Some users may prefer to store multiple `SOCIALMEDIAHANDLE`s of their contacts, perhaps if the contact has different handles for different platforms, or different purposes. Hence, we plan to store `SOCIALMEDIAHANDLE` in a set so that contacts can have more than 1 `SOCIALMEDIAHANDLE`.
+6. **Accept multiple pieces of financial information**: Currently, there can be only 0 or 1 `FINANCIALINFO` stored for a given contact, and should an `add` or `edit` command with more than one `fi\FINANCIALINFORMATION` field be entered, only the last one would be stored. Some users may prefer to store multiple pieces of `FINANCIALINFO` of their contacts for different purposes. Hence, we plan to store `FINANCIALINFO` in a set so that contacts can have more than 1 piece of `FINANCIALINFO`.
+7. **Add horizontal scroll bar to UI to prevent text truncation**: Currently, if a user enters a very long value for certain fields, such as, but not limited to, `NAME` or `ADDRESS`, and the application is open in a window that is not wide enough to display the entire value of that field, the value will be truncated with `...` at the end. This could cause inconvenience to certain users, who may not be able to view the entire value as a result. Thus, we plan to modify the UI to create a horizontal scroll bar so that the user can see the entire value instead of it being truncated.
+8. **Accept negative numbers and mathematical expressions in Tag names and values**: Currently, the `TAG` and `TAG:value`'s TagName and TagValue fields do not accept mathematical symbols or expressions, including, but not limited to, `+`, `-`, `*` or `/`, along with negative numbers. This could cause an inconvenience to certain users, who may wish to store `TAG`s with such information. Hence, we intend to adjust the validation RegEx of the `Tag` class to allow for such expressions.
+9. **Block fullscreen of application in Unix and Unix-Like systems**: On certain systems running Unix-based or Unix-like operating systems, including but not limited to MacOS, Linux and its distributions, making the application run in full screen mode leads to slightly buggy behaviour in the GUI, such as the Help window not scaling fully to the size of the display. This may inconvenience users who attempt to run the application in fullscreen mode. Hence, we intend to modify the `UiManager` file to block attempts for Unix-based and Unix-like operating systems from making the application run in fullscreen mode.
+10. **Include a more specific error for exporting on Windows**: On systems running Windows, if a user has a previous export's CSV or TXT file open in another application (for instance, Microsoft Excel or Notepad), and they attempt to use the `export` command, they will see a standard export failure error. This may not be sufficiently specific to inform users of the reason for the error. Thus, we intend to modify the `ExportCommand` class to detect such an issue and remind the user to close the previously exported file if they have it open.

@@ -1,94 +1,157 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# BA€ User Guide
 
-* Table of Contents
-{:toc}
+Thank you for choosing BA€! We know how important it is for salespeople to stay organized and efficient, especially when managing a large client network and making recurring sales. BA€ is designed to be your trusted assistant, streamlining your sales process by swiftly storing and retrieving client information. This allows you to focus on building lasting relationships and closing deals. Combining the speed of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI), BA€ ensures your contact management is smoother and faster than ever before!
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Installation
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-2/tp/releases).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Copy the file to the folder you want to use as the _home folder_ for BA€.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Launching BA€
+
+1. **Open Your Command Terminal**
+   - Navigate to the folder where you saved the `.jar` file using the `cd` command.
+   - For more info on how to use the `cd` command, visit the following links:
+     - For [Windows users](https://www.wikihow.com/Change-Directories-in-Command-Prompt)
+     - For [Mac/Linux users](https://iboysoft.com/wiki/cd-mac-terminal.html)
+1. **Start the App**
+   - Enter the following command: `java -jar tp.jar`
+   - Within a few seconds, the BA€ Address Book interface should display and should look something like this: <br>
+     <img src="images/UG_Images/UiwLabels.png" alt="Ui" width="600"/>
+
+### Using BA€
+
+1. To get started, try entering some of these commands in the command box at the top of the app:
+
+   * `help` : Opens the help menu detailing each command with an example format.
+
+   * `add n\John Doe p\98765432 e\johnd@example.com a\3, 6th Ave fi\millionaire s\@jdoe` : Adds a contact named `John Doe` to the Address Book.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
    * `delete 3` : Deletes the 3rd contact shown in the current list.
+
+   * `export format\csv` : Exports contact data in the CSV format.
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+2. For more details on each command, refer to the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n\NAME`, `NAME` is a parameter which can be used as `add n\John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n\NAME [t\TAG]` can be used as `n\John Doe t\friend` or as `n\John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t\TAG]…​` can be used as ` ` (i.e. 0 times), `t\friend`, `t\friend t\family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n\NAME p\PHONE_NUMBER`, `p\PHONE_NUMBER n\NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a window showing all commands and usage examples.
 
-![help message](images/helpMessage.png)
+<img src="images/UG_Images/HelpWindow.png" alt="help message" width="600"/>
 
 Format: `help`
 
+<div style="page-break-after: always;"></div>
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="warning" seamless>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+Name Constraints: <br>
+* Names have to be unique, duplicates are not allowed, regardless of case. For example, `John Doe` and `john doe` would be considered duplicates and if one is already in the address book, the other will not be allowed to be added. We suggest adding some additional information to differentiate your contacts from one another, such as `John Tan NUS` instead of just `John Tan`
+* Names must consist only of alphanumerics, spaces, forward slashes and apostrophes
+* Names must not be longer than 200 characters
 
-### Listing all persons : `list`
+Phone Number Constraints: <br>
+* Phone numbers must consist of digits `0` to `9`, with the option of a `+` sign at the beginning for the country code
+* Phone numbers must not be more than 30 digits long
+* Phone numbers cannot contain spaces
 
-Shows a list of all persons in the address book.
+Email Address Constraints: <br>
+* Email should be of the format `local@domain`
+* `local` must only contain alphanumeric characters and these special characters, excluding the parentheses, (`+_.-`)
+* `local` must not start or end with any special characters
+* `domain` must only consist of alphanumeric characters, with no more than one hyphen (`-`) or period (`.`) in between any 2 alphanumeric characters.
+* `domain` must end with at least 2 characters that are not a period (`.`)
+* Duplication is not prevented/checked for, as it might be possible for some of your users' clients to be contacted through the same contact, e.g. a common secretary.
+
+Address Constraints: <br>
+* Address can take any characters except for `\`, but cannot be blank
+
+Financial Info Constraints: <br>
+* Financial Info can take any valid characters except for `\`
+* If multiple Financial Info entries are provided, only the last one will be recorded. For example, in `fi\high income fi\millionaire` only `millionaire` will be stored
+
+Social Media Handle Constraints: <br>
+* Social Media Handle can take any valid characters except for `\`
+* If multiple Social Media Handle entries are provided, only the last one will be recorded. For example, in `s\@john123 s\@john456` only `@john456` will be stored
+
+Tag Constraints: <br>
+* A person can have any number of tags (including 0).
+* A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
+* Only alphanumeric characters (alphabets and numbers) are supported in tag names.
+* For tag values, only alphanumeric characters and periods in between numbers (eg `2.4`) are supported.
+* Multiple of the same tags are not supported for a single contact. For example, `t\policy` and `t\policy: 223302B` would not be supported for a single contact.
+* Negative numbers are not supported in tag values
+* Operations such as `+, -, *, /` are also not supported in tag values
+* Reserved tags are not allowed to be added manually via commands like `add` or `edit`
+  * For BA€, `DuplicatePhone` is a reserved tag name, manually adding variations with different capitalisation of letters (e.g. `duplicatePhone`, `dUpLiCaTePhOnE`) or adding tags with will give an error
+  * Tags with values but have the same name as reserved tags are also not allowed (e.g. `t\DuplicatePhone:7`)
+
+</box>
+
+<div style="page-break-after: always;"></div>
+
+Command examples:
+* `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
+* `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal fi\noIncome s\@bestyC`
+
+### Listing all contacts : `list`
+
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
@@ -96,22 +159,25 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE\ [t\TAG]…​ [t\TAG:value]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the person’s tags by typing `t\` without
     specifying any tags after it.
+* The same restrictions of input values seen in the `add` command apply here.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p\91234567 e\johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n\Betsy Crower t\ ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
+
+Useful for displaying contacts you already know of quickly and conveniently.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -119,27 +185,142 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  <img src="images/UG_Images/findAlexDavidResult.png" alt="result for 'find alex david'" width="600"/>
 
-### Deleting a person : `delete`
+<div style="page-break-after: always;"></div>
 
-Deletes the specified person from the address book.
+### Deleting a contacts : `delete`
+
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+### Filtering contacts: `filter`
+
+Filters the contact list by name and/or tags.
+
+Useful for displaying contacts that match the filter criteria.
+
+Format: `filter [n\NAME] [t\TAG]…​`
+
+* At least one of the optional fields must be provided.
+* Filters the contact list by name and/or tags.
+* Filter is not case-sensitive.
+* `n\NAME` specifies a name (or partial name) to filter by.
+* Partial words will also be matched e.g. `Han` will match `Hans`
+* `t\TAG` specifies a tag to filter by. You can provide multiple tags.
+* If both `n\NAME` and `t\TAG` are provided, the command will display contacts matching both the name and tags. (i.e. `AND` search).
+* Filter only temporarily modifies the list of contacts displayed, so if you use `filter` and then `edit`, your original unfiltered list of contacts will be displayed after.
+
+Examples:
+* `filter n\John` filters and displays all contacts whose names contain "John".
+* `filter t\client` filters and displays all contacts tagged as "client".
+* `filter n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
+* `filter n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth" <br>
+  <img src="images/UG_Images/filterJoAliWorth.png" alt="result for 'filter n/Jo n/Al t/worth'" width="600"/>
+<div style="page-break-after: always;"></div>
+<box type="tip" seamless>
+
+**Tip:** Use the command buttons provided to get command template
+<div style="text-align: left;">
+    <img src="images/UG_Images/FilterUIButton.png" alt="Using filter button" width=600 />
+</div>
+
+</box>
+
+### Advanced filtering of your contacts: `advfilter`
+
+Filters contacts by tag values, with an operator.
+
+Format: `advfilter t\TAG OPERATOR VALUE`
+
+* Filters the contact list by tags values, comparing with the operator.
+* Advfilter is not case-sensitive.
+* Available operators include: `=, !=, <, <=, >, >=`
+* Advfilter only temporarily modifies the list of contacts displayed, so if you use `advfilter` and then `edit`, your original unfiltered list of contacts will be displayed after.
+
+Examples:
+* `advfilter t\premium > 1000` would show all contacts that have the tag of premium, and a value of more than 1000 for that tag
+* `advfilter t\client != VIP` would show all contacts that have the tag of client, other than those with the value of VIP
+* `advfilter t\highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
+* `advfilter t\neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater. <br>
+  <img src="images/UG_Images/advfilterEg.png" alt="result for 'advfilter t/neighbours >= 5'" width="600"/>
+<div style="page-break-after: always;"></div>
+<box type="tip" seamless>
+
+**Tip:** Use the command button for Advanced Filter provided to get command template
+<div style="text-align: left;">
+    <img src="images/UG_Images/advfilterUIButton.png" alt="Using filter button" width=600 />
+</div>
+
+</box>
+
+### Sorting contacts: `sort`
+
+Sort contacts by tag values, in ascending or descending order.
+
+Format: `sort t\TAG DIRECTION`
+
+* Sorts the contact list by tags values according to specified sort order.
+* Sort is not case-sensitive.
+* Available directions include `asc` (ascending) and `desc` (descending).
+* Numeric-only tag values are of lower sort value than alphanumeric tag values.
+* Empty tag values will always appear at the end of the list regardless of sort order.
+* Sort only temporarily modifies the list of contacts displayed, so if you use `sort` and then `edit`, your original unsorted list of contacts will be displayed after.
+
+Examples:
+* `sort t\premium asc` would show all contacts that have the tag of premium, beginning with the contact that has the smallest
+numeric-only tag value for premium, then the contact with the largest alphanumeric tag value for premium, and lastly the contact
+that has empty tag value for premium.
+* `sort t\premium desc` would show all contacts that have the tag of premium, beginning with the contact that has the largest
+alphanumeric tag value for premium, then the contact with the smallest numeric-only tag value for premium, and lastly contact
+that has empty tag value for premium. <br>
+  <img src="images/UG_Images/sortpremium.png" alt="result for 'sort t/premium asc'" width="600"/>
+<div style="page-break-after: always;"></div>
+<box type="tip" seamless>
+
+**Tip:** Use the command button for Sort provided to get command template
+<div style="text-align: left;">
+    <img src="images/UG_Images/sortUiButton.png" alt="Using filter button" width=600 />
+</div>
+
+</box>
+
+### Exporting your contacts: `export`
+
+Exports a copy of your contact data to a specified file format.
+
+BA€ supports file exports in the CSV and TXT file formats.
+
+Format: `export format\EXPORT_FORMAT`
+* `format\EXPORT_FORMAT` specifies a file format for the contact data export.
+
+Examples:
+* `export format\csv` exports a copy of your contact data to `data/bae_addressbook.csv`.
+* `export format\txt` exports a copy of your contact data to `data/bae_addressbook.txt`.
+
+<box type="tip" seamless>
+
+**Tip:** Use the command button for Export to export your contact data to your preferred file format in the click of a button.
+<div style="text-align: left;">
+    <img src="images/UG_Images/exportUIButton.png" alt="Using filter button" width=600 />
+</div>
+
+</box>
 
 ### Clearing all entries : `clear`
 
@@ -156,26 +337,40 @@ Format: `exit`
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bae_addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
 
-### Archiving data files `[coming in v2.0]`
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
-_Details coming soon ..._
+</box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How can I open my contact data in another application, such as Microsoft Excel?
+
+1. Create a data export in your preferred file format.
+    * For CSV exports: type the command `export format\csv` or click `Export` > `Export to CSV`.
+    * For TXT exports: type the command `export format\txt` or click `Export` > `Export to TXT`.
+    * A confirmation message will appear onscreen after the export is complete.
+2. Navigate to the folder where BA€ was installed.
+3. Open the `/data/` folder.
+4. Open your data export file (`bae_addressbook.csv`/`bae_addressbook.txt`) in your application of choice.
+
+**Q**: How can I open my data in BA€ on a different computer?
+
+1. Install BA€ on your secondary computer.
+2. Copy your data file (`bae_addressbook.json`) from BA€'s `/data/` folder on your primary computer.
+3. Paste the copied data file in BA€'s `/data/` folder on your secondary computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,17 +378,41 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you accidentally press the alt key (Windows, Linux) or option key (MacOS)** on your keyboard while typing a command, the arrow keys will no longer navigate the command box. To rectify this, press the alt/option key again.
+4. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
+5. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
+6. **If you use have a previous export's file open and try to export again** on a Windows computer, you will encounter an error. To rectify this, close the previous export's file and try again.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
+**Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Edit**   | `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE\ [t\TAG]…​ [t\TAG:value]…​` <br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List**   | `list`
+**Help**   | `help`
+**Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
+**Advanced Filter** | `advfilter t\TAG OPERATOR VALUE…​`<br> e.g., `advfilter t\premium > 1000`
+**Sort** | `sort t\TAG DIRECTION`<br> e.g., `sort t\premium asc`
+**Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
+**Exit** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Glossary
+
+* **Above-average Typing Speed**: A typing speed that is higher than the average user (40 words per minute), allowing the user to input commands and data more efficiently.
+* **Case-sensitive**: The application differentiates between capital and small letters. For instance, `John Doe`, `jOhN dOe` and `john doe` would be regarded as different.
+* **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands.
+* **CSV**: Type of format of file that stores data in an ordered fashion using rows and columns. Often used in third-party spreadsheet software such as Microsoft Excel.
+* **Filter**: A way to quickly find the contacts you need by narrowing down the list based on specific details, like tags or names.
+* **Financial Info**: Any details related to a contact’s finances, like income level or whether they are a high-value customer.
+* **Index**: The number next to each contact in the list that helps you refer to them when you want to make changes.
+* **Social Media Handle**: A contact's username on social platforms like Twitter or Instagram, for example, @john_doe.
+* **Tag**: Form of text-based labelling to categorise contacts or data for organisation.
+
