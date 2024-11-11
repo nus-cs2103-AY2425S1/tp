@@ -979,14 +979,14 @@ This section outlines proposed improvements to address known feature flaws ident
 5. **Edit displayed error message for priority command when index is invalid:**
     * Currently, when an invalid index (i.e. an index greater than the size of the patient list) is entered with the priority command, The error message `Invalid patient ID. Please enter a valid patient identifier.` is displayed.
     * However, for other commands when an invalid index is used, the error message `The patient index provided is invalid` is displayed instead.
-    * We plan to edit the displayed error message for the priority command, to ensure consistency in error messages by using similar terminology throughout the system.
+    * We plan to edit the displayed error message for the priority command, to ensure consistency in error messages by using similar terminology throughout the system.<br></br>
 6. **Change `deletelevel` command to `resetpriority`:**
     * Currently, the `deletelevel` command is used to reset a patient's given priority level to level 3, which is the default level.
-    * As `deletelevel` actually resets a patient's priority level, we plan to change the command to `resetpriority` which is more indicative of the command's usage, improving clarity.
+    * As `deletelevel` actually resets a patient's priority level, we plan to change the command to `resetpriority` which is more indicative of the command's usage, improving clarity.<br></br>
 7. **Add `sortpriority` feature:**
     * Currently, nurses can use the `priority` command to label each patient with a priority level from 1 to 3, with 1 being of the highest priority.
     * To add on to the priority feature, we plan to implement a `sortpriority` feature, in which calling `sortpriority` will sort the displayed patient list by priority level, with patient's that are priority level 1 at the top of the list.
-    * This enhancement will allow nurses to sort their patient list based on highest priority patients, helping them pay more attention to the patients who require more care.
+    * This enhancement will allow nurses to sort their patient list based on highest priority patients, helping them pay more attention to the patients who require more care.<br></br>
 8. **Implement an "Edit Emergency Contact" command:**
     * Currently, NovaCare does not provide a way to edit an existing emergency contact directly. Users must delete the emergency contact and add a new one to make any updates, which is inconvenient and time-consuming, especially for minor edits such as updating a phone number or correcting a name spelling.
     * We propose introducing a new `editemergency` command that allows users to edit specific fields of an emergency contact (e.g., name, phone number) without the need to delete and re-add the contact. This enhancement will improve user experience by streamlining contact management.
