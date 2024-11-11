@@ -940,3 +940,17 @@ This section outlines proposed improvements to address known feature flaws ident
       * :white_check_mark: `Ravi s/o Indra`
       * :x: `Timothy /Ng`
       * :x: `-Lim En An`<br></br>
+4. **Implement stricter validation for duplicate description prefixes (`d/`) in task commands:**
+    * Currently, NovaCare allows multiple `d/` prefixes in the `addtask` command without flagging it as an error, as NovaCare will accept any task descriptions after the last prefix `d/`. This can lead to unintended behavior, where only the last `d/` prefix is considered as the task description, while earlier prefixes and text are ignored. 
+    * Although unlikely that users will enter an additional `d/`, we are aware that this behavior can result in data inconsistencies and confusion for users, especially if they unintentionally use multiple description prefixes, thinking all information will be stored.
+    * For example:
+        * `addtask 1 d/first d/second` will only store "second" as the task description.
+        * `addtask 1 d/ p/task` will store "p/task" as the description.
+        * `addtask 1 d/ d/first` will store "first" as the description.
+    * We plan to enhance the command parsing logic to detect and disallow multiple occurrences of the `d/` prefix within a single command. If duplicate prefixes are detected, the system will throw an error message explaining the issue to the user, helping to ensure command clarity and data integrity.
+    * For example:
+        * :white_check_mark: `addtask 1 d/task description`
+        * :white_check_mark: `addtask 1 d/Doctor appointment at p/2 physiotherapy room`
+        * :x: `addtask 1 d/first d/second` (Error: Duplicate `d/` prefix detected)
+        * :x: `addtask 1 d/    d/first` (Error: Duplicate `d/` prefix detected)
+        * :x: `addtask 1 d/d/first` (Error: Duplicate `d/` prefix detected)<br></br>
