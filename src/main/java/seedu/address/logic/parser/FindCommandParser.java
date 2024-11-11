@@ -20,7 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
-import seedu.address.model.person.ModuleRoleMap;
+import seedu.address.model.person.ModuleRolePair;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -78,7 +78,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.MESSAGE_USAGE));
         }
 
-        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
+        List<ModuleRolePair> moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
 
         List<Predicate<Person>> predicates = new ArrayList<>();
         if (!nameKeywords.isEmpty()) {
