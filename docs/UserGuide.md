@@ -22,42 +22,46 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 - **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list. The value provided should be a positive integer smaller than 2147483648.
 - **JSON**: JavaScript Object Notation, a lightweight data format that is easy to read and write for humans and easy to parse and generate for machines. TAHub saves its data in a `TAHub.json` file, which contains structured information about contacts, grades, and attendance records.
 
+<div style="page-break-after: always;"></div>
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds.
+
    ![StartUpPage](images/StartUpPage.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    - `list` : Lists all contacts.
+    - `list`<br>
+    Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+    Adds a contact named `John Doe` to the TAHub.
+    - `delete 3`<br>
+    Deletes the 3rd contact shown in the current list.
+    - `clear`<br>
+    Deletes all contacts.
+    - `exit`<br>
+    Exits the app.
+    <br></br>
 
-    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the TAHub.
-
-    - `delete 3` : Deletes the 3rd contact shown in the current list.
-
-    - `clear` : Deletes all contacts.
-
-    - `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Quick Start (Detailed)
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
     - **Check if Java is installed:**
-
         1. Open your command terminal:
             - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
             - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
@@ -66,39 +70,36 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
            ```bash
            java -version
            ```
-        3. If your system has Java `17` or above, you should see something like:
+        3. If your system has Java `17` or above, you should see something like:<br>
            ```bash
            java version "17.0.x" 2024-xx-xx LTS
            ```
         4. If your Java version is lower than `17`, proceed to the next step to install Java.
+           <br></br>
 
     - **Install Java `17` if not installed:**
         1. Go to [Oracle's Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
         2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
         3. After installation, repeat the `java -version` command to ensure Java is properly installed.
+           <br></br>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
     1. Visit the [GitHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
     2. Download the `.jar` file (`TAHub.jar`) from the latest release.
     3. Save the `.jar` file to the folder where you want to store your TAHub project.
+       <br></br>
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
     1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
-
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select Copy.
         - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
-        <br></br>
-
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
-
         - Open the **Finder** and go to your `Downloads` folder.
         - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
         - Go to the folder where you want to keep the file, then right-click and select Paste.
-        <br></br>
-
     3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
         - Right-click on the `.jar` file, choose Copy.
@@ -108,7 +109,6 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
     1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
-
         - Open the folder where you saved the `.jar` file.
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
@@ -123,7 +123,6 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```bash
           java -jar TAHub.jar
           ```
-
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
         - To get the full path of the folder where the `.jar` file is located:
@@ -140,19 +139,29 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
+   
    ![StartUpPage](images/StartUpPage.png)
+   <br></br>
 
-5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
+5. Type commands in the command box and press Enter to execute them.<br>
+   Some example commands you can try:
 
-    - `list`: Lists all contacts.
-    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`: Adds a contact named `John Doe`.
-    - `delete 3`: Deletes the 3rd contact shown in the current list.
-    - `clear`: Deletes all contacts.
-    - `exit`: Exits the app.
+    - `list`<br>
+      Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+      Adds a contact named `John Doe` to the TAHub.
+    - `delete 3`<br>
+      Deletes the 3rd contact shown in the current list.
+    - `clear`<br>
+      Deletes all contacts.
+    - `exit`<br>
+      Exits the app.
+      <br></br>
 
 6. Refer to the [Features](#features) section below for details of each command.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -177,7 +186,7 @@ Refer to the specific sections for a detailed guide on how to use each command.
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -200,8 +209,7 @@ Refer to the specific sections for a detailed guide on how to use each command.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-<br></br>
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -211,18 +219,21 @@ Expected output:
 
 ![result for 'help'](images/helpMessage.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a person: `add`
 
 Adds a person to the TAHub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
-Expected output:
-![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
+- `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to valid name, phone number, and email of the person.
+- `COURSE` refers to the course this person is taking.
+- `TAG` refers to any additional information about the person and should only contain alphanumeric characters. A person can have any number of tags (including 0).
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** TAs can use tags to keep small notes about students' progress and performance in class.
 </box>
 
 Examples:
@@ -230,16 +241,25 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
 
-### Listing all persons : `list`
+Expected output:
+
+![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
+
+<div style="page-break-after: always;"></div>
+
+### Listing all persons: `list`
 
 Shows a list of all persons in the TAHub.
 
 Format: `list`
 
 Expected output:
+
 ![result for 'list'](images/listPersons.png)
 
-### Editing a person : `edit`
+<div style="page-break-after: always;"></div>
+
+### Editing a person: `edit`
 
 Edits an existing person in the TAHub.
 
@@ -253,11 +273,16 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
+- `edit 1 p/91234567 e/johndoe@example.com`<br>
+  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/`<br>
+  Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
 
 Expected output:
+
 ![result for 'find John' followed by 'edit 1 p/91234567 e/johndoe@example.com'](images/editPerson.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name: `find`
 
@@ -274,12 +299,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find alex david` returns `Alex Yeoh`, `David Li`
 
 Expected output:
+
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+<div style="page-break-after: always;"></div>
+
+### Deleting a person: `delete`
 
 Deletes the specified person from the TAHub.
 
@@ -291,11 +319,16 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the TAHub.
-- `find John` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2`<br>
+  Deletes the 2nd person in the TAHub.
+- `find John` followed by `delete 1`<br>
+  Deletes the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'delete 1'](images/deletePerson.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding or editing a grade: `addGrade`
 
@@ -311,11 +344,16 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 Examples:
 
-- `addGrade 2 n/Midterm s/85 w/30` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
-- `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
+- `addGrade 2 n/Midterm s/85 w/30`<br>
+  Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
+- `find Betsy` followed by `addGrade 1 n/Final Exam s/92 w/30`<br>
+  Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "Final Exam" and 30% weightage.
 
 Expected output:
+
 ![result for 'find John' followed by 'addGrade 1 n/Midterm s/85 w/30'](images/addGrade.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a grade from a person: `deleteGrade`
 
@@ -329,11 +367,16 @@ Format: `deleteGrade INDEX n/TEST_NAME`
 
 Examples:
 
-- `deleteGrade 2 n/Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
-- `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+- `deleteGrade 2 n/Midterm`<br>
+  Deletes the grade for the "Midterm" test for the 2nd person in the list.
+- `find Betsy` followed by `deleteGrade 1 n/Final Exam`<br>
+  Deletes the "Final Exam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Performing grade aggregation operations: `aggGrade`
 
@@ -351,20 +394,42 @@ Format: `aggGrade OPERATION [n/TEST_NAME]`
 - `median`: Taking **median**
 
 Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the **overall grade** of the current filtered list.
+**This includes persons without any grades listed**, for which the overall grade is taken as 0.00.
 
 When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` **only on
-`TEST_NAME` tests** of the current filtered list.
+`TEST_NAME` tests** of the current filtered list. This will only include **persons who have the specified test recorded in their grade list**.
 
 Example:
 
-- `aggGrade median` Shows the median of the overall grade of the current filtered list.
-- `aggGrade median n/Midterm` Shows the median for midterm tests of the current filtered list.
+- `aggGrade mean`<br>
+  Shows the mean of the overall grade of the current filtered list.<br>
+  Expected output:
 
-Expected output for `aggGrade median`:
-![result for 'aggGrade median'](images/aggGrade_normal.png)
+  ![result for 'aggGrade mean'](images/aggGrade_mean_normal.png)
 
-Expected output for `aggGrade median n/midterm`
-![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
+  In this example, `aggGrade mean` calculates the mean of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 87.00 respectively.
+
+- `aggGrade min`<br>
+  Shows the minimum of the overall grade of the current filtered list (including persons with no grades).<br>
+  Expected output:
+
+  ![result for 'aggGrade min'](images/aggGrade_min_normal.png)
+
+  In this example, `aggGrade min` calculates the minimum of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 0.00 respectively.
+
+<div style="page-break-after: always;"></div>
+
+- `aggGrade mean n/final`<br>
+  Shows the mean for final tests of the current filtered list.<br>
+  Expected output:
+
+  ![result for 'aggGrade mean n/final'](images/aggGrade_mean_filtered.png)
+
+  In this example, `aggGrade mean n/final` calculates the mean of the final grades of **persons who have their final tests recorded in their grade list**.
+  Only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
+  Other persons like Charlotte Oliveiro are not included in the calculation.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking attendance: `mark`
 
@@ -379,11 +444,16 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 
 Examples:
 
-- `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent` Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `mark 2 d/31/01/2024 10:00 m/Attended`<br>
+  Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent`<br>
+  Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'mark 1 d/31/01/2024 12:00 m/Absent'](images/markAttendance.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Unmarking attendance: `unmark`
 
@@ -396,11 +466,16 @@ Format: `unmark INDEX d/DATETIME`
 
 Examples:
 
-- `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `unmark 1 d/31/01/2024 12:00` deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `unmark 2 d/31/01/2024 10:00`<br>
+  Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+- `find John` followed by `unmark 1 d/31/01/2024 12:00`<br>
+  Deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
+
 ![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering people who were absent: `absentees`
 
@@ -413,21 +488,28 @@ Format: `absentees d/DATE_TIME`
 
 Examples:
 
-- `absentees d/31/01/2024 10:00` Finds all people who were absent on the 10 AM of January 31st, 2024.
+- `absentees d/31/01/2024 10:00`<br>
+  Finds all people who were absent on the 10 AM of January 31st, 2024.
 
 Expected output:
+
 ![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
 
-### Clearing all entries : `clear`
+<div style="page-break-after: always;"></div>
+
+### Clearing all entries: `clear`
 
 Clears all entries from the TAHub.
 
 Format: `clear`
 
 Expected output:
+
 ![result for 'clear'](images/clearMessage.png)
 
-### Exiting the program : `exit`
+<div style="page-break-after: always;"></div>
+
+### Exiting the program: `exit`
 
 Exits the program and closes.
 
@@ -453,6 +535,7 @@ Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g
 _Details coming soon ..._
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -463,40 +546,39 @@ _Details coming soon ..._
     - Open the folder where TAHub saves its data. By default, the data file is located at `[JAR file location]/data/TAHub.json`.
     - If you installed TAHub in a custom folder, look for the `data` folder within that location.
     - Copy the `TAHub.json` file to a USB drive, cloud storage, or any other method you prefer for transferring files between computers.
-
+      <br></br>
 2. **Install TAHub on the New Computer**:
     - Download the latest `.jar` file from the [TAHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases).
     - Place the `.jar` file in a folder on the new computer where you want to use TAHub.
-
+      <br></br>
 3. **Run TAHub Once on the New Computer**:
     - Open a terminal, `cd` into the folder containing the `.jar` file, and run the command:
       ```bash
       java -jar TAHub.jar
       ```
     - This creates a new `data` folder in the same directory as the `.jar` file with an empty `TAHub.json` file.
-
+      <br></br>
 4. **Replace the Empty Data File**:
     - Close the TAHub application on the new computer.
     - Go to the `data` folder where the new `TAHub.json` file was created.
     - Delete the empty `TAHub.json` file and replace it with the `TAHub.json` file you copied from the old computer.
-
+      <br></br>
 5. **Verify the Data Transfer**:
     - Open TAHub on the new computer by running the `.jar` file again.
     - Check that all your contacts, grades, and attendance records appear correctly, verifying that the data has been successfully transferred.
-
----
 
 By following these steps, you can easily transfer all your TAHub data to a new computer without losing any information.
 
 
 ---
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
