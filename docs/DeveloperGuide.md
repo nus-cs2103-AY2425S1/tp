@@ -272,7 +272,7 @@ Tech-savvy sales representatives in the insurance industry who
 - Need quick access to contact information during calls or email communications
 - Require efficient follow-up management and interaction tracking
 
-**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management. 
+**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management.
 It offers instant access to lead details, interaction histories, and follow-up schedules, maximizing call and email productivity for high-volume, rapid-paced sales environments.
 
 
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The user provides incomplete contact information
 
   * 2a1. AddressBook shows an error message and prompts for the missing details
-    
+
     Use case resumes at step 3
 
 * 3a. The contact already exists
@@ -473,14 +473,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User reaches the earliest command in the history.
 
-  * 2a1. AddressBook stops navigating further back and continues displaying the first command. 
-  
+  * 2a1. AddressBook stops navigating further back and continues displaying the first command.
+
   Use case ends.
 
 * 2b. User requests to view the next command but is at the latest command.
 
-    * 2b1. AddressBook shows an empty string or a message indicating no further commands. 
-  
+    * 2b1. AddressBook shows an empty string or a message indicating no further commands.
+
     Use case ends.
 
 
@@ -531,8 +531,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -548,12 +546,32 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+1. Finding people while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with one or more contacts containing the word `Roy`
+   2. Test case: `find Roy`<br>
+      Expected: Contacts containing `Roy` is displayed.
+   3. Test case: `find roy`<br>
+      Expected: Similar to previous.
+   4. Test case: `find royt`<br>
+      Expected: Contacts similar to `royt` is displayed.
+   5. Other find commands to try: `find x`, `...` (where x is any sequence of characters)<br>
+      Expected: Similar to previous.
+   5. Test case: `find`<br>
+      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+
+1. Filtering people while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `filter p/+65`<br>
+      Expected: Contacts containing in their phone `+65` is displayed.
+   3. Test case: `filter p/+++`<br>
+      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect filter commands to try: `filter p/x`, `...` (where x is any invalid phone number)<br>
+      Expected: Similar to previous.
+   5. Other incorrect filter commands to try: `filter y/x`, `...` (where x is any invalid field, and y is any valid field format)<br>
+      Expected: Similar to previous.
+
 1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Data is stored automatically
