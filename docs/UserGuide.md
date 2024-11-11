@@ -452,6 +452,8 @@ The `find` command allows you find student by a field or any combination of fiel
 - `find n/john joe` returns students whose names contain `john` or `joe`.
 - `find e/asdf p/123` returns students whose email contains `asdf` and phone number contains `123`.
 
+<div style="page-break-after: always;"></div>
+
 **Example Usage:** `find n/Kim`
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
@@ -532,10 +534,18 @@ The `undo` and `redo` commands allow you to undo/redo the most recent changes ma
 - `redo` – Reverses the latest `undo` command.
 
 **Example Usage:**
+
 **Input:** User enters the `undo` command to reverse the last change.
 ![Ui](images/undo_input.png)
+
+<div style="page-break-after: always;"></div>
+
 **Output:** The UI updates to reflect the reversal of the most recent change.*
 ![Ui](images/undo_output.png)
+
+<div style="page-break-after: always;"></div>
+
+
 **Input:** User then enters the `redo` command to reapply the change.
 The UI updates to reflect the reapplication of the previously undone change*
 ![Ui](images/redo.png)
@@ -661,6 +671,7 @@ Opens a window with detailed information of a specified student.
 
 Displaying the detailed information window can be done in two ways:
 
+<div style="page-break-after: always;"></div>
 
 #### Method 1:
 **Example Usage:**
@@ -669,7 +680,7 @@ Displaying the detailed information window can be done in two ways:
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px; margin-top: -10px;">
     <p><b>Input:</b> User enters the `info 1` command to display detailed information for the first student.</p>
-    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 90%;" />
+    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
@@ -679,7 +690,6 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
 </div>
-
 
 
 
