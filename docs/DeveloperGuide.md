@@ -143,9 +143,9 @@ How the parsing works:
 
 ![ModelClassDiagram.png](images%2FModelClassDiagram.png)
 **Note:** Some arrows might be blurred from the conversion between markdown and pdf. Here is a description in case arrows are not visible:
-- Person contains phone, email, information, name and optional tag
-- Customer and Supplier inherit from person
-- Customer and Supplier contains address
+- Person contains phone,address, email, name, tags and orders. (everything is optional except name and phone)
+- Customer and Supplier inherit from person.
+- Customer contains information (optional) and Supplier contains ingredients supplied (optional).
 - ModelManager has a filtered number of persons. UniquePersonList has all persons in the address book.
 
 The Model component is responsible for managing the core data of the application, structured based on the updated UML diagram.

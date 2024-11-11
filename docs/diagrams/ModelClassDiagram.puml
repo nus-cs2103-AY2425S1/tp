@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package Model as ModelPackage <<Rectangle>> {
     Package order {
         Class CustomerOrder
         Class CustomerOrderList
@@ -83,11 +83,11 @@ AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Remark
-Person *--> "*" Tag
-Person *--> "*" Order
+Person --> "0..1" Email
+Person --> "0..1" Address
+Person --> "0..1" Remark
+Person --> "0..*" Tag
+Person --> "0..*" Order
 
 CustomerOrderList -up-|> OrderList
 SupplyOrderList -up-|> OrderList
@@ -99,8 +99,8 @@ OrderList --> "1..*" Order
 SupplyOrderList --> "1..*" SupplyOrder
 CustomerOrder *--> OrderStatus
 SupplyOrder *--> OrderStatus
-Customer *--> Information
-Supplier *--> "1..* ingredients supplied" Ingredients
+Customer --> "0..1" Information
+Supplier *--> "0..* ingredients supplied" Ingredients
 ModelManager --> "~* filtered" Person
 
 Person -[hidden]up--> I
