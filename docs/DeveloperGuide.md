@@ -774,6 +774,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 3. Currently, the app allows different people to have the same phone number. Future versions will enforce unique phone numbers for each contact.
 4. Currently, the app displays the statistical graphs with no labelling of the units of the x-axes and y-axes. Future versions will include this labelling.
 5. Currently, the app displays pie charts labels for categories that have no recorded values. Future versions of will hide the labelling until there are recorded values for those categories.
+6. Currently, the app displays dynamic statistics for any new properties bought/sold and the associated revenue/expense in the current session. Future versions will update the total properties bought/sold and the associated revenue/expense if contacts are deleted as well.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
