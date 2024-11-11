@@ -209,8 +209,6 @@ Format: `addEcName INDEX en/[ECNAME]`
 **Tip:** You can delete the emergency contact's name by leaving the `ECNAME` field empty.
 </box>
 
-<div style="page-break-after: always;"></div>
-
 * Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
 * Deletes the emergency contact's name at the specified `INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​ 
@@ -337,8 +335,6 @@ Format: `addSubmissionStatus INDEX sm/SUBMISSION_NAME ss/SUBMISSION_STATUS`
 * The submission status must be "Y", "N" or `NIL`.
 * The submission status can be edited using the same command with a different submission status.
 * The index **must be a positive integer** 1, 2, 3, …​
-
-<div style="page-break-after: always;"></div>
 
 Examples:
 * `addSubmissionStatus 1 sm/Assignment 1 ss/Y`
