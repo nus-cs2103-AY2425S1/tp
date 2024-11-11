@@ -38,6 +38,7 @@ The user guide contains formatting to highlight important info. The standards us
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
+  - **Employee Commands**
   - [Adding an employee : `add`](#adding-an-employee-add)
   - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
@@ -45,6 +46,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Locating employees by name : `find`](#locating-employees-by-name-find)
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
+  - **Project Commands**
   - [Adding a project : `addproject`](#adding-a-project--addproject)
   - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
   - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
@@ -52,9 +54,11 @@ The user guide contains formatting to highlight important info. The standards us
   - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - **Assignment Commands**
   - [Create an assignment : `assign`](#create-assignment--assign)
   - [List assignments : `listassignments`](#list-assignments--listassignments)
   - [Delete Assignment : `unassign`](#delete-assignment-unassign)
+  - **Other Commands**
   - [Exiting the program : `exit`](#exiting-the-program--exit)
 - [Saving / Editing the data file](#saving-the-data)
 - [FAQ](#faq)
@@ -195,7 +199,7 @@ Format: `listemployees`
 
 Expected output:
 - System message noting success
-- All persons shown in the displayed employee list
+- All employees shown in the displayed employee list
 - Result for `listemployees` with sample data:
 ![result for `listemployees`](images/listEmployees.png)
 
@@ -230,7 +234,7 @@ Expected output:
 
 ### Filtering employees by skills: `filter`
 
-Finds employees who have **at least one skill or tag matching** at least one of the search items.
+**Finds employees who have at least one skill or tag matching** at least one of the search items.
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
@@ -290,8 +294,8 @@ Format: `delete INDEX`
 
 Examples:
 
-- `listemployees` followed by `delete 2` deletes the 2nd person in the address book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `listemployees` followed by `delete 2` deletes the 2nd employee in the address book.
+- `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 Expected output:
 - System message noting success
@@ -356,7 +360,7 @@ Expected output:
 
 ### Listing all members of a project : `listprojectmembers`
 
-Shows a list of **all project members**.
+Shows a list of **all project members of the specified project**.
 
 Format: `listprojectmembers pn/PROJECT_NAME`
 
@@ -396,7 +400,7 @@ Expected output:
 
 ### Finding projects by name : `findproject`
 
-Finds projects whose **names contain any of the given keywords**.
+**Finds projects whose names contain any of the given keywords**.
 
 Format: `findproject KEYWORD [MORE_KEYWORDS]`
 
@@ -457,7 +461,7 @@ Expected output:
 
 ### Create Assignment : `assign`
 
-**Creates an assignment** between a Person and a Project.
+**Creates an assignment** between an Employee and a Project.
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
@@ -467,7 +471,7 @@ Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
   > Assignment IDs are compared numerically. `0001` is treated the same as `1`.
 
 - The `PROJECT_ID` must belong to an existing project.
-- The `EMPLOYEE_ID` must belong to an existing person.
+- The `EMPLOYEE_ID` must belong to an existing employee.
 - There must not be an existing assignment with the same `PROJECT_ID` and `EMPLOYEE_ID`.
 
 Examples:
@@ -489,7 +493,7 @@ Format: `listassignments`
 Expected output:
 
 - System message noting success
-- All assignments shown in the top display list
+- All assignments shown in the assignment display list
 - Result of `listassignments` with sample data:
 ![result of `listassignments`](images/listAssignments.png)
 
@@ -497,8 +501,8 @@ Expected output:
 
 ### Delete Assignment: `unassign`
 
-**Deletes an assignment** between a Person and a Project.<br>
-This does not delete the Person nor the Project.
+**Deletes an assignment** between an Employee and a Project.<br>
+This does not delete the Employee nor the Project.
 
 Format: `unassign aid/ASSIGNMENT_ID`
 
@@ -516,7 +520,7 @@ Expected output:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+**Exits the program.**
 
 Format: `exit`
 
