@@ -269,7 +269,7 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
-  * This is to search as a filtering function.
+  * This serves as a filtering function.
   * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags.
   * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`.
 
