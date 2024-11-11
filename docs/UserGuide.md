@@ -401,7 +401,7 @@ This command will help you add a new guest to the bottom of the existing overall
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
-![add_guest command](images/addGuestCommand.png)
+<img src="images/addGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
 
 [_Back to Top_](#table-of-contents)
 
@@ -433,7 +433,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-![edit_guest command](images/editGuestCommand.png)
+<img src="images/editGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
 
 [_Back to Top_](#table-of-contents)
 
@@ -459,7 +459,7 @@ Assuming that `Guest` `Tony Stark` has an `INDEX` of 1 on the existing guest lis
 
 [_Back to Top_](#table-of-contents)
 
----
+<div style="page-break-after: always"></div>
 
 ### **Vendor Related Commands**
 
@@ -486,7 +486,7 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
-![add_vendor command](images/addVendorCommand.png)
+<img src="images/addVendorCommand.png" alt="add guest_command" width="1300" height="<1000">
 
 [_Back to Top_](#table-of-contents)
 
@@ -518,7 +518,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-![edit_vendor command](images/editVendorCommand.png)
+<img src="images/editGuestCommand.png" alt="add guest_command" width="1300" height="<1000">
 
 [_Back to Top_](#table-of-contents)
 
@@ -544,6 +544,7 @@ Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing vendor
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Other Useful Features**
 
@@ -587,7 +588,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 [_Back to Top_](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Command summary**
 
