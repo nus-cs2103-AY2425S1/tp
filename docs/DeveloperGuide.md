@@ -24,7 +24,6 @@ Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -51,8 +50,6 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-<div style="page-break-after: always;"></div>
-
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -70,8 +67,6 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-<div style="page-break-after: always;"></div>
-
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -88,8 +83,6 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
-
-<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -389,14 +382,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The input format for adding the contact is invalid.
 
     * 1a1. PlanPerfect shows an error message requesting for the correct input format.
-  
-        Use case ends.
+
+      Use case ends.
 * 1b. PlanPerfect detects a duplicate contact entry (by phone number) in the addressbook.
 
-  * 1b1. PlanPerfect displays an error message showing the duplicated contact.
-  
+    * 1b1. PlanPerfect displays an error message showing the duplicated contact.
+
       Use case ends.
-<br/><br/>
+      <br/><br/>
 
 **Use case: UC04 - Edit a contact**
 
@@ -414,10 +407,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 * 1b. Wedding planner requests to edit a contact's phone number to one that is held by another contact
 
-   *  1b1.  PlanPerfect shows an error message that the input phone number already exists in PlanPerfect.
+    *  1b1.  PlanPerfect shows an error message that the input phone number already exists in PlanPerfect.
 
-      Use case ends.
-<br/><br/>
+       Use case ends.
+       <br/><br/>
 
 **Use case: UC05 - Tag a contact**
 
@@ -534,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. PlanPerfect shows an error message.
 
-        Use case ends.
+      Use case ends.
 
 <br/><br/>
 
@@ -590,9 +583,9 @@ Use case ends.
 
 **Extensions**
 * 1a. User provides invalid details about a wedding to PlanPerfect.
-  * 1a1. PlanPerfect shows an error message detailing why the details provided are invalid.
+    * 1a1. PlanPerfect shows an error message detailing why the details provided are invalid.
 
-    Use case ends.
+      Use case ends.
 
 <br/><br/>
 
@@ -601,7 +594,7 @@ Use case ends.
 **MSS**
 
 1. User requests to delete a wedding with specified details.
-2. PlanPerfect deletes the wedding.
+2. PlanPerfect deletes the wedding and removes it from the weddings panel view.
 
    Use case ends.
 
@@ -619,7 +612,8 @@ Use case ends.
 **MSS**
 
 1. User requests to edit the name and/or date of the wedding.
-2. PlanPerfect edits the wedding as specified by the command.
+2. PlanPerfect edits the wedding as specified and updates the wedding name and date in the weddings panel
+   view.
 
    Use case ends.
 
@@ -629,7 +623,7 @@ Use case ends.
     * 1a1. PlanPerfect shows an error message.
 
       Use case ends.
-  
+
 * 1b. PlanPerfect detects a duplicate wedding entry (by wedding name) in the addressbook.
     * 1b1. PlanPerfect displays an error message showing the duplicated wedding details.
 
@@ -681,78 +675,142 @@ testers are expected to do more *exploratory* testing.
 ### Contact Management
 
 1. Adding a contact
-   - **Recommended:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but upon the contact being added, you will be redirected to the all contacts view. 
-   - Test case: `add n/John Doe p/91234567 e/johnd@example.com a/123 John St.`<br>
-          **Expected:** A new contact with the specified details is added to the all contacts list. Confirmation is shown in the status message.
-     <br></br>
+    - **Recommended:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but upon the contact being added, you will be redirected to the all contacts view.
+    - Test case: `add n/John Doe p/91234567 e/johnd@example.com a/123 John St.`<br>
+      **Expected:** A new contact with the specified details is added to the all contacts list. Confirmation is shown in the status message.
+      <br></br>
 
 2. Deleting a contact
 
-   - **Prerequisites:** For optimal testing, multiple contacts should already be present in the contact list.
-   - Test case: `delete 1`<br>
-         **Expected:** First contact is deleted from the list in view. Details of the deleted contact are shown in the status message. 
-   - Test case: `delete 0`<br>
-         **Expected:** No contact is deleted. Error details are shown in the status message. 
-   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-         **Expected:** Similar to the previous case, an error message appears.
-     <br></br>
+    - **Prerequisites:** For optimal testing, multiple contacts should already be present in the contact list.
+    - Test case: `delete 1`<br>
+      **Expected:** First contact is deleted from the list in view. Details of the deleted contact are shown in the status message.
+    - Test case: `delete 0`<br>
+      **Expected:** No contact is deleted. Error details are shown in the status message.
+    - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+      **Expected:** Similar to the previous case, an error message appears.
+      <br></br>
 
 3. Editing a contact
-   - **Prerequisites:** Ensure the contact you want to edit is in the current view.
-   - Test case: `edit 2 n/Jane Smith p/98765432`<br>
-       **Expected:** The name and phone number of the second contact in view are updated. Confirmation is shown in the status message.
-    <br></br>
+    - **Prerequisites:** Ensure the contact you want to edit is in the current view.
+    - Test case: `edit 2 n/Jane Smith p/98765432`<br>
+      **Expected:** The name and phone number of the second contact in view are updated. Confirmation is shown in the status message.
+      <br></br>
 
 4. Tagging a contact
-   - **Prerequisites:** The contact should not already have the tag you want to add. You may add multiple tags at once.
-   - Test case: `tag 2 t/florist designer`<br>
-        **Expected:** The contact at index 2 in the current contacts view will now have the florist and designer tags.
-    <br></br>
+    - **Prerequisites:** The contact should not already have the tag you want to add. You may add multiple tags at once.
+    - Test case: `tag 2 t/florist designer`<br>
+      **Expected:** The contact at index 2 in the current contacts view will now have the florist and designer tags.
+      <br></br>
 5. Untagging a contact
-   - **Prerequisites:** The contact should currently have the tag you want to remove. You may remove multiple tags at once.
-   - Test case: `untag 2 t/photographer videographer`<br>
-        **Expected:** The contact at index 2 will no longer have the photographer and videographer tags.
-   <br></br>
+    - **Prerequisites:** The contact should currently have the tag you want to remove. You may remove multiple tags at once.
+    - Test case: `untag 2 t/photographer videographer`<br>
+      **Expected:** The contact at index 2 will no longer have the photographer and videographer tags.
+      <br></br>
 
 ### Wedding Management
 
 1. Adding a wedding
-   - **Recommendation:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. 
-   - Test case: `addw n/Emily and John d/25/12/2024 c/1 2`<br>
-          **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
-     <br></br>
-2. Editing a wedding's details
-    - Test case: `editw 1 n/Emmy and Johnny d/29/12/2024` <br>
-        **Expected:** The name and date at the wedding at index 1 have been updated with the specified name and date.
-    <br></br>
-3. Deleting a wedding
-    - Test case: `deletew 1` <br>
-      **Expected:** The wedding at index 1 has been deleted 
+    - **Recommendation:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal.
+    - Test case: `addw n/Emily and John Wedding d/25/12/2024 c/1 2`<br>
+      **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
       <br></br>
+
+2. Deleting a wedding
+   - Test case: `deletew 1` <br>
+   **Expected**: The wedding's details at index 1 has been updated with the name and date provided
+   <br></br>
+
+
+3. Editing a wedding's details
+   - Test case: `editw 1 n/Emmy and Johnny d/29/12/2024` <br>
+  **Expected**: The wedding's details at index 1 has been updated with the name and date provided
+  <br></br>
+
 4. Viewing wedding details
-   - Test case: `view 1`<br>
-       **Expected:** Displays the contacts assigned to the wedding at index 1.
-     <br></br>
+    - Test case: `view 1`<br>
+      **Expected:** Displays the contacts assigned to the wedding at index 1.
+      <br></br>
+
+      
 5. Assigning and unassigning contacts to/from a wedding
-   - Test case: `assign 1 c/3`<br>
-       **Expected:** Contact at index 3 is assigned to wedding 1. A confirmation message is displayed.
-   - Test case: `unassign c/3`<br>
-       **Expected:** Contact at index 3 is removed from the wedding in view. A confirmation message is displayed.
-     <br></br>
+    - Test case: `assign 1 c/3`<br>
+      **Expected:** Contact at index 3 is assigned to wedding 1. A confirmation message is displayed.
+    - Test case: `unassign c/3`<br>
+      **Expected:** Contact at index 3 is removed from the wedding in view. A confirmation message is displayed.
+      <br></br>
 
 ### Error Handling and Data Integrity
 
 1. Handling invalid commands
-   - Test case: Enter invalid commands, such as `edit`, `delete abc`, `add n/` (missing parameters).<br>
-          **Expected:** Clear error message appears, with no unintended changes to the data.
-     <br></br>
+    - Test case: Enter invalid commands, such as `edit`, `delete abc`, `add n/` (missing parameters).<br>
+      **Expected:** Clear error message appears, with no unintended changes to the data.
+      <br></br>
 2. Testing data persistence
-   - After making several changes, close and reopen the application.<br>
-          **Expected:** All recent changes persist, confirming successful data saving.
-     <br></br>
+    - After making several changes, close and reopen the application.<br>
+      **Expected:** All recent changes persist, confirming successful data saving.
+      <br></br>
 3. Dealing with missing/corrupted data files
-   - To simulate a missing data file, go into the folder where your jar file is stored, and delete the folder named 'data'. 
-   - To simulate a corrupted data file, go into the folder where you jar file is stored, click into the data folder, and edit the addressbook.json in a way that it contains syntax error(s). <br>
-   **Expected:** The application will start with an empty contact list there is no data available or if the data has been corrupted.
-     <br></br>
+    - To simulate a missing data file, go into the folder where your jar file is stored, and delete the folder named 'data'.
+    - To simulate a corrupted data file, go into the folder where you jar file is stored, click into the data folder, and edit the addressbook.json in a way that it contains syntax error(s). <br>
+      **Expected:** The application will start with an empty contact list there is no data available or if the data has been corrupted.
+      <br></br>
 
+## Appendix: Effort
+
+To summarise, PlanPerfect extends the AB3 framework considerably by not only enhancing and adding new
+contact-management features (like `tag`, `untag`, `filter`)  but also a list of weddings as a new entity type with its
+own attributes and a new set of wedding commands. It has also considerably
+altered some of the AB3's pre-existing contact management features, especially regarding the nature of tag
+management and changed the UI to increase its complexity and better reflect an integrated wedding and contacts view.
+
+**Difficulty level:**
+- Moderate difficulty: While numerous newly added commands and tests did leverage existing AB3 code in some aspects
+  when creating some wedding commands, adapting it to handle dual entities (contacts and wedding) and augmenting the
+  UI to display the wedding list and current wedding viewed required a significant amount of effort.
+
+**Challenges faced:**
+- Ensuring robust test coverage for new and adapted features, which required a lot of consideration for edge cases.
+- Modifying the UI which required considerable additions to the FXML code and utilising JavaFX (which has a fairly
+  steep learning curve) to support a split wedding list and contact list view.
+- Managing whether new commands (eg. `assign`/`filter`) operate on the current view or main view for newly added
+  commands dependent on whether they were in the main/filtered/wedding view, which created more complexity for the team.
+
+**Achievements of the project:**
+- Adding significant enhancements to the UI via a new wedding list pane with the live-updating current wedding
+  viewed name on top, a more appealing layout of the contact card with tags on the right, and multicolored tags
+- Enhanced tags management and filtering capabilities, alongside additional wedding-specific commands that handle
+  wedding management.
+- Achieving a passing code coverage of 76% reflecting thorough testing of core features.
+
+## Appendix: Planned Enhancements
+
+1. **Enhanced duplicate detection handling for Wedding Names and Contacts**
+
+   Wedding Names should be compared on a case-insensitive basis ('john' and 'jOhN' are considered the same
+   wedding names) and contacts should be determined to be duplicates if both emails and/or both phone numbers of a
+   contact are identical, rather than just by the basis of an identical phone number.
+
+2. **More advanced date validation for invalid dates**
+
+   Implement stricter date validation to handle invalid dates like February 29 on non-leap years or days that exceed the
+   maximum for a given month (e.g., 31st in months with only 30 days). This enhancement will ensure that users are
+   notified of invalid dates instead of automatically adjusting them to the nearest valid date when using `addw` or
+   `editw`.
+
+3. **More accurate error messages for extreme numerical inputs**
+
+   Improve error handling to provide an "invalid index" message instead of a "wrong format error' for contact indexes
+   provided which are larger than the MAX_INT or equal to or below 0 (negative numbers).
+
+4. **Improve parsing for address fields with text resembling flags (eg. `a/` or `t/`)**
+
+   Update address parsing logic to differentiate between actual command flags and address text that may resemble these
+   flags to allow users to store addresses like `1 Street e/b Building` or `Frenk t/t road` without triggering errors
+   that multiple values have been specified for single-valued fields.
+
+5. **Add support for names with non-alphanumeric characters (e.g., -, @, .).**
+
+    Special characters like hyphens (-), at symbols (@), and periods (.), are common in some names, thus there will be an 
+    update to allow the addition of names with special characters. This update will ensure that users with such characters 
+    in their names can be added without errors thrown.
