@@ -110,7 +110,9 @@ public class AddSupplierCommandTest {
         }
 
         @Override
-        public void addProduct(Product product){ throw new AssertionError("This method should not be called."); }
+        public void addProduct(Product product) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
