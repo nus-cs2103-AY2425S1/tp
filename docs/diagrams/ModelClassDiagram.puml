@@ -19,6 +19,7 @@ Package Model as ModelPackage <<Rectangle>> {
     Class Address
     Class Email
     Class Name
+    Class Nаme
     Class Phone
     Class IdentificationCardNumber
 
@@ -58,7 +59,7 @@ Owner *--> IdentificationCardNumber
 
 Pet *--> Age
 Pet *--> Breed
-Pet *--> Name
+Pet *--> Nаme
 Pet *--> Sex
 Pet *--> Species
 
