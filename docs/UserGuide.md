@@ -63,7 +63,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
     * `exit` : Exits the app.
 
-Refer to the [Features](#features) below for more details.
+Refer to the [Commands](#commands) below for more details.
 <br>
 <div style="page-break-after: always;"></div>
 
@@ -571,8 +571,15 @@ Output: `Address book has been saved!`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.  
 
-Format: `load`
+Format: `load`  
 Output: `The saved address book has been loaded!`
+
+<box type="warning" seamless>
+
+**Caution:**
+`load` is irreversible and cannot be undone by `undo`<br>
+All the data you have in `[JAR file location]/data/addressbook.json` prior to using `load` will be lost!
+</box>
 
 <br>
 
