@@ -184,8 +184,12 @@ help
 ```
 
 The help window will display the help message as shown in the screenshot below:
-![help message](images/helpMessage.png)
+![help message](images/helpMessage.png) <br>
+
+
 Alternatively, you can click the button on the top right hand corner as indicated here:
+
+
 ![alternative_help](images/alternativeHelp.png)
 
 <br>
