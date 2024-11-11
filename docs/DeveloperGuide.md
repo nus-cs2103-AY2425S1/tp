@@ -381,10 +381,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. Given index is invalid.
+* 1a. SocialBook detects missing or invalid input.
     * 1a1. SocialBook informs user that the index is invalid.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
     
-      Use case resumes at step 1.
+      Use case resumes from step 2.
 
 
 **Use case: UC07 - Add a scheme to a person**
@@ -397,10 +399,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions:**
-* 2a. The given index is invalid.
+* 2a. SocialBook detects missing or invalid input.
     * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
 
-        Use case ends.
+        Use case resumes from step 3.
   
 * 2b.  The scheme is already added to the person.
     * 2b1. SocialBook informs user that the scheme is already added to the person.
@@ -415,10 +419,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. Given index is invalid.
+* 1a. SocialBook detects missing or invalid input.
     * 1a1. SocialBook informs user that the index is invalid.
-    
-      Use case resumes at step 1.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 2.
 
 **Use case: UC09 - Delete schemes from a person**
 
@@ -430,10 +436,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-* 2a. The given index is invalid.
+* 2a. SocialBook detects missing or invalid input.
     * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
 
-      Use case ends.
+      Use case resumes from step 3.
 
 * 2b. User chooses to delete more than 1 scheme at a time.
     * 2b1. SocialBook deletes the schemes from the person and displays the updated information.
