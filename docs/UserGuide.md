@@ -79,16 +79,49 @@ Adds a client to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
-
-**Tip 1:** Phone number can take on multiple formats, including Singapore and foreign
-numbers (without the + symbol). This supports insurance agents with an international customer base. </br>
-**Tip 2:** A client can have any number of tags (including 0). <br>
-**Tip 3:** Emails must at least have an "@" character to be considered valid.
+    Parameters
 </box>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+2. `NAME` : Must be alphanumeric, can include spaces.
+3. `PHONE_NUMBER` : Must be numeric and at least 3 digits long.
+4. `EMAIl` : Must ba a valid email address following the format `local-part@domain`.
+5. `ADDRESS`: Can take any values.
+6. `[t/TAG]`: Must be alphanumeric.
+
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* If the `INDEX` is invalid, the user will be informed with an error message.
+* Parameters `NAME`, `PHONE_NUMBER`, `EMAIl`and `ADDRESS` cannot be blank.
+* A client can have any number of tags (including 0).
+* Phone number can take on multiple formats, including Singapore and foreign
+  numbers (without the + symbol). This supports insurance agents with an international customer base.
+* Emails must at least have an "@" character to be considered valid.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+
+- The prefixes such as `n` and `p` are case-sensitive.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+<br>
+Output 1: `New client added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Insurance Plans: No added plans; Open Claims: No open claims; Tags: `
+
+Input 2: `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+<br>
+Output 2: `New client added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Newgate Prison; Insurance Plans: No added plans; Open Claims: No open claims; Tags: [friend][criminal]`
+
 
 ### Listing all clients : `list`
 
@@ -102,17 +135,52 @@ Edits an existing client in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
-* You can remove all the client’s tags by typing `t/` without
-    specifying any tags after it.
-* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `addClaim`, `deleteClaim` and `closeClaim` to make any necessary updates.
+<box type="tip" seamless>
+    Parameters
+</box>
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+2. `NAME` : Must be alphanumeric, can include spaces.
+3. `PHONE_NUMBER` : Must be numeric and at least 3 digits long.
+4. `EMAIl` : Must ba a valid email address following the format `local-part@domain`.
+5. `ADDRESS`: Can take any values.
+6. `[t/TAG]`: Must be alphanumeric.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* If the `INDEX` is invalid, the user will be informed with an error message.
+- At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
+* Phone number can take on multiple formats, including Singapore and foreign
+  numbers (without the + symbol). This supports insurance agents with an international customer base.
+* Emails must at least have an "@" character to be considered valid.
+* Insurance plans and claims cannot be modified directly using this command. 
+  You may use other features such as `addInsurance`, `deleteInsurance`, `addClaim`, `deleteClaim` and `closeClaim` to make any necessary updates.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+
+- The prefixes such as `n` and `p` are case-sensitive.
+- When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `edit 1 p/91234567 e/johndoe@example.com`
+<br>
+Output 1: `Edited Client: Alex Yeoh; Phone: 91234567; Email: johndoe@example.com; Address: Blk 30 Geylang Street 29, #06-40; Insurance Plans: No added plans; Open Claims: No open claims; Tags: [friends]`
+
+Input 2: `edit 2 n/Betsy Crower t/`
+<br>
+Output 2: `Edited Client: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Insurance Plans: No added plans; Open Claims: No open claims; Tags:`
 
 ### Locating clients by name: `find`
 
