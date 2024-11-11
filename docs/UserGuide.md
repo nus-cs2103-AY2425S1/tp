@@ -166,7 +166,7 @@ Refer to the [Features](#features) below for details of each command.
 
 * PROperty currently only supports English.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the you.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. for `add n/NAME`, `NAME` is a parameter which you input, such as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
