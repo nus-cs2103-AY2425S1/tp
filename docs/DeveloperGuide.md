@@ -134,16 +134,16 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<puml src="diagrams/UndoRedoState0.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState0.puml" width = "150"/>
 
 How the undo works:
 * When any command that is not undo is called, the `LogicManger` pushes the command onto the `CommandStack`.
 
-<puml src="diagrams/UndoRedoState1.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState1.puml" width = "150"/>
 
 * When the `undo` command is called, the `LogicManager` pops the latest command 
 
-<puml src="diagrams/UndoRedoState2.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState2.puml" width = "150"/>
 
 
 ### Model component
@@ -448,7 +448,6 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 
-1. _{ more test cases …​ }_
 
 ### Deleting a Student
 
@@ -465,7 +464,6 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deletes`, `deletes x/`, `...` (where x is any invalid prefix)<br>
        Expected: Similar to previous case.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -473,4 +471,4 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+

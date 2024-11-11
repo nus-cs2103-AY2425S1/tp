@@ -26,7 +26,7 @@ done faster than traditional GUI apps.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
    A GUI similar to the one below should appear in a few seconds. <br>
-   <img src="images/Ui.png" alt="Ui" style="zoom: 40%"/>
+   <img src="images/Ui.png" alt="Ui" style="zoom: 45%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
@@ -41,8 +41,6 @@ done faster than traditional GUI apps.
    * `adds n/John Doe p/98765432 tg/G17 sn/A1234567Z` : Adds a student named `John Doe` to the Teletutor contact list.
 
    * `deletes n/John Doe` : Deletes the contact with the name John Doe.
-
-   * `deleteall` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -75,7 +73,7 @@ done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 * Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
-  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+  e.g. `n/John Doe` will be treated as `n/John Doe`.
 
 * Tutorial group and student number arguments are not case-sensitive.  
   * Tutorial Groups must be in the format of a letter followed by two numbers i.e `G17`, `Z19`, `T15`, etc.
@@ -153,6 +151,8 @@ Examples:
 *  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person in the displayed list to be `91234567` and `Z19` respectively.
 *  `edits 2 n/Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
 
+<div style="page-break-after: always;"></div>
+
 ### Locating student by name: `view`
 
 View student(s) whose name matches the specified name exactly.
@@ -167,8 +167,6 @@ Format: `view NAME`
 Examples: 
 * `view Alex Yeoh` Displays the details of all students with the exact name `Alex Yeoh`.
 * `view Lynette` Displays the details of all students with the exact name `Lynette`.
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a specific student : `deletes`
 
