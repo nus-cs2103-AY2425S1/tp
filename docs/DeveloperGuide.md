@@ -2,42 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-
-# Table of Contents
-
-- [Acknowledgements](#acknowledgements)
-- [Setting up, getting started](#setting-up-getting-started)
-- [Design](#design)
-  - [Architecture](#architecture)
-  - [UI component](#ui-component)
-  - [Logic component](#logic-component)
-  - [Model component](#model-component)
-  - [Storage component](#storage-component)
-  - [Common classes](#common-classes)
-- [Implementation](#implementation)
-  - [Proposed Undo/Redo feature](#proposed-undoredo-feature)
-  - [Consultation Management](#proposed-consultation-management)
-  - [Data Import / Export Feature](#data-import--export-feature)
-- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-- [Appendix: Requirements](#appendix-requirements)
-  - [Product scope](#product-scope)
-  - [User stories](#user-stories)
-  - [Use cases](#use-cases)
-  - [Non-Functional Requirements](#non-functional-requirements)
-  - [Glossary](#glossary)
-- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-  - [Launch and shutdown](#launch-and-shutdown)
-  - [Adding a student](#adding-a-student)
-  - [Finding a student (by course)](#finding-a-student-by-course)
-  - [Finding a student (by name)](#finding-a-student-by-name)
-  - [Editing a student](#editing-a-student)
-  - [Deleting a student](#deleting-a-student)
-  - [Lesson Test Cases](#lesson-test-cases)
-  - [Consultation Test Cases](#consultation-test-cases)
-  - [Saving data](#saving-data)
-  - [Exporting data](#exporting-data)
-  - [Importing data](#importing-data)
-
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -289,9 +255,9 @@ The consultation feature comprises these key components:
 * `AddConsultCommand`: Handles adding new consultations
 * `AddConsultCommandParser`: Parses user input for consultation commands
 
-[//]: # (The class diagram below shows the structure of the consultation feature:)
+The class diagram below shows the structure of the consultation feature:
 
-[//]: # (<img src="images/ConsultationClassDiagram.png" width="450" />)
+<img src="images/Consultation/ConsultCommands.png" width="450" />
 
 #### Implementation
 
@@ -330,6 +296,10 @@ consult.removeStudent(student);
 // Getting immutable student list
 List<Student> students = consult.getStudents(); // Returns unmodifiable list
 ```
+The sequence diagram below shows how the `addStudent(student)` method is performed in the `Consultation` class.
+
+<img src="images/Consultation/addStudent_for_consult.png" width="450" />
+
 
 **3. Command Processing**
 
@@ -342,7 +312,7 @@ The system supports these consultation management commands:
 Command examples:
 ```
 addconsult d/2024-10-20 t/14:00
-addtoconsult 1 n/John Doe n/Harry Ng
+addtoconsult 1 n/John Doe i/1
 deleteconsult 1
 removefromconsult 1 n/John Doe
 ```

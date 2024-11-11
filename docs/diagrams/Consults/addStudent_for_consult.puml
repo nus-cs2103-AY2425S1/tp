@@ -4,11 +4,11 @@ skinparam ArrowFontStyle plain
 
 title addStudent Method Sequence Diagram
 
-box "AddToConsultCommand"
+box Logic
 participant ":AddToConsultCommand" as client LOGIC_COLOR
 end box
 
-box Consultation
+box Model
 participant ":Consultation" as consultation MODEL_COLOR
 end box
 
@@ -23,13 +23,13 @@ activate consultation
     consultation -> consultation :
     deactivate consultation
 
-alt student already exists
+alt student already in consult
 
     consultation -> client : nothing is added, exception thrown
 
-else student doesn't exist
+else student not in consult
 
-    consultation -> client : add student to arraylist
+    consultation -> client : student added to consult successfully
 
 end alt
 
