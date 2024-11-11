@@ -598,6 +598,8 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 </box>
 
+* Deletes the public address of the contact with the specified `INDEX` in the specified `NETWORK`, and if applicable, the specified `WALLET_NAME`.
+
 Examples:
 
 * `deletepa 1 c/BTC l/wallet1` **only** deletes the public address of the first contact in the BTC network with the wallet name
