@@ -194,6 +194,7 @@ Examples:
   ![result for 'findc alex david'](images/findAlexDavidResult.png)
 
 <box type="important">
+<div style="page-break-after: always;"></div>
 
 ##### Constraints
 
@@ -267,6 +268,8 @@ List all orders of a specified customer from the address book.
 
 Command alias: `listo`<br>
 Format: `listorder INDEX`<br>
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
 * `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st customer from the list of customers found with "Betsy".
