@@ -81,7 +81,7 @@ Adds a supplier to the SupplyCentral.
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0). Tags are differentiated by case-sensitive characters.
 </div>
 
 #### Address format
