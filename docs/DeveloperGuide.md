@@ -1393,19 +1393,9 @@ or adding an invalid object as outlined in [Storage feature](#storage-feature).
 
 1. Marking payment of a student
 
-   * Prerequisites: Student is enrolled in at least one tutorial
-
    * Test case: `markpaid 1 pay/100`
 
       - Expected: Payment due decreases by 100 for the first student. If the amount paid is equal to payment due, the UI updates to show the fees are paid. If the amount paid is greater than the payment due, the advance amount will also be shown.
-
-2. Marking payment of a student that is not enrolled in any tutorial
-
-   * Prerequisites: Student is not enrolled in any tutorial
-
-   * Test case: `markpaid 1 pay/100`
-
-      - Expected: Payment is not updated for the first student. Error message is shown in the message box.
 
 ### Logging payment
 
