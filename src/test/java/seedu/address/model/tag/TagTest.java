@@ -55,4 +55,11 @@ public class TagTest {
         assertNotEquals(tag, other);
     }
 
+    @Test
+    public void hashcode_sameCharsDiffCase_true() {
+        Tag tag = new Tag("test");
+        Tag other = new Tag("TEST");
+        assertEquals(tag.hashCode(), other.hashCode());
+    }
+
 }
