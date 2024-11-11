@@ -149,6 +149,7 @@ The `Logic` component processes user inputs passed through the UI, utilizing a s
       <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
       <box type="info" seamless>
+      
       **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X), but due to a PlantUML limitation, it continues to the end of the diagram.
       </box>
 
@@ -710,7 +711,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
 
 ---
 
-## **Use case: UC24 — Assigning a Vendor**
+### **Use case: UC24 — Assigning a Vendor**
 
 **MSS**
 
@@ -1058,14 +1059,17 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Person Features
+---
+
+<h3 class="features">Person Features</h3>
 
 #### Finding a person
 
 <box type="info" seamless>
-      **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
-        applied to edited data, but specific expected results will differ. <br>
-      **Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
+
+**Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
+applied to edited data, but specific expected results will differ. <br>
+**Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
 </box>
 
 1. Finding a person by name
@@ -1373,13 +1377,15 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
-### Vendor Features
+---
+<h3 class="features">Vendor Features</h3>
 
 #### Assigning vendors
    
 <box type="info" seamless>
-   **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
-   </box>
+
+**Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+</box>
 
 1. Assigning a `Person` as a vendor
 
@@ -1399,7 +1405,8 @@ testers are expected to do more *exploratory* testing.
 #### Unssigning vendors
 
 <box type="info" seamless>
-      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+
+**Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
 </box>
 
 1. Unassigning a `Person` as a vendor
@@ -1424,6 +1431,188 @@ testers are expected to do more *exploratory* testing.
 
 <br>
 
+---
+<h3 class="features">Wedding Features</h3>
+
+### Creating Wedding
+##### ... if `John's Wedding` is not in the list of weddings
+1. Test case: `create-wedding w/John's Wedding`<br>
+   Expected: `John's Wedding` is added to list of weddings. Details of the added wedding are shown.
+
+##### ... if `John's Wedding` is in the list of weddings
+1. Test case: `create-wedding w/John's Wedding`<br>
+   Expected: No weddings are added to list of weddings. Error details shown.
+
+### Deleting Wedding
+##### ... if `John's Wedding` is in the list of weddings
+1. Test case: `delete-wedding w/John's Wedding`<br>
+   Expected: `John's Wedding` is removed from list of weddings. Details of the removed wedding are shown.
+
+##### ... if `John's Wedding` is not in the list of weddings
+1. Test case: `delete-wedding w/John's Wedding`<br>
+   Expected: No weddings are removed from list of weddings. Error details shown.
+
+### Editing Wedding
+##### ... if there is only 1 wedding in the list
+1. Test case: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 `<br>
+   Expected: 1st wedding's date is set as `John's Wedding`, with address `Address1` and date `2024-12-31`. Details of edited wedding are shown.
+
+1. Test case: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 `<br>
+   Expected: No weddings are edited. Error details shown.
+
+### Assigning Wedding
+##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
+   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p1/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p2/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 2 and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p1/ p2/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+
+##### ... if `John's Wedding` is in the list and if the first contact is already in John's Wedding
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
+   Expected: No weddings are assigned to any contacts. Error details shown.
+
+##### ... if `John's Wedding` is not in the list
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
+   Expected: No contact is assigned. Error details shown.
+
+1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
+   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+### Unassigning Wedding
+##### ... if first contact in `John's Wedding`
+1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
+   Expected: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
+
+##### ... if first contact not in `John's Wedding`
+1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
+   Expected: No weddings are unassigned. Error details shown.
+
+---
+<h3 class="features">Task Features</h3>
+
+### Creating Task
+##### ... if `Task1` is not in the list of tasks
+1. Test case: `create-task tk/Task1`<br>
+   Expected: `Task1` is added to list of tasks. Details of the added task are shown.
+
+##### ... if `Task1` is in the list of tasks
+1. Test case: `create-task tk/Task1`<br>
+   Expected: No tasks are added to list of tasks. Error details shown.
+
+1. Test case: `create-task tk/task1`<br>
+   Expected: No tasks are added to list of tasks. Error details shown.
+
+### Deleting Task
+##### ... if there is only 1 task in the list
+1. Test case: `delete-task 1`<br>
+   Expected: `Task1` is removed from list of tasks. Details of the removed task are shown.
+
+1. Test case: `delete-task 2`<br>
+   Expected: No tasks are removed from list of tasks. Error details shown.
+
+### Assigning Task
+##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
+1. Test case: `assign-task 1 1`<br>
+   Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
+
+1. Test case: `assign-task 0 0`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+1. Test case: `assign-task 2 2`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+##### ... if there's only 1 task and 1 vendor in WedLinker and vendor has that task already assigned to them
+1. Test case: `assign-task 1 1`<br>
+   Expected: No tasks are assigned to any contacts. Error details shown.
+
+##### ... if there's only 1 task and 0 vendors
+1. Test case: `assign-task 1 1`<br>
+   Expected: No tasks are assigned. Error details shown.
+
+### Unassigning Task
+##### ... if first contact has first task
+1. Test case: `unassign-task 1 1`<br>
+   Expected: First task unassigned. Details of updated contact shown.
+
+##### ... if first contact does not have first task
+1. Test case: `unassign-task 1 1`<br>
+   Expected: No tasks are unassigned. Error details shown.
+
+### Marking Task
+##### ... if there's only 2 tasks
+1. Test case: `mark-task 1 2`<br>
+   Expected: First two task marked. Details of updated tasks shown.
+
+1. Test case: `mark-task 1 2 3 4`<br>
+   Expected: No tasks marked (besides those originally marked). Error details shown.
+
+### Unmarking Task
+##### ... if there's only 2 tasks
+1. Test case: `unmark-task 1`<br>
+   Expected: First task unmarked. Details of updated tasks shown.
+
+##### ... if first contact does not have first task
+1. Test case: `unmark-task 1 2 3 4`<br>
+   Expected: No tasks are unmarked (besides those originally unmarked). Error details shown.
+
+---
+<h3 class="features">Tag Features</h3>
+
+### Creating Tag
+##### ... if `Tag1` is not in the list of tags
+1. Test case: `create-tag w/Tag1`<br>
+   Expected: `Tag1` is added to list of tags. Details of the added tag are shown.
+
+##### ... if `Tag1` is in the list of tags
+1. Test case: `create-tag w/Tag1`<br>
+   Expected: No tags are added to list of tags. Error details shown.
+
+1. Test case: `create-tag w/tag1`<br>
+   Expected: No tags are added to list of tags. Error details shown.
+
+### Deleting Tag
+##### ... if `Tag1` is in the list of tags
+1. Test case: `delete-tag w/Tag1`<br>
+   Expected: `Tag1` is removed from list of tags. Details of the removed tag are shown.
+
+##### ... if `Tag1` is not in the list of tags
+1. Test case: `delete-tag w/Tag1`<br>
+   Expected: No tags are removed from list of tags. Error details shown.
+
+### Tagging contact
+##### ... if `Tag1` is in the list and if the first contact is not tagged with `Tag1`
+1. Test case: `tag 1 t/Tag1`<br>
+   Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
+
+##### ... if `Tag1` is in the list and if the first contact is already tagged with `Tag1`
+1. Test case: `tag 1 t/Tag1`<br>
+   Expected: No contacts are tagged. Error details shown.
+
+##### ... if `Tag1` is not in the list
+1. Test case: `tag 1 t/Tag1`<br>
+   Expected: No contact is tagged. Error details shown.
+
+1. Test case: `tag 1 t/Tag1 f/`<br>
+   Expected: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
+
+### Untagging contact
+##### ... if first contact is tagged with `Tag1`
+1. Test case: `untag 1 w/Tag1`<br>
+   Expected: `Tag1` is removed from their contact card.
+
+##### ... if first contact is not tagged with `Tag1`
+1. Test case: `untag 1 w/Tag1`<br>
+   Expected: No contacts are untagged. Error details shown.
+
+---
+
 ### Saving data
 
 1. Saving data altered during application use <br>
@@ -1436,12 +1625,58 @@ testers are expected to do more *exploratory* testing.
 
     1. Upon booting up WedLinker and the contact/wedding/tag/task list is not as per expected, open the `data` folder where WedLinker stores data.
    
-    2. Within the folder, open `addressBook.json` and identify any mistakes with stored data.<br>
+    2. Within the folder, open `addressbook.json` and identify any mistakes with stored data.<br>
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
     3. If the data is beyond repair, delete the entire `data` folder or the `addressbook.json` file to start afresh with sample data.
 
 <br>
+
+---
+
+## Appendix: Efforts
+
+WedLinker is a project adapted from the original [AddressBook3 (AB3)](https://se-education.org/addressbook-level3/) customized specifically for wedding planners by our team of five.
+Throughout this project, we split the work evenly and adhered to the principles and concepts that were taught by the
+CS2103T teaching team, including:
+- [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
+- [Feature Branch Flow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-feature-branch-flow)
+- [UML Class Diagrams](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/uml.html#class-diagrams)
+- [Testing](https://nus-cs2103-ay2425s1.github.io/website/se-book-adapted/chapters/testing.html)
+
+As we envisioned an application for wedding planners, we concocted multiple features based on feedback from the wedding planners we interviewed.
+These are the features that shape the WedLinker you see today.
+
+#### Difficulty Level:
+Adapting from the original AB3 to the WedLinker has been difficult as we opted for a more daring approach to implement 
+many features that wedding planners wanted. As with any software, the more features implemented, the more bugs there are,
+and WedLinker was no exception to it. 
+
+As a result, the difficulty of developing WedLinker came not only from the
+myriad of features we had to implement (and alter from the original AB3), but to also ensure that there were minimal bugs created.
+
+#### Challenges Faced:
+With the number of features that we wanted to implement, we had used the [Forking Workflow](https://nus-cs2103-ay2425s1.github.io/website/schedule/week7/topics.html#project-management-revision-control-forking-flow)
+that enabled us to work on numerous features, debugs, or minor adjustments concurrently. However, with the Forking Workflow came some drawbacks that we personally experienced, such as
+the extra overhead of sending everything through forks, as well as the increased possibility of merge conflicts.
+
+The numerous number of features also meant that our test coverage had to be extensive. This was a challenge as we had to
+write new test codes for every single new feature implemented and perform regression testing with all previous features that might be potentially affected.
+
+We also faced having to make design choices such as bidirectional navigability between `Person` and `Wedding`,
+resulting in further design choices in storage of these data that relies on each other whilst maintaining validity checks.
+
+#### Effort Required:
+As we had chosen to implement numerous features and inevitably introduced bugs per iteration, the effort required to
+resolve these issues were higher than if we had opted to be safe and tweak AB3 just a little.
+
+#### Achievements:
+As of 12 Nov 2024, WedLinker has:
+
+- [Most LoC in AY2425 S1 CS2103T](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=AY2425S1-CS2103T-F15-4%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20)
+- **20** new commands as compared to the original AB3
+
+---
 
 ## Appendix: Planned Enhancements
 

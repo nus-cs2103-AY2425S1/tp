@@ -15,8 +15,10 @@ Class PersonListPanel
 Class TaskListPanel
 Class WeddingListPanel
 Class PersonCard
+Class TagListPanel
 Class TaskCard
 Class WeddingCard
+Class TagCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -42,10 +44,12 @@ MainWindow --> "0..1" HelpWindow
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" TaskListPanel
 MainWindow *-down-> "1" WeddingListPanel
+MainWindow *-down-> "1" TagListPanel
 
 PersonListPanel -down-> "*" PersonCard
 WeddingListPanel -down-> "*" WeddingCard
 TaskListPanel -down-> "*" TaskCard
+TagListPanel -down-> "*" TagCard
 
 MainWindow -left-|> UiPart
 
@@ -57,12 +61,14 @@ WeddingListPanel --|> UiPart
 PersonCard --|> UiPart
 TaskCard --|> UiPart
 WeddingCard --|> UiPart
+TagCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ....> Model
 TaskCard ....> Model
 WeddingCard ....> Model
+TagCard ....> Model
 UiManager -right-> Logic
 MainWindow -right-> Logic
 
