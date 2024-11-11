@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 ## What is VolunSync?
-Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers, organize events, keep track of hours, and stay in touch with everyone – all in one place.
+Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers and organize events all in one place.
 
 ## Before You Start
 
