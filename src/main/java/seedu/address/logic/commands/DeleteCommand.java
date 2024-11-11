@@ -52,6 +52,13 @@ public class DeleteCommand extends Command {
         this.identityNumber = null;
     }
 
+    /**
+     * Executes the DeleteCommand to delete the person identified by their Identity Number or index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the success of the command.
+     * @throws CommandException if the person identified by the Identity Number is not found in the address book.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -62,6 +69,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Validates the input of the command.
+     *
+     * @param model The model to validate the input on.
+     * @throws CommandException If the input is invalid.
+     */
     //@@ author junyi73
     @Override
     public void validateInput(Model model) throws CommandException {
