@@ -31,6 +31,12 @@ public class AddEcNameCommandParser implements Parser<AddEcNameCommand> {
         logger.log(Level.INFO, "Parsing AddEcNameCommand with arguments");
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ECNAME);
 
+        if (argMultimap.getPreamble().isEmpty()) {
+            logger.log(Level.WARNING, "EcName index is not present in the command.");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddEcNameCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_ECNAME).isPresent()) {
             logger.log(Level.WARNING, "EcName prefix is not present in the command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
