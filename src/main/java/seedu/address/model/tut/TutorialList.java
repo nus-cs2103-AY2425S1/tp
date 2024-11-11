@@ -11,7 +11,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
-import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.model.tut.exceptions.TutNotFoundException;
 
 /**
  * Represents a tutorial list with a title, due date, and completion statuses for students.
@@ -84,11 +84,11 @@ public class TutorialList {
      * The tutorial must exist in the list.
      *
      * @param tutorial The tutorial to be deleted.
-     * @throws TutNoFoundException if the tutorial does not exist in the list.
+     * @throws TutNotFoundException if the tutorial does not exist in the list.
      */
     public String deleteTutorial(Tutorial tutorial) {
         if (!hasTutorial(tutorial)) {
-            throw new TutNoFoundException();
+            throw new TutNotFoundException();
         }
         Tutorial tut = getTutorial(tutorial);
         tutorials.stream()
@@ -176,13 +176,13 @@ public class TutorialList {
      *
      * @param tutorial The tutorial to be retrieved.
      * @return The matching tutorial from the list.
-     * @throws TutNoFoundException if the specified tutorial does not exist in the list.
+     * @throws TutNotFoundException if the specified tutorial does not exist in the list.
      */
     private Tutorial getTutorial(Tutorial tutorial) {
         return tutorials.stream()
                 .filter(tutorial::equals)
                 .findFirst()
-                .orElseThrow(TutNoFoundException::new);
+                .orElseThrow(TutNotFoundException::new);
     }
 
     @Override
