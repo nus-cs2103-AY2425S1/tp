@@ -795,7 +795,7 @@ This section outlines the planned future enhancements for the data_coNdUctorS ap
 
    1. Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time.
   
-   1. Example 1: Editing a contact with the same `NAME` and `NICKNAME` as a current contact will result in an error message: "This Contact already exists in the address book". This is not very clear so in the future, we could show that current contact to the user and show them which fields are duplicated.
+   1. Example 1: Editing a contact with the same `NAME` and `NICKNAME` as an existing contact will result in an error message: "This Contact already exists in the address book". This is not very clear so in the future, we could display the said contact to the user and inform them which fields are duplicated.
    
    1. Example 2: Executing this command `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` will output an error message saying invalid Role. Instead, should tell the user that the Role they implemented is `President [` which is not recognised as a role.
       
