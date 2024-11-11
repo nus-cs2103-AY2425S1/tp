@@ -212,6 +212,7 @@ Team size: 5
 2. **Improve UI design:** The current UI is functional but lacking in aesthetics. We plan to redesign the UI to improve contrast on important info, and add a light mode for users who require it. 
 2. **Clear all assignments feature:** A `clearassignments` command which allows users to delete all assignments.
 3. **Make sample data more relevant:** Some of the example commands and sample data contain information that are not relevant to human resource management tasks. (For instance, some employees are tagged as 'friends', 'family', etc.) We plan to replace these with more fitting examples.
+5. **Allow users to specify other fields in `listprojectmembers`:** Currently, users can only specify project name, but this could result in project members from multiple projects with the same name being shown. We plan to improve this command by allowing users to specify fields such as project ID instead, such as `listprojectmembers pid/1`. Since project IDs uniquely identify a project, users will be able to see only project members from that project specified.
 
 [Return to Top](#table-of-contents)
 
