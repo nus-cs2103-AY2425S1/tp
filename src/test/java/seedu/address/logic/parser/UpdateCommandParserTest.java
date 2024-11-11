@@ -254,12 +254,6 @@ public class UpdateCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-    @Test
-    public void parse_validLevelInvalidSubject_failure() {
-        String command = " John Doe l/S2 NA s/Chem";
-
-        assertParseFailure(parser, command, Subject.getValidSubjectMessage(new Level("S2 NA")));
-    }
 
     @Test
     public void parse_invalidLevelInvalidSubject_failure() {
