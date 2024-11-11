@@ -47,46 +47,54 @@ VendorVault is a **desktop app for managing supplier contact information and del
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 1 How to get started
+# 1. How to get started
 
-1. If you are new to Vendor Vault, we suggest starting from the [Setting up VendorVault section](#setting-up-vendorvault).
+1. If you are new to Vendor Vault, we suggest starting from the [Setting up VendorVault section](#2-setting-up-vendorvault).
 
-2. If you have already set up Vendor Vault and are looking for information of our commands and features, take a look at our [Features](#features) or [Command Summary](#command-summary) sections. 
+2. If you have already set up Vendor Vault and are looking for information of our commands and features, take a look at our [Features](#3-features) or [Command Summary](#7-command-summary) sections. 
 
-3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#glossary) section for definitions and explanations.
+3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#8-glossary) section for definitions and explanations.
 
 [[Back to Table of Contents]](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 2 Setting up VendorVault 
+# 2. Setting up VendorVault 
 
 1. Java is the toolset that will allow you to use VendorVault on your system. Hence, first you need to ensure that you have Java `17` or above installed on your Computer. If you are unsure, you can check by following the steps below:
    - 1a. Open up your command terminal. 
-     * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. 
-     * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space).
-     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu.
+     * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. (If unsure, follow this [guide]().)
+     * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space). (If unsure, follow this [guide]().)
+     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu. (If unsure, follow this [guide]().)
    
-   - 1b. Type in java -version to check if you have Java installed. If you have java installed you should see something like this:
+   - 1b. Type in java -version to check if you have Java installed. If you have Java installed you should see something like this:
      ![Terminal Example showcasing java version](images/intro/terminalJavaVersion.png)
    
-   - 1c. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+   - 1c. If you do not have Java installed or are currently on a different version, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
 2. Download the latest `vendorvault.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
    ![Download jar file](images/intro/jarFile.png)
 
 3. Upon downloading the `vendorvault.jar` file, copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
 
-4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you put the jar file in) and use the `java -jar vendorvault.jar` command to run the application.<br>
-   ![Starting up application](images/intro/startingApp.png)
+4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you placed the jar file in step 3) and use the `java -jar vendorvault.jar` command in the terminal to run the application.<br>
+   ![Starting up application](images/intro/startingApp.png). If you are unsure how to do this step follow these guides below:
+    * Windows users follow this [guide](https://wiki.communitydata.science/Windows_terminal_navigation).
+    * Mac users follow this [guide](https://darkroomphotos.com/mac-terminal-navigate-folders/).
+    * Linux users follow this [guide](https://www.redhat.com/en/blog/Linux-file-navigation-commands).
 
-A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-<br>
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:
+
 
 ![Ui](images/intro/Ui.png)
+<br>
 
-5. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. In the application the box that says `Enter command here ... ` is called the command box. This is where you will input in your commands. 
+
+6. The box below the command box is called the `results display box`. This is where the result of your inputted command will be displayed. 
+
+7. Type commands in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list -a` : Lists all suppliers and deliveries.
@@ -97,16 +105,16 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 <br>
 
 [[Back to Table of Contents]](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 3 Features
+# 3. Features
 
-## 3.1 Understanding the Command Syntax
+## 3.1. Understanding the Command Syntax
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -138,9 +146,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ---
 
-## 3.2 General Commands
+## 3.2. General Commands
 
-### 3.2.1 Viewing help : `help`
+### 3.2.1. Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -154,7 +162,7 @@ Format: `help`
 
 ---
 
-### 3.2.2 Viewing all deliveries and suppliers : `list -a`
+### 3.2.2. Viewing all deliveries and suppliers : `list -a`
 
 Lists all suppliers and deliveries in the VendorVault.
 
@@ -170,7 +178,7 @@ Warnings:
 
 ---
 
-### 3.2.3 Clearing all suppliers and deliveries : `clear`
+### 3.2.3. Clearing all suppliers and deliveries : `clear`
 
 Clears all data regarding suppliers and deliveries in vendor vault.
 
@@ -180,7 +188,7 @@ Format: `clear`
 
 ---
 
-### 3.2.4 Exiting the program : `exit`
+### 3.2.4. Exiting the program : `exit`
 
 Exits the program.
 
@@ -190,9 +198,9 @@ Format: `exit`
 
 ---
 
-## 3.3 Supplier Commands 
+## 3.3. Supplier Commands 
 
-### 3.3.1 Adding a supplier: `add -s`
+### 3.3.1. Adding a supplier: `add -s`
 
 Adds a supplier to VendorVault.
 
@@ -248,7 +256,7 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ---
 
-### 3.3.2 Listing all suppliers: `list -s`
+### 3.3.2. Listing all suppliers: `list -s`
 
 Shows a list of all suppliers in VendorVault. The delivery list will not be affected.
 
@@ -266,7 +274,7 @@ Format: `list -s`
 
 ---
 
-### 3.3.3 Deleting a supplier : `delete -s`
+### 3.3.3. Deleting a supplier : `delete -s`
 
 Deletes a supplier from the list of suppliers in VendorVault.
 
@@ -302,7 +310,7 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ---
 
-### 3.3.4 Marking a supplier with a status : `mark -s`
+### 3.3.4. Marking a supplier with a status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**.
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
@@ -345,7 +353,7 @@ A success message will be displayed if the supplier is successfully marked as ac
 
 ---
 
-### 3.3.5 Finding suppliers: `find -s`
+### 3.3.5. Finding suppliers: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you to search for a supplier based on the supplier name, company, or product. 
@@ -393,7 +401,7 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ---
 
-### 3.3.6 Sorting suppliers: `sort -s`
+### 3.3.6. Sorting suppliers: `sort -s`
 
 The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
 This helps you to view the suppliers in a different order (ascending or descending).
@@ -433,9 +441,9 @@ A success message will be displayed if the suppliers are successfully sorted.
 
 ---
 
-## 3.4 Delivery Commands 
+## 3.4. Delivery Commands 
 
-### 3.4.1 Adding a delivery: `add -d`
+### 3.4.1. Adding a delivery: `add -d`
 
 Adds a delivery to VendorVault.
 
@@ -492,7 +500,7 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ---
 
-### 3.4.2 Listing all deliveries: `list -d`
+### 3.4.2. Listing all deliveries: `list -d`
 
 Shows a list of all deliveries in VendorVault. The supplier list will not be affected.
 
@@ -510,7 +518,7 @@ Format: `list -d`
 
 ---
 
-### 3.4.3 Deleting a delivery : `delete -d`
+### 3.4.3. Deleting a delivery : `delete -d`
 
 Deletes the specified delivery from the address book.
 
@@ -548,7 +556,7 @@ Expected output:
 
 ---
 
-### 3.4.4 Marking a delivery : `mark -d`
+### 3.4.4. Marking a delivery : `mark -d`
 
 Marks the specified delivery in VendorVault with the specified `STATUS`.
 
@@ -589,7 +597,7 @@ Expected output:
 
 ---
 
-### 3.4.5 Finding deliveries: `find -d`
+### 3.4.5. Finding deliveries: `find -d`
 
 Find deliveries based on attributes of the delivery, like the delivery date and time, status, supplier and product.
 
@@ -636,7 +644,7 @@ Expected output:
 
 ---
 
-### 3.4.6 Sorting deliveries: `sort -d`
+### 3.4.6. Sorting deliveries: `sort -d`
 
 The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date and time or status.
 This helps you to view the deliveries in a different order (ascending or descending).
@@ -687,7 +695,7 @@ Expected output:
 
 ---
 
-### 3.4.7 Upcoming deliveries: `upcoming`
+### 3.4.7. Upcoming deliveries: `upcoming`
 
 Shows a list of pending deliveries in VendorVault based on delivery date and time. You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
@@ -731,9 +739,9 @@ Expected output:
 
 ---
 
-## 3.5 Extended valid format guidelines
+## 3.5. Extended valid format guidelines
 
-#### 3.5.1 Valid email address format
+#### 3.5.1. Valid email address format
 
 Valid email addresses are of the format: `local-part@domain`.  
 Both `local-part` and `domain` must start and end with alphanumeric characters.  
@@ -760,7 +768,7 @@ Invalid email address examples:
 
 ---
 
-#### 3.5.2 Valid company name format
+#### 3.5.2. Valid company name format
 
 Valid company names must be alphanumeric or punctuation characters, and spaces are allowed.  
 Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
@@ -769,13 +777,14 @@ Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
 
 ---
 
-# 4 Managing your data
+# 4. Managing your data
 
-## 4.1 Saving the data
+## 4.1. Saving the data
 
 VendorVault data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-## 4.2 Editing the data file
+
+## 4.2. Editing the data file
 
 VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
@@ -786,7 +795,7 @@ VendorVault automatically saves your data as a JSON file `[JAR file location]/da
 </box>
 
 
-## 4.3 Archiving data files `[coming in v2.0]`
+## 4.3. Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -794,7 +803,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 5 FAQ
+# 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -803,7 +812,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 6 Known issues
+# 6. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -812,9 +821,9 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-# 7 Command Summary
+# 7. Command Summary
 
-## 7.1 General Commands
+## 7.1. General Commands
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[List]()**   | `list -a`
@@ -823,7 +832,7 @@ Action     | Format, Examples
 **[Exit]()**   | `exit`
 
 
-## 7.2 Supplier-specific Commands
+## 7.2. Supplier-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -835,7 +844,7 @@ Action     | Format, Examples
 **[Sort]()**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
-## 7.3 Delivery-specific Commands
+## 7.3. Delivery-specific Commands
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -851,7 +860,7 @@ Action     | Format, Examples
 
 ---
 
-# 8 Glossary
+# 8. Glossary
 
 * **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
 * **Command**: An instruction given to the application to perform a specific action. They are entered by the user in a text-based format and are used to interact with and manage data.
