@@ -95,6 +95,58 @@ If Java is not installed or if the version is below `17`, download the latest Ja
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always"></div>
 
+## Graphical User Interface Layout:
+
+### User Interface (UI) Overview:
+
+![UI_Overview image](images/AppImages/UI_Overview.png)
+
+This image shows the default User Interface you'll see when you first launch PlanPal. Let’s go through each part of the 
+interface, moving clockwise from the top left:
+
+- **Menu Bar**: Provides quick access to key functions and features within PlanPal.
+- **Data Bar**: Displays the relative path to the current storage file in use.
+- **Contact List Panel**: Shows a list of contact cards.
+- **Contact Card**: Displays detailed system recorded information about a specific contact.
+- **Command Box**: Space for users to enter commands for PlanPal to execute.
+- **Result Box**: Displays the outcomes of executed commands.
+- **Event Card**: Displays detailed system recorded information about a specific event.
+- **Event List Panel**: Shows a list of event cards.
+
+### Additional UI Components:
+
+![UI_Components_image](images/AppImages/UI_Components.png)
+
+Let's go through the UI components in more detail.
+- **Index**: The identifier used for selecting or referencing a specific contact.
+- **Contact Name**: The name of the contact person.
+- **Telegram Username**: The Telegram handle of the contact.
+- **Role**: The role assigned to the contact (e.g., attendee, volunteer, sponsor, vendor).
+- **Phone Number**: The contact's phone number.
+- **Address**: The physical address of the contact.
+- **Email**: The contact's email address.
+- **Total Event Contacts**: The total number of contacts associated with the current event.
+- **Event Role Count**: The count of each role in the event; note that the total may differ as some contacts can hold multiple roles.
+- **Event Name**: The name of the event being managed.
+
+### Searchmode UI Overview:
+
+![UI_searchmode](images/AppImages/UI_searchmode.png)
+
+This image shows how the User Interface will change when you use 
+[Search Mode](#search-mode-for-event-management--search-mode-or-sm). You can also learn how to use Search Mode in 
+[Step 5](#step-5-using-search-mode) of the tutorial. Let's go through each part of the Search Mode interface, moving clockwise
+from the top right:
+
+- **Contact List Panel (Minimised)**: In search mode, the original Contact List Panel remains but is minimised.
+- **Search Results Panel**: A separate panel to displays the contact cards that match your search criteria.
+- **Contact Card**: Contact cards in the search results continue to have the same format.
+- **Event List Panel**: Remains unchanged, displaying a list of event cards.
+
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
+
 ## **Tutorial: Getting Started with PlanPal**
 
 This tutorial guides you step-by-step to use the key features of PlanPal effectively. 
