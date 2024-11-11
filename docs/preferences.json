@@ -1,0 +1,11 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 1203.0,
+    "windowHeight" : 975.0,
+    "windowCoordinates" : {
+      "x" : -32,
+      "y" : -32
+    }
+  },
+  "addressBookFilePath" : "data/TAHub.json"
+}

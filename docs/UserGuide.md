@@ -221,6 +221,7 @@ Format: `help`
 Expected output:
 
 <img alt="result for &#39;help&#39;" src="images/helpMessage.png" width="580"/>
+<br/>
 
 ### Adding a person: `add`
 
@@ -243,7 +244,7 @@ Examples:
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/struggling`
 
-Expected output:
+Expected output for `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/excellent`:
 
 <img alt="result for &#39;add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends&#39;" src="images/addPerson.png" width="580"/>
 
@@ -281,7 +282,7 @@ Examples:
 - `edit 2 n/Betsy Crower t/`<br>
   Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
 
-Expected output:
+Expected output for `edit 1 p/99947328 e/bcy@example.com`
 
 <img alt="result for &#39;find John&#39; followed by &#39;edit 1 p/91234567 e/johndoe@example.com&#39;" src="images/editPerson.png" width="580"/>
 
@@ -304,7 +305,7 @@ Examples:
 - `find John` returns `john` and `John Doe`
 - `find Alex David` returns `Alex Yeoh`, `David Li`
 
-Expected output:
+Expected output for `find Alex David`:
 
 <img alt="result for &#39;find alex david&#39;" src="images/findAlexDavidResult.png" width="580"/>
 
@@ -327,7 +328,7 @@ Examples:
 - `find Alex` followed by `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
-Expected output:
+Expected output for `find Alex` followed by `delete 1`:
 
 <img alt="result for &#39;find John&#39; followed by &#39;delete 1&#39;" src="images/deletePerson.png" width="580"/>
 
@@ -352,7 +353,7 @@ Examples:
 - `find Alex` followed by `addGrade 1 n/midterm s/85 w/30`<br>
   Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "Final Exam" and 30% weightage.
 
-Expected output:
+Expected output for `addGrade 1 n/midterm s/85 w/30`:
 
 <img alt="result for &#39;find Alex&#39; followed by &#39;addGrade 1 n/midterm s/85 w/30&#39;" src="images/addGrade.png" width="580"/>
 
@@ -375,7 +376,7 @@ Examples:
 - `find Betsy` followed by `deleteGrade 1 n/Final Exam`<br>
   Deletes the "Final Exam" grade for the 1st person in the results of the `find` command.
 
-Expected output:
+Expected output for `deleteGrade n/midterm`:
 
 <img alt="result for &#39;find Alex&#39; followed by &#39;deleteGrade 1 n/midterm&#39;" width="580" src="images/deleteGrade.png"/>
 
@@ -453,7 +454,7 @@ Examples:
 - `find Alex` followed by `mark 1 d/31/01/2024 12:00 m/Absent`<br>
   Sets the attendance to 'Absent' on 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
-Expected output:
+Expected output for `mark 1 d/31/01/2024 12:00 m/absent`:
 
 <img alt="result for &#39;find Alex&#39; followed by &#39;mark 1 d/31/01/2024 12:00 m/Absent&#39;" src="images/markAttendance.png" width="580"/>
 
@@ -475,7 +476,7 @@ Examples:
 - `find Alex` followed by `unmark 1 d/31/01/2024 12:00`<br>
   Deletes the attendance on 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
-Expected output:
+Expected output for `unmark 1 d/31/01/2024 12:00`:
 
 <img alt="result for &#39;find Alex&#39; followed by &#39;unmark 1 d/31/01/2024 12:00&#39;" src="images/unmarkAttendance.png" width="580"/>
 
@@ -495,7 +496,7 @@ Examples:
 - `absentees d/31/01/2024 10:00`<br>
   Finds all people who were absent on the 10 AM of January 31st, 2024.
 
-Expected output:
+Expected output for `absentees d/31/01/2024 10:00`:
 
 <img alt="result for &#39;absentees d/31/01/2024 10:00&#39;" src="images/absentees.png" width="580"/>
 

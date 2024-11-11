@@ -1,0 +1,318 @@
+Nov 11, 2024 9:02:48 PM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Nov 11, 2024 9:02:49 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Nov 11, 2024 9:02:49 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp initConfig
+INFO: Creating new config file config.json
+Nov 11, 2024 9:02:50 PM seedu.address.commons.core.LogsCenter init
+INFO: Log level will be set as: INFO
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp initPrefs
+INFO: Creating new preference file preferences.json
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/TAHub.json
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/TAHub.json populated with a sample AddressBook.
+Nov 11, 2024 9:02:50 PM seedu.address.MainApp start
+INFO: Starting AddressBook V1.5.0ea
+Nov 11, 2024 9:02:50 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Nov 11, 2024 9:03:06 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:03:06 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: David Li; Phone: 91031282; Email: lidavid@example.com; Course: CS2030/S; Tags: [active]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:07 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 5]
+Nov 11, 2024 9:03:07 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Course: CS1231S; Tags: [average]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:10 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:03:10 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Course: CS2103/T LG17; Tags: [excellent]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:23 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][clear]
+Nov 11, 2024 9:03:23 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Address book has been cleared!
+Nov 11, 2024 9:03:24 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:03:24 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:03:26 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:03:26 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:03:27 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Nov 11, 2024 9:03:27 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Nov 11, 2024 9:03:27 PM seedu.address.MainApp stop
+INFO: ============================ [ Stopping AddressBook ] =============================
+Nov 11, 2024 9:03:33 PM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Nov 11, 2024 9:03:33 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Nov 11, 2024 9:03:33 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Nov 11, 2024 9:03:33 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file config.json found.
+Nov 11, 2024 9:03:33 PM seedu.address.commons.core.LogsCenter init
+INFO: Log level will be set as: INFO
+Nov 11, 2024 9:03:33 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Nov 11, 2024 9:03:33 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file preferences.json found.
+Nov 11, 2024 9:03:34 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/TAHub.json
+Nov 11, 2024 9:03:34 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/TAHub.json populated with a sample AddressBook.
+Nov 11, 2024 9:03:34 PM seedu.address.MainApp start
+INFO: Starting AddressBook V1.5.0ea
+Nov 11, 2024 9:03:34 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Nov 11, 2024 9:03:46 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:03:46 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: David Li; Phone: 91031282; Email: lidavid@example.com; Course: CS2030/S; Tags: [active]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:47 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:03:47 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Course: CS2103/T LG17; Tags: [excellent]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:48 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:03:48 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Course: CS1231S; Tags: [average]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:03:50 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:03:50 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:04:14 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][mark 1 d/30/03/2024 12:21 m/Attended]
+Nov 11, 2024 9:04:14 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Person: Alex Yeoh marked as Attended on 30/03/2024 12:21
+Nov 11, 2024 9:04:25 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][mark 2 d/30/03/2024 12:21 m/Absent]
+Nov 11, 2024 9:04:25 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Person: Bernice Yu marked as Absent on 30/03/2024 12:21
+Nov 11, 2024 9:04:38 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][absentees d/30/03/2024 12:21]
+Nov 11, 2024 9:04:38 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: 1 persons listed!
+Nov 11, 2024 9:04:41 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:04:41 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:04:57 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 1 n/midterm s/12 w/80]
+Nov 11, 2024 9:04:57 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Alex Yeoh
+Nov 11, 2024 9:05:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 2 n/midterm s/13 w/23]
+Nov 11, 2024 9:05:02 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Bernice Yu
+Nov 11, 2024 9:05:10 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade median]
+Nov 11, 2024 9:05:10 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 2.99%
+Nov 11, 2024 9:05:15 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade median n/midterm]
+Nov 11, 2024 9:05:15 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 12.50%
+Nov 11, 2024 9:05:20 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade stddev midterm]
+Nov 11, 2024 9:05:20 PM seedu.address.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: aggGrade stddev midterm
+Nov 11, 2024 9:05:26 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade stddev n/midterm]
+Nov 11, 2024 9:05:26 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 0.50%
+Nov 11, 2024 9:05:30 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Nov 11, 2024 9:05:30 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Nov 11, 2024 9:05:30 PM seedu.address.MainApp stop
+INFO: ============================ [ Stopping AddressBook ] =============================
+Nov 11, 2024 9:05:33 PM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Nov 11, 2024 9:05:34 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file config.json found.
+Nov 11, 2024 9:05:34 PM seedu.address.commons.core.LogsCenter init
+INFO: Log level will be set as: INFO
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Nov 11, 2024 9:05:34 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file preferences.json found.
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/TAHub.json
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/TAHub.json populated with a sample AddressBook.
+Nov 11, 2024 9:05:34 PM seedu.address.MainApp start
+INFO: Starting AddressBook V1.5.0ea
+Nov 11, 2024 9:05:34 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Nov 11, 2024 9:05:51 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:05:51 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: David Li; Phone: 91031282; Email: lidavid@example.com; Course: CS2030/S; Tags: [active]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:05:52 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:05:52 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Course: CS2103/T LG17; Tags: [excellent]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:05:53 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:05:53 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Course: CS1231S; Tags: [average]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:05:54 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:05:54 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:06:14 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][mark 1 d/30/03/2024 12:21 m/Attended]
+Nov 11, 2024 9:06:14 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Person: Alex Yeoh marked as Attended on 30/03/2024 12:21
+Nov 11, 2024 9:06:22 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][mark 2 d/30/03/2024 12:21 m/Absent]
+Nov 11, 2024 9:06:22 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Person: Bernice Yu marked as Absent on 30/03/2024 12:21
+Nov 11, 2024 9:06:28 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][absentees d/30/03/2024 12:21]
+Nov 11, 2024 9:06:28 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: 1 persons listed!
+Nov 11, 2024 9:08:41 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Nov 11, 2024 9:08:41 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Nov 11, 2024 9:08:41 PM seedu.address.MainApp stop
+INFO: ============================ [ Stopping AddressBook ] =============================
+Nov 11, 2024 9:08:44 PM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Nov 11, 2024 9:08:45 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file config.json found.
+Nov 11, 2024 9:08:45 PM seedu.address.commons.core.LogsCenter init
+INFO: Log level will be set as: INFO
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Nov 11, 2024 9:08:45 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file preferences.json found.
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/TAHub.json
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/TAHub.json populated with a sample AddressBook.
+Nov 11, 2024 9:08:45 PM seedu.address.MainApp start
+INFO: Starting AddressBook V1.5.0ea
+Nov 11, 2024 9:08:45 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Nov 11, 2024 9:08:47 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:08:48 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: David Li; Phone: 91031282; Email: lidavid@example.com; Course: CS2030/S; Tags: [active]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:08:49 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:08:49 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Course: CS2103/T LG17; Tags: [excellent]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:08:50 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:08:50 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Course: CS1231S; Tags: [average]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:09:02 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 1 n/midterm s/70 w/40]
+Nov 11, 2024 9:09:02 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Alex Yeoh
+Nov 11, 2024 9:09:13 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 2 s/89.2 w/40]
+Nov 11, 2024 9:09:13 PM seedu.address.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: addGrade 2 s/89.2 w/40
+Nov 11, 2024 9:09:17 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 2 n/midterm s/89.2 w/40]
+Nov 11, 2024 9:09:17 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Bernice Yu
+Nov 11, 2024 9:09:26 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 3 n/midterm s/76.63 w/40]
+Nov 11, 2024 9:09:26 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Charlotte Oliveiro
+Nov 11, 2024 9:09:33 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade median n/midterm]
+Nov 11, 2024 9:09:33 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 76.63%
+Nov 11, 2024 9:09:38 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade stddev midterm]
+Nov 11, 2024 9:09:38 PM seedu.address.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: aggGrade stddev midterm
+Nov 11, 2024 9:09:40 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade stddev n/midterm]
+Nov 11, 2024 9:09:40 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 7.96%
+Nov 11, 2024 9:09:42 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Nov 11, 2024 9:09:42 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Exiting Address Book as requested ...
+Nov 11, 2024 9:09:42 PM seedu.address.MainApp stop
+INFO: ============================ [ Stopping AddressBook ] =============================
+Nov 11, 2024 9:09:46 PM seedu.address.Main main
+WARNING: The warning about Unsupported JavaFX configuration below (if any) can be ignored.
+Nov 11, 2024 9:09:47 PM seedu.address.MainApp init
+INFO: =============================[ Initializing AddressBook ]===========================
+Nov 11, 2024 9:09:47 PM seedu.address.MainApp initConfig
+INFO: Using config file : config.json
+Nov 11, 2024 9:09:48 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file config.json found.
+Nov 11, 2024 9:09:48 PM seedu.address.commons.core.LogsCenter init
+INFO: Log level will be set as: INFO
+Nov 11, 2024 9:09:48 PM seedu.address.MainApp initPrefs
+INFO: Using preference file : preferences.json
+Nov 11, 2024 9:09:48 PM seedu.address.commons.util.JsonUtil readJsonFile
+INFO: JSON file preferences.json found.
+Nov 11, 2024 9:09:48 PM seedu.address.MainApp initModelManager
+INFO: Using data file : data/TAHub.json
+Nov 11, 2024 9:09:48 PM seedu.address.MainApp initModelManager
+INFO: Creating a new data file data/TAHub.json populated with a sample AddressBook.
+Nov 11, 2024 9:09:48 PM seedu.address.MainApp start
+INFO: Starting AddressBook V1.5.0ea
+Nov 11, 2024 9:09:48 PM seedu.address.ui.UiManager start
+INFO: Starting UI...
+Nov 11, 2024 9:09:54 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:09:54 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: David Li; Phone: 91031282; Email: lidavid@example.com; Course: CS2030/S; Tags: [active]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:09:56 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:09:56 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Irfan Ibrahim; Phone: 92492021; Email: irfan@example.com; Course: CS2103/T LG17; Tags: [excellent]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:09:57 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][delete 4]
+Nov 11, 2024 9:09:57 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Deleted Person: Roy Balakrishnan; Phone: 92624417; Email: royb@example.com; Course: CS1231S; Tags: [average]; Exams: No grades available; Attendances: No attendance records
+Nov 11, 2024 9:09:59 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Nov 11, 2024 9:09:59 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Listed all persons
+Nov 11, 2024 9:10:31 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 1 n/midterm s/87.2 w/80]
+Nov 11, 2024 9:10:31 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Alex Yeoh
+Nov 11, 2024 9:10:41 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 2 n/midterm s/85.55 w/80]
+Nov 11, 2024 9:10:41 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Bernice Yu
+Nov 11, 2024 9:10:50 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][addGrade 3 n/midterm s/23.4 w/80]
+Nov 11, 2024 9:10:50 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Added grade for 'midterm' to Charlotte Oliveiro
+Nov 11, 2024 9:10:56 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade median n/midterm]
+Nov 11, 2024 9:10:56 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 85.55%
+Nov 11, 2024 9:11:03 PM seedu.address.logic.LogicManager execute
+INFO: ----------------[USER COMMAND][aggGrade stddev n/midterm]
+Nov 11, 2024 9:11:04 PM seedu.address.ui.MainWindow executeCommand
+INFO: Result: Result of the aggregation operation: 29.69%
