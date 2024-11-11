@@ -832,7 +832,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: Can I have duplicate contacts in my address book? <br>
 **A**: Duplicate names are not permitted. Contacts with the same name, even if capitalized differently, are considered duplicates.
 
-**Q**: Can I mark certain patients as high-priority?<br>
+**Q**: Can I mark certain patients as 'important' or add them into favourite list?<br>
 **A**: Yes, you can use the `edit` command with tag prefix `t/` to tag patients as high-priority, or use `star` command to add them to a favourite list.
 
 **Q**: Is there a way to restore deleted or cleared contacts?<br>
