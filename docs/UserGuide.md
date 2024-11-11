@@ -263,7 +263,6 @@ Expected outputs:
 - `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: Newgates; Tags: [urgent]; Products: [soap]; Status: active`
 
 #### Here's how it would look like in the app:
-TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add Command](images/addSupplierCommand.png)
 
 [[Back to Table of Contents]](#table-of-contents)
@@ -319,7 +318,6 @@ Expected output:
 - Supplier at index 3 is deleted, assuming there is at least three suppliers displayed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
-TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![delete command](images/deleteSupplierCommand.png)
 
 [[Back to Table of Contents]](#table-of-contents)
@@ -357,12 +355,12 @@ Parameters:
 </box>
 
 Examples:
-- `mark -s 3 active`
-- Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 inactive`
+- `mark -s 3 inactive`
+- Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 active`
 
 Expected outputs:
-- Supplier at index 3 of the displayed list will be marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `active`. Otherwise, an error message will be shown.
-- Supplier at index 1 of the displayed list will be status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `inactive`. Otherwise, an error message wil be shown.
+- Supplier at index 3 of the displayed list will be marked as `inactive`, assuming there is at least three suppliers displayed and the third supplier is not currently `inactive`. Otherwise, an error message will be shown.
+- Supplier at index 1 of the displayed list will be status marked as `active`, assuming there is at least one supplier displayed and the first supplier is not currently `active`. Otherwise, an error message wil be shown.
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
@@ -409,10 +407,10 @@ Parameters:
 </box>
 
 Example:
-- `find -s n/link com/NU`
+- `find -s n/john com/companya`
 
 Expected output:
-- All suppliers with `name` containing `link` and `COMPANY` containing `NU` are shown.
+- All suppliers with `name` containing `john` and `COMPANY` containing `companya` are shown.
 
 #### Here's how it would look like in the app:
 ![find command](images/findSupplierCommand.png)
@@ -510,7 +508,7 @@ Parameters:
 
 Examples:
 - `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/25.50`
-- `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20 `
+- `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20`
 
 Expected output:
 - Delivery details are shown and paired to supplier at index 1, assuming there is a supplier at index 1 with an `ACTIVE` status. Otherwise, an error message will be shown.
@@ -663,10 +661,10 @@ Parameters:
 
 
 Example:
-- `find -d on/ 28-06-2025 17:00 pro/ milk`
+- `find -d on/18-06-2024 15:00 pro/rice`
 
 Expected output:
-- Deliveries of products that contains "milk" on "28-06-2025 17:00", if any, will be displayed.
+- Deliveries of products that contains "rice" on "18-06-2024 15:00", if any, will be displayed.
 
 #### Here's how it would look like in the app:
 ![find command](images/findDeliveryCommand.png)
@@ -719,7 +717,7 @@ Expected output:
 - Deliveries sorted by their `COST` in ascending order are shown.
 
 #### Here's how it would look like in the app:
-![sort command](images/sortDeliveriesCommand.png)
+![sort command](images/sortDeliveryCommand.png)
 
 [[Back to Table of Contents]](#table-of-contents)
 
@@ -758,11 +756,11 @@ Parameters:
 </box> 
 
 Examples:
-- `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+- `upcoming aft/19-12-2022 08:00 bef/20-06-2024 17:00`
 - `upcoming aft/19-12-2022 08:00`
 
 Expected output:
-- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 and before 18-06-2023 17:00 are shown.
+- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 and before 20-06-2024 17:00 are shown.
 - All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 are shown.
 
 #### Here's how it would look like in the app:
