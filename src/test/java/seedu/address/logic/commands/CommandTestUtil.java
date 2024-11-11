@@ -59,14 +59,6 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_TIME_BOB = "08:00";
     public static final String VALID_DATETIME_BEGIN = "2024-10-10 00:00";
     public static final String VALID_DATETIME_END = "2024-10-12 00:00";
-    public static final String VALID_SORT_ASCENDING = "ascending";
-    public static final String VALID_SORT_ASC = "asc";
-    public static final String VALID_SORT_ASCENDING_CAP = "ASCENDING";
-    public static final String VALID_SORT_ASC_CAP = "ASC";
-    public static final String VALID_SORT_DESCENDING = "descending";
-    public static final String VALID_SORT_DESC = "desc";
-    public static final String VALID_SORT_DESCENDING_CAP = "DESCENDING";
-    public static final String VALID_SORT_DESC_CAP = "DESC";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
