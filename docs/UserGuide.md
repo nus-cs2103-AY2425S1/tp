@@ -135,6 +135,8 @@ Examples:
   <img src="images/add-after.png" width="500" alt="Add-After">
 </div>
 
+> **_NOTE:_**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
+
 <br>
 
 ### Listing all internship applications : `/list`
@@ -336,6 +338,9 @@ Ans: New entries will not be inserted in the right order. They are inserted to t
 
 #### Q6: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
+
+#### Q6: What is considered a valid email address format?
+Ans: If you have an existing email address account, it will be allowed by HireMe. You can check [here](https://verifalia.com/validate-email).
 
 --------------------------------------------------------------------------------------------------------------------
 
