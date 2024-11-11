@@ -72,26 +72,29 @@ If you type fast, you can complete your contact management tasks faster with Log
 <box type="info" seamless>
 
 **Notes about the command format:**
-* There are two windows in this program:
-  - Main window: the default window you see when opening LogiLink.
-  - Inspect window: the window you see when inspecting a contact.<br></br>
+1. There are two windows in this program:
+  - **Main window**: the default window you see when opening LogiLink.
+    ![main window](images/Ui.png)
+  - **Inspect window**: the window you see when inspecting a contact.
+    ![inspect window](images/Ui2.png)
+    <br></br>
 
-* Words in `UPPER_CASE` are parameters you need to provide.<br>
-  e.g. In `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
+2. Words in `UPPER_CASE` are parameters you need to provide.<br>
+   * Example: `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
 
-* Square brackets [ ] mean that the parameter is optional.<br>
-  e.g `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
+1. Square brackets [ ] indicate the parameter is optional.<br>
+   * Example: `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
 
-* Ellipsis (...) means you can repeat the parameter multiple times, or leave it out completely.<br>
-e.g. `[t/TAG]…​`lets you add any number of tags like `t/friend`, `t/friend t/family`, etc., or you can skip the tags altogether.
+1. Ellipsis `...` means you can repeat the parameter multiple times, or leave it out completely.<br>
+   * Example: `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
 
-* You can enter parameters in any order.<br>
-  e.g. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
+1. You can enter parameters in any order.<br>
+   * Example: If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-*  Commands that do not require parameters (like `help`, `list`, `exit` and `clear`) will ignore anything extra you type.<br>
-  e.g. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
+1. Commands that do not require parameters (`help`, `list`, `exit`, `clear`) will ignore anything extra you type.<br>
+   * Example: If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
+1. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
 the app.
 </box>
 
@@ -104,6 +107,7 @@ Note:
 * Does not show an exhaustive list of all available commands, only the most helpful. 
 
 <box type="tip" seamless>
+
 **Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
 </box>
 
@@ -116,7 +120,7 @@ Format: `help`
 
 Adds a contact to the contacts list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
@@ -126,7 +130,8 @@ Examples:
 Note: 
 
 * `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
-* `EMAIL` and `PHONE` can be duplicated to give the user freedom, but there will be a warning.
+* `EMAIL` and `PHONE` can be duplicated to give you freedom, but there will be a warning.
+* `Phone`, `EMAIL`, `Address` are optional but they will be populated with dummy values if left blank.
 
 
 **<ins>When in the inspect window**
