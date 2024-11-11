@@ -7,7 +7,7 @@
 
 <VBox fx:id="attendanceCard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       styleClass="attendance-card">
-    <Label fx:id="subject" style="-fx-padding: 0 0 8 0; -fx-font-weight: bold; -fx-font-size: 14" text="\$subject"/>
+    <Label fx:id="subject" style="-fx-padding: 0 0 8 0; -fx-font-weight: bold; -fx-font-size: 14" text="\$subject" wrapText="true"/>
     <VBox spacing="5">
         <HBox alignment="CENTER_LEFT">
             <HBox HBox.hgrow="ALWAYS" >
