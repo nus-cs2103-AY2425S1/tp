@@ -217,7 +217,7 @@ Edits an existing student in UGTeach.
 * At least one of the optional fields must be provided. You may refer to
 [Constraints of Add command](#constraints) for acceptable values of each field.
 * Existing values will be updated to the input values.
-* Command will behave weirdly for values after 2147483647.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
@@ -248,7 +248,7 @@ Deletes the specified student from UGTeach.
 
 * The **INDEX** refers to the index number shown in the **displayed** student list.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
-* Command will behave weirdly for values after 2147483647.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
@@ -315,7 +315,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson. 
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
 * **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-* Command will behave weirdly for values after 2147483647.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
@@ -349,7 +349,7 @@ When he/she pays the outstanding fees at a later time, you should use the [`sett
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
 * **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-* Command will behave weirdly for values after 2147483647.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
@@ -381,7 +381,7 @@ Settles the amount owed by the student and adds it to the paid amount. To record
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX** **must be a positive integer** 1, 2, 3, …​
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
-* Command will behave weirdly for values after 2147483647.
+* Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
 
