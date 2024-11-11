@@ -276,7 +276,7 @@ It will display all events the volunteer at the specified `INDEX` under the `Vol
 
 Format: `/v view VOLUNTEER_INDEX`
 
-* The `INDEX` is the number you see next to their name in the list
+* The `INDEX` is the number you see to the left of their name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
@@ -338,7 +338,7 @@ It will add a volunteer with the specified `VOLUNTEER_INDEX` to the list of part
 
 Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The `INDEX` refers to the numbers shown next to both the volunteer and event names
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
 
 Examples:
 * `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
@@ -361,7 +361,7 @@ It will remove a volunteer with the specified `VOLUNTEER_INDEX` to the list of p
 
 Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The `INDEX` refers to the numbers shown next to both the volunteer and event names
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
 
 Examples:
 * `unassign v/2 e/2` removes the second volunteer on the volunteer list from the list of participants of the second event on the event list.
