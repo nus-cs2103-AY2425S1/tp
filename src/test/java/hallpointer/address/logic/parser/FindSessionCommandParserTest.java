@@ -3,15 +3,12 @@ package hallpointer.address.logic.parser;
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import hallpointer.address.logic.commands.FindMemberCommand;
 import hallpointer.address.logic.commands.FindSessionCommand;
-import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.SessionContainsKeywordsPredicate;
 
 public class FindSessionCommandParserTest {

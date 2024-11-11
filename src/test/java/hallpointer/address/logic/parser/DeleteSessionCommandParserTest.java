@@ -17,8 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.DeleteSessionCommand;
-import hallpointer.address.logic.commands.FindMemberCommand;
-import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;
 
 public class DeleteSessionCommandParserTest {

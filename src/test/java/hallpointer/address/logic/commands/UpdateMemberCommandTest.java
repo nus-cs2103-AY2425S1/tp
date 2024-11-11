@@ -90,7 +90,6 @@ public class UpdateMemberCommandTest {
     @Test
     public void execute_filteredList_success() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-
         Member memberInFilteredList = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         Member updatedMember = new MemberBuilder(memberInFilteredList).withName(VALID_NAME_BOB).build();
         UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
@@ -105,23 +104,61 @@ public class UpdateMemberCommandTest {
         assertCommandSuccess(updateMemberCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author {taggyhan}
     @Test
     public void execute_duplicateMemberUnfilteredList_failure() {
         Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(firstMember).build();
-        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_SECOND_MEMBER, descriptor);
+        Member secondMember = model.getFilteredMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
+
+        // Update to duplicate name only
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(
+                new MemberBuilder(firstMember).withName(secondMember.getName().toString()).build()).build();
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
+
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+
+        // Update to duplicate telegram only
+        descriptor = new UpdateMemberDescriptorBuilder(
+                new MemberBuilder(firstMember).withTelegram(secondMember.getTelegram().toString()).build()).build();
+        updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
+
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+
+
+        // Update to duplicate name and telegram
+        descriptor = new UpdateMemberDescriptorBuilder(firstMember).build();
+        updateMemberCommand = new UpdateMemberCommand(INDEX_SECOND_MEMBER, descriptor);
 
         assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
+    //@@author {taggyhan}
     @Test
     public void execute_duplicateMemberFilteredList_failure() {
+        Member firstMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        Member secondMember = model.getFilteredMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
-        // update member in filtered list into a duplicate in hall pointer
-        Member memberInList = model.getHallPointer().getMemberList().get(INDEX_SECOND_MEMBER.getZeroBased());
-        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER,
-                new UpdateMemberDescriptorBuilder(memberInList).build());
+        // Update to duplicate name only
+        UpdateMemberDescriptor descriptor = new UpdateMemberDescriptorBuilder(
+                new MemberBuilder(firstMember).withName(secondMember.getName().toString()).build()).build();
+        UpdateMemberCommand updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
+
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+
+        // Update to duplicate telegram only
+        descriptor = new UpdateMemberDescriptorBuilder(
+                new MemberBuilder(firstMember).withTelegram(secondMember.getTelegram().toString()).build()).build();
+        updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
+
+        assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
+
+
+        // Update to duplicate name and telegram
+        descriptor = new UpdateMemberDescriptorBuilder(
+                new MemberBuilder(firstMember).withName(secondMember.getName().toString())
+                        .withTelegram(secondMember.getTelegram().toString()).build()).build();
+        updateMemberCommand = new UpdateMemberCommand(INDEX_FIRST_MEMBER, descriptor);
 
         assertCommandFailure(updateMemberCommand, model, UpdateMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }

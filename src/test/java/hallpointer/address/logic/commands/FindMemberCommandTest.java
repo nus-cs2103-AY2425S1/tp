@@ -50,7 +50,7 @@ public class FindMemberCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different member -> returns false
+        // different predicate -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
@@ -58,6 +58,16 @@ public class FindMemberCommandTest {
     public void execute_zeroKeywords_noMemberFound() {
         String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredMemberList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_noMemberFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Dad Mom Son");
         FindMemberCommand command = new FindMemberCommand(predicate);
         expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
