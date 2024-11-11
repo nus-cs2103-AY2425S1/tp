@@ -578,26 +578,30 @@ Deletes the public address of a contact.
 
 Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-* Deletes the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
-  displayed contact list.
-  The index **must be a positive integer** 1, 2, 3, …​
+| Parameter     | Explanation                                              | Details                                                                                                                                                                      |
+|---------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`       | The index of the contact in the displayed contact list   | - The index **must be a positive integer** 1, 2, 3, ... <br> - This field does not accept negative numbers or zero.                                                          |
+| `NETWORK`     | The network of the public address to be deleted          | - Allowed values: `BTC, ETH, SOL` <br> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                                       |
+| `WALLET_NAME` | Optional wallet name of the public address to be deleted | - This field is **case-insensitive** <br> - If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact at the specified `INDEX` will be deleted. |
 
+<box type = "tip" seamless>
 
-* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
-  `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
-  Allowed values: `BTC|ETH|SOL`.
+**Tip:** This command deletes all the public addresses in the network if wallet name is not specified.
 
-* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address
-  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact
-  at the specified `INDEX` will be deleted. This field is **case-insensitive**.
+</box>
+
+* Deletes the public address of the contact with the specified `INDEX` in the specified `NETWORK`, and if applicable, the specified `WALLET_NAME`.
 
 Examples:
 
-* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first contact in the BTC network with the wallet name
+* `deletepa 1 c/BTC l/wallet1` **only** deletes the public address of the first contact in the BTC network with the wallet name
   `wallet1`.
 
-* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network.
+![deletepa1.png](images/deletepa1.png)
 
+* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network but not in the ETH network.
+
+![deletepa2.png](images/deletepa2.png)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
