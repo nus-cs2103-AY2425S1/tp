@@ -182,7 +182,7 @@ to the relevant commands!
 | [**Favourite**](#adding-a-company-to-favourites-fav)         | `fav INDEX`                                                                                                                                                                       |
 | [**Unfavourite**](#removing-a-company-from-favourites-unfav) | `unfav INDEX`                                                                                                                                                                     |
 | [**Find**](#locating-companies-find)                         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
-| [**View**](#viewing-detailed-applications-of-a-company-view) | `view INDEX`                                                                                                                                                                      |
+| [**Reopen**](#reopening-a-company-reopen)                    | `reopen INDEX`                                                                                                                                                                    |
 
 ### Commands for managing Applications 
 
@@ -191,7 +191,7 @@ to the relevant commands!
 | [**Apply**](#adding-an-application-record-for-a-company-apply)     | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React` |
 | [**Update**](#updating-an-application-for-a-company-update)        | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                    |
 | [**Withdraw**](#withdrawing-an-application-for-a-company-withdraw) | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                           |
-| [**Reopen**](#reopening-a-company-reopen)                          | `reopen INDEX`                                                                                                            |
+| [**View**](#viewing-detailed-applications-of-a-company-view)       | `view INDEX`                                                                                                              |
 
 ### Miscellaneous commands
 
@@ -451,22 +451,14 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing detailed applications of a company: `view`
+#### Reopening a company: `reopen`
 
-Displays a specified company with all its application details.
+Changes the status of a company from `CLOSED` to `INTERESTED`
 
-Format: `view INDEX`
-
-* Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-
-<box type="tip" seamless>
-
-**Tip:** By default, only partial application details are shown to the user not shown to reduce clutter. Use `view` if you want to see full details about the applications of
-a given company.
-</box>
-
-![view application descriptions](images/viewCommand.png)
-> Result after executing `view 1`
+Format: `reopen INDEX`
+* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+* The company at the provided index **must have status** `CLOSED`.
+* To use the `reopen` command, the company at the `INDEX` provided must have status `CLOSED`, which will subsequently become `INTERESTED`.
 
 [back to command summary](#command-summary) <br>
 [back to features](#features) <br>
@@ -555,14 +547,22 @@ The index refers to the index number shown in the displayed company list. The in
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Reopening a company: `reopen`
+#### Viewing detailed applications of a company: `view`
 
-Changes the status of a company from `CLOSED` to `INTERESTED`
+Displays a specified company with all its application details.
 
-Format: `reopen INDEX`
-* The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
-* The company at the provided index **must have status** `CLOSED`.
-* To use the `reopen` command, the company at the `INDEX` provided must have status `CLOSED`, which will subsequently become `INTERESTED`.
+Format: `view INDEX`
+
+* Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:** By default, only partial application details are shown to the user not shown to reduce clutter. Use `view` if you want to see full details about the applications of
+a given company.
+</box>
+
+![view application descriptions](images/viewCommand.png)
+> Result after executing `view 1`
 
 [back to command summary](#command-summary) <br>
 [back to features](#features) <br>
