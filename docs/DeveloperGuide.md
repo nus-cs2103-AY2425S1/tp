@@ -18,7 +18,9 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-* We referred to our TA's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
+  * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
+* We referred to our TA (Wu Xiaoyun) team's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide.
 
 ---
 
@@ -276,8 +278,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. KonTActs detects an error in the input format.
 
-  - 3a1.KonTActs requests for the corrected input.
-  - 3b2. User enters a new input.
+  - 3a1.KonTActs displays error message.
+  - 3a2. User enters a new input.
   - Steps 3a1 - 3a2 are repeated until input format is correct.
 
     Use cases resume from step 4.
@@ -294,7 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User indicates to delete a contact.
+1. User enters command to delete a contact.
 2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
@@ -303,8 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1.KonTActs requests for the user to try again.
-  - 1a2. User enters the command again
+  - 1a1.KonTActs displays error message.
+  - 1a2.User enters a new input.
   - Steps 1a1 - 1a2 are repeated until the input entered is correct.
 
     Use case resumes from step 2.
@@ -331,11 +333,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 4a. KonTActs detects an error in the entered data.
+- 3a. KonTActs detects an error in the entered data.
 
-  - 4a1. KonTActs requests for the correct data.
-  - 4a2. User enters new data.
-  - Steps 4a1-4a2 are repeated until the data entered are correct.
+  - 3a1. KonTActs requests for the correct data.
+  - 3a2. User enters new data.
+  - Steps 3a1-3a2 are repeated until the data entered are correct.
 
     Use case resumes from step 4.
 
@@ -348,7 +350,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to view the entire contact list.
-2. KonTActs displays the full list of contacts.\
+2. KonTActs displays the full list of contacts.
+
    Use case ends.
 
 **Extensions**
@@ -373,30 +376,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. TA chooses to edit a contact’s details.
-2. KonTActs requests the contact’s identifier.
-3. TA enters the identifier of the contact to update.
-4. KonTActs displays the current details and requests the changes.
-5. TA updates the relevant details.
-6. KonTActs saves and displays the changes.
+1. User chooses to edit a contact’s details. 
+2. User enters the identifier (person's index), and updated information of the contact
+3. KonTActs saves and displays the changes.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs identifies that there is no such contact.
+- 2a. KonTActs identifies that the index is invalid.
 
-  - 3a1. KonTActs requests for the correct data.
-  - 3a2. TA enters the new data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct.
+  - 2a1. Error message is displayed.
+  - 2a2. TA enters the new index.
+  - Steps 2a1-2a2 are repeated until the data entered are correct.
 
-    Use case resumes from step 4.
+    Use case resumes from step 3.
   
-- 4a. KonTActs identifies that the data to be updated is invalid.
+- 2b. KonTActs identifies that the data to be updated is invalid.
 
-    - 4a1. KonTActs requests for the correct data.
-    - 4a2. TA enters new data
-    - Steps 4a1-4a2 are repeated until the data entered are correct.
+    - 2b1. Error message is displayed.
+    - 2b2. TA enters new data to be updated.
+    - Steps 2b1-2b2 are repeated until the data entered are valid.
 
       Use case resumes from step 5.
 
@@ -409,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to filter the contact list.
-2. KonTActs requests the filter criteria (current overall grades, name, tele handle).
+2. KonTActs requests the filter criteria (current overall grades, name, telegram handle).
 3. User enters the filter criteria.
 4. KonTActs filters the contact list based on the entered criteria and displays the filtered list.
 
@@ -552,7 +552,8 @@ Duplicate names)
 
 1. Should work on any mainstream OS as long as it has Java 17 or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+able to accomplish most of the tasks faster using commands than using the mouse.
 4. Commands should be easy to remember.
 5. Ui should be easy to navigate and intuitive.
 6. KonTActs should be easy to use for new users.
@@ -589,6 +590,16 @@ Duplicate names)
 
 ---
 
+## **Appendix: Planned Enhancements**
+
+Team member count: 5
+
+1. **Implement commands to add/edit assignment details:** Currently, one has to edit the `kontacts.json` file manually to add or remove assignment details. This could be an issue as the information keyed in may be incorrect. We are planning to create commands which can add/edit assignment details (such as assignment name `Ex04` and its respective `maxGrade` fields) to the `assignment.json` file. This is to make the adding/editing of new assignments easier and prevent wrong information being entered.
+2. **Include validation for Telegram ID:** Currently, KonTActs does not check for the Telegram ID's length despite it not being a valid username in Telegram. In future updates, we are planning to provide proper Telegram ID validation to prevent users from inputting usernames that are not accepted by Telegram.
+3. **Add flexibility to attendance:** Currently, the maximum number of weeks that can be inputted is 14 since there are 14 weeks in a semester (from week 0 to week 13). However, it is possible that the user would want to use it for a different amount of weeks such as during special terms. Thus, we plan on incorporating commands to edit the start or end week of the attendance.
+4. **Improve UI of Result Display box:** Currently, the Result Display only shows three lines of message to the user. However, some of the details require more than three lines to be seen. We plan to improve the UI such that users are able to adjust the size of the Result Display box to display more information.
+5. **Improve scroll-ability of application:** Currently, when there is a long tag, and the View Window is closed, the scroll of the application does not work. Although there is a [workaround](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html#known-issues) to it, it is not efficient and prevents fast usage. So, we plan on editing the View Window and the Main Window to make it more user-friendly.
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -618,16 +629,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person by specifying the name
+1. Deleting a person while all persons are being shown
 
-    1. Test case: `delete n/John Doe`<br>
-       Expected: Contact with name `John Doe` is deleted from the list. Details of the deleted contact shown in the status message.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+    1. Test case: `delete name/John Doe`<br>
+       Expected: Deletes the contact named John Doe. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Other incorrect delete commands to try: `delete`, `delete x` (where `x` is any value), `delete n/g` (where `g` is a name that is not in KonTActs)<br>
-       Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete n/ABC`, `...` (where name `ABC` does not exist in the list)<br>
+       Expected: An error message redirecting to the correct format.
+
    
 ### Adding a person
 
