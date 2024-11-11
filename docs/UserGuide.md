@@ -118,6 +118,8 @@ Adds a contact to the contacts list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
+* `ADDRESS` is further split into "`ADDRESS LINE`, s`POSTAL CODE`", where both parameters are required.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
@@ -126,7 +128,8 @@ Examples:
 Note: 
 
 * `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
-* `EMAIL` and `PHONE` can be duplicated to give the user freedom, but there will be a warning.
+* `EMAIL` and `PHONE` can be duplicated if needed, but please note that you will receive a warning if you try to use the same email or phone number 
+for multiple contacts.
 
 
 **<ins>When in the inspect window**
@@ -450,7 +453,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
 **Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
-**Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
+**Assign** | <ins>Main Window:</ins><br> Does not work <br><ins>Inpsect Window:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
 **Back**   | <ins>Both Windows:</ins><br> `back`
 **Clear**  | <ins>Both Windows:</ins><br> `clear`
 **Delete** | <ins>Both Windows:</ins><br> `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
@@ -459,7 +462,7 @@ Action     | Format, Examples
 **Find Delivery**| <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `finddel ITEM [MORE_ITEMS]` e.g., `finddel Monitor Mouse`
 **Help**   | <ins>Both Windows:</ins><br> `help`
 **Inspect**| <ins>Main Window:</ins><br> `inspect INDEX`<br> e.g., `inspect 2` <br><ins>Inspect Window:</ins><br> Does not work
-**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Main Window:</ins><br> `list`
+**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Inspect Window:</ins><br> `list`
 **Sort Ascending**| <ins>Both Windows:</ins><br> `asort by/ATTRIBUTE`
 **Sort Descending**| <ins>Both Windows:</ins><br> `dsort by/ATTRIBUTE`
 **Unarchive**| <ins>Both Windows:</ins><br> `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
