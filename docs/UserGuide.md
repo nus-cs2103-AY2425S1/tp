@@ -507,7 +507,7 @@ Advanced users can edit the data file directly to modify the address book data.
 ### General Command Format
 
 - **Command Structure**:
-    - Commands are case-insensitive.
+    - Commands are case-sensitive, i.e. must be in **lower-case only**. <br> e.g. `clear` will be accepted but `Clear` will not.
     - Parameters are case-insensitive unless specified.
 - **Parameters in `UPPER_CASE`** are to be supplied by the user.
     - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
