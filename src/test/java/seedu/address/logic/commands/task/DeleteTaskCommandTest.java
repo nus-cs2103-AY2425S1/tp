@@ -119,7 +119,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_taskRemoveIndexFailure() throws Exception {
+    public void execute_taskRemoveIndexFailure() {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(100));
         assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
                 100, 1, 1), () -> deleteTaskCommand.execute(model)

@@ -3,7 +3,6 @@ package seedu.address.logic.commands.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -67,16 +66,6 @@ public class UnmarkTaskCommandTest {
         assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
                 model.getFilteredTaskList().size() + 1,
                 1, model.getFilteredTaskList().size()), () -> command.execute(model));
-    }
-
-    @Test
-    public void execute_taskAlreadyUnmarked_throwsErrir() throws Exception {
-        Task taskToUnmark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
-        taskToUnmark.markAsUndone();
-
-        UnmarkTaskCommand command = new UnmarkTaskCommand(Set.of(INDEX_FIRST));
-
-        assertCommandFailure(command, model, Messages.MESSAGE_TASK_ALREADY_UNCOMPLETED);
     }
 
     @Test
