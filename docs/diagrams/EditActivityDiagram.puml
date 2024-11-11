@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes edit command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([command format invalid])
+    :Display invalid command format error message;
+elseif () then ([parameters invalid])
+    :Displays invalid parameter error message;
+elseif () then ([duplicate parameters])
+    :Displays contact already exists error message;
+else ([else])
+    :Updates specified person with specified parameters;
+    :Push to undo stack;
+
+endif
+stop
+@enduml

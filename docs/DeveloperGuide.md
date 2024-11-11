@@ -185,13 +185,47 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 <box type="info" seamless>
 
-**Note:** There are no destroy markers (X) for `AddCommand` as they are preserved in the `undo` command stack.
+**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
 
 </box>
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
 <puml src="diagrams/AddActivityDiagram.puml" height="600" width="600" />
+
+### Edit feature
+
+#### Implementation
+
+The `edit` command extends `Command` and implements `Undoable`. The `edit` command updates an existing contact based on the supplied index and parameters, of which
+only the `INDEX` supplied, as well as any one field to update is compulsory.
+The `edit` command is undoable.
+
+Given below is an example usage scenario and how the `edit` command behaves at each step.
+
+Step 1. The user executes `edit 1 n/John Doe p/+65 98765432`.
+
+<box type="info" seamless>
+
+**Note:** An error message will be displayed if attempting to edit a contact to have with duplicate `NAME`, `PHONE` or `EMAIL`.
+
+</box>
+
+Step 2. The `edit` command updates the details of the contact with index 1 to have the name John Doe and phone number +65 98765432.
+
+The following sequence diagram shows how an `edit` command goes through the `Logic` component:
+
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a `edit` command:
+
+<puml src="diagrams/EditActivityDiagram.puml" height="600" width="900" />
 
 ### Undo feature
 
