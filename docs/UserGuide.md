@@ -278,9 +278,9 @@ Format: `import`
 **Tip:** You can import multiple contact spreadsheets at a time if you put them all in the Import folder!
 </box>
 
-* If the program comes across a contact that has an empty or invalid contact info, it will attempt to fill in the info
-* It will fill in the info with placeholder values (0000 0000, default@email.net, @defaulthandle, AA0000)
-* Feel free to edit these handles!
+* If the program comes across a contact that has an empty or invalid contact info, the contact information will stay blank after importing
+* Take note that the same constraints apply as when trying to add new contacts using the add command
+* For more information on making a .csv file to use with the import command, please refer to the section: [Preparing a .csv file](#preparing-a-csv-file-)
 
 ### Exiting the program : `exit`
 
@@ -310,10 +310,10 @@ A .csv file is simply one of the ways that you can save a spreadsheet file. Comm
 
 For this guide, we'll be giving you a sample spreadsheet to easily convert into a .csv file, as well as some things to note when preparing your spreadsheet!
 
-Here is a [sample spreadsheet](https://docs.google.com/spreadsheets/d/1hWybja47YMeKs3-mmOts-QkJANj2WcHPVLlYJ-lfUro/edit?usp=sharing) for you to copy to start! There is already some sample data inside the sheet, feel free to delete that.
+To start, here is a [sample spreadsheet](https://docs.google.com/spreadsheets/d/1hWybja47YMeKs3-mmOts-QkJANj2WcHPVLlYJ-lfUro/edit?usp=sharing) for you to copy! There is already some sample data inside the sheet, feel free to edit that.
 
 ### Constraints
-Take note of the following when filling in your spreadsheet data,
+Do take note of the following when preparing your contacts,
 1. Do not try to import a .csv file that is empty.
 2. Do not change the capitalisation of the sections at the top, if you do, UniLink will not be able to import your data correctly.
 3. Note that the contact type can only be either Work, Personal or School. If that contact contains any other contact type, or no contact type, it will fail to import. 
