@@ -10,17 +10,18 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.OrderStatus;
-import seedu.address.model.person.Customer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.product.Product;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Remark;
 
 /**
@@ -86,7 +87,7 @@ public class AddCustomerOrderCommand extends Command {
 
         List<Person> personList = model.getFilteredPersonList();
 
-        // Check if the person exits in the personList by unique phone number
+        // Check if the customer exits in the personList by unique phone number
         Person person = null;
         for (Person p : personList) {
             if (phone.equals(p.getPhone())) {
@@ -98,7 +99,9 @@ public class AddCustomerOrderCommand extends Command {
             model.addPerson(person);
         }
 
-        if (!(person instanceof Customer)) {
+        Optional<Tag> firstTag = person.getTags().stream().findFirst();
+        String name = firstTag.get().tagName;
+        if (!name.equals("Customer")) {
             throw new CommandException(INVALID_CUSTOMER);
         }
 
