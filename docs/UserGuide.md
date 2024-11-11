@@ -174,6 +174,12 @@ Examples:
 * `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
 * `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
+### Clearing all data and deleting all students : `deleteall`
+
+Deletes all students from the contact list.
+
+Format: `deleteall`
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
