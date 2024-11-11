@@ -939,7 +939,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Enhanced Find Command with Partial Matching and Group Filtering**
 
-  Currently, the `find` command supports exact matches for names and student IDs, which may limit its usability when TAs want to locate students based on partial names. Additionally, `find` does not work well when used after `show`, as it displays students from all groups, rather than only those from the filtered group list. To improve functionality, we plan to enhance the `find` command to support both partial matching and group filtering.
+    Currently, the `find` command supports exact matches for names and student IDs, which may limit its usability when TAs want to locate students based on partial names. Additionally, `find` does not work well when used after `show`, as it displays students from all groups, rather than only those from the filtered group list. To improve functionality, we plan to enhance the `find` command to support both partial matching and group filtering.
 
   **Enhancement Goals:**
 
@@ -948,7 +948,7 @@ testers are expected to do more *exploratory* testing.
 
 2. **Enhance Grouping Functionality for Attendance Tracking**
 
-  Currently, the `listattn` command lists all students for a given attendance event without segmentation by groups, which may cause confusion when managing multiple classes or sections. We plan to enhance the `listattn` command to allow filtering by groups, so TAs can view attendance specifically for each group within an event.
+    Currently, the `listattn` command lists all students for a given attendance event without segmentation by groups, which may cause confusion when managing multiple classes or sections. We plan to enhance the `listattn` command to allow filtering by groups, so TAs can view attendance specifically for each group within an event.
 
     **Implementation Considerations:**
 
@@ -958,7 +958,7 @@ testers are expected to do more *exploratory* testing.
 
 3. **Rename `createattn` Command to `createevent` for Consistency**
 
-  Currently, the command for creating attendance events (`createattn`) is inconsistent with the naming of other event-related commands such as `deleteevent` and `listevents`. To improve usability and consistency, we plan to rename the `createattn` command to `createevent`.
+    Currently, the command for creating attendance events (`createattn`) is inconsistent with the naming of other event-related commands such as `deleteevent` and `listevents`. To improve usability and consistency, we plan to rename the `createattn` command to `createevent`.
 
 4. **Warning for when edited fields are the same as previous fields**
 
