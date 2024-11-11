@@ -188,8 +188,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 en/Betsy Crower ep/+65 91235678 t/` Edits the name and phone number of the emergency contact of the 2nd person to be `Betsy Crower` and `+65 91235678` respectively, and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 en/Betsy Crower ep/+65 91235678 t/` edits the name and phone number of the emergency contact of the 2nd person to be `Betsy Crower` and `+65 91235678` respectively, and clears all existing tags.
 
 The following screenshot shows the results of executing `edit 2 en/Betsy Crower p/+65 91235678 t/`.
 
@@ -218,8 +218,8 @@ Format: `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​`
 > * If multiple parameters, namely `NAME`, `PHONE`, `ROOM_NUMBER`, and/or `TAG`,  are specified, the results of the search will only contain contacts that match all the specified parameters.
 
 Examples:
-* `find n/John` Finds contacts who have the word John in their name.
-* `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues` Finds contacts who have the tags `friends` and `colleagues`. They also must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
+* `find n/John` finds contacts who have the word John in their name.
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues` finds contacts who have the tags `friends` and `colleagues`. They must also have the `Alex` or `Jones` in their name, `94509592` as their contact number, and live in room `08-1234`.
 
 The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`.
 
@@ -551,7 +551,7 @@ Duplicate handling:
 ## Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Dorm**: A university or college hall of residence / hotel for students and teachers.
 * **Dorm resident**: Student and / or teacher currently staying in a dorm.
 * **Dorm manager**: User of DorManager Pro that has to keep track of the residents in their dorm.
