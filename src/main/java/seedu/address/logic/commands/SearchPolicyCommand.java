@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_NAME;
 import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_POLICY;
 
@@ -33,7 +33,7 @@ public class SearchPolicyCommand extends Command {
     public SearchPolicyCommand(String policyName) throws CommandException {
         requireNonNull(policyName);
         if (!isValidPolicyName(policyName)) {
-            throw new CommandException(MESSAGE_INVALID_POLICY_FORMAT);
+            throw new CommandException(MESSAGE_INVALID_POLICY_NAME);
         }
         this.policyName = policyName;
     }

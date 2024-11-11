@@ -30,6 +30,7 @@ public class Policy {
     public static final String START_EQ_END = "Start date and end date cannot be the same!";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    //This regular expression was converted by chatgpt from normal regular expression to java regular expression
     private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
             + "to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*"
            + "(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
