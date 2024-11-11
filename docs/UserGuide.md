@@ -43,8 +43,8 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 1. Before you run the application for the **first time**, ensure that your _home folder_ **does not contain** a `config.json` and `preferences.json` file. If it does, delete them.
 
-1. Open a command terminal, `cd` into the folder that you put the jar file in.
-   * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
+1. Open a command terminal, `cd` into the folder that you put the `.jar` file in.
+   * For example, if the `.jar` file is still in the Downloads folder, type `cd Downloads`
 
 1. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -78,7 +78,7 @@ Action     | Format, Examples
 **Add**  : adds a student to UGTeach  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
 **Edit** : edits a student in UGTeach | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/SCHEDULE] [s/SUBJECT] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Delete** : deletes a student in UGTeach | `delete INDEX`<br> e.g., `delete 3`
-**Find** : Finds students whose names contain any of the given keywords *and* their schedules contain any of the given days | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex John d/Friday`
+**Find** : finds students whose names contain any of the given keywords *and* their schedules contain any of the given days | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex John d/Friday`
 **Pay** : updates amount paid by a student | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **Owe** : updates amount owed by a student | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** : updates amount paid and owed by student (used when the student repays an amount owed to you) | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
@@ -125,14 +125,17 @@ Action     | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
+**Format**: `help`
+
+**Output**:
 ![help message](images/helpMessage.png)
 
-**Format**: `help`
 
 ### Listing all students: `list`
 
@@ -181,7 +184,7 @@ Adds a student to UGTeach.
 * **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
   * Special case: `-0`, `-0.0`, `-0.00` are not allowed! UGTeach will behave weirdly if you enter these values.
-* **SUBJECT** should only be
+* **SUBJECT** must only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
   * **SUBJECT** is case-insensitive.
@@ -310,35 +313,6 @@ Finds students whose names contain any of the given keywords *and* their schedul
 
 <div style="page-break-after: always;"></div>
 
-### Receiving payment from a student: `pay`
-
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
-
-**Format:** `pay INDEX hr/HOURS_PAID`
-
-**Example:**
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
-  
-**Output:**
-![payResult.png](images/payResult.png)
-
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the displayed student list.
-* The **INDEX must be a positive integer** 1, 2, 3, …​
-* Command will behave weirdly if **INDEX** is larger than 2147483647.
-* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
-</box>
-
-<box type="tip" header="##### Tips">
-
-* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
-
-</box>
-
-<div style="page-break-after: always;"></div>
-
 ### Recording unpaid tuition fee of a student: `owe`
 
 Records the tuition fee that the student is unable to pay immediately after the lesson. 
@@ -397,6 +371,8 @@ Settles the amount owed by the student and adds it to the paid amount. To record
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Receiving payment from a student: `pay`
 
 Updates the amount of tuition fee paid by the specified student after a lesson. 
@@ -428,6 +404,7 @@ Recording payment using the `pay` command does not update the owed amount. You s
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Showing income data: `income`
 
@@ -479,6 +456,8 @@ Exits the program.
 
 **Format:** `exit`
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 UGTeach data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -501,8 +480,6 @@ Please note:
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Glossary
 * **CLI**: Command-line interface, where you interact with the system using your keyboard.
@@ -531,4 +508,5 @@ Please note:
 1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
 e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
 The remedy is to avoid using prefixes in the address field. Rest assured that this issue is unlikely to affect daily use cases as it is unlikely for Singapore addresses to contain prefixes.
+1. **Rounding up to 2 decimal places** in the `pay` and `owe` commands can result in a minor difference of tuition fee based on the number of hours one session lasts. For example, with the rate of $100.01/hr, `pay 1 hr/3` returns a payment $300.03, but typing `pay 1 hr/1.5` twice returns $300.04 in total. However, this issue is less likely to impact tutors, as their hourly rates typically do not extend to two decimal places. Therefore, in most cases, the differences would be negligible. 
 --------------------------------------------------------------------------------------------------------------------
