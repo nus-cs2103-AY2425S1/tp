@@ -26,7 +26,7 @@ public class RemarkCommand extends Command {
             + "by the patient's NRIC. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: NRIC "
-            + PREFIX_REMARK + "[REMARK]\n"
+            + PREFIX_REMARK + "REMARK\n"
             + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_REMARK + "Wheelchair-bound";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";

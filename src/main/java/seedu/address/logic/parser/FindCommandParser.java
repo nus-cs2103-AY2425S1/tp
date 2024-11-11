@@ -26,7 +26,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         // Throw exception if the string is non alphanumeric except spaces or slashes
         if (!trimmedArgs.matches("^[a-zA-Z0-9\\s/]*$")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException("Names or tags cannot contain non-alphanumeric characters");
         }
 
         // If the user provides a tag search prefix (e.g., "tag/diabetic"), search by tags
@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             // Throw exception if string is non alphanumeric except spaces
             if (!tagKeywords.matches("^[a-zA-Z0-9\\s]*$")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                throw new ParseException("Names or tags cannot contain non-alphanumeric characters");
             }
 
             List<String> tagKeywordList = Arrays.asList(tagKeywords.split("\\s+"));

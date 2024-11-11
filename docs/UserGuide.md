@@ -89,8 +89,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.<br>
-Murphy's List also does not automatically check for invalid email formats, so please take caution when adding/editing patient information. *(Email validation will be included in a future release.)*
+Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.
 </div>
 
 
