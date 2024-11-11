@@ -76,6 +76,8 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+---
+
 ## Managing Contacts
 
 ### Adding a person: `add person`
@@ -269,6 +271,8 @@ Examples:
   <img src="images/delete_person.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
 </figure>
+
+---
 
 ## Managing Events
 
@@ -475,6 +479,8 @@ Example:
   <img src="images/clear_event.png" alt="clear person" style="display: block; margin: 0 auto; border-radius: 10px;">
   <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
 </figure>
+
+---
 
 ## Utility Commands
 
