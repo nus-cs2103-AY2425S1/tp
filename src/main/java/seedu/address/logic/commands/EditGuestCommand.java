@@ -37,7 +37,7 @@ public class EditGuestCommand extends Command {
     public static final String COMMAND_WORD = "edit_guest";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the guest identified "
-            + "by the index number used in the displayed guest list. "
+            + "by the index number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -47,6 +47,7 @@ public class EditGuestCommand extends Command {
             + "[" + PREFIX_RSVP + "RSVP] "
             + "[" + PREFIX_RELATION + "RELATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Note: At least 1 field of a guest has to be specified for the command to be valid\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

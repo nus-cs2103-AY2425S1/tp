@@ -12,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Relation {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Relation should be 'H' for husband, 'W' for wife or 'U' for unknown!";
+            "Relation should be 'H'/'h' for husband, 'W'/'w' for wife or 'U'/'u' for unknown!";
 
     /**
      * Represents the relation of a guest to the wedding.
