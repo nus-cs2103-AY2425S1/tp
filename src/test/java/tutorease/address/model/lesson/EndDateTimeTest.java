@@ -64,6 +64,7 @@ public class EndDateTimeTest {
     @Test
     public void constructor_invalidHour_throwsParseException() throws ParseException {
         StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
+
         assertThrows(IllegalArgumentException.class, () ->
                 EndDateTime.createEndDateTime(startDateTime, INVALID_DURATION_ZERO));
         assertThrows(IllegalArgumentException.class, () ->
