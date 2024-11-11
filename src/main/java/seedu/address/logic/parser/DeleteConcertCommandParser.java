@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteConcertCommand;
@@ -20,12 +21,14 @@ public class DeleteConcertCommandParser implements Parser<DeleteConcertCommand> 
      */
     public DeleteConcertCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteConcertCommand(index);
-        } catch (ParseException pe) {
+        ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args);
+
+        if (argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteConcertCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndexWithMessage(args, MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
+        return new DeleteConcertCommand(index);
     }
 }

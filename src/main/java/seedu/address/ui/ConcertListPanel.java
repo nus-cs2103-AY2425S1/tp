@@ -26,41 +26,13 @@ public class ConcertListPanel extends UiPart<Region> {
     public ConcertListPanel(ObservableList<Concert> concertList) {
         super(FXML);
         concertListView.setItems(concertList);
-        concertListView.setCellFactory(listView -> new ConcertListViewCell(false));
-    }
-
-    /**
-     * Sets the list to show full details of its {@code Concert} cards.
-     */
-    public void showFullConcert() {
-        concertListView.setCellFactory(listView -> new ConcertListViewCell(true));
-        concertListView.refresh();
-    }
-
-    /**
-     * Sets the list to hide full details of its {@code Concert} cards.
-     */
-    public void hideFullConcert() {
-        concertListView.setCellFactory(listView -> new ConcertListViewCell(false));
-        concertListView.refresh();
+        concertListView.setCellFactory(listView -> new ConcertListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Concert} using a {@code ConcertCard}.
      */
     class ConcertListViewCell extends ListCell<Concert> {
-        private final boolean showFullDetails;
-
-        /**
-         * Creates a {@code ConcertListViewCell} with {@param showFullDetails} to indicate whether the details
-         * of the {@code ConcertCard} should be truncated or wrapped to a new line.
-         *
-         * @param showFullDetails
-         */
-        protected ConcertListViewCell(boolean showFullDetails) {
-            this.showFullDetails = showFullDetails;
-        }
-
         @Override
         protected void updateItem(Concert concert, boolean empty) {
             super.updateItem(concert, empty);
@@ -69,8 +41,7 @@ public class ConcertListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                ConcertCard concertCard = new ConcertCard(concert, getIndex() + 1, showFullDetails);
-                setGraphic(concertCard.getRoot());
+                setGraphic(new ConcertCard(concert, getIndex() + 1).getRoot());
             }
         }
     }
