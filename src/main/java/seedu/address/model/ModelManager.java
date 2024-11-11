@@ -121,7 +121,6 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(int index, Student student) {
         addressBook.addStudent(index, student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -133,7 +132,6 @@ public class ModelManager implements Model {
     @Override
     public void replaceStudentList(ObservableList<Student> studentList) {
         addressBook.replaceStudentList(studentList);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
