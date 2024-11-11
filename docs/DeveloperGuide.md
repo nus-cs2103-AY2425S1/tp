@@ -761,7 +761,8 @@ and does not accept duplicate names, so there will never be a case where more th
 
     1. Download the jar file and copy into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences.
 
@@ -1023,6 +1024,60 @@ PhysioPal's UI displays all names in lowercase, which may not reflect the actual
 **Proposed Implementation**<br>
 
 Modify the UI to display names as they were originally entered, preserving their case formatting.
+
+### **4. Set Reminders for Specific Appointments**
+**Current Feature Flaw**<br>
+
+PhysioPal only allows reminders at the client level, limiting users to set reminders only for the next upcoming appointment. This prevents users from setting reminders for each appointment.
+
+**Proposed Implementation**<br>
+1. Modify the reminder feature to support setting reminders at the appointment level instead of just the client level.
+    1. Users will be able to set a reminder for any scheduled appointment.
+2. Update the command syntax to `REMINDER NAME d/DATE_AND_TIME r/REMINDER_TIME`
+
+### **5. Enhance Reminder Feature**
+**Current Feature Flaw**<br>
+
+Currently, PhysioPal sets a reminder note for clients. However, the system to send these reminders have yet to be implemented. 
+
+**Proposed Implementation**<br>
+
+1. Add a new "Reminders" box in PhysioPal's application interface. This box will display upcoming reminders based on the reminder times set by users.
+2. Reminders are displayed in chronological order, with the soonest reminders appearing at the top of the list.
+3. As reminders expire (i.e once the appointment time passes), they are automatically removed from the Reminders box.
+
+### **6. Make Scheduling Cumulative**
+**Current Feature Flaw**<br>
+
+PhysioPal’s schedule command replaces a person's existing appointments with new ones, instead of adding to the current list of schedules.
+
+**Proposed Implementation**<br>
+
+Update the schedule command to append new appointments to the existing list of schedules for a person. Specifically:
+
+1. Retrieve the current schedules of the person.
+2. Validate for any duplicate or conflicting time slots.
+3. Append the new schedules to the existing ones.
+
+### **7. Make 'Empty Note in Schedule' Error Message More Specific**
+**Current Feature Flaw**<br>
+
+The current error message for an empty note in the schedule command `Invalid command format!
+schedule: Schedule appointments for client. Parameters: NAME d/DATE_AND_TIME... note/NOTE...
+Example: schedule John Doe d/2024-10-17 1200 note/first appointment` is too general.
+
+**Proposed Implementation**<br>
+
+Update the error message to specifically indicate that the note cannot be empty: The note field cannot be empty. Please provide a note for the appointment.
+
+### **8. Validate No-Change Edits in Edit Command**
+**Current Feature Flaw**<br>
+
+Currently, if a user calls the `edit` command but does not change any information (e.g they enter the same values for all fields), PhysioPal still returns a success message.
+
+**Proposed Implementation**<br>
+1. Update the `edit` command to check if the new input values are identical to the existing data.
+2. If no changes are detected, an error message will be displayed, such as `No changes detected. Please enter different values to update the record.`.
 
 ## **Appendix: Effort**
 
