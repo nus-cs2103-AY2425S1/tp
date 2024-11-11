@@ -1,12 +1,52 @@
+
 ---
+
   layout: default.md
     title: "User Guide"
     pageNav: 3
+
 ---
 
 # VolunTier User Guide
 
 --------------------------------------------------------------------------------------------------------------------
+
+
+<!-- Table of Contents -->
+- [VolunTier User Guide](#voluntier-user-guide)
+- [Quick start](#quick-start)
+  - [Installation of application](#installation-of-application)
+- [Features](#features)
+  - [Viewing help](#viewing-help--help)
+  - [Adding a Tutor](#adding-a-tutor-addtutor)
+  - [Adding a Tutee](#adding-a-tutee-addtutee)
+  - [Adding a Lesson](#adding-a-lesson-addlesson)
+  - [Listing all persons](#listing-all-persons--list)
+  - [Editing a person](#editing-a-person--edit)
+  - [Locating persons by name](#locating-persons-by-name-find)
+  - [Locating persons by subject](#locating-persons-by-subject-findsubject)
+  - [Deleting a person](#deleting-a-person--delete)
+  - [Deleting a lesson](#deleting-a-lesson--deletelesson)
+  - [Viewing a person's details](#viewing-a-persons-details--view)
+  - [Undoing a command](#undoing-a-command--undo)
+  - [Redoing a command](#redoing-a-command--redo)
+  - [Viewing command history](#viewing-command-history--history)
+  - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
+  - [Clearing all entries](#clearing-all-entries--clear)
+  - [Importing people from CSV files](#importing-people-from-csv-files--import)
+  - [Exiting the program](#exiting-the-program--exit)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+
+<page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
 ## Introduction
 VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and looking to manage your growing clientele efficiently.
 VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI) and can type fast** living in Singapore, who have many tutors and tutee data to manage and support tutoring of 3 subjects. VolunTier simplifies the process of adding, editing and deleting your volunteers, students and the lessons that they share.
@@ -78,7 +118,12 @@ Ctrl + Alt + T
 ## Features
 
 
-<box type=”tip” seamless>
+
+<box type="tip" seamless>
+
+**Tips:**
+
+
 * start the app with `java -jar VolunTier.jar` when you are in the folder you put the jar file in.
 
 </box>
@@ -108,7 +153,9 @@ Ctrl + Alt + T
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* For users who have used VolunTier before can jump to [Command Summary][# Command summary]
+
+* For users who have used VolunTier before can jump to [Command Summary](# Command summary)
+
 
   </box>
 
@@ -283,6 +330,7 @@ Format: `redo`
 * Redo is only available immediately after an undo.
 
 <box type="tip" seamless>
+
 **Tips:**
 
 * The undo and redo commands only apply to actions that modify data in the VolunTier address book, such as `edit` or `addTutor`. Commands that do not alter data, like `view`, cannot be undone or redone.
@@ -425,3 +473,4 @@ Action     | Format, Examples
 **View Tutor Hours**   | `vtc`
 **Exit**   | `exit`
 **Help**   | `help`
+
