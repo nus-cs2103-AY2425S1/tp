@@ -471,7 +471,7 @@ Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 ```
 
-| Parameter Name | Description                                                               | Constraints                                   | Required   |
+| Parameter Name | Description                                                               | Constraint                                    | Required   |
 |----------------|---------------------------------------------------------------------------|-----------------------------------------------|------------|
 | `all`          | Indicates that the deletion operation applies to all contacts in the list |                                               | Compulsory |
 | `t/TAG`        | Tag to be deleted from every contact in the list with the tag             | Must be alphanumeric characters and no spaces | Compulsory |
