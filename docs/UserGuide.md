@@ -105,9 +105,9 @@ Each company in TechConnect is represented by the following fields, each with sp
 | **Phone Number**     | - **Required:** Yes<br>- **Format:** Must only contain numeric characters.<br>- **Length:** Must be at least 3 digits long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **Career Page URL**  | - **Required:** Yes<br>- **Format:** Can contain any characters, including being left blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | **Email**            | - **Required:** Yes<br>- **Format:** Must follow the structure `local-part@domain`.<br>- **Local-part Constraints:**<br>  &nbsp;&nbsp;- Only alphanumeric characters and the following special characters are allowed: `+ _ . -`.<br>  &nbsp;&nbsp;- Cannot start or end with a special character.<br>- **Domain Constraints:**<br>  &nbsp;&nbsp;- Consists of domain labels separated by periods.<br>  &nbsp;&nbsp;- Must end with a domain label that is at least 2 characters long.<br>  &nbsp;&nbsp;- Each domain label must start and end with an alphanumeric character.<br>  &nbsp;&nbsp;- Domain labels can contain hyphens (`-`) but cannot start or end with them. |
-| **Application Status**| - **Required:** No<br>- **Format:** Can contain any value, including being left blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Remark**           | - **Required:** No<br>- **Format:** Can contain any characters.<br>- **Length:** Must be at most 200 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **Tags**           | - **Required:** No<br>- **Format:** Must be alphanumeric.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Application Status**| - **Required:** No<br>- **Format:** Can contain any characters, including being left blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Remark**           | - **Required:** Yes<br>- **Format:** Can contain any characters, including being left blank.<br>- **Length:** Must be at most 200 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Tags**           | - **Required:** No<br>- **Format:** Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -398,14 +398,14 @@ Finds companies whose names or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
-- The search is case-insensitive. e.g., `google` will match `Google`
-- The order of the keywords does not matter. e.g., `Google Amazon` will match `Amazon Google`
+- The search is case-insensitive. e.g., `google` will match `Google`.
+- The order of the keywords does not matter. e.g., `Google Amazon` will match `Amazon Google`.
 - Only the name and tags are searched.
 - **Only full words will be matched** e.g., `Goog` will not match `Google`.
 - Finding tag values requires you to provide the full tag value. e.g.,
-  `Salary:LOW` tag will not match `Salary` but matches `Salary:LOW`
+  `Salary:LOW` tag will not match `Salary` but matches `Salary:LOW`.
 - Companies matching at least one keyword will be returned (i.e., `OR` search).
-  e.g., `Grab Food` will return `Grab Ride`, `Food Panda`
+  e.g., `Grab Food` will return `Grab Ride`, `Food Panda`.
 
 **Examples**:
 
@@ -416,7 +416,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
 find bigTech
 ```
 
-returns companies with bigTech tag
+Returns companies with bigTech tag
 
 **Outcome**:
 
@@ -437,7 +437,7 @@ Format: `delete INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
   - a negative integer will result in an invalid command message.
 
-Examples:
+**Examples**:
 
 - `list` followed by `delete 2` deletes the 2nd company in the address book.
 - `find Google` followed by `delete 1` deletes the 1st company in the results of the `find` command.
@@ -465,7 +465,7 @@ Format: `status INDEX as/STATUS`
 status 1 as/Applied
 ```
 
-modifies the application status of the company at index 1 to `Applied`.
+modifies the application status of the company at index 1 to `Applied`.<br>
 **Outcome**:
 
 **Before**
