@@ -137,6 +137,14 @@ To add specific roles to a person, you can use the following commands:
 Example:
 * `add n/John Doe p/98765432 e/john@mail.com r/athlete - COM - Soccer Men`
 
+Before:
+![before-add-command](https://github.com/user-attachments/assets/ed65e046-883d-43bb-aefb-8edba8b7bf13)
+
+
+After:
+
+
+
 You may check a summary of the list of roles, faculties, sports, positions, and more via [this link](#using-shortcuts).
 
 ### Listing all persons : `list`
@@ -380,6 +388,7 @@ Volunteer Roles (Code - Role Name):
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. Currently, only **standard English** names for people and events are accepted. We are planning to add support for more languages in the future.
+4. Currently, after a `find` command is executed, when executing `addevent` or `editevent`commands, references to people not in the currently displayed list are not able to be added to an event. We plan to fix this in a later version.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
