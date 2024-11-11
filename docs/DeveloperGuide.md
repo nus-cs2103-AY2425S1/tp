@@ -511,34 +511,64 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a client
 
-1. Deleting a client in the Client List View
+1. Deleting a client in the client list view
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details informing of invalid command shown in the status message.
+  
+  1. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
+      Expected: No client is deleted. Error detail informing out of range index shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `delete`<br>
+      Expected: No client is deleted. Error details informing of missing index parameter shown in the status message.
 
-2. Deleting a client in the Transaction List View
+1. Deleting a client in the transaction list view
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
     1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error detail informing environemnt discreprancy shown in the status message.
+      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
     2. Test case: `delete 1`<br>
-      Expected: No client is deleted. Error detail informing environemnt discreprancy shown in the status message.
+      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
-    3. Test case: `delete x`, where `x` is exactly 1 more than transaction list size<br>
-      Expected: No client is deleted. Error detail informing out of range index shown in the status message.
+
+
+### Adding a transaction to a client 
+
+1. Adding a transaction in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `addt 1 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: Transaction is added to first client. Details of transaction and the client transaction was added to shown in status message.
+
+    3. Test case: `addt 0 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid command format shown in the status message. 
+
+    4. Test case: `addt 1 amt/-1000 o/ABC Motor Group dt/2024-11-17 ` (where description prefix is missing)<br>
+       Expected: Similar to previous.
+
+    5. Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
+       Expected: Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid index shown in the status message.
+       
+
+
+2. Adding a transaction in transaction list view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `addt 1 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: UI still shows the transactions list. Error details informing of environment discrepancy shown in the status message. 
+
 
 ### Listing transactions for a client
 
-1. Listing transactions while all clients are being shown.
+1. Listing transactions in the client list view.
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -551,7 +581,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect listt commands to try: `listt`, `listt x` (where x is larger than the list size), `listt hello`<br>
        Expected: Similar to previous.
 
-2. Listing transactions in transactions view.
+2. Listing transactions in the transaction list view.
 
     1. Prerequisites: List transactions for a client using the `listt INDEX` command.
 

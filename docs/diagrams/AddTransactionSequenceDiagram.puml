@@ -7,8 +7,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddTransactionCommandParser" as AddTransactionCommandParser LOGIC_COLOR
 participant "a:AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
-participant "t:ArrayList<Transaction>" as TransactionList LOGIC_COLOR
-participant "p:Client" as Client LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
