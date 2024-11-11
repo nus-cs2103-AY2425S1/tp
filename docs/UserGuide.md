@@ -19,6 +19,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 ## Quick start
 
+[//]: # (Quick start guide below adapted from https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html)
 1. Ensure you have Java `17` or above installed in your Computer.
    1. To check if you have Java installed, open a command terminal:
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
@@ -27,6 +28,11 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
    1. In the terminal, type `java -version`.
    1. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
    1. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+
+       [//]: # (
+        @@author CS2103T-F12-4-reused
+        Reused from https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html
+        )
    1. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` File:
