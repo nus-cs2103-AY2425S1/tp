@@ -187,14 +187,15 @@ addw in/INDEX w/ROLE,COMPANY,YEAR
 Example:
 
 ```plaintext
-addw in/1 w/Software Engineer,Google,2023
+addw in/1 w/Engineer,Google,2023
 ```
 
-- `in/INDEX`: Index of contact user wishes to add work experience to.
-- `w/WORK EXPERIENCE` : Work Experience user wishes to add.
-- Index has to be a number from 1 to the total number of existing contacts in the contact list.
-- Work experience in the format `ROLE,COMPANY,YEAR`
-- If existing contact has a current work experience, it will just be replaced by the user input.
+- `in/INDEX`: Index of contact user wishes to add work experience to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
+- `w/ROLE,COMPANY,YEAR`: Work experience details user wishes to add.
+  - `ROLE`: Must be a single word without spaces and the first letter must be capitalized.
+  - `COMPANY`: Must be a single word without spaces and the first letter must be capitalized.
+  - `YEAR`: A four-digit year.
+- **Note:** If the specified contact already has existing work experience, it will just be replaced by the user input.
 
 Example:
 
@@ -551,9 +552,10 @@ _Details coming soon ..._
     - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
     - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
     - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
-4. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
-5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
-6. **Multiple Indexes in addi Command**: When running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
+4. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
+5. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
+6. **When adding `interests` to contacts**, running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
+7. **When adding `work experience` to contacts**, `year` is allowed to be in the future.
 ---
 
 ## Glossary
