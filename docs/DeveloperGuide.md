@@ -152,37 +152,35 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 1. Tier and status attributes
+### 1. Tier and Status Attributes
 
-Given that this software is designed to support credit card sales to clients, having predefined credit card tiers aligned with the bank’s product offerings is essential. These tiers provide valuable insights into a customer’s spending habits and allow agents to tailor their sales strategies accordingly.
+AgentAssist is designed to support credit card sales, making it essential to have predefined credit card tiers that align with the bank’s product offerings. These tiers provide agents with insights into a client’s financial profile, allowing them to tailor their sales approach to meet each client’s unique needs.
 
-Additionally, the inclusion of a status attribute for clients, indicating whether follow-up action is required, enhances customer satisfaction. This feature helps agents keep track of promised actions, reducing the risk of missed commitments and ensuring a more reliable service experience.
+Additionally, the inclusion of a status attribute for clients enhances customer service by indicating whether follow-up action is required. This feature helps agents keep track of promised actions, reducing missed commitments and ensuring a reliable client experience.
 
-This section will describe in detail the current implementation and design considerations of these two attributes.
+This section details the current implementation and design considerations for these two attributes.
 
 #### Current implementation
 
-The tier and status fields are classes which contain an enum value. 
+The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
 ![TierStatusAttributes](images/TierStatusAttributes.png)
 
-Using enums helps to limit the range of possible values for `Tier` and `Status`.
+Using `enum` values for `Tier` aligns with a real-world banking scenario where a predefined set of credit card tiers is available. This structure also accommodates clients who may have applied but been declined for a credit card, providing agents with an at-a-glance view of a client’s status and relevant product options.
 
-For `Tier`, this approach models the real-world scenario of a bank offering a predefined list of credit card services. It also accounts for the possibility of clients who have applied for, but been denied, a credit card.
+Moreover, using enums for `Tier` simplifies updates to the list of predefined services,allowing banks to customize offerings based on their unique product catalog.
 
-We believe that this information can help Agents understand at a glance, their customer's needs better.
+When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
+- Below is an example of a CSS update after renaming an enum value to `TEST`:
+    ![img_1.png](images/CssFileSetting.png)  
+- This is the result in the UI after update the CSS:  
+    ![img_2.png](images/UIChangeAfterCSSFileChange.png)
 
-The usage of an Enum in `Tier`, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services.
+Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
 
-When modifying the `Enum`, remember to also update the CSS files `ClientDetailPanel.css` and `ClientListCard.css`. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new `Enum` settings. Here is an example of the changes to a css file after renaming one enum value to `TEST`:
-![img_1.png](images/CssFileSetting.png)
-![img_2.png](images/UIChangeAfterCSSFileChange.png)
-
-The `Enum` used in `Status` follows a similar rationale as `Tier`, with the key constraint that each client status is limited to a set of predefined values. These statuses have been color-coded throughout the UI for clear visual cues:
-
-- `NA` – Indicates a client with no required follow-up from the agent. This status is represented by green to signify a positive state, requiring no immediate action.
-- `NON_URGENT` – Indicates a client for whom follow-up is needed, but not urgently. This is represented by orange, signifying that action is required but not immediately pressing (e.g., within a few days).
-- `URGENT` – Indicates a client requiring immediate follow-up. This status is highlighted in red to draw attention to the need for prompt action by the agent.
+- `NA` – Indicates clients with **no follow-up/action needed**. This status is displayed in green, representing a positive state with no immediate action.
+- `NON_URGENT` – Indicates clients who **need a follow-up, though not urgently**. This status is displayed in orange, suggesting action is required soon but not immediately.
+- `URGENT` – Indicates clients who need an **urgent follow-up**, displayed in red to ensure prompt action.
 
 By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
 
