@@ -885,7 +885,7 @@ Address: 123 PASIR RIS (S)123456
 
 - **Failed Execution:**
 > ---
-> **User Error #1**: Attempting to add a listing for a non-existent seller
+> **User Error #1**: Seller index out of bounds
 >
 > **Input**: `listing n/Warton House pr/400000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
 >
@@ -893,7 +893,7 @@ Address: 123 PASIR RIS (S)123456
 >
 > ---
 > 
-> **User Error #2**: Attempting to add non-existent buyers to a listing
+> **User Error #2**: Buyer index out of bounds
 > 
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
 > 
