@@ -182,11 +182,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addInputToLog(String input) {
-        commandLog.addinput(input);
+        commandLog.addInput(input);
     }
 
     @Override
     public String getPreviousInput() {
         return commandLog.getPreviousInput();
     }
+
+    public void emptyCommandLog() {
+        this.commandLog = new CommandLog();
+    }
+
 }

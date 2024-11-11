@@ -121,4 +121,9 @@ public interface Model {
      * @return
      */
     String getPreviousInput();
+
+    /**
+     * Flushes the {@code CommandLog}.
+     */
+    void emptyCommandLog();
 }

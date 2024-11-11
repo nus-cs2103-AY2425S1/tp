@@ -192,6 +192,11 @@ public class AddCommandTest {
         public String getPreviousInput() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void emptyCommandLog() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
