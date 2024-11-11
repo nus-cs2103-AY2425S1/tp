@@ -86,7 +86,7 @@ specific topics or commands.
 
 Below is a summary of the main sections in this User Guide and what you can expect from each one.
 
-- [Get Started With PlanPal](#3-quick-start): New to PlanPal? Visit this section for a step-by-step guide to installing and launching the application.
+- [Quick-Start](#3-quick-start): New to PlanPal? Visit this section for a step-by-step guide to installing and launching the application.
 - [Tutorial](#4-tutorial-getting-started-with-planpal): Gain a basic understanding on how to use PlanPal to its fullest potential.
 - [Features](#5-features): Explore the full range of PlanPal’s capabilities, with detailed instructions and examples for each command.
 - [FAQ](#6-faq): Stuck or have questions? Find answers to common problems and queries here.
