@@ -758,5 +758,9 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Instructions for manual testing**
-1. Being able to edit/delete order history of a customer 
-2. Being able to export customer order history into csv file 
+1. **Being able to edit/delete order history of a customer**
+- Add `editHistory` and `deleteHistory` command that allows order history of a customer to be modified
+
+2. Being able to export customer order history into csv file
+- Add `downloadOrderHistory` to export all customer data alongside the order history
+
