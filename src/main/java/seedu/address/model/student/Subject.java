@@ -91,7 +91,7 @@ public class Subject {
      */
     public static boolean isValidSubjectNameByLevel(Level level, String subjectName) {
         requireNonNull(subjectName);
-        if (level.isNone()) {
+        if (level.levelName.equals("NONE NONE")) {
             return false;
         }
         return validSubjectsByLevel
@@ -115,7 +115,7 @@ public class Subject {
      * @return A message listing valid subjects for the level, or a message indicating a level is required.
      */
     public static String getValidSubjectMessage(Level level) {
-        if (level == null || level.isNone()) {
+        if (level == null || level.levelName.equals("NONE NONE")) {
             return Subject.MESSAGE_LEVEL_NEEDED;
         }
 
@@ -144,7 +144,7 @@ public class Subject {
      * @return true if all subjects are valid for the specified level, false otherwise.
      */
     public static boolean isValidSubjectsByLevel(Level level, Set<Subject> subjects) {
-        if (level == null || level.isNone()) {
+        if (level == null || level.levelName.equals("NONE NONE")) {
             messageValidSubjectsByLevel = Subject.MESSAGE_LEVEL_NEEDED;
             return false;
         }

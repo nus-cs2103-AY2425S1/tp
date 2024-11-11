@@ -38,7 +38,7 @@ public class StudentUtil {
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_EMERGENCY_CONTACT + student.getEmergencyContact().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
-        sb.append(PREFIX_LEVEL + student.getLevel().toString() + " ");
+        sb.append(PREFIX_LEVEL + student.getLevel().levelName + " ");
         student.getSubjects().stream().forEach(
             s -> sb.append(PREFIX_SUBJECT + s.subjectName + " ")
         );
@@ -59,7 +59,7 @@ public class StudentUtil {
                 .ifPresent(phone -> sb.append(PREFIX_EMERGENCY_CONTACT).append(phone.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.value).append(" "));
-        descriptor.getLevel().ifPresent(level -> sb.append(PREFIX_LEVEL).append(level).append(" "));
+        descriptor.getLevel().ifPresent(level -> sb.append(PREFIX_LEVEL).append(level.levelName).append(" "));
         if (descriptor.getSubjects().isPresent()) {
             Set<Subject> subjects = descriptor.getSubjects().get();
             if (subjects.isEmpty()) {

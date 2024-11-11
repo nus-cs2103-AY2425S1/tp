@@ -58,7 +58,7 @@ public class DetailsDisplay extends UiPart<Region> {
         emergencyContact.setText("Emergency Contact: " + student.getEmergencyContact().value);
         address.setText("Address: " + student.getAddress().value);
         note.setText(student.getNote().value);
-        if (!student.getLevel().isNone()) {
+        if (!student.getLevel().levelName.equals("NONE NONE")) {
             level.getChildren().add(new Label(student.getLevel().toString()));
         }
         student.getSubjects().stream()
