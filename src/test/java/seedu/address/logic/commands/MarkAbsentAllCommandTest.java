@@ -20,7 +20,7 @@ import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code UnmarkPresentAllCommand}.
+ * Contains integration tests (interaction with the Model) for {@code MarkAbsentAllCommand}.
  */
 public class MarkAbsentAllCommandTest {
 

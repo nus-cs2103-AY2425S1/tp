@@ -13,7 +13,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
@@ -133,20 +132,19 @@ public class ParserUtil {
      *
      * @param date The date string to be parsed.
      * @return A {@code LocalDate} object representing the parsed date.
-     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is null.
+     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is otherwise invalid.
      */
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-
-        // Parse date, then check if tbe date and format are valid
         LocalDate parsedDate;
 
         try {
             parsedDate = LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format or invalid date. Please provide a correct date in YYYY-MM-DD format.");
+            throw new ParseException("Invalid date format or invalid date. "
+                    + "Please provide a correct date in YYYY-MM-DD format.");
         }
 
         return parsedDate;

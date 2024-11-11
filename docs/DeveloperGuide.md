@@ -204,7 +204,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ### Product scope
 
-**Target user profile**: Tutors managing students
+**Target user profile**: NUS SOC Teaching Assistants managing students
 
 **Value proposition**:
 * Easier management of administrative tasks
@@ -438,7 +438,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Launch the jar using the java -jar command Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 

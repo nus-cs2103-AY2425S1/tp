@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T16-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T16-4/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/DataUi.png)
 
 * This is **a  project by NUS Software Engineering (SE) students**.<br>
   Usages:
