@@ -1,9 +1,5 @@
 package careconnect.ui;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Comparator;
 
 import careconnect.model.person.Person;
@@ -44,8 +40,6 @@ public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusabl
     @FXML
     private Text address;
     @FXML
-    private Label addressLink;
-    @FXML
     private Label email;
     @FXML
     private Label appointmentDate;
@@ -64,17 +58,6 @@ public class PersonDetailCard extends UiPart<Region> implements ShiftTabFocusabl
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         appointmentDate.setText(person.getAppointmentDate().toString());
-        addressLink.setOnMouseClicked(e -> {
-            try {
-                String q = person.getAddress().value.replaceAll(" ", "+");
-                URI link = new URI("https://www.google.com/maps/place/" + q);
-                Desktop.getDesktop().browse(link);
-            } catch (URISyntaxException | IOException ex) {
-                // TODO: handle this properly. we should show a ui to inform the user that
-                //  something has gone wrong
-                throw new RuntimeException(ex);
-            }
-        });
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
