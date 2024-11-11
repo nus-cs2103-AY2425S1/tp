@@ -812,7 +812,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `filter s\English`<br>
        Expected: A list of students taking English is shown.
 
-### Tracking statistics of subjects
+### Tracking subject statistics
 
 1. Opening the track subject window
     1. Prerequisites: None
