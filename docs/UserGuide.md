@@ -216,6 +216,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
       e.g. `find r/President` &rarr; valid
     * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
     * Only perfect matches returned
+    * Specifying multiple roles returns contacts who own all specified roles
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * Can be used at most once e.g. `find n/Hans n/Bo` &rarr; invalid
     * Case-insensitive. e.g. query `hans` will match `Hans`
@@ -230,7 +231,7 @@ Examples:
 * `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
-//& ISSUE 292: It seems that it is already written here...MAYBE we need to make this BIGGEr, more OBVIOUS?
+
 
 ### Listing all contacts: `list`
 
