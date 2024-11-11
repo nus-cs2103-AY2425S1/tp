@@ -245,13 +245,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -397,6 +390,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 4a. An appointment already exists on patient profile.
+
+    * 4a1. The system overwrites the existing appointment with the new appointment details.
+
+      Use case ends.
+
 ---
 
 ### **Use case: Add a remark to a patient's profile**
@@ -418,20 +417,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. The system shows an error message that no person with the given NRIC is found.
 
       Use case ends.
+  
 * 3a. User provides an empty remark.
 
     * 3a1. The system shows an error message indicating that the remark cannot be empty.
 
       Use case ends.
 
+* 3b. User provides an invalid remark (containing non-alpha-numeric characters).
+
+    * 3b1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+* 4a. The remark already exists on the patient's profile.
+
+    * 4a1. The system overwrites the existing remark with the new remark.
+
+      Use case ends.
+
 ---
 
-### **Use case: Search for a patient by name**
+### **Use case: Search for a patient**
 
 **MSS**
 
-1.  User enters appropriate command keyword to search for a patient by name.
-2.  User enters the name of a patient.
+1.  User enters appropriate command keyword to search for a patient.
+2.  User enters the name or tag of a patient.
 3.  The system displays all patients with a name that matches with the user's input.
 
     Use case ends.
@@ -441,6 +453,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given name does not match any patient.
 
     * 2a1. The system shows an empty list.
+
+      Use case ends.
+
+* 2b. The given tag does not match any patient.
+
+    * 2b1. The system shows an empty list.
 
       Use case ends.
 
@@ -462,6 +480,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+---
+
 ### **Use case: Display a list of patients in a schedule by appointment dates**
 
 **MSS**
@@ -477,11 +497,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
     Use case ends.
+
 * 2b. There are no appointments scheduled.
 
     Use case ends.
 
 ---
+
+### **Use case: Sort list of patients by name or appointment**
+
+**MSS**
+
+1.  User enters appropriate command keyword to sort the list of patients.
+2.  User specifies the criteria for sorting (e.g., name | appointment).
+3.  The system displays a list of patients sorted by the specified criteria.
+4.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides an invalid sorting criteria.
+*
+    * 2a1. The system shows an error message indicating invalid input.
+    
+       Use case ends.
 
 ### **Use case: Log information to a patient's profile**
 
@@ -566,6 +606,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+### **Use case: Appointment pop-up alert on app start-up**
+
+**MSS**
+
+1.  User launches the app.
+2.  The system displays a pop-up alert for the day's appointments.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no appointments scheduled for the day, no pop-up alert.
+
+    Use case ends.
+
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. The app should hence not depend on any third-party software that is not available on all mainstream OS.
@@ -580,14 +637,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, MacOS
-* **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
 * **Timestamp**: A record of the date and time an event occurred
-* **Tag**: A keyword or term assigned to a piece of information (e.g., a patient) to describe or categorize it
+* **Tag**: A medical condition or status assigned to a piece of information (e.g., diabetes, G6PD) to describe or categorize it
 * **Command Line Interface**: A text-based interface for interacting with a computer program
 * **Graphical User Interface**: A visual interface for interacting with a computer program
 * **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. Ability to add appointment and remark to a patient's profile using the add command.
+2. Support whitespaces in tags. For example, `t/heart disease` should be a single valid tag.
+3. Patient should be able to have multiple upcoming appointments and multiple remarks.
+4. Ability to edit patient's remark in the edit command.
+5. View window should automatically update after editing patient's details or logging a new entry.
+6. Additional command shortcuts for `log` and `schedule` commands.
+7. Make commands case-insensitive. For example, `Add` should be treated the same as `add`.
+8. GUI for error messages should be more user-friendly as currently there is a need to scroll to see the full error message. For example, a pop-up window could be used to display the error message.
+9. Triage should indicate level of severity of patient's condition on the GUI for new users.
+10. Log success message should indicate that logged entries can be viewed using the`view` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -619,15 +692,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Person to delete is shown in the list.
+   1. Test case: `delete S1234567A`<br>
+      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Status bar updated.
 
-   2. Test case: `delete S1234567A`<br>
-      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   3. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
       Expected: Similar to previous.
 
 ### Saving data
@@ -637,9 +708,9 @@ testers are expected to do more *exploratory* testing.
     1. Simulating a Missing Data File
        1. Locate the data file used by the application `data/addressbook.json`
        2. Move or delete this file before launching the application<br>
-       Expected: The application should automatically create an empty data file, without displaying any errors and the application should function normally.
+       Expected: The application should automatically create a new data file with default sample data loaded into the created file and app.
     2. Simulating a Corrupted Data File
        1. Open the data file `data/addressbook.json` in a text editor.
        2. Introduce invalid JSON syntax into the file.
        3. Save the corrupted file and launch the application.<br>
-    Expected: Application will display an error message to the user, indicating that the data is corrupted.
+       Expected: The application should automatically create a new empty data file with no contacts loaded into the app.

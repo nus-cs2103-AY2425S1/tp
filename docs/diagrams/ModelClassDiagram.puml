@@ -48,12 +48,11 @@ Person *--> "1"Phone
 Person *--> "1"Email
 Person *--> "1"Address
 Person *--> "1"Nric
-Person *--> "*" Appointment
-Person *--> "*" Remark
+Person *--> "0..1" Appointment
+Person *--> "0..1" Remark
 Person *--> "1" LogList
 Person *--> "1" Triage
 Person *--> "*" Tag
-
 LogList *--> "*" Log
 
 Person -[hidden]up--> I

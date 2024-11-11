@@ -85,6 +85,9 @@ Welcome! This short guide will help you launch the **Murphy's List** application
 
 **Notes about the command format:**<br>
 
+* All commands are case-sensitive and to be only used in lowercase.<br>
+  e.g. `help` is a valid command, but `Help` and `HELP` is not.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
