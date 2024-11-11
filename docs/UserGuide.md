@@ -19,7 +19,7 @@ KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who w
 KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment 
 information more effectively compared to traditional GUI apps. 
 
-KonTActs **main features** includes: 
+KonTActs' **main features** includes: 
 1. Attendance tracking: Track student's weekly attendance.
 2. Assignment tracking: Add and manage student's assignment and grades.
 3. Contact detail storing: Store and manage student's contact information 
@@ -231,8 +231,9 @@ Adds a person's contact detail to KonTActs.
 
 <md>**Name restrictions**</md>
 1. Names should only contain English alphanumeric characters and whitespaces only. Special characters are not allowed.
-2. Names should be **unique**. Duplicate names cannot exist in the same database. Please refer to the [faq](#faq) on
+2. Names should be **unique**. Duplicate names cannot exist in the same database. Please refer to the [FAQ](#faq) on
 this issue.
+3. A name is considered unique if no other name consists of the exact same characters in the same order, case-insensitive. Whitespaces at the start and end of the name will be removed.
 
 Eg. `n/John` or `name/John`
 
@@ -260,7 +261,7 @@ Eg. `e/john@abc.com` or `email/john@abc.com`
 
 A person can have any number of tags (including 0).
   </box>
-
+{{ newPageBetween }}
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Tag restrictions**</md>
@@ -270,7 +271,7 @@ A person can have any number of tags (including 0).
 Eg. `t/friend t/family`
 
 </box>
-{{ newPageBetween }}
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Telegram username restrictions**</md>
@@ -302,8 +303,8 @@ Eg. `t/friend t/family`
 <md>**Examples:**</md>
 * `add name/John Doe email/johnd@example.com telegram/@john github/swag-john33` adds John Doe's contact details with no
 tags.
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com tele/@Betsy t/criminal g/betsy-29` uses shortcut parameters to
-add Betsy Crowe's contact details with a friend and criminal tag.
+* `add n/Betsy Crowe t/student e/betsycrowe@example.com tele/@Betsy t/Smart g/betsy-29` uses shortcut parameters to
+add Betsy Crowe's contact details with a student and Smart tag.
 </box>
 
 
@@ -418,7 +419,7 @@ Finds persons whose names contain any of the given tag keywords.
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * At least one tag must be provided.
 * The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`.
-* Only the tags is searched.
+* Only the tags are searched.
 * Only full tag name will be matched. e.g. `friend` will not match `friends`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
