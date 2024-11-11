@@ -34,18 +34,20 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns false
+        // same name, all other attributes different -> returns true
         // because email is different
+        // true because as long as email or student number is the same, it is the same person
         Student editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different student number, all other attributes same -> returns false
+        // different student number, all other attributes same -> returns true
+        // true because as long as email or student number is the same, it is the same person
         editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        assertTrue(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns true
-        // true because StudentNumber is same
+        // true because student number and email are the same
         Student editedBob = new PersonBuilder(BOB).withName(VALID_NAME_AMY.toLowerCase()).build();
         assertTrue(BOB.isSamePerson(editedBob));
 

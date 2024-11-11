@@ -67,6 +67,7 @@ public class EditStudentCommand extends Command {
     public static final String MESSAGE_INVALID_FIELD_STUDENT_NUMBER = "Student number should not be changed.";
     public static final String MESSAGE_DUPLICATE_FIELD_WARNING =
         "ATTENTION: No changes detected in the following fields:";
+    public static final String MESSAGE_EMAIL_EXISTS = "This email already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -90,6 +91,12 @@ public class EditStudentCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
+        }
+        if (editPersonDescriptor.getEmail().isPresent()) {
+            Email emailToEdit = editPersonDescriptor.getEmail().get();
+            if (isDuplicatedEmail(lastShownList, emailToEdit)) {
+                throw new CommandException(MESSAGE_EMAIL_EXISTS);
+            }
         }
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
@@ -145,6 +152,16 @@ public class EditStudentCommand extends Command {
             duplicatedTags.setLength(duplicatedTags.length() - 2);
         }
         return duplicatedTags.toString();
+    }
+
+    private boolean isDuplicatedEmail(List<Student> students, Email emailToEdit) {
+        for (Student student : students) {
+            Email curEmail = student.getEmail();
+            if (curEmail.equals(emailToEdit)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
