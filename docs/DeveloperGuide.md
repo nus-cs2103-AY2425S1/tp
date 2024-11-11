@@ -357,7 +357,7 @@ The following sequence diagram illustrate how an archive operation is processed 
 In this scenario, the user is trying to load the address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
 ![Load](images/Load.png)
 
-The following sequence diagram illustrate how an archive operation is processed under `Logic` component.
+The following sequence diagram illustrate how a load operation is processed under `Logic` component.
 
 ![LoadSequenceDiagram](images/LoadSequenceDiagram-Logic.png)
 
