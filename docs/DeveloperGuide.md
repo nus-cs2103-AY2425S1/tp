@@ -656,7 +656,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
       Use case resumes at step 1.
 
 ### **Use case: UC25 — Unassign one or more Tasks from a Contact**
-Similar to [<ins>UC22](#use-case-uc24-assign-one-or-more-tasks-to-a-contact) except un-assigning tasks from a contact. Additionally, for **Extension 2a.** it checks to ensure the specified task is currently assigned to the contact, instead of simply existing in the system.
+Similar to [<ins>UC24](#use-case-uc24-assign-one-or-more-tasks-to-a-contact) except un-assigning tasks from a contact. Additionally, for **Extension 2a.** it checks to ensure the specified task is currently assigned to the contact, instead of simply existing in the system.
 
 ### **Use case: UC26 — Mark one or more Tasks as Completed**
 
