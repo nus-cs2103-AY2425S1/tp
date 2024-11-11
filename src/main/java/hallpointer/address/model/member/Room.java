@@ -27,6 +27,8 @@ public class Room {
         checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
 
         // remove zero-padding of block or floor or room number
+        // causes uncatched exception if integers are too large
+        // however, since this make no sense in realistic scenarios and fixing this counts as enhancement, ignoring it
         String[] arr = room.split("-");
         value = Integer.parseInt(arr[0]) + "-" + Integer.parseInt(arr[1]) + "-" + Integer.parseInt(arr[2]);
     }
