@@ -392,8 +392,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">list contacts (UC06)</a>
-2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+1. Talent Manager <a style="text-decoration:underline;">lists contacts (UC06)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes contact (UC05)</a>
 
 Use case ends.
 
@@ -402,10 +402,10 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
-2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+1. Talent Manager <a style="text-decoration:underline;">finds contact by name (UC07)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes contact (UC05)</a>
 
-   Use case ends.
+Use case ends.
 
 **Use case: UC05 - Delete Contact**
 
@@ -477,7 +477,7 @@ Use case ends.
 1. Talent Manager requests to find persons whose name contains `keywords`
 2. TalentHub processes and list person(s) whose name contains `keywords`
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -539,13 +539,13 @@ Use case ends.
 
       Use case ends.
 
-* 1c. A duplicate event is detected:
+* 1c. A duplicate event is detected.
   
   * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
-* 1d. Time clash is detected:
+* 1d. Time clash is detected.
 
   * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not add it.
 
@@ -574,13 +574,13 @@ Use case ends.
 
       Use case ends.
 
-* 1c. A duplicate event is detected:
+* 1c. A duplicate event is detected.
 
     * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not change it.
 
       Use case ends.
 
-* 1d. Time clash is detected:
+* 1d. Time clash is detected.
 
     * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not change it.
 
@@ -590,17 +590,17 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
+1. Talent Manager <a style="text-decoration:underline;">lists events (UC14)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes event (UC13)</a>
 
-   Use case ends.
+Use case ends.
 
 **Use case: UC12 - Delete Event after Find**
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
+1. Talent Manager <a style="text-decoration:underline;">finds event by name (UC15)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes event (UC13)</a>
 
 Use case ends.
 
@@ -734,7 +734,7 @@ Use case ends.
 2. TalentHub requests for confirmation of clear
 3. TalentHub clears all persons and events in the list
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
