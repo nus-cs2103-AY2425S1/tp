@@ -6,7 +6,7 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore selling properties to local and overseas clients.
 Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
