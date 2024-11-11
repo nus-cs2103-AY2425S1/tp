@@ -6,9 +6,14 @@
 
 # LogiLink User Guide
 
-LogiLink allows you, as a logistics coordinator, to manage your contacts on your desktop with keyboard commands. 
+LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts<sup>1</sup> and their associated delivery information from your desktop.
+Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
+<br><sup><small>1</small></sup> <small>"Contacts" referring to either employees or clients.</small>
 
-If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
+
+If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
+
+Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
@@ -73,8 +78,8 @@ If you type fast, you can complete your contact management tasks faster with Log
 
 **Notes about the command format:**
 * There are two windows in this program:
-  - Main window: the default window you see when opening LogiLink.
-  - Inspect window: the window you see when inspecting a contact.<br></br>
+  - <u>**Main window**</u>: the default window you see when opening LogiLink.
+  - <u>**Inspect window**</u>: the window you see when inspecting a contact.<br></br>
 
 * Words in `UPPER_CASE` are parameters you need to provide.<br>
   e.g. In `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
@@ -236,7 +241,7 @@ Examples:
 Archives the specified contact(s) from the contacts list.<br>
 Archived contact(s) will be less visible (greyed out) and moved to the bottom of the list.
 
-Format: `archive [INDEXES]...`
+Format: `archive INDEXES...`
 
 * Archive the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -266,7 +271,7 @@ Note:
 
 Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
-Format: `unarchive [INDEXES]...`
+Format: `unarchive INDEXES...`
 
 * Undoes the archive action for the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -326,7 +331,7 @@ Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 Deletes the specified contact(s) from the contacts list.
 
-Format: `delete [INDEXES]...`
+Format: `delete INDEXES...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -350,7 +355,7 @@ Examples:
 
 Inspects a specified contact from the contacts list to see their delivery list.
 
-Format: `inspect [INDEX]`
+Format: `inspect INDEX`
 
 * Inspects the contact at the specified `INDEX`.
 * The index is the number displayed next to the contact's name in the list.
