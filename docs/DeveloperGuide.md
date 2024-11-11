@@ -242,10 +242,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -583,7 +579,7 @@ Team Size: 4
 
 1. **Enhance multi-screen support**: Ensure that the GUI opens on the primary screen when switching from a secondary screen, without requiring the user to delete the `preferences.json` file.
 2. **Improve Help Window behavior**: Automatically restore the minimized Help Window when the `help` command is run, or when the `Help` menu or `F1` keyboard shortcut is used.
-3. **Implement length restrictions**: Add length restrictions for tags, names, and phone numbers to prevent UI display issues.
+3. **Implement length restrictions**: Add length restrictions for fields to prevent UI display issues.
 4. **Allow special characters in tag names**: Modify tag name validation to accept special characters like hyphens.
 5. **Expand phone number validation**: Allow more symbols in phone numbers beyond just the "+" symbol at the beginning.
 6. **Enable filtering for empty fields**: Add functionality to filter for empty fields.
