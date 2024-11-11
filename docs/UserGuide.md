@@ -349,7 +349,7 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When opening the url to the User Guide on WSL2**, the operation might fail silently. The remedy is to copy the url link, and manually open the page in your browser.
 4. **When exporting to a directory**, if the directory does not exist, the export will fail due to `unexpected I/O error`. The remedy is to create the required directory in the same folder as the `researchroster.jar` file.
-7. **When editing a person**, you can add and remove the same tag in one command. As tags are added before they are removed, the duplicate tags will be processed without any visible change (with respect to the duplicate tag) to the person. An incorrect warning "`You tried removing a non-existent study group tag`" is then displayed.
+5. **When editing a person**, you can add and remove the same tag in one command. As tags are added before they are removed, the duplicate tags will be processed without any visible change (with respect to the duplicate tag) to the person. An incorrect warning "`You tried removing a non-existent study group tag`" is then displayed.
 
 
 --------------------------------------------------------------------------------------------------------------------
