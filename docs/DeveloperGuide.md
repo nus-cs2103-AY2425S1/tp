@@ -573,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
   - 2a3. PROperty saves the changes.
     
-    Use case resumes at step 4.
+    Use case resumes at step 3.
 
 - 2b. User chooses to add a valid tag.
   
