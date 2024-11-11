@@ -201,12 +201,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
-|----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
+| Priority             | As a …​     | I want to …​                                                       | So that I can…​                                               |
+|----------------------|------------|-------------------------------------------------------------------|--------------------------------------------------------------|
 | `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
 | `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
 | `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
-| `* * *`              | HR Manager | insert email address of my employees/potential hire.               | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | insert email address of my employees/potential hire.              | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | delete data through the CLI.                                      | delete users who are incorrectly added.                      |
 | `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
 | `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
 | `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
