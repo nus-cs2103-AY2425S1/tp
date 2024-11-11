@@ -194,7 +194,6 @@ Examples:
 
 Shows the list of persons in SocialBook, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 
-<box type="tip" seamless>
 
 Format: `list [archive/] [all/]`
 
