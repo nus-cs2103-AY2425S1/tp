@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.parser.ParserUtil.ENGLISH_FORMAT;
+import static seedu.address.model.person.Appointment.TODAY;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -36,6 +40,12 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
+    private Label date;
+
+    @FXML
+    private Label operatingHours;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -56,16 +66,33 @@ public class MainWindow extends UiPart<Stage> {
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
+        date.setText("Today's Date is " + TODAY.format(ENGLISH_FORMAT));
+        operatingHours.setText("Operating hours are " + logic.getOperatingHours().getOpeningHour()
+                                + " to " + logic.getOperatingHours().getClosingHour());
+
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultDisplay = new ResultDisplay();
+
+
+        primaryStage.getScene().heightProperty().addListener((observable, oldHeight, newHeight) -> {
+            double heightDifference = newHeight.doubleValue() - oldHeight.doubleValue();
+
+            // Check if the height difference is at least 3 cm (approximately 113.4 pixels)
+            if (Math.abs(heightDifference) >= 113.4) {
+                double resultDisplayIncrement = 28; // Increase by 1 cm (approx. 37.8 pixels)
+                double newResultHeight = resultDisplayPlaceholder.getHeight() + resultDisplayIncrement;
+
+                resultDisplay.setPrefHeight(Math.max(newResultHeight, 100));
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -114,6 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.setPrefHeight(200);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -177,6 +205,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            operatingHours.setText("Operating hours are " + logic.getOperatingHours().getOpeningHour()
+                    + " to " + logic.getOperatingHours().getClosingHour());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

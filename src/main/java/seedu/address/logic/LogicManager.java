@@ -14,12 +14,18 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.OperatingHours;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
 /**
- * The main LogicManager of the app.
+ * The main LogicManager of the application.
+ * <p>
+ * The {@code LogicManager} orchestrates the parsing and execution of user commands,
+ * handles confirmation prompts, and manages data persistence by saving the address book
+ * after commands that modify data.
+ * </p>
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
@@ -45,8 +51,8 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
+
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
@@ -69,6 +75,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public OperatingHours getOperatingHours() {
+        return model.getOperatingHours();
     }
 
     @Override

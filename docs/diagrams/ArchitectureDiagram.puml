@@ -30,4 +30,9 @@ Main -down[hidden]-> Commons
 Storage -up[STORAGE_COLOR].> Model
 Storage .right[STORAGE_COLOR].>File
 User ..> UI
+
+' Add backup and restore processes
+Model -[#orange]-> Storage : Backup
+Model <-[#purple]- Storage : Restore
+
 @enduml

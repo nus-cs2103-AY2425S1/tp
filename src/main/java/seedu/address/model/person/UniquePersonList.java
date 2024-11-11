@@ -147,4 +147,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Clears all persons from the list.
+     */
+    public void clear() {
+        internalList.clear();
+    }
 }

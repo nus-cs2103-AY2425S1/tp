@@ -14,20 +14,23 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBackupsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.UpdatePersonDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -48,18 +51,23 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
+        Nric nric = new Nric("S1234567A");
+
+        // Update the command to pass the NRIC instead of the index
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + "S1234567A");
+
+        // Update the assertion to expect a DeleteCommand constructed with the NRIC
+        assertEquals(new DeleteCommand(nric), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_update() throws Exception {
         Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(person).build();
+        UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new UpdateCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
@@ -88,6 +96,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
+    /*@Test
+    public void parseCommand_backup() throws Exception {
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " ");
+        assertEquals(new BackupCommand(), command);
+    }*/
+
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
@@ -98,4 +112,31 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommandBackupNoArgs() throws Exception {
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD);
+        assertEquals(new BackupCommand(null), command);
+    }
+
+    @Test
+    public void parseCommandBackupWithFileName() throws Exception {
+        String fileName = "myBackup";
+        BackupCommand command = (BackupCommand) parser.parseCommand(BackupCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new BackupCommand(fileName), command);
+    }
+
+    @Test
+    public void parseCommandListBackups_noArgs_success() throws Exception {
+        // Check if listbackups command without arguments is parsed correctly
+        Command command = parser.parseCommand(ListBackupsCommand.COMMAND_WORD);
+        assertTrue(command instanceof ListBackupsCommand);
+    }
+
+    @Test
+    public void parseCommandListBackups_withArgs_throwsParseException() {
+        // Ensure listbackups command fails if arguments are provided
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListBackupsCommand.COMMAND_WORD + " extraArg"));
+    }
+
 }

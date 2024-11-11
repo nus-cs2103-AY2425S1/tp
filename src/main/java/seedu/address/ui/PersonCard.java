@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.tag.Tag.BLOOD_TYPE_PREFIX;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -15,6 +17,15 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String CSS_THEME_APPT = "-fx-font-family: \"Segoe UI\";\n"
+            + "    -fx-font-size: 13px;";
+
+    private static final String CSS_THEME_BLOODTYPE = "    -fx-text-fill: white;\n"
+            + "    -fx-background-color: #d06651;\n"
+            + "    -fx-padding: 1 3 1 3;\n"
+            + "    -fx-border-radius: 2;\n"
+            + "    -fx-background-radius: 2;\n"
+            + "    -fx-font-size: 11;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,6 +42,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label age;
+    @FXML
+    private Label gender;
+    @FXML
+    private Label nric;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -39,7 +56,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane bloodType;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +70,37 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        age.setText("Age : " + person.getAge().value);
+        gender.setText("Gender : " + person.getGender().value);
+        nric.setText("NRIC : " + person.getNric().fullNric);
+        phone.setText("Phone : " + person.getPhone().value);
+        address.setText("Address : " + person.getAddress().value);
+        email.setText("Email : " + person.getEmail().value);
+        appointment.setText("Appointment : " + person.getAppointment().dateTime
+                + " to " + person.getAppointment().getEndTime());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = null;
+
+                    if (tag.isBloodType) {
+                        tagLabel = new Label(BLOOD_TYPE_PREFIX + tag.tagName);
+                        tagLabel.setStyle(CSS_THEME_BLOODTYPE);
+                    } else {
+                        tagLabel = new Label(tag.tagName);
+                    }
+                    tags.getChildren().add(tagLabel);
+
+                });
+
+        if (person.getAppointment().isToday()) {
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #80ef80;"); // Green
+        } else if (person.getAppointment().hasPassed()) {
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #DE1738;"); // Red
+        } else if (person.getAppointment().hasNotPassed()) {
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: #ffb347;"); // Orange
+        } else {
+            appointment.setStyle(CSS_THEME_APPT + " -fx-text-fill: white;"); // White
+        }
     }
 }

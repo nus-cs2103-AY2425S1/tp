@@ -21,10 +21,8 @@ public class CommandResultTest {
 
         // null -> returns false
         assertFalse(commandResult.equals(null));
-
         // different types -> returns false
         assertFalse(commandResult.equals(0.5f));
-
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
@@ -38,7 +36,6 @@ public class CommandResultTest {
     @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
-
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
 

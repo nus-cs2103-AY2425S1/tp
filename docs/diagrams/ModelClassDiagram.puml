@@ -9,9 +9,14 @@ Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class Appointment
+Class Nric
+Class Gender
+Class Age
+Class Calendar
 Class ModelManager
 Class UserPrefs
-
+Class OperatingHours
 Class UniquePersonList
 Class Person
 Class Address
@@ -26,6 +31,7 @@ Class I #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
+AddressBook -r-> "1" OperatingHours
 AddressBook .up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
@@ -34,14 +40,20 @@ Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager -left-> "1" Calendar
+Calendar -down-> "*" Appointment
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *-down-> "1" UniquePersonList
+UniquePersonList -r-> "~* all" Person
+Person *-d-> "1" Name
+Person *-r-> "1" Appointment
+Person *-d-> "1" Age
+Person *-d-> "1" Nric
+Person *-d-> "1" Gender
+Person *-d-> "1" Phone
+Person *-d-> "1" Email
+Person *-d-> "1" Address
+Person *-l-> "*" Tag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

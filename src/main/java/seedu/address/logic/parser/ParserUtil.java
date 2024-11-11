@@ -1,18 +1,32 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.TimeParseException;
+import seedu.address.model.tag.BloodType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,11 +34,45 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index should not be zero or a negative integer or outside the "
+            + "length of the current list.";
+
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not a valid calendar date "
+            + "or is not in the following accepted formats:\ndd/MM/yyyy or "
+            + "dd-MM-yyyy or "
+            + "dd MM yyyy";
+
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Time is not in the format o/HH:mm or c/HH:mm.";
+
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    public static final DateTimeFormatter ENGLISH_FORMAT = DateTimeFormatter.ofPattern(
+            "dd MMMM uuuu",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
+
+    public static final DateTimeFormatter ENGLISH_FORMAT_WITH_TIME = DateTimeFormatter.ofPattern(
+            "dd MMMM uuuu HH:mm",
+            Locale.ENGLISH).withResolverStyle(ResolverStyle.STRICT);
+
+    public static final DateTimeFormatter[] DATE_FORMATTERS = new DateTimeFormatter[]{
+        ENGLISH_FORMAT,
+        DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT)
+    };
+
+    public static final DateTimeFormatter[] DATE_TIME_FORMATTERS = new DateTimeFormatter[] {
+        ENGLISH_FORMAT_WITH_TIME,
+        DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT),
+        DateTimeFormatter.ofPattern("dd MM uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT)
+    };
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -48,6 +96,51 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String age} into a {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Nric} is invalid.
+     */
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim().toUpperCase();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
     }
 
     /**
@@ -96,6 +189,67 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String appointment} into an {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        if (isNull(appointment) || appointment.equals("No Appointment")) {
+            return new Appointment(null);
+        }
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointment(appointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses a String {@code time} into a LocalTime. Leading and trailing whitspaces will be trimmed.
+     * @throws ParseException - if given {@code time} is invalid
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        try {
+            return LocalTime.parse(time, TIME_FORMATTER);
+        } catch (DateTimeParseException ignored) {
+            throw new ParseException(MESSAGE_INVALID_TIME_FORMAT);
+        }
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        for (DateTimeFormatter formatter : DATE_FORMATTERS) {
+            try {
+                return LocalDate.parse(date, formatter);
+            } catch (DateTimeParseException ignored) {
+                continue;
+            }
+        }
+        throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+    }
+
+    /**
+     * Parses string into LocalDateTime Object based on fixed formats
+     * @throws TimeParseException String given does not match any time format
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws TimeParseException {
+        for (DateTimeFormatter formatter : DATE_TIME_FORMATTERS) {
+            try {
+                return LocalDateTime.parse(dateTime, formatter);
+            } catch (DateTimeParseException ignored) {
+                continue;
+            }
+        }
+        throw new TimeParseException();
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -103,11 +257,15 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String trimmedTagName = tag.trim();
+
+        if (isValidBloodType(trimmedTagName)) {
+            return new Tag(trimmedTagName);
+        } else if (!Tag.isValidTagName(trimmedTagName)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        return new Tag(trimmedTagName);
     }
 
     /**
@@ -116,9 +274,35 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        boolean hasBloodTypeTag = false;
+
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+
+            // Check if it's a blood type tag
+            if (isValidBloodType(tag.tagName)) {
+                if (hasBloodTypeTag) {
+                    throw new ParseException("Only one blood type tag is allowed.");
+                }
+                hasBloodTypeTag = true;
+            }
+            tagSet.add(tag);
         }
         return tagSet;
+    }
+
+    /**
+     * Checks if the given tag name is a valid blood type.
+     *
+     * @param tagName the name of the tag to check for validity as a blood type.
+     * @return {@code true} if the tag name is a valid blood type; {@code false} otherwise.
+     */
+    public static boolean isValidBloodType(String tagName) {
+        for (BloodType bloodType : BloodType.values()) {
+            if (bloodType.getDisplayValue().equals(tagName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
