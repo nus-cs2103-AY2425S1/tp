@@ -73,6 +73,9 @@ BizBook (BB) is a **desktop app for managing contacts, optimized for use via a C
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- Parameters are composed only of letters.<br>
+  e.g. `n` for the name parameter or `p` for the phone number parameter. Numbers are not valid parameter names.
+
 - Parameters in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -489,7 +492,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 4. **Only one note may be added at a time**. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
    is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
    feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
-5. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+5. **Maximum number of items**, the maximum number of items (contacts, notes, tags, etc.) in this application is 2147483647. If you enter a number larger than this, the program may behave unexpectedly. However, it is unlikely that you will ever have so many contacts or tags of one contact.
+6. **Contact name is a unique identifier**, this application uses the name of a contact as the unique identifier. This means that it cannot accept two of the same names in the application. Instead, consider adding the surname, use full names or, if really needed, adding numbers at the back of the name to distinguish different people.
+7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
+8. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+
 ---
 
 ## Command summary
