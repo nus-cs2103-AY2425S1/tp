@@ -438,7 +438,7 @@ Format: `clear`
 
 
 ### Undoing previous command : `undo`
-Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
+Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a patient.
 
 Format: `undo`
 
@@ -451,9 +451,13 @@ An action cannot be undone once you close the MedConnect application.
 
 ### Redoing previous command : `redo`
 
-Restores the state of the address book **after an undo operation has been executed**, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
+Restores the state of the address book **after an undo operation has been executed**, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a patient.
 
 Format: `redo`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+An action cannot be redone once you close the MedConnect application.
+</div>
 
 [↑ Back to top](#table-of-contents)
 
