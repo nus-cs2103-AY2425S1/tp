@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -103,10 +104,14 @@ public class ParserUtil {
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
         String trimmedBirthday = birthday.trim();
-        if (!Birthday.isValidBirthday(trimmedBirthday)) {
-            throw new ParseException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
+        try {
+            if (!Birthday.isValidBirthday(trimmedBirthday)) {
+                throw new ParseException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
+            }
+            return new Birthday(trimmedBirthday);
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
         }
-        return new Birthday(trimmedBirthday);
     }
 
     /**

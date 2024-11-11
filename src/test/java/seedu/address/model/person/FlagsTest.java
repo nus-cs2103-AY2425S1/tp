@@ -45,7 +45,6 @@ public class FlagsTest {
         testFlags.add(PresetFlags.ARCHIVED);
 
         assertEquals(2, flags.getNumberOfMatchingFlags(testFlags));
-
         // Test with a set containing no matching flags.
         testFlags.clear();
         testFlags.add(PresetFlags.BUYER);
@@ -59,7 +58,7 @@ public class FlagsTest {
         Flags flags = new Flags(PresetFlags.FAVOURITE, PresetFlags.BUYER, PresetFlags.SELLER);
 
         // Test weight calculation for matching flags.
-        // Assuming the weight is calculated as 2^index in reverse order:
+        // The weight is calculated as 2^index in reverse order:
         // FAVOURITE: index 0 -> 2^0 = 1
         // ARCHIVED: index 1 -> 2^1 = 2
         // BUYER: index 2 -> 2^2 = 4
@@ -85,7 +84,6 @@ public class FlagsTest {
                 PresetFlags.ARCHIVED, PresetFlags.BUYER, PresetFlags.SELLER));
         assertEquals(0, emptyFlags.getNumberOfMatchingFlags(new HashSet<>()));
 
-        // Ensure that no flags are present.
         assertEquals(0, emptyFlags.flagIsPresent(PresetFlags.FAVOURITE));
         assertEquals(0, emptyFlags.flagIsPresent(PresetFlags.ARCHIVED));
     }

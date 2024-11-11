@@ -432,12 +432,12 @@ otherwise)
 
 - **3a.** The command format is incorrect (e.g., index not provided).
   - **3a1.** AddressBook displays an error message:
-    ```
+    `
     Invalid command format! 
     delete: Deletes the person identified by the index number used in the displayed person list.
     Parameters: INDEX (must be a positive integer)
     Example: delete 1
-    ```
+    `
   - **Use case resumes at Step 2.**
 
 - **4a.** The contact index is invalid or out of bounds.
@@ -553,7 +553,7 @@ otherwise)
     `Example: log 1 l/Met for price negotiation.`
     
     `Example: log 2 d/2024-11-11 l/ Offered discount`
-    
+
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
