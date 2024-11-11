@@ -195,6 +195,8 @@ Format: `sort PARAMETER_PREFIX/ORDER`
 * By default, if `ORDER` is omitted, contacts will be sorted in ascending order based on the `PARAMETER`.
 * An ascending order can be specified by replacing `ORDER` with `ascending` or its short form `asc`.
 * A descending order can be specified by replacing `ORDER` with `descending` or its short form `desc`.
+* Ascending name order will **generally** be special characters and numbers followed by letters (incase-sensitive).
+* Persons with date of last visit will always appear in the end when sorting by date of last visit. 
 
 Examples:
 * `sort n/` sorts by name in ascending order.
@@ -322,6 +324,7 @@ _Details coming soon ..._
 * More than one tag can be added to a contact.
 * Tags can contain any characters, but they should not begin with whitespace.
 * You can include hyphens and spaces as necessary between words for tags that are multiple words long!
+* Avoid using underscores for tags.
 * To indicate no tags for a contact, you can `add` a contact without any `t/` prefixes.
   * Take note that `add`ing a contact with a `t/` prefix followed by whitespace is not supported. Omit the `t/` tag for contacts without tags.
 
