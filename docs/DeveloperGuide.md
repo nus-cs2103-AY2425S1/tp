@@ -909,3 +909,5 @@ The error message indicates that there are no tasks in the person's list, rather
 However, there is no functionality flaws and application runs as intended.
 Planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
 message.
+4. Unassign task and unassign wedding are case sensitive, but 
+5. To allow addition of vendors directly. 
