@@ -362,6 +362,8 @@ F.A.R.T data is saved in your computer automatically after any command that chan
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Editing the data file
 
 F.A.R.T data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
