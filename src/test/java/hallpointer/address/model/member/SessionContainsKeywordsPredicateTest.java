@@ -18,14 +18,17 @@ public class SessionContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        SessionContainsKeywordsPredicate firstPredicate = new SessionContainsKeywordsPredicate(firstPredicateKeywordList);
-        SessionContainsKeywordsPredicate secondPredicate = new SessionContainsKeywordsPredicate(secondPredicateKeywordList);
+        SessionContainsKeywordsPredicate firstPredicate =
+                new SessionContainsKeywordsPredicate(firstPredicateKeywordList);
+        SessionContainsKeywordsPredicate secondPredicate =
+                new SessionContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        SessionContainsKeywordsPredicate firstPredicateCopy = new SessionContainsKeywordsPredicate(firstPredicateKeywordList);
+        SessionContainsKeywordsPredicate firstPredicateCopy =
+                new SessionContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
