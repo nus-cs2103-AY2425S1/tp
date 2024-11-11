@@ -147,7 +147,6 @@ Shows a list of all customers in the address book.
 
 Command alias: `listc`<br>
 Format: `listcustomer`
-<div style="page-break-after: always;"></div>
 
 ### Editing a customer : `editcustomer`
 
@@ -155,6 +154,7 @@ Edits an existing customer in the address book.
 
 Command alias: `editc`<br>
 Format: `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>
+<div style="page-break-after: always;"></div>
 Examples:
 *  `editcustomer 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd customer to be `91234567` and `johndoe@example.com` respectively.
 *  `editc 1 n/Betsy Crower t/` Edits the name of the 1st customer to be `Betsy Crower` and clears all existing tags.
