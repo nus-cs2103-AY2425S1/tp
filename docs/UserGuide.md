@@ -192,9 +192,9 @@ Examples:
 * `findcustomer John` returns `john` and `John Doe`
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'findc alex david'](images/findAlexDavidResult.png)
+<div style="page-break-after: always;"></div>
 
 <box type="important">
-<div style="page-break-after: always;"></div>
 
 ##### Constraints
 
@@ -407,6 +407,7 @@ Examples:
   e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
