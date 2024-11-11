@@ -585,16 +585,19 @@ testers are expected to do more *exploratory* testing.
 
 Team size : 5
 
-  1. To accommodate candidates from various countries, we plan to enhance the phone number input field to include area codes (e.g., +6598765432). 
+  1. Add support for international phone numbers: To accommodate candidates from various countries, 
+     we plan to enhance the phone number input field to include area codes (e.g., +6598765432). 
      This update will allow for different international formats and enable the field to accept alphanumeric characters in the future.
 
-  2. Name Field Validation: To ensure accuracy, the name field will be enhanced to prevent the entry of numerical characters, 
+  2. Improve name field validation: To ensure accuracy, the name field will be enhanced to prevent the entry of numerical characters, 
      allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
-  3. Users will be able to search by job title and, making it easier to locate candidates with specific job positions
+  3. Enhance find command to take job and skills as parameters: Users are only able to search for candidates by name currently. 
+     We plan to allow users to search by job title and, making it easier to locate candidates with specific job positions
      and skills
 
-  4. Enhance the view command such that it can also use indexing to view a candidate's status (e.g. view 1). We plan
+  4. Enhance the view command such that it can also use indexing to view a candidate's status: We plan
      to make the view command format much simpler by adopting a similar command format from the delete command where
-     indexing was used instead of having to input both the candidate's name and the job position.
+     indexing was used instead of having to input both the candidate's name and the job position.(e.g. "view 1" instead
+     of "view n/John Doe j/Software Engineer)
 
