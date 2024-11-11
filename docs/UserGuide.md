@@ -187,7 +187,7 @@ Format:
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 
 How `find` works with multiple parameters:
 * If multiple keywords for a field are present, `find` will display contacts that satisfy *any* keyword for that field.
