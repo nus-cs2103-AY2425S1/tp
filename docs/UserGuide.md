@@ -18,7 +18,7 @@ pageNav: 3
 </div>
 
 
-EduLog is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLog can get your contact management tasks done faster than traditional GUI apps.
+EduLog is a **desktop app for managing students and lesson details, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduLog can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -60,7 +60,7 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the EduLog.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/100` : Adds a contact named `John Doe` to the EduLog.
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -124,7 +124,8 @@ Format: `exit`
 
 Adds a student to the edulog.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS f/fee [t/TAG]...` <br>
+*For phone numbers, only alphanumeric characters are supported.*
 
 <box type="tip" seamless>
 Tip: A person can have any number of tags (including 0)
@@ -132,12 +133,12 @@ Tip: A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/100`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 f/100 t/criminal`
 * `add n/Ben Lim p/98765432 e/ben@example.com a/John street, block 123, #01-01 f/100`
 #### 2.2 Listing all students : `list`
 
-Shows a list of all students in the edulog.
+Shows a list of *all* students in EduLog. Students not displayed will be displayed after entering this command.
 
 Format: `list`
 
@@ -178,7 +179,7 @@ Examples:
 
 #### 2.5 Deleting a student by index: `delete`
 
-Deletes the specified student from the edulog.
+Deletes the specified student from the EduLog. 
 
 Format: `delete INDEX`
 
@@ -193,13 +194,15 @@ Examples:
 
 #### 2.6 Deleting a student by name: `delete`
 
-Deletes the specified student from the edulog.
+Deletes the specified student from the edulog. The student you want to delete must be displayed in EduLog.
+For example, if you filtered the student list, and student `Bob` is no longer in the list, `delete Bob` will not work.
 
 Format: `delete Name`
 
 * Deletes the student by the specified Name.
 * The name refers to the name shown in the displayed student list.
-* The name is case sensitive.
+* The name is case-sensitive.
+* The name of the student needs to be displayed.
 
 Examples:
 
@@ -275,7 +278,7 @@ Format: gift
 
 #### 4.2 Discount Links `[coming in v2.0]`
 
-*Details coming soon ...*
+In v2.0, we plan to include links to our website to shop for gifts at discounted prices.
 
 #### Summary of Gift Commands
 <img src="images/demos/giftCommands/collatedCommands.png" alt="UI" style="width: 300px;">
@@ -330,6 +333,7 @@ Examples:
 
 * Calculates the total amount of money earned from student who has paid/not paid
 * Filters the list of students based on their payment status.
+* Until `list` is used, only unpaid or paid students will be displayed depending on the command used. 
 
 Format: `revenue [paid/unpaid]`
 
@@ -358,13 +362,13 @@ EduLog data are saved automatically as a JSON file `[JAR file location]/data/edu
 
 <box type="warning" seamless>
 Caution:
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, EduLog will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 #### 6.3 Archiving data files `[coming in v2.0]`
 
-*Details coming soon ...*
+*Details will be given in v2.0*
 
 ## 
 
@@ -378,8 +382,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
-
-<h2 style="color: black; padding-top: 30px"> Command Summary </h2>
 
 ### 1. General Commands
 
