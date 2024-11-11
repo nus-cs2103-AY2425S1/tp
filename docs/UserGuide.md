@@ -418,7 +418,6 @@ Collection: 25/12/2024 6pm
 ```
 This system helps maintain clean contact records while still allowing flexibility in order collection arrangements.
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 # **Features**
