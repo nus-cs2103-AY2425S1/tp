@@ -30,9 +30,6 @@ import seedu.address.model.Model;
  * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
-    public static final int DISTANCE_TO_TAG_FRONT = 2;
-    public static final int DISTANCE_TO_TAG_BACK = 2;
-
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -42,16 +39,22 @@ public class ExportCommand extends Command {
             + "./data/bae_addressbook.%1$s in the specified format.";
 
     public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
-    public static final String BACKWARD_SLASH = "\\\\";
-    public static final String INVERTED_COMMA = "\"";
+    public static final String BACKWARD_SLASH = "\\";
+    public static final String COMMA = ",";
+    public static final String QUOTES = "\"";
     public static final String EMPTY_STRING = "";
+    public static final String COLON = ":";
+    public static final String SPACE = " ";
 
     public static final String DEFAULT_FILEPATH = "data/";
     public static final String DEFAULT_FILENAME = "bae_addressbook";
     public static final String NULL_VALUE = "\\b : null\\b";
     public static final String LEFT_CURLY_BRACKET = "\\{";
     public static final String RIGHT_CURLY_BRACKET = "}";
-    public static final String NEWLINE_OR_CARRIAGE_RETURN = "\\\\r|\\\\n";
+    public static final String NEWLINE = "\\n";
+    public static final String CARRIAGE_RETURN = "\\r";
+    public static final String NEWLINE_OR_CARRIAGE_RETURN_REGEX = "\\\\r|\\\\n";
+    public static final String CURLY_BRACE_AND_QUOTES_REGEX = "[{}\"]";
 
     /**
      * Class that handles Format enum type used in ExportCommand
@@ -59,6 +62,7 @@ public class ExportCommand extends Command {
     public static enum Format {
         CSV("csv"),
         TXT("txt"),
+        JSON("json"),
         UNSUPPORTED("unsupported");
 
         private final String format;
@@ -83,7 +87,7 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        String jsonFilePath = DEFAULT_FILEPATH + DEFAULT_FILENAME + ".json";
+        String jsonFilePath = DEFAULT_FILEPATH + DEFAULT_FILENAME + "." + Format.JSON;
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
@@ -105,20 +109,20 @@ public class ExportCommand extends Command {
      */
     static String parseTags(String tagString) {
         // Remove leading and trailing whitespace
-        tagString = tagString.replaceAll(NEWLINE_OR_CARRIAGE_RETURN, EMPTY_STRING)
-                .replaceAll(BACKWARD_SLASH + INVERTED_COMMA, EMPTY_STRING)
+        tagString = tagString.replaceAll(NEWLINE_OR_CARRIAGE_RETURN_REGEX, EMPTY_STRING)
+                .replaceAll(BACKWARD_SLASH + BACKWARD_SLASH + QUOTES, EMPTY_STRING)
                 .replaceAll(NULL_VALUE, EMPTY_STRING)
-                .replaceAll(INVERTED_COMMA + LEFT_CURLY_BRACKET, EMPTY_STRING)
-                .replaceAll(RIGHT_CURLY_BRACKET + INVERTED_COMMA, EMPTY_STRING)
+                .replaceAll(QUOTES + LEFT_CURLY_BRACKET, EMPTY_STRING)
+                .replaceAll(RIGHT_CURLY_BRACKET + QUOTES, EMPTY_STRING)
                 .trim();
         // Split the tagString; the first part represents the tag's key.
         // If there's a second part, it represents the tag's value.
-        String[] parts = tagString.split(":");
+        String[] parts = tagString.split(COLON);
         boolean tagHasValue = parts.length == 2;
         String trimmedKey = parts[0].trim();
         if (tagHasValue) {
             String trimmedValue = parts[1].trim();
-            return trimmedKey + " : " + trimmedValue;
+            return trimmedKey + SPACE + COLON + SPACE + trimmedValue;
         }
         // If the format doesn't match, return the original string
         return tagString;
@@ -149,7 +153,7 @@ public class ExportCommand extends Command {
                     for (JsonNode tag : value) {
                         tags.add(parseTags(tag.toString()));
                     }
-                    personInfo.put(header, String.join(", ", tags));
+                    personInfo.put(header, String.join(COMMA + SPACE, tags));
                 } else {
                     personInfo.put(header, value.toString());
                 }
@@ -213,14 +217,15 @@ public class ExportCommand extends Command {
     static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
             throws FileNotFoundException {
         try (PrintWriter writer = new PrintWriter(csvFilePath)) {
-            writer.println(String.join(",", headers));
+            writer.println(String.join(COMMA, headers));
             for (Map<String, String> row : jsonData) {
                 List<String> rowData = new ArrayList<>();
                 for (String header : headers) {
-                    String cellValue = row.getOrDefault(header, "").replace("\"", "\"\"");
-                    rowData.add("\"" + cellValue + "\"");
+                    String cellValue = row.getOrDefault(header, EMPTY_STRING)
+                            .replace(QUOTES, QUOTES + QUOTES);
+                    rowData.add(QUOTES + cellValue + QUOTES);
                 }
-                writer.println(String.join(",", rowData));
+                writer.println(String.join(COMMA, rowData));
             }
         }
     }
@@ -231,25 +236,7 @@ public class ExportCommand extends Command {
             for (Map<String, String> row : jsonData) {
                 writer.println("{");
                 for (String header : headers) {
-                    String cellValue = row.getOrDefault(header, "");
-
-                    // Check if the header is "tags" and format as a comma-separated list in square brackets
-                    if ("tags".equals(header) && !cellValue.isEmpty()) {
-                        // Assuming the tags come in as a set represented by a JSON-like structure
-                        // Parse the cell value if it's formatted as JSON-like, i.e., "{key1 : value1, key2 : value2}"
-                        cellValue = cellValue.replaceAll("[{}\"]", ""); // Remove curly braces and quotes
-                        String[] tagsArray = cellValue.split(","); // Split tags by comma if needed
-                        cellValue = "[ " + String.join(", ", tagsArray) + " ]"; // Join with comma and wrap in brackets
-                    } else {
-                        // For other fields, clean up quotes, commas, newline characters, and backslashes
-                        cellValue = cellValue
-                                .replace("\"", "")
-                                .replace(",", "")
-                                .replace("\\n", "")
-                                .replace("\\", "")
-                                .replace("\\r", "");
-                    }
-
+                    String cellValue = formatCellValue(row, header);
                     writer.printf("  %s | %s%n", header, cellValue);
                 }
                 writer.println("}");
@@ -258,6 +245,36 @@ public class ExportCommand extends Command {
         }
     }
 
+    private static String formatCellValue(Map<String, String> row, String header) {
+        String cellValue = row.getOrDefault(header, EMPTY_STRING);
+        // Check if the header is "tags" and format as a comma-separated list in square brackets
+        if ("tags".equals(header) && !cellValue.isEmpty()) {
+            cellValue = formatTags(cellValue);
+        } else {
+            // For other fields, clean up quotes, commas, newline characters, and backslashes
+            cellValue = cleanCellValue(cellValue);
+        }
+        return cellValue;
+    }
+
+    private static String formatTags(String cellValue) {
+        // Assuming the tags come in as a set represented by a JSON-like structure
+        // Parse the cell value if it's formatted as JSON-like, i.e., "{key1 : value1, key2 : value2}"
+        cellValue = cellValue.replaceAll(CURLY_BRACE_AND_QUOTES_REGEX, EMPTY_STRING); // Remove curly braces and quotes
+        String[] tagsArray = cellValue.split(COMMA); // Split tags by comma if needed
+        cellValue = "[ " + String.join(", ", tagsArray) + " ]"; // Join with comma and wrap in brackets
+        return cellValue;
+    }
+
+    private static String cleanCellValue(String cellValue) {
+        cellValue = cellValue
+                .replace(QUOTES, EMPTY_STRING)
+                .replace(COMMA, EMPTY_STRING)
+                .replace(NEWLINE, EMPTY_STRING)
+                .replace(BACKWARD_SLASH, EMPTY_STRING)
+                .replace(CARRIAGE_RETURN, EMPTY_STRING);
+        return cellValue;
+    }
 
     @Override
     public boolean equals(Object other) {
