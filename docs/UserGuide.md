@@ -20,14 +20,17 @@ With MindMap, therapists can quickly record and access detailed patient informat
 1. **Check Your Java Version**  
    Make sure Java **version 17** or above is installed on your computer. <br> <box type="info" seamless>Java is a software platform that lets you run certain types of applications, including `.jar` files. [Learn more about Java here](https://www.java.com/en/download/faq/whatis_java.xml).<br> <br> To check your current Java version, [learn more here](https://www.java.com/en/download/help/version_manual.html). <br>[Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed. </box>
 
+<br>
 
 2. **Download MindMap**  
    Download the latest `.jar` file for MindMap from [this link](https://github.com/AY2425S1-CS2103T-W13-3/tp/releases). <br> <box type="info" seamless> A `.jar` file is a single file that contains everything needed to run a program. Think of it like a zipped folder that, when opened, lets you start using the application right away. <br> <br> To run it, you just need Java installed on your computer. </box>
 
+<br>
 
 3. **Choose a Folder**  
    Copy the `.jar` file to a folder you’d like to use as the home for your MindMap contacts.
 
+<br>
 
 4. **Open a Terminal**
    <br> <box type="info" seamless> We’ll use the Terminal (or PowerShell on Windows) to enter a few simple commands to launch the MindMap app. </box>
@@ -39,11 +42,13 @@ With MindMap, therapists can quickly record and access detailed patient informat
         - Press `Command + Space` to open the search bar.
         - Type "Terminal" and select it from the results.
 
+<br>
 
 5. **Get the Folder Path**
     - For **Windows**: Hold `Shift` and `Right-click` the folder containing the `.jar` file and select **Copy as Path**.
     - For **Mac**: [Follow these steps](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ) to copy the folder path.
 
+<br>
 
 6. **Navigate to the Folder in Terminal**  
    In the terminal, type the following line and press Enter:
@@ -51,6 +56,8 @@ With MindMap, therapists can quickly record and access detailed patient informat
    cd [paste the folder path from step 5 here]
    ```
    If successful, this command will take you into the folder where your .jar file is located.
+
+<br>
    
 7. **Start MindMap**  
    Now, type the following line in the terminal to launch the app:
@@ -59,12 +66,15 @@ With MindMap, therapists can quickly record and access detailed patient informat
    ```
    This will open the MindMap app. You’re now ready to use it! If you see an error, double-check that Java is installed using **Step 1**.
 
+<br>
 
 8. **Get Started with the App**  
    In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
 
 > **NOTE**: You should see something like this. The app also contains some sample data.<br>
 ![img_1.png](img_1.png)
+
+<br>
 
 9. **Try Out Some Commands**  
    Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -79,6 +89,8 @@ With MindMap, therapists can quickly record and access detailed patient informat
     * `clear` : Deletes all patients and their logs (if any).
 
     * `exit` : Exits the app. 
+
+<br>
 
 10. **Learn More**  
     Refer to the [Features](#features) below for details of each command.
@@ -159,6 +171,8 @@ Creates a new log entry for a specific patient. This command is typically used t
   Examples:
 * `addlog i/S1234567D d/20 May 2024 l/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 
+<box type="info" seamless>
+
 **Note:**
 
 1) For logs that requires input text to include some of our flags like `i/`, `d/` and `l/` please use `addentry` command instead.
@@ -167,6 +181,8 @@ Creates a new log entry for a specific patient. This command is typically used t
 4) Adding an older log is allowed, considering a user may want to move their logs from a physical notebook to the application.
   <br>
   <br>
+
+</box>
 
 ### Adding a log entry: `addentry`
 Creates a **separate pop up window** to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previously inputted.
@@ -350,19 +366,19 @@ However, there are mechanisms in place to prevent accidental inputs. The existen
 [1] Singapore Medical Council. (2016). Ethical Code and Ethical Guidelines. Section B3 (6) and B4 (5). Retrieved from
 https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-smc-ethical-code-and-ethical-guidelines---(13sep16).pdf
 
-**Q:** Why is there a need for AddLogEntry when there is already AddLog?
+**Q:** Why is there a need for AddLogEntry when there is already AddLog?<br>
 **A:** _AddLogEntry is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the AddLog command directly. Additionally, AddLogEntry supports flags like i/, l/ and d/ which would be recognised as duplicate flags in AddLog._
 
-**Q:** Why does the system display a "duplicate contact" error when the patient's name I entered is different?
+**Q:** Why does the system display a "duplicate contact" error when the patient's name I entered is different?<br>
 **A:** _The system identifies unique contacts by their NRIC rather than by their name. If 2 patients have the same NRIC, the system identifies them as duplicate contacts._
 
-**Q:** Why can I add session logs older than the current date?
+**Q:** Why can I add session logs older than the current date?<br>
 **A:** _Since there is no way for import and export of data for now, this facilitates the manual transfer of data from existing solutions into our app._
 
-**Q:** Why are multiple logs allowed in the same day?
+**Q:** Why are multiple logs allowed in the same day?<br>
 **A:** _Session logs may contain errors which only surfaces after the log is saved. As such you may need to add another session log on the same day to reference the incorrect log with amendments._
 
-**Q:** **Why can I input non-alphanumeric characters into logs?**
+**Q:** Why can I input non-alphanumeric characters into logs?<br>
 **A:** _Our priority is to mainly support alphanumeric characters only, but remains functionally flexible enough to support non-alphanumeric characters (like emojis or other languages). As such you should only use it only when necessary and with caution as it could break cause unexpected behaviours._
 
 
@@ -435,12 +451,19 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
     - `KEYWORD` - Search keyword(s) to find patients.
     - `MORE_KEYWORDS` - Additional search keywords.
 
+<br>
+
 * **Commands**:
     - **Edit** and **Delete** require the `INDEX` number displayed in the list of patients.
     - **Clear**, **Delete**, **Add** and **Edit** actions require `confirm` to complete or `cancel` to abort.
 
+<br>
+
 * **Other Commands**:
-    - **Help** shows a guide for using all commands.
+    - **Help** shows a guide for using all commands. 
+
+<br>
+
 ---
 
 ## **Sample NRICs**
