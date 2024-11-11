@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,6 +44,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label schedule;
+    @FXML
+    private Label note;
+    @FXML
+    private Label reminder;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -52,8 +63,41 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        schedule.setText(formatSchedules(person.getSchedules()));
+        if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
+            reminder.setText(String.format("Reminder: %s before",
+                    person.getReminder().getReminderTime()));
+        } else {
+            reminder.setText("");
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Formats the schedules of the person into a readable string.
+     *
+     * @param schedules The set of schedules.
+     * @return A formatted string of schedules or a default message if empty.
+     */
+    private String formatSchedules(Set<Schedule> schedules) {
+        if (schedules.isEmpty()) {
+            return "No scheduled appointments";
+        }
+        // Handle multiple schedules
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
+        return schedules.stream()
+            .map(schedule -> {
+                LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+                String formattedDate = dateTime.format(outputFormatter);
+                String noteText = schedule.getNotes();
+                return String.format("%s [ %s ]\n", formattedDate, noteText);
+            })
+            .collect(Collectors.joining(""));
     }
 }

@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Sarah Faith Teo
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/sarahteonin.png" width="200px">
+
+[[github](https://github.com/sarahteonin)]
 
 * Role: Project Advisor
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+### Chia Jia Ye
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/jiayr99.png" width="200px">
+
+
+[[github](http://github.com/jiayr99)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jasmine Lin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasmiinee.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jasmiinee)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Ren Guanpeng
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/guanpengr.png" width="200px">
+
+
+[[github](http://github.com/GuanpengR)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Bhudisanont Kanit
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/jumpyjay.png" width="200px">
+
+[[github](https://github.com/JumpyJay)]
 
 * Role: Developer
 * Responsibilities: UI

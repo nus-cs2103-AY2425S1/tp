@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -13,9 +14,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ScheduleServices;
+import seedu.address.logic.commands.ClientUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ClientWindow clientWindow;
+    private List<Person> personList;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +66,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        logger.info("Initializing MainWindow...");
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -66,6 +74,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        logger.info("MainWindow initialized");
     }
 
     public Stage getPrimaryStage() {
@@ -110,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        personList = logic.getFilteredPersonList();
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -121,6 +131,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        showTopThreeSchedules();
     }
 
     /**
@@ -147,6 +159,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the client view window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleShowClient(Person client) {
+        if (clientWindow != null && clientWindow.isShowing()) {
+            clientWindow.hide();
+        }
+
+        // Create and show a new client window
+        clientWindow = new ClientWindow(client);
+        clientWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -156,6 +182,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        if (clientWindow != null && clientWindow.isShowing()) {
+            clientWindow.hide();
+        }
+        logger.info("Closing application...");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
@@ -182,6 +212,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowClient()) {
+                Person targetClient = ClientUtil.findViewPerson(commandText, logic);
+                handleShowClient(targetClient);
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -192,5 +227,25 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays the top three upcoming appointments for all persons in the system
+     *
+     * @see Person
+     * @see Schedule
+     */
+    private void showTopThreeSchedules() {
+        List<String> result = ScheduleServices.getTopThreeSchedules(personList);
+
+        StringBuilder feedbackMessage = new StringBuilder("Upcoming Appointments:\n");
+
+        if (result.isEmpty()) {
+            feedbackMessage.append("No upcoming appointments.");
+        } else {
+            feedbackMessage.append(String.join("\n", result));
+        }
+
+        resultDisplay.setFeedbackToUser(feedbackMessage.toString());
     }
 }

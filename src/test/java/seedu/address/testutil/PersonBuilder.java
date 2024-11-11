@@ -8,6 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Reminder;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +22,17 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SCHEDULE = "2024-11-11 1400";
+    public static final String DEFAULT_REMINDER = "1 hour";
+    public static final double DEFAULT_PAYMENT_AMOUNT = 0.0;
+    public static final boolean DEFAULT_PAYMENT_IS_PAID = true;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Set<Schedule> schedules;
+    private Reminder reminder;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +43,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        schedules = new HashSet<>();
+        reminder = new Reminder(DEFAULT_REMINDER);
         tags = new HashSet<>();
     }
 
@@ -46,6 +56,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        schedules = new HashSet<>(personToCopy.getSchedules());
+        reminder = personToCopy.getReminder();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +101,25 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(String[] dateTime, String[] note) {
+        this.schedules = SampleDataUtil.getScheduleSet(dateTime, note);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Reminder} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withReminder(String reminderTime) {
+        this.reminder = new Reminder(reminderTime);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, schedules, reminder, tags);
     }
 
 }

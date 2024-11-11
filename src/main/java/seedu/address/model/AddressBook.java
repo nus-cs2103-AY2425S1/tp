@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -92,6 +93,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Deletes the appointment of the given {@code target}.
+     * The person must exist in the address book.
+     */
+    public void deleteAppointment(Person target, Schedule appointment) {
+        persons.deleteAppointment(target, appointment);
+    }
+
+    /**
+     * Deletes the reminder of the given {@code target}.
+     * The person must exist in the address book.
+     */
+    public void deleteReminder(Person target) {
+        persons.deleteReminder(target);
     }
 
     //// util methods

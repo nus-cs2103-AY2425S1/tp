@@ -2,9 +2,15 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,17 +29,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private Set<Schedule> schedules;
+    private Reminder reminder;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Schedule> schedules,
+                  Reminder reminder, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, schedules, reminder, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.schedules = schedules;
+        this.reminder = reminder;
         this.tags.addAll(tags);
     }
 
@@ -52,6 +63,13 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    public Set<Schedule> getSchedules() {
+        return Collections.unmodifiableSet(schedules);
+    }
+    public Reminder getReminder() {
+        return reminder;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -72,6 +90,71 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if the person has an appointment that matches the given filters.
+     *
+     * @param now The current datetime to compare against.
+     * @param dateFilter Optional date filter.
+     * @param timeFilter Optional time filter.
+     * @return true if the person has a matching appointment, false otherwise.
+     */
+    public boolean hasAppointment(LocalDateTime now, Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
+
+        if (schedules == null || schedules.isEmpty()) {
+            return false; // Return false if schedules are null or empty
+        }
+
+        for (Schedule schedule : schedules) {
+            if (schedule == null || schedule.getDateTime().isEmpty()) {
+                return false;
+            }
+
+            LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.getDateTime(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+            // Check if the appointment is in the future
+            if (appointmentDateTime.isBefore(now)) {
+                return false;
+            }
+
+            // Apply date filter if present
+            if (dateFilter.isPresent()) {
+                if (!appointmentDateTime.toLocalDate().equals(dateFilter.get())) {
+                    return false;
+                }
+                // Only apply time filter if date filter is present
+                if (timeFilter.isPresent() && !appointmentDateTime.toLocalTime().equals(timeFilter.get())) {
+                    return false;
+                }
+            } else if (timeFilter.isPresent()) {
+                // If time filter is present but date filter is not, ignore the time filter
+                return true;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Removes the appointment of the given {@code appointment}.
+     */
+    public void removeAppointment(Schedule appointment) {
+        Iterator<Schedule> iterator = schedules.iterator();
+        while (iterator.hasNext()) {
+            Schedule schedule = iterator.next();
+            if (schedule.equals(appointment)) {
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Removes the reminder of the person by setting the reminder to an empty string.
+     */
+    public void removeReminder() {
+        reminder = new Reminder("");
     }
 
     /**
@@ -110,6 +193,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("schedule", schedules)
+                .add("reminder", reminder)
                 .add("tags", tags)
                 .toString();
     }

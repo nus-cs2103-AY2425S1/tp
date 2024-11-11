@@ -4,15 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.PaymentCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +47,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = name.toLowerCase().trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -121,4 +125,71 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String date} and {@code String note} into a {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Schedule} is invalid.
+     */
+    public static Schedule parseSchedule(String dateTime, String note) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        String trimmedNote = note.trim();
+
+        Schedule.isValidDateTime(trimmedDateTime);
+        return new Schedule(trimmedDateTime, trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Schedule} with an empty note.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Schedule} is invalid.
+     */
+    public static Schedule parseSchedule(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+
+        Schedule.isValidDateTime(trimmedDateTime);
+        return new Schedule(trimmedDateTime, "");
+    }
+
+    /**
+     * Parses {@code Collection<String> schedules} into a {@code Set<Schedule>}.
+     */
+    public static Set<Schedule> parseSchedules(Collection<String> dateTimes, Collection<String> notes)
+            throws ParseException {
+        requireNonNull(dateTimes);
+        final Set<Schedule> scheduleSet = new HashSet<>();
+        Iterator<String> dateTimeIterator = dateTimes.iterator();
+        Iterator<String> noteIterator = notes.iterator();
+        while (dateTimeIterator.hasNext() && noteIterator.hasNext()) {
+            scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
+        }
+        if (dateTimeIterator.hasNext() || noteIterator.hasNext()) {
+            throw new ParseException(ScheduleCommand.MESSAGE_UNEQUAL_NOTES);
+        }
+        return scheduleSet;
+    }
+
+
+    /**
+     * Parses a {@code String paidStatus} into a {@code boolean}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code paidStatus} is invalid.
+     */
+    public static boolean parsePaidStatus(String paidStatus) throws ParseException {
+        requireNonNull(paidStatus);
+        String trimmedStatus = paidStatus.trim().toLowerCase();
+        if (trimmedStatus.equals("paid")) {
+            return true;
+        } else if (trimmedStatus.equals("unpaid")) {
+            return false;
+        } else {
+            throw new ParseException(PaymentCommand.MESSAGE_PAYMENT_STATUS_INVALID);
+        }
+    }
+
 }

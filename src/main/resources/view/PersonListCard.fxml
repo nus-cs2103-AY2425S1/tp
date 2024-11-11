@@ -25,12 +25,20 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" maxWidth="650"/>
       </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <FlowPane fx:id="tags" hgap="5" vgap="5" prefWrapLength="600" maxWidth="600"/>
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" maxWidth="600"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" maxWidth="600"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" maxWidth="600"/>
+    </VBox>
+    <VBox alignment="TOP_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+      <padding>
+        <Insets top="10" right="8" bottom="5" left="15" />
+      </padding>
+      <Label text="Appointment details" styleClass="cell_appointment" style="-fx-text-fill: #ffffff;" />
+      <Label fx:id="schedule" styleClass="cell_small_label" text="\$schedule" wrapText="true" maxWidth="400"/>
+      <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder" wrapText="true" maxWidth="400"/>
     </VBox>
   </GridPane>
 </HBox>

@@ -12,9 +12,18 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
+
+
+
 
 public class PersonTest {
 
@@ -41,9 +50,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
@@ -91,9 +100,53 @@ public class PersonTest {
     }
 
     @Test
+    public void hasAppointment() {
+        LocalDateTime now = LocalDateTime.of(2024, 10, 15, 10, 0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        // Person with future appointment
+        Person personWithFutureAppointment = new PersonBuilder()
+                .withSchedule(new String[]{"2024-10-16 1400"}, new String[]{""}).build();
+
+        // Person with past appointment
+        Person personWithPastAppointment = new PersonBuilder()
+                .withSchedule(new String[]{"2024-10-14 1400"}, new String[]{""}).build();
+
+        // Test with null schedule
+        Person personWithNullSchedule = new PersonBuilder().build(); // Person with no schedules
+        assertFalse(personWithNullSchedule.hasAppointment(now, Optional.empty(), Optional.empty()));
+
+        // Test without filters
+        assertTrue(personWithFutureAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
+        assertFalse(personWithPastAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
+
+        // Test with date filter
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.empty()));
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 17)), Optional.empty()));
+
+        // Test with date and time filters
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.of(LocalTime.of(14, 0))));
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 16)), Optional.of(LocalTime.of(15, 0))));
+
+        // Test with time filter but no date filter (should ignore time filter)
+        assertTrue(personWithFutureAppointment.hasAppointment(now,
+                Optional.empty(), Optional.of(LocalTime.of(15, 0))));
+
+        // Test with date filter not matching and time filter matching (should return false)
+        assertFalse(personWithFutureAppointment.hasAppointment(now,
+                Optional.of(LocalDate.of(2024, 10, 17)), Optional.of(LocalTime.of(14, 0))));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", schedule="
+                + ALICE.getSchedules() + ", reminder=" + ALICE.getReminder() + ", tags=" + ALICE.getTags()
+                + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

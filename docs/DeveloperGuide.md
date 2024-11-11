@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Multiple areas of the code were completed with the help of generative AI including ChatGPT, Codeium and ClaudeAI.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete John`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,15 +86,15 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete John Doe")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete John Doe` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -115,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -136,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -155,94 +156,139 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Schedule Feature
 
-#### Proposed Implementation
+#### Overview
+The `schedule` command helps to set up appointments for a client, including any relevant notes.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `schedule` command.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![ScheduleSequenceDiagram](images/ScheduleSequenceDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Details
+1. The user executes the command `schedule John Doe d/2024-10-28 1200 note/First Appointment` to schedule a new appointment for a client named john doe.
+2. The `ScheduleCommandParser` object calls its `parse` method to interpret the user input.
+3. A `ScheduleCommand` object is created.
+4. The `ScheduleCommandParser` object returns the `ScheduleCommand` object.
+5. The `LogicManager` object calls the `execute` method of `ScheduleCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a new appointment with the specified details.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their appointments.
+8. The `execute` method returns a `CommandResult` which contains data indicating the completion of the `ScheduleCommand`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Example Usage
+1. User inputs the command `schedule Alice Tan d/2024-10-29 1200 note/Second Appointment`.
+2. This creates an appointment for a person named "alice tan" on October 29, 2024, at 12:00pm, with the note "Second Appointment" attached.
+3. The new appointment is then displayed in the UI, reflecting the updated schedule for "alice tan".
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+### View Client Feature
 
-![UndoRedoState0](images/UndoRedoState0.png)
+#### Overview
+The `view` command enables users to access and display detailed information for a specific client in the address book.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `view` command.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![ViewClientSequenceDiagram](images/ViewSequenceDiagram.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+#### Details
+1. The user executes the command `view John Doe` to display the details of a client named john doe.
+2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
+3. The `AddressBookParser` then creates a `ViewClientCommandParser` object to handle parsing.
+4. The `ViewClientCommandParser` object calls its `parse` method to extract the client name, and the `ClientUtil` utility class is used to confirm the full name "john doe."
+5. The `ViewClientCommandParser` creates a `ViewClientCommand` object.
+6. The `ViewClientCommandParser` returns the `ViewClientCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
+7. The `LogicManager` object invokes the `execute` method of `ViewClientCommand`.
+8. The `execute` method calls `getFilteredPersonList` on the `Model` to retrieve the details of the specified client.
+9. The `execute` method creates a `CommandResult` object containing the client’s information.
+10. The `CommandResult` object is returned to `LogicManager`, which then displays the client’s information to the user.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+#### Example Usage
+1. User inputs the command `view Alice Tan`.
+2. The system displays the details of "alice tan," including name, phone number, email, address, condition, reminder note and any scheduled appointments.
+3. This information is shown in a pop-up or a designated UI section for easy access by the user.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+### Reminder Note Feature
 
-</div>
+#### Overview
+The `reminder` command helps to set a reminder note for a client's most upcoming appointment.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+The reminder diagram below models the interaction between the different components of PhysioPal for the execution of the `reminder` command.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+#### Details
+1. The user executes the command `reminder John Doe r/1 day` to set a reminder note for a client named john doe's appointment.
+2. The `ReminderCommandParser` object calls its parse method to interpret the user input.
+3. A `ReminderCommand` object is created.
+4. The `ReminderCommandParser` object returns the `ReminderCommand` object.
+5. The `LogicManager` object calls the `execute` method of `ReminderCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a reminder note with the specified reminder time.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their reminders.
+8. The `execute` method returns a `CommandResult` which contains data including the completion of the `ReminderCommand`.
 
-</div>
+#### Example Usage
+1. User inputs the command `reminder Alice Tan r/3 hours`.
+2. This creates a reminder note for a person named "alice tan", with reminder time "3 hours".
+3. The reminder is then displayed in the UI, reflecting that a reminder note has been set for "alice tan"'s appointment.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+### Delete Appointment Feature
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+#### Overview
+The `appointment-delete` command helps to delete scheduled appointments for a client.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The sequence diagram below models the interactions between the different components of PhysioPal for the execution of the `appointment-delete` command.
 
-</div>
+![DeleteAppointmentSequenceDiagram](images/DeleteAppointmentSequenceDiagram.png)
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### Details
+1. The user executes the command `appointment-delete John Doe d/2024-10-28 1200` to delete a specified appointment for a client named john doe.
+2. The `DeleteAppointmentCommandParser` object calls its `parse` method to interpret the user input.
+3. A `DeleteAppointmentCommand` object is created.
+4. The `DeleteAppointmentCommandParser` object returns the `DeleteAppointmentCommand` object.
+5. The `LogicManager` object calls the `execute` method of `DeleteAppointmentCommand`.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to delete the specified appointment.
+7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their appointments.
+8. The `execute` method returns a `CommandResult` which contains data indicating the completion of the `DeleteAppointmentCommand`.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+#### Example Usage
+1. User inputs the command `appointment-delete Alice Tan d/2024-10-29 1200`.
+2. This deletes the appointment for a person named "alice tan" on October 29, 2024, at 12:00pm.
+3. The updated schedule for "alice tan" is then displayed in the UI.
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-</div>
+### Listing Upcoming Appointments Feature
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+#### Overview
 
-![UndoRedoState4](images/UndoRedoState4.png)
+The user can view upcoming appointments through the `appointment-list` command.
+The command can be supplied with optional filters date and time to list
+upcoming appointments on the specified date or date and time.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Command: `appointment-list [d/DATE][TIME]`
 
-![UndoRedoState5](images/UndoRedoState5.png)
+The following sequence diagram models the interactions between the different components of PhysioPal
+for the execution of `appointment-list` command.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+![ListAppointmentSequenceDiagram](images/ListAppointmentSequenceDiagram.png)
 
-<img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Details
 
-**Aspect: How undo & redo executes:**
+1. The user executes the command `appointment-list` to view all upcoming appointments.
+2. The `LogicManager` object receives this command and calls the `parseCommand` method of `AddressBookParser` to interpret the input.
+3. The `AddressBookParser` then creates a `ListAppointmentsCommandParser` object to handle parsing.
+4. The `ListAppointmentsCommandParser` object calls its `parse` method to extract any present date and time filters
+5. The `ListAppointmentsCommandParser` creates a `ListAppointmentsCommand` object.
+6. The `ListAppointmentsCommandParser` returns the `ListAppointmentsCommand` object to `AddressBookParser`, which then returns it to `LogicManager`.
+7. The `LogicManager` object invokes the `execute` method of `ListAppointmentsCommand`.
+8. The `execute` method calls `getFilteredPersonList` on the `Model` to retrieve the list of persons with upcoming appointments matching the filter(if any).
+9. The `execute` method creates a `CommandResult` object containing the list of upcoming appointments.
+10. The `CommandResult` object is returned to `LogicManager`, which then displays the list of upcoming appointments to the user.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+#### Example Usage
+1. User inputs the command `appointment-list`.
+2. The system displays the number and list of all upcoming appointments, including notes of the appointments (if any).
+3. This information is shown in the status message.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -260,73 +306,442 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+**Product name**: PhysioPal
+
+**Target user**: Physiotherapists
+
 **Target user profile**:
+Physiotherapists with a large client base who prefer typing over other means of input, thus require an
+organised system to manage the details of the clients.
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+**Value proposition**: A cost-effective, customisable solution for managing client contacts,
+scheduling appointments, tracking treatment history, and generating health progress reports,
+all without subscription or licensing fees. It saves time, money, and manpower on repetitive tasks,
+allowing flexibility to tailor the address book to specific needs.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                | I want to …​                              | So that I can…​                                                  |
+|----------|----------------------------------------|-------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                    | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information        | keep track of a record of client details                         |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant client information | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name | quickly retrieve specific client details                         |
+| `* * *`  | physiotherapist                        | search for client contact information by number | access the client’s details when name is not readily recalled    |
+| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients      | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist                        | record payment details for client appointments | easily track and manage payment information                      |
+| `* *`    | physiotherapist                        | edit client information                   | make changes to erroneous or outdated client details             |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no appointments are missed                           |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed          | prominently see what I need to do in order to manage my schedule |
 
-*{More to be added}*
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `PhysioPal` and the **Actor** is the `Physiotherapist`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete client's information**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Physiotherapist requests to delete a specific client.
+2. PhysioPal deletes the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. PhysioPal detects an empty input for name.
 
-  Use case ends.
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
 
-* 3a. The given index is invalid.
+* 1b. PhysioPal detects an invalid name.
 
-    * 3a1. AddressBook shows an error message.
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
-*{More to be added}*
+**Use case: UC02 - Schedule an appointment**
+
+**MSS**
+
+1. Physiotherapist requests to schedule a new appointment for a client.
+2. PhysioPal creates appointment for client with the appointment details provided.
+3. PhysioPal confirms creation of appointment and displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1c. PhysioPal detects an empty input for date and time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1d. PhysioPal detects an invalid date and time or the given date and time already contains an appointment.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1e. PhysioPal detects an empty input for note.
+
+    * 1e1. PhysioPal displays error message.
+    * 1e2. Physiotherapist enters new data.
+    * Steps 1e1-1e2 are repeated until a valid note is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+**Use case: UC03- Setting a reminder note for an appointment**
+
+**Preconditions: Client must have at least one appointment.**
+
+**MSS**
+
+1. Physiotherapists sets a reminder note for an appointment made for a client.
+2. PhysioPal creates a reminder note for the client with the reminder time provided.
+3. PhysioPal confirms creation of reminder note and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
+
+* 1c. PhysioPal detects an empty input for reminder time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
+
+* 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
+
+**Use case: UC04 - Deleting a reminder note**
+
+**MSS**
+
+1. Physiotherapist requests to delete the reminder note for a client.
+2. PhysioPal deletes the reminder note for client.
+3. PhysioPal confirms deletion of reminder note and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1c. PhysioPal detects that the client does not have a reminder note set.
+
+    * 1c1. PhysioPal displays error message.
+      
+      Use case ends.
+
+**Use case: UC05 - Deleting an appointment**
+
+**Preconditions: Client has more than one appointment.**
+
+**MSS**
+
+1. Physiotherapist requests to delete an appointment for a client.
+2. PhysioPal deletes the corresponding appointment for client.
+3. PhysioPal confirms deletion of appointment and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1c. PhysioPal detects an empty input for date and time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1d. PhysioPal detects that the client does not have an appointment on given date and time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+**Use case: UC06 - Deleting an appointment**
+
+**Preconditions: Client has exactly one appointment.**
+
+**MSS**
+
+1. Physiotherapist <u>deletes a scheduled appointment for a client (UC05)</u>.
+2. PhysioPal deletes the reminder note for client.
+3. PhysioPal confirms deletion of appointment and displays a success message.
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. PhysioPal detects that the client does not have a reminder note set.<br>
+
+    Use case resumes from step 3.
+
+**Use Case: UC07 - Displaying upcoming appointments on launch screen**
+
+**MSS**
+
+1. Physiotherapist launches PhysioPal.
+2. PhysioPal retrieves the top three upcoming appointments.
+3. PhysioPal displays the top three upcoming appointments in the result display box.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No upcoming appointments are found.
+
+    * 2a1. PhysioPal displays a message indicating no upcoming appointments.
+  
+      Use case ends.
+
+**Use case: UC08 - List all upcoming appointments**
+
+**MSS**
+
+1.  Physiotherapist requests to list all upcoming appointments
+2.  PhysioPal displays a list of all upcoming appointments, ordered chronologically starting from the soonest upcoming appointment relative to the current time.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No upcoming appointments are found.
+
+    * 1a1. PhysioPal displays a message indicating no upcoming appointments.
+
+      Use case ends.
+
+**Use case: UC09 - List upcoming appointments on a specified date**
+
+**MSS**
+
+1.  Physiotherapist requests to list all upcoming appointments on specified date.
+2.  PhysioPal displays a list of upcoming appointments on the specified date, ordered chronologically starting from the soonest upcoming appointment relative to the current time.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The format for date is wrong.
+
+    * 1a1. PhysioPal requests for correct data.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      
+      Use case resumes from step 2.
+
+* 1b. No upcoming appointments are found.
+
+    * 1b1. PhysioPal displays a message indicating no upcoming appointments.
+
+      Use case ends.
+
+**Use case: UC10 - Marking payment for appointment as paid**
+
+**MSS**
+
+1. Physiotherapist requests to mark payment for an appointment of a client as paid.
+2. PhysioPal marks payment status of the appointment as paid and displays a success status message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Client does not exist.
+
+    * 1a1. PhysioPal requests for correct data.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      
+      Use case resumes from step 2.
+
+* 1b. The format for date is incorrect.
+
+    * 1b1. PhysioPal requests for correct data.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until the data entered are correct.
+      
+      Use case resumes from step 2.
+
+* 1c. The appointment does not exist.
+
+    * 1c1. PhysioPal displays an error message that no such appointment found.
+    
+      Use case ends.
+
+**Use case: UC11 - Viewing a person**
+
+**MSS**
+
+1. Physiotherapist requests to view details of a specific client by name.
+2. PhysioPal retrieves the client’s information based on the exact name provided.
+3. PhysioPal displays a pop-up window with the client’s details, including name, phone number, email, address, condition, and schedule.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays an error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects that the name does not match any recorded clients.
+
+    * 1b1. PhysioPal displays an error message indicating no matches found.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+**Use case: UC12 - Finding persons**
+
+**MSS**
+
+1. Physiotherapist requests to find clients by entering one or more keywords (name or phone number).
+2. PhysioPal searches for all clients whose names contain any of the given keywords or whose phone numbers match partially.
+3. PhysioPal displays a list of matching clients.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for keywords.
+
+    * 1a1. PhysioPal displays an error message indicating that keywords are required.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until valid keywords are input by the Physiotherapist.
+      
+      Use case resumes from step 2.
+
+* 1b. PhysioPal detects no matches for the entered keywords.
+
+    * 1b1. PhysioPal displays a message indicating no results found.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1.  Should be able to handle  all operations of at least 100 clients without a delay of more than 0.5 seconds
+2.  Should be able to search for any client in less than 1 second.
+3.  The system should comply with healthcare regulations like Private Hospital and Medical Clinics Act (PHMC)
+and Personal Data Protection Act (PDPA), so that I manage client data in a compliant manner.
+4.  Should be compatible with any Operating System supporting Java 17 (Windows, macOS, Linux).
+5.  Should function completely offline.
+6.  Jar file size should not exceed 100MB.
 
-*{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Appointment details**: Information on the appointment including date, time, notes and payment details.
+* **API**: Application Programming Interface.
+* **Client**: A person receiving services from the physiotherapist. He/she should have a unique name (not case-sensitive).
+* **Client contact detail**: A contact detail that includes name, phone number, email address,
+  address, appointment details, tags etc.
+* **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.
+* **GUI**: Graphical User Interface.
+* **MSS**: Main Success Scenario.
+* **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
+* **Tag**: A label to indicate the client's condition.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -339,44 +754,430 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** PhysioPal is designed to handle names in a **case-insensitive** manner 
+and does not accept duplicate names, so there will never be a case where more than one contact with the same name exists in the contact list.
+
+</div>
+
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+1. Saving window preferences.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Relaunch the app by using the `java -jar physiopal.jar` command to run the application.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person.
+
+   1. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+      **Expected**: The person named john doe is added and displayed in the address book.
+
+   1. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+      **Expected**: No person is added, duplicate contact. Error details shown in the status message.
+
+   1. **Test case**: `add Jane p/98765432`<br>
+      **Expected**: No person is added, invalid command format. Error details shown in the status message.
+
+   1. Other incorrect add commands to try: `add`, `add n/John Doe n/John Doe`, `...`<br>
+      **Expected**: Similar to previous.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. **Test case**: `delete John Doe`<br>
+       **Expected**: The contact named john doe is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. **Test case**: `delete John Doe`<br>
+       **Expected**: No contact is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete XXX`, `...` (where XXX is not a name in the address book)<br>
+       **Expected**: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a person
+
+1. Editing a person's information while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `edit John Doe p/91234567`<br>
+       **Expected**: The contact named john doe has his/her phone number changed to `91234567`. Details of the edited contact is shown in the status message.
+
+    1. **Test case**: `edit John Doe n/John Doo`<br>
+       **Expected**: The contact named john doe has his/her name changed to john doo. Details of the edited contact is shown in the status message.
+
+    1. **Test case**: `edit John Doo`<br>
+       **Expected**: No contact is edited. Error details shown in the status message.
+
+
+### Finding persons
+
+1. Finding a person by name while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    2. **Test case**: `find John`<br>**Expected**: All contacts with names containing "john" (case-insensitive) should appear in the results, e.g., "john doe." The search should be able to display "john" and "john doe" regardless of casing. Total number of the matched contacts is shown in the status message.
+
+    3. **Test case**: `find alex david`<br>**Expected**: Contacts containing "alex" or "david" in any order should appear in the results, e.g., "alex yeoh" and "david li." The results should display all contacts that match at least one keyword in a case-insensitive manner. Total number of the matched contacts is shown in the status message.
+
+    4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if no client's name contains "han". Error details shown in the status message.
+
+2. Finding a person by phone number while all clients are being shown.
+
+    1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches. Total number of the matched contacts is shown in the status message.
+
+### Viewing a person
+
+1. Viewing a person’s details in the address book.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. And that he or she has a scheduled appointment. If not, add the required contact or appointment using a command similar to:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` and `schedule John Doe d/2024-10-29 1200 note/First Appointment` respectively
+
+    1. **Test case**: `view John Doe`<br>**Expected**: A pop-up window should display the full details for john doe, including:
+        - Name
+        - Phone Number
+        - Email
+        - Address
+        - Condition
+        - Schedule
+        - Reminder Note<br>
+
+    1. **Test case**: `view John`<br>**Expected**: No window will pop up. Error details shown in the status message.
+
+    1. **Test case**: `view Nonexistent Name`<br>**Expected**: No window will pop up. Error details shown in the status message.
+
+### Scheduling an appointment
+
+1. Scheduling an appointment for a client while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>**Expected**: Contact named john doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
+
+    1. **Test case**: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>**Expected**: No contact is updated with the corresponding appointment. Error details shown in the status message.
+
+    1. **Test case**: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>**Expected**: Similar to previous.
+
+### Deleting an appointment
+
+1. Deleting an appointment for a client while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    
+        At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
+
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1200`<br>**Expected**: Contact named john doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
+
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1300`<br>**Expected**: No contact is updated. Error details shown in the status message.
+
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1800`<br>**Expected**: Similar to previous.
+
+### Setting a reminder note for an appointment
+
+1. Setting a reminder note for a scheduled appointment for a client while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        
+        At least **one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
+
+    1. **Test case**: `reminder John Doe r/1 hour`<br>**Expected**: Contact name john doe will be updated with a reminder note of 1 hour before Oct 29 2024, 12:00pm
+
+    1. **Test case**: `reminder John Doee r/1 hour`<br>**Expected**: No contact is updated with the corresponding reminder time. Error details shown in the status message.
+
+    1. **Test case**: `reminder John Doe r/1 cycle`<br>**Expected**: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
+
+### Deleting a reminder note
+
+1. Deleting a reminder note for a client while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. A reminder note should be set for the client john doe. If not, run the appropriate command to set a reminder note for john doe.<br>`reminder John Doe r/1 day`<br>
+
+    1. **Test case**: `reminder-delete John Doe`<br>**Expected**: Contact named john doe will be updated without the reminder note. Success message of the reminder note deletion shown in the status message.
+
+    1. **Test case**: `reminder-delete John Doe`<br>**Expected**: No contact is updated. Error details shown in the status message.
+
+### Listing upcoming appointments
+
+1. Listing all upcoming appointments.
+
+   1. **Prerequisites**: Only appointments scheduled for a future date and time relative to the current local date and time will be displayed. 
+
+   1. **Test case**: `appointment-list`<br>
+     **Expected**: Lists all upcoming appointments in chronological order. Total number of appointments and 
+   details of the appointments shown in the status message.
+   
+   2. **Test case**: `appointment-list d/2024-11-25`<br>
+     **Expected**: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
+   details of the appointments shown in the status message.
+   
+   3. **Test case**: `appointment-list d/2024-11-10 1000`<br>
+     **Expected**: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
+     details of the appointments shown in the status message.
+   
+   4. Other incorrect appointment-list commands to try: `appointment-list d/`, `appointment-list d/2025-13-32`, `...`<br>
+     **Expected**: No appointments listed. Error details shown in the status message.
+
+### Making payment for an appointment
+
+1. Marking payment as paid.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
+       **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
+       Details of the status change shown in the status message.
+
+    2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
+       **Expected**: No payment made. Error details shown in the status message.
+
+2. Marking payment as unpaid.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
+       **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
+       Details of the status change shown in the status message.
+
+    2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
+       **Expected**: No payment made. Error details shown in the status message.
+
+### Showing Top Three Upcoming Appointments
+
+1. Handling Data Retrieval.
+    1. If there are no upcoming appointments: A message indicating no upcoming appointments will be displayed to the user.
+    2. If there are upcoming appointments: The top three upcoming appointments will be displayed in order.
+
+### Listing all persons
+
+1. Viewing all clients in PhysioPal.
+
+    1. **Prerequisites**: There are client contacts stored in PhysioPal. If not run the appropriate command to add clients to PhysioPal.
+        <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        <br>`add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Newgate Prison`
+   
+   2. **Test Case**: `list`
+        <br>Expected: All previously saved client contacts will be shown in the list. Success message is displayed.
+
+### Clearing all contacts
+
+1. Clearing the entire list of contacts in the JSON file that is being used as the data source.
+
+    1. **Test case**: `clear`<br>
+       **Expected**: All contacts in the data file are cleared.
+
+### Exiting the application
+
+1. Closes the PhysioPal application.
+
+    1. **Test case**: `exit`<br>
+       **Expected**: The application closes.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. If the data file is missing, a new empty client contact list is created in the given directory.
+   2. If the data file is corrupted, the corrupted file is cleared and an empty client contact list is returned.
+   3. The data file is saved automatically after each command that modifies the data file.
 
-1. _{ more test cases …​ }_
+## **Appendix: Planned Enhancements**
+
+**Team Size - 5**
+
+### 1. Support Multiple clients with the Same Name
+**Current Feature Flaw**<br>
+
+PhysioPal currently does not allow duplicate names, which does not reflect real-world scenarios where different clients may have identical names.
+
+**Proposed Implementation**<br>
+1. Modify the `add` command to support adding multiple clients with the same name.
+   1. Exact duplicate entries (where all fields are identical) will still be disallowed.
+2. Update commands to accept both `INDEX` and `NAME` formats (i.e. `COMMAND INDEX [parameters]` or `COMMAND NAME [parameters]`).
+   <br> <b>Index format</b>: Each client is uniquely identified by their index.
+   <br> <b>Name format</b>:
+      * <b>Single Match</b>: The command executes as usual.
+      * <b>Multiple Matches</b>:
+         - A list of all clients with the same name is displayed.
+         - Users can select the desired client by modifying the command input to include the appropriate index number.
+
+### 2. Allow Special Characters in Names
+**Current Feature Flaw**<br>
+
+PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a person's legal name.
+
+**Proposed Implementation**<br>
+
+Change the check in the add command to allow for special characters in names.
+
+### 3. Enhance Name Display
+**Current Feature Flaw**<br>
+
+PhysioPal's UI displays all names in lowercase, which may not reflect the actual case formatting of users' names.    
+
+**Proposed Implementation**<br>
+
+Modify the UI to display names as they were originally entered, preserving their case formatting.
+
+### 4. Set Reminders for Specific Appointments
+**Current Feature Flaw**<br>
+
+PhysioPal only allows reminders at the client level, limiting users to set reminders only for the next upcoming appointment. This prevents users from setting reminders for each appointment.
+
+**Proposed Implementation**<br>
+1. Modify the reminder feature to support setting reminders at the appointment level instead of just the client level.
+    1. Users will be able to set a reminder for any scheduled appointment.
+2. Update the command syntax to `REMINDER NAME d/DATE_AND_TIME r/REMINDER_TIME`
+
+### 5. Enhance Reminder Feature
+**Current Feature Flaw**<br>
+
+Currently, PhysioPal sets a reminder note for clients. However, the system to send these reminders have yet to be implemented. 
+
+**Proposed Implementation**<br>
+
+1. Add a new "Reminders" box in PhysioPal's application interface. This box will display upcoming reminders based on the reminder times set by users.
+2. Reminders are displayed in chronological order, with the soonest reminders appearing at the top of the list.
+3. As reminders expire (i.e once the appointment time passes), they are automatically removed from the Reminders box.
+
+### 6. Make Scheduling Cumulative
+**Current Feature Flaw**<br>
+
+PhysioPal’s schedule command replaces a person's existing appointments with new ones, instead of adding to the current list of schedules.
+
+**Proposed Implementation**<br>
+
+Update the schedule command to append new appointments to the existing list of schedules for a person. Specifically:
+
+1. Retrieve the current schedules of the person.
+2. Validate for any duplicate or conflicting time slots.
+3. Append the new schedules to the existing ones.
+
+### 7. Make 'Empty Note in Schedule' Error Message More Specific
+**Current Feature Flaw**<br>
+
+The current error message for an empty note in the schedule command `Invalid command format!
+schedule: Schedule appointments for client. Parameters: NAME d/DATE_AND_TIME... note/NOTE...
+Example: schedule John Doe d/2024-10-17 1200 note/first appointment` is too general.
+
+**Proposed Implementation**<br>
+
+Update the error message to specifically indicate that the note cannot be empty: The note field cannot be empty. Please provide a note for the appointment.
+
+### 8. Validate No-Change Edits in Edit Command
+**Current Feature Flaw**<br>
+
+Currently, if a user calls the `edit` command but does not change any information (e.g they enter the same values for all fields), PhysioPal still returns a success message.
+
+**Proposed Implementation**<br>
+1. Update the `edit` command to check if the new input values are identical to the existing data.
+2. If no changes are detected, an error message will be displayed, such as `No changes detected. Please enter different values to update the record.`.
+
+### 9. Enable Information Wrapping in Client Window
+**Current Feature Flaw**  
+
+PhysioPal currently truncates long client details (address, email, name, and medical condition) in the client window, limiting readability.
+
+**Proposed Implementation**
+
+1. Modify `ClientWindow` to enable wrapping for long fields, ensuring full details are visible across multiple lines.
+2. Use `Text` or `TextArea` components with word-wrapping for address, email, and medical condition fields. The name field will also wrap if it exceeds the header width.
+
+### 10. Add 'Appointment Date In The Past' Prompt Message
+
+**Current Feature Flaw**
+
+PhysioPal currently does not have an error message or prompt when the user tries to use `appointment-list` with a date and time
+filter that was in the past (i.e. after the current local system time) and displays `Listed 0 upcoming appointments.`. <br>
+Hence the user may be confused as to why no appointments are returned on a past appointment date.
+
+**Proposed Implementation**
+
+1. Modify `appointment-list` command to detect that given date and time filter is in the past.
+2. Other than displaying `Listed 0 upcoming appointments.`, display in a new line to inform the user that
+`Date and Time you have given are in the past. I am designed to display only upcoming appointments.`.
+
+## **Appendix: Effort**
+
+### Project Overview
+
+Our project aims to provide an efficient contact management system for a physiotherapist 
+with a large client base, building on AddressBook Level 3 (AB3). Additional features include scheduling appointments,
+setting reminder notes, tracking patient appointments, type, and payment. These improvements are
+aimed to provide a cost-effective solution to help physiotherapists save time, money and manpower on
+repetitive tasks.
+
+### Difficulty Level and Challenges Faced
+
+Developing PhysioPal presented unique challenges. Unlike AB3,
+which handles only one entity type, PhysioPal extends heavily on the appointment feature: `Schedule`.
+The need for seamless interaction between different entities and satisfying functionality requirements
+demanded significant work to incorporate features such as reminder notes and appointment handling.
+Furthermore, the pop-up window to display client details in an organized fashion added complexity
+to the UI design.
+
+Entity Management and Interaction: Handling multiple interdependent entities added complexity
+in data storage and retrieval, along with maintaining consistent UI updates.
+Error Management in Scheduling: Validating date and time inputs for appointments, 
+especially in cases of overlaps and conflicts, required custom validation logic and extensive testing.
+State Persistence Across Sessions: Ensuring that scheduled appointments and 
+client information persist across sessions added layers of complexity to the storage component.
+
+### Effort Required
+
+The effort required for PhysioPal was extensive, encompassing phases of analysis,
+design, development, testing, and documentation. The multidisciplinary team dedicated considerable
+time and resources to understand the application's architecture, pinpoint areas for improvement, 
+and implement new features while maintaining compatibility and stability. 
+Utilizing Agile methodologies allowed the team to address challenges iteratively and integrate
+stakeholder feedback throughout, leading to a streamlined and effective development process.
+
+
+### Achievements
+
+PhysioPal was able to achieve many milestones despite the difficulties faced. 
+This majorly enhanced the contact management system’s functionality to be more tailored
+to physiotherapists. Key achievements included:
+
+1. Streamlined Contact Removal (delete): The delete command enables physiotherapists to 
+remove a client by name instead of an ID, simplifying the process and reducing errors. 
+This approach allows quick removal of inactive clients.
+
+2. Enhanced Appointment Scheduling and Management (schedule, appointment-delete, appointment-list):
+The schedule command allows quick setup of client appointments with date, time, and contextual notes,
+ensuring well-prepared sessions. appointment-delete provides flexibility to cancel appointments by
+name and time, preventing scheduling conflicts. appointment-list offers an overview of 
+upcoming sessions, helping to manage and organize appointments effectively.
+
+3. Effective Reminder Management (reminder and reminder-delete): The reminder command allows 
+physiotherapists to set a reminder note in terms of hours and days before appointments, 
+ensuring punctuality and reducing the risk of missed sessions. reminder-delete allows for easy 
+removal of outdated reminders, providing flexibility. Together, these features help maintain a 
+well-organized schedule, enhancing the client experience.
+
+4. Integrated Payment Tracking (payment): The payment command marks specific appointments as paid, 
+simplifying billing and ensuring financial clarity. By tracking payment status per appointment, 
+this feature minimizes errors and reduces administrative workload. It provides a clear payment
+record linked to each client’s treatment.
+
+5. Focused Client Information Display (view Command with Pop-Up): The view command opens a pop-up 
+with comprehensive client details, including contact info, appointments, reminder notes, and 
+payment status. This consolidated view improves accessibility, allowing physiotherapists to 
+quickly review all necessary client information. It streamlines workflow and supports a more 
+personalized client experience.
+
+### Effort Saved Through Reuse
+
+For our project, approximately 10% of the effort was saved through reusing AB3's existing codebase.
+Features such as adding and deleting contact were adapted from the existing implementation
+to fit our users' needs.
