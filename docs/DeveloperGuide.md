@@ -421,6 +421,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
+**Use case: Mark a person as favorite**
+
+**MSS**
+
+1.  HR staff requests to mark a specific person in the list as a favorite.
+2.  HRHelper marks the person as a favorite.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not have the authority to mark the person as favorite.
+
+  Use case ends.
+
+* 2a. The person is already marked as favorite.
+
+    * 2a1. HRHelper notifies HR staff that the person is already a favorite.
+
+  Use case ends.
+
+**Use case: Sort persons by tag**
+
+**MSS**
+
+1.  HR staff requests to sort persons by a specified tag (e.g., department or manager). 
+2.  HRHelper sorts and displays the list based on the specified tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 1b. The given tag is invalid.
+
+    * 1b1. HRHelper shows an error message.
+
+  Use case resumes at step 1.
 
 **Use case: Search an employee**
 
@@ -531,8 +572,8 @@ Team size: 5
 2. HR staff can track maternity leave of up to 6 months.
 3. Allow for the `count` command to count number of favorited employees.
 4. Enhance the GUI to make it more visually appealing.
-5. add enhancement here
-6. add enhancement here
+5. Allow for the `sort` command to sort not only by tag but also by other fields.
+6. Allow for the `favorite` command to view only favorited employees.
 7. add enhancement here
 8. add enhancement here
 9. add enhancement here
