@@ -11,9 +11,9 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and the following special characters: "
-                    + "/, -, ', ., ,, (, ), &. It should not be blank.";
+                    + "/, -, ', ., ,, (, ), &. It should start with an alphabet and should not be blank.";
 
-    public static final String VALIDATION_REGEX = "\\s*[\\p{Alnum}][\\p{Alnum} /'.,()&-]*";
+    public static final String VALIDATION_REGEX = "\\s*[A-Za-z][\\p{Alnum} /'.,()&-]*";
 
     public final String fullName;
 

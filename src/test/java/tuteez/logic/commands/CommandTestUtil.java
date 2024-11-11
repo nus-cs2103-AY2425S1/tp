@@ -44,6 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_MONDAY = "Monday 1000-1100";
     public static final String VALID_LESSON_TUESDAY = "Tuesday 1000-1100";
     public static final String VALID_LESSON_WEDNESDAY = "Wednesday 1000-1100";
+    public static final String VALID_LESSON_THURSDAY = "Thursday 1000-1100";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

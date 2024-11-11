@@ -6,8 +6,38 @@
 
 # Tuteez Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<!-- TOC start -->
+
+- [**Acknowledgements**](#acknowledgements)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+   * [Architecture](#architecture)
+   * [UI component](#ui-component)
+      + [Command Box Component](#command-box-component)
+   * [Logic component](#logic-component)
+   * [Model component](#model-component)
+   * [Storage component](#storage-component)
+   * [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+   * [Find feature](#find-feature)
+      + [Implementation details](#implementation-details)
+   * [Design Considerations](#design-considerations)
+   * [Detection of next lesson](#detection-of-next-lesson)
+   * [Display feature](#display-feature)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+   * [Product scope](#product-scope)
+   * [User stories](#user-stories)
+   * [Use cases](#use-cases)
+   * [Non-Functional Requirements](#non-functional-requirements)
+   * [Glossary](#glossary)
+- [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+   * [Launch and shutdown](#launch-and-shutdown)
+   * [Deleting a student](#deleting-a-student)
+   * [Saving data](#saving-data)
+
+<!-- TOC end -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -75,19 +105,30 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 #### Command Box Component
 
-The `CommandBox` component is responsible for handling user command inputs. Below is the sequence diagram illustrating how the `CommandBox` processes user commands:
+The `CommandBox` component is responsible for handling user command inputs and managing command history navigation.
 
-<puml src="diagrams/CommandBoxSequenceDiagram.puml" alt="Sequence Diagram for CommandBox"/>
+**Handling user inputs:**
+Below is the sequence diagram illustrating how the `CommandBox` processes user inputs:
 
-The command execution flow:
+<puml src="diagrams/CommandBoxSequenceDiagram.puml" alt="Sequence Diagram for CommandBox command execution"/>
+
+How command execution works:
 1. When the user types a command and presses Enter, the `CommandBox` retrieves the command text from the `TextField`.
 2. If the command is not empty, it is passed to the `CommandExecutor` for execution.
 3. Upon successful execution:
    - The command is added to the `CommandHistory` for tracking previous commands
    - The text field is cleared
 4. If a `CommandException` or `ParseException` occurs:
-   - The command box styling is updated to indicate the error
-   - The error style class is added to the text field
+   - The error style class is added to the text field to indicate error.
+   - The command text will not be added to the `CommandHistory`.
+
+**Command History Navigation:**
+Below is the sequence diagram showing the command history navigation:
+<puml src="diagrams/CommandBoxSequenceDiagram2.puml" alt="Sequence Diagram for CommandBox history navigation"/>
+
+- UP Arrow Key: Retrieves the previous command from the `CommandHistory` when pressed.
+- DOWN Arrow Key: Retrieves the next command from the `CommandHistory` when pressed.
+- After retrieving a command (previous or next), the `CommandBox` updates the `TextField` with this command and moves the cursor to the end of the text.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -197,32 +238,36 @@ Classes used by multiple components are in the `tuteez.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add/delete remark feature
+### Find feature
 
-The `addRemarkCommand` allows users to add a remark to a specified person in the addressbook.
-The `deleteRemarkCommand` allows users to delete a remark from a specified person in the addressbook.
-They both use `RemarkCommandParser` to parse the user input and create an `addRemarkCommand` and `deleteRemarkCommand` object respectively, which modifies the `Person` object in the `Model`.
+#### Implementation details
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+The `find` command involves searching for keywords that match the student's details.
 
-<puml src="diagrams/AddRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -a Good progress` Command" />
+It uses `FindCommandParser` to parse the user input and create a `FindCommand` object, which modifies the `Person` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `deleteRemarkCommand`, taking `execute("remark 1 -d 2")` API call as an example.
+The following sequence diagram demonstrates the flow for the `find` command:
 
-<puml src="diagrams/DeleteRemarkSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `remark 1 -d 2` Command" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find n/john` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the this feature works:
+### Design Considerations
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `remark` (i.e., `RemarkCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddRemarkCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed.<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+Aspect: Search target differentiated by prefixes
+- Alternative 1 (Current choice): Prefixes (e.g., n/ for name) specify the field within the studet's details to search, followed by the desired search target (e.g. n/Alice)
+    - Pros:
+        - Allows for more accurate searches
+    - Cons
+        - Users must remember prefixes
+- Alternative 2: No differentiation of search targets
+    - Pros:
+        - More straightforward to type out
+    - Cons:
+        - May result in ambiguous commands, leading to incorrect or incomplete searches.
 
 ### Detection of next lesson
 
@@ -232,7 +277,7 @@ High level idea:
 
 * For each student, calculate the duration remaining until the start of each of their lessons based on devices current time.
 * Identify the lesson with the shortest remaining time and display it as their next scheduled lesson.
-* Returns null if a student has no lessons scheduled
+* Returns null if a student has no lessons scheduled.
 
 How this feature works:
 
@@ -246,7 +291,7 @@ How this feature works:
 The `DisplayCommand` allows users to display a specified person in the addressbook.
 It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
 
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("remark 1 -a Good progress")` API call as an example.
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("addremark 1 r/Good progress")` API call as an example.
 
 <puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
 
@@ -259,104 +304,6 @@ How the this feature works:
 1. The command can communicate with the `Model` when it is executed.<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -436,28 +383,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | expert user          | not type the exact command, just something like it  | not just adhere to a specific format                                                                                                       |
 
 
-*{More to be added}*
-
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Add a student**
 
 **MSS**
 
-1. User types keyword followed by student details into textbox
-2. App acknowledges that a new user has been added
+1. User types keyword followed by student details into the textbox
+2. Tuteez acknowledges that a new student has been added
 3. Use case ends
 
 **Extensions**
 
-- 2a. App detects similar/identical name or phone number in records
+- 2a. Tuteez detects similar/identical name
+    - 2a1. Tuteez rejects the new addition and show error message
+    Use case ends
 
-    - 2a1. Asks user to confirm action
-    - 2a2. User confirms/denies
-    - 2a3. App adds new entry and acknowledges / returns to home screen
-    - 2a4. Use case ends
+- 2b. Tuteez detects clashing lesson
+    - 2b1. Tuteez rejects the new addition and show error message
+    Use case ends
 
 
 **Use case: UC2 - List all students**
@@ -465,17 +411,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. App displays all students address book in alphabetical order
+2. Tuteez displays all students
 3. Use case ends
 
-**Use case: UC3 - Delete a person**
+**Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons <u>(UC2)</u>
+1.  User requests to list students
+2.  Tuteez shows a list of student <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the person
+4.  Tuteez deletes the person
 5. Use case ends
 
 
@@ -487,13 +433,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. Tuteez shows an error message.
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message.
-  - 3b2. Use case resumes from step 2
+  - 3b1. Tuteez shows an error message.
+        
+      Use case resumes at step 2
 
+**Use case: UC4 - Add a lesson to a student**
+
+**MSS**
+
+1. User requests to list persons
+1. tuteez shows a list of persons <u>(UC2)</u>
+1. User types keyword followed by index then lesson day and time
+1. tuteez adds lesson to student
+
+**Extensions**
+
+* 3a. The lesson clashes with an existing lesson(s)
+
+   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with
+
+   Use case resumes at step 2
+
+* 3b. The lesson has invalid day or times
+
+   * 3b1. Tuteez shows error message specifying the error
+
+   Use case resumes at step 2
+
+* 3c. The given index is invalid.
+
+   * 3c1. Tuteez shows an error message.
+
+   Use case resumes at step 2
 
 ### Non-Functional Requirements
 
@@ -514,19 +489,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student**: A person who is taking lessons from the tutor
 * **Tutor**: The user of the application
-* **Parent**: A person who is the parent or guardian of the student
-* **Add student**: A feature that allows users to create a new student entry along with their information in the application
-* **Delete student**: A feature that allows users to remove a student entry and their information from the application
-* **Search student**: A feature that allows users to find a particular student by entering their name
-* **Private student details**: Student details and contact information that are not meant to be shared with others
-* **Private parent details**: Parent details and contact information that are not meant to be shared with others
-* **Notes tab**: A section within the application where users can record additional information about their students
-* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **addlsn**: An abbreviation for the addlesson command
+* **dellsn**: An abbreviation for the deletelesson command
+* **addrmk**: An abbreviation for the addremark command
+* **delrmk**: An abbreviation for the deleteremark command
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
-* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
-
+* **Remarks**: Longer texts that can be added to students
+* **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands
+* **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus
 --------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Group size: 5 memebers
+
+1. Student identification: 
+   - Our app uniquely identifies students by name. In future updates, we plan to use a combination of name **and** phone number for unique identification.
+      - Two students cannot share the same name and the same phone number
+      - Allowing different names with the same phone number accommodates cases where tutors of younger students may store siblings under different names but with a shared contact number, typically a parent’s.
+1. Optimise add command:
+   - Our app does not support adding remarks while adding new student. 
+   - In future updates, we can add this feature to grant our users more flexibility
+1. Optimise edit command:
+   - Our app does not support direct editing of lessons or remarks. 
+   - In future updates, we plan to enable users to edit existing lessons and remarks without needing to delete and re-add them.
+1. Name of student truncated on left:
+   - If a student’s name exceeds the character limit, it will be truncated in the left panel view. Users can use the display command to view the student’s full name when needed.
+1. Find command Behavior:
+   - After using the find command to locate student(s), executing most other commands will reset the left panel to the default view, as if the `list` command was called. 
+   - In future updates, we will rectify this issue.
+1. Remark Constraints:
+   - We do not allow remarks to contain `r/`. 
+   - In future updates, allow `r/`.
+1. Find behavior:
+   - The find command uses the `or` constraint, while this can provide more flexibility there are cases where users want to search for long sequence of `Strings` such as "Serangoon Gardens Rd". ]
+   - In future updates, we can provide users some way to indicate certain target words as a group and apply `and` constraint.
+1. Remarks added one at a time:
+   - `addrmk` only allows users to add one remark at a time
+   - In future updates, allow users to add multiple
+1. Remarks deleted one at a time:
+   - `delrmk` only allows users to delete one remark at a time
+   - In future updates, allow users to delete multiple
 
 ## **Appendix: Instructions for manual testing**
 
@@ -543,7 +546,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -554,29 +557,149 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student by index
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete`<br>
+      Expected: No student is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size) <br>
+      Expected: Invalid student index error is shown in the status message.
 
-1. _{ more test cases …​ }_
+1. Deleting a student by name
 
+    1. Prerequisites: The student list contains only a student with the name "John".
+
+    1. Test case: `delete john`<br>
+       Expected: John will be deleted from the list. Details of john will be shown in the status message.
+   
+    1. Test case: `delete Alice`<br>
+       Expected: No student is deleted. An error will be displayed in the status message.
+
+### Adding a student
+
+1. Adding a student with just name and phone number
+
+   1. Prerequisites: List all students using the `list` command. No student with the name "John" in the list.
+
+   1. Test case: `add n/john p/82223238`<br>
+      Expected: A new student will be added to the list. The details of the student will be shown in the status message.
+
+1. Adding a student with a duplicate name
+    
+    1. Prerequisites: The student list contains only a student with the name "John".
+    
+    1. Test case: `add n/john p/82223238`<br>
+        Expected: No person is added. A duplicate student error will be displayed in the status message.
+
+1. Adding a student with a clashing lesson
+    
+    1. Prerequisites: The student list contains only a student with the name "John" with only a lesson on "MONDAY 0900-1000".
+    
+    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`<br>
+        Expected: No person is added. A clashing lesson error will be displayed in the status message.
+
+### Editing a student
+
+1. Editing a student with index
+   
+    1. Prerequisites: List all students using the `list` command. There are already students in the student list. No student with the name "Alice" in the list.
+
+    1. Test case: `edit 1 n/Alice`<br>
+        Expected: Name of the first student in the list will be updated to "Alice".
+   
+    1. Test case: `edit`<br>
+       Expected: No student is edited. Error details shown in the status message.
+   
+    1. Other incorrect edit commands to try: `edit 0`, `edit x` (where x is larger than the list size) <br>
+       Expected: Invalid student index error is shown in the status message.
+
+### Adding a lesson to a student
+
+1. Adding a lesson to a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
+    
+    1. Test case: `addlesson 1 l/monday 0900-1100` <br>
+        Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
+
+### Deleting a lesson from a student
+
+1. Deleting a lesson from a student using index
+    
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one lesson on "MONDAY 0900-1000".
+    
+    1. Test case: `deletelesson 1 li/1` <br>
+       Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
+
+### Adding a remark to a student
+
+1. Adding a remark to a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
+    
+    1. Test case: `addremark 1 r/Midterms coming up` <br>
+       Expected: The remark "Midterms coming up" will be added to the student. The student's details should be displayed on the right panel. Remark successfully added is shown in status message.
+
+### Deleting a remark from a student
+
+1. Deleting a remark from a student using index
+
+    1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one remark "Midterms coming up".
+
+    1. Test case: `deleteremark 1 ri/1` <br>
+       Expected: The remark "Midterms coming up" will be deleted from the student. The student's details should be displayed on the right panel. Remark successfully deleted is shown in the status message.
+    
+### Displaying a student
+
+1. Displaying a student using index
+
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    1. Test case: `display 1`<br>
+       Expected: Details of first student is displayed on the right panel. A message confirming successful display of the student is shown in the status message.
+    
+    1. Test case: `display`<br>
+       Expected: No student is displayed. Error details shown in the status message.
+   
+    1. Test case: `display x` (where x is larger than the list size) <br>
+       Expected: No student is displayed. Invalid student index is shown in the status message.
+
+### Navigating through command history
+
+1. Navigating to your previous command
+
+    1. Prerequisite: You have just entered the command `list`.
+
+    1. Test case: Press the `UP` arrow key. <br>
+       Expected: The previous command `list` is shown in the command box.
+
+1. Navigating to your next command
+
+    1. Prerequisite: You have entered the `list` command followed by the `help` command. Close the help window.
+
+    1. Test case: Press the `UP` arrow key once. <br>
+       Expected: You would see the `help` command in the command box.
+   
+    1. Test case: Press the `UP` arrow key twice. <br>
+        Expected: You would see the `list` command in the command box.
+
+    1. Test case: Press the `UP` arrow key twice then press the `DOWN` arrow key once. <br>
+       Expected: You would see the `help` command in the command box.
+
+    1. Test case: Press the `UP` arrow key once then press the `DOWN` arrow key once. <br>
+       Expected: The command box should be cleared.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file. <br>
+      Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.

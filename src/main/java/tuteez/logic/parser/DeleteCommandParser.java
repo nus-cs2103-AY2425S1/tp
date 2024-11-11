@@ -1,6 +1,8 @@
 package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.DeleteCommand;
@@ -18,17 +20,24 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        try {
-            if (args.trim().matches("\\d+")) {
-                Index index = ParserUtil.parseIndex(args);
-                return new DeleteCommand(index);
-            } else {
-                Name name = ParserUtil.parseName(args);
-                return new DeleteCommand(name);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+        validateNonEmptyArgs(args, DeleteCommand.MESSAGE_USAGE);
+        if (args.trim().matches("-?\\d+")) {
+            Index index = parsePersonIndex(args);
+            return new DeleteCommand(index);
+        } else {
+            Name name = ParserUtil.parseName(args);
+            return new DeleteCommand(name);
         }
+    }
+
+    private Index parsePersonIndex(String args) throws ParseException {
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(args);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, args)));
+        }
+        return index;
     }
 }

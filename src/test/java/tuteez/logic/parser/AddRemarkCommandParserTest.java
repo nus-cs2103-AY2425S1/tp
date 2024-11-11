@@ -53,7 +53,7 @@ public class AddRemarkCommandParserTest {
     public void parse_invalidPersonIndex_throwsParseException() {
         // Invalid index for add remark
         assertParseFailure(parser, "0 " + PREFIX_REMARK + " Some remark",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_PERSON_INDEX_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "0")));
     }
 
     @Test

@@ -1,6 +1,9 @@
 package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -243,7 +246,7 @@ public class ParserUtil {
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code remark} is invalid.
+     * @throws ParseException If the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
@@ -252,5 +255,62 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Validates that the provided {@code String args} is not empty or only whitespace.
+     * If invalid, throws a {@code ParseException} with the provided {@code errorMessage}.
+     *
+     * @param args The args to validate.
+     * @param errorMessage The error message to use in the exception if validation fails.
+     * @throws ParseException If {@code args} is empty or contains only whitespace.
+     */
+    public static void validateNonEmptyArgs(String args, String errorMessage) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+    }
+
+    /**
+     * Validates that the specified {@code Prefix} exists in the given {@code ArgumentMultimap}.
+     * If the prefix is missing, throws a {@code ParseException} with the provided {@code errorMessage}.
+     *
+     * @param argMultimap The map of arguments to check.
+     * @param prefix The prefix to validate.
+     * @param errorMessage The error message to use in the exception if validation fails.
+     * @throws ParseException If the specified {@code prefix} is not present in {@code argMultimap}.
+     */
+    public static void validatePrefixExists(ArgumentMultimap argMultimap, Prefix prefix, String errorMessage)
+            throws ParseException {
+        if (!argMultimap.getValue(prefix).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+    }
+
+    /**
+     * Parses the person index from the provided {@code ArgumentMultimap}
+     * Validates that the preamble contains a valid index and throws a {@code ParseException} if invalid.
+     *
+     * @param argMultimap The argument multimap to retrieve the preamble from.
+     * @return The parsed {@code Index}
+     * @throws ParseException If the preamble is empty or contains an invalid index.
+     */
+    public static Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
+        String preamble = argMultimap.getPreamble().trim();
+
+        if (preamble.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
+        }
+
+        return index;
     }
 }

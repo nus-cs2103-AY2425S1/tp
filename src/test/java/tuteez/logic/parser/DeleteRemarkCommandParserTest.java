@@ -1,6 +1,7 @@
 package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_REMARK_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_REMARK_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_REMARK_INDEX_PREFIX;
@@ -41,6 +42,12 @@ public class DeleteRemarkCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPersonIndex_throwsParseException() {
+        assertParseFailure(parser, "0 " + PREFIX_REMARK_INDEX + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "0")));
+    }
+
+    @Test
     public void parse_missingCommandType_throwsParseException() {
         assertParseFailure(parser, "1 Some remark",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_REMARK_INDEX_PREFIX));
@@ -61,9 +68,10 @@ public class DeleteRemarkCommandParserTest {
     @Test
     public void parse_invalidRemarkIndex_throwsParseException() {
         assertParseFailure(parser, String.format("1 %s 0", PREFIX_REMARK_INDEX),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_REMARK_INDEX_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, String.format(MESSAGE_INVALID_REMARK_INDEX_FORMAT, "0")));
 
         assertParseFailure(parser, String.format("1 %s -1", PREFIX_REMARK_INDEX),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_REMARK_INDEX_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        String.format(MESSAGE_INVALID_REMARK_INDEX_FORMAT, "-1")));
     }
 }

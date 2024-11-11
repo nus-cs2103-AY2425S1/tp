@@ -9,7 +9,7 @@ import tuteez.model.Model;
 import tuteez.model.person.Person;
 
 /**
- * Adds or deletes a lesson for a student using its identified index in the displayed person list.
+ * Adds or deletes a lesson for a student using its identified index in the displayed student list.
  */
 public abstract class LessonCommand extends Command {
     public static final String COMMAND_WORD_ADD = "addlesson";
@@ -17,21 +17,11 @@ public abstract class LessonCommand extends Command {
     public static final String COMMAND_WORD_DELETE = "deletelesson";
     public static final String COMMAND_WORD_DELETE_ALT = "dellsn";
 
-    public static final String MESSAGE_USAGE = "Add lessons by index in displayed student list: " + COMMAND_WORD_ADD
-            + " (short form: " + COMMAND_WORD_ADD_ALT + ")"
-            + " INDEX l/LESSON [l/LESSON]...\n"
-            + "Example: " + COMMAND_WORD_ADD + " 1 l/monday 0900-1100 l/wednesday 1400-1600\n"
-            + "\n"
-            + "Delete lessons by index in displayed student list: " + COMMAND_WORD_DELETE
-            + " (short form: " + COMMAND_WORD_DELETE_ALT + ")"
-            + " INDEX li/LESSON_INDEX [li/LESSON_INDEX]...\n"
-            + "Example: " + COMMAND_WORD_DELETE + " 1 li/1 li/2";
-
     protected final Index personIndex;
 
     /**
      * Creates a LessonCommand with the specified {@code personIndex}.
-     * @param personIndex Index of the person in the displayed person list to apply command
+     * @param personIndex Index of the student in the student person list to apply command
      */
     public LessonCommand(Index personIndex) {
         this.personIndex = personIndex;
