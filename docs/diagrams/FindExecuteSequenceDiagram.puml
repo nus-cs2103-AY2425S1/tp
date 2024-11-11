@@ -5,7 +5,6 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":FindCommand" as FindCommand LOGIC_COLOR
 participant "CommandResult" as CommandResult LOGIC_COLOR
-participant "Messages" as Messages LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -30,15 +29,8 @@ activate Model
 Model --> FindCommand : list
 deactivate Model
 
-FindCommand -> FindCommand : list.size()
-
-FindCommand -> Messages : String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, list size)
-activate Messages
-Messages --> FindCommand : formatted message
-deactivate Messages
-
 create CommandResult
-FindCommand -> CommandResult : new CommandResult(formatted message)
+FindCommand -> CommandResult : new CommandResult(...)
 activate CommandResult
 CommandResult --> FindCommand : result
 deactivate CommandResult

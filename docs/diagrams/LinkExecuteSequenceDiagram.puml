@@ -5,51 +5,36 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LinkCommand" as LinkCommand LOGIC_COLOR
 participant "CommandResult" as CommandResult LOGIC_COLOR
-participant "CommandException" as CommandException LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":Parent" as Parent MODEL_COLOR
-participant ":Student" as Student MODEL_COLOR
 end box
 
 [-> LinkCommand : execute(model)
 activate LinkCommand
 
-alt Retrieve child
-    LinkCommand -> Model : personFromName(childName)
-    activate Model
-    deactivate Model
 
-    alt Child not found or not a Student
-        LinkCommand -> CommandException : throw CommandException()
-    else Child is a Student
-        LinkCommand -> LinkCommand : cast Student (castedChild)
-    end
-end
+LinkCommand -> Model : personFromName(...)
+activate Model
+Model --> LinkCommand : child
+deactivate Model
 
-alt Retrieve parent
-    LinkCommand -> Model : personFromName(parentName)
-    activate Model
-    deactivate Model
+LinkCommand -> Model : personFromName(...)
+activate Model
+Model --> LinkCommand : parent
+deactivate Model
 
-    alt Parent not found or not a Parent
-        LinkCommand -> CommandException : throw CommandException()
-    else Parent is a Parent
-        LinkCommand -> LinkCommand : cast Parent (castedParent)
-    end
-end
 
-LinkCommand -> Student : createLinkedChild(castedChild, castedParent)
-activate Student
-Student --> LinkCommand : linkedChild
-deactivate Student
+LinkCommand -> Model : createLinkedChild(castedChild, castedParent)
+activate Model
+Model --> LinkCommand : linkedChild
+deactivate Model
 
-LinkCommand -> Parent : createLinkedParent(castedParent, castedChild)
-activate Parent
-Parent --> LinkCommand : linkedParent
-deactivate Parent
+LinkCommand -> Model : createLinkedParent(castedParent, castedChild)
+activate Model
+Model --> LinkCommand : linkedParent
+deactivate Model
 
 LinkCommand -> Model : setPerson(castedChild, linkedChild)
 activate Model
@@ -60,7 +45,7 @@ activate Model
 deactivate Model
 
 create CommandResult
-LinkCommand -> CommandResult : new CommandResult(generateSuccessMessage())
+LinkCommand -> CommandResult : new CommandResult(...)
 activate CommandResult
 CommandResult --> LinkCommand : result
 deactivate CommandResult
