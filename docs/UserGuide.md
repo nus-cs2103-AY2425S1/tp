@@ -400,7 +400,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 > :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
-> :warning: At least one field to edit must be provided.
+> :warning: At least 1 field of a `Guest` has to be specified for the command to be valid.
 
 * :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
 
@@ -479,7 +479,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 > :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
-> :warning: At least one field to edit must be provided.
+> :warning: At least 1 field of a `Vendor` has to be specified for the command to be valid.
 
 * :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
 
@@ -556,6 +556,8 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
+
+3. when inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors.
 
 [_Back to Top_](#table-of-contents)
 
