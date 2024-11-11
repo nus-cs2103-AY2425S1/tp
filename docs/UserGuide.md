@@ -36,7 +36,9 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
    - Then type this command to start the app:
 
         `java -jar educonnect.jar`
-   - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
+   - After a few seconds, the EduConnect window will appear with some sample data to help you get started. Here are some screenshots of how it might look:
+    
+    <br><br/>
 
     **macOS User Interface**: 
     ![Ui](images/Ui.png)
@@ -45,8 +47,8 @@ Welcome to EduConnect – a tool designed to help teachers manage student and te
     
     {: .alert .alert-info}
     > :information_source: **Note:**
-    > * EduConnect will look slightly different on macOS, and on Windows. Particularly, the emojis on macOS will be colourised, while those on Windows will be in monochrome.
-    > * The screenshots on this User Guide will be primarily on macOS.
+    > * EduConnect will look slightly different on macOS and Windows. Specifically, the emojis on macOS will be in color, while those on Windows will appear in monochrome.
+    > * The screenshots in this User Guide will primarily be from macOS.
 
 5. Enter a command:
 
@@ -74,7 +76,7 @@ The table below provides a quick overview of each parameter associated with a co
 >
 > * Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
 >
-> * A person is considered as a duplicate if they share the same phone number or email address regardless of whether they are a student or teacher. For example, adding a student with the phone number `12345678` will result in an error if another student or teacher already has the same phone number. 
+> * A person is considered a duplicate if they share the same phone number or email address, regardless of whether they are a student or teacher. For example, adding a student with the phone number `12345678` will result in an error if another student or teacher already has that phone number. 
 
 | Parameter           | Definition                                                        | Constraints                                                                                                                       | Examples                                                                   |
 |---------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -153,6 +155,14 @@ Example:
     * the next of kin whose name is Bob Doe
     * an emergency contact 8765 4321
 
+{: .alert .alert-secondary}
+> When a new student is added using the example command above, they will be displayed as shown below, with the following example success message:
+> 
+> ![result for addAppt command example](images/addStudentCommand.png)
+> 
+> _New student added: John Doe; Gender: male; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags:_
+>
+
 ##### Adding a teacher: `teacher`
 
 Adds a teacher to EduConnect.
@@ -182,6 +192,13 @@ Example:
     * the subject she teaches as English
     * the classes she teaches 5A and 8C
 
+{: .alert .alert-secondary}
+> When a new teacher is added using the example command above, they will be displayed as shown below, with the following example success message:
+> 
+> ![result for addTeacher command example](images/addTeacherCommand.png)
+>
+> _New teacher added: Elizabeth Chua; Gender: female; Phone: 95673211; Email: elizchua@yahoo.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subject: [English]; Classes: 8C, 5A; Tags:_
+
 [Back to Table of Contents](#table-of-contents)
 
 ### Managing Entries
@@ -205,9 +222,13 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 /name Betsy Crower` edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
-   <br/><br/>
 
-![edit command](images/edited_ui.png)
+{: .alert .alert-secondary}
+> When a person is edited using the example command above, they will be displayed as shown below, with the following example success message:
+>
+> ![edit command](images/edited_ui.png)
+>
+> _Edited Person: Miles Morales; Gender: male; Phone 91919291; Email: johnsc@example.com; Address: 311, Clementi Ave 2, #02-25; Subject: [Physics]; Classes: 7A, 7B; Days attended: 0; Next of Kin: John Morales; Emergency Contact: 87654321; Tags:_
 
 #### Deleting a person : `delete`
 
@@ -223,7 +244,7 @@ Format: `delete INDEX…​`
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 >
-> If any index provided is invalid, the command will not be executed.
+> The command will not be executed if any of the provided indexes are invalid.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in EduConnect.
@@ -277,15 +298,20 @@ Format: `unmark INDEX…​`
 * The person corresponding to the index must be a student.
 * The student must have attended at least one day to be unmarked.
 
-Example:
-* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
-* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
-* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
-
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
 > Use the `find` command to filter the list of students before unmarking their attendance.
+
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> The command will not be executed if any of the provided indexes are invalid.
+
+Example:
+* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
+* `find /name John` followed by `unmark 1` reduces the attendance of the 1st student within the filtered list.
+* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
 
 #### Reset attendance: `resetAttendance`
 
@@ -320,8 +346,8 @@ Finds and displays person(s) who satisfies the provided parameters.
 Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`
 
 * At least one of the optional fields must be provided.
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `/name Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `/name Hans Bo` will match `Bo Hans`.
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -333,11 +359,20 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 > 
-> Only full words will be matched e.g. `/name Han` will not match `Hans`
+> Only full words will be matched e.g. `/name Han` will not match `Hans`.
 
 Examples:
-* `find /name John` returns `John` and `John Doe`
-* `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
+* `find /name John` returns `John` and `John Doe`.
+* `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A).
+* `find /subject English` returns `Elizabeth` who has the subject English
+
+{: .alert .alert-secondary}
+> When the find command above is entered, the following results will be displayed, with the following success message:
+>
+> ![result for addTeacher command example](images/findCommand.png)
+>
+> _Found 1 matching entries!_
+
 
 #### Sorting persons : `sort`
 
@@ -367,15 +402,19 @@ Format: `sort ATTRIBUTE`
 
 Examples:
 * `sort attendance` sorts the list of students by attendance in descending order.
-  <br/><br/>
 
-![sort attendance command](images/sort_attendance.png)
+{: .alert .alert-secondary}
+> When the list of persons is sorted by attendance using the example command above, they will be displayed as shown below, with the following example success message:
+>
+> ![sort attendance command](images/sort_attendance.png)
+>
+> List sorted successfully.
 
 [Back to Table of Contents](#table-of-contents)
 
 ### Command History
 
-EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. <br> For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2` in your command box, and pressing it again will display `delete 1`.
+EduConnect has a built-in command history which allows users to navigate through previously entered valid commands in the command box by pressing the **Up** and **Down** arrow keys. <br><br/> For example, if you have entered `delete 1` and then `unmark 2`, pressing the **Up** arrow key will display `unmark 2` in your command box, and pressing it again will display `delete 1`.
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
@@ -418,7 +457,7 @@ Format: `redo`
 
 Examples:
 * `edit 1 /name Alex Koh` followed by `undo` and then `redo` restores the name of the 1st person back to `Alex Koh`.
-* `delete 3` followed by `undo` and then `redo` removes the person at position 3 from the list
+* `delete 3` followed by `undo` and then `redo` removes the person at position 3 from the list.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -435,14 +474,31 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 >
 > The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
-![change themes](images/Changing-Themes.png)
+{: .alert .alert-secondary}
+> ![change themes](images/Changing-Themes.png)
+>
+> _Here is an example of how the menu looks._
+
+{: .alert .alert-secondary}
+> ![result for dark Theme example](images/Ui.png)
+>
+> _The dark theme will be the default theme when you open EduConnect._
+
+{: .alert .alert-secondary}
+> ![result for light Theme example](images/LightMode.png)
+>
+> _The light theme can be toggled by following the above instructions._
 
 #### Viewing help : `help`
 
 Shows a message with a URL link to access the user guide.
 
 Format: `help`
-![help message](images/helpMessage.png)
+
+{: .alert .alert-secondary}
+> ![help message](images/helpMessage.png)
+>
+> _Here is an example of how the help window looks._
 
 #### Exiting the program : `exit`
 
