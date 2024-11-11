@@ -98,10 +98,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): UI of the application.
+* [**`Logic`**](#logic-component): Executes & parses commands.
+* [**`Model`**](#model-component): Data of the application is stored here.
+* [**`Storage`**](#storage-component): Reads/Writes data to the disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -475,6 +475,7 @@ MSS
 * **Commonly Used Formats**: Text Files, CSV Files
 * **Help System**: The built-in documentation or command that provides guidance on using the application, including descriptions of commands and examples.
 * **Goods**: A commodity that is sold to the user.
+* **Goods Receipt**: 
 * **Supplier**: Someone who is selling goods to the user. For this application, they are the contacts.
 * **Procurement Date**: The date in which the order for the goods have been made.
 * **Arrival Date**: The expected date of delivery for the goods.
