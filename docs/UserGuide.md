@@ -130,8 +130,8 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by an `@` and then a `domain`.
   * The `domain` must:
-    * consist of one or more domain labels separated by single periods.
-      * each domain label must start and end with alphanumeric characters.
+    * Consist of one or more domain labels separated by a single period.
+      * Each domain label must start and end with alphanumeric characters.
       * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
   * Examples:
     * `example@gmail.com`, `example@u.nus.edu`.

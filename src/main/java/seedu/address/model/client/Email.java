@@ -20,7 +20,7 @@ public class Email {
             + "characters and must not contain consecutive special characters.\n"
             + "\t2. This is followed by an @ and then a domain.\n"
             + "\t3. The domain must:\n"
-            + "\t\t- Consist of one or more domain labels separated by single periods.\n"
+            + "\t\t- Consist of one or more domain labels separated by a single period.\n"
             + "\t\t\t- Each domain label must start and end with alphanumeric characters. \n"
             + "\t\t\t- The final label is the top-level domain (TLD), which must be at least "
             + "two alphabetic characters long.\n"
