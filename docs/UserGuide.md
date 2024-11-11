@@ -162,7 +162,7 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 
 <box type="warning">
 
-**Caution:** Attempting to add variations of "hired", "rejected" or "pending" as additional tags will still only result in a single status tag defaulting to "pending"
+**Caution:** Attempting to add variations of `hired`, `rejected` or `pending` as additional tags will still only result in a single status tag defaulting to "pending"
 </box>
 <br><br>
 
@@ -206,7 +206,7 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 
 <box type="warning">
 
-**Caution:** Attempting to edit the tags to include variations of "hired", "rejected" or "pending" as additional tags prevent their addition while maintaining the original status tag.
+**Caution:** Attempting to edit the tags to include variations of `hired`, `rejected` or `pending` as additional tags will be ignored while maintaining the original status tag.
 </box>
 <br><br>
 
