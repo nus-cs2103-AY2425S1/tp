@@ -259,9 +259,9 @@ Format: `setrsvp INDEX s/STATUS_INDEX`
 * Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
 * The index **must be within the index boundaries of the guest list**. i.e. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
-    * `1` represents `Coming`
-    * `2` represents `Not Coming`
-    * `3` represents `Pending`
+  * `1` represents `Coming`
+  * `2` represents `Not Coming`
+  * `3` represents `Pending`
 * By default, the RSVP status for all guests is `Pending`.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may only set one guest's RSVP status in each command. i.e. Setting multiple guests' statuses at once is not supported.
@@ -343,8 +343,8 @@ Format: `undo`
 
 Examples:
 * `tag 7 t/neighbours` is the latest successfully executed
-  ![undoCommand1.png](images/undoCommand1.png)
-  ![undoCommand2.png](images/undoCommand2.png)
+![undoCommand1.png](images/undoCommand1.png)
+![undoCommand2.png](images/undoCommand2.png)
 
 
 ### Clearing all entries : `clear`
