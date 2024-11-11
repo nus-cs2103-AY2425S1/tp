@@ -72,6 +72,8 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
     ```
    You should see the BakeBuddy window appear as follows in the next page!
 
+<div style="page-break-after: always;"></div>
+
 ## **Step 3: Try Your First Commands**
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
@@ -104,12 +106,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   - *Done*: Order that has been completed and delivered/received
 </div>
 
-## **UI Elements**
-
-<div markdown="block" class="alert alert-info">
-- **Index**: The number shown beside each item in a list, used for referencing items in commands
-</div>
-
 
 ## **Product Management**
 
@@ -120,6 +116,15 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 - **Cost**:
   - For ingredients: Purchase price from supplier
   - For pastries: Selling price to customer
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
+## **UI Elements**
+
+<div markdown="block" class="alert alert-info">
+- **Index**: The number shown beside each item in a list, used for referencing items in commands
 </div>
 
 ## **Contact Management**
@@ -196,7 +201,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                       | `deleteContact 1`                                                    |
 | [Edit Contact](#edit-contact-command)     | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335`                                           |
 | [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
-| [Find](#find-persons-by-name)             | `find KEYWORD [MORE_KEYWORDS]`                                              | `find Charlotte Bernice`                                             |
+| [Find](#find-persons-by-name)             | `find KEYWORD [MORE_KEYWORDS]...`                                           | `find Charlotte Bernice`                                             |
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
@@ -303,7 +308,8 @@ For Supply Orders:
 ## **Q3: How do I add collection dates and large quantities to orders?**
 **A:** You can include collection dates and quantities in the order's remark field:
 ```
-addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x Croissant, 3x Muffin
+addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x 
+Croissant, 3x Muffin
 ```
 
 Best practices for remarks:
@@ -376,6 +382,9 @@ For the best experience:
 
 ## **Q10: Are there limits to email and phone number length?**
 **A:** There are several constraints to email and phone number.
+
+<div markdown="block" class="alert alert-info">
+
 - Phone numbers:
   - Minimum: 3 digits
   - Maximum: 15 digits
@@ -384,6 +393,8 @@ For the best experience:
   - Maximum: No limit. Not advisable to input long phone number as it may disrupt the UI display.
   - Must follow standard email format (xxx@xxx.xxx)
   - Special characters allowed: . _ - @
+
+</div>
 
 ## **Q11: Can I add two contacts with the same phone number?**
 **A:** No, phone number is the unique identification number in the contact book. When a different name is attached to an 
@@ -416,7 +427,8 @@ addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 
 **Example:**
 ```bash
-addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
+addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
+03-04 
 ```
 **Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-2.png)
@@ -427,7 +439,8 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] 
+[t/TAG]...
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name. This has to be alphanumerical.
@@ -439,7 +452,8 @@ addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] [t/TAG].
 
 **Example:**
 ```bash
-addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 i/Allergic to peanuts
+addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
+03-04 i/Allergic to peanuts
 ```
 ![screenshot](images/Screenshot-3.png)
 
@@ -450,7 +464,8 @@ Adds a customer order by providing the customer's name, phone number and the pas
 New customer will be added with the name if phone number not found in contacts.
 
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... [r/REMARK]
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... 
+[r/REMARK]
 ```
 - **Parameters:**
   - `n/NAME`: (Optional) The customer's name. This has to be alphanumerical.
@@ -515,7 +530,8 @@ all their pastries and ingredient needs, making it more convenient for bakery ow
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS] 
+[t/TAG]...
 ```
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
@@ -527,7 +543,8 @@ addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS]
 
 **Example:**
 ```bash
-addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 s/salt, chocolate
+addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
+03-04 s/salt, chocolate
 ```
 ![Add Supplier.png](images%2FAdd%20Supplier.png)
 
@@ -547,7 +564,8 @@ of supplier contacts and ingredient sources, helping bakery owners efficiently m
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 ```bash
-addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... [r/REMARK]
+addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... 
+[r/REMARK]
 ```
 - **Parameters:**
     - `n/NAME`: (Optional) The supplier's name. This has to be alphanumerical.
@@ -630,9 +648,7 @@ deleteSupplyOrder 1
 <div style="page-break-after: always;"></div>
 
 ## **Edit Contact Command**
-Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
-
-<div style="page-break-after: always;"></div>
+Update the contact details of an existing contact in the address book, including persons, customers, and suppliers.
 
 ```bash
 editContact INDEX FIELDS [moreFIELDS]...
@@ -664,7 +680,7 @@ exit
 Filter and list contacts in the address book based on specified tags.
 
 ```bash
-filterContact t/TAG [MORE_TAGS...]
+filterContact t/TAG [MORE_TAGS]...
 ```
 - **Parameters:**
    - `t/TAG`: A tag to filter contacts by. Multiple tags can be specified by repeating the "t/" prefix with different tag values.
