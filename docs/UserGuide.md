@@ -36,7 +36,7 @@ The user guide contains formatting to highlight important info. The standards us
 ## Table of Contents
 
 - [Quick Start](#quick-start)
-  - [Some commands to get started:](#some-commands-to-get-started)
+  - [Some commands to get started](#some-commands-to-get-started)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - **Employee Commands**
@@ -61,9 +61,9 @@ The user guide contains formatting to highlight important info. The standards us
   - [Delete assignment : `unassign`](#delete-assignment--unassign)
   - **Other Commands**
   - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Traversing command history](#traversing-command-history)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
-  - [Traversing command history](#traversing-command-history)
   - [Editing the command history save file](#editing-the-command-history-save-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
@@ -104,7 +104,7 @@ A GUI similar to the screenshot below should appear in a few seconds. Note how t
 
 Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-### Some commands to get started:
+### Some commands to get started
 
    - `listemployees` : Lists all employees.
 
@@ -552,6 +552,19 @@ Format: `exit`
 
 [Return to Top](#table-of-contents)
 
+### Traversing command history
+
+HRConnect keeps a log of past commands entered, up to a maximum of the 50 latest commands. To access past commands, make sure that your cursor is in the command box (indicated within the red box below), then press the up (↑) and down (↓) arrow keys.
+
+![cursorInCommandBox.png](images/cursorInCommandBox.png)
+
+- Press the up arrow key (↑) to navigate to the previous command.
+- Press the down arrow key (↓) to navigate to the next command.
+
+Previously entered commands are saved to disk (up to a maximum of 50 commands). Users can navigate to previous commands from earlier sessions as commands are saved across exit(s) of the application.
+
+[Return to Top](#table-of-contents)
+
 ### Saving the data
 
 HRConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -572,19 +585,6 @@ Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g
 
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
-
-[Return to Top](#table-of-contents)
-
-### Traversing command history
-
-HRConnect keeps a log of past commands entered, up to a maximum of the 50 latest commands. To access past commands, make sure that your cursor is in the command box (indicated within the red box below), then press the up (↑) and down (↓) arrow keys. This feature is similar to terminal or command prompt history.
-
-![cursorInCommandBox.png](images/cursorInCommandBox.png)
-
-- Press the up arrow key (↑) to navigate to the previous command.
-- Press the down arrow key (↓) to navigate to the next command.
-
-Previously entered commands are saved to disk (up to a maximum of 50 commands). Users can navigate to previous commands from earlier sessions as commands are saved across exit(s) of the application.
 
 [Return to Top](#table-of-contents)
 
