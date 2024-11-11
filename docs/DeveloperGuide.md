@@ -57,6 +57,7 @@
 * [7.1 Update subject and lesson time cumulatively](#7-1-update-subject-and-lesson-time-cumulatively)
 * [7.2 Names with special characters](#7-2-names-with-special-characters)
 * [7.3 Multiple students with the same name](#7-3-multiple-students-with-the-same-name)
+* [7.4 Usage of reserved prefixes in parameters](#7-4-usgae-of-reserved-prefixes-in-parameters)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -289,6 +290,11 @@ filtered student list.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
 #### 3.3.2 Design Considerations
 **Name vs Index for Deletion**
 - **Current Implementation (Alternative 1):**
@@ -321,11 +327,14 @@ manage student profiles more efficiently.
   duplication.
 
 #### 3.4.1 Implementation - Sequence Diagrams
-The sequence diagrams below depicts the interaction among various classes during the execution of a tag command. Note
-that while the `TagCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
-lifeline till the diagram's end.
+The sequence diagrams below depicts the interaction among various classes during the execution of a tag command.
 
 <puml src="diagrams/TagSequenceDiagram-Logic.puml" alt="TagSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 <puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
 
@@ -370,11 +379,14 @@ to a student's profile for viewing key information.
   do not affect the search result.
 
 #### 3.5.1 Implementation - Sequence Diagram
-The sequence diagram below depicts the interaction among various classes during the execution of a view command. Note
-that while the `ViewCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the
-lifeline till the diagram's end.
+The sequence diagram below depicts the interaction among various classes during the execution of a view command.
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 #### 3.5.2 Design Considerations
 **Case Insensitivity and Name Matching**
@@ -406,10 +418,13 @@ can manage and monitor students' progress more efficiently.
 
 #### 3.6.1 Implementation - Sequence Diagram
 The sequence diagram below illustrate the interactions among various classes when an add task command is executed.
-Note that while the `AddTaskCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML
-extend the lifeline till the diagram’s end.
 
 <puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 #### 3.6.2 Design Considerations
 **Parsing Task Input**
@@ -1026,6 +1041,8 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the planned enhancements for future versions of EduManage.
 
+**Team size**: 5.
+
 ### 7.1 Update subject and lesson time cumulatively
 
 Currently, both subjects and lesson times are not updated cumulatively; using the `update` command replaces all previous
@@ -1034,15 +1051,29 @@ subjects or lesson times without removing existing ones. We plan to enhance this
 both subjects and lesson times, enabling users to add new subjects and lesson times without overwriting existing entries
 by changing the behaviour of the `update` command.
 
+***
+
 ### 7.2 Names with special characters
 
 Currently, only alphanumeric names are allowed. Users are advised to omit special characters (e.g., `,`, `-`, `/`) or replace them with spaces.
 A future version will include support for names with special characters to accommodate a wider range of naming conventions.
+
+***
 
 ### 7.3 Multiple students with the same name
 
 Currently, EduManage does not support multiple students with identical names. As a workaround, users can differentiate these
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by
 relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
+
+***
+
+### 7.4 Usage of reserved prefixes in parameters
+
+Currently, EduManage does not check whether reserved prefixes are used within parameters. A future version will ensure that
+all reserved prefixes are restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
+enhancement aims to improve system reliability by reducing potential errors arising from misuse of reserved prefixes.
+
+The reserved prefixes are: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
 
 [(Back to Top)](#edumanage-developer-guide)

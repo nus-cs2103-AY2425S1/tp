@@ -18,7 +18,7 @@ public class Messages {
             + " of students in the list";
     public static final String MESSAGE_STUDENT_NOT_FOUND =
             "No student found with the specified name. Please check the name and try again";
-    public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
+    public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d student(s) listed!";
     public static final String MESSAGE_INVALID_STUDENT_UPDATE =
             "This student does not exist. Create a student first before updating";
     public static final String MESSAGE_DUPLICATE_FIELDS =
