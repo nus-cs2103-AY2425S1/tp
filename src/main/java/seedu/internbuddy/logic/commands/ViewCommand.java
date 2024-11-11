@@ -13,9 +13,7 @@ import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.CompanyToViewPredicate;
 
 /**
- * Finds and lists all companies in address book whose name, tags or application details
- * contains any of the argument keywords.
- * Keyword matching is case-insensitive.
+ * Expands the application details of and displays only the specified company based on the given index.
  */
 public class ViewCommand extends Command {
 
