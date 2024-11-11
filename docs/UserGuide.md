@@ -759,7 +759,16 @@ Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to
 Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
 >
 > ---
-> **User Error #4**: The `From` time is later than `To`
+> 
+> **User Error #4**: Index out-of-bounds
+>
+> **Input**: `apt 100 d/20-10-24 fr/0800 to/1000`
+>
+> **Output**: The person index provided is invalid!
+>
+> ---
+>
+> **User Error #5**: The `From` time is later than `To`
 >
 > **Input**: `apt d/111124 fr/0900 to/0800`
 >
