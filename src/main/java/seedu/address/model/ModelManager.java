@@ -234,7 +234,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Predicate<? super Person> getFilteredPersonListPredicate() {
+    public Predicate<Person> getFilteredPersonListPredicate() {
         Predicate<? super Person> predicate = filteredPersons.getPredicate();
 
         // predicate may be null, which means always true
@@ -242,7 +242,7 @@ public class ModelManager implements Model {
             return unused -> true;
         }
 
-        return predicate;
+        return predicate::test;
     }
 
     @Override
