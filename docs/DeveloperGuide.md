@@ -899,7 +899,7 @@ The only way to set these fields is through the `edit` command, which can be inc
 We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
 
 3. **Add more features to the help command pop up window.** The `help` command pop up window currently only shows instructions for three commands, `add`, `edit` and `delete`. We plan
-to add instructions for all other features to make it easier to familiarise with the commands without going to the external User Guide. 
+to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide. 
 
 ## **Appendix: Effort**
 
