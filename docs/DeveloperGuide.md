@@ -577,7 +577,7 @@ testers are expected to do more *exploratory* testing.
 
 Team Size: 4
 
-1. **Enhance multi-screen support**: The GUI currently opens off-screen when switching from a secondary screen to the primary screen. We will fix this by ensuring that the GUI opens on the primary screen without requiring the user to delete the `preferences.json` file.
+1. **Improve Help Window content**: The current Help Window content is quite wordy, and some command formats are cut off halfway. We will fix this by allowing resizing of the help window, so users are better able to read the content.
 2. **Improve Help Window behavior**: The Help Window remains minimized when the `help` command is run again. We will fix this by automatically restoring the minimized Help Window when the `help` command is run, or when the `Help` menu or `F1` keyboard shortcut is used.
 3. **Add horizontal scroll bar**: The fields UI is cut off for any contacts with lengthy fields. We will fix this issue by adding a horizontal scroll bar to cells, so everything can be seen even for contacts with lengthy fields.
 4. **Allow special characters in tag names**: Tag names currently only accept alphanumeric characters. We will fix this by modifying tag name validation to accept special characters like hyphens.
