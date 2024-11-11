@@ -13,6 +13,7 @@
 
 ## **Acknowledgements**
 
+- Codebase adapted from [AddressBook3](https://se-education.org/addressbook-level3/)
 - Libraries
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
@@ -1607,20 +1608,6 @@ testers are expected to do more _exploratory_ testing.
        the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into
        the group list shown to you. After executing the command you will be brought back to the default panel of the
        application, which is the panel displaying the student list.
-
----
-
-<div style="page-break-after: always;"></div>
-
-## **Appendix: Effort**
-
-[To be updated.]
-
-### Design Choices
-
-### Challenges Faced
-
-### Achievements
 
 ---
 
