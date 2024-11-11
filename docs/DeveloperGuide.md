@@ -100,14 +100,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete e 1` Command" />
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `edit 1 n/tom` API call as an example.
-
-<puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(find all n/John)` API call as an example.
-
-<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find all n/John` Command" />
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCommandParser`) and uses it to parse the command.
@@ -193,33 +185,39 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority             | As a …​     | I want to …​                                                       | So that I can…​                                               |
-|----------------------|------------|-------------------------------------------------------------------|--------------------------------------------------------------|
-| `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
-| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
-| `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
-| `* * *`              | HR Manager | insert email address of my employees/potential hire.              | retrieve their email address if required.                    |
-| `* * *`              | HR Manager | delete data through the CLI.                                      | delete users who are incorrectly added.                      |
-| `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
-| `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
-| `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
-| `* *`                | New user   | purge the sample data in the tutorial.                            | input my own data to use.                                    |
-| `*`                  | HR Manager | view the emergency contact details of employees.                  | quickly respond in case of an emergency.                     |
-| `*`                  | HR Manager | sort the employee information by when their contract will expire. | better plan out when to resign contracts.                    |
+| Priority             | As a …​     | I want to …​                                                       | So that I can…​                                                     |
+|----------------------|------------|-------------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                                   |
+| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                           |
+| `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                              |
+| `* * *`              | HR Manager | insert email address of my employees/potential hire.              | retrieve their email address if required.                          |
+| `* * *`              | HR Manager | view department and role of employees/potential hire.             | match suitable employees and potential hires to open job positions.|
+| `* * *`              | HR Manager | insert department and role of my employees/potential hire.        | retrieve their department and role if required.                    |
+| `* * *`              | HR Manager | view contract end date of my employees.                           | plan when to renew their contract.                                 |
+| `* * *`              | HR Manager | insert contract end date of my employees.                         | retrieve their contract end date if required                       |
+| `* * *`              | HR Manager | delete data through the CLI.                                      | delete users who are incorrectly added.                            |
+| `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them.       |
+| `* *`                | HR Manager | find details of employees/potential hire.                         | quickly view the relevant details of the specific employee/potential hire being searched for.|
+| `* *`                | HR Manager | change potential hires to employees and vice versa.               | maintain accurate records of employment status for streamlined hiring and onboarding.|
+| `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                          |
+| `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.               |
+| `* *`                | New user   | purge the sample data in the tutorial.                            | input my own data to use.                                          |
+| `*`                  | HR Manager | view the emergency contact details of employees.                  | quickly respond in case of an emergency.                           |
+| `*`                  | HR Manager | sort the employee information by when their contract will expire. | better plan out when to resign contracts.                          |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `StaffSync` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `StaffSync` and the **Actor** is the `User`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons.
-2.  System shows a list of persons.
+2.  StaffSync shows a list of persons.
 3.  User requests to delete a specific person in the list of the correct shown type.
-4.  System deletes the person.
+4.  StaffSync deletes the person.
    
    Use case ends.
 
@@ -231,13 +229,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-   * 3a1. System shows an error message.
+   * 3a1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. The given index is not of the correct person type.
+* 3b. The given index does not match the correct person type.
 
-   * 3b1. System shows an error message.
+   * 3b1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
@@ -246,7 +244,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add an employee.
-2. System saves the employee's information.
+2. StaffSync saves the employee's information.
 
    Use case ends.
 
@@ -254,13 +252,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input syntax is invalid.
 
-   * 1a1. System shows an error message.
+   * 1a1. StaffSync shows an error message.
 
       Use case resumes at step 1.
 
 * 1b. The user requests to add a potential hire.
 
-   * 1b1. System saves the potential hire's information.
+   * 1b1. StaffSync saves the potential hire's information.
 
       Use case ends.
 
@@ -268,42 +266,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to find a person.
-2. System requests for the parameters to find by.
+1. User wants to find a person.
+2. StaffSync requests for the parameters to find by.
 3. User gives the paramters to find by.
-4. System displays a list of persons whose fields matches the keywords.
+4. StaffSync displays a list of persons whose fields matches the keywords.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The input syntax is invalid.
+* 3a. The input syntax is invalid.
 
-   * 1a1. System shows an error message.
+   * 3a1. StaffSync shows an error message.
 
       Use case resumes at step 1.
 
-* 1b. User request the find to be of an employee.
+* 3b. User request the find to be of an employee.
 
-    * 1b1. System displays a list of employees whose fields matches the keywords.
-
-      Use case ends.
-
-* 1d. User request the find to be of a potential hire.
-
-    * 1c1. System displays a list of potential hires whose fields matches the keywords.
+    * 3b1. StaffSync displays a list of employees whose fields matches the keywords.
 
       Use case ends.
 
-* 3a. User gives an empty paramter.
+* 3c. User request the find to be of a potential hire.
 
-   * 3a1. System shows an error message.
+    * 3c1. StaffSync displays a list of potential hires whose fields matches the keywords.
+
+      Use case ends.
+
+* 3d. User gives an empty paramter.
+
+   * 3d1. StaffSync shows an error message.
 
       Use case resumes at step 3.
 
 * 4a. No contacts match any keywords.
 
-    * 4a1. System shows an empty list.
+    * 4a1. StaffSync shows an empty list.
 
       Use case ends.
 
@@ -312,9 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User request to list person.
-2. System shows a list of person.
+2. StaffSync shows a list of person.
 3. User request to change a specific person in the list into an employee.
-4. System changes the person to an employee.
+4. StaffSync changes the person to an employee.
 
    Use case ends.
 
@@ -324,9 +322,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-* 3a. The person is already an employee.
+* 3a. The input syntax is invalid.
 
-  * 3a1. System shows an error message.
+   * 3a1. StaffSync shows an error message.
+
+      Use case resumes at step 1.
+
+* 3b. The person is already an employee.
+
+  * 3b1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
@@ -335,9 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User request to list person.
-2. System shows a list of person.
+2. StaffSync shows a list of person.
 3. User request to change a specific person in the list into a potential hire.
-4. System changes the person to a potential hire.
+4. StaffSync changes the person to a potential hire.
 
    Use case ends.
 
@@ -347,9 +351,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-* 3a. The person is already a potential hire.
+* 3a. The input syntax is invalid.
 
-   * 3a1. System shows an error message.
+   * 3a1. StaffSync shows an error message.
+
+      Use case resumes at step 1.
+
+* 3b. The person is already a potential hire.
+
+   * 3b1. StaffSync shows an error message.
 
       Use case resumes at step 2.
 
@@ -358,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list all persons.
-2. System shows a list of persons.
+2. StaffSync shows a list of persons.
 
    Use case ends.
 
@@ -370,26 +380,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The user requests to list all employees.
 
-   * 1b1. System shows a list of employees.
+   * 1b1. StaffSync shows a list of employees.
 
       Use case ends.
 
 * 1c. The user requests to list all potential hires.
 
-   * 1c1. System shows a list of potential hires.
+   * 1c1. StaffSync shows a list of potential hires.
 
       Use case ends.
+
+* 1d. The input syntax is invalid.
+
+   * 1d1. System shows an error message.
+
+      Use case resumes at step 1.
 
 **Use case: Sort the addressbook**
 
 **MSS**
 
 1. User requests to list person.
-2. System shows a list of person.
+2. StaffSync shows a list of person.
 3. User requests to sort the list.
-4. System asks for the field to sort by as well as the order to sort by.
+4. StaffSync asks for the field to sort by as well as the order to sort by.
 5. User gives the field and order to sort the list by.
-6. System shows the sorted list.
+6. StaffSync shows the sorted list.
 
    Use case ends.
 
@@ -397,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User filters the list to not show all persons.
 
-   * 1a1. System shows a filtered list.
+   * 1a1. StaffSync shows a filtered list.
 
       Use case resumes at step 3, but only the shown person are sorted.
 
@@ -405,12 +421,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+* 5a. The input syntax is invalid.
+
+   * 5a1. StaffSync shows an error message.
+
+      Use case resumes at step 1.
+
 **Use case: Clear the addressbook**
 
 **MSS**
 
 1. User requests to clear the addressbook
-2. System clears the addressbook
+2. StaffSync clears the addressbook
 
    Use case ends.
 
@@ -419,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests for help.
-2. System gives a list of commands.
+2. StaffSync gives a list of commands.
 
    Use case ends.
 
@@ -428,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to exit the program.
-2. System closes.
+2. StaffSync closes.
 
 
 ### Non-Functional Requirements
@@ -456,6 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command line interface - Text based user interface which allows user to type instructions directly to the computer to perform certain tasks.
 * **GUI**: Graphical User Interface - User interface which allows users interact with the application through components such as icons, buttons and menus.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **MSS**: Main Success Scenario - The ideal sequence of steps where everything goes right to achieve the desired outcome in a use case.
 * **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Public Release**: A version of the software that is released to the public with any bugs squashed after Release Candidate.
@@ -668,7 +691,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Invalid command format. No potential hire is deleted as the minimum index is 1. A guide on how to use the command will be shown in the status message.
 
    4. Test case: `Delete E 1`<br>
-      Expected: Invalid command format. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Capitalisation matters. A guide on how to use the command will be shown in the status message.
+      Expected: Unknown command. Error is due to capitalisation of `Delete` and/or `E` instead of `delete` and/or `e`. Capitalisation matters.
 
    5. Test case: `delete e`<br>
       Expected: Invalid command format. There are missing parameters. A guide on how to use the command will be shown in the status message.
@@ -710,7 +733,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
 
    6. Test case: `find e`, `find ph`, `find all`<br>
-   Expected: Incorrect command format due to missing keywords. Status message shows the correct usage of Find command.
+   Expected: Incorrect command format due to missing keywords. Status message shows missing prefix error.
 
    7. Test case: `find E n/john`, `find PH n/john`, `find ALL n/john`<br>
    Expected: Incorrect command format due to capitalisation of parameter.
@@ -718,6 +741,9 @@ testers are expected to do more *exploratory* testing.
 
    8. Other incorrect find commands to try: `find aLL n/john`, `find pH n/john`, `find a`<br>
    Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
+
+   9. Test case: `find all n/`, `find e p/`, `find ph e/`, `find all d/`, `find e r/`<br>
+   Expected: Incorrect command format due to missing keywords after prefix. Status message shows missing keyword after prefix error.
 
 ### Demoting an employee
 
@@ -729,13 +755,13 @@ testers are expected to do more *exploratory* testing.
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
     3. Test case: `demote 0`<br>
-     Expected: Invalid index found. No employees demoted. Error details shown in the status message.
+     Expected: Invalid command format. No employees demoted. Error details shown in the status message.
 
     4. Test case: `Demote 1`<br>
      Excepted: Unrecognised command. Error is due to capitalization of `Demote` instead of `demote`. Capitalisation matters.
 
     5. Test case: `demote`<br>
-     Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+     Expected: Invalid command format as there are missing parameters. A guide on how to use the command will be shown in the status message.
 
     6. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
@@ -755,16 +781,16 @@ testers are expected to do more *exploratory* testing.
        Expected: First person in the list is promoted to an employee. Details of the promoted potential hire is shown in the status message.
 
     3. Test case: `promote 0 2024-12-20`<br>
-       Expected: Invalid index found. No potential hire promoted. Error details shown in the status message.
+       Expected: Invalid command format. No potential hire promoted. Error details shown in the status message.
 
     4. Test case: `Promote 1 2024-12-20`<br>
        Excepted: Unrecognised command. Error is due to capitalization of `Promote` instead of `promote`. Capitalisation matters.
 
     5. Test case: `promote 1`<br>
-       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+       Expected: Invalid command format as there are missing parameters. A guide on how to use the command will be shown in the status message.
 
     6. Test case: `promote`<br>
-      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+      Expected: Invalid command format as there are missing parameters. A guide on how to use the command will be shown in the status message.
 
     7. Test case: `promote 1 20-12-2024`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
@@ -772,7 +798,7 @@ testers are expected to do more *exploratory* testing.
     8. Test case: `promote 1 2024-20-12`<br>
       Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
 
-    9. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
+    9. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`  (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
 2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries).
@@ -843,7 +869,11 @@ Diagram for interactions inside the `Logic` component, taking execute("list all"
 <puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
 Diagram for interactions inside the `Logic` component, taking execute("demote 1") API call.
 
+<puml src="diagrams/EditSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `edit 1 n/tom` Command" />
+Diagram for interactions inside the `Logic` component, taking `edit 1 n/tom` API call.
 
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find all n/John` Command" />
+Diagram for interactions inside the `Logic` component, taking `execute(find all n/John)` API call.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
@@ -914,3 +944,24 @@ it at the very top of the helpWindow screen.
 as right now, the inclusion of ph or e parameter is not as relevant.
 
 3. We plan to add colours to the help and command output text to improve readability.
+
+4. We will allow users to enter any characters for name in the future. For example, "d/o Jr. ඞඞ" can be inputted in the future.
+
+5. We will allow users to put parameters in address, department and role. For example, "employee n/John Doe p/98765432 
+e/johnd@example.com a/311, r/hill Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09" will work where the address is "311, 
+r/hill Clementi Ave 2, #02-25"
+
+6. We will allow phone numbers to have symbols such as -#()+ in the future.
+
+7. We will do stricter validation for email to ensure it is a valid domain. For example, "e/alice@gmail" is currently
+valid, but it should not be.
+
+8. We will use a better duplicate detection method such as NRIC to detect duplicates. Currently, if there are 2 people 
+named "John Doe", it will be impossible to insert them. The duplicate detection is also flawed as "John Doe" and
+"john doe" are seen as different people
+
+9. We will cater to different types of contract in the future. For example, contracts with no contract end date.
+
+10. We will improve find command to search for users based on similarity score like Google's search engine. For example,
+ "find n/John Doe" will return all the names with "John Doe" first before returning the names with "John" and the names 
+with "Doe"
