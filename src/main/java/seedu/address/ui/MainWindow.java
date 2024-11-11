@@ -210,17 +210,14 @@ public class MainWindow extends UiPart<Stage> {
         dialog.setTitle("Confirmation");
         dialog.setHeaderText(null);
 
-        // Create a label with wrapping for the confirmation message
         Label contentLabel = new Label(message + "\n(\"y\" to confirm or any other key to cancel)");
-        contentLabel.setWrapText(true); // Enable text wrapping for long messages
+        contentLabel.setWrapText(true);
         contentLabel.setMaxWidth(400);
 
-        // Get the dialog's content pane and add the label above the existing input box
         VBox content = new VBox(contentLabel, dialog.getEditor());
         content.setSpacing(10);
         dialog.getDialogPane().setContent(content);
 
-        // Show the dialog and capture the result
         Optional<String> result = dialog.showAndWait();
         return result.isPresent() && result.get().trim().equals("y");
     }

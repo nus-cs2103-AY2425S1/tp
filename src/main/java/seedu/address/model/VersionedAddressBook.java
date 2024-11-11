@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
+//Code adapted from AB4 undo/redo feature with modifications
+//With reference to AB3 proposed implementation of undo/redo feature in the DG
 /**
  * Represents an address book that maintains a history of its states to support undo and redo operations.
  */

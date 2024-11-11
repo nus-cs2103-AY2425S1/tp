@@ -68,6 +68,7 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    //ChatGPT to generate javadocs
     /**
      * Parses a {@code String name} into a {@code Name} with a custom error message.
      * Leading and trailing whitespaces will be trimmed.

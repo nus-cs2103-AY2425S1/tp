@@ -85,6 +85,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        //Used Copilot to help split execute method into two methods to improve code quality
         if (targetIndex != null) {
             return executeByIndex(model, lastShownList);
         } else {
@@ -198,6 +199,7 @@ public class DeleteCommand extends Command {
             return false;
         }
         DeleteCommand otherCommand = (DeleteCommand) other;
+        //ChatGPT used to help with equals method
         return (targetIndex != null ? targetIndex.equals(otherCommand.targetIndex) : otherCommand.targetIndex == null)
                 && (policyIndex != null ? policyIndex.equals(otherCommand.policyIndex)
                 : otherCommand.policyIndex == null)
