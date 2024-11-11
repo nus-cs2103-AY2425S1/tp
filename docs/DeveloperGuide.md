@@ -788,25 +788,23 @@ Use case ends.
 ### Glossary
 
 * **AddressBook**: A structured data set containing contact and event information for Talents managed by Talent Managers.
-* **Events**: Social and networking events organised by third parties e.g. award shows, brand, events.
-* **Index**: Refers to the position of the individuals contact or event in TalentHub.
-* **Industry Professional**: Individuals that Talents make contacts for events.
-* **Logic Component**: A part of the architecture responsible for handling user commands and parsing them.
+* **Events**: Social and networking events organized by third parties, such as award shows and brand events.
+* **Index**: The position of individual contacts or events in lists referenced by specific commands.
+* **Industry Professional**: Individuals that Talents interact with or service providers from whom Talents may need to procure services during events.
+* **Logic Component**: A part of the architecture responsible for handling and parsing user commands.
 * **Mainstream OS**: Windows, Linux, macOS.
-* **Model Component**: Manages the applications responsible for handling user commands and parsing them.
+* **Model Component**: Manages the applications responsible for handling and parsing user commands.
 * **Model-View-Controller (MVC)**: A design pattern that separates an application into three main logical components: the Model, the View, and the Controller.
 * **ObservableList**: A list that is monitored for changes, triggering updates to any UI components bound to it.
 * **Parser**: A component that interprets and processes commands inputted by the user.
-* **Persistence**: The storage of data in a way that it can be retrieved later, even after the application is closed.
-* **Person**: Refers to a contact object within the address book application.
-* **Points of Contact (POCs)**: List of persons involved in the event that the Talent Manager would have to contact e.g. hairdresser, stylist, chauffeur.
-* **Private Contact Detail**: A contact detail that is not meant to be shared with others.
+* **Person**: Refers to a contact object within TalentHub.
+* **Points of Contact (POCs)**: A list of persons involved in an event whom the talent manager may need to contact, such as a hairdresser, stylist, or chauffeur.
 * **Sequence Diagram**: A type of UML diagram that shows the order of interactions between objects in a particular scenario.
 * **Storage Component**: Manages reading from and writing to the persistent storage.
-* **Tag**: The associated description with said contact based on common groups.
+* **Tag**: A descriptor associated with a contact, grouping them by common characteristics.
 * **Talent Manager**: Industry professionals involved in managing and planning Talent schedules.
-* **Talents**: Well-known or up-and-coming individuals who partake in the entertainment industry in one way or another.
-* **Undo/Redo Feature**: A functionality that allows reverting or reapplying actions taken by the user within the application.
+* **Talents**: Well-known or emerging individuals active in the entertainment industry.
+* **Undo/Redo Feature**: Functionality that allows users to revert or reapply actions within the application.
 * **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the TalentHub
 
 --------------------------------------------------------------------------------------------------------------------
