@@ -17,7 +17,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
    1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java 17
    1. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.5).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.6).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your F.A.R.T.
    1. A good home folder would be the Downloads folder as it makes the next step easier.
