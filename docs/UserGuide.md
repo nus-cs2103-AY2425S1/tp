@@ -34,17 +34,17 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
-      * [_Mac Users_](#mac-users)
-      * [_Windows Users_](#windows-users)
-      * [_Using the terminal_](#using-the-terminal)
-      * [_Using the HireMe application_](#using-the-hireme-application)
+      * [Mac Users](#mac-users)
+      * [Windows Users](#windows-users)
+      * [Using the terminal](#using-the-terminal)
+      * [Using the HireMe application](#using-the-hireme-application)
   * [Features](#features)
     * [Viewing help : `/help`](#viewing-help-help)
     * [Adding an internship application: `/add`](#adding-an-internship-application-add)
     * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
     * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
+    * [Updating the Status of an internship application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
     * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
@@ -111,6 +111,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 
 4. Find the downloaded `hireme.jar` file and drag it into the folder you created in step 3. <br>
+
     ![hiremejar](images/HireMeJar.png)
 
 <br></br>
@@ -121,7 +122,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
 #### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
-    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/>
+    <img src="images/MacTerminal.png" alt="macsterminal" width="810"/> <br>
    
     You will see a window like this. <br>
 
@@ -129,6 +130,7 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
     
 
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
+
    ![macfilepathinfo](images/Macfilepathinfo.png)
     <br></br>
     On the new open that pops up, left click on `Where` and copy the file path.
@@ -137,14 +139,17 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
    <br></br>
 
 #### _Windows users_
-5. Use windows search and type Terminal, click on open. 
+5. Use windows search and type Terminal, click on open.<br>
+
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
 You will see a window like this. <br>
+
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
 6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.<br>
+
    ![windowsfilepath](images/Windowsfilepath.png)
    <box type="info" seamless>
    <strong>Note:</strong> File path here is highlighted in blue
@@ -157,10 +162,12 @@ You will see a window like this. <br>
 
 8. Type `java -jar hireme.jar` and press `Enter` to run the HireMe application.
 <br></br>
-   - Windows Terminal:
+   - Windows Terminal: <br>
+   
       ![windowscd](images/Windowscd.png)
      <br></br>
-   - Mac Terminal:
+   - Mac Terminal: <br>
+   
       ![maccd](images/Maccd.png)
 <br></br>
 
@@ -243,7 +250,7 @@ Examples:
 </div>
 
 <box type="info" seamless>
-<strong>Note:</strong>  HireMe considers an entry to be a duplicate of all of its fields match <strong>(case-insensitive)</strong>  an existing internship application entry. An attempt to add duplicates will result in an error.
+<strong>Note:</strong> HireMe identifies an entry as a duplicate if its <em>NAME</em>, <em>ROLE</em>, <em>EMAIL</em> and <em>DATE</em> match <strong>(case-insensitive)</strong> with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
 </box>
 
 <br></br>
@@ -265,7 +272,7 @@ Format: `/delete INDEX`
 * Deletes the internship application at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed internship application list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications).
+* The `INDEX` **must be a valid index number** (e.g. 5 is not valid when there is less than five applications in the displayed list).
 
 Examples:
 * `/list` followed by `/delete 2` deletes the second application in the list.
@@ -289,7 +296,7 @@ Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
-* The search allows for **more than one `KEYWORD`**
+* The search allows for **more than one** `KEYWORD`
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
@@ -308,7 +315,7 @@ Examples:
 
 <br></br>
 
-### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
+### Updating the status of an internship application: `/accept`, `/pending`, `/reject`
 
 Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
@@ -317,17 +324,17 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 * `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
 * `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
 * `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
-*  The `INDEX` refers to the position of an application in the displayed list, relative to the current filtered or listed view.
+*  The `INDEX` refers to the position of an application in the displayed list.
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
 * `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than five applications in the displayed list).
 
 **Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have ten total applications, but after using `/filter ACCEPTED` only five applications are shown, then `/reject 5` will target the last item on this filtered list.
 
-**Examples:**
+Examples:
 1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
 2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
 3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `PENDING` filter.
 5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
@@ -336,7 +343,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
   <img src="images/accept-status-after.png" width="360" alt="Accept-Status-After">
 </div>
 <box type="info" seamless>
-<strong>Note:</strong> You can update an application’s status to its current state. For example, using `/accept INDEX` on an already accepted application will keep its status as `ACCEPTED`, `/pending INDEX` on a pending application will keep it as `PENDING`, and `/reject INDEX` on a rejected application will maintain its `REJECTED` status.
+<strong>Note:</strong> You can update an application’s status to its current state. For example, using <em>/accept INDEX</em> on an already accepted application will keep its status as <em>ACCEPTED</em>, <em>/pending INDEX</em> on a pending application will keep it as <em>PENDING</em>, and <em>/reject INDEX</em> on a rejected application will maintain its <em>REJECTED</em> status.
 </box>
 
 
@@ -490,7 +497,7 @@ Action     | Format, Examples
 **Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **List**   | `/list`
 **Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
+**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g., `/find Google Facebook`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
 **Pending**| `/pending INDEX`<br> e.g., `/pending 3`
 **Reject** | `/reject INDEX`<br> e.g., `/reject 1`
@@ -503,6 +510,7 @@ Action     | Format, Examples
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
 Term     | Definition
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Action**    | The task carried out by the HireMe application such as Add, Delete, Update entries. 
@@ -523,3 +531,6 @@ Term     | Definition
 **Parameter** | The details needed for to perform specific commands. (e.g. Add command has a parameter for company name) 
 **Role** | The role of the internship the user applied for.
 **Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
+
+
+
