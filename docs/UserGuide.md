@@ -547,7 +547,7 @@ Output: `The saved address book has been loaded!`
 
 <br>
 
-#### Editing the data file
+#### **Editing the data file**
 
 GamerBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` after every command. Advanced users are
 welcome to update data directly by editing that data file.
