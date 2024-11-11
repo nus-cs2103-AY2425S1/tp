@@ -15,6 +15,9 @@
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* The implementation description of the `add` command in this documentation was inspired by the documentation of the past project [NetworkBook](https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details).
+* The non-functional requirement related to the standard screen resolution was inspired by the documentation of the current year project [PlanPerfect](https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html).
+* The Quick start guide in the User Guide was adapted from the documentation of the current year project [VBook](https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html). 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -918,10 +921,10 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
 
 1. **Allow negative HOURS_OWED for `owe`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `owe command`. Hence, if users have used the `owe command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owed` field using the `edit` command.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owedAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
-   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount by the student by 3 hours instead.
+   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount of the student by 3 hours * `rate` instead.
    He can first type `owe 1 hr/-2` to 'undo' the previous owe command, and type `owe 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * hr/0 will still not be accepted.
@@ -929,25 +932,31 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
       The main purpose for allowing negative hours for `owe command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours owed by the student.
       Hence, the resulting owed amount from the execution of the `owe command` should not be negative in any daily use case.<br><br>
 
+1. **Integrate `pay` and `settle` command to reduce user confusion:** In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users.
+    * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
+        * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
+        * `hr/HOURS_PAID` specifies number of hours the student **pays** for, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
+        * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
+    * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want. <br>
 
-1. **Allow negative HOURS_PAID for `pay`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paid` field using the `edit` command.
+1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allows **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paidAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
-   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours instead.
-   He can first type `pay 1 hr/-2` to 'undo' the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
+   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount of the student by 3 hours * `rate` field of that student instead.
+   He can first type `pay 1 hr/-2` to "undo" the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
    Special cases that we handle:
-    * hr/0 will still not be accepted.
+    * `hr/0` will still not be accepted.
     * When the resulting paid amount of the student that user want to update is less than 0, the command will not be executed and an error message will be shown.
-      The main purpose for allowing negative hours for `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid by the student.
-      Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
+     
+    Similarly, we plan to also allow a **negative number with at most 2 decimal places** as a valid AMOUNT when the user needs to "undo" the previous settlement of the owed amount.
+    Special cases that we handle:
+    * `amount/0` will still not be accepted.
+    *  When the resulting paid amount of the student that the user want to update is less than 0, the command will not be executed and an error message will be shown.
 
 
-1. **Allow Find command to search for partial word in name:** The current `find command` only allows exact full word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, but will **not** match the students named `Alexander Yeoh` or `Alexa Tan`, etc.
-    This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
-    Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
+    The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to "undo" his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
+    Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
 
 
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
@@ -990,11 +999,3 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
     The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
-
-
-1. **Integrate `pay` and `settle` command to reduce user confusion**: In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users. 
-   * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
-       * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
-       * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
-       * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
-   * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want.
