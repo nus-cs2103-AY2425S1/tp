@@ -1,26 +1,33 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Jing Wen's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: GRUB
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+GRUB is a quick and efficient solution to search for local dining options, tailored to personal preferences. The user interacts with it using a GUI created with JavaFX.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the price field for restaurants
+  * What it does: Allows the user to set and remove the restaurant price.
+  * Justification: This feature adds value because it allows users to know the price range (in the form of an affordability label) of the restaurant before visiting it.
+  * Highlights: The feature was implemented in a way that is consistent with the existing codebase, and the GUI was updated to reflect the new feature.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability to filter restaurants based on their price label.
+  * What it does: Allows the user to filter and find restaurants based on their price label.
+  * Justification: This feature adds value because it allows users to quickly find restaurants that match their budget.
+  * Highlights: The feature was implemented in a way that is consistent with the existing codebase, and the GUI was updated to reflect the new feature.
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Overhauled the GUI to improve user experience and aesthetics.
+  * What it does: Updated the GUI color scheme and layout to make it more visually appealing.
+  * Justification: This feature adds value because it enhances the user experience and makes the application more attractive.
+  * Highlights: The new GUI design looks clean, modern, and it was implemented without breaking existing functionality.
+    
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=f12-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=shotnothing&tabRepo=AY2425S1-CS2103-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.1` - `v1.6` (6 releases) on GitHub
 
 * **Enhancements to existing features**:
   * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
