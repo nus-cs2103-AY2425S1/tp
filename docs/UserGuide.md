@@ -872,7 +872,7 @@ Please set up the following commands before proceeding with the example inputs a
 9. **Expected**: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. **Expected**: `rview 1` is shown in the command box.
 11. **Expected**: `list` is shown in the command box.
-12. **Expected**: `cdelete 3` is shown in the command box.
+12. **Expected**: `cdelete 2` is shown in the command box.
 13. **Expected**: : Nothing is shown in the command box.
 
 </box>
@@ -1076,14 +1076,16 @@ and use the `import` command to import the data file that you previously exporte
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **The commands are not case-insensitive**. The remedy is to ensure that all commands are either capitalised or not capitalised.
 4. Current **error message for invalid value** of `MONTHLY_RENT` and `DEPOSIT` is not precise enough (we use the term `numbers`). Please follow [Parameter Constraints Table](#parameter-constraints-table) for valid values.
-5. If a **parameter value is too long**, it will not display fully in the application. The excess characters will be cut off and replace by `...`. You should not provide a value that is too long to avoid this issue.
-6. The error message of `import` and `export` is displayed with a green color, which may be confusing for users.
-7. The error message displayed when `import` or `export` fails is quite vague ("The chosen file may be corrupted").
+5. Current **error message for invalid value** of `CUSTOMER_LIST` is not precise enough (we only mention you should separate the names by ; if there is more than one customer). Please follow [Parameter Constraints Table](#parameter-constraints-table) for valid values.
+6. If a **parameter value is too long**, it will not display fully in the application. The excess characters will be cut off and replace by `...`. You should not provide a value that is too long to avoid this issue.
+7. The error message of `import` and `export` is displayed with a green color, which may be confusing for users.
+8. The error message displayed when `import` or `export` fails is quite vague ("The chosen file may be corrupted").
    We will be refining this error message in the future to give more feedback about what went wrong 
    (duplicate clients, missing field, etc.)
-8. The message for confirmation prompts state `y/n`, which implies you can only use `n` to cancel the command. However,
+9. The message for confirmation prompts state `y/n`, which implies you can only use `n` to cancel the command. However,
    any input other than `y`/`yes` leads to cancellation.
-9. An error occurs in the background when you first launch TrueRental, due to the absence of the `CommandHistory` storage file. The file will subsequently be created after the user enters his/her first `TrueRental's` command. This will not hinder your experience.
+10. The message displayed when a command is cancelled has green color, which may be confusing for users.
+11. An error occurs in the background when you first launch TrueRental, due to the absence of the `CommandHistory` storage file. The file will subsequently be created after the user enters his/her first `TrueRental's` command. This will not hinder your experience.
 
 --------------------------------------------------------------------------------------------------------------------
 

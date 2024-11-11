@@ -38,13 +38,13 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 17**.
-1. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
+2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
    <box type="warning" seamless>
    Note: Importing a Gradle project is slightly different from importing a normal Java project.
    </box>
-1. **Verify the setup**:
-    1. Run the `seedu.address.Main` and try a few commands.
-    1. [Run the tests](#running-tests) to ensure they all pass.
+3. **Verify the setup**:
+   1. Run the `seedu.address.Main` and try a few commands.
+   2. [Run the tests](#running-tests) to ensure they all pass.
 
 ### Running Tests
 
@@ -78,11 +78,11 @@ There are two ways to run tests.
 
    </box>
 
-1. **Set up CI**
+2. **Set up CI**
 
    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up required.
 
-1. **Learn the design**
+3. **Learn the design**
 
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [TrueRental’s architecture](DeveloperGuide.md#architecture).
 
@@ -201,12 +201,12 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteClientCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`)
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientCommand`)
    which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a [_client_](#glossary-client)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -263,9 +263,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
-* Separately, it has another portion within the storage component to store the current's session command history into a
-  text file.
+  that belong to the `Model`).
+* has a separate portion to store the current session's command history into a text file.
 
 ### Common classes
 
@@ -694,10 +693,11 @@ otherwise)
 * <a id="glossary-letting-agent"/>**Letting agent**: An individual that facilitates a property rental agreement
 * <a id="glossary-system"/>**System**: TrueRental desktop application
 * <a id="glossary-clients-information"/>**Client's information**: A client's information containing name, phone number
-  and email, not meant to be shared with others.
-* <a id="glossary-rental-information"/>**Client's rental information**: A client's rental information containing
-  address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, tenant list, not
-  meant to be shared with others.
+  , email and list of **rental information**, not meant to be shared with others.
+* <a id="glossary-rental-information"/>**Rental information**: A client's rental information containing
+  address, rental start date, rental end date, rent due date, monthly rent amount, deposit amount, **customer list**,
+  not meant to be shared with others.
+* <a id="glossary-customer-list"/>**Customer List**: The list of tenant(s) who are renting a property.
 * <a id="glossary-mss"/>**MSS**: Main Success Scenario.
 
 [Back to top](#table-of-contents)
@@ -728,28 +728,26 @@ testers are expected to do more *exploratory* testing.
        some sample data.
        ![image](images/uiWithDescription.png)
 
-1. Shut down
+2. Shut down
 
     1. Click on the cross at the top of the application window.
         1. MacOS: Red cross button at the top-left of the application window.
         2. Windows / Linux: Red cross button at the top-right of the application window.<br>
            Expected: The application will exit and close safely.
-
     2. Enter `exit` into the command box of the application.<br>
        Expected: The application will exit and close safely.
 
-1. Subsequent Launches
+3. Subsequent Launches
 
     1. Relaunch the application by `cd` into the respective folder with the `truerental.jar` file.
     2. Use `java --version` to ensure your java version is `Java 17`.
     3. Use `java -jar truerental.jar` command to run the application.
     4. Expected: The application should retain all changes made to the data within the application previously.
 
-1. Saving window preferences
+4. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-    1. Re-launch the app by typing `java -jar truerental.jar`.<br>
+    2. Re-launch the app by typing `java -jar truerental.jar`.<br>
        Expected: The most recent window size and location is retained.
 
 ### Basic Usage
@@ -1537,14 +1535,27 @@ All _clients_ will be displayed in the client list panel.
 
 </box>
 
-#### Find a keyword within all [_clients_](#glossary-client) and [_rental information_](#glossary-rental-information)
+#### Find [_clients_](#glossary-client) based on criteria
 
-Finding a keyword from all _clients_ and _rental information_.
+Find _clients_ based on certain criteria such as **name contains `Amy`**, **is tagged with `Friends`**, etc.
+Additionally, find _clients_ whose details or _rental information_ contains a keyword.
 
 <box type="warning">
 
-**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ with names
-`Amy Tan` in the list.
+**Prerequisite**: List all _clients_ using the `list` command. Suppose the list contains the following clients
+
+1. `Amy Tan; Phone: 98765432; Email: amytan@example.com; Tags: [Rich]`
+   1. `Blk 321 Ang Mo Kio Ave 3, #09-123; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2500.00; Deposit: $7500.00; Customer List: Jackson;Yummi`
+   2. `Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2026; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Ryan Low;Matthew`
+   3. `BLK 2 Bishan; Rental Start Date: 01 Jan 2024; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: —`
+2. `Bernice Yu; Phone: 99272758; Email: berniceyu@email.com; Tags: [Friends][Rich]`
+   1. `Blk 321 Ang Mo Kio Ave 3, #09-123; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2500.00; Deposit: $7500.00; Customer List: Jackson;Yummi`
+   2. `BLK 1 Bishan; Rental Start Date: 01 Jan 2024; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Amy Tan;David`
+3. `Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Tags: [Friends]`
+   1. `Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Dec 2021; Rental End Date: 31 Dec 2025; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $4500.00; Customer List: Michelle`
+4. `David Li; Phone: 91031282; Email: lidavid@example.com; Tags: [Friends]`
+5. `Irfan Ibrahim; Phone: 92492021; Email: irfan@email.com; Tags: [Colleagues]`
+6. `Roy Balakrishnan; Phone: 92624417; Email: royb@email.com; Tags: [Colleagues]`
 
 </box>
 
@@ -1555,7 +1566,8 @@ Finding a keyword from all _clients_ and _rental information_.
 <box type="success">
 
 Clients whose details or rental information include the keyword `Amy Tan` will be displayed on the client list panel.
-Command success message will be displayed in the result display box.
+Command success message will be displayed in the result display box. 
+In this case, the clients `Amy Tan` and `Bernice Yu` will be displayed.
 
 </box>
 
@@ -1563,11 +1575,63 @@ Command success message will be displayed in the result display box.
 
 <box type="info" seamless>
 
-**Test case 2**: `find k/Yong Li`, given that no client within the list has name `Yong Li`
+**Test case 2**: `find n/Bernice`
+
+<box type="success">
+
+Clients whose name contain `Bernice` will be displayed on the client list panel.
+In this case, only the client `Bernice Yu` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `find e/@example.com`
+
+<box type="success">
+
+Clients whose email contain `@example.com` will be displayed on the client list panel.
+In this case, the clients `Amy Tan`, `Charlotte Oliveiro` and `David Li` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `find p/92492021`
+
+<box type="success">
+
+Clients whose phone number contain `92492021` will be displayed on the client list panel.
+In this case, only the client `Irfan Ibrahim` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `find t/Friends`
+
+<box type="success">
+
+Clients who are tagged with `Friends` will be displayed on the client list panel.
+In this case, the clients `Amy Tan`, `Bernice Yu`, `Charlotte Oliveiro` and `David Li` will be displayed.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `find t/Friend`
 
 <box type="wrong">
 
-No client or rental information matches the particular keyword `Yong Li`.
+No clients are tagged with `Friend` **exactly**.
 
 </box>
 
@@ -1575,11 +1639,11 @@ No client or rental information matches the particular keyword `Yong Li`.
 
 <box type="info" seamless>
 
-**Test case 3**: `find Amy`
+**Test case 7**: `find k/Yong Li`
 
 <box type="wrong">
 
-No prefix k/ given. An invalid command will be shown in the result display box.
+No client or rental information matches the keyword `Yong Li`.
 
 </box>
 
@@ -1587,7 +1651,31 @@ No prefix k/ given. An invalid command will be shown in the result display box.
 
 <box type="info" seamless>
 
-**Test case 4**: `find k/`
+**Test case 8**: `find Amy`
+
+<box type="wrong">
+
+No prefix given. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 9**: `find k/`
+
+<box type="wrong">
+
+Keywords cannot be empty. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 10**: `find`
 
 <box type="wrong">
 
@@ -1597,41 +1685,162 @@ No parameters given. An invalid command will be shown in the result display box.
 
 </box>
 
+#### Deleting a [_client_](#glossary-client)
+
+Deleting a _client_.
+
+<box type="warning">
+
+**Prerequisites**: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+
+</box>
+
 <box type="info" seamless>
 
-**Test case 5**: `find`
+**Test case 1**: `cdelete 1`
+
+<box type="success">
+
+The app prompts for confirmation. Accepting the prompt with `y` causes the command to proceed, any other input cancels the command.
+The first _client_ is deleted from the list. Details of the deleted _client_ will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `cdelete 0`
 
 <box type="wrong">
 
-No prefix and/or parameters given. An invalid command will be shown in the result display box.
+Client index cannot be `0`. No _client_ is deleted, and error details are displayed in the result display box.
 
 </box>
 
 </box>
 
-#### Find a information from all [_clients_](#glossary-client)
+<box type="info" seamless>
 
-<!-- TODO!! @Nathan follow format above for n/ e/ t/ p/ -->
+**Test case 3**: `cdelete x`, where `x` is larger than the total number of clients.
 
-#### Deleting a [_client_](#glossary-client)
+<box type="wrong">
 
-1. Deleting a _client_ while all _clients_ are being shown
+Client index cannot be larger than the size of the displayed list. No _client_ is deleted, and error details are displayed in the result display box.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+</box>
 
-    2. Test case: `cdelete 1`<br>
-       Expected: The first _client_ is deleted from the list. Details of the deleted contact will be displayed in the
-       result display box.
-
-    3. Test case: `cdelete 0`<br>
-       Expected: No _client_ is deleted. Error details will be displayed in the result display box.
-
-    4. Test case: `cdelete x`, where x is larger than the total number of clients.<br>
-       Expected: No _client_ is deleted. An invalid command will be shown in the result display box.
+</box>
 
 #### Deleting a client's [_rental information_](#glossary-rental-information)
 
-1. <!-- TODO!! @Nathan follow same foramt as above -->
+Deleting a _client's_ _rental information_.
+
+<box type="warning">
+
+**Prerequisites**: List all _clients_ using the `list` command. **At least one** _client_ is in the list, and the first 
+_client_ has **at least one** _rental information_.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `rdelete c/1 r/1`
+
+<box type="success">
+
+The app prompts for confirmation. Accepting the prompt with `y` causes the command to proceed, any other input cancels the command.
+The first rental information is deleted from the first _client_ displayed in the list.
+Details of the deleted _rental information_ will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `rdelete c/0 r/1`
+
+<box type="wrong">
+
+Client index cannot be `0`. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `rdelete c/x r/1`, where `x` is larger than the total number of clients.
+
+<box type="wrong">
+
+Client index cannot be larger than the size of the displayed list. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `rdelete c/1 r/0`
+
+<box type="wrong">
+
+Rental index cannot be `0`. No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `rdelete c/1 r/x`, where `x` is larger than the number of rental information associated with the first client.
+
+<box type="wrong">
+
+Rental index cannot be larger than the number of _rental information_ in the client's list.
+No _rental information_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6**: `rdelete c/1`
+
+<box type="wrong">
+
+No rental index given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7**: `rdelete r/1`
+
+<box type="wrong">
+
+No client index given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8**: `rdelete`
+
+<box type="wrong">
+
+No parameter given. An invalid command error will be shown in the result display box.
+
+</box>
+
+</box>
 
 #### Command History Feature
 
@@ -1640,12 +1849,13 @@ Retrieving previously entered commands.
 <box type="warning">
 
 **Prerequisites**: Below commands were previously entered.
-<br>1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
-<br>2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
-<br>3. `cadd n/Amy Tan p/99887766`
-<br>4. `rview 1`
-<br>5. `list`
-<br>6. `cdelete 2`
+
+1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
+2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
+3. `cadd n/Amy Tan p/99887766`
+4. `rview 1`
+5. `list`
+6. `cdelete 2`
 
 </box>
 
@@ -1748,7 +1958,7 @@ Step 12: Press ↓ down-arrow key on the keyboard.
 
 <box type="success">
 
-`cdelete 3` is shown in the command box.
+`cdelete 2` is shown in the command box.
 
 </box>
 
@@ -1764,7 +1974,7 @@ Nothing is shown in the command box.
 
 #### Autofill Commands Feature
 
-1. Autofills command name.
+1. Autofill command name.
 
 <box type="warning">
 
@@ -1826,7 +2036,7 @@ Value of the input command changes from `rview` to `radd`.
 
 </box> <br>
 
-2. Autofills parameter prefix for a command.
+2. Autofill parameter prefix for a command.
 
 <box type="warning">
 
@@ -2150,7 +2360,7 @@ The following are **DUPLICATES** of the initial rental information:
 
 ### Appendix: Future Enhancements
 
-#### Additional Parameter Constraints
+#### 1. Additional Parameter Constraints
 
 <d-table>
 
@@ -2167,48 +2377,48 @@ The following are **DUPLICATES** of the initial rental information:
 
 </d-table>
 
-#### `cedit` Command
+#### 2. `cedit` Command
 
 The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
 command.
 In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain** as well as which tag to **edit**.
 
-#### `redit` Command
+#### 3. `redit` Command
 
 The current version of `redit` only supports replacing existing value to the newly specified value for all parameters used in `redit`.
 In the future, there will be an update to the `redit` command, where the user is able to choose whether to edit from the existing value or simply replace the existing value, offering greater convenience.
 
-#### `sort` Command
+#### 4. `sort` Command
 
 The current version of `sort` is case-sensitive.
 In the future, there will be an update to the `sort` command, where the sorting will be case-insensitive.
 
-#### `RENT_DUE_DATE` Parameter
+#### 5. `RENT_DUE_DATE` Parameter
 
 The current `RENT_DUE_DATE` meant to refer to the specific day (of the month) on which the rent payment is due for the property owned by the client. However, the term `DATE` may be misleading, as users might assume it requires the format `dd/mm/yyyy`.
 In the future, there will be an update to the `RENT_DUE_DATE` parameter, where it will be renamed to `RENT_DUE_DAY` for greater clarity.
 
-#### Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
+#### 6. Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
 
 The current error message for an invalid value of `MONTHLY_RENT` is: `Monthly Rent should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
 In the future, there will be an update to the error message for invalid value of `MONTHLY_RENT`, where it will be rephrased to `Monthly Rent should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
 
-#### Error Message For Invalid Value Of `DEPOSIT` Parameter
+#### 7. Error Message For Invalid Value Of `DEPOSIT` Parameter
 
 The current error message for an invalid value of `DEPOSIT` is: `Deposit should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
 In the future, there will be an update to the error message for invalid value of `DEPOSIT`, where it will be rephrased to `Deposit should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
 
-#### Duplicate Rental Information Detection
+#### 8. Duplicate Rental Information Detection
 
 Currently, rental information is considered a duplicate if and only if the `ADDRESS` parameter **matches exactly**, **including case sensitivity**. However, this approach may not be ideal as unique identifiers such as unit numbers can differentiate addresses that are otherwise the same.
 In the future, there will be an update to the duplicate rental information detection method, where rental information will be considered a duplicate if and only if the `ADDRESS` parameter **matches** (**case-insensitively**).
 
-#### Handling Long Text In The UI
+#### 9. Handling Long Text In The UI
 
 Currently, some long texts are truncated due to the window size constraints of the application, with excess text displayed as `...`.
 In the future, there will be an update to the UI and additional constraints on the parameter value. The UI will be updated such that all characters will be fully displayed without truncation or the use of `...`.
 
-#### Storage Related Error Handling
+#### 10. Storage Related Error Handling
 
 In some very rare cases, reading from or writing to data file may fail due to various reasons.
 In the future, there will be an update to the application, where a prompt will be displayed to notify the user of such failures.
