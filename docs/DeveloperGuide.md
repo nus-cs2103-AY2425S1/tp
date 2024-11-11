@@ -387,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data should be stored in an unencrypted flat file that can be edited by the user.
 6. The product must be able to be used offline.
-7. The product is not expected handle _semantic search_.
+7. The product is not expected to handle _semantic search_.
 8. The product is not expected to implement user authentication.
 
 ### Glossary
