@@ -633,4 +633,5 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. Make list command with miscellaneous parameters error message more helpful. Currently, typing list with with miscellaneous parameters, ex. `list 123`, will result in a message that states "Please ensure your command is valid!". To improve specificity this will be changed to ask user to remove miscellaneous parameters.
+1. Make list command with miscellaneous parameters error message more helpful. Currently, typing list with miscellaneous parameters, ex. `list 123`, will result in a message that states "Please ensure your command is valid!". To improve specificity this will be changed to ask user to remove miscellaneous parameters.
+2. Prevent tags from allowing underscores. When searching for tags with underscores in the find command, the underscores are interpreted as an `or`. This means that searching for the tag "low_income" will bring up all tags containing "low" and "income" instead of just "low_income".

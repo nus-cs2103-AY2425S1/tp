@@ -89,7 +89,6 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Co
 * More than one tag can be added to a contact.
 * Tags can contain any characters, but they should not begin with whitespace.
 * You can include hyphens and spaces as necessary between words for tags that are multiple words long!
-* Avoid using underscores for tags.
 * To indicate no tags for a contact, you can `add` a contact without any `t/` prefixes.
     * Take note that `add`ing a contact with a `t/` prefix followed by whitespace is not supported. Omit the `t/` tag for contacts without tags.
 
