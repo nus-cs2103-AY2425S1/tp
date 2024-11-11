@@ -407,15 +407,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Intermediate User Stories
 
-| Priority | As a …                   | I want to …                              | So that I can…                                                               |
-|----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
-| `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
-| `* *`    | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
-| `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
-| `* *`    | healthcare administrator | archive contacts                         | maintain a clean and relevant contact list without losing historical records |
-| `* *`    | healthcare administrator | load backup archived data                | restore a backup copy in case of data corruption or user error              |
+| Priority | As a …                   | I want to …                           | So that I can…                                                               |
+|----------|--------------------------|---------------------------------------|------------------------------------------------------------------------------|
+| `* *`    | healthcare administrator | filter contacts by their doctor       | view a consolidated list of all the patients a doctor is responsible for     |
+| `* *`    | healthcare administrator | sort patients by their admission time | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | tag important notes to patients       | remember special considerations about certain patients                       |
+| `* *`    | healthcare administrator | archive outdated contacts             | maintain a clean and relevant contact list without losing historical records |
+| `* *`    | healthcare administrator | load backup archived data             | restore a backup copy in case of data corruption or user error               |
+| `* *`    | healthcare administrator | delete archived data                  | free up storage space and remove unnecessary or outdated contact information |
+| `* *`    | healthcare administrator | view a list of all archived data      | keep track of the archived data for reference or auditing purposes           |
+| `* *`    | healthcare administrator | undo the last operation               | recover from accidental deletions or modifications                           |
+| `* *`    | healthcare administrator | redo the last undone operation        | reverse an undo operation if it was done in error                            |
 
-### Advanced User Stories
+<div style="page-break-after: always;"></div>
+
+#### Advanced User Stories
 
 | Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
