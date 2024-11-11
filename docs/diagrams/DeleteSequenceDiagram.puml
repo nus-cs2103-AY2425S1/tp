@@ -64,6 +64,7 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
+DeleteCommand -[hidden]-> LogicManager
 destroy DeleteCommand
 
 [<-- LogicManager
