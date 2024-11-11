@@ -54,14 +54,16 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- **Tutorials** are labelled starting from **1**, regardless of when they commence.
+
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/CS1101S` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/CS1101S`, `t/MA1521 t/CS1101S` etc.
 
-- Parameters with prefixes (e.g. `n/`, `p/`) can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- For commands with only prefixes (e.g. `add`, `edit`), parameter order does not matter.<br>
+  e.g. `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are both acceptable.
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -190,7 +192,7 @@ Visual Effect:
 
 The specified tutorial box of the specified student will turn **<span style="color:red">red</span>**.
 
-|❗ *To reduce visual clutter, an image will not be provided*.|
+>❗ *To reduce visual clutter, an image will not be provided*.
 ---
 
 ### Resetting student's attendance : `reset`
@@ -215,7 +217,7 @@ Visual Effect:
 
 The specified tutorial box of the specified student will turn **<span style="color:grey">grey</span>**.
 
-|❗ *To reduce visual clutter, an image will not be provided*.|
+>❗ *To reduce visual clutter, an image will not be provided*.
 ---
 
 <div markdown="block" class="alert alert-info">
