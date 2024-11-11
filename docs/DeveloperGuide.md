@@ -769,6 +769,8 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 * **L Order**: A sorting method where elements are arranged in ascending order, from the lowest to the highest value.
 * **H Order**: A sorting method where elements are arranged in descending order, from the highest to the lowest value.
+* **Status Message**: The message displayed upon an attempt to run a command.
+* **Person List**: The list of Person displayed in the main page.
 * * **Command Terminal**: A window into which users can type commands that are then executed by the computer's operating system. The cursor point in the terminal where you type the commands is known as the CLI.
 * **UI (User Interface)**: The layout of the visual elements that enable a user to interact with a computer system.
 * **CLI (Command Line Interface)**: A text-based User Interface (UI) where commands are typed and used to run programs, manage computer files and interact with the computer. This provides a faster and efficient alternative to GUI interactions.
@@ -821,17 +823,58 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Person list should show the updated display that has excluded the deleted person.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message. Person list remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Sorting properties for a person
+### Adding a new property to buy or sell for a person
 
-1. Sorting properties for a person
+1. Adding a new property to buy or sell for a person
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `addSell 1 ht/a sp/1200000 pc/431244 un/12-24 t/Near MRT`<br>
+       Expected: A new property to buy is added for the first person. Details of the new property shown in the status message.
+
+    1. Test case: `addBuy 0 ht/a sp/1205000 pc/455677 un/1-45`<br>
+       Expected: No property is added. Error details shown in the status message. Person list remains the same.
+
+    1. Other incorrect add property commands to try: `addBuy`, `addSell x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Finding a person based on the properties-to-buy or properties-to-sell
+
+1. Finding a person based on the details of the properties-to-buy or properties-to-sell associated to the person.
+
+    1. Test case: `findSell 431244`<br>
+       Expected: 1 persons listed! 1 person has a property-to-sell with a postal code of 431244.
+
+    2. Test case: `findSell MRT`<br>
+      Expected: 1 persons listed! 1 person has a property-to-sell with the tag `MRT`.
+
+    3. Test case" `findSell hot`<br>
+       Expected: 0 persons listed!
+
+### Finding a person based on the phone number
+
+1. Finding a person based on the phone number.
+
+    1. Test case: `findp 93 99`<br>
+       Expected: 3 persons listed! 3 persons has a phone number with '93' or '99' included.
+
+    2. Test case: `findSell xxx`<br>
+       Expected: 0 persons listed!
+
+    3. Test case" `findSell a`<br>
+       Expected: The keywords for findp command can only be numbers.
+
+### Sorting properties for an individual person
+
+1. Sorting properties for an individual person
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -839,22 +882,46 @@ testers are expected to do more *exploratory* testing.
       Expected: Properties - both properties to buy and sell - for the first person are sorted based on property price. Details of the how the properties are sorted shown in the status message.
 
    1. Test case: `sorti 0 f/Price o/L`<br>
-      Expected: No properties are sorted. Error details shown in the status message. Status bar remains the same.
+      Expected: No properties are sorted. Error details shown in the status message. Person list remains the same.
 
    1. Other incorrect sort commands to try: `sorti`, `sorti x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-### Adding a new property to buy or sell for a person
+## Pin or unpin contacts in the person list
 
-1. Adding a new property to buy or sell for a person
+1. Pin or unpin contacts in the person list
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `pin 2`<br>
+       Expected: Pins the previously second person in the person list to the top of the person list.
 
-   1. Test case: `addSell 1 ht/a sp/1200000 pc/431244 un/12-24 t/Near MRT`<br>
-      Expected: A new property to buy is added for the first person. Details of the new property shown in the status message.
+    2. Test case: `unpin 1`<br>
+       Expected: Unpins the first person in the person list, which should be a pinned person. If there is no pinned person, error details will shown in the status message. Person list remains the same.
 
-   1. Test case: `addBuy 0 ht/a sp/1205000 pc/455677 un/1-45`<br>
-      Expected: No property is added. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `unpin 0`<br>
+       Expected: Error details shown in the status message. Person list remains the same.
 
-   1. Other incorrect add property commands to try: `addBuy`, `addSell x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Sorting contacts in the person list
+
+1. Sorting all contacts in the person list
+
+    1. Test case: `sort f/Name o/L`<br>
+       Expected: Contacts in the person list are now sorted by Name in L order, from low to high. Pinned Contacts will remain pinned, and among the pinned contacts, they will also be sorted accordingly.
+
+    2. Test case: `sort` <br>
+       Expected: Error details shown in the status message. Person list remains the same.
+
+### Display statistics 
+
+1. Displays statistics based on the current data
+
+    1. Test case: `stats' <br>
+       Expected: Displays diagrams and charts about the data stored by NUStates. Status message displays success.
+
+### Quick display of all commands
+
+1. Provides a quick display of all command words as a status message
+
+    1. Test case: `commands` <br>
+       Expected: Displays a quick display of all command words in the status message.
+
+
