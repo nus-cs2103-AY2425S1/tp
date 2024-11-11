@@ -179,7 +179,6 @@ The `home` command returns the user to the home UI where all the patients are di
 
 ##### Executing the Command
 
-
 #### Clear Command : `clear`
 
 #### Exit Command : `exit`
