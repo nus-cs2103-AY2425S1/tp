@@ -237,8 +237,7 @@ Examples:
 
 ### Screening contacts by a job's name : `screen job`
 
-Screens the list of contacts in the address book with the name of the
-job specified.
+Screens the list of contacts in the address book with the job specified.
 
 Format: `screen job INDEX`
 
