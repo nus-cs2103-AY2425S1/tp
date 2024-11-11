@@ -32,12 +32,6 @@ deactivate LoadCommand
 AddressBookParser --> LogicManager : u
 deactivate AddressBookParser
 
-LogicManager -> "Storage" : saveArchivedAddressBook()
-activate "Storage"
-
-"Storage" --> LogicManager :
-deactivate "Storage"
-
 LogicManager -> LoadCommand : execute()
 activate LoadCommand
 
