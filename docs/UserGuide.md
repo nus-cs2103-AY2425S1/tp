@@ -216,7 +216,7 @@ Note:
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit v/1 p/58623042 ` : Edits the phone number of the vendor with index 1 to be `58623042`.
+*  `edit v/1 p/58623042` : Edits the phone number of the vendor with index 1 to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the event with index 2 to be `Baby Shower`, and clears all existing tags.
 
 ### Deleting Vendors & Events : `delete`
