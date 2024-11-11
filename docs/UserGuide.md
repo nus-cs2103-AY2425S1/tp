@@ -1098,16 +1098,32 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Failed Execution:**
-> **User Error**: Out-of-bounds index
+> **User Error #1**: Out-of-bounds index
 >
 > **Input**: `moreinfo 100`
 > 
 > **Output**: The person index provided is invalid!
+>
+> ---
+> 
+> **User Error #2**: No index provided
+> 
+> **Input**: `moreinfo`
+> 
+> **Output**:
+Invalid command format!
+moreinfoCLIENT_INDEX: Open a window to more information about the client.
+Example: moreinfo 1
 > 
 > ---
 
 - **Special Comments:**
 1. Refer to the remarks and constraints for the following prefix: [n/](#n)
+2. The `Output` for User Error #2 has a missing parameter line where the CLIENT_INDEX should be. The intended look is:
+   Invalid command format!
+   moreinfo: Open a window to more information about the client.
+   Parameters: CLIENT_INDEX
+   Example: moreinfo 1
 
 #### Chat Window
 - **Command:** `chatbot`
