@@ -197,7 +197,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -207,7 +207,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
-### Searching persons by a specified field : `search`
+### Searching by a specified field : `search`
 
 Finds all persons whose specified field contains any of the specified keywords and displays them as a list.
 
@@ -217,18 +217,34 @@ Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 * Only the specified field is searched.
 * Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* However, the search for events is an exact search criteria, where all characters must match.
-* Any number of words used with the event prefix `ev/` is treated as a single keyword.
+* e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+> [!CAUTION]<br>
+> When multiple fields are specified, the order of the different fields in the command is ignored.<br>
+> Instead, the fields will be prioritised as follows(in decreasing order of priority):<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;Address -> Email -> Name -> Phone -> Tags -> Event<br>
+> The field with the highest priority will be searched, and the rest will be ignored.
 
 Examples:
 * `search a/street avenue`
 * `search e/gmail exampleEmail`
 * `search n/alice bob charlie`
 * `search p/98765432 12345678`
-* `search t/friend colleague`
-* `search ev/Orbital Workshop`<br>
-  ![result for 'search orbital workshop'](images/searchOrbitalWorkshopResult.png)
+
+* `search t/friend colleague`<br>  
+  ![result for search t/friends](images/searchTagsFriendsResult.png)
+
+The `search` command can also be used to find contacts assigned to an event.
+
+Format: `search ev/{EVENT_NAME}`
+
+* Contacts who are assigned to the event entered will be displayed as the search result.
+* However, the search for events is an exact search criteria, where all characters must match.
+* Any number of words used with the event prefix `ev/` is treated as a single keyword.
+
+Examples:
+* `search ev/Orbital Workshop`<br>  
+  ![result for search ev/Orbital Workshop](images/searchEventOrbitalWorkshop.png)
 
 
 ### Exporting persons: `export`
