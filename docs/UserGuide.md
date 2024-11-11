@@ -214,7 +214,7 @@ Examples:
 Format `delete NAME` or `delete n/NAME`
 
 * Delete the contact whose name matches the specified `NAME`.
-* The `NAME` has to be an exact match to an existing contact which is displayed.
+* The `NAME` has to be an exact match to an existing contact in the displayed list.
 * The `NAME` is not case-sensitive.
 
 Examples:
