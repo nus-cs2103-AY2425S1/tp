@@ -11,7 +11,7 @@ end box
 
 box "Model Layer" MODEL_COLOR_T1
     participant ":Model" as Model MODEL_COLOR
-    participant "List<Person>" as LastShownList MODEL_COLOR
+    participant ":List<Person>" as LastShownList MODEL_COLOR
 end box
 
 [-> DeleteCommand : execute(Model model)

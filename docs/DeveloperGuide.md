@@ -452,6 +452,43 @@ The following sequence diagram shows how the `find` command works:
 
 <div style="page-break-after: always;"></div>
 
+### Pin Command
+
+#### Overview
+
+The `pin` command is used to pin a person from the address book. The person pinned will be shifted to the top of the filtered list.<br>
+
+The format of the `find` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#pinning-a-person-pin).<br>
+
+#### Feature details
+
+1. The user executes the `pin` command.
+2. If the `index` field is not provided, an error message with the correct command usage will be shown.
+3. If all previous steps are completed without exceptions, all `Person` pinned will be successfully shifted to the top of the filtered list in the address book.
+
+<br>
+
+The sequence of the `pin` command is as follows:<br>
+
+1. The user inputs the `pin` command.<br>
+   e.g. `pin 1 2`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `PinCommandParser` to parse the fields provided by the user and a new `PinCommand` is created.
+4. The `PinCommand` pins all `Person` in the filtered person list in the address book by calling `Model#pinPerson`.
+5. The `PinCommand` sorts the filtered person list in the address book by calling `Model#sortByPin`.
+
+The following sequence diagram shows how the `pin` command works:
+
+<puml src="diagrams/PinParseSequenceDiagram.puml" />
+
+<puml src="diagrams/PinExecuteSequenceDiagram.puml" width="600" />
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### [Proposed] Undo/redo feature
 
 #### Proposed Implementation
