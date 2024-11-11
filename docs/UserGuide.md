@@ -387,7 +387,7 @@ This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
 #### Editing a Group: `edit_g`, `eg`
 
-Explanation of what command does.
+Edits the specified group in T_Assistant.
 
 **Format**: `edit_g i/INDEX gn/GROUP_NAME`
 
@@ -620,7 +620,7 @@ Deletes a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
-   based on the list when `list_t` is called.
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 4. For information on the constraints for each parameter used in this command, go
@@ -649,7 +649,9 @@ Delete a task from all groups that contain it.
 ##### Notes
 
 1. The index must be valid and should be the index of task list.
-2. For information on the constraints for each parameter used in this command, go
+2. `del_t` deletes a task identified by the index. It only accepts a valid index
+      based on the list when `list_t` is called.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -674,11 +676,13 @@ Edits a task from a group.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. `Group Name` must exist in the T_Assistant.
-3. At least 1 optional parameter must be provided, else an error will be thrown.
-4. This command is case-insensitive.
+2. `edit_t_g` edits a task identified by the index. It only accepts a valid index
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+3. `Group Name` must exist in the T_Assistant.
+4. At least 1 optional parameter must be provided, else an error will be thrown.
+5. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-5. For information on the constraints for each parameter used in this command, go
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -703,9 +707,9 @@ Edits a task from all groups that contain it.
 ##### Notes
 
 1. The index must be valid and should be the index of task list.
-2. At least 1 optional parameter must be provided, else an error will be thrown.
-3. This command is case-insensitive.
-   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+2. `edit_t` edits a task identified by the index. It only accepts a valid index
+   based on the list when `list_t`.
+3. At least 1 optional parameter must be provided, else an error will be thrown.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -731,8 +735,10 @@ Marks a task as done or undone.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. If a task is complete it will be marked as pending/overdue, and vice versa.
-3. For information on the constraints for each parameter used in this command, go
+2. `mark_t` marks a task identified by the index. It only accepts a valid index
+   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+3. If a task is complete it will be marked as pending/overdue, and vice versa.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -924,17 +930,17 @@ This section will inform you about what parameters are used in T_Assistant and t
 All parameters are case-insensitive when used for comparison unless stated otherwise.
 </box>
 
-| Parameter                | Constraints                                                                                                                                                                                                                                         | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0` <br>Followed by 6 numerical digits <br>End with any letter                                                                                                                                                                          | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
-| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                          | `John Doe`                                    | `J0hn Doe$$`                                     |
-| `e/`<br>Email            | Format: `local-part@domain-part`<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
-| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a positive number<br>`Group Number` should be a positive number                             | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
-| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                     | `Release tP v1.6`                             |                                                  |
-| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                              | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
-| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                      | `iP`<br>`tP v1.5`                             |                                                  |
-| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                            | `1`<br>`10`                                   | `-1`<br>`test`                                   |
+| Parameter                | Constraints                                                                                                                                                                                                                                                       | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| `sno/`<br>Student Number | Start with `A0` <br>Followed by 6 numerical digits <br>End with any letter                                                                                                                                                                                        | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                        | `John Doe`                                    | `J0hn Doe$$`                                     |
+| `e/`<br>Email            | Format: `local-part@domain-part`<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu`               | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
+| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                              | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a positive number<br>`Group Number` should be a positive number<br>Numbers are supported up to 2147483647 | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                   | `Release tP v1.6`                             |                                                  |
+| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                            | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
+| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                                    | `iP`<br>`tP v1.5`                             |                                                  |
+| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                          | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 ---
 
