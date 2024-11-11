@@ -31,7 +31,7 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
 
         // Check if all fields' prefix are present
         if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || argMultimap.getValue(PREFIX_LOG).isEmpty()
-                || argMultimap.getValue(PREFIX_DATE).isEmpty()) {
+                || argMultimap.getValue(PREFIX_DATE).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE));
         }

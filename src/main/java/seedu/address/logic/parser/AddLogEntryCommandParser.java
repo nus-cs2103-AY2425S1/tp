@@ -28,7 +28,8 @@ public class AddLogEntryCommandParser implements Parser<AddLogEntryCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IDENTITY_NUMBER, PREFIX_DATE);
 
         // Check if all fields' prefix are present
-        if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || argMultimap.getValue(PREFIX_DATE).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || argMultimap.getValue(PREFIX_DATE).isEmpty()
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogEntryCommand.MESSAGE_USAGE));
         }

@@ -22,7 +22,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by either the index number used in the displayed person list or"
             + " the Identity Number.\n"
-            + "Parameters: INDEX(must be a positive integer) or i/NRIC (must be 9 characters)\n"
+            + "Parameters: INDEX(must be a positive integer) or i/NRIC (NRIC must be 9 characters long, "
+            + "starting with 'S', 'T', 'F', or 'G', followed by 7 digits and ending with a checksum letter "
+            + "(e.g., S1234567D))\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " " + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
     public static final String MESSAGE_INDEX_AND_IDENTITY_NUMBER = "Please provide either an index "
@@ -36,6 +38,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates a DeleteCommand to delete the person with the specified {@code identityNumber}.
      */
+    //@@ author junyi73
     public DeleteCommand(IdentityNumber identityNumber) {
         this.identityNumber = identityNumber;
         this.targetIndex = null;
@@ -59,6 +62,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    //@@ author junyi73
     @Override
     public void validateInput(Model model) throws CommandException {
         requireNonNull(model);
@@ -70,8 +74,6 @@ public class DeleteCommand extends Command {
         } else {
             List<Person> lastShownList = model.getPersonList();
             Person personToDelete = null;
-
-            // Find the person by identity number
             for (Person person : lastShownList) {
                 if (person.getIdentityNumber().equals(identityNumber)) {
                     personToDelete = person;
@@ -79,7 +81,6 @@ public class DeleteCommand extends Command {
                 }
             }
 
-            // If person was not found, throw an exception
             if (personToDelete == null) {
                 throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, identityNumber));
             }
@@ -93,11 +94,11 @@ public class DeleteCommand extends Command {
      * @return The result of the command.
      * @throws CommandException If the person is not found.
      */
+    //@@author junyi73
     private CommandResult deleteByIdentityNumber(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToDelete = null;
 
-        // Find the person by identity number
         for (Person person : lastShownList) {
             if (person.getIdentityNumber().equals(identityNumber)) {
                 personToDelete = person;
@@ -105,7 +106,6 @@ public class DeleteCommand extends Command {
             }
         }
 
-        // If person was not found, throw an exception
         if (personToDelete == null) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }

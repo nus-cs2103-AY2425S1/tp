@@ -54,6 +54,7 @@ public class AddLogCommand extends Command {
                 log.getAppointmentDate(), log.getEntry());
     }
 
+    //@@author junyi73
     private Person getPerson(Model model) throws CommandException {
         List<Person> lastShownList = model.getPersonList();
         Person personToUpdate = null;
