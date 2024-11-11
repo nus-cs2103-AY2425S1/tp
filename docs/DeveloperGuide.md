@@ -444,6 +444,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3e1. ConTActs shows an error message indicating that such a student already exists.
 
       Use case resumes at step 3.
+
+**UC06: Sort student list**
+
+**MSS**
+
+1.  User requests to list students.
+2.  ConTActs shows a list of students.
+3.  User requests to sort the list by specifying the order and field to sort by.
+4.  ConTActs shows the list of students in sorted order accordingly.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a.  No order or field is provided.
+
+    * 3a1. ConTActs shows an error message indicating the command format is incorrect.
+
+      Use case resumes at step 3.
+
+* 3b.  The order provided is not an acceptable value (i.e: 1 or -1).
+  
+    * 3b1. ConTActs shows an error message indicating the order is invalid.
+
+      Use case resumes at step 3.
+
+* 3c.  The field provided is not an acceptable value.
+
+    * 3c1. ConTActs shows an error message indicating the field to sort by is invalid.
+
+      Use case resumes at step 3.
+
+* 3d.  The more than 1 fields to sort by is provided.
+
+    * 3d1. ConTActs shows an error message indicating the sort command takes only 1 field to sort by.
+
+      Use case resumes at step 3.
   
 ### Non-Functional Requirements
 
