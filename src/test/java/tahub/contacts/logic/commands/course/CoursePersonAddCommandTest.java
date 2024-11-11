@@ -100,6 +100,11 @@ public class CoursePersonAddCommandTest {
     private class ModelStub implements Model {
 
         @Override
+        public void notifyEnrollmentChanged() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca) {
             throw new AssertionError("This method should not be called.");
         }
