@@ -14,8 +14,6 @@ import javafx.util.Pair;
 import seedu.eventfulnus.commons.core.index.Index;
 import seedu.eventfulnus.commons.util.StringUtil;
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
-import seedu.eventfulnus.model.AddressBook;
-import seedu.eventfulnus.model.ModelManager;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Email;

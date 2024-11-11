@@ -67,7 +67,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'tp.jar'
+    archiveFileName = 'eventfulnus.jar'
 }
 
 run {

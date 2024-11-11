@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import seedu.eventfulnus.commons.core.index.Index;
 import seedu.eventfulnus.logic.Messages;
 import seedu.eventfulnus.logic.commands.EditEventCommand.EditEventDescriptor;
-import seedu.eventfulnus.model.AddressBook;
 import seedu.eventfulnus.model.Model;
 import seedu.eventfulnus.model.ModelManager;
 import seedu.eventfulnus.model.UserPrefs;
@@ -78,17 +77,9 @@ public class EditEventCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT, new EditEventDescriptor());
-
-        Event editedEvent = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-
-        String expectedMessage = String.format(EditEventCommand.MESSAGE_EDIT_EVENT_SUCCESS,
-                Messages.formatEvent(editedEvent));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
-        assertCommandSuccess(editEventCommand, model, expectedMessage, expectedModel);
+        assertCommandFailure(editEventCommand, model, EditEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
     @Test
