@@ -74,27 +74,30 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                                                         |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pc/POSTAL_CODE`<br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/Blk 123, Clementi Rd pc/123466 t/Vegan t/Vegetarian` |
-| **Clear**                   | `clear`                                                                                                                                                                                  |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
-| **Delete by Postal Code**   | `deletePC POSTALCODE`<br> e.g., `deletePC 560123`                                                                                                                                        |
-| **Download**                | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                                             |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                             |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
-| **List**                    | `list`                                                                                                                                                                                   |
-| **Help**                    | `help`                                                                                                                                                                                   |
-| **Add Order**               | `order ORDER`                                                                                                                                                                            |
-| **Delete Order**            | `deleteOrder ORDER`                                                                                                                                                                      |
-| **List Order**              | `listOrder`                                                                                                                                                                              |
-| **Add Order to Customer**   | `put ORDER n/NAME`                                                                                                                                                                       |
-| **History of a Customer**   | `history NAME`                                                                                                                                                                           |
-| **Help**                    | `help`                                                                                                                                                                                   |
-| **Add Shortcut**            | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                                                 |
-| **Delete Shortcut**         | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                                                 |
-| **List Shortcuts**          | `listShortCut`                                                                                                                                                                           |
-| **Filter**                  | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                                             |
+| Action                    | Format, Examples                                                                                                                                                     |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add Order to app**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
+| **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                       |
+| **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
+| **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                      |
+| **Clear**                 | `clear`                                                                                                                                                              |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Delete Order**          | `deleteOrder ORDER`<br> e.g., `deleteOrder pizza`                                                                                                                    |
+| **Delete by postal code** | `deletePC POSTALCODE`<br> e.g., `deletePC S118303`                                                                                                                   |
+| **Download**              | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Exit**                  | `exit`                                                                                                                                                                |
+| **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **Help**                  | `help`                                                                                                                                                               |
+| **History of a Customer** | `history NAME`<br> e.g., `history Alex`                                                                                                                              |
+| **Delete Shortcut**       | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
+| **List**                  | `list`                                                                                                                                                               |
+| **List Order**            | `listOrder`                                                                                                                                                          |
+| **List Shortcuts**        | `listShortCut`                                                                                                                                                       |
+| **List Archived**         | `listarchive`                                                                                                                                                        |
+| **Filter**                | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
+| **Unarchive**             | `unarchive INDEX`<br> e.g., `unarchive 2`                                                                                                                            |
 
 > **Disclaimer**: NomNomNotifier only accepts inputs in english without any emojis, any inputs in other languages could cause unexpected behaviour
 
@@ -426,7 +429,7 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
 
 ---
 
-### Deleting Shortcuts for Tags: `DelShortCut`
+### Deleting Shortcuts for Tags: `delShortCut`
 
 You can delete an existing shortcut by specifying its alias and tag name.
 
@@ -457,7 +460,7 @@ View all current shortcuts to see the mappings of aliases to tag names.
 
 ---
 
-### Using Shortcuts for Tagging
+#### Using Shortcuts for Tagging: 
 After setting shortcuts, you can tag contacts using these aliases.
 
 Usage: 
@@ -622,7 +625,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the `addressbook.json` under `data` directory it creates with the `addressbook.json` file from the original computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
