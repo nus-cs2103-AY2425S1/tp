@@ -24,7 +24,7 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.jpeg)
+   ![Ui](images/Ui.png)
 
 1. The program is loaded up with some default data. If you wish to clear the data, enter `clear` in the command box and press Enter.
 
@@ -74,6 +74,12 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 Shows a message explaining how to access the help page as shown below.
 
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Returning to list view:**<br>
+After opening the help window, if you wish to return to the list view, close the help window and use the command `list`.
+</div>
+
 ![help message](images/helpMessage.jpeg)
 
 Format: `help`
@@ -97,21 +103,23 @@ Adds a pet owner to PawPatrol.
 </ul>
 </div>
 
+<div markdown="block" class="alert alert-primary">
+
+**:exclamation: More on NRIC fields:**<br>
+<ul>
+<li>Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.
+<ul><li>The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.</li></ul>
+</ul>
+</div>
+
+> 2 owners may not share the same IC_NUMBER and will be deemed as duplicate
+
 Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
-
-> 2 owners may not share the same IC_NUMBER and will be deemed as duplicate
-
-<div markdown="span" class="alert alert-info">
-
-**:exclamation: About Owner's NRIC in list**<br>
-
-Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.<br>
-The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.
-
-</div>
+  ![add John Doe](images/ownerJohnDoe.jpeg)  
+<div style="text-align: center;"><em>John Doe added to owners list</em></div>
 
 #### <u>Adding a pet</u>
 
@@ -124,23 +132,18 @@ Adds a pet to PawPatrol.
 <li><code>NAME</code>: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
 <li><code>SPECIES</code>: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
 <li><code>BREED</code>: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
-<li><code>AGE</code>: Must only contain numbers, and it should be 1 or 2 digits long.</li>
+<li><code>AGE</code>: Must only contain non-negative numbers, and it should be 1 or 2 digits long.</li>
 <li><code>SEX</code>: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
 <li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
 <ul>
 <li>Ensure that tags are short in length. Avoid long tags</li>
+<li>A pet can have any number of tags (including 0).</li>
 </ul>
 </ul>
 </div>
 
 > 2 pets are deemed as duplicates when they have matching name, species, breed, age and sex.
 > This behavior is expected to be improved in future to allow multiple pets with similar characteristics.
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:**
-A pet can have any number of tags (including 0)
-</div>
 
 
 <div markdown="span" class="alert alert-primary">
@@ -152,8 +155,10 @@ It is recommended to link the pets to the owners immediately after adding a pet 
 Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
 
 Examples:
-* `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
 * `pet n/Megatron s/Cat b/Siamese a/3 x/M t/playful`
+* `pet n/Fluffy s/Dog b/Golden Retriever a/7 x/F`
+    ![add Fluffy](images/petFluffy.png)
+<div style="text-align: center;"><em>Fluffy added to pets list</em></div>
 
 ### Linking owners and pets: `link`
 
@@ -234,7 +239,8 @@ Format:
 * `edit oOWNER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`: Edits an existing owner in PawPatrol.
 
 Example:
-*  `edit o1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st owner to be `91234567` and `johndoe@example.com` respectively.
+*  `edit o2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd owner to be `91234567` and `johndoe@example.com` respectively as shown below.
+   ![edit John](images/editJohn.jpeg)
 
 #### <u>Editing a pet</u>
 
@@ -242,7 +248,8 @@ Format:
 * `edit pPET_INDEX [n/NAME] [s/SPECIES] [b/BREED] [a/AGE] [x/SEX] [t/TAG]…​`: Edits an existing pet in PawPatrol.
 
 Example:
-*  `edit p2 n/Fluffy t/` Edits the name of the 2nd pet to be `Fluffy` and clears all existing tags.
+*  `edit p1 n/Kobi t/` Edits the name of the 1st pet to be `Kobi` and clears all existing tags as shown below.
+   ![edit Buddy](images/editp1.jpeg)
 
 ### Finding entities by name: `find`
 
