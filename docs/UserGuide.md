@@ -27,7 +27,7 @@ Supply Central is a **desktop app for managing suppliers, optimized for use via 
 
    * `list` : Lists all suppliers.
 
-   * `add n/John Doe p/98765432 a/John street, Block 123, #01-01` : Adds a supplier named `John Doe` to SupplyCentral.
+   * `add n/John Doe p/98765432 a/125 Orchard Road #12-34 ABC Building Singapore 123456` : Adds a supplier named `John Doe` to SupplyCentral.
 
    * `delete Alex Yeoh` : Deletes the supplier "Alex Yeoh".
 
@@ -277,7 +277,7 @@ This is a **key** feature of our application and deliveries are automatically ma
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 a/125 Orchard Road #12-34 ABC Building Singapore 123456 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g. `delete Amy`
 **Edit** | `edit NAME [n/NEW_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit James n/James Lee`
