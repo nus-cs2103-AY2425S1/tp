@@ -134,6 +134,12 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="info" seamless>
+**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work** 
+For example, the command `sold 1 1 ap/1110000` will not work if a property to sell has not been added under the contact at index 1. <br>
+</box>
+
+
 ## General Commands
 
 ### Viewing help : `help`
