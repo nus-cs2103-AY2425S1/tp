@@ -71,8 +71,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        String index = Long.toString(Integer.MAX_VALUE + 1);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_INDEX, index), ()
+            -> ParserUtil.parseIndex(index));
     }
 
     @Test
@@ -313,44 +314,99 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseModuleRolePairs_singleModuleRolePair_returnsModuleRoleMap() throws Exception {
+    public void parseModuleRoleMap_singleModuleRolePair_returnsModuleRoleMap() throws Exception {
         HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
         hashMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         ModuleRoleMap expected = new ModuleRoleMap(hashMap);
 
         List<String> input = Arrays.asList("CS1101S-student");
-        ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+        ModuleRoleMap result = ParserUtil.parseModuleRoleMap(input);
 
         assertEquals(expected, result);
     }
 
     @Test
-    public void parseModuleRolePairs_multipleModuleRolePairs_returnsModuleRoleMap() throws Exception {
+    public void parseModuleRoleMap_multipleModuleRolePairs_returnsModuleRoleMap() throws Exception {
         HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
         hashMap.put(new ModuleCode("CS1101S"), RoleType.STUDENT);
         hashMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
         ModuleRoleMap expected = new ModuleRoleMap(hashMap);
 
         List<String> input = Arrays.asList("CS1101S-student", "MA1521-student");
-        ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+        ModuleRoleMap result = ParserUtil.parseModuleRoleMap(input);
 
         assertEquals(expected, result);
     }
 
     @Test
-    public void parseModuleRolePairs_duplicateModuleCodeDifferentRoles_throwsParseException() throws Exception {
+    public void parseModuleRoleMap_duplicateModuleCodeDifferentRoles_throwsParseException() throws Exception {
         assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
             List<String> input = Arrays.asList("CS1101S-student", "CS1101S-prof");
-            ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+            ModuleRoleMap result = ParserUtil.parseModuleRoleMap(input);
         });
     }
 
     @Test
-    public void parseModuleRolePairs_duplicateModuleCodeSameRoles_throwsParseException() throws Exception {
+    public void parseModuleRoleMap_duplicateModuleCodeSameRoles_throwsParseException() throws Exception {
         assertThrows(ParseException.class, ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS, () -> {
             List<String> input = Arrays.asList("CS1101S-student", "CS1101S-student");
-            ModuleRoleMap result = ParserUtil.parseModuleRolePairs(input);
+            ModuleRoleMap result = ParserUtil.parseModuleRoleMap(input);
         });
+    }
+
+    @Test
+    public void parseModuleRolePairs_noModuleRolePairs_returnsEmptyList() throws Exception {
+        List<ModuleRolePair> expected = Collections.emptyList();
+        List<ModuleRolePair> result = ParserUtil.parseModuleRolePairs(Collections.emptyList());
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_singleModuleRolePair_returnsSingletonList() throws Exception {
+        List<ModuleRolePair> expected = List.of(new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT));
+        List<ModuleRolePair> result = ParserUtil.parseModuleRolePairs(List.of("CS1101S-student"));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_multipleModuleRolePairs_returnsList() throws Exception {
+        List<ModuleRolePair> expected = List.of(
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+            new ModuleRolePair(new ModuleCode("MA1521"), RoleType.TUTOR)
+        );
+        List<ModuleRolePair> result = ParserUtil.parseModuleRolePairs(List.of("CS1101S-student", "MA1521-tutor"));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_duplicateModuleCodeDifferentRoles_returnsList() throws Exception {
+        List<ModuleRolePair> expected = List.of(
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.TUTOR)
+        );
+        List<ModuleRolePair> result = ParserUtil.parseModuleRolePairs(List.of("CS1101S-student", "CS1101S-tutor"));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_duplicateModuleCodeSameRoles_returnsList() throws Exception {
+        List<ModuleRolePair> expected = List.of(
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT),
+            new ModuleRolePair(new ModuleCode("CS1101S"), RoleType.STUDENT)
+        );
+        List<ModuleRolePair> result = ParserUtil.parseModuleRolePairs(List.of("CS1101S-student", "CS1101S-student"));
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void parseModuleRolePairs_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleRolePairs(null));
+    }
+
+    @Test
+    public void parseModuleRolePairs_invalidModuleRolePair_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModuleRolePairs(
+                Arrays.asList(INVALID_MODULE_ROLE_PAIR_INVALID_MODULE_CODE)));
     }
 
     @Test

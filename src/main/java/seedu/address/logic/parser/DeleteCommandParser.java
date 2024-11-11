@@ -17,7 +17,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        String[] stringArrayToParse = args.trim().split(" ");
+        String[] stringArrayToParse = args.trim().split(" +");
         Index[] indicesToDelete = new Index[stringArrayToParse.length];
         try {
             for (int i = 0; i < stringArrayToParse.length; i++) {

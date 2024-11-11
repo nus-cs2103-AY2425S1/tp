@@ -35,7 +35,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer!";
+    public static final String MESSAGE_INVALID_INDEX = "Index '%1$s' is not a non-zero unsigned integer!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -45,7 +45,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, oneBasedIndex));
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -229,8 +229,9 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> moduleRolePairs} into a {@code ModuleRoleMap}.
+     * This method will check for duplicate module codes.
      */
-    public static ModuleRoleMap parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
+    public static ModuleRoleMap parseModuleRoleMap(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);
 
         final LinkedHashMap<ModuleCode, RoleType> hashMap = new LinkedHashMap<>();
@@ -248,6 +249,21 @@ public class ParserUtil {
         }
 
         return new ModuleRoleMap(hashMap);
+    }
+
+    /**
+     * Parses {@code Collection<String> moduleRolePairs} into a {@code List<ModuleRolePair>}.
+     * This method will not check for duplicate module codes.
+     */
+    public static List<ModuleRolePair> parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
+        requireNonNull(moduleRolePairs);
+
+        final List<ModuleRolePair> moduleRolePairList = new ArrayList<>();
+        for (String moduleRolePair : moduleRolePairs) {
+            moduleRolePairList.add(parseModuleRolePair(moduleRolePair));
+        }
+
+        return moduleRolePairList;
     }
 
     /**
@@ -291,7 +307,7 @@ public class ParserUtil {
      */
     public static AddModuleRoleDescriptor parseAddModuleRoleDescriptor(List<String> moduleRolePairs)
             throws ParseException {
-        return new AddModuleRoleDescriptor(parseModuleRolePairs(moduleRolePairs).getData());
+        return new AddModuleRoleDescriptor(parseModuleRoleMap(moduleRolePairs).getData());
     }
 
     /**

@@ -150,7 +150,7 @@ public class FindCommand extends Command {
      */
     private String getAllKeywordsFromPredicates(List<Predicate<Person>> predicates) {
         return predicates.stream()
-                .map(this::extractKeywords)
+                .map(FindCommand::extractKeywords)
                 .map(kws -> kws.stream().collect(Collectors.joining(" OR ")))
                 .map(kws -> "(" + kws + ")")
                 .collect(Collectors.joining(" AND "));
@@ -163,13 +163,13 @@ public class FindCommand extends Command {
      * @param predicate The predicate from which to extract keywords.
      * @return A list of keywords from the predicate, or an empty list if the predicate type is not recognized.
      */
-    private List<String> extractKeywords(Predicate<Person> predicate) {
-        if (predicate instanceof NameContainsKeywordsPredicate) {
-            return ((NameContainsKeywordsPredicate) predicate).getNameKeywords();
-        } else if (predicate instanceof ModuleRoleContainsKeywordsPredicate) {
-            return ((ModuleRoleContainsKeywordsPredicate) predicate).getModuleRolePairs();
-        } else if (predicate instanceof TagContainsKeywordsPredicate) {
-            return ((TagContainsKeywordsPredicate) predicate).getTagKeywords();
+    private static List<String> extractKeywords(Predicate<Person> predicate) {
+        if (predicate instanceof NameContainsKeywordsPredicate nameContainsKeywordsPredicate) {
+            return nameContainsKeywordsPredicate.getNameKeywords();
+        } else if (predicate instanceof ModuleRoleContainsKeywordsPredicate moduleRoleContainsKeywordsPredicate) {
+            return moduleRoleContainsKeywordsPredicate.getModuleRolePairs();
+        } else if (predicate instanceof TagContainsKeywordsPredicate tagContainsKeywordsPredicate) {
+            return tagContainsKeywordsPredicate.getTagKeywords();
         }
         return Collections.emptyList();
     }
