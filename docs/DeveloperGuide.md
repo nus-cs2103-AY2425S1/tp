@@ -117,7 +117,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` Component,
@@ -205,7 +205,7 @@ The following methods are involved:
 
 Below is an activity diagram that explains what happens when a user tries to find tasks:
 <puml src="diagrams/FindTaskActivityDiagram.puml" />
-
+<br></br>
 
 #### Proposed Implementation
 
@@ -281,7 +281,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" />
 
 #### Design Considerations:
 
