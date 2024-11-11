@@ -849,7 +849,7 @@ Using the clear command will delete all the properties from the list of properti
         <th rowspan="2">Edit</th>
         <td>Index</td><td>Refer to General > Delete > Index</td>
     </tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</td></tr>
     <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
     <tr><th colspan="3">Meet-Up</th></tr>
     <tr>
@@ -861,7 +861,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr><td>To</td></tr>
     <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
     <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</td></tr>
     <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
     <tr><th colspan="3">Property</th></tr>
     <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
@@ -875,7 +875,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
     <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
     <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</td></tr>
     <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
     <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
 </table>
