@@ -587,8 +587,8 @@ Format: `find [k/KEYWORD...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG
 
 <box type="info" seamless>
 
-**Note:** Utilising the **keyword** will perform a search for all clients for the matching keyword throughout all
-information, including rental information.
+**Note:** Utilising `KEYWORD` will perform a search for clients whose details include the keyword. Clients are matched
+if any of their fields **contains** the keyword, including rental information details (E.g. name, email, address, etc.).
 
 </box>
 
@@ -600,10 +600,10 @@ information, including rental information.
 * For `[k/KEYWORD]`, `[n/NAME]`, `[p/PHONE_NUMBER]` and `[e/EMAIL]`, partial input will be matched with any of the
   fields, if any.
   <br>E.g. `Han` will match <code><b>Han</b>s</code>
-* For `[t/TAG]` only the full input will be matched with a tag, if any.
-  <br>E.g. `Friend` will only match with `Friend`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  <br>E.g. `k/Hans k/Bo` will return `Hans Gruber`, `Bo Yang`
+* Tags (`[t/TAG]`) will match **exactly**.
+  <br>E.g. `t/Friend` will **only** match with the tag `Friend`, **not** `Friends` or `MyBestFriend`.
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+  <br>E.g. `k/Hans k/Bo` will return <code><b>Han</b>s Gruber</code>, <code><b>Bo</b> Yang</code>`
 
 </box>
 
@@ -611,8 +611,8 @@ information, including rental information.
 
 **Example inputs**:
 
-1. `find n/Alex`, finds any client with the matching characters `Alex` in their names.
-2. `find k/12`, finds any client with the matching keyword `12` in any of their information.
+1. `find n/Alex`, finds any client whose name **contain** the word `Alex`.
+2. `find k/12`, finds any client whose details **contain** `12`.
 3. `find t/Rich`, finds any client with the matching tag `Rich`.
 
 </box>
@@ -621,8 +621,8 @@ information, including rental information.
 
 **Example outputs**:
 
-1. `1 persons listed!`. It will return every client with the name containing `Alex`.
-2. `2 persons listed!`. It will return every client with the keyword `12` within all its attributes.
+1. `1 persons listed!`. It will return every client whose name contains `Alex`.
+2. `2 persons listed!`. It will return every client whose details contain `12`.
 3. `3 persons listed!`. It will return every client with the tag `Rich`.
 
 </box>
