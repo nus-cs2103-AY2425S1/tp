@@ -264,7 +264,7 @@ Examples:
 List all orders of a specified customer from the address book.
 
 Command alias: `listo`<br>
-Format: `listorder INDEX`<br>
+Format: `listorder CUSTOMER_INDEX`<br>
 Examples:
 * `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
 * `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st customer from the list of customers found with "Betsy".
@@ -273,7 +273,7 @@ Examples:
 
 ##### Constraints
 
-* List all orders of the customer at the specified `INDEX`.
+* List all orders of the customer at the specified `CUSTOMER_INDEX`.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
