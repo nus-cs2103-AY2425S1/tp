@@ -96,13 +96,12 @@ Examples:
 ### Adding a job : `add job`
 
 Adds a job to the address book. 
-The company attributed to the job being added must already 
-be in the address book.
 
 Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
-* A unique pairing of job's name and job's company is consider a unique job. e.g. `add job n/Barista c/Starbucks ...` and `add job n/Barista c/McCafe ...` are different jobs. 
-* The name company of the job are case-insensitive when used to identify duplicate jobs. e.g. `add job n/Barista c/Starbucks ...` is considered the same job as `add job n/barista c/starbucks ...`.
+* `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.  
+* A job with the same `NAME` and `COMPANY` as an existing job is considered a duplicate and cannot be added.
+* It is acceptable for a job to have the same `NAME` if it has a different `COMPANY` and vice versa.
 
 Examples:
 * `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
