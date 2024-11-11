@@ -56,14 +56,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "INDEX OF EMERGENCY CONTACT TO EDIT "
-            + "At least one of these fields ("
+            + "[" + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "EMERGENCY_CONTACT_INDEX] "
             + "[" + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE] "
             + "[" + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP]) "
-            + "[" + PREFIX_DOC_NAME + "DOCTOR NAME]"
-            + "[" + PREFIX_DOC_PHONE + "DOCTOR PHONE]"
-            + "[" + PREFIX_DOC_EMAIL + "DOCTOR EMAIL]"
+            + "[" + PREFIX_DOC_NAME + "DOCTOR NAME] "
+            + "[" + PREFIX_DOC_PHONE + "DOCTOR PHONE] "
+            + "[" + PREFIX_DOC_EMAIL + "DOCTOR EMAIL] "
             + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -73,7 +72,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+        "A person with the same phone number already exists in the address book.";
     public static final String MESSAGE_EMERGENCY_CONTACT_NOT_EDITED = "At least one emergency contact field to edit "
             + "must be provided.";
     public static final String MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID = "At least one emergency contact index to "
