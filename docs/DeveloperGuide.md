@@ -909,6 +909,9 @@ Adding a _client_'s rental information while all _clients_ are being shown.
 the clients already has a _rental information_ saved in the application with address of
 `Blk 321 Ang Mo Kio Ave 3, #09-123`.<br>
 
+**Note**: Following test cases should be executed independently. You should delete the newly added rental information 
+after every test case.<br>
+
 </box>
 
 <box type="info" seamless>
@@ -1563,8 +1566,7 @@ Command success message will be displayed in the result display box.
 
 <box type="wrong">
 
-No client or rental information matches the particular keyword `Yong Li`. Error details will be
-displayed in the result display box.
+No client or rental information matches the particular keyword `Yong Li`.
 
 </box>
 
@@ -2006,32 +2008,64 @@ Value of the input command changes from `redit cl/Jayden a/Blk` to `redit cl/Jay
 
 #### Sort all _clients_ by name
 
-1. Sorting the entire True Rental's database by name.
+Sorting the entire True Rental's database by name.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+<box type="warning">
 
-    2. Test case: `sort`<br>
-       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be
-       displayed in the result display box.
+**Prerequisites**: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `sort`
+
+<box type="success">
+
+Client list will be sorted in alphabetical order by name. A command success message for name will be
+displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Clear
 
-1. Clearing the entire True Rental's database, wiping all clients and their respective rental information.
+Clearing the entire True Rental's database, wiping all clients and their respective rental information (if any).
 
-    1. Prerequisites: There are more than 1 client and 1 rental information in the application.
+<box type="info" seamless>
 
-    2. Test case: `clear`<br>
-       Expected: Both client list panel and rental information list panel will be empty with all data being cleared. A
-       command success message will be displayed in the result display box.
+**Test case 1**: `clear`
+
+<box type="success">
+
+Both client list panel and rental information list panel will be empty with all data being cleared. A command success message will be displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Exit
 
-1. Safely exiting `TrueRental` application.
+Safely exiting `TrueRental` application.
 
-    1. Prerequisites: Run the application
+<box type="warning">
 
-    2. Test case: `exit`
-       Expected: The application will exit and be closed safely.
+**Prerequisites**: Run the application
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `exit`
+
+<box type="success">
+
+The application will exit and be closed safely.
+
+</box>
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -2119,16 +2153,16 @@ The following are **DUPLICATES** of the initial rental information:
 
 <d-table>
 
-| Parameter       | Description                                                                                                        | Additional Constraints                                                                                                                                          | Examples                                                                   |
-|-----------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `NAME`          | Client's name                                                                                                      | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`.                                                                | `Ravi S/O Ramasamy`                                                        |
-| `PHONE_NUMBER`  | Client's phone number                                                                                              | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`                                                                 |
-| `EMAIL`         | Client's email address                                                                                             | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`                                                           |
-| `TAG`           | Client's tag                                                                                                       | Limit up to `20 characters`.                                                                                                                                    | `12345678901234567890`                                                     |
-| `ADDRESS`       | The address of the property managed by the client.                                                                 | Limit up to **150** `Unicode` characters.                                                                                                                       | `18 Kaki Bt Rd 3 #05-16 Entrepreneur Business Centre S(415978), Singapore` |
-| `MONTHLY_RENT`  | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease. | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
-| `DEPOSIT`       | The address of the property managed by the client.                                                                 | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
-| `CUSTOMER_LIST` | The name(s) of the tenant(s) for the property managed by the client.                                               | Limit the usage of the `;` separator to **49** occurrences, which can accommodate up to **50** names in total.                                                  | `Alice;Bob;Charlie;David;Ella;Fiona;Geoge;Helen`                           |
+| Parameter       | Description                                                                                                     | Additional Constraints                                                                                                                                          | Examples                                                                   |
+|-----------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `NAME`          | The client's name.                                                                                              | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`.                                                                | `Ravi S/O Ramasamy`                                                        |
+| `PHONE_NUMBER`  | The client's phone number.                                                                                      | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`                                                                 |
+| `EMAIL`         | The client's email address.                                                                                     | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`                                                           |
+| `TAG`           | The tags associated with the client.                                                                            | Limit up to `20 characters`.                                                                                                                                    | `12345678901234567890`                                                     |
+| `ADDRESS`       | The address of the property owned by the client.                                                                | Limit up to **150** `Unicode` characters.                                                                                                                       | `18 Kaki Bt Rd 3 #05-16 Entrepreneur Business Centre S(415978), Singapore` |
+| `MONTHLY_RENT`  | The monthly rent amount for the property owned by the client.                                                   | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
+| `DEPOSIT`       | The security deposit amount for the property owned by the client, paid by the tenant at the start of the lease. | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
+| `CUSTOMER_LIST` | The name(s) of the tenant(s) for the property owned by the client.                                              | Limit the usage of the `;` separator to **49** occurrences, which can accommodate up to **50** names in total.                                                  | `Alice;Bob;Charlie;David;Ella;Fiona;Geoge;Helen`                           |
 
 </d-table>
 
@@ -2150,7 +2184,7 @@ In the future, there will be an update to the `sort` command, where the sorting 
 
 #### `RENT_DUE_DATE` Parameter
 
-The current `RENT_DUE_DATE` meant to refer to the specific day (of the month) on which the rent payment is due for the property managed by the client. However, the term `DATE` may be misleading, as users might assume it requires the format `dd/mm/yyyy`.
+The current `RENT_DUE_DATE` meant to refer to the specific day (of the month) on which the rent payment is due for the property owned by the client. However, the term `DATE` may be misleading, as users might assume it requires the format `dd/mm/yyyy`.
 In the future, there will be an update to the `RENT_DUE_DATE` parameter, where it will be renamed to `RENT_DUE_DAY` for greater clarity.
 
 #### Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
