@@ -24,8 +24,8 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
         * [List Orders: `listOrder`](#listing-all-orders-listorder)
         * [Assign Order to Customer: `put`](#adding-an-order-to-a-customer-put)
         * [View Order History for Customer: `history`](#listing-all-order-histories-for-a-customer-history)
-        * [Create Shortcut for Tags: `addShortCut`](#creating-shortcut-for-tags-addshortcut)
-        * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcut-for-tags-delshortcut)
+        * [Create Shortcut for Tags: `addShortCut`](#creating-shortcuts-for-tags-addshortcut)
+        * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcuts-for-tags-delshortcut)
         * [List All Shortcuts: `listShortCut`](#listing-existing-shortcuts-listshortcut)
         * [Tag with Shortcuts](#using-shortcuts-for-tagging)
         * [Filter Customers by Tags: `filter`](#filtering-by-tags-filter)
@@ -45,7 +45,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     - **To check:** Open a command terminal (Terminal for macOS, Command Prompt for Windows), and type `java -version` to check if Java is installed and which version is installed.
     - **To install:** Visit Oracle’s Java 17 download page. Download the version for your operating system (Windows, macOS, or Linux). Follow the instructions provided by Oracle to install Java 17.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-2/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -74,23 +74,29 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                          |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ pc/POSTAL_CODE`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/Blk 123, Clementi Rd pc/1234665 t/Vegan t/Vegetarian` |
-| **Clear**           | `clear`                                                                                                                                                                                   |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Download**       | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                                              |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                              |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **List**            | `list`                                                                                                                                                                                    |
-| **Help**            | `help`                                                                                                                                                                                    |
-| **Add Shortcut**    | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                                                  |
-| **Delete Shortcut** | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                                                  |
-| **List Shortcuts**  | `listShortCut`                                                                                                                                                                            |
-| **Filter**          | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                                              |
+| Action                      | Format, Examples                                                                                                                                                     |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                   | `clear`                                                                                                                                                              |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Delete by Postal Code**   | `deletePC POSTALCODE`<br> e.g., `deletePC 560123`                                                                                                                    |
+| **Download**                | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**                    | `list`                                                                                                                                                               |
+| **Help**                    | `help`                                                                                                                                                               |
+| **Add Order**               | `order ORDER`                                                                                                                                                        |
+| **Delete Order**            | `deleteOrder ORDER`                                                                                                                                                  |
+| **List Order**              | `listOrder`                                                                                                                                                          |
+| **Add Order to Customer**   | `put ORDER n/NAME`                                                                                                                                                   |
+| **History of a Customer**   | `history NAME`                                                                                                                                                       |
+| **Help**                    | `help`                                                                                                                                                               |
+| **Add Shortcut**            | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
+| **Delete Shortcut**         | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
+| **List Shortcuts**          | `listShortCut`                                                                                                                                                       |
+| **Filter**                  | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
 
 > **Disclaimer**: NomNomNotifier only accepts inputs in english without any emojis, any inputs in other languages could cause unexpected behaviour
-
 
 ---
 
@@ -231,7 +237,7 @@ Users can search for customers by entering part or all of their postal code. Pos
 
 **Examples:**
 - `find S560123` — Finds any customers with the postal code "560123".
-- `find S560` — Finds any customers with postal codes starting with "560".
+- `find S560` — Finds any customers with postal codes containing "560".
 
 
 #### Simultaneous Search with Multiple Criteria
@@ -241,7 +247,7 @@ Users can combine multiple criteria—name, phone number, and postal code—in a
 **Examples:**
 - `find Alice 9876` — Finds all customers with the name "Alice" **or** a phone number containing "9876".
 - `find 9456 S630123` — Finds all customers with phone numbers containing "9456" **or** postal code "630123".
-- `find S550 Bob` — Finds all customers with postal codes starting with "550" **or** the name "Bob".
+- `find S550 Bob` — Finds all customers with postal codes containing "550" **or** the name "Bob".
 - `find S789123 Carl 97621010` — Finds all customers with postal code "789123" **or** name "Carl" **or** phone number "97621010".
 
 <div style="text-align: center;">
@@ -277,10 +283,11 @@ Deletes the specified customer from the address book.
 
 ---
 
-### Deleting customers : `deletePC`
+### Deleting customers by postal code: `deletePC`
+
 * Delete all persons from the address book with the given postal code.
 
-Format: `delete POSTALCODE`
+Format: `deletePC POSTALCODE`
 
 * Delete all persons with the specified `POSTALCODE`.
 * The postal code **must be a 6 digits** 
@@ -291,7 +298,7 @@ Examples:
 <div style="text-align: center;">
     <img src="images/delete_by_pc.png" alt="deletePC customers" width="350"/>
     <br>
-    <em>Figure 8: Shows multiple customers being deleted using deletePC command</em>
+    <em>Figure 8: Customer being deleted using deletePC command</em>
 </div>
 
 ---
@@ -509,12 +516,13 @@ Examples:
 Archive a customer so that it doesn't show when we run `list`
 
 **Format:**
-`archive [index]`
+`archive INDEX`
 
 **Warning**
 You must run `list` before running `archive`
 
-**How to run command**:
+**Details**
+- `INDEX` must be positive integer
 
 Assuming there's at least one person that is unarchived.
 
@@ -541,12 +549,13 @@ Assuming there's at least one person that is archived.
 Unarchive a customer so that it shows when we run `list`
 
 **Format:**
-`unarchive [index]`
+`unarchive INDEX`
 
 **Warning**
 You must run `listarchive` before running `unarchive`
 
-**How to run command**:
+**Detail**
+- `INDEX` must be positive integer 
 
 Assuming there's at least one person that is archived.
 
@@ -555,23 +564,26 @@ Assuming there's at least one person that is archived.
 
 ---
 
-### **Downloading Customer Data: `download`**  
-Exports Address Book as a CSV file with optional tag-based filtering.
+### **Downloading Customer Data: `download`**
+Exports the currently displayed Address Book data as a CSV file with optional tag-based filtering.
+
 
 **Format:**  
 `download [t/TAG1] [t/TAG2] ...`
 
 **Details:**
+- The command will export only the currently displayed data in the Address Book (based on active filters or views) and not the absolute data stored in the Address Book.
 - Creates a CSV file containing the people that match the specified tags.
-- The exported file will be saved in the same directory as the application.
+- The exported file will be saved in the `./data` subdirectory.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
-- If no tags are specified, all data will be exported.
+- If no tags are specified, all currently displayed data will be exported.
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
 - `download` — Exports all contacts that exists in displayed list.
 - `download t/Vegan` — Exports only the contacts or orders tagged as "Vegan" within the displayed list.
-- `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague" within the displayed list.
+- `download t/Vegan t/Vegetarian` — Exports contacts or orders tagged as "Vegan" and "Vegetarian" within the displayed list.
+
 
 <div style="text-align: center;">
     <img src="images/dowload.png" alt="download" width="350"/>
@@ -579,10 +591,10 @@ Exports Address Book as a CSV file with optional tag-based filtering.
     <em>Figure 19: Shows entire contact list being downloaded</em>
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-top: 20px">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 20: Shows only people with vegan tag being added</em>
+    <em>Figure 20: Shows only people with vegan tag being downloaded</em>
 </div>
 
 ---

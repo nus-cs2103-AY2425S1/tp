@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_POSTAL_CODE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +39,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (!isValidKeyword(keyword)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            if (keyword.startsWith("S") && !isPostalCode(keyword)) {
+                throw new ParseException(MESSAGE_INVALID_POSTAL_CODE);
             }
         }
 

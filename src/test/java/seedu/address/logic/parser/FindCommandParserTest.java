@@ -61,5 +61,9 @@ public class FindCommandParserTest {
     public void parse_invalidKeyword_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse("find Alice -1234"));
     }
+    @Test
+    public void parse_invalidPostal_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse("find S12a"));
+    }
 
 }
