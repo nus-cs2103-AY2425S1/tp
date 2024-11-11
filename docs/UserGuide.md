@@ -222,6 +222,7 @@ Expected output:
 
 <img alt="result for &#39;help&#39;" src="images/helpMessage.png" width="580"/>
 <br/>
+<br/>
 
 ### Adding a person: `add`
 
@@ -376,7 +377,7 @@ Examples:
 - `find Betsy` followed by `deleteGrade 1 n/Final Exam`<br>
   Deletes the "Final Exam" grade for the 1st person in the results of the `find` command.
 
-Expected output for `deleteGrade n/midterm`:
+Expected output for `deleteGrade 1 n/midterm`:
 
 <img alt="result for &#39;find Alex&#39; followed by &#39;deleteGrade 1 n/midterm&#39;" width="580" src="images/deleteGrade.png"/>
 
