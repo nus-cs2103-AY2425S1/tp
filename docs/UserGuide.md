@@ -314,6 +314,18 @@ Format: `exit`
 
 Teacher's Pet allows you to create and manage attendance events, such as lectures, tutorials, or lab sessions. You can mark or unmark students' attendance for these events.
 
+### General Constraints
+
+- **Event Names:**
+  - Event names cannot be empty.
+  - Event names cannot contain the `/` character.
+  - Event names are case-insensitive when matching existing events and checking for duplicates.
+
+- **Student Indices:**
+  - Each index must be a positive integer corresponding to a student in the current displayed list.
+  - Each index must be prefixed with `i/`.
+  - Duplicate indices are not allowed within the same command.
+
 ---
 
 #### Creating Attendance Events: `createattn`
@@ -323,13 +335,14 @@ Creates one or more new attendance events.
 **Format:** `createattn e/EVENT_NAME [e/EVENT_NAME]...`
 
 - **Event Names:**
-    - Event names cannot be empty.
-    - Event names cannot contain the `/` character.
-    - Duplicate event names (case-insensitive) are not allowed within the same command.
-    - Event names are case-insensitive when checking for duplicates and existing events.
+    - Specify one or more event names using the `e/` prefix.
+    - Must adhere to the [Event Names](#general-constraints) constraints.
+    - Duplicate event names within the same command are not allowed.
+    - If an event with the same name already exists, the command will fail and indicate the first event which already exists.
 
-- **Existing Events:**
-    - If an event with the same name (case-insensitive) already exists, the command will fail and indicate which event already exists.
+<div markdown="span" class="alert alert-info">**Note:**
+All students are marked as absent by default during the creation of an event.
+</div>
 
 **Examples:**
 
@@ -349,15 +362,10 @@ Deletes one or more attendance events.
 **Format:** `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`
 
 - **Event Names:**
-    - Event names cannot be empty.
-    - Event names cannot contain the `/` character.
-    - Duplicate event names (case-insensitive) are not allowed within the same command.
-
-- **Non-Existing Events:**
-    - If any specified event does not exist, the command will fail and indicate which event was not found.
-
-- **Case-Insensitive:**
-    - Event names are case-insensitive when matching existing events.
+    - Specify one or more event names using the `e/` prefix.
+    - Must adhere to the [Event Names](#general-constraints) constraints.
+    - Duplicate event names within the same command are not allowed.
+    - If any specified event does not exist, the command will fail and indicate the first event which was not found.
 
 **Examples:**
 
@@ -395,19 +403,21 @@ Marks one or more students as present for a specific attendance event.
 **Format:** `mark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
 - **Event Name:**
-    - Must specify exactly one event name and not contain '/' character.
-    - Event name cannot be empty.
-    - Event must exist in Teacher's Pet.
-    - Event name is case-insensitive.
+    - Specify exactly one event name using the `e/` prefix.
+    - Must adhere to the [Event Names](#general-constraints) constraints.
+    - The event must exist in Teacher's Pet.
 
 - **Student Indices:**
-    - You can specify multiple student indices.
-    - Each index must be a positive integer corresponding to a student in the current displayed list.
-    - Each index must be prefixed with `i/`.
-    - Duplicate indices are not allowed within the same command.
+    - Specify one or more student indices using the `i/` prefix.
+    - Each must adhere to the [Student Indices](#general-constraints) constraints.
+    - Attendance is not marked for any student, if any one of the indices is invalid (or duplicate).
 
 - **Existing Attendance:**
-    - If a student is already marked as present for the event, they will be skipped.
+    - If a student is already marked as present for the event, they will be skipped. No warning or error message will be given, to allow for marking multiple students at once.
+
+<div markdown="span" class="alert alert-info">**Note:**
+If a student is not marked as present, they are automatically marked as absent for the event.
+</div>
 
 **Examples:**
 
@@ -427,19 +437,17 @@ Marks one or more students as absent for a specific attendance event.
 **Format:** `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`
 
 - **Event Name:**
-    - Must specify exactly one event name and not contain '/' character.
-    - Event name cannot be empty.
-    - Event must exist in Teacher's Pet.
-    - Event name is case-insensitive.
+    - Specify exactly one event name using the `e/` prefix.
+    - Must adhere to the [Event Names](#general-constraints) constraints.
+    - The event must exist in Teacher's Pet.
 
 - **Student Indices:**
-    - You can specify multiple student indices.
-    - Each index must be a positive integer corresponding to a student in the current displayed list.
-    - Each index must be prefixed with `i/`.
-    - Duplicate indices are not allowed within the same command.
+    - Specify one or more student indices using the `i/` prefix.
+    - Each must adhere to the [Student Indices](#general-constraints) constraints.
+    - Attendance is not marked for any student, if any one of the indices is invalid (or duplicate).
 
 - **Existing Attendance:**
-    - If a student is already marked as absent for the event, they will be skipped.
+    - If a student is already marked as absent for the event, they will be skipped. No warning or error message will be given, to allow for unmarking multiple students at once.
 
 **Examples:**
 
@@ -459,15 +467,14 @@ Displays the list of students who are either present or absent for a specific at
 **Format:** `listattn e/EVENT_NAME s/STATUS`
 
 - **Event Name:**
-    - Must specify exactly one event name and not contain '/' character.
-    - Event name cannot be empty.
-    - Event must exist in Teacher's Pet.
-    - Event name is case-insensitive.
+    - Specify exactly one event name using the `e/` prefix.
+    - Must adhere to the [Event Names](#general-constraints) constraints.
+    - The event must exist in Teacher's Pet.
 
 - **Status:**
-    - Must specify exactly one status: `present` or `absent`.
-    - Status is case-insensitive.
-
+    - Specify exactly one status using the `s/` prefix.
+    - Accepted values: `present` or `absent` (case-insensitive).
+  
 **Examples:**
 
 - `listattn e/Tutorial 1 s/present`
@@ -479,75 +486,8 @@ Displays the list of students who are either present or absent for a specific at
 
 ---
 
-### Additional Notes
-
-- **Case Sensitivity:**
-    - All event names are case-insensitive when matching existing events and checking for duplicates.
-
-- **Error Messages:**
-    - The application provides clear error messages indicating the nature of the problem and how to fix it.
-
-- **Event Name Restrictions:**
-    - Event names cannot be empty.
-    - Event names cannot contain the `/` character to avoid confusion with command prefixes.
-
----
 
 ## Tips
-
-### Creating Multiple Attendance Events
-
-You can create multiple attendance events in one command:
-
-- `createattn e/Tutorial 1 e/Tutorial 2 e/Lecture 1`
-    - Creates three events: "Tutorial 1", "Tutorial 2", and "Lecture 1".
-
-**Important Notes:**
-
-- Ensure that no event names are duplicates (case-insensitive).
-- Event names cannot contain `/`.
-
-### Deleting Multiple Attendance Events
-
-Delete multiple events at once:
-
-- `deleteevent e/Tutorial 1 e/lecture 1`
-    - Deletes "Tutorial 1" and "Lecture 1" (case-insensitive).
-
-**Important Notes:**
-
-- If any specified event does not exist, the command will fail.
-- Duplicate event names within the command are not allowed.
-
-### Marking Attendance for Multiple Students
-
-Mark multiple students as present:
-
-- `mark e/Tutorial 1 i/1 i/2 i/3`
-    - Marks students at indices 1, 2, and 3 as present for "Tutorial 1".
-
-**Important Notes:**
-
-- Each index must be prefixed with `i/`.
-- Indices must be positive integers corresponding to the displayed student list.
-- Duplicate indices are not allowed within the same command.
-
-### Unmarking Attendance for Multiple Students
-
-Unmark multiple students as absent:
-
-- `unmark e/Tutorial 1 i/4 i/5 i/6`
-    - Marks students at indices 4, 5, and 6 as absent for "Tutorial 1".
-
-### Listing Present or Absent Students
-
-List students based on their attendance status:
-
-- `listattn e/Tutorial 1 s/present`
-    - Shows students marked as present for "Tutorial 1".
-
-- `listattn e/Tutorial 1 s/absent`
-    - Shows students marked as absent for "Tutorial 1".
 
 ### Common Errors and Solutions
 
