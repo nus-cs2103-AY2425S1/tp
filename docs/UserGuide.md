@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**  
+MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**
+
+Our app is built for receptionists working in small clinics, who need to manage thousands of patients and doctors, and keep track of their appointments.
 
 It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
