@@ -273,10 +273,10 @@ Step 3. The `WithdrawCommand` creates an updated `Company` object containing the
 
 Step 4. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`.
 
-<puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
+<puml src="diagrams/WithdrawCommandSequence.puml" alt="WithdrawCommandSequence" />
 
-Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
-<puml src="diagrams/ApplyCommandActivity.puml" alt="ApplyCommandActivity" />
+Below displays an activity diagram that explains roughly what happens when a user tries to withdraw an application:
+<puml src="diagrams/WithdrawCommandActivity.puml" alt="WithdrawCommandActivity" />
 
 #### Design considerations:
 
