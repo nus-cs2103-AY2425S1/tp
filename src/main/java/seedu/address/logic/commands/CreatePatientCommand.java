@@ -20,8 +20,8 @@ import seedu.address.model.person.Person;
 public class CreatePatientCommand extends Command {
     public static final String COMMAND_WORD = "createP";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new patient. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new patient. \n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "

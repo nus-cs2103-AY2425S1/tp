@@ -22,11 +22,11 @@ public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "deleteA";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an appointment "
-            + "between the relevant doctor and patient. "
+            + "between the relevant doctor and patient.\n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_ID + "[DOCTOR_ID] "
-            + PREFIX_DATE + "[APPOINTMENT_TIME]\n "
+            + PREFIX_ID + "PATIENT_ID "
+            + PREFIX_ID + "DOCTOR_ID "
+            + PREFIX_DATE + "DATE_TIME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234 "
             + PREFIX_ID + "5678 "

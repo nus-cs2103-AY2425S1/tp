@@ -9,10 +9,7 @@ import java.util.List;
  */
 public class Id {
     public static final String MESSAGE_CONSTRAINTS =
-            "ID should only contain positive numbers and it should not be blank. "
-                    + "Check the ID entered";
-    public static final String MESSAGE_ID_TOO_LARGE = "The ID entered is too large. "
-            + "Please verify the ID and try again.";
+            "ID is in an invalid format. Refer to the User Guide in the help command for more information.";
     public static final String VALIDATION_REGEX = "\\d+";
     public static final String DOCTOR = "DOCTOR";
     private static final String PATIENT = "PATIENT";
