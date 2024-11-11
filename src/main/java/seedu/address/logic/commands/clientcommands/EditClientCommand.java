@@ -49,7 +49,7 @@ public class EditClientCommand extends Command {
               + "[" + PREFIX_EMAIL + "EMAIL] "
               + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited %1$s!";

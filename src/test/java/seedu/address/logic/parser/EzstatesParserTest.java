@@ -22,8 +22,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfileCommand;
+import seedu.address.logic.commands.clientcommands.AddSellerProfileCommand;
 import seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
@@ -60,15 +60,16 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_addBuyer() throws Exception {
         Buyer buyer = new PersonBuilder().buildBuyer();
-        AddBuyerProfile command = (AddBuyerProfile) parser.parseCommand(PersonUtil.getAddCommand(buyer));
-        assertEquals(new AddBuyerProfile(buyer), command);
+        AddBuyerProfileCommand command = (AddBuyerProfileCommand) parser.parseCommand(PersonUtil.getAddCommand(buyer));
+        assertEquals(new AddBuyerProfileCommand(buyer), command);
     }
 
     @Test
     public void parseCommand_addSeller() throws Exception {
         Seller seller = (Seller) new PersonBuilder().buildSeller();
-        AddSellerProfile command = (AddSellerProfile) parser.parseCommand(PersonUtil.getAddCommand(seller));
-        assertEquals(new AddSellerProfile(seller), command);
+        AddSellerProfileCommand command = (AddSellerProfileCommand) parser
+                .parseCommand(PersonUtil.getAddCommand(seller));
+        assertEquals(new AddSellerProfileCommand(seller), command);
     }
 
     @Test
