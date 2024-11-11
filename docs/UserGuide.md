@@ -198,6 +198,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] || p/PHONE`
 * Persons matching at least one keyword (or parts of it) will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `hans gruber`, `bo yang`
 * Persons matching the phone number (or parts of it) will be returned
+* Phone number input must not have any spaces in between 
 
 Examples:
 * `find john` returns `john` and `john doe`
@@ -398,7 +399,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
 **Edit** | `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit James n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS] / p/PHONE`<br> e.g., `find James Jake` `find p/8357 2348`
+**Find** | `find KEYWORD [MORE_KEYWORDS] / p/PHONE`<br> e.g., `find James Jake` `find p/83572348`
 **Help** | `help`
 **List** | `list`
 **Payment** | `payment NAME d/DATE_and_TIME pay/PAYMENT_STATUS` <br> e.g., `payment John Doe d/2024-10-20 1100 pay/paid`
