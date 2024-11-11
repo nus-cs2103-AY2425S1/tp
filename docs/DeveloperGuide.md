@@ -394,15 +394,17 @@ and the **Actor** is the `user`, unless specified otherwise)
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts, jobs or companies without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be capable of running entirely on a local machine.
+5.  Should support future enhancements without requiring major architectural changes.
+6.  Should be executable directly from the downloaded JAR file. 
+7.  Should store data in a local human editable file. 
+8.  The GUI should be fully functional across commonly used screen resolutions.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
